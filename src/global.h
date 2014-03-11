@@ -26,7 +26,7 @@
 #include <QRegExp>
 #include <QDebug>
 
-#include <KGrid2D>
+#include "kgrid2d.h"
 
 using KGrid2D::Coord;
 

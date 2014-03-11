@@ -24,7 +24,7 @@
 #include <QString>
 #include <QPair>
 #include <QPainter>
-#include <KGrid2D>
+#include "kgrid2d.h"
 #include <qstyleoption.h>
 
 #include <KDebug>

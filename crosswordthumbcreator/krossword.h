@@ -21,7 +21,7 @@
 #define KROSSWORD_H
 
 #include <QSizeF>
-#include <KGrid2D>
+#include "kgrid2d.h"
 
 #include "cells/krosswordcell.h"
 #include "cells/cluecell.h"

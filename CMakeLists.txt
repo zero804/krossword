@@ -3,7 +3,7 @@ project( krosswordpuzzle )
 find_package( KDE4 REQUIRED )
 include ( KDE4Defaults )
 
-find_package( LibKDEGames REQUIRED )
+find_package( KDEGames REQUIRED )
 
 # for KDE 4.3 we require at least version 0.30
 set( SHARED_MIME_INFO_MINIMUM_VERSION "0.30" )

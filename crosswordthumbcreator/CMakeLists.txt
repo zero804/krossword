@@ -4,6 +4,7 @@ find_package( KDE4 REQUIRED )
 include( KDE4Defaults )
 include( MacroOptionalAddSubdirectory )
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src) # kgrid2d.h
 
 set( crosswordthumbnail_SRCS crosswordthumbnail.cpp
     krossword.cpp
