@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>configure_details</class>
+ <widget class="QWidget" name="configure_details">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>449</width>
+    <height>404</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string notr="true">Detailed Configuration</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="lblReadOnlyInfo">
+     <property name="text">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'FreeSans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note:&lt;/span&gt; To change these values please first select &quot;User Defined&quot; as the crossword type.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="KTabWidget" name="ktabwidget">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Basic Settings</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="1" column="0">
+        <widget class="QLabel" name="lblName">
+         <property name="text">
+          <string>&amp;Name:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>name</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="2">
+        <widget class="KLineEdit" name="name">
+         <property name="clickMessage">
+          <string>The name of the crossword type</string>
+         </property>
+         <property name="showClearButton" stdset="0">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="lblDescription">
+         <property name="text">
+          <string>&amp;Description:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>description</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="2">
+        <widget class="KTextEdit" name="description">
+         <property name="overwriteMode">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblName_2">
+         <property name="text">
+          <string>&amp;Icon:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>icon</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="KIconButton" name="icon">
+         <property name="icon">
+          <string notr="true">crossword-free</string>
+         </property>
+         <property name="strictIconSize">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="lblLongDescription">
+         <property name="text">
+          <string>&amp;Long Description:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>longDescription</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="2">
+        <widget class="KTextEdit" name="longDescription">
+         <property name="overwriteMode">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Rules</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblMinAnswerLength">
+         <property name="text">
+          <string>&amp;Minimum Answer Length:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>minAnswerLength</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="KIntNumInput" name="minAnswerLength">
+         <property name="toolTip">
+          <string>The minimum length of answers to clues</string>
+         </property>
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lblClueCellHandling">
+         <property name="text">
+          <string>Clue Cell &amp;Handling:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>clueCellHandling</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="2">
+        <widget class="KComboBox" name="clueCellHandling">
+         <property name="toolTip">
+          <string>If a clue cell can, can't or has to be inserted into the crossword grid for each clue</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="lblClueType">
+         <property name="text">
+          <string>Clue &amp;Type:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>clueType</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="lblLetterCellContent">
+         <property name="text">
+          <string>Letter Cell &amp;Content:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>letterCellContent</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="2">
+        <widget class="KComboBox" name="clueType">
+         <property name="toolTip">
+          <string>The type of clues (strings or numbers)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="2">
+        <widget class="KComboBox" name="letterCellContent">
+         <property name="toolTip">
+          <string>The type of content of letter cells</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="lblClueMapping">
+         <property name="text">
+          <string>Clue &amp;Mapping:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>clueMapping</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" colspan="2">
+        <widget class="KComboBox" name="clueMapping">
+         <property name="toolTip">
+          <string>Clues can be mapped to single cells or sets of cells</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="lblCellTypes">
+         <property name="text">
+          <string>Allowed Cell T&amp;ypes:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>cellTypes</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" colspan="2">
+        <widget class="QListWidget" name="cellTypes">
+         <property name="toolTip">
+          <string>Only the checked cell types can be added into the crossword grid</string>
+         </property>
+         <property name="whatsThis">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'FreeSans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Only the checked cell types can be added into the crossword grid.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;- &lt;span style=&quot; font-weight:600;&quot;&gt;Empty Cells&lt;/span&gt; are also called &quot;Shaded Cells&quot;, &quot;Blanks&quot;, &quot;Darks&quot;, &quot;Blocks&quot;, &quot;Black Squares&quot; or &quot;Shaded Squares&quot;. You cannot disallow empty cells.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;- &lt;span style=&quot; font-weight:600;&quot;&gt;Letter Cells&lt;/span&gt; are also called &quot;White Cells&quot; or &quot;Lights&quot;. They contain one letter (or digit) of one or two answers / entries. A letter cell that is part of two answers (both Across and Down) is called &lt;span style=&quot; font-style:italic;&quot;&gt;checked&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;keyed&lt;/span&gt; or &lt;span style=&quot; font-style:italic;&quot;&gt;crossed&lt;/span&gt;. A letter cell that is part of only one answer is called &lt;span style=&quot; font-style:italic;&quot;&gt;unchecked&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;unkeyed&lt;/span&gt; or &lt;span style=&quot; font-style:italic;&quot;&gt;uncrossed&lt;/span&gt;.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;- &lt;span style=&quot; font-weight:600;&quot;&gt;Clue Cells&lt;/span&gt; contain the clue text in small print inside and act as empty cells. Each clue cell has a little arrow indicating in which direction from its initial cell the answer is to be written.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;- &lt;span style=&quot; font-weight:600;&quot;&gt;Double Clue Cells&lt;/span&gt; contain two clue cells inside, one above the other.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;- &lt;span style=&quot; font-weight:600;&quot;&gt;Solution Letter Cells&lt;/span&gt; are letter cells that are part of a solution word for the whole crossword.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;- &lt;span style=&quot; font-weight:600;&quot;&gt;Image Cells&lt;/span&gt; contain images and can be stretched over a block of multiple cells.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KIconButton</class>
+   <extends>QPushButton</extends>
+   <header>kicondialog.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>ktabwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>KIntNumInput</class>
+   <extends>QWidget</extends>
+   <header>knuminput.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>ktextedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>ktabwidget</tabstop>
+  <tabstop>icon</tabstop>
+  <tabstop>name</tabstop>
+  <tabstop>description</tabstop>
+  <tabstop>longDescription</tabstop>
+  <tabstop>clueCellHandling</tabstop>
+  <tabstop>clueType</tabstop>
+  <tabstop>letterCellContent</tabstop>
+  <tabstop>clueMapping</tabstop>
+  <tabstop>cellTypes</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

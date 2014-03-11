@@ -1,0 +1,8 @@
+[Desktop Entry]
+ Encoding=UTF-8
+ Type=Service
+ Name=Crossword files
+ ServiceTypes=ThumbCreator
+ MimeType=application/x-acrosslite-puz;application/x-krosswordpuzzle;application/x-krosswordpuzzle-compressed;
+ CacheThumbnail=true
+ X-KDE-Library=crosswordthumbnail

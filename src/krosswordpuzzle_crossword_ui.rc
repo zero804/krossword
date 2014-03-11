@@ -1,0 +1,328 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="krosswordpuzzle_crossword" version="5">
+
+<!-- Menu bar -->
+<MenuBar>
+    <Menu name="game">
+	<Separator append="new_merge" />
+<!-- 	<ActionList name="loadFromInternetList" append="new_merge" /> -->
+	<Action name="game_export" append="save_merge" />
+	<Separator  />
+
+	<Action name="game_download" append="save_merge" />
+	<Action name="game_upload" append="save_merge" />
+    </Menu>
+
+    <Menu name="edit">
+	<Action name="editundo" />
+	<Action name="editredo" />
+	<Separator />
+
+	<Action name="edit_add_clue" />
+	<Action name="edit_add_image" />
+<!-- 		<Action name="edit_cell_properties" /> -->
+	<ActionList name="edit_cell_properties_list" />
+	<Action name="edit_remove" />
+	<Separator />
+
+	<Action name="edit_clear_crossword" />
+<!-- 	<Action name="edit_convert_to_solution_letter" /> -->
+<!-- 	<Action name="edit_convert_to_letter" /> -->
+	<Separator />
+
+	<Action name="clue_number_mapping" />
+	<Action name="edit_check_rotation_symmetry" />
+	<Action name="edit_statistics" />
+	<Action name="edit_move_cells" />
+	<Action name="edit_properties" />
+	<Separator />
+
+	<Action name="edit_enable_edit_mode" />
+    </Menu>
+
+    <Menu name="move">
+	<Action name="move_check" />
+	<Action name="move_clear" />
+	<Separator />
+
+	<Action name="move_eraser" />
+	<Separator />
+
+	<Action name="move_select_first_letter_of_clue" />
+	<Action name="move_select_last_letter_of_clue" />
+	<Separator />
+
+	<Action name="move_select_clue_with_switched_orientation" />
+	<Separator />
+
+	<Action name="move_select_first_clue" />
+	<Action name="move_select_previous_clue" />
+	<Action name="move_select_next_clue" />
+	<Action name="move_select_last_clue" />
+    </Menu>
+
+    <Menu name="view">
+	<Action name="view_pan" />
+    </Menu>
+
+<!--     <Menu name="settings"> -->
+<!-- 		<Action name="options_themes" /> -->
+<!-- 		<Separator /> -->
+
+<!-- 		<ActionList name="dockList" append="show_merge" /> -->
+<!--     </Menu> -->
+</MenuBar>
+
+
+<!-- Toolbars -->
+<ToolBar name="mainToolBar">
+    <text>Main Toolbar</text>
+
+    <Action name="game_new" />
+    <Action name="game_save" />
+    <Action name="game_end" />
+    <Separator />
+
+    <Action name="move_hint" />
+    <Action name="move_check" />
+    <Action name="view_pan" />
+    <Action name="move_eraser" />
+    <Separator />
+
+    <Action name="game_print" />
+    <Separator />
+
+    <Action name="edit_enable_edit_mode" />
+</ToolBar>
+
+<ToolBar name="selectionToolBar">
+    <text>Selection</text>
+
+    <Action name="move_select_first_letter_of_clue" />
+    <Action name="move_select_last_letter_of_clue" />
+    <Separator />
+
+    <Action name="move_select_clue_with_switched_orientation" />
+    <Separator />
+
+    <Action name="move_select_first_clue" />
+    <Action name="move_select_previous_clue" />
+    <Action name="move_select_next_clue" />
+    <Action name="move_select_last_clue" />
+</ToolBar>
+
+<ToolBar name="editToolBar">
+    <text>Edit</text>
+
+    <Action name="editundo" />
+    <Action name="editredo" />
+    <Separator />
+
+    <Action name="edit_add_clue" />
+    <Action name="edit_add_image" />
+    <Separator />
+
+<!--     <Action name="edit_cell_properties" /> -->
+	<ActionList name="edit_cell_properties_list" />
+    <Action name="edit_remove" />
+<!--     <Action name="edit_clear_crossword" /> -->
+<!--     <Separator /> -->
+
+<!--     <Action name="edit_properties" /> -->
+</ToolBar>
+
+<ToolBar name="solutionToolBar">
+    <text>Solution</text>
+</ToolBar>
+
+
+<!-- Popup menus -->
+<Menu name="edit_clue_list_popup">
+    <Action name="edit_cell_properties" />
+    <Action name="edit_clear_clue" />
+    <Action name="edit_remove" />
+</Menu>
+
+<Menu name="crossword_letter_cell_popup">
+    <Action name="info_confidence_is_solved" />
+    <Action name="move_set_confidence_confident" />
+    <Action name="move_set_confidence_unsure" />
+    <Separator />
+
+    <Action name="move_clear_current_cell" />
+    <Action name="move_clear_horizontal_clue" />
+    <Action name="move_clear_vertical_clue" />
+    <Separator />
+
+    <Action name="move_hint_current_cell" />
+    <Action name="move_hint_horizontal_clue" />
+    <Action name="move_hint_vertical_clue" />
+</Menu>
+
+<Menu name="crossword_clue_cell_popup">
+    <Action name="move_clear_clue" />
+    <Action name="move_hint_clue" />
+</Menu>
+
+<Menu name="edit_crossword_letter_cell_popup">
+    <Action name="edit_clear_current_cell" />
+    <Action name="edit_clear_horizontal_clue" />
+    <Action name="edit_clear_vertical_clue" />
+    <Separator />
+
+    <Action name="edit_add_clue" />
+    <Action name="edit_remove_horizontal_clue" />
+    <Action name="edit_remove_vertical_clue" />
+</Menu>
+
+<Menu name="edit_crossword_clue_cell_popup">
+    <Action name="edit_clear_clue" />
+    <Separator />
+
+    <Action name="edit_cell_properties" />
+    <Action name="edit_add_clue" />
+    <Action name="edit_remove" />
+</Menu>
+
+<Menu name="edit_crossword_image_cell_popup">
+    <Action name="edit_cell_properties" />
+    <Action name="edit_remove" />
+</Menu>
+
+<Menu name="edit_crossword_empty_cell_popup">
+    <Action name="edit_add_clue" />
+    <Action name="edit_add_image" />
+</Menu>
+
+
+<!-- States -->
+<State name="no_file_opened">
+    <disable>
+	<Action name="game_save" />
+	<Action name="game_save_as" />
+	<Action name="game_upload" />
+	<Action name="game_export" />
+	<Action name="game_print" />
+	<Action name="game_print_preview" />
+	<Action name="game_end" />
+
+	<Action name="edit_enable_edit_mode" />
+
+	<Action name="move_hint" />
+	<Action name="move_solve" />
+	<Action name="move_clear" />
+	<Action name="move_check" />
+	<Action name="move_eraser" />
+
+	<Action name="move_select_first_letter_of_clue" />
+	<Action name="move_select_last_letter_of_clue" />
+	<Action name="move_select_clue_with_switched_orientation" />
+	<Action name="move_select_first_clue" />
+	<Action name="move_select_previous_clue" />
+	<Action name="move_select_next_clue" />
+	<Action name="move_select_last_clue" />
+
+	<Action name="view_fit_to_page" />
+	<Action name="view_zoom_in" />
+	<Action name="view_zoom_out" />
+    </disable>
+</State>
+
+<State name="showing_congratulations" >
+    <disable>
+	<Action name="move_hint" />
+	<Action name="move_solve" />
+	<Action name="move_check" />
+	<Action name="move_clear" />
+	<Action name="move_eraser" />
+
+	<Action name="move_select_first_letter_of_clue" />
+	<Action name="move_select_last_letter_of_clue" />
+	<Action name="move_select_clue_with_switched_orientation" />
+	<Action name="move_select_first_clue" />
+	<Action name="move_select_previous_clue" />
+	<Action name="move_select_next_clue" />
+	<Action name="move_select_last_clue" />
+
+	<Action name="view_fit_to_page" />
+	<Action name="view_zoom_in" />
+	<Action name="view_zoom_out" />
+
+	<Action name="edit_enable_edit_mode" />
+    </disable>
+</State>
+
+<State name="edit_mode" >
+    <enable>
+	<Action name="editundo" />
+	<Action name="editredo" />
+	<Action name="edit_clear_crossword" />
+	<Action name="edit_properties" />
+	<Action name="edit_check_rotation_symmetry" />
+	<Action name="edit_statistics" />
+	<Action name="edit_move_cells" />
+    </enable>
+    <disable>
+	<Action name="move_hint" />
+	<Action name="move_check" />
+	<Action name="move_solve" />
+	<Action name="move_clear" />
+    </disable>
+</State>
+
+<State name="edit_add_clue_enabled" >
+    <enable>
+	<Action name="edit_add_clue" />
+    </enable>
+</State>
+
+<State name="edit_solution_letter_cell_selected" >
+    <enable>
+<!-- 	<Action name="edit_convert_to_letter" /> -->
+	<Action name="move_select_clue_with_switched_orientation" />
+    </enable>
+</State>
+
+<State name="edit_removable_cell_selected" >
+    <enable>
+	<Action name="edit_remove" />
+	<Action name="edit_cell_properties" />
+    </enable>
+</State>
+
+<State name="edit_letter_cell_selected" >
+    <enable>
+<!-- 	<Action name="edit_convert_to_solution_letter" /> -->
+	<Action name="move_select_clue_with_switched_orientation" />
+    </enable>
+</State>
+
+<State name="letter_cell_selected" >
+    <enable>
+	<Action name="move_select_clue_with_switched_orientation" />
+	<Action name="move_select_first_letter_of_clue" />
+	<Action name="move_select_last_letter_of_clue" />
+    </enable>
+</State>
+
+<State name="edit_empty_cell_selected" >
+    <enable>
+	<Action name="edit_add_image" />
+    </enable>
+</State>
+
+<ActionProperties>
+<!--     <Action shortcut="N; Ctrl+N"       name="game_new" /> -->
+<!--     <Action shortcut="Q; Ctrl+Q"       name="game_quit" /> -->
+<!--     <Action shortcut="Shift+U; F5"     name="game_restart" /> -->
+<!--     <Action shortcut="Shift+R"         name="redo_all" /> -->
+<!--     <Action shortcut="S"               name="move_solve" /> -->
+    <Action shortcut="Ctrl+H"		name="move_hint" />
+    <Action shortcut="Return"		name="move_select_next_clue" />
+    <Action shortcut="Tab"		name="move_select_clue_with_switched_orientation" />
+    <Action shortcut="Home"		name="move_select_first_letter_of_clue" />
+    <Action shortcut="End"		name="move_select_last_letter_of_clue" />
+<!--     <Action shortcut="Ctrl+D"          name="move_demo" /> -->
+</ActionProperties>
+
+</kpartgui>

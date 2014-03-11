@@ -1,0 +1,24 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="krosswordpuzzle_library" version="1">
+
+<!-- Toolbars -->
+<ToolBar name="mainToolBar">
+	<text>Library</text>
+
+	<Action name="library_open" />
+	<Separator />
+
+	<Action name="library_download" />
+	<Action name="libary_import" />
+	<Action name="libary_export" />
+	<Action name="libary_delete" />
+	<Separator />
+
+	<Action name="library_new_folder" />
+	<Action name="library_new_crossword" />
+	<Separator />
+
+	<Action name="library_update" />
+</ToolBar>
+
+</kpartgui>

@@ -1,0 +1,427 @@
+Version 0.15.6:
+    - Changed the theme handling. Each theme now has a .desktop file with ten optional settings plus author, description... The themes are loaded with a class derived from KGameTheme. Theme selection is no longer done in a submenu but in the settings dialog with a KThemeSelector (with nice previews). Feel free to improve the themes (changing the SVGs or the .desktop settings) or create new ones :)
+    - Changed the entry name in the config file to store the used theme from "theme" to "Theme", because otherwise KThemeSelector crashes.
+    - Added drop shadow effects to the crossword title item (displaying the title in the crossword view above the crossword). When the theme says that it has a dark background (in it's .desktop file), the shadow becomes a white glow (looks great in the egyptian theme).
+    - Made the cells for the scribble theme semitransparent white, so that they are better distinguishable from blanks.
+    - Ukranian translation update.
+
+Version 0.15.5:
+    - The crossword title, authors and copyright information are now drawn above the crossword in the crossword view.
+    - Added a glow effect to highlighted cells (QGraphicsDropShadowEffect). Focus cells get a red glow. Glow (dis-)appearance / color change is animated, when enabled.
+    - Disabled BSP Tree indexing of the QGraphicsScene for the crossword, which speeds up the game. The documentation says that it can be faster when disabled, if many animations are used or items move a lot. And it also prevents a crash due to some pure virtual method call, that arised with the use of the glow effect, combined with the focus in effect.
+    - Changed the easing curves for some animations.
+    - Speedup for theme loading, by reducing the size of the background pixmap (and drawing it scaled). This speeds up theme changing and reduces the startup time of the game.
+    - Nicer clue list dock.
+    - When holding the backspace key pressed to clear letters, the animations are now better (not playing the animations after releasing the key). Also works for filling answers with the same letter (although that makes no sense). This is done by processing non-user-input events after each changed letter cell due to a key press.
+    - BugFix: The theme background was cached twice, once by KrosswordPuzzleView (using QGraphicsView::CacheBackground) and once by KrosswordRenderer (this is now removed).
+    - BugFix: The current cell dock offered to change the orientation of a selected clue, although the orientation couldn't be changed, because the clue wouldn't fit into the grid with the new orientation.
+    - BugFix: When changing the length of an answer the currently selected clue won't change any longer, when the focused letter cell has been removed from the answer (the new last letter is now focused in such cases).
+
+Version 0.15.4:
+    - Added icons for answer offsets. They are shown in the current cell dock for clue cells instead of text ("Top Left", "Top", "Top Right", ...), to let the current cell dock get smaller. The insert char button is now a smaller tool button. The layout has changed to FormLayout with wrapping rows.
+    - The sorting of the across clue list and the down clue list in the clue dock is now set to: Across clue list first, then the down clue list. Previously it was random (I think ;)).
+    - Removed the preferences dialog to toggle animations when compiled with Qt < 4.6 as there are no animations then.
+    - The current cell dock now caches the widgets for the different cell types. When changing a clues properties it now doesn't have to recreate all the widgets which has delayed the animations in previous versions.
+    - Converting letter cells to solution letter cells and vice versa is now also animated.
+    - Clue texts can now be edited from the clue list (again). This is now also undoable.
+    - The clue texts in the clue list are now wrapped over two lines. The "Across"/"Down" parent items got a bold font.
+    - BugFix: Resizing image cells to a smaller vertical cell span wrongly created empty cells. This was due to the use of the "<="-operator of KGrid2D::Coord, which is a typedef for QPair<int, int>. This operator is inaccurate for coordinates (first it only tests the first element, the x coordinate; the second element, the y coordinate, is only tested if the x coordinates are equal). I now wrote overloaded operators (<, <=, >, >=) for KGrid2D::Coord in the game (maybe that should be included with kdegameslibs?).
+    - BugFix: Changing a clues orientation didn't move it's associated item in the clue dock to the list of clues with the new orientation. Changing a clues text didn't update the associated item in the clue dock.
+    - BugFix: When changing clue properties in a way that requires removal of solution letter cells, the solution letter cell wasn't restored on undo. Solution letter cells need to be removed when there already is a solution letter cell at the new position of a solution letter cell of the changed clue. This lead to an invalid undo stack and crashes.
+    - BugFix: When changing clue properties the clue got duplicated in the clue dock.
+    - BugFix: The solution toolbar wasn't updated when solution letter cells were removed due to changes of a clues properties.
+    - BugFix: For solution letter cells in the current cell dock: The solution word wasn't updated on changes due to a click on "Apply".
+    - BugFix: The current cell dock doesn't allow to convert to solution letters any longer, if the current crossword type doesn't allow solution letter cells.
+    - BugFix: Animations were always enabled for the krossword in the solution word toolbar.
+    - BugFix: The solution word letter cells in the solution word toolbar were sometimes wrongly disabled (should only be disabled when they have no associated solution letter cell in the crossword).
+    - BugFix: The select first/next/previous/last clue actions ignored that two clues can have the same clue number (horizontal and vertical). Therefore it didn't select all clues and switched twice sometimes (first to the horizontal and then to the vertical clue with the same clue number).
+    - BugFix: When changing the orientation of a clue with only one letter the clue expander item wasn't correctly positioned.
+    - BugFix: When changing a clues orientation / answer offset the animation wasn't correct in all cases.
+    - BugFix: When changing the correct answer by a click on an answer from the dictionary no undo command was created.
+    - BugFix: Fixed a bug that prevented clues to be added starting on letter cells.
+    - BugFix: Fixed a bug that made popup menus for cells disappear immediately when not in edit mode. The bug was in the current cell dock, it called show() on widgets that had no parent.
+    - BugFix: Fixed a possible crash when changing the answer offset of a clue with a crossed letter cell.
+    - Ukranian translation update.
+
+Version 0.15.3:
+    - Better layout switching in the current cell dock, better performance. The different layouts are now cached.
+    - BugFix: Disappearance of cells wasn't animated in most cases (although enabled).
+
+Version 0.15.2:
+    - Fixed another compilation problem with Qt < 4.6.
+
+Version 0.15.1:
+    - Added zooming by Ctrl + mouse wheel.
+    - Fixed a compilation problem with Qt < 4.6 (used FINAL in Q_PROPERTY).
+
+Version 0.15:
+    - Editing crosswords is now more interactive. Instead of having dialogs to add new clues/images or to changes properties of cells, there is now a new dock to change the properties of the current cell. When adding a new clue/image an inital/default one is inserted which properties can be changed with the new dock. Converting letters to solution letters and vice versa is now also done through the current cell dock.
+    - Added much more animations :) Every change of a cells appearance is animated (inspired by the transition widgets in oxygens new animations). Other things that are now animated:
+    Changes to items positions/sizes, (dis-)appearance of items, focus in, changing letters. Animations can be enabled/disabled through a new config dialog.
+    - Correct letters are now themed seperately from normal (current) letters, to make correct and current letters easily distinguishable. Correct letters are shown in edit mode.
+    - Changed the appearance of highlighted clue cells in the default theme to make it better distinguishable from non highlighted clue cells.
+    - Clue cells now store a list of all attached letter cells. Previously the letter cells were searched in the grid everytime. This is now only done when letters are added to a clue.
+    - Letter cells now also store the correct letter. Previously the correct letter was retrieved from the attached clue(s). This is now only done when the correct answer of an attached clue changes.
+    - Better performance when solving / clearing clues, by not emitting the currentAnswerChanged signal for each changed letter, but for the whole answer after all letters have been solved.
+    - Better performance when closing files with many clues. The clue list in the clue list dock is now cleared when closing files instead of searching and removing each clue one after another.
+    - Added merging of resize crossword grid / move all cells undo commands.
+    - Added ukranian translation from KDE SVN.
+    - Renamed the "pics" directory to "themes".
+    - When a crossword is opened or newly created it is zoomed to fit into the game window.
+    - BugFix: The pixmap cache of all cells wasn't deleted when it changed (only the last pixmap cache was deleted when the cell was deleted...).
+    - BugFix: When creating a new crossword from template it didn't automatically enter edit mode.
+    - BugFix: Disabled editing of clue texts in the clue list. It didn't do anything and clue texts can now be changed in the current cell dock.
+    - BugFix: Fixed a bug in the thumb creator with crosswords containing images (the thumb creator crashed, so no thumbnail was generated).
+
+Version 0.14.5:
+    - Added drawing of "end bars" after the last letter cell of clues, if another letter cell is following in direction of the clue (so that there's no visual seperation between the two clues). This enables you to design barred crossword with KrossWordPuzzle.
+    - Added a template for a barred crossword.
+    - Added drawing of "end bars" also to the crossword thumb creator.
+    - Added a combobox to choose the target dir to the download dialog. Initially it is set to the default download directory.
+    - BugFix: The default target directory wasn't respected. New downloads were downloaded to the currently selected directory in the library.
+    - BugFix: Fixed a crash, when the download dialog was closed and the preview image wasn't already downloaded.
+    - Fixed a compilation issue with KDE 4.2.x.
+
+Version 0.14.4.1:
+
+Version 0.14.4:
+    - New interactive editing feature: For all clues a bar is shown after the last letter cell. It can be dragged to add more letters to the clue or to remove letters. The action is undoable and merges with following undo commands (of the same type) if they refer to the same clue. Unfortunately saving of the undo stack doesn't work for merged commands, maybe later version of Qt's undo system will be better suited for saving..
+    - The color of info labels showing what cells get removed when resizing/converting/moving cells is now set to KColorScheme::PositiveText (if no cells will get removed) or ::NegativeText.
+    - Added templates. New crosswords can now be created based on those templates. There's also a preview in the create new crossword dialog. The save as dialog got a new option to save a crossword as template, ie. without correct/current letters filled out, without clue texts and images.
+    - Added places for the Library and the Templates directory to all file widgets in the game. The Templates place doesn't point to /usr/share/... but to ~/.kde/share/apps/krosswordpuzzle/... so the default templates won't show up in that place.
+    - The modified state of crosswords is now also visualized in the main crossword tab title (with a "*").
+    - Error messages from the XML writer are now displayed by the game.
+    - BugFix: Opening a file in the library with a double click in the second column didn't work.
+
+Version 0.14.3:
+    - Improved the clue cell text rendering. It now uses QTextLayout to layout the clue text. This also improves performance, as the layout has to be done only once (until changing the zoom level). For higher zoom levels more lines are allowed. In double clue cells, the layout uses less lines. Text that doesn't fit into the clue cell gets elided. The new layout can also shrink the line spacing to fit more text or to use bigger font sizes.
+    - Fixed a compilation issue with KDE < 4.3, KButtonGroup::id() exists since 4.3.
+    - Fixed a compilation issue with disabled exceptions (by removing a try..catch block that was just there for debugging purposes).
+    - BugFix: When changing clue properties, answer offsets were wrongly set illegal, if an uncrossed letter cell with only the clue to be changed was at that position. The clue to be excluded (= the clue to be changed) actually wasn't excluded in such cases.
+
+Version 0.14.2:
+    - BugFix: The anchor buttons for resizing the crossword were disabled all the time.
+
+Version 0.14.1:
+    - Changing the clue number mapping for number puzzles is now undoable.
+    - New feature: Move all cells in the crossword grid, undoable.
+    - New crossword properties dialog using a toolbox. Resizing with anchor (where to expand / shrink the crossword).
+    - Seperated more dialogs from the main window class to seperate classes (in dialogs directory).
+    - Changed the icon of the downloads folder in the library to "folder-downloads".
+    - Title capitalization for undo command texts.
+    - When clicking the answer input box in the clue properties dialog (behind the last character) the cursor position is now set to 0.
+    - The KrossWord class now has a list of all clues of the crossword, which gets updated when clues are added / removed. So the clue cells don't have to be searched in the crossword grid all the time any longer (searching clue cells, clues from double clue cells, hidden clue cells from letter cells...).
+    - New feature: The undo stack can now be stored with the crossword in the XML file format. All undoable actions can be stored. This is automatically done for auto saved files. Other files are normally stored without undo data, as that data can get big, if you used a lot of edit actions. Files that were loaded with undo stack data also store the new undo stack the next time they're saved (Save action). To explicitly tell the game wheather or not the undo stack should be stored, use the "Save As" action. There's a new checkbox ("Store Undo Stack"). Sometimes it still fails to recover the undo stack, in those cases the undo stack gets cleared..
+    - BugFix: Couldn't change clue properties of clues without clue cell and starting at a crossed letter cell, while one of the clues of that letter cell is the clue to be changed. Error message was "Can't change clue properties. The cell for the new clue isn't empty.".
+
+Version 0.14:
+    - New:
+	- Different crossword types, conversion between types, user defined types.
+	- MySQL database for the dictionary.
+	- Redesigned dialogs: Dictionary, Download, Clue Properties / Add Clue, Create New Crossword, Crossword Properties.
+	- Statistics, check for symmetry.
+	- New icons.
+
+    - Now using a database to store the dictionary (MySQL). That makes dictionary lookups much faster, therefore the thread that previously did that job is now removed as it's no longer needed (tested with ~275000 words). The dictionary can now be filled will clues/answers from existing crosswords, a clue is stored for each answer. Importing answers from plain text dictionaries is also possible. You can also add single answers to the database through the game or change answers/clues in the database.
+    - Added CSV import / export to the dictionary. Can be used as backup or to share dictionaries. It can correctly read CSV's from spread sheet apps (tested with OO), double quoted fields can be parsed (the fields are enclosed by an odd number of double quotes, even numbers of double quotes are 'encoded' double quotes from the field content).
+    - The game will automatically setup the database, when you give the root password for MySQL, which is only used to add a new user with privileges for only one database (both named krosswordpuzzle). The game informs it's users what it will do with that password and that they can also do that manually.
+    - Redesigned dictionary dialog to manage the dictionary database. It has an editable table view with all entries of the database.
+    - When opening the clue properties dialog to change existing clues, the automatically generated pattern to offer words from the dictionary now doesn't take the clue to be changed itself into account.
+    - The list of offered answers in the clue properties / add clue dialog now doesn't include answers that don't fit into the crossword.
+    - Added a new settings menu toolbutton to the pattern line edit in the clue properties / add clue dialog. Available settings are currently: Show only answers with clue, Show only 100 first answers.
+    - Redesigned the download dialog in the library. It now has a combobox for "providers" and a treeview for the crosswords from the selected provider. The treeview can be filtered with a search line. The dialog also got a preview.
+    - Added information about different crossword types to simplify editing of those crosswords (because the game is now aware of the rules for those crossword types). When creating new crosswords, you can choose which type of crossword you want to create. Currently the following types are available: American, Swedish, Number Puzzle, Crossnumber, Free and User Defined. For each crossword type a set of rules is stored, eg. wheather or not clues are written into the crossword grid, if letter cells can contain characters, digits or both, ... When using the "User Defined" crossword type you can specify the rules of the crossword type yourself.
+    - The crossword properties dialog shows the type of the current crossword and allows to convert to another type. The conversion dialog shows if clues / images will get removed by the conversion. For example, the conversion makes clue cells visible if the new crossword type requires it.
+    - Added saving and reading of the crossword type to the XML formats. When reading PUZ-files 'american' is assumed as the crossword type. When reading XML-files without crossword type information, the rules of the 'free' crossword type are used. When writing crosswords with user defined crossword types, all information about that crossword type is stored in the XML file (and can be read again of course).
+    - The clue list is now automatically shown for crossword types where clue cells are disallowed (eg. american crosswords) and hidden + disabled for number puzzles (1-26 for each answer letter as clue).
+    - Redesigned the add clue / clue properties dialog. UI elements that aren't useful for the current crossword type are hidden.
+    - For the 'number puzzle' crossword type: Added a new dialog to change the answer letter to clue number mapping, synchronization of letter cells with the same answer letter, saving/loading of the clue number mapping to the XML file formats. Synchronization of cells is now stored in categories (currently used categories are SolutionLetterSynchronization and SameCharacterLetterSynchronization), so that synchronization can be removed by category.
+    - Added a new validator which validates crossword answers (allowed characters depend on the crossword type). It converts letters with accents to it's counterparts without accents, german umlauts are converted like this: Ä > AE, Ö > OE, Ü > UE. This validator is used for the delegate to edit answers in the dictionary and for the pattern edit box in the clue properties dialog (also allowing * and ? here). The Validator is also used to fix words with letters other than A-Z when importing words from a plain text dictionary.
+    - Added an edit action to check for 180 degree rotation symmetry.
+    - Added a statistics dialog, that can be opened through the edit menu. It shows stuff like empty cell percentage, (un)crossed letter cell percentage, occurences of letters, etc.
+    - Added '0' - '9' and missing clue arrows to the themes.
+    - Arrows for clue cells in double clue cells are now vertically centered at the clue cell.
+    - When resizing the crossword, now only cells/clues that don't fit into the new crossword size are removed. Resizing is now also completely undoable (removed cells are restored on undo). Resizing the crossword is now combined in one undo command with the change crossword properties undo command. When changing the new crossword size in the crossword properties dialog, the number of removed clues / images is displayed.
+    - Added new icons for the new crossword types (except for 'number puzzle') and for those actions: add clue, remove (horizontal/verical) clue, solve (horizontal/verical) clue, goto first/last letter of clue, dictionary, extract from crosswords to dictionary, extract from library-crosswords to dictionary.
+    - Limited the auto save to maximally once every 30 seconds.
+    - The main window title is now set to "Library" when the library is shown.
+    - BugFix: Clue cells are now deletable also when they're inside a double clue cell.
+    - BugFix: Added restoring of deleted image cells to the clear crossword undo command.
+    - BugFix: When changing the properties of an existing clue, there were wrongly disabled answer offsets (becuase the clue which properties should be changed wasn't excluded when getting legal answer offsets).
+    - BugFix: In the add clue / clue properties dialog: Newly disabled answer offsets (eg. because of changed orientation) no longer stay checked.
+    - BugFix: Changes of current answers to clues where detected wrongly (no actual change), wasting some time. This was because a "change" of a letter from ' ' to '-' was noticed as a change, but '-' is just the representation of ' ' to be displayed.
+    - BugFix: Fixed a possible crash with the solution letter properties dialog.
+
+
+Version 0.13:
+    - Added dictionaries support to help creating crosswords. New dictionaries can be added through the settings menu. You can use dictionaries in /usr/share/dict/ or /usr/dict/ or download a dictionary and use the downloaded file. Dictionary files must be plain text files with one word per line. The dictionary is then used inside the "add clue" dialog. You can type wildcard patterns to get matching answers from the dictionary (while typing). The pattern is automatically set based on the letters that are already in the crossword at the positions of the answer letters when opening the dialog or when other clue settings are changed. So you can just choose an answer from multiple matching words.
+    - When opening an empty crossword the edit mode is enabled automatically.
+    - Changed clue number assignment back (had some confusion ;)).
+    - BugFix: Fixed a crash when trying to add a new clue.
+    - BugFix: Fixed a possible crash when removing a clue through the context menu.
+
+Version 0.12:
+    - Better clue highlighting, when clicking a letter cell. It now tries not to change the orientation of the highlighted clue. So for example you can click another letter cell of the currently highlighted clue without switching the orientation.
+    - Changed clue number assignment to have across clues first.
+    - Added new actions: Select first/last letter of current clue, select first/next/previous/last clue, select clue with switched orientation. Some of the functions where there before, but now the shortcuts are configurable and more visible to the user.
+    - Wrote an own class for the (embedded) library window, which is now also a KXmlGuiWindow. The toolbar and shortcuts can now also be customized for the library.
+    - Removed the menu bar from the the crossword tab and moved it to the (always visible) menu bar in the upper right corner of the main tab widget. The menu items are switched when switching between the library and crossword tab. Settings menu entries like configure shortcuts / toolbars are linked to the shortcuts / toolbars of the currently active tab (library or crossword tab, also works for show/hide toolbars/statusbar).
+    - Add clue dialog: Added more restrictions for the selection of the offset of the first answer cell. It now can't be a letter cell that already has two clues (this doesn't work anyway).
+    - Implemented the "Convert To Solution Letter" action, with a little properties dialog to select the position of the letter in the solution word. It's also possible to edit the properties of existing solution letter cells with the same dialog. Converting solution letters back to normal letters is also possible through another new action.
+    - When a solution letter cell is selected the properties action turns into a KMenuAction with the solution properties action and the clue properties action in it (because when a solution letter is selected a clue is always highlighted).
+    - Corrected the solution word toolbar. The solution word (which is a small KrossWord with only one clue) is now resized with the toolbar.
+    - The selected clue is now saved when using an XML file format (*.kwp(z)). When read again, the previously selected clue is made visible and selected again.
+    - The library view now includes a "last modified" column, sortable.
+    - When adding new crosswords to the library (import / download) the new crossword is selected.
+    - BugFix: When selecting a clue with invisible clue cell in the clue dock, the first letter cell of that clue gets focus, so that you can directly enter the answer. Previously this only worked with visible clue cells.
+    - BugFix: Configuring toolbars and shortcuts works now in the crossword window ;) After reading some time in the KDE sources I found out that KXmlGuiClient::setupGUI needs to be called with a relative path to the XML file, because otherwise the shortcut- and toolbar-settings can't be saved locally.
+    - BugFix: The menubar in the corner of the main tab widget was painted too low.
+
+Version 0.11.3:
+	- The preprocessor-switches for Qt 4.6 didn't work... Corrected the Qt version check to it's hex value (0x040600).
+
+Version 0.11.2:
+    - Surrounded Q_INTERFACES(QGraphicsItem) with Qt 4.6 prepocessor-switches. Again, it wasn't compilable with Qt < 4.6 before.
+
+Version 0.11.1
+    - Surrounded #includes for QtKinetic with Qt 4.6 prepocessor-switches. It wasn't compilable with Qt < 4.6 before.
+
+Version 0.11
+    - When a letter cell gets focus, the highlighted clue gets no longer switched unneccessarily (from horizontal to vertical or vice versa). So now you can fill in answers without interruption again.
+    - Added clue number assignment after reading crosswords from xml (*.kwp, *.kwpz). So downloaded *.puz-files which are converted to *.kwpz when imported to the library will have their clue numbers shown again.
+    - Added a crossword tab to the start new page (that name isn't appropriate anymore, as it's now shown all the time). Opened crosswords are shown inside this crossword tab. It's disabled when no crossword is opened and it has it's own toolbars / menus / dock widgets / status bar.
+    - Removed the load tab, you can import crossword files to the library and then open them.
+    - Removed the create new tab, this functionality is now in the library tab (new crossword button).
+    - Removed the recent tab. Maybe it will be added later to the library tab.
+    - Now using default KMainWindow saving of the window state for the (embedded) library window and crossword window. Previously it was saved manually (and now it works better).
+    - To scroll the crossword view, you now need to press Ctrl or use the new pan action.
+    - Loading of crosswords got faster again, because the crossword view doesn't get recreated every time loading a new crossword (instead, it's created once at the beginning).
+    - Nicer library tree view.
+    - Crosswords can now be moved between folders of the library using drag and drop.
+    - Created a CrossWordThumbCreator as a KDE service, which can be used with KIO::PreviewJob. Can be enabled in dolphin to have previews for crossword files. It's now also used for previews in the library tree view.
+    - Added a refresh button to the library toolbar to update the library according to the library directory in the file system.
+    - Downloaded crosswords are now saved in a subfolder called "Downloads" (translatable, created if it doesn't exist). The user can set another folder as default folder for downloaded crosswords using the popup menu.
+    - Added the possibility to drop crossword files onto the game window. If they're dropped onto an item of the library the crosswords are added to the library, otherwise the first file gets opened.
+    - Combined "Clear (horizontal/vertical) clue/cell" actions of edit and normal mode, so that they appear only once in the shortcut configuration dialog.
+    - Changed the "ok" button of the "restore file after crash"-dialog to be a "restore" button.
+    - Now hiding/showing the edit toolbar according to the edit mode state.
+    - Added an action to show/hide the menu-bar (in the crossword-tab).
+    - Added "Q_INTERFACES(QGraphicsItem)" for Qt 4.6.
+    - The animation of the crossword cells when the congratulations items are shown is now done using QtKinetic for Qt 4.6. That's MUCH easier (and therefore it already looks better)!
+    - Added more animations (a zoom effect for focus in events of cells, some rotation when changing the letter of a letter cell, a fade in effect for newly inserted clues / images). Only with Qt 4.6. Looks really cool ;)
+    - The classes KrossWord and KrossWordCell are now derived from the new QGraphicsObject instead of QObject and QGraphicsItem (from which QGraphicsObject is derived) for Qt 4.6. Removed all QGraphicsScene-parameters from the constructors (they are added to a scene using QGraphicsScene::addItem()).
+    - Now setting the new Flag QGraphicsItem::ItemHasNoContents for empty cells when not in edit mode for Qt 4.6.
+    - Changed option->levelOfDetail to QStyleOptionGraphicsItem::levelOfDetailFromTransform(sceneTransform()) for Qt 4.6.
+
+Version 0.10.3
+    - Added an image properties action.
+    - Added a dialog that pops up while loading crosswords.
+    - Added exporting to png/jpeg, with a dialog to select the image size and quality.
+    - Added overwrite confirmation to the export dialogs.
+    - Changed the title of export dialogs to "Export to" (from "Save As").
+    - Performance improvement for clue cell rendering. This makes loading of crosswords with many visible clue cells also faster, because initially there is no cache for the newly read clue cells and therefore all clue cells are rendered at once.
+    - Performance improvement by not rereading the current theme everytime loading another crossword.
+    - With both performance improvements the load time dropped from ~9 to ~3 seconds for my bigger test crossword with an image cell and many visible clue cells.
+    - Fixed an error preventing clue cells to be changed.
+    - Fixed clues not being highlighted when a letter cell with only one associated clue gets focus.
+    - Fixed save file types when exporting from the library. Previously all files where saved as pdf.
+
+Version 0.10.2
+    - Corrected a compile error with KDE < 4.3.
+
+Version 0.10.1
+    - Some move actions are now disabled in edit mode (hint, solve, check, clear answers).
+    - Corrected a compile error with KDE < 4.3.60.
+
+Version 0.10
+    - Added an undo command for adding / removing images.
+    - Added writing / reading of images to the XML writer / reader.
+    - Added a frame to image cells, when in edit mode selected image cells are tinted red.
+    - Added support for external links to image cells.
+    - Added a popup menu for image cells with an entry to remove them.
+    - Simpler start new page: Now hiding the menubar, toolbars, the solution progress bar and the zoom slider when showing the start new page. The help menu is now in the top right corner of the tab widget. (This is inspired by the current palapeli development :))
+    - Added a new library tab to the start new page. It has a toolbar, it's state is restored the next time the library is shown. You can import crosswords to the library, export crosswords to *.kwp, *.kwpz, *.puz, *.pdf, *.ps, download and add crosswords, create new folders in the library, delete folders/crosswords from the library and of course you can open crosswords in the library. For each crossword that is added to the library a thumbnail is generated.
+    - Removed the download tab from the start new page. This functionality is now inside the library tab (download-button).
+    - Combined the remove clue action with a new remove image action. It's text (and function) is changed depending on what is currently selected in the crossword.
+    - Added GetHotNewStuff - download / upload actions. A webDAV-repository for the crosswords is already created (thanks to Josef Spillner). But unfortunately it's currently not working correctly. I will add this functionality to the library tab of the start new page later.
+    - Better focus handling of clue/letter cells.
+    - BugFix: Images were drawn with wrong sizes when zoom wasn't at 100%.
+    - BugFix: Entries of the popup menu for the clue dock did nothing.
+
+Version 0.9
+    - New cell type: Double clue cells, which contain two child clue cells. The child clue cells are drawn with half height, one on top and one on bottom of the double clue cell.
+    - New cell type: Image cells, which can display images and may be stretched over multiple horizontal / vertical columns. When trying to save crosswords containing images to PUZ format a warning is shown.
+    - Added coordinates display to the "add clue"- / "clue properties"-dialog, indicating where the clue cell is in the crossword grid.
+    - Renamed FirstLetterPosition to AnswerOffset, also in the XML-files (but old XML-files can still be read).
+    - New clue cells can now also be added at coordinates containing a letter / clue cell (creating a double clue cell).
+    - Added a tooltip to the zoom slider showing the current zoom level.
+    - Tooltips for the "add clue"- / "clue properties"-dialog.
+    - Added a progress bar to the status bar showing the percentage of filled out letter cells.
+    - Renamed file names for classes LetterCell and ClueCell, removed the "krossword" from the beginning. Moved all cell source files to a new subfolder "cells".
+    - Wrote a ClueModel / ClueItem for the clue dock (previously using QStandardModelItem / QStandardItem). This makes things easier and requires less code :). ClueItem's store a pointer to the associated clue, edit data is the clue text with hyphens but without the clue number, display data is the clue text without hyphens and with the clue number (if any).
+    - BugFix: Changed many previously public slots to now be protected, as public slots are automatically published through DBUS.
+    - BugFix: Fixed error message propagation when reading compressed XML-files.
+    - BugFix: Added german umlauts to the regular expression used to search for "line-breaking"-hyphens. So now clue texts like "Hahnenfuß-gewächs" are correctly converted to "Hahnenfußgewächs" using the function ClueCell::clueWithoutHyphens().
+    - BugFix: Don't connect QSelectionModel::currentRowChanged(QModelIndex,QModelIndex) multiple times. This bug has lead to having the associated slot being called multiple times.
+    - BugFix: Fixes to enable edit actions correctly.
+    - BugFix: Many fixes to the "add clue"- / "clue properties"-dialog, to only enable settings that are possible. Among others: Only enable answer offset buttons in the "add clue"- / "clue properties"-dialog, if there's an empty or letter cell at the respective position. Disable horizontal / vertical radio button if there's a letter cell with a clue cell in the same direction.
+    - BugFix: Now storing the clue text without clue number but with hyphens as edit data in the clue dock. Otherwise the clue number would be added to the clue text (and hyphens would be removed) each time editing the clue text in the clue dock.
+
+Version 0.8.3
+    - Added a clue properties action, which opens the same dialog used for adding new clues. When executed it removes the old clue and reinserts it with the new settings. So you can now change all properties of existing clues (answer length, first letter position).
+    - Added an undo action for clearing correct answers. This is now used by the erasor tool and popup menu entries to clear clues in edit mode.
+    - Now using the letter edit undo action for clearing correct letters (also when using the erasor tool).
+    - Combined the AddClueCommand with possibly needed LetterEditCommands, when the answer to the new clue changes existing letter cells.
+    - Disallow answers to new clues to overwrite answers to existing clues with the same orientation, ie. it's no longer possible to have more than two clue cells for one letter cell, as it's not designed to be.
+    - Remove modification flag when undoing all changes since the last save.
+    - Zooming with zoom-in- / zoom-out-actions is now limited to the range of the zoom slider, so you can't zoom in/out insanely anymore ;)
+    - Clue texts in the clue dock are now shown without line-break-hyphens, ie. hypens that are between two lowercase letters.
+    - BugFix: Corrected changes to the maximal answer length when changing settings in the add clue dialog.
+    - BugFix: It wasn't possible to remove clues by using the popup menu entry from the popup menu for clue cells.
+    - BugFix: Fixed the hint action from move menu / main toolbar.
+
+Version 0.8.2, 0.6.10.2009
+    - Improved the "Add clue"-dialog. The orientation-combobox is replaced by two radio buttons, the first letter position-combobox is replaced by a buttongroup. The clue text line edit got an "insert char"-button using KCharSelect. A new (masked) line edit to set the correct answer has been added, it's synced with the letter count spin box.
+    - Error messages in the status bar are no longer overwritten by "Empty Cell" in edit mode.
+    - Corrected the tab order of the crossword properties dialog and the add clue dialog.
+    - Reduced the maximal font size for clue cells to 1/3 of the cell height. Clue cell text is now left aligned and vertically centered.
+    - Better word wrapping for clue cells (default qt word wrap - or (when there are hyphens in the clue text) - wrap at hyphens and break longest lines, maximal four lines).
+    - BugFix: Settings in the add clue dialog that would create a clue that doesn't fit into the crossword are no longer possible (by disabling illegal first letter positions).
+    - BugFix: Fixed a crash when trying to add a new clue with the minimal answer length (2) at the border of the crossword, so that the answer wouldn't fit into the crossword. Fixed by changing the minimal answer length to 1.
+
+Version 0.8.1, 05.10.2009
+    - Added two signals to the KrossWord-class: "cluesAdded" and "cluesAboutToBeRemoved". As their names say they are emitted when new clues are added / existing clues will get removed. These signals are now used to sync the clue dock with the clues in the crossword.
+    - Added a context menu to the clue dock to remove clues when in edit mode.
+    - Added a zoom slider and zoom buttons to the status bar. Therefore the zoom buttons in the main toolbar are now removed (but the user can still add them to any toolbar of course).
+    - BugFix: Allow reading of empty correct answers with the XML reader.
+    - Changed all licence comments to GPL V3, with a brief description what each file does.
+
+Version 0.8, 02.10.2009
+    - Added popup menu entries for setting the confidence of a letter. When trying to save a crossword with changed confidence values in the PUZ-format, a warning is shown that confidence values can't be stored in a PUZ-file.
+    - Letter cells with confidence unsure are now painted transparent.
+    - Added saving/loading of confidence values for each letter cell, that has a confidence other than confident (for XML files).
+    - Added loading of current answers from XML files (*.kwp, *.kwpz).
+    - Added saving/loading of title, authors, copyright and notes to the XML writer/reader.
+    - XML-tags of *.kwp-files are now read case insensitive.
+    - BugFix: The undo stack is now cleared when having a crossword opened (with undo actions in the stack) and then opening a new crossword.
+false
+Version 0.7.10, 01.10.2009
+    - Added an erasor tool and popup menu entries for clearing letter cells, clue answers (both in normal mode to clear current letters and in edit mode to clear correct letters).
+    - Now using KCursor to automatically hide the cursor on keyboard input.
+    - Put class ClueCell into krosswordcluecell.h/.cpp and classes LetterCell/SolutionLetterCell into krosswordlettercell.h/.cpp.
+    - Title capitalization for popup menu entries.
+    - Now using KDE_IS_VERSION to check for the KDE version used to compile. So you don't have to care about it anymore.
+
+Version 0.7.9.1, 30.09.2009
+    - BugFix: When pressing backspace letter cells weren't cleared.
+    - BugFix: The status bar sometimes didn't display information for the highlighted clue, but for another one.
+    - Corrected the COMPILE_FOR_KDE_4_2_2 preprocessor switch. It was also needed for KDE 4.3. Now it's named KDE_4_4 and should only be uncommented to compile for KDE 4.4.
+
+Version 0.7.9, 30.09.2009
+    - Better rendering when the view is zoomed in. Everything gets drawn sharp now :)
+    - Added undo commands for changing the text of a clue, changing crossword properties and resizing a crossword.
+    - Disable remove clue action and clear clue dock after clearing the crossword.
+    - Changed user visible coordinates to not be zero-based (in undo text, error messages).
+    - Added current coordinates display to the status bar.
+    - Don't save settings after each edit action (to save the auto-save filename). Only save it when the auto-save filename has changed.
+    - Added a popup menu for clue cells.
+    - Don't scroll view with arrow keys when navigating in the crossword using the arrow keys.
+    - Changed the file format of auto-saved temp files from KrossWord::KrossWordPuzzleCompressedXmlFile to KrossWord::KrossWordPuzzleXmlFile for better performance.
+
+Version 0.7.8 / 0.7.8.1 (made it compilable with KDE 4.2), 29.09.2009
+    - Added the possibility to change the clue text of clue cells by editing the item in the clue dock.
+    - When selecting a save filename without extension, ".kwpz" is automatically added to the filename.
+    - Added automatic saving when editing a crossword. After each edit action the crossword is saved to a temporary file. When the game isn't closed normally (ie. it crashed) the user will be asked wheather he wants the crossword to be restored when the game is started again.
+    - Bug fixes:
+	- Changed "#include <KFileWidget>" to "#include <kfilewidget.h>", to compile for KDE < 4.3.
+	- The save as dialog now asks for confirmation when overwriting files.
+	- The save as dialog doesn't appear twice anymore.
+	- When adding a clue, the maximal answer length is now calculated correctly for not-hidden clue cells.
+	- When building the list of clues, don't add clues twice that aren't hidden.
+	- Allow reading of clues from XML-files with no text (ie. <text></text>). This can be useful when the user wants to edit the clue text later.
+	- When closing an edited crossword all edited flags get unset. Previously it was set to modified again, when the undo stack was cleared.
+	- Fixed a (stupid) crash when adding vertical clues with a firstLetterPosition that has no associated arrow item in the SVG to draw.
+
+Version 0.7.7, 25.09.2009
+    - Clue dialog is now modal.
+    - Added context menus to crossword cells.
+    - After adding a new clue, it is automatically highlighted and it's first letter cell is focused.
+    - Update the clue dock when adding / removing clues. It's still somewhat buggy, the clue dock doesn't get updated on undo/redo and when the clue cell isn't hidden, clues get added twice..
+    - BugFix: When setting the letter of a letter cell to the same letter it had before, no undo command will be added to the undo stack.
+
+Version 0.7.6,24.09.2009
+    - Show error messages for edit commands in the status bar.
+    - Add saved files to the list of recent files.
+    - Set focus to clue text when opening the clue properties dialog.
+    - Paint bounding rect for empty cells in editing mode.
+    - Disable add clue action after adding a clue (because then no empty cell is selected).
+    - Added status tips for actions
+    - Removed the "Download Crossword From X" actions from the game menu, so that it's not as crowded as previously. They're now in the "start new" page (see below).
+    - Improved the "start new" page:
+	- Added a new tab: "Load", which shows a KFileWidget to load crosswords. When there are no recent crosswords it is shown initially.
+	- And another new tab: "Download", which shows a tree widget to download crosswords.
+	- A crossword from the recent crossword list now gets loaded on single click / double click depending on KDE's global settings (simply changed the connected signal from itemDoubleClicked to executed).
+	- The recent crossword list widget is now hidden when it's empty. Instead a label item is shown, saying that there are no recent crosswords.
+	- The most recent file's font is now bold.
+	- Added a context menu to the recent file list in the start new page with two actions: remove item and clear list.
+    - Bug fixes:
+	- Ask for filename when saving downloaded crosswords. Previously it just saved to a temporary file.
+	- When turning on the edit mode: The confirmation dialog isn't shown for newly created or empty crosswords, changed the dialog text.
+	- Include path to internal stored current filename when loading a crossword. Prevents asking for filename when trying to save a previously loaded file.
+	- Corrected load() slot name in QObject::connect to loadSlot().
+	- Set crossword state read from PUZ files.
+	- Fixed a possible crash when reading PUZ files with too few clues.
+	- Fixed a crash when selecting a clue or letter cell in newly created crosswords. The clue model for the clue dock wasn't created for new crosswords.
+
+Version 0.7.5, 23.09.2009
+    - Now asking to save changes when a modified crossword is being closed. Display "[modified]" in the title bar for modified crosswords.
+    - Only use one .rc-file again. It crashed sometimes when switching/recreating the UI (it was too hacky..). Added a state in the .rc-file which disables most actions when no crossword is opened and the "start new"-page is shown.
+    - (New) UI file for start new page. Using tabs: "Recent Crosswords", "Create New Crossword" (with default values for copyright, notes and the KDE user name as author by default).
+    - Game > New - action now creates a new window instead of closing the current crossword.
+    - Changed the print layout of the clue list (saves pages): Across and down clues are now side by side, not one under the other.
+
+Version 0.7.4, 22.09.2009
+    - Added an export action (simply prints to PDF/postscript).
+    - BugFix: Preview all pages on print preview (not only the first).
+
+Version 0.7.3, 22.09.2009
+    - Added printing and print preview. Prints the crossword with it's title, authors, copyright, notes and the clue list.
+    - New mime type *.kwpz, which is a zip file, containing a compressed crossword.kwp-file. Can be opened and saved.
+    - Code cleanup for the PUZ-reader/-writer, now reading checksums (will add checksum-checking as soon as all checksum calculations are right..). The PUZ-reader can now be used to read a PUZ-file without the need of a KrossWord-object to display the crossword.
+    - Title Capitalization for mime types.
+    - Renamed mimeTypes.xml to krosswordpuzzle.xml.
+    - More standardized krosswordpuzzleui.rc, discovered the append-attribute and state-tag for KXMLGui ;), now using it. Moved "Enable Edit Mode" action to the bottom of the edit menu, so that undo and redo are on top as it's the standard.
+    - BugFix: When removing clues with hidden clue cells, the first letter cell was removed even when it had another clue.
+
+Version 0.7.2, 18.09.2009
+    - Added saving of PUZ-files, with checksums (some don't seem to be correct somehow..).
+    - BugFix: When switching to edit mode, the cell pixmaps wheren't updated since version 0.7.1.
+
+Version 0.7.1, 17.09.2009
+    - Improved the congratulations "page", removed the continue button, disable move/zoom actions.
+    - Each crossword cell is now cached in a single pixmap.
+    - Added an animation when the crossword is solved.
+    - Title Capitalization for all actions, renamed the open-button in the "start new"-page to "load".
+    - Recent files in the "start new"-page can now also be opened with a double click.
+
+Version 0.7, 16.09.2009
+    - Added a "start new" page (or welcome page), which is shown when the game starts. When it's shown a different app UI is shown with less actions (and without the dock widgets). In the "start new" page, you can open recent crosswords, create new crosswords or open a crossword.
+    - Added title/author/copyright/notes display in the properties dialog (in edit menu).
+    - The currently opened crossword filename or title (if any) is now shown in the title bar.
+    - Faster solve / clear answers.
+    - Uses a QBrush for background painting
+    - The class KrossWord is now also a QGraphicsItem and all crossword cells are child items (so the crossword can be transformed altogether)
+    - Removed 1 pixel spacing of crossword cells
+
+Version 0.6, 12.09.2009
+    - Added an edit mode. New actions: enable/disable edit mode, add/remove clues, clear crossword, document-properties.
+    - Added an XML writer and save/save as actions.
+    - Added a recent files/urls action.
+    - Added an undo stack, and a undo stack view dock.
+    - QUndoCommand classes for editing actions (change letter, add/remove clue, clear crossword).
+    - Better navigation with arrow keys.
+    - The first letter cell now gets focus when a clue is clicked in the clue dock.
+    - Faster loading of crosswords.
+    - Added AUTHORS and COPYING files, all source files now include GPL licence infos
+
+Version 0.5 (first release on kde-apps.org), 09.09.2009

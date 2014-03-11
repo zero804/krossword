@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name="krosswordpuzzlerc"/>
+
+  <group name="Preferences">
+    <entry name="lastUnsavedFileBeforeCrash" type="String">
+      <label>Filename of the last unsaved file, before a crash or unexpected behaviour, which caused that an edited crossword wasn't saved without confirmation of the user.</label>
+      <default></default>
+    </entry>
+
+    <entry name="Theme" type="String">
+      <label>Name of the current theme.</label>
+      <default>default</default>
+    </entry>
+
+    <entry name="libraryDownloadSubDir" type="String">
+      <label>Name of the subdirectory in the library directory in which new downloads are saved.</label>
+      <default></default>
+    </entry>
+
+    <entry name="animate" type="Bool">
+      <label>Enable Animations</label>
+      <tooltip>whether or not animations should be enabled</tooltip>
+      <default>true</default>
+    </entry>
+    <entry name="animateSizeChange" type="Bool">
+      <label>Animate Size Changes</label>
+      <tooltip>whether or not changes to items sizes should be animated.</tooltip>
+      <default>true</default>
+    </entry>
+    <entry name="animatePosChange" type="Bool">
+      <label>Animate Position Changes</label>
+      <tooltip>whether or not changes to items positions should be animated.</tooltip>
+      <default>true</default>
+    </entry>
+    <entry name="animateAppear" type="Bool">
+      <label>Animate Items Appearance</label>
+      <tooltip>whether or not the appearance of items should be animated.</tooltip>
+      <default>true</default>
+    </entry>
+    <entry name="animateDisappear" type="Bool">
+      <label>Animate Items Disappearance</label>
+      <tooltip>whether or not the disappearance of items should be animated.</tooltip>
+      <default>true</default>
+    </entry>
+    <entry name="animateFocusIn" type="Bool">
+      <label>Animate Focus In</label>
+      <tooltip>whether or not items should be animated when getting focus.</tooltip>
+      <default>true</default>
+    </entry>
+    <entry name="animateChangeLetter" type="Bool">
+      <label>Animate Change Letter</label>
+      <tooltip>whether or not letter cells should be animated when their letter changes.</tooltip>
+      <default>true</default>
+    </entry>
+    <entry name="animateTransition" type="Bool">
+      <label>Animate Changes to an Items Appearance</label>
+      <tooltip>whether or not changes to an items appearance should be animated.</tooltip>
+      <default>true</default>
+    </entry>
+  </group>
+</kcfg>

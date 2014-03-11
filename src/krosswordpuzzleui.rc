@@ -1,0 +1,28 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="krosswordpuzzle" version="3">
+
+<!-- Menu bar -->
+<MenuBar>
+    <Menu name="settings">
+<!-- 		<Action name="options_themes" /> -->
+	<ActionList name="options_list" />
+	<Action name="" />
+    </Menu>
+</MenuBar>
+
+<!-- Toolbars -->
+<ToolBar name="mainToolBar">
+    <text>Main Toolbar</text>
+
+<!--     <Action name="game_new" /> -->
+</ToolBar>
+
+<!-- Popup menus -->
+<Menu name="recent_files_list_popup">
+    <Action name="recent_files_remove" />
+    <Separator />
+
+    <Action name="recent_files_clear" />
+</Menu>
+
+</kpartgui>
