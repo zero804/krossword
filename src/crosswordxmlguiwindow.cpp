@@ -816,22 +816,17 @@ bool CrossWordXmlGuiWindow::setupActions() {
 void CrossWordXmlGuiWindow::updateTheme() {
   QString themeFile = Settings::theme();
 
-  /*
-  if ( !m_theme.load(themeFile) ) {
-    if ( !m_theme.loadDefault() ) {
-      KMessageBox::information( this, i18n("Neither the chosen theme '%1' "
-				"nor the default theme could be found.\n"
-				"Check your installation.", themeFile) );
+  if ( !m_theme.readFromDesktopFile(themeFile) ) {
+    if ( !m_theme.readFromDesktopFile("themes/default.desktop") ) {
+      KMessageBox::information( this, i18n("Neither the chosen theme '%1' nor the default theme could be found.\nCheck your installation.", themeFile) );
       qApp->quit();
       return;
     } else {
-      KMessageBox::information( this, i18n("The theme '%1' couldn't be found. "
-				"The default theme is now used.", themeFile) );
-      Settings::setTheme( "themes/" + m_theme.fileName() );
+      KMessageBox::information( this, i18n("The theme '%1' couldn't be found. The default theme is now used.", themeFile) );
+      Settings::setTheme( "themes/default.desktop" );
       Settings::self()->writeConfig();
     }
   }
-  */
 
   if ( viewSolution() )
       viewSolution()->scene()->update();
@@ -1002,15 +997,12 @@ void CrossWordXmlGuiWindow::updateClueDock() {
   } else
     m_clueModel = new ClueModel();
 
-  connect( m_clueModel, SIGNAL(changeClueTextRequest(ClueCell*,QString)),
-	   this, SLOT(changeClueTextRequested(ClueCell*,QString)) );
+  connect( m_clueModel, SIGNAL(changeClueTextRequest(ClueCell*,QString)), this, SLOT(changeClueTextRequested(ClueCell*,QString)) );
 
   m_clueTree->setModel( m_clueModel );
-  m_clueTree->setFirstColumnSpanned( m_clueModel->horizontalCluesItem()->row(),
-				     QModelIndex(), true );
-  m_clueTree->setFirstColumnSpanned( m_clueModel->verticalCluesItem()->row(),
-				     QModelIndex(), true );
-  m_clueTree->setColumnWidth( 0, 200 );
+  m_clueTree->setFirstColumnSpanned( m_clueModel->horizontalCluesItem()->row(), QModelIndex(), true );
+  m_clueTree->setFirstColumnSpanned( m_clueModel->verticalCluesItem()->row(), QModelIndex(), true );
+  m_clueTree->setColumnWidth( 0, 300 );
   m_clueTree->header()->setStretchLastSection( true );
   m_clueTree->expandAll();
 
@@ -1021,8 +1013,7 @@ void CrossWordXmlGuiWindow::updateClueDock() {
     m_clueSelectionModel = new QItemSelectionModel( m_clueModel );
 
   m_clueTree->setSelectionModel( m_clueSelectionModel );
-  connect( m_clueSelectionModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-	   this, SLOT(currentClueInDockChanged(QModelIndex,QModelIndex)) );
+  connect( m_clueSelectionModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentClueInDockChanged(QModelIndex,QModelIndex)) );
 
   m_clueDock->setWidget( m_clueTree );
 }
@@ -1042,9 +1033,7 @@ void CrossWordXmlGuiWindow::updateSolutionInToolBar() {
   solutionToolBar->setVisible( krossWord()->hasSolutionWord() );
   // TODO: enable/disable toggle solution toolbar action
 
-  KrossWord *separateSolutionCrossword =
-      krossWord()->createSeparateSolutionKrossWord( i18n("Solution"),
-		  Qt::Horizontal, SyncContent | SyncSelection );
+  KrossWord *separateSolutionCrossword = krossWord()->createSeparateSolutionKrossWord( i18n("Solution"), Qt::Horizontal, SyncContent | SyncSelection );
   if ( !separateSolutionCrossword ) {
     if ( krossWord()->hasSolutionWord() )
       kDebug() << "Couldn't create a separate solution crossword.";
@@ -1059,16 +1048,13 @@ void CrossWordXmlGuiWindow::updateSolutionInToolBar() {
   m_viewSolution->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
   m_viewSolution->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Maximum );
   solutionToolBar->addWidget( m_viewSolution );
-  connect( m_viewSolution, SIGNAL(resized(QSize,QSize)),
-	   this, SLOT(solutionViewResized(QSize,QSize)) );
+  connect( m_viewSolution, SIGNAL(resized(QSize,QSize)), this, SLOT(solutionViewResized(QSize,QSize)) );
 }
 
-void CrossWordXmlGuiWindow::solutionViewResized( const QSize &oldSize,
-						 const QSize &newSize ) {
+void CrossWordXmlGuiWindow::solutionViewResized( const QSize &oldSize, const QSize &newSize ) {
   Q_UNUSED( oldSize );
   Q_UNUSED( newSize );
-  m_viewSolution->fitInView( m_viewSolution->krossWord()->boundingRect(),
-			     Qt::KeepAspectRatio );
+  m_viewSolution->fitInView( m_viewSolution->krossWord()->boundingRect(), Qt::KeepAspectRatio );
 }
 
 QDockWidget *CrossWordXmlGuiWindow::createClueDock() {
@@ -1088,10 +1074,8 @@ QDockWidget *CrossWordXmlGuiWindow::createClueDock() {
   m_clueTree->setIconSize( QSize(32, 32) );
   m_clueTree->setContextMenuPolicy( Qt::CustomContextMenu );
   m_clueTree->setItemDelegate( new HtmlDelegate );
-  connect( m_clueTree, SIGNAL(clicked(QModelIndex)),
-	   this, SLOT(clickedClueInDock(QModelIndex)) );
-  connect( m_clueTree, SIGNAL(customContextMenuRequested(QPoint)),
-	   this, SLOT(clueListContextMenuRequested(QPoint)) );
+  connect( m_clueTree, SIGNAL(clicked(QModelIndex)), this, SLOT(clickedClueInDock(QModelIndex)) );
+  connect( m_clueTree, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(clueListContextMenuRequested(QPoint)) );
 
   m_clueDock = new QDockWidget(i18n("Clue List"), this);
   m_clueDock->setObjectName( "clueDock" );
@@ -1117,26 +1101,13 @@ QDockWidget* CrossWordXmlGuiWindow::createCurrentCellDock() {
   m_currentCellDock->setObjectName( "currentCellDock" );
   m_currentCellDock->setWidget( m_currentCellWidget );
 
-  connect( m_currentCellWidget,
-	   SIGNAL(changeAnswerOffsetRequest(ClueCell*,AnswerOffset)),
-	   this, SLOT(changeAnswerOffsetRequested(ClueCell*,AnswerOffset)) );
-  connect( m_currentCellWidget,
-	   SIGNAL(changeOrientationRequest(ClueCell*,Qt::Orientation)),
-	   this, SLOT(changeOrientationRequested(ClueCell*,Qt::Orientation)) );
-  connect( m_currentCellWidget, SIGNAL(changeClueTextRequest(ClueCell*,QString)),
-	   this, SLOT(changeClueTextRequested(ClueCell*,QString)) );
-  connect( m_currentCellWidget,
-	   SIGNAL(changeClueAndCorrectAnswerRequest(ClueCell*,QString,QString)),
-	   this, SLOT(changeClueAndCorrectAnswerRequested(ClueCell*,QString,QString)) );
-  connect( m_currentCellWidget,
-	   SIGNAL(setSolutionWordIndexRequest(SolutionLetterCell*,int)),
-	   this, SLOT(setSolutionWordIndexRequested(SolutionLetterCell*,int)) );
-  connect( m_currentCellWidget,
-	   SIGNAL(convertToLetterCellRequest(SolutionLetterCell*)),
-	   this, SLOT(convertToLetterCellRequested(SolutionLetterCell*)) );
-  connect( m_currentCellWidget,
-	   SIGNAL(convertToSolutionLetterCellRequest(LetterCell*)),
-	   this, SLOT(convertToSolutionLetterCellRequested(LetterCell*)) );
+  connect( m_currentCellWidget, SIGNAL(changeAnswerOffsetRequest(ClueCell*,AnswerOffset)), this, SLOT(changeAnswerOffsetRequested(ClueCell*,AnswerOffset)) );
+  connect( m_currentCellWidget, SIGNAL(changeOrientationRequest(ClueCell*,Qt::Orientation)), this, SLOT(changeOrientationRequested(ClueCell*,Qt::Orientation)) );
+  connect( m_currentCellWidget, SIGNAL(changeClueTextRequest(ClueCell*,QString)), this, SLOT(changeClueTextRequested(ClueCell*,QString)) );
+  connect( m_currentCellWidget, SIGNAL(changeClueAndCorrectAnswerRequest(ClueCell*,QString,QString)), this, SLOT(changeClueAndCorrectAnswerRequested(ClueCell*,QString,QString)) );
+  connect( m_currentCellWidget, SIGNAL(setSolutionWordIndexRequest(SolutionLetterCell*,int)), this, SLOT(setSolutionWordIndexRequested(SolutionLetterCell*,int)) );
+  connect( m_currentCellWidget, SIGNAL(convertToLetterCellRequest(SolutionLetterCell*)), this, SLOT(convertToLetterCellRequested(SolutionLetterCell*)) );
+  connect( m_currentCellWidget, SIGNAL(convertToSolutionLetterCellRequest(LetterCell*)), this, SLOT(convertToSolutionLetterCellRequested(LetterCell*)) );
 
   return m_currentCellDock;
 }
@@ -1145,50 +1116,42 @@ void CrossWordXmlGuiWindow::currentCellDockToggled( bool checked ) {
   m_currentCellWidget->setWatchForChanges( checked );
 }
 
-void CrossWordXmlGuiWindow::changeAnswerOffsetRequested( ClueCell* clueCell,
-				    AnswerOffset newAnswerOffset ) {
+void CrossWordXmlGuiWindow::changeAnswerOffsetRequested( ClueCell* clueCell, AnswerOffset newAnswerOffset ) {
   QString errorMessage;
   if ( !m_undoStack->tryPush(new ChangeClueCommand(krossWord(), clueCell,
 	clueCell->clue(), clueCell->orientation(), newAnswerOffset,
 	clueCell->correctAnswer(), clueCell->currentAnswer(' ')), &errorMessage) ) {
     statusBar()->showMessage(
-	i18nc("%1 contains the reason why the answer offset couldn't be changed",
-	"Can't change answer offset. %1", errorMessage) );
+	i18nc("%1 contains the reason why the answer offset couldn't be changed", "Can't change answer offset. %1", errorMessage) );
   }
 }
 
-void CrossWordXmlGuiWindow::changeOrientationRequested( ClueCell* clueCell,
-					    Qt::Orientation newOrientation ) {
+void CrossWordXmlGuiWindow::changeOrientationRequested( ClueCell* clueCell, Qt::Orientation newOrientation ) {
   QString errorMessage;
   if ( !m_undoStack->tryPush(new ChangeClueCommand(krossWord(), clueCell,
 	clueCell->clue(), newOrientation, clueCell->answerOffset(),
 	clueCell->correctAnswer(), clueCell->currentAnswer(' ')), &errorMessage) ) {
     statusBar()->showMessage(
-	i18nc("%1 contains the reason why the orientation couldn't be changed",
-	"Can't change orientation. %1", errorMessage) );
+	i18nc("%1 contains the reason why the orientation couldn't be changed", "Can't change orientation. %1", errorMessage) );
   }
 }
 
-void CrossWordXmlGuiWindow::changeClueTextRequested( ClueCell* clueCell,
-						const QString& newClueText ) {
+void CrossWordXmlGuiWindow::changeClueTextRequested( ClueCell* clueCell, const QString& newClueText ) {
   QString errorMessage;
   if ( !m_undoStack->tryPush(new ChangeClueCommand(krossWord(), clueCell,
 	newClueText), &errorMessage) ) {
     statusBar()->showMessage(
-	i18nc("%1 contains the reason why the clue text couldn't be changed",
-	"Can't change clue text. %1", errorMessage) );
+	i18nc("%1 contains the reason why the clue text couldn't be changed", "Can't change clue text. %1", errorMessage) );
   }
 }
 
-void CrossWordXmlGuiWindow::changeClueAndCorrectAnswerRequested( ClueCell* clueCell,
-		const QString &newClueText, const QString &newCorrectAnswer ) {
+void CrossWordXmlGuiWindow::changeClueAndCorrectAnswerRequested( ClueCell* clueCell, const QString &newClueText, const QString &newCorrectAnswer ) {
   QString errorMessage;
   if ( !m_undoStack->tryPush(new ChangeClueCommand(krossWord(), clueCell,
 	newClueText, clueCell->orientation(), clueCell->answerOffset(),
 	newCorrectAnswer, clueCell->currentAnswer(' ')), &errorMessage) ) {
     statusBar()->showMessage(
-	i18nc("%1 contains the reason why the correct answer couldn't be changed",
-	"Can't change correct answer. %1", errorMessage) );
+	i18nc("%1 contains the reason why the correct answer couldn't be changed", "Can't change correct answer. %1", errorMessage) );
   }
 }
 
@@ -1199,19 +1162,16 @@ void CrossWordXmlGuiWindow::setSolutionWordIndexRequested(
   updateSolutionInToolBar();
 }
 
-void CrossWordXmlGuiWindow::convertToLetterCellRequested(
-	SolutionLetterCell* solutionLetterCell ) {
+void CrossWordXmlGuiWindow::convertToLetterCellRequested( SolutionLetterCell* solutionLetterCell ) {
   QString errorMessage;
   if ( !m_undoStack->tryPush(new ConvertToLetterCommand(
 	      krossWord(), solutionLetterCell), &errorMessage) ) {
       statusBar()->showMessage(
-	  i18nc("%1 contains the reason why the solution letter couldn't be converted to a letter",
-	  "Can't convert solution letter. %1", errorMessage) );
+	  i18nc("%1 contains the reason why the solution letter couldn't be converted to a letter", "Can't convert solution letter. %1", errorMessage) );
   }
 }
 
-void CrossWordXmlGuiWindow::convertToSolutionLetterCellRequested(
-	    LetterCell* letterCell ) {
+void CrossWordXmlGuiWindow::convertToSolutionLetterCellRequested( LetterCell* letterCell ) {
   Q_ASSERT( letterCell );
 
   QString solutionWord = krossWord()->solutionWord( '_' );
@@ -1223,8 +1183,7 @@ void CrossWordXmlGuiWindow::convertToSolutionLetterCellRequested(
   if ( !m_undoStack->tryPush(new ConvertToSolutionLetterCommand(
 	    krossWord(), letterCell->coord(), pos), &errorMessage) ) {
     statusBar()->showMessage(
-	i18nc("%1 contains the reason why the letter couldn't be converted to a solution letter",
-	"Can't convert letter. %1", errorMessage) );
+	i18nc("%1 contains the reason why the letter couldn't be converted to a solution letter", "Can't convert letter. %1", errorMessage) );
   }
 }
 
@@ -1504,8 +1463,7 @@ bool CrossWordXmlGuiWindow::saveAs() {
 
     QCheckBox *chkSaveAsTemplate = new QCheckBox( i18n("Save As &Template") );
     chkSaveAsTemplate->setChecked( false );
-    chkSaveAsTemplate->setToolTip( i18n("Save without correct answers, clue texts, "
-				     "images") );
+    chkSaveAsTemplate->setToolTip( i18n("Save without correct answers, clue texts, images") );
 
     // Custom widgets for the save as file dialog
     QWidget *w = new QWidget;
@@ -1539,9 +1497,7 @@ bool CrossWordXmlGuiWindow::saveAs() {
 	return false;
 }
 
-bool CrossWordXmlGuiWindow::writeTo( const QString &fileName,
-				     KrossWord::WriteMode writeMode,
-				     bool saveUndoStack ) {
+bool CrossWordXmlGuiWindow::writeTo( const QString &fileName, KrossWord::WriteMode writeMode, bool saveUndoStack ) {
     KrossWord::FileFormat fileFormat =
 	KrossWord::fileFormatFromFileName( fileName );
     if ( fileFormat == KrossWord::AcrossLitePuzFile ) {
@@ -1716,34 +1672,20 @@ KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView() {
     brush.setMatrix( m );
     view->setBackgroundBrush( brush );
 
-    connect( view, SIGNAL(signalChangeStatusbar(const QString&)),
-	     this, SLOT(signalChangeStatusbar(const QString&)) );
-    connect( view, SIGNAL(signalChangeZoom(int)),
-	     this, SLOT(zoomSlot(int)) );
-    connect( view->krossWord(), SIGNAL(cluesAdded(ClueCellList)),
-	     this, SLOT(cluesAdded(ClueCellList)) );
-    connect( view->krossWord(), SIGNAL(cluesAboutToBeRemoved(ClueCellList)),
-	     this, SLOT(cluesAboutToBeRemoved(ClueCellList)) );
-    connect( view->krossWord(), SIGNAL(solutionWordLetterAdded(SolutionLetterCell*)),
-	     this, SLOT(solutionWordLetterAdded(SolutionLetterCell*)) );
-    connect( view->krossWord(), SIGNAL(solutionWordLetterRemoved(SolutionLetterCell*)),
-	     this, SLOT(solutionWordLetterAboutToBeRemoved(SolutionLetterCell*)) );
-    connect( view->krossWord(), SIGNAL(currentClueChanged(ClueCell*)),
-	     this, SLOT(currentClueChanged(ClueCell*)) );
-    connect( view->krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)),
-	     this, SLOT(answerChanged(ClueCell*, const QString&)) ); // TODO: No slot?
-    connect( view->krossWord(), SIGNAL(currentCellChanged(KrossWordCell*,KrossWordCell*)),
-	     this, SLOT(currentCellChanged(KrossWordCell*,KrossWordCell*)) );
-    connect( view->krossWord(), SIGNAL(letterEditRequest(LetterCell*,QChar,QChar)),
-	     this, SLOT(letterEditRequest(LetterCell*,QChar,QChar)) );
-    connect( view->krossWord(), SIGNAL(customContextMenuRequested(QPointF,KrossWordCell*)),
-	     this, SLOT(customContextMenuRequestedForCell(QPointF,KrossWordCell*)) );
-    connect( view->krossWord(), SIGNAL(mousePressed(QPointF,Qt::MouseButton,KrossWordCell*)),
-	     this, SLOT(mousePressedOnCell(QPointF,Qt::MouseButton,KrossWordCell*)) );
-    connect( view->krossWord(), SIGNAL(addLettersToClueRequest(ClueCell*,int)),
-	     this, SLOT(addLettersToClueRequest(ClueCell*,int)) );
-//     connect( view->krossWord(), SIGNAL(mouseEnteredWhilePressed(QPointF,Qt::MouseButton,KrossWordCell*)),
-// 	    this, SLOT(mouseMovedOnCellWhilePressed(QPointF,Qt::MouseButton,KrossWordCell*)) );
+    connect( view, SIGNAL(signalChangeStatusbar(const QString&)), this, SLOT(signalChangeStatusbar(const QString&)) );
+    connect( view, SIGNAL(signalChangeZoom(int)), this, SLOT(zoomSlot(int)) );
+    connect( view->krossWord(), SIGNAL(cluesAdded(ClueCellList)), this, SLOT(cluesAdded(ClueCellList)) );
+    connect( view->krossWord(), SIGNAL(cluesAboutToBeRemoved(ClueCellList)), this, SLOT(cluesAboutToBeRemoved(ClueCellList)) );
+    connect( view->krossWord(), SIGNAL(solutionWordLetterAdded(SolutionLetterCell*)), this, SLOT(solutionWordLetterAdded(SolutionLetterCell*)) );
+    connect( view->krossWord(), SIGNAL(solutionWordLetterRemoved(SolutionLetterCell*)), this, SLOT(solutionWordLetterAboutToBeRemoved(SolutionLetterCell*)) );
+    connect( view->krossWord(), SIGNAL(currentClueChanged(ClueCell*)), this, SLOT(currentClueChanged(ClueCell*)) );
+    connect( view->krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)) ); // TODO: No slot?
+    connect( view->krossWord(), SIGNAL(currentCellChanged(KrossWordCell*,KrossWordCell*)), this, SLOT(currentCellChanged(KrossWordCell*,KrossWordCell*)) );
+    connect( view->krossWord(), SIGNAL(letterEditRequest(LetterCell*,QChar,QChar)), this, SLOT(letterEditRequest(LetterCell*,QChar,QChar)) );
+    connect( view->krossWord(), SIGNAL(customContextMenuRequested(QPointF,KrossWordCell*)), this, SLOT(customContextMenuRequestedForCell(QPointF,KrossWordCell*)) );
+    connect( view->krossWord(), SIGNAL(mousePressed(QPointF,Qt::MouseButton,KrossWordCell*)), this, SLOT(mousePressedOnCell(QPointF,Qt::MouseButton,KrossWordCell*)) );
+    connect( view->krossWord(), SIGNAL(addLettersToClueRequest(ClueCell*,int)), this, SLOT(addLettersToClueRequest(ClueCell*,int)) );
+    //connect( view->krossWord(), SIGNAL(mouseEnteredWhilePressed(QPointF,Qt::MouseButton,KrossWordCell*)), this, SLOT(mouseMovedOnCellWhilePressed(QPointF,Qt::MouseButton,KrossWordCell*)) );
 
     return view;
 }
@@ -1774,8 +1716,7 @@ void CrossWordXmlGuiWindow::printSlot() {
     dlg->setFromTo( 1, document.pages() );
 
     if ( dlg->exec() ) {
-	krossWord()->setEmptyCellColorForPrinting(
-		    ui_print_crossword.emptyCellColor->color() );
+	krossWord()->setEmptyCellColorForPrinting( ui_print_crossword.emptyCellColor->color() );
 	document.print( dlg->fromPage(), dlg->toPage() );
     }
 
@@ -2023,8 +1964,7 @@ void CrossWordXmlGuiWindow::zoomSlot( int zoomChange ) {
 }
 
 void CrossWordXmlGuiWindow::fitToPageSlot() {
-  m_view->fitInView( m_view->sceneRect().adjusted(150, 150, -150, -150),
-		     Qt::KeepAspectRatio );
+  m_view->fitInView( m_view->sceneRect().adjusted(150, 150, -150, -150), Qt::KeepAspectRatio );
 
   if ( m_zoomSlider && m_view )
     m_zoomSlider->setValue( m_view->matrix().m11() * 100 );
@@ -2040,8 +1980,7 @@ void CrossWordXmlGuiWindow::viewPanSlot( bool enabled ) {
 }
 
 void CrossWordXmlGuiWindow::solveSlot() {
-    disconnect( krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)),
-	     this, SLOT(answerChanged(ClueCell*, const QString&)) );
+    disconnect( krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)) );
 
     krossWord()->solve();
 

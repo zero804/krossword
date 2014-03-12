@@ -206,26 +206,15 @@ class CrossWordXmlGuiWindow : public KXmlGuiWindow {
     bool isInEditMode() const { return m_editMode != NoEditing; };
     void setEditMode( EditMode editMode = Editing );
 
-    bool createNewCrossWord( const CrosswordTypeInfo &crosswordTypeInfo,
-			     const QSize &crosswordSize, const QString &title,
-			     const QString &authors, const QString &copyright,
-			     const QString &notes );
-    bool createNewCrossWordFromTemplate( const QString& templateFilePath,
-					 const QString& title,
-					 const QString& authors,
-					 const QString& copyright,
-					 const QString& notes );
+    bool createNewCrossWord( const CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize, const QString &title, const QString &authors, const QString &copyright, const QString &notes );
+    bool createNewCrossWordFromTemplate( const QString& templateFilePath, const QString& title, const QString& authors, const QString& copyright, const QString& notes );
     inline bool loadFile( const QString& fileName ) {
 	return loadFile( KUrl(fileName) ); };
-    bool loadFile( const KUrl &url,
-		KrossWord::FileFormat fileFormat = KrossWord::DetermineByFileName,
-		bool loadCrashedFile = false );
+    bool loadFile( const KUrl &url, KrossWord::FileFormat fileFormat = KrossWord::DetermineByFileName, bool loadCrashedFile = false );
     bool save();
     bool saveAs();
     bool closeFile();
-    bool writeTo( const QString &fileName,
-		  KrossWord::WriteMode writeMode = KrossWord::Normal,
-		  bool saveUndoStack = false );
+    bool writeTo( const QString &fileName, KrossWord::WriteMode writeMode = KrossWord::Normal, bool saveUndoStack = false );
     bool isModified() const { return m_modified != NoModification; };
     QString currentFileName() const { return m_curFileName; };
 //     QStandardItemModel *createCrosswordTypeModel() const;

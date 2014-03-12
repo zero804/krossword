@@ -105,8 +105,7 @@ class LibraryXmlGuiWindow : public KXmlGuiWindow {
 	void libraryItemDoubleClicked( const QModelIndex &index ) {
 	  libraryOpenItem( index ); };
 	void libraryOpenItem( const QModelIndex &index );
-	void libraryCurrentChanged( const QModelIndex &current,
-								const QModelIndex &previous );
+	void libraryCurrentChanged( const QModelIndex &current, const QModelIndex &previous );
 	void librarySetAsSubDirForDownloads();
 
 	void libraryOpenSlot() {

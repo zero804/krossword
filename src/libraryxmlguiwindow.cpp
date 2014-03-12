@@ -410,8 +410,7 @@ void LibraryXmlGuiWindow::libraryAddCrossword( const QList< QUrl >& urls,
   QString lastCrosswordFileName;
   foreach ( const KUrl &url, urls ) {
     if ( !krossWord.read(url, &errorString, this) ) {
-      KMessageBox::error( this, i18n("The crossword couldn't be imported to "
-	  "the library.\n%1", errorString) );
+      KMessageBox::error( this, i18n("The crossword couldn't be imported to the library.\n%1", errorString) );
     } else {
       QString name = krossWord.title().trimmed();
       if ( name.isEmpty() )
@@ -427,10 +426,8 @@ void LibraryXmlGuiWindow::libraryAddCrossword( const QList< QUrl >& urls,
 
       QString saveFileName = tmpFileName + ".kwpz";
 
-      if ( !krossWord.write(saveFileName, &errorString, Crossword::KrossWord::Normal,
-	    Crossword::KrossWord::KrossWordPuzzleCompressedXmlFile) ) {
-	KMessageBox::error( this,
-	    i18n("The crossword couldn't be written to the library folder.\n%1", errorString) );
+      if ( !krossWord.write(saveFileName, &errorString, Crossword::KrossWord::Normal, Crossword::KrossWord::KrossWordPuzzleCompressedXmlFile) ) {
+	KMessageBox::error( this, i18n("The crossword couldn't be written to the library folder.\n%1", errorString) );
       } else
 	lastCrosswordFileName = saveFileName;
     }
@@ -803,11 +800,9 @@ void LibraryXmlGuiWindow::libraryTreeContextMenuRequested( const QPoint& pos ) {
     if ( index.isValid() && index.data(Qt::UserRole + 2).toBool() ) {
 	m_libraryPopupIndex = index;
 	QAction *setAsSubDirAction = menu->addAction(
-	KIcon("folder-downloads"), i18n("Set as Folder For New &Downloads"),
-			    this, SLOT(librarySetAsSubDirForDownloads()) );
+	KIcon("folder-downloads"), i18n("Set as Folder For New &Downloads"), this, SLOT(librarySetAsSubDirForDownloads()) );
 	setAsSubDirAction->setCheckable( true );
-	if ( QFileInfo(index.data(Qt::UserRole).toString()).fileName()
-			== Settings::libraryDownloadSubDir() ) {
+	if ( QFileInfo(index.data(Qt::UserRole).toString()).fileName() == Settings::libraryDownloadSubDir() ) {
 	    setAsSubDirAction->setChecked( true );
 	}
     }
@@ -852,12 +847,9 @@ void LibraryXmlGuiWindow::fillLibrary() {
     if ( !m_libraryModel ) {
 	m_libraryModel = new QStandardItemModel();
 
-	connect( m_libraryModel, SIGNAL(itemChanged(QStandardItem*)),
-			this, SLOT(libraryItemChanged(QStandardItem*)) );
-			m_libraryTree->setModel( m_libraryModel );
-	connect( m_libraryTree->selectionModel(),
-			SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-			this, SLOT(libraryCurrentChanged(QModelIndex,QModelIndex)) );
+	connect( m_libraryModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(libraryItemChanged(QStandardItem*)) );
+        m_libraryTree->setModel( m_libraryModel );
+	connect( m_libraryTree->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(libraryCurrentChanged(QModelIndex,QModelIndex)) );
     } else
 	m_libraryModel->clear();
 
@@ -869,8 +861,7 @@ void LibraryXmlGuiWindow::fillLibrary() {
 
     // Get library folders
     QString libraryDir = KGlobal::dirs()->saveLocation( "appdata", "library" );
-    QFileInfoList fiSubDirs = QDir( libraryDir ).entryInfoList(
-	QDir::Dirs | QDir::NoDotAndDotDot ) << QFileInfo( libraryDir );
+    QFileInfoList fiSubDirs = QDir( libraryDir ).entryInfoList( QDir::Dirs | QDir::NoDotAndDotDot ) << QFileInfo( libraryDir );
 
     // Add contained crosswords for each folder (including the root folder)
     KFileItemList fileItemList, fileItemListBaseDir;
@@ -883,8 +874,7 @@ void LibraryXmlGuiWindow::fillLibrary() {
 	else
 	    filter = "library/" + fi.fileName() + "/*.kwp?";
 
-	QStringList libraryFiles = KGlobal::dirs()->findAllResources(
-	    "appdata", filter, KStandardDirs::NoDuplicates );
+	QStringList libraryFiles = KGlobal::dirs()->findAllResources( "appdata", filter, KStandardDirs::NoDuplicates );
 	QStandardItem *subDirectoryItem = NULL;
 	if ( !isBaseLibraryDir ) {
 	    int containedCrosswords = QDir( fi.absoluteFilePath() ).entryInfoList(
@@ -892,11 +882,8 @@ void LibraryXmlGuiWindow::fillLibrary() {
 	    QString itemText = QString( "<b>%1</b><br>&nbsp;&nbsp;"
 		    "<span style='color:%4'><b>%2</b> %3</span>" )
 		    .arg( fi.fileName() )
-		    .arg( i18nc("The title for contents descriptions of folders "
-				"in the library tree view", "Content:") )
-		    .arg( i18ncp("Text to describe the contents of library folders "
-				 "in the library tree view",
-		    "%1 crossword", "%1 crosswords", containedCrosswords) )
+		    .arg( i18nc("The title for contents descriptions of folders in the library tree view", "Content:") )
+		    .arg( i18ncp("Text to describe the contents of library folders in the library tree view", "%1 crossword", "%1 crosswords", containedCrosswords) )
 		    .arg( sAdditionsColor );
 
 	    if ( fi.fileName() == Settings::libraryDownloadSubDir() )
@@ -923,35 +910,26 @@ void LibraryXmlGuiWindow::fillLibrary() {
 	    KrossWordXmlReader::KrossWordInfo info =
 		KrossWordXmlReader::readInfo( KUrl(libraryFile), &errorString );
 	    if ( !info.isValid() ) {
-	      kDebug() << "Error reading crossword info from library file"
-		       << errorString;
+	      kDebug() << "Error reading crossword info from library file" << errorString;
 	    }
 
 	    if ( isBaseLibraryDir ) {
-		fileItemListBaseDir << KFileItem( KFileItem::Unknown,
-						  KFileItem::Unknown,
-						  KUrl(libraryFile), true );
+		fileItemListBaseDir << KFileItem( KFileItem::Unknown, KFileItem::Unknown, KUrl(libraryFile), true );
 	    } else {
-		fileItemList << KFileItem( KFileItem::Unknown,
-					   KFileItem::Unknown,
-					   KUrl(libraryFile), true );
+		fileItemList << KFileItem( KFileItem::Unknown, KFileItem::Unknown, KUrl(libraryFile), true );
 	    }
 
 	    QIcon preview = puzIcon;
 	    QString title = info.title.isEmpty()
-		    ? fi.fileName().remove( QRegExp("\\." + fi.suffix() + '$',
-						    Qt::CaseInsensitive) )
-		    : info.title;
+		    ? fi.fileName().remove( QRegExp("\\." + fi.suffix() + '$', Qt::CaseInsensitive) ) : info.title;
 	    QString itemText = QString( "<b>%1</b><br>&nbsp;&nbsp;"
 		    "<span style='color:%8;'><b>%2</b> %3x%4<br>&nbsp;&nbsp;"
 		    "<b>%5</b> %6 - %7</span>" )
 		    .arg( title )
-		    .arg( i18nc("The title for sizes of crosswords in the "
-				"library tree view", "Size:") )
+		    .arg( i18nc("The title for sizes of crosswords in the library tree view", "Size:") )
 		    .arg( info.width )
 		    .arg( info.height )
-		    .arg( i18nc("The title for authors of crosswords in the "
-				"library tree view", "Author(s):") )
+		    .arg( i18nc("The title for authors of crosswords in the library tree view", "Author(s):") )
 		    .arg( info.authors )
 		    .arg( info.copyright )
 		    .arg( sAdditionsColor );
@@ -961,8 +939,7 @@ void LibraryXmlGuiWindow::fillLibrary() {
 	    libraryItem->setData( false, Qt::UserRole + 2 );
 	    libraryItem->setDropEnabled( false );
 
-	    QStandardItem *lastModifiedItem
-		    = new QStandardItem( KGlobal::locale()->formatDate(fi.lastModified().date(), KLocale::FancyShortDate) );
+	    QStandardItem *lastModifiedItem = new QStandardItem( KGlobal::locale()->formatDate(fi.lastModified().date(), KLocale::FancyShortDate) );
 	    lastModifiedItem->setData( fi.lastModified(), Qt::UserRole + 1 );
 	    lastModifiedItem->setDropEnabled( false );
 
@@ -982,24 +959,18 @@ void LibraryXmlGuiWindow::fillLibrary() {
     m_libraryTree->setCurrentIndex( QModelIndex() );
     libraryCurrentChanged( QModelIndex(), QModelIndex() );
 
-    m_libraryModel->setHeaderData( 0, Qt::Horizontal, i18nc("Name", "Used as label "
-	    "of the header for the column containing the crossword names in the "
-	    "library model."), Qt::DisplayRole );
-    m_libraryModel->setHeaderData( 1, Qt::Horizontal, i18nc("Last Modified",
-	    "Used as label of the header for the column containing the times when "
-	    "the crosswords have been last edited in the library model."),
-	    Qt::DisplayRole );
-    m_libraryTree->resizeColumnToContents( 1 );
+    m_libraryModel->setHeaderData( 0, Qt::Horizontal, i18nc("Used as label of the header for the column containing the crossword names in the library model.", "Name"), Qt::DisplayRole );
+    m_libraryModel->setHeaderData( 1, Qt::Horizontal, i18nc("Used as label of the header for the column containing the times when "
+	    "the crosswords have been last edited in the library model.", "Last Modified"), Qt::DisplayRole );
+    m_libraryTree->resizeColumnToContents( 0 );
 
     // Get previews
     while ( !fileItemListBaseDir.isEmpty() )
 	    fileItemList.prepend( fileItemListBaseDir.takeLast() );
     m_previewJob = new KIO::PreviewJob( fileItemList, 64, 64, 0, 1, false, true, 0 );
     m_previewJob->setAutoDelete( true );
-    connect( m_previewJob, SIGNAL(gotPreview(KFileItem,QPixmap)),
-		this, SLOT(previewJobGotPreview(KFileItem,QPixmap)) );
-    connect( m_previewJob, SIGNAL(failed(KFileItem)),
-		this, SLOT(previewJobFailed(KFileItem)) );
+    connect( m_previewJob, SIGNAL(gotPreview(KFileItem,QPixmap)), this, SLOT(previewJobGotPreview(KFileItem,QPixmap)) );
+    connect( m_previewJob, SIGNAL(failed(KFileItem)), this, SLOT(previewJobFailed(KFileItem)) );
     m_previewJob->start();
 }
 
@@ -1010,20 +981,14 @@ QString LibraryXmlGuiWindow::additionsColorCSS() {
 		    .arg( additionsColor.green() ).arg( additionsColor.blue() );
 }
 
-QString LibraryXmlGuiWindow::libraryFolderText( const QString& path,
-						int crosswordCountOffset ) {
+QString LibraryXmlGuiWindow::libraryFolderText( const QString& path, int crosswordCountOffset ) {
     QFileInfo fi( path );
-    int containedCrosswords = crosswordCountOffset + QDir( fi.absoluteFilePath() )
-	.entryInfoList( QStringList() << "*.kwp" << "*.kwpz",
-			QDir::NoDotAndDotDot | QDir::Files ).count();
+    int containedCrosswords = crosswordCountOffset + QDir( fi.absoluteFilePath() ).entryInfoList( QStringList() << "*.kwp" << "*.kwpz", QDir::NoDotAndDotDot | QDir::Files ).count();
     return QString( "<b>%1</b><br>&nbsp;&nbsp;"
 	"<span style='color:%4'><b>%2</b> %3</span>" )
 	.arg( fi.fileName() )
-	.arg( i18nc("The title for contents descriptions of folders in the "
-		    "library tree view", "Content:") )
-	.arg( i18ncp("Text to describe the contents of library folders in the "
-		     "library tree view",
-		     "%1 crossword", "%1 crosswords", containedCrosswords) )
+	.arg( i18nc("The title for contents descriptions of folders in the library tree view", "Content:") )
+	.arg( i18ncp("Text to describe the contents of library folders in the library tree view", "%1 crossword", "%1 crosswords", containedCrosswords) )
 	.arg( additionsColorCSS() );
 }
 
