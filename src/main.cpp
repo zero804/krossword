@@ -30,39 +30,40 @@ static const char version[] = "0.15.60";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("krosswordpuzzle", 0, ki18n("KrossWordPuzzle"), version,
-		     ki18n(description), KAboutData::License_GPL_V3,
-		     ki18n("(C) 2009 Friedrich Pülz"), KLocalizedString(), 0,
-		     "fpuelz@gmx.de");
-    about.addAuthor( ki18n("Friedrich Pülz"), KLocalizedString(), "fpuelz@gmx.de" );
+    KAboutData about("krosswordpuzzle", 0, ki18n("KrossWordPuzzle"), version, 
+                     ki18n(description), KAboutData::License_GPL_V3, 
+                     ki18n("(C) 2009 Friedrich Pülz"), KLocalizedString(), 0, "fpuelz@gmx.de");
+    about.addAuthor(ki18n("Friedrich Pülz"), KLocalizedString(), "fpuelz@gmx.de");
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;
-    options.add( "+[URL]", ki18n("Document to open") );
+    options.add("+[URL]", ki18n("Document to open"));
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
-    KGlobal::locale()->insertCatalog( "libkdegames" );
+    KGlobal::locale()->insertCatalog("libkdegames");
 
     KrossWordPuzzle *widget = new KrossWordPuzzle;
 
     // see if we are starting with session management
-    if ( app.isSessionRestored() ) {
+    if (app.isSessionRestored()) {
         RESTORE(KrossWordPuzzle);
-    } else { QCoreApplication::applicationPid();
+    } else { 
+        QCoreApplication::applicationPid();
         // no session.. just start up normally
         KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-        if ( args->count() == 0 ) {
-	    //krosswordpuzzle *widget = new krosswordpuzzle;
-	    widget->show();
+        
+        if (args->count() == 0) {
+            //krosswordpuzzle *widget = new krosswordpuzzle;
+            widget->show();
         } else {
-            int i = 0;
-            for ( ; i < args->count(); i++ ) {
-                //krosswordpuzzle *widget = new krosswordpuzzle;
+            for (int i = 0; i < args->count(); i++) {
+                // krosswordpuzzle *widget = new krosswordpuzzle;
                 widget->show();
-		widget->loadSlot( args->arg(i) );
-    // 	    widget->load( );
+                widget->loadSlot(args->arg(i));
+                // widget->load( );
             }
         }
+        
         args->clear();
     }
 

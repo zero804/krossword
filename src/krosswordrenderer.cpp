@@ -26,6 +26,8 @@
 #include <QPainter>
 #include "settings.h"
 
+#include <iostream>
+
 
 KrosswordRenderer* KrosswordRenderer::self() {
     static KrosswordRenderer instance;

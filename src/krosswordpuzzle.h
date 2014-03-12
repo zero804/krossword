@@ -54,15 +54,13 @@ class KrossWordPuzzle : public KXmlGuiWindow
 
 public:
     enum Action {
-	Game_Download,
-	Game_Upload,
-
-    // 	Options_Themes,
-
-	RecentTab_RecentFilesRemove,
+        Game_Download,
+        Game_Upload,
+        // 	Options_Themes,
+        RecentTab_RecentFilesRemove,
     };
 
-    const char *actionName( Action action ) const;
+    const char *actionName(Action action) const;
 
     /**
      * Default Constructor
@@ -72,73 +70,68 @@ public:
     /**
      * Default Destructor
      */
-    virtual ~KrossWordPuzzle() {};
+    virtual ~KrossWordPuzzle() {}
 
-    CrossWordXmlGuiWindow *mainCrossword() const { return m_mainCrossword; };
+    CrossWordXmlGuiWindow *mainCrossword() const { return m_mainCrossword; }
 
-    void loadFile( const KUrl &url,
-		   Crossword::KrossWord::FileFormat fileFormat = Crossword::KrossWord::DetermineByFileName,
-		   bool loadCrashedFile = false );
-    bool createNewCrossWord( const Crossword::CrosswordTypeInfo &crosswordTypeInfo,
-			     const QSize &crosswordSize, const QString &title,
-			     const QString &authors, const QString &copyright,
-			     const QString &notes );
-    bool createNewCrossWordFromTemplate( const QString &templateFilePath,
-					 const QString &title,
-					 const QString &authors,
-					 const QString &copyright,
-					 const QString &notes );
+    void loadFile(const KUrl &url, Crossword::KrossWord::FileFormat fileFormat = Crossword::KrossWord::DetermineByFileName, bool loadCrashedFile = false);
+    bool createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo,
+                            const QSize &crosswordSize,
+                            const QString &title,
+                            const QString &authors,
+                            const QString &copyright,
+                            const QString &notes);
+    bool createNewCrossWordFromTemplate(const QString &templateFilePath, 
+                                        const QString &title,
+                                        const QString &authors,
+                                        const QString &copyright,
+                                        const QString &notes);
     /** Removes the path for crosswords that are in the library. */
-    QString displayFileName( const QString &fileName );
+    QString displayFileName(const QString &fileName);
     /** Checks if the crossword with the given filename is in the library. */
-    bool isFileInLibrary( const QString &fileName );
+    bool isFileInLibrary(const QString &fileName);
 
 protected:
-    virtual void closeEvent( QCloseEvent *event );
-    virtual void dropEvent( QDropEvent* );
-    virtual void dragEnterEvent( QDragEnterEvent* );
+    virtual void closeEvent(QCloseEvent *event);
+    virtual void dropEvent(QDropEvent*);
+    virtual void dragEnterEvent(QDragEnterEvent*);
 
 public slots:
     // Game actions
     void gameNewSlot();
     void downloadSlot();
     void uploadSlot();
-    void loadSlot( const KUrl &url = KUrl() ) {
-      loadFile( url ); };
-    void loadRecentSlot( const KUrl &url ){
-      loadFile( url ); };
-    void loadFile( const QString &fileName ) {
-      loadFile( KUrl(fileName) ); };
-
-    void saveSlot() {
-      m_mainCrossword->save(); }
-    void saveAsSlot() {
-      m_mainCrossword->saveAs(); };
+    
+    void loadSlot(const KUrl &url = KUrl()) { loadFile(url); }
+    void loadRecentSlot(const KUrl &url)    { loadFile(url); }
+    void loadFile(const QString &fileName)  { loadFile(KUrl(fileName)); }
+    void saveSlot()                         { m_mainCrossword->save(); }
+    void saveAsSlot()                       { m_mainCrossword->saveAs(); }
 
     // Settings actions
     void optionsPreferencesSlot();
     void settingsChanged();
     AnimationTypes animationTypesFromSettings();
-//     void changeThemeSlot( int themeId );
+    // void changeThemeSlot( int themeId );
 
-    void showStatusbarGlobal( bool show );
-    int configureShortcutsGlobal();
+    void showStatusbarGlobal(bool show);
+    int  configureShortcutsGlobal();
     void configureToolbarsGlobal();
-    void currentTabChanged( int );
+    void currentTabChanged(int);
 
 protected slots:
-    void crosswordLoadingComplete( const QString &fileName );
-    void crosswordErrorLoading( const QString &fileName );
-    void crosswordCurrentChanged( const QString &fileName, const QString &oldFileName );
-    void crosswordClosed( const QString &fileName );
-    void crosswordModificationsChanged( CrossWordXmlGuiWindow::ModificationTypes modificationTypes );
-    void crosswordAutoSaveFileChanged( const QString &fileName );
+    void crosswordLoadingComplete(const QString &fileName);
+    void crosswordErrorLoading(const QString &fileName);
+    void crosswordCurrentChanged(const QString &fileName, const QString &oldFileName);
+    void crosswordClosed(const QString &fileName);
+    void crosswordModificationsChanged(CrossWordXmlGuiWindow::ModificationTypes modificationTypes);
+    void crosswordAutoSaveFileChanged(const QString &fileName);
 
 //     void loadRecentItem();
 //     void recentFileExecuted( QListWidgetItem *item );
 //     void recentFileListContextMenuRequested( const QPoint &pos );
 
-    // Popup menu actions
+// Popup menu actions
 //     void recentFilesRemoveSlot();
 //     void recentFilesClearSlot();
 
@@ -149,18 +142,14 @@ private:
     void setupPlaces();
     void setupActions();
 
-    Ui::settings ui_settings;
-
-    LibraryXmlGuiWindow *m_mainLibrary;
+    Ui::settings           ui_settings;
+    LibraryXmlGuiWindow   *m_mainLibrary;
     CrossWordXmlGuiWindow *m_mainCrossword;
-    KDialog *m_loadProgressDialog;
-
-    KRecentFilesAction *m_recentFilesAction;
-    QList<KToolBar*> m_hiddenToolBars;
-
-    QString m_caption;
-
-    MenuTabWidget *m_mainTabBar;
+    KDialog               *m_loadProgressDialog;
+    KRecentFilesAction    *m_recentFilesAction;
+    QList<KToolBar*>       m_hiddenToolBars;
+    QString                m_caption;
+    MenuTabWidget         *m_mainTabBar;
 };
 
 #endif // _KROSSWORDPUZZLE_H_

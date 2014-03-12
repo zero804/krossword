@@ -30,12 +30,10 @@ class KrosswordRenderer
     public:
 	static KrosswordRenderer* self();
 
-	void renderBackground( QPainter *p, const QRectF& r ) const;
-	QPixmap background( const QSize &size ) const;
-	void renderElement( QPainter *p, const QString& elementid,
-		    const QRectF& r ) const;
-	void renderElement( QPainter *p, const QString& elementid,
-		    const QRectF& r, const QColor &alpha ) const;
+	void renderBackground(QPainter *p, const QRectF& r) const;
+	QPixmap background(const QSize &size) const;
+	void renderElement(QPainter *p, const QString& elementid, const QRectF& r) const;
+	void renderElement(QPainter *p, const QString& elementid, const QRectF& r, const QColor &alpha) const;
 	bool setTheme( const QString &fileName );
 
     private:
