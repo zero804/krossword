@@ -23,7 +23,8 @@
 #include "krossword.h"
 #include "cells/krosswordcell.h"
 
-#include <KGameDifficulty>
+//#include <KGameDifficulty>
+#include <KgDifficulty>
 #include <KColorScheme>
 
 
@@ -58,8 +59,8 @@ CrosswordPropertiesDialog::CrosswordPropertiesDialog(
   foreach ( const QString &language, languages )
     ui_properties.language->insertLanguage( language );
 
-  QMap<QByteArray, QString> difficulties = KGameDifficulty::localizedLevelStrings();
-  ui_properties.difficulty->addItems( difficulties.values() );
+  //QMap<QByteArray, QString> difficulties = KGameDifficulty::localizedLevelStrings();
+  //ui_properties.difficulty->addItems( difficulties.values() );
 
   ui_properties.title->setText( krossWord->title() );
   ui_properties.author->setText( krossWord->authors() );

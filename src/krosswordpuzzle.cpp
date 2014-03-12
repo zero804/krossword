@@ -47,7 +47,10 @@
 #include <KMenuBar>
 #include <KToolBar>
 #include <KTabWidget>
-#include <KGameThemeSelector>
+////#include <KGameThemeSelector>
+#include <KgThemeProvider>
+#include <KgThemeSelector>
+
 #include <KShortcutsDialog>
 
 // KDE action includes
@@ -63,7 +66,9 @@
 // Other KDE includes
 #include <KDE/KLocale>
 #include <KStandardDirs>
-#include <KGameDifficulty>
+//#include <KGameDifficulty>
+#include <KgDifficulty>
+
 #include <KRandom>
 #include <KTemporaryFile>
 #include <kdeversion.h>
@@ -766,13 +771,17 @@ void KrossWordPuzzle::optionsPreferencesSlot() {
 #endif
 
   QWidget *themeSelectorDlg = new QWidget;
-  KGameThemeSelector *themeSelector = new KGameThemeSelector( themeSelectorDlg,
-		Settings::self(), KGameThemeSelector::NewStuffDisableDownload );
+  //KGameThemeSelector *themeSelector = new KGameThemeSelector( themeSelectorDlg, Settings::self(), KGameThemeSelector::NewStuffDisableDownload );
+
+  KgThemeProvider* provider = new KgThemeProvider(QByteArray(), themeSelectorDlg);
+  provider->discoverThemes("appdata", QLatin1String("themes"));
+  
+  KgThemeSelector *themeSelector = new KgThemeSelector(provider, KgThemeSelector::EnableNewStuffDownload, themeSelectorDlg);
   dialog->addPage( themeSelector, i18n("Theme"), "games-config-theme" );
 
-  connect( dialog, SIGNAL(settingsChanged(QString)),
-	   this, SLOT(settingsChanged()) );
+  connect( dialog, SIGNAL(settingsChanged(QString)), this, SLOT(settingsChanged()) );
   dialog->setAttribute( Qt::WA_DeleteOnClose );
+
   dialog->show();
 }
 

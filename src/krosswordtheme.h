@@ -24,7 +24,8 @@
 #include <QColor>
 #include <QRect>
 
-#include <KGameTheme>
+//#include <KGameTheme>
+#include <KgTheme>
 
 #if QT_VERSION >= 0x040600 // HACK TODO FIXME 0x040600
 #include <QMargins>
@@ -50,7 +51,7 @@ class QMargins {
 };
 #endif
 
-class KrosswordTheme : public KGameTheme {
+class KrosswordTheme : public KgTheme {
   public:
     enum ItemPosition {
       TopLeft, TopRight, BottomLeft, BottomRight
@@ -58,7 +59,7 @@ class KrosswordTheme : public KGameTheme {
     
     KrosswordTheme();
     
-    virtual bool load( const QString& file );
+    virtual bool readFromDesktopFile( const QString& file );
 
     /** Margins of letter cell contents. */
     QMargins marginsLetterCell() const { return m_marginsLetterCell; };
@@ -107,8 +108,8 @@ class KrosswordTheme : public KGameTheme {
     ItemPosition solutionLetterIndexPos() const { return m_solutionLetterIndexPos; };
 
     /** Returns the given @p itemRect aligned at @p position inside @p bounds. */
-    static QRect rectAtPos( const QRect &bounds, const QRect &itemRect,
-			    ItemPosition position );
+    static QRect rectAtPos( const QRect &bounds, const QRect &itemRect, ItemPosition position );
+    
     /** Trims the given @p source rect with the given @p margins. */
     static QRect trimmedRect( const QRect &source, const QMargins &margins );
 

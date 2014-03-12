@@ -96,8 +96,7 @@ void KrossWordTitleItem::updateTheme( KrossWord* krossWord ) {
 }
 
 #if QT_VERSION >= 0x040600
-void KrossWordTitleItem::updateGraphicsEffect( KrossWord* krossWord,
-					       QGraphicsDropShadowEffect* effect ) {
+void KrossWordTitleItem::updateGraphicsEffect( KrossWord* krossWord, QGraphicsDropShadowEffect* effect ) {
   if ( !effect ) {
     kDebug() << "No drop shadow effect found for title item";
     return;
@@ -112,6 +111,7 @@ void KrossWordTitleItem::updateGraphicsEffect( KrossWord* krossWord,
     effect->setOffset( 2, 2 );
     effect->setColor( QColor(63, 63, 63, 180) );
   }
+
 }
 #endif
 
@@ -208,8 +208,8 @@ KrossWord::KrossWord( KrosswordTheme *theme, int width, int height )
 }
 
 void KrossWord::init( uint width, uint height) {
-  if ( !m_theme )
-    m_theme = KrosswordTheme::defaultValues();
+  //if ( !m_theme )
+  //  m_theme = KrosswordTheme::defaultValues();
   m_topLeftCellOffset = QPointF( 0, 0 );
   m_krossWordGrid = new KrosswordGrid( width, height );
   m_editable = false;
@@ -224,7 +224,7 @@ void KrossWord::init( uint width, uint height) {
   m_focusItem->hide();
   m_focusItem->setZValue( 500 );
   m_focusItem->setBrush( QBrush(Qt::transparent) );
-  m_focusItem->setPen( QPen(m_theme->selectionColor(), 3) );
+  //m_focusItem->setPen( QPen(m_theme->selectionColor(), 3) );
 
   setFlag( QGraphicsItem::ItemIsFocusable );
   setFlag( QGraphicsItem::ItemIsSelectable );
@@ -240,7 +240,7 @@ void KrossWord::setTheme( KrosswordTheme* theme ) {
     delete m_theme;
 
   m_theme = theme;
-  m_focusItem->setPen( QPen(m_theme->selectionColor()) );
+  //m_focusItem->setPen( QPen(m_theme->selectionColor()) );
   clearCache();
 }
 

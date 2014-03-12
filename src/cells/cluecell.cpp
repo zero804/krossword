@@ -136,13 +136,11 @@ void DoubleClueCell::removeClueCell( ClueCell* clueCell ) {
 #if QT_VERSION >= 0x040600
   if ( otherIsBelow ) {
     QPointF targetPos = newPos + QPointF( 0, -quartHeight );
-    krossWord()->animator()->animate( Crossword::Animator::AnimatePositionChange,
-				      otherClueCell, targetPos, Crossword::Animator::VeryFast );
+    krossWord()->animator()->animate( Crossword::Animator::AnimatePositionChange, otherClueCell, targetPos, Crossword::Animator::VeryFast );
   } else
     otherClueCell->setPos( newPos );
 
-  QPropertyAnimation *sizeAnim = new QPropertyAnimation(
-	    otherClueCell, "transitionHeightFactor" );
+  QPropertyAnimation *sizeAnim = new QPropertyAnimation( otherClueCell, "transitionHeightFactor" );
   sizeAnim->setStartValue( 0.5 );
   sizeAnim->setEndValue( 1.0 );
   sizeAnim->setEasingCurve( QEasingCurve(QEasingCurve::InOutBack) );
@@ -394,19 +392,14 @@ QList< Coord > ClueCell::answerCoordList( const Coord& clueCoord,
   return ret;
 }
 
-ErrorType ClueCell::setProperties( Qt::Orientation newOrientation,
-				   AnswerOffset newAnswerOffset,
-				   const QString &newCorrectAnswer ) {
-  return krossWord()->changeClueProperties( this, newOrientation,
-					    newAnswerOffset, newCorrectAnswer );
+ErrorType ClueCell::setProperties( Qt::Orientation newOrientation, AnswerOffset newAnswerOffset, const QString &newCorrectAnswer ) {
+  return krossWord()->changeClueProperties( this, newOrientation, newAnswerOffset, newCorrectAnswer );
 }
 
-void ClueCell::setProperties( Qt::Orientation newOrientation,
-			      AnswerOffset newAnswerOffset ) {
+void ClueCell::setProperties( Qt::Orientation newOrientation, AnswerOffset newAnswerOffset ) {
   bool changed = false;
   if ( newAnswerOffset != m_answerOffset ) {
-    if ( newAnswerOffset != OnClueCell
-	  && m_answerOffset == OnClueCell ) {
+    if ( newAnswerOffset != OnClueCell && m_answerOffset == OnClueCell ) {
       setVisible( true );
 #if QT_VERSION >= 0x040600
       if ( krossWord()->isAnimationTypeEnabled(AnimateAppear) )
@@ -498,8 +491,7 @@ bool ClueCell::setUnhidden( AnswerOffset newAnswerOffset ) {
   return true;
 }
 
-AnswerOffset ClueCell::tryToMakeVisible( bool simulate,
-					    QList<Coord> disallowedCoords ) {
+AnswerOffset ClueCell::tryToMakeVisible( bool simulate, QList<Coord> disallowedCoords ) {
   if ( m_answerOffset != OnClueCell )
     return m_answerOffset; // Clue cell is already visible
 
@@ -572,8 +564,7 @@ Coord ClueCell::firstLetterCoords() const {
     return coord() + ClueCell::answerOffsetToOffset( m_answerOffset );
 }
 
-Coord ClueCell::firstLetterCoords( Coord clueCoords,
-					      AnswerOffset answerOffset ) {
+Coord ClueCell::firstLetterCoords( Coord clueCoords, AnswerOffset answerOffset ) {
     return clueCoords + ClueCell::answerOffsetToOffset( answerOffset );
 }
 
@@ -1065,16 +1056,13 @@ void ClueCell::createLayout( const QRect& rect ) {
 }
 
 void ClueCell::drawForeground( QPainter *p, const QStyleOptionGraphicsItem *option ) {
-    QRect drawRect = KrosswordTheme::trimmedRect( option->rect,
-				    krossWord()->theme()->marginsClueCell() );
+    QRect drawRect = KrosswordTheme::trimmedRect( option->rect, krossWord()->theme()->marginsClueCell() );
 
     if ( drawRect != m_textLayoutRect )
       createLayout( drawRect );
 
-    m_textLayout.draw( p, QPointF(drawRect.left(),
-		       drawRect.top() + (drawRect.height() -
-		       m_textLayout.boundingRect().height()) / 2.0f) );
-
+    m_textLayout.draw( p, QPointF(drawRect.left(), drawRect.top() + (drawRect.height() - m_textLayout.boundingRect().height()) / 2.0f) );
+    
     drawClueNumber( p , option );
 }
 
@@ -1098,10 +1086,9 @@ void ClueCell::drawClueNumber( QPainter *p, const QStyleOptionGraphicsItem *opti
 	QFontMetrics fontMetrics( font );
 	QRect rect = fontMetrics.boundingRect( text );
 	rect.setWidth( fontMetrics.width(text) );
-	QRect trimmedRect = KrosswordTheme::trimmedRect( option->rect,
-		    krossWord()->theme()->marginsClueCell(levelOfDetail) );
-	p->drawText( KrosswordTheme::rectAtPos(trimmedRect, rect,
-			krossWord()->theme()->clueNumberPos()), text );
+	QRect trimmedRect = KrosswordTheme::trimmedRect( option->rect, krossWord()->theme()->marginsClueCell(levelOfDetail) );
+	p->drawText( KrosswordTheme::rectAtPos(trimmedRect, rect, krossWord()->theme()->clueNumberPos()), text );
+        
 // 	QPoint topLeft = option->rect.bottomRight() - QPoint( rect.width(), rect.height() );
 // 	p->drawText( QRect( topLeft, rect.size()).adjusted(-3, -3, -3, -3), text );
     }

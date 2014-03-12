@@ -46,7 +46,7 @@ class ClueModel;
 
 class QStringListModel;
 class QStandardItemModel;
-class QFutureWatcher;
+//class QFutureWatcher;
 class QProgressBar;
 class QStandardItem;
 class QTreeView;
@@ -373,8 +373,7 @@ protected slots:
     void solutionWordLetterAdded( SolutionLetterCell *solutionLetter );
     void solutionWordLetterAboutToBeRemoved( SolutionLetterCell *solutionLetter );
 
-    void letterEditRequest( LetterCell* letter,
-			    const QChar &currentLetter, const QChar &newLetter );
+    void letterEditRequest( LetterCell* letter, const QChar &currentLetter, const QChar &newLetter );
 
 protected:
     virtual void keyPressEvent( QKeyEvent* );

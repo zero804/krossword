@@ -27,31 +27,27 @@
 #include <QFile>
 
 
-KrosswordTheme::KrosswordTheme() : KGameTheme()  {
+KrosswordTheme::KrosswordTheme() : KgTheme("krosswordpuzzle") {
 }
 
 
-bool KrosswordTheme::load( const QString& file ) {
-  if ( !KGameTheme::load(file) )
+bool KrosswordTheme::readFromDesktopFile( const QString& file ) {
+  if ( !KgTheme::readFromDesktopFile(file) )
     return false;
 
   // Load theme .desktop file
-  KConfig themeConfig( path(), KConfig::SimpleConfig );
+  KConfig themeConfig( file, KConfig::SimpleConfig );
   KConfigGroup configGroup( &themeConfig, "KGameTheme" );
 
-  QList<int> letterCellMargins = configGroup.readEntry( "LetterCellMargins",
-							QList<int>() );
-  QList<int> clueCellMargins = configGroup.readEntry( "ClueCellMargins",
-						      QList<int>() );
+  QList<int> letterCellMargins = configGroup.readEntry( "LetterCellMargins", QList<int>() );
+  QList<int> clueCellMargins = configGroup.readEntry( "ClueCellMargins", QList<int>() );
   if ( letterCellMargins.count() != 4 )
     letterCellMargins = QList<int>() << 2 << 2 << 2 << 2;
   if ( clueCellMargins.count() != 4 )
     clueCellMargins = QList<int>() << 2 << 2 << 2 << 2;
 
-  m_marginsLetterCell = QMargins( letterCellMargins[0], letterCellMargins[1],
-				  letterCellMargins[2], letterCellMargins[3] );
-  m_marginsClueCell = QMargins( clueCellMargins[0], clueCellMargins[1],
-				clueCellMargins[2], clueCellMargins[3] );
+  m_marginsLetterCell = QMargins( letterCellMargins[0], letterCellMargins[1], letterCellMargins[2], letterCellMargins[3] );
+  m_marginsClueCell = QMargins( clueCellMargins[0], clueCellMargins[1], clueCellMargins[2], clueCellMargins[3] );
 
   m_hasDarkBackground = configGroup.readEntry( "HasDarkBackground", false );
   m_glowColor = configGroup.readEntry( "GlowColor", QColor(64, 64, 255) );
@@ -60,15 +56,12 @@ bool KrosswordTheme::load( const QString& file ) {
   m_emptyCellColor = configGroup.readEntry( "EmptyCellColor", QColor(100, 100, 100, 128) );
 
   // TODO only use "free" positions as default values
-  m_clueNumberPos = positionFromString(
-	configGroup.readEntry("ClueNumberPos", ""), BottomRight );
-  m_numberPuzzleCluePos = positionFromString(
-	configGroup.readEntry("NumberPuzzleCluePos", ""), TopRight );
-  m_solutionLetterIndexPos = positionFromString(
-	configGroup.readEntry("SolutionLetterIndexPos", ""), BottomLeft );
+  m_clueNumberPos = positionFromString( configGroup.readEntry("ClueNumberPos", ""), BottomRight );
+  m_numberPuzzleCluePos = positionFromString( configGroup.readEntry("NumberPuzzleCluePos", ""), TopRight );
+  m_solutionLetterIndexPos = positionFromString( configGroup.readEntry("SolutionLetterIndexPos", ""), BottomLeft );
 
-  if ( !KrosswordRenderer::self()->setTheme(graphics()) ) {
-    kDebug() << "Couldn't load theme SVG file" << graphics();
+  if ( !KrosswordRenderer::self()->setTheme(graphicsPath()) ) {
+    kDebug() << "Couldn't load theme SVG file" << graphicsPath();
     return false;
   }
 
@@ -94,8 +87,7 @@ KrosswordTheme* KrosswordTheme::defaultValues() {
   return theme;
 }
 
-KrosswordTheme::ItemPosition KrosswordTheme::positionFromString( const QString& s,
-					ItemPosition defaultPos ) const {
+KrosswordTheme::ItemPosition KrosswordTheme::positionFromString( const QString& s, ItemPosition defaultPos ) const {
   if ( s.compare("TopLeft", Qt::CaseInsensitive) == 0 )
     return TopLeft;
   else if ( s.compare("TopRight", Qt::CaseInsensitive) == 0 )
@@ -108,31 +100,24 @@ KrosswordTheme::ItemPosition KrosswordTheme::positionFromString( const QString& 
     return defaultPos;
 }
 
-QRect KrosswordTheme::rectAtPos( const QRect& bounds, const QRect& itemRect,
-				 KrosswordTheme::ItemPosition position ) {
+QRect KrosswordTheme::rectAtPos( const QRect& bounds, const QRect& itemRect, KrosswordTheme::ItemPosition position ) {
   switch ( position ) {
     case TopLeft:
-      return QRect( bounds.left(), bounds.top(),
-		    itemRect.width(), itemRect.height() );
+      return QRect( bounds.left(), bounds.top(), itemRect.width(), itemRect.height() );
     case TopRight:
-      return QRect( bounds.right() - itemRect.width(), bounds.top(),
-		    itemRect.width(), itemRect.height() );
+      return QRect( bounds.right() - itemRect.width(), bounds.top(), itemRect.width(), itemRect.height() );
     case BottomLeft:
-      return QRect( bounds.left(), bounds.bottom() - itemRect.height(),
-		    itemRect.width(), itemRect.height() );
+      return QRect( bounds.left(), bounds.bottom() - itemRect.height(), itemRect.width(), itemRect.height() );
     default:
     case BottomRight:
-      return QRect( bounds.right() - itemRect.width(),
-		    bounds.bottom() - itemRect.height(),
-		    itemRect.width(), itemRect.height() );
+      return QRect( bounds.right() - itemRect.width(), bounds.bottom() - itemRect.height(), itemRect.width(), itemRect.height() );
   }
 
   return QRect(); // To make the buildService happy for openSuse 11.1 TODO: Test.
 }
 
 QRect KrosswordTheme::trimmedRect( const QRect& source, const QMargins& margins ) {
-  return source.adjusted( margins.left(), margins.top(),
-			  -margins.right(), -margins.bottom() );
+  return source.adjusted( margins.left(), margins.top(), -margins.right(), -margins.bottom() );
 }
 
 

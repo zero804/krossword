@@ -81,7 +81,9 @@
 #include <KStatusBar>
 #include <KEmoticons>
 #include <KCharSelect>
-#include <KGameDifficulty>
+//#include <KGameDifficulty>
+#include <KgDifficulty>
+
 #include <KCursor>
 #include <KPrintPreview>
 #include <kdeprintdialog.h>
@@ -187,19 +189,15 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow( QWidget* parent )
 
     // Load theme
     QString savedThemeName = Settings::theme();
-    if ( !m_theme.load(savedThemeName) ) {
-      if ( !m_theme.load("themes/" + savedThemeName.toLower() + ".desktop") // Compatibility with KrossWordPuzzle < 0.15.6
-	    && !m_theme.loadDefault() ) {
-	KMessageBox::information( this, i18n("Neither the last used theme '%1' "
-				  "nor the default theme could be found.\n"
-				  "Check your installation.",
-				  savedThemeName) );
+    if ( !m_theme.readFromDesktopFile(savedThemeName) ) {
+      if ( !m_theme.readFromDesktopFile("themes/" + savedThemeName.toLower() + ".desktop") // Compatibility with KrossWordPuzzle < 0.15.6
+	    && !m_theme.readFromDesktopFile("themes/default.desktop") ) {
+	KMessageBox::information( this, i18n("Neither the last used theme '%1' nor the default theme could be found.\nCheck your installation.", savedThemeName) );
 	qApp->quit();
 	return;
       } else {
-	KMessageBox::information( this, i18n("The theme '%1' couldn't be found. "
-				  "The default theme is now used.", savedThemeName) );
-	Settings::setTheme( "themes/" + m_theme.fileName() );
+	KMessageBox::information( this, i18n("The theme '%1' couldn't be found. The default theme is now used.", savedThemeName) );
+	Settings::setTheme( "themes/default.desktop"); // m_theme.fileName() );
 	Settings::self()->writeConfig();
       }
     }
@@ -818,6 +816,7 @@ bool CrossWordXmlGuiWindow::setupActions() {
 void CrossWordXmlGuiWindow::updateTheme() {
   QString themeFile = Settings::theme();
 
+  /*
   if ( !m_theme.load(themeFile) ) {
     if ( !m_theme.loadDefault() ) {
       KMessageBox::information( this, i18n("Neither the chosen theme '%1' "
@@ -832,6 +831,7 @@ void CrossWordXmlGuiWindow::updateTheme() {
       Settings::self()->writeConfig();
     }
   }
+  */
 
   if ( viewSolution() )
       viewSolution()->scene()->update();
@@ -1700,8 +1700,7 @@ void CrossWordXmlGuiWindow::setCurrentFileName( const QString& fileName ) {
 }
 
 KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView() {
-    KrossWordPuzzleView *view = new KrossWordPuzzleView(
-	new KrossWordPuzzleScene(new KrossWord(&m_theme)) );
+    KrossWordPuzzleView *view = new KrossWordPuzzleView( new KrossWordPuzzleScene( new KrossWord(&m_theme)) );
     view->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     view->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     view->scene()->setStickyFocus( true );

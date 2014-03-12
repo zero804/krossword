@@ -442,7 +442,8 @@ void KrossWordCell::focusInEvent( QFocusEvent* event ) {
 	fadeColorAnim->setEndValue( krossWord()->theme()->glowFocusColor() );
 // 	  fadeColorAnim->start( QAbstractAnimation::DeleteWhenStopped );
 	animGroup->addAnimation( fadeColorAnim );*/
-	effect->setColor( krossWord()->theme()->glowFocusColor() );
+	
+        effect->setColor( krossWord()->theme()->glowFocusColor() );
       } else {
 	effect->setColor( krossWord()->theme()->glowFocusColor() );
 	effect->setBlurRadius( 10 );

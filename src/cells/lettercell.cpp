@@ -748,8 +748,7 @@ void LetterCell::drawForeground( QPainter* p, const QStyleOptionGraphicsItem* op
 #else
     qreal levelOfDetail = option->levelOfDetail;
 #endif
-    QRect rect = KrosswordTheme::trimmedRect( option->rect,
-			      krossWord()->theme()->marginsLetterCell(levelOfDetail) );
+    QRect rect = KrosswordTheme::trimmedRect( option->rect, krossWord()->theme()->marginsLetterCell(levelOfDetail) );
     if ( !krossWord()->isEditable() && confidence() == Unsure )
 	KrosswordRenderer::self()->renderElement( p, id, rect, QColor(128, 128, 128) );
     else
@@ -832,10 +831,8 @@ void LetterCell::drawClueForCell( QPainter* p, const QStyleOptionGraphicsItem* o
     QFontMetrics fontMetrics( font );
     QRect rect = fontMetrics.boundingRect( text );
     rect.setWidth( fontMetrics.width(text) );
-    QRect trimmedRect = KrosswordTheme::trimmedRect( option->rect,
-		    krossWord()->theme()->marginsLetterCell(levelOfDetail) );
-    p->drawText( KrosswordTheme::rectAtPos(trimmedRect, rect,
-		    krossWord()->theme()->numberPuzzleCluePos()), text );
+    QRect trimmedRect = KrosswordTheme::trimmedRect( option->rect, krossWord()->theme()->marginsLetterCell(levelOfDetail) );
+    p->drawText( KrosswordTheme::rectAtPos(trimmedRect, rect, krossWord()->theme()->numberPuzzleCluePos()), text );
     p->restore();
 }
 
@@ -1213,10 +1210,9 @@ void SolutionLetterCell::drawForeground( QPainter* p,
   QFontMetrics fontMetrics( font );
   QRect rect = fontMetrics.boundingRect( text );
   rect.setWidth( fontMetrics.width(text) );
-  QRect trimmedRect = KrosswordTheme::trimmedRect( option->rect,
-			    krossWord()->theme()->marginsLetterCell(levelOfDetail) );
-  p->drawText( KrosswordTheme::rectAtPos(trimmedRect, rect,
-		  krossWord()->theme()->solutionLetterIndexPos()), text );
+  QRect trimmedRect = KrosswordTheme::trimmedRect( option->rect, krossWord()->theme()->marginsLetterCell(levelOfDetail) );
+  p->drawText( KrosswordTheme::rectAtPos(trimmedRect, rect, krossWord()->theme()->solutionLetterIndexPos()), text );
+    
 //   p->drawText( QRect(option->rect.right() - rect.width(),
 // 		     option->rect.bottom() - rect.height(),
 // 		     rect.width(), rect.height()).adjusted(-3, -3, -3, -3), text );
