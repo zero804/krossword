@@ -32,47 +32,50 @@ class QProgressBar;
 class KDialog;
 class ExtendedSqlTableModel;
 
-class KrosswordDictionary : public QObject {
-  Q_OBJECT
+class KrosswordDictionary : public QObject
+{
+    Q_OBJECT
 
-  public:
-	KrosswordDictionary( QObject* parent = 0 );
-	virtual ~KrosswordDictionary();
+public:
+    KrosswordDictionary(QObject* parent = 0);
+    virtual ~KrosswordDictionary();
 
-	static const int MAX_WORD_LENGTH = 256;
-	bool openDatabase( QWidget *dlgParent );
-	void closeDatabase();
-	bool createTables();
+    static const int MAX_WORD_LENGTH = 256;
+    bool openDatabase(QWidget *dlgParent);
+    void closeDatabase();
+    bool createTables();
 
-	bool isDatabaseOk() const { return m_databaseOk; };
+    bool isDatabaseOk() const {
+        return m_databaseOk;
+    };
 
-	bool isEmpty();
-	int entryCount();
+    bool isEmpty();
+    int entryCount();
 
-	bool exportToCsv( const QString &fileName );
-	int importFromCsv( const QString &fileName, QWidget *parent );
+    bool exportToCsv(const QString &fileName);
+    int importFromCsv(const QString &fileName, QWidget *parent);
 
-	ExtendedSqlTableModel *createModel();
+    ExtendedSqlTableModel *createModel();
 
-	int addEntriesFromCrosswords( const QStringList &fileNames, QWidget *parent );
-	int addEntriesFromDictionary( const QString &fileName, QWidget *parent );
+    int addEntriesFromCrosswords(const QStringList &fileNames, QWidget *parent);
+    int addEntriesFromDictionary(const QString &fileName, QWidget *parent);
 
-	bool clearDatabase();
+    bool clearDatabase();
 
-    public slots:
-	void cancelCurrentActionClicked();
+public slots:
+    void cancelCurrentActionClicked();
 
-    signals:
-	void extractedEntriesFromCrossword( const QString &fileName, int entryCount );
-	void errorExtractedEntriesFromCrossword( const QString &fileName, const QString &errorString );
+signals:
+    void extractedEntriesFromCrossword(const QString &fileName, int entryCount);
+    void errorExtractedEntriesFromCrossword(const QString &fileName, const QString &errorString);
 
-    private:
-	KDialog *createProgressDialog( QWidget *parent, const QString &text, QProgressBar *progressBar );
-	bool checkDatabase();
+private:
+    KDialog *createProgressDialog(QWidget *parent, const QString &text, QProgressBar *progressBar);
+    bool checkDatabase();
 
-	Ui::database_connection ui_database_connection;
-	bool m_cancel;
-	bool m_databaseOk;
+    Ui::database_connection ui_database_connection;
+    bool m_cancel;
+    bool m_databaseOk;
 };
 
 #endif // DICTIONARY_H

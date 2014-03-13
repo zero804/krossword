@@ -26,9 +26,9 @@
 class ImageCell : public SpannedCell
 {
 public:
-    ImageCell( KrossWord* krossWord, const Coord& coordTopLeft,
-               int horizontalCellSpan, int verticalCellSpan, const KUrl &url/*,
-     QGraphicsScene* scene*/ );
+    ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
+              int horizontalCellSpan, int verticalCellSpan, const KUrl &url/*,
+     QGraphicsScene* scene*/);
 
     /** For qgraphicsitem_cast. */
     enum { Type = UserType + 8 };
@@ -37,7 +37,7 @@ public:
     };
 
     virtual void drawBackgroundForPrinting(
-        QPainter *p, const QStyleOptionGraphicsItem *options );
+        QPainter *p, const QStyleOptionGraphicsItem *options);
 
     KUrl url() const {
         return m_url;

@@ -33,21 +33,21 @@ class CrosswordPreviewWidget : public QLabel
     Q_OBJECT
 
 public:
-    CrosswordPreviewWidget( QWidget* parent = 0 );
+    CrosswordPreviewWidget(QWidget* parent = 0);
 
-    void showPreview( const QString &fileName,
-                      const QString &mimeType =
-                          "application/x-krosswordpuzzle-compressed" );
+    void showPreview(const QString &fileName,
+                     const QString &mimeType =
+                         "application/x-krosswordpuzzle-compressed");
     QSize previewSize() const {
         return m_previewSize;
     };
-    void setPreviewSize( const QSize &previewSize ) {
+    void setPreviewSize(const QSize &previewSize) {
         m_previewSize = previewSize;
     };
 
 protected slots:
-    void previewJobGotPreview( const KFileItem &fileItem, const QPixmap &pixmap );
-    void previewJobFailed( const KFileItem &fileItem );
+    void previewJobGotPreview(const KFileItem &fileItem, const QPixmap &pixmap);
+    void previewJobFailed(const KFileItem &fileItem);
 
 private:
     KIO::PreviewJob *m_previewJob;

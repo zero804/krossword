@@ -36,7 +36,7 @@ public:
         KrossWordInfo() {
         };
 
-        KrossWordInfo( const KrossWordInfo &other ) {
+        KrossWordInfo(const KrossWordInfo &other) {
             this->width = other.width;
             this->height = other.height;
             this->title = other.title;
@@ -45,9 +45,9 @@ public:
             this->notes = other.notes;
         };
 
-        KrossWordInfo( int width, qint8 height,
-                       const QString &title, const QString &authors,
-                       const QString &copyright, const QString &notes ) {
+        KrossWordInfo(int width, qint8 height,
+                      const QString &title, const QString &authors,
+                      const QString &copyright, const QString &notes) {
             this->width = width;
             this->height = height;
             this->title = title;
@@ -57,18 +57,18 @@ public:
         };
     };
 
-    bool readCompressed( QIODevice *device, KrossWord *krossWord );
-    bool readCompressedInfo( QIODevice *device, KrossWordInfo &krossWordInfo );
-    bool read( QIODevice *device, KrossWord *krossWord );
-    bool readInfo( QIODevice *device, KrossWordInfo &krossWordInfo );
+    bool readCompressed(QIODevice *device, KrossWord *krossWord);
+    bool readCompressedInfo(QIODevice *device, KrossWordInfo &krossWordInfo);
+    bool read(QIODevice *device, KrossWord *krossWord);
+    bool readInfo(QIODevice *device, KrossWordInfo &krossWordInfo);
 
 private:
     void readUnknownElement();
     KrossWordInfo readKrossWordInfo();
-    void readKrossWord( KrossWord *krossWord );
-    void readClue( KrossWord *krossWord );
-    void readImage( KrossWord *krossWord );
-    void readSolutionLetter( KrossWord *krossWord );
+    void readKrossWord(KrossWord *krossWord);
+    void readClue(KrossWord *krossWord);
+    void readImage(KrossWord *krossWord);
+    void readSolutionLetter(KrossWord *krossWord);
 };
 
 #endif // Multiple inclusion guard

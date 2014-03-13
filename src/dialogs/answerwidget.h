@@ -25,12 +25,12 @@
 class AnswerWidget : public KLineEdit
 {
 public:
-    AnswerWidget( QWidget *parent = 0 );
-    explicit AnswerWidget( const QString& string, QWidget *parent = 0 );
+    AnswerWidget(QWidget *parent = 0);
+    explicit AnswerWidget(const QString& string, QWidget *parent = 0);
 
 protected:
-    virtual void focusInEvent( QFocusEvent *ev );
-    virtual void mousePressEvent( QMouseEvent *ev );
+    virtual void focusInEvent(QFocusEvent *ev);
+    virtual void mousePressEvent(QMouseEvent *ev);
 
 private:
     bool m_justGotFocusByMouse;

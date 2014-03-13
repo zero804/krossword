@@ -53,10 +53,10 @@ typedef QList<LetterCell*> LetterCellList;
 typedef QList<SolutionLetterCell*> SolutionLetterCellList;
 typedef QList<ImageCell*> ImageCellList;
 
-Offset operator *( const Offset &offset, int factor );
-Coord operator +=( Coord & coord1, const Coord & coord2 );
+Offset operator *(const Offset &offset, int factor);
+Coord operator +=(Coord & coord1, const Coord & coord2);
 
-const QString ALLOWED_CHARACTERS = QLatin1String( "ABCDEFGHIJKLMNOPQRSTUVWXYZ" );
+const QString ALLOWED_CHARACTERS = QLatin1String("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
 #if QT_VERSION >= 0x040600
 class KrossWordCell : public QGraphicsObject
@@ -68,7 +68,7 @@ class KrossWordCell : public QObject, public QGraphicsItem
     friend class KrossWord;
     Q_OBJECT
 #if QT_VERSION >= 0x040600
-    Q_INTERFACES( QGraphicsItem )
+    Q_INTERFACES(QGraphicsItem)
 #endif
 
 public:
@@ -82,21 +82,21 @@ public:
         ImageCellType = 0x020,
 
         AllCellTypes = EmptyCellType | ClueCellType | DoubleClueCellType
-        | LetterCellType | SolutionLetterCellType | ImageCellType,
+                       | LetterCellType | SolutionLetterCellType | ImageCellType,
         /**< All cell types, but not user defined cell types. */
 
         InteractiveCellTypes = ClueCellType | DoubleClueCellType
-        | LetterCellType | SolutionLetterCellType,
+                               | LetterCellType | SolutionLetterCellType,
         /**< All cell types except empty cells, but not user defined cell types. */
 
         UserType = 0x100 /**< For user defined cell classes derived from KrossWordCell.
   To make use of this in the flags class CellTypes, only use values computed
   like this: value=2^x with x>=4. */
     };
-    Q_DECLARE_FLAGS( CellTypes, CellType );
+    Q_DECLARE_FLAGS(CellTypes, CellType);
 
 
-    KrossWordCell( KrossWord *krossWord, CellType cellType, const Coord &coord );
+    KrossWordCell(KrossWord *krossWord, CellType cellType, const Coord &coord);
     virtual ~KrossWordCell();
 
     /** For qgraphicsitem_cast. */
@@ -122,19 +122,19 @@ public:
         m_cache = NULL;
     };
 
-    static QString displayStringFromCellType( CellType cellType );
+    static QString displayStringFromCellType(CellType cellType);
 
 protected:
     void setPositionFromCoordinates();
 
     // Overloaded methods
     virtual QRectF boundingRect() const;
-    virtual void paint( QPainter* painter,
-                        const QStyleOptionGraphicsItem* option, QWidget* widget = 0 );
+    virtual void paint(QPainter* painter,
+                       const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
     // Virtual methods
-    virtual void drawBackgroundForPrinting( QPainter*, const QStyleOptionGraphicsItem* ) { };
-    virtual void drawForegroundForPrinting( QPainter*, const QStyleOptionGraphicsItem* ) { };
+    virtual void drawBackgroundForPrinting(QPainter*, const QStyleOptionGraphicsItem*) { };
+    virtual void drawForegroundForPrinting(QPainter*, const QStyleOptionGraphicsItem*) { };
 
 private:
     CellType m_cellType;
@@ -149,7 +149,7 @@ class EmptyCell : public KrossWordCell
     Q_OBJECT
 
 public:
-    EmptyCell( KrossWord *krossWord, Coord coord/*, QGraphicsScene *scene*/ );
+    EmptyCell(KrossWord *krossWord, Coord coord/*, QGraphicsScene *scene*/);
 
     /** For qgraphicsitem_cast. */
     enum { Type = UserType + 2 };
@@ -158,14 +158,14 @@ public:
     };
 
 protected:
-    virtual void drawBackgroundForPrinting( QPainter *p, const QStyleOptionGraphicsItem *option );
+    virtual void drawBackgroundForPrinting(QPainter *p, const QStyleOptionGraphicsItem *option);
 };
 
 
 
 // Sorting functions
-bool lessThanCellType( const KrossWordCell *cell1, const KrossWordCell *cell2 );
-bool greaterThanCellType( const KrossWordCell *cell1, const KrossWordCell *cell2 );
+bool lessThanCellType(const KrossWordCell *cell1, const KrossWordCell *cell2);
+bool greaterThanCellType(const KrossWordCell *cell1, const KrossWordCell *cell2);
 
 
 // Serialization

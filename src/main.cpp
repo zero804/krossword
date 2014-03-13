@@ -30,8 +30,8 @@ static const char version[] = "0.15.60";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("krosswordpuzzle", 0, ki18n("KrossWordPuzzle"), version, 
-                     ki18n(description), KAboutData::License_GPL_V3, 
+    KAboutData about("krosswordpuzzle", 0, ki18n("KrossWordPuzzle"), version,
+                     ki18n(description), KAboutData::License_GPL_V3,
                      ki18n("(C) 2009 Friedrich Pülz"), KLocalizedString(), 0, "fpuelz@gmx.de");
     about.addAuthor(ki18n("Friedrich Pülz"), KLocalizedString(), "fpuelz@gmx.de");
     KCmdLineArgs::init(argc, argv, &about);
@@ -47,11 +47,11 @@ int main(int argc, char **argv)
     // see if we are starting with session management
     if (app.isSessionRestored()) {
         RESTORE(KrossWordPuzzle);
-    } else { 
+    } else {
         QCoreApplication::applicationPid();
         // no session.. just start up normally
         KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-        
+
         if (args->count() == 0) {
             //krosswordpuzzle *widget = new krosswordpuzzle;
             widget->show();
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
                 // widget->load( );
             }
         }
-        
+
         args->clear();
     }
 

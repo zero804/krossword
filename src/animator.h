@@ -30,19 +30,21 @@
 
 #include <KDebug>
 
-namespace Crossword {
+namespace Crossword
+{
 
 class KrossWord;
 class KrossWordCell;
 
 /** Pixmap item that is used by @ref Animator to create transition animations. */
-class GraphicsPixmapObject : public QObject, public QGraphicsPixmapItem {
+class GraphicsPixmapObject : public QObject, public QGraphicsPixmapItem
+{
     Q_OBJECT
-    Q_PROPERTY( qreal opacity READ opacity WRITE setOpacity )
+    Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity)
 
 public:
-    explicit GraphicsPixmapObject( const QPixmap &pixmap, QGraphicsItem *parent = 0 )
-            : QObject( 0 ), QGraphicsPixmapItem( pixmap, parent ) {};
+    explicit GraphicsPixmapObject(const QPixmap &pixmap, QGraphicsItem *parent = 0)
+        : QObject(0), QGraphicsPixmapItem(pixmap, parent) {};
 
 //   public slots:
 //     void setRotationOfParent() {
@@ -58,7 +60,8 @@ public:
   * cell. In parallel the cell itself fades in, showing the new appearance of
   * the cell. The pixmap items opacity and the opacity of the cell adds to 1
   * in every frame of the animation. */
-class TransitionAnimation : public QVariantAnimation {
+class TransitionAnimation : public QVariantAnimation
+{
     Q_OBJECT
 
 public:
@@ -70,7 +73,7 @@ public:
       * @note You should make sure, that the appearance of the cell is changed
       * immediately after creating and starting this animation. Otherwise no
       * transition may be visible. */
-    TransitionAnimation( KrossWordCell *cell );
+    TransitionAnimation(KrossWordCell *cell);
 
     virtual ~TransitionAnimation();
 
@@ -79,22 +82,26 @@ public:
     QPixmap composedCellPixmap() const;
 
     /** The cell that is animated. */
-    KrossWordCell *cell() const { return m_cell; };
+    KrossWordCell *cell() const {
+        return m_cell;
+    };
 
     /** A pixmap item that fades out over the cell to create the transition effect. */
-    GraphicsPixmapObject *pixmapObject() const { return m_pixmapObject; };
+    GraphicsPixmapObject *pixmapObject() const {
+        return m_pixmapObject;
+    };
 
 signals:
     /** Emitted when the animation finishes, with the animated cell as argument. */
-    void finished( KrossWordCell *cell );
+    void finished(KrossWordCell *cell);
 
 protected slots:
     void appearanceAboutToChange();
-    void cellDestroyed( QObject *obj );
+    void cellDestroyed(QObject *obj);
 
 protected:
-    virtual void updateCurrentValue( const QVariant& value );
-    virtual void updateState( State newState, State oldState );
+    virtual void updateCurrentValue(const QVariant& value);
+    virtual void updateState(State newState, State oldState);
 
 private:
     KrossWordCell *m_cell;
@@ -103,62 +110,65 @@ private:
 
 /** Manages animations. It can queue animations to start all enqueued animations
   * at once when they are ready.
-  * There are some basic animations (see @ref BasicAnimation) that can be 
+  * There are some basic animations (see @ref BasicAnimation) that can be
   * started using @ref animate.
   * @brief Manages animations. */
-class Animator : QObject {
-  Q_OBJECT
+class Animator : QObject
+{
+    Q_OBJECT
 
-  public:
+public:
     /** Different durations for animations. */
     enum Duration {
-      Slowest,		/**< Five times the default duration. */
-      VerySlow,		/**< Three times the default duration. */
-      Slow, 		/**< Two times the default duration. */
-      DefaultDuration, 	/**< Default duration, ie. defaultDuration(). */
-      Fast,		/**< Two thirds of the default duration. */
-      VeryFast,		/**< One third of the default duration.  */
+        Slowest,      /**< Five times the default duration. */
+        VerySlow,     /**< Three times the default duration. */
+        Slow,         /**< Two times the default duration. */
+        DefaultDuration,  /**< Default duration, ie. defaultDuration(). */
+        Fast,     /**< Two thirds of the default duration. */
+        VeryFast,     /**< One third of the default duration.  */
 
-      Instant		/**< Zero duration, ie. no animation. */
+        Instant       /**< Zero duration, ie. no animation. */
     };
 
     /** Basic animations that don't require a parameter. */
     enum BasicAnimation {
-      AnimateFadeIn = 0, 	/**< Animate to full opacity. */
-      AnimateFadeOut, 		/**< Animate to full transparency. */
-      AnimateBounce 		/**< Scales a bit in and out again with 
-				   * QEasingCurve::Bounce. */
+        AnimateFadeIn = 0,    /**< Animate to full opacity. */
+        AnimateFadeOut,       /**< Animate to full transparency. */
+        AnimateBounce         /**< Scales a bit in and out again with
+                   * QEasingCurve::Bounce. */
     };
-    
+
     /** Animations that require one parameter. */
     enum OneParameterAnimation {
-      AnimatePositionChange = 100 /**< Animate moving from the current position
-				     * to a new one (given as QPointF-argument). */
+        AnimatePositionChange = 100 /**< Animate moving from the current position
+                     * to a new one (given as QPointF-argument). */
     };
 
     /** Flags for animation setup / start. */
     enum AnimateFlag {
-      AnimateDontStart = 0x000, /**< Do not start the animation, if one was created. */
-      AnimateStart = 0x001,	/**< Start the animation, if one was created. */
-      AnimateDeleteWhenStopped = 0x002,	/**< Delete the animation when it stops. */
+        AnimateDontStart = 0x000, /**< Do not start the animation, if one was created. */
+        AnimateStart = 0x001, /**< Start the animation, if one was created. */
+        AnimateDeleteWhenStopped = 0x002, /**< Delete the animation when it stops. */
 
-      AnimateDefaults = AnimateStart | AnimateDeleteWhenStopped
-				/**< Default animation flags, that automatically
-				   * start the animation and delete it when it stops. */
+        AnimateDefaults = AnimateStart | AnimateDeleteWhenStopped
+                          /**< Default animation flags, that automatically
+                             * start the animation and delete it when it stops. */
     };
-    Q_DECLARE_FLAGS( AnimateFlags, AnimateFlag );
+    Q_DECLARE_FLAGS(AnimateFlags, AnimateFlag);
 
     /** Creates an animation manager. */
     Animator() : QObject(), m_queuedAnimationGroup(0), m_queueBeginCount(0),
-			    m_enabled(true) {};
+        m_enabled(true) {};
 
     /** The default duration of animations in milliseconds. */
-    inline int defaultDuration() const { return 150; };
+    inline int defaultDuration() const {
+        return 150;
+    };
 
     /** Starts or enqueues the given @p animation. If not enqueued the @p flags
       * are used to determine how to start the animation.
       * @return True, if the animation was started (not enqueued). False, otherwise. */
-    bool startOrEnqueue( QAbstractAnimation *animation, AnimateFlags flags = AnimateDefaults );
+    bool startOrEnqueue(QAbstractAnimation *animation, AnimateFlags flags = AnimateDefaults);
 
     /** Starts or enqueues the given @p animation. If not enqueued the @p flags
       * are used to determine how to start the animation.
@@ -166,10 +176,11 @@ class Animator : QObject {
       * starting / enqueing it. It can be useful if you want to start / enqueue
       * custom animations and use @ref Duration to compute the actual duration.
       * @return True, if the animation was started (not enqueued). False, otherwise. */
-    inline bool startOrEnqueue( QVariantAnimation *animation, Duration duration,
-				AnimateFlags flags = AnimateDefaults ) {
-	animation->setDuration( defaultDuration() * durationToDurationFactor(duration) );
-	return startOrEnqueue( animation, flags ); };
+    inline bool startOrEnqueue(QVariantAnimation *animation, Duration duration,
+                               AnimateFlags flags = AnimateDefaults) {
+        animation->setDuration(defaultDuration() * durationToDurationFactor(duration));
+        return startOrEnqueue(animation, flags);
+    };
 
     /** Starts a transition animation for the given @p cell. This is done by
       * creating a pixmap item from the cell's cached pixmap, which then gets
@@ -179,15 +190,15 @@ class Animator : QObject {
       * @param cell The cell to animate.
       * @param duration The duration of the animation.
       * @param flags Flags for the animation, eg. @ref AnimateDontStart. */
-    TransitionAnimation* animateTransition( KrossWordCell *cell,
-					    Duration duration = DefaultDuration,
-					    AnimateFlags flags = AnimateDefaults );
-					    
+    TransitionAnimation* animateTransition(KrossWordCell *cell,
+                                           Duration duration = DefaultDuration,
+                                           AnimateFlags flags = AnimateDefaults);
+
     /** Whether or not the given @p cell is currently in a transition, ie. a
       * transition animation is running for that cell. */
-    inline bool isInTransition( KrossWordCell *cell ) const {
-        return m_transitionItems.contains( cell )
-	    && m_transitionItems[ cell ]->state() == QAbstractAnimation::Running;
+    inline bool isInTransition(KrossWordCell *cell) const {
+        return m_transitionItems.contains(cell)
+               && m_transitionItems[ cell ]->state() == QAbstractAnimation::Running;
     };
 
     /** Performs @p basicAnimation on @p obj.
@@ -197,11 +208,11 @@ class Animator : QObject {
       * @param duration The duration of the animation.
       * @param flags Flags for the animation, eg. @ref AnimateDontStart.
       * @return The newly created animation. */
-    QAbstractAnimation *animate( BasicAnimation basicAnimation,
-				 QGraphicsObject *obj, 
-				 Duration duration = DefaultDuration,
-				 AnimateFlags flags = AnimateDefaults );
-	
+    QAbstractAnimation *animate(BasicAnimation basicAnimation,
+                                QGraphicsObject *obj,
+                                Duration duration = DefaultDuration,
+                                AnimateFlags flags = AnimateDefaults);
+
     /** Performs @p basicAnimation on @p obj.
       * @note This is a convenience method for animations that need no argument.
       * You can't use it for animations that require an argument.
@@ -210,10 +221,10 @@ class Animator : QObject {
       * @param duration The duration of the animation.
       * @param flags Flags for the animation, eg. @ref AnimateDontStart.
       * @return The newly created animation. */
-    QAbstractAnimation *animate( OneParameterAnimation animation,
-				 QGraphicsObject *obj, const QVariant &argument,
-				 Duration duration = DefaultDuration,
-				 AnimateFlags flags = AnimateDefaults );
+    QAbstractAnimation *animate(OneParameterAnimation animation,
+                                QGraphicsObject *obj, const QVariant &argument,
+                                Duration duration = DefaultDuration,
+                                AnimateFlags flags = AnimateDefaults);
 
     /** Creates a QParallelAnimationGroup and adds all following animations to
       * it until @ref endQueueAnimations is called. If this method is called
@@ -245,30 +256,37 @@ class Animator : QObject {
       * @see beginEnqueueAnimations
       * @see endEnqueueAnimations
       * @see queuedAnimationCount */
-    inline bool isQueuingAnimations() const { return m_queuedAnimationGroup; };
+    inline bool isQueuingAnimations() const {
+        return m_queuedAnimationGroup;
+    };
 
     /** Gets the number of queued animations.
       * @see beginEnqueueAnimations
       * @see endEnqueueAnimations
       * @see isQueuingAnimations */
     inline int queuedAnimationCount() const {
-	return m_queuedAnimationGroup->animationCount(); };
+        return m_queuedAnimationGroup->animationCount();
+    };
 
     /** Whether or not animations are enabled. If false, no animation will be
       * started, nor will it be queued.
       * @see setEnabled */
-    inline bool isEnabled() const { return m_enabled; };
+    inline bool isEnabled() const {
+        return m_enabled;
+    };
     /** Enables or disables animations. If set to false, no animation will be
       * started, nor will it be queued.
       * @see isEnabled */
-    void setEnabled( bool enabled = true ) { m_enabled = enabled; };
+    void setEnabled(bool enabled = true) {
+        m_enabled = enabled;
+    };
 
-  protected slots:
+protected slots:
     /** Called, when a transition animation is finished. */
-    void transitionAnimationFinished( KrossWordCell *cell );
+    void transitionAnimationFinished(KrossWordCell *cell);
 
-  private:
-    qreal durationToDurationFactor( Duration duration ) const;
+private:
+    qreal durationToDurationFactor(Duration duration) const;
 
     QParallelAnimationGroup *m_queuedAnimationGroup;
     int m_queueBeginCount;
@@ -277,7 +295,7 @@ class Animator : QObject {
 };
 
 }; // namespace
-Q_DECLARE_OPERATORS_FOR_FLAGS( Crossword::Animator::AnimateFlags )
+Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::Animator::AnimateFlags)
 
 #endif // QT_VERSION >= 0x040600
 

@@ -23,61 +23,73 @@
 #include <QStandardItemModel>
 #include <KDebug>
 
-namespace Crossword {
-  class ClueCell;
+namespace Crossword
+{
+class ClueCell;
 }
 using namespace Crossword;
 
-class ClueItem : public QObject, public QStandardItem {
+class ClueItem : public QObject, public QStandardItem
+{
     Q_OBJECT
-    
-    public:
-	ClueItem( const QIcon &icon, ClueCell *clueCell );
 
-	virtual QVariant data( int role = Qt::UserRole + 1 ) const;
-	virtual void setData( const QVariant& value, int role = Qt::UserRole + 1 );
-	QStandardItem *parent() const { return QStandardItem::parent(); };
+public:
+    ClueItem(const QIcon &icon, ClueCell *clueCell);
 
-	ClueCell *clueCell() const { return m_clueCell; };
+    virtual QVariant data(int role = Qt::UserRole + 1) const;
+    virtual void setData(const QVariant& value, int role = Qt::UserRole + 1);
+    QStandardItem *parent() const {
+        return QStandardItem::parent();
+    };
 
-    signals:
-	void changeClueTextRequest( ClueCell *clue, const QString &newClueText );
+    ClueCell *clueCell() const {
+        return m_clueCell;
+    };
 
-    private:
-	ClueCell *m_clueCell;
+signals:
+    void changeClueTextRequest(ClueCell *clue, const QString &newClueText);
+
+private:
+    ClueCell *m_clueCell;
 };
 
-class ClueModel : public QStandardItemModel {
+class ClueModel : public QStandardItemModel
+{
     Q_OBJECT
-    
-    public:
-	ClueModel( QObject* parent = 0 );
 
-	QStandardItem *horizontalCluesItem() const { return m_itemHorizontal; };
-	QStandardItem *verticalCluesItem() const { return m_itemVertical; };
+public:
+    ClueModel(QObject* parent = 0);
 
-	ClueItem *clueItem( ClueCell *clueCell ) const;
-	QStandardItem *answerItem( ClueCell *clueCell ) const;
-	ClueItem *clueItemFromIndex( const QModelIndex &index ) const;
+    QStandardItem *horizontalCluesItem() const {
+        return m_itemHorizontal;
+    };
+    QStandardItem *verticalCluesItem() const {
+        return m_itemVertical;
+    };
 
-	void addClue( ClueCell *clueCell );
-	void removeClue( ClueCell *clueCell );
+    ClueItem *clueItem(ClueCell *clueCell) const;
+    QStandardItem *answerItem(ClueCell *clueCell) const;
+    ClueItem *clueItemFromIndex(const QModelIndex &index) const;
 
-	void clear();
+    void addClue(ClueCell *clueCell);
+    void removeClue(ClueCell *clueCell);
 
-    signals:
-	void changeClueTextRequest( ClueCell *clue, const QString &newClueText );
-	
-    protected slots:
-	void updateClueOrientation( ClueCell *clue, Qt::Orientation newOrientation );
-	void updateClueText( ClueCell *clue, const QString &newText );
-	void changeClueTextRequested( ClueCell *clue, const QString &newClueText ) {
-	    emit changeClueTextRequest( clue, newClueText ); };
+    void clear();
 
-    private:
-	QStandardItem *m_itemHorizontal;
-	QStandardItem *m_itemVertical;
-	QString m_iconSad;
+signals:
+    void changeClueTextRequest(ClueCell *clue, const QString &newClueText);
+
+protected slots:
+    void updateClueOrientation(ClueCell *clue, Qt::Orientation newOrientation);
+    void updateClueText(ClueCell *clue, const QString &newText);
+    void changeClueTextRequested(ClueCell *clue, const QString &newClueText) {
+        emit changeClueTextRequest(clue, newClueText);
+    };
+
+private:
+    QStandardItem *m_itemHorizontal;
+    QStandardItem *m_itemVertical;
+    QString m_iconSad;
 };
 
 #endif // CLUEMODEL_H

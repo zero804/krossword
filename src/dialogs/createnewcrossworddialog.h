@@ -36,7 +36,7 @@ class CreateNewCrosswordDialog : public KDialog
 
 public:
     /** Constructs a new dialog. */
-    explicit CreateNewCrosswordDialog( QWidget* parent = 0, Qt::WFlags flags = 0 );
+    explicit CreateNewCrosswordDialog(QWidget* parent = 0, Qt::WFlags flags = 0);
     ~CreateNewCrosswordDialog();
 
     /** Returns the current crossword type info. */
@@ -44,11 +44,11 @@ public:
         return m_typeInfo;
     };
     /** Sets another crossword type info. */
-    void setCrosswordType( CrosswordTypeInfo crosswordTypeInfo );
+    void setCrosswordType(CrosswordTypeInfo crosswordTypeInfo);
 
     /** Returns the current crossword size. */
     QSize crosswordSize() const {
-        return QSize( ui_create_new.columns->value(), ui_create_new.rows->value() );
+        return QSize(ui_create_new.columns->value(), ui_create_new.rows->value());
     };
     /** Return the current title. */
     QString title() const {
@@ -72,14 +72,14 @@ public:
     QString templateFilePath() const;
 
 protected slots:
-    void crosswordTypeChanged( int index );
-    void typeInfoChanged( const CrosswordTypeInfo &typeInfo );
-    void templateFilterChanged( const QString &text );
-    void currentTemplateChanged( const QModelIndex &current,
-                                 const QModelIndex &previous );
-    void templateLocationChanged( const QString &path );
+    void crosswordTypeChanged(int index);
+    void typeInfoChanged(const CrosswordTypeInfo &typeInfo);
+    void templateFilterChanged(const QString &text);
+    void currentTemplateChanged(const QModelIndex &current,
+                                const QModelIndex &previous);
+    void templateLocationChanged(const QString &path);
     void expandTemplateDirs();
-    void useTemplateToggled( bool checked );
+    void useTemplateToggled(bool checked);
 
 private:
     void setup();

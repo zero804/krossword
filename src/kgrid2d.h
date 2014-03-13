@@ -33,24 +33,26 @@
 //-----------------------------------------------------------------------------
 namespace KGrid2D
 {
-    /**
-     * This type represents coordinates on a bidimensionnal grid.
-     */
-    typedef QPair<int, int> Coord;
+/**
+ * This type represents coordinates on a bidimensionnal grid.
+ */
+typedef QPair<int, int> Coord;
 
-    /**
-     * This type represents a list of @ref Coord.
-     */
-    typedef QList<Coord> CoordList;
+/**
+ * This type represents a list of @ref Coord.
+ */
+typedef QList<Coord> CoordList;
 }
 
 inline KGrid2D::Coord
-operator +(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
+operator +(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2)
+{
     return KGrid2D::Coord(c1.first + c2.first, c1.second + c2.second);
 }
 
 inline KGrid2D::Coord
-operator -(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
+operator -(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2)
+{
     return KGrid2D::Coord(c1.first - c2.first, c1.second - c2.second);
 }
 
@@ -58,26 +60,29 @@ operator -(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
  * @return the maximum of both coordinates.
  */
 inline KGrid2D::Coord
-maximum(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
+maximum(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2)
+{
     return KGrid2D::Coord(qMax(c1.first, c2.first), qMax(c1.second, c2.second));
 }
 /**
  * @return the minimum of both coordinates.
  */
 inline KGrid2D::Coord
-minimum(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2) {
+minimum(const KGrid2D::Coord &c1, const KGrid2D::Coord &c2)
+{
     return KGrid2D::Coord(qMin(c1.first, c2.first), qMin(c1.second, c2.second));
 }
 
-inline QTextStream &operator <<(QTextStream &s, const KGrid2D::Coord &c) {
+inline QTextStream &operator <<(QTextStream &s, const KGrid2D::Coord &c)
+{
     return s << '(' << c.second << "," << c.first << ')';
 }
 
 inline QTextStream &operator <<(QTextStream &s, const KGrid2D::CoordList &list)
 {
-    for(KGrid2D::CoordList::const_iterator i=list.constBegin(); i!=list.constEnd(); ++i)
+    for (KGrid2D::CoordList::const_iterator i = list.constBegin(); i != list.constEnd(); ++i)
         s << *i;
-	return s;
+    return s;
 }
 
 //-----------------------------------------------------------------------------
@@ -85,14 +90,14 @@ namespace KGrid2D
 {
 /**
  * \class Generic kgrid2d.h <KGrid2D>
- * 
+ *
  * This template class represents a generic bidimensionnal grid. Each node
  * contains an element of the template type.
  */
 template <class Type>
 class Generic
 {
- public:
+public:
     /**
      * Constructor.
      */
@@ -108,34 +113,40 @@ class Generic
     void resize(uint width, uint height) {
         _width = width;
         _height = height;
-        _vector.resize(width*height);
+        _vector.resize(width * height);
     }
 
     /**
      * Fill the nodes with the given value.
      */
     void fill(const Type &value) {
-        for (int i=0; i<_vector.count(); i++) _vector[i] = value;
+        for (int i = 0; i < _vector.count(); i++) _vector[i] = value;
     }
 
     /**
      * @return the width.
      */
-    uint width() const  { return _width; }
+    uint width() const  {
+        return _width;
+    }
     /**
      * @return the height.
      */
-    uint height() const { return _height; }
+    uint height() const {
+        return _height;
+    }
     /**
      * @return the number of nodes (ie width*height).
      */
-    uint size() const   { return _width*_height; }
+    uint size() const   {
+        return _width * _height;
+    }
 
     /**
      * @return the linear index for the given coordinate.
      */
     uint index(const Coord &c) const {
-        return c.first + c.second*_width;
+        return c.first + c.second * _width;
     }
 
     /**
@@ -148,72 +159,90 @@ class Generic
     /**
      * @return the value at the given coordinate.
      */
-    const Type &at(const Coord &c) const { return _vector[index(c)]; }
+    const Type &at(const Coord &c) const {
+        return _vector[index(c)];
+    }
     /**
      * @return the value at the given coordinate.
      */
-    Type &at(const Coord &c)             { return _vector[index(c)]; }
+    Type &at(const Coord &c)             {
+        return _vector[index(c)];
+    }
     /**
      * @return the value at the given coordinate.
      */
-    const Type &operator [](const Coord &c) const { return _vector[index(c)]; }
+    const Type &operator [](const Coord &c) const {
+        return _vector[index(c)];
+    }
     /**
      * @return the value at the given coordinate.
      */
-    Type &operator [](const Coord &c)             { return _vector[index(c)]; }
+    Type &operator [](const Coord &c)             {
+        return _vector[index(c)];
+    }
 
     /**
      * @return the value at the given linear index.
      */
-    const Type &at(uint index) const          { return _vector[index]; }
+    const Type &at(uint index) const          {
+        return _vector[index];
+    }
     /**
      * @return the value at the given linear index.
      */
-    Type &at(uint index)                      { return _vector[index]; }
+    Type &at(uint index)                      {
+        return _vector[index];
+    }
     /**
      * @return the value at the given linear index.
      */
-    const Type &operator [](uint index) const { return _vector[index]; }
+    const Type &operator [](uint index) const {
+        return _vector[index];
+    }
     /**
      * @return the value at the given linear index.
      */
-    Type &operator [](uint index)             { return _vector[index]; }
+    Type &operator [](uint index)             {
+        return _vector[index];
+    }
 
     /**
      * @return if the given coordinate is inside the grid.
      */
     bool inside(const Coord &c) const {
-        return ( c.first>=0 && c.first<(int)_width
-                 && c.second>=0 && c.second<(int)_height );
+        return (c.first >= 0 && c.first < (int)_width
+                && c.second >= 0 && c.second < (int)_height);
     }
 
     /**
      * Bound the given coordinate with the grid dimensions.
      */
     void bound(Coord &c) const {
-        c.first = qMax(qMin(c.first, (int)_width-1), 0);
-        c.second = qMax(qMin(c.second, (int)_height-1), 0);
+        c.first = qMax(qMin(c.first, (int)_width - 1), 0);
+        c.second = qMax(qMin(c.second, (int)_height - 1), 0);
     }
 
- protected:
+protected:
     uint               _width, _height;
     QVector<Type> _vector;
 };
 }
 
 template <class Type>
-QDataStream &operator <<(QDataStream &s, const KGrid2D::Generic<Type> &m) {
+QDataStream &operator <<(QDataStream &s, const KGrid2D::Generic<Type> &m)
+{
     s << (quint32)m.width() << (quint32)m.height();
-    for (uint i=0; i<m.size(); i++) s << m[i];
+    for (uint i = 0; i < m.size(); i++) s << m[i];
     return s;
 }
 
 template <class Type>
-QDataStream &operator >>(QDataStream &s, KGrid2D::Generic<Type> &m) {
+QDataStream &operator >>(QDataStream &s, KGrid2D::Generic<Type> &m)
+{
     quint32 w, h;
     s >> w >> h;
     m.resize(w, h);
-    for (uint i=0; i<m.size(); i++) s >> m[i];
+    for (uint i = 0; i < m.size(); i++) s >> m[i];
     return s;
 }
 
@@ -224,18 +253,19 @@ namespace KGrid2D
 //-----------------------------------------------------------------------------
 /**
  * \class SquareBase kgrid2d.h <KGrid2D>
- * 
+ *
  * kgamecanvas.hThis class contains static methods to manipulate coordinates for a
  * square bidimensionnal grid.
  */
 class SquareBase
 {
- public:
+public:
     /**
      * Identify the eight neighbours.
      */
-    enum Neighbour { Left=0, Right, Up, Down, LeftUp, LeftDown,
-                     RightUp, RightDown, Nb_Neighbour };
+    enum Neighbour { Left = 0, Right, Up, Down, LeftUp, LeftDown,
+                     RightUp, RightDown, Nb_Neighbour
+                   };
 
     /**
      * @return the trigonometric angle in radians for the given neighbour.
@@ -246,8 +276,8 @@ class SquareBase
         case Right:     return 0;
         case Up:        return M_PI_2;
         case Down:      return -M_PI_2;
-        case LeftUp:    return 3.0*M_PI_4;
-        case LeftDown:  return -3.0*M_PI_4;
+        case LeftUp:    return 3.0 * M_PI_4;
+        case LeftDown:  return -3.0 * M_PI_4;
         case RightUp:   return M_PI_4;
         case RightDown: return -M_PI_4;
         case Nb_Neighbour: Q_ASSERT(false);
@@ -277,7 +307,9 @@ class SquareBase
      * @return true if the neighbour is a direct one (ie is one of the four
      * nearest).
      */
-    static bool isDirect(Neighbour n) { return n<LeftUp; }
+    static bool isDirect(Neighbour n) {
+        return n < LeftUp;
+    }
 
     /**
      * @return the neighbour for the given coordinate.
@@ -285,13 +317,13 @@ class SquareBase
     static Coord neighbour(const Coord &c, Neighbour n) {
         switch (n) {
         case Left:      return c + Coord(-1,  0);
-        case Right:     return c + Coord( 1,  0);
-        case Up:        return c + Coord( 0, -1);
-        case Down:      return c + Coord( 0,  1);
+        case Right:     return c + Coord(1,  0);
+        case Up:        return c + Coord(0, -1);
+        case Down:      return c + Coord(0,  1);
         case LeftUp:    return c + Coord(-1, -1);
         case LeftDown:  return c + Coord(-1,  1);
-        case RightUp:   return c + Coord( 1, -1);
-        case RightDown: return c + Coord( 1,  1);
+        case RightUp:   return c + Coord(1, -1);
+        case RightDown: return c + Coord(1,  1);
         case Nb_Neighbour: Q_ASSERT(false);
         }
         return c;
@@ -300,14 +332,14 @@ class SquareBase
 
 /**
  * \class Square kgrid2d.h <KGrid2D>
- * 
+ *
  * This template is a @ref Generic implementation for a square bidimensionnal
  * grid (@ref SquareBase).
  */
 template <class T>
 class Square : public Generic<T>, public SquareBase
 {
- public:
+public:
     /**
      * Constructor.
      */
@@ -324,9 +356,9 @@ class Square : public Generic<T>, public SquareBase
     CoordList neighbours(const Coord &c, bool insideOnly = true,
                          bool directOnly = false) const {
         CoordList neighbours;
-        for (int i=0; i<(directOnly ? LeftUp : Nb_Neighbour); i++) {
+        for (int i = 0; i < (directOnly ? LeftUp : Nb_Neighbour); i++) {
             Coord n = neighbour(c, (Neighbour)i);
-            if ( insideOnly && !Generic<T>::inside(n) ) continue;
+            if (insideOnly && !Generic<T>::inside(n)) continue;
             neighbours.append(n);
         }
         return neighbours;
@@ -341,13 +373,13 @@ class Square : public Generic<T>, public SquareBase
     Coord toEdge(const Coord &c, Neighbour n) const {
         switch (n) {
         case Left:      return Coord(0, c.second);
-        case Right:     return Coord(Generic<T>::width()-1, c.second);
+        case Right:     return Coord(Generic<T>::width() - 1, c.second);
         case Up:        return Coord(c.first, 0);
-        case Down:      return Coord(c.first, Generic<T>::height()-1);
+        case Down:      return Coord(c.first, Generic<T>::height() - 1);
         case LeftUp:    return Coord(0, 0);
-        case LeftDown:  return Coord(0, Generic<T>::height()-1);
-        case RightUp:   return Coord(Generic<T>::width()-1, 0);
-        case RightDown: return Coord(Generic<T>::width()-1, Generic<T>::height()-1);
+        case LeftDown:  return Coord(0, Generic<T>::height() - 1);
+        case RightUp:   return Coord(Generic<T>::width() - 1, 0);
+        case RightDown: return Coord(Generic<T>::width() - 1, Generic<T>::height() - 1);
         case Nb_Neighbour: Q_ASSERT(false);
         }
         return c;
@@ -357,7 +389,7 @@ class Square : public Generic<T>, public SquareBase
 //-----------------------------------------------------------------------------
 /**
  * \class HexagonalBase kgrid2d.h <KGrid2D>
- * 
+ *
  * This class contains static methods to manipulate coordinates on an
  * hexagonal grid where hexagons form horizontal lines:
  * <pre>
@@ -368,24 +400,25 @@ class Square : public Generic<T>, public SquareBase
  */
 class HexagonalBase
 {
- public:
+public:
     /**
      * Identify the six neighbours.
      */
     enum Neighbour { Left = 0, Right, LeftUp, LeftDown,
-                     RightUp, RightDown, Nb_Neighbour };
+                     RightUp, RightDown, Nb_Neighbour
+                   };
 
-     /**
-     * @return the trigonometric angle in radians for the given neighbour.
-     */
+    /**
+    * @return the trigonometric angle in radians for the given neighbour.
+    */
     static double angle(Neighbour n) {
         switch (n) {
         case Left:      return M_PI;
         case Right:     return 0;
-        case LeftUp:    return 2.0*M_PI/3;
-        case LeftDown:  return -2.0*M_PI/3;
-        case RightUp:   return M_PI/3;
-        case RightDown: return -M_PI/3;
+        case LeftUp:    return 2.0 * M_PI / 3;
+        case LeftDown:  return -2.0 * M_PI / 3;
+        case RightUp:   return M_PI / 3;
+        case RightDown: return -M_PI / 3;
         case Nb_Neighbour: Q_ASSERT(false);
         }
         return 0;
@@ -411,14 +444,14 @@ class HexagonalBase
      * @return the neighbour of the given coordinate.
      */
     static Coord neighbour(const Coord &c, Neighbour n) {
-        bool oddRow = c.second%2;
+        bool oddRow = c.second % 2;
         switch (n) {
         case Left:      return c + Coord(-1,  0);
-        case Right:     return c + Coord( 1,  0);
-        case LeftUp:    return c + (oddRow ? Coord( 0, -1) : Coord(-1, -1));
-        case LeftDown:  return c + (oddRow ? Coord( 0,  1) : Coord(-1,  1));
-        case RightUp:   return c + (oddRow ? Coord( 1, -1) : Coord( 0, -1));
-        case RightDown: return c + (oddRow ? Coord( 1,  1) : Coord( 0,  1));
+        case Right:     return c + Coord(1,  0);
+        case LeftUp:    return c + (oddRow ? Coord(0, -1) : Coord(-1, -1));
+        case LeftDown:  return c + (oddRow ? Coord(0,  1) : Coord(-1,  1));
+        case RightUp:   return c + (oddRow ? Coord(1, -1) : Coord(0, -1));
+        case RightDown: return c + (oddRow ? Coord(1,  1) : Coord(0,  1));
         case Nb_Neighbour: Q_ASSERT(false);
         }
         return c;
@@ -429,13 +462,13 @@ class HexagonalBase
     */
     static uint distance(const Coord &c1, const Coord &c2) {
         return qAbs(c1.first - c2.first) + qAbs(c1.second - c2.second)
-            + (c1.first==c2.first || c1.second==c2.second ? 0 : -1);
+               + (c1.first == c2.first || c1.second == c2.second ? 0 : -1);
     }
 };
 
 /**
  * \class Hexagonal kgrid2d.h <KGrid2D>
- * 
+ *
  * This template implements a hexagonal grid
  * where hexagons form horizontal lines:
  * <pre>
@@ -447,7 +480,7 @@ class HexagonalBase
 template <class Type>
 class Hexagonal : public Generic<Type>, public HexagonalBase
 {
- public:
+public:
     /**
      * Constructor.
      */
@@ -462,9 +495,9 @@ class Hexagonal : public Generic<Type>, public HexagonalBase
      */
     CoordList neighbours(const Coord &c, bool insideOnly = true) const {
         CoordList neighbours;
-        for (uint i=0; i<Nb_Neighbour; i++) {
+        for (uint i = 0; i < Nb_Neighbour; i++) {
             Coord n = neighbour(c, (Neighbour)i);
-            if ( insideOnly && !Generic<Type>::inside(n) ) continue;
+            if (insideOnly && !Generic<Type>::inside(n)) continue;
             neighbours.append(n);
         }
         return neighbours;
@@ -480,32 +513,32 @@ class Hexagonal : public Generic<Type>, public HexagonalBase
      *        @param distance (the original coordinate is not included).
      */
     CoordList neighbours(const Coord &c, uint distance, bool all,
-                        bool insideOnly = true) const {
+                         bool insideOnly = true) const {
         // brute force algorithm -- you're welcome to make it more efficient :)
         CoordList ring;
-        if ( distance==0 ) return ring;
+        if (distance == 0) return ring;
         ring = neighbours(c, insideOnly);
-        if ( distance==1 ) return ring;
+        if (distance == 1) return ring;
         CoordList center;
         center.append(c);
-        for (uint i=1; i<distance; i++) {
+        for (uint i = 1; i < distance; i++) {
             CoordList newRing;
             CoordList::const_iterator it;
-            for (it=ring.constBegin(); it!=ring.constEnd(); ++it) {
+            for (it = ring.constBegin(); it != ring.constEnd(); ++it) {
                 CoordList n = neighbours(*it, insideOnly);
                 CoordList::const_iterator it2;
-                for (it2=n.constBegin(); it2!=n.constEnd(); ++it2)
-                    if ( center.indexOf(*it2)==-1
-                         && ring.indexOf(*it2)==-1
-                         && newRing.indexOf(*it2)==-1 )
+                for (it2 = n.constBegin(); it2 != n.constEnd(); ++it2)
+                    if (center.indexOf(*it2) == -1
+                            && ring.indexOf(*it2) == -1
+                            && newRing.indexOf(*it2) == -1)
                         newRing.append(*it2);
                 center.append(*it);
             }
             ring = newRing;
         }
-        if ( !all ) return ring;
+        if (!all) return ring;
         CoordList::const_iterator it;
-        for (it=ring.constBegin(); it!=ring.constEnd(); ++it)
+        for (it = ring.constBegin(); it != ring.constEnd(); ++it)
             center.append(*it);
         center.removeAll(c);
         return center;

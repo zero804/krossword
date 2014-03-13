@@ -58,10 +58,10 @@ class ImageCell;
 class GlowEffect : public QGraphicsDropShadowEffect
 {
 public:
-    GlowEffect( QObject* parent = 0 ) : QGraphicsDropShadowEffect( parent ) {};
+    GlowEffect(QObject* parent = 0) : QGraphicsDropShadowEffect(parent) {};
 
 protected:
-    virtual void draw( QPainter* painter );
+    virtual void draw(QPainter* painter);
 };
 #endif
 
@@ -84,13 +84,13 @@ class KrossWordCell : public QObject, public QGraphicsItem
     friend class DoubleClueCell; // To be able to set m_coord of the child clue cells in the constructor
     Q_OBJECT
 #if QT_VERSION >= 0x040600
-    Q_INTERFACES( QGraphicsItem )
-    Q_PROPERTY( qreal scaleX READ scaleX WRITE setScaleX )
+    Q_INTERFACES(QGraphicsItem)
+    Q_PROPERTY(qreal scaleX READ scaleX WRITE setScaleX)
 #endif
 
 public:
-    KrossWordCell( KrossWord *krossWord, CellType cellType,
-                   const Coord &coord );
+    KrossWordCell(KrossWord *krossWord, CellType cellType,
+                  const Coord &coord);
     virtual ~KrossWordCell();
 
     /** For qgraphicsitem_cast. */
@@ -104,7 +104,7 @@ public:
         return m_cellType;
     };
 
-    bool isType( CellType cellType ) const {
+    bool isType(CellType cellType) const {
         return m_cellType == cellType;
     };
     virtual bool isLetterCell() const {
@@ -127,7 +127,7 @@ public:
     };
 
     qreal scaleX() const;
-    void setScaleX( qreal scaleX );
+    void setScaleX(qreal scaleX);
 
     /** Returns a list with all synchronization categories. */
     QList< SyncCategory > allSynchronizationCategories() const {
@@ -148,9 +148,9 @@ public:
     * one of @p syncCategories.
     * @returns False, if none of @p syncMethods are synced in any of
     * @p syncCategories. */
-    bool isSynchronizedWith( KrossWordCell *cell,
-                             SyncMethods syncMethods = SyncAll,
-                             SyncCategories syncCategories = AllSyncCategories );
+    bool isSynchronizedWith(KrossWordCell *cell,
+                            SyncMethods syncMethods = SyncAll,
+                            SyncCategories syncCategories = AllSyncCategories);
 
     /** Checks if this cell is synced by one of @p syncMethods with
     * @p cell in @p syncCategory.
@@ -158,23 +158,23 @@ public:
     * category @p syncCategory.
     * @returns False, if none of @p syncMethods are synced in category
     * @p syncCategory. */
-    bool isSynchronizedWith( KrossWordCell *cell, SyncCategory syncCategory,
-                             SyncMethods syncMethods = SyncAll );
+    bool isSynchronizedWith(KrossWordCell *cell, SyncCategory syncCategory,
+                            SyncMethods syncMethods = SyncAll);
 
-    void synchronizeWith( KrossWordCell *cell,
-                          SyncMethods syncMethods = SyncAll,
-                          SyncCategory syncCategory = OtherSynchronization );
-    void synchronizeWith( const KrossWordCellList &cellList,
-                          SyncMethods syncMethods = SyncAll,
-                          SyncCategory syncCategory = OtherSynchronization );
-    bool removeSynchronizationWith( KrossWordCell *cell,
-                                    SyncMethods syncMethods = SyncAll,
-                                    SyncCategories syncCategories = AllSyncCategories );
-    void removeSynchronization( SyncMethods syncMethods = SyncAll,
-                                SyncCategories syncCategories = AllSyncCategories );
+    void synchronizeWith(KrossWordCell *cell,
+                         SyncMethods syncMethods = SyncAll,
+                         SyncCategory syncCategory = OtherSynchronization);
+    void synchronizeWith(const KrossWordCellList &cellList,
+                         SyncMethods syncMethods = SyncAll,
+                         SyncCategory syncCategory = OtherSynchronization);
+    bool removeSynchronizationWith(KrossWordCell *cell,
+                                   SyncMethods syncMethods = SyncAll,
+                                   SyncCategories syncCategories = AllSyncCategories);
+    void removeSynchronization(SyncMethods syncMethods = SyncAll,
+                               SyncCategories syncCategories = AllSyncCategories);
 
     /** Sets the highlight of this cell. */
-    virtual void setHighlight( bool enable = true );
+    virtual void setHighlight(bool enable = true);
     /** Whether or not this cell is currently highlighted. */
     bool isHighlighted() const;
 
@@ -184,19 +184,19 @@ public:
       * @param durationFactor The factor for the duration of a transition
       *  animation. Only used if transition animations are enabled. */
 #if QT_VERSION >= 0x040600
-    void clearCache( Animator::Duration duration = Animator::DefaultDuration );
+    void clearCache(Animator::Duration duration = Animator::DefaultDuration);
 #else
     void clearCache();
 #endif
 
 signals:
-    void gotFocus( KrossWordCell *cell );
+    void gotFocus(KrossWordCell *cell);
     /** The cell has been moved to @p newCoord. */
-    void cellMoved( const Coord &newCoord );
+    void cellMoved(const Coord &newCoord);
     void appearanceAboutToChange();
 
 public slots:
-    void setFocusSlot( KrossWordCell *cell );
+    void setFocusSlot(KrossWordCell *cell);
     void deleteAndRemoveFromSceneLater();
 
 #if QT_VERSION >= 0x040600
@@ -207,7 +207,7 @@ protected slots:
     void blurAnimationInFinished();
     void blurAnimationOutFinished();
     void clearCacheAndUpdate() {
-        clearCache( Crossword::Animator::Instant );
+        clearCache(Crossword::Animator::Instant);
         update();
     };
 #else
@@ -219,24 +219,24 @@ protected slots:
 #endif
 
 protected:
-    virtual bool setPositionFromCoordinates( bool animate = true );
-    void setCoord( Coord coord, bool updateInCrosswordGrid = true );
+    virtual bool setPositionFromCoordinates(bool animate = true);
+    void setCoord(Coord coord, bool updateInCrosswordGrid = true);
 
     // Overloaded methods
-    virtual void mousePressEvent( QGraphicsSceneMouseEvent* event );
-    virtual void mouseReleaseEvent( QGraphicsSceneMouseEvent* event );
-    virtual void focusInEvent( QFocusEvent* event );
-    virtual void focusOutEvent( QFocusEvent* event );
-    virtual QVariant itemChange( GraphicsItemChange change, const QVariant& value );
-    virtual void paint( QPainter* painter,
-                        const QStyleOptionGraphicsItem* option,
-                        QWidget* widget = 0 );
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+    virtual void focusInEvent(QFocusEvent* event);
+    virtual void focusOutEvent(QFocusEvent* event);
+    virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
+    virtual void paint(QPainter* painter,
+                       const QStyleOptionGraphicsItem* option,
+                       QWidget* widget = 0);
 
     // Virtual methods
-    virtual void drawBackground( QPainter*, const QStyleOptionGraphicsItem* ) { };
-    virtual void drawForeground( QPainter*, const QStyleOptionGraphicsItem* ) { };
-    virtual void drawBackgroundForPrinting( QPainter*, const QStyleOptionGraphicsItem* ) { };
-    virtual void drawForegroundForPrinting( QPainter*, const QStyleOptionGraphicsItem* ) { };
+    virtual void drawBackground(QPainter*, const QStyleOptionGraphicsItem*) { };
+    virtual void drawForeground(QPainter*, const QStyleOptionGraphicsItem*) { };
+    virtual void drawBackgroundForPrinting(QPainter*, const QStyleOptionGraphicsItem*) { };
+    virtual void drawForegroundForPrinting(QPainter*, const QStyleOptionGraphicsItem*) { };
 
     KrossWord *m_krossWord;
 
@@ -264,7 +264,7 @@ class EmptyCell : public KrossWordCell
     Q_OBJECT
 
 public:
-    EmptyCell( KrossWord *krossWord, Coord coord );
+    EmptyCell(KrossWord *krossWord, Coord coord);
 
     /** For qgraphicsitem_cast. */
     enum { Type = UserType + 2 };
@@ -272,26 +272,28 @@ public:
         return Type;
     };
 
-    LetterCell *toLetterCell( const QChar &correctContent = ' ' );
+    LetterCell *toLetterCell(const QChar &correctContent = ' ');
 
 protected:
-    virtual void focusInEvent( QFocusEvent* event );
-    virtual void focusOutEvent( QFocusEvent* event );
-    virtual void mousePressEvent( QGraphicsSceneMouseEvent* event );
-    virtual void keyPressEvent( QKeyEvent* event );
+    virtual void focusInEvent(QFocusEvent* event);
+    virtual void focusOutEvent(QFocusEvent* event);
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
+    virtual void keyPressEvent(QKeyEvent* event);
 
-    virtual void drawBackground( QPainter *p, const QStyleOptionGraphicsItem* option );
-    virtual void drawBackgroundForPrinting( QPainter *p, const QStyleOptionGraphicsItem *option );
+    virtual void drawBackground(QPainter *p, const QStyleOptionGraphicsItem* option);
+    virtual void drawBackgroundForPrinting(QPainter *p, const QStyleOptionGraphicsItem *option);
 };
 
 
 
-inline QDebug &operator <<( QDebug debug, CellType cellType ) {
-    return debug << stringFromCellType( cellType );
+inline QDebug &operator <<(QDebug debug, CellType cellType)
+{
+    return debug << stringFromCellType(cellType);
 };
 
-inline QDebug &operator <<( QDebug debug, KrossWordCell *cell ) {
-    if ( !cell )
+inline QDebug &operator <<(QDebug debug, KrossWordCell *cell)
+{
+    if (!cell)
         return debug << "NULL ";
 
     debug << cell->cellType() << "at" << cell->coord();
@@ -299,8 +301,8 @@ inline QDebug &operator <<( QDebug debug, KrossWordCell *cell ) {
 };
 
 // Sorting functions
-bool lessThanCellType( const KrossWordCell *cell1, const KrossWordCell *cell2 );
-bool greaterThanCellType( const KrossWordCell *cell1, const KrossWordCell *cell2 );
+bool lessThanCellType(const KrossWordCell *cell1, const KrossWordCell *cell2);
+bool greaterThanCellType(const KrossWordCell *cell1, const KrossWordCell *cell2);
 
 
 // Serialization

@@ -49,18 +49,18 @@ enum CellType {
     ImageCellType = 0x020,
 
     AllCellTypes = EmptyCellType | ClueCellType | DoubleClueCellType
-            | LetterCellType | SolutionLetterCellType | ImageCellType,
-            /**< All cell types, but not user defined cell types. */
+                   | LetterCellType | SolutionLetterCellType | ImageCellType,
+    /**< All cell types, but not user defined cell types. */
 
     InteractiveCellTypes = ClueCellType | DoubleClueCellType
-            | LetterCellType | SolutionLetterCellType,
-            /**< All cell types except empty cells, but not user defined cell types. */
+                           | LetterCellType | SolutionLetterCellType,
+    /**< All cell types except empty cells, but not user defined cell types. */
 
     UserType = 0x100 /**< For user defined cell classes derived from KrossWordCell.
             * To make use of this in the flags class CellTypes, only use values computed
             * like this: value=2^x with x>=4. */
 };
-Q_DECLARE_FLAGS( CellTypes, CellType );
+Q_DECLARE_FLAGS(CellTypes, CellType);
 
 QList< CellType > allCellTypes();
 
@@ -105,7 +105,7 @@ enum SyncMethod {
     SyncAll = SyncSelection | SyncContent /**< Same as SyncSelection and
             * SyncContent together. */
 };
-Q_DECLARE_FLAGS( SyncMethods, SyncMethod );
+Q_DECLARE_FLAGS(SyncMethods, SyncMethod);
 
 enum SyncCategory {
     OtherSynchronization = 0x1,
@@ -113,10 +113,10 @@ enum SyncCategory {
     SameCharacterLetterSynchronization = 0x4,
 
     AllSyncCategories = OtherSynchronization
-            | SolutionLetterSynchronization
-            | SameCharacterLetterSynchronization
+                        | SolutionLetterSynchronization
+                        | SameCharacterLetterSynchronization
 };
-Q_DECLARE_FLAGS( SyncCategories, SyncCategory );
+Q_DECLARE_FLAGS(SyncCategories, SyncCategory);
 
 /** Where the first letter cell of the answer to a clue is, relative to
  * the clue cell position. */
@@ -160,18 +160,18 @@ enum KeyboardNavigationType {
             * Only used when @ref NavigateWithArrowKeys is set. */
 
     DefaultKeyboardNavigation = NavigateForthOnLetterEdit
-            | NavigateBackOnBackspace
-            | NavigateWithArrowKeys
-            | NavigateJump,
-            /**< Enable default keyboard navigation types. */
+                                | NavigateBackOnBackspace
+                                | NavigateWithArrowKeys
+                                | NavigateJump,
+    /**< Enable default keyboard navigation types. */
     AllKeyboardNavigationTypes = NavigateForthOnLetterEdit
-            | NavigateBackOnBackspace
-            | NavigateWithArrowKeys
-            | NavigateJump
-            | NavigateSwitchOrientationOnArrowKeyNavigation
-            /**< Enable all keyboard navigation types. */
+                                 | NavigateBackOnBackspace
+                                 | NavigateWithArrowKeys
+                                 | NavigateJump
+                                 | NavigateSwitchOrientationOnArrowKeyNavigation
+                                 /**< Enable all keyboard navigation types. */
 };
-Q_DECLARE_FLAGS( KeyboardNavigation, KeyboardNavigationType );
+Q_DECLARE_FLAGS(KeyboardNavigation, KeyboardNavigationType);
 
 /** Types of error when trying to change the crossword. For example, the
 * @ref insertClue and @ref canInsertClue methods returns a value of type
@@ -211,7 +211,7 @@ enum ErrorType {
     ErrorImageCellsDisallowed = 0x4000, /**< Image cells aren't allowed in
             * the current crossword type. */
 };
-Q_DECLARE_FLAGS( ErrorTypes, ErrorType );
+Q_DECLARE_FLAGS(ErrorTypes, ErrorType);
 
 /** Types of animations. */
 enum AnimationType {
@@ -226,10 +226,10 @@ enum AnimationType {
     AnimateTransition = 0x040, /**< Animate changes to items appearance. */
 
     AllAnimations = AnimatePosChange | AnimateSizeChange | AnimateAppear
-    | AnimateDisappear | AnimateFocusIn | AnimateChangeLetter
-    | AnimateTransition /**< All animations. */
+                    | AnimateDisappear | AnimateFocusIn | AnimateChangeLetter
+                    | AnimateTransition /**< All animations. */
 };
-Q_DECLARE_FLAGS( AnimationTypes, AnimationType );
+Q_DECLARE_FLAGS(AnimationTypes, AnimationType);
 
 /** Types of crosswords. */
 enum CrosswordType {
@@ -306,10 +306,10 @@ public:
         ClueType clueType = StringClues,
         CellTypes cellTypes = AllCellTypes,
         QList< QSize > defaultSizes = QList< QSize >(),
-        const QString &iconName = QString() ) {
-        init( UserDefinedCrossword, name, description, longDescription, iconName,
-              clueCellHandling, rotationSymmetryRequired, minAnswerLength,
-              letterCellContent, clueMapping, clueType, cellTypes, defaultSizes );
+        const QString &iconName = QString()) {
+        init(UserDefinedCrossword, name, description, longDescription, iconName,
+             clueCellHandling, rotationSymmetryRequired, minAnswerLength,
+             letterCellContent, clueMapping, clueType, cellTypes, defaultSizes);
     };
 
     static const QList< CrosswordType > typeList() {
@@ -320,32 +320,32 @@ public:
 
     /** Constructs a crossword type information object for the given crossword
     * type. */
-    static const CrosswordTypeInfo infoFromType( CrosswordType crosswordType );
+    static const CrosswordTypeInfo infoFromType(CrosswordType crosswordType);
 
-    static const QString stringFromType( CrosswordType crosswordType );
-    static CrosswordType typeFromString( const QString &crosswordType );
+    static const QString stringFromType(CrosswordType crosswordType);
+    static CrosswordType typeFromString(const QString &crosswordType);
 
     static QList<ClueCellHandling> allClueCellHandlingValues();
     static QList<ClueType> allClueTypeValues();
     static QList<ClueMapping> allClueMappingValues();
     static QList<LetterCellContent> allLetterCellContentValues();
 
-    static QString stringFromClueCellHandling( ClueCellHandling clueCellHandling );
-    static QString stringFromClueType( ClueType clueType );
-    static QString stringFromClueMapping( ClueMapping clueMapping );
-    static QString stringFromLetterCellContent( LetterCellContent letterCellContent );
-    static QStringList stringListFromCellTypes( CellTypes cellTypes );
+    static QString stringFromClueCellHandling(ClueCellHandling clueCellHandling);
+    static QString stringFromClueType(ClueType clueType);
+    static QString stringFromClueMapping(ClueMapping clueMapping);
+    static QString stringFromLetterCellContent(LetterCellContent letterCellContent);
+    static QStringList stringListFromCellTypes(CellTypes cellTypes);
 
-    static ClueCellHandling clueCellHandlingFromString( const QString &sClueCellHandling );
-    static ClueType clueTypeFromString( const QString &sClueType );
-    static ClueMapping clueMappingFromString( const QString &sClueMapping );
-    static LetterCellContent letterCellContentFromString( const QString &sLetterCellContent );
-    static CellTypes cellTypesFromStringList( const QStringList &sCellTypes );
+    static ClueCellHandling clueCellHandlingFromString(const QString &sClueCellHandling);
+    static ClueType clueTypeFromString(const QString &sClueType);
+    static ClueMapping clueMappingFromString(const QString &sClueMapping);
+    static LetterCellContent letterCellContentFromString(const QString &sLetterCellContent);
+    static CellTypes cellTypesFromStringList(const QStringList &sCellTypes);
 
-    static QString displayStringFromClueCellHandling( ClueCellHandling clueCellHandling );
-    static QString displayStringFromClueType( ClueType clueType );
-    static QString displayStringFromClueMapping( ClueMapping clueMapping );
-    static QString displayStringFromLetterCellContent( LetterCellContent letterCellContent );
+    static QString displayStringFromClueCellHandling(ClueCellHandling clueCellHandling);
+    static QString displayStringFromClueType(ClueType clueType);
+    static QString displayStringFromClueMapping(ClueMapping clueMapping);
+    static QString displayStringFromLetterCellContent(LetterCellContent letterCellContent);
 
     static const CrosswordTypeInfo free();
     static const CrosswordTypeInfo defaultUserDefined();
@@ -355,14 +355,14 @@ public:
     static const CrosswordTypeInfo crossNumber();
 
     QString typeString() const {
-        return stringFromType( crosswordType );
+        return stringFromType(crosswordType);
     };
 
     QString allowedChars() const;
-    bool containsIllegalCharacters( const QString &testString ) const {
-        return testString.contains( QRegExp( QString( "[^%1]" ).arg( allowedChars() ) ) );
+    bool containsIllegalCharacters(const QString &testString) const {
+        return testString.contains(QRegExp(QString("[^%1]").arg(allowedChars())));
     };
-    bool isCharacterLegal( const QChar &testCharacter ) const;
+    bool isCharacterLegal(const QChar &testCharacter) const;
 
     CrosswordType crosswordType; /**< The type of crossword this description belongs to. */
     QString name; /**< The name of the crossword type. */
@@ -381,37 +381,37 @@ public:
     QList< QSize > defaultSizes; /**< A list of default sizes of the crossword grid. */
 
 private:
-    CrosswordTypeInfo( CrosswordType crosswordType,
-                       const QString &name,
-                       const QString &description,
-                       const QString &longDescription,
-                       const QString &iconName,
-                       ClueCellHandling clueCellHandling,
-                       bool rotationSymmetryRequired = false,
-                       int minAnswerLength = -1,
-                       LetterCellContent letterCellContent = Characters,
-                       ClueMapping clueMapping = CluesReferToSetsOfCells,
-                       ClueType clueType = StringClues,
-                       CellTypes cellTypes = AllCellTypes,
-                       QList< QSize > defaultSizes = QList< QSize >() ) {
-        init( crosswordType, name, description, longDescription, iconName, clueCellHandling,
-              rotationSymmetryRequired, minAnswerLength, letterCellContent,
-              clueMapping, clueType, cellTypes, defaultSizes );
+    CrosswordTypeInfo(CrosswordType crosswordType,
+                      const QString &name,
+                      const QString &description,
+                      const QString &longDescription,
+                      const QString &iconName,
+                      ClueCellHandling clueCellHandling,
+                      bool rotationSymmetryRequired = false,
+                      int minAnswerLength = -1,
+                      LetterCellContent letterCellContent = Characters,
+                      ClueMapping clueMapping = CluesReferToSetsOfCells,
+                      ClueType clueType = StringClues,
+                      CellTypes cellTypes = AllCellTypes,
+                      QList< QSize > defaultSizes = QList< QSize >()) {
+        init(crosswordType, name, description, longDescription, iconName, clueCellHandling,
+             rotationSymmetryRequired, minAnswerLength, letterCellContent,
+             clueMapping, clueType, cellTypes, defaultSizes);
     };
 
-    void init( CrosswordType crosswordType,
-               const QString &name,
-               const QString &description,
-               const QString &longDescription,
-               const QString &iconName,
-               ClueCellHandling clueCellHandling,
-               bool rotationSymmetryRequired = false,
-               int minAnswerLength = -1,
-               LetterCellContent letterCellContent = Characters,
-               ClueMapping clueMapping = CluesReferToSetsOfCells,
-               ClueType clueType = StringClues,
-               CellTypes cellTypes = AllCellTypes,
-               QList< QSize > defaultSizes = QList< QSize >() ) {
+    void init(CrosswordType crosswordType,
+              const QString &name,
+              const QString &description,
+              const QString &longDescription,
+              const QString &iconName,
+              ClueCellHandling clueCellHandling,
+              bool rotationSymmetryRequired = false,
+              int minAnswerLength = -1,
+              LetterCellContent letterCellContent = Characters,
+              ClueMapping clueMapping = CluesReferToSetsOfCells,
+              ClueType clueType = StringClues,
+              CellTypes cellTypes = AllCellTypes,
+              QList< QSize > defaultSizes = QList< QSize >()) {
         this->crosswordType = crosswordType;
         this->name = name;
         this->description = description;
@@ -428,70 +428,70 @@ private:
     };
 }; // struct CrosswordTypeInformation
 
-QString displayStringFromCellType( CellType cellType );
-QString stringFromCellType( CellType cellType );
-CellType cellTypeFromString( const QString& sCellType );
+QString displayStringFromCellType(CellType cellType);
+QString stringFromCellType(CellType cellType);
+CellType cellTypeFromString(const QString& sCellType);
 
-inline QDebug &operator <<( QDebug debug,
-                            CrosswordType crosswordType )
+inline QDebug &operator <<(QDebug debug,
+                           CrosswordType crosswordType)
 {
-    return debug << CrosswordTypeInfo::stringFromType( crosswordType );
+    return debug << CrosswordTypeInfo::stringFromType(crosswordType);
 };
 
-inline QDebug &operator <<( QDebug debug,
-                            ClueCellHandling clueCellHandling )
+inline QDebug &operator <<(QDebug debug,
+                           ClueCellHandling clueCellHandling)
 {
     return debug << CrosswordTypeInfo::stringFromClueCellHandling(
-               clueCellHandling );
+               clueCellHandling);
 };
 
-inline QDebug &operator <<( QDebug debug, ClueMapping clueMapping )
+inline QDebug &operator <<(QDebug debug, ClueMapping clueMapping)
 {
     return debug << CrosswordTypeInfo::stringFromClueMapping(
-               clueMapping );
+               clueMapping);
 };
 
-inline QDebug &operator <<( QDebug debug, ClueType clueType )
+inline QDebug &operator <<(QDebug debug, ClueType clueType)
 {
-    return debug << CrosswordTypeInfo::stringFromClueType( clueType );
+    return debug << CrosswordTypeInfo::stringFromClueType(clueType);
 };
 
-QDataStream &operator <<( QDataStream &stream, CrosswordTypeInfo typeInfo );
-QDataStream &operator >>( QDataStream &stream, CrosswordTypeInfo &typeInfo );
+QDataStream &operator <<(QDataStream &stream, CrosswordTypeInfo typeInfo);
+QDataStream &operator >>(QDataStream &stream, CrosswordTypeInfo &typeInfo);
 }; // namespace Crossword
 
-Q_DECLARE_OPERATORS_FOR_FLAGS( Crossword::CellTypes )
-Q_DECLARE_OPERATORS_FOR_FLAGS( Crossword::SyncMethods )
-Q_DECLARE_OPERATORS_FOR_FLAGS( Crossword::SyncCategories )
-Q_DECLARE_OPERATORS_FOR_FLAGS( Crossword::ErrorTypes )
-Q_DECLARE_OPERATORS_FOR_FLAGS( Crossword::AnimationTypes )
-Q_DECLARE_OPERATORS_FOR_FLAGS( Crossword::KeyboardNavigation )
+Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::CellTypes)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::SyncMethods)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::SyncCategories)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::ErrorTypes)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::AnimationTypes)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::KeyboardNavigation)
 // Q_DECLARE_METATYPE( Crossword::ErrorTypes )
 
-Coord operator +=( Coord & coord, const Crossword::Offset & offset );
-Crossword::Offset operator *( const Crossword::Offset &offset, int factor );
+Coord operator +=(Coord & coord, const Crossword::Offset & offset);
+Crossword::Offset operator *(const Crossword::Offset &offset, int factor);
 
-inline bool operator<( const Coord &coord1, const Coord &coord2 )
+inline bool operator<(const Coord &coord1, const Coord &coord2)
 {
-    return ( coord1.first < coord2.first && coord1.second <= coord2.second )
-           || ( coord1.first <= coord2.first && coord1.second < coord2.second );
+    return (coord1.first < coord2.first && coord1.second <= coord2.second)
+           || (coord1.first <= coord2.first && coord1.second < coord2.second);
 };
-inline bool operator<= ( const Coord &coord1, const Coord &coord2 )
+inline bool operator<= (const Coord &coord1, const Coord &coord2)
 {
     return coord1.first <= coord2.first && coord1.second <= coord2.second;
 };
-inline bool operator>( const Coord &coord1, const Coord &coord2 )
+inline bool operator>(const Coord &coord1, const Coord &coord2)
 {
     return coord2 < coord1;
 };
-inline bool operator>=( const Coord &coord1, const Coord &coord2 )
+inline bool operator>=(const Coord &coord1, const Coord &coord2)
 {
     return coord2 <= coord1;
 };
 
-inline QDebug &operator <<( QDebug debug, Crossword::SyncCategory syncCategory )
+inline QDebug &operator <<(QDebug debug, Crossword::SyncCategory syncCategory)
 {
-    switch ( syncCategory ) {
+    switch (syncCategory) {
     case Crossword::OtherSynchronization:
         return debug << "OtherSynchronization";
     case Crossword::SolutionLetterSynchronization:
@@ -505,9 +505,9 @@ inline QDebug &operator <<( QDebug debug, Crossword::SyncCategory syncCategory )
     }
 };
 
-inline QDebug &operator <<( QDebug debug, Crossword::SyncMethod syncMethod )
+inline QDebug &operator <<(QDebug debug, Crossword::SyncMethod syncMethod)
 {
-    switch ( syncMethod ) {
+    switch (syncMethod) {
     case Crossword::SyncNothing:
         return debug << "SyncNothing";
     case Crossword::SyncSelection:
@@ -521,11 +521,11 @@ inline QDebug &operator <<( QDebug debug, Crossword::SyncMethod syncMethod )
     }
 };
 
-inline QDebug &operator <<( QDebug debug,
-                            Crossword::LetterCellContent letterCellContent )
+inline QDebug &operator <<(QDebug debug,
+                           Crossword::LetterCellContent letterCellContent)
 {
     return debug << Crossword::CrosswordTypeInfo::stringFromLetterCellContent(
-               letterCellContent );
+               letterCellContent);
 };
 
 #endif // Multiple inclusion guard

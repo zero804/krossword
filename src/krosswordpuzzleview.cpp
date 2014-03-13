@@ -30,7 +30,7 @@
 /*
 #include <QPropertyAnimation>
 ScrollbarAnimator::ScrollbarAnimator( QAbstractSlider* slider, QWidget* parent )
-	    : QObject( parent ), m_slider( slider ), m_animation( 0 ) {
+        : QObject( parent ), m_slider( slider ), m_animation( 0 ) {
   m_oldValue = m_slider->value();
   m_setValueSlotDeactivated = false;
   connect( m_slider, SIGNAL(actionTriggered(int)), this, SLOT(sliderActionTriggered(int)) );
@@ -81,7 +81,7 @@ void ScrollbarAnimator::sliderActionTriggered( int action ) {
 //     case QAbstractSlider::SliderToMaximum:
 //       startAnimation( m_slider->maximum() - m_slider->sliderPosition() );
 //       break;
-//       
+//
 //     case QAbstractSlider::SliderNoAction:
 //     default:
 //       kDebug() << "SliderNoAction" << (m_slider->sliderPosition() - m_slider->value());
@@ -103,7 +103,7 @@ void ScrollbarAnimator::startAnimation( int scrollOffset ) {
     m_animation->setEasingCurve( QEasingCurve(QEasingCurve::OutCurve) );
     m_animation->start();
   }
-} 
+}
 
 void ScrollbarAnimator::setValue( int value ) {
   if ( value != m_slider->value() )
@@ -117,22 +117,23 @@ void ScrollbarAnimator::animationFinished() {
 }*/
 
 
-KrossWordPuzzleView::KrossWordPuzzleView( KrossWordPuzzleScene *scene, QWidget *parent )
-	    : QGraphicsView( scene, parent ), m_scene( scene ) {
+KrossWordPuzzleView::KrossWordPuzzleView(KrossWordPuzzleScene *scene, QWidget *parent)
+    : QGraphicsView(scene, parent), m_scene(scene)
+{
 //     new ScrollbarAnimator( verticalScrollBar() );
 //     new ScrollbarAnimator( horizontalScrollBar() );
-    
+
 //     setOptimizationFlags( QGraphicsView::DontSavePainterState );
-    setRenderHints( QPainter::Antialiasing | QPainter::TextAntialiasing
-		    | QPainter::SmoothPixmapTransform );
+    setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing
+                   | QPainter::SmoothPixmapTransform);
 
 //     setMinimumSize( 100, 100 );
-    setCacheMode( CacheBackground );
+    setCacheMode(CacheBackground);
     settingsChanged();
 //     setViewport( new QGLWidget );
 //     setAutoFillBackground(true);
 
-    setObjectName( "krosswordpuzzleview" );
+    setObjectName("krosswordpuzzleview");
 }
 
 KrossWordPuzzleView::~KrossWordPuzzleView()
@@ -142,67 +143,68 @@ KrossWordPuzzleView::~KrossWordPuzzleView()
 
 QSize KrossWordPuzzleView::sizeHint() const
 {
-    if ( krossWord() ) {
-	QSize sz = krossWord()->cellSize().toSize() * 0.8;
-// 	kDebug() << QSize( krossWord()->width() * sz.width(), krossWord()->height() * sz.height() );
-	return QSize( krossWord()->width() * sz.width() + 4, krossWord()->height() * sz.height() );
-// 	return mapFromScene( krossWord()->boundingRect() ).boundingRect().size();
+    if (krossWord()) {
+        QSize sz = krossWord()->cellSize().toSize() * 0.8;
+//  kDebug() << QSize( krossWord()->width() * sz.width(), krossWord()->height() * sz.height() );
+        return QSize(krossWord()->width() * sz.width() + 4, krossWord()->height() * sz.height());
+//  return mapFromScene( krossWord()->boundingRect() ).boundingRect().size();
     } else
-	return QGraphicsView::sizeHint();
+        return QGraphicsView::sizeHint();
 }
 
-void KrossWordPuzzleView::keyPressEvent( QKeyEvent* event )
+void KrossWordPuzzleView::keyPressEvent(QKeyEvent* event)
 {
-    if ( event->modifiers().testFlag(Qt::ControlModifier) ) {
-	krossWord()->setAcceptedMouseButtons( Qt::NoButton );
-	setDragMode( QGraphicsView::ScrollHandDrag );
+    if (event->modifiers().testFlag(Qt::ControlModifier)) {
+        krossWord()->setAcceptedMouseButtons(Qt::NoButton);
+        setDragMode(QGraphicsView::ScrollHandDrag);
     }
 
-    QGraphicsView::keyPressEvent( event );
+    QGraphicsView::keyPressEvent(event);
 }
 
-void KrossWordPuzzleView::keyReleaseEvent( QKeyEvent* event )
+void KrossWordPuzzleView::keyReleaseEvent(QKeyEvent* event)
 {
-    if ( !event->modifiers().testFlag(Qt::ControlModifier) ) {
-	krossWord()->setAcceptedMouseButtons( Qt::LeftButton | Qt::MidButton | Qt::RightButton );
-	setDragMode( QGraphicsView::NoDrag );
+    if (!event->modifiers().testFlag(Qt::ControlModifier)) {
+        krossWord()->setAcceptedMouseButtons(Qt::LeftButton | Qt::MidButton | Qt::RightButton);
+        setDragMode(QGraphicsView::NoDrag);
     }
 
-    QGraphicsView::keyReleaseEvent( event );
+    QGraphicsView::keyReleaseEvent(event);
 }
 
-void KrossWordPuzzleView::wheelEvent( QWheelEvent* event ) {
-    if ( event->modifiers().testFlag(Qt::ControlModifier) )
-      emit signalChangeZoom( event->delta() / 10 );
+void KrossWordPuzzleView::wheelEvent(QWheelEvent* event)
+{
+    if (event->modifiers().testFlag(Qt::ControlModifier))
+        emit signalChangeZoom(event->delta() / 10);
     else
-      QGraphicsView::wheelEvent( event );
+        QGraphicsView::wheelEvent(event);
 }
 
-void KrossWordPuzzleView::resizeEvent( QResizeEvent* event )
+void KrossWordPuzzleView::resizeEvent(QResizeEvent* event)
 {
-    QGraphicsView::resizeEvent( event );
-    emit resized( event->oldSize(), event->size() );
+    QGraphicsView::resizeEvent(event);
+    emit resized(event->oldSize(), event->size());
 }
 /*
 void KrossWordPuzzleView::setTheme( const QString &theme )
 {
     if ( !KrosswordRenderer::self()->setTheme(theme) )
-	return;
+    return;
 
     scene()->update();
     Settings::setTheme( theme );
     settingsChanged();
 }*/
 
-void KrossWordPuzzleView::renderToPrinter( QPainter* painter,
-	const QRectF& target, const QRect& source, Qt::AspectRatioMode aspectRatioMode )
+void KrossWordPuzzleView::renderToPrinter(QPainter* painter,
+        const QRectF& target, const QRect& source, Qt::AspectRatioMode aspectRatioMode)
 {
     bool wasDrawingForPrinting = krossWord()->isDrawingForPrinting();
     krossWord()->setDrawForPrinting();
 
-    render( painter, target, source, aspectRatioMode );
+    render(painter, target, source, aspectRatioMode);
 
-    krossWord()->setDrawForPrinting( wasDrawingForPrinting );
+    krossWord()->setDrawForPrinting(wasDrawingForPrinting);
 }
 
 void KrossWordPuzzleView::settingsChanged()
@@ -214,7 +216,7 @@ void KrossWordPuzzleView::settingsChanged()
 
 //     ui_krosswordpuzzleview_base.kcfg_sillyLabel->setText( i18n("This project is %1 days old",Settings::val_time()) );
     Settings::self()->writeConfig();
-    emit signalChangeStatusbar( i18n("Settings changed") );
+    emit signalChangeStatusbar(i18n("Settings changed"));
 }
 
 #include "krosswordpuzzleview.moc"

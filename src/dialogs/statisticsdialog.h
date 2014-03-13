@@ -36,14 +36,14 @@ class StatisticsDialog : public KDialog
     Q_OBJECT
 
 public:
-    explicit StatisticsDialog( KrossWord *krossWord, QWidget* parent = 0 );
+    explicit StatisticsDialog(KrossWord *krossWord, QWidget* parent = 0);
 
 private:
     void setup();
-    QLabel *label( const QString &text, bool title = false );
-    void addStatisticsValue( QGridLayout *layout, const QString &title,
-                             int count, int totalCount,
-                             const QString &toolTip = QString() );
+    QLabel *label(const QString &text, bool title = false);
+    void addStatisticsValue(QGridLayout *layout, const QString &title,
+                            int count, int totalCount,
+                            const QString &toolTip = QString());
 
     KrossWord *m_krossWord;
 };

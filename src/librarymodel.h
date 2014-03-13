@@ -24,9 +24,10 @@
 #include <KDebug>
 
 // TODO
-class LibraryModel : public QStandardItemModel {
-    public:
-	LibraryModel( QObject* parent = 0 );
+class LibraryModel : public QStandardItemModel
+{
+public:
+    LibraryModel(QObject* parent = 0);
 };
 
 #endif // LIBRARYMODEL_H

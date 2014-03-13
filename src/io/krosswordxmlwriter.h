@@ -37,26 +37,26 @@ class KrossWordXmlWriter : public QXmlStreamWriter
 public:
     KrossWordXmlWriter() { };
 
-    bool writeCompressed( QIODevice *device, KrossWord *krossWord,
-                          KrossWord::WriteMode writeMode = KrossWord::Normal,
-                          const QByteArray &undoData = QByteArray() );
-    bool write( QIODevice *device, KrossWord *krossWord,
-                KrossWord::WriteMode writeMode = KrossWord::Normal,
-                const QByteArray &undoData = QByteArray() );
+    bool writeCompressed(QIODevice *device, KrossWord *krossWord,
+                         KrossWord::WriteMode writeMode = KrossWord::Normal,
+                         const QByteArray &undoData = QByteArray());
+    bool write(QIODevice *device, KrossWord *krossWord,
+               KrossWord::WriteMode writeMode = KrossWord::Normal,
+               const QByteArray &undoData = QByteArray());
 
     QString errorString() const {
         return m_errorString;
     };
 
 private:
-    void writeKrossWord( KrossWord *krossWord,
-                         KrossWord::WriteMode writeMode = KrossWord::Normal,
-                         const QByteArray &undoData = QByteArray() );
-    void writeClue( ClueCell *clue,
-                    KrossWord::WriteMode writeMode = KrossWord::Normal );
-    void writeImage( ImageCell *image,
-                     KrossWord::WriteMode writeMode = KrossWord::Normal );
-    void writeSolutionLetter( SolutionLetterCell *solutionLetter );
+    void writeKrossWord(KrossWord *krossWord,
+                        KrossWord::WriteMode writeMode = KrossWord::Normal,
+                        const QByteArray &undoData = QByteArray());
+    void writeClue(ClueCell *clue,
+                   KrossWord::WriteMode writeMode = KrossWord::Normal);
+    void writeImage(ImageCell *image,
+                    KrossWord::WriteMode writeMode = KrossWord::Normal);
+    void writeSolutionLetter(SolutionLetterCell *solutionLetter);
 
     QString m_errorString;
 };

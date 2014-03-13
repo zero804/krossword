@@ -85,7 +85,7 @@ class KrossWord : public QObject, public QGraphicsItem
     friend class SolutionLetterCell;
     Q_OBJECT
 #if QT_VERSION >= 0x040600
-    Q_INTERFACES( QGraphicsItem )
+    Q_INTERFACES(QGraphicsItem)
 #endif
 
 public:
@@ -109,7 +109,7 @@ public:
         ErrorImageDoesntFit = 0x0100, /**< The image doesn't fit in the grid with the given settings. */
         ErrorImageCellsArentEmpty = 0x0200 /**< The cells for a new image aren't empty. */
     };
-    Q_DECLARE_FLAGS( ErrorTypes, ErrorType ); // TODO Better naming...
+    Q_DECLARE_FLAGS(ErrorTypes, ErrorType);   // TODO Better naming...
 
     enum FileFormat {
         DetermineByFileName,
@@ -128,7 +128,7 @@ public:
     * @param height The height of the new crossword. That is, how many vertical
     * cells should be created.
     * @see resizeGrid() */
-    explicit KrossWord( int width = 0, int height = 0 );
+    explicit KrossWord(int width = 0, int height = 0);
 
     virtual ~KrossWord();
 
@@ -136,58 +136,58 @@ public:
     * @param url The URL to the file to read.
     * @param errorString Contains a string describing the error, if false was returned.
     * @return False, if there was an error. */
-    bool read( const KUrl &url, QString *errorString = NULL,
-               FileFormat fileFormat = DetermineByFileName );
+    bool read(const KUrl &url, QString *errorString = NULL,
+              FileFormat fileFormat = DetermineByFileName);
 
-    static FileFormat fileFormatFromFileName( const QString &fileName );
+    static FileFormat fileFormatFromFileName(const QString &fileName);
 
-    QImage toImage( const QSize &size = QSize( 64, 64 ) );
-    void resizeTo( const QSizeF &size );
+    QImage toImage(const QSize &size = QSize(64, 64));
+    void resizeTo(const QSizeF &size);
     void assignClueNumbers();
 
     /** Gets the clue cell at the coordinates @p coord with the given @p orientation.
     * If the clue cell is hidden, it gets the clue cell with @p orientation of the
     * letter cell at @p coord. If no clue cell could be found, it returns NULL. */
-    ClueCell *findClueCell( const Coord &coord, Qt::Orientation orientation ) const;
+    ClueCell *findClueCell(const Coord &coord, Qt::Orientation orientation) const;
 
     QString title() const {
         return m_title;
     };
-    void setTitle( const QString &title ) {
+    void setTitle(const QString &title) {
         m_title = title;
     };
     QString authors() const {
         return m_authors;
     };
-    void setAuthors( const QString &authors ) {
+    void setAuthors(const QString &authors) {
         m_authors = authors;
     };
     QString copyright() const {
         return m_copyright;
     };
-    void setCopyright( const QString &copyright ) {
+    void setCopyright(const QString &copyright) {
         m_copyright = copyright;
     };
     QString notes() const {
         return m_notes;
     };
-    void setNotes( const QString &notes ) {
+    void setNotes(const QString &notes) {
         m_notes = notes;
     };
 
-    bool canTakeSpannedCell( const Coord &coord,
-                             int horizontalCellSpan, int verticalCellSpan,
-                             SpannedCell* excludedSpannedCell = NULL ) const;
+    bool canTakeSpannedCell(const Coord &coord,
+                            int horizontalCellSpan, int verticalCellSpan,
+                            SpannedCell* excludedSpannedCell = NULL) const;
 
-    ErrorType insertImage( const KGrid2D::Coord &coord,
-                           int horizontalCellSpan, int verticalCellSpan, KUrl url,
-                           ErrorTypes correctnessesToIgnore = DontIgnoreErrors,
-                           ImageCell **insertedImage = NULL );
+    ErrorType insertImage(const KGrid2D::Coord &coord,
+                          int horizontalCellSpan, int verticalCellSpan, KUrl url,
+                          ErrorTypes correctnessesToIgnore = DontIgnoreErrors,
+                          ImageCell **insertedImage = NULL);
 
-    bool canTakeClueCell( const Coord &coord,
-                          const Offset &firstLetterOffset = Offset( 0, 0 ),
-                          bool allowDoubleClueCells = true,
-                          ClueCell *excludedClue = NULL ) const;
+    bool canTakeClueCell(const Coord &coord,
+                         const Offset &firstLetterOffset = Offset(0, 0),
+                         bool allowDoubleClueCells = true,
+                         ClueCell *excludedClue = NULL) const;
 
     /** Inserts a new clue into the crossword at @p coord. This method won't
     * overwrite existing cells, except for those of type EmptyCell. Existing cells
@@ -218,12 +218,12 @@ public:
     * @returns Other values of Correctness, if there was an error when inserting
     * the new clue and it's answers letter cells.
     * @see canInsertClue() */
-    ErrorType insertClue( const KGrid2D::Coord &coord,
-                          Qt::Orientation orientation, ClueCell::AnswerOffset answerOffset,
-                          const QString &clue, const QString &answer,
-                          KrossWordCell::CellType cellType = KrossWordCell::LetterCellType,
-                          ErrorTypes correctnessesToIgnore = DontIgnoreErrors,
-                          bool allowDoubleClueCells = true, ClueCell **insertedClue = NULL );
+    ErrorType insertClue(const KGrid2D::Coord &coord,
+                         Qt::Orientation orientation, ClueCell::AnswerOffset answerOffset,
+                         const QString &clue, const QString &answer,
+                         KrossWordCell::CellType cellType = KrossWordCell::LetterCellType,
+                         ErrorTypes correctnessesToIgnore = DontIgnoreErrors,
+                         bool allowDoubleClueCells = true, ClueCell **insertedClue = NULL);
 
     /** Returns true, if a clue cell with it's answer letters fits into the
     * current crossword at @p coord.
@@ -238,10 +238,10 @@ public:
     * double clue cells if needed, ie. if there's already a clue cell at @p coord.
     * @param excludedClue You can specify a clue cell which shouldn't be taken
     * into account when checking if the new clue can be inserted. */
-    ErrorType canInsertClue( const KGrid2D::Coord &coord, Qt::Orientation orientation,
-                             const Offset &answerOffset, const QString &answer,
-                             ErrorTypes correctnessesToIgnore = DontIgnoreErrors,
-                             bool allowDoubleClueCells = true, ClueCell *excludedClue = NULL );
+    ErrorType canInsertClue(const KGrid2D::Coord &coord, Qt::Orientation orientation,
+                            const Offset &answerOffset, const QString &answer,
+                            ErrorTypes correctnessesToIgnore = DontIgnoreErrors,
+                            bool allowDoubleClueCells = true, ClueCell *excludedClue = NULL);
 
     /** Returns true, if an image cell with it's horizontal and vertical cell
     * span fits into the current crossword at @p coord.
@@ -253,25 +253,25 @@ public:
     * @param correctnessesToIgnore Correctness values to ignore.
     * @param excludedClue You can specify a clue cell which shouldn't be taken
     * into account when checking if the new clue can be inserted. */
-    ErrorType canInsertImage( const KGrid2D::Coord &coord,
-                              int horizontalCellSpan, int verticalCellSpan,
-                              ErrorTypes correctnessesToIgnore = DontIgnoreErrors,
-                              ImageCell *excludedImage = NULL );
+    ErrorType canInsertImage(const KGrid2D::Coord &coord,
+                             int horizontalCellSpan, int verticalCellSpan,
+                             ErrorTypes correctnessesToIgnore = DontIgnoreErrors,
+                             ImageCell *excludedImage = NULL);
 
     /** Convert a LetterCell to a SolutionLetterCell.
     * @note There must be a letter cell at the given coordinates. */
-    bool convertToSolutionLetter( const KGrid2D::Coord &coord, int solutionLetterIndex );
+    bool convertToSolutionLetter(const KGrid2D::Coord &coord, int solutionLetterIndex);
 
     /** Returns a list of all cells of the crossword.
     * @see KrossWordCell::cellType() */
-    KrossWordCellList cells( KrossWordCell::CellTypes cellTypes = KrossWordCell::AllCellTypes ) const;
+    KrossWordCellList cells(KrossWordCell::CellTypes cellTypes = KrossWordCell::AllCellTypes) const;
     /** Returns a list of cells beginning with the cell at @p coord and going
     * in direction @p orientation.
     * @param coord The coordinates of the first cell in the returned list.
     * @param orientation The direction to go to collect the cells.
     * @param count The maximal number of cells or -1 to get all cells in the
     * given direction. */
-    KrossWordCellList cells( const Coord &coord, Qt::Orientation orientation, int count = -1 ) const;
+    KrossWordCellList cells(const Coord &coord, Qt::Orientation orientation, int count = -1) const;
     /** Returns a list of empty cells of the crossword.
     * @see KrossWordCell::cellType() */
     EmptyCellList emptyCells() const;
@@ -281,7 +281,7 @@ public:
     ClueCellList clues() const;
     /** Gets all horizontal and vertical clues, sorted by clue number (if the
     * clues have a clue number). */
-    void clues( ClueCellList *horizontalClues, ClueCellList *verticalClues ) const;
+    void clues(ClueCellList *horizontalClues, ClueCellList *verticalClues) const;
     /** Returns a list of all letters of the crossword. */
     LetterCellList letters() const;
     /** Returns a list of all empty letters of the crossword. */
@@ -296,7 +296,7 @@ public:
     /** Resizes the crossword grid. The grid is then filled with empty cells.
     * @param width The new width.
     * @param height The new height. */
-    void resizeGrid( uint width, uint height );
+    void resizeGrid(uint width, uint height);
     /** Removes all cells, replacing them with empty cells.
     * @note To really delete all cells, you can resize the crossword to 0x0.
     * @see resizeGrid() */
@@ -312,13 +312,13 @@ public:
     * check if coordinates are inside the crossword grid with @ref inside().
     * @see Coord
     * @see inside */
-    KrossWordCell *at( Coord coord ) const {
-        if ( !inside( coord ) ) {
+    KrossWordCell *at(Coord coord) const {
+        if (!inside(coord)) {
             kDebug() << coord << "is outside of the grid! Returning NULL.";
             return NULL;
         }
-        KrossWordCell *cell = m_krossWordGrid->at( coord );
-        Q_ASSERT( !cell || cell->cellType() == KrossWordCell::ImageCellType || cell->coord() == coord );
+        KrossWordCell *cell = m_krossWordGrid->at(coord);
+        Q_ASSERT(!cell || cell->cellType() == KrossWordCell::ImageCellType || cell->coord() == coord);
         return cell;
     };
     /** Gets the width of the crossword grid. */
@@ -330,20 +330,20 @@ public:
         return m_krossWordGrid->height();
     };
     /** Returns true, if the given coordinates are inside the crossword grid. */
-    bool inside( Coord coord ) const {
-        return m_krossWordGrid->inside( coord );
+    bool inside(Coord coord) const {
+        return m_krossWordGrid->inside(coord);
     };
 
-    KrossWordCell *const&operator[]( const Coord &coord ) const {
-        return m_krossWordGrid->operator[]( coord );
+    KrossWordCell *const&operator[](const Coord &coord) const {
+        return m_krossWordGrid->operator[](coord);
     };
-    KrossWordCell *&operator[]( const Coord &coord ) {
-        return m_krossWordGrid->operator[]( coord );
+    KrossWordCell *&operator[](const Coord &coord) {
+        return m_krossWordGrid->operator[](coord);
     };
 
-    static QString errorMessageFromErrorType( ErrorType correctness );
-    static ClueCell::AnswerOffset answerOffsetFromString( const QString &s );
-    static QString answerOffsetToString( ClueCell::AnswerOffset answerOffset );
+    static QString errorMessageFromErrorType(ErrorType correctness);
+    static ClueCell::AnswerOffset answerOffsetFromString(const QString &s);
+    static QString answerOffsetToString(ClueCell::AnswerOffset answerOffset);
 
     void resizeScene();
 
@@ -353,7 +353,7 @@ public:
     QColor emptyCellColorForPrinting() const {
         return m_emptyCellColorForPrinting;
     };
-    void setEmptyCellColorForPrinting( const QColor &color ) {
+    void setEmptyCellColorForPrinting(const QColor &color) {
         m_emptyCellColorForPrinting = color;
     };
 
@@ -377,46 +377,46 @@ protected:
     * @param newCell The cell to insert at the coordinates of the old cell after
     * removing it. This is needed to assure consistency. Should not be NULL.
     * @see removeCell */
-    void replaceCell( KrossWordCell *cell, KrossWordCell *newCell );
+    void replaceCell(KrossWordCell *cell, KrossWordCell *newCell);
     /** Removes the cell at the given coordinates and inserts the new @p cell.
     * @param coord The coordinates of the cell to replace.
     * @param cell The cell to insert at the given coordinates after removing
     * the old one. This is needed to assure consistency. Should not be NULL.
     * @see removeCell */
-    void replaceCell( const KGrid2D::Coord &coord, KrossWordCell *newCell );
+    void replaceCell(const KGrid2D::Coord &coord, KrossWordCell *newCell);
     /** Removes the cell @p cell and inserts an empty cell instead.
     * @param cell The cell to remove.
     * @see replaceCell*/
-    void removeCell( KrossWordCell *cell );
+    void removeCell(KrossWordCell *cell);
     /** Removes the cell at the given coordinates and inserts an empty cell instead.
     * @param coord The coordinates of the cell to remove.
     * @see replaceCell */
-    void removeCell( const KGrid2D::Coord &coord );
+    void removeCell(const KGrid2D::Coord &coord);
 
     virtual QRectF boundingRect() const;
-    virtual void paint( QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0 );
+    virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
 signals:
     /** This signal is emitted when new clues are added. When reading crosswords
     * it will only be emitted once with a list of all new clues. A call to @ref insertClue
     * emits this signal with only the inserted clue in the list. */
-    void cluesAdded( ClueCellList clues );
+    void cluesAdded(ClueCellList clues);
     /** This signal is emitted when existing clues will get removed. When clearing
     * crosswords it will only be emitted once with a list of all clues to be removed.
     * A call to @ref removeClue emits this signal with only the removed clue in the
     * list. */
-    void cluesAboutToBeRemoved( ClueCellList clues );
+    void cluesAboutToBeRemoved(ClueCellList clues);
 
 private:
-    void replaceCell( const KGrid2D::Coord& coord, KrossWordCell *newCell,
-                      bool deleteOldCell );
+    void replaceCell(const KGrid2D::Coord& coord, KrossWordCell *newCell,
+                     bool deleteOldCell);
 
-    void init( uint width = 0, uint height = 0 );
+    void init(uint width = 0, uint height = 0);
     void fillWithEmptyCells();
-    bool canTakeClueLetterCell( const Coord &coord, Qt::Orientation orientation,
-                                ClueCell *excludedClue = NULL );
-    bool isCellEmptyIfClueIsExcluded( const Coord &coord, ClueCell *excludedClue ) const;
-    bool isCellEmptyIfSpannedCellIsExcluded( const Coord &coord, SpannedCell* excludedSpannedCell ) const;
+    bool canTakeClueLetterCell(const Coord &coord, Qt::Orientation orientation,
+                               ClueCell *excludedClue = NULL);
+    bool isCellEmptyIfClueIsExcluded(const Coord &coord, ClueCell *excludedClue) const;
+    bool isCellEmptyIfSpannedCellIsExcluded(const Coord &coord, SpannedCell* excludedSpannedCell) const;
 
     KGrid2D::Generic<KrossWordCell*> *m_krossWordGrid;
     QSizeF m_cellSize;

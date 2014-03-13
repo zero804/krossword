@@ -25,26 +25,29 @@
 #include "krossword.h"
 #include <qevent.h>
 
-class KrossWordPuzzleScene : public QGraphicsScene {
-    public:
-	explicit KrossWordPuzzleScene( Crossword::KrossWord *krossWord, QObject* parent = 0 )
-		    : QGraphicsScene(parent),
-		    m_krossWord(krossWord) {
-	  addItem( m_krossWord );
-	  setItemIndexMethod( NoIndex );
-	};
+class KrossWordPuzzleScene : public QGraphicsScene
+{
+public:
+    explicit KrossWordPuzzleScene(Crossword::KrossWord *krossWord, QObject* parent = 0)
+        : QGraphicsScene(parent),
+          m_krossWord(krossWord) {
+        addItem(m_krossWord);
+        setItemIndexMethod(NoIndex);
+    };
 
-        KrossWordPuzzleScene( QObject* parent = 0 )
-		    : QGraphicsScene(parent),
-		    m_krossWord(new Crossword::KrossWord()) {
-	  addItem( m_krossWord );
-	  setItemIndexMethod( NoIndex );
-	};
+    KrossWordPuzzleScene(QObject* parent = 0)
+        : QGraphicsScene(parent),
+          m_krossWord(new Crossword::KrossWord()) {
+        addItem(m_krossWord);
+        setItemIndexMethod(NoIndex);
+    };
 
-	Crossword::KrossWord *krossWord() { return m_krossWord; };
+    Crossword::KrossWord *krossWord() {
+        return m_krossWord;
+    };
 
-    private:
-	Crossword::KrossWord *m_krossWord;
+private:
+    Crossword::KrossWord *m_krossWord;
 };
 
 #endif // KROSSWORDPUZZLESCENE_H

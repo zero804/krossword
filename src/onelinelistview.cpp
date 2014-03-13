@@ -21,32 +21,35 @@
 
 #include <qevent.h>
 
-OneLineListView::OneLineListView( QWidget* parent )
-		: QListView( parent ) {
+OneLineListView::OneLineListView(QWidget* parent)
+    : QListView(parent)
+{
 
 }
 
-QRect OneLineListView::visualRect( const QModelIndex& index ) const {
-    QRect rect = QListView::visualRect( index );
-    if ( height() > width() ) { //flow() == TopToBottom ) {
-	rect.setLeft( 0 );
-	rect.setWidth( gridSize().width() );
+QRect OneLineListView::visualRect(const QModelIndex& index) const
+{
+    QRect rect = QListView::visualRect(index);
+    if (height() > width()) {   //flow() == TopToBottom ) {
+        rect.setLeft(0);
+        rect.setWidth(gridSize().width());
     } else {
-	rect.setTop( 0 );
-	rect.setHeight( gridSize().height() );
+        rect.setTop(0);
+        rect.setHeight(gridSize().height());
     }
     return rect;
 }
 
-void OneLineListView::resizeEvent( QResizeEvent *e ) {
-    if ( height() > width() ) { //flow() == TopToBottom )
-	setGridSize( QSize(e->size().width(), iconSize().height()
-	    + fontMetrics().height() * 2 + 10) );
+void OneLineListView::resizeEvent(QResizeEvent *e)
+{
+    if (height() > width()) {   //flow() == TopToBottom )
+        setGridSize(QSize(e->size().width(), iconSize().height()
+                          + fontMetrics().height() * 2 + 10));
     } else {
-	setGridSize( QSize( qMax(iconSize().width(),
-				 fontMetrics().width("Abcdefghijklmnop")),
-			    e->size().height()) );
+        setGridSize(QSize(qMax(iconSize().width(),
+                               fontMetrics().width("Abcdefghijklmnop")),
+                          e->size().height()));
     }
-    QListView::resizeEvent( e );
+    QListView::resizeEvent(e);
 }
 

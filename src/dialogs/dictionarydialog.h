@@ -31,15 +31,15 @@ class DictionaryDialog : public KDialog
     Q_OBJECT
 
 public:
-    explicit DictionaryDialog( KrosswordDictionary *dictionary, QWidget* parent = 0 );
+    explicit DictionaryDialog(KrosswordDictionary *dictionary, QWidget* parent = 0);
 
     ExtendedSqlTableModel *databaseTable() const {
         return m_dbTable;
     };
 
 protected slots:
-    void tableSelectionChanged( const QItemSelection &selected,
-                                const QItemSelection &deselected );
+    void tableSelectionChanged(const QItemSelection &selected,
+                               const QItemSelection &deselected);
     void addDictionaryFromCrosswordsClicked();
     void addDictionaryFromLibraryClicked();
     void getWordsFromDictionaryClicked();
@@ -48,11 +48,11 @@ protected slots:
     void clearClicked();
     void importFromCsvClicked();
     void exportToCsvClicked();
-    void filterChanged( const QString &filter );
+    void filterChanged(const QString &filter);
     void hideInfoMessage();
 
 private:
-    void showInfoMessage( const QString &infoMessage );
+    void showInfoMessage(const QString &infoMessage);
 
     Ui::dictionaries ui_dictionaries;
     KrosswordDictionary *m_dictionary;

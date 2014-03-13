@@ -30,21 +30,20 @@ class KrosswordRenderer
 public:
     static KrosswordRenderer* self();
 
-    bool hasElement( const QString &elementid ) const;
+    bool hasElement(const QString &elementid) const;
 
-    void renderBackground( QPainter *p, const QRectF& r ) const;
-    QPixmap background( const QSize &size ) const;
+    void renderBackground(QPainter *p, const QRectF& r) const;
+    QPixmap background(const QSize &size) const;
 //  void renderElement( QPainter *p, const QString& elementid,
 //       const QRectF& r ) const;
-    void renderElement( QPainter *p, const QString& elementid,
-                        const QRectF& r, const QColor &alpha = Qt::black ) const;
-    bool setTheme( const QString &fileName );
+    void renderElement(QPainter *p, const QString& elementid, const QRectF& r, const QColor &alpha = Qt::black) const;
+    bool setTheme(const QString &fileName);
 
 private:
     // disable copy - it's singleton
     KrosswordRenderer();
-    KrosswordRenderer( const KrosswordRenderer& );
-    KrosswordRenderer& operator=( const KrosswordRenderer& );
+    KrosswordRenderer(const KrosswordRenderer&);
+    KrosswordRenderer& operator=(const KrosswordRenderer&);
     ~KrosswordRenderer();
 
     /**

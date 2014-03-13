@@ -60,7 +60,7 @@ public:
         /** All available elements, including a the defined button. */
         AllElements = ElementDetails | ElementRules | ElementIcon | ElementUserButton
     };
-    Q_DECLARE_FLAGS( Elements, Element );
+    Q_DECLARE_FLAGS(Elements, Element);
 
     /** The edit mode for crossword rules. */
     enum EditMode {
@@ -73,23 +73,23 @@ public:
     * @note It has no initial crossword type info set, so call @ref setTypeInfo
     * before the widget is displayed.
     * @see Elements::DefaultElements */
-    CrosswordTypeWidget( QWidget* parent = 0 );
+    CrosswordTypeWidget(QWidget* parent = 0);
 
     /** Constructs a CrosswordTypeWidget with @p elements shown and an
     * initial crossword type info @p typeInfo. */
-    explicit CrosswordTypeWidget( CrosswordTypeInfo typeInfo,
-                                  Elements elements = DefaultElements, QWidget* parent = 0 );
+    explicit CrosswordTypeWidget(CrosswordTypeInfo typeInfo,
+                                 Elements elements = DefaultElements, QWidget* parent = 0);
 
     /** The current crossword type info object. */
     CrosswordTypeInfo typeInfo() const {
         return m_typeInfo;
     };
     /** Sets a new crossword type info object. */
-    void setTypeInfo( CrosswordTypeInfo typeInfo );
+    void setTypeInfo(CrosswordTypeInfo typeInfo);
 
     /** Returns which elements are shown.
     * @param count If not NULL, it is set to the total count of elements. */
-    Elements elements( int *count = 0 ) const;
+    Elements elements(int *count = 0) const;
     /** Whether or not a details checkbox is shown. */
     bool hasDetailsElement() const {
         return m_chkDetails;
@@ -118,25 +118,25 @@ public:
     };
 
     /** Sets which elements should be shown. */
-    void setElements( Elements elements = DefaultElements );
+    void setElements(Elements elements = DefaultElements);
     /** Sets whether or not a details checkbox should be shown. */
-    void setDetailsElement( bool shown = true );
+    void setDetailsElement(bool shown = true);
     /** Sets whether or not a rules button should be shown. */
-    void setRulesElement( bool shown = true );
+    void setRulesElement(bool shown = true);
     /** Sets whether or not an icon for the crossword type should be shown. */
-    void setIconElement( bool shown = true );
+    void setIconElement(bool shown = true);
     /** Adds a user defined button.
     * @param text The text on the user defined button.
     * @param receiver The receiver of the clicked signal of the user defined
     * button or NULL if that signal shouldn't be connected.
     * @param memberClicked The slot to connect the clicked signal of the
     * user defined button to. */
-    void addUserButtonElement( const QString &text,
-                               QObject *receiver = 0, const char *memberClicked = 0 );
+    void addUserButtonElement(const QString &text,
+                              QObject *receiver = 0, const char *memberClicked = 0);
     /** Removes the user button. */
     void removeUserButtonElement();
     /** Changes the edit mode. */
-    void setEditMode( EditMode editMode ) {
+    void setEditMode(EditMode editMode) {
         m_editMode = editMode;
     };
 
@@ -144,19 +144,19 @@ signals:
     /** Emitted, when the crossword type info has been changed by clicking
     * the rules button and changing values.
     * @param newTypeInfo The new crossword type info. */
-    void crosswordTypeInfoChanged( CrosswordTypeInfo newTypeInfo );
+    void crosswordTypeInfoChanged(CrosswordTypeInfo newTypeInfo);
 
 protected slots:
-    void showDetailsToggled( bool checked );
+    void showDetailsToggled(bool checked);
     void configureRulesClicked();
 
 private:
-    void setTextScrollable( bool scrollable = true );
-    bool setDetailsElementNoLayout( bool shown = true );
-    bool setRulesElementNoLayout( bool shown = true );
-    bool setIconElementNoLayout( bool shown = true );
-    bool addUserButtonElementNoLayout( const QString &text,
-                                       QObject *receiver = 0, const char *memberClicked = 0 );
+    void setTextScrollable(bool scrollable = true);
+    bool setDetailsElementNoLayout(bool shown = true);
+    bool setRulesElementNoLayout(bool shown = true);
+    bool setIconElementNoLayout(bool shown = true);
+    bool addUserButtonElementNoLayout(const QString &text,
+                                      QObject *receiver = 0, const char *memberClicked = 0);
     bool removeUserButtonElementNoLayout();
     void createLayout();
 
@@ -171,6 +171,6 @@ private:
     EditMode m_editMode;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS( CrosswordTypeWidget::Elements );
+Q_DECLARE_OPERATORS_FOR_FLAGS(CrosswordTypeWidget::Elements);
 
 #endif // CROSSWORDTYPEWIDGET_H

@@ -19,26 +19,30 @@
 
 #include "extendedsqltablemodel.h"
 
-ExtendedSqlTableModel::ExtendedSqlTableModel( QObject* parent, QSqlDatabase db )
-		    : QSqlTableModel( parent, db ) {
+ExtendedSqlTableModel::ExtendedSqlTableModel(QObject* parent, QSqlDatabase db)
+    : QSqlTableModel(parent, db)
+{
     m_lowerLimit = -1;
     m_upperLimit = -1;
 }
 
-void ExtendedSqlTableModel::setLimit( int lowerLimit, int upperLimit ) {
+void ExtendedSqlTableModel::setLimit(int lowerLimit, int upperLimit)
+{
     m_lowerLimit = lowerLimit;
     m_upperLimit = upperLimit;
 }
 
-void ExtendedSqlTableModel::removeLimit() {
-    setLimit( -1, -1 );
+void ExtendedSqlTableModel::removeLimit()
+{
+    setLimit(-1, -1);
 }
 
-QString ExtendedSqlTableModel::selectStatement() const {
+QString ExtendedSqlTableModel::selectStatement() const
+{
     QString sql = QSqlTableModel::selectStatement();
 
-    if ( m_lowerLimit >= 0 && m_upperLimit >= 0 )
-	sql.append( QString(" LIMIT %1,%2").arg(m_lowerLimit).arg(m_upperLimit) );
+    if (m_lowerLimit >= 0 && m_upperLimit >= 0)
+        sql.append(QString(" LIMIT %1,%2").arg(m_lowerLimit).arg(m_upperLimit));
 
     return sql;
 }

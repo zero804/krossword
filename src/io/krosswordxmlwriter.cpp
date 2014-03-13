@@ -26,161 +26,161 @@
 #include <QBuffer>
 #include <KZip>
 
-bool KrossWordXmlWriter::writeCompressed( QIODevice* device,
+bool KrossWordXmlWriter::writeCompressed(QIODevice* device,
         KrossWord* krossWord,
         KrossWord::WriteMode writeMode,
-        const QByteArray &undoData )
+        const QByteArray &undoData)
 {
-    Q_ASSERT( device );
-    Q_ASSERT( krossWord );
+    Q_ASSERT(device);
+    Q_ASSERT(krossWord);
     m_errorString.clear();
 
     // Write XML to a buffer
     QBuffer buffer;
-    buffer.open( QBuffer::WriteOnly );
-    bool writeOk = write( &buffer, krossWord, writeMode, undoData );
+    buffer.open(QBuffer::WriteOnly);
+    bool writeOk = write(&buffer, krossWord, writeMode, undoData);
     buffer.close();
 
-    if ( !writeOk )
+    if (!writeOk)
         return false;
 
     // Write compressed XML to the given IO device
-    KZip zip( device );
-    zip.setCompression( KZip::DeflateCompression );
-    if ( !zip.open( QIODevice::WriteOnly ) ) {
+    KZip zip(device);
+    zip.setCompression(KZip::DeflateCompression);
+    if (!zip.open(QIODevice::WriteOnly)) {
         kDebug() << "Couldn't open the ZIP archive for writing";
-        m_errorString = i18n( "Couldn't open the ZIP archive for writing" );
+        m_errorString = i18n("Couldn't open the ZIP archive for writing");
         return false;
     }
-    if ( !zip.prepareWriting( "crossword.kwp", "krosswordpuzzle",
-                              "krosswordpuzzle", buffer.size() ) ) {
+    if (!zip.prepareWriting("crossword.kwp", "krosswordpuzzle",
+                            "krosswordpuzzle", buffer.size())) {
         kDebug() << "Error while calling KZip::prepareWriting()";
-        m_errorString = i18n( "Error writing to the compressed file" );
+        m_errorString = i18n("Error writing to the compressed file");
         return false;
     }
-    if ( !zip.writeData( buffer.data(), buffer.size() ) ) {
+    if (!zip.writeData(buffer.data(), buffer.size())) {
         kDebug() << "Error while calling KZip::writeData()";
-        m_errorString = i18n( "Error writing to the compressed file" );
+        m_errorString = i18n("Error writing to the compressed file");
         return false;
     }
-    if ( !zip.finishWriting( buffer.size() ) ) {
+    if (!zip.finishWriting(buffer.size())) {
         kDebug() << "Error while calling KZip::finishWriting()";
-        m_errorString = i18n( "Error writing to the compressed file" );
+        m_errorString = i18n("Error writing to the compressed file");
         return false;
     }
-    if ( !zip.close() ) {
+    if (!zip.close()) {
         kDebug() << "Couldn't close the ZIP archive";
-        m_errorString = i18n( "Couldn't close the ZIP archive" );
+        m_errorString = i18n("Couldn't close the ZIP archive");
         return false;
     }
 
     return true;
 }
 
-bool KrossWordXmlWriter::write( QIODevice* device, KrossWord* krossWord,
-                                KrossWord::WriteMode writeMode,
-                                const QByteArray &undoData )
+bool KrossWordXmlWriter::write(QIODevice* device, KrossWord* krossWord,
+                               KrossWord::WriteMode writeMode,
+                               const QByteArray &undoData)
 {
-    Q_ASSERT( device );
-    Q_ASSERT( krossWord );
+    Q_ASSERT(device);
+    Q_ASSERT(krossWord);
     m_errorString.clear();
 
     bool closeAfterWrite;
-    if (( closeAfterWrite = !device->isOpen() )
-            && !device->open( QIODevice::WriteOnly ) ) {
+    if ((closeAfterWrite = !device->isOpen())
+            && !device->open(QIODevice::WriteOnly)) {
         m_errorString = device->errorString();
         return false;
     }
 
-    setDevice( device );
-    setAutoFormatting( true );
+    setDevice(device);
+    setAutoFormatting(true);
 
-    writeStartDocument( "1.0", true );
-    writeKrossWord( krossWord, writeMode, undoData );
+    writeStartDocument("1.0", true);
+    writeKrossWord(krossWord, writeMode, undoData);
     writeEndDocument();
 
-    if ( closeAfterWrite )
+    if (closeAfterWrite)
         device->close();
 
     return true;
 }
 
-void KrossWordXmlWriter::writeKrossWord( KrossWord* krossWord,
-        KrossWord::WriteMode writeMode,
-        const QByteArray &undoData )
+void KrossWordXmlWriter::writeKrossWord(KrossWord* krossWord,
+                                        KrossWord::WriteMode writeMode,
+                                        const QByteArray &undoData)
 {
-    writeStartElement( "krossWord" );
-    writeAttribute( "version", "1.1" );
-    writeAttribute( "width", QString::number( krossWord->width() ) );
-    writeAttribute( "height", QString::number( krossWord->height() ) );
-    writeAttribute( "type", krossWord->crosswordTypeInfo().typeString() );
+    writeStartElement("krossWord");
+    writeAttribute("version", "1.1");
+    writeAttribute("width", QString::number(krossWord->width()));
+    writeAttribute("height", QString::number(krossWord->height()));
+    writeAttribute("type", krossWord->crosswordTypeInfo().typeString());
 
-    if ( !krossWord->title().isEmpty() && writeMode != KrossWord::Template )
-        writeTextElement( "title", krossWord->title() );
-    if ( !krossWord->authors().isEmpty() )
-        writeTextElement( "authors", krossWord->authors() );
-    if ( !krossWord->copyright().isEmpty() )
-        writeTextElement( "copyright", krossWord->copyright() );
-    if ( !krossWord->notes().isEmpty() )
-        writeTextElement( "notes", krossWord->notes() );
+    if (!krossWord->title().isEmpty() && writeMode != KrossWord::Template)
+        writeTextElement("title", krossWord->title());
+    if (!krossWord->authors().isEmpty())
+        writeTextElement("authors", krossWord->authors());
+    if (!krossWord->copyright().isEmpty())
+        writeTextElement("copyright", krossWord->copyright());
+    if (!krossWord->notes().isEmpty())
+        writeTextElement("notes", krossWord->notes());
 
-    if ( krossWord->crosswordTypeInfo().crosswordType == UserDefinedCrossword ) {
+    if (krossWord->crosswordTypeInfo().crosswordType == UserDefinedCrossword) {
         CrosswordTypeInfo info = krossWord->crosswordTypeInfo();
-        writeStartElement( "userDefinedCrosswordSettings" );
-        writeAttribute( "name", info.name );
+        writeStartElement("userDefinedCrosswordSettings");
+        writeAttribute("name", info.name);
 
-        writeTextElement( "iconName", info.iconName );
-        writeTextElement( "description", info.description );
-        writeTextElement( "minAnswerLength", QString::number( info.minAnswerLength ) );
-        writeTextElement( "clueCellHandling", CrosswordTypeInfo::
-                          stringFromClueCellHandling( info.clueCellHandling ) );
-        writeTextElement( "clueType", CrosswordTypeInfo::
-                          stringFromClueType( info.clueType ) );
-        writeTextElement( "letterCellContent", CrosswordTypeInfo::
-                          stringFromLetterCellContent( info.letterCellContent ) );
-        writeTextElement( "clueMapping", CrosswordTypeInfo::
-                          stringFromClueMapping( info.clueMapping ) );
-        writeTextElement( "cellTypes", CrosswordTypeInfo::
-                          stringListFromCellTypes( info.cellTypes ).join( "," ) );
+        writeTextElement("iconName", info.iconName);
+        writeTextElement("description", info.description);
+        writeTextElement("minAnswerLength", QString::number(info.minAnswerLength));
+        writeTextElement("clueCellHandling", CrosswordTypeInfo::
+                         stringFromClueCellHandling(info.clueCellHandling));
+        writeTextElement("clueType", CrosswordTypeInfo::
+                         stringFromClueType(info.clueType));
+        writeTextElement("letterCellContent", CrosswordTypeInfo::
+                         stringFromLetterCellContent(info.letterCellContent));
+        writeTextElement("clueMapping", CrosswordTypeInfo::
+                         stringFromClueMapping(info.clueMapping));
+        writeTextElement("cellTypes", CrosswordTypeInfo::
+                         stringListFromCellTypes(info.cellTypes).join(","));
         writeEndElement();
     }
 
-    if ( krossWord->crosswordTypeInfo().clueType == NumberClues1To26
+    if (krossWord->crosswordTypeInfo().clueType == NumberClues1To26
             && krossWord->crosswordTypeInfo().clueMapping == CluesReferToCells
-            && krossWord->crosswordTypeInfo().letterCellContent == Characters ) {
-        writeTextElement( "letterContentToClueNumberMapping",
-                          krossWord->letterContentToClueNumberMapping() );
+            && krossWord->crosswordTypeInfo().letterCellContent == Characters) {
+        writeTextElement("letterContentToClueNumberMapping",
+                         krossWord->letterContentToClueNumberMapping());
     }
 
     ClueCellList clueList = krossWord->clues();
-    foreach( ClueCell *clue, clueList )
-    writeClue( clue, writeMode );
+    foreach(ClueCell * clue, clueList)
+    writeClue(clue, writeMode);
 
     ImageCellList imageList = krossWord->images();
-    foreach( ImageCell *image, imageList )
-    writeImage( image, writeMode );
+    foreach(ImageCell * image, imageList)
+    writeImage(image, writeMode);
 
     SolutionLetterCellList solutionLetterList = krossWord->solutionWordLetters();
-    foreach( SolutionLetterCell *letter, solutionLetterList )
-    writeSolutionLetter( letter );
+    foreach(SolutionLetterCell * letter, solutionLetterList)
+    writeSolutionLetter(letter);
 
     // Writing not confident letters
     QHash< Confidence, LetterCellList > notConfidentLetterLists;
     LetterCellList letterList = krossWord->letters();
-    foreach( LetterCell *letter, letterList ) {
-        if ( letter->confidence() != Confident )
+    foreach(LetterCell * letter, letterList) {
+        if (letter->confidence() != Confident)
             notConfidentLetterLists[ letter->confidence()] << letter;
     }
-    if ( !notConfidentLetterLists.isEmpty() ) {
-        writeStartElement( "confidence" );
-        for ( QHash<Confidence, LetterCellList>::const_iterator it =
+    if (!notConfidentLetterLists.isEmpty()) {
+        writeStartElement("confidence");
+        for (QHash<Confidence, LetterCellList>::const_iterator it =
                     notConfidentLetterLists.constBegin();
-                it != notConfidentLetterLists.constEnd(); ++it ) {
-            writeStartElement( LetterCell::confidenceToString( it.key() ) );
-            foreach( const LetterCell *letter, notConfidentLetterLists[it.key()] ) {
-                writeEmptyElement( "letter" );
-                writeAttribute( "coord", QString( "%1,%2" )
-                                .arg( letter->coord().first ).arg( letter->coord().second ) );
+                it != notConfidentLetterLists.constEnd(); ++it) {
+            writeStartElement(LetterCell::confidenceToString(it.key()));
+            foreach(const LetterCell * letter, notConfidentLetterLists[it.key()]) {
+                writeEmptyElement("letter");
+                writeAttribute("coord", QString("%1,%2")
+                               .arg(letter->coord().first).arg(letter->coord().second));
             }
             writeEndElement();
         }
@@ -188,67 +188,67 @@ void KrossWordXmlWriter::writeKrossWord( KrossWord* krossWord,
     }
 
 
-    if ( !undoData.isEmpty() ) {
+    if (!undoData.isEmpty()) {
 //       qDebug() << "WRITE DATA" << undoData.toBase64();
-        writeTextElement( "undoData", undoData.toBase64() );
+        writeTextElement("undoData", undoData.toBase64());
     }
 
     writeEndElement(); // </krossWord>
 }
 
-void KrossWordXmlWriter::writeClue( ClueCell* clue,
-                                    KrossWord::WriteMode writeMode )
+void KrossWordXmlWriter::writeClue(ClueCell* clue,
+                                   KrossWord::WriteMode writeMode)
 {
-    writeStartElement( "clue" );
-    writeAttribute( "coord", QString( "%1,%2" ).arg( clue->coord().first ).arg( clue->coord().second ) );
-    writeAttribute( "orientation", clue->orientation() == Qt::Horizontal ? "horizontal" : "vertical" );
-    writeAttribute( "answerOffset", KrossWord::answerOffsetToString( clue->answerOffset() ) );
+    writeStartElement("clue");
+    writeAttribute("coord", QString("%1,%2").arg(clue->coord().first).arg(clue->coord().second));
+    writeAttribute("orientation", clue->orientation() == Qt::Horizontal ? "horizontal" : "vertical");
+    writeAttribute("answerOffset", KrossWord::answerOffsetToString(clue->answerOffset()));
 
-    if ( clue->isHighlighted() )
-        writeAttribute( "selected", "true" );
+    if (clue->isHighlighted())
+        writeAttribute("selected", "true");
 
 
-    if ( writeMode == KrossWord::Normal ) {
-        writeTextElement( "text", clue->clue() );
-        writeTextElement( "answer", clue->correctAnswer() );
-        writeTextElement( "currentAnswer", clue->currentAnswer() );
-    } else if ( writeMode == KrossWord::Template ) {
+    if (writeMode == KrossWord::Normal) {
+        writeTextElement("text", clue->clue());
+        writeTextElement("answer", clue->correctAnswer());
+        writeTextElement("currentAnswer", clue->currentAnswer());
+    } else if (writeMode == KrossWord::Template) {
         QString emptyAnswer;
-        emptyAnswer.fill( ClueCell::EmptyCorrectCharacter,
-                          clue->correctAnswer().length() );
-        writeTextElement( "text", QString() );
-        writeTextElement( "answer", emptyAnswer );
-        writeTextElement( "currentAnswer", emptyAnswer );
+        emptyAnswer.fill(ClueCell::EmptyCorrectCharacter,
+                         clue->correctAnswer().length());
+        writeTextElement("text", QString());
+        writeTextElement("answer", emptyAnswer);
+        writeTextElement("currentAnswer", emptyAnswer);
     } else
-        kWarning() << "Write mode unknown" << static_cast<int>( writeMode );
+        kWarning() << "Write mode unknown" << static_cast<int>(writeMode);
 
     writeEndElement();
 }
 
-void KrossWordXmlWriter::writeImage( ImageCell* image,
-                                     KrossWord::WriteMode writeMode )
+void KrossWordXmlWriter::writeImage(ImageCell* image,
+                                    KrossWord::WriteMode writeMode)
 {
-    writeEmptyElement( "image" );
-    writeAttribute( "coordTopLeft", QString( "%1,%2" )
-                    .arg( image->coord().first ).arg( image->coord().second ) );
-    writeAttribute( "horizontalCellSpan", QString::number( image->horizontalCellSpan() ) );
-    writeAttribute( "verticalCellSpan", QString::number( image->verticalCellSpan() ) );
-    if ( writeMode == KrossWord::Normal )
-        writeAttribute( "url", image->url().pathOrUrl() );
-    else if ( writeMode == KrossWord::Template )
-        writeAttribute( "url", QString() );
+    writeEmptyElement("image");
+    writeAttribute("coordTopLeft", QString("%1,%2")
+                   .arg(image->coord().first).arg(image->coord().second));
+    writeAttribute("horizontalCellSpan", QString::number(image->horizontalCellSpan()));
+    writeAttribute("verticalCellSpan", QString::number(image->verticalCellSpan()));
+    if (writeMode == KrossWord::Normal)
+        writeAttribute("url", image->url().pathOrUrl());
+    else if (writeMode == KrossWord::Template)
+        writeAttribute("url", QString());
     else
-        kWarning() << "Write mode unknown" << static_cast<int>( writeMode );
+        kWarning() << "Write mode unknown" << static_cast<int>(writeMode);
 }
 
-void KrossWordXmlWriter::writeSolutionLetter( SolutionLetterCell* solutionLetter )
+void KrossWordXmlWriter::writeSolutionLetter(SolutionLetterCell* solutionLetter)
 {
-    writeStartElement( "solutionLetter" );
-    writeAttribute( "coord", QString( "%1,%2" )
-                    .arg( solutionLetter->coord().first )
-                    .arg( solutionLetter->coord().second ) );
-    writeAttribute( "index", QString( "%1" )
-                    .arg( solutionLetter->solutionWordIndex() ) );
+    writeStartElement("solutionLetter");
+    writeAttribute("coord", QString("%1,%2")
+                   .arg(solutionLetter->coord().first)
+                   .arg(solutionLetter->coord().second));
+    writeAttribute("index", QString("%1")
+                   .arg(solutionLetter->solutionWordIndex()));
     writeEndElement();
 }
 

@@ -28,10 +28,10 @@
 #include <kdeversion.h>
 
 #if QT_VERSION >= 0x040600
-  #include <QGraphicsObject>
-  class QGraphicsDropShadowEffect;
+#include <QGraphicsObject>
+class QGraphicsDropShadowEffect;
 #else
-  #include <QGraphicsItem>
+#include <QGraphicsItem>
 #endif
 
 #include "global.h"
@@ -40,14 +40,15 @@ class KrosswordTheme;
 class QStandardItemModel;
 class ClueExpanderItem;
 
-namespace Crossword {
+namespace Crossword
+{
 class ClueCell;
 class DoubleClueCell;
 class SpannedCell;
 class ImageCell;
 
 #if QT_VERSION >= 0x040600
-  class Animator;
+class Animator;
 #endif
 
 /**
@@ -55,49 +56,52 @@ class ImageCell;
  *
  * This is a square bidimensionnal grid for crosswords (@ref KGrid2D::Square).
  */
-class KrosswordGrid : public KGrid2D::Square< KrossWordCell* > {
-  public:
-    explicit KrosswordGrid( uint width = 0, uint height = 0 )
-	: KGrid2D::Square< KrossWordCell* >( width, height ) {};
+class KrosswordGrid : public KGrid2D::Square< KrossWordCell* >
+{
+public:
+    explicit KrosswordGrid(uint width = 0, uint height = 0)
+        : KGrid2D::Square< KrossWordCell* >(width, height) {};
 
     /**
       * @return the offset for the given neighbour.
       */
-    static Offset neighbourOffset( Neighbour n ) {
-      switch (n) {
-      case Left:      return Offset(-1,  0);
-      case Right:     return Offset( 1,  0);
-      case Up:        return Offset( 0, -1);
-      case Down:      return Offset( 0,  1);
-      case LeftUp:    return Offset(-1, -1);
-      case LeftDown:  return Offset(-1,  1);
-      case RightUp:   return Offset( 1, -1);
-      case RightDown: return Offset( 1,  1);
-      case Nb_Neighbour: Q_ASSERT(false);
-      }
-      return Offset( 0, 0 );
+    static Offset neighbourOffset(Neighbour n) {
+        switch (n) {
+        case Left:      return Offset(-1,  0);
+        case Right:     return Offset(1,  0);
+        case Up:        return Offset(0, -1);
+        case Down:      return Offset(0,  1);
+        case LeftUp:    return Offset(-1, -1);
+        case LeftDown:  return Offset(-1,  1);
+        case RightUp:   return Offset(1, -1);
+        case RightDown: return Offset(1,  1);
+        case Nb_Neighbour: Q_ASSERT(false);
+        }
+        return Offset(0, 0);
     }
 
-    static Offset letterOffset( Qt::Orientation orientation ) {
-      return orientation == Qt::Horizontal ? Offset( 1, 0 ) : Offset( 0, 1 );
+    static Offset letterOffset(Qt::Orientation orientation) {
+        return orientation == Qt::Horizontal ? Offset(1, 0) : Offset(0, 1);
     }
 };
 
 #if QT_VERSION >= 0x040600
-class FocusItem : public QObject, public QGraphicsRectItem {
-  Q_OBJECT
+class FocusItem : public QObject, public QGraphicsRectItem
+{
+    Q_OBJECT
 
-  Q_PROPERTY( QRectF rect READ rect WRITE setRect )
-  Q_PROPERTY( qreal opacity READ opacity WRITE setOpacity )
-  Q_INTERFACES( QGraphicsItem )
-  public:
-    FocusItem( QGraphicsItem* parent = 0 ) : QObject(0), QGraphicsRectItem(parent) {};
+    Q_PROPERTY(QRectF rect READ rect WRITE setRect)
+    Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity)
+    Q_INTERFACES(QGraphicsItem)
+public:
+    FocusItem(QGraphicsItem* parent = 0) : QObject(0), QGraphicsRectItem(parent) {};
 
 };
 #else // QT_VERSION >= 0x040600
-class FocusItem : public QGraphicsRectItem {
-  public:
-    FocusItem( QGraphicsItem* parent = 0 ) : QGraphicsRectItem(parent) {};
+class FocusItem : public QGraphicsRectItem
+{
+public:
+    FocusItem(QGraphicsItem* parent = 0) : QGraphicsRectItem(parent) {};
 
 };
 #endif
@@ -105,34 +109,40 @@ class FocusItem : public QGraphicsRectItem {
 
 class KrossWord;
 #if QT_VERSION >= 0x040600
-class KrossWordTitleItem : public QGraphicsObject {
+class KrossWordTitleItem : public QGraphicsObject
+{
 #else
-class KrossWordTitleItem : public QObject, public QGraphicsItem {
+class KrossWordTitleItem : public QObject, public QGraphicsItem
+{
 #endif
-  Q_OBJECT
+    Q_OBJECT
 #if QT_VERSION >= 0x040600
-  Q_INTERFACES( QGraphicsItem )
+    Q_INTERFACES(QGraphicsItem)
 #endif
 
-  public:
-    KrossWordTitleItem( QGraphicsItem *parent = 0 );
+public:
+    KrossWordTitleItem(QGraphicsItem *parent = 0);
 
-    void setContent( KrossWord *krossWord );
-    void updateTheme( KrossWord *krossWord );
+    void setContent(KrossWord *krossWord);
+    void updateTheme(KrossWord *krossWord);
 
-    QGraphicsTextItem *titleItem() const { return m_titleItem; };
-    QGraphicsTextItem *authorsItem() const { return m_authorsItem; };
+    QGraphicsTextItem *titleItem() const {
+        return m_titleItem;
+    };
+    QGraphicsTextItem *authorsItem() const {
+        return m_authorsItem;
+    };
 
     virtual QRectF boundingRect() const;
-    virtual void paint( QPainter* painter, const QStyleOptionGraphicsItem* option,
-			QWidget* widget = 0 );
+    virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
+                       QWidget* widget = 0);
 
-  public slots:
-    void crosswordResized( KrossWord *krossWord, int columns, int rows );
+public slots:
+    void crosswordResized(KrossWord *krossWord, int columns, int rows);
 
-  private:
+private:
 #if QT_VERSION >= 0x040600
-    void updateGraphicsEffect( KrossWord *krossWord, QGraphicsDropShadowEffect *effect );
+    void updateGraphicsEffect(KrossWord *krossWord, QGraphicsDropShadowEffect *effect);
 #endif
 
     QGraphicsTextItem *m_titleItem;
@@ -178,9 +188,11 @@ class KrossWordTitleItem : public QObject, public QGraphicsItem {
  * @brief An interactive crossword to be displayed in a QGraphicsScene.
  */
 #if QT_VERSION >= 0x040600
-class KrossWord : public QGraphicsObject {
+class KrossWord : public QGraphicsObject
+{
 #else
-class KrossWord : public QObject, public QGraphicsItem {
+class KrossWord : public QObject, public QGraphicsItem
+{
 #endif
     friend class KrossWordCell;
     friend class EmptyCell;
@@ -191,74 +203,74 @@ class KrossWord : public QObject, public QGraphicsItem {
     friend class SpannedCell; // To call replaceCell()
     Q_OBJECT
 #if QT_VERSION >= 0x040600
-    Q_INTERFACES( QGraphicsItem )
+    Q_INTERFACES(QGraphicsItem)
 #endif
-    Q_PROPERTY( QString title READ title WRITE setTitle )
-    Q_PROPERTY( QString authors READ authors WRITE setAuthors )
-    Q_PROPERTY( QString copyright READ copyright WRITE setCopyright )
-    Q_PROPERTY( QString notes READ notes WRITE setNotes )
-    Q_PROPERTY( bool editable READ isEditable WRITE setEditable )
-    Q_PROPERTY( bool interactive READ isInteractive WRITE setInteractive )
+    Q_PROPERTY(QString title READ title WRITE setTitle)
+    Q_PROPERTY(QString authors READ authors WRITE setAuthors)
+    Q_PROPERTY(QString copyright READ copyright WRITE setCopyright)
+    Q_PROPERTY(QString notes READ notes WRITE setNotes)
+    Q_PROPERTY(bool editable READ isEditable WRITE setEditable)
+    Q_PROPERTY(bool interactive READ isInteractive WRITE setInteractive)
 
-  public:
+public:
     enum WriteMode {
-      Normal,
-      Template
+        Normal,
+        Template
     };
 
     enum ResizeAnchor {
-      AnchorTopLeft, 	AnchorTop, 	AnchorTopRight,
-      AnchorLeft, 	AnchorCenter, 	AnchorRight,
-      AnchorBottomLeft, AnchorBottom, 	AnchorBottomRight
+        AnchorTopLeft,    AnchorTop,  AnchorTopRight,
+        AnchorLeft,   AnchorCenter,   AnchorRight,
+        AnchorBottomLeft, AnchorBottom,   AnchorBottomRight
     };
 
     enum FileFormat {
-      DetermineByFileName,
-      KrossWordPuzzleXmlFile,
-      KrossWordPuzzleCompressedXmlFile,
-      AcrossLitePuzFile
+        DetermineByFileName,
+        KrossWordPuzzleXmlFile,
+        KrossWordPuzzleCompressedXmlFile,
+        AcrossLitePuzFile
     };
 
     enum ConversionCommand {
-      NoCommand = 0x00,
+        NoCommand = 0x00,
 
-      SetupSameLetterSynchronization = 0x01,
-      SetDefaultNumberPuzzleMapping = 0x02
+        SetupSameLetterSynchronization = 0x01,
+        SetDefaultNumberPuzzleMapping = 0x02
     };
-    Q_DECLARE_FLAGS( ConversionCommands, ConversionCommand );
+    Q_DECLARE_FLAGS(ConversionCommands, ConversionCommand);
 
     struct Statistics {
-      int letterCellCount;
-      int crossedLetterCells;
-      int uncrossedLetterCells;
-      QHash< QChar, int > letterCellCountByChar;
+        int letterCellCount;
+        int crossedLetterCells;
+        int uncrossedLetterCells;
+        QHash< QChar, int > letterCellCountByChar;
 
-      int clueCount;
-      int horizontalClues;
-      int verticalClues;
+        int clueCount;
+        int horizontalClues;
+        int verticalClues;
 
-      int minAnswerLength;
-      int maxAnswerLength;
-      float avgAnswerLength;
+        int minAnswerLength;
+        int maxAnswerLength;
+        float avgAnswerLength;
 
-      int cellCount;
-      int emptyCellCount;
+        int cellCount;
+        int emptyCellCount;
 
-      LetterCellList letters;
-      ClueCellList clues;
-      EmptyCellList emptyCells;
+        LetterCellList letters;
+        ClueCellList clues;
+        EmptyCellList emptyCells;
     }; // struct Statistics
 
     struct ConversionInfo {
-      CrosswordTypeInfo typeInfoSource;
-      CrosswordTypeInfo typeInfoTarget;
+        CrosswordTypeInfo typeInfoSource;
+        CrosswordTypeInfo typeInfoTarget;
 
-      KrossWordCellList cellsToRemove;
-      ClueCellList cluesToRemove;
-      QHash<ClueCell*, AnswerOffset> cluesToMakeVisible;
-      QHash<LetterCell*, QChar> letterEditCorrect;
-      QHash<LetterCell*, QChar> letterEditCurrent;
-      ConversionCommands conversionCommands;
+        KrossWordCellList cellsToRemove;
+        ClueCellList cluesToRemove;
+        QHash<ClueCell*, AnswerOffset> cluesToMakeVisible;
+        QHash<LetterCell*, QChar> letterEditCorrect;
+        QHash<LetterCell*, QChar> letterEditCurrent;
+        ConversionCommands conversionCommands;
     }; // struct ConversionInfo
 
     /** Creates a new KrossWord with size @p width x @p height.
@@ -269,74 +281,86 @@ class KrossWord : public QObject, public QGraphicsItem {
     * @param height The height of the new crossword. That is, how many vertical
     * cells should be created.
     * @see resizeGrid() */
-    explicit KrossWord( KrosswordTheme *theme = NULL, int width = 0, int height = 0 );
+    explicit KrossWord(KrosswordTheme *theme = NULL, int width = 0, int height = 0);
 
     virtual ~KrossWord();
 
     /** Gets the type information of the current crossword type. */
-    CrosswordTypeInfo crosswordTypeInfo() const { return m_crosswordTypeInfo; };
-    void setCrosswordTypeInfo( CrosswordTypeInfo typeInfo ) {
-	m_crosswordTypeInfo = typeInfo; };
+    CrosswordTypeInfo crosswordTypeInfo() const {
+        return m_crosswordTypeInfo;
+    };
+    void setCrosswordTypeInfo(CrosswordTypeInfo typeInfo) {
+        m_crosswordTypeInfo = typeInfo;
+    };
 
     /** Creates and returns a model with all standard crossword types and
     * all crossword types in @p additionalTypes. */
     static QStandardItemModel *createCrosswordTypeModel(
-	    const QList<CrosswordTypeInfo> &additionalTypes = QList<CrosswordTypeInfo>() );
+        const QList<CrosswordTypeInfo> &additionalTypes = QList<CrosswordTypeInfo>());
 
     /** Gets statistics of the crossword. */
     Statistics statistics();
 
 #if QT_VERSION >= 0x040600
-    inline Animator *animator() const { return m_animator; };
+    inline Animator *animator() const {
+        return m_animator;
+    };
 #endif
 
-    AnimationTypes animationTypes() const { return m_animationTypes; };
-    void setAnimationTypes( AnimationTypes animationTypes ) {
-	m_animationTypes = animationTypes; };
-    inline void disableAnimations() { setAnimationTypes( NoAnimation ); };
-    void enableAnimationType( AnimationType animationType, bool enable = true ) {
-	if ( enable ) m_animationTypes |= animationType;
-	else m_animationTypes &= ~animationType; };
-    inline bool isAnimationTypeEnabled( AnimationType animationType ) {
-	return m_animationTypes.testFlag( animationType ); };
+    AnimationTypes animationTypes() const {
+        return m_animationTypes;
+    };
+    void setAnimationTypes(AnimationTypes animationTypes) {
+        m_animationTypes = animationTypes;
+    };
+    inline void disableAnimations() {
+        setAnimationTypes(NoAnimation);
+    };
+    void enableAnimationType(AnimationType animationType, bool enable = true) {
+        if (enable) m_animationTypes |= animationType;
+        else m_animationTypes &= ~animationType;
+    };
+    inline bool isAnimationTypeEnabled(AnimationType animationType) {
+        return m_animationTypes.testFlag(animationType);
+    };
 
-    void createNew( CrosswordType crosswordType, const QSize &crosswordSize );
-    void createNew( const CrosswordTypeInfo &crosswordTypeInfo,
-		    const QSize &crosswordSize );
+    void createNew(CrosswordType crosswordType, const QSize &crosswordSize);
+    void createNew(const CrosswordTypeInfo &crosswordTypeInfo,
+                   const QSize &crosswordSize);
 
     /** This method is provided for convenience. It calls
     * @ref generateConversionInfo and then @ref executeConversionInfo,
     * if @p simulate is true.
     * @returns The conversion information to convert from the current
     * crossword type to the one described in @p newInfo. */
-    ConversionInfo convertToType( CrosswordTypeInfo newInfo,
-				  bool simulate = false );
+    ConversionInfo convertToType(CrosswordTypeInfo newInfo,
+                                 bool simulate = false);
     /** Generates conversion information to convert from the current
     * crossword type to the one described in @p newInfo. To perform the
     * conversion described in the conversion information, pass it to
     * @ref executeConversionInfo. To get a string with user readable
     * information about the conversion use @ref conversionInfoToString. */
-    ConversionInfo generateConversionInfo( CrosswordTypeInfo newInfo );
+    ConversionInfo generateConversionInfo(CrosswordTypeInfo newInfo);
     /** Executes the conversion described in conversionInfo. To get
     * conversion information use @ref generateConversionInfo. */
-    void executeConversionInfo( ConversionInfo conversionInfo );
+    void executeConversionInfo(ConversionInfo conversionInfo);
     /** Returns a user readable info string describing what cells get removed
     * when performing the conversion described in @p conversionInfo. */
-    QString conversionInfoToString( ConversionInfo conversionInfo );
+    QString conversionInfoToString(ConversionInfo conversionInfo);
 
     /** Wheater or not the crossword has 180 degree rotation symmetry. */
     bool has180DegreeRotationSymmetry() const;
 
     /** Gets the file format for a given @p fileName. */
-    static FileFormat fileFormatFromFileName( const QString &fileName );
+    static FileFormat fileFormatFromFileName(const QString &fileName);
 
     /** Reads a crossword from a file.
     * @param url The URL to the file to read.
     * @param errorString Contains a string describing the error, if false was returned.
     * @return False, if there was an error. */
-    bool read( const KUrl &url, QString *errorString = NULL,
-	QWidget *mainWindow = NULL, FileFormat fileFormat = DetermineByFileName,
-	QByteArray *undoData = NULL );
+    bool read(const KUrl &url, QString *errorString = NULL,
+              QWidget *mainWindow = NULL, FileFormat fileFormat = DetermineByFileName,
+              QByteArray *undoData = NULL);
 
     /** Write the crossword into a file.
     * @param fileName The path to the file to write to.
@@ -345,51 +369,61 @@ class KrossWord : public QObject, public QGraphicsItem {
     * @param undoData Undo data to be written into the crossword file, works
     * only for XML files.
     * @return False, if there was an error. */
-    bool write( const QString &fileName, QString *errorString = NULL,
-		WriteMode writeMode = Normal,
-		FileFormat fileFormat = DetermineByFileName,
-		const QByteArray &undoData = QByteArray() );
+    bool write(const QString &fileName, QString *errorString = NULL,
+               WriteMode writeMode = Normal,
+               FileFormat fileFormat = DetermineByFileName,
+               const QByteArray &undoData = QByteArray());
 
     /** Gets the clue cell at the coordinates @p coord with the given @p orientation.
     * If the clue cell is hidden, it gets the clue cell with @p orientation of the
     * letter cell at @p coord. If no clue cell could be found, it returns NULL. */
-    ClueCell *findClueCell( const Coord &coord, Qt::Orientation orientation,
-			    AnswerOffset answerOffset ) const;
+    ClueCell *findClueCell(const Coord &coord, Qt::Orientation orientation,
+                           AnswerOffset answerOffset) const;
 
     /** Gets the clue cell with the given zero-based clue number @p clueNumber.
     * If no clue cell could be found, it returns NULL. */
-    ClueCellList clueCellsFromClueNumber( int clueNumber ) const;
-    int maxClueNumber() const { return m_maxClueNumber; };
+    ClueCellList clueCellsFromClueNumber(int clueNumber) const;
+    int maxClueNumber() const {
+        return m_maxClueNumber;
+    };
 
     /** The title of the crossword. */
-    QString title() const { return m_title; };
+    QString title() const {
+        return m_title;
+    };
     /** Sets the title of the crossword to @p title. */
-    void setTitle( const QString &title );
+    void setTitle(const QString &title);
 
     /** The authors of the crossword. */
-    QString authors() const { return m_authors; };
+    QString authors() const {
+        return m_authors;
+    };
     /** Sets the authors string to @p authors. */
-    void setAuthors( const QString &authors );
+    void setAuthors(const QString &authors);
 
     /** The copyright information string of the crossword. */
-    QString copyright() const { return m_copyright; };
+    QString copyright() const {
+        return m_copyright;
+    };
     /** Sets the copyright information string to @p copyright. */
-    void setCopyright( const QString &copyright );
+    void setCopyright(const QString &copyright);
 
     /** Notes of the crossword. */
-    QString notes() const { return m_notes; };
+    QString notes() const {
+        return m_notes;
+    };
     /** Sets the notes of the crossword to @p notes. */
-    void setNotes( const QString &notes );
+    void setNotes(const QString &notes);
 
     /** Returns the percentage of solved letter cells. */
     float solutionProgress() const;
 
     /** Gets the span of empty cells from the given coordinates @p coordTopLeft. */
-    QSize emptyCellSpan( const Coord &coordTopLeft, SpannedCell *excludedCell = 0 );
+    QSize emptyCellSpan(const Coord &coordTopLeft, SpannedCell *excludedCell = 0);
 
-    bool canTakeSpannedCell( const Coord &coord,
-		    int horizontalCellSpan, int verticalCellSpan,
-		    SpannedCell* excludedSpannedCell = NULL ) const;
+    bool canTakeSpannedCell(const Coord &coord,
+                            int horizontalCellSpan, int verticalCellSpan,
+                            SpannedCell* excludedSpannedCell = NULL) const;
 
     /** Inserts a new image into the crossword at @p coord.
     * @note This method first checks if the new image with the given span
@@ -410,10 +444,10 @@ class KrossWord : public QObject, public QGraphicsItem {
     * @returns Other values of ErrorType, if there was an error when inserting
     * the image.
     * @see canInsertClue() */
-    ErrorType insertImage( const KGrid2D::Coord &coord,
-	    int horizontalCellSpan, int verticalCellSpan, KUrl url,
-	    ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
-	    ImageCell **insertedImage = NULL );
+    ErrorType insertImage(const KGrid2D::Coord &coord,
+                          int horizontalCellSpan, int verticalCellSpan, KUrl url,
+                          ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
+                          ImageCell **insertedImage = NULL);
 
     /** Gets a list with all legal answer offsets for a new clue at the given
     * coordinates @p clueCellCoord with the given @p orientation. You can set
@@ -425,13 +459,13 @@ class KrossWord : public QObject, public QGraphicsItem {
     * a clue cell is at the coordinates (clue coordinates + answer offset),
     * then that answer offset would be illegal. */
     QList< AnswerOffset > legalAnswerOffsets(
-		    Coord clueCellCoord, Qt::Orientation orientation,
-		    int answerLength,
-		    ClueCell *excludedClue = NULL ) const;
-    bool canTakeClueCell( const Coord &coord,
-		    const Offset &firstLetterOffset = Offset(0, 0),
-		    bool allowDoubleClueCells = true,
-		    ClueCell *excludedClue = NULL ) const;
+        Coord clueCellCoord, Qt::Orientation orientation,
+        int answerLength,
+        ClueCell *excludedClue = NULL) const;
+    bool canTakeClueCell(const Coord &coord,
+                         const Offset &firstLetterOffset = Offset(0, 0),
+                         bool allowDoubleClueCells = true,
+                         ClueCell *excludedClue = NULL) const;
 
     /** Inserts a new clue into the crossword at @p coord. This method won't
     * overwrite existing cells, except for those of type EmptyCell. Existing cells
@@ -462,14 +496,14 @@ class KrossWord : public QObject, public QGraphicsItem {
     * @returns Other values of ErrorType, if there was an error when inserting
     * the clue and it's answers letter cells.
     * @see canInsertClue() */
-    ErrorType insertClue( const KGrid2D::Coord &coord,
-				     Qt::Orientation orientation,
-				     AnswerOffset answerOffset,
-				     const QString &clue, const QString &answer,
-				     CellType cellType = LetterCellType,
-				     ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
-				     bool allowDoubleClueCells = true,
-				     ClueCell **insertedClue = NULL );
+    ErrorType insertClue(const KGrid2D::Coord &coord,
+                         Qt::Orientation orientation,
+                         AnswerOffset answerOffset,
+                         const QString &clue, const QString &answer,
+                         CellType cellType = LetterCellType,
+                         ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
+                         bool allowDoubleClueCells = true,
+                         ClueCell **insertedClue = NULL);
 
     /** Returns true, if a clue cell with it's answer letters fits into the
     * current crossword at @p coord.
@@ -484,30 +518,30 @@ class KrossWord : public QObject, public QGraphicsItem {
     * double clue cells if needed, ie. if there's already a clue cell at @p coord.
     * @param excludedClue You can specify a clue cell which shouldn't be taken
     * into account when checking if the new clue can be inserted. */
-    ErrorType canInsertClue( const KGrid2D::Coord &coord,
-					Qt::Orientation orientation,
-					const Offset &answerOffset,
-					const QString &answer,
-					ErrorTypes errorTypesToIgnore =
-					DontIgnoreErrors,
-					bool allowDoubleClueCells = true,
-					ClueCell *excludedClue = NULL );
+    ErrorType canInsertClue(const KGrid2D::Coord &coord,
+                            Qt::Orientation orientation,
+                            const Offset &answerOffset,
+                            const QString &answer,
+                            ErrorTypes errorTypesToIgnore =
+                                DontIgnoreErrors,
+                            bool allowDoubleClueCells = true,
+                            ClueCell *excludedClue = NULL);
 
-    ErrorType changeClueProperties( ClueCell *clue,
-				    Qt::Orientation newOrientation,
-				    AnswerOffset newAnswerOffset,
-				    const QString &newCorrectAnswer,
-				    ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
-				    bool allowDoubleClueCells = true );
+    ErrorType changeClueProperties(ClueCell *clue,
+                                   Qt::Orientation newOrientation,
+                                   AnswerOffset newAnswerOffset,
+                                   const QString &newCorrectAnswer,
+                                   ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
+                                   bool allowDoubleClueCells = true);
 
-    ErrorType canChangeClueProperties( ClueCell *clue,
-				       Qt::Orientation newOrientation,
-				       Offset newAnswerOffset,
-				       const QString &newCorrectAnswer,
-				       ErrorTypes errorTypesToIgnore =
-					  DontIgnoreErrors,
-				       bool allowDoubleClueCells = true,
-				       SolutionLetterCellList *removedSolutionLetterCells = NULL );
+    ErrorType canChangeClueProperties(ClueCell *clue,
+                                      Qt::Orientation newOrientation,
+                                      Offset newAnswerOffset,
+                                      const QString &newCorrectAnswer,
+                                      ErrorTypes errorTypesToIgnore =
+                                          DontIgnoreErrors,
+                                      bool allowDoubleClueCells = true,
+                                      SolutionLetterCellList *removedSolutionLetterCells = NULL);
 
     /** Returns true, if an image cell with it's horizontal and vertical cell
     * span fits into the current crossword at @p coord.
@@ -519,21 +553,22 @@ class KrossWord : public QObject, public QGraphicsItem {
     * @param errorTypesToIgnore Error types to ignore.
     * @param excludedClue You can specify a clue cell which shouldn't be taken
     * into account when checking if the new clue can be inserted. */
-    ErrorType canInsertImage( const KGrid2D::Coord &coord,
-	    int horizontalCellSpan, int verticalCellSpan,
-	    ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
-	    ImageCell *excludedImage = NULL );
+    ErrorType canInsertImage(const KGrid2D::Coord &coord,
+                             int horizontalCellSpan, int verticalCellSpan,
+                             ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
+                             ImageCell *excludedImage = NULL);
 
     /** Removes the given clue from the crossword. It also removes answer
     * letters of the clue, if the letters have no second clue. Otherwise
     * it just detaches the clue from the letters.
     * @param clue The clue to be removed. */
-    inline QList<Coord> removeClue( ClueCell* clue ) {
-	return removeClue( clue, RemoveFromGridAndDelete ); };
+    inline QList<Coord> removeClue(ClueCell* clue) {
+        return removeClue(clue, RemoveFromGridAndDelete);
+    };
 
     /** Removes the given image from the crossword.
     * @param clue The image to be removed. */
-    void removeImage( ImageCell* image );
+    void removeImage(ImageCell* image);
 
     /** Creates a new KrossWord object containing only one clue. The answer
     * to the clue is constructed from all solution letter cells of this crossword.
@@ -551,10 +586,10 @@ class KrossWord : public QObject, public QGraphicsItem {
     * @see hasSolutionWord()
     * @see KrossWordCell::SyncMethods */
     KrossWord *createSeparateSolutionKrossWord(
-			const QString &solutionClue = i18n("Solution"),
-			Qt::Orientation clueOrientation = Qt::Horizontal,
-			SyncMethods solutionLetterSynchronization
-			    = SyncAll ) const;
+        const QString &solutionClue = i18n("Solution"),
+        Qt::Orientation clueOrientation = Qt::Horizontal,
+        SyncMethods solutionLetterSynchronization
+        = SyncAll) const;
 
     /** Gets the maximal space for a new answer starting at @p coord in
     * direction @p orientation, but excluding @p excludedClue from the
@@ -562,49 +597,52 @@ class KrossWord : public QObject, public QGraphicsItem {
     * @return The number of empty cells or letter cells which doesn't already
     * have a clue in @p orientation. These cells can be used for the answer
     * letter cells of a clue cell. */
-    int maxAnswerLengthAt( const Coord &coord, Qt::Orientation orientation,
-			   ClueCell *excludedClue = NULL );
+    int maxAnswerLengthAt(const Coord &coord, Qt::Orientation orientation,
+                          ClueCell *excludedClue = NULL);
 
-    bool correctLettersAt( const Coord &coord, Qt::Orientation orientation,
-			   int letterCount, QString *correctLetters,
-			   ClueCell *excludeClue = NULL );
+    bool correctLettersAt(const Coord &coord, Qt::Orientation orientation,
+                          int letterCount, QString *correctLetters,
+                          ClueCell *excludeClue = NULL);
 
     void setupSameLetterSynchronization();
     void removeSameLetterSynchronization();
     void removeSynchronization(
-		SyncMethods syncMethods = SyncAll,
-		SyncCategories syncCategories =
-		    AllSyncCategories );
+        SyncMethods syncMethods = SyncAll,
+        SyncCategories syncCategories =
+            AllSyncCategories);
 
     /** Returns a list of all cells of the crossword.
     * @see KrossWordCell::cellType() */
-    KrossWordCellList cells( CellTypes cellTypes =
-		    AllCellTypes ) const;
+    KrossWordCellList cells(CellTypes cellTypes =
+                                AllCellTypes) const;
     /** Returns a list of cells beginning with the cell at @p coord and going
     * in direction @p orientation.
     * @param coord The coordinates of the first cell in the returned list.
     * @param orientation The direction to go to collect the cells.
     * @param count The maximal number of cells or -1 to get all cells in the
     * given direction. */
-    KrossWordCellList cells( const Coord &coord,
-					Qt::Orientation orientation,
-					int count = -1 ) const;
+    KrossWordCellList cells(const Coord &coord,
+                            Qt::Orientation orientation,
+                            int count = -1) const;
     /** Returns a list of empty cells of the crossword.
     * @see KrossWordCell::cellType() */
     EmptyCellList emptyCells() const;
     /** Returns a list of all clues of the crossword. */
-    ClueCellList clues() const { return m_clues; };
+    ClueCellList clues() const {
+        return m_clues;
+    };
     /** Gets all horizontal and vertical clues, sorted by clue number (if the
     * clues have a clue number). */
-    void clues( ClueCellList *horizontalClues,
-		ClueCellList *verticalClues ) const;
+    void clues(ClueCellList *horizontalClues,
+               ClueCellList *verticalClues) const;
     /** Returns a list of all letters of the crossword. */
     LetterCellList letters() const;
     /** Returns a list of all empty letters of the crossword. */
     LetterCellList emptyLetters() const;
     /** Returns a list of all letters that form the solution word of the crossword. */
     SolutionLetterCellList solutionWordLetters() const {
-	return m_solutionLetters; };
+        return m_solutionLetters;
+    };
     /** Returns a list of all images of the crossword. */
     ImageCellList images() const;
 
@@ -623,43 +661,53 @@ class KrossWord : public QObject, public QGraphicsItem {
     * @param simulate If true, no resizing is actually done, but the cells that
     * would have been are returned. If false, the crossword grid is resized.
     * @returns A list of cells that were removed. */
-    KrossWordCellList resizeGrid( uint width, uint height,
-	    ResizeAnchor anchor = AnchorCenter, bool simulate = false );
-    KrossWordCellList moveCells( int dx, int dy, bool simulate = false );
+    KrossWordCellList resizeGrid(uint width, uint height,
+                                 ResizeAnchor anchor = AnchorCenter, bool simulate = false);
+    KrossWordCellList moveCells(int dx, int dy, bool simulate = false);
     /** Removes all cells, replacing them with empty cells.
     * @note To really delete all cells, you can resize the crossword to 0x0.
     * @see resizeGrid() */
     void removeAllCells();
     /** Returns the size of one crossword cell. */
-    QSizeF cellSize() const { return m_cellSize; };
+    QSizeF cellSize() const {
+        return m_cellSize;
+    };
     /** Checks if this crossword has a solution word. It checks if there are any
     * solution letter cells. */
-    bool hasSolutionWord() const { return !solutionWordLetters().isEmpty(); };
+    bool hasSolutionWord() const {
+        return !solutionWordLetters().isEmpty();
+    };
     /** Gets the correct solution word.
     * @see currentSolutionWord */
-    QString solutionWord( const QChar &charNonLinkedLetters = ' ' ) const;
+    QString solutionWord(const QChar &charNonLinkedLetters = ' ') const;
     /** Gets the solution word as it is currently solved. Not solved (empty)
     * letter cells generate a '-' in the returned string.
     * @see solutionWord */
     QString currentSolutionWord() const;
     /** Gets the currently highlighted clue.
     * @see setHighlightedClue */
-    ClueCell *highlightedClue() const { return m_highlightedClue; };
-    ClueCell *previousHighlightedClue() const { return m_previousHighlightedClue; };
+    ClueCell *highlightedClue() const {
+        return m_highlightedClue;
+    };
+    ClueCell *previousHighlightedClue() const {
+        return m_previousHighlightedClue;
+    };
     /** Sets the highlighted clue. All letter cells and the clue cell
     * are then highlighted. A previously highlighted clue will no longer be
     * highlighted.
     * @param clue The clue to highlight or NULL to remove all highlights.
     * @see highlightedClue */
-    void setHighlightedClue( ClueCell *clue );
+    void setHighlightedClue(ClueCell *clue);
 
-    void applyLetterContentToClueNumberMapping( const QString &numberPuzzleMapping );
-    void setLetterContentToClueNumberMapping( const QString &numberPuzzleMapping,
-					      bool apply = true );
+    void applyLetterContentToClueNumberMapping(const QString &numberPuzzleMapping);
+    void setLetterContentToClueNumberMapping(const QString &numberPuzzleMapping,
+            bool apply = true);
     QString letterContentToClueNumberMapping() const {
-	return m_numberPuzzleMapping; };
+        return m_numberPuzzleMapping;
+    };
     static const QString defaultNumberPuzzleMapping() {
-	return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; };
+        return "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    };
 
     QString contentString() const;
     QString synchronizationString() const;
@@ -670,31 +718,39 @@ class KrossWord : public QObject, public QGraphicsItem {
     * check if coordinates are inside the crossword grid with @ref inside().
     * @see Coord
     * @see inside */
-    inline KrossWordCell *at( Coord coord ) const {
-	if ( !inside(coord) ) {
-	  kDebug() << coord << "isn't inside the grid! Returning NULL.";
-	  return NULL;
-	}
-// 	KrossWordCell *cell = m_krossWordGrid->at( coord );
-// 	Q_ASSERT( !cell || cell->isType(KrossWordCell::ImageCellType) || cell->coord() == coord );
-	return m_krossWordGrid->at( coord );
+    inline KrossWordCell *at(Coord coord) const {
+        if (!inside(coord)) {
+            kDebug() << coord << "isn't inside the grid! Returning NULL.";
+            return NULL;
+        }
+//  KrossWordCell *cell = m_krossWordGrid->at( coord );
+//  Q_ASSERT( !cell || cell->isType(KrossWordCell::ImageCellType) || cell->coord() == coord );
+        return m_krossWordGrid->at(coord);
     };
 
     /** Gets the width of the crossword grid. */
-    inline uint width() const { return m_krossWordGrid->width(); };
+    inline uint width() const {
+        return m_krossWordGrid->width();
+    };
     /** Gets the height of the crossword grid. */
-    inline uint height() const { return m_krossWordGrid->height(); };
+    inline uint height() const {
+        return m_krossWordGrid->height();
+    };
     /** Returns true, if the given coordinates are inside the crossword grid. */
-    inline bool inside( Coord coord ) const { return m_krossWordGrid->inside( coord ); };
+    inline bool inside(Coord coord) const {
+        return m_krossWordGrid->inside(coord);
+    };
 
-    inline KrossWordCell *const&operator[]( const Coord &coord ) const {
-	return m_krossWordGrid->operator[](coord); };
-    inline KrossWordCell *&operator[]( const Coord &coord ) {
-	return m_krossWordGrid->operator[](coord); };
+    inline KrossWordCell *const&operator[](const Coord &coord) const {
+        return m_krossWordGrid->operator[](coord);
+    };
+    inline KrossWordCell *&operator[](const Coord &coord) {
+        return m_krossWordGrid->operator[](coord);
+    };
 
-    void removeSolutionSynchronizationTo( KrossWord *solutionKrossWord );
-    QPixmap toPixmap( const QSize &size = QSize(64, 64) );
-    void resizeTo( const QSizeF &size );
+    void removeSolutionSynchronizationTo(KrossWord *solutionKrossWord);
+    QPixmap toPixmap(const QSize &size = QSize(64, 64));
+    void resizeTo(const QSizeF &size);
     void resizeScene();
     void assignClueNumbers();
 
@@ -703,9 +759,9 @@ class KrossWord : public QObject, public QGraphicsItem {
     * (eg. why a clue couldn't be inserted).
     * @see canInsertClue()
     * @see canInsertImage() */
-    static QString errorMessageFromErrorType( ErrorType errorType );
-    static AnswerOffset answerOffsetFromString( const QString &s );
-    static QString answerOffsetToString( AnswerOffset answerOffset );
+    static QString errorMessageFromErrorType(ErrorType errorType);
+    static AnswerOffset answerOffsetFromString(const QString &s);
+    static QString answerOffsetToString(AnswerOffset answerOffset);
 
     /** Checks if the crossword is empty, ie. contains no clues. */
     bool isEmpty() const;
@@ -716,60 +772,81 @@ class KrossWord : public QObject, public QGraphicsItem {
     * Empty cells are drawn and can be highlighted in edit mode.
     * @see setEditable.
     * @see isInteractive. */
-    bool isEditable() const { return m_editable; };
+    bool isEditable() const {
+        return m_editable;
+    };
     /** Enables / disables the edit mode for the crossword.
     * @see isEditable.
     * @see setInteractive. */
-    void setEditable( bool editable = true );
+    void setEditable(bool editable = true);
 
-    bool isInteractive() const { return m_interactive; };
-    void setInteractive( bool interactive = true );
+    bool isInteractive() const {
+        return m_interactive;
+    };
+    void setInteractive(bool interactive = true);
 
-    bool isDrawingForPrinting() const { return m_drawForPrinting; };
-    void setDrawForPrinting( bool drawForPrinting = true );
+    bool isDrawingForPrinting() const {
+        return m_drawForPrinting;
+    };
+    void setDrawForPrinting(bool drawForPrinting = true);
 
-    QColor emptyCellColorForPrinting() const { return m_emptyCellColorForPrinting; };
-    void setEmptyCellColorForPrinting( const QColor &color ) { m_emptyCellColorForPrinting = color; };
+    QColor emptyCellColorForPrinting() const {
+        return m_emptyCellColorForPrinting;
+    };
+    void setEmptyCellColorForPrinting(const QColor &color) {
+        m_emptyCellColorForPrinting = color;
+    };
 
     /** Returns the minimal size of the crossword to include all current cells,
     * ie. the "bounding rect" of all non-empty cells. */
     QSize minimalSize() const;
 
-    KrossWordCell *currentCell() const { return m_currentCell; };
-    KrossWordCell *previousCell() const { return m_previousCell; };
+    KrossWordCell *currentCell() const {
+        return m_currentCell;
+    };
+    KrossWordCell *previousCell() const {
+        return m_previousCell;
+    };
 
     /** Gets the edit mode of letter cells. */
     EditMode letterEditMode() const {
-	return m_letterEditMode; };
+        return m_letterEditMode;
+    };
     /** Changes the edit mode of all letter cells. */
-    void setLetterEditMode( EditMode editMode ) {
-	m_letterEditMode = editMode; };
+    void setLetterEditMode(EditMode editMode) {
+        m_letterEditMode = editMode;
+    };
 
-    KeyboardNavigation keyboardNavigation() const { return m_keyboardNavigation; };
-    void setKeyboardNavigation( KeyboardNavigation keyboardNavigation =
-				    DefaultKeyboardNavigation ) {
-	m_keyboardNavigation = keyboardNavigation; };
+    KeyboardNavigation keyboardNavigation() const {
+        return m_keyboardNavigation;
+    };
+    void setKeyboardNavigation(KeyboardNavigation keyboardNavigation =
+                                   DefaultKeyboardNavigation) {
+        m_keyboardNavigation = keyboardNavigation;
+    };
 
 //     void enableSignalAnswerChanged( bool enable ) {
-// 	m_signalAnswerChanged = enable; };
+//  m_signalAnswerChanged = enable; };
 //     bool isSignalAnswerChangedEnabled() const { return m_signalAnswerChanged; };
 
     virtual QRectF boundingRect() const;
 
-    KrosswordTheme *theme() const { return m_theme; };
-    void setTheme( KrosswordTheme *theme );
+    KrosswordTheme *theme() const {
+        return m_theme;
+    };
+    void setTheme(KrosswordTheme *theme);
 
 protected:
     enum RemoveMode {
-      DontRemove,
-      RemoveFromGrid,
-      RemoveFromGridAndDelete
+        DontRemove,
+        RemoveFromGrid,
+        RemoveFromGridAndDelete
     };
 
-    void insertCluePostProcessing( ClueCell *clue );
-    QList<Coord> removeClue( ClueCell* clue,
-		      RemoveMode clueCellRemoveMode,
-		      RemoveMode letterCellsRemoveMode = RemoveFromGridAndDelete );
+    void insertCluePostProcessing(ClueCell *clue);
+    QList<Coord> removeClue(ClueCell* clue,
+                            RemoveMode clueCellRemoveMode,
+                            RemoveMode letterCellsRemoveMode = RemoveFromGridAndDelete);
 
     /** Returns a non-const list of all solution letter cells. */
 //     SolutionLetterCellList &solutionWordLettersNonConst() { return m_solutionLetters; };
@@ -784,125 +861,129 @@ protected:
     * @param newCell The cell to insert at the coordinates of the old cell after
     * removing it. This is needed to assure consistency. Should not be NULL.
     * @see removeCell */
-    void replaceCell( KrossWordCell *cell, KrossWordCell *newCell );
+    void replaceCell(KrossWordCell *cell, KrossWordCell *newCell);
     /** Removes the cell at the given coordinates and inserts the new @p cell.
     * @param coord The coordinates of the cell to replace.
     * @param cell The cell to insert at the given coordinates after removing
     * the old one. This is needed to assure consistency. Should not be NULL.
     * @see removeCell */
-    inline void replaceCell( const Coord &coord, KrossWordCell *newCell ) {
-	replaceCell( coord, newCell, true ); };
+    inline void replaceCell(const Coord &coord, KrossWordCell *newCell) {
+        replaceCell(coord, newCell, true);
+    };
     /** Removes the cell @p cell and inserts an empty cell instead.
     * @param cell The cell to remove.
     * @see replaceCell*/
-    void removeCell( KrossWordCell *cell );
+    void removeCell(KrossWordCell *cell);
     /** Removes the cell at the given coordinates and inserts an empty cell instead.
     * @param coord The coordinates of the cell to remove.
     * @see replaceCell */
-    void removeCell( const Coord &coord );
+    void removeCell(const Coord &coord);
 //     void switchCellPositions( KrossWordCell *cell1, KrossWordCell *cell2 ); TODO
 
     // Maybe this should also be done with signals/slots..? I think this way it's
     // easier, because the cells don't need all to be connected.
-    void emitCustomContextMenuRequested( const QPointF &pos, KrossWordCell *cell ) {
-	emit customContextMenuRequested( pos, cell );
+    void emitCustomContextMenuRequested(const QPointF &pos, KrossWordCell *cell) {
+        emit customContextMenuRequested(pos, cell);
     };
-    void emitLetterEditRequest( LetterCell *letter, const QChar &currentLetter,
-				const QChar &newLetter ) {
-	emit letterEditRequest( letter, currentLetter, newLetter );
+    void emitLetterEditRequest(LetterCell *letter, const QChar &currentLetter,
+                               const QChar &newLetter) {
+        emit letterEditRequest(letter, currentLetter, newLetter);
     };
-    void emitMousePressed( const QPointF &pos, Qt::MouseButton button,
-			   KrossWordCell *cell ) {
-	emit mousePressed( pos, button, cell );
+    void emitMousePressed(const QPointF &pos, Qt::MouseButton button,
+                          KrossWordCell *cell) {
+        emit mousePressed(pos, button, cell);
     };
 
     /** Returns the offset of the top left cell. When the crossword title is
     * displayed the offset is set below that title. */
-    QPointF topLeftCellOffset() const { return m_topLeftCellOffset; };
+    QPointF topLeftCellOffset() const {
+        return m_topLeftCellOffset;
+    };
 
-    virtual void paint( QPainter* painter, const QStyleOptionGraphicsItem* option,
-			QWidget* widget = 0 );
+    virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
+                       QWidget* widget = 0);
 
 signals:
     /** This signal is emitted when new clues are added. When reading crosswords
     * it will only be emitted once with a list of all new clues. A call to @ref insertClue
     * emits this signal with only the inserted clue in the list. */
-    void cluesAdded( ClueCellList clues );
+    void cluesAdded(ClueCellList clues);
 
     /** This signal is emitted when existing clues will get removed. When clearing
     * crosswords it will only be emitted once with a list of all clues to be removed.
     * A call to @ref removeClue emits this signal with only the removed clue in the
     * list. */
-    void cluesAboutToBeRemoved( ClueCellList clues );
+    void cluesAboutToBeRemoved(ClueCellList clues);
 
-    void solutionWordLetterAdded( SolutionLetterCell *solutionLetter );
-    void solutionWordLetterRemoved( SolutionLetterCell *solutionLetter );
+    void solutionWordLetterAdded(SolutionLetterCell *solutionLetter);
+    void solutionWordLetterRemoved(SolutionLetterCell *solutionLetter);
 
     /** Right mouse button was pressed on a cell. */
-    void customContextMenuRequested( const QPointF &pos, KrossWordCell *cell );
+    void customContextMenuRequested(const QPointF &pos, KrossWordCell *cell);
 
-    void mousePressed( const QPointF &pos, Qt::MouseButton button, KrossWordCell *cell );
-    void mouseEnteredWhilePressed( const QPointF &pos, Qt::MouseButton button, KrossWordCell *cell );
+    void mousePressed(const QPointF &pos, Qt::MouseButton button, KrossWordCell *cell);
+    void mouseEnteredWhilePressed(const QPointF &pos, Qt::MouseButton button, KrossWordCell *cell);
 
     /** The currently selected cell has been changed. */
-    void currentCellChanged( KrossWordCell *currentCell, KrossWordCell *previousCell );
+    void currentCellChanged(KrossWordCell *currentCell, KrossWordCell *previousCell);
     /** Another clue was selected. */
-    void currentClueChanged( ClueCell *clue );
+    void currentClueChanged(ClueCell *clue);
     /** The currently selected answer has been changed. */
-    void answerChanged( ClueCell *clue, const QString &currentAnswer );
+    void answerChanged(ClueCell *clue, const QString &currentAnswer);
     /** A solution letter has been changed. */
-    void solutionLetterChanged( SolutionLetterCell *solutionLetter,
-		    const QString &currentSolutionWord, int changedLetterIndex );
+    void solutionLetterChanged(SolutionLetterCell *solutionLetter,
+                               const QString &currentSolutionWord, int changedLetterIndex);
 
     /** Requests changing the current letter of @p letter from @p currentLetter
     * to @p newLetter.
     * To be used with QUndoCommand to have control over what's changed. */
-    void letterEditRequest( LetterCell *letter, const QChar &currentLetter,
-			    const QChar &newLetter );
-    void addLettersToClueRequest( ClueCell *clue, int lettersToAdd );
+    void letterEditRequest(LetterCell *letter, const QChar &currentLetter,
+                           const QChar &newLetter);
+    void addLettersToClueRequest(ClueCell *clue, int lettersToAdd);
 
-    void editModeChanged( bool editable );
+    void editModeChanged(bool editable);
 
-    void resized( KrossWord *krossWord, int columns, int rows );
+    void resized(KrossWord *krossWord, int columns, int rows);
 
 public slots:
-    void setCurrentCell( KrossWordCell *cell );
+    void setCurrentCell(KrossWordCell *cell);
     void clearCache();
 
 protected slots:
-    void addLettersToClueRequestSlot( ClueCell *clue, int lettersToAdd ) {
-	emit addLettersToClueRequest( clue, lettersToAdd ); };
+    void addLettersToClueRequestSlot(ClueCell *clue, int lettersToAdd) {
+        emit addLettersToClueRequest(clue, lettersToAdd);
+    };
     /** An answer of the crossword has been changed. */
-    void answerChangedSlot( ClueCell *clue, const QString &currentAnswer );
+    void answerChangedSlot(ClueCell *clue, const QString &currentAnswer);
     /** A letter of the solution word has been changed. */
-    void solutionLetterChanged( LetterCell *letter, const QChar &newLetter );
+    void solutionLetterChanged(LetterCell *letter, const QChar &newLetter);
     /** A crossword cell has received focus. */
-    void focusCellChanged( KrossWordCell *currentCell );
+    void focusCellChanged(KrossWordCell *currentCell);
 
-    void currentCellDestroyed( QObject* );
+    void currentCellDestroyed(QObject*);
 
 private:
-    void replaceCell( const Coord& coord, KrossWordCell *newCell,
-		      bool deleteOldCell );
-    void removeCell( const Coord &coord, bool deleteOldCell );
-    KrossWordCellList invalidateCellRegion( const Coord &coordTopLeft,
-			       const Coord &coordBottomRight,
-			       bool simulate = false );
-    KrossWordCellList invalidateCell( const Coord &coord,
-			       bool simulate = false );
+    void replaceCell(const Coord& coord, KrossWordCell *newCell,
+                     bool deleteOldCell);
+    void removeCell(const Coord &coord, bool deleteOldCell);
+    KrossWordCellList invalidateCellRegion(const Coord &coordTopLeft,
+                                           const Coord &coordBottomRight,
+                                           bool simulate = false);
+    KrossWordCellList invalidateCell(const Coord &coord,
+                                     bool simulate = false);
 
-    void init( uint width = 0, uint height = 0 );
+    void init(uint width = 0, uint height = 0);
     void fillWithEmptyCells();
-    void fillWithEmptyCells( const Coord &coordTopLeft,
-			     const Coord &coordBottomRight );
-    bool canTakeClueLetterCell( const Coord &coord, Qt::Orientation orientation,
-			   ClueCell *excludedClue = NULL );
-    bool isCellEmptyIfClueIsExcluded( const Coord &coord,
-				      ClueCell *excludedClue ) const;
-    bool isCellEmptyIfSpannedCellIsExcluded( const Coord &coord,
-					     SpannedCell* excludedSpannedCell ) const;
+    void fillWithEmptyCells(const Coord &coordTopLeft,
+                            const Coord &coordBottomRight);
+    bool canTakeClueLetterCell(const Coord &coord, Qt::Orientation orientation,
+                               ClueCell *excludedClue = NULL);
+    bool isCellEmptyIfClueIsExcluded(const Coord &coord,
+                                     ClueCell *excludedClue) const;
+    bool isCellEmptyIfSpannedCellIsExcluded(const Coord &coord,
+                                            SpannedCell* excludedSpannedCell) const;
 
-    void setTopLeftCellOffset( const QPointF &topLeftCellOffset );
+    void setTopLeftCellOffset(const QPointF &topLeftCellOffset);
     void updateTitleItem();
 
 #if QT_VERSION >= 0x040600
@@ -951,60 +1032,65 @@ private:
 
 
 
-inline QDebug &operator <<(QDebug debug, KrossWord *krossWord) {
-  return debug << krossWord->contentString();
+inline QDebug &operator <<(QDebug debug, KrossWord *krossWord)
+{
+    return debug << krossWord->contentString();
 };
 
 inline QDebug &operator <<(QDebug debug,
-			   KrossWord::ConversionCommand conversionCommand) {
-  switch ( conversionCommand ) {
+                           KrossWord::ConversionCommand conversionCommand)
+{
+    switch (conversionCommand) {
     case KrossWord::NoCommand:
-      return debug << "No command";
+        return debug << "No command";
     case KrossWord::SetupSameLetterSynchronization:
-      return debug << "SetupSameLetterSynchronization";
+        return debug << "SetupSameLetterSynchronization";
     case KrossWord::SetDefaultNumberPuzzleMapping:
-      return debug << "SetDefaultNumberPuzzleMapping";
+        return debug << "SetDefaultNumberPuzzleMapping";
     default:
-      return debug << "ConversionCommand unknown" << conversionCommand;
-  }
+        return debug << "ConversionCommand unknown" << conversionCommand;
+    }
 };
 
 }; // namespace Crossword
 
-Q_DECLARE_METATYPE( Crossword::CrosswordTypeInfo )
+Q_DECLARE_METATYPE(Crossword::CrosswordTypeInfo)
 
 
-inline QDebug &operator <<(QDebug debug, Qt::Orientation orientation) {
-  return debug << (orientation == Qt::Horizontal ? "Horizontal" : "Vertical");
+inline QDebug &operator <<(QDebug debug, Qt::Orientation orientation)
+{
+    return debug << (orientation == Qt::Horizontal ? "Horizontal" : "Vertical");
 };
 
-inline QDebug &operator <<(QDebug debug, Crossword::ErrorType errorType) {
-  return debug << Crossword::KrossWord::errorMessageFromErrorType( errorType );
+inline QDebug &operator <<(QDebug debug, Crossword::ErrorType errorType)
+{
+    return debug << Crossword::KrossWord::errorMessageFromErrorType(errorType);
 };
 
-inline QDebug &operator <<(QDebug debug, Crossword::KrossWord::ResizeAnchor anchor) {
-  switch ( anchor ) {
+inline QDebug &operator <<(QDebug debug, Crossword::KrossWord::ResizeAnchor anchor)
+{
+    switch (anchor) {
     case Crossword::KrossWord::AnchorCenter:
-      return debug << "AnchorCenter";
+        return debug << "AnchorCenter";
     case Crossword::KrossWord::AnchorLeft:
-      return debug << "AnchorLeft";
+        return debug << "AnchorLeft";
     case Crossword::KrossWord::AnchorRight:
-      return debug << "AnchorRight";
+        return debug << "AnchorRight";
     case Crossword::KrossWord::AnchorTopLeft:
-      return debug << "AnchorTopLeft";
+        return debug << "AnchorTopLeft";
     case Crossword::KrossWord::AnchorTop:
-      return debug << "AnchorTop";
+        return debug << "AnchorTop";
     case Crossword::KrossWord::AnchorTopRight:
-      return debug << "AnchorTopRight";
+        return debug << "AnchorTopRight";
     case Crossword::KrossWord::AnchorBottomLeft:
-      return debug << "AnchorBottomLeft";
+        return debug << "AnchorBottomLeft";
     case Crossword::KrossWord::AnchorBottom:
-      return debug << "AnchorBottom";
+        return debug << "AnchorBottom";
     case Crossword::KrossWord::AnchorBottomRight:
-      return debug << "AnchorBottomRight";
+        return debug << "AnchorBottomRight";
     default:
-      return debug << "ResizeAnchor unknown" << anchor;
-  }
+        return debug << "ResizeAnchor unknown" << anchor;
+    }
 };
 
 #endif // KROSSWORD_H

@@ -31,22 +31,22 @@ class SolutionLetterCellWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SolutionLetterCellWidget( SolutionLetterCell *solutionLetterCell, QWidget* parent = 0 );
+    explicit SolutionLetterCellWidget(SolutionLetterCell *solutionLetterCell, QWidget* parent = 0);
 
-    void setSolutionLetterCell( SolutionLetterCell *solutionLetterCell );
+    void setSolutionLetterCell(SolutionLetterCell *solutionLetterCell);
     SolutionLetterCell *solutionLetterCell() const {
         return m_solutionLetterCell;
     };
 
 signals:
-    void setSolutionWordIndexRequest( SolutionLetterCell *solutionLetterCell,
-                                      int solutionWordIndex );
-    void convertToLetterCellRequest( SolutionLetterCell *solutionLetterCell );
+    void setSolutionWordIndexRequest(SolutionLetterCell *solutionLetterCell,
+                                     int solutionWordIndex);
+    void convertToLetterCellRequest(SolutionLetterCell *solutionLetterCell);
 
 protected slots:
     void applyClicked();
     void convertToLetterCellClicked();
-    void solutionLetterPropertiesPositionChanged( int position );
+    void solutionLetterPropertiesPositionChanged(int position);
 
 private:
     void updateSolutionWord();

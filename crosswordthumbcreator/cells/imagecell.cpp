@@ -24,31 +24,31 @@
 #include <KIO/NetAccess>
 
 
-ImageCell::ImageCell( KrossWord* krossWord, const Coord& coordTopLeft,
-                      int horizontalCellSpan, int verticalCellSpan, const KUrl &url )
-        : SpannedCell( krossWord, KrossWordCell::ImageCellType, coordTopLeft,
-                       horizontalCellSpan, verticalCellSpan )
+ImageCell::ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
+                     int horizontalCellSpan, int verticalCellSpan, const KUrl &url)
+    : SpannedCell(krossWord, KrossWordCell::ImageCellType, coordTopLeft,
+                  horizontalCellSpan, verticalCellSpan)
 {
-    if ( !url.isLocalFile() ) {
+    if (!url.isLocalFile()) {
         QString fileName;
-        if ( KIO::NetAccess::download( url, fileName, 0 ) ) {
-            m_image = QImage( fileName );
-            KIO::NetAccess::removeTempFile( fileName );
+        if (KIO::NetAccess::download(url, fileName, 0)) {
+            m_image = QImage(fileName);
+            KIO::NetAccess::removeTempFile(fileName);
         }
     } else {
-        m_image = QImage( url.pathOrUrl() );
+        m_image = QImage(url.pathOrUrl());
     }
 
     m_url = url;
 }
 
-void ImageCell::drawBackgroundForPrinting( QPainter *p,
-        const QStyleOptionGraphicsItem *options )
+void ImageCell::drawBackgroundForPrinting(QPainter *p,
+        const QStyleOptionGraphicsItem *options)
 {
-    p->drawImage( options->rect, m_image );
+    p->drawImage(options->rect, m_image);
 
-    p->setPen( Qt::black );
-    p->drawRect( options->rect );
+    p->setPen(Qt::black);
+    p->drawRect(options->rect);
 }
 
 

@@ -28,8 +28,8 @@ class DoubleClueCell : public KrossWordCell
     Q_OBJECT
 
 public:
-    DoubleClueCell( KrossWord* krossWord, const Coord& coord,
-                    ClueCell *clue1, ClueCell *clue2 );
+    DoubleClueCell(KrossWord* krossWord, const Coord& coord,
+                   ClueCell *clue1, ClueCell *clue2);
 
     /** For qgraphicsitem_cast. */
     enum { Type = UserType + 4 };
@@ -44,7 +44,7 @@ public:
         return m_clue2;
     };
 
-    bool hasClue( ClueCell *clue ) {
+    bool hasClue(ClueCell *clue) {
         return m_clue1 == clue || m_clue2 == clue;
     };
 
@@ -83,9 +83,9 @@ public:
                << ClueCell::OffsetBottomLeft << ClueCell::OffsetBottom << ClueCell::OffsetBottomRight;
     };
 
-    ClueCell( KrossWord *krossWord, Coord coord,
-              Qt::Orientation orientation, AnswerOffset answerOffset,
-              QString clue, QString answer/*, QGraphicsScene *scene*/ );
+    ClueCell(KrossWord *krossWord, Coord coord,
+             Qt::Orientation orientation, AnswerOffset answerOffset,
+             QString clue, QString answer/*, QGraphicsScene *scene*/);
 
     /** For qgraphicsitem_cast. */
     enum { Type = UserType + 3 };
@@ -111,10 +111,10 @@ public:
     QString clue() const {
         return m_clue;
     };
-    void setClue( const QString &clue );
+    void setClue(const QString &clue);
     QString clueWithoutHyphens() const;
-    QString clueWithNumber( QString format = "%1. " ) const {
-        QString nr = clueNumber() == -1 ? "" : QString( format ).arg( clueNumber() + 1 );
+    QString clueWithNumber(QString format = "%1. ") const {
+        QString nr = clueNumber() == -1 ? "" : QString(format).arg(clueNumber() + 1);
         return nr + clueWithoutHyphens();
     };
     /** Gets the correct answer. */
@@ -126,9 +126,9 @@ public:
     * (@ref letters()).
     * @param pad This character is inserted for each empty letter
     * (@ref LetterCell::isEmpty()). */
-    QString currentAnswer( const QChar &pad = '-' ) const;
-    void setCurrentAnswer( const QString &answer,
-                           LetterCell::Confidence confidence = LetterCell::Confident );
+    QString currentAnswer(const QChar &pad = '-') const;
+    void setCurrentAnswer(const QString &answer,
+                          LetterCell::Confidence confidence = LetterCell::Confident);
     /** Returns true if no letter cell of this clue is empty.
     * @see LetterCell::isEmpty() */
     bool isAnswerComplete() const;
@@ -152,10 +152,10 @@ public:
     * clue cell is hidden, if @ref answerOffset() is
     * @ref ClueCell::ClueHidden. */
     Offset firstLetterOffset() const {
-        return answerOffsetToOffset( m_answerOffset );
+        return answerOffsetToOffset(m_answerOffset);
     };
-    static Offset answerOffsetToOffset( AnswerOffset answerOffset );
-    static Coord firstLetterCoords( Coord clueCoords, AnswerOffset answerOffset );
+    static Offset answerOffsetToOffset(AnswerOffset answerOffset);
+    static Coord firstLetterCoords(Coord clueCoords, AnswerOffset answerOffset);
     bool isHidden() const {
         return m_answerOffset == OnClueCell;
     };
@@ -174,25 +174,25 @@ public:
     * @see firstLetter()
     * @see lastLetter()
     * @see letters() */
-    LetterCell *letterAt( int letterIndex ) const;
-    int posOfLetter( LetterCell *letterCell ) const;
-    bool answerContainsLetter( LetterCell *letterCell ) const {
-        return posOfLetter( letterCell ) != -1;
+    LetterCell *letterAt(int letterIndex) const;
+    int posOfLetter(LetterCell *letterCell) const;
+    bool answerContainsLetter(LetterCell *letterCell) const {
+        return posOfLetter(letterCell) != -1;
     };
 
     int clueNumber() const {
         return m_clueNumber;
     };
-    void setClueNumber( int clueNumber );
+    void setClueNumber(int clueNumber);
 
     /** Sets the correct answer to this clue cell. */
-    void setCorrectAnswer( const QString &correctAnswer );
+    void setCorrectAnswer(const QString &correctAnswer);
 
 protected:
-    virtual void drawClueNumber( QPainter *p, const QStyleOptionGraphicsItem *option );
+    virtual void drawClueNumber(QPainter *p, const QStyleOptionGraphicsItem *option);
 
-    virtual void drawBackgroundForPrinting( QPainter* , const QStyleOptionGraphicsItem* );
-    virtual void drawForegroundForPrinting( QPainter* , const QStyleOptionGraphicsItem* );
+    virtual void drawBackgroundForPrinting(QPainter* , const QStyleOptionGraphicsItem*);
+    virtual void drawForegroundForPrinting(QPainter* , const QStyleOptionGraphicsItem*);
 
     virtual void wrapClueText();
 
@@ -205,15 +205,15 @@ private:
 
 
 // Sorting functions
-bool lessThanClueNumber( const ClueCell *clueCell1, const ClueCell *clueCell2 );
-bool greaterThanClueNumber( const ClueCell *clueCell1, const ClueCell *clueCell2 );
+bool lessThanClueNumber(const ClueCell *clueCell1, const ClueCell *clueCell2);
+bool greaterThanClueNumber(const ClueCell *clueCell1, const ClueCell *clueCell2);
 
-bool lessThanAnswerLength( const ClueCell *clueCell1, const ClueCell *clueCell2 );
-bool greaterThanAnswerLength( const ClueCell *clueCell1, const ClueCell *clueCell2 );
+bool lessThanAnswerLength(const ClueCell *clueCell1, const ClueCell *clueCell2);
+bool greaterThanAnswerLength(const ClueCell *clueCell1, const ClueCell *clueCell2);
 
 /** Horizontal clues first. */
-bool lessThanOrientation( const ClueCell *clueCell1, const ClueCell *clueCell2 );
+bool lessThanOrientation(const ClueCell *clueCell1, const ClueCell *clueCell2);
 /** Vertical clues first. */
-bool greaterThanOrientation( const ClueCell *clueCell1, const ClueCell *clueCell2 );
+bool greaterThanOrientation(const ClueCell *clueCell1, const ClueCell *clueCell2);
 
 #endif // KROSSWORDCLUECELL_H

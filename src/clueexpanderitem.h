@@ -33,53 +33,61 @@ using namespace Crossword;
 
 class QGraphicsSceneMouseEvent;
 #if QT_VERSION >= 0x040600
-class ClueExpanderItem : public QGraphicsObject {
+class ClueExpanderItem : public QGraphicsObject
+{
 #else
-class ClueExpanderItem : public QObject, public QGraphicsItem {
+class ClueExpanderItem : public QObject, public QGraphicsItem
+{
 #endif
-  Q_OBJECT
-  Q_PROPERTY( QColor color READ color WRITE setColor )
-  
+    Q_OBJECT
+    Q_PROPERTY(QColor color READ color WRITE setColor)
+
 #if QT_VERSION >= 0x040600
-  Q_INTERFACES( QGraphicsItem )
+    Q_INTERFACES(QGraphicsItem)
 #endif
 
-  public:
-    ClueExpanderItem( KrossWord *krossWord, ClueCell *clueCell );
+public:
+    ClueExpanderItem(KrossWord *krossWord, ClueCell *clueCell);
 
     static const int EXPANDER_WIDTH = 6;
-  
-    KrossWord *krossWord() const { return m_krossWord; };
-    ClueCell *clue() const { return m_clue; };
-    QColor color() const { return m_color; };
-    void setColor( const QColor &color );
+
+    KrossWord *krossWord() const {
+        return m_krossWord;
+    };
+    ClueCell *clue() const {
+        return m_clue;
+    };
+    QColor color() const {
+        return m_color;
+    };
+    void setColor(const QColor &color);
 
     const QColor normalColor() const;
     const QColor dragColor() const;
 
-  signals:
-    void addLettersToClueRequest( ClueCell *clue, int lettersToAdd );
-    
-  protected slots:
-    void krosswordEditModeChanged( bool editable );
-    void clueAnswerLengthChanged( ClueCell *clueCell, int newLength );
-    void clueCorrectAnswerChanged( ClueCell *clueCell, const QString &correctAnswer );
+signals:
+    void addLettersToClueRequest(ClueCell *clue, int lettersToAdd);
+
+protected slots:
+    void krosswordEditModeChanged(bool editable);
+    void clueAnswerLengthChanged(ClueCell *clueCell, int newLength);
+    void clueCorrectAnswerChanged(ClueCell *clueCell, const QString &correctAnswer);
     void clueCellMoved();
-    void clueLastLetterChanged( LetterCell *lastLetter );
-    
-  protected:
+    void clueLastLetterChanged(LetterCell *lastLetter);
+
+protected:
     virtual QRectF boundingRect() const;
-    virtual void paint( QPainter* painter,
-			const QStyleOptionGraphicsItem* option,
-			QWidget* widget = 0 );
-    
-    virtual void mousePressEvent( QGraphicsSceneMouseEvent* event );
-    virtual void mouseReleaseEvent( QGraphicsSceneMouseEvent* event );
-    virtual void mouseMoveEvent( QGraphicsSceneMouseEvent* event );
-    
-  private:
-    void setPosAfterCell( LetterCell *letter );
-    
+    virtual void paint(QPainter* painter,
+                       const QStyleOptionGraphicsItem* option,
+                       QWidget* widget = 0);
+
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
+
+private:
+    void setPosAfterCell(LetterCell *letter);
+
     KrossWord *m_krossWord;
     ClueCell *m_clue;
     LetterCell *m_lastLetter;
@@ -88,7 +96,7 @@ class ClueExpanderItem : public QObject, public QGraphicsItem {
     QString m_origCorrectAnswer;
     QColor m_color;
 public slots:
-    void lastLetterDestroyed( QObject* );
+    void lastLetterDestroyed(QObject*);
 };
 
 #endif // KROSSWORDLETTERCELL_H

@@ -44,68 +44,68 @@ class CurrentCellWidget : public QWidget
     Q_OBJECT
 
 public:
-    CurrentCellWidget( KrossWord *krossWord, KrosswordDictionary *dictionary,
-                       QWidget* parent = 0 );
+    CurrentCellWidget(KrossWord *krossWord, KrosswordDictionary *dictionary,
+                      QWidget* parent = 0);
     ~CurrentCellWidget();
 
     KrossWord *krossWord() const {
         return m_krossWord;
     };
-    void setKrossWord( KrossWord *krossWord );
-    void setWatchForChanges( bool enabled = true );
+    void setKrossWord(KrossWord *krossWord);
+    void setWatchForChanges(bool enabled = true);
 
 signals:
-    void changeOrientationRequest( ClueCell *clueCell,
-                                   Qt::Orientation newOrientation );
-    void changeAnswerOffsetRequest( ClueCell *clueCell,
-                                    AnswerOffset newAnswerOffset );
-    void changeClueTextRequest( ClueCell *clueCell, const QString &newClueText );
-    void changeClueAndCorrectAnswerRequest( ClueCell *clueCell,
-                                            const QString &newClueText,
-                                            const QString &newCorrectAnswer );
-    void setSolutionWordIndexRequest( SolutionLetterCell *solutionLetterCell,
-                                      int solutionWordIndex );
-    void convertToLetterCellRequest( SolutionLetterCell *solutionLetterCell );
-    void convertToSolutionLetterCellRequest( LetterCell *letterCell );
+    void changeOrientationRequest(ClueCell *clueCell,
+                                  Qt::Orientation newOrientation);
+    void changeAnswerOffsetRequest(ClueCell *clueCell,
+                                   AnswerOffset newAnswerOffset);
+    void changeClueTextRequest(ClueCell *clueCell, const QString &newClueText);
+    void changeClueAndCorrectAnswerRequest(ClueCell *clueCell,
+                                           const QString &newClueText,
+                                           const QString &newCorrectAnswer);
+    void setSolutionWordIndexRequest(SolutionLetterCell *solutionLetterCell,
+                                     int solutionWordIndex);
+    void convertToLetterCellRequest(SolutionLetterCell *solutionLetterCell);
+    void convertToSolutionLetterCellRequest(LetterCell *letterCell);
 
 protected slots:
-    void currentCellChanged( KrossWordCell *currentCell,
-                             KrossWordCell *previousCell );
-    void currentClueChanged( ClueCell *clue );
-    void editModeChanged( bool editable );
+    void currentCellChanged(KrossWordCell *currentCell,
+                            KrossWordCell *previousCell);
+    void currentClueChanged(ClueCell *clue);
+    void editModeChanged(bool editable);
 
-    void changeOrientationRequested( ClueCell *clueCell,
-                                     Qt::Orientation newOrientation ) {
-        emit changeOrientationRequest( clueCell, newOrientation );
+    void changeOrientationRequested(ClueCell *clueCell,
+                                    Qt::Orientation newOrientation) {
+        emit changeOrientationRequest(clueCell, newOrientation);
     };
-    void changeAnswerOffsetRequested( ClueCell *clueCell,
-                                      AnswerOffset newAnswerOffset ) {
-        emit changeAnswerOffsetRequest( clueCell, newAnswerOffset );
+    void changeAnswerOffsetRequested(ClueCell *clueCell,
+                                     AnswerOffset newAnswerOffset) {
+        emit changeAnswerOffsetRequest(clueCell, newAnswerOffset);
     };
-    void changeClueTextRequested( ClueCell *clueCell, const QString &newClueText ) {
-        emit changeClueTextRequest( clueCell, newClueText );
+    void changeClueTextRequested(ClueCell *clueCell, const QString &newClueText) {
+        emit changeClueTextRequest(clueCell, newClueText);
     };
-    void changeClueAndCorrectAnswerRequested( ClueCell *clueCell, const QString &newClueText,
-            const QString &newCorrectAnswer ) {
-        emit changeClueAndCorrectAnswerRequest( clueCell, newClueText, newCorrectAnswer );
+    void changeClueAndCorrectAnswerRequested(ClueCell *clueCell, const QString &newClueText,
+            const QString &newCorrectAnswer) {
+        emit changeClueAndCorrectAnswerRequest(clueCell, newClueText, newCorrectAnswer);
     };
-    void setSolutionWordIndexRequested( SolutionLetterCell *solutionLetterCell,
-                                        int solutionWordIndex ) {
-        emit setSolutionWordIndexRequest( solutionLetterCell, solutionWordIndex );
+    void setSolutionWordIndexRequested(SolutionLetterCell *solutionLetterCell,
+                                       int solutionWordIndex) {
+        emit setSolutionWordIndexRequest(solutionLetterCell, solutionWordIndex);
     };
-    void convertToLetterCellRequested( SolutionLetterCell *solutionLetterCell ) {
-        emit convertToLetterCellRequest( solutionLetterCell );
+    void convertToLetterCellRequested(SolutionLetterCell *solutionLetterCell) {
+        emit convertToLetterCellRequest(solutionLetterCell);
     };
     void convertToSolutionLetterCellRequested();
 
 private:
-    void replaceCurrentWidget( CellType newCellType, QWidget *newWidget );
+    void replaceCurrentWidget(CellType newCellType, QWidget *newWidget);
     void clearLayout();
     void setupNoCell();
-    void setupNoPropertiesCell( KrossWordCell *cell );
-    void setupClueCell( ClueCell *clue, LetterCell *letter = NULL );
-    void setupImageCell( ImageCell *image );
-    void setupSolutionLetterCell( SolutionLetterCell *solutionLetter );
+    void setupNoPropertiesCell(KrossWordCell *cell);
+    void setupClueCell(ClueCell *clue, LetterCell *letter = NULL);
+    void setupImageCell(ImageCell *image);
+    void setupSolutionLetterCell(SolutionLetterCell *solutionLetter);
 
     KrossWord *m_krossWord;
     KrosswordDictionary *m_dictionary;
@@ -121,10 +121,10 @@ private:
 class ClueCellWidgetWithConvertButton : public QWidget
 {
 public:
-    ClueCellWidgetWithConvertButton( ClueCell* clue, KrosswordDictionary *dictionary,
-                                     LetterCell *letter, QWidget* parent = 0 );
+    ClueCellWidgetWithConvertButton(ClueCell* clue, KrosswordDictionary *dictionary,
+                                    LetterCell *letter, QWidget* parent = 0);
 
-    void setCells( ClueCell *clue, LetterCell *letter );
+    void setCells(ClueCell *clue, LetterCell *letter);
 
     ClueCellWidget *clueCellWidget() const {
         return m_clueCellWidget;

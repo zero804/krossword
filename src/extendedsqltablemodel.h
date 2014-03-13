@@ -21,21 +21,22 @@
 #define EXTENDEDSQLTABLEMODEL_H
 #include <QSqlTableModel>
 
-class ExtendedSqlTableModel : public QSqlTableModel {
+class ExtendedSqlTableModel : public QSqlTableModel
+{
     Q_OBJECT
 
-    public:
-	explicit ExtendedSqlTableModel( QObject* parent = 0, QSqlDatabase db = QSqlDatabase() );
+public:
+    explicit ExtendedSqlTableModel(QObject* parent = 0, QSqlDatabase db = QSqlDatabase());
 
-	void setLimit( int lowerLimit, int upperLimit );
-	void removeLimit();
+    void setLimit(int lowerLimit, int upperLimit);
+    void removeLimit();
 
-    protected:
-	virtual QString selectStatement() const;
+protected:
+    virtual QString selectStatement() const;
 
-    private:
-	int m_lowerLimit;
-	int m_upperLimit;
+private:
+    int m_lowerLimit;
+    int m_upperLimit;
 };
 
 #endif // EXTENDEDSQLTABLEMODEL_H

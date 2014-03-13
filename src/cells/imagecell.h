@@ -29,8 +29,8 @@ namespace Crossword
 class ImageCell : public SpannedCell
 {
 public:
-    ImageCell( KrossWord* krossWord, const Coord& coordTopLeft,
-               int horizontalCellSpan, int verticalCellSpan, const KUrl &url );
+    ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
+              int horizontalCellSpan, int verticalCellSpan, const KUrl &url);
 
     /** For qgraphicsitem_cast. */
     enum { Type = UserType + 8 };
@@ -39,18 +39,18 @@ public:
     };
 
     virtual void drawBackground(
-        QPainter *p, const QStyleOptionGraphicsItem *options );
+        QPainter *p, const QStyleOptionGraphicsItem *options);
     virtual void drawBackgroundForPrinting(
-        QPainter *p, const QStyleOptionGraphicsItem *options );
+        QPainter *p, const QStyleOptionGraphicsItem *options);
 
     KUrl url() const {
         return m_url;
     };
-    void setUrl( const KUrl &url );
+    void setUrl(const KUrl &url);
 
 protected:
-    virtual void focusInEvent( QFocusEvent* event );
-    virtual void focusOutEvent( QFocusEvent* event );
+    virtual void focusInEvent(QFocusEvent* event);
+    virtual void focusOutEvent(QFocusEvent* event);
 
 private:
     KUrl m_url;

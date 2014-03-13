@@ -31,17 +31,17 @@ class ImageCellWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit ImageCellWidget( ImageCell *imageCell, QWidget* parent = 0 );
+    explicit ImageCellWidget(ImageCell *imageCell, QWidget* parent = 0);
 
-    void setImageCell( ImageCell *imageCell );
+    void setImageCell(ImageCell *imageCell);
     ImageCell *imageCell() const {
         return m_imageCell;
     };
 
 protected slots:
     void browseClicked();
-    void horizontalCellSpanChanged( int value );
-    void verticalCellSpanChanged( int value );
+    void horizontalCellSpanChanged(int value);
+    void verticalCellSpanChanged(int value);
 
 private:
     Ui::image_properties_dock ui_image_properties_dock;

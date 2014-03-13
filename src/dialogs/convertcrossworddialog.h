@@ -30,16 +30,16 @@ class ConvertCrosswordDialog : public KDialog
     Q_OBJECT
 
 public:
-    explicit ConvertCrosswordDialog( KrossWord *krossWord,
-                                     QWidget* parent = 0, Qt::WFlags flags = 0 );
+    explicit ConvertCrosswordDialog(KrossWord *krossWord,
+                                    QWidget* parent = 0, Qt::WFlags flags = 0);
 
     CrosswordTypeInfo crosswordTypeInfo() {
         return m_convertTypeInfo;
     };
 
 protected slots:
-    void crosswordTypeChanged( int index );
-    void crosswordTypeInfoChanged( const CrosswordTypeInfo &typeInfo );
+    void crosswordTypeChanged(int index);
+    void crosswordTypeInfoChanged(const CrosswordTypeInfo &typeInfo);
 
 private:
     KrossWord *m_krossWord;

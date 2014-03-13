@@ -31,7 +31,7 @@
 
 namespace KIO
 {
-    class PreviewJob;
+class PreviewJob;
 }
 class LibraryXmlGuiWindow;
 class QTreeView;
@@ -56,7 +56,7 @@ public:
     enum Action {
         Game_Download,
         Game_Upload,
-        // 	Options_Themes,
+        //  Options_Themes,
         RecentTab_RecentFilesRemove,
     };
 
@@ -72,7 +72,9 @@ public:
      */
     virtual ~KrossWordPuzzle() {}
 
-    CrossWordXmlGuiWindow *mainCrossword() const { return m_mainCrossword; }
+    CrossWordXmlGuiWindow *mainCrossword() const {
+        return m_mainCrossword;
+    }
 
     void loadFile(const KUrl &url, Crossword::KrossWord::FileFormat fileFormat = Crossword::KrossWord::DetermineByFileName, bool loadCrashedFile = false);
     bool createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo,
@@ -81,7 +83,7 @@ public:
                             const QString &authors,
                             const QString &copyright,
                             const QString &notes);
-    bool createNewCrossWordFromTemplate(const QString &templateFilePath, 
+    bool createNewCrossWordFromTemplate(const QString &templateFilePath,
                                         const QString &title,
                                         const QString &authors,
                                         const QString &copyright,
@@ -101,12 +103,22 @@ public slots:
     void gameNewSlot();
     void downloadSlot();
     void uploadSlot();
-    
-    void loadSlot(const KUrl &url = KUrl()) { loadFile(url); }
-    void loadRecentSlot(const KUrl &url)    { loadFile(url); }
-    void loadFile(const QString &fileName)  { loadFile(KUrl(fileName)); }
-    void saveSlot()                         { m_mainCrossword->save(); }
-    void saveAsSlot()                       { m_mainCrossword->saveAs(); }
+
+    void loadSlot(const KUrl &url = KUrl()) {
+        loadFile(url);
+    }
+    void loadRecentSlot(const KUrl &url)    {
+        loadFile(url);
+    }
+    void loadFile(const QString &fileName)  {
+        loadFile(KUrl(fileName));
+    }
+    void saveSlot()                         {
+        m_mainCrossword->save();
+    }
+    void saveAsSlot()                       {
+        m_mainCrossword->saveAs();
+    }
 
     // Settings actions
     void optionsPreferencesSlot();

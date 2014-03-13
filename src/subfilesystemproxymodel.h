@@ -24,20 +24,21 @@
 #include <QDir>
 
 class QFileSystemModel;
-class SubFileSystemProxyModel : public QSortFilterProxyModel {
-  public:
-    SubFileSystemProxyModel( QObject* parent = 0 );
+class SubFileSystemProxyModel : public QSortFilterProxyModel
+{
+public:
+    SubFileSystemProxyModel(QObject* parent = 0);
     virtual ~SubFileSystemProxyModel();
 
-    void setRootPath( const QString &rootPath );
-    QString filePath( const QModelIndex &index ) const;
-    void setFilter( QDir::Filter filter );
-    QModelIndex indexForPath( const QString &path, int column = 0 ) const;
+    void setRootPath(const QString &rootPath);
+    QString filePath(const QModelIndex &index) const;
+    void setFilter(QDir::Filter filter);
+    QModelIndex indexForPath(const QString &path, int column = 0) const;
 
-    virtual QModelIndex mapFromSource( const QModelIndex& sourceIndex ) const;
-    virtual QModelIndex mapToSource( const QModelIndex& proxyIndex ) const;
-    
-  private:
+    virtual QModelIndex mapFromSource(const QModelIndex& sourceIndex) const;
+    virtual QModelIndex mapToSource(const QModelIndex& proxyIndex) const;
+
+private:
     QFileSystemModel *m_fileSystemModel;
 };
 

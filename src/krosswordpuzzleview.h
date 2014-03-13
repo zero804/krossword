@@ -35,22 +35,22 @@ class KUrl;
 // class ScrollbarAnimator : public QObject {
 //   Q_OBJECT
 //   Q_PROPERTY( int value READ value WRITE setValue )
-// 
+//
 //   public:
 //     ScrollbarAnimator( QAbstractSlider *slider, QWidget* parent = 0 );
-// 
+//
 //     int value() const { return m_slider->value(); };
 //     void setValue( int value );
-// 
+//
 //   protected slots:
 //     void sliderActionTriggered( int action );
 //     void sliderValueChanged( int value );
 //     void sliderDestroyed( QObject* );
 //     void animationFinished();
-// 
+//
 //   private:
 //     void startAnimation( int scrollOffset );
-// 
+//
 //     QAbstractSlider *m_slider;
 //     QPropertyAnimation *m_animation;
 //     int m_oldValue;
@@ -72,7 +72,7 @@ public:
     /**
      * Default constructor
      */
-    explicit KrossWordPuzzleView( KrossWordPuzzleScene *scene, QWidget *parent = 0 );
+    explicit KrossWordPuzzleView(KrossWordPuzzleScene *scene, QWidget *parent = 0);
 
     /**
      * Destructor
@@ -80,21 +80,22 @@ public:
     virtual ~KrossWordPuzzleView();
 
     inline Crossword::KrossWord *krossWord() const {
-	return ((KrossWordPuzzleScene*)scene())->krossWord(); };
+        return ((KrossWordPuzzleScene*)scene())->krossWord();
+    };
 //     void setTheme( const QString &theme = "default" );
 
-    void renderToPrinter( QPainter *painter, const QRectF &target = QRectF(),
-		const QRect &source = QRect(),
-                Qt::AspectRatioMode aspectRatioMode = Qt::KeepAspectRatio );
+    void renderToPrinter(QPainter *painter, const QRectF &target = QRectF(),
+                         const QRect &source = QRect(),
+                         Qt::AspectRatioMode aspectRatioMode = Qt::KeepAspectRatio);
 
     virtual QSize sizeHint() const;
 
 protected:
-    virtual void keyPressEvent( QKeyEvent* event );
-    virtual void keyReleaseEvent( QKeyEvent* event );
-    virtual void wheelEvent( QWheelEvent* event );
+    virtual void keyPressEvent(QKeyEvent* event);
+    virtual void keyReleaseEvent(QKeyEvent* event);
+    virtual void wheelEvent(QWheelEvent* event);
 
-    virtual void resizeEvent( QResizeEvent* event );
+    virtual void resizeEvent(QResizeEvent* event);
 
 private:
 //     Ui::krosswordpuzzleview_base ui_krosswordpuzzleview_base;
@@ -104,16 +105,16 @@ signals:
     /**
      * Use this signal to change the content of the statusbar
      */
-    void signalChangeStatusbar( const QString& text );
+    void signalChangeStatusbar(const QString& text);
 
     /**
      * Use this signal to change the content of the caption
      */
-    void signalChangeCaption( const QString& text );
+    void signalChangeCaption(const QString& text);
 
-    void signalChangeZoom( int zoomChange );
+    void signalChangeZoom(int zoomChange);
 
-    void resized( const QSize &oldSize, const QSize &newSize );
+    void resized(const QSize &oldSize, const QSize &newSize);
 
 private slots:
     void settingsChanged();

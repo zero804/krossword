@@ -22,23 +22,24 @@
 
 #include <KUrl>
 
-bool CrosswordThumbCreator::create( const QString& path, int width, int height, QImage& img )
+bool CrosswordThumbCreator::create(const QString& path, int width, int height, QImage& img)
 {
     KrossWord krossWord;
     QString errorString;
-    if ( !krossWord.read( KUrl( path ), &errorString ) ) {
+    if (!krossWord.read(KUrl(path), &errorString)) {
         kDebug() << errorString;
         return false;
     }
 
-    img = krossWord.toImage( QSize( width * 2, height * 2 ) );
+    img = krossWord.toImage(QSize(width * 2, height * 2));
 
     return true;
 }
 
 extern "C"
 {
-    KDE_EXPORT ThumbCreator *new_creator() {
+    KDE_EXPORT ThumbCreator *new_creator()
+    {
         return new CrosswordThumbCreator();
     }
 };

@@ -23,47 +23,47 @@
 #include <KLocalizedString>
 
 
-CrosswordPreviewWidget::CrosswordPreviewWidget( QWidget* parent )
-        : QLabel( parent ), m_previewJob( 0 )
+CrosswordPreviewWidget::CrosswordPreviewWidget(QWidget* parent)
+    : QLabel(parent), m_previewJob(0)
 {
-    m_previewSize = QSize( 256, 256 );
+    m_previewSize = QSize(256, 256);
 }
 
-void CrosswordPreviewWidget::showPreview( const QString& fileName,
-        const QString& mimeType )
+void CrosswordPreviewWidget::showPreview(const QString& fileName,
+        const QString& mimeType)
 {
-    KFileItem crossword( KUrl( fileName ), mimeType, KFileItem::Unknown );
-    m_previewJob = new KIO::PreviewJob( KFileItemList() << crossword,
-                                        m_previewSize.width(), m_previewSize.height(),
-                                        0, 1, false, true, 0 );
-    m_previewJob->setAutoDelete( true );
-    connect( m_previewJob, SIGNAL( gotPreview( KFileItem, QPixmap ) ),
-             this, SLOT( previewJobGotPreview( KFileItem, QPixmap ) ) );
-    connect( m_previewJob, SIGNAL( failed( KFileItem ) ),
-             this, SLOT( previewJobFailed( KFileItem ) ) );
+    KFileItem crossword(KUrl(fileName), mimeType, KFileItem::Unknown);
+    m_previewJob = new KIO::PreviewJob(KFileItemList() << crossword,
+                                       m_previewSize.width(), m_previewSize.height(),
+                                       0, 1, false, true, 0);
+    m_previewJob->setAutoDelete(true);
+    connect(m_previewJob, SIGNAL(gotPreview(KFileItem, QPixmap)),
+            this, SLOT(previewJobGotPreview(KFileItem, QPixmap)));
+    connect(m_previewJob, SIGNAL(failed(KFileItem)),
+            this, SLOT(previewJobFailed(KFileItem)));
     m_previewJob->start();
 
-    setText( i18n( "Loading preview..." ) );
-    setPixmap( QPixmap() );
-    setEnabled( false );
+    setText(i18n("Loading preview..."));
+    setPixmap(QPixmap());
+    setEnabled(false);
 }
 
-void CrosswordPreviewWidget::previewJobFailed( const KFileItem& fileItem )
+void CrosswordPreviewWidget::previewJobFailed(const KFileItem& fileItem)
 {
-    Q_UNUSED( fileItem );
+    Q_UNUSED(fileItem);
 
-    setText( i18n( "Preview failed" ) );
-    setPixmap( QPixmap() );
-    setEnabled( false );
+    setText(i18n("Preview failed"));
+    setPixmap(QPixmap());
+    setEnabled(false);
 }
 
-void CrosswordPreviewWidget::previewJobGotPreview( const KFileItem& fileItem,
-        const QPixmap& pixmap )
+void CrosswordPreviewWidget::previewJobGotPreview(const KFileItem& fileItem,
+        const QPixmap& pixmap)
 {
-    Q_UNUSED( fileItem );
+    Q_UNUSED(fileItem);
 
-    setText( QString() );
-    setPixmap( pixmap );
-    setEnabled( true );
+    setText(QString());
+    setPixmap(pixmap);
+    setEnabled(true);
 }
 

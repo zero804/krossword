@@ -20,8 +20,9 @@
 #include "librarymodel.h"
 
 
-LibraryModel::LibraryModel( QObject* parent )
-	    : QStandardItemModel( 0, 1, parent ) {
+LibraryModel::LibraryModel(QObject* parent)
+    : QStandardItemModel(0, 1, parent)
+{
 
 }
 

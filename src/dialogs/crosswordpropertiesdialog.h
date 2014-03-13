@@ -30,8 +30,8 @@ class CrosswordPropertiesDialog : public KDialog
     Q_OBJECT
 
 public:
-    explicit CrosswordPropertiesDialog( KrossWord *krossWord,
-                                        QWidget* parent = 0, Qt::WFlags flags = 0 );
+    explicit CrosswordPropertiesDialog(KrossWord *krossWord,
+                                       QWidget* parent = 0, Qt::WFlags flags = 0);
 
     int columns() const;
     int rows() const;
@@ -52,14 +52,14 @@ public:
     };
 
 signals:
-    void conversionRequested( const CrosswordTypeInfo &targetTypeInfo );
+    void conversionRequested(const CrosswordTypeInfo &targetTypeInfo);
 
 protected slots:
-    void rowsChanged( int rows );
-    void columnsChanged( int columns );
+    void rowsChanged(int rows);
+    void columnsChanged(int columns);
     void convertClicked();
-    void sizeChanged( int columns, int rows );
-    void resizeAnchorChanged( int id );
+    void sizeChanged(int columns, int rows);
+    void resizeAnchorChanged(int id);
     void resetSizeClicked();
 
 private:
@@ -70,15 +70,15 @@ private:
     };
     static const QList< QChar > ArrowChars;
 
-    void setAnchorIcons( KrossWord::ResizeAnchor anchor );
-    void updateInfoText( KrossWord::ResizeAnchor anchor ) {
-        updateInfoText( anchor,
-                        ui_properties.columns->value(), ui_properties.rows->value() );
+    void setAnchorIcons(KrossWord::ResizeAnchor anchor);
+    void updateInfoText(KrossWord::ResizeAnchor anchor) {
+        updateInfoText(anchor,
+                       ui_properties.columns->value(), ui_properties.rows->value());
     };
-    void updateInfoText( int columns, int rows ) {
-        updateInfoText( anchor(), columns, rows );
+    void updateInfoText(int columns, int rows) {
+        updateInfoText(anchor(), columns, rows);
     };
-    void updateInfoText( KrossWord::ResizeAnchor anchor, int columns, int rows );
+    void updateInfoText(KrossWord::ResizeAnchor anchor, int columns, int rows);
 
     KrossWord *m_krossWord;
     Ui::properties ui_properties;

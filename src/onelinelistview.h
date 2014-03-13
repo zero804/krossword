@@ -22,12 +22,13 @@
 
 #include <QListView>
 
-class OneLineListView : public QListView {
-    public:
-	OneLineListView( QWidget* parent = 0 );
+class OneLineListView : public QListView
+{
+public:
+    OneLineListView(QWidget* parent = 0);
 
-	virtual QRect visualRect( const QModelIndex& index ) const;
-	virtual void resizeEvent( QResizeEvent* e );
+    virtual QRect visualRect(const QModelIndex& index) const;
+    virtual void resizeEvent(QResizeEvent* e);
 
 };
 

@@ -25,9 +25,9 @@
 class SpannedCell : public KrossWordCell
 {
 public:
-    SpannedCell( KrossWord* krossWord, KrossWordCell::CellType cellType,
-                 const Coord& coordTopLeft, int horizontalCellSpan,
-                 int verticalCellSpan );
+    SpannedCell(KrossWord* krossWord, KrossWordCell::CellType cellType,
+                const Coord& coordTopLeft, int horizontalCellSpan,
+                int verticalCellSpan);
 
     virtual QRectF boundingRect() const;
 
@@ -48,14 +48,14 @@ public:
         return coord();
     };
     inline Coord coordTopRight() const {
-        return Coord( coord().first + m_horizontalCellSpan - 1, coord().second );
+        return Coord(coord().first + m_horizontalCellSpan - 1, coord().second);
     };
     inline Coord coordBottomLeft() const {
-        return Coord( coord().first, coord().second + m_verticalCellSpan - 1 );
+        return Coord(coord().first, coord().second + m_verticalCellSpan - 1);
     };
     inline Coord coordBottomRight() const {
-        return Coord( coord().first + m_horizontalCellSpan - 1,
-                      coord().second + m_verticalCellSpan - 1 );
+        return Coord(coord().first + m_horizontalCellSpan - 1,
+                     coord().second + m_verticalCellSpan - 1);
     };
 
 private:

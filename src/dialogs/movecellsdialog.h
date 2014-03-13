@@ -34,7 +34,7 @@ class MoveCellsDialog : public KDialog
     Q_OBJECT
 
 public:
-    explicit MoveCellsDialog( KrossWord *krossWord, QWidget* parent = 0 );
+    explicit MoveCellsDialog(KrossWord *krossWord, QWidget* parent = 0);
 
     int moveHorizontal() const {
         return ui_move_cells.dx->value();

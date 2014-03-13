@@ -30,25 +30,25 @@ class HtmlDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 
-    protected:
-	void paint ( QPainter * painter, const QStyleOptionViewItem & option,
-		    const QModelIndex & index ) const;
-	QSize sizeHint ( const QStyleOptionViewItem & option,
-		    const QModelIndex & index ) const;
+protected:
+    void paint(QPainter * painter, const QStyleOptionViewItem & option,
+               const QModelIndex & index) const;
+    QSize sizeHint(const QStyleOptionViewItem & option,
+                   const QModelIndex & index) const;
 };
 
 class RemovedDelegate : public QItemDelegate
 {
     Q_OBJECT
 
-    protected:
-	virtual void drawDisplay( QPainter* painter, const QStyleOptionViewItem& option,
-				  const QRect& rect, const QString& text ) const;
+protected:
+    virtual void drawDisplay(QPainter* painter, const QStyleOptionViewItem& option,
+                             const QRect& rect, const QString& text) const;
 
 
-    virtual QWidget* createEditor( QWidget*, const QStyleOptionViewItem&,
-				   const QModelIndex& ) const {
-	return NULL; // No editing allowed
+    virtual QWidget* createEditor(QWidget*, const QStyleOptionViewItem&,
+                                  const QModelIndex&) const {
+        return NULL; // No editing allowed
     };
 };
 
@@ -57,29 +57,30 @@ class CrosswordAnswerDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 
-    protected:
-	virtual QWidget* createEditor( QWidget* parent,
-				       const QStyleOptionViewItem& option,
-				       const QModelIndex& index ) const;
+protected:
+    virtual QWidget* createEditor(QWidget* parent,
+                                  const QStyleOptionViewItem& option,
+                                  const QModelIndex& index) const;
 };
 
-class CrosswordAnswerValidator : public QValidator {
-    public:
-	explicit CrosswordAnswerValidator( const QString &allowedChars = "A-Z",
-					   QObject* parent = 0 );
-	explicit CrosswordAnswerValidator( const Crossword::CrosswordTypeInfo &crosswordType,
-					   QObject* parent = 0 );
+class CrosswordAnswerValidator : public QValidator
+{
+public:
+    explicit CrosswordAnswerValidator(const QString &allowedChars = "A-Z",
+                                      QObject* parent = 0);
+    explicit CrosswordAnswerValidator(const Crossword::CrosswordTypeInfo &crosswordType,
+                                      QObject* parent = 0);
 
-	virtual State validate( QString &input, int &pos ) const;
-	virtual void fixup( QString &input ) const;
+    virtual State validate(QString &input, int &pos) const;
+    virtual void fixup(QString &input) const;
 
-	static void fix( QString &input, const QString &allowedChars = "A-Z" );
-	static void fix( QString &input, const Crossword::CrosswordTypeInfo &crosswordType );
+    static void fix(QString &input, const QString &allowedChars = "A-Z");
+    static void fix(QString &input, const Crossword::CrosswordTypeInfo &crosswordType);
 
-    private:
-	static void fix( QString &input, int *pos, const QString &allowedChars = "A-Z" );
-	static void fix( QString &input, int *pos, const Crossword::CrosswordTypeInfo &crosswordType );
-	QString m_allowedChars;
+private:
+    static void fix(QString &input, int *pos, const QString &allowedChars = "A-Z");
+    static void fix(QString &input, int *pos, const Crossword::CrosswordTypeInfo &crosswordType);
+    QString m_allowedChars;
 };
 
 #endif // HTMLDELEGATE_H

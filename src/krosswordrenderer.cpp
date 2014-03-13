@@ -35,8 +35,8 @@ KrosswordRenderer* KrosswordRenderer::self()
 
 KrosswordRenderer::KrosswordRenderer()
 {
-    m_cache = new KPixmapCache( "krosswordpuzzle-cache" );
-    m_cache->setCacheLimit( 2 * 1024 );
+    m_cache = new KPixmapCache("krosswordpuzzle-cache");
+    m_cache->setCacheLimit(2 * 1024);
 
     m_renderer = new KSvgRenderer();
 //     m_renderer->load( KStandardDirs::locate( "appdata", "themes/scribble_theme.svgz" ) );
@@ -50,9 +50,9 @@ KrosswordRenderer::~KrosswordRenderer()
     delete m_cache;
 }
 
-bool KrosswordRenderer::setTheme( const QString& fileName )
+bool KrosswordRenderer::setTheme(const QString& fileName)
 {
-    if ( m_themeFileName == fileName )
+    if (m_themeFileName == fileName)
         return true;
 
     m_themeFileName = fileName;
@@ -63,20 +63,20 @@ bool KrosswordRenderer::setTheme( const QString& fileName )
 //     if ( themeFile.isNull() )
 //       return false; // Theme not found
 
-    return m_renderer->load( fileName );
+    return m_renderer->load(fileName);
 }
 
-QPixmap KrosswordRenderer::background( const QSize &size ) const
+QPixmap KrosswordRenderer::background(const QSize &size) const
 {
     QPixmap pix;
 //     QString cacheStr = "background" + QString("_%1x%2")
 //          .arg(size.width()).arg(size.height());
 //     if ( !m_cache->find(cacheStr, pix) ) {
 
-    pix = QPixmap( size );
-    pix.fill( Qt::transparent );
-    QPainter paint( &pix );
-    m_renderer->render( &paint, "background" );
+    pix = QPixmap(size);
+    pix.fill(Qt::transparent);
+    QPainter paint(&pix);
+    m_renderer->render(&paint, "background");
     paint.end();
 //  m_cache->insert( cacheStr, pix );
 //     }
@@ -84,14 +84,14 @@ QPixmap KrosswordRenderer::background( const QSize &size ) const
     return pix;
 }
 
-bool KrosswordRenderer::hasElement( const QString& elementid ) const
+bool KrosswordRenderer::hasElement(const QString& elementid) const
 {
-    return m_renderer->elementExists( elementid );
+    return m_renderer->elementExists(elementid);
 }
 
-void KrosswordRenderer::renderBackground( QPainter* p, const QRectF& r ) const
+void KrosswordRenderer::renderBackground(QPainter* p, const QRectF& r) const
 {
-    renderElement( p, "background", r );
+    renderElement(p, "background", r);
 }
 
 // void KrosswordRenderer::renderElement( QPainter* p, const QString& elementid,
@@ -116,33 +116,29 @@ void KrosswordRenderer::renderBackground( QPainter* p, const QRectF& r ) const
 //     p->drawPixmap( static_cast<int>(r.x()), static_cast<int>(r.y()), pix );
 // }
 
-void KrosswordRenderer::renderElement( QPainter* p, const QString& elementid,
-                                       const QRectF& r, const QColor &alpha ) const
+void KrosswordRenderer::renderElement(QPainter* p, const QString& elementid, const QRectF& r, const QColor &alpha) const
 {
     QPixmap pix;
 
-    QString cacheStr = elementid + QString( "_%1x%2" )
-                       .arg( r.width() ).arg( r.height() );
-    if ( !m_cache->find( cacheStr, pix ) ) {
-        pix = QPixmap( r.size().toSize() );
-        pix.fill( Qt::transparent );
-        QPainter painter( &pix );
-        painter.setRenderHints( QPainter::HighQualityAntialiasing | QPainter::Antialiasing
-                                | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing );
-        m_renderer->render( &painter, elementid );
+    QString cacheStr = elementid + QString("_%1x%2").arg(r.width()).arg(r.height());
+    if (!m_cache->find(cacheStr, pix)) {
+        pix = QPixmap(r.size().toSize());
+        pix.fill(Qt::transparent);
+        QPainter painter(&pix);
+        painter.setRenderHints(QPainter::HighQualityAntialiasing | QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing);
+        m_renderer->render(&painter, elementid);
         painter.end();
-        m_cache->insert( cacheStr, pix );
+        m_cache->insert(cacheStr, pix);
     }
 
-    if ( alpha != Qt::black ) {
-        QPixmap pixAlpha = QPixmap( r.size().toSize() );
-        pixAlpha.fill( alpha );
-        pix.setAlphaChannel( pixAlpha );
+    if (alpha != Qt::black) {
+        QPixmap pixAlpha = QPixmap(r.size().toSize());
+        pixAlpha.fill(alpha);
+        pix.setAlphaChannel(pixAlpha);
     }
 
-    p->setRenderHints( QPainter::HighQualityAntialiasing | QPainter::Antialiasing
-                       | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing );
-    p->drawPixmap( static_cast<int>( r.x() ), static_cast<int>( r.y() ), pix );
+    p->setRenderHints(QPainter::HighQualityAntialiasing | QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing);
+    p->drawPixmap(static_cast<int>(r.x()), static_cast<int>(r.y()), pix);
 }
 
 

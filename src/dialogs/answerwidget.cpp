@@ -22,42 +22,42 @@
 #include <QFocusEvent>
 #include <QDebug>
 
-AnswerWidget::AnswerWidget( QWidget* parent )
-        : KLineEdit( parent )
+AnswerWidget::AnswerWidget(QWidget* parent)
+    : KLineEdit(parent)
 {
-    setToolTip( i18n( "The correct answer to the clue. For each letter a letter "
-                      "cell is created" ) );
-    setClickMessage( i18n( "The answer to the clue" ) );
-    setClearButtonShown( true );
+    setToolTip(i18n("The correct answer to the clue. For each letter a letter "
+                    "cell is created"));
+    setClickMessage(i18n("The answer to the clue"));
+    setClearButtonShown(true);
     m_justGotFocusByMouse = false;
 }
 
-AnswerWidget::AnswerWidget( const QString &text, QWidget *parent )
-        : KLineEdit( text, parent )
+AnswerWidget::AnswerWidget(const QString &text, QWidget *parent)
+    : KLineEdit(text, parent)
 {
-    setToolTip( i18n( "The correct answer to the clue. For each letter a letter "
-                      "cell is created" ) );
-    setClickMessage( i18n( "The answer to the clue" ) );
-    setClearButtonShown( true );
+    setToolTip(i18n("The correct answer to the clue. For each letter a letter "
+                    "cell is created"));
+    setClickMessage(i18n("The answer to the clue"));
+    setClearButtonShown(true);
     m_justGotFocusByMouse = false;
 }
 
-void AnswerWidget::focusInEvent( QFocusEvent* ev )
+void AnswerWidget::focusInEvent(QFocusEvent* ev)
 {
-    KLineEdit::focusInEvent( ev );
+    KLineEdit::focusInEvent(ev);
 
-    if ( ev->reason() == Qt::MouseFocusReason )
+    if (ev->reason() == Qt::MouseFocusReason)
         m_justGotFocusByMouse = true;
 }
 
-void AnswerWidget::mousePressEvent( QMouseEvent* ev )
+void AnswerWidget::mousePressEvent(QMouseEvent* ev)
 {
-    if ( m_justGotFocusByMouse ) {
+    if (m_justGotFocusByMouse) {
         m_justGotFocusByMouse = false;
-        if ( cursorPositionAt( ev->pos() ) > text().length() )
-            home( false );
+        if (cursorPositionAt(ev->pos()) > text().length())
+            home(false);
         else
-            KLineEdit::mousePressEvent( ev );
+            KLineEdit::mousePressEvent(ev);
     } else
-        KLineEdit::mousePressEvent( ev );
+        KLineEdit::mousePressEvent(ev);
 }

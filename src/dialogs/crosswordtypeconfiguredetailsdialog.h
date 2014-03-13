@@ -43,9 +43,9 @@ public:
     };
 
     /** Constructs a dialog with the given @p crosswordTypeInfo. */
-    CrosswordTypeConfigureDetailsDialog( QWidget* parent,
-                                         CrosswordTypeInfo crosswordTypeInfo,
-                                         Qt::WFlags flags = 0 );
+    CrosswordTypeConfigureDetailsDialog(QWidget* parent,
+                                        CrosswordTypeInfo crosswordTypeInfo,
+                                        Qt::WFlags flags = 0);
 
     /** Returns the current crossword type info. */
     CrosswordTypeInfo crosswordTypeInfo() const {
@@ -60,27 +60,27 @@ public:
         return m_readOnly;
     };
     /** Sets the read only mode of the dialog. */
-    void setReadOnly( ReadOnlyMode readOnlyMode );
+    void setReadOnly(ReadOnlyMode readOnlyMode);
 
 protected slots:
-    void iconChanged( const QString &iconName );
-    void nameChanged( const QString &name );
+    void iconChanged(const QString &iconName);
+    void nameChanged(const QString &name);
     void descriptionChanged();
     void longDescriptionChanged();
-    void minAnswerLengthChanged( int minAnswerLength );
-    void clueCellHandlingChanged( int index );
-    void clueTypeChanged( int index );
-    void letterCellContentChanged( int index );
-    void clueMappingChanged( int index );
-    void cellTypeToggled( QListWidgetItem *item );
+    void minAnswerLengthChanged(int minAnswerLength);
+    void clueCellHandlingChanged(int index);
+    void clueTypeChanged(int index);
+    void letterCellContentChanged(int index);
+    void clueMappingChanged(int index);
+    void cellTypeToggled(QListWidgetItem *item);
 
 private:
     void setup();
-    void setupConnections( bool disconnection = false );
-    void setCrosswordType( CrosswordTypeInfo crosswordTypeInfo );
+    void setupConnections(bool disconnection = false);
+    void setCrosswordType(CrosswordTypeInfo crosswordTypeInfo);
 
-    void setValuesForClueCellHandling( ClueCellHandling clueCellHandling );
-    void setValuesForClueCellType( bool allowed );
+    void setValuesForClueCellHandling(ClueCellHandling clueCellHandling);
+    void setValuesForClueCellType(bool allowed);
 
     Ui::configure_details ui_configure_details;
     CrosswordTypeInfo m_typeInfo;

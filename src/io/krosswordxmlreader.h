@@ -42,11 +42,11 @@ public:
             this->width = this->height = -1; // make invalid initially
         };
 
-        KrossWordInfo( const KrossWordInfo &other );
+        KrossWordInfo(const KrossWordInfo &other);
 
-        KrossWordInfo( const QString &type, int width, qint8 height,
-                       const QString &title, const QString &authors,
-                       const QString &copyright, const QString &notes );
+        KrossWordInfo(const QString &type, int width, qint8 height,
+                      const QString &title, const QString &authors,
+                      const QString &copyright, const QString &notes);
 
         bool isValid() const {
             return this->width > 0 && this->height > 0;
@@ -58,24 +58,24 @@ public:
     * the given @p url. Use KrossWordInfo::isValid() to check for errors.
     * If isValid() returns false @p errorString will be set to a string
     * explaining the error (if @p errorString isn't NULL). */
-    static KrossWordInfo readInfo( const KUrl &url, QString *errorString = NULL );
+    static KrossWordInfo readInfo(const KUrl &url, QString *errorString = NULL);
 
-    bool readCompressed( QIODevice *device, KrossWord *krossWord,
-                         QByteArray *undoData = NULL );
-    bool readCompressedInfo( QIODevice *device, KrossWordInfo &krossWordInfo );
+    bool readCompressed(QIODevice *device, KrossWord *krossWord,
+                        QByteArray *undoData = NULL);
+    bool readCompressedInfo(QIODevice *device, KrossWordInfo &krossWordInfo);
 
-    bool read( QIODevice *device, KrossWord *krossWord,
-               QByteArray *undoData = NULL );
-    bool readInfo( QIODevice *device, KrossWordInfo &krossWordInfo );
+    bool read(QIODevice *device, KrossWord *krossWord,
+              QByteArray *undoData = NULL);
+    bool readInfo(QIODevice *device, KrossWordInfo &krossWordInfo);
 
 private:
     void readUnknownElement();
     KrossWordInfo readKrossWordInfo();
-    void readKrossWord( KrossWord *krossWord, QByteArray *undoData = NULL );
-    void readClue( KrossWord *krossWord );
-    void readImage( KrossWord *krossWord );
-    void readSolutionLetter( KrossWord *krossWord );
-    void readUserDefinedCrosswordSettings( KrossWord *krossWord );
+    void readKrossWord(KrossWord *krossWord, QByteArray *undoData = NULL);
+    void readClue(KrossWord *krossWord);
+    void readImage(KrossWord *krossWord);
+    void readSolutionLetter(KrossWord *krossWord);
+    void readUserDefinedCrosswordSettings(KrossWord *krossWord);
 };
 
 #endif // Multiple inclusion guard

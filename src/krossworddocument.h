@@ -23,8 +23,9 @@
 class KrossWordPuzzleScene;
 class KrossWordPuzzleView;
 
-namespace Crossword {
-  class KrossWord;
+namespace Crossword
+{
+class KrossWord;
 }
 using namespace Crossword;
 
@@ -32,19 +33,22 @@ class QTextDocument;
 class QPrinter;
 class QPainter;
 
-class KrossWordDocument {
-  public:
-    KrossWordDocument( KrossWord *krossWord, QPrinter *printer );
+class KrossWordDocument
+{
+public:
+    KrossWordDocument(KrossWord *krossWord, QPrinter *printer);
     ~KrossWordDocument();
 
-    void print( int fromPage = 1, int toPage = -1 );
-    void renderPage( QPainter *painter, int page );
+    void print(int fromPage = 1, int toPage = -1);
+    void renderPage(QPainter *painter, int page);
     int pages() const;
 
-    QPrinter *printer() const { return m_printer; };
-    void setPrinter( QPrinter *printer );
+    QPrinter *printer() const {
+        return m_printer;
+    };
+    void setPrinter(QPrinter *printer);
 
-  private:
+private:
     KrossWord *m_krossWord;
     KrossWordPuzzleScene *m_krossWordScene;
     KrossWordPuzzleView *m_krossWordView;
