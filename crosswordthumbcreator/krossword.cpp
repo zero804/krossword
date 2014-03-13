@@ -168,11 +168,12 @@ KrossWord::FileFormat KrossWord::fileFormatFromFileName(const QString& fileName)
 
 bool KrossWord::read(const KUrl& url, QString *errorString, FileFormat fileFormat)
 {
-    bool removeTempFile;
+    // Variable not used
+    // bool removeTempFile;
     QString fileName;
     if (url.isLocalFile()) {
         fileName = url.path();
-        removeTempFile = false;
+        // removeTempFile = false;
     } else {
         *errorString = i18n("Error while downloading from url");
         return false;

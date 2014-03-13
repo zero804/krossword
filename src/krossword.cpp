@@ -167,9 +167,7 @@ void KrossWordTitleItem::setContent(KrossWord *krossWord)
         if (krossWord->copyright().isEmpty())
             m_authorsItem->setPlainText(krossWord->authors());
         else
-            m_authorsItem->setHtml(QString("<p style=\"text-align:right;\">%1<br>%2</p>")
-                                   .arg(krossWord->authors())
-                                   .arg(krossWord->copyright()));
+            m_authorsItem->setHtml(QString("<p style=\"text-align:right;\">%1<br>%2</p>").arg(krossWord->authors()).arg(krossWord->copyright()));
 
 #if QT_VERSION >= 0x040600
         QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;

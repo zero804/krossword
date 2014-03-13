@@ -105,7 +105,7 @@ public:
 
     virtual UndoCommandExt *mergedWith(const QUndoCommand* other) {
         Q_UNUSED(other);
-        return false;
+        return nullptr;
     };
 
     /** Checks if the redo action can be performed or would lead to an error.
