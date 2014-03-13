@@ -81,7 +81,8 @@
 #include <KStatusBar>
 #include <KEmoticons>
 #include <KCharSelect>
-#include <KGameDifficulty>
+//#include <KGameDifficulty>
+
 #include <KCursor>
 #include <KPrintPreview>
 #include <kdeprintdialog.h>
