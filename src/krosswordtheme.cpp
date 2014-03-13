@@ -32,8 +32,9 @@ KrosswordTheme::KrosswordTheme() : KgTheme("krosswordpuzzle") {
 
 
 bool KrosswordTheme::readFromDesktopFile( const QString& file ) {
-  if ( !KgTheme::readFromDesktopFile(file) )
+  if ( !KgTheme::readFromDesktopFile(file) && !KgTheme::readFromDesktopFile("themes/" + file.toLower() + ".desktop")) {
     return false;
+  }
 
   // Load theme .desktop file
   KConfig themeConfig( file, KConfig::SimpleConfig );

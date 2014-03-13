@@ -698,11 +698,12 @@ void KrossWordPuzzle::recentFileExecuted( QListWidgetItem *item ) {
 
 void KrossWordPuzzle::setupActions()
 {
-    KStandardAction::showStatusbar    (this, SLOT(showStatusbarGlobal(bool)),  actionCollection());
-    KStandardAction::keyBindings      (this, SLOT(configureShortcutsGlobal()), actionCollection());
-    KStandardAction::configureToolbars(this, SLOT(configureToolbarsGlobal()),  actionCollection());
-    KStandardAction::preferences      (this, SLOT(optionsPreferencesSlot()),   actionCollection());
-    
+    KStandardAction::showStatusbar( this, SLOT( showStatusbarGlobal( bool ) ), actionCollection() );
+    KStandardAction::keyBindings( this, SLOT( configureShortcutsGlobal() ), actionCollection() );
+    KStandardAction::configureToolbars( this, SLOT( configureToolbarsGlobal() ), actionCollection() );
+    KStandardAction::preferences( this, SLOT( optionsPreferencesSlot() ), actionCollection() );
+    KStandardAction::quit( qApp, SLOT( closeAllWindows() ), actionCollection() );
+
 //     KStandardGameAction::load(this, SLOT(loadSlot()), actionCollection())->setStatusTip( i18n("Load a crossword from a file") );
 
 //     KAction *downloadAction = new KAction( KIcon("get-hot-new-stuff"),

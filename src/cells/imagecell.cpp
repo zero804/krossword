@@ -27,73 +27,80 @@
 #include <QPainter>
 #include <KIO/NetAccess>
 
-namespace Crossword {
+namespace Crossword
+{
 
 ImageCell::ImageCell( KrossWord* krossWord, const Coord& coordTopLeft,
-		      int horizontalCellSpan, int verticalCellSpan, const KUrl &url )
-		      : SpannedCell( krossWord, ImageCellType, coordTopLeft,
-				     horizontalCellSpan, verticalCellSpan ) {
-  setUrl( url );
+                      int horizontalCellSpan, int verticalCellSpan, const KUrl &url )
+        : SpannedCell( krossWord, ImageCellType, coordTopLeft,
+                       horizontalCellSpan, verticalCellSpan )
+{
+    setUrl( url );
 
-  setFlag( QGraphicsItem::ItemIsFocusable, krossWord->isEditable() );
-  setFlag( QGraphicsItem::ItemIsSelectable, krossWord->isEditable() );
+    setFlag( QGraphicsItem::ItemIsFocusable, krossWord->isEditable() );
+    setFlag( QGraphicsItem::ItemIsSelectable, krossWord->isEditable() );
 }
 
-void ImageCell::setUrl( const KUrl& url ) {
-  if ( !url.isLocalFile() ) {
-    QString fileName;
-    if ( KIO::NetAccess::download(url, fileName, 0) ) {
-      m_image = QImage( fileName );
-      KIO::NetAccess::removeTempFile( fileName );
+void ImageCell::setUrl( const KUrl& url )
+{
+    if ( !url.isLocalFile() ) {
+        QString fileName;
+        if ( KIO::NetAccess::download( url, fileName, 0 ) ) {
+            m_image = QImage( fileName );
+            KIO::NetAccess::removeTempFile( fileName );
+        }
+    } else {
+        m_image = QImage( url.pathOrUrl() );
     }
-  } else {
-    m_image = QImage( url.pathOrUrl() );
-  }
 
-  m_url = url;
+    m_url = url;
 
-  clearCache();
-  update();
+    clearCache();
+    update();
 }
 
 void ImageCell::drawBackground( QPainter *p,
-				const QStyleOptionGraphicsItem *options ) {
-  if ( m_image.isNull() ) {
-    QTextOption textOption( Qt::AlignCenter );
-    textOption.setWrapMode( QTextOption::WordWrap );
-    p->drawText( options->rect, i18n("Edit image properties to set an image"),
-		  textOption );
-  } else {
-    p->drawImage( options->rect, m_image );
-  }
+                                const QStyleOptionGraphicsItem *options )
+{
+    if ( m_image.isNull() ) {
+        QTextOption textOption( Qt::AlignCenter );
+        textOption.setWrapMode( QTextOption::WordWrap );
+        p->drawText( options->rect, i18n( "Edit image properties to set an image" ),
+                     textOption );
+    } else {
+        p->drawImage( options->rect, m_image );
+    }
 
-  if ( isHighlighted() ) {
-    p->fillRect( options->rect, krossWord()->theme()->selectionColor() );
-    p->setPen( Qt::red );
-    p->drawRect( options->rect );
-  } else {
-    p->setPen( Qt::black );
-    p->drawRect( options->rect );
-  }
+    if ( isHighlighted() ) {
+        p->fillRect( options->rect, krossWord()->theme()->selectionColor() );
+        p->setPen( Qt::red );
+        p->drawRect( options->rect );
+    } else {
+        p->setPen( Qt::black );
+        p->drawRect( options->rect );
+    }
 }
 
 void ImageCell::drawBackgroundForPrinting( QPainter *p,
-		    const QStyleOptionGraphicsItem *options ) {
-  drawBackground( p, options );
+        const QStyleOptionGraphicsItem *options )
+{
+    drawBackground( p, options );
 }
 
-void ImageCell::focusInEvent( QFocusEvent* event ) {
-  krossWord()->setHighlightedClue( NULL );
-  if ( krossWord()->isEditable() )
-      setHighlight();
-  KrossWordCell::focusInEvent( event );
+void ImageCell::focusInEvent( QFocusEvent* event )
+{
+    krossWord()->setHighlightedClue( NULL );
+    if ( krossWord()->isEditable() )
+        setHighlight();
+    KrossWordCell::focusInEvent( event );
 }
 
-void ImageCell::focusOutEvent( QFocusEvent* event ) {
-  // Only remove highlight if the scene still has focus
-  if ( scene() && scene()->hasFocus() )
-    setHighlight( false );
-  KrossWordCell::focusOutEvent( event );
+void ImageCell::focusOutEvent( QFocusEvent* event )
+{
+    // Only remove highlight if the scene still has focus
+    if ( scene() && scene()->hasFocus() )
+        setHighlight( false );
+    KrossWordCell::focusOutEvent( event );
 }
 
 }; // namespace Crossword

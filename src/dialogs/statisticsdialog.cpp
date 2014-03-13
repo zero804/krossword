@@ -26,98 +26,100 @@
 #include <KLocale>
 
 StatisticsDialog::StatisticsDialog( KrossWord* krossWord, QWidget* parent )
-	    : KDialog( parent ), m_krossWord( krossWord ) {
-  setWindowTitle( i18n("Statistics") );
-  setWindowIcon( KIcon("view-statistics") );
-  setMinimumWidth( 300 );
-  setButtons( KDialog::Close );
-  setModal( true );
+        : KDialog( parent ), m_krossWord( krossWord )
+{
+    setWindowTitle( i18n( "Statistics" ) );
+    setWindowIcon( KIcon( "view-statistics" ) );
+    setMinimumWidth( 300 );
+    setButtons( KDialog::Close );
+    setModal( true );
 
-  setup();
+    setup();
 }
 
-void StatisticsDialog::setup() {
+void StatisticsDialog::setup()
+{
     KrossWord::Statistics stats = m_krossWord->statistics();
     QString characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     QGridLayout *layout = new QGridLayout;
     int row = 0;
-    layout->addWidget( label(i18n("Total Cell Count:"), true), row, 0 );
-    layout->addWidget( label(QString::number(stats.cellCount)), row++, 1 );
+    layout->addWidget( label( i18n( "Total Cell Count:" ), true ), row, 0 );
+    layout->addWidget( label( QString::number( stats.cellCount ) ), row++, 1 );
 
     QFrame *hLine = new QFrame;
     hLine->setFrameShape( QFrame::HLine );
     layout->addWidget( hLine, row++, 0, 1, 2 );
 
     if ( stats.cellCount > 0 ) {
-	addStatisticsValue( layout, i18n("Empty Cells:"),
-		stats.emptyCellCount, stats.cellCount,
-		i18n("Number of empty cells, percentage of total cell count in braces") );
-	addStatisticsValue( layout, i18n("Letter Cells:"),
-		stats.letterCellCount, stats.cellCount,
-		i18n("Number of letter cells, percentage of total cell count in braces") );
+        addStatisticsValue( layout, i18n( "Empty Cells:" ),
+                            stats.emptyCellCount, stats.cellCount,
+                            i18n( "Number of empty cells, percentage of total cell count in braces" ) );
+        addStatisticsValue( layout, i18n( "Letter Cells:" ),
+                            stats.letterCellCount, stats.cellCount,
+                            i18n( "Number of letter cells, percentage of total cell count in braces" ) );
 
-	row = layout->rowCount();
-	hLine = new QFrame;
-	hLine->setFrameShape( QFrame::HLine );
-	layout->addWidget( hLine, row++, 0, 1, 2 );
+        row = layout->rowCount();
+        hLine = new QFrame;
+        hLine->setFrameShape( QFrame::HLine );
+        layout->addWidget( hLine, row++, 0, 1, 2 );
 
-	if ( stats.letterCellCount > 0 ) {
-	    addStatisticsValue( layout, i18n("Crossed:"),
-		    stats.crossedLetterCells, stats.letterCellCount,
-		    i18n("Number of crossed letter cells, percentage of total "
-		    "letter cell count in braces") );
-	    addStatisticsValue( layout, i18n("Uncrossed:"),
-		    stats.uncrossedLetterCells, stats.letterCellCount,
-		    i18n("Number of uncrossed letter cells, percentage of total "
-		    "letter cell count in braces") );
+        if ( stats.letterCellCount > 0 ) {
+            addStatisticsValue( layout, i18n( "Crossed:" ),
+                                stats.crossedLetterCells, stats.letterCellCount,
+                                i18n( "Number of crossed letter cells, percentage of total "
+                                      "letter cell count in braces" ) );
+            addStatisticsValue( layout, i18n( "Uncrossed:" ),
+                                stats.uncrossedLetterCells, stats.letterCellCount,
+                                i18n( "Number of uncrossed letter cells, percentage of total "
+                                      "letter cell count in braces" ) );
 
-	    row = layout->rowCount();
-	    hLine = new QFrame;
-	    hLine->setFrameShape( QFrame::HLine );
-	    layout->addWidget( hLine, row++, 0, 1, 2 );
-	}
+            row = layout->rowCount();
+            hLine = new QFrame;
+            hLine->setFrameShape( QFrame::HLine );
+            layout->addWidget( hLine, row++, 0, 1, 2 );
+        }
 
-	layout->addWidget( label(i18n("Clues:"), true), row, 0 );
-	layout->addWidget( label(QString::number(stats.clueCount)), row++, 1 );
-	if ( stats.clueCount > 0 ) {
-	    addStatisticsValue( layout, i18nc("Horizontal:", "Label for the number "
-		    " of horizontal clues"), stats.horizontalClues, stats.clueCount,
-		    i18n("Number of horizontal clues, percentage of total clue "
-		    "count in braces") );
-	    addStatisticsValue( layout, i18nc("Vertical:", "Label for the number "
-		    " of vertical clues"), stats.verticalClues, stats.clueCount,
-		    i18n("Number of vertical clues, percentage of total clue "
-		    "count in braces") );
+        layout->addWidget( label( i18n( "Clues:" ), true ), row, 0 );
+        layout->addWidget( label( QString::number( stats.clueCount ) ), row++, 1 );
+        if ( stats.clueCount > 0 ) {
+            addStatisticsValue( layout, i18nc( "Horizontal:", "Label for the number "
+                                               " of horizontal clues" ), stats.horizontalClues, stats.clueCount,
+                                i18n( "Number of horizontal clues, percentage of total clue "
+                                      "count in braces" ) );
+            addStatisticsValue( layout, i18nc( "Vertical:", "Label for the number "
+                                               " of vertical clues" ), stats.verticalClues, stats.clueCount,
+                                i18n( "Number of vertical clues, percentage of total clue "
+                                      "count in braces" ) );
 
-	    row = layout->rowCount();
-	    layout->addWidget( label(i18n("Min. Answer Length:"), true), row, 0 );
-	    layout->addWidget( label(QString::number(stats.minAnswerLength)), row++, 1 );
+            row = layout->rowCount();
+            layout->addWidget( label( i18n( "Min. Answer Length:" ), true ), row, 0 );
+            layout->addWidget( label( QString::number( stats.minAnswerLength ) ), row++, 1 );
 
-	    layout->addWidget( label(i18n("Max. Answer Length:"), true), row, 0 );
-	    layout->addWidget( label(QString::number(stats.maxAnswerLength)), row++, 1 );
+            layout->addWidget( label( i18n( "Max. Answer Length:" ), true ), row, 0 );
+            layout->addWidget( label( QString::number( stats.maxAnswerLength ) ), row++, 1 );
 
-	    layout->addWidget( label(i18n("Avg. Answer Length:"), true), row, 0 );
-	    layout->addWidget( label(KGlobal::locale()->formatNumber(
-		    stats.avgAnswerLength, 2)), row++, 1 );
-	}
+            layout->addWidget( label( i18n( "Avg. Answer Length:" ), true ), row, 0 );
+            layout->addWidget( label( KGlobal::locale()->formatNumber(
+                                          stats.avgAnswerLength, 2 ) ), row++, 1 );
+        }
 
-	if ( stats.letterCellCount > 0 ) {
-	    row = layout->rowCount();
-	    hLine = new QFrame;
-	    hLine->setFrameShape( QFrame::HLine );
-	    layout->addWidget( hLine, row++, 0, 1, 2 );
+        if ( stats.letterCellCount > 0 ) {
+            row = layout->rowCount();
+            hLine = new QFrame;
+            hLine->setFrameShape( QFrame::HLine );
+            layout->addWidget( hLine, row++, 0, 1, 2 );
 
-	    QLabel *lbl = label( i18n("Occurrences Of Letters:"), true );
-	    lbl->setAlignment( Qt::AlignCenter );
-	    layout->addWidget( lbl, row++, 0, 1, 2 );
-	    foreach ( QChar ch, characters ) {
-		addStatisticsValue( layout, QString("\"%1\":").arg(ch),
-			stats.letterCellCountByChar[ch], stats.letterCellCount,
-			i18n("Number of letter cells containing '%1', percentage "
-			"of total letter cell count in braces", ch) );
-	    }
-	}
+            QLabel *lbl = label( i18n( "Occurrences Of Letters:" ), true );
+            lbl->setAlignment( Qt::AlignCenter );
+            layout->addWidget( lbl, row++, 0, 1, 2 );
+            foreach( QChar ch, characters ) {
+                addStatisticsValue( layout, QString( "\"%1\":" ).arg( ch ),
+                                    stats.letterCellCountByChar[ch], stats.letterCellCount,
+                                    i18n( "Number of letter cells containing '%1', percentage "
+                                          "of total letter cell count in braces", ch ) );
+            }
+        }
     }
 
     QWidget *w = new QWidget;
@@ -131,32 +133,34 @@ void StatisticsDialog::setup() {
 }
 
 void StatisticsDialog::addStatisticsValue( QGridLayout* layout,
-					   const QString& title, int count,
-					   int totalCount, const QString& toolTip ) {
-  int row = layout->rowCount();
-  float percentage = 100.0f * (float)count / (float)totalCount;
+        const QString& title, int count,
+        int totalCount, const QString& toolTip )
+{
+    int row = layout->rowCount();
+    float percentage = 100.0f * ( float )count / ( float )totalCount;
 
-  QLabel *lblTitle = label( title, true );
-  QLabel *lblValue = label( QString("%1 (%2%)").arg(count)
-      .arg(KGlobal::locale()->formatNumber(percentage, 2)) );
+    QLabel *lblTitle = label( title, true );
+    QLabel *lblValue = label( QString( "%1 (%2%)" ).arg( count )
+                              .arg( KGlobal::locale()->formatNumber( percentage, 2 ) ) );
 
-  if ( !toolTip.isEmpty() ) {
-    lblTitle->setToolTip( toolTip );
-    lblValue->setToolTip( toolTip );
-  }
+    if ( !toolTip.isEmpty() ) {
+        lblTitle->setToolTip( toolTip );
+        lblValue->setToolTip( toolTip );
+    }
 
-  layout->addWidget( lblTitle, row, 0 );
-  layout->addWidget( lblValue, row++, 1 );
+    layout->addWidget( lblTitle, row, 0 );
+    layout->addWidget( lblValue, row++, 1 );
 }
 
-QLabel* StatisticsDialog::label( const QString& text, bool title ) {
-  QLabel *label = new QLabel( text );
-  if ( title ) {
-    label->setAlignment( Qt::AlignRight | Qt::AlignVCenter );
-    QFont font = label->font();
-    font.setBold( true );
-    label->setFont( font );
-  }
-  return label;
+QLabel* StatisticsDialog::label( const QString& text, bool title )
+{
+    QLabel *label = new QLabel( text );
+    if ( title ) {
+        label->setAlignment( Qt::AlignRight | Qt::AlignVCenter );
+        QFont font = label->font();
+        font.setBold( true );
+        label->setFont( font );
+    }
+    return label;
 }
 

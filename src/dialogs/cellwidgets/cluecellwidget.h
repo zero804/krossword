@@ -25,40 +25,44 @@
 #include <global.h>
 
 class KrosswordDictionary;
-namespace Crossword {
-  class ClueCell;
+namespace Crossword
+{
+class ClueCell;
 }
 using namespace Crossword;
 
-class ClueCellWidget : public QWidget {
-  Q_OBJECT
-  
-  public:
-    explicit ClueCellWidget( ClueCell *clueCell, KrosswordDictionary *dictionary = NULL,
-		    QWidget* parent = 0 );
-		    
-    void setClue( ClueCell *clueCell );
-    ClueCell *clueCell() const { return m_clueCell; };
+class ClueCellWidget : public QWidget
+{
+    Q_OBJECT
 
-  signals:
+public:
+    explicit ClueCellWidget( ClueCell *clueCell, KrosswordDictionary *dictionary = NULL,
+                             QWidget* parent = 0 );
+
+    void setClue( ClueCell *clueCell );
+    ClueCell *clueCell() const {
+        return m_clueCell;
+    };
+
+signals:
     void changeOrientationRequest( ClueCell *clueCell,
-				   Qt::Orientation newOrientation );
+                                   Qt::Orientation newOrientation );
     void changeAnswerOffsetRequest( ClueCell *clueCell,
-				    AnswerOffset newAnswerOffset );
+                                    AnswerOffset newAnswerOffset );
     void changeClueTextRequest( ClueCell *clueCell, const QString &newClueText );
     void changeClueAndCorrectAnswerRequest( ClueCell *clueCell,
-		    const QString &newClue, const QString &newCorrectAnswer );
-    
-  protected slots:
+                                            const QString &newClue, const QString &newCorrectAnswer );
+
+protected slots:
     void cluesAboutToBeRemoved( ClueCellList clues );
     void cluesAdded( ClueCellList clues );
 
     void cellAnswerLengthChanged( ClueCell *clueCell, int length );
-    void cellAnswerOffsetChanged( ClueCell *clueCell, 
-				  AnswerOffset answerOffset );
+    void cellAnswerOffsetChanged( ClueCell *clueCell,
+                                  AnswerOffset answerOffset );
     void cellOrientationChanged( ClueCell *clueCell, Qt::Orientation orientation );
     void cellClueTextChanged( ClueCell *clueCell, const QString &clueText );
-    
+
     void answerOffsetButtonClicked( int index );
     void orientationVerticalToggled( bool checked );
     void orientationHorizontalToggled( bool checked );
@@ -67,15 +71,15 @@ class ClueCellWidget : public QWidget {
     void searchDictionaryClicked( bool forceFilterReset = false );
     void setAsCorrectAnswer( const QModelIndex &index );
     void resetDictionaryFilter( bool );
-    
-  private:
+
+private:
     void enableAnswerOffsets();
     void showAnswerOffsets( bool show );
     void enableOrientations();
-    
+
     void fillDictionaryAnswers();
     void dictionaryFilterString( const QString &wildcardPattern, int maxLength = -1 );
-    
+
     Ui::clue_properties_dock ui_clue_properties_dock;
     ClueCell *m_clueCell;
     QButtonGroup *m_btnGroupAnswerOffset;

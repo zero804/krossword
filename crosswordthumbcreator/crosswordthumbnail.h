@@ -22,9 +22,10 @@
 
 #include <ThumbCreator>
 
-class CrosswordThumbCreator : public ThumbCreator {
-    public:
-	virtual bool create( const QString& path, int width, int height, QImage& img );
+class CrosswordThumbCreator : public ThumbCreator
+{
+public:
+    virtual bool create( const QString& path, int width, int height, QImage& img );
 };
 
 #endif // Multiple inclusion guard

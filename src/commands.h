@@ -30,17 +30,19 @@
 #include <QtCore/QString>
 #include <QBuffer>
 
-namespace Crossword {
-  class ImageCell;
-  class KrossWord;
+namespace Crossword
+{
+class ImageCell;
+class KrossWord;
 }
 using namespace Crossword;
 class UndoCommandExt;
 
-class UndoStackExt : public KUndoStack {
-  Q_OBJECT
+class UndoStackExt : public KUndoStack
+{
+    Q_OBJECT
 
-  public:
+public:
     UndoStackExt( QObject* parent = 0 );
 
     bool tryPush( UndoCommandExt *cmd, QString *errorMessage = 0 );
@@ -48,59 +50,64 @@ class UndoStackExt : public KUndoStack {
     const QByteArray &data() const;
     void createFromData( KrossWord *krossWord, const QByteArray &data );
 
-    bool isExecuting() const { return m_executingRedo; };
+    bool isExecuting() const {
+        return m_executingRedo;
+    };
     void clear() {
-      KUndoStack::clear();
-      m_data.clear();
-      m_dataIndexPos.clear();
-      m_dataIndexPos << sizeof(qint16);
+        KUndoStack::clear();
+        m_data.clear();
+        m_dataIndexPos.clear();
+        m_dataIndexPos << sizeof( qint16 );
     };
 
-  public slots:
+public slots:
     void indexChanged( int idx );
 
-  private:
+private:
     QList<qint64> m_dataIndexPos;
     QByteArray m_data;
 //     QStringList m_data;
     bool m_executingRedo;
     qint16 m_storedStartIndex;
-    
+
 //     UndoCommandExt *m_lastCommand;
 //     bool m_deleteLastCommand;
 };
 
-class UndoCommandExt : public QUndoCommand {
-  public:
+class UndoCommandExt : public QUndoCommand
+{
+public:
     enum Command {
-      CommandCrosswordCompound = 1,
-      CommandRemoveClue = 2,
-      CommandAddClue = 3,
-      CommandRemoveImage = 4,
-      CommandAddImage = 5,
-      CommandConvertToLetter = 6,
-      CommandConvertToSolutionLetter = 7,
-      CommandChangeClue = 8,
-      CommandLetterEdit = 9,
-      CommandClearClue = 10,
-      CommandClearCrossword = 11,
-      CommandChangeCrosswordProperties = 12,
-      CommandSetClueHidden = 13,
-      CommandMakeClueCellVisible = 14,
-      CommandSetNumberPuzzleMapping = 15,
-      CommandSetupSameLetterSynchronization = 16,
-      CommandRemoveSameLetterSynchronization = 17,
-      CommandConvertCrossword = 18,
-      CommandResizeCrossword = 19,
-      CommandMoveCells = 20,
-      CommandAddLettersToClue = 21
+        CommandCrosswordCompound = 1,
+        CommandRemoveClue = 2,
+        CommandAddClue = 3,
+        CommandRemoveImage = 4,
+        CommandAddImage = 5,
+        CommandConvertToLetter = 6,
+        CommandConvertToSolutionLetter = 7,
+        CommandChangeClue = 8,
+        CommandLetterEdit = 9,
+        CommandClearClue = 10,
+        CommandClearCrossword = 11,
+        CommandChangeCrosswordProperties = 12,
+        CommandSetClueHidden = 13,
+        CommandMakeClueCellVisible = 14,
+        CommandSetNumberPuzzleMapping = 15,
+        CommandSetupSameLetterSynchronization = 16,
+        CommandRemoveSameLetterSynchronization = 17,
+        CommandConvertCrossword = 18,
+        CommandResizeCrossword = 19,
+        CommandMoveCells = 20,
+        CommandAddLettersToClue = 21
     };
 
     UndoCommandExt( UndoCommandExt* parent = 0 );
 
     virtual UndoCommandExt *mergedWith( const QUndoCommand* other ) {
-	Q_UNUSED( other ); return false; };
-    
+        Q_UNUSED( other );
+        return false;
+    };
+
     /** Checks if the redo action can be performed or would lead to an error.
     * The default implementation always returns true.
     * @param errorMessage A pointer to a QString to store a possible error message.
@@ -110,8 +117,8 @@ class UndoCommandExt : public QUndoCommand {
     * message is set to @p errorMessage.
     * @see checkUndo() */
     virtual bool checkRedo( QString *errorMessage = 0 ) const {
-      Q_UNUSED( errorMessage );
-      return true;
+        Q_UNUSED( errorMessage );
+        return true;
     };
 
     /** Checks if the undo action can be performed or would lead to an error.
@@ -123,45 +130,53 @@ class UndoCommandExt : public QUndoCommand {
     * message is set to @p errorMessage.
     * @see checkRedo() */
     virtual bool checkUndo( QString *errorMessage = 0 ) const {
-      Q_UNUSED( errorMessage );
-      return true;
+        Q_UNUSED( errorMessage );
+        return true;
     };
 
-    UndoStackExt *undoStack() const { return m_undoStack; };
+    UndoStackExt *undoStack() const {
+        return m_undoStack;
+    };
     void setUndoStack( UndoStackExt *undoStack );
 
     void redo() {
 //       qDebug() << "UndoCommandExt::redo()  type =" << type();
-      if ( !m_undoStack ) {
-	kDebug() << "No undo stack for undo command" << type();
-	redoMaybe();
-      } else if ( m_undoStack->isExecuting() )
-	redoMaybe();
+        if ( !m_undoStack ) {
+            kDebug() << "No undo stack for undo command" << type();
+            redoMaybe();
+        } else if ( m_undoStack->isExecuting() )
+            redoMaybe();
     };
-    virtual void redoMaybe() { QUndoCommand::redo(); };
+    virtual void redoMaybe() {
+        QUndoCommand::redo();
+    };
 
     void undo() {
 //       qDebug() << "UndoCommandExt::undo()  type =" << type();
-      if ( !m_undoStack ) {
-	kDebug() << "No undo stack for undo command" << type();
-	undoMaybe();
-      } else if ( m_undoStack->isExecuting() )
-	undoMaybe();
+        if ( !m_undoStack ) {
+            kDebug() << "No undo stack for undo command" << type();
+            undoMaybe();
+        } else if ( m_undoStack->isExecuting() )
+            undoMaybe();
     };
-    virtual void undoMaybe() { QUndoCommand::undo(); };
+    virtual void undoMaybe() {
+        QUndoCommand::undo();
+    };
 
 
     virtual Command type() const = 0;
-    virtual void appendToData( QDataStream *stream ) const { Q_UNUSED(stream); };
+    virtual void appendToData( QDataStream *stream ) const {
+        Q_UNUSED( stream );
+    };
 
     static UndoCommandExt *fromData( KrossWord *krossWord, QDataStream *stream,
-				     UndoCommandExt *parent = NULL );
+                                     UndoCommandExt *parent = NULL );
 
-  protected:
+protected:
     UndoStackExt *m_undoStack;
 };
 
-QDebug &operator <<(QDebug debug, UndoCommandExt::Command command);
+QDebug &operator <<( QDebug debug, UndoCommandExt::Command command );
 
 /*
 // template < class UndoCommand >
@@ -175,9 +190,9 @@ QDebug &operator <<(QDebug debug, UndoCommandExt::Command command);
 //     virtual void undo() { m_cmd->redo(); };
 //
 //     virtual bool checkRedo( QString* errorMessage = 0 ) const {
-// 	return m_cmd->checkRedo( errorMessage ); };
+//  return m_cmd->checkRedo( errorMessage ); };
 //     virtual bool checkUndo( QString* errorMessage = 0 ) const {
-// 	return m_cmd->checkUndo( errorMessage ); };
+//  return m_cmd->checkUndo( errorMessage ); };
 //
 //   private:
 //     UndoCommand *m_cmd;
@@ -196,8 +211,9 @@ class MakeClueCellVisibleCommand;
 class SetClueHiddenCommand;
 class ConvertToLetterCommand;
 class ConvertToSolutionLetterCommand;
-class CrosswordCompoundUndoCommand : public UndoCommandExt {
-  public:
+class CrosswordCompoundUndoCommand : public UndoCommandExt
+{
+public:
     explicit CrosswordCompoundUndoCommand( KrossWord *krossWord, UndoCommandExt* parent = 0 );
 
     virtual void redoMaybe();
@@ -210,56 +226,60 @@ class CrosswordCompoundUndoCommand : public UndoCommandExt {
     const UndoCommandExt *findFirstChild( Command command ) const;
     bool hasChildOfType( Command command ) const;
 
-    virtual Command type() const { return CommandCrosswordCompound; };
+    virtual Command type() const {
+        return CommandCrosswordCompound;
+    };
     static CrosswordCompoundUndoCommand *fromData( KrossWord *krossWord,
-						   QDataStream *stream,
-						   UndoCommandExt *parent = NULL ) {
-      return new CrosswordCompoundUndoCommand( krossWord, stream, parent ); };
+            QDataStream *stream,
+            UndoCommandExt *parent = NULL ) {
+        return new CrosswordCompoundUndoCommand( krossWord, stream, parent );
+    };
     virtual void appendToData( QDataStream *stream ) const;
 
     ResizeCrosswordCommand *addResizeCrosswordCommand( int newWidth, int newHeight,
-		  KrossWord::ResizeAnchor anchor = KrossWord::AnchorCenter );
+            KrossWord::ResizeAnchor anchor = KrossWord::AnchorCenter );
     AddClueCommand *addAddClueCommand( const Coord &coord,
-				       Qt::Orientation orientation,
-				       const QString &clue, const QString &answer,
-				       const QString &currentAnswer,
-				       AnswerOffset answerOffset );
+                                       Qt::Orientation orientation,
+                                       const QString &clue, const QString &answer,
+                                       const QString &currentAnswer,
+                                       AnswerOffset answerOffset );
     RemoveClueCommand *addRemoveClueCommand( ClueCell *clue );
     RemoveImageCommand *addRemoveImageCommand( ImageCell *image );
     LetterEditCommand *addLetterEditCommand( bool editCorrectLetter,
-					     const Coord &coord,
-					     const QChar &currentLetter,
-					     const QChar &newLetter );
+            const Coord &coord,
+            const QChar &currentLetter,
+            const QChar &newLetter );
     ConvertToLetterCommand *addConvertToLetterCommand(
-				SolutionLetterCell *solutionLetter );
+        SolutionLetterCell *solutionLetter );
     ConvertToSolutionLetterCommand *addConvertToSolutionLetterCommand(
-				LetterCell *letter, int solutionWordIndex );
+        LetterCell *letter, int solutionWordIndex );
     SetNumberPuzzleMappingCommand *addSetDefaultNumberPuzzleMappingCommand();
     SetNumberPuzzleMappingCommand *addSetNumberPuzzleMappingCommand(
-	const QString &numberPuzzleMapping );
+        const QString &numberPuzzleMapping );
     SetupSameLetterSynchronizationCommand *addSetupSameLetterSynchronizationCommand();
     RemoveSameLetterSynchronizationCommand *addRemoveSameLetterSynchronizationCommand();
     MakeClueCellVisibleCommand *addMakeClueCellVisibleCommand( ClueCell *clue );
     MakeClueCellVisibleCommand *addMakeClueCellVisibleCommand( ClueCell *clue,
-					AnswerOffset answerOffset );
+            AnswerOffset answerOffset );
     SetClueHiddenCommand *addSetClueHiddenCommand( ClueCell *clue );
 
-  protected:
+protected:
     CrosswordCompoundUndoCommand( KrossWord *krossWord, QDataStream *stream,
-				  UndoCommandExt *parent = NULL );
+                                  UndoCommandExt *parent = NULL );
 
     KrossWord *m_krossWord;
 };
 
-class RemoveClueCommand : public CrosswordCompoundUndoCommand {
-  public:
+class RemoveClueCommand : public CrosswordCompoundUndoCommand
+{
+public:
     RemoveClueCommand( KrossWord *krossWord, ClueCell *clue,
-		       UndoCommandExt* parent = 0 );
+                       UndoCommandExt* parent = 0 );
     RemoveClueCommand( KrossWord *krossWord, const Coord &coord,
-		       Qt::Orientation orientation, const QString &clue,
-		       const QString &answer, const QString &currentAnswer,
-		       AnswerOffset answerOffset,
-		       UndoCommandExt* parent = 0 );
+                       Qt::Orientation orientation, const QString &clue,
+                       const QString &answer, const QString &currentAnswer,
+                       AnswerOffset answerOffset,
+                       UndoCommandExt* parent = 0 );
 
     virtual void redoMaybe();
     virtual void undoMaybe();
@@ -267,24 +287,41 @@ class RemoveClueCommand : public CrosswordCompoundUndoCommand {
     virtual bool checkRedo( QString* errorMessage = 0 ) const;
     virtual bool checkUndo( QString* errorMessage = 0 ) const;
 
-    virtual Command type() const { return CommandRemoveClue; };
+    virtual Command type() const {
+        return CommandRemoveClue;
+    };
     static RemoveClueCommand *fromData( KrossWord *krossWord, QDataStream *stream,
-					UndoCommandExt *parent = NULL ) {
-	return new RemoveClueCommand( krossWord, stream, parent ); };
+                                        UndoCommandExt *parent = NULL ) {
+        return new RemoveClueCommand( krossWord, stream, parent );
+    };
 
-    KrossWord *krossWord() const { return m_krossWord; };
-    Coord coord() const { return m_coord; };
-    Qt::Orientation orientation() const { return m_orientation; };
-    QString clue() const { return m_clue; };
-    QString answer() const { return m_answer; };
-    QString currentAnswer() const { return m_currentAnswer; };
-    AnswerOffset answerOffset() const { return m_answerOffset; };
+    KrossWord *krossWord() const {
+        return m_krossWord;
+    };
+    Coord coord() const {
+        return m_coord;
+    };
+    Qt::Orientation orientation() const {
+        return m_orientation;
+    };
+    QString clue() const {
+        return m_clue;
+    };
+    QString answer() const {
+        return m_answer;
+    };
+    QString currentAnswer() const {
+        return m_currentAnswer;
+    };
+    AnswerOffset answerOffset() const {
+        return m_answerOffset;
+    };
 
     virtual void appendToData( QDataStream *stream ) const;
 
-  protected:
+protected:
     RemoveClueCommand( KrossWord *krossWord, QDataStream *stream,
-		       UndoCommandExt *parent = NULL );
+                       UndoCommandExt *parent = NULL );
     void setupText();
 
     Coord m_coord;
@@ -296,42 +333,47 @@ class RemoveClueCommand : public CrosswordCompoundUndoCommand {
 };
 
 // Store CrosswordCompoundUndoCommand
-class AddClueCommand : public RemoveClueCommand {
-  public:
+class AddClueCommand : public RemoveClueCommand
+{
+public:
     AddClueCommand( KrossWord *krossWord, const Coord &coord,
-		    Qt::Orientation orientation, const QString &clue,
-		    const QString &answer, const QString &currentAnswer,
-		    AnswerOffset answerOffset,
-		    UndoCommandExt* parent = 0 );
+                    Qt::Orientation orientation, const QString &clue,
+                    const QString &answer, const QString &currentAnswer,
+                    AnswerOffset answerOffset,
+                    UndoCommandExt* parent = 0 );
 
     virtual void redoMaybe();
     virtual void undoMaybe();
 
     virtual bool checkRedo( QString* errorMessage = 0 ) const;
     virtual bool checkUndo( QString* errorMessage = 0 ) const;
-    
-    virtual Command type() const { return CommandAddClue; };
-    static AddClueCommand *fromData( KrossWord *krossWord, QDataStream *stream,
-				     UndoCommandExt *parent = NULL ) {
-      return new AddClueCommand( krossWord, stream, parent ); };
 
-  protected:
+    virtual Command type() const {
+        return CommandAddClue;
+    };
+    static AddClueCommand *fromData( KrossWord *krossWord, QDataStream *stream,
+                                     UndoCommandExt *parent = NULL ) {
+        return new AddClueCommand( krossWord, stream, parent );
+    };
+
+protected:
     AddClueCommand( KrossWord *krossWord, QDataStream *stream,
-		    UndoCommandExt *parent = NULL )
-		    : RemoveClueCommand( krossWord, stream, parent ) {
-      init();
+                    UndoCommandExt *parent = NULL )
+            : RemoveClueCommand( krossWord, stream, parent ) {
+        init();
     }
 
     void init();
 };
 
-class RemoveImageCommand : public UndoCommandExt {
-  public:
+class RemoveImageCommand : public UndoCommandExt
+{
+public:
     RemoveImageCommand( KrossWord *krossWord, ImageCell *image,
-			UndoCommandExt* parent = 0 );
+                        UndoCommandExt* parent = 0 );
     RemoveImageCommand( KrossWord *krossWord, const Coord &coord,
-			int horizontalCellSpan, int verticalCellSpan, KUrl url,
-			UndoCommandExt* parent = 0 );
+                        int horizontalCellSpan, int verticalCellSpan, KUrl url,
+                        UndoCommandExt* parent = 0 );
 
     virtual void redoMaybe();
     virtual void undoMaybe();
@@ -339,22 +381,35 @@ class RemoveImageCommand : public UndoCommandExt {
     virtual bool checkRedo( QString* errorMessage = 0 ) const;
     virtual bool checkUndo( QString* errorMessage = 0 ) const;
 
-    virtual Command type() const { return CommandRemoveImage; };
+    virtual Command type() const {
+        return CommandRemoveImage;
+    };
     virtual void appendToData( QDataStream *stream ) const;
     static RemoveImageCommand *fromData( KrossWord *krossWord,
-					 QDataStream *stream,
-					 UndoCommandExt *parent = NULL ) {
-      return new RemoveImageCommand( krossWord, stream, parent ); };
+                                         QDataStream *stream,
+                                         UndoCommandExt *parent = NULL ) {
+        return new RemoveImageCommand( krossWord, stream, parent );
+    };
 
-    KrossWord *krossWord() const { return m_krossWord; };
-    Coord coord() const { return m_coord; };
-    int horizontalCellSpan() const { return m_horizontalCellSpan; };
-    int verticalCellSpan() const { return m_verticalCellSpan; };
-    KUrl url() const { return m_url; };
+    KrossWord *krossWord() const {
+        return m_krossWord;
+    };
+    Coord coord() const {
+        return m_coord;
+    };
+    int horizontalCellSpan() const {
+        return m_horizontalCellSpan;
+    };
+    int verticalCellSpan() const {
+        return m_verticalCellSpan;
+    };
+    KUrl url() const {
+        return m_url;
+    };
 
-  protected:
+protected:
     RemoveImageCommand( KrossWord *krossWord, QDataStream *stream,
-			UndoCommandExt *parent = NULL );
+                        UndoCommandExt *parent = NULL );
     void setupText();
 
     KrossWord *m_krossWord;
@@ -364,45 +419,54 @@ class RemoveImageCommand : public UndoCommandExt {
     KUrl m_url;
 };
 
-class AddImageCommand : public RemoveImageCommand {
-  public:
+class AddImageCommand : public RemoveImageCommand
+{
+public:
     AddImageCommand( KrossWord* krossWord, const Coord &coord,
-		     int horizontalCellSpan, int verticalCellSpan, KUrl url,
-		     UndoCommandExt* parent = 0 );
+                     int horizontalCellSpan, int verticalCellSpan, KUrl url,
+                     UndoCommandExt* parent = 0 );
 
-    virtual void redoMaybe() { RemoveImageCommand::undoMaybe(); };
-    virtual void undoMaybe() { RemoveImageCommand::redoMaybe(); };
+    virtual void redoMaybe() {
+        RemoveImageCommand::undoMaybe();
+    };
+    virtual void undoMaybe() {
+        RemoveImageCommand::redoMaybe();
+    };
 
     virtual bool checkRedo( QString* errorMessage = 0 ) const {
-      return RemoveImageCommand::checkUndo( errorMessage );
+        return RemoveImageCommand::checkUndo( errorMessage );
     };
     virtual bool checkUndo( QString* errorMessage = 0 ) const {
-      return RemoveImageCommand::checkRedo( errorMessage );
+        return RemoveImageCommand::checkRedo( errorMessage );
     };
 
-    virtual Command type() const { return CommandAddImage; };
+    virtual Command type() const {
+        return CommandAddImage;
+    };
 
     static AddImageCommand *fromData( KrossWord *krossWord, QDataStream *stream,
-				      UndoCommandExt *parent = NULL ) {
-      return new AddImageCommand( krossWord, stream, parent ); };
+                                      UndoCommandExt *parent = NULL ) {
+        return new AddImageCommand( krossWord, stream, parent );
+    };
 
-  protected:
+protected:
     AddImageCommand( KrossWord *krossWord, QDataStream *stream,
-		     UndoCommandExt *parent = NULL )
-		     : RemoveImageCommand( krossWord, stream, parent ) {
-      setupText();
+                     UndoCommandExt *parent = NULL )
+            : RemoveImageCommand( krossWord, stream, parent ) {
+        setupText();
     };
 
     void setupText();
 };
 
-class ConvertToLetterCommand : public UndoCommandExt {
-  public:
+class ConvertToLetterCommand : public UndoCommandExt
+{
+public:
     ConvertToLetterCommand( KrossWord *krossWord,
-	    SolutionLetterCell *solutionLetterCell, UndoCommandExt* parent = 0 );
+                            SolutionLetterCell *solutionLetterCell, UndoCommandExt* parent = 0 );
     ConvertToLetterCommand( KrossWord *krossWord, const Coord &coord,
-	    int solutionWordIndex,
-	    UndoCommandExt* parent = 0 );
+                            int solutionWordIndex,
+                            UndoCommandExt* parent = 0 );
 
     virtual void redoMaybe();
     virtual void undoMaybe();
@@ -410,20 +474,29 @@ class ConvertToLetterCommand : public UndoCommandExt {
     virtual bool checkRedo( QString* errorMessage = 0 ) const;
     virtual bool checkUndo( QString* errorMessage = 0 ) const;
 
-    virtual Command type() const { return CommandConvertToLetter; };
+    virtual Command type() const {
+        return CommandConvertToLetter;
+    };
     virtual void appendToData( QDataStream *stream ) const;
     static ConvertToLetterCommand *fromData( KrossWord *krossWord,
-					     QDataStream *stream,
-					     UndoCommandExt *parent = NULL ) {
-      return new ConvertToLetterCommand( krossWord, stream, parent ); };
+            QDataStream *stream,
+            UndoCommandExt *parent = NULL ) {
+        return new ConvertToLetterCommand( krossWord, stream, parent );
+    };
 
-    KrossWord *krossWord() const { return m_krossWord; };
-    Coord coord() const { return m_coord; };
-    int solutionWordIndex() const { return m_solutionWordIndex; };
+    KrossWord *krossWord() const {
+        return m_krossWord;
+    };
+    Coord coord() const {
+        return m_coord;
+    };
+    int solutionWordIndex() const {
+        return m_solutionWordIndex;
+    };
 
-  protected:
+protected:
     ConvertToLetterCommand( KrossWord *krossWord, QDataStream *stream,
-			    UndoCommandExt *parent = NULL );
+                            UndoCommandExt *parent = NULL );
 
     void setupText();
 
@@ -432,52 +505,64 @@ class ConvertToLetterCommand : public UndoCommandExt {
     int m_solutionWordIndex;
 };
 
-class ConvertToSolutionLetterCommand : public ConvertToLetterCommand {
-  public:
+class ConvertToSolutionLetterCommand : public ConvertToLetterCommand
+{
+public:
     ConvertToSolutionLetterCommand( KrossWord *krossWord, const Coord &coord,
-		    int solutionWordIndex, UndoCommandExt* parent = 0 );
+                                    int solutionWordIndex, UndoCommandExt* parent = 0 );
 
-    virtual void redoMaybe() { ConvertToLetterCommand::undoMaybe(); };
-    virtual void undoMaybe() { ConvertToLetterCommand::redoMaybe(); };
+    virtual void redoMaybe() {
+        ConvertToLetterCommand::undoMaybe();
+    };
+    virtual void undoMaybe() {
+        ConvertToLetterCommand::redoMaybe();
+    };
 
     virtual bool checkRedo( QString* errorMessage = 0 ) const {
-	return ConvertToLetterCommand::checkUndo( errorMessage );
+        return ConvertToLetterCommand::checkUndo( errorMessage );
     };
     virtual bool checkUndo( QString* errorMessage = 0 ) const {
-	return ConvertToLetterCommand::checkRedo( errorMessage );
+        return ConvertToLetterCommand::checkRedo( errorMessage );
     };
 
-    virtual Command type() const { return CommandConvertToSolutionLetter; };
+    virtual Command type() const {
+        return CommandConvertToSolutionLetter;
+    };
     static ConvertToSolutionLetterCommand *fromData( KrossWord *krossWord,
-		      QDataStream *stream, UndoCommandExt *parent = NULL ) {
-      return new ConvertToSolutionLetterCommand( krossWord, stream, parent ); };
+            QDataStream *stream, UndoCommandExt *parent = NULL ) {
+        return new ConvertToSolutionLetterCommand( krossWord, stream, parent );
+    };
 
-  protected:
+protected:
     ConvertToSolutionLetterCommand( KrossWord *krossWord, QDataStream *stream,
-		    UndoCommandExt *parent = NULL )
-		    : ConvertToLetterCommand( krossWord, stream, parent ) {
-      setupText(); };
+                                    UndoCommandExt *parent = NULL )
+            : ConvertToLetterCommand( krossWord, stream, parent ) {
+        setupText();
+    };
 
-  private:
+private:
     void setupText();
 };
 
-class ChangeClueCommand : public UndoCommandExt {
-  public:
+class ChangeClueCommand : public UndoCommandExt
+{
+public:
     ChangeClueCommand( KrossWord* krossWord, ClueCell *clueCell,
-		       const QString &newClueText,
-		       UndoCommandExt* parent = 0 );
+                       const QString &newClueText,
+                       UndoCommandExt* parent = 0 );
     ChangeClueCommand( KrossWord* krossWord, ClueCell *clueCell,
-		       const QString &newClueText,
-		       Qt::Orientation newOrientation,
-		       AnswerOffset newAnswerOffset,
-		       const QString &newCorrectAnswer,
-		       const QString &newCurrentAnswer,
-		       UndoCommandExt* parent = 0 );
-		       
-    virtual int id() const { return static_cast<int>( CommandChangeClue ); };
+                       const QString &newClueText,
+                       Qt::Orientation newOrientation,
+                       AnswerOffset newAnswerOffset,
+                       const QString &newCorrectAnswer,
+                       const QString &newCurrentAnswer,
+                       UndoCommandExt* parent = 0 );
+
+    virtual int id() const {
+        return static_cast<int>( CommandChangeClue );
+    };
     virtual bool mergeWith( const QUndoCommand* other );
-    
+
     virtual void redoMaybe();
     virtual void undoMaybe();
 
@@ -489,23 +574,26 @@ class ChangeClueCommand : public UndoCommandExt {
     * changing the clue properties. */
     QHash< Coord, int > removedSolutionLetters() const;
 
-    virtual Command type() const { return CommandChangeClue; };
+    virtual Command type() const {
+        return CommandChangeClue;
+    };
     virtual void appendToData( QDataStream *stream ) const;
     static ChangeClueCommand *fromData( KrossWord *krossWord,
-					QDataStream *stream,
-					UndoCommandExt *parent = NULL ) {
-      return new ChangeClueCommand( krossWord, stream, parent ); };
+                                        QDataStream *stream,
+                                        UndoCommandExt *parent = NULL ) {
+        return new ChangeClueCommand( krossWord, stream, parent );
+    };
 
-  protected:
+protected:
     ChangeClueCommand( KrossWord *krossWord, QDataStream *stream,
-		       UndoCommandExt *parent = NULL );
+                       UndoCommandExt *parent = NULL );
 
-  private:
+private:
     void init( KrossWord* krossWord, ClueCell *clueCell,
-	       const QString &newClueText, Qt::Orientation newOrientation,
-	       AnswerOffset newAnswerOffset,
-	       const QString &newCorrectAnswer,
-	       const QString &newCurrentAnswer );
+               const QString &newClueText, Qt::Orientation newOrientation,
+               AnswerOffset newAnswerOffset,
+               const QString &newCorrectAnswer,
+               const QString &newCurrentAnswer );
     void setupText();
 
     KrossWord *m_krossWord;
@@ -517,36 +605,42 @@ class ChangeClueCommand : public UndoCommandExt {
     QString m_oldClueText, m_newClueText;
 };
 
-class AddLettersToClueCommand : public UndoCommandExt {
-  public:
+class AddLettersToClueCommand : public UndoCommandExt
+{
+public:
     AddLettersToClueCommand( KrossWord *krossWord, ClueCell *clueCell,
-			     int lettersToAdd, UndoCommandExt *parent = 0 );
+                             int lettersToAdd, UndoCommandExt *parent = 0 );
 
-    virtual int id() const { return static_cast<int>( CommandAddLettersToClue ); };
+    virtual int id() const {
+        return static_cast<int>( CommandAddLettersToClue );
+    };
     virtual bool mergeWith( const QUndoCommand* other );
     virtual UndoCommandExt *mergedWith( const QUndoCommand* other );
-    
+
     virtual void redoMaybe();
     virtual void undoMaybe();
 
     virtual bool checkRedo( QString* errorMessage = 0 ) const;
     virtual bool checkUndo( QString* errorMessage = 0 ) const;
-    
-    virtual Command type() const { return CommandAddLettersToClue; };
+
+    virtual Command type() const {
+        return CommandAddLettersToClue;
+    };
     virtual void appendToData( QDataStream *stream ) const;
     static AddLettersToClueCommand *fromData( KrossWord *krossWord,
-					      QDataStream *stream,
-					      UndoCommandExt *parent = NULL ) {
-      return new AddLettersToClueCommand( krossWord, stream, parent ); };
+            QDataStream *stream,
+            UndoCommandExt *parent = NULL ) {
+        return new AddLettersToClueCommand( krossWord, stream, parent );
+    };
 
-    
-      
-  protected:
+
+
+protected:
     AddLettersToClueCommand( KrossWord* krossWord, QDataStream *stream,
-			     UndoCommandExt *parent = 0 );
+                             UndoCommandExt *parent = 0 );
     AddLettersToClueCommand( AddLettersToClueCommand *other );
-    
-  private:
+
+private:
     void setupText();
     void restoreLetters( ClueCell *clue, int newLetters );
 
@@ -562,29 +656,30 @@ class AddLettersToClueCommand : public UndoCommandExt {
 /*
 // class ChangeCluePropertiesCommand : public CheckableUndoCommand {
 //     public:
-// 	ChangeCluePropertiesCommand( KrossWord* krossWord, ClueCell *clueCell,
-// 		Qt::Orientation newOrientation, const QString &newClue,
-// 		const QString &newAnswer, AnswerOffset answerOffset,
-// 		UndoCommandExt* parent = 0 );
+//  ChangeCluePropertiesCommand( KrossWord* krossWord, ClueCell *clueCell,
+//   Qt::Orientation newOrientation, const QString &newClue,
+//   const QString &newAnswer, AnswerOffset answerOffset,
+//   UndoCommandExt* parent = 0 );
 //
-// // 	virtual void redoMaybe();
-// // 	virtual void undoMaybe();
+// //  virtual void redoMaybe();
+// //  virtual void undoMaybe();
 //
-// 	virtual bool checkRedo( QString* errorMessage = 0 ) const;
-// // 	virtual bool checkUndo( QString* errorMessage = 0 ) const;
+//  virtual bool checkRedo( QString* errorMessage = 0 ) const;
+// //  virtual bool checkUndo( QString* errorMessage = 0 ) const;
 //
 //     private:
-// 	RemoveClueCommand *m_removeClueCommand;
-// 	AddClueCommand *m_addClueCommand;
+//  RemoveClueCommand *m_removeClueCommand;
+//  AddClueCommand *m_addClueCommand;
 // };
 */
 
-class LetterEditCommand : public UndoCommandExt {
-  public:
+class LetterEditCommand : public UndoCommandExt
+{
+public:
     LetterEditCommand( KrossWord *krossWord,
-		       bool editCorrectLetter, const Coord &coord,
-		       const QChar &currentLetter, const QChar &newLetter,
-		       UndoCommandExt* parent = 0 );
+                       bool editCorrectLetter, const Coord &coord,
+                       const QChar &currentLetter, const QChar &newLetter,
+                       UndoCommandExt* parent = 0 );
 
     virtual void redoMaybe();
     virtual void undoMaybe();
@@ -592,17 +687,20 @@ class LetterEditCommand : public UndoCommandExt {
     virtual bool checkRedo( QString* errorMessage = 0 ) const;
     virtual bool checkUndo( QString* errorMessage = 0 ) const;
 
-    virtual Command type() const { return CommandLetterEdit; };
+    virtual Command type() const {
+        return CommandLetterEdit;
+    };
     virtual void appendToData( QDataStream *stream ) const;
     static LetterEditCommand *fromData( KrossWord *krossWord,
-		    QDataStream *stream, UndoCommandExt *parent = NULL ) {
-      return new LetterEditCommand( krossWord, stream, parent ); };
+                                        QDataStream *stream, UndoCommandExt *parent = NULL ) {
+        return new LetterEditCommand( krossWord, stream, parent );
+    };
 
-  protected:
+protected:
     LetterEditCommand( KrossWord *krossWord, QDataStream *stream,
-		       UndoCommandExt *parent = NULL );
+                       UndoCommandExt *parent = NULL );
 
-  private:
+private:
     void setupText();
 
     KrossWord *m_krossWord;
@@ -612,10 +710,11 @@ class LetterEditCommand : public UndoCommandExt {
     QChar m_newLetter;
 };
 
-class ClearClueCommand : public UndoCommandExt {
-  public:
+class ClearClueCommand : public UndoCommandExt
+{
+public:
     ClearClueCommand( KrossWord* krossWord, ClueCell *clueCell,
-		      UndoCommandExt* parent = 0 );
+                      UndoCommandExt* parent = 0 );
 
     virtual void redoMaybe();
     virtual void undoMaybe();
@@ -623,17 +722,20 @@ class ClearClueCommand : public UndoCommandExt {
     virtual bool checkRedo( QString* errorMessage = 0 ) const;
     virtual bool checkUndo( QString* errorMessage = 0 ) const;
 
-    virtual Command type() const { return CommandClearClue; };
+    virtual Command type() const {
+        return CommandClearClue;
+    };
     virtual void appendToData( QDataStream *stream ) const;
     static ClearClueCommand *fromData( KrossWord *krossWord,
-		QDataStream *stream, UndoCommandExt *parent = NULL ) {
-      return new ClearClueCommand( krossWord, stream, parent ); };
+                                       QDataStream *stream, UndoCommandExt *parent = NULL ) {
+        return new ClearClueCommand( krossWord, stream, parent );
+    };
 
-  protected:
+protected:
     ClearClueCommand( KrossWord *krossWord, QDataStream *stream,
-		      UndoCommandExt *parent = NULL );
+                      UndoCommandExt *parent = NULL );
 
-  private:
+private:
     void setupText();
 
     KrossWord *m_krossWord;
@@ -643,61 +745,70 @@ class ClearClueCommand : public UndoCommandExt {
     QString m_answer;
 };
 
-class ClearCrosswordCommand : public CrosswordCompoundUndoCommand {
-  public:
+class ClearCrosswordCommand : public CrosswordCompoundUndoCommand
+{
+public:
     explicit ClearCrosswordCommand( KrossWord *krossWord, UndoCommandExt* parent = 0 );
 
     virtual void redoMaybe(); // Only call removeAllCells()
-    // 	virtual void undoMaybe(); // QUndoCommand processes all children (RemoveClue/ImageCommand's)
+    //  virtual void undoMaybe(); // QUndoCommand processes all children (RemoveClue/ImageCommand's)
 
-// 	virtual bool checkRedo( QString* errorMessage = 0 ) const; // Just use default implementation (always true)
+//  virtual bool checkRedo( QString* errorMessage = 0 ) const; // Just use default implementation (always true)
 //     virtual bool checkUndo( QString* errorMessage = 0 ) const;
 
-    virtual Command type() const { return CommandClearCrossword; };
+    virtual Command type() const {
+        return CommandClearCrossword;
+    };
     static ClearCrosswordCommand *fromData( KrossWord *krossWord,
-		    QDataStream *stream, UndoCommandExt *parent = NULL ) {
-      return new ClearCrosswordCommand( krossWord, stream, parent ); };
+                                            QDataStream *stream, UndoCommandExt *parent = NULL ) {
+        return new ClearCrosswordCommand( krossWord, stream, parent );
+    };
 
 
-  protected:
+protected:
     ClearCrosswordCommand( KrossWord *krossWord, QDataStream *stream,
-	      UndoCommandExt *parent = NULL )
-	      : CrosswordCompoundUndoCommand( krossWord, stream, parent ) {
-      setupText(); };
+                           UndoCommandExt *parent = NULL )
+            : CrosswordCompoundUndoCommand( krossWord, stream, parent ) {
+        setupText();
+    };
 
-  private:
+private:
     void setupText();
 };
 
-class ChangeCrosswordPropertiesCommand : public CrosswordCompoundUndoCommand {
-  public:
+class ChangeCrosswordPropertiesCommand : public CrosswordCompoundUndoCommand
+{
+public:
     ChangeCrosswordPropertiesCommand( KrossWord *krossWord,
-			  const QString &newTitle, const QString &newAuthors,
-			  const QString &newCopyright, const QString &newNotes,
-			  int newWidth = -1, int newHeight = -1,
-			  KrossWord::ResizeAnchor anchor = KrossWord::AnchorCenter,
-			  UndoCommandExt* parent = 0 );
+                                      const QString &newTitle, const QString &newAuthors,
+                                      const QString &newCopyright, const QString &newNotes,
+                                      int newWidth = -1, int newHeight = -1,
+                                      KrossWord::ResizeAnchor anchor = KrossWord::AnchorCenter,
+                                      UndoCommandExt* parent = 0 );
 
     bool isEmpty() const;
 
     virtual void redoMaybe();
     virtual void undoMaybe();
 
-    virtual Command type() const { return CommandChangeCrosswordProperties; };
+    virtual Command type() const {
+        return CommandChangeCrosswordProperties;
+    };
     virtual void appendToData( QDataStream *stream ) const;
     static ChangeCrosswordPropertiesCommand *fromData( KrossWord *krossWord,
-		      QDataStream *stream, UndoCommandExt *parent = NULL ) {
-      return new ChangeCrosswordPropertiesCommand( krossWord, stream, parent ); };
+            QDataStream *stream, UndoCommandExt *parent = NULL ) {
+        return new ChangeCrosswordPropertiesCommand( krossWord, stream, parent );
+    };
 
-// 	TODO: Could check string lengths, if a PUZ file is opened
-// 	virtual bool checkRedo( QString* errorMessage = 0 ) const;
-// 	virtual bool checkUndo( QString* errorMessage = 0 ) const;
+//  TODO: Could check string lengths, if a PUZ file is opened
+//  virtual bool checkRedo( QString* errorMessage = 0 ) const;
+//  virtual bool checkUndo( QString* errorMessage = 0 ) const;
 
-  protected:
+protected:
     ChangeCrosswordPropertiesCommand( KrossWord *krossWord, QDataStream *stream,
-				      UndoCommandExt *parent = NULL );
+                                      UndoCommandExt *parent = NULL );
 
-  private:
+private:
     void setupText();
 
     QString m_oldTitle, m_newTitle;
@@ -706,25 +817,29 @@ class ChangeCrosswordPropertiesCommand : public CrosswordCompoundUndoCommand {
     QString m_oldNotes, m_newNotes;
 };
 
-class SetClueHiddenCommand : public UndoCommandExt {
-  public:
+class SetClueHiddenCommand : public UndoCommandExt
+{
+public:
     SetClueHiddenCommand( KrossWord *krossWord, ClueCell *clue,
-			  UndoCommandExt* parent = 0 );
+                          UndoCommandExt* parent = 0 );
 
     virtual void redoMaybe();
     virtual void undoMaybe();
 
-    virtual Command type() const { return CommandSetClueHidden; };
+    virtual Command type() const {
+        return CommandSetClueHidden;
+    };
     virtual void appendToData( QDataStream *stream ) const;
     static SetClueHiddenCommand *fromData( KrossWord *krossWord,
-		  QDataStream *stream, UndoCommandExt *parent = NULL ) {
-      return new SetClueHiddenCommand( krossWord, stream, parent ); };
+                                           QDataStream *stream, UndoCommandExt *parent = NULL ) {
+        return new SetClueHiddenCommand( krossWord, stream, parent );
+    };
 
-  protected:
+protected:
     SetClueHiddenCommand( KrossWord *krossWord, QDataStream *stream,
-			  UndoCommandExt *parent = NULL );
+                          UndoCommandExt *parent = NULL );
 
-  private:
+private:
     void setupText();
 
     KrossWord *m_krossWord;
@@ -733,30 +848,34 @@ class SetClueHiddenCommand : public UndoCommandExt {
     Coord m_firstLetterCoord;
 };
 
-class MakeClueCellVisibleCommand : public UndoCommandExt {
-  public:
+class MakeClueCellVisibleCommand : public UndoCommandExt
+{
+public:
     MakeClueCellVisibleCommand( KrossWord *krossWord, ClueCell *clue,
-				UndoCommandExt* parent = 0 );
+                                UndoCommandExt* parent = 0 );
     MakeClueCellVisibleCommand( KrossWord *krossWord, ClueCell *clue,
-				AnswerOffset answerOffset,
-				UndoCommandExt* parent = 0 );
+                                AnswerOffset answerOffset,
+                                UndoCommandExt* parent = 0 );
 
     virtual bool checkRedo( QString* errorMessage = 0 ) const;
 
     virtual void redoMaybe();
     virtual void undoMaybe();
 
-    virtual Command type() const { return CommandMakeClueCellVisible; };
+    virtual Command type() const {
+        return CommandMakeClueCellVisible;
+    };
     virtual void appendToData( QDataStream *stream ) const;
     static MakeClueCellVisibleCommand *fromData( KrossWord *krossWord,
-		      QDataStream *stream, UndoCommandExt *parent = NULL ) {
-      return new MakeClueCellVisibleCommand( krossWord, stream, parent ); };
+            QDataStream *stream, UndoCommandExt *parent = NULL ) {
+        return new MakeClueCellVisibleCommand( krossWord, stream, parent );
+    };
 
-  protected:
+protected:
     MakeClueCellVisibleCommand( KrossWord *krossWord, QDataStream *stream,
-				UndoCommandExt *parent = NULL );
+                                UndoCommandExt *parent = NULL );
 
-  private:
+private:
     void setupText();
 
     KrossWord *m_krossWord;
@@ -765,26 +884,30 @@ class MakeClueCellVisibleCommand : public UndoCommandExt {
     Coord m_firstLetterCoord;
 };
 
-class SetNumberPuzzleMappingCommand : public UndoCommandExt {
-  public:
+class SetNumberPuzzleMappingCommand : public UndoCommandExt
+{
+public:
     SetNumberPuzzleMappingCommand( KrossWord *krossWord,
-				   const QString &newNumberPuzzleMapping,
-				   UndoCommandExt* parent = 0 );
+                                   const QString &newNumberPuzzleMapping,
+                                   UndoCommandExt* parent = 0 );
 
     virtual void redoMaybe();
     virtual void undoMaybe();
 
-    virtual Command type() const { return CommandSetNumberPuzzleMapping; };
+    virtual Command type() const {
+        return CommandSetNumberPuzzleMapping;
+    };
     virtual void appendToData( QDataStream *stream ) const;
     static SetNumberPuzzleMappingCommand *fromData( KrossWord *krossWord,
-		      QDataStream *stream, UndoCommandExt *parent = NULL ) {
-      return new SetNumberPuzzleMappingCommand( krossWord, stream, parent ); };
+            QDataStream *stream, UndoCommandExt *parent = NULL ) {
+        return new SetNumberPuzzleMappingCommand( krossWord, stream, parent );
+    };
 
-  protected:
+protected:
     SetNumberPuzzleMappingCommand( KrossWord *krossWord, QDataStream *stream,
-				   UndoCommandExt *parent = NULL );
+                                   UndoCommandExt *parent = NULL );
 
-  private:
+private:
     void setupText();
 
     KrossWord *m_krossWord;
@@ -792,63 +915,77 @@ class SetNumberPuzzleMappingCommand : public UndoCommandExt {
     QString m_newNumberPuzzleMapping;
 };
 
-class SetupSameLetterSynchronizationCommand : public UndoCommandExt {
-  public:
+class SetupSameLetterSynchronizationCommand : public UndoCommandExt
+{
+public:
     explicit SetupSameLetterSynchronizationCommand( KrossWord *krossWord,
-						    UndoCommandExt* parent = 0 );
+            UndoCommandExt* parent = 0 );
 
     virtual void redoMaybe();
     virtual void undoMaybe();
 
-    virtual Command type() const { return CommandSetupSameLetterSynchronization; };
+    virtual Command type() const {
+        return CommandSetupSameLetterSynchronization;
+    };
     static SetupSameLetterSynchronizationCommand *fromData( KrossWord *krossWord,
-			  QDataStream *stream, UndoCommandExt *parent = NULL ) {
-      return new SetupSameLetterSynchronizationCommand(
-	  krossWord, stream, parent ); };
+            QDataStream *stream, UndoCommandExt *parent = NULL ) {
+        return new SetupSameLetterSynchronizationCommand(
+                   krossWord, stream, parent );
+    };
 
-  protected:
+protected:
     SetupSameLetterSynchronizationCommand( KrossWord *krossWord,
-			QDataStream *stream, UndoCommandExt *parent = NULL );
+                                           QDataStream *stream, UndoCommandExt *parent = NULL );
 
-  private:
+private:
     void setupText();
 
     KrossWord *m_krossWord;
 };
 
 class RemoveSameLetterSynchronizationCommand
-	: public SetupSameLetterSynchronizationCommand {
-  public:
+            : public SetupSameLetterSynchronizationCommand
+{
+public:
     explicit RemoveSameLetterSynchronizationCommand( KrossWord *krossWord,
-						     UndoCommandExt* parent = 0 );
+            UndoCommandExt* parent = 0 );
 
-    virtual void redoMaybe() { SetupSameLetterSynchronizationCommand::undoMaybe(); };
-    virtual void undoMaybe() { SetupSameLetterSynchronizationCommand::redoMaybe(); };
+    virtual void redoMaybe() {
+        SetupSameLetterSynchronizationCommand::undoMaybe();
+    };
+    virtual void undoMaybe() {
+        SetupSameLetterSynchronizationCommand::redoMaybe();
+    };
 
-    virtual Command type() const { return CommandRemoveSameLetterSynchronization; };
+    virtual Command type() const {
+        return CommandRemoveSameLetterSynchronization;
+    };
     static RemoveSameLetterSynchronizationCommand *fromData( KrossWord *krossWord,
-			  QDataStream *stream, UndoCommandExt *parent = NULL ) {
-      return new RemoveSameLetterSynchronizationCommand(
-	  krossWord, stream, parent ); };
+            QDataStream *stream, UndoCommandExt *parent = NULL ) {
+        return new RemoveSameLetterSynchronizationCommand(
+                   krossWord, stream, parent );
+    };
 
-  protected:
+protected:
     RemoveSameLetterSynchronizationCommand( KrossWord *krossWord,
-	  QDataStream *stream, UndoCommandExt *parent = NULL )
-	  : SetupSameLetterSynchronizationCommand( krossWord, stream, parent ) {
-      setupText(); };
+                                            QDataStream *stream, UndoCommandExt *parent = NULL )
+            : SetupSameLetterSynchronizationCommand( krossWord, stream, parent ) {
+        setupText();
+    };
 
-  private:
+private:
     void setupText();
 };
 
 // typedef ReverseUndoCommand<SetupSameLetterSynchronizationCommand>
-// 	RemoveSameLetterSynchronizationCommand;
+//  RemoveSameLetterSynchronizationCommand;
 
-class ConvertCrosswordCommand : public CrosswordCompoundUndoCommand {
-  public:
-    ConvertCrosswordCommand(KrossWord *krossWord,
-			    CrosswordTypeInfo newTypeInfo,
-			    UndoCommandExt* parent = 0);
+class ConvertCrosswordCommand : public CrosswordCompoundUndoCommand
+{
+public:
+    ConvertCrosswordCommand( KrossWord *krossWord,
+                             CrosswordTypeInfo newTypeInfo,
+                             UndoCommandExt* parent = 0 );
 
     virtual void redoMaybe();
     virtual void undoMaybe();
@@ -856,50 +993,59 @@ class ConvertCrosswordCommand : public CrosswordCompoundUndoCommand {
 //     virtual bool checkRedo( QString* errorMessage = 0 ) const; // Just use default implementation (always true)
 //     virtual bool checkUndo( QString* errorMessage = 0 ) const;
 
-    virtual Command type() const { return CommandConvertCrossword; };
+    virtual Command type() const {
+        return CommandConvertCrossword;
+    };
     virtual void appendToData( QDataStream *stream ) const;
     static ConvertCrosswordCommand *fromData( KrossWord *krossWord,
-		    QDataStream *stream, UndoCommandExt *parent = NULL ) {
-      return new ConvertCrosswordCommand( krossWord, stream, parent ); };
+            QDataStream *stream, UndoCommandExt *parent = NULL ) {
+        return new ConvertCrosswordCommand( krossWord, stream, parent );
+    };
 
-  protected:
+protected:
     ConvertCrosswordCommand( KrossWord *krossWord,
-	  QDataStream *stream, UndoCommandExt *parent = NULL );
+                             QDataStream *stream, UndoCommandExt *parent = NULL );
 
-  private:
+private:
     void setupText();
 
     CrosswordTypeInfo m_oldTypeInfo;
     CrosswordTypeInfo m_newTypeInfo;
 };
 
-class ResizeCrosswordCommand : public CrosswordCompoundUndoCommand {
-  public:
+class ResizeCrosswordCommand : public CrosswordCompoundUndoCommand
+{
+public:
     ResizeCrosswordCommand( KrossWord *krossWord, uint newWidth, uint newHeight,
-			    KrossWord::ResizeAnchor anchor = KrossWord::AnchorCenter,
-			    UndoCommandExt* parent = 0 );
+                            KrossWord::ResizeAnchor anchor = KrossWord::AnchorCenter,
+                            UndoCommandExt* parent = 0 );
 
     virtual bool mergeWith( const QUndoCommand* other );
-    virtual int id() const { return static_cast<int>( CommandResizeCrossword ); };
-    
+    virtual int id() const {
+        return static_cast<int>( CommandResizeCrossword );
+    };
+
     virtual void redoMaybe();
     virtual void undoMaybe();
 
-// 	TODO: Could check size, if a PUZ file is opened
-// 	virtual bool checkRedo( QString* errorMessage = 0 ) const;
+//  TODO: Could check size, if a PUZ file is opened
+//  virtual bool checkRedo( QString* errorMessage = 0 ) const;
 //     virtual bool checkUndo( QString* errorMessage = 0 ) const;
 
-    virtual Command type() const { return CommandResizeCrossword; };
+    virtual Command type() const {
+        return CommandResizeCrossword;
+    };
     virtual void appendToData( QDataStream *stream ) const;
     static ResizeCrosswordCommand *fromData( KrossWord *krossWord,
-		      QDataStream *stream, UndoCommandExt *parent = NULL ) {
-      return new ResizeCrosswordCommand( krossWord, stream, parent ); };
+            QDataStream *stream, UndoCommandExt *parent = NULL ) {
+        return new ResizeCrosswordCommand( krossWord, stream, parent );
+    };
 
-  protected:
+protected:
     ResizeCrosswordCommand( KrossWord *krossWord, QDataStream *stream,
-			    UndoCommandExt *parent = NULL );
+                            UndoCommandExt *parent = NULL );
 
-  private:
+private:
     void setupText();
 
     KrossWord::ResizeAnchor m_anchor;
@@ -907,28 +1053,34 @@ class ResizeCrosswordCommand : public CrosswordCompoundUndoCommand {
     uint m_oldHeight, m_newHeight;
 };
 
-class MoveCellsCommand : public CrosswordCompoundUndoCommand {
-  public:
+class MoveCellsCommand : public CrosswordCompoundUndoCommand
+{
+public:
     MoveCellsCommand( KrossWord *krossWord, int dx, int dy,
-		      UndoCommandExt* parent = 0 );
+                      UndoCommandExt* parent = 0 );
 
     virtual bool mergeWith( const QUndoCommand* other );
-    virtual int id() const { return static_cast<int>( CommandMoveCells ); };
-		      
+    virtual int id() const {
+        return static_cast<int>( CommandMoveCells );
+    };
+
     virtual void redoMaybe();
     virtual void undoMaybe();
 
-    virtual Command type() const { return CommandMoveCells; };
+    virtual Command type() const {
+        return CommandMoveCells;
+    };
     virtual void appendToData( QDataStream *stream ) const;
     static MoveCellsCommand *fromData( KrossWord *krossWord,
-		  QDataStream *stream, UndoCommandExt *parent = NULL ) {
-      return new MoveCellsCommand( krossWord, stream, parent ); };
+                                       QDataStream *stream, UndoCommandExt *parent = NULL ) {
+        return new MoveCellsCommand( krossWord, stream, parent );
+    };
 
-  protected:
+protected:
     MoveCellsCommand( KrossWord *krossWord, QDataStream *stream,
-		      UndoCommandExt *parent = NULL );
+                      UndoCommandExt *parent = NULL );
 
-  private:
+private:
     void setupText();
 
     int m_dx, m_dy;

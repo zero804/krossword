@@ -30,45 +30,58 @@ class SubFileSystemProxyModel;
 using namespace Crossword;
 
 /** A dialog to configure settings for a new crossword. */
-class CreateNewCrosswordDialog : public KDialog {
-  Q_OBJECT
-  
-  public:
+class CreateNewCrosswordDialog : public KDialog
+{
+    Q_OBJECT
+
+public:
     /** Constructs a new dialog. */
     explicit CreateNewCrosswordDialog( QWidget* parent = 0, Qt::WFlags flags = 0 );
     ~CreateNewCrosswordDialog();
 
     /** Returns the current crossword type info. */
     CrosswordTypeInfo crosswordTypeInfo() const {
-	return m_typeInfo; };
+        return m_typeInfo;
+    };
     /** Sets another crossword type info. */
     void setCrosswordType( CrosswordTypeInfo crosswordTypeInfo );
 
     /** Returns the current crossword size. */
     QSize crosswordSize() const {
-	return QSize( ui_create_new.columns->value(), ui_create_new.rows->value() ); };
+        return QSize( ui_create_new.columns->value(), ui_create_new.rows->value() );
+    };
     /** Return the current title. */
-    QString title() const { return ui_create_new.title->text(); };
+    QString title() const {
+        return ui_create_new.title->text();
+    };
     /** Return the current author(s). */
-    QString author() const { return ui_create_new.author->text(); };
+    QString author() const {
+        return ui_create_new.author->text();
+    };
     /** Return the current copyright. */
-    QString copyright() const { return ui_create_new.copyright->text(); };
+    QString copyright() const {
+        return ui_create_new.copyright->text();
+    };
     /** Return the current notes. */
-    QString notes() const { return ui_create_new.notes->text(); };
-    bool useTemplate() const { return ui_create_new.useTemplate->isChecked(); };
+    QString notes() const {
+        return ui_create_new.notes->text();
+    };
+    bool useTemplate() const {
+        return ui_create_new.useTemplate->isChecked();
+    };
     QString templateFilePath() const;
 
-  protected slots:
+protected slots:
     void crosswordTypeChanged( int index );
     void typeInfoChanged( const CrosswordTypeInfo &typeInfo );
     void templateFilterChanged( const QString &text );
     void currentTemplateChanged( const QModelIndex &current,
-				 const QModelIndex &previous );
+                                 const QModelIndex &previous );
     void templateLocationChanged( const QString &path );
     void expandTemplateDirs();
     void useTemplateToggled( bool checked );
 
-  private:
+private:
     void setup();
 
     Ui::create_new ui_create_new;

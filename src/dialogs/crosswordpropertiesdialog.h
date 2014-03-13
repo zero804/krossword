@@ -25,26 +25,36 @@
 using namespace Crossword;
 
 /** A dialog to move all cells of a crossword. */
-class CrosswordPropertiesDialog : public KDialog {
-  Q_OBJECT
+class CrosswordPropertiesDialog : public KDialog
+{
+    Q_OBJECT
 
-  public:
+public:
     explicit CrosswordPropertiesDialog( KrossWord *krossWord,
-		     QWidget* parent = 0, Qt::WFlags flags = 0 );
+                                        QWidget* parent = 0, Qt::WFlags flags = 0 );
 
     int columns() const;
     int rows() const;
     KrossWord::ResizeAnchor anchor() const {
-      return m_anchorIdToAnchor[ui_properties.buttonGroupAnchor->selected()]; };
-    QString title() const { return ui_properties.title->text(); };
-    QString author() const { return ui_properties.author->text(); };
-    QString copyright() const { return ui_properties.copyright->text(); };
-    QString notes() const { return ui_properties.notes->text(); };
+        return m_anchorIdToAnchor[ui_properties.buttonGroupAnchor->selected()];
+    };
+    QString title() const {
+        return ui_properties.title->text();
+    };
+    QString author() const {
+        return ui_properties.author->text();
+    };
+    QString copyright() const {
+        return ui_properties.copyright->text();
+    };
+    QString notes() const {
+        return ui_properties.notes->text();
+    };
 
-  signals:
+signals:
     void conversionRequested( const CrosswordTypeInfo &targetTypeInfo );
 
-  protected slots:
+protected slots:
     void rowsChanged( int rows );
     void columnsChanged( int columns );
     void convertClicked();
@@ -52,21 +62,21 @@ class CrosswordPropertiesDialog : public KDialog {
     void resizeAnchorChanged( int id );
     void resetSizeClicked();
 
-  private:
+private:
     enum ArrowCharIndex {
-      ArrowNW = 0, ArrowN = 1, ArrowNE = 2,
-      ArrowW = 3, ArrowNone = 4, ArrowE = 5,
-      ArrowSW = 6, ArrowS = 7, ArrowSE = 8
+        ArrowNW = 0, ArrowN = 1, ArrowNE = 2,
+        ArrowW = 3, ArrowNone = 4, ArrowE = 5,
+        ArrowSW = 6, ArrowS = 7, ArrowSE = 8
     };
     static const QList< QChar > ArrowChars;
 
     void setAnchorIcons( KrossWord::ResizeAnchor anchor );
     void updateInfoText( KrossWord::ResizeAnchor anchor ) {
-      updateInfoText( anchor,
-		      ui_properties.columns->value(), ui_properties.rows->value() );
+        updateInfoText( anchor,
+                        ui_properties.columns->value(), ui_properties.rows->value() );
     };
     void updateInfoText( int columns, int rows ) {
-      updateInfoText( anchor(), columns, rows );
+        updateInfoText( anchor(), columns, rows );
     };
     void updateInfoText( KrossWord::ResizeAnchor anchor, int columns, int rows );
 

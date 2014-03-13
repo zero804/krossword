@@ -24,24 +24,26 @@
 
 class QLabel;
 class QGridLayout;
-namespace Crossword {
-  class KrossWord;
+namespace Crossword
+{
+class KrossWord;
 }
 using namespace Crossword;
 
 /** A dialog to show statistics of a crossword. */
-class StatisticsDialog : public KDialog {
-  Q_OBJECT
+class StatisticsDialog : public KDialog
+{
+    Q_OBJECT
 
-  public:
+public:
     explicit StatisticsDialog( KrossWord *krossWord, QWidget* parent = 0 );
 
-  private:
+private:
     void setup();
     QLabel *label( const QString &text, bool title = false );
     void addStatisticsValue( QGridLayout *layout, const QString &title,
-			     int count, int totalCount,
-			     const QString &toolTip = QString() );
+                             int count, int totalCount,
+                             const QString &toolTip = QString() );
 
     KrossWord *m_krossWord;
 };

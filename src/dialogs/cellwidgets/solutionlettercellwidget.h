@@ -27,27 +27,30 @@
 using namespace Crossword;
 
 
-class SolutionLetterCellWidget : public QWidget {
-  Q_OBJECT
-  public:
+class SolutionLetterCellWidget : public QWidget
+{
+    Q_OBJECT
+public:
     explicit SolutionLetterCellWidget( SolutionLetterCell *solutionLetterCell, QWidget* parent = 0 );
 
     void setSolutionLetterCell( SolutionLetterCell *solutionLetterCell );
-    SolutionLetterCell *solutionLetterCell() const { return m_solutionLetterCell; };
+    SolutionLetterCell *solutionLetterCell() const {
+        return m_solutionLetterCell;
+    };
 
-  signals:
+signals:
     void setSolutionWordIndexRequest( SolutionLetterCell *solutionLetterCell,
-				      int solutionWordIndex );
+                                      int solutionWordIndex );
     void convertToLetterCellRequest( SolutionLetterCell *solutionLetterCell );
-    
-  protected slots:
+
+protected slots:
     void applyClicked();
     void convertToLetterCellClicked();
     void solutionLetterPropertiesPositionChanged( int position );
-    
-  private:
+
+private:
     void updateSolutionWord();
-    
+
     Ui::solution_letter_properties ui_solution_letter_properties;
     SolutionLetterCell *m_solutionLetterCell;
 };

@@ -24,56 +24,61 @@
 #include <KFileDialog>
 
 ImageCellWidget::ImageCellWidget( ImageCell* imageCell, QWidget* parent )
-				  : QWidget( parent ) {
-  ui_image_properties_dock.setupUi( this );
-  ui_image_properties_dock.browse->setIcon( KIcon("document-open") );
-  setImageCell( imageCell );
+        : QWidget( parent )
+{
+    ui_image_properties_dock.setupUi( this );
+    ui_image_properties_dock.browse->setIcon( KIcon( "document-open" ) );
+    setImageCell( imageCell );
 
-  connect( ui_image_properties_dock.browse, SIGNAL(clicked()),
-	   this, SLOT(browseClicked()) );
-  connect( ui_image_properties_dock.horizontalCellSpan, SIGNAL(valueChanged(int)),
-	   this, SLOT(horizontalCellSpanChanged(int)) );
-  connect( ui_image_properties_dock.verticalCellSpan, SIGNAL(valueChanged(int)),
-	   this, SLOT(verticalCellSpanChanged(int)) );
+    connect( ui_image_properties_dock.browse, SIGNAL( clicked() ),
+             this, SLOT( browseClicked() ) );
+    connect( ui_image_properties_dock.horizontalCellSpan, SIGNAL( valueChanged( int ) ),
+             this, SLOT( horizontalCellSpanChanged( int ) ) );
+    connect( ui_image_properties_dock.verticalCellSpan, SIGNAL( valueChanged( int ) ),
+             this, SLOT( verticalCellSpanChanged( int ) ) );
 }
 
-void ImageCellWidget::setImageCell( ImageCell* imageCell ) {
-  Q_ASSERT( imageCell );
+void ImageCellWidget::setImageCell( ImageCell* imageCell )
+{
+    Q_ASSERT( imageCell );
 
-  if ( m_imageCell == imageCell )
-    return;
-  
-  m_imageCell = imageCell;
-  ui_image_properties_dock.fileName->setText( imageCell->url().pathOrUrl() );
-  QSize maxSize = imageCell->krossWord()->emptyCellSpan(
-	  imageCell->krossWord()->currentCell()->coord(),
-	  dynamic_cast<SpannedCell*>(imageCell) );
-  ui_image_properties_dock.horizontalCellSpan->setRange( 1, maxSize.width() );
-  ui_image_properties_dock.verticalCellSpan->setRange( 1, maxSize.height() );
-  ui_image_properties_dock.horizontalCellSpan->setValue( imageCell->horizontalCellSpan() );
-  ui_image_properties_dock.verticalCellSpan->setValue( imageCell->verticalCellSpan() );
+    if ( m_imageCell == imageCell )
+        return;
+
+    m_imageCell = imageCell;
+    ui_image_properties_dock.fileName->setText( imageCell->url().pathOrUrl() );
+    QSize maxSize = imageCell->krossWord()->emptyCellSpan(
+                        imageCell->krossWord()->currentCell()->coord(),
+                        dynamic_cast<SpannedCell*>( imageCell ) );
+    ui_image_properties_dock.horizontalCellSpan->setRange( 1, maxSize.width() );
+    ui_image_properties_dock.verticalCellSpan->setRange( 1, maxSize.height() );
+    ui_image_properties_dock.horizontalCellSpan->setValue( imageCell->horizontalCellSpan() );
+    ui_image_properties_dock.verticalCellSpan->setValue( imageCell->verticalCellSpan() );
 }
 
-void ImageCellWidget::browseClicked() {
-  KUrl imageUrl = KFileDialog::getOpenUrl( KUrl("kfiledialog:///openImage"),
-      "image/gif image/x-xpm image/x-xbm image/jpeg image/x-bmp image/png "
-      "image/x-ico image/x-portable-bitmap image/x-portable-pixmap "
-      "image/x-portable-greymap image/tiff image/jp2", this );
+void ImageCellWidget::browseClicked()
+{
+    KUrl imageUrl = KFileDialog::getOpenUrl( KUrl( "kfiledialog:///openImage" ),
+                    "image/gif image/x-xpm image/x-xbm image/jpeg image/x-bmp image/png "
+                    "image/x-ico image/x-portable-bitmap image/x-portable-pixmap "
+                    "image/x-portable-greymap image/tiff image/jp2", this );
 
-  if ( imageUrl.isEmpty() )
-    return; // No file was chosen
-  else {
-    ui_image_properties_dock.fileName->setText( imageUrl.pathOrUrl() );
-    m_imageCell->setUrl( imageUrl );
+    if ( imageUrl.isEmpty() )
+        return; // No file was chosen
+    else {
+        ui_image_properties_dock.fileName->setText( imageUrl.pathOrUrl() );
+        m_imageCell->setUrl( imageUrl );
 //     ui_image_properties_dock.kimagefilepreview->showPreview( imageUrl );
-  }
+    }
 }
 
-void ImageCellWidget::horizontalCellSpanChanged( int value ) {
-  m_imageCell->setHorizontalCellSpan( value );
+void ImageCellWidget::horizontalCellSpanChanged( int value )
+{
+    m_imageCell->setHorizontalCellSpan( value );
 }
 
-void ImageCellWidget::verticalCellSpanChanged( int value ) {
-  m_imageCell->setVerticalCellSpan( value );
+void ImageCellWidget::verticalCellSpanChanged( int value )
+{
+    m_imageCell->setVerticalCellSpan( value );
 }
 

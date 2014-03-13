@@ -24,36 +24,37 @@
 
 class KrossWord;
 
-class KrossWordXmlReader : public QXmlStreamReader {
+class KrossWordXmlReader : public QXmlStreamReader
+{
 public:
     KrossWordXmlReader();
 
     struct KrossWordInfo {
-	int width, height;
-	QString title, authors, copyright, notes;
+        int width, height;
+        QString title, authors, copyright, notes;
 
-	KrossWordInfo() {
-	};
+        KrossWordInfo() {
+        };
 
-	KrossWordInfo( const KrossWordInfo &other ) {
-	    this->width = other.width;
-	    this->height = other.height;
-	    this->title = other.title;
-	    this->authors = other.authors;
-	    this->copyright = other.copyright;
-	    this->notes = other.notes;
-	};
+        KrossWordInfo( const KrossWordInfo &other ) {
+            this->width = other.width;
+            this->height = other.height;
+            this->title = other.title;
+            this->authors = other.authors;
+            this->copyright = other.copyright;
+            this->notes = other.notes;
+        };
 
-	KrossWordInfo( int width, qint8 height,
-		const QString &title, const QString &authors,
-		const QString &copyright, const QString &notes ) {
-	    this->width = width;
-	    this->height = height;
-	    this->title = title;
-	    this->authors = authors;
-	    this->copyright = copyright;
-	    this->notes = notes;
-	};
+        KrossWordInfo( int width, qint8 height,
+                       const QString &title, const QString &authors,
+                       const QString &copyright, const QString &notes ) {
+            this->width = width;
+            this->height = height;
+            this->title = title;
+            this->authors = authors;
+            this->copyright = copyright;
+            this->notes = notes;
+        };
     };
 
     bool readCompressed( QIODevice *device, KrossWord *krossWord );

@@ -23,24 +23,29 @@
 #include "spannedcell.h"
 #include <KUrl>
 
-class ImageCell : public SpannedCell {
-    public:
-	ImageCell( KrossWord* krossWord, const Coord& coordTopLeft,
-		   int horizontalCellSpan, int verticalCellSpan, const KUrl &url/*,
-		   QGraphicsScene* scene*/ );
+class ImageCell : public SpannedCell
+{
+public:
+    ImageCell( KrossWord* krossWord, const Coord& coordTopLeft,
+               int horizontalCellSpan, int verticalCellSpan, const KUrl &url/*,
+     QGraphicsScene* scene*/ );
 
-	/** For qgraphicsitem_cast. */
-	enum { Type = UserType + 8 };
-	virtual int type() const { return Type; };
+    /** For qgraphicsitem_cast. */
+    enum { Type = UserType + 8 };
+    virtual int type() const {
+        return Type;
+    };
 
-	virtual void drawBackgroundForPrinting(
-		QPainter *p, const QStyleOptionGraphicsItem *options );
+    virtual void drawBackgroundForPrinting(
+        QPainter *p, const QStyleOptionGraphicsItem *options );
 
-	KUrl url() const { return m_url; };
+    KUrl url() const {
+        return m_url;
+    };
 
-    private:
-	KUrl m_url;
-	QImage m_image;
+private:
+    KUrl m_url;
+    QImage m_image;
 };
 
 #endif // IMAGECELL_H

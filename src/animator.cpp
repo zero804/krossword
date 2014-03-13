@@ -42,7 +42,7 @@ TransitionAnimation::TransitionAnimation( KrossWordCell *cell )
 			  + QPointF(0.5, 0.5) );
   qreal scale = cell->boundingRect().width() / m_pixmapObject->pixmap().width();
   m_pixmapObject->scale( scale, scale );
-  
+
   m_pixmapObject->setTransformOriginPoint( cell->boundingRect().center() );
 
   // Fade old item appearance out (transition item)
@@ -73,7 +73,7 @@ TransitionAnimation::~TransitionAnimation() {
 void TransitionAnimation::updateCurrentValue( const QVariant& value ) {
   if ( !m_cell )
     return; // Without this it crashes when cells get destroyed
-  
+
   if ( !m_pixmapObject ) {
     m_cell->setOpacity( 1 );
     return;
@@ -158,9 +158,11 @@ void TransitionAnimation::updateState( QAbstractAnimation::State newState,
       m_cell->setOpacity( 1 );
     }
 
-    m_pixmapObject->scene()->removeItem( m_pixmapObject );
+    if ( m_pixmapObject->scene() ) {
+        m_pixmapObject->scene()->removeItem( m_pixmapObject );
+    }
     delete m_pixmapObject;
-    m_pixmapObject = NULL;
+    m_pixmapObject = 0;
 
     QVariantAnimation::updateState( newState, oldState );
     emit finished( m_cell );
@@ -220,7 +222,7 @@ TransitionAnimation* Animator::animateTransition( KrossWordCell* cell,
 
 void Animator::transitionAnimationFinished( KrossWordCell* cell ) {
   QAbstractAnimation *anim = m_transitionItems.take( cell );
-  
+
   if ( m_queuedAnimationGroup ) {
     int index = m_queuedAnimationGroup->indexOfAnimation( anim );
     if ( index >= 0 )

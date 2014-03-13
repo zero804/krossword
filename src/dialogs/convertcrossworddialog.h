@@ -25,20 +25,23 @@
 using namespace Crossword;
 
 /** A dialog to convert a crossword. */
-class ConvertCrosswordDialog : public KDialog {
-  Q_OBJECT
+class ConvertCrosswordDialog : public KDialog
+{
+    Q_OBJECT
 
-  public:
+public:
     explicit ConvertCrosswordDialog( KrossWord *krossWord,
-			    QWidget* parent = 0, Qt::WFlags flags = 0 );
+                                     QWidget* parent = 0, Qt::WFlags flags = 0 );
 
-    CrosswordTypeInfo crosswordTypeInfo() { return m_convertTypeInfo; };
+    CrosswordTypeInfo crosswordTypeInfo() {
+        return m_convertTypeInfo;
+    };
 
-  protected slots:
+protected slots:
     void crosswordTypeChanged( int index );
     void crosswordTypeInfoChanged( const CrosswordTypeInfo &typeInfo );
 
-  private:
+private:
     KrossWord *m_krossWord;
     Ui::convert_crossword_type ui_convert_crossword_type;
 

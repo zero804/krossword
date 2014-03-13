@@ -23,35 +23,39 @@
 #include <QXmlStreamWriter>
 #include <krossword.h>
 
-namespace Crossword {
-  class ImageCell;
-  class SolutionLetterCell;
-  class ClueCell;
-  class KrossWord;
+namespace Crossword
+{
+class ImageCell;
+class SolutionLetterCell;
+class ClueCell;
+class KrossWord;
 }
 using namespace Crossword;
 
-class KrossWordXmlWriter : public QXmlStreamWriter {
-  public:
+class KrossWordXmlWriter : public QXmlStreamWriter
+{
+public:
     KrossWordXmlWriter() { };
 
     bool writeCompressed( QIODevice *device, KrossWord *krossWord,
-			  KrossWord::WriteMode writeMode = KrossWord::Normal,
-			  const QByteArray &undoData = QByteArray() );
+                          KrossWord::WriteMode writeMode = KrossWord::Normal,
+                          const QByteArray &undoData = QByteArray() );
     bool write( QIODevice *device, KrossWord *krossWord,
-		KrossWord::WriteMode writeMode = KrossWord::Normal,
-		const QByteArray &undoData = QByteArray() );
+                KrossWord::WriteMode writeMode = KrossWord::Normal,
+                const QByteArray &undoData = QByteArray() );
 
-    QString errorString() const { return m_errorString; };
-		
-  private:
+    QString errorString() const {
+        return m_errorString;
+    };
+
+private:
     void writeKrossWord( KrossWord *krossWord,
-			 KrossWord::WriteMode writeMode = KrossWord::Normal,
-			 const QByteArray &undoData = QByteArray() );
+                         KrossWord::WriteMode writeMode = KrossWord::Normal,
+                         const QByteArray &undoData = QByteArray() );
     void writeClue( ClueCell *clue,
-		    KrossWord::WriteMode writeMode = KrossWord::Normal );
+                    KrossWord::WriteMode writeMode = KrossWord::Normal );
     void writeImage( ImageCell *image,
-		     KrossWord::WriteMode writeMode = KrossWord::Normal );
+                     KrossWord::WriteMode writeMode = KrossWord::Normal );
     void writeSolutionLetter( SolutionLetterCell *solutionLetter );
 
     QString m_errorString;

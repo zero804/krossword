@@ -27,28 +27,32 @@ class KPixmapCache;
 
 class KrosswordRenderer
 {
-    public:
-	static KrosswordRenderer* self();
+public:
+    static KrosswordRenderer* self();
 
-	void renderBackground(QPainter *p, const QRectF& r) const;
-	QPixmap background(const QSize &size) const;
-	void renderElement(QPainter *p, const QString& elementid, const QRectF& r) const;
-	void renderElement(QPainter *p, const QString& elementid, const QRectF& r, const QColor &alpha) const;
-	bool setTheme( const QString &fileName );
+    bool hasElement( const QString &elementid ) const;
 
-    private:
-	// disable copy - it's singleton
-	KrosswordRenderer();
-	KrosswordRenderer( const KrosswordRenderer& );
-	KrosswordRenderer& operator=( const KrosswordRenderer& );
-	~KrosswordRenderer();
+    void renderBackground( QPainter *p, const QRectF& r ) const;
+    QPixmap background( const QSize &size ) const;
+//  void renderElement( QPainter *p, const QString& elementid,
+//       const QRectF& r ) const;
+    void renderElement( QPainter *p, const QString& elementid,
+                        const QRectF& r, const QColor &alpha = Qt::black ) const;
+    bool setTheme( const QString &fileName );
 
-	/**
-	*  Svg renderer instance
-	*/
-	KSvgRenderer *m_renderer;
-	KPixmapCache *m_cache;
-	QString m_themeFileName;
+private:
+    // disable copy - it's singleton
+    KrosswordRenderer();
+    KrosswordRenderer( const KrosswordRenderer& );
+    KrosswordRenderer& operator=( const KrosswordRenderer& );
+    ~KrosswordRenderer();
+
+    /**
+    *  Svg renderer instance
+    */
+    KSvgRenderer *m_renderer;
+    KPixmapCache *m_cache;
+    QString m_themeFileName;
 };
 
 #endif // KROSSWORD_RENDERER_H

@@ -23,32 +23,38 @@
 #include "spannedcell.h"
 #include <KUrl>
 
-namespace Crossword {
+namespace Crossword
+{
 
-class ImageCell : public SpannedCell {
-    public:
-	ImageCell( KrossWord* krossWord, const Coord& coordTopLeft,
-		   int horizontalCellSpan, int verticalCellSpan, const KUrl &url );
+class ImageCell : public SpannedCell
+{
+public:
+    ImageCell( KrossWord* krossWord, const Coord& coordTopLeft,
+               int horizontalCellSpan, int verticalCellSpan, const KUrl &url );
 
-	/** For qgraphicsitem_cast. */
-	enum { Type = UserType + 8 };
-	virtual int type() const { return Type; };
+    /** For qgraphicsitem_cast. */
+    enum { Type = UserType + 8 };
+    virtual int type() const {
+        return Type;
+    };
 
-	virtual void drawBackground(
-		QPainter *p, const QStyleOptionGraphicsItem *options );
-	virtual void drawBackgroundForPrinting(
-		QPainter *p, const QStyleOptionGraphicsItem *options );
+    virtual void drawBackground(
+        QPainter *p, const QStyleOptionGraphicsItem *options );
+    virtual void drawBackgroundForPrinting(
+        QPainter *p, const QStyleOptionGraphicsItem *options );
 
-	KUrl url() const { return m_url; };
-	void setUrl( const KUrl &url );
+    KUrl url() const {
+        return m_url;
+    };
+    void setUrl( const KUrl &url );
 
-    protected:
-	virtual void focusInEvent( QFocusEvent* event );
-	virtual void focusOutEvent( QFocusEvent* event );
+protected:
+    virtual void focusInEvent( QFocusEvent* event );
+    virtual void focusOutEvent( QFocusEvent* event );
 
-    private:
-	KUrl m_url;
-	QImage m_image;
+private:
+    KUrl m_url;
+    QImage m_image;
 };
 
 }; // namespace Crossword

@@ -54,14 +54,16 @@ typedef QList<SolutionLetterCell*> SolutionLetterCellList;
 typedef QList<ImageCell*> ImageCellList;
 
 Offset operator *( const Offset &offset, int factor );
-Coord operator +=( Coord &coord1, const Coord &coord2 );
+Coord operator +=( Coord & coord1, const Coord & coord2 );
 
-const QString ALLOWED_CHARACTERS = QLatin1String("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+const QString ALLOWED_CHARACTERS = QLatin1String( "ABCDEFGHIJKLMNOPQRSTUVWXYZ" );
 
 #if QT_VERSION >= 0x040600
-class KrossWordCell : public QGraphicsObject {
+class KrossWordCell : public QGraphicsObject
+{
 #else
-class KrossWordCell : public QObject, public QGraphicsItem {
+class KrossWordCell : public QObject, public QGraphicsItem
+{
 #endif
     friend class KrossWord;
     Q_OBJECT
@@ -69,79 +71,94 @@ class KrossWordCell : public QObject, public QGraphicsItem {
     Q_INTERFACES( QGraphicsItem )
 #endif
 
-    public:
-	/** Different cell types for crosswords. */
-	enum CellType {
-	    EmptyCellType = 0x001,
-	    ClueCellType = 0x002,
-	    DoubleClueCellType = 0x004,
-	    LetterCellType = 0x008,
-	    SolutionLetterCellType = 0x010,
-	    ImageCellType = 0x020,
+public:
+    /** Different cell types for crosswords. */
+    enum CellType {
+        EmptyCellType = 0x001,
+        ClueCellType = 0x002,
+        DoubleClueCellType = 0x004,
+        LetterCellType = 0x008,
+        SolutionLetterCellType = 0x010,
+        ImageCellType = 0x020,
 
-	    AllCellTypes = EmptyCellType | ClueCellType | DoubleClueCellType
-				    | LetterCellType | SolutionLetterCellType | ImageCellType,
-		/**< All cell types, but not user defined cell types. */
+        AllCellTypes = EmptyCellType | ClueCellType | DoubleClueCellType
+        | LetterCellType | SolutionLetterCellType | ImageCellType,
+        /**< All cell types, but not user defined cell types. */
 
-	    InteractiveCellTypes = ClueCellType | DoubleClueCellType
-				    | LetterCellType | SolutionLetterCellType,
-		/**< All cell types except empty cells, but not user defined cell types. */
+        InteractiveCellTypes = ClueCellType | DoubleClueCellType
+        | LetterCellType | SolutionLetterCellType,
+        /**< All cell types except empty cells, but not user defined cell types. */
 
-	    UserType = 0x100 /**< For user defined cell classes derived from KrossWordCell.
-		To make use of this in the flags class CellTypes, only use values computed
-		like this: value=2^x with x>=4. */
-	};
-	Q_DECLARE_FLAGS( CellTypes, CellType );
+        UserType = 0x100 /**< For user defined cell classes derived from KrossWordCell.
+  To make use of this in the flags class CellTypes, only use values computed
+  like this: value=2^x with x>=4. */
+    };
+    Q_DECLARE_FLAGS( CellTypes, CellType );
 
 
-	KrossWordCell( KrossWord *krossWord, CellType cellType, const Coord &coord );
-	virtual ~KrossWordCell();
+    KrossWordCell( KrossWord *krossWord, CellType cellType, const Coord &coord );
+    virtual ~KrossWordCell();
 
-	/** For qgraphicsitem_cast. */
-	enum { Type = UserType + 1 };
-	virtual int type() const { return Type; };
+    /** For qgraphicsitem_cast. */
+    enum { Type = UserType + 1 };
+    virtual int type() const {
+        return Type;
+    };
 
-	CellType cellType() const { return m_cellType; };
-	virtual bool isLetterCell() const { return false; };
-	Coord coord() const { return m_coord; };
-	KrossWord *krossWord() const { return m_krossWord; };
+    CellType cellType() const {
+        return m_cellType;
+    };
+    virtual bool isLetterCell() const {
+        return false;
+    };
+    Coord coord() const {
+        return m_coord;
+    };
+    KrossWord *krossWord() const {
+        return m_krossWord;
+    };
 
-	void clearCache() { m_cache = NULL; };
+    void clearCache() {
+        m_cache = NULL;
+    };
 
-	static QString displayStringFromCellType( CellType cellType );
+    static QString displayStringFromCellType( CellType cellType );
 
-    protected:
-	void setPositionFromCoordinates();
+protected:
+    void setPositionFromCoordinates();
 
-	// Overloaded methods
-        virtual QRectF boundingRect() const;
-        virtual void paint( QPainter* painter,
-			    const QStyleOptionGraphicsItem* option, QWidget* widget = 0 );
+    // Overloaded methods
+    virtual QRectF boundingRect() const;
+    virtual void paint( QPainter* painter,
+                        const QStyleOptionGraphicsItem* option, QWidget* widget = 0 );
 
-	// Virtual methods
-	virtual void drawBackgroundForPrinting( QPainter*, const QStyleOptionGraphicsItem* ) { };
-	virtual void drawForegroundForPrinting( QPainter*, const QStyleOptionGraphicsItem* ) { };
+    // Virtual methods
+    virtual void drawBackgroundForPrinting( QPainter*, const QStyleOptionGraphicsItem* ) { };
+    virtual void drawForegroundForPrinting( QPainter*, const QStyleOptionGraphicsItem* ) { };
 
-    private:
-	CellType m_cellType;
-	Coord m_coord;
-	KrossWord *m_krossWord;
-	QPixmap *m_cache;
+private:
+    CellType m_cellType;
+    Coord m_coord;
+    KrossWord *m_krossWord;
+    QPixmap *m_cache;
 };
 
 
-class EmptyCell : public KrossWordCell {
+class EmptyCell : public KrossWordCell
+{
     Q_OBJECT
 
-    public:
-	EmptyCell( KrossWord *krossWord, Coord coord/*, QGraphicsScene *scene*/ );
+public:
+    EmptyCell( KrossWord *krossWord, Coord coord/*, QGraphicsScene *scene*/ );
 
-	/** For qgraphicsitem_cast. */
-	enum { Type = UserType + 2 };
-	virtual int type() const { return Type; };
+    /** For qgraphicsitem_cast. */
+    enum { Type = UserType + 2 };
+    virtual int type() const {
+        return Type;
+    };
 
-    protected:
-	virtual void drawBackgroundForPrinting( QPainter *p, const QStyleOptionGraphicsItem *option );
+protected:
+    virtual void drawBackgroundForPrinting( QPainter *p, const QStyleOptionGraphicsItem *option );
 };
 
 

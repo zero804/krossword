@@ -58,19 +58,20 @@ class KAction;
 class KRecentFilesAction;
 
 #if QT_VERSION >= 0x040600
-  class QPropertyAnimation;
-  class QParallelAnimationGroup;
+class QPropertyAnimation;
+class QParallelAnimationGroup;
 #else
-  class QGraphicsItemAnimation;
+class QGraphicsItemAnimation;
 #endif
 
 #include <QTreeView>
 #if QT_VERSION >= 0x040600
-class ClueListView : public QTreeView {
-  Q_OBJECT
-  Q_PROPERTY( QPoint scrollPos READ scrollPos WRITE setScrollPos )
+class ClueListView : public QTreeView
+{
+    Q_OBJECT
+    Q_PROPERTY( QPoint scrollPos READ scrollPos WRITE setScrollPos )
 
-  public:
+public:
     ClueListView( QWidget* parent = 0 );
 
     QPoint scrollPos() const;
@@ -79,116 +80,119 @@ class ClueListView : public QTreeView {
     virtual void animateScrollTo( const QModelIndex &index );
 
 
-  protected slots:
+protected slots:
     void scrollAnimationFinished();
     void resumeIfPaused();
 
-  private:
+private:
     QPropertyAnimation *m_scrollAnimation;
     QPoint m_curScrollPos;
 };
 #endif
 
-class CrossWordXmlGuiWindow : public KXmlGuiWindow {
-  Q_OBJECT
+class CrossWordXmlGuiWindow : public KXmlGuiWindow
+{
+    Q_OBJECT
 
-  public:
+public:
     enum Action {
-	Game_PrintPreview,
+        Game_PrintPreview,
 
-	Edit_EnableEditMode,
-	Edit_Undo,
-	Edit_Redo,
+        Edit_EnableEditMode,
+        Edit_Undo,
+        Edit_Redo,
 
-	Edit_AddClue,
-	Edit_AddImage,
+        Edit_AddClue,
+        Edit_AddImage,
 
-	Edit_Remove,
-	Edit_RemoveHorizontalClue,
-	Edit_RemoveVerticalClue,
+        Edit_Remove,
+        Edit_RemoveHorizontalClue,
+        Edit_RemoveVerticalClue,
 
-	Edit_ClearCurrentCell,
-	Edit_ClearClue,
-	Edit_ClearHorizontalClue,
-	Edit_ClearVerticalClue,
-	Edit_ClearCrossword,
+        Edit_ClearCurrentCell,
+        Edit_ClearClue,
+        Edit_ClearHorizontalClue,
+        Edit_ClearVerticalClue,
+        Edit_ClearCrossword,
 
-	Edit_Properties,
-	Edit_ClueNumberMapping,
-	Edit_CheckRotationSymmetry,
-	Edit_Statistics,
-	Edit_MoveCells,
+        Edit_Properties,
+        Edit_ClueNumberMapping,
+        Edit_CheckRotationSymmetry,
+        Edit_Statistics,
+        Edit_MoveCells,
 
-	Move_HintCurrentCell,
-	Move_HintClue,
-	Move_HintVerticalClue,
-	Move_HintHorizontalClue,
+        Edit_PasteSpecialCharacter,
 
-	Move_Eraser,
-	Move_ClearCurrentCell,
-	Move_ClearClue,
-	Move_ClearVerticalClue,
-	Move_ClearHorizontalClue,
+        Move_HintCurrentCell,
+        Move_HintClue,
+        Move_HintVerticalClue,
+        Move_HintHorizontalClue,
 
-	Move_Check,
-	Move_Clear,
+        Move_Eraser,
+        Move_ClearCurrentCell,
+        Move_ClearClue,
+        Move_ClearVerticalClue,
+        Move_ClearHorizontalClue,
 
-	Move_SelectFirstLetterOfClue,
-	Move_SelectLastLetterOfClue,
-	Move_SelectClueWithSwitchedOrientation,
-	Move_SelectFirstClue,
-	Move_SelectNextClue,
-	Move_SelectPreviousClue,
-	Move_SelectLastClue,
+        Move_Check,
+        Move_Clear,
 
-	Move_SetConfidenceConfident,
-	Move_SetConfidenceUnsure,
-	Info_ConfidenceIsSolved,
+        Move_SelectFirstLetterOfClue,
+        Move_SelectLastLetterOfClue,
+        Move_SelectClueWithSwitchedOrientation,
+        Move_SelectFirstClue,
+        Move_SelectNextClue,
+        Move_SelectPreviousClue,
+        Move_SelectLastClue,
 
-	Options_Dictionaries,
+        Move_SetConfidenceConfident,
+        Move_SetConfidenceUnsure,
+        Info_ConfidenceIsSolved,
 
-	View_Pan,
+        Options_Dictionaries,
 
-	ShowClueDock,
-	ShowUndoViewDock,
-	ShowCurrentCellDock,
+        View_Pan,
 
-	RecentTab_RecentFilesRemove,
+        ShowClueDock,
+        ShowUndoViewDock,
+        ShowCurrentCellDock,
+
+        RecentTab_RecentFilesRemove,
     };
 
     /** Different display states of the game. */
     enum DisplayState {
-	ShowingNothing, /**< The game is currently starting up. */
-	ShowingCrossword, /**< A crossword is currently shown. */
-	ShowingCongratulations /**< A crossword with a congratulations overlay is currently shown. */
+        ShowingNothing, /**< The game is currently starting up. */
+        ShowingCrossword, /**< A crossword is currently shown. */
+        ShowingCongratulations /**< A crossword with a congratulations overlay is currently shown. */
     };
 
     enum StatusBarItems {
-	CoordinatesItem = 0
+        CoordinatesItem = 0
     };
 
     /** Origins of (current) documents. */
     enum DocumentOrigin {
-	NoDocument, /**< No document is opened. */
-	DocumentNewlyCreated, /**< The document has been newly created. */
-	DocumentDownloaded, /**< The document has been downloaded from the internet. */
-	DocumentRestoredAfterCrash, /**< The document has been restored after a crash. */
-	DocumentOpenedLocally /**< The document has been opened from a local file. */
+        NoDocument, /**< No document is opened. */
+        DocumentNewlyCreated, /**< The document has been newly created. */
+        DocumentDownloaded, /**< The document has been downloaded from the internet. */
+        DocumentRestoredAfterCrash, /**< The document has been restored after a crash. */
+        DocumentOpenedLocally /**< The document has been opened from a local file. */
     };
 
     /** Types of modifications. */
     enum ModificationType {
-	NoModification = 0x00, /** No modification has been made. */
-	ModifiedState = 0x01, /** The state of the crossword has been changed,
-				ie. it's current letters has been changed. */
-	ModifiedCrossword = 0x02 /** The crossword has been edited. */
+        NoModification = 0x00, /** No modification has been made. */
+        ModifiedState = 0x01, /** The state of the crossword has been changed,
+    ie. it's current letters has been changed. */
+        ModifiedCrossword = 0x02 /** The crossword has been edited. */
     };
     Q_DECLARE_FLAGS( ModificationTypes, ModificationType );
 
     enum EditMode {
-	NoEditing,
-	Editing,
-	EditingInteractiveAddClue
+        NoEditing,
+        Editing,
+        EditingInteractiveAddClue
     };
 
     CrossWordXmlGuiWindow( QWidget* parent = 0 );
@@ -196,31 +200,53 @@ class CrossWordXmlGuiWindow : public KXmlGuiWindow {
 
     const char *actionName( Action actionEnum ) const;
 
-    KrossWordPuzzleView *view() const { return m_view; };
-    KrossWordPuzzleView *viewSolution() const { return m_viewSolution; };
+    KrossWordPuzzleView *view() const {
+        return m_view;
+    };
+    KrossWordPuzzleView *viewSolution() const {
+        return m_viewSolution;
+    };
     KrossWord *krossWord() const;
     KrossWord *solutionKrossWord() const;
 
     void setState( DisplayState state );
 
-    bool isInEditMode() const { return m_editMode != NoEditing; };
+    bool isInEditMode() const {
+        return m_editMode != NoEditing;
+    };
     void setEditMode( EditMode editMode = Editing );
 
-    bool createNewCrossWord( const CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize, const QString &title, const QString &authors, const QString &copyright, const QString &notes );
-    bool createNewCrossWordFromTemplate( const QString& templateFilePath, const QString& title, const QString& authors, const QString& copyright, const QString& notes );
+    bool createNewCrossWord( const CrosswordTypeInfo &crosswordTypeInfo,
+                             const QSize &crosswordSize, const QString &title,
+                             const QString &authors, const QString &copyright,
+                             const QString &notes );
+    bool createNewCrossWordFromTemplate( const QString& templateFilePath,
+                                         const QString& title,
+                                         const QString& authors,
+                                         const QString& copyright,
+                                         const QString& notes );
     inline bool loadFile( const QString& fileName ) {
-	return loadFile( KUrl(fileName) ); };
-    bool loadFile( const KUrl &url, KrossWord::FileFormat fileFormat = KrossWord::DetermineByFileName, bool loadCrashedFile = false );
+        return loadFile( KUrl( fileName ) );
+    };
+    bool loadFile( const KUrl &url,
+                   KrossWord::FileFormat fileFormat = KrossWord::DetermineByFileName,
+                   bool loadCrashedFile = false );
     bool save();
     bool saveAs();
     bool closeFile();
-    bool writeTo( const QString &fileName, KrossWord::WriteMode writeMode = KrossWord::Normal, bool saveUndoStack = false );
-    bool isModified() const { return m_modified != NoModification; };
-    QString currentFileName() const { return m_curFileName; };
+    bool writeTo( const QString &fileName,
+                  KrossWord::WriteMode writeMode = KrossWord::Normal,
+                  bool saveUndoStack = false );
+    bool isModified() const {
+        return m_modified != NoModification;
+    };
+    QString currentFileName() const {
+        return m_curFileName;
+    };
 //     QStandardItemModel *createCrosswordTypeModel() const;
 
 //     KDialog *createCrosswordTypeConfigureDetailsDialog( QWidget *parent,
-// 	    KrossWord::CrosswordTypeInformation crosswordTypeInfo );
+//      KrossWord::CrosswordTypeInformation crosswordTypeInfo );
 
 signals:
     void fileClosed( const QString &fileName );
@@ -234,15 +260,18 @@ signals:
 public slots:
     // Game actions
     void saveSlot() {
-      save(); };
+        save();
+    };
     void saveAsSlot() {
-      saveAs(); };
+        saveAs();
+    };
     void exportSlot();
     void printSlot();
     void printPreviewSlot();
     void showMenuBarSlot();
     void closeSlot() {
-      closeFile(); };
+        closeFile();
+    };
 
     // Edit actions
     void addClueSlot();
@@ -259,6 +288,7 @@ public slots:
     void editClueNumberMappingSlot();
     void editMoveCellsSlot();
     void enableEditModeSlot( bool enable );
+    void editPasteSpecialCharacter();
 
     // Move actions
     void moveSetConfidenceConfidentSlot();
@@ -312,7 +342,7 @@ protected slots:
     void clueListContextMenuRequested( const QPoint &pos );
     void clickedClueInDock( const QModelIndex &index );
     void currentClueInDockChanged(
-		const QModelIndex &current, const QModelIndex &previous );
+        const QModelIndex &current, const QModelIndex &previous );
 
     void popupMenuCellDestroyed( QObject* );
     void setDefaultCursor();
@@ -327,21 +357,21 @@ protected slots:
     void solutionViewResized( const QSize &oldSize, const QSize &newSize );
 
     void clueMappingCurrentLetterChanged(
-		QTreeWidgetItem *current, QTreeWidgetItem *previous );
+        QTreeWidgetItem *current, QTreeWidgetItem *previous );
     void clueMappingSetMappingClicked();
 
     void propertiesConversionRequested( const CrosswordTypeInfo &typeInfo );
 
     void changeAnswerOffsetRequested( ClueCell *clueCell,
-				      AnswerOffset newAnswerOffset );
+                                      AnswerOffset newAnswerOffset );
     void changeOrientationRequested( ClueCell *clueCell,
-				     Qt::Orientation newOrientation );
+                                     Qt::Orientation newOrientation );
     void changeClueTextRequested( ClueCell *clueCell, const QString &newClueText );
     void changeClueAndCorrectAnswerRequested( ClueCell *clueCell,
-					      const QString &newClueText,
-					      const QString &newCorrectAnswer );
+            const QString &newClueText,
+            const QString &newCorrectAnswer );
     void setSolutionWordIndexRequested( SolutionLetterCell *solutionLetterCell,
-					int newSolutionLetterIndex );
+                                        int newSolutionLetterIndex );
     void convertToLetterCellRequested( SolutionLetterCell *solutionLetterCell );
     void convertToSolutionLetterCellRequested( LetterCell *letterCell );
 
@@ -350,19 +380,20 @@ protected slots:
     // KrossWord slots
     void currentClueChanged( ClueCell *question );
     void answerChanged( ClueCell*, const QString&, bool statusBar = true,
-			const KIcon &icon = KIcon() );
+                        const KIcon &icon = KIcon() );
     void currentCellChanged( KrossWordCell *currentCell, KrossWordCell* previousCell );
     void customContextMenuRequestedForCell( const QPointF &scenePos,
-					    KrossWordCell *cell );
+                                            KrossWordCell *cell );
     void mousePressedOnCell( const QPointF &scenePos, Qt::MouseButton button,
-			     KrossWordCell *cell );
+                             KrossWordCell *cell );
     void cluesAdded( ClueCellList clues );
     void cluesAboutToBeRemoved( ClueCellList clues );
 
     void solutionWordLetterAdded( SolutionLetterCell *solutionLetter );
     void solutionWordLetterAboutToBeRemoved( SolutionLetterCell *solutionLetter );
 
-    void letterEditRequest( LetterCell* letter, const QChar &currentLetter, const QChar &newLetter );
+    void letterEditRequest( LetterCell* letter,
+                            const QChar &currentLetter, const QChar &newLetter );
 
 protected:
     virtual void keyPressEvent( QKeyEvent* );

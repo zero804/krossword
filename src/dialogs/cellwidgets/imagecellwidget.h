@@ -26,21 +26,24 @@
 
 using namespace Crossword;
 
-class ImageCellWidget : public QWidget {
-  Q_OBJECT
-  
-  public:
+class ImageCellWidget : public QWidget
+{
+    Q_OBJECT
+
+public:
     explicit ImageCellWidget( ImageCell *imageCell, QWidget* parent = 0 );
 
     void setImageCell( ImageCell *imageCell );
-    ImageCell *imageCell() const { return m_imageCell; };
+    ImageCell *imageCell() const {
+        return m_imageCell;
+    };
 
-  protected slots:
+protected slots:
     void browseClicked();
     void horizontalCellSpanChanged( int value );
     void verticalCellSpanChanged( int value );
 
-  private:
+private:
     Ui::image_properties_dock ui_image_properties_dock;
     ImageCell *m_imageCell;
 };

@@ -6,7 +6,11 @@ set( krosswordpuzzle_THEME_SRCS
 
 	scribble.desktop
 	scribble.svgz
-	scribble.png )
+	scribble.png
+
+	egyptian.desktop
+	egyptian.svgz
+	egyptian.png )
 
 install( FILES ${krosswordpuzzle_THEME_SRCS}
 	 DESTINATION ${DATA_INSTALL_DIR}/krosswordpuzzle/themes )

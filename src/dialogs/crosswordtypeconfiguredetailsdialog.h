@@ -29,34 +29,40 @@ using namespace Crossword;
 
 /** A dialog to configure name, description, etc. and the rules of a crossword
 * type. */
-class CrosswordTypeConfigureDetailsDialog : public KDialog {
-  Q_OBJECT
+class CrosswordTypeConfigureDetailsDialog : public KDialog
+{
+    Q_OBJECT
 
-  public:
+public:
     /** Read only modes. */
     enum ReadOnlyMode {
-      ReadOnly, /**< All widgets in the dialog are readonly. */
-      ReadOnlyWithInfo, /**< All widgets in the dialog are readonly.
-	* An info label shows information how to edit the crossword type. */
-      Editable /**< All widgets in the dialog are editable. */
+        ReadOnly, /**< All widgets in the dialog are readonly. */
+        ReadOnlyWithInfo, /**< All widgets in the dialog are readonly.
+ * An info label shows information how to edit the crossword type. */
+        Editable /**< All widgets in the dialog are editable. */
     };
 
     /** Constructs a dialog with the given @p crosswordTypeInfo. */
     CrosswordTypeConfigureDetailsDialog( QWidget* parent,
-		CrosswordTypeInfo crosswordTypeInfo,
-		Qt::WFlags flags = 0 );
+                                         CrosswordTypeInfo crosswordTypeInfo,
+                                         Qt::WFlags flags = 0 );
 
     /** Returns the current crossword type info. */
     CrosswordTypeInfo crosswordTypeInfo() const {
-	return m_typeInfo; };
+        return m_typeInfo;
+    };
     /** Returns whether or not some value has been changed. */
-    bool changed() const { return m_changed; };
+    bool changed() const {
+        return m_changed;
+    };
     /** Return whether or not the dialog is in read only mode. */
-    bool isReadOnly() const { return m_readOnly; };
+    bool isReadOnly() const {
+        return m_readOnly;
+    };
     /** Sets the read only mode of the dialog. */
     void setReadOnly( ReadOnlyMode readOnlyMode );
 
-  protected slots:
+protected slots:
     void iconChanged( const QString &iconName );
     void nameChanged( const QString &name );
     void descriptionChanged();
@@ -68,7 +74,7 @@ class CrosswordTypeConfigureDetailsDialog : public KDialog {
     void clueMappingChanged( int index );
     void cellTypeToggled( QListWidgetItem *item );
 
-  private:
+private:
     void setup();
     void setupConnections( bool disconnection = false );
     void setCrosswordType( CrosswordTypeInfo crosswordTypeInfo );

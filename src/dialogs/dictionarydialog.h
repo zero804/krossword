@@ -26,17 +26,20 @@
 class ExtendedSqlTableModel;
 class KrosswordDictionary;
 
-class DictionaryDialog : public KDialog {
-  Q_OBJECT
+class DictionaryDialog : public KDialog
+{
+    Q_OBJECT
 
-  public:
+public:
     explicit DictionaryDialog( KrosswordDictionary *dictionary, QWidget* parent = 0 );
 
-    ExtendedSqlTableModel *databaseTable() const { return m_dbTable; };
+    ExtendedSqlTableModel *databaseTable() const {
+        return m_dbTable;
+    };
 
-  protected slots:
+protected slots:
     void tableSelectionChanged( const QItemSelection &selected,
-				const QItemSelection &deselected );
+                                const QItemSelection &deselected );
     void addDictionaryFromCrosswordsClicked();
     void addDictionaryFromLibraryClicked();
     void getWordsFromDictionaryClicked();
@@ -48,7 +51,7 @@ class DictionaryDialog : public KDialog {
     void filterChanged( const QString &filter );
     void hideInfoMessage();
 
-  private:
+private:
     void showInfoMessage( const QString &infoMessage );
 
     Ui::dictionaries ui_dictionaries;

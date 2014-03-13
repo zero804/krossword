@@ -23,45 +23,49 @@
 #include <QXmlStreamReader>
 #include <KUrl>
 
-namespace Crossword {
-  class KrossWord;
+namespace Crossword
+{
+class KrossWord;
 }
 using namespace Crossword;
 
-class KrossWordXmlReader : public QXmlStreamReader {
+class KrossWordXmlReader : public QXmlStreamReader
+{
 public:
     KrossWordXmlReader();
 
     struct KrossWordInfo {
-	int width, height;
-	QString type, title, authors, copyright, notes;
+        int width, height;
+        QString type, title, authors, copyright, notes;
 
-	KrossWordInfo() {
-	    this->width = this->height = -1; // make invalid initially
-	};
+        KrossWordInfo() {
+            this->width = this->height = -1; // make invalid initially
+        };
 
-	KrossWordInfo( const KrossWordInfo &other );
+        KrossWordInfo( const KrossWordInfo &other );
 
-	KrossWordInfo( const QString &type, int width, qint8 height,
-		const QString &title, const QString &authors,
-		const QString &copyright, const QString &notes );
+        KrossWordInfo( const QString &type, int width, qint8 height,
+                       const QString &title, const QString &authors,
+                       const QString &copyright, const QString &notes );
 
-	bool isValid() const { return this->width > 0 && this->height > 0; };
+        bool isValid() const {
+            return this->width > 0 && this->height > 0;
+        };
     };
 
     /** Reads information about the crossword at the given @p url.
     * @returns A KrossWordInfo object with information about the crossword at
     * the given @p url. Use KrossWordInfo::isValid() to check for errors.
-    * If isValid() returns false @p errorString will be set to a string 
+    * If isValid() returns false @p errorString will be set to a string
     * explaining the error (if @p errorString isn't NULL). */
     static KrossWordInfo readInfo( const KUrl &url, QString *errorString = NULL );
-    
+
     bool readCompressed( QIODevice *device, KrossWord *krossWord,
-			 QByteArray *undoData = NULL );
+                         QByteArray *undoData = NULL );
     bool readCompressedInfo( QIODevice *device, KrossWordInfo &krossWordInfo );
-    
+
     bool read( QIODevice *device, KrossWord *krossWord,
-	       QByteArray *undoData = NULL );
+               QByteArray *undoData = NULL );
     bool readInfo( QIODevice *device, KrossWordInfo &krossWordInfo );
 
 private:

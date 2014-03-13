@@ -21,15 +21,17 @@
 #include "krossword.h"
 
 SpannedCell::SpannedCell( KrossWord* krossWord, KrossWordCell::CellType cellType,
-			const Coord& coordTopLeft, int horizontalCellSpan,
-			int verticalCellSpan )
-			: KrossWordCell( krossWord, cellType, coordTopLeft ) {
+                          const Coord& coordTopLeft, int horizontalCellSpan,
+                          int verticalCellSpan )
+        : KrossWordCell( krossWord, cellType, coordTopLeft )
+{
     m_horizontalCellSpan = horizontalCellSpan;
     m_verticalCellSpan = verticalCellSpan;
 }
 
-QRectF SpannedCell::boundingRect() const {
+QRectF SpannedCell::boundingRect() const
+{
     return QRectF( x(), y(),
-		    krossWord()->cellSize().width() * m_horizontalCellSpan,
-		    krossWord()->cellSize().width() * m_verticalCellSpan );
+                   krossWord()->cellSize().width() * m_horizontalCellSpan,
+                   krossWord()->cellSize().width() * m_verticalCellSpan );
 }

@@ -22,39 +22,50 @@
 
 #include "krosswordcell.h"
 
-namespace Crossword {
+namespace Crossword
+{
 
-class SpannedCell : public KrossWordCell {
-  Q_OBJECT
+class SpannedCell : public KrossWordCell
+{
+    Q_OBJECT
 #if QT_VERSION >= 0x040600
-  Q_PROPERTY(QSizeF transitionSize READ transitionSize WRITE setTransitionSize FINAL)
+    Q_PROPERTY( QSizeF transitionSize READ transitionSize WRITE setTransitionSize FINAL )
 #endif
-  friend class KrossWord;
+    friend class KrossWord;
 
-  public:
+public:
     SpannedCell( KrossWord* krossWord, CellType cellType,
-		 const Coord& coordTopLeft, int horizontalCellSpan,
-		 int verticalCellSpan );
+                 const Coord& coordTopLeft, int horizontalCellSpan,
+                 int verticalCellSpan );
 
     virtual QRectF boundingRect() const;
 
     /** For qgraphicsitem_cast. */
     enum { Type = UserType + 7 };
-    virtual int type() const { return Type; };
+    virtual int type() const {
+        return Type;
+    };
 
 #if QT_VERSION >= 0x040600
-    QSizeF transitionSize() const { return m_transitionSize; };
+    QSizeF transitionSize() const {
+        return m_transitionSize;
+    };
     void setTransitionSize( const QSizeF &transitionSize );
 #endif
 
-    int horizontalCellSpan() const { return m_horizontalCellSpan; };
-    int verticalCellSpan() const { return m_verticalCellSpan; };
+    int horizontalCellSpan() const {
+        return m_horizontalCellSpan;
+    };
+    int verticalCellSpan() const {
+        return m_verticalCellSpan;
+    };
     void setCellSpan( int horizontalCellSpan, int verticalCellSpan );
     inline void setHorizontalCellSpan( int horizontalCellSpan );
     inline void setVerticalCellSpan( int verticalCellSpan );
 
     bool inside( const Coord &coord ) {
-      return coord >= coordTopLeft() && coord <= coordBottomRight(); };
+        return coord >= coordTopLeft() && coord <= coordBottomRight();
+    };
 
     inline Coord coordTopLeft() const;
     inline Coord coordTopRight() const;
@@ -63,12 +74,12 @@ class SpannedCell : public KrossWordCell {
 
     QList<Coord> spannedCoords() const;
 
-  protected slots:
+protected slots:
 #if QT_VERSION >= 0x040600
     void endSizeTransizionAnim();
 #endif
 
-  private:
+private:
     int m_horizontalCellSpan;
     int m_verticalCellSpan;
 
@@ -77,22 +88,35 @@ class SpannedCell : public KrossWordCell {
 #endif
 };
 
-inline void SpannedCell::setHorizontalCellSpan( int horizontalCellSpan ) {
-  setCellSpan( horizontalCellSpan, m_verticalCellSpan ); };
+inline void SpannedCell::setHorizontalCellSpan( int horizontalCellSpan )
+{
+    setCellSpan( horizontalCellSpan, m_verticalCellSpan );
+};
 
-inline void SpannedCell::setVerticalCellSpan( int verticalCellSpan ) {
-  setCellSpan( m_horizontalCellSpan, verticalCellSpan ); };
+inline void SpannedCell::setVerticalCellSpan( int verticalCellSpan )
+{
+    setCellSpan( m_horizontalCellSpan, verticalCellSpan );
+};
 
-inline Coord SpannedCell::coordTopLeft() const { return coord(); };
-inline Coord SpannedCell::coordTopRight() const {
-  return Coord( coord().first + m_horizontalCellSpan - 1,
-		coord().second ); };
-inline Coord SpannedCell::coordBottomLeft() const {
-  return Coord( coord().first,
-		coord().second + m_verticalCellSpan - 1 ); };
-inline Coord SpannedCell::coordBottomRight() const {
-  return Coord( coord().first + m_horizontalCellSpan - 1,
-		coord().second + m_verticalCellSpan - 1 ); };
+inline Coord SpannedCell::coordTopLeft() const
+{
+    return coord();
+};
+inline Coord SpannedCell::coordTopRight() const
+{
+    return Coord( coord().first + m_horizontalCellSpan - 1,
+                  coord().second );
+};
+inline Coord SpannedCell::coordBottomLeft() const
+{
+    return Coord( coord().first,
+                  coord().second + m_verticalCellSpan - 1 );
+};
+inline Coord SpannedCell::coordBottomRight() const
+{
+    return Coord( coord().first + m_horizontalCellSpan - 1,
+                  coord().second + m_verticalCellSpan - 1 );
+};
 
 }; // namespace Crossword
 

@@ -23,27 +23,33 @@
 #include <QLabel>
 #include <kfileitem.h>
 
-namespace KIO {
-  class PreviewJob;
+namespace KIO
+{
+class PreviewJob;
 }
 
-class CrosswordPreviewWidget : public QLabel {
-  Q_OBJECT
-  
-  public:
+class CrosswordPreviewWidget : public QLabel
+{
+    Q_OBJECT
+
+public:
     CrosswordPreviewWidget( QWidget* parent = 0 );
 
     void showPreview( const QString &fileName,
-		      const QString &mimeType =
-			    "application/x-krosswordpuzzle-compressed" );
-    QSize previewSize() const { return m_previewSize; };
-    void setPreviewSize( const QSize &previewSize ) { m_previewSize = previewSize; };
+                      const QString &mimeType =
+                          "application/x-krosswordpuzzle-compressed" );
+    QSize previewSize() const {
+        return m_previewSize;
+    };
+    void setPreviewSize( const QSize &previewSize ) {
+        m_previewSize = previewSize;
+    };
 
-  protected slots:
+protected slots:
     void previewJobGotPreview( const KFileItem &fileItem, const QPixmap &pixmap );
     void previewJobFailed( const KFileItem &fileItem );
-    
-  private:
+
+private:
     KIO::PreviewJob *m_previewJob;
     QSize m_previewSize;
 };

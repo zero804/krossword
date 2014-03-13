@@ -22,25 +22,31 @@
 
 #include "ui_move_cells.h"
 
-namespace Crossword {
-  class KrossWord;
+namespace Crossword
+{
+class KrossWord;
 }
 using namespace Crossword;
 
 /** A dialog to move all cells of a crossword. */
-class MoveCellsDialog : public KDialog {
-  Q_OBJECT
+class MoveCellsDialog : public KDialog
+{
+    Q_OBJECT
 
-  public:
+public:
     explicit MoveCellsDialog( KrossWord *krossWord, QWidget* parent = 0 );
 
-    int moveHorizontal() const { return ui_move_cells.dx->value(); };
-    int moveVertical() const { return ui_move_cells.dy->value(); };
+    int moveHorizontal() const {
+        return ui_move_cells.dx->value();
+    };
+    int moveVertical() const {
+        return ui_move_cells.dy->value();
+    };
 
-  protected slots:
+protected slots:
     void updateInfoText();
 
-  private:
+private:
     KrossWord *m_krossWord;
     Ui::move_cells ui_move_cells;
 };

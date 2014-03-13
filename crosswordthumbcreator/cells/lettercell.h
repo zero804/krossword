@@ -22,167 +22,196 @@
 
 #include "krosswordcell.h"
 
-class LetterCell : public KrossWordCell {
+class LetterCell : public KrossWordCell
+{
     Q_OBJECT
     friend class KrossWord;
     friend class ClueCell;
     friend class SolutionLetterCell;
 
-    public:
-	/** Describes the confidence of the correctness of a letter. */
-	enum Confidence {
-	    Solved, /**< The letter is definetly correct, because it was solved. */
-	    Confident, /**< Confident that the letter is correct. */
-	    Unsure, /**< Unsure if the letter is correct. */
-	    Unknown /**< Confidence is unknown, eg. when loaded from a file format
-				    not supporting confidence. */
-	};
+public:
+    /** Describes the confidence of the correctness of a letter. */
+    enum Confidence {
+        Solved, /**< The letter is definetly correct, because it was solved. */
+        Confident, /**< Confident that the letter is correct. */
+        Unsure, /**< Unsure if the letter is correct. */
+        Unknown /**< Confidence is unknown, eg. when loaded from a file format
+        not supporting confidence. */
+    };
 
-	enum EditMode {
-	    NoEditing,
-	    AutomaticKeyboardEditing,
-	    EmitEditRequestsOnKeyboardEdit
-	};
+    enum EditMode {
+        NoEditing,
+        AutomaticKeyboardEditing,
+        EmitEditRequestsOnKeyboardEdit
+    };
 
-	enum ClearMode {
-	    ClearCurrentLetter,
-	    ClearCorrectLetter
-	};
+    enum ClearMode {
+        ClearCurrentLetter,
+        ClearCorrectLetter
+    };
 
-	LetterCell( KrossWord *krossWord, const Coord &coord,
-		    ClueCell *clueHorizontal, ClueCell *clueVertical/*,
-		    QGraphicsScene *scene*/ );
-	LetterCell( KrossWord *krossWord, const Coord &coord, ClueCell *clue/*,
-		    QGraphicsScene *scene*/ );
+    LetterCell( KrossWord *krossWord, const Coord &coord,
+                ClueCell *clueHorizontal, ClueCell *clueVertical/*,
+      QGraphicsScene *scene*/ );
+    LetterCell( KrossWord *krossWord, const Coord &coord, ClueCell *clue/*,
+      QGraphicsScene *scene*/ );
 
-	static const qreal BAR_WIDTH = 0.08; // in percent of the total cell width/height
-	
-	virtual bool isLetterCell() const { return true; };
+    static const qreal BAR_WIDTH = 0.08; // in percent of the total cell width/height
 
-	/** For qgraphicsitem_cast. */
-	enum { Type = UserType + 5 };
-	virtual int type() const { return Type; };
+    virtual bool isLetterCell() const {
+        return true;
+    };
 
-	ClueCell *clueHorizontal() const { return m_clueHorizontal; };
-	ClueCell *clueVertical() const { return m_clueVertical; };
-	ClueCell *clue( Qt::Orientation orientation ) const {
-	    return orientation == Qt::Horizontal ? m_clueHorizontal : m_clueVertical;
-	};
-	ClueCellList clues() const {
-	  ClueCellList clueList;
-	  if ( m_clueHorizontal )
-	    clueList << m_clueHorizontal;
-	  if ( m_clueVertical )
-	    clueList << m_clueVertical;
-	  return clueList;
-	};
-	bool hasClueInDirection( Qt::Orientation orientation ) const {
-	    return clue(orientation);
-	};
-	bool isCrossed() const {
-	    return m_clueHorizontal && m_clueVertical;
-	};
-	bool isAttachedToClue( ClueCell *clue ) {
-	    return m_clueHorizontal == clue || m_clueVertical == clue;
-	};
-	bool isAttachedToClueExclusivly( ClueCell *clue ) {
-	    return isAttachedToClue( clue ) && !isCrossed();
-	};
+    /** For qgraphicsitem_cast. */
+    enum { Type = UserType + 5 };
+    virtual int type() const {
+        return Type;
+    };
 
-	QString allowedLetters() const { return ALLOWED_CHARACTERS; };
-	static bool isLetterAllowed( const QChar &letter ) {
-	    return ALLOWED_CHARACTERS.contains( letter.toUpper() ); };
+    ClueCell *clueHorizontal() const {
+        return m_clueHorizontal;
+    };
+    ClueCell *clueVertical() const {
+        return m_clueVertical;
+    };
+    ClueCell *clue( Qt::Orientation orientation ) const {
+        return orientation == Qt::Horizontal ? m_clueHorizontal : m_clueVertical;
+    };
+    ClueCellList clues() const {
+        ClueCellList clueList;
+        if ( m_clueHorizontal )
+            clueList << m_clueHorizontal;
+        if ( m_clueVertical )
+            clueList << m_clueVertical;
+        return clueList;
+    };
+    bool hasClueInDirection( Qt::Orientation orientation ) const {
+        return clue( orientation );
+    };
+    bool isCrossed() const {
+        return m_clueHorizontal && m_clueVertical;
+    };
+    bool isAttachedToClue( ClueCell *clue ) {
+        return m_clueHorizontal == clue || m_clueVertical == clue;
+    };
+    bool isAttachedToClueExclusivly( ClueCell *clue ) {
+        return isAttachedToClue( clue ) && !isCrossed();
+    };
 
-	/** Returns the correct letter of this letter cell. */
-	QChar correctLetter() const;
-	/** Returns the current letter of this letter cell. */
-	QChar currentLetter() const { return m_currentLetter; };
-	void setCurrentLetter( const QChar &currentLetter, Confidence confidence = Confident );
-	void setCorrectLetter( const QChar &correctLetter );
-	bool isCorrect() const { return m_currentLetter == correctLetter(); };
-	bool isEmpty() const { return m_currentLetter == ' '; };
-	Confidence confidence() const { return m_confidence; };
-	void setConfidence( Confidence confidence );
+    QString allowedLetters() const {
+        return ALLOWED_CHARACTERS;
+    };
+    static bool isLetterAllowed( const QChar &letter ) {
+        return ALLOWED_CHARACTERS.contains( letter.toUpper() );
+    };
 
-	bool needsEndBar( Qt::Orientation orientation ) const;
-	
-	LetterCell *letterCellOnRight() const;
-	LetterCell *letterCellOnLeft() const;
-	LetterCell *letterCellOnTop() const;
-	LetterCell *letterCellOnBottom() const;
+    /** Returns the correct letter of this letter cell. */
+    QChar correctLetter() const;
+    /** Returns the current letter of this letter cell. */
+    QChar currentLetter() const {
+        return m_currentLetter;
+    };
+    void setCurrentLetter( const QChar &currentLetter, Confidence confidence = Confident );
+    void setCorrectLetter( const QChar &correctLetter );
+    bool isCorrect() const {
+        return m_currentLetter == correctLetter();
+    };
+    bool isEmpty() const {
+        return m_currentLetter == ' ';
+    };
+    Confidence confidence() const {
+        return m_confidence;
+    };
+    void setConfidence( Confidence confidence );
 
-	static Confidence stringToConfidence( const QString &string );
-	static QString confidenceToString( Confidence confidence );
+    bool needsEndBar( Qt::Orientation orientation ) const;
 
-    public slots:
-	/** Sets the current letter to @p newLetter. */
-	void setCurrentLetterSlot( LetterCell *letter, const QChar &newLetter );
+    LetterCell *letterCellOnRight() const;
+    LetterCell *letterCellOnLeft() const;
+    LetterCell *letterCellOnTop() const;
+    LetterCell *letterCellOnBottom() const;
 
-    protected:
-	LetterCell( KrossWord *krossWord, const Coord &coord,
-		    ClueCell *clueHorizontal, ClueCell *clueVertical,
-		    /*QGraphicsScene *scene,*/ CellType cellType );
-	LetterCell( KrossWord *krossWord, const Coord &coord, ClueCell *clue,
-		    /*QGraphicsScene *scene,*/ CellType cellType );
+    static Confidence stringToConfidence( const QString &string );
+    static QString confidenceToString( Confidence confidence );
 
-	/** Gets the clue of this letter cell that is orthogonal to the given
-	* @p clue, or NULL if this letter cell has no other clue.
-	* @note It is assumed that @p clue is one @ref horizontalClue()
-	* and @ref verticalClue(). */
-	ClueCell *getOrthogonalClueTo( ClueCell *clue ) const;
+public slots:
+    /** Sets the current letter to @p newLetter. */
+    void setCurrentLetterSlot( LetterCell *letter, const QChar &newLetter );
 
-	void setClueHorizontal(ClueCell *clue) { m_clueHorizontal = clue; };
-	void setClueVertical(ClueCell *clue) { m_clueVertical = clue; };
-	void setClue(ClueCell *clue);
-	void detachClues();
-	bool detachClue( ClueCell *cell );
+protected:
+    LetterCell( KrossWord *krossWord, const Coord &coord,
+                ClueCell *clueHorizontal, ClueCell *clueVertical,
+                /*QGraphicsScene *scene,*/ CellType cellType );
+    LetterCell( KrossWord *krossWord, const Coord &coord, ClueCell *clue,
+                /*QGraphicsScene *scene,*/ CellType cellType );
 
-	virtual void drawClueArrows( QPainter *p, const QStyleOptionGraphicsItem *option );
-	virtual void drawEndBarIfNeeded( QPainter *p, const QStyleOptionGraphicsItem *option );
+    /** Gets the clue of this letter cell that is orthogonal to the given
+    * @p clue, or NULL if this letter cell has no other clue.
+    * @note It is assumed that @p clue is one @ref horizontalClue()
+    * and @ref verticalClue(). */
+    ClueCell *getOrthogonalClueTo( ClueCell *clue ) const;
 
-	virtual void drawBackgroundForPrinting( QPainter *p, const QStyleOptionGraphicsItem *option );
-	virtual void drawForegroundForPrinting( QPainter *p, const QStyleOptionGraphicsItem *option );
+    void setClueHorizontal( ClueCell *clue ) {
+        m_clueHorizontal = clue;
+    };
+    void setClueVertical( ClueCell *clue ) {
+        m_clueVertical = clue;
+    };
+    void setClue( ClueCell *clue );
+    void detachClues();
+    bool detachClue( ClueCell *cell );
 
-    private:
-	void init( ClueCell *clueHorizontal, ClueCell *clueVertical );
-	void init( ClueCell *clue );
-	LetterCell *letterCellAtOffset( Offset offset ) const;
+    virtual void drawClueArrows( QPainter *p, const QStyleOptionGraphicsItem *option );
+    virtual void drawEndBarIfNeeded( QPainter *p, const QStyleOptionGraphicsItem *option );
 
-	ClueCell *m_clueHorizontal, *m_clueVertical;
-	QChar m_currentLetter;
-	Confidence m_confidence;
+    virtual void drawBackgroundForPrinting( QPainter *p, const QStyleOptionGraphicsItem *option );
+    virtual void drawForegroundForPrinting( QPainter *p, const QStyleOptionGraphicsItem *option );
+
+private:
+    void init( ClueCell *clueHorizontal, ClueCell *clueVertical );
+    void init( ClueCell *clue );
+    LetterCell *letterCellAtOffset( Offset offset ) const;
+
+    ClueCell *m_clueHorizontal, *m_clueVertical;
+    QChar m_currentLetter;
+    Confidence m_confidence;
 };
 
-class SolutionLetterCell : public LetterCell {
+class SolutionLetterCell : public LetterCell
+{
     friend class KrossWord;
     friend class LetterCell;
     Q_OBJECT
 
-    public:
-	SolutionLetterCell( KrossWord *krossWord, const Coord &coord,
-		    ClueCell *clueHorizontal, ClueCell *clueVertical,
-		    int solutionWordIndex/*, QGraphicsScene *scene*/ );
-	SolutionLetterCell( KrossWord *krossWord, const Coord &coord,
-		    ClueCell *clue, int solutionWordIndex/*, QGraphicsScene *scene*/ );
+public:
+    SolutionLetterCell( KrossWord *krossWord, const Coord &coord,
+                        ClueCell *clueHorizontal, ClueCell *clueVertical,
+                        int solutionWordIndex/*, QGraphicsScene *scene*/ );
+    SolutionLetterCell( KrossWord *krossWord, const Coord &coord,
+                        ClueCell *clue, int solutionWordIndex/*, QGraphicsScene *scene*/ );
 
-	/** For qgraphicsitem_cast. */
-	enum { Type = UserType + 6 };
-	virtual int type() const { return Type; };
+    /** For qgraphicsitem_cast. */
+    enum { Type = UserType + 6 };
+    virtual int type() const {
+        return Type;
+    };
 
-	int solutionWordIndex() const { return m_solutionWordIndex; };
+    int solutionWordIndex() const {
+        return m_solutionWordIndex;
+    };
 
-	static SolutionLetterCell *fromLetterCell( LetterCell *&letter,
-						   int solutionWordIndex, bool deleteLetter = true );
+    static SolutionLetterCell *fromLetterCell( LetterCell *&letter,
+            int solutionWordIndex, bool deleteLetter = true );
 
-    protected:
-	virtual void drawForeground( QPainter* p, const QStyleOptionGraphicsItem* option );
+protected:
+    virtual void drawForeground( QPainter* p, const QStyleOptionGraphicsItem* option );
 
-    private:
-	// Use fromLetterCell()
-	SolutionLetterCell( LetterCell *letter, int solutionWordIndex );
-	void init( int solutionWordIndex );
+private:
+    // Use fromLetterCell()
+    SolutionLetterCell( LetterCell *letter, int solutionWordIndex );
+    void init( int solutionWordIndex );
 
-	int m_solutionWordIndex;
+    int m_solutionWordIndex;
 };
 
 #endif // KROSSWORDLETTERCELL_H

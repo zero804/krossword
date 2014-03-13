@@ -4,65 +4,65 @@
 <!-- Menu bar -->
 <MenuBar>
     <Menu name="game">
-	<Separator append="new_merge" />
-<!-- 	<ActionList name="loadFromInternetList" append="new_merge" /> -->
-	<Action name="game_export" append="save_merge" />
-	<Separator  />
+        <Separator append="new_merge" />
+    <!-- 	<ActionList name="loadFromInternetList" append="new_merge" /> -->
+        <Action name="game_export" append="save_merge" />
+        <Separator  />
 
-	<Action name="game_download" append="save_merge" />
-	<Action name="game_upload" append="save_merge" />
+        <Action name="game_download" append="save_merge" />
+        <Action name="game_upload" append="save_merge" />
     </Menu>
 
     <Menu name="edit">
-	<Action name="editundo" />
-	<Action name="editredo" />
-	<Separator />
+        <Action name="editundo" />
+        <Action name="editredo" />
+        <Separator />
 
-	<Action name="edit_add_clue" />
-	<Action name="edit_add_image" />
-<!-- 		<Action name="edit_cell_properties" /> -->
-	<ActionList name="edit_cell_properties_list" />
-	<Action name="edit_remove" />
-	<Separator />
+        <Action name="edit_add_clue" />
+        <Action name="edit_add_image" />
+    <!-- 		<Action name="edit_cell_properties" /> -->
+        <ActionList name="edit_cell_properties_list" />
+        <Action name="edit_remove" />
+        <Separator />
 
-	<Action name="edit_clear_crossword" />
-<!-- 	<Action name="edit_convert_to_solution_letter" /> -->
-<!-- 	<Action name="edit_convert_to_letter" /> -->
-	<Separator />
+        <Action name="edit_clear_crossword" />
+    <!-- 	<Action name="edit_convert_to_solution_letter" /> -->
+    <!-- 	<Action name="edit_convert_to_letter" /> -->
+        <Separator />
 
-	<Action name="clue_number_mapping" />
-	<Action name="edit_check_rotation_symmetry" />
-	<Action name="edit_statistics" />
-	<Action name="edit_move_cells" />
-	<Action name="edit_properties" />
-	<Separator />
+        <Action name="clue_number_mapping" />
+        <Action name="edit_check_rotation_symmetry" />
+        <Action name="edit_statistics" />
+        <Action name="edit_move_cells" />
+        <Action name="edit_properties" />
+        <Separator />
 
-	<Action name="edit_enable_edit_mode" />
+        <Action name="edit_enable_edit_mode" />
     </Menu>
 
     <Menu name="move">
-	<Action name="move_check" />
-	<Action name="move_clear" />
-	<Separator />
+        <Action name="move_check" />
+        <Action name="move_clear" />
+        <Separator />
 
-	<Action name="move_eraser" />
-	<Separator />
+        <Action name="move_eraser" />
+        <Separator />
 
-	<Action name="move_select_first_letter_of_clue" />
-	<Action name="move_select_last_letter_of_clue" />
-	<Separator />
+        <Action name="move_select_first_letter_of_clue" />
+        <Action name="move_select_last_letter_of_clue" />
+        <Separator />
 
-	<Action name="move_select_clue_with_switched_orientation" />
-	<Separator />
+        <Action name="move_select_clue_with_switched_orientation" />
+        <Separator />
 
-	<Action name="move_select_first_clue" />
-	<Action name="move_select_previous_clue" />
-	<Action name="move_select_next_clue" />
-	<Action name="move_select_last_clue" />
+        <Action name="move_select_first_clue" />
+        <Action name="move_select_previous_clue" />
+        <Action name="move_select_next_clue" />
+        <Action name="move_select_last_clue" />
     </Menu>
 
     <Menu name="view">
-	<Action name="view_pan" />
+        <Action name="view_pan" />
     </Menu>
 
 <!--     <Menu name="settings"> -->
@@ -157,6 +157,9 @@
     <Action name="move_hint_current_cell" />
     <Action name="move_hint_horizontal_clue" />
     <Action name="move_hint_vertical_clue" />
+    <Separator />
+
+    <Action name="edit_paste_special_char" />
 </Menu>
 
 <Menu name="crossword_clue_cell_popup">

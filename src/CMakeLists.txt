@@ -59,6 +59,8 @@ install( TARGETS krosswordpuzzle ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES krosswordpuzzle.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES krosswordpuzzle.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
-install( FILES krosswordpuzzleui.rc krosswordpuzzle_library_ui.rc krosswordpuzzle_crossword_ui.rc
-	 DESTINATION ${DATA_INSTALL_DIR}/krosswordpuzzle )
+install( FILES krosswordpuzzleui.rc
+               krosswordpuzzle_library_ui.rc
+               krosswordpuzzle_crossword_ui.rc
+         DESTINATION ${DATA_INSTALL_DIR}/krosswordpuzzle )
 install( FILES krosswordpuzzle.knsrc DESTINATION ${CONFIG_INSTALL_DIR} )
