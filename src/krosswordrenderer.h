@@ -23,7 +23,7 @@
 #include <QPixmap>
 
 class KSvgRenderer;
-class KPixmapCache;
+class KImageCache;
 
 class KrosswordRenderer
 {
@@ -34,8 +34,7 @@ public:
 
     void renderBackground(QPainter *p, const QRectF& r) const;
     QPixmap background(const QSize &size) const;
-//  void renderElement( QPainter *p, const QString& elementid,
-//       const QRectF& r ) const;
+    //void renderElement( QPainter *p, const QString& elementid, const QRectF& r ) const;
     void renderElement(QPainter *p, const QString& elementid, const QRectF& r, const QColor &alpha = Qt::black) const;
     bool setTheme(const QString &fileName);
 
@@ -50,7 +49,7 @@ private:
     *  Svg renderer instance
     */
     KSvgRenderer *m_renderer;
-    KPixmapCache *m_cache;
+    KImageCache *m_cache;
     QString m_themeFileName;
 };
 

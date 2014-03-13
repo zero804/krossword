@@ -21,7 +21,7 @@
 
 #include <kstandarddirs.h>
 #include <ksvgrenderer.h>
-#include <kpixmapcache.h>
+#include <kimagecache.h>
 
 #include <QPainter>
 #include "settings.h"
@@ -35,8 +35,8 @@ KrosswordRenderer* KrosswordRenderer::self()
 
 KrosswordRenderer::KrosswordRenderer()
 {
-    m_cache = new KPixmapCache("krosswordpuzzle-cache");
-    m_cache->setCacheLimit(2 * 1024);
+    m_cache = new KImageCache("krosswordpuzzle-cache", 1024);
+    m_cache->setPixmapCacheLimit(2 * 1024);
 
     m_renderer = new KSvgRenderer();
 //     m_renderer->load( KStandardDirs::locate( "appdata", "themes/scribble_theme.svgz" ) );
@@ -45,7 +45,7 @@ KrosswordRenderer::KrosswordRenderer()
 
 KrosswordRenderer::~KrosswordRenderer()
 {
-    m_cache->discard();
+    m_cache->clear();
     delete m_renderer;
     delete m_cache;
 }
@@ -56,7 +56,7 @@ bool KrosswordRenderer::setTheme(const QString& fileName)
         return true;
 
     m_themeFileName = fileName;
-    m_cache->discard();
+    m_cache->clear();
 
 //     QString themeFile = KStandardDirs::locate( "appdata",
 //             "themes/" + m_themeName + ".desktop" );
@@ -121,14 +121,14 @@ void KrosswordRenderer::renderElement(QPainter* p, const QString& elementid, con
     QPixmap pix;
 
     QString cacheStr = elementid + QString("_%1x%2").arg(r.width()).arg(r.height());
-    if (!m_cache->find(cacheStr, pix)) {
+    if (!m_cache->findPixmap(cacheStr, &pix)) {
         pix = QPixmap(r.size().toSize());
         pix.fill(Qt::transparent);
         QPainter painter(&pix);
         painter.setRenderHints(QPainter::HighQualityAntialiasing | QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing);
         m_renderer->render(&painter, elementid);
         painter.end();
-        m_cache->insert(cacheStr, pix);
+        m_cache->insertPixmap(cacheStr, pix);
     }
 
     if (alpha != Qt::black) {
