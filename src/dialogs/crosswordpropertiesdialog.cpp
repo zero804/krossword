@@ -23,7 +23,6 @@
 #include "krossword.h"
 #include "cells/krosswordcell.h"
 
-//#include <KGameDifficulty>
 #include <KgDifficulty>
 #include <KColorScheme>
 
@@ -33,9 +32,7 @@ const QList< QChar > CrosswordPropertiesDialog::ArrowChars = QList<QChar>()
         << QChar(0x2190) << QChar(0x2022) << QChar(0x2192)
         << QChar(0x2199) << QChar(0x2193) << QChar(0x2198);
 
-CrosswordPropertiesDialog::CrosswordPropertiesDialog(
-    KrossWord* krossWord, QWidget* parent, Qt::WFlags flags)
-    : KDialog(parent, flags), m_krossWord(krossWord)
+CrosswordPropertiesDialog::CrosswordPropertiesDialog(KrossWord* krossWord, QWidget* parent, Qt::WFlags flags) : KDialog(parent, flags), m_krossWord(krossWord)
 {
     setWindowTitle(i18n("Properties"));
     QWidget *propertiesDlg = new QWidget;
@@ -45,23 +42,23 @@ CrosswordPropertiesDialog::CrosswordPropertiesDialog(
     ui_properties.btnReset->setIcon(KIcon("edit-undo"));
     ui_properties.btnReset->setEnabled(false);
 
-    ui_properties.toolBox->setItemText(ui_properties.toolBox->indexOf(
-                                           ui_properties.pageCrosswordType), i18n("Crossword Type: %1",
-                                                   krossWord->crosswordTypeInfo().name));
-    ui_properties.typeInfoWidget->setElements(
-        CrosswordTypeWidget::ElementDetails | CrosswordTypeWidget::ElementIcon);
+    ui_properties.toolBox->setItemText(ui_properties.toolBox->indexOf(ui_properties.pageCrosswordType), i18n("Crossword Type: %1",krossWord->crosswordTypeInfo().name));
+    ui_properties.typeInfoWidget->setElements(CrosswordTypeWidget::ElementDetails | CrosswordTypeWidget::ElementIcon);
     ui_properties.typeInfoWidget->setEditMode(CrosswordTypeWidget::EditAlwaysReadOnly);
-    ui_properties.typeInfoWidget->addUserButtonElement(i18n("&Convert..."),
-            this, SLOT(convertClicked()));
+    ui_properties.typeInfoWidget->addUserButtonElement(i18n("&Convert..."), this, SLOT(convertClicked()));
     ui_properties.typeInfoWidget->setTypeInfo(krossWord->crosswordTypeInfo());
 
     QStringList languages = KGlobal::locale()->allLanguagesList();
     languages.sort();
     foreach(const QString & language, languages)
-    ui_properties.language->insertLanguage(language);
+        ui_properties.language->insertLanguage(language);
 
     //QMap<QByteArray, QString> difficulties = KGameDifficulty::localizedLevelStrings();
-    //ui_properties.difficulty->addItems( difficulties.values() );
+    //ui_properties.difficulty->addItems(difficulties.values());
+    KgDifficulty dif;
+    QList<const KgDifficultyLevel*> difLevels = dif.levels();
+    foreach(const KgDifficultyLevel *difLevel, difLevels)
+        ui_properties.difficulty->addItem(difLevel->title());
 
     ui_properties.title->setText(krossWord->title());
     ui_properties.author->setText(krossWord->authors());
@@ -70,24 +67,15 @@ CrosswordPropertiesDialog::CrosswordPropertiesDialog(
 
     ui_properties.anchorCenter->setChecked(true);
 #if KDE_IS_VERSION(4,3,0)
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(
-                                  ui_properties.anchorTopLeft), KrossWord::AnchorTopLeft);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(
-                                  ui_properties.anchorTop), KrossWord::AnchorTop);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(
-                                  ui_properties.anchorTopRight), KrossWord::AnchorTopRight);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(
-                                  ui_properties.anchorLeft), KrossWord::AnchorLeft);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(
-                                  ui_properties.anchorCenter), KrossWord::AnchorCenter);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(
-                                  ui_properties.anchorRight), KrossWord::AnchorRight);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(
-                                  ui_properties.anchorBottomLeft), KrossWord::AnchorBottomLeft);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(
-                                  ui_properties.anchorBottom), KrossWord::AnchorBottom);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(
-                                  ui_properties.anchorBottomRight), KrossWord::AnchorBottomRight);
+    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorTopLeft), KrossWord::AnchorTopLeft);
+    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorTop), KrossWord::AnchorTop);
+    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorTopRight), KrossWord::AnchorTopRight);
+    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorLeft), KrossWord::AnchorLeft);
+    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorCenter), KrossWord::AnchorCenter);
+    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorRight), KrossWord::AnchorRight);
+    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorBottomLeft), KrossWord::AnchorBottomLeft);
+    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorBottom), KrossWord::AnchorBottom);
+    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorBottomRight), KrossWord::AnchorBottomRight);
 #else
     m_anchorIdToAnchor.insert(0, KrossWord::AnchorTopLeft);
     m_anchorIdToAnchor.insert(1, KrossWord::AnchorTop);
@@ -100,18 +88,14 @@ CrosswordPropertiesDialog::CrosswordPropertiesDialog(
     m_anchorIdToAnchor.insert(8, KrossWord::AnchorBottomRight);
 #endif
 
-    connect(ui_properties.buttonGroupAnchor, SIGNAL(changed(int)),
-            this, SLOT(resizeAnchorChanged(int)));
-    connect(ui_properties.btnReset, SIGNAL(clicked()),
-            this, SLOT(resetSizeClicked()));
+    connect(ui_properties.buttonGroupAnchor, SIGNAL(changed(int)),this, SLOT(resizeAnchorChanged(int)));
+    connect(ui_properties.btnReset, SIGNAL(clicked()),this, SLOT(resetSizeClicked()));
 
     ui_properties.columns->setValue(krossWord->width());
     ui_properties.rows->setValue(krossWord->height());
 
-    connect(ui_properties.columns, SIGNAL(valueChanged(int)),
-            this, SLOT(columnsChanged(int)));
-    connect(ui_properties.rows, SIGNAL(valueChanged(int)),
-            this, SLOT(rowsChanged(int)));
+    connect(ui_properties.columns, SIGNAL(valueChanged(int)),this, SLOT(columnsChanged(int)));
+    connect(ui_properties.rows, SIGNAL(valueChanged(int)),this, SLOT(rowsChanged(int)));
     // To update the resize info label
     sizeChanged(krossWord->width(), krossWord->height());
 
@@ -276,11 +260,9 @@ void CrosswordPropertiesDialog::sizeChanged(int columns, int rows)
         || ui_properties.rows->value() != (int)m_krossWord->height());
 }
 
-void CrosswordPropertiesDialog::updateInfoText(KrossWord::ResizeAnchor anchor,
-        int columns, int rows)
+void CrosswordPropertiesDialog::updateInfoText(KrossWord::ResizeAnchor anchor, int columns, int rows)
 {
-    KrossWordCellList removedCells = m_krossWord->resizeGrid(columns, rows,
-                                     anchor, true);
+    KrossWordCellList removedCells = m_krossWord->resizeGrid(columns, rows, anchor, true);
     int clueCount = 0, imageCount = 0;
     foreach(KrossWordCell * cell, removedCells) {
         if (cell->isType(ClueCellType))
@@ -290,8 +272,7 @@ void CrosswordPropertiesDialog::updateInfoText(KrossWord::ResizeAnchor anchor,
     }
     if (ui_properties.columns->value() == (int)m_krossWord->width()
             && ui_properties.rows->value() == (int)m_krossWord->height()) {
-        ui_properties.lblResizeInfo->setText(
-            i18nc("No changes to the crossword grid size.", "No change"));
+        ui_properties.lblResizeInfo->setText(i18nc("No changes to the crossword grid size.", "No change"));
         ui_properties.lblResizeInfo->setEnabled(false);
     } else {
         ui_properties.lblResizeInfo->setText(i18ncp("How many clues are removed "
@@ -311,9 +292,7 @@ void CrosswordPropertiesDialog::updateInfoText(KrossWord::ResizeAnchor anchor,
     bool hasRemovedCells = clueCount > 0 || imageCount > 0;
     KColorScheme colorScheme(QPalette::Normal);
     QPalette palette = ui_properties.lblResizeInfo->palette();
-    palette.setColor(QPalette::Normal, QPalette::WindowText,
-                     colorScheme.foreground(hasRemovedCells
-                                            ? KColorScheme::NegativeText : KColorScheme::PositiveText).color());
+    palette.setColor(QPalette::Normal, QPalette::WindowText,colorScheme.foreground(hasRemovedCells ? KColorScheme::NegativeText : KColorScheme::PositiveText).color());
     ui_properties.lblResizeInfo->setPalette(palette);
 }
 
@@ -383,9 +362,7 @@ void CrosswordPropertiesDialog::convertClicked()
 //       } else {
 //  stateChanged( "clue_cell_highlighted" );
 
-        ui_properties.toolBox->setItemText(
-            ui_properties.toolBox->indexOf(ui_properties.pageCrosswordType),
-            i18n("Crossword Type: %1", typeInfo.name));
+        ui_properties.toolBox->setItemText(ui_properties.toolBox->indexOf(ui_properties.pageCrosswordType), i18n("Crossword Type: %1", typeInfo.name));
         ui_properties.typeInfoWidget->setTypeInfo(typeInfo);
 //  ui_properties.lblInfo->setText( krossWord()->crosswordTypeInfo().description );
 

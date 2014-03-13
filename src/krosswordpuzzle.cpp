@@ -47,7 +47,6 @@
 #include <KMenuBar>
 #include <KToolBar>
 #include <KTabWidget>
-////#include <KGameThemeSelector>
 #include <KgThemeProvider>
 #include <KgThemeSelector>
 
@@ -66,9 +65,7 @@
 // Other KDE includes
 #include <KDE/KLocale>
 #include <KStandardDirs>
-//#include <KGameDifficulty>
-#include <KgDifficulty>
-
+//#include <KGameDifficulty> -> #include <KgDifficulty>
 #include <KRandom>
 #include <KTemporaryFile>
 #include <kdeversion.h>
