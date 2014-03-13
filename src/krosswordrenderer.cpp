@@ -26,6 +26,8 @@
 #include <QPainter>
 #include "settings.h"
 
+#include <memory>
+
 
 KrosswordRenderer* KrosswordRenderer::self()
 {
@@ -35,6 +37,8 @@ KrosswordRenderer* KrosswordRenderer::self()
 
 KrosswordRenderer::KrosswordRenderer()
 {
+    int *foo = nullptr;
+    
     m_cache = new KImageCache("krosswordpuzzle-cache", 1024);
     m_cache->setPixmapCacheLimit(2 * 1024);
 

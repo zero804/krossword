@@ -56,7 +56,7 @@ public:
     LetterCell(KrossWord *krossWord, const Coord &coord, ClueCell *clue/*,
       QGraphicsScene *scene*/);
 
-    static const qreal BAR_WIDTH = 0.08; // in percent of the total cell width/height
+    static constexpr qreal BAR_WIDTH = 0.08; // in percent of the total cell width/height
 
     virtual bool isLetterCell() const {
         return true;

@@ -47,7 +47,7 @@ public:
                ClueCell *clue, AnswerOffset answerOffset = OffsetInvalid);
     ~LetterCell();
 
-    static const qreal BAR_WIDTH = 0.08; // in percent of the total cell width/height
+    static constexpr qreal BAR_WIDTH = 0.08; // in percent of the total cell width/height
     static const QColor editLetterColor() {
         return Qt::blue;
     };
