@@ -24,6 +24,9 @@
 
 class KSvgRenderer;
 class KImageCache;
+class KgTheme;
+class KGameRenderer;
+class KgThemeProvider;
 
 class KrosswordRenderer
 {
@@ -36,7 +39,7 @@ public:
     QPixmap background(const QSize &size) const;
     //void renderElement( QPainter *p, const QString& elementid, const QRectF& r ) const;
     void renderElement(QPainter *p, const QString& elementid, const QRectF& r, const QColor &alpha = Qt::black) const;
-    bool setTheme(const QString &fileName);
+    bool setTheme(KgTheme* theme);
 
 private:
     // disable copy - it's singleton
@@ -48,8 +51,12 @@ private:
     /**
     *  Svg renderer instance
     */
+    KGameRenderer   *m_renderer;
+    KgThemeProvider *m_provider;
+    /*
     KSvgRenderer *m_renderer;
     KImageCache *m_cache;
+    */
     QString m_themeFileName;
 };
 

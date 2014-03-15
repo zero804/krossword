@@ -62,8 +62,8 @@ bool KrosswordTheme::readFromDesktopFile(const QString& file)
     m_clueNumberPos = positionFromString(configGroup.readEntry("ClueNumberPos", ""), BottomRight);
     m_numberPuzzleCluePos = positionFromString(configGroup.readEntry("NumberPuzzleCluePos", ""), TopRight);
     m_solutionLetterIndexPos = positionFromString(configGroup.readEntry("SolutionLetterIndexPos", ""), BottomLeft);
-
-    if (!KrosswordRenderer::self()->setTheme(graphicsPath())) {
+//==================================================== HERE CHANGES ====================================
+    if (!KrosswordRenderer::self()->setTheme(this)) {
         kDebug() << "Couldn't load theme SVG file" << graphicsPath();
         return false;
     }

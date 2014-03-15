@@ -48,7 +48,9 @@ int main(int argc, char **argv)
     if (app.isSessionRestored()) {
         RESTORE(KrossWordPuzzle);
     } else {
+        //## Return applicationPid, but is not saved anywhere...
         QCoreApplication::applicationPid();
+        
         // no session.. just start up normally
         KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 

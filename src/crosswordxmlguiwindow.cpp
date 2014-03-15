@@ -1455,8 +1455,8 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url,
                                             "application/x-krosswordpuzzle "
                                             "application/x-krosswordpuzzle-compressed "
                                             "application/x-acrosslite-puz", this);
-        if (resultUrl.isEmpty())
-            return false; // No file was chosen
+    if (resultUrl.isEmpty())
+        return false; // No file was chosen
     } else
         resultUrl = url;
 
@@ -1500,11 +1500,9 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url,
             if (KMessageBox::questionYesNo(this, i18n("The crossword type couldn't "
                                            "be determined, so 'Free Crossword' is assumed.\n\n"
                                            "Do you want to convert the crossword to another type now?\n\n"
-                                           "(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")"))
-                    == KMessageBox::Yes) {
+                                           "(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")")) == KMessageBox::Yes) {
                 //  Open conversion dialog
-                QPointer<ConvertCrosswordDialog> dialog = new ConvertCrosswordDialog(
-                    krossWord(), this);
+                QPointer<ConvertCrosswordDialog> dialog = new ConvertCrosswordDialog(krossWord(), this);
                 if (dialog->exec() == KDialog::Accepted) {
                     krossWord()->convertToType(dialog->crosswordTypeInfo());
                     setModificationType(ModifiedCrossword);
@@ -1615,14 +1613,12 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName,
                                     KrossWord::WriteMode writeMode,
                                     bool saveUndoStack)
 {
-    KrossWord::FileFormat fileFormat =
-        KrossWord::fileFormatFromFileName(fileName);
+    KrossWord::FileFormat fileFormat = KrossWord::fileFormatFromFileName(fileName);
     if (fileFormat == KrossWord::AcrossLitePuzFile) {
         bool hasConfidencesSet = false;
         LetterCellList letterList = krossWord()->letters();
         foreach(LetterCell * letter, letterList) {
-            if (letter->confidence() == Unsure
-                    || letter->confidence() == Solved) {
+            if (letter->confidence() == Unsure || letter->confidence() == Solved) {
                 hasConfidencesSet = true;
                 break;
             }
@@ -1686,8 +1682,7 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName,
 
 void CrossWordXmlGuiWindow::unlockAndCallAutoSave()
 {
-    m_lastAutoSave = QDateTime::currentDateTime().addSecs(
-                         -MIN_SECS_BETWEEN_AUTOSAVES - 1);
+    m_lastAutoSave = QDateTime::currentDateTime().addSecs(-MIN_SECS_BETWEEN_AUTOSAVES - 1);
     autoSaveToTempFile();
 }
 

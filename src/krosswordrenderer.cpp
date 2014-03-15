@@ -26,7 +26,9 @@
 #include <QPainter>
 #include "settings.h"
 
-#include <memory>
+#include <KgTheme>
+#include <KGameRenderer>
+#include <KgThemeProvider>
 
 
 KrosswordRenderer* KrosswordRenderer::self()
@@ -37,27 +39,43 @@ KrosswordRenderer* KrosswordRenderer::self()
 
 KrosswordRenderer::KrosswordRenderer()
 {    
+    m_provider = new KgThemeProvider(QByteArray());
+    m_renderer = new KGameRenderer(m_provider);
+    
+    /*
     m_cache = new KImageCache("krosswordpuzzle-cache", 1024);
     m_cache->setPixmapCacheLimit(2 * 1024);
 
     m_renderer = new KSvgRenderer();
+    */
 //     m_renderer->load( KStandardDirs::locate( "appdata", "themes/scribble_theme.svgz" ) );
 //     setTheme( Settings::theme() );
 }
 
 KrosswordRenderer::~KrosswordRenderer()
 {
+    //NOTE Crash if delete them... (?)
+    //delete m_provider;
+    //delete m_renderer;
+    /*
     m_cache->clear();
     delete m_renderer;
     delete m_cache;
+    */
 }
 
-bool KrosswordRenderer::setTheme(const QString& fileName)
+bool KrosswordRenderer::setTheme(KgTheme *theme)
 {
-    if (m_themeFileName == fileName)
+    if (m_themeFileName == theme->graphicsPath())
         return true;
 
-    m_themeFileName = fileName;
+    m_themeFileName = theme->graphicsPath();
+    
+    m_provider->addTheme(theme);
+    
+    return true;
+    
+    /*
     m_cache->clear();
 
 //     QString themeFile = KStandardDirs::locate( "appdata",
@@ -66,10 +84,12 @@ bool KrosswordRenderer::setTheme(const QString& fileName)
 //       return false; // Theme not found
 
     return m_renderer->load(fileName);
+    */
 }
 
 QPixmap KrosswordRenderer::background(const QSize &size) const
 {
+    /*
     QPixmap pix;
 //     QString cacheStr = "background" + QString("_%1x%2")
 //          .arg(size.width()).arg(size.height());
@@ -77,9 +97,17 @@ QPixmap KrosswordRenderer::background(const QSize &size) const
 
     pix = QPixmap(size);
     pix.fill(Qt::transparent);
-    QPainter paint(&pix);
-    m_renderer->render(&paint, "background");
-    paint.end();
+    */
+    
+    QPixmap pix;
+    pix.fill(Qt::transparent);
+    pix = m_renderer->spritePixmap("background", size);
+    //QPainter paint(&pix);
+    
+    
+    
+    //m_renderer->render(&paint, "background");
+    //paint.end();
 //  m_cache->insert( cacheStr, pix );
 //     }
 
@@ -88,7 +116,10 @@ QPixmap KrosswordRenderer::background(const QSize &size) const
 
 bool KrosswordRenderer::hasElement(const QString& elementid) const
 {
+    /*
     return m_renderer->elementExists(elementid);
+    */
+    return m_renderer->spriteExists(elementid);
 }
 
 void KrosswordRenderer::renderBackground(QPainter* p, const QRectF& r) const
@@ -121,8 +152,20 @@ void KrosswordRenderer::renderBackground(QPainter* p, const QRectF& r) const
 void KrosswordRenderer::renderElement(QPainter* p, const QString& elementid, const QRectF& r, const QColor &alpha) const
 {
     QPixmap pix;
-
     QString cacheStr = elementid + QString("_%1x%2").arg(r.width()).arg(r.height());
+    
+    if (alpha != Qt::black) {
+        QPixmap pixAlpha = QPixmap(r.size().toSize());
+        pixAlpha.fill(alpha);
+        pix.setAlphaChannel(pixAlpha);
+    }
+    
+    pix = m_renderer->spritePixmap(elementid, r.size().toSize());
+    
+    p->setRenderHints(QPainter::HighQualityAntialiasing | QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing);
+    p->drawPixmap(static_cast<int>(r.x()), static_cast<int>(r.y()), pix);
+    
+    /*
     if (!m_cache->findPixmap(cacheStr, &pix)) {
         pix = QPixmap(r.size().toSize());
         pix.fill(Qt::transparent);
@@ -141,6 +184,7 @@ void KrosswordRenderer::renderElement(QPainter* p, const QString& elementid, con
 
     p->setRenderHints(QPainter::HighQualityAntialiasing | QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing);
     p->drawPixmap(static_cast<int>(r.x()), static_cast<int>(r.y()), pix);
+    */
 }
 
 
