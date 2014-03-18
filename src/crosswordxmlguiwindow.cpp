@@ -1435,20 +1435,17 @@ void CrossWordXmlGuiWindow::setActionVisibility()
     action(actionName(Edit_AddImage))->setVisible(availableCellTypes.testFlag(ImageCellType));
 }
 
-bool CrossWordXmlGuiWindow::loadFile(const KUrl &url,
-                                     KrossWord::FileFormat fileFormat, bool loadCrashedFile)
+bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat fileFormat, bool loadCrashedFile)
 {
     if (isModified()) {
-        QString msg = i18n("The current crossword has been modified.\n"
-                           "Would you like to save it?");
-        int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"),
-                     KStandardGuiItem::save(),
-                     KStandardGuiItem::discard());
+        QString msg = i18n("The current crossword has been modified.\nWould you like to save it?");
+        int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"), KStandardGuiItem::save(), KStandardGuiItem::discard());
         if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !save()))
             return false;
     }
 
     QString errorString;
+    
     KUrl resultUrl;
     if (url.isEmpty()) {
         resultUrl = KFileDialog::getOpenUrl(KUrl("kfiledialog:///loadCrossword"),
@@ -1467,8 +1464,7 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url,
     updateClueDock();
 
     QByteArray undoData;
-    bool readOk = krossWord()->read(resultUrl, &errorString, this,
-                                    fileFormat, &undoData);
+    bool readOk = krossWord()->read(resultUrl, &errorString, this, fileFormat, &undoData);
 
     if (readOk) {
         setState(ShowingCrossword);
@@ -1479,15 +1475,14 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url,
 //     if ( krossWord()->highlightedClue() )
 //       m_view->ensureVisible( krossWord()->highlightedClue() );
 //     else
-        fitToPageSlot();
+        //fitToPageSlot();
 
         statusBar()->showMessage(i18n("Loaded crossword from file '%1'", fileName), 5000);
         if (loadCrashedFile) {
             m_curDocumentOrigin = DocumentRestoredAfterCrash;
             setModificationType(ModifiedCrossword);
         } else {
-            m_curDocumentOrigin = resultUrl.isLocalFile()
-                                  ? DocumentOpenedLocally : DocumentDownloaded;
+            m_curDocumentOrigin = resultUrl.isLocalFile() ? DocumentOpenedLocally : DocumentDownloaded;
             setModificationType(NoModification);
         }
         setCurrentFileName(resultUrl.path());
@@ -1520,12 +1515,13 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url,
 //  m_recentFilesAction->addUrl( resultUrl,
 //      isFileInLibrary(resultUrl.path()) ? "Library: " + resultUrl.fileName() : resultUrl.fileName() );
 //  m_recentFilesAction->saveEntries( Settings::self()->config()->group("") );
+        
+        fitToPageSlot();
         return true;
     } else {
         setState(ShowingNothing);
         m_undoStackLoaded = false;
-        statusBar()->showMessage(i18n("Error while loading file '%1': %2",
-                                      fileName, errorString));
+        statusBar()->showMessage(i18n("Error while loading file '%1': %2", fileName, errorString));
         emit errorLoadingFile(fileName);
 
         return false;
@@ -1574,8 +1570,7 @@ bool CrossWordXmlGuiWindow::saveAs()
 
     QCheckBox *chkSaveAsTemplate = new QCheckBox(i18n("Save As &Template"));
     chkSaveAsTemplate->setChecked(false);
-    chkSaveAsTemplate->setToolTip(i18n("Save without correct answers, clue texts, "
-                                       "images"));
+    chkSaveAsTemplate->setToolTip(i18n("Save without correct answers, clue texts, images"));
 
     // Custom widgets for the save as file dialog
     QWidget *w = new QWidget;
@@ -1602,16 +1597,12 @@ bool CrossWordXmlGuiWindow::saveAs()
         if (fileName.indexOf(QRegExp("\\.(kwp|kwpz|puz)$", Qt::CaseInsensitive)) == -1)
             fileName += ".kwpz";
 
-        return writeTo(fileName, chkSaveAsTemplate->isChecked()
-                       ? KrossWord::Template : KrossWord::Normal,
-                       chkSaveUndoStack->isChecked());
+        return writeTo(fileName, chkSaveAsTemplate->isChecked() ? KrossWord::Template : KrossWord::Normal, chkSaveUndoStack->isChecked());
     } else
         return false;
 }
 
-bool CrossWordXmlGuiWindow::writeTo(const QString &fileName,
-                                    KrossWord::WriteMode writeMode,
-                                    bool saveUndoStack)
+bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, bool saveUndoStack)
 {
     KrossWord::FileFormat fileFormat = KrossWord::fileFormatFromFileName(fileName);
     if (fileFormat == KrossWord::AcrossLitePuzFile) {
@@ -2109,11 +2100,11 @@ void CrossWordXmlGuiWindow::zoomSlot(int zoomChange)
 
 void CrossWordXmlGuiWindow::fitToPageSlot()
 {
-    m_view->fitInView(m_view->sceneRect().adjusted(150, 150, -150, -150),
-                      Qt::KeepAspectRatio);
+    m_view->fitInView(m_view->sceneRect().adjusted(150, 150, -150, -150), Qt::KeepAspectRatio);
 
     if (m_zoomSlider && m_view)
         m_zoomSlider->setValue(m_view->matrix().m11() * 100);
+    
     krossWord()->clearCache();
 }
 

@@ -888,8 +888,7 @@ void LetterCell::drawClueForCell(QPainter* p, const QStyleOptionGraphicsItem* op
     p->restore();
 }
 
-void LetterCell::drawClueArrows(QPainter* p,
-                                const QStyleOptionGraphicsItem* option)
+void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* option)
 {
     bool isFirstLetterOfVerticalClue = clueVertical()
                                        && clueVertical()->firstLetter() == this;
