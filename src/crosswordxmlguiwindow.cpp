@@ -1109,8 +1109,7 @@ void CrossWordXmlGuiWindow::updateSolutionInToolBar()
     m_viewSolution->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_viewSolution->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
     solutionToolBar->addWidget(m_viewSolution);
-    connect(m_viewSolution, SIGNAL(resized(QSize, QSize)),
-            this, SLOT(solutionViewResized(QSize, QSize)));
+    connect(m_viewSolution, SIGNAL(resized(QSize, QSize)), this, SLOT(solutionViewResized(QSize, QSize)));
 }
 
 void CrossWordXmlGuiWindow::solutionViewResized(const QSize &oldSize,
@@ -1118,8 +1117,7 @@ void CrossWordXmlGuiWindow::solutionViewResized(const QSize &oldSize,
 {
     Q_UNUSED(oldSize);
     Q_UNUSED(newSize);
-    m_viewSolution->fitInView(m_viewSolution->krossWord()->boundingRect(),
-                              Qt::KeepAspectRatio);
+    m_viewSolution->fitInView(m_viewSolution->krossWord()->boundingRect(), Qt::KeepAspectRatio);
 }
 
 QDockWidget *CrossWordXmlGuiWindow::createClueDock()
@@ -1783,8 +1781,8 @@ KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
 
     connect(view, SIGNAL(signalChangeStatusbar(const QString&)),
             this, SLOT(signalChangeStatusbar(const QString&)));
-    connect(view, SIGNAL(signalChangeZoom(int)),
-            this, SLOT(zoomSlot(int)));
+    connect(view, SIGNAL(signalChangeZoom(int, int)),
+            this, SLOT(zoomSlot(int, int)));
     connect(view->krossWord(), SIGNAL(cluesAdded(ClueCellList)),
             this, SLOT(cluesAdded(ClueCellList)));
     connect(view->krossWord(), SIGNAL(cluesAboutToBeRemoved(ClueCellList)),
@@ -2093,9 +2091,14 @@ void CrossWordXmlGuiWindow::zoomOutSlot()
     m_zoomSlider->setValue(m_zoomSlider->value() - m_zoomSlider->pageStep());
 }
 
-void CrossWordXmlGuiWindow::zoomSlot(int zoomChange)
+void CrossWordXmlGuiWindow::zoomSlot(int zoomChange, int minimum_zoom)
 {
-    m_zoomSlider->setValue(m_zoomSlider->value() + zoomChange);
+    int new_zoom = m_zoomSlider->value() + zoomChange;
+    
+    if(new_zoom > minimum_zoom)
+        m_zoomSlider->setValue(m_zoomSlider->value() + zoomChange);
+    else
+        m_zoomSlider->setValue(minimum_zoom);
 }
 
 void CrossWordXmlGuiWindow::fitToPageSlot()

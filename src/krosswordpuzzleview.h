@@ -85,8 +85,7 @@ public:
 //     void setTheme( const QString &theme = "default" );
 
     void renderToPrinter(QPainter *painter, const QRectF &target = QRectF(),
-                         const QRect &source = QRect(),
-                         Qt::AspectRatioMode aspectRatioMode = Qt::KeepAspectRatio);
+                         const QRect &source = QRect(), Qt::AspectRatioMode aspectRatioMode = Qt::KeepAspectRatio);
 
     virtual QSize sizeHint() const;
 
@@ -100,6 +99,7 @@ protected:
 private:
 //     Ui::krosswordpuzzleview_base ui_krosswordpuzzleview_base;
     KrossWordPuzzleScene *m_scene;
+    int m_minimum_zoom;
 
 signals:
     /**
@@ -112,7 +112,7 @@ signals:
      */
     void signalChangeCaption(const QString& text);
 
-    void signalChangeZoom(int zoomChange);
+    void signalChangeZoom(int zoomChange, int minimum_zoom);
 
     void resized(const QSize &oldSize, const QSize &newSize);
 

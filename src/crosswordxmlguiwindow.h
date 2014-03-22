@@ -318,7 +318,7 @@ public slots:
     void fitToPageSlot();
     void zoomInSlot();
     void zoomOutSlot();
-    void zoomSlot(int zoomChange);
+    void zoomSlot(int zoomChange, int minumum_zoom);
     void viewPanSlot(bool enabled);
 
     // Settings actions

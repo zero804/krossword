@@ -24,6 +24,7 @@
 #include <QtGui/QLabel>
 // #include <QGLWidget>
 #include "krosswordrenderer.h"
+#include <QDebug>
 
 
 
@@ -118,14 +119,13 @@ void ScrollbarAnimator::animationFinished() {
 
 
 KrossWordPuzzleView::KrossWordPuzzleView(KrossWordPuzzleScene *scene, QWidget *parent)
-    : QGraphicsView(scene, parent), m_scene(scene)
+    : QGraphicsView(scene, parent), m_scene(scene), m_minimum_zoom(0)
 {
 //     new ScrollbarAnimator( verticalScrollBar() );
 //     new ScrollbarAnimator( horizontalScrollBar() );
 
 //     setOptimizationFlags( QGraphicsView::DontSavePainterState );
-    setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing
-                   | QPainter::SmoothPixmapTransform);
+    setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
 
 //     setMinimumSize( 100, 100 );
     setCacheMode(CacheBackground);
@@ -175,15 +175,20 @@ void KrossWordPuzzleView::keyReleaseEvent(QKeyEvent* event)
 void KrossWordPuzzleView::wheelEvent(QWheelEvent* event)
 {
     if (event->modifiers().testFlag(Qt::ControlModifier))
-        emit signalChangeZoom(event->delta() / 10);
+        emit signalChangeZoom(event->delta() / 10, m_minimum_zoom);
     else
         QGraphicsView::wheelEvent(event);
+    
 }
 
 void KrossWordPuzzleView::resizeEvent(QResizeEvent* event)
 {
     QGraphicsView::resizeEvent(event);
     emit resized(event->oldSize(), event->size());
+    
+    this->fitInView(this->sceneRect().adjusted(150, 150, -150, -150), Qt::KeepAspectRatio);
+    m_minimum_zoom = this->matrix().m11() * 100;
+    emit signalChangeZoom(0, m_minimum_zoom);
 }
 /*
 void KrossWordPuzzleView::setTheme( const QString &theme )
@@ -196,8 +201,7 @@ void KrossWordPuzzleView::setTheme( const QString &theme )
     settingsChanged();
 }*/
 
-void KrossWordPuzzleView::renderToPrinter(QPainter* painter,
-        const QRectF& target, const QRect& source, Qt::AspectRatioMode aspectRatioMode)
+void KrossWordPuzzleView::renderToPrinter(QPainter* painter, const QRectF& target, const QRect& source, Qt::AspectRatioMode aspectRatioMode)
 {
     bool wasDrawingForPrinting = krossWord()->isDrawingForPrinting();
     krossWord()->setDrawForPrinting();
