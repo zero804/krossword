@@ -22,15 +22,12 @@
 
 #include <QPixmap>
 
-class KSvgRenderer;
-class KImageCache;
 class KgTheme;
 class KGameRenderer;
 class KgThemeProvider;
 
 class KrosswordRenderer
 {
-    friend class KrossWordPuzzle;
 public:
     static KrosswordRenderer* self();
 
