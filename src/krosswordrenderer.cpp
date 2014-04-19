@@ -30,7 +30,6 @@
 #include <KGameRenderer>
 #include <KgThemeProvider>
 
-
 KrosswordRenderer* KrosswordRenderer::self()
 {
     static KrosswordRenderer instance;
@@ -39,9 +38,8 @@ KrosswordRenderer* KrosswordRenderer::self()
 
 KrosswordRenderer::KrosswordRenderer()
 {    
-    m_provider = new KgThemeProvider(QByteArray());
+    m_provider = new KgThemeProvider(QByteArray("Theme"));
     m_renderer = new KGameRenderer(m_provider);
-    
     /*
     m_cache = new KImageCache("krosswordpuzzle-cache", 1024);
     m_cache->setPixmapCacheLimit(2 * 1024);
@@ -72,7 +70,6 @@ bool KrosswordRenderer::setTheme(KgTheme *theme)
     m_themeFileName = theme->graphicsPath();
     
     m_provider->addTheme(theme);
-    
     return true;
     
     /*
@@ -187,4 +184,7 @@ void KrosswordRenderer::renderElement(QPainter* p, const QString& elementid, con
     */
 }
 
-
+KgThemeProvider* KrosswordRenderer::getThemeProvider() const
+{
+    return m_provider;
+}

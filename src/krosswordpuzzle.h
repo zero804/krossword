@@ -29,6 +29,8 @@
 #include "crosswordxmlguiwindow.h"
 #include "krosswordtheme.h"
 
+#include <KgThemeProvider>
+
 namespace KIO
 {
 class PreviewJob;
@@ -38,6 +40,7 @@ class QTreeView;
 class KRecentFilesAction;
 class KUndoStack;
 class KUrl;
+class KrosswordRenderer;
 
 class MenuTabWidget;
 /**
@@ -162,6 +165,7 @@ private:
     QList<KToolBar*>       m_hiddenToolBars;
     QString                m_caption;
     MenuTabWidget         *m_mainTabBar;
+    KgThemeProvider       *m_provider;
 };
 
 #endif // _KROSSWORDPUZZLE_H_

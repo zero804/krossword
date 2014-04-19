@@ -30,6 +30,7 @@ class KgThemeProvider;
 
 class KrosswordRenderer
 {
+    friend class KrossWordPuzzle;
 public:
     static KrosswordRenderer* self();
 
@@ -40,6 +41,7 @@ public:
     //void renderElement( QPainter *p, const QString& elementid, const QRectF& r ) const;
     void renderElement(QPainter *p, const QString& elementid, const QRectF& r, const QColor &alpha = Qt::black) const;
     bool setTheme(KgTheme* theme);
+    KgThemeProvider* getThemeProvider() const;
 
 private:
     // disable copy - it's singleton

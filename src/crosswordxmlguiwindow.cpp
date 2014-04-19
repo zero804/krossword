@@ -206,10 +206,13 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent)
         } else {
             KMessageBox::information(this, i18n("The theme '%1' couldn't be found. "
                                                 "The default theme is now used.", savedThemeName));
-            Settings::setTheme("themes/default.desktop");
-            Settings::self()->writeConfig();
+            // Now handled by KThemeProvider
+            //Settings::setTheme("themes/default.desktop");
+            //Settings::self()->writeConfig();
         }
     }
+    
+    KrosswordRenderer::self()->setTheme(&m_theme);
 
     // Create main view
     setCentralWidget(m_view = createKrossWordPuzzleView());
@@ -333,8 +336,7 @@ KrossWord* CrossWordXmlGuiWindow::solutionKrossWord() const
     return m_viewSolution ? m_viewSolution->krossWord() : NULL;
 }
 
-const char *CrossWordXmlGuiWindow::actionName(
-    CrossWordXmlGuiWindow::Action actionEnum) const
+const char *CrossWordXmlGuiWindow::actionName(CrossWordXmlGuiWindow::Action actionEnum) const
 {
     switch (actionEnum) {
     case Game_PrintPreview:

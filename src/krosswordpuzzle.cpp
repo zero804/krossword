@@ -167,6 +167,9 @@ KrossWordPuzzle::KrossWordPuzzle()
       m_loadProgressDialog(0),
       m_mainTabBar(new MenuTabWidget(this))
 {
+    KgThemeProvider *provider = KrosswordRenderer::self()->getThemeProvider();
+    provider->discoverThemes("appdata", QLatin1String("themes"));
+    
     if (Settings::libraryDownloadSubDir().isEmpty()) {
         Settings::setLibraryDownloadSubDir(i18n("Downloads"));
         Settings::self()->writeConfig();
@@ -790,10 +793,12 @@ void KrossWordPuzzle::optionsPreferencesSlot()
     QWidget *themeSelectorDlg = new QWidget;
     //KGameThemeSelector *themeSelector = new KGameThemeSelector( themeSelectorDlg, Settings::self(), KGameThemeSelector::NewStuffDisableDownload );
 
+    /* Provider is now centralized
     KgThemeProvider* provider = new KgThemeProvider(QByteArray(), themeSelectorDlg);
     provider->discoverThemes("appdata", QLatin1String("themes"));
+    */
 
-    KgThemeSelector *themeSelector = new KgThemeSelector(provider, KgThemeSelector::EnableNewStuffDownload, themeSelectorDlg);
+    KgThemeSelector *themeSelector = new KgThemeSelector(KrosswordRenderer::self()->getThemeProvider(), KgThemeSelector::EnableNewStuffDownload, themeSelectorDlg);
     dialog->addPage(themeSelector, i18n("Theme"), "games-config-theme");
 
     connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(settingsChanged()));

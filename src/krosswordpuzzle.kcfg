@@ -10,12 +10,12 @@
       <label>Filename of the last unsaved file, before a crash or unexpected behaviour, which caused that an edited crossword wasn't saved without confirmation of the user.</label>
       <default></default>
     </entry>
-
+    
     <entry name="Theme" type="String">
       <label>Name of the current theme.</label>
       <default>default</default>
     </entry>
-
+    
     <entry name="libraryDownloadSubDir" type="String">
       <label>Name of the subdirectory in the library directory in which new downloads are saved.</label>
       <default></default>

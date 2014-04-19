@@ -251,7 +251,7 @@ KrossWord::~KrossWord()
 void KrossWord::setTheme(KrosswordTheme* theme)
 {
     if (m_theme)
-        delete m_theme;
+        delete m_theme;     //WARNING: DELETE THIS??? WHAT ABOUT THE PROVIDER??
 
     m_theme = theme;
     m_focusItem->setPen(QPen(m_theme->selectionColor()));
