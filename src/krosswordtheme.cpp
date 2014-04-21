@@ -19,25 +19,48 @@
 
 #include "krosswordtheme.h"
 
-#include <KStandardDirs>
-#include <KDebug>
-#include <kconfiggroup.h>
-#include <kconfig.h>
-#include "krosswordrenderer.h"
-#include <QFile>
-
+//#include <KStandardDirs>
+//#include <kconfiggroup.h>
+//#include <kconfig.h>
+//#include "krosswordrenderer.h"
+//#include <QFile>
+#include <QDebug>
 
 KrosswordTheme::KrosswordTheme() : KgTheme("krosswordpuzzle")
 {
 }
 
-
 bool KrosswordTheme::readFromDesktopFile(const QString& file)
 {
+    qDebug() << "Read theme:" << file;
+
     if (!KgTheme::readFromDesktopFile(file) && !KgTheme::readFromDesktopFile("themes/" + file.toLower() + ".desktop")) {
         return false;
     }
 
+    // Load theme .desktop file
+    QStringList letterCellMargins = (customData("LetterCellMargins", "2,2,2,2")).split(',', QString::SkipEmptyParts);
+    QStringList clueCellMargins = (customData("ClueCellMargins", "2,2,2,2")).split(',', QString::SkipEmptyParts);
+    if (letterCellMargins.count() != 4)
+        letterCellMargins = QStringList() << "2" << "2" << "2" << "2";
+    if (clueCellMargins.count() != 4)
+        clueCellMargins = QStringList() << "2" << "2" << "2" << "2";
+    m_marginsLetterCell = QMargins(letterCellMargins.at(0).toInt(), letterCellMargins.at(1).toInt(), letterCellMargins.at(2).toInt(), letterCellMargins.at(3).toInt());
+    m_marginsClueCell = QMargins(clueCellMargins.at(0).toInt(), clueCellMargins.at(1).toInt(), clueCellMargins.at(2).toInt(), clueCellMargins.at(3).toInt());
+
+
+    m_hasDarkBackground = (customData("HasDarkBackground", "false") == "false") ? false : true;
+    m_glowColor = QColor(customData("GlowColor", "64, 64, 255"));
+    m_glowFocusColor = QColor(customData("FocusGlowColor", "255, 64, 64"));
+    m_selectionColor = QColor(customData("SelectionColor", "255, 100, 100, 128"));
+    m_emptyCellColor = QColor(customData("EmptyCellColor", "100, 100, 100, 128"));
+
+    // TODO only use "free" positions as default values
+    m_clueNumberPos = positionFromString(customData("ClueNumberPos", ""), BottomRight);
+    m_numberPuzzleCluePos = positionFromString(customData("NumberPuzzleCluePos", ""), TopRight);
+    m_solutionLetterIndexPos = positionFromString(customData("SolutionLetterIndexPos", ""), BottomLeft);
+
+    /*
     // Load theme .desktop file
     KConfig themeConfig(file, KConfig::SimpleConfig);
     KConfigGroup configGroup(&themeConfig, "KGameTheme");
@@ -52,17 +75,19 @@ bool KrosswordTheme::readFromDesktopFile(const QString& file)
     m_marginsLetterCell = QMargins(letterCellMargins[0], letterCellMargins[1], letterCellMargins[2], letterCellMargins[3]);
     m_marginsClueCell = QMargins(clueCellMargins[0], clueCellMargins[1], clueCellMargins[2], clueCellMargins[3]);
 
-    m_hasDarkBackground = configGroup.readEntry("HasDarkBackground", false);
-    m_glowColor = configGroup.readEntry("GlowColor", QColor(64, 64, 255));
-    m_glowFocusColor = configGroup.readEntry("FocusGlowColor", QColor(255, 64, 64));
-    m_selectionColor = configGroup.readEntry("SelectionColor", QColor(255, 100, 100, 128));
-    m_emptyCellColor = configGroup.readEntry("EmptyCellColor", QColor(100, 100, 100, 128));
+    //m_hasDarkBackground = configGroup.readEntry("HasDarkBackground", false);
+    //m_glowColor = configGroup.readEntry("GlowColor", QColor(64, 64, 255));
+    //m_glowFocusColor = configGroup.readEntry("FocusGlowColor", QColor(255, 64, 64));
+    //m_selectionColor = configGroup.readEntry("SelectionColor", QColor(255, 100, 100, 128));
+    //m_emptyCellColor = configGroup.readEntry("EmptyCellColor", QColor(100, 100, 100, 128));
 
     // TODO only use "free" positions as default values
-    m_clueNumberPos = positionFromString(configGroup.readEntry("ClueNumberPos", ""), BottomRight);
-    m_numberPuzzleCluePos = positionFromString(configGroup.readEntry("NumberPuzzleCluePos", ""), TopRight);
-    m_solutionLetterIndexPos = positionFromString(configGroup.readEntry("SolutionLetterIndexPos", ""), BottomLeft);
-//==================================================== HERE CHANGES ====================================
+    //m_clueNumberPos = positionFromString(configGroup.readEntry("ClueNumberPos", ""), BottomRight);
+    //m_numberPuzzleCluePos = positionFromString(configGroup.readEntry("NumberPuzzleCluePos", ""), TopRight);
+    //m_solutionLetterIndexPos = positionFromString(configGroup.readEntry("SolutionLetterIndexPos", ""), BottomLeft);
+    */
+
+    //==================================================== HERE CHANGES ====================================
     
     /*
     if (!KrosswordRenderer::self()->setTheme(this)) {
