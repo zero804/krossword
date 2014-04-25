@@ -61,7 +61,7 @@ int main(int argc, char **argv)
             for (int i = 0; i < args->count(); i++) {
                 // krosswordpuzzle *widget = new krosswordpuzzle;
                 widget->show();
-                widget->loadSlot(args->arg(i));
+                widget->loadSlot(args->arg(i)); //! Should open just ONE crossword at a time
                 // widget->load( );
             }
         }

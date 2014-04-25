@@ -191,35 +191,7 @@ KrossWordPuzzle::KrossWordPuzzle()
 
     QString lastUnsavedFileBeforeCrash = Settings::lastUnsavedFileBeforeCrash();
     if (!lastUnsavedFileBeforeCrash.isEmpty()) {
-//       KInstance
-//  KSysGuard::Processes *processes = KSysGuard::Processes::getInstance();
-//  QList<KSysGuard::Process *> processlist = processes->getAllProcesses();
-//  foreach(KSysGuard::Process * process, processlist) {
-//      QString name = process->name;
-//  }
-//  QString sPid = lastUnsavedFileBeforeCrash.mid( lastUnsavedFileBeforeCrash.lastIndexOf("PID") + 3 );
-//  sPid = sPid.left( sPid.length() - 4 ); // Remove ".tmp" from the end
-//  bool ok;
-//  long int pid = sPid.toLong( &ok );
-//  if ( ok ) {
-//      KSysGuard::Processes *processes = KSysGuard::Processes::getInstance();
-//      KSysGuard::Process *process = processes->getProcess( pid );
-//      if ( process ) {
-//      kDebug() << "Game didn't crash, it's still running!";
-//      }
-//  }
-
-        KGuiItem restoreButton(i18n("&Restore"), KIcon("document-open"), i18n("Restore the automatically saved version of an edited crossword before the crash"));
-        int result = KMessageBox::questionYesNo(this, i18n("An unsaved crossword has been found. Most likely the game crashed, sorry!\n "
-                                                "Do you want to restore the crossword?"),
-                                                QString(),
-                                                restoreButton,
-                                                KStandardGuiItem::discard());
-        if (result == KMessageBox::Yes) {
-            loadFile(lastUnsavedFileBeforeCrash, Crossword::KrossWord::KrossWordPuzzleCompressedXmlFile, true);
-        } else {
-            m_mainCrossword->removeTempFile(lastUnsavedFileBeforeCrash);
-        }
+        showRestoreOption(lastUnsavedFileBeforeCrash);
     }
 }
 
@@ -259,28 +231,13 @@ bool KrossWordPuzzle::createNewCrossWordFromTemplate(const QString& templateFile
     }
 }
 
-QString KrossWordPuzzle::displayFileName(const QString &fileName)
-{
-    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
-    if (fileName.startsWith(libraryDir)) {
-        // Cut the library path
-        QString libraryFileName = fileName.mid(libraryDir.length());
-        libraryFileName.prepend(i18nc("This string is used to replace the library path "
-                                      "for crossword files that are in the library with a shorter user visible string, "
-                                      "e.g. replacing ~/.kde4/apps/krosswordpuzzle/library/crossword.kwpz with "
-                                      "Library/crossword.kwpz", "Library") + QDir::separator());
-        return libraryFileName;
-    } else {
-        return fileName;
-    }
-}
-
 bool KrossWordPuzzle::isFileInLibrary(const QString& fileName)
 {
     QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
     return fileName.startsWith(libraryDir);
 }
 
+/*
 const char *KrossWordPuzzle::actionName(KrossWordPuzzle::Action actionEnum) const
 {
     switch (actionEnum) {
@@ -297,11 +254,13 @@ const char *KrossWordPuzzle::actionName(KrossWordPuzzle::Action actionEnum) cons
         return "";
     }
 }
-
+*/
+/*
 CrossWordXmlGuiWindow* KrossWordPuzzle::mainCrossword() const
 {
     return m_mainCrossword;
 }
+*/
 
 //=====================================================================================
 
@@ -520,13 +479,46 @@ void KrossWordPuzzle::setupActions()
         KStandardGameAction::gameNew(this, SLOT(gameNewSlot()), actionCollection())->setStatusTip( i18n("Start a new crossword") );*/
 }
 
+void KrossWordPuzzle::showRestoreOption(const QString& lastUnsavedFileBeforeCrash)
+{
+    KGuiItem restoreButton(i18n("&Restore"), KIcon("document-open"), i18n("Restore the automatically saved version of an edited crossword before the crash"));
+    int result = KMessageBox::questionYesNo(this, i18n("An unsaved crossword has been found. Most likely the game crashed, sorry!\n "
+                                            "Do you want to restore the crossword?"),
+                                            QString(),
+                                            restoreButton,
+                                            KStandardGuiItem::discard());
+    if (result == KMessageBox::Yes) {
+        loadFile(lastUnsavedFileBeforeCrash, Crossword::KrossWord::KrossWordPuzzleCompressedXmlFile, true);
+    } else {
+        m_mainCrossword->removeTempFile(lastUnsavedFileBeforeCrash);
+    }
+}
+
+QString KrossWordPuzzle::displayFileName(const QString &fileName)
+{
+    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
+    if (fileName.startsWith(libraryDir)) {
+        // Cut the library path
+        QString libraryFileName = fileName.mid(libraryDir.length());
+        libraryFileName.prepend(i18nc("This string is used to replace the library path "
+                                      "for crossword files that are in the library with a shorter user visible string, "
+                                      "e.g. replacing ~/.kde4/apps/krosswordpuzzle/library/crossword.kwpz with "
+                                      "Library/crossword.kwpz", "Library") + QDir::separator());
+        return libraryFileName;
+    } else {
+        return fileName;
+    }
+}
+
 //=====================================================================================
 
+/*
 void KrossWordPuzzle::gameNewSlot()
 {
     // create a new window
     (new KrossWordPuzzle)->show();
 }
+*/
 
 void KrossWordPuzzle::downloadSlot()
 {
@@ -575,10 +567,12 @@ void KrossWordPuzzle::loadSlot(const KUrl &url)
     loadFile(url);
 }
 
+/* Useless it's equal to loadSlot...
 void KrossWordPuzzle::loadRecentSlot(const KUrl &url)
 {
     loadFile(url);
 }
+*/
 
 void KrossWordPuzzle::loadFile(const QString &fileName)
 {
@@ -610,8 +604,8 @@ void KrossWordPuzzle::optionsPreferencesSlot()
     dialog->addPage(animationSettingsDlg, i18n("Animations"), "package_settings");
 #endif
 
+    // What is his purpose? Maybe useless?
     QWidget *themeSelectorDlg = new QWidget;
-    //KGameThemeSelector *themeSelector = new KGameThemeSelector( themeSelectorDlg, Settings::self(), KGameThemeSelector::NewStuffDisableDownload );
 
     KgThemeSelector *themeSelector = new KgThemeSelector(KrosswordRenderer::self()->getThemeProvider(), KgThemeSelector::EnableNewStuffDownload, themeSelectorDlg);
     dialog->addPage(themeSelector, i18n("Theme"), "games-config-theme");

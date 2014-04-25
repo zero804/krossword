@@ -56,12 +56,14 @@ class KrossWordPuzzle : public KXmlGuiWindow
     Q_OBJECT
 
 public:
+    /*
     enum Action {
         Game_Download,
         Game_Upload,
         //  Options_Themes,
         RecentTab_RecentFilesRemove
     };
+    */
 
     KrossWordPuzzle();
     virtual ~KrossWordPuzzle() {}
@@ -74,15 +76,12 @@ public:
     bool createNewCrossWordFromTemplate(const QString &templateFilePath, const QString &title,
                                         const QString &authors, const QString &copyright, const QString &notes);
 
-    /** Removes the path for crosswords that are in the library. */
-    QString displayFileName(const QString &fileName);
-
     /** Checks if the crossword with the given filename is in the library. */
     bool isFileInLibrary(const QString &fileName);
 
-    const char *actionName(Action action) const;
-
-    CrossWordXmlGuiWindow *mainCrossword() const;
+    //! Unused methods
+    //const char *actionName(Action action) const;
+    //CrossWordXmlGuiWindow *mainCrossword() const;
 
 protected:
     virtual void closeEvent(QCloseEvent* event);
@@ -91,12 +90,12 @@ protected:
 
 public slots:
     // Game actions
-    void gameNewSlot();
+    //void gameNewSlot();
     void downloadSlot();
     void uploadSlot();
 
     void loadSlot(const KUrl &url = KUrl());
-    void loadRecentSlot(const KUrl &url);
+    //void loadRecentSlot(const KUrl &url); //Useless
     void loadFile(const QString &fileName);
     void saveSlot();
     void saveAsSlot();
@@ -131,9 +130,13 @@ protected slots:
 private:
     KDialog* createLoadProgressDialog();
     void setupMainTabWidget();
-//     QMenu *popupMenuRecentFilesList();
+//     QMenu *popupMenuRecentFilesList();   // Unused
     void setupPlaces();
     void setupActions();
+    void showRestoreOption(const QString &lastUnsavedFileBeforeCrash);
+
+    /** Removes the path for crosswords that are in the library. */
+    static QString displayFileName(const QString &fileName);
 
     Ui::settings           ui_settings;
 
