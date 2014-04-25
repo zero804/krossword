@@ -60,46 +60,34 @@ public:
         Game_Download,
         Game_Upload,
         //  Options_Themes,
-        RecentTab_RecentFilesRemove,
+        RecentTab_RecentFilesRemove
     };
 
-    const char *actionName(Action action) const;
-
-    /**
-     * Default Constructor
-     */
     KrossWordPuzzle();
-
-    /**
-     * Default Destructor
-     */
     virtual ~KrossWordPuzzle() {}
 
-    CrossWordXmlGuiWindow *mainCrossword() const {
-        return m_mainCrossword;
-    }
-
     void loadFile(const KUrl &url, Crossword::KrossWord::FileFormat fileFormat = Crossword::KrossWord::DetermineByFileName, bool loadCrashedFile = false);
-    bool createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo,
-                            const QSize &crosswordSize,
-                            const QString &title,
-                            const QString &authors,
-                            const QString &copyright,
-                            const QString &notes);
-    bool createNewCrossWordFromTemplate(const QString &templateFilePath,
-                                        const QString &title,
-                                        const QString &authors,
-                                        const QString &copyright,
-                                        const QString &notes);
+
+    bool createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize,
+                            const QString &title, const QString &authors, const QString &copyright, const QString &notes);
+
+    bool createNewCrossWordFromTemplate(const QString &templateFilePath, const QString &title,
+                                        const QString &authors, const QString &copyright, const QString &notes);
+
     /** Removes the path for crosswords that are in the library. */
     QString displayFileName(const QString &fileName);
+
     /** Checks if the crossword with the given filename is in the library. */
     bool isFileInLibrary(const QString &fileName);
 
+    const char *actionName(Action action) const;
+
+    CrossWordXmlGuiWindow *mainCrossword() const;
+
 protected:
-    virtual void closeEvent(QCloseEvent *event);
-    virtual void dropEvent(QDropEvent*);
-    virtual void dragEnterEvent(QDragEnterEvent*);
+    virtual void closeEvent(QCloseEvent* event);
+    virtual void dropEvent(QDropEvent* event);
+    virtual void dragEnterEvent(QDragEnterEvent* event);
 
 public slots:
     // Game actions
@@ -107,21 +95,11 @@ public slots:
     void downloadSlot();
     void uploadSlot();
 
-    void loadSlot(const KUrl &url = KUrl()) {
-        loadFile(url);
-    }
-    void loadRecentSlot(const KUrl &url)    {
-        loadFile(url);
-    }
-    void loadFile(const QString &fileName)  {
-        loadFile(KUrl(fileName));
-    }
-    void saveSlot()                         {
-        m_mainCrossword->save();
-    }
-    void saveAsSlot()                       {
-        m_mainCrossword->saveAs();
-    }
+    void loadSlot(const KUrl &url = KUrl());
+    void loadRecentSlot(const KUrl &url);
+    void loadFile(const QString &fileName);
+    void saveSlot();
+    void saveAsSlot();
 
     // Settings actions
     void optionsPreferencesSlot();
@@ -151,21 +129,22 @@ protected slots:
 //     void recentFilesClearSlot();
 
 private:
-    KDialog *createLoadProgressDialog();
+    KDialog* createLoadProgressDialog();
     void setupMainTabWidget();
 //     QMenu *popupMenuRecentFilesList();
     void setupPlaces();
     void setupActions();
 
     Ui::settings           ui_settings;
-    LibraryXmlGuiWindow   *m_mainLibrary;
-    CrossWordXmlGuiWindow *m_mainCrossword;
-    KDialog               *m_loadProgressDialog;
-    KRecentFilesAction    *m_recentFilesAction;
+
+    LibraryXmlGuiWindow   *m_mainLibrary;           //Owned
+    CrossWordXmlGuiWindow *m_mainCrossword;         //Owned
+
+    KDialog               *m_loadProgressDialog;    //Owned
+    // KRecentFilesAction    *m_recentFilesAction;  //Unused
     QList<KToolBar*>       m_hiddenToolBars;
     QString                m_caption;
-    MenuTabWidget         *m_mainTabBar;
-    KgThemeProvider       *m_provider;
+    MenuTabWidget         *m_mainTabBar;            //Owned
 };
 
 #endif // _KROSSWORDPUZZLE_H_

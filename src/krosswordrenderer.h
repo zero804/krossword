@@ -47,15 +47,10 @@ private:
     KrosswordRenderer& operator=(const KrosswordRenderer&);
     ~KrosswordRenderer();
 
-    /**
-    *  Svg renderer instance
-    */
-    KGameRenderer   *m_renderer;
+
     KgThemeProvider *m_provider;
-    /*
-    KSvgRenderer *m_renderer;
-    KImageCache *m_cache;
-    */
+    KGameRenderer   *m_renderer;
+
     QString m_themeFileName;
 };
 

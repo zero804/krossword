@@ -37,9 +37,11 @@ KrosswordRenderer* KrosswordRenderer::self()
 }
 
 KrosswordRenderer::KrosswordRenderer()
+    : m_provider(new KgThemeProvider(QByteArray("Theme"))),
+      m_renderer(new KGameRenderer(m_provider))
 {    
-    m_provider = new KgThemeProvider(QByteArray("Theme"));
-    m_renderer = new KGameRenderer(m_provider);
+    m_provider->discoverThemes("appdata", QLatin1String("themes"));
+    m_provider->currentTheme();
 }
 
 KrosswordRenderer::~KrosswordRenderer()

@@ -167,10 +167,6 @@ KrossWordPuzzle::KrossWordPuzzle()
       m_loadProgressDialog(0),
       m_mainTabBar(new MenuTabWidget(this))
 {
-    KgThemeProvider *provider = KrosswordRenderer::self()->getThemeProvider();
-    provider->discoverThemes("appdata", QLatin1String("themes"));
-    provider->currentTheme();
-    
     if (Settings::libraryDownloadSubDir().isEmpty()) {
         Settings::setLibraryDownloadSubDir(i18n("Downloads"));
         Settings::self()->writeConfig();
@@ -227,76 +223,19 @@ KrossWordPuzzle::KrossWordPuzzle()
     }
 }
 
-void KrossWordPuzzle::setupPlaces()
+void KrossWordPuzzle::loadFile(const KUrl &url, Crossword::KrossWord::FileFormat fileFormat, bool loadCrashedFile)
 {
-    KUrl libraryUrl   = KUrl(KGlobal::dirs()->saveLocation("appdata", "library"));
-    KUrl templatesUrl = KUrl(KGlobal::dirs()->saveLocation("appdata", "templates"));
+    m_mainLibrary->statusBar()->showMessage(i18n("Loading..."));
+    m_loadProgressDialog = createLoadProgressDialog();
+    m_loadProgressDialog->show();
 
-    KFilePlacesModel *placesModel = new KFilePlacesModel();
-    if (placesModel->url(placesModel->closestItem(libraryUrl)) != libraryUrl) {
-        placesModel->addPlace(i18n("Library"), KUrl(libraryUrl), "favorites", KApplication::applicationName());
-    }
-
-    if (placesModel->url(placesModel->closestItem(templatesUrl)) != templatesUrl) {
-        placesModel->addPlace(i18n("Templates"), KUrl(templatesUrl), "krosswordpuzzle", KApplication::applicationName());
-    }
-
-    delete placesModel;
-}
-
-void KrossWordPuzzle::showStatusbarGlobal(bool show)
-{
-    if (m_mainTabBar->currentWidget() == m_mainCrossword) {
-        m_mainCrossword->statusBar()->setVisible(show);
-    } else {
-        m_mainLibrary->statusBar()->setVisible(show);
-    }
-}
-
-int KrossWordPuzzle::configureShortcutsGlobal()
-{
-    KShortcutsDialog dlg(KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcutsAllowed, this);
-    if (m_mainTabBar->currentWidget() == m_mainCrossword) {
-        dlg.addCollection(m_mainCrossword->actionCollection());
-    } else {
-        dlg.addCollection(m_mainLibrary->actionCollection());
-    }
-
-    return dlg.configure(true);
-}
-
-void KrossWordPuzzle::configureToolbarsGlobal()
-{
-    if (m_mainTabBar->currentWidget() == m_mainCrossword) {
-        m_mainCrossword->configureToolbars();
-    } else {
-        m_mainLibrary->configureToolbars();
-    }
-}
-
-const char *KrossWordPuzzle::actionName(KrossWordPuzzle::Action actionEnum) const
-{
-    switch (actionEnum) {
-    case Game_Download:
-        return "game_download";
-    case Game_Upload:
-        return "game_upload";
-        //  case Options_Themes:
-        //      return "options_themes";
-    case RecentTab_RecentFilesRemove:
-        return "recent_files_remove";
-    default:
-        kWarning() << "Action enumerable not handled in switch" << actionEnum;
-        return "";
-    }
+    m_mainCrossword->loadFile(url, fileFormat, loadCrashedFile);
 }
 
 bool KrossWordPuzzle::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo,
-        const QSize &crosswordSize,
-        const QString& title,
-        const QString& authors,
-        const QString& copyright,
-        const QString& notes)
+                                         const QSize &crosswordSize, const QString& title,
+                                         const QString& authors, const QString& copyright,
+                                         const QString& notes)
 {
     if (m_mainCrossword->createNewCrossWord(crosswordTypeInfo, crosswordSize, title, authors, copyright, notes)) {
         int indexCrossword = m_mainTabBar->indexOf(m_mainCrossword);
@@ -318,6 +257,121 @@ bool KrossWordPuzzle::createNewCrossWordFromTemplate(const QString& templateFile
     } else {
         return false;
     }
+}
+
+QString KrossWordPuzzle::displayFileName(const QString &fileName)
+{
+    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
+    if (fileName.startsWith(libraryDir)) {
+        // Cut the library path
+        QString libraryFileName = fileName.mid(libraryDir.length());
+        libraryFileName.prepend(i18nc("This string is used to replace the library path "
+                                      "for crossword files that are in the library with a shorter user visible string, "
+                                      "e.g. replacing ~/.kde4/apps/krosswordpuzzle/library/crossword.kwpz with "
+                                      "Library/crossword.kwpz", "Library") + QDir::separator());
+        return libraryFileName;
+    } else {
+        return fileName;
+    }
+}
+
+bool KrossWordPuzzle::isFileInLibrary(const QString& fileName)
+{
+    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
+    return fileName.startsWith(libraryDir);
+}
+
+const char *KrossWordPuzzle::actionName(KrossWordPuzzle::Action actionEnum) const
+{
+    switch (actionEnum) {
+    case Game_Download:
+        return "game_download";
+    case Game_Upload:
+        return "game_upload";
+        //  case Options_Themes:
+        //      return "options_themes";
+    case RecentTab_RecentFilesRemove:
+        return "recent_files_remove";
+    default:
+        kWarning() << "Action enumerable not handled in switch" << actionEnum;
+        return "";
+    }
+}
+
+CrossWordXmlGuiWindow* KrossWordPuzzle::mainCrossword() const
+{
+    return m_mainCrossword;
+}
+
+//=====================================================================================
+
+void KrossWordPuzzle::closeEvent(QCloseEvent* event)
+{
+    if (m_mainCrossword->isModified()) {
+        QString msg = i18n("The current crossword has been modified.\n"
+                           "Would you like to save it?");
+
+        int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"), KStandardGuiItem::save(), KStandardGuiItem::discard());
+
+        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !m_mainCrossword->save()))
+            event->ignore();
+        else
+            event->accept();
+    } else {
+        event->accept();
+    }
+
+    if (event->isAccepted()) {
+        // Closing not aborted, so the temporary file can be deleted
+        m_mainCrossword->removeTempFile();
+        m_mainCrossword->setState(CrossWordXmlGuiWindow::ShowingNothing); // Cleanup
+    }
+}
+
+void KrossWordPuzzle::dragEnterEvent(QDragEnterEvent *event)
+{
+    if (event->mimeData()->hasUrls())
+        event->accept();
+}
+
+void KrossWordPuzzle::dropEvent(QDropEvent *event)
+{
+    if (event->mimeData()->hasUrls()) {
+        QPoint pt         = m_mainLibrary->libraryTree()->mapFrom(this, event->pos());
+        QModelIndex index = m_mainLibrary->libraryTree()->indexAt(pt);
+
+        if (index.isValid()) {
+            if (index.data(Qt::UserRole + 2).toBool() || index.parent().isValid()) {
+                // Dropped onto library folder
+                QString subFolder = index.parent().isValid() ?
+                                    QFileInfo(index.parent().data(Qt::UserRole).toString()).fileName() :
+                                    QFileInfo(index.data(Qt::UserRole).toString()).fileName();
+
+                m_mainLibrary->libraryAddCrossword(event->mimeData()->urls(), subFolder);
+            } else {
+                m_mainLibrary->libraryAddCrossword(event->mimeData()->urls());
+            }
+        } else {
+            QList<QUrl> urls = event->mimeData()->urls();
+            loadFile(urls.first());
+        }
+    }
+}
+
+//=====================================================================================
+
+KDialog* KrossWordPuzzle::createLoadProgressDialog()
+{
+    KDialog *dialog = new KDialog(this);
+    dialog->setButtons(KDialog::None);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    // TODO: No max/min buttons
+    dialog->setWindowTitle(i18n("Loading..."));
+    QLabel *lblLoad = new QLabel(i18n("Loading the crossword, please wait..."));
+
+    dialog->setMainWidget(lblLoad);
+    dialog->setModal(true);
+    return dialog;
 }
 
 void KrossWordPuzzle::setupMainTabWidget()
@@ -410,6 +464,226 @@ void KrossWordPuzzle::setupMainTabWidget()
     m_mainTabBar->setCurrentIndex(indexLibrary);
     connect(m_mainTabBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
     currentTabChanged(indexLibrary);
+}
+
+void KrossWordPuzzle::setupPlaces()
+{
+    KUrl libraryUrl   = KUrl(KGlobal::dirs()->saveLocation("appdata", "library"));
+    KUrl templatesUrl = KUrl(KGlobal::dirs()->saveLocation("appdata", "templates"));
+
+    KFilePlacesModel *placesModel = new KFilePlacesModel();
+    if (placesModel->url(placesModel->closestItem(libraryUrl)) != libraryUrl) {
+        placesModel->addPlace(i18n("Library"), KUrl(libraryUrl), "favorites", KApplication::applicationName());
+    }
+
+    if (placesModel->url(placesModel->closestItem(templatesUrl)) != templatesUrl) {
+        placesModel->addPlace(i18n("Templates"), KUrl(templatesUrl), "krosswordpuzzle", KApplication::applicationName());
+    }
+
+    delete placesModel;
+}
+
+void KrossWordPuzzle::setupActions()
+{
+    KStandardAction::showStatusbar(this, SLOT(showStatusbarGlobal(bool)), actionCollection());
+    KStandardAction::keyBindings(this, SLOT(configureShortcutsGlobal()), actionCollection());
+    KStandardAction::configureToolbars(this, SLOT(configureToolbarsGlobal()), actionCollection());
+    KStandardAction::preferences(this, SLOT(optionsPreferencesSlot()), actionCollection());
+    KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
+
+//     KStandardGameAction::load(this, SLOT(loadSlot()), actionCollection())->setStatusTip( i18n("Load a crossword from a file") );
+
+//     KAction *downloadAction = new KAction( KIcon("get-hot-new-stuff"),
+//                     i18n("Get new crosswords..."), actionCollection() );
+//     downloadAction->setStatusTip( i18n("Download crosswords from other users.") );
+//     actionCollection()->addAction( actionName(Game_Download), downloadAction );
+//     connect( downloadAction, SIGNAL(triggered()), this, SLOT(downloadSlot()) );
+//
+//     KAction *uploadAction = new KAction( KIcon("network-server"),
+//                     i18n("Upload current crossword..."), actionCollection() );
+//     uploadAction->setStatusTip( i18n("Share the current crossword with other users.") );
+//     actionCollection()->addAction( actionName(Game_Upload), uploadAction );
+//     connect( uploadAction, SIGNAL(triggered()), this, SLOT(uploadSlot()) );
+    /*
+        m_recentFilesAction = KStandardGameAction::loadRecent(
+            this, SLOT(loadRecentSlot(KUrl)), actionCollection());
+        m_recentFilesAction->setIcon( KIcon("document-open-recent") ); // Not set by KStandardAction...
+        m_recentFilesAction->loadEntries( Settings::self()->config()->group("") );
+        m_recentFilesAction->setStatusTip( i18n("Load recent crosswords") );*/
+    //     KStandardAction::openNew(this, SLOT(fileNew()), actionCollection());
+//     KStandardGameAction::quit(qApp, SLOT(closeAllWindows()), actionCollection())->setStatusTip( i18n("Quit the game") );
+    //     KStandardAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
+    /*
+        m_undoStack->createUndoAction( actionCollection(), actionName(Edit_Undo) );
+        m_undoStack->createRedoAction( actionCollection(), actionName(Edit_Redo) );*/
+    /*
+        KStandardGameAction::gameNew(this, SLOT(gameNewSlot()), actionCollection())->setStatusTip( i18n("Start a new crossword") );*/
+}
+
+//=====================================================================================
+
+void KrossWordPuzzle::gameNewSlot()
+{
+    // create a new window
+    (new KrossWordPuzzle)->show();
+}
+
+void KrossWordPuzzle::downloadSlot()
+{
+    KNS::Entry::List entries = KNS::Engine::download();
+    kDebug() << "Entries count =" << entries.count();
+//     KNS::Engine engine( this );
+//     if ( engine.init("krosswordpuzzle.knsrc" )) {
+//  KNS::Entry::List entries = engine.downloadDialogModal( this );
+//
+//  kDebug() << "Entries count =" << entries.count();
+//  if (entries.size() > 0) {
+//      foreach ( KNS::Entry *entry, entries ) {
+//      // Downloaded file has the name "hotstuff-access" which is wrong (maybe it works
+//      // better with archives). So rename the file to the right name from the payload:
+//      QString filename = entry->payload().representation()
+//          .remove( QRegExp("^.*\\?file=") ).remove( QRegExp("&site=.*$") );
+//      QStringList installedFiles = entry->installedFiles();
+//
+//      kDebug() << "installedFiles =" << installedFiles;
+// //       if ( !installedFiles.isEmpty() ) {
+// //           QString installedFile = installedFiles[0];
+// //
+// //           QString path = KUrl( installedFile ).path().remove( QRegExp("/[^/]*$") ) + "/";
+// //           QFile( installedFile ).rename( path + filename );
+//
+// //           qDebug() << "PublicTransportSettings::downloadServiceProvidersClicked" <<
+// //           "Rename" << installedFile << "to" << path + filename;
+// //       }
+//      }
+//  }
+//     }
+}
+
+void KrossWordPuzzle::uploadSlot()
+{
+// TODO: Get filename from CrossWordXmlGuiWindow
+//     KNS::Entry *entry = KNS::Engine::upload( m_curFileName );
+//     if ( entry )
+//  kDebug() << "Entry =" << entry->payload().translated( entry->payload().language() );
+//     else
+//  kDebug() << "No uploaded entry";
+}
+
+void KrossWordPuzzle::loadSlot(const KUrl &url)
+{
+    loadFile(url);
+}
+
+void KrossWordPuzzle::loadRecentSlot(const KUrl &url)
+{
+    loadFile(url);
+}
+
+void KrossWordPuzzle::loadFile(const QString &fileName)
+{
+    loadFile(KUrl(fileName));
+}
+
+void KrossWordPuzzle::saveSlot()
+{
+    m_mainCrossword->save();
+}
+
+void KrossWordPuzzle::saveAsSlot()
+{
+    m_mainCrossword->saveAs();
+}
+
+void KrossWordPuzzle::optionsPreferencesSlot()
+{
+    // Avoid to have 2 dialogs shown
+    if (KConfigDialog::showDialog("settings")) {
+        return;
+    }
+
+    KConfigDialog *dialog = new KConfigDialog(this, "settings", Settings::self());
+
+#if QT_VERSION >= 0x040600
+    QWidget *animationSettingsDlg = new QWidget;
+    ui_settings.setupUi(animationSettingsDlg);
+    dialog->addPage(animationSettingsDlg, i18n("Animations"), "package_settings");
+#endif
+
+    QWidget *themeSelectorDlg = new QWidget;
+    //KGameThemeSelector *themeSelector = new KGameThemeSelector( themeSelectorDlg, Settings::self(), KGameThemeSelector::NewStuffDisableDownload );
+
+    KgThemeSelector *themeSelector = new KgThemeSelector(KrosswordRenderer::self()->getThemeProvider(), KgThemeSelector::EnableNewStuffDownload, themeSelectorDlg);
+    dialog->addPage(themeSelector, i18n("Theme"), "games-config-theme");
+
+    connect(KrosswordRenderer::self()->getThemeProvider(), SIGNAL(currentThemeChanged(const KgTheme*)), m_mainCrossword ,SLOT(updateTheme()));
+    connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(settingsChanged()));
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+
+    dialog->show();
+}
+
+void KrossWordPuzzle::settingsChanged()
+{
+    m_mainCrossword->updateTheme();
+
+    m_mainCrossword->krossWord()->setAnimationTypes(animationTypesFromSettings());
+    if (m_mainCrossword->solutionKrossWord())
+        m_mainCrossword->solutionKrossWord()->setAnimationTypes(animationTypesFromSettings());
+}
+
+AnimationTypes KrossWordPuzzle::animationTypesFromSettings()
+{
+    if (!Settings::animate())
+        return NoAnimation;
+
+    AnimationTypes anim = NoAnimation;
+    if (Settings::animateSizeChange())
+        anim |= AnimateSizeChange;
+    if (Settings::animatePosChange())
+        anim |= AnimatePosChange;
+    if (Settings::animateAppear())
+        anim |= AnimateAppear;
+    if (Settings::animateDisappear())
+        anim |= AnimateDisappear;
+    if (Settings::animateChangeLetter())
+        anim |= AnimateChangeLetter;
+    if (Settings::animateFocusIn())
+        anim |= AnimateFocusIn;
+    if (Settings::animateTransition())
+        anim |= AnimateTransition;
+
+    return anim;
+}
+
+void KrossWordPuzzle::showStatusbarGlobal(bool show)
+{
+    if (m_mainTabBar->currentWidget() == m_mainCrossword) {
+        m_mainCrossword->statusBar()->setVisible(show);
+    } else {
+        m_mainLibrary->statusBar()->setVisible(show);
+    }
+}
+
+int KrossWordPuzzle::configureShortcutsGlobal()
+{
+    KShortcutsDialog dlg(KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcutsAllowed, this);
+    if (m_mainTabBar->currentWidget() == m_mainCrossword) {
+        dlg.addCollection(m_mainCrossword->actionCollection());
+    } else {
+        dlg.addCollection(m_mainLibrary->actionCollection());
+    }
+
+    return dlg.configure(true);
+}
+
+void KrossWordPuzzle::configureToolbarsGlobal()
+{
+    if (m_mainTabBar->currentWidget() == m_mainCrossword) {
+        m_mainCrossword->configureToolbars();
+    } else {
+        m_mainLibrary->configureToolbars();
+    }
 }
 
 void KrossWordPuzzle::currentTabChanged(int index)
@@ -546,104 +820,6 @@ void KrossWordPuzzle::crosswordAutoSaveFileChanged(const QString &fileName)
     Settings::self()->writeConfig();
 }
 
-QString KrossWordPuzzle::displayFileName(const QString &fileName)
-{
-    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
-    if (fileName.startsWith(libraryDir)) {
-        // Cut the library path
-        QString libraryFileName = fileName.mid(libraryDir.length());
-        libraryFileName.prepend(i18nc("This string is used to replace the library path "
-                                      "for crossword files that are in the library with a shorter user visible string, "
-                                      "e.g. replacing ~/.kde4/apps/krosswordpuzzle/library/crossword.kwpz with "
-                                      "Library/crossword.kwpz", "Library") + QDir::separator());
-        return libraryFileName;
-    } else {
-        return fileName;
-    }
-}
-
-bool KrossWordPuzzle::isFileInLibrary(const QString& fileName)
-{
-    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
-    return fileName.startsWith(libraryDir);
-}
-
-void KrossWordPuzzle::loadFile(const KUrl &url, Crossword::KrossWord::FileFormat fileFormat, bool loadCrashedFile)
-{
-    m_mainLibrary->statusBar()->showMessage(i18n("Loading..."));
-    m_loadProgressDialog = createLoadProgressDialog();
-    m_loadProgressDialog->show();
-
-    m_mainCrossword->loadFile(url, fileFormat, loadCrashedFile);
-}
-
-void KrossWordPuzzle::closeEvent(QCloseEvent* event)
-{
-    if (m_mainCrossword->isModified()) {
-        QString msg = i18n("The current crossword has been modified.\n"
-                           "Would you like to save it?");
-
-        int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"), KStandardGuiItem::save(), KStandardGuiItem::discard());
-
-        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !m_mainCrossword->save()))
-            event->ignore();
-        else
-            event->accept();
-    } else {
-        event->accept();
-    }
-
-    if (event->isAccepted()) {
-        // Closing not aborted, so the temporary file can be deleted
-        m_mainCrossword->removeTempFile();
-        m_mainCrossword->setState(CrossWordXmlGuiWindow::ShowingNothing); // Cleanup
-    }
-}
-
-void KrossWordPuzzle::dragEnterEvent(QDragEnterEvent *event)
-{
-    if (event->mimeData()->hasUrls())
-        event->accept();
-}
-
-void KrossWordPuzzle::dropEvent(QDropEvent *event)
-{
-    if (event->mimeData()->hasUrls()) {
-        QPoint pt         = m_mainLibrary->libraryTree()->mapFrom(this, event->pos());
-        QModelIndex index = m_mainLibrary->libraryTree()->indexAt(pt);
-
-        if (index.isValid()) {
-            if (index.data(Qt::UserRole + 2).toBool() || index.parent().isValid()) {
-                // Dropped onto library folder
-                QString subFolder = index.parent().isValid() ?
-                                    QFileInfo(index.parent().data(Qt::UserRole).toString()).fileName() :
-                                    QFileInfo(index.data(Qt::UserRole).toString()).fileName();
-
-                m_mainLibrary->libraryAddCrossword(event->mimeData()->urls(), subFolder);
-            } else {
-                m_mainLibrary->libraryAddCrossword(event->mimeData()->urls());
-            }
-        } else {
-            QList<QUrl> urls = event->mimeData()->urls();
-            loadFile(urls.first());
-        }
-    }
-}
-
-KDialog* KrossWordPuzzle::createLoadProgressDialog()
-{
-    KDialog *dialog = new KDialog(this);
-    dialog->setButtons(KDialog::None);
-    dialog->setAttribute(Qt::WA_DeleteOnClose);
-    // TODO: No max/min buttons
-    dialog->setWindowTitle(i18n("Loading..."));
-    QLabel *lblLoad = new QLabel(i18n("Loading the crossword, please wait..."));
-
-    dialog->setMainWidget(lblLoad);
-    dialog->setModal(true);
-    return dialog;
-}
-
 /*
 void KrossWordPuzzle::recentFileListContextMenuRequested( const QPoint &pos ) {
     QMenu *menu = popupMenuRecentFilesList();
@@ -690,157 +866,6 @@ void KrossWordPuzzle::recentFileExecuted( QListWidgetItem *item ) {
     QString url = item->text().remove(QRegExp("(^.*\\(|\\)$)"));
     loadSlot( KUrl(url) );
 }*/
-
-void KrossWordPuzzle::setupActions()
-{
-    KStandardAction::showStatusbar(this, SLOT(showStatusbarGlobal(bool)), actionCollection());
-    KStandardAction::keyBindings(this, SLOT(configureShortcutsGlobal()), actionCollection());
-    KStandardAction::configureToolbars(this, SLOT(configureToolbarsGlobal()), actionCollection());
-    KStandardAction::preferences(this, SLOT(optionsPreferencesSlot()), actionCollection());
-    KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
-
-//     KStandardGameAction::load(this, SLOT(loadSlot()), actionCollection())->setStatusTip( i18n("Load a crossword from a file") );
-
-//     KAction *downloadAction = new KAction( KIcon("get-hot-new-stuff"),
-//                     i18n("Get new crosswords..."), actionCollection() );
-//     downloadAction->setStatusTip( i18n("Download crosswords from other users.") );
-//     actionCollection()->addAction( actionName(Game_Download), downloadAction );
-//     connect( downloadAction, SIGNAL(triggered()), this, SLOT(downloadSlot()) );
-//
-//     KAction *uploadAction = new KAction( KIcon("network-server"),
-//                     i18n("Upload current crossword..."), actionCollection() );
-//     uploadAction->setStatusTip( i18n("Share the current crossword with other users.") );
-//     actionCollection()->addAction( actionName(Game_Upload), uploadAction );
-//     connect( uploadAction, SIGNAL(triggered()), this, SLOT(uploadSlot()) );
-    /*
-        m_recentFilesAction = KStandardGameAction::loadRecent(
-            this, SLOT(loadRecentSlot(KUrl)), actionCollection());
-        m_recentFilesAction->setIcon( KIcon("document-open-recent") ); // Not set by KStandardAction...
-        m_recentFilesAction->loadEntries( Settings::self()->config()->group("") );
-        m_recentFilesAction->setStatusTip( i18n("Load recent crosswords") );*/
-    //     KStandardAction::openNew(this, SLOT(fileNew()), actionCollection());
-//     KStandardGameAction::quit(qApp, SLOT(closeAllWindows()), actionCollection())->setStatusTip( i18n("Quit the game") );
-    //     KStandardAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
-    /*
-        m_undoStack->createUndoAction( actionCollection(), actionName(Edit_Undo) );
-        m_undoStack->createRedoAction( actionCollection(), actionName(Edit_Redo) );*/
-    /*
-        KStandardGameAction::gameNew(this, SLOT(gameNewSlot()), actionCollection())->setStatusTip( i18n("Start a new crossword") );*/
-}
-
-void KrossWordPuzzle::gameNewSlot()
-{
-    // create a new window
-    (new KrossWordPuzzle)->show();
-}
-
-void KrossWordPuzzle::downloadSlot()
-{
-    KNS::Entry::List entries = KNS::Engine::download();
-    kDebug() << "Entries count =" << entries.count();
-//     KNS::Engine engine( this );
-//     if ( engine.init("krosswordpuzzle.knsrc" )) {
-//  KNS::Entry::List entries = engine.downloadDialogModal( this );
-//
-//  kDebug() << "Entries count =" << entries.count();
-//  if (entries.size() > 0) {
-//      foreach ( KNS::Entry *entry, entries ) {
-//      // Downloaded file has the name "hotstuff-access" which is wrong (maybe it works
-//      // better with archives). So rename the file to the right name from the payload:
-//      QString filename = entry->payload().representation()
-//          .remove( QRegExp("^.*\\?file=") ).remove( QRegExp("&site=.*$") );
-//      QStringList installedFiles = entry->installedFiles();
-//
-//      kDebug() << "installedFiles =" << installedFiles;
-// //       if ( !installedFiles.isEmpty() ) {
-// //           QString installedFile = installedFiles[0];
-// //
-// //           QString path = KUrl( installedFile ).path().remove( QRegExp("/[^/]*$") ) + "/";
-// //           QFile( installedFile ).rename( path + filename );
-//
-// //           qDebug() << "PublicTransportSettings::downloadServiceProvidersClicked" <<
-// //           "Rename" << installedFile << "to" << path + filename;
-// //       }
-//      }
-//  }
-//     }
-}
-
-void KrossWordPuzzle::uploadSlot()
-{
-// TODO: Get filename from CrossWordXmlGuiWindow
-//     KNS::Entry *entry = KNS::Engine::upload( m_curFileName );
-//     if ( entry )
-//  kDebug() << "Entry =" << entry->payload().translated( entry->payload().language() );
-//     else
-//  kDebug() << "No uploaded entry";
-}
-
-void KrossWordPuzzle::optionsPreferencesSlot()
-{
-    // Avoid to have 2 dialogs shown
-    if (KConfigDialog::showDialog("settings")) {
-        return;
-    }
-
-    KConfigDialog *dialog = new KConfigDialog(this, "settings", Settings::self());
-
-#if QT_VERSION >= 0x040600
-    QWidget *animationSettingsDlg = new QWidget;
-    ui_settings.setupUi(animationSettingsDlg);
-    dialog->addPage(animationSettingsDlg, i18n("Animations"), "package_settings");
-#endif
-
-    QWidget *themeSelectorDlg = new QWidget;
-    //KGameThemeSelector *themeSelector = new KGameThemeSelector( themeSelectorDlg, Settings::self(), KGameThemeSelector::NewStuffDisableDownload );
-
-    /* Provider is now centralized
-    KgThemeProvider* provider = new KgThemeProvider(QByteArray(), themeSelectorDlg);
-    provider->discoverThemes("appdata", QLatin1String("themes"));
-    */
-
-    KgThemeSelector *themeSelector = new KgThemeSelector(KrosswordRenderer::self()->getThemeProvider(), KgThemeSelector::EnableNewStuffDownload, themeSelectorDlg);
-    dialog->addPage(themeSelector, i18n("Theme"), "games-config-theme");
-
-    connect(KrosswordRenderer::self()->getThemeProvider(), SIGNAL(currentThemeChanged(const KgTheme*)), SLOT(settingsChanged()));
-    connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(settingsChanged()));
-    dialog->setAttribute(Qt::WA_DeleteOnClose);
-
-    dialog->show();
-}
-
-void KrossWordPuzzle::settingsChanged()
-{
-    m_mainCrossword->updateTheme();
-
-    m_mainCrossword->krossWord()->setAnimationTypes(animationTypesFromSettings());
-    if (m_mainCrossword->solutionKrossWord())
-        m_mainCrossword->solutionKrossWord()->setAnimationTypes(animationTypesFromSettings());
-}
-
-AnimationTypes KrossWordPuzzle::animationTypesFromSettings()
-{
-    if (!Settings::animate())
-        return NoAnimation;
-
-    AnimationTypes anim = NoAnimation;
-    if (Settings::animateSizeChange())
-        anim |= AnimateSizeChange;
-    if (Settings::animatePosChange())
-        anim |= AnimatePosChange;
-    if (Settings::animateAppear())
-        anim |= AnimateAppear;
-    if (Settings::animateDisappear())
-        anim |= AnimateDisappear;
-    if (Settings::animateChangeLetter())
-        anim |= AnimateChangeLetter;
-    if (Settings::animateFocusIn())
-        anim |= AnimateFocusIn;
-    if (Settings::animateTransition())
-        anim |= AnimateTransition;
-
-    return anim;
-}
 
 // QMenu* KrossWordPuzzle::popupMenuRecentFilesList() {
 //     return static_cast<QMenu*>( factory()->container("recent_files_list_popup", this) );
