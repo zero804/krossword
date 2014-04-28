@@ -18,154 +18,38 @@
 */
 
 #include "krosswordpuzzle.h"
-#include "krosswordpuzzleview.h"
 #include "krosswordrenderer.h"
-#include "krossworddocument.h"
 #include "settings.h"
-#include "crosswordxmlguiwindow.h"
 #include "libraryxmlguiwindow.h"
-#include "io/krosswordxmlreader.h"
-
-// Qt UI includes
-#include <QPrintDialog>
-#include <QTreeWidget>
-
-// Other Qt includes
-#include <QCloseEvent>
-#include <QtGui/QPrinter>
 
 // KDE UI includes
-#include <KXMLGUIFactory>
-#include <KMessageBox>
 #include <KConfigDialog>
-#include <KPrintPreview>
-#include <kdeprintdialog.h>
-#include <KFileDialog>
-#include <KPushButton>
+#include <KMessageBox>
 #include <KStatusBar>
-#include <KMenu>
 #include <KMenuBar>
-#include <KToolBar>
 #include <KTabWidget>
-#include <KgThemeProvider>
+
 #include <KgThemeSelector>
 
 #include <KShortcutsDialog>
 
 // KDE action includes
-#include <KAction>
-#include <KActionMenu>
-#include <KSelectAction>
-#include <KToggleAction>
-#include <KActionCollection>
 #include <KStandardAction>
-#include <KStandardGameAction>
-#include <KRecentFilesAction>
+#include <KActionCollection>
 
 // Other KDE includes
-#include <KDE/KLocale>
 #include <KStandardDirs>
+
 //#include <KGameDifficulty> -> #include <KgDifficulty>
-#include <KRandom>
-#include <KTemporaryFile>
-#include <kdeversion.h>
 #include <kapplication.h>
-#include <knewstuff2/engine.h>
-#include <KColorScheme>
 #include <kfileplacesmodel.h>
-
-
-
-/** A KTabWidget with a menu bar shown directly after the tabs.
-  * Simply call @ref takeMenu to move the menu of your main window to the tab
-  * widget. An event filter is installed on the main window, to track changes
-  * that require the layout for the menu to be redone.
-  * @Note The code is mostly copied from Palapeli, but with all code for a tab
-  * widget with a menu bar in one class. */
-class MenuTabWidget : public KTabWidget
-{
-public:
-    MenuTabWidget(QWidget* parent = 0)
-        : KTabWidget(parent), m_menuBar(0) {
-        setDocumentMode(true);
-    }
-
-    void takeMenu(KMainWindow *mainWindow) {
-        m_mainWindow = mainWindow;
-        m_menuBar    = mainWindow->menuBar();
-        m_menuBar->QWidget::setParent(0);
-        m_menuBar->QWidget::setParent(m_mainWindow);
-        m_menuBar->raise();
-        doMenuLayout();
-
-        mainWindow->installEventFilter(this);
-    }
-
-    KMenuBar *menu() const {
-        return m_menuBar;
-    };
-
-protected:
-    virtual void changeEvent(QEvent *ev) {
-        doMenuLayout();
-        KTabWidget::changeEvent(ev);
-    }
-
-    virtual bool eventFilter(QObject *obj, QEvent *event) {
-        switch (event->type()) {
-        case QEvent::Resize:
-        case QEvent::FontChange:
-        case QEvent::LanguageChange:
-        case QEvent::LayoutDirectionChange:
-        case QEvent::LocaleChange:
-        case QEvent::StyleChange:
-            // Relayout the menu whenever the tabbar size may have changed
-            doMenuLayout();
-            return true;
-        default:
-            return QObject::eventFilter(obj, event);
-        }
-    }
-
-    void doMenuLayout() {
-        // Determine geometry of menubar...
-        QRect rect              = m_mainWindow->rect();
-        const QSize tabBarSize  = tabBar()->sizeHint();
-        const QSize menuBarSize = m_menuBar->sizeHint();
-
-        setMinimumWidth(tabBarSize.width());
-
-        //...in X direction
-        if (QApplication::isLeftToRight())
-            rect.setLeft(tabBarSize.width());
-        else
-            rect.setRight(rect.width() - tabBarSize.width());
-
-        //...in Y direction
-        const int height    = menuBarSize.height();
-        const int maxHeight = tabBarSize.height() -
-                              style()->pixelMetric(QStyle::PM_TabBarBaseHeight, 0, this);
-
-        // Vertical alignment on tab bar, Difference to palapeli: geometry().top() is added if the tabbar isn't at top == 0
-        const int yPos = geometry().top() + (maxHeight - height) / 2;
-        rect.setHeight(height);
-        rect.moveTop(qMax(yPos, 0)); // Do not allow yPos < 0!
-
-        m_menuBar->setGeometry(rect);
-    }
-
-private:
-    KMainWindow *m_mainWindow;
-    KMenuBar    *m_menuBar;
-};
-
 
 KrossWordPuzzle::KrossWordPuzzle()
     : KXmlGuiWindow(),
-      m_mainLibrary(0),
-      m_mainCrossword(0),
-      m_loadProgressDialog(0),
-      m_mainTabBar(new MenuTabWidget(this))
+      m_mainLibrary(nullptr),
+      m_mainCrossword(nullptr),
+      m_loadProgressDialog(nullptr),
+      m_mainTabBar(new KTabWidget(this))
 {
     if (Settings::libraryDownloadSubDir().isEmpty()) {
         Settings::setLibraryDownloadSubDir(i18n("Downloads"));
@@ -179,7 +63,7 @@ KrossWordPuzzle::KrossWordPuzzle()
 
     setupGUI(Save | Create);
 
-    m_mainTabBar->takeMenu(this);
+    //m_mainTabBar->takeMenu(this);   //! <-------------------- Delete this after you removed MenuTabWidget
     setupMainTabWidget();
     setCentralWidget(m_mainTabBar);
     m_mainLibrary->statusBar()->showMessage(i18n("Welcome to KrossWordPuzzle!"));
@@ -230,37 +114,6 @@ bool KrossWordPuzzle::createNewCrossWordFromTemplate(const QString& templateFile
         return false;
     }
 }
-
-bool KrossWordPuzzle::isFileInLibrary(const QString& fileName)
-{
-    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
-    return fileName.startsWith(libraryDir);
-}
-
-/*
-const char *KrossWordPuzzle::actionName(KrossWordPuzzle::Action actionEnum) const
-{
-    switch (actionEnum) {
-    case Game_Download:
-        return "game_download";
-    case Game_Upload:
-        return "game_upload";
-        //  case Options_Themes:
-        //      return "options_themes";
-    case RecentTab_RecentFilesRemove:
-        return "recent_files_remove";
-    default:
-        kWarning() << "Action enumerable not handled in switch" << actionEnum;
-        return "";
-    }
-}
-*/
-/*
-CrossWordXmlGuiWindow* KrossWordPuzzle::mainCrossword() const
-{
-    return m_mainCrossword;
-}
-*/
 
 //=====================================================================================
 
@@ -369,56 +222,18 @@ void KrossWordPuzzle::setupMainTabWidget()
     connect(m_mainCrossword, SIGNAL(tempAutoSaveFileChanged(QString)),
             this,            SLOT(crosswordAutoSaveFileChanged(QString)));
 
-    // Setup recent tab
-//     ui_start_new.openRecent->setIcon( KIcon("document-open-recent") );
-    // TODO: revival of the recent files action?
-//     foreach ( KUrl url, m_recentFilesAction->urls() ) {
-//  QString iconName = KMimeType::findByUrl( url, 0, /*url.isLocalFile()*/true )->iconName();
-//  KIcon icon;
-//  icon.addPixmap( KIconLoader::global()->loadMimeTypeIcon(iconName, KIconLoader::Dialog) );
-//  QListWidgetItem *item = new QListWidgetItem( icon,
-//      QString("%1\n  (%2)").arg(url.fileName()).arg(url.pathOrUrl()) );
-// //   item->setData( Qt::UserRole, url ); // QListWidgetItem doesn't store Qt::UserRole-data...
-//
-//  ui_start_new.recentFiles->addItem( item );
-//     }
-    /*
-        if ( ui_start_new.recentFiles->count() == 0 ) {
-        ui_start_new.openRecent->hide();
-        ui_start_new.recentFiles->hide();
-        ui_start_new.lblNoRecentFiles->show();
-
-    //  m_mainTabBar->setCurrentIndex( indexLoad );
-        } else {
-        ui_start_new.lblNoRecentFiles->hide();
-        ui_start_new.tabRecent->layout()->removeItem( ui_start_new.spacerNoRecentFilesTop );
-        ui_start_new.tabRecent->layout()->removeItem( ui_start_new.spacerNoRecentFilesBetween );
-        ui_start_new.tabRecent->layout()->removeItem( ui_start_new.spacerNoRecentFilesBottom );
-        ui_start_new.recentFiles->setCurrentRow( 0 );
-        QListWidgetItem *mostRecentItem = ui_start_new.recentFiles->item( 0 );
-        QFont font = mostRecentItem->font();
-        font.setBold( true );
-        mostRecentItem->setFont( font );
-
-    //  m_mainTabBar->setCurrentIndex( indexRecent );
-        }*/
-
-//     connect( ui_start_new.recentFiles, SIGNAL(executed(QListWidgetItem*)),
-//      this, SLOT(recentFileExecuted(QListWidgetItem*)) );
-//     connect( ui_start_new.recentFiles, SIGNAL(customContextMenuRequested(QPoint)),
-//      this, SLOT(recentFileListContextMenuRequested(QPoint)) );
-//     connect( ui_start_new.openRecent, SIGNAL(clicked()), this, SLOT(loadRecentItem()) );
 
     // Add menus of the embedded crossword window to the menu bar of this (main) window
-    QAction *firstMenu = m_mainTabBar->menu()->actions().first();
+    QAction *firstMenu = this->menuBar()->actions().last();
     foreach(QAction * action, m_mainCrossword->menuBar()->actions()) {
         if (action->menu() && (action->menu()->objectName() == "game" ||
                                action->menu()->objectName() == "edit" ||
                                action->menu()->objectName() == "move" ||
                                action->menu()->objectName() == "view")) {
-            m_mainTabBar->menu()->insertMenu(firstMenu, action->menu());
+            this->menuBar()->insertMenu(firstMenu, action->menu());
         }
     }
+
 
     m_mainTabBar->setCurrentIndex(indexLibrary);
     connect(m_mainTabBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
@@ -449,34 +264,6 @@ void KrossWordPuzzle::setupActions()
     KStandardAction::configureToolbars(this, SLOT(configureToolbarsGlobal()), actionCollection());
     KStandardAction::preferences(this, SLOT(optionsPreferencesSlot()), actionCollection());
     KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
-
-//     KStandardGameAction::load(this, SLOT(loadSlot()), actionCollection())->setStatusTip( i18n("Load a crossword from a file") );
-
-//     KAction *downloadAction = new KAction( KIcon("get-hot-new-stuff"),
-//                     i18n("Get new crosswords..."), actionCollection() );
-//     downloadAction->setStatusTip( i18n("Download crosswords from other users.") );
-//     actionCollection()->addAction( actionName(Game_Download), downloadAction );
-//     connect( downloadAction, SIGNAL(triggered()), this, SLOT(downloadSlot()) );
-//
-//     KAction *uploadAction = new KAction( KIcon("network-server"),
-//                     i18n("Upload current crossword..."), actionCollection() );
-//     uploadAction->setStatusTip( i18n("Share the current crossword with other users.") );
-//     actionCollection()->addAction( actionName(Game_Upload), uploadAction );
-//     connect( uploadAction, SIGNAL(triggered()), this, SLOT(uploadSlot()) );
-    /*
-        m_recentFilesAction = KStandardGameAction::loadRecent(
-            this, SLOT(loadRecentSlot(KUrl)), actionCollection());
-        m_recentFilesAction->setIcon( KIcon("document-open-recent") ); // Not set by KStandardAction...
-        m_recentFilesAction->loadEntries( Settings::self()->config()->group("") );
-        m_recentFilesAction->setStatusTip( i18n("Load recent crosswords") );*/
-    //     KStandardAction::openNew(this, SLOT(fileNew()), actionCollection());
-//     KStandardGameAction::quit(qApp, SLOT(closeAllWindows()), actionCollection())->setStatusTip( i18n("Quit the game") );
-    //     KStandardAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
-    /*
-        m_undoStack->createUndoAction( actionCollection(), actionName(Edit_Undo) );
-        m_undoStack->createRedoAction( actionCollection(), actionName(Edit_Redo) );*/
-    /*
-        KStandardGameAction::gameNew(this, SLOT(gameNewSlot()), actionCollection())->setStatusTip( i18n("Start a new crossword") );*/
 }
 
 void KrossWordPuzzle::showRestoreOption(const QString& lastUnsavedFileBeforeCrash)
@@ -512,81 +299,14 @@ QString KrossWordPuzzle::displayFileName(const QString &fileName)
 
 //=====================================================================================
 
-/*
-void KrossWordPuzzle::gameNewSlot()
-{
-    // create a new window
-    (new KrossWordPuzzle)->show();
-}
-*/
-
-void KrossWordPuzzle::downloadSlot()
-{
-    KNS::Entry::List entries = KNS::Engine::download();
-    kDebug() << "Entries count =" << entries.count();
-//     KNS::Engine engine( this );
-//     if ( engine.init("krosswordpuzzle.knsrc" )) {
-//  KNS::Entry::List entries = engine.downloadDialogModal( this );
-//
-//  kDebug() << "Entries count =" << entries.count();
-//  if (entries.size() > 0) {
-//      foreach ( KNS::Entry *entry, entries ) {
-//      // Downloaded file has the name "hotstuff-access" which is wrong (maybe it works
-//      // better with archives). So rename the file to the right name from the payload:
-//      QString filename = entry->payload().representation()
-//          .remove( QRegExp("^.*\\?file=") ).remove( QRegExp("&site=.*$") );
-//      QStringList installedFiles = entry->installedFiles();
-//
-//      kDebug() << "installedFiles =" << installedFiles;
-// //       if ( !installedFiles.isEmpty() ) {
-// //           QString installedFile = installedFiles[0];
-// //
-// //           QString path = KUrl( installedFile ).path().remove( QRegExp("/[^/]*$") ) + "/";
-// //           QFile( installedFile ).rename( path + filename );
-//
-// //           qDebug() << "PublicTransportSettings::downloadServiceProvidersClicked" <<
-// //           "Rename" << installedFile << "to" << path + filename;
-// //       }
-//      }
-//  }
-//     }
-}
-
-void KrossWordPuzzle::uploadSlot()
-{
-// TODO: Get filename from CrossWordXmlGuiWindow
-//     KNS::Entry *entry = KNS::Engine::upload( m_curFileName );
-//     if ( entry )
-//  kDebug() << "Entry =" << entry->payload().translated( entry->payload().language() );
-//     else
-//  kDebug() << "No uploaded entry";
-}
-
 void KrossWordPuzzle::loadSlot(const KUrl &url)
 {
     loadFile(url);
 }
 
-/* Useless it's equal to loadSlot...
-void KrossWordPuzzle::loadRecentSlot(const KUrl &url)
-{
-    loadFile(url);
-}
-*/
-
 void KrossWordPuzzle::loadFile(const QString &fileName)
 {
     loadFile(KUrl(fileName));
-}
-
-void KrossWordPuzzle::saveSlot()
-{
-    m_mainCrossword->save();
-}
-
-void KrossWordPuzzle::saveAsSlot()
-{
-    m_mainCrossword->saveAs();
 }
 
 void KrossWordPuzzle::optionsPreferencesSlot()
@@ -598,11 +318,9 @@ void KrossWordPuzzle::optionsPreferencesSlot()
 
     KConfigDialog *dialog = new KConfigDialog(this, "settings", Settings::self());
 
-#if QT_VERSION >= 0x040600
     QWidget *animationSettingsDlg = new QWidget;
     ui_settings.setupUi(animationSettingsDlg);
     dialog->addPage(animationSettingsDlg, i18n("Animations"), "package_settings");
-#endif
 
     // What is his purpose? Maybe useless?
     QWidget *themeSelectorDlg = new QWidget;
@@ -684,12 +402,12 @@ void KrossWordPuzzle::currentTabChanged(int index)
 {
     bool crosswordTabShown = index == m_mainTabBar->indexOf(m_mainCrossword);
 
-    foreach(QAction * action, m_mainTabBar->menu()->actions()) {
+    foreach(QAction * action, this->menuBar()->actions()) {
         if (action->menu() && (action->menu()->objectName() == "game" ||
                                action->menu()->objectName() == "edit" ||
                                action->menu()->objectName() == "move" ||
                                action->menu()->objectName() == "view")) {
-            action->setVisible(crosswordTabShown);
+            action->setEnabled(crosswordTabShown);
         }
     }
 
@@ -776,32 +494,15 @@ void KrossWordPuzzle::crosswordModificationsChanged(CrossWordXmlGuiWindow::Modif
         m_mainTabBar->setTabText(iCrossword, i18nc("The title for the "
                                  "crossword tab with an unmodified or no crossword opened",
                                  "&Crossword"));
-        //  if (m_mainTabBar->isTabEnabled(iCrossword)) {
-        //      m_mainTabBar->setTabTextColor( iCrossword, KColorScheme(QPalette::Active).foreground().color());
-        //  } else {
-        //      m_mainTabBar->setTabTextColor( iCrossword, KColorScheme(QPalette::Disabled).foreground().color());
-        //  }
     } else {
-        //  m_mainTabBar->setTabTextColor(iCrossword, KColorScheme(QPalette::Active).foreground(KColorScheme::NeutralText).color());
-
         if (modificationTypes.testFlag(CrossWordXmlGuiWindow::ModifiedCrossword)) {
             m_mainTabBar->setTabText(iCrossword, i18nc("The title for the "
                                      "crossword tab with an edited crossword opened",
                                      "&Crossword *"));
-
-            //  if (modificationTypes.testFlag(CrossWordXmlGuiWindow::ModifiedState))
-            //  // Both edited and state changed
-            //      m_mainTabBar->setTabTextColor( iCrossword, KColorScheme(QPalette::Active).foreground(KColorScheme::NeutralText).color());
-            //  else
-            //  // Only edited
-            //     m_mainTabBar->setTabTextColor(iCrossword, KColorScheme(QPalette::Active).foreground(KColorScheme::NeutralText).color());
         } else if (modificationTypes.testFlag(CrossWordXmlGuiWindow::ModifiedState)) {
             m_mainTabBar->setTabText(iCrossword, i18nc("The title for the "
                                      "crossword tab with an unmodified or no crossword opened",
                                      "&Crossword"));
-
-            // // Only state changed
-            // m_mainTabBar->setTabTextColor(iCrossword, KColorScheme(QPalette::Active).foreground(KColorScheme::NeutralText).color());
         }
     }
 
@@ -814,55 +515,5 @@ void KrossWordPuzzle::crosswordAutoSaveFileChanged(const QString &fileName)
     Settings::self()->writeConfig();
 }
 
-/*
-void KrossWordPuzzle::recentFileListContextMenuRequested( const QPoint &pos ) {
-    QMenu *menu = popupMenuRecentFilesList();
-
-    action( actionName(RecentTab_RecentFilesRemove) )->setEnabled( ui_start_new.recentFiles->itemAt(pos) );
-    menu->exec( ui_start_new.recentFiles->mapToGlobal(pos) );
-}*/
-/*
-void KrossWordPuzzle::recentFilesClearSlot() {
-    ui_start_new.recentFiles->clear();
-    m_recentFilesAction->clear();
-    m_recentFilesAction->saveEntries( Settings::self()->config()->group("") );
-}*/
-/*
-void KrossWordPuzzle::recentFilesRemoveSlot() {
-    QListWidgetItem *item = ui_start_new.recentFiles->currentItem();
-    if ( !item ) {
-    kDebug() << "No current item";
-    return;
-    }
-
-    // Extract url from display string, because QListWidgetItem doesn't store Qt::UserRole-data..
-    QString url = item->text().remove(QRegExp("(^.*\\(|\\)$)"));
-    delete ui_start_new.recentFiles->takeItem( ui_start_new.recentFiles->row(item) );
-    m_recentFilesAction->removeUrl( KUrl(url) );
-    m_recentFilesAction->saveEntries( Settings::self()->config()->group("") );
-}*/
-/*
-void KrossWordPuzzle::loadRecentItem() {
-    QListWidgetItem *item = ui_start_new.recentFiles->currentItem();
-    if ( !item )
-    return;
-
-    // Extract url from display string, because QListWidgetItem doesn't store Qt::UserRole-data..
-    QString url = item->text().remove(QRegExp("(^.*\\(|\\)$)"));
-    loadSlot( KUrl(url) );
-}
-
-void KrossWordPuzzle::recentFileExecuted( QListWidgetItem *item ) {
-    if ( !item )
-    return;
-
-    // Extract url from display string, because QListWidgetItem doesn't store Qt::UserRole-data..
-    QString url = item->text().remove(QRegExp("(^.*\\(|\\)$)"));
-    loadSlot( KUrl(url) );
-}*/
-
-// QMenu* KrossWordPuzzle::popupMenuRecentFilesList() {
-//     return static_cast<QMenu*>( factory()->container("recent_files_list_popup", this) );
-// }
-
-#include "krosswordpuzzle.moc"
+//!????
+//#include "krosswordpuzzle.moc"

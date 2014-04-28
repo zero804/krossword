@@ -23,24 +23,16 @@
 #include <kxmlguiwindow.h>
 
 #include "ui_settings.h"
-// #include "ui_print_crossword.h"
-
-#include "krossword.h"
 #include "crosswordxmlguiwindow.h"
-#include "krosswordtheme.h"
-
-#include <KgThemeProvider>
 
 namespace KIO
 {
 class PreviewJob;
 }
+
 class LibraryXmlGuiWindow;
-class QTreeView;
-class KRecentFilesAction;
-class KUndoStack;
 class KUrl;
-class KrosswordRenderer;
+class KTabWidget;
 
 class MenuTabWidget;
 /**
@@ -56,15 +48,6 @@ class KrossWordPuzzle : public KXmlGuiWindow
     Q_OBJECT
 
 public:
-    /*
-    enum Action {
-        Game_Download,
-        Game_Upload,
-        //  Options_Themes,
-        RecentTab_RecentFilesRemove
-    };
-    */
-
     KrossWordPuzzle();
     virtual ~KrossWordPuzzle() {}
 
@@ -76,35 +59,19 @@ public:
     bool createNewCrossWordFromTemplate(const QString &templateFilePath, const QString &title,
                                         const QString &authors, const QString &copyright, const QString &notes);
 
-    /** Checks if the crossword with the given filename is in the library. */
-    bool isFileInLibrary(const QString &fileName);
-
-    //! Unused methods
-    //const char *actionName(Action action) const;
-    //CrossWordXmlGuiWindow *mainCrossword() const;
-
 protected:
     virtual void closeEvent(QCloseEvent* event);
     virtual void dropEvent(QDropEvent* event);
     virtual void dragEnterEvent(QDragEnterEvent* event);
 
 public slots:
-    // Game actions
-    //void gameNewSlot();
-    void downloadSlot();
-    void uploadSlot();
-
     void loadSlot(const KUrl &url = KUrl());
-    //void loadRecentSlot(const KUrl &url); //Useless
     void loadFile(const QString &fileName);
-    void saveSlot();
-    void saveAsSlot();
 
     // Settings actions
     void optionsPreferencesSlot();
     void settingsChanged();
     AnimationTypes animationTypesFromSettings();
-    // void changeThemeSlot( int themeId );
 
     void showStatusbarGlobal(bool show);
     int  configureShortcutsGlobal();
@@ -119,18 +86,9 @@ protected slots:
     void crosswordModificationsChanged(CrossWordXmlGuiWindow::ModificationTypes modificationTypes);
     void crosswordAutoSaveFileChanged(const QString &fileName);
 
-//     void loadRecentItem();
-//     void recentFileExecuted( QListWidgetItem *item );
-//     void recentFileListContextMenuRequested( const QPoint &pos );
-
-// Popup menu actions
-//     void recentFilesRemoveSlot();
-//     void recentFilesClearSlot();
-
 private:
     KDialog* createLoadProgressDialog();
     void setupMainTabWidget();
-//     QMenu *popupMenuRecentFilesList();   // Unused
     void setupPlaces();
     void setupActions();
     void showRestoreOption(const QString &lastUnsavedFileBeforeCrash);
@@ -144,10 +102,8 @@ private:
     CrossWordXmlGuiWindow *m_mainCrossword;         //Owned
 
     KDialog               *m_loadProgressDialog;    //Owned
-    // KRecentFilesAction    *m_recentFilesAction;  //Unused
-    QList<KToolBar*>       m_hiddenToolBars;
     QString                m_caption;
-    MenuTabWidget         *m_mainTabBar;            //Owned
+    KTabWidget            *m_mainTabBar;            //Owned
 };
 
 #endif // _KROSSWORDPUZZLE_H_
