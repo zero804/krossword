@@ -442,9 +442,7 @@ void LibraryXmlGuiWindow::libraryAddCrossword(const QList< QUrl >& urls, const Q
     }
 }
 
-QList<QTreeWidgetItem*> LibraryXmlGuiWindow::getDownloadCrosswordItems(
-    const QString& rawUrl, const QDate& startDate,
-    const QDate& endDate, int dayOffset, const KIcon &puzIcon)
+QList<QTreeWidgetItem*> LibraryXmlGuiWindow::getDownloadCrosswordItems(const QString& rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset, const KIcon &puzIcon)
 {
     QList<QTreeWidgetItem*> items;
 
@@ -536,8 +534,7 @@ void LibraryXmlGuiWindow::downloadProviderChanged(int index)
     ui_download.crosswords->addTopLevelItems(items);
 }
 
-void LibraryXmlGuiWindow::downloadCurrentCrosswordChanged(
-    QTreeWidgetItem* current, QTreeWidgetItem* previous)
+void LibraryXmlGuiWindow::downloadCurrentCrosswordChanged(QTreeWidgetItem* current, QTreeWidgetItem* previous)
 {
     Q_UNUSED(previous);
 
@@ -569,8 +566,7 @@ void LibraryXmlGuiWindow::downloadPreviewJobFailed(const KFileItem& fi)
     kDebug() << fi.url();
 }
 
-void LibraryXmlGuiWindow::downloadPreviewJobGotPreview(
-    const KFileItem& fi, const QPixmap& pix)
+void LibraryXmlGuiWindow::downloadPreviewJobGotPreview(const KFileItem& fi, const QPixmap& pix)
 {
     Q_UNUSED(fi);
     if (!m_dialog)
@@ -579,7 +575,6 @@ void LibraryXmlGuiWindow::downloadPreviewJobGotPreview(
     ui_download.preview->setPixmap(pix);
     ui_download.preview->setEnabled(true);
 }
-
 
 void LibraryXmlGuiWindow::libraryDownloadSlot()
 {

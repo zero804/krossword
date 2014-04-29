@@ -135,9 +135,7 @@ private:
     QString additionsColorCSS();
     QString libraryFolderText(const QString &path, int crosswordCountOffset = 0);
 
-    QList<QTreeWidgetItem*> getDownloadCrosswordItems(
-        const QString &rawUrl, const QDate& startDate,
-        const QDate& endDate, int dayOffset, const KIcon &puzIcon);
+    QList<QTreeWidgetItem*> getDownloadCrosswordItems(const QString &rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset, const KIcon &puzIcon);
 
     Ui::create_new ui_create_new;
     Ui::export_to_image ui_export_to_image;
