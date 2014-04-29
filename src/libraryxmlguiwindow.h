@@ -66,27 +66,17 @@ public:
         WashingtonPost
     };
 
-    static QList<DownloadProvider> allDownloadProviders() {
-        return QList<DownloadProvider>() << HoustonChronicle
-               << JonesinCrosswords << BostonGlobe << OnionCrosswords
-               << WallStreetJournal << WashingtonPost;
-    }
-
     LibraryXmlGuiWindow(KrossWordPuzzle* parent = 0);
+
+    void setMainWindow(KrossWordPuzzle *mainWindow) {
+        m_mainWindow = mainWindow;
+    }
 
     QTreeView *libraryTree() const {
         return m_libraryTree;
     }
 
     const char *actionName(Action actionEnum) const;
-
-    KrossWordPuzzle *mainWindow() const {
-        return m_mainWindow;
-    }
-
-    void setMainWindow(KrossWordPuzzle *mainWindow) {
-        m_mainWindow = mainWindow;
-    }
 
 public slots:
     void libraryAddCrossword(const KUrl &url, const QString &subFolder = QString()) {
@@ -106,27 +96,20 @@ protected slots:
 
     void libraryItemChanged(QStandardItem *item);
     void libraryTreeContextMenuRequested(const QPoint &pos);
-    void libraryItemDoubleClicked(const QModelIndex &index) {
-        libraryOpenItem(index);
-    }
+    void libraryItemDoubleClicked(const QModelIndex &index);
 
     void libraryOpenItem(const QModelIndex &index);
     void libraryCurrentChanged(const QModelIndex &current, const QModelIndex &previous);
     void librarySetAsSubDirForDownloads();
 
-    void libraryOpenSlot() {
-        libraryOpenItem(m_libraryTree->currentIndex());
-    }
-
+    void libraryOpenSlot();
     void libraryImportSlot();
     void libraryExportSlot();
     void libraryDownloadSlot();
     void libraryDeleteSlot();
     void libraryNewFolderSlot();
     void libraryNewCrosswordSlot();
-    void libraryUpdateSlot() {
-        fillLibrary();
-    }
+    void libraryUpdateSlot();
 
 private:
     void setupActions();
@@ -149,6 +132,8 @@ private:
     QStandardItemModel *m_libraryModel;
     HtmlDelegate *m_libraryDelegate;
     KIO::PreviewJob *m_previewJob, *m_downloadPreviewJob;
+
+    static QList<DownloadProvider> allDownloadProviders();
 };
 
 #endif // LIBRARYXMLGUIWINDOW_H

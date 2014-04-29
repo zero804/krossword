@@ -202,6 +202,11 @@ void LibraryXmlGuiWindow::libraryNewCrosswordSlot()
     delete dialog;
 }
 
+void LibraryXmlGuiWindow::libraryUpdateSlot()
+{
+    fillLibrary();
+}
+
 void LibraryXmlGuiWindow::libraryDeleteSlot()
 {
     QModelIndex index = m_libraryTree->currentIndex();
@@ -579,7 +584,7 @@ void LibraryXmlGuiWindow::downloadPreviewJobGotPreview(const KFileItem& fi, cons
 void LibraryXmlGuiWindow::libraryDownloadSlot()
 {
     // TODO: get rid of m_loadFromInternetList?
-    KDialog *dialog = m_dialog = new KDialog(mainWindow());
+    KDialog *dialog = m_dialog = new KDialog(m_mainWindow); // ??
     dialog->setWindowTitle(i18n("Download Crossword To Library"));
     QWidget *downloadCrosswordsDlg = new QWidget;
     ui_download.setupUi(downloadCrosswordsDlg);
@@ -796,6 +801,11 @@ void LibraryXmlGuiWindow::libraryTreeContextMenuRequested(const QPoint& pos)
     menu->exec(m_libraryTree->mapToGlobal(pos));
 }
 
+void LibraryXmlGuiWindow::libraryItemDoubleClicked(const QModelIndex &index)
+{
+    libraryOpenItem(index);
+}
+
 void LibraryXmlGuiWindow::librarySetAsSubDirForDownloads()
 {
     if (m_libraryPopupIndex.isValid()) {
@@ -807,6 +817,11 @@ void LibraryXmlGuiWindow::librarySetAsSubDirForDownloads()
 
         // TODO: Move crosswords from old downloads folder to the new one?
     }
+}
+
+void LibraryXmlGuiWindow::libraryOpenSlot()
+{
+    libraryOpenItem(m_libraryTree->currentIndex());
 }
 
 void LibraryXmlGuiWindow::previewJobFailed(const KFileItem &fi)
@@ -983,4 +998,9 @@ QString LibraryXmlGuiWindow::libraryFolderText(const QString& path, int crosswor
            .arg(i18nc("The title for contents descriptions of folders in the library tree view", "Content:"))
            .arg(i18ncp("Text to describe the contents of library folders in the library tree view", "%1 crossword", "%1 crosswords", containedCrosswords))
            .arg(additionsColorCSS());
+}
+
+QList<LibraryXmlGuiWindow::DownloadProvider> LibraryXmlGuiWindow::allDownloadProviders()
+{
+    return QList<DownloadProvider>() << HoustonChronicle << JonesinCrosswords << BostonGlobe << OnionCrosswords << WallStreetJournal << WashingtonPost;
 }
