@@ -30,6 +30,8 @@
 #include <KGameRenderer>
 #include <KgThemeProvider>
 
+#include "krosswordtheme.h"
+
 KrosswordRenderer* KrosswordRenderer::self()
 {
     static KrosswordRenderer instance;
@@ -41,7 +43,6 @@ KrosswordRenderer::KrosswordRenderer()
       m_renderer(new KGameRenderer(m_provider))
 {    
     m_provider->discoverThemes("appdata", QLatin1String("themes"));
-    m_provider->currentTheme();
 }
 
 KrosswordRenderer::~KrosswordRenderer()
@@ -51,15 +52,27 @@ KrosswordRenderer::~KrosswordRenderer()
     //delete m_renderer;
 }
 
-bool KrosswordRenderer::setTheme(KgTheme *theme)
+bool KrosswordRenderer::setTheme(const QString& themeName)
 {
-    if (m_themeFileName == theme->graphicsPath())
+    if (m_themeName == themeName)
         return true;
 
-    m_themeFileName = theme->graphicsPath();
-    
-    m_provider->addTheme(theme);
-    return true;
+    QList<const KgTheme*> themeList = m_provider->themes();
+
+    int index  = 0;
+    bool found = false;
+    while(!found && index < themeList.size()) {
+
+        const KgTheme *currTheme = themeList.at(index);
+        if(currTheme->name() == themeName) {
+            m_provider->setCurrentTheme(currTheme);
+            m_themeName = themeName;
+            found = true;
+        }
+        ++index;
+    }
+
+    return found;
 }
 
 QPixmap KrosswordRenderer::background(const QSize &size) const
@@ -99,4 +112,9 @@ void KrosswordRenderer::renderElement(QPainter* p, const QString& elementid, con
 KgThemeProvider* KrosswordRenderer::getThemeProvider() const
 {
     return m_provider;
+}
+
+QString KrosswordRenderer::getCurrentThemeName() const
+{
+    return m_provider->currentThemeName();
 }

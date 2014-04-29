@@ -63,7 +63,6 @@ KrossWordPuzzle::KrossWordPuzzle()
 
     setupGUI(Save | Create);
 
-    //m_mainTabBar->takeMenu(this);   //! <-------------------- Delete this after you removed MenuTabWidget
     setupMainTabWidget();
     setCentralWidget(m_mainTabBar);
     m_mainLibrary->statusBar()->showMessage(i18n("Welcome to KrossWordPuzzle!"));

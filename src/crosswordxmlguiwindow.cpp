@@ -193,26 +193,10 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent)
     connect(m_undoStack, SIGNAL(indexChanged(int)), this, SLOT(undoStackIndexChanged(int)));
 
     // Load theme
+    /* Should not do it manually */
     QString savedThemeName = Settings::theme();
-    if (!m_theme.readFromDesktopFile(savedThemeName)) {
-        if (!m_theme.readFromDesktopFile("themes/" + savedThemeName.toLower() + ".desktop")    // Compatibility with KrossWordPuzzle < 0.15.6
-                && !m_theme.readFromDesktopFile("themes/default.desktop")) {
-            KMessageBox::information(this, i18n("Neither the last used theme '%1' "
-                                                "nor the default theme could be found.\n"
-                                                "Check your installation.",
-                                                savedThemeName));
-            qApp->quit();
-            return;
-        } else {
-            KMessageBox::information(this, i18n("The theme '%1' couldn't be found. "
-                                                "The default theme is now used.", savedThemeName));
-            // Now handled by KThemeProvider
-            //Settings::setTheme("themes/default.desktop");
-            //Settings::self()->writeConfig();
-        }
-    }
-    
-    KrosswordRenderer::self()->setTheme(&m_theme);
+    if(savedThemeName != "")
+        KrosswordRenderer::self()->setTheme(savedThemeName);
 
     // Create main view
     setCentralWidget(m_view = createKrossWordPuzzleView());
@@ -860,22 +844,10 @@ bool CrossWordXmlGuiWindow::setupActions()
 
 void CrossWordXmlGuiWindow::updateTheme()
 {
+    /* Should not do it manually */
     QString themeFile = Settings::theme();
-
-    if (!m_theme.readFromDesktopFile(themeFile)) {
-        if (!m_theme.readFromDesktopFile("themes/default.desktop")) {
-            KMessageBox::information(this, i18n("Neither the chosen theme '%1' "
-                                                "nor the default theme could be found.\n"
-                                                "Check your installation.", themeFile));
-            qApp->quit();
-            return;
-        } else {
-            KMessageBox::information(this, i18n("The theme '%1' couldn't be found. "
-                                                "The default theme is now used.", themeFile));
-            Settings::setTheme("themes/default.desktop");
-            Settings::self()->writeConfig();
-        }
-    }
+    Settings::setTheme(KrosswordRenderer::self()->getCurrentThemeName());
+    Settings::self()->writeConfig();
 
     if (viewSolution())
         viewSolution()->scene()->update();

@@ -21,7 +21,8 @@
 
 #include <QDebug>
 
-KrosswordTheme::KrosswordTheme() : KgTheme("krosswordpuzzle")
+KrosswordTheme::KrosswordTheme()
+    : KgTheme("krosswordpuzzle")
 {
 }
 

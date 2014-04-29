@@ -4,7 +4,7 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="krosswordpuzzlerc"/>
-
+  
   <group name="Preferences">
     <entry name="lastUnsavedFileBeforeCrash" type="String">
       <label>Filename of the last unsaved file, before a crash or unexpected behaviour, which caused that an edited crossword wasn't saved without confirmation of the user.</label>

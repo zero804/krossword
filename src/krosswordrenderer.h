@@ -37,8 +37,9 @@ public:
     QPixmap background(const QSize &size) const;
     //void renderElement( QPainter *p, const QString& elementid, const QRectF& r ) const;
     void renderElement(QPainter *p, const QString& elementid, const QRectF& r, const QColor &alpha = Qt::black) const;
-    bool setTheme(KgTheme* theme);
+    bool setTheme(const QString &themeName);
     KgThemeProvider* getThemeProvider() const;
+    QString getCurrentThemeName() const;
 
 private:
     // disable copy - it's singleton
@@ -51,7 +52,7 @@ private:
     KgThemeProvider *m_provider;
     KGameRenderer   *m_renderer;
 
-    QString m_themeFileName;
+    QString m_themeName;
 };
 
 #endif // KROSSWORD_RENDERER_H
