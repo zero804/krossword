@@ -70,7 +70,6 @@ LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindo
     m_libraryTree->setAllColumnsShowFocus(true);
     m_libraryTree->setWordWrap(true);
     m_libraryTree->header()->setMinimumSectionSize(125);
-    m_libraryTree->setColumnWidth(0, 350);
     m_libraryTree->setWhatsThis(i18n("This is the library view.<br/>You can see all crosswords that are inside the library."));
     m_libraryTree->setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -90,8 +89,6 @@ LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindo
 
     // Fill library view with files
     fillLibrary();
-
-    m_libraryTree->setColumnWidth(0, 350);
 }
 
 const char* LibraryXmlGuiWindow::actionName(LibraryXmlGuiWindow::Action actionEnum) const

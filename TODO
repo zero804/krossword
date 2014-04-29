@@ -11,7 +11,7 @@
 - fixed background when zooming?
 - stretched background option (not just tiled)?
 - remove old compatibility code (< KDE 4.6)?
-- text issue in Library view and Clue List panel (column size/wrap)
+- text issue in Clue List panel (column size/wrap)
 - Clue List default size
 - window size at first run
 - 
