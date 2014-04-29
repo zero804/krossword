@@ -20,43 +20,12 @@
 #ifndef KROSSWORDPUZZLEVIEW_H
 #define KROSSWORDPUZZLEVIEW_H
 
-// #include <QtGui/QWidget>
 #include <QGraphicsView>
-#include <QScrollBar>
 
-// #include "ui_krosswordpuzzleview_base.h"
 #include "krosswordpuzzlescene.h"
 
-// class QGraphicsView;
 class QPainter;
 class KUrl;
-
-// TEST
-// class ScrollbarAnimator : public QObject {
-//   Q_OBJECT
-//   Q_PROPERTY( int value READ value WRITE setValue )
-//
-//   public:
-//     ScrollbarAnimator( QAbstractSlider *slider, QWidget* parent = 0 );
-//
-//     int value() const { return m_slider->value(); };
-//     void setValue( int value );
-//
-//   protected slots:
-//     void sliderActionTriggered( int action );
-//     void sliderValueChanged( int value );
-//     void sliderDestroyed( QObject* );
-//     void animationFinished();
-//
-//   private:
-//     void startAnimation( int scrollOffset );
-//
-//     QAbstractSlider *m_slider;
-//     QPropertyAnimation *m_animation;
-//     int m_oldValue;
-//     bool m_setValueSlotDeactivated;
-// };
-
 
 /**
  * This is the main view class for KrossWordPuzzle.
@@ -65,24 +34,16 @@ class KUrl;
  * @author Friedrich Pülz <fpuelz@gmx.de>
  * @version 0.15
  */
-class KrossWordPuzzleView : public QGraphicsView //, public Ui::krosswordpuzzleview_base
+class KrossWordPuzzleView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    /**
-     * Default constructor
-     */
     explicit KrossWordPuzzleView(KrossWordPuzzleScene *scene, QWidget *parent = 0);
-
-    /**
-     * Destructor
-     */
     virtual ~KrossWordPuzzleView();
 
     inline Crossword::KrossWord *krossWord() const {
         return ((KrossWordPuzzleScene*)scene())->krossWord();
-    };
-//     void setTheme( const QString &theme = "default" );
+    }
 
     void renderToPrinter(QPainter *painter, const QRectF &target = QRectF(),
                          const QRect &source = QRect(), Qt::AspectRatioMode aspectRatioMode = Qt::KeepAspectRatio);
@@ -97,7 +58,6 @@ protected:
     virtual void resizeEvent(QResizeEvent* event);
 
 private:
-//     Ui::krosswordpuzzleview_base ui_krosswordpuzzleview_base;
     KrossWordPuzzleScene *m_scene;
     int m_minimum_zoom;
 
@@ -120,4 +80,4 @@ private slots:
     void settingsChanged();
 };
 
-#endif // KrossWordPuzzleVIEW_H
+#endif // KROSSWORDPUZZLEVIEW_H

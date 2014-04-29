@@ -70,35 +70,31 @@ public:
         return QList<DownloadProvider>() << HoustonChronicle
                << JonesinCrosswords << BostonGlobe << OnionCrosswords
                << WallStreetJournal << WashingtonPost;
-    };
+    }
 
     LibraryXmlGuiWindow(KrossWordPuzzle* parent = 0);
 
     QTreeView *libraryTree() const {
         return m_libraryTree;
-    };
+    }
+
     const char *actionName(Action actionEnum) const;
 
     KrossWordPuzzle *mainWindow() const {
         return m_mainWindow;
-    };
+    }
+
     void setMainWindow(KrossWordPuzzle *mainWindow) {
         m_mainWindow = mainWindow;
-    };
-
-//      void setLibraryTree( QTreeView *treeTree ) { m_libraryTree = libraryTree; };
+    }
 
 public slots:
     void libraryAddCrossword(const KUrl &url, const QString &subFolder = QString()) {
         libraryAddCrossword(QList<QUrl>() << url, subFolder);
-    };
+    }
     void libraryAddCrossword(const QList<QUrl> &urls, const QString &subFolder = QString());
 
 protected slots:
-//  void createNewCurrentCrosswordTypeChanged(
-//          const QModelIndex &current, const QModelIndex &previous );
-//  void createNewConfigureDetailsClicked();
-
     void previewJobGotPreview(const KFileItem &fi, const QPixmap &pix);
     void previewJobFailed(const KFileItem &fi);
 
@@ -106,21 +102,22 @@ protected slots:
     void downloadPreviewJobFailed(const KFileItem &fi);
 
     void downloadProviderChanged(int index);
-    void downloadCurrentCrosswordChanged(
-        QTreeWidgetItem *current, QTreeWidgetItem *previous);
+    void downloadCurrentCrosswordChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
     void libraryItemChanged(QStandardItem *item);
     void libraryTreeContextMenuRequested(const QPoint &pos);
     void libraryItemDoubleClicked(const QModelIndex &index) {
         libraryOpenItem(index);
-    };
+    }
+
     void libraryOpenItem(const QModelIndex &index);
     void libraryCurrentChanged(const QModelIndex &current, const QModelIndex &previous);
     void librarySetAsSubDirForDownloads();
 
     void libraryOpenSlot() {
         libraryOpenItem(m_libraryTree->currentIndex());
-    };
+    }
+
     void libraryImportSlot();
     void libraryExportSlot();
     void libraryDownloadSlot();
@@ -129,7 +126,7 @@ protected slots:
     void libraryNewCrosswordSlot();
     void libraryUpdateSlot() {
         fillLibrary();
-    };
+    }
 
 private:
     void setupActions();
