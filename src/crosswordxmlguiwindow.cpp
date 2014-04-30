@@ -252,74 +252,6 @@ CrossWordXmlGuiWindow::~CrossWordXmlGuiWindow()
     delete m_dictionary;
 }
 
-void CrossWordXmlGuiWindow::keyPressEvent(QKeyEvent *ev)
-{
-    if (ev->modifiers().testFlag(Qt::ControlModifier)
-            && ev->modifiers().testFlag(Qt::ShiftModifier)
-            && ev->key() == Qt::Key_D) {
-        // Debug output
-        qDebug() << krossWord();
-
-        KrossWordCell *cell = krossWord()->currentCell();
-        if (cell->isLetterCell())
-            qDebug() << (LetterCell*)cell;
-        else if (cell->isType(ClueCellType)) {
-            qDebug() << (ClueCell*)cell;
-
-            int i = 1;
-            foreach(LetterCell * letter, ((ClueCell*)cell)->letters())
-            qDebug() << "Letter" << i++ << letter;
-        } else
-            qDebug() << cell;
-    }
-
-    QWidget::keyPressEvent(ev);
-}
-
-QWidget* CrossWordXmlGuiWindow::createZoomWidget()
-{
-    QToolButton *btnZoomOut = new QToolButton;
-    QToolButton *btnZoomIn = new QToolButton;
-    btnZoomOut->setIcon(KIcon("zoom-out"));
-    btnZoomIn->setIcon(KIcon("zoom-in"));
-    btnZoomOut->setToolButtonStyle(Qt::ToolButtonIconOnly);
-    btnZoomIn->setToolButtonStyle(Qt::ToolButtonIconOnly);
-    btnZoomOut->setAutoRaise(true);
-    btnZoomIn->setAutoRaise(true);
-    m_zoomSlider = new QSlider(Qt::Horizontal);
-    m_zoomSlider->setRange(10, 300);
-    m_zoomSlider->setValue(100);
-
-    setZoom(100);
-
-    QBoxLayout *layout = new QBoxLayout(QBoxLayout::LeftToRight);
-    layout->setSpacing(0);
-    layout->setMargin(0);
-    layout->addWidget(btnZoomOut);
-    layout->addWidget(m_zoomSlider);
-    layout->addWidget(btnZoomIn);
-
-    QWidget *zoomWidget = new QWidget;
-    zoomWidget->setFixedWidth(150);
-    zoomWidget->setLayout(layout);
-
-    connect(btnZoomOut, SIGNAL(pressed()), this, SLOT(zoomOutSlot()));
-    connect(btnZoomIn, SIGNAL(pressed()), this, SLOT(zoomInSlot()));
-    connect(m_zoomSlider, SIGNAL(valueChanged(int)), this, SLOT(setZoom(int)));
-
-    return zoomWidget;
-}
-
-KrossWord* CrossWordXmlGuiWindow::krossWord() const
-{
-    return m_view ? m_view->krossWord() : NULL;
-}
-
-KrossWord* CrossWordXmlGuiWindow::solutionKrossWord() const
-{
-    return m_viewSolution ? m_viewSolution->krossWord() : NULL;
-}
-
 const char *CrossWordXmlGuiWindow::actionName(CrossWordXmlGuiWindow::Action actionEnum) const
 {
     switch (actionEnum) {
@@ -441,6 +373,890 @@ const char *CrossWordXmlGuiWindow::actionName(CrossWordXmlGuiWindow::Action acti
         kWarning() << "Action enumerable not handled in switch" << actionEnum;
         return "";
     }
+}
+
+KrossWordPuzzleView *CrossWordXmlGuiWindow::view() const
+{
+    return m_view;
+}
+
+KrossWordPuzzleView *CrossWordXmlGuiWindow::viewSolution() const
+{
+    return m_viewSolution;
+}
+
+KrossWord* CrossWordXmlGuiWindow::krossWord() const
+{
+    return m_view ? m_view->krossWord() : NULL;
+}
+
+KrossWord* CrossWordXmlGuiWindow::solutionKrossWord() const
+{
+    return m_viewSolution ? m_viewSolution->krossWord() : NULL;
+}
+
+void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
+{
+    if (m_state == state)
+        return;
+
+    // Remove old state
+    KConfigGroup cg;
+    switch (m_state) {
+    case ShowingNothing:
+    case ShowingCrossword:
+        break;
+
+    case ShowingCongratulations:
+#if QT_VERSION >= 0x040600
+        m_animation->setCurrentTime(0);
+        m_animation->stop();
+        m_animation = NULL;
+#else
+        foreach(QGraphicsItemAnimation * anim, m_animationList) {
+            anim->timeLine()->setCurrentTime(0);
+            anim->timeLine()->stop();
+            anim->clear();
+            delete anim;
+        }
+#endif
+
+        m_view->scene()->removeItem(m_winItems);
+//      m_winItems->deleteLater();
+        m_view->scene()->update();
+
+        stateChanged("showing_congratulations", StateReverse);
+        break;
+    }
+
+    // Set new state
+    switch (state) {
+    case ShowingNothing:
+        kDebug() << "New state: ShowingNothing";
+
+#if QT_VERSION >= 0x040600
+        krossWord()->animator()->setEnabled(false);
+#endif
+        krossWord()->removeAllCells();
+        krossWord()->resizeGrid(0, 0);
+#if QT_VERSION >= 0x040600
+        krossWord()->animator()->setEnabled(true);
+#endif
+
+        m_undoStackLoaded = false;
+        setCurrentFileName(QString());
+        setModificationType(NoModification);
+
+        m_zoomWidget->setEnabled(false);
+        m_solutionProgress->setEnabled(false);
+        break;
+
+    case ShowingCrossword:
+        kDebug() << "New state: ShowingCrossword";
+
+        krossWord()->setInteractive(true);
+        m_zoomWidget->setEnabled(true);
+        m_solutionProgress->setEnabled(true);
+        m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
+
+        setDefaultCursor();
+        action(actionName(Move_Eraser))->setChecked(false);
+        enableEditActions();
+        break;
+
+    case ShowingCongratulations:
+        kDebug() << "New state: ShowingCongratulations";
+        if (m_state != ShowingCrossword) {
+            kDebug() << "Showing congrats without having a crossword doesn't make sense...";
+        }
+
+        statusBar()->showMessage(i18n("Congratulations! You solved the crossword perfectly."));
+        krossWord()->setInteractive(false);
+        stateChanged("showing_congratulations");
+
+        m_zoomWidget->setEnabled(false);
+        m_solutionProgress->setEnabled(false);
+        m_solutionProgress->setValue(100);
+
+        showCongratulationsItems();
+        break;
+    }
+
+    m_state = state;
+}
+
+bool CrossWordXmlGuiWindow::isInEditMode() const
+{
+    return m_editMode != NoEditing;
+}
+
+void CrossWordXmlGuiWindow::setEditMode(EditMode editMode)
+{
+    m_editMode = editMode;
+
+    bool inEditMode = isInEditMode();
+    if (m_view)
+        krossWord()->setEditable(inEditMode);
+
+    if (action(actionName(Edit_EnableEditMode))->isChecked() != inEditMode)
+        action(actionName(Edit_EnableEditMode))->setChecked(inEditMode);
+    enableEditActions();
+
+    if (inEditMode) {
+        m_clueTree->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed);
+        toolBar("editToolBar")->setVisible(true);
+
+        m_currentCellDock->show();
+    } else {
+        if (krossWord()->crosswordTypeInfo().clueType == NumberClues1To26
+                && krossWord()->crosswordTypeInfo().clueMapping == CluesReferToCells
+                && krossWord()->crosswordTypeInfo().letterCellContent == Characters) {
+            krossWord()->setupSameLetterSynchronization();
+        }
+        m_clueTree->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        toolBar("editToolBar")->setVisible(false);
+    }
+}
+
+bool CrossWordXmlGuiWindow::createNewCrossWord(
+    const CrosswordTypeInfo &crosswordTypeInfo,
+    const QSize &crosswordSize,
+    const QString& title, const QString& authors,
+    const QString& copyright, const QString& notes)
+{
+    if (!closeFile())
+        return false;
+
+    m_curDocumentOrigin = DocumentNewlyCreated;
+
+    krossWord()->createNew(crosswordTypeInfo, crosswordSize);
+    krossWord()->setTitle(title);
+    krossWord()->setAuthors(authors);
+    krossWord()->setCopyright(copyright);
+    krossWord()->setNotes(notes);
+
+    m_lastAutoSave = QDateTime::currentDateTime();
+//   m_blockAutoSave = false;
+    setModificationType(ModifiedCrossword);
+    setCurrentFileName(i18n("New crossword"));
+    m_solutionProgress->setValue(0);
+
+    setActionVisibility();
+
+    setState(ShowingCrossword);
+    setEditMode();
+    fitToPageSlot();
+
+    return true;
+}
+
+bool CrossWordXmlGuiWindow::createNewCrossWordFromTemplate(
+    const QString& templateFilePath, const QString& title,
+    const QString& authors, const QString& copyright,
+    const QString& notes)
+{
+    if (!closeFile())
+        return false;
+
+
+    if (!loadFile(templateFilePath))
+        return false;
+
+    m_curDocumentOrigin = DocumentNewlyCreated;
+    krossWord()->setTitle(title);
+    krossWord()->setAuthors(authors);
+    krossWord()->setCopyright(copyright);
+    krossWord()->setNotes(notes);
+
+    m_lastAutoSave = QDateTime::currentDateTime();
+//   m_blockAutoSave = false;
+    setModificationType(ModifiedCrossword);
+    setCurrentFileName(i18n("New crossword"));
+    m_solutionProgress->setValue(0);
+
+    setActionVisibility();
+
+    setState(ShowingCrossword);
+    setEditMode();
+
+    return true;
+}
+
+inline bool CrossWordXmlGuiWindow::loadFile(const QString& fileName)
+{
+    return loadFile(KUrl(fileName));
+}
+
+bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat fileFormat, bool loadCrashedFile)
+{
+    if (isModified()) {
+        QString msg = i18n("The current crossword has been modified.\nWould you like to save it?");
+        int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"), KStandardGuiItem::save(), KStandardGuiItem::discard());
+        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !save()))
+            return false;
+    }
+
+    QString errorString;
+
+    KUrl resultUrl;
+    if (url.isEmpty()) {
+        resultUrl = KFileDialog::getOpenUrl(KUrl("kfiledialog:///loadCrossword"),
+                                            "application/x-krosswordpuzzle "
+                                            "application/x-krosswordpuzzle-compressed "
+                                            "application/x-acrosslite-puz", this);
+    if (resultUrl.isEmpty())
+        return false; // No file was chosen
+    } else
+        resultUrl = url;
+
+    setCurrentFileName(QString());
+
+    // Read the file
+    QString fileName = resultUrl.fileName();
+    updateClueDock();
+
+    QByteArray undoData;
+    bool readOk = krossWord()->read(resultUrl, &errorString, this, fileFormat, &undoData);
+
+    if (readOk) {
+        setState(ShowingCrossword);
+        m_undoStack->createFromData(krossWord(), undoData);
+        m_undoStackLoaded = !undoData.isEmpty();
+        m_lastAutoSave = QDateTime::currentDateTime();
+
+//     if ( krossWord()->highlightedClue() )
+//       m_view->ensureVisible( krossWord()->highlightedClue() );
+//     else
+        //fitToPageSlot();
+
+        statusBar()->showMessage(i18n("Loaded crossword from file '%1'", fileName), 5000);
+        if (loadCrashedFile) {
+            m_curDocumentOrigin = DocumentRestoredAfterCrash;
+            setModificationType(ModifiedCrossword);
+        } else {
+            m_curDocumentOrigin = resultUrl.isLocalFile() ? DocumentOpenedLocally : DocumentDownloaded;
+            setModificationType(NoModification);
+        }
+        setCurrentFileName(resultUrl.path());
+        m_lastSavedUndoIndex = m_undoStack->index();
+
+        updateSolutionInToolBar();
+        m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
+
+        if (krossWord()->crosswordTypeInfo().crosswordType == UnknownCrosswordType) {
+            if (KMessageBox::questionYesNo(this, i18n("The crossword type couldn't "
+                                           "be determined, so 'Free Crossword' is assumed.\n\n"
+                                           "Do you want to convert the crossword to another type now?\n\n"
+                                           "(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")")) == KMessageBox::Yes) {
+                //  Open conversion dialog
+                QPointer<ConvertCrosswordDialog> dialog = new ConvertCrosswordDialog(krossWord(), this);
+                if (dialog->exec() == KDialog::Accepted) {
+                    krossWord()->convertToType(dialog->crosswordTypeInfo());
+                    setModificationType(ModifiedCrossword);
+                }
+                delete dialog;
+            }
+        }
+
+        if (krossWord()->isEmpty())
+            setEditMode();
+
+        adjustGuiToCrosswordType();
+        emit loadingFileComplete(m_curFileName);
+
+//  m_recentFilesAction->addUrl( resultUrl,
+//      isFileInLibrary(resultUrl.path()) ? "Library: " + resultUrl.fileName() : resultUrl.fileName() );
+//  m_recentFilesAction->saveEntries( Settings::self()->config()->group("") );
+
+        fitToPageSlot();
+        return true;
+    } else {
+        setState(ShowingNothing);
+        m_undoStackLoaded = false;
+        statusBar()->showMessage(i18n("Error while loading file '%1': %2", fileName, errorString));
+        emit errorLoadingFile(fileName);
+
+        return false;
+    }
+}
+
+bool CrossWordXmlGuiWindow::save()
+{
+    if (m_curFileName.isEmpty() || !QFile::exists(m_curFileName)
+            || m_curDocumentOrigin == DocumentDownloaded
+            || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
+        return saveAs();
+    } else
+        return writeTo(m_curFileName, KrossWord::Normal, m_undoStackLoaded);
+}
+
+bool CrossWordXmlGuiWindow::saveAs()
+{
+    KUrl startDir;
+    if (m_curDocumentOrigin == DocumentDownloaded
+            || m_curDocumentOrigin == DocumentRestoredAfterCrash)
+        startDir = KGlobalSettings::documentPath();
+    else
+        startDir = KUrl(m_curFileName).path();
+
+    QCheckBox *chkSaveUndoStack = new QCheckBox(i18n("Save &Edit History"));
+    chkSaveUndoStack->setChecked(m_undoStackLoaded);
+
+    QCheckBox *chkSaveAsTemplate = new QCheckBox(i18n("Save As &Template"));
+    chkSaveAsTemplate->setChecked(false);
+    chkSaveAsTemplate->setToolTip(i18n("Save without correct answers, clue texts, images"));
+
+    // Custom widgets for the save as file dialog
+    QWidget *w = new QWidget;
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(chkSaveUndoStack);
+    layout->addWidget(chkSaveAsTemplate);
+    w->setLayout(layout);
+
+    QString fileName;
+    QPointer<KFileDialog> fileDlg = new KFileDialog(startDir,
+            "application/x-krosswordpuzzle "
+            "application/x-krosswordpuzzle-compressed "
+            "application/x-acrosslite-puz", this, w);
+    fileDlg->setMode(KFile::File);
+    fileDlg->setOperationMode(KFileDialog::Saving);
+    fileDlg->setConfirmOverwrite(true);
+
+    if (fileDlg->exec() == KFileDialog::Accepted)
+        fileName = fileDlg->selectedFile();
+    delete fileDlg;
+
+    if (!fileName.isEmpty()) {
+        // Add default extension if non was selected
+        if (fileName.indexOf(QRegExp("\\.(kwp|kwpz|puz)$", Qt::CaseInsensitive)) == -1)
+            fileName += ".kwpz";
+
+        return writeTo(fileName, chkSaveAsTemplate->isChecked() ? KrossWord::Template : KrossWord::Normal, chkSaveUndoStack->isChecked());
+    } else
+        return false;
+}
+
+bool CrossWordXmlGuiWindow::closeFile()
+{
+    if (isModified()) {
+        QString msg = i18n("The current crossword has been modified.\n"
+                           "Would you like to save it?");
+        int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"),
+                     KStandardGuiItem::save(), KStandardGuiItem::discard());
+        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !save()))
+            return false;
+    }
+
+    setState(ShowingNothing);
+    emit fileClosed(m_curFileName);
+
+    return true;
+}
+
+bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, bool saveUndoStack)
+{
+    KrossWord::FileFormat fileFormat = KrossWord::fileFormatFromFileName(fileName);
+    if (fileFormat == KrossWord::AcrossLitePuzFile) {
+        bool hasConfidencesSet = false;
+        LetterCellList letterList = krossWord()->letters();
+        foreach(LetterCell * letter, letterList) {
+            if (letter->confidence() == Unsure || letter->confidence() == Solved) {
+                hasConfidencesSet = true;
+                break;
+            }
+        }
+
+        if (hasConfidencesSet) {
+            int result = KMessageBox::warningContinueCancel(this,
+                         i18n("Can't store confidence values in *.puz files!\nIf you want confidence "
+                              "values to be stored please use a KrossWordPuzzle file format (*.kwp or *.kwpz)."),
+                         QString(), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
+                         "dont_show_cant_write_confidences_to_puz_confirmation");
+            if (result == KMessageBox::Cancel)
+                return false;
+        }
+
+        KrossWordCellList imageList = krossWord()->cells(ImageCellType);
+        if (!imageList.isEmpty()) {
+            int result = KMessageBox::warningContinueCancel(this,
+                         i18n("Can't store image cells in *.puz files!\nIf you want image "
+                              "cells to be stored please use a KrossWordPuzzle file format (*.kwp or *.kwpz)."),
+                         QString(), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
+                         "dont_show_cant_write_images_to_puz_confirmation");
+            if (result == KMessageBox::Cancel)
+                return false;
+        }
+    }
+
+    QString errorString;
+    bool writeOk;
+    if (saveUndoStack) {
+        writeOk = krossWord()->write(fileName, &errorString, writeMode,
+                                     KrossWord::DetermineByFileName,
+                                     m_undoStack->data());
+    } else
+        writeOk = krossWord()->write(fileName, &errorString, writeMode);
+
+    if (writeOk) {
+        QString oldFileName = m_curFileName;
+        m_lastSavedUndoIndex = m_undoStack->index();
+        setModificationType(NoModification);
+        setCurrentFileName(fileName);
+        statusBar()->showMessage(i18n("Wrote crossword to file '%1'", m_curFileName), 5000);
+        if (m_curDocumentOrigin == DocumentDownloaded
+                || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
+            m_curDocumentOrigin = DocumentOpenedLocally;
+        }
+
+        // TODO connect to signal from main game window
+        emit fileSaved(m_curFileName, oldFileName);
+
+//  QString fileWithoutPath = QFileInfo( m_curFileName ).fileName();
+//  m_recentFilesAction->addUrl( KUrl(m_curFileName),
+//      isFileInLibrary(m_curFileName) ? "Library: " + fileWithoutPath : fileWithoutPath );
+//  m_recentFilesAction->saveEntries( Settings::self()->config()->group("") );
+        return true;
+    } else {
+        statusBar()->showMessage(i18n("Error while writing file: %1", errorString));
+        return false;
+    }
+}
+
+bool CrossWordXmlGuiWindow::isModified() const
+{
+    return m_modified != NoModification;
+}
+
+QString CrossWordXmlGuiWindow::currentFileName() const
+{
+    return m_curFileName;
+}
+
+//======================================================
+
+void CrossWordXmlGuiWindow::keyPressEvent(QKeyEvent *ev)
+{
+    if (ev->modifiers().testFlag(Qt::ControlModifier)
+            && ev->modifiers().testFlag(Qt::ShiftModifier)
+            && ev->key() == Qt::Key_D) {
+        // Debug output
+        qDebug() << krossWord();
+
+        KrossWordCell *cell = krossWord()->currentCell();
+        if (cell->isLetterCell())
+            qDebug() << (LetterCell*)cell;
+        else if (cell->isType(ClueCellType)) {
+            qDebug() << (ClueCell*)cell;
+
+            int i = 1;
+            foreach(LetterCell * letter, ((ClueCell*)cell)->letters())
+            qDebug() << "Letter" << i++ << letter;
+        } else
+            qDebug() << cell;
+    }
+
+    QWidget::keyPressEvent(ev);
+}
+
+//======================================================
+
+void CrossWordXmlGuiWindow::saveSlot()
+{
+    save();
+}
+
+void CrossWordXmlGuiWindow::saveAsSlot()
+{
+    saveAs();
+}
+
+void CrossWordXmlGuiWindow::exportSlot()
+{
+    Q_ASSERT(m_view);
+
+#if KDE_IS_VERSION(4,3,60)
+    QString fileName = KFileDialog::getSaveFileName(KUrl(m_curFileName).upUrl(),
+                       "application/pdf "
+                       "application/postscript "
+                       "image/png "
+                       "image/jpeg", this, i18n("Export"), KFileDialog::ConfirmOverwrite);
+#else
+    QString fileName;
+    QPointer<KFileDialog> fileDlg = new KFileDialog(KUrl(m_curFileName).upUrl(),
+            "application/pdf "
+            "application/postscript "
+            "image/png "
+            "image/jpeg", this);
+    fileDlg->setWindowTitle(i18n("Export"));
+    fileDlg->setMode(KFile::File);
+    fileDlg->setOperationMode(KFileDialog::Saving);
+    fileDlg->setConfirmOverwrite(true);
+    if (fileDlg->exec() == KFileDialog::Accepted)
+        fileName = fileDlg->selectedFile();
+    delete fileDlg;
+#endif
+
+    if (!fileName.isEmpty()) {
+        QString fileSuffix = QFileInfo(fileName).suffix();
+        if (fileSuffix.compare("png", Qt::CaseInsensitive) == 0
+                || fileSuffix.compare("jpeg", Qt::CaseInsensitive) == 0
+                || fileSuffix.compare("jpg", Qt::CaseInsensitive) == 0) {
+            QPointer<KDialog> dlg = new KDialog(this);
+            dlg->setWindowTitle(i18n("Export Settings"));
+            dlg->setModal(true);
+            QWidget *exportToImageDlg = new QWidget;
+            ui_export_to_image.setupUi(exportToImageDlg);
+            dlg->setMainWidget(exportToImageDlg);
+            if (dlg->exec() == KDialog::Rejected)
+                return;
+
+            QPixmap pix = krossWord()->toPixmap(QSize(ui_export_to_image.width->value(), ui_export_to_image.height->value()));
+            int quality = ui_export_to_image.quality->value();
+            delete dlg;
+
+            if (!pix.save(fileName, 0, quality)) {
+                kDebug() << "Couldn't export the crossword to the specified image file." << fileName;
+                KMessageBox::error(this, i18n("Couldn't export the crossword to the specified image file."));
+            }
+        } else {
+            QPrinter printer;
+            setupPrinter(printer);
+
+            printer.setOutputFileName(fileName);
+            KrossWordDocument document(krossWord(), &printer);
+            document.print();
+        }
+    }
+}
+
+void CrossWordXmlGuiWindow::printSlot()
+{
+    Q_ASSERT(m_view);
+
+    QPrinter printer;
+    setupPrinter(printer);
+
+    QWidget *printCrossWord = new QWidget;
+    ui_print_crossword.setupUi(printCrossWord);
+    ui_print_crossword.emptyCellColor->setColor(Qt::gray);
+
+    QPrintDialog *dlg = KdePrint::createPrintDialog(&printer, QList<QWidget*>() << printCrossWord, this);
+    KrossWordDocument document(krossWord(), &printer);
+    dlg->setMinMax(1, document.pages());
+    dlg->setFromTo(1, document.pages());
+
+    if (dlg->exec()) {
+        krossWord()->setEmptyCellColorForPrinting(ui_print_crossword.emptyCellColor->color());
+        document.print(dlg->fromPage(), dlg->toPage());
+    }
+
+    delete dlg;
+}
+
+void CrossWordXmlGuiWindow::printPreviewSlot()
+{
+    Q_ASSERT(m_view);
+
+    QPrinter printer;
+    setupPrinter(printer);
+    KPrintPreview preview(&printer);
+
+    KrossWordDocument document(krossWord(), &printer);
+    document.print();
+
+    preview.exec();
+}
+
+void CrossWordXmlGuiWindow::showMenuBarSlot()
+{
+    menuBar()->setVisible(!menuBar()->isVisible());
+}
+
+void CrossWordXmlGuiWindow::closeSlot()
+{
+    closeFile();
+}
+
+void CrossWordXmlGuiWindow::addClueSlot()
+{
+    if (m_popupMenuCell && m_popupMenuCell->cellType() == ClueCellType)
+        krossWord()->setCurrentCell(m_popupMenuCell);
+
+    QString answer;
+    answer.fill(' ', krossWord()->crosswordTypeInfo().minAnswerLength);
+    Coord coord = krossWord()->currentCell()->coord();
+    QList< AnswerOffset > offsetsHorizontal = krossWord()->legalAnswerOffsets(coord, Qt::Horizontal, krossWord()->crosswordTypeInfo().minAnswerLength);
+    QList< AnswerOffset > offsetsVertical = krossWord()->legalAnswerOffsets(coord, Qt::Vertical, krossWord()->crosswordTypeInfo().minAnswerLength);
+
+    Qt::Orientation orientation;
+    AnswerOffset answerOffset;
+    LetterCell *letter = dynamic_cast< LetterCell* >(krossWord()->at(coord));
+    if (letter) {
+        if (letter->isCrossed()) {
+            statusBar()->showMessage(i18n("Can't add clues on crossed letter cells"));
+            return;
+        }
+        if (letter->clue()->isHorizontal())
+            offsetsHorizontal.clear();
+    }
+
+    if (offsetsHorizontal.isEmpty()) {
+        if (offsetsVertical.isEmpty()) {
+            statusBar()->showMessage(i18n("Can't add clue at the current cell"));
+            return;
+        } else {
+            orientation = Qt::Vertical; // FIXME: User Horizontal if there is a letter of a vertical clue
+            if (offsetsVertical.contains(OffsetBottom))
+                answerOffset = OffsetBottom;
+            else
+                answerOffset = offsetsVertical.first();
+        }
+    } else {
+        orientation = Qt::Horizontal;
+        if (offsetsHorizontal.contains(OffsetRight))
+            answerOffset = OffsetRight;
+        else
+            answerOffset = offsetsHorizontal.first();
+    }
+
+    QString errorMessage;
+    if (!m_undoStack->tryPush(new AddClueCommand(krossWord(),
+                              coord, orientation, QString(),
+                              answer, answer, answerOffset), &errorMessage)) {
+        statusBar()->showMessage(i18nc("%1 contains the reason why the clue couldn't be added", "Can't add clue. %1", errorMessage));
+    } else { // Clue was successfully added
+        enableEditActions();
+
+        // Old pointer is invalid, because it has been replaced with the clue cell
+        // or a letter cell if the clue cell is hidden...
+        KrossWordCell *cell = krossWord()->at(coord);
+        ClueCell *newClue;
+        if (cell->isLetterCell())   // For hidden clues
+            newClue = ((LetterCell*)cell)->clue(orientation);
+        else
+            newClue = qgraphicsitem_cast<ClueCell*>(cell);
+
+        if (newClue) {
+            statusBar()->showMessage(i18n("Clue added ('%1')", newClue->clue()));
+            newClue->setHighlight();
+            newClue->firstLetter()->setFocus();
+        } else
+            kDebug() << "New clue not found" << cell;
+    }
+}
+
+void CrossWordXmlGuiWindow::addImageSlot()
+{
+    Coord coord = krossWord()->currentCell()->coord();
+    int horizontalCellSpan = 1;
+    int verticalCellSpan = 1;
+    KUrl url;
+
+    QString errorMessage;
+    if (!m_undoStack->tryPush(new AddImageCommand(krossWord(), coord, horizontalCellSpan, verticalCellSpan, url), &errorMessage)) {
+        statusBar()->showMessage(i18nc("%1 contains the reason why the image couldn't be added", "Can't add image. %1", errorMessage));
+    } else { // Image was successfully added
+        enableEditActions();
+    }
+}
+
+void CrossWordXmlGuiWindow::removeSlot()
+{
+    ClueCell *clue;
+    ImageCell *image;
+    if ((clue = krossWord()->highlightedClue()) || (clue = qgraphicsitem_cast<ClueCell*>(m_popupMenuCell))) {
+        QString errorMessage;
+        if (!m_undoStack->tryPush(new RemoveClueCommand(krossWord(), clue), &errorMessage)) {
+            statusBar()->showMessage(i18nc("%1 contains the reason why the clue couldn't be removed", "Can't remove clue. %1", errorMessage));
+        }
+    } else if ((image = qgraphicsitem_cast<ImageCell*>(krossWord()->currentCell())) || (image = qgraphicsitem_cast<ImageCell*>(m_popupMenuCell))) {
+        QString errorMessage;
+        if (!m_undoStack->tryPush(new RemoveImageCommand(krossWord(), image), &errorMessage)) {
+            statusBar()->showMessage(i18nc("%1 contains the reason why the image couldn't be removed", "Can't remove image. %1", errorMessage));
+        }
+    } else
+        statusBar()->showMessage(i18n("No removable cell selected."));
+}
+
+void CrossWordXmlGuiWindow::clearCrosswordSlot()
+{
+    QString errorMessage;
+    if (!m_undoStack->tryPush(new ClearCrosswordCommand(krossWord()), &errorMessage)) {
+        statusBar()->showMessage(i18nc("%1 contains the reason why the crossword couldn't be cleared", "Can't clear crossword. %1", errorMessage));
+    } else {
+        stateChanged("clue_cell_highlighted");
+    }
+}
+
+void CrossWordXmlGuiWindow::propertiesSlot()
+{
+    QPointer<CrosswordPropertiesDialog> dialog = new CrosswordPropertiesDialog(krossWord(), this);
+    connect(dialog, SIGNAL(conversionRequested(CrosswordTypeInfo)), this, SLOT(propertiesConversionRequested(CrosswordTypeInfo)));
+    if (dialog->exec() == KDialog::Accepted) {
+        QString errorMessage;
+        ChangeCrosswordPropertiesCommand *command = new ChangeCrosswordPropertiesCommand(krossWord(), dialog->title(), dialog->author(), dialog->copyright(),
+            dialog->notes(), dialog->columns(), dialog->rows(), dialog->anchor());
+        if (!command->isEmpty() && !m_undoStack->tryPush(command, &errorMessage)) {
+            statusBar()->showMessage(i18nc("%1 contains the reason why the crossword properties couldn't be changed", "Can't change crossword properties. %1", errorMessage));
+        }
+    }
+
+    delete dialog;
+}
+
+void CrossWordXmlGuiWindow::editCheckRotationSymmetrySlot()
+{
+    bool symmetric = krossWord()->has180DegreeRotationSymmetry();
+    QString message;
+    if (symmetric)
+        message = i18n("The crossword has 180 degree rotation symmetry.");
+    else {
+        if (krossWord()->crosswordTypeInfo().clueCellHandling ==
+                ClueCellsDisallowed) {
+            message = i18n("The crossword doesn't have 180 degree rotation symmetry.\n"
+                           "To achieve symmetry make sure that each empty cell has a counterpart at "
+                           "it's 180 degree rotated position.\n");
+        } else {
+            message = i18n("The crossword doesn't have 180 degree rotation symmetry.\n"
+                           "To achieve symmetry make sure that each empty cell and each clue cell "
+                           "has a counterpart at it's 180 degree rotated position.\n");
+        }
+
+        if (krossWord()->crosswordTypeInfo().rotationSymmetryRequired) {
+            message += '\n' + i18n("Quality crosswords of the current crossword "
+                                   "type (%1) are usually symmetric.",
+                                   krossWord()->crosswordTypeInfo().name);
+        }
+    }
+
+    KMessageBox::information(this, message);
+}
+
+void CrossWordXmlGuiWindow::editStatisticsSlot()
+{
+    KDialog *dialog = new StatisticsDialog(krossWord(), this);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->show();
+}
+
+void CrossWordXmlGuiWindow::editClueNumberMappingSlot()
+{
+    KDialog *dialog = m_propertiesDialog = new KDialog(this);
+    dialog->setWindowTitle(i18n("Clue Number Mapping"));
+    QWidget *clueNumberMappingDlg = new QWidget;
+    ui_clue_number_mapping.setupUi(clueNumberMappingDlg);
+
+    for (int i = 0; i < ui_clue_number_mapping.letterContentList->topLevelItemCount(); ++i) {
+        QTreeWidgetItem *item = ui_clue_number_mapping.letterContentList->topLevelItem(i);
+        QChar ch = item->text(0)[ 0 ];
+        int clueNumber = krossWord()->letterContentToClueNumberMapping().indexOf(ch) + 1;
+        item->setText(1, QString::number(clueNumber));
+    }
+    connect(ui_clue_number_mapping.letterContentList, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), this, SLOT(clueMappingCurrentLetterChanged(QTreeWidgetItem*, QTreeWidgetItem*)));
+    connect(ui_clue_number_mapping.setMapping, SIGNAL(clicked()), this, SLOT(clueMappingSetMappingClicked()));
+
+    dialog->setMainWidget(clueNumberMappingDlg);
+    dialog->setModal(true);
+    if (dialog->exec() == KDialog::Accepted) {
+        QString clueMapping;
+        clueMapping.reserve(26);
+        for (int i = 0; i < ui_clue_number_mapping.letterContentList->topLevelItemCount(); ++i) {
+            QTreeWidgetItem *item = ui_clue_number_mapping.letterContentList->topLevelItem(i);
+            int position = item->text(1).toInt() - 1;
+            clueMapping[ position ] = item->text(0)[ 0 ];
+        }
+
+        QString errorMessage;
+        if (!m_undoStack->tryPush(new SetNumberPuzzleMappingCommand(krossWord(), clueMapping), &errorMessage)) {
+            statusBar()->showMessage(i18nc("%1 contains the reason why the new clue number mapping couldn't be applied", "Can't apply clue number mapping. %1", errorMessage));
+        }
+    }
+
+    delete dialog;
+}
+
+void CrossWordXmlGuiWindow::editMoveCellsSlot()
+{
+    QPointer<MoveCellsDialog> dialog = new MoveCellsDialog(krossWord(), this);
+    if (dialog->exec() == KDialog::Accepted) {
+        QString errorMessage;
+        if (!m_undoStack->tryPush(new MoveCellsCommand(krossWord(), dialog->moveHorizontal(), dialog->moveVertical()), &errorMessage)) {
+            statusBar()->showMessage(i18nc("%1 contains the reason why the cells couldn't be moved", "Can't move cells. %1", errorMessage));
+        }
+    }
+    delete dialog;
+}
+
+void CrossWordXmlGuiWindow::enableEditModeSlot(bool enable)
+{
+    if (enable) {
+        if (m_curDocumentOrigin == DocumentNewlyCreated || krossWord()->isEmpty()
+                || KMessageBox::warningContinueCancel(this, i18n("This will cause all answers to be shown and editable.\nIf you want to solve the crossword you should cancel."),
+                        "Enable Edit Mode", KStandardGuiItem::cont(), KStandardGuiItem::cancel(), "dont_show_edit_mode_confirmation") == KMessageBox::Continue)
+            setEditMode(Editing);
+        else
+            action(actionName(Edit_EnableEditMode))->setChecked(m_editMode);
+    } else
+        setEditMode(NoEditing);
+}
+
+void CrossWordXmlGuiWindow::editPasteSpecialCharacter()
+{
+    const QToolButton *button = qobject_cast<QToolButton*>(sender());
+    Q_ASSERT(button);
+
+    const QString text = KGlobal::locale()->removeAcceleratorMarker(button->text());
+    Q_ASSERT(!text.isEmpty());
+
+    const QChar character = text.at(0);
+    LetterCell *cell = qgraphicsitem_cast<LetterCell*>(m_popupMenuCell);
+    if (!cell) {
+        kDebug() << "No letter cell selected to insert special character";
+        return;
+    }
+
+    if (krossWord()->isEditable()) {
+        cell->setCorrectLetter(character);
+    } else {
+        cell->setCurrentLetter(character);
+    }
+}
+
+//======================================================
+
+
+QWidget* CrossWordXmlGuiWindow::createZoomWidget()
+{
+    QToolButton *btnZoomOut = new QToolButton;
+    QToolButton *btnZoomIn = new QToolButton;
+    btnZoomOut->setIcon(KIcon("zoom-out"));
+    btnZoomIn->setIcon(KIcon("zoom-in"));
+    btnZoomOut->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    btnZoomIn->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    btnZoomOut->setAutoRaise(true);
+    btnZoomIn->setAutoRaise(true);
+    m_zoomSlider = new QSlider(Qt::Horizontal);
+    m_zoomSlider->setRange(10, 300);
+    m_zoomSlider->setValue(100);
+
+    setZoom(100);
+
+    QBoxLayout *layout = new QBoxLayout(QBoxLayout::LeftToRight);
+    layout->setSpacing(0);
+    layout->setMargin(0);
+    layout->addWidget(btnZoomOut);
+    layout->addWidget(m_zoomSlider);
+    layout->addWidget(btnZoomIn);
+
+    QWidget *zoomWidget = new QWidget;
+    zoomWidget->setFixedWidth(150);
+    zoomWidget->setLayout(layout);
+
+    connect(btnZoomOut, SIGNAL(pressed()), this, SLOT(zoomOutSlot()));
+    connect(btnZoomIn, SIGNAL(pressed()), this, SLOT(zoomInSlot()));
+    connect(m_zoomSlider, SIGNAL(valueChanged(int)), this, SLOT(setZoom(int)));
+
+    return zoomWidget;
 }
 
 bool CrossWordXmlGuiWindow::setupActions()
@@ -864,96 +1680,6 @@ void CrossWordXmlGuiWindow::updateTheme()
     view()->scene()->update();
 }
 
-void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
-{
-    if (m_state == state)
-        return;
-
-    // Remove old state
-    KConfigGroup cg;
-    switch (m_state) {
-    case ShowingNothing:
-    case ShowingCrossword:
-        break;
-
-    case ShowingCongratulations:
-#if QT_VERSION >= 0x040600
-        m_animation->setCurrentTime(0);
-        m_animation->stop();
-        m_animation = NULL;
-#else
-        foreach(QGraphicsItemAnimation * anim, m_animationList) {
-            anim->timeLine()->setCurrentTime(0);
-            anim->timeLine()->stop();
-            anim->clear();
-            delete anim;
-        }
-#endif
-
-        m_view->scene()->removeItem(m_winItems);
-//      m_winItems->deleteLater();
-        m_view->scene()->update();
-
-        stateChanged("showing_congratulations", StateReverse);
-        break;
-    }
-
-    // Set new state
-    switch (state) {
-    case ShowingNothing:
-        kDebug() << "New state: ShowingNothing";
-
-#if QT_VERSION >= 0x040600
-        krossWord()->animator()->setEnabled(false);
-#endif
-        krossWord()->removeAllCells();
-        krossWord()->resizeGrid(0, 0);
-#if QT_VERSION >= 0x040600
-        krossWord()->animator()->setEnabled(true);
-#endif
-
-        m_undoStackLoaded = false;
-        setCurrentFileName(QString());
-        setModificationType(NoModification);
-
-        m_zoomWidget->setEnabled(false);
-        m_solutionProgress->setEnabled(false);
-        break;
-
-    case ShowingCrossword:
-        kDebug() << "New state: ShowingCrossword";
-
-        krossWord()->setInteractive(true);
-        m_zoomWidget->setEnabled(true);
-        m_solutionProgress->setEnabled(true);
-        m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
-
-        setDefaultCursor();
-        action(actionName(Move_Eraser))->setChecked(false);
-        enableEditActions();
-        break;
-
-    case ShowingCongratulations:
-        kDebug() << "New state: ShowingCongratulations";
-        if (m_state != ShowingCrossword) {
-            kDebug() << "Showing congrats without having a crossword doesn't make sense...";
-        }
-
-        statusBar()->showMessage(i18n("Congratulations! You solved the crossword perfectly."));
-        krossWord()->setInteractive(false);
-        stateChanged("showing_congratulations");
-
-        m_zoomWidget->setEnabled(false);
-        m_solutionProgress->setEnabled(false);
-        m_solutionProgress->setValue(100);
-
-        showCongratulationsItems();
-        break;
-    }
-
-    m_state = state;
-}
-
 void CrossWordXmlGuiWindow::setDefaultCursor()
 {
     Q_ASSERT(m_view);
@@ -971,28 +1697,6 @@ void CrossWordXmlGuiWindow::setDefaultCursor()
         else
             cell->setCursor(cursor);
     }
-}
-
-bool CrossWordXmlGuiWindow::closeFile()
-{
-    if (isModified()) {
-        QString msg = i18n("The current crossword has been modified.\n"
-                           "Would you like to save it?");
-        int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"),
-                     KStandardGuiItem::save(), KStandardGuiItem::discard());
-        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !save()))
-            return false;
-    }
-
-    setState(ShowingNothing);
-    emit fileClosed(m_curFileName);
-
-    return true;
-}
-
-void CrossWordXmlGuiWindow::showMenuBarSlot()
-{
-    menuBar()->setVisible(!menuBar()->isVisible());
 }
 
 void CrossWordXmlGuiWindow::undoStackIndexChanged(int index)
@@ -1336,168 +2040,11 @@ void CrossWordXmlGuiWindow::setModificationType(
     emit modificationTypesChanged(m_modified);
 }
 
-bool CrossWordXmlGuiWindow::createNewCrossWord(
-    const CrosswordTypeInfo &crosswordTypeInfo,
-    const QSize &crosswordSize,
-    const QString& title, const QString& authors,
-    const QString& copyright, const QString& notes)
-{
-    if (!closeFile())
-        return false;
-
-    m_curDocumentOrigin = DocumentNewlyCreated;
-
-    krossWord()->createNew(crosswordTypeInfo, crosswordSize);
-    krossWord()->setTitle(title);
-    krossWord()->setAuthors(authors);
-    krossWord()->setCopyright(copyright);
-    krossWord()->setNotes(notes);
-
-    m_lastAutoSave = QDateTime::currentDateTime();
-//   m_blockAutoSave = false;
-    setModificationType(ModifiedCrossword);
-    setCurrentFileName(i18n("New crossword"));
-    m_solutionProgress->setValue(0);
-
-    setActionVisibility();
-
-    setState(ShowingCrossword);
-    setEditMode();
-    fitToPageSlot();
-
-    return true;
-}
-
-bool CrossWordXmlGuiWindow::createNewCrossWordFromTemplate(
-    const QString& templateFilePath, const QString& title,
-    const QString& authors, const QString& copyright,
-    const QString& notes)
-{
-    if (!closeFile())
-        return false;
-
-
-    if (!loadFile(templateFilePath))
-        return false;
-
-    m_curDocumentOrigin = DocumentNewlyCreated;
-    krossWord()->setTitle(title);
-    krossWord()->setAuthors(authors);
-    krossWord()->setCopyright(copyright);
-    krossWord()->setNotes(notes);
-
-    m_lastAutoSave = QDateTime::currentDateTime();
-//   m_blockAutoSave = false;
-    setModificationType(ModifiedCrossword);
-    setCurrentFileName(i18n("New crossword"));
-    m_solutionProgress->setValue(0);
-
-    setActionVisibility();
-
-    setState(ShowingCrossword);
-    setEditMode();
-
-    return true;
-}
-
 void CrossWordXmlGuiWindow::setActionVisibility()
 {
     CellTypes availableCellTypes = krossWord()->crosswordTypeInfo().cellTypes;
 
     action(actionName(Edit_AddImage))->setVisible(availableCellTypes.testFlag(ImageCellType));
-}
-
-bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat fileFormat, bool loadCrashedFile)
-{
-    if (isModified()) {
-        QString msg = i18n("The current crossword has been modified.\nWould you like to save it?");
-        int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"), KStandardGuiItem::save(), KStandardGuiItem::discard());
-        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !save()))
-            return false;
-    }
-
-    QString errorString;
-    
-    KUrl resultUrl;
-    if (url.isEmpty()) {
-        resultUrl = KFileDialog::getOpenUrl(KUrl("kfiledialog:///loadCrossword"),
-                                            "application/x-krosswordpuzzle "
-                                            "application/x-krosswordpuzzle-compressed "
-                                            "application/x-acrosslite-puz", this);
-    if (resultUrl.isEmpty())
-        return false; // No file was chosen
-    } else
-        resultUrl = url;
-
-    setCurrentFileName(QString());
-
-    // Read the file
-    QString fileName = resultUrl.fileName();
-    updateClueDock();
-
-    QByteArray undoData;
-    bool readOk = krossWord()->read(resultUrl, &errorString, this, fileFormat, &undoData);
-
-    if (readOk) {
-        setState(ShowingCrossword);
-        m_undoStack->createFromData(krossWord(), undoData);
-        m_undoStackLoaded = !undoData.isEmpty();
-        m_lastAutoSave = QDateTime::currentDateTime();
-
-//     if ( krossWord()->highlightedClue() )
-//       m_view->ensureVisible( krossWord()->highlightedClue() );
-//     else
-        //fitToPageSlot();
-
-        statusBar()->showMessage(i18n("Loaded crossword from file '%1'", fileName), 5000);
-        if (loadCrashedFile) {
-            m_curDocumentOrigin = DocumentRestoredAfterCrash;
-            setModificationType(ModifiedCrossword);
-        } else {
-            m_curDocumentOrigin = resultUrl.isLocalFile() ? DocumentOpenedLocally : DocumentDownloaded;
-            setModificationType(NoModification);
-        }
-        setCurrentFileName(resultUrl.path());
-        m_lastSavedUndoIndex = m_undoStack->index();
-
-        updateSolutionInToolBar();
-        m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
-
-        if (krossWord()->crosswordTypeInfo().crosswordType == UnknownCrosswordType) {
-            if (KMessageBox::questionYesNo(this, i18n("The crossword type couldn't "
-                                           "be determined, so 'Free Crossword' is assumed.\n\n"
-                                           "Do you want to convert the crossword to another type now?\n\n"
-                                           "(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")")) == KMessageBox::Yes) {
-                //  Open conversion dialog
-                QPointer<ConvertCrosswordDialog> dialog = new ConvertCrosswordDialog(krossWord(), this);
-                if (dialog->exec() == KDialog::Accepted) {
-                    krossWord()->convertToType(dialog->crosswordTypeInfo());
-                    setModificationType(ModifiedCrossword);
-                }
-                delete dialog;
-            }
-        }
-
-        if (krossWord()->isEmpty())
-            setEditMode();
-
-        adjustGuiToCrosswordType();
-        emit loadingFileComplete(m_curFileName);
-
-//  m_recentFilesAction->addUrl( resultUrl,
-//      isFileInLibrary(resultUrl.path()) ? "Library: " + resultUrl.fileName() : resultUrl.fileName() );
-//  m_recentFilesAction->saveEntries( Settings::self()->config()->group("") );
-        
-        fitToPageSlot();
-        return true;
-    } else {
-        setState(ShowingNothing);
-        m_undoStackLoaded = false;
-        statusBar()->showMessage(i18n("Error while loading file '%1': %2", fileName, errorString));
-        emit errorLoadingFile(fileName);
-
-        return false;
-    }
 }
 
 void CrossWordXmlGuiWindow::adjustGuiToCrosswordType()
@@ -1516,131 +2063,6 @@ void CrossWordXmlGuiWindow::adjustGuiToCrosswordType()
             m_clueDock->show();
     }
     setActionVisibility();
-}
-
-bool CrossWordXmlGuiWindow::save()
-{
-    if (m_curFileName.isEmpty() || !QFile::exists(m_curFileName)
-            || m_curDocumentOrigin == DocumentDownloaded
-            || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
-        return saveAs();
-    } else
-        return writeTo(m_curFileName, KrossWord::Normal, m_undoStackLoaded);
-}
-
-bool CrossWordXmlGuiWindow::saveAs()
-{
-    KUrl startDir;
-    if (m_curDocumentOrigin == DocumentDownloaded
-            || m_curDocumentOrigin == DocumentRestoredAfterCrash)
-        startDir = KGlobalSettings::documentPath();
-    else
-        startDir = KUrl(m_curFileName).path();
-
-    QCheckBox *chkSaveUndoStack = new QCheckBox(i18n("Save &Edit History"));
-    chkSaveUndoStack->setChecked(m_undoStackLoaded);
-
-    QCheckBox *chkSaveAsTemplate = new QCheckBox(i18n("Save As &Template"));
-    chkSaveAsTemplate->setChecked(false);
-    chkSaveAsTemplate->setToolTip(i18n("Save without correct answers, clue texts, images"));
-
-    // Custom widgets for the save as file dialog
-    QWidget *w = new QWidget;
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(chkSaveUndoStack);
-    layout->addWidget(chkSaveAsTemplate);
-    w->setLayout(layout);
-
-    QString fileName;
-    QPointer<KFileDialog> fileDlg = new KFileDialog(startDir,
-            "application/x-krosswordpuzzle "
-            "application/x-krosswordpuzzle-compressed "
-            "application/x-acrosslite-puz", this, w);
-    fileDlg->setMode(KFile::File);
-    fileDlg->setOperationMode(KFileDialog::Saving);
-    fileDlg->setConfirmOverwrite(true);
-
-    if (fileDlg->exec() == KFileDialog::Accepted)
-        fileName = fileDlg->selectedFile();
-    delete fileDlg;
-
-    if (!fileName.isEmpty()) {
-        // Add default extension if non was selected
-        if (fileName.indexOf(QRegExp("\\.(kwp|kwpz|puz)$", Qt::CaseInsensitive)) == -1)
-            fileName += ".kwpz";
-
-        return writeTo(fileName, chkSaveAsTemplate->isChecked() ? KrossWord::Template : KrossWord::Normal, chkSaveUndoStack->isChecked());
-    } else
-        return false;
-}
-
-bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, bool saveUndoStack)
-{
-    KrossWord::FileFormat fileFormat = KrossWord::fileFormatFromFileName(fileName);
-    if (fileFormat == KrossWord::AcrossLitePuzFile) {
-        bool hasConfidencesSet = false;
-        LetterCellList letterList = krossWord()->letters();
-        foreach(LetterCell * letter, letterList) {
-            if (letter->confidence() == Unsure || letter->confidence() == Solved) {
-                hasConfidencesSet = true;
-                break;
-            }
-        }
-
-        if (hasConfidencesSet) {
-            int result = KMessageBox::warningContinueCancel(this,
-                         i18n("Can't store confidence values in *.puz files!\nIf you want confidence "
-                              "values to be stored please use a KrossWordPuzzle file format (*.kwp or *.kwpz)."),
-                         QString(), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
-                         "dont_show_cant_write_confidences_to_puz_confirmation");
-            if (result == KMessageBox::Cancel)
-                return false;
-        }
-
-        KrossWordCellList imageList = krossWord()->cells(ImageCellType);
-        if (!imageList.isEmpty()) {
-            int result = KMessageBox::warningContinueCancel(this,
-                         i18n("Can't store image cells in *.puz files!\nIf you want image "
-                              "cells to be stored please use a KrossWordPuzzle file format (*.kwp or *.kwpz)."),
-                         QString(), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
-                         "dont_show_cant_write_images_to_puz_confirmation");
-            if (result == KMessageBox::Cancel)
-                return false;
-        }
-    }
-
-    QString errorString;
-    bool writeOk;
-    if (saveUndoStack) {
-        writeOk = krossWord()->write(fileName, &errorString, writeMode,
-                                     KrossWord::DetermineByFileName,
-                                     m_undoStack->data());
-    } else
-        writeOk = krossWord()->write(fileName, &errorString, writeMode);
-
-    if (writeOk) {
-        QString oldFileName = m_curFileName;
-        m_lastSavedUndoIndex = m_undoStack->index();
-        setModificationType(NoModification);
-        setCurrentFileName(fileName);
-        statusBar()->showMessage(i18n("Wrote crossword to file '%1'", m_curFileName), 5000);
-        if (m_curDocumentOrigin == DocumentDownloaded
-                || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
-            m_curDocumentOrigin = DocumentOpenedLocally;
-        }
-
-        // TODO connect to signal from main game window
-        emit fileSaved(m_curFileName, oldFileName);
-
-//  QString fileWithoutPath = QFileInfo( m_curFileName ).fileName();
-//  m_recentFilesAction->addUrl( KUrl(m_curFileName),
-//      isFileInLibrary(m_curFileName) ? "Library: " + fileWithoutPath : fileWithoutPath );
-//  m_recentFilesAction->saveEntries( Settings::self()->config()->group("") );
-        return true;
-    } else {
-        statusBar()->showMessage(i18n("Error while writing file: %1", errorString));
-        return false;
-    }
 }
 
 void CrossWordXmlGuiWindow::unlockAndCallAutoSave()
@@ -1779,103 +2201,6 @@ void CrossWordXmlGuiWindow::setupPrinter(QPrinter &printer)
 {
     printer.setCreator("KrossWordPuzzle");
     printer.setDocName(m_curFileName);
-}
-
-void CrossWordXmlGuiWindow::printSlot()
-{
-    Q_ASSERT(m_view);
-
-    QPrinter printer;
-    setupPrinter(printer);
-
-    QWidget *printCrossWord = new QWidget;
-    ui_print_crossword.setupUi(printCrossWord);
-    ui_print_crossword.emptyCellColor->setColor(Qt::gray);
-
-    QPrintDialog *dlg = KdePrint::createPrintDialog(&printer, QList<QWidget*>() << printCrossWord, this);
-    KrossWordDocument document(krossWord(), &printer);
-    dlg->setMinMax(1, document.pages());
-    dlg->setFromTo(1, document.pages());
-
-    if (dlg->exec()) {
-        krossWord()->setEmptyCellColorForPrinting(ui_print_crossword.emptyCellColor->color());
-        document.print(dlg->fromPage(), dlg->toPage());
-    }
-
-    delete dlg;
-}
-
-void CrossWordXmlGuiWindow::printPreviewSlot()
-{
-    Q_ASSERT(m_view);
-
-    QPrinter printer;
-    setupPrinter(printer);
-    KPrintPreview preview(&printer);
-
-    KrossWordDocument document(krossWord(), &printer);
-    document.print();
-
-    preview.exec();
-}
-
-void CrossWordXmlGuiWindow::exportSlot()
-{
-    Q_ASSERT(m_view);
-
-#if KDE_IS_VERSION(4,3,60)
-    QString fileName = KFileDialog::getSaveFileName(KUrl(m_curFileName).upUrl(),
-                       "application/pdf "
-                       "application/postscript "
-                       "image/png "
-                       "image/jpeg", this, i18n("Export"), KFileDialog::ConfirmOverwrite);
-#else
-    QString fileName;
-    QPointer<KFileDialog> fileDlg = new KFileDialog(KUrl(m_curFileName).upUrl(),
-            "application/pdf "
-            "application/postscript "
-            "image/png "
-            "image/jpeg", this);
-    fileDlg->setWindowTitle(i18n("Export"));
-    fileDlg->setMode(KFile::File);
-    fileDlg->setOperationMode(KFileDialog::Saving);
-    fileDlg->setConfirmOverwrite(true);
-    if (fileDlg->exec() == KFileDialog::Accepted)
-        fileName = fileDlg->selectedFile();
-    delete fileDlg;
-#endif
-
-    if (!fileName.isEmpty()) {
-        QString fileSuffix = QFileInfo(fileName).suffix();
-        if (fileSuffix.compare("png", Qt::CaseInsensitive) == 0
-                || fileSuffix.compare("jpeg", Qt::CaseInsensitive) == 0
-                || fileSuffix.compare("jpg", Qt::CaseInsensitive) == 0) {
-            QPointer<KDialog> dlg = new KDialog(this);
-            dlg->setWindowTitle(i18n("Export Settings"));
-            dlg->setModal(true);
-            QWidget *exportToImageDlg = new QWidget;
-            ui_export_to_image.setupUi(exportToImageDlg);
-            dlg->setMainWidget(exportToImageDlg);
-            if (dlg->exec() == KDialog::Rejected)
-                return;
-
-            QPixmap pix = krossWord()->toPixmap(QSize(ui_export_to_image.width->value(), ui_export_to_image.height->value()));
-            int quality = ui_export_to_image.quality->value();
-            delete dlg;
-
-            if (!pix.save(fileName, 0, quality)) {
-                kDebug() << "Couldn't export the crossword to the specified image file." << fileName;
-                KMessageBox::error(this, i18n("Couldn't export the crossword to the specified image file."));
-            }
-        } else {
-            QPrinter printer;
-            setupPrinter(printer);
-
-            printer.setOutputFileName(fileName);
-            KrossWordDocument document(krossWord(), &printer);
-            document.print();
-        }
-    }
 }
 
 void CrossWordXmlGuiWindow::hideCongratulations()
@@ -2793,190 +3118,6 @@ void CrossWordXmlGuiWindow::letterEditRequest(LetterCell* letter, const QChar &c
     }
 }
 
-void CrossWordXmlGuiWindow::addImageSlot()
-{
-    Coord coord = krossWord()->currentCell()->coord();
-    int horizontalCellSpan = 1;
-    int verticalCellSpan = 1;
-    KUrl url;
-
-    QString errorMessage;
-    if (!m_undoStack->tryPush(new AddImageCommand(krossWord(), coord, horizontalCellSpan, verticalCellSpan, url), &errorMessage)) {
-        statusBar()->showMessage(i18nc("%1 contains the reason why the image couldn't be added", "Can't add image. %1", errorMessage));
-    } else { // Image was successfully added
-        enableEditActions();
-    }
-}
-
-void CrossWordXmlGuiWindow::addClueSlot()
-{
-    if (m_popupMenuCell && m_popupMenuCell->cellType() == ClueCellType)
-        krossWord()->setCurrentCell(m_popupMenuCell);
-
-    QString answer;
-    answer.fill(' ', krossWord()->crosswordTypeInfo().minAnswerLength);
-    Coord coord = krossWord()->currentCell()->coord();
-    QList< AnswerOffset > offsetsHorizontal = krossWord()->legalAnswerOffsets(coord, Qt::Horizontal, krossWord()->crosswordTypeInfo().minAnswerLength);
-    QList< AnswerOffset > offsetsVertical = krossWord()->legalAnswerOffsets(coord, Qt::Vertical, krossWord()->crosswordTypeInfo().minAnswerLength);
-
-    Qt::Orientation orientation;
-    AnswerOffset answerOffset;
-    LetterCell *letter = dynamic_cast< LetterCell* >(krossWord()->at(coord));
-    if (letter) {
-        if (letter->isCrossed()) {
-            statusBar()->showMessage(i18n("Can't add clues on crossed letter cells"));
-            return;
-        }
-        if (letter->clue()->isHorizontal())
-            offsetsHorizontal.clear();
-    }
-
-    if (offsetsHorizontal.isEmpty()) {
-        if (offsetsVertical.isEmpty()) {
-            statusBar()->showMessage(i18n("Can't add clue at the current cell"));
-            return;
-        } else {
-            orientation = Qt::Vertical; // FIXME: User Horizontal if there is a letter of a vertical clue
-            if (offsetsVertical.contains(OffsetBottom))
-                answerOffset = OffsetBottom;
-            else
-                answerOffset = offsetsVertical.first();
-        }
-    } else {
-        orientation = Qt::Horizontal;
-        if (offsetsHorizontal.contains(OffsetRight))
-            answerOffset = OffsetRight;
-        else
-            answerOffset = offsetsHorizontal.first();
-    }
-
-    QString errorMessage;
-    if (!m_undoStack->tryPush(new AddClueCommand(krossWord(),
-                              coord, orientation, QString(),
-                              answer, answer, answerOffset), &errorMessage)) {
-        statusBar()->showMessage(i18nc("%1 contains the reason why the clue couldn't be added", "Can't add clue. %1", errorMessage));
-    } else { // Clue was successfully added
-        enableEditActions();
-
-        // Old pointer is invalid, because it has been replaced with the clue cell
-        // or a letter cell if the clue cell is hidden...
-        KrossWordCell *cell = krossWord()->at(coord);
-        ClueCell *newClue;
-        if (cell->isLetterCell())   // For hidden clues
-            newClue = ((LetterCell*)cell)->clue(orientation);
-        else
-            newClue = qgraphicsitem_cast<ClueCell*>(cell);
-
-        if (newClue) {
-            statusBar()->showMessage(i18n("Clue added ('%1')", newClue->clue()));
-            newClue->setHighlight();
-            newClue->firstLetter()->setFocus();
-        } else
-            kDebug() << "New clue not found" << cell;
-    }
-}
-
-void CrossWordXmlGuiWindow::removeSlot()
-{
-    ClueCell *clue;
-    ImageCell *image;
-    if ((clue = krossWord()->highlightedClue()) || (clue = qgraphicsitem_cast<ClueCell*>(m_popupMenuCell))) {
-        QString errorMessage;
-        if (!m_undoStack->tryPush(new RemoveClueCommand(krossWord(), clue), &errorMessage)) {
-            statusBar()->showMessage(i18nc("%1 contains the reason why the clue couldn't be removed", "Can't remove clue. %1", errorMessage));
-        }
-    } else if ((image = qgraphicsitem_cast<ImageCell*>(krossWord()->currentCell())) || (image = qgraphicsitem_cast<ImageCell*>(m_popupMenuCell))) {
-        QString errorMessage;
-        if (!m_undoStack->tryPush(new RemoveImageCommand(krossWord(), image), &errorMessage)) {
-            statusBar()->showMessage(i18nc("%1 contains the reason why the image couldn't be removed", "Can't remove image. %1", errorMessage));
-        }
-    } else
-        statusBar()->showMessage(i18n("No removable cell selected."));
-}
-
-void CrossWordXmlGuiWindow::editCheckRotationSymmetrySlot()
-{
-    bool symmetric = krossWord()->has180DegreeRotationSymmetry();
-    QString message;
-    if (symmetric)
-        message = i18n("The crossword has 180 degree rotation symmetry.");
-    else {
-        if (krossWord()->crosswordTypeInfo().clueCellHandling ==
-                ClueCellsDisallowed) {
-            message = i18n("The crossword doesn't have 180 degree rotation symmetry.\n"
-                           "To achieve symmetry make sure that each empty cell has a counterpart at "
-                           "it's 180 degree rotated position.\n");
-        } else {
-            message = i18n("The crossword doesn't have 180 degree rotation symmetry.\n"
-                           "To achieve symmetry make sure that each empty cell and each clue cell "
-                           "has a counterpart at it's 180 degree rotated position.\n");
-        }
-
-        if (krossWord()->crosswordTypeInfo().rotationSymmetryRequired) {
-            message += '\n' + i18n("Quality crosswords of the current crossword "
-                                   "type (%1) are usually symmetric.",
-                                   krossWord()->crosswordTypeInfo().name);
-        }
-    }
-
-    KMessageBox::information(this, message);
-}
-
-void CrossWordXmlGuiWindow::editStatisticsSlot()
-{
-    KDialog *dialog = new StatisticsDialog(krossWord(), this);
-    dialog->setAttribute(Qt::WA_DeleteOnClose);
-    dialog->show();
-}
-
-void CrossWordXmlGuiWindow::editMoveCellsSlot()
-{
-    QPointer<MoveCellsDialog> dialog = new MoveCellsDialog(krossWord(), this);
-    if (dialog->exec() == KDialog::Accepted) {
-        QString errorMessage;
-        if (!m_undoStack->tryPush(new MoveCellsCommand(krossWord(), dialog->moveHorizontal(), dialog->moveVertical()), &errorMessage)) {
-            statusBar()->showMessage(i18nc("%1 contains the reason why the cells couldn't be moved", "Can't move cells. %1", errorMessage));
-        }
-    }
-    delete dialog;
-}
-
-void CrossWordXmlGuiWindow::editClueNumberMappingSlot()
-{
-    KDialog *dialog = m_propertiesDialog = new KDialog(this);
-    dialog->setWindowTitle(i18n("Clue Number Mapping"));
-    QWidget *clueNumberMappingDlg = new QWidget;
-    ui_clue_number_mapping.setupUi(clueNumberMappingDlg);
-
-    for (int i = 0; i < ui_clue_number_mapping.letterContentList->topLevelItemCount(); ++i) {
-        QTreeWidgetItem *item = ui_clue_number_mapping.letterContentList->topLevelItem(i);
-        QChar ch = item->text(0)[ 0 ];
-        int clueNumber = krossWord()->letterContentToClueNumberMapping().indexOf(ch) + 1;
-        item->setText(1, QString::number(clueNumber));
-    }
-    connect(ui_clue_number_mapping.letterContentList, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), this, SLOT(clueMappingCurrentLetterChanged(QTreeWidgetItem*, QTreeWidgetItem*)));
-    connect(ui_clue_number_mapping.setMapping, SIGNAL(clicked()), this, SLOT(clueMappingSetMappingClicked()));
-
-    dialog->setMainWidget(clueNumberMappingDlg);
-    dialog->setModal(true);
-    if (dialog->exec() == KDialog::Accepted) {
-        QString clueMapping;
-        clueMapping.reserve(26);
-        for (int i = 0; i < ui_clue_number_mapping.letterContentList->topLevelItemCount(); ++i) {
-            QTreeWidgetItem *item = ui_clue_number_mapping.letterContentList->topLevelItem(i);
-            int position = item->text(1).toInt() - 1;
-            clueMapping[ position ] = item->text(0)[ 0 ];
-        }
-
-        QString errorMessage;
-        if (!m_undoStack->tryPush(new SetNumberPuzzleMappingCommand(krossWord(), clueMapping), &errorMessage)) {
-            statusBar()->showMessage(i18nc("%1 contains the reason why the new clue number mapping couldn't be applied", "Can't apply clue number mapping. %1", errorMessage));
-        }
-    }
-
-    delete dialog;
-}
-
 void CrossWordXmlGuiWindow::clueMappingCurrentLetterChanged(
     QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
@@ -2999,22 +3140,6 @@ void CrossWordXmlGuiWindow::clueMappingSetMappingClicked()
     item->setText(1, sNumber);
 }
 
-void CrossWordXmlGuiWindow::propertiesSlot()
-{
-    QPointer<CrosswordPropertiesDialog> dialog = new CrosswordPropertiesDialog(krossWord(), this);
-    connect(dialog, SIGNAL(conversionRequested(CrosswordTypeInfo)), this, SLOT(propertiesConversionRequested(CrosswordTypeInfo)));
-    if (dialog->exec() == KDialog::Accepted) {
-        QString errorMessage;
-        ChangeCrosswordPropertiesCommand *command = new ChangeCrosswordPropertiesCommand(krossWord(), dialog->title(), dialog->author(), dialog->copyright(),
-            dialog->notes(), dialog->columns(), dialog->rows(), dialog->anchor());
-        if (!command->isEmpty() && !m_undoStack->tryPush(command, &errorMessage)) {
-            statusBar()->showMessage(i18nc("%1 contains the reason why the crossword properties couldn't be changed", "Can't change crossword properties. %1", errorMessage));
-        }
-    }
-
-    delete dialog;
-}
-
 void CrossWordXmlGuiWindow::propertiesConversionRequested(
     const CrosswordTypeInfo &typeInfo)
 {
@@ -3027,79 +3152,6 @@ void CrossWordXmlGuiWindow::propertiesConversionRequested(
     enableEditActions();
     adjustGuiToCrosswordType();
     setModificationType(ModifiedCrossword);
-}
-
-void CrossWordXmlGuiWindow::clearCrosswordSlot()
-{
-    QString errorMessage;
-    if (!m_undoStack->tryPush(new ClearCrosswordCommand(krossWord()), &errorMessage)) {
-        statusBar()->showMessage(i18nc("%1 contains the reason why the crossword couldn't be cleared", "Can't clear crossword. %1", errorMessage));
-    } else {
-        stateChanged("clue_cell_highlighted");
-    }
-}
-
-void CrossWordXmlGuiWindow::setEditMode(EditMode editMode)
-{
-    m_editMode = editMode;
-
-    bool inEditMode = isInEditMode();
-    if (m_view)
-        krossWord()->setEditable(inEditMode);
-
-    if (action(actionName(Edit_EnableEditMode))->isChecked() != inEditMode)
-        action(actionName(Edit_EnableEditMode))->setChecked(inEditMode);
-    enableEditActions();
-
-    if (inEditMode) {
-        m_clueTree->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed);
-        toolBar("editToolBar")->setVisible(true);
-
-        m_currentCellDock->show();
-    } else {
-        if (krossWord()->crosswordTypeInfo().clueType == NumberClues1To26
-                && krossWord()->crosswordTypeInfo().clueMapping == CluesReferToCells
-                && krossWord()->crosswordTypeInfo().letterCellContent == Characters) {
-            krossWord()->setupSameLetterSynchronization();
-        }
-        m_clueTree->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        toolBar("editToolBar")->setVisible(false);
-    }
-}
-
-void CrossWordXmlGuiWindow::enableEditModeSlot(bool enable)
-{
-    if (enable) {
-        if (m_curDocumentOrigin == DocumentNewlyCreated || krossWord()->isEmpty()
-                || KMessageBox::warningContinueCancel(this, i18n("This will cause all answers to be shown and editable.\nIf you want to solve the crossword you should cancel."),
-                        "Enable Edit Mode", KStandardGuiItem::cont(), KStandardGuiItem::cancel(), "dont_show_edit_mode_confirmation") == KMessageBox::Continue)
-            setEditMode(Editing);
-        else
-            action(actionName(Edit_EnableEditMode))->setChecked(m_editMode);
-    } else
-        setEditMode(NoEditing);
-}
-
-void CrossWordXmlGuiWindow::editPasteSpecialCharacter()
-{
-    const QToolButton *button = qobject_cast<QToolButton*>(sender());
-    Q_ASSERT(button);
-
-    const QString text = KGlobal::locale()->removeAcceleratorMarker(button->text());
-    Q_ASSERT(!text.isEmpty());
-
-    const QChar character = text.at(0);
-    LetterCell *cell = qgraphicsitem_cast<LetterCell*>(m_popupMenuCell);
-    if (!cell) {
-        kDebug() << "No letter cell selected to insert special character";
-        return;
-    }
-
-    if (krossWord()->isEditable()) {
-        cell->setCorrectLetter(character);
-    } else {
-        cell->setCurrentLetter(character);
-    }
 }
 
 void CrossWordXmlGuiWindow::optionsDictionarySlot()

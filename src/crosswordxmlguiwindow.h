@@ -57,15 +57,10 @@ class QItemSelectionModel;
 class KAction;
 class KRecentFilesAction;
 
-#if QT_VERSION >= 0x040600
 class QPropertyAnimation;
 class QParallelAnimationGroup;
-#else
-class QGraphicsItemAnimation;
-#endif
 
 #include <QTreeView>
-#if QT_VERSION >= 0x040600
 class ClueListView : public QTreeView
 {
     Q_OBJECT
@@ -88,7 +83,6 @@ private:
     QPropertyAnimation *m_scrollAnimation;
     QPoint m_curScrollPos;
 };
-#endif
 
 class CrossWordXmlGuiWindow : public KXmlGuiWindow
 {
@@ -157,7 +151,7 @@ public:
         ShowUndoViewDock,
         ShowCurrentCellDock,
 
-        RecentTab_RecentFilesRemove,
+        RecentTab_RecentFilesRemove
     };
 
     /** Different display states of the game. */
@@ -183,11 +177,10 @@ public:
     /** Types of modifications. */
     enum ModificationType {
         NoModification = 0x00, /** No modification has been made. */
-        ModifiedState = 0x01, /** The state of the crossword has been changed,
-    ie. it's current letters has been changed. */
+        ModifiedState = 0x01, /** The state of the crossword has been changed, ie. it's current letters has been changed. */
         ModifiedCrossword = 0x02 /** The crossword has been edited. */
     };
-    Q_DECLARE_FLAGS(ModificationTypes, ModificationType);
+    Q_DECLARE_FLAGS(ModificationTypes, ModificationType)
 
     enum EditMode {
         NoEditing,
@@ -195,58 +188,41 @@ public:
         EditingInteractiveAddClue
     };
 
-    CrossWordXmlGuiWindow(QWidget* parent = 0);
+    CrossWordXmlGuiWindow(QWidget* parent = nullptr);
     virtual ~CrossWordXmlGuiWindow();
 
     const char *actionName(Action actionEnum) const;
 
-    KrossWordPuzzleView *view() const {
-        return m_view;
-    };
-    KrossWordPuzzleView *viewSolution() const {
-        return m_viewSolution;
-    };
+    KrossWordPuzzleView *view() const;
+    KrossWordPuzzleView *viewSolution() const;
     KrossWord *krossWord() const;
     KrossWord *solutionKrossWord() const;
 
     void setState(DisplayState state);
 
-    bool isInEditMode() const {
-        return m_editMode != NoEditing;
-    };
+    bool isInEditMode() const;
     void setEditMode(EditMode editMode = Editing);
 
-    bool createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,
-                            const QSize &crosswordSize, const QString &title,
-                            const QString &authors, const QString &copyright,
-                            const QString &notes);
-    bool createNewCrossWordFromTemplate(const QString& templateFilePath,
-                                        const QString& title,
-                                        const QString& authors,
-                                        const QString& copyright,
-                                        const QString& notes);
-    inline bool loadFile(const QString& fileName) {
-        return loadFile(KUrl(fileName));
-    };
-    bool loadFile(const KUrl &url,
-                  KrossWord::FileFormat fileFormat = KrossWord::DetermineByFileName,
-                  bool loadCrashedFile = false);
+    bool createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize, const QString &title,
+                            const QString &authors, const QString &copyright, const QString &notes);
+    bool createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title, const QString& authors,
+                                        const QString& copyright, const QString& notes);
+
+    inline bool loadFile(const QString& fileName);
+    bool loadFile(const KUrl &url, KrossWord::FileFormat fileFormat = KrossWord::DetermineByFileName, bool loadCrashedFile = false);
     bool save();
     bool saveAs();
     bool closeFile();
-    bool writeTo(const QString &fileName,
-                 KrossWord::WriteMode writeMode = KrossWord::Normal,
-                 bool saveUndoStack = false);
-    bool isModified() const {
-        return m_modified != NoModification;
-    };
-    QString currentFileName() const {
-        return m_curFileName;
-    };
+    bool writeTo(const QString &fileName, KrossWord::WriteMode writeMode = KrossWord::Normal, bool saveUndoStack = false);
+    bool isModified() const;
+    QString currentFileName() const;
 //     QStandardItemModel *createCrosswordTypeModel() const;
 
 //     KDialog *createCrosswordTypeConfigureDetailsDialog( QWidget *parent,
 //      KrossWord::CrosswordTypeInformation crosswordTypeInfo );
+
+protected:
+    virtual void keyPressEvent(QKeyEvent*);
 
 signals:
     void fileClosed(const QString &fileName);
@@ -259,19 +235,13 @@ signals:
 
 public slots:
     // Game actions
-    void saveSlot() {
-        save();
-    };
-    void saveAsSlot() {
-        saveAs();
-    };
+    void saveSlot();
+    void saveAsSlot();
     void exportSlot();
     void printSlot();
     void printPreviewSlot();
     void showMenuBarSlot();
-    void closeSlot() {
-        closeFile();
-    };
+    void closeSlot();
 
     // Edit actions
     void addClueSlot();
@@ -395,9 +365,6 @@ protected slots:
     void letterEditRequest(LetterCell* letter,
                            const QChar &currentLetter, const QChar &newLetter);
 
-protected:
-    virtual void keyPressEvent(QKeyEvent*);
-
 private:
     KrossWordPuzzleView *createKrossWordPuzzleView();
     void setActionVisibility();
@@ -472,11 +439,7 @@ private:
     QDateTime m_lastAutoSave;
     bool m_undoStackLoaded;
 
-#if QT_VERSION >= 0x040600
     QParallelAnimationGroup *m_animation;
-#else
-    QList<QGraphicsItemAnimation*> m_animationList;
-#endif
 };
 
 #endif // CROSSWORDXMLGUIWINDOW_H
