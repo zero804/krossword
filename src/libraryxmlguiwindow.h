@@ -26,7 +26,6 @@
 #include "ui_download.h"
 
 #include <KXmlGuiWindow>
-#include <QFileInfo>
 
 namespace KIO
 {
@@ -34,12 +33,8 @@ class PreviewJob;
 }
 
 class HtmlDelegate;
-class QStandardItemModel;
-class LibraryModel;
 class KrossWordPuzzle;
-class QTreeView;
 class QStandardItem;
-class KFileItem;
 
 class LibraryXmlGuiWindow : public KXmlGuiWindow
 {
@@ -68,20 +63,11 @@ public:
 
     LibraryXmlGuiWindow(KrossWordPuzzle* parent = 0);
 
-    void setMainWindow(KrossWordPuzzle *mainWindow) {
-        m_mainWindow = mainWindow;
-    }
-
-    QTreeView *libraryTree() const {
-        return m_libraryTree;
-    }
+    QTreeView* libraryTree() const;
 
     const char *actionName(Action actionEnum) const;
 
 public slots:
-    void libraryAddCrossword(const KUrl &url, const QString &subFolder = QString()) {
-        libraryAddCrossword(QList<QUrl>() << url, subFolder);
-    }
     void libraryAddCrossword(const QList<QUrl> &urls, const QString &subFolder = QString());
 
 protected slots:
@@ -112,14 +98,6 @@ protected slots:
     void libraryUpdateSlot();
 
 private:
-    void setupActions();
-
-    void fillLibrary();
-    QString additionsColorCSS();
-    QString libraryFolderText(const QString &path, int crosswordCountOffset = 0);
-
-    QList<QTreeWidgetItem*> getDownloadCrosswordItems(const QString &rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset, const KIcon &puzIcon);
-
     Ui::create_new ui_create_new;
     Ui::export_to_image ui_export_to_image;
     Ui::download ui_download;
@@ -132,6 +110,13 @@ private:
     QStandardItemModel *m_libraryModel;
     HtmlDelegate *m_libraryDelegate;
     KIO::PreviewJob *m_previewJob, *m_downloadPreviewJob;
+
+    void setupActions();
+
+    void fillLibrary();
+    QString getFolderText(const QString &path, int crosswordCountOffset = 0);
+
+    QList<QTreeWidgetItem*> getDownloadCrosswordItems(const QString &rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset, const KIcon &puzIcon);
 
     static QList<DownloadProvider> allDownloadProviders();
 };
