@@ -68,9 +68,6 @@ public:
     const char *actionName(Action actionEnum) const;
 
 public slots:
-    void libraryAddCrossword(const KUrl &url, const QString &subFolder = QString()) {
-        libraryAddCrossword(QList<QUrl>() << url, subFolder);
-    }
     void libraryAddCrossword(const QList<QUrl> &urls, const QString &subFolder = QString());
 
 protected slots:
@@ -117,8 +114,7 @@ private:
     void setupActions();
 
     void fillLibrary();
-    QString additionsColorCSS();
-    QString libraryFolderText(const QString &path, int crosswordCountOffset = 0);
+    QString getFolderText(const QString &path, int crosswordCountOffset = 0);
 
     QList<QTreeWidgetItem*> getDownloadCrosswordItems(const QString &rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset, const KIcon &puzIcon);
 
