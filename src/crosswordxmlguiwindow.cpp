@@ -1222,6 +1222,12 @@ void CrossWordXmlGuiWindow::editPasteSpecialCharacter()
     }
 }
 
+void CrossWordXmlGuiWindow::moveSetConfidenceConfidentSlot()
+{
+    if (m_popupMenuCell && m_popupMenuCell->isLetterCell())
+        ((LetterCell*)m_popupMenuCell)->setConfidence(Confident);
+}
+
 //======================================================
 
 
@@ -2419,12 +2425,6 @@ void CrossWordXmlGuiWindow::solveSlot()
     connect(krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));
 
     m_solutionProgress->setValue(100);
-}
-
-void CrossWordXmlGuiWindow::moveSetConfidenceConfidentSlot()
-{
-    if (m_popupMenuCell && m_popupMenuCell->isLetterCell())
-        ((LetterCell*)m_popupMenuCell)->setConfidence(Confident);
 }
 
 void CrossWordXmlGuiWindow::moveSetConfidenceUnsureSlot()
