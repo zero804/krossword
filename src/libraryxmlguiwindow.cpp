@@ -36,7 +36,7 @@
 //#include <QListView>
 //#include <QStringListModel>
 
-#include <KDebug>
+#include <QDebug>
 //#include <KAction>
 #include <KMessageBox>
 #include <KFileDialog>
@@ -84,7 +84,6 @@ LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindo
     connect(m_libraryTree, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(libraryTreeContextMenuRequested(QPoint)));
     connect(m_libraryTree, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(libraryItemDoubleClicked(QModelIndex)));
 
-    // Fill library view with files
     fillLibrary();
 }
 
@@ -185,14 +184,14 @@ void LibraryXmlGuiWindow::previewJobGotPreview(const KFileItem &fi, const QPixma
     QModelIndexList list = m_libraryModel->match(m_libraryModel->index(0, 0), Qt::UserRole,
                            fileName, 1, Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive);
     if (list.isEmpty())
-        kDebug() << "Item for preview image not found";
+        qDebug() << "Item for preview image not found";
     else
         m_libraryModel->itemFromIndex(list.first())->setIcon(pix);
 }
 
 void LibraryXmlGuiWindow::previewJobFailed(const KFileItem &fi)
 {
-    kDebug() << fi.url();
+    qDebug() << fi.url();
 }
 
 void LibraryXmlGuiWindow::downloadPreviewJobGotPreview(const KFileItem& fi, const QPixmap& pix)
@@ -207,7 +206,7 @@ void LibraryXmlGuiWindow::downloadPreviewJobGotPreview(const KFileItem& fi, cons
 
 void LibraryXmlGuiWindow::downloadPreviewJobFailed(const KFileItem& fi)
 {
-    kDebug() << fi.url();
+    qDebug() << fi.url();
 }
 
 void LibraryXmlGuiWindow::downloadProviderChanged(int index)
@@ -316,7 +315,7 @@ void LibraryXmlGuiWindow::libraryItemChanged(QStandardItem *item)
     if (item->parent()) {
         if (!item->parent()->child(item->row(), 0)) {
             // Item copied/moved to another column...
-            kDebug() << "Remove copied item";
+            qDebug() << "Remove copied item";
             m_libraryModel->removeRow(item->row(), item->index().parent());
             return;
         }
@@ -328,7 +327,7 @@ void LibraryXmlGuiWindow::libraryItemChanged(QStandardItem *item)
 
         if (!item) {
             // Item copied/moved to another column...
-            kDebug() << "Remove copied item";
+            qDebug() << "Remove copied item";
             m_libraryModel->removeRow(row);
             return;
         }
@@ -353,10 +352,10 @@ void LibraryXmlGuiWindow::libraryItemChanged(QStandardItem *item)
     if (libraryDir.endsWith(QDir::separator()))
         libraryDir = libraryDir.left(libraryDir.length() - 1);
 
-    //  kDebug() << "LIBRARY DIR" << libraryDir;
-    //  kDebug() << "OLD FILE PATH" << oldCrosswordFilePath;
-    //  kDebug() << "OLD DIR" << oldCrosswordPath;
-    //  kDebug() << "NEW DIR" << newCrosswordPath;
+    //  qDebug() << "LIBRARY DIR" << libraryDir;
+    //  qDebug() << "OLD FILE PATH" << oldCrosswordFilePath;
+    //  qDebug() << "OLD DIR" << oldCrosswordPath;
+    //  qDebug() << "NEW DIR" << newCrosswordPath;
 
     if (oldCrosswordPath != newCrosswordPath) {
         QString fileName = oldCrosswordFileInfo.fileName();
@@ -529,14 +528,16 @@ void LibraryXmlGuiWindow::libraryExportSlot()
                 KrossWordDocument document(&krossWord, &printer);
                 document.print();
             } else if (fileSuffix.compare("png", Qt::CaseInsensitive) == 0
-                       || fileSuffix.compare("jpeg", Qt::CaseInsensitive) == 0
-                       || fileSuffix.compare("jpg", Qt::CaseInsensitive) == 0) {
+                    || fileSuffix.compare("jpeg", Qt::CaseInsensitive) == 0
+                    || fileSuffix.compare("jpg", Qt::CaseInsensitive) == 0) {
                 QPointer<KDialog> dlg = new KDialog(this);
                 dlg->setWindowTitle(i18n("Export Settings"));
                 dlg->setModal(true);
-                QWidget *exportToImageDlg = new QWidget;
+
+                QWidget *exportToImageDlg = new QWidget(dlg);
                 ui_export_to_image.setupUi(exportToImageDlg);
                 dlg->setMainWidget(exportToImageDlg);
+
                 if (dlg->exec() == KDialog::Rejected) {
                     delete dlg;
                     return;
@@ -547,7 +548,7 @@ void LibraryXmlGuiWindow::libraryExportSlot()
                 delete dlg;
 
                 if (!pix.save(fileName, 0, quality)) {
-                    kDebug() << fileName;
+                    qDebug() << fileName;
                     KMessageBox::error(this, i18n("Couldn't export the image to the specified file."));
                 } else {
                     if (!krossWord.write(fileName, &errorString)) {
@@ -887,7 +888,7 @@ void LibraryXmlGuiWindow::fillLibrary()
             QString errorString;
             KrossWordXmlReader::KrossWordInfo info = KrossWordXmlReader::readInfo(KUrl(libraryFile), &errorString);
             if (!info.isValid()) {
-                kDebug() << "Error reading crossword info from library file" << errorString;
+                qDebug() << "Error reading crossword info from library file" << errorString;
             }
 
             if (isBaseLibraryDir) {
