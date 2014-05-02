@@ -72,21 +72,14 @@ class ImageCell;
 * the synchronization of all cells of the crossword.
 * @brief An interactive crossword to be displayed in a QGraphicsScene. */
 
-#if QT_VERSION >= 0x040600
 class KrossWord : public QGraphicsObject
 {
-#else
-class KrossWord : public QObject, public QGraphicsItem
-{
-#endif
     friend class KrossWordCell;
     friend class ClueCell;
     friend class LetterCell;
     friend class SolutionLetterCell;
     Q_OBJECT
-#if QT_VERSION >= 0x040600
     Q_INTERFACES(QGraphicsItem)
-#endif
 
 public:
     /** Types of error when trying to change the crossword. For example, the
@@ -109,7 +102,7 @@ public:
         ErrorImageDoesntFit = 0x0100, /**< The image doesn't fit in the grid with the given settings. */
         ErrorImageCellsArentEmpty = 0x0200 /**< The cells for a new image aren't empty. */
     };
-    Q_DECLARE_FLAGS(ErrorTypes, ErrorType);   // TODO Better naming...
+    Q_DECLARE_FLAGS(ErrorTypes, ErrorType)   // TODO Better naming...
 
     enum FileFormat {
         DetermineByFileName,
@@ -152,28 +145,28 @@ public:
 
     QString title() const {
         return m_title;
-    };
+    }
     void setTitle(const QString &title) {
         m_title = title;
-    };
+    }
     QString authors() const {
         return m_authors;
-    };
+    }
     void setAuthors(const QString &authors) {
         m_authors = authors;
-    };
+    }
     QString copyright() const {
         return m_copyright;
-    };
+    }
     void setCopyright(const QString &copyright) {
         m_copyright = copyright;
-    };
+    }
     QString notes() const {
         return m_notes;
-    };
+    }
     void setNotes(const QString &notes) {
         m_notes = notes;
-    };
+    }
 
     bool canTakeSpannedCell(const Coord &coord,
                             int horizontalCellSpan, int verticalCellSpan,

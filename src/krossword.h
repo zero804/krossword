@@ -47,9 +47,7 @@ class DoubleClueCell;
 class SpannedCell;
 class ImageCell;
 
-#if QT_VERSION >= 0x040600
 class Animator;
-#endif
 
 /**
  * @class KrosswordGrid krossword.h <Crossword>
@@ -60,7 +58,7 @@ class KrosswordGrid : public KGrid2D::Square< KrossWordCell* >
 {
 public:
     explicit KrosswordGrid(uint width = 0, uint height = 0)
-        : KGrid2D::Square< KrossWordCell* >(width, height) {};
+        : KGrid2D::Square< KrossWordCell* >(width, height) {}
 
     /**
       * @return the offset for the given neighbour.
@@ -85,7 +83,6 @@ public:
     }
 };
 
-#if QT_VERSION >= 0x040600
 class FocusItem : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
@@ -94,31 +91,16 @@ class FocusItem : public QObject, public QGraphicsRectItem
     Q_PROPERTY(qreal opacity READ opacity WRITE setOpacity)
     Q_INTERFACES(QGraphicsItem)
 public:
-    FocusItem(QGraphicsItem* parent = 0) : QObject(0), QGraphicsRectItem(parent) {};
+    FocusItem(QGraphicsItem* parent = 0) : QObject(0), QGraphicsRectItem(parent) {}
 
 };
-#else // QT_VERSION >= 0x040600
-class FocusItem : public QGraphicsRectItem
-{
-public:
-    FocusItem(QGraphicsItem* parent = 0) : QGraphicsRectItem(parent) {};
-
-};
-#endif
 
 
 class KrossWord;
-#if QT_VERSION >= 0x040600
 class KrossWordTitleItem : public QGraphicsObject
 {
-#else
-class KrossWordTitleItem : public QObject, public QGraphicsItem
-{
-#endif
     Q_OBJECT
-#if QT_VERSION >= 0x040600
     Q_INTERFACES(QGraphicsItem)
-#endif
 
 public:
     KrossWordTitleItem(QGraphicsItem *parent = 0);
@@ -128,22 +110,19 @@ public:
 
     QGraphicsTextItem *titleItem() const {
         return m_titleItem;
-    };
+    }
     QGraphicsTextItem *authorsItem() const {
         return m_authorsItem;
-    };
+    }
 
     virtual QRectF boundingRect() const;
-    virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
-                       QWidget* widget = 0);
+    virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
 public slots:
     void crosswordResized(KrossWord *krossWord, int columns, int rows);
 
 private:
-#if QT_VERSION >= 0x040600
     void updateGraphicsEffect(KrossWord *krossWord, QGraphicsDropShadowEffect *effect);
-#endif
 
     QGraphicsTextItem *m_titleItem;
     QGraphicsTextItem *m_authorsItem;
@@ -187,13 +166,8 @@ private:
  * the synchronization of all cells of the crossword.
  * @brief An interactive crossword to be displayed in a QGraphicsScene.
  */
-#if QT_VERSION >= 0x040600
 class KrossWord : public QGraphicsObject
 {
-#else
-class KrossWord : public QObject, public QGraphicsItem
-{
-#endif
     friend class KrossWordCell;
     friend class EmptyCell;
     friend class ClueCell;
@@ -202,9 +176,7 @@ class KrossWord : public QObject, public QGraphicsItem
     friend class DoubleClueCell; // To call replaceCell()
     friend class SpannedCell; // To call replaceCell()
     Q_OBJECT
-#if QT_VERSION >= 0x040600
     Q_INTERFACES(QGraphicsItem)
-#endif
     Q_PROPERTY(QString title READ title WRITE setTitle)
     Q_PROPERTY(QString authors READ authors WRITE setAuthors)
     Q_PROPERTY(QString copyright READ copyright WRITE setCopyright)
@@ -237,7 +209,7 @@ public:
         SetupSameLetterSynchronization = 0x01,
         SetDefaultNumberPuzzleMapping = 0x02
     };
-    Q_DECLARE_FLAGS(ConversionCommands, ConversionCommand);
+    Q_DECLARE_FLAGS(ConversionCommands, ConversionCommand)
 
     struct Statistics {
         int letterCellCount;
@@ -288,10 +260,10 @@ public:
     /** Gets the type information of the current crossword type. */
     CrosswordTypeInfo crosswordTypeInfo() const {
         return m_crosswordTypeInfo;
-    };
+    }
     void setCrosswordTypeInfo(CrosswordTypeInfo typeInfo) {
         m_crosswordTypeInfo = typeInfo;
-    };
+    }
 
     /** Creates and returns a model with all standard crossword types and
     * all crossword types in @p additionalTypes. */
@@ -301,28 +273,26 @@ public:
     /** Gets statistics of the crossword. */
     Statistics statistics();
 
-#if QT_VERSION >= 0x040600
     inline Animator *animator() const {
         return m_animator;
-    };
-#endif
+    }
 
     AnimationTypes animationTypes() const {
         return m_animationTypes;
-    };
+    }
     void setAnimationTypes(AnimationTypes animationTypes) {
         m_animationTypes = animationTypes;
-    };
+    }
     inline void disableAnimations() {
         setAnimationTypes(NoAnimation);
-    };
+    }
     void enableAnimationType(AnimationType animationType, bool enable = true) {
         if (enable) m_animationTypes |= animationType;
         else m_animationTypes &= ~animationType;
-    };
+    }
     inline bool isAnimationTypeEnabled(AnimationType animationType) {
         return m_animationTypes.testFlag(animationType);
-    };
+    }
 
     void createNew(CrosswordType crosswordType, const QSize &crosswordSize);
     void createNew(const CrosswordTypeInfo &crosswordTypeInfo,

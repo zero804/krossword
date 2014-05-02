@@ -202,13 +202,7 @@ void KrossWordTitleItem::crosswordResized(KrossWord *krossWord,
 
 
 KrossWord::KrossWord(KrosswordTheme *theme, int width, int height)
-#if QT_VERSION >= 0x040600
-    :
-    QGraphicsObject(0), m_animator(new Animator()),
-#else
-    :
-    QGraphicsItem(0),
-#endif
+    : QGraphicsObject(0), m_animator(new Animator()),
     m_currentCell(0), m_previousCell(0),
     m_highlightedClue(0), m_previousHighlightedClue(0),
     m_focusItem(0), m_titleItem(0),

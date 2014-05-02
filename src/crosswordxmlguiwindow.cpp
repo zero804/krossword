@@ -55,10 +55,8 @@
 #include <QTimer>
 #include <QStringListModel>
 
-#if QT_VERSION >= 0x040600
 #include <QParallelAnimationGroup>
 #include <QPropertyAnimation>
-#endif
 
 #include <KAction>
 #include <KToggleAction>
@@ -93,7 +91,6 @@
 #include <kapplication.h>
 #include "kdeversion.h"
 
-#if QT_VERSION >= 0x040600
 ClueListView::ClueListView(QWidget* parent)
     : QTreeView(parent), m_scrollAnimation(0)
 {
@@ -156,26 +153,21 @@ void ClueListView::scrollAnimationFinished()
     delete m_scrollAnimation;
     m_scrollAnimation = NULL;
 }
-#endif
 
 
 CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent)
     : KXmlGuiWindow(parent, Qt::Widget),
-      m_view(0),
-      m_viewSolution(0),
-      m_zoomSlider(0),
-      m_zoomWidget(0),
-      m_solutionProgress(0),
-      m_cluePropertiesCharMenu(0),
-      m_btnGroupAnswerOffset(0),
-      m_clueModel(0), m_clueSelectionModel(0),
-      m_winItems(0),
-      m_popupMenuCell(0),
-      m_propertiesCell(0), m_propertiesDialog(0),
-      m_dictionary(0)
-#if QT_VERSION >= 0x040600
-      , m_animation(0)
-#endif
+      m_view(nullptr),
+      m_viewSolution(nullptr),
+      m_zoomSlider(nullptr),
+      m_zoomWidget(nullptr),
+      m_solutionProgress(nullptr),
+      m_clueModel(nullptr),
+      m_clueSelectionModel(nullptr),
+      m_winItems(nullptr),
+      m_popupMenuCell(nullptr),
+      m_dictionary(nullptr),
+      m_animation(nullptr)
 {
     m_lastSavedUndoIndex = -1;
     m_undoStackLoaded = false;
@@ -199,7 +191,8 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent)
         KrosswordRenderer::self()->setTheme(savedThemeName);
 
     // Create main view
-    setCentralWidget(m_view = createKrossWordPuzzleView());
+    m_view = createKrossWordPuzzleView();
+    setCentralWidget(m_view);
 
     // Create coordinates item in the status bar
     statusBar()->insertPermanentFixedItem(QString(), CoordinatesItem);
@@ -1141,7 +1134,7 @@ void CrossWordXmlGuiWindow::editStatisticsSlot()
 
 void CrossWordXmlGuiWindow::editClueNumberMappingSlot()
 {
-    KDialog *dialog = m_propertiesDialog = new KDialog(this);
+    KDialog *dialog = new KDialog(this);
     dialog->setWindowTitle(i18n("Clue Number Mapping"));
     QWidget *clueNumberMappingDlg = new QWidget;
     ui_clue_number_mapping.setupUi(clueNumberMappingDlg);
@@ -2164,7 +2157,8 @@ void CrossWordXmlGuiWindow::setCurrentFileName(const QString& fileName)
 
 KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
 {
-    KrossWordPuzzleView *view = new KrossWordPuzzleView(new KrossWordPuzzleScene(new KrossWord(&m_theme)));
+    //!Warning Krossword class needs a pointer to a theme but doesn't seems to be in trouble with a null pointer
+    KrossWordPuzzleView *view = new KrossWordPuzzleView(new KrossWordPuzzleScene(new KrossWord(nullptr)));
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->scene()->setStickyFocus(true);
@@ -2261,9 +2255,8 @@ void CrossWordXmlGuiWindow::showCongratulationsItems()
     layout->activate();
     m_view->fitInView(layout->contentsRect().adjusted(-150, -150, 150, 150), Qt::KeepAspectRatio);
 
-#if QT_VERSION >= 0x040600
     // Animate using QtKinetic
-    m_animation = new QParallelAnimationGroup;
+    m_animation = new QParallelAnimationGroup(this);
     m_animation->setLoopCount(-1);
 
     KrossWordCellList cellList = krossWord()->cells();
@@ -2295,52 +2288,6 @@ void CrossWordXmlGuiWindow::showCongratulationsItems()
     }
 
     m_animation->start(QAbstractAnimation::DeleteWhenStopped);
-
-#else // QT_VERSION >= 0x040600
-    // Animate using QGraphicsItemAnimation
-    KrossWordCellList cellList = krossWord()->cells();
-    foreach(KrossWordCell * cell, cellList) {
-        if (cell->isType(EmptyCellType))
-            continue;
-
-        QGraphicsItemAnimation *anim = new QGraphicsItemAnimation;
-        m_animationList << anim;
-        anim->setItem(cell);
-
-        QTimeLine *timeLine = new QTimeLine(10000);
-        timeLine->setLoopCount(0);
-        timeLine->setFrameRange(0, 360);
-        anim->setTimeLine(timeLine);
-
-        float r = (float)KRandom::random() / (float)RAND_MAX + 0.5f;
-        for (float i = 0; i < 2 * 3.14159f; i += 0.05f) {
-            float step = i / (2 * 3.14159f);
-            float sini = sin(i);
-            anim->setTranslationAt(step, sini * r, sin(i / 4.f));
-            anim->setScaleAt(step, sini / 4.f + 1.f, sini / 4.f + 1.f);
-        }
-        anim->setRotationAt(0, 0);
-        for (float i = 2.f; i < 2 * 3.14159f; i += 0.05f) {
-            float step = i / (2 * 3.14159f);
-            anim->setRotationAt(step, sin(i) * 20.f * r);
-        }
-        timeLine->start();
-    }
-
-    QGraphicsItemAnimation *anim = new QGraphicsItemAnimation;
-    m_animationList << anim;
-    anim->setItem(krossWord());
-    QTimeLine *timeLine = new QTimeLine(10000);
-    timeLine->setLoopCount(0);
-    timeLine->setFrameRange(0, 360);
-    anim->setTimeLine(timeLine);
-    anim->setTranslationAt(0, 0, 0);
-    anim->setTranslationAt(0.3, -25, 25);
-    anim->setTranslationAt(0.6, 25, -25);
-    anim->setTranslationAt(1, 0, 0);
-
-    timeLine->start();
-#endif // QT_VERSION >= 0x040600
 }
 
 void CrossWordXmlGuiWindow::setZoom(int value)

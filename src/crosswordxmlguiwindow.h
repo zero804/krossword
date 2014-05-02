@@ -31,7 +31,7 @@
 #include <QPrinter>
 #include <KXmlGuiWindow>
 #include <KUrl>
-
+#include <QTreeView>
 
 #define MIN_SECS_BETWEEN_AUTOSAVES 30
 
@@ -60,7 +60,6 @@ class KRecentFilesAction;
 class QPropertyAnimation;
 class QParallelAnimationGroup;
 
-#include <QTreeView>
 class ClueListView : public QTreeView
 {
     Q_OBJECT
@@ -185,7 +184,7 @@ public:
     enum EditMode {
         NoEditing,
         Editing,
-        EditingInteractiveAddClue
+        EditingInteractiveAddClue   //Unused
     };
 
     CrossWordXmlGuiWindow(QWidget* parent = nullptr);
@@ -237,10 +236,10 @@ public slots:
     // Game actions
     void saveSlot();
     void saveAsSlot();
-    void exportSlot();
+    void exportSlot();  //Unused functionality?
     void printSlot();
     void printPreviewSlot();
-    void showMenuBarSlot();
+    void showMenuBarSlot();  //Unused functionality?
     void closeSlot();
 
     // Edit actions
@@ -268,7 +267,7 @@ public slots:
     void hintClueSlot();
     void hintHorizontalClueSlot();
     void hintVerticalClueSlot();
-    void clearCellSlot();
+    void clearCellSlot();       //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     void clearClueSlot();
     void clearHorizontalClueSlot();
     void clearVerticalClueSlot();
@@ -326,22 +325,16 @@ protected slots:
 
     void solutionViewResized(const QSize &oldSize, const QSize &newSize);
 
-    void clueMappingCurrentLetterChanged(
-        QTreeWidgetItem *current, QTreeWidgetItem *previous);
+    void clueMappingCurrentLetterChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
     void clueMappingSetMappingClicked();
 
     void propertiesConversionRequested(const CrosswordTypeInfo &typeInfo);
 
-    void changeAnswerOffsetRequested(ClueCell *clueCell,
-                                     AnswerOffset newAnswerOffset);
-    void changeOrientationRequested(ClueCell *clueCell,
-                                    Qt::Orientation newOrientation);
+    void changeAnswerOffsetRequested(ClueCell *clueCell, AnswerOffset newAnswerOffset);
+    void changeOrientationRequested(ClueCell *clueCell, Qt::Orientation newOrientation);
     void changeClueTextRequested(ClueCell *clueCell, const QString &newClueText);
-    void changeClueAndCorrectAnswerRequested(ClueCell *clueCell,
-            const QString &newClueText,
-            const QString &newCorrectAnswer);
-    void setSolutionWordIndexRequested(SolutionLetterCell *solutionLetterCell,
-                                       int newSolutionLetterIndex);
+    void changeClueAndCorrectAnswerRequested(ClueCell *clueCell, const QString &newClueText, const QString &newCorrectAnswer);
+    void setSolutionWordIndexRequested(SolutionLetterCell *solutionLetterCell, int newSolutionLetterIndex);
     void convertToLetterCellRequested(SolutionLetterCell *solutionLetterCell);
     void convertToSolutionLetterCellRequested(LetterCell *letterCell);
 
@@ -349,13 +342,10 @@ protected slots:
 
     // KrossWord slots
     void currentClueChanged(ClueCell *question);
-    void answerChanged(ClueCell*, const QString&, bool statusBar = true,
-                       const KIcon &icon = KIcon());
+    void answerChanged(ClueCell*, const QString&, bool statusBar = true, const KIcon &icon = KIcon());
     void currentCellChanged(KrossWordCell *currentCell, KrossWordCell* previousCell);
-    void customContextMenuRequestedForCell(const QPointF &scenePos,
-                                           KrossWordCell *cell);
-    void mousePressedOnCell(const QPointF &scenePos, Qt::MouseButton button,
-                            KrossWordCell *cell);
+    void customContextMenuRequestedForCell(const QPointF &scenePos, KrossWordCell *cell);
+    void mousePressedOnCell(const QPointF &scenePos, Qt::MouseButton button, KrossWordCell *cell);
     void cluesAdded(ClueCellList clues);
     void cluesAboutToBeRemoved(ClueCellList clues);
 
@@ -405,41 +395,35 @@ private:
     EditMode m_editMode;
     DisplayState m_state;
     QString m_curFileName, m_curTmpFileName;
-    ClueCell *m_editClue;
     int m_lastSavedUndoIndex;
 
-    KrossWordPuzzleView *m_view;
-    KrossWordPuzzleView *m_viewSolution;
+    KrossWordPuzzleView *m_view;                // Owned
+    KrossWordPuzzleView *m_viewSolution;        // Owned
 
-    QSlider *m_zoomSlider;
-    QWidget *m_zoomWidget;
-    QProgressBar *m_solutionProgress;
+    QSlider *m_zoomSlider;                      // Owned
+    QWidget *m_zoomWidget;                      // Owned
+    QProgressBar *m_solutionProgress;           // Owned
 
-    QMenu *m_cluePropertiesCharMenu;
-    QButtonGroup *m_btnGroupAnswerOffset;
-    KRecentFilesAction *m_recentFilesAction;
-    QDockWidget *m_clueDock, *m_undoViewDock, *m_currentCellDock;
-    QUndoView *m_undoView;
-    UndoStackExt *m_undoStack;
-    CurrentCellWidget *m_currentCellWidget;
-    QTreeView *m_clueTree;
-    ClueModel *m_clueModel;
-    QItemSelectionModel *m_clueSelectionModel;
-    QGraphicsProxyWidget *m_winItems;
+    QDockWidget *m_clueDock;                    // Owned
+    QDockWidget *m_undoViewDock;                // Owned
+    QDockWidget *m_currentCellDock;             // Owned
 
-    KrossWordCell *m_popupMenuCell;
-    KrossWordCell *m_propertiesCell;
-    KDialog *m_propertiesDialog;
+    QUndoView *m_undoView;                      // Owned
+    UndoStackExt *m_undoStack;                  // Owned
+    CurrentCellWidget *m_currentCellWidget;     // Owned
+    QTreeView *m_clueTree;                      // Owned
+    ClueModel *m_clueModel;                     // Owned
+    QItemSelectionModel *m_clueSelectionModel;  // Owned
+    QGraphicsProxyWidget *m_winItems;           // Owned
 
-    KrosswordDictionary *m_dictionary;
-    QString m_lastDictionaryPattern;
+    KrossWordCell *m_popupMenuCell;             // Not Owned
 
-    KrosswordTheme m_theme;
+    KrosswordDictionary *m_dictionary;          // Owned
 
     QDateTime m_lastAutoSave;
     bool m_undoStackLoaded;
 
-    QParallelAnimationGroup *m_animation;
+    QParallelAnimationGroup *m_animation;       // Owned
 };
 
 #endif // CROSSWORDXMLGUIWINDOW_H

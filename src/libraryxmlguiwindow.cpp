@@ -806,7 +806,7 @@ void LibraryXmlGuiWindow::fillLibrary()
 
     // Create HTML delegate
     if (!m_libraryDelegate) {
-        m_libraryDelegate = new HtmlDelegate;
+        m_libraryDelegate = new HtmlDelegate;   //! <<<<<<<<<<<<< Leak
         m_libraryTree->setItemDelegate(m_libraryDelegate);
     }
 
