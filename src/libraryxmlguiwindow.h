@@ -58,6 +58,9 @@ public:
         BostonGlobe,
         OnionCrosswords,
         WallStreetJournal,
+        ChronicleHigherEducation,
+        CrossNerd,
+        SwearCrossword,
         WashingtonPost
     };
 

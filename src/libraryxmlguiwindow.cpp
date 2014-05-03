@@ -206,58 +206,57 @@ void LibraryXmlGuiWindow::downloadProviderChanged(int index)
 
     DownloadProvider provider = static_cast<DownloadProvider>(ui_download.providers->itemData(index).toInt());
     switch (provider) {
+    /* outdated
     case HoustonChronicle:
         item = new QTreeWidgetItem(QStringList() << i18n("Daily Crossword From Houston Chronicle"));
         item->setIcon(0, puzIcon);
         item->setData(0, Qt::UserRole, "http://www.chron.com/apps/games/xword/puzzles/today.puz");
         items << item;
         break;
-
+    */
     case JonesinCrosswords:
-        items << getDownloadCrosswordItems(
-                  "http://herbach.dnsalias.com/Jonesin/jz%1.puz",
+        items << getDownloadCrosswordItems("http://herbach.dnsalias.com/Jonesin/jz%1.puz",
                   QDate(2008, 6, 5), QDate::currentDate(), 7, puzIcon);
-//    i18n("Weekly Crosswords From Matt Jones %1"),
-//         "loadFromJonesin%1",
-//         i18n("Crosswords by Matt Jones"),
         break;
-
+    /* outdated
     case BostonGlobe:
-        items << getDownloadCrosswordItems(
-                  "http://home.comcast.net/~nshack/Puzzles/bg%1.puz",
+        items << getDownloadCrosswordItems("http://home.comcast.net/~nshack/Puzzles/bg%1.puz",
                   QDate(2009, 1, 4), QDate::currentDate(), 7, puzIcon);
-//         i18n("Weekly Crosswords From Boston Globe %1"),
-//        "loadFromBostonGlobe%1",
-//        i18n("Crosswords from Boston Globe by Emily Cox, Henry Rathvon and Henry Hook"),
         break;
-
+    */
+    /* outdated
     case OnionCrosswords:
-        items << getDownloadCrosswordItems(
-                  "http://herbach.dnsalias.com/Tausig/av%1.puz",
+        items << getDownloadCrosswordItems("http://herbach.dnsalias.com/Tausig/av%1.puz",
                   QDate(2008, 1, 2), QDate::currentDate(), 7, puzIcon);
-//        i18n("Weekly Crosswords From Onion Crosswords %1"),
-//        "loadFromOnion%1",
-//        i18n("Crosswords from Onion Crosswords by Ben Tausig"),
         break;
-
+    */
     case WallStreetJournal:
-        items << getDownloadCrosswordItems(
-                  "http://mazerlm.home.att.net/wsj%1.puz",
-                  QDate(2008, 1, 4), QDate::currentDate(), 7, puzIcon);
-//        i18n("Weekly Crosswords From Wall Street Journal %1"),
-//        "loadFromWallStreetJournal%1",
-//        i18n("Crosswords from Wall Street Journal by Mike Shenk"),
+        items << getDownloadCrosswordItems("http://mazerlm.home.comcast.net/wsj%1.puz", QDate(2009, 1, 2), QDate(2012, 12, 28), 7, puzIcon);
+        items << getDownloadCrosswordItems("http://herbach.dnsalias.com/wsj/wsj%1.puz", QDate(2013, 1, 4), QDate::currentDate(), 7, puzIcon);
         break;
 
+    case ChronicleHigherEducation:
+        items << getDownloadCrosswordItems("http://chronicle.com/items/biz/puzzles/20%1.puz", QDate(2009, 10, 9), QDate::currentDate(), 7, puzIcon);
+        break;
+
+    case CrossNerd:
+        item = new QTreeWidgetItem(QStringList() << i18n("The Cross Nerd current crossword"));
+        item->setIcon(0, puzIcon);
+        item->setData(0, Qt::UserRole, "http://crossexamination.info/CN_current.puz");
+        items << item;
+        break;
+
+    case SwearCrossword:
+        items << getDownloadCrosswordItems("http://wij.theworld.com/puzzles/dailyrecord/DR%1.puz", QDate(2011, 1, 7), QDate(2013, 12, 27), 7, puzIcon);
+        break;
+
+    /* outdated
     case WashingtonPost:
         items << getDownloadCrosswordItems(
-                  "http://crosswords.washingtonpost.com/wp-srv/style/"
-                  "crosswords/util/csserve.cgi?z=sunday&f=cs%1.puz",
+                  "http://crosswords.washingtonpost.com/wp-srv/style/crosswords/util/csserve.cgi?z=sunday&f=cs%1.puz",
                   QDate(2008, 1, 6), QDate(2008, 3, 30), 7, puzIcon);
-//        i18n("Weekly Crosswords From Washington Post %1"),
-//        "loadFromWashingtonPost%1",
-//        i18n("Crosswords from Washington Post by Fred Piscop"),
         break;
+    */
     }
 
     ui_download.crosswords->clear();
@@ -540,14 +539,15 @@ void LibraryXmlGuiWindow::libraryDownloadSlot()
 
     foreach(const DownloadProvider & provider, allDownloadProviders()) {
         switch (provider) {
+        /*
         case HoustonChronicle:
             ui_download.providers->addItem(i18n("Houston Chronicle (daily)"), static_cast<int>(provider));
             break;
-
+        */
         case JonesinCrosswords:
             ui_download.providers->addItem(i18n("Matt Jones (thursdays)"), static_cast<int>(provider));
             break;
-
+        /*
         case BostonGlobe:
             ui_download.providers->addItem(i18n("Boston Globe (sundays)"), static_cast<int>(provider));
             break;
@@ -555,14 +555,27 @@ void LibraryXmlGuiWindow::libraryDownloadSlot()
         case OnionCrosswords:
             ui_download.providers->addItem(i18n("Onion Crosswords by Ben Tausig (wednesdays)"), static_cast<int>(provider));
             break;
-
+        */
         case WallStreetJournal:
             ui_download.providers->addItem(i18n("Wall Street Journal by Mike Shenk (fridays)"), static_cast<int>(provider));
             break;
 
+        case ChronicleHigherEducation:
+            ui_download.providers->addItem(i18n("The Chronicle of Higher Education (fridays)"), static_cast<int>(provider));
+            break;
+
+        case CrossNerd:
+            ui_download.providers->addItem(i18n("The Cross Nerd (tuesdays)"), static_cast<int>(provider));
+            break;
+
+        case SwearCrossword:
+            ui_download.providers->addItem(i18n("I Swear Crossword by Victor Fleming (fridays)"), static_cast<int>(provider));
+            break;
+        /*
         case WashingtonPost:
             ui_download.providers->addItem(i18n("Washington Post by Fred Piscop (sundays)"), static_cast<int>(provider));
             break;
+        */
         }
     }
 
@@ -957,5 +970,5 @@ QList<QTreeWidgetItem*> LibraryXmlGuiWindow::getDownloadCrosswordItems(const QSt
 
 QList<LibraryXmlGuiWindow::DownloadProvider> LibraryXmlGuiWindow::allDownloadProviders()
 {
-    return QList<DownloadProvider>() << HoustonChronicle << JonesinCrosswords << BostonGlobe << OnionCrosswords << WallStreetJournal << WashingtonPost;
+    return QList<DownloadProvider>() << JonesinCrosswords << WallStreetJournal << ChronicleHigherEducation << CrossNerd << SwearCrossword;
 }
