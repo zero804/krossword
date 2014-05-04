@@ -66,6 +66,8 @@ public:
 
     LibraryXmlGuiWindow(KrossWordPuzzle* parent = 0);
 
+    ~LibraryXmlGuiWindow();
+
     QTreeView* libraryTree() const;
 
     const char *actionName(Action actionEnum) const;
@@ -105,13 +107,14 @@ private:
     Ui::export_to_image ui_export_to_image;
     Ui::download ui_download;
 
-    QTreeView *m_libraryTree;
     KrossWordPuzzle *m_mainWindow;
     KDialog *m_dialog;
 
-    QModelIndex m_libraryPopupIndex;
-    QStandardItemModel *m_libraryModel;
+    QTreeView *m_libraryTree;
     HtmlDelegate *m_libraryDelegate;
+    QStandardItemModel *m_libraryModel;
+    QModelIndex m_libraryPopupIndex;
+
     KIO::PreviewJob *m_previewJob, *m_downloadPreviewJob;
 
     void setupActions();

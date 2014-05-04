@@ -73,6 +73,11 @@ LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindo
     fillLibrary();
 }
 
+LibraryXmlGuiWindow::~LibraryXmlGuiWindow()
+{
+    delete m_libraryDelegate;
+}
+
 QTreeView* LibraryXmlGuiWindow::libraryTree() const
 {
     return m_libraryTree;
