@@ -1814,7 +1814,7 @@ QDockWidget *CrossWordXmlGuiWindow::createClueDock()
     m_clueTree->setWordWrap(true);
     m_clueTree->setIconSize(QSize(32, 32));
     m_clueTree->setContextMenuPolicy(Qt::CustomContextMenu);
-    m_clueTree->setItemDelegate(new HtmlDelegate);
+    m_clueTree->setItemDelegate(new HtmlDelegate(this));
     connect(m_clueTree, SIGNAL(clicked(QModelIndex)),
             this, SLOT(clickedClueInDock(QModelIndex)));
     connect(m_clueTree, SIGNAL(customContextMenuRequested(QPoint)),

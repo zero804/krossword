@@ -65,8 +65,7 @@ public:
     };
 
     LibraryXmlGuiWindow(KrossWordPuzzle* parent = 0);
-
-    ~LibraryXmlGuiWindow();
+    virtual ~LibraryXmlGuiWindow() { }
 
     QTreeView* libraryTree() const;
 

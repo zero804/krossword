@@ -24,8 +24,12 @@
 #include <KColorScheme>
 #include <klineedit.h>
 
-void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem & option,
-                         const QModelIndex &index) const
+HtmlDelegate::HtmlDelegate(QObject *parent)
+    : QStyledItemDelegate(parent)
+{
+}
+
+void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem & option, const QModelIndex &index) const
 {
     QStyleOptionViewItemV4 options = option;
     initStyleOption(&options, index);

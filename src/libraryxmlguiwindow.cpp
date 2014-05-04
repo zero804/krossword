@@ -41,7 +41,13 @@
 
 
 LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
-      m_libraryTree(new QTreeView()), m_mainWindow(parent), m_dialog(0), m_libraryModel(0), m_libraryDelegate(0), m_previewJob(0), m_downloadPreviewJob(0)
+      m_mainWindow(parent),
+      m_dialog(0),
+      m_libraryTree(new QTreeView()),
+      m_libraryDelegate(0),
+      m_libraryModel(0),
+      m_previewJob(0),
+      m_downloadPreviewJob(0)
 {
     m_libraryTree->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_libraryTree->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -71,11 +77,6 @@ LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindo
     connect(m_libraryTree, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(libraryItemDoubleClicked(QModelIndex)));
 
     fillLibrary();
-}
-
-LibraryXmlGuiWindow::~LibraryXmlGuiWindow()
-{
-    delete m_libraryDelegate;
 }
 
 QTreeView* LibraryXmlGuiWindow::libraryTree() const
@@ -824,7 +825,7 @@ void LibraryXmlGuiWindow::fillLibrary()
 
     // Create HTML delegate
     if (!m_libraryDelegate) {
-        m_libraryDelegate = new HtmlDelegate;   //! <<<<<<<<<<<<< Leak
+        m_libraryDelegate = new HtmlDelegate(this);
         m_libraryTree->setItemDelegate(m_libraryDelegate);
     }
 

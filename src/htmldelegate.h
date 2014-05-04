@@ -29,8 +29,10 @@
 class HtmlDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
+public:
+    HtmlDelegate(QObject *parent);
 
-protected:
+protected:    
     void paint(QPainter * painter, const QStyleOptionViewItem & option,
                const QModelIndex & index) const;
     QSize sizeHint(const QStyleOptionViewItem & option,
