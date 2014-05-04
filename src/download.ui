@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>571</width>
-    <height>326</height>
+    <width>567</width>
+    <height>374</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,36 +48,26 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="KTreeWidgetSearchLineWidget" name="crosswordsSearchLine"/>
+        <widget class="QLabel" name="labelCrosswords">
+         <property name="text">
+          <string>Crosswords</string>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QTreeWidget" name="crosswords">
+        <widget class="QListWidget" name="crosswords">
          <property name="alternatingRowColors">
           <bool>true</bool>
          </property>
-         <property name="animated">
-          <bool>true</bool>
-         </property>
-         <property name="allColumnsShowFocus">
-          <bool>true</bool>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-         <property name="headerHidden">
-          <bool>true</bool>
-         </property>
-         <column>
-          <property name="text">
-           <string notr="true">1</string>
-          </property>
-         </column>
         </widget>
        </item>
       </layout>
      </widget>
      <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QLabel" name="lblPreview">
          <property name="sizePolicy">
@@ -87,7 +77,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Preview:</string>
+          <string>Preview</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -184,11 +174,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KTreeWidgetSearchLineWidget</class>
-   <extends>QWidget</extends>
-   <header>ktreewidgetsearchline.h</header>
-  </customwidget>
   <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>

@@ -202,74 +202,39 @@ void LibraryXmlGuiWindow::downloadPreviewJobFailed(const KFileItem& fi)
 
 void LibraryXmlGuiWindow::downloadProviderChanged(int index)
 {
-    // Get mime type icon
-    QString puzIconName = KMimeType::findByPath("crossword.kwp", 0, true)->iconName();
-    KIcon puzIcon;
-    puzIcon.addPixmap(KIconLoader::global()->loadMimeTypeIcon(puzIconName, KIconLoader::Dialog));
+    QListWidgetItem *item;
 
-    QList< QTreeWidgetItem* > items;
-    QTreeWidgetItem *item;
+    ui_download.crosswords->clear();
 
     DownloadProvider provider = static_cast<DownloadProvider>(ui_download.providers->itemData(index).toInt());
     switch (provider) {
-    /* outdated
-    case HoustonChronicle:
-        item = new QTreeWidgetItem(QStringList() << i18n("Daily Crossword From Houston Chronicle"));
-        item->setIcon(0, puzIcon);
-        item->setData(0, Qt::UserRole, "http://www.chron.com/apps/games/xword/puzzles/today.puz");
-        items << item;
-        break;
-    */
+
     case JonesinCrosswords:
-        items << getDownloadCrosswordItems("http://herbach.dnsalias.com/Jonesin/jz%1.puz",
-                  QDate(2008, 6, 5), QDate::currentDate(), 7, puzIcon);
+        getDownloadCrosswordItems("http://herbach.dnsalias.com/Jonesin/jz%1.puz", QDate(2008, 6, 5), QDate::currentDate(), 7);
         break;
-    /* outdated
-    case BostonGlobe:
-        items << getDownloadCrosswordItems("http://home.comcast.net/~nshack/Puzzles/bg%1.puz",
-                  QDate(2009, 1, 4), QDate::currentDate(), 7, puzIcon);
-        break;
-    */
-    /* outdated
-    case OnionCrosswords:
-        items << getDownloadCrosswordItems("http://herbach.dnsalias.com/Tausig/av%1.puz",
-                  QDate(2008, 1, 2), QDate::currentDate(), 7, puzIcon);
-        break;
-    */
+
     case WallStreetJournal:
-        items << getDownloadCrosswordItems("http://mazerlm.home.comcast.net/wsj%1.puz", QDate(2009, 1, 2), QDate(2012, 12, 28), 7, puzIcon);
-        items << getDownloadCrosswordItems("http://herbach.dnsalias.com/wsj/wsj%1.puz", QDate(2013, 1, 4), QDate::currentDate(), 7, puzIcon);
+        getDownloadCrosswordItems("http://mazerlm.home.comcast.net/wsj%1.puz", QDate(2009, 1, 2), QDate(2012, 12, 28), 7);
+        getDownloadCrosswordItems("http://herbach.dnsalias.com/wsj/wsj%1.puz", QDate(2013, 1, 4), QDate::currentDate(), 7);
         break;
 
     case ChronicleHigherEducation:
-        items << getDownloadCrosswordItems("http://chronicle.com/items/biz/puzzles/20%1.puz", QDate(2009, 10, 9), QDate::currentDate(), 7, puzIcon);
+        getDownloadCrosswordItems("http://chronicle.com/items/biz/puzzles/20%1.puz", QDate(2009, 10, 9), QDate::currentDate(), 7);
         break;
 
     case CrossNerd:
-        item = new QTreeWidgetItem(QStringList() << i18n("The Cross Nerd current crossword"));
-        item->setIcon(0, puzIcon);
-        item->setData(0, Qt::UserRole, "http://crossexamination.info/CN_current.puz");
-        items << item;
+        item = new QListWidgetItem(QString(i18n("The Cross Nerd current crossword")));
+        item->setData(Qt::UserRole, "http://crossexamination.info/CN_current.puz");
+        ui_download.crosswords->addItem(item);
         break;
 
     case SwearCrossword:
-        items << getDownloadCrosswordItems("http://wij.theworld.com/puzzles/dailyrecord/DR%1.puz", QDate(2011, 1, 7), QDate(2013, 12, 27), 7, puzIcon);
+        getDownloadCrosswordItems("http://wij.theworld.com/puzzles/dailyrecord/DR%1.puz", QDate(2011, 1, 7), QDate(2013, 12, 27), 7);
         break;
-
-    /* outdated
-    case WashingtonPost:
-        items << getDownloadCrosswordItems(
-                  "http://crosswords.washingtonpost.com/wp-srv/style/crosswords/util/csserve.cgi?z=sunday&f=cs%1.puz",
-                  QDate(2008, 1, 6), QDate(2008, 3, 30), 7, puzIcon);
-        break;
-    */
     }
-
-    ui_download.crosswords->clear();
-    ui_download.crosswords->addTopLevelItems(items);
 }
 
-void LibraryXmlGuiWindow::downloadCurrentCrosswordChanged(QTreeWidgetItem* current, QTreeWidgetItem* previous)
+void LibraryXmlGuiWindow::downloadCurrentCrosswordChanged(QListWidgetItem* current, QListWidgetItem* previous)
 {
     Q_UNUSED(previous);
 
@@ -285,7 +250,7 @@ void LibraryXmlGuiWindow::downloadCurrentCrosswordChanged(QTreeWidgetItem* curre
     } else
         ui_download.preview->setText(i18n("Loading..."));
 
-    QString url = current->data(0, Qt::UserRole).toString();
+    QString url = current->data(Qt::UserRole).toString();
     KFileItem crossword(KUrl(url), "application/x-acrosslite-puz", KFileItem::Unknown);
     m_downloadPreviewJob = new KIO::PreviewJob(KFileItemList() << crossword, 256, 256, 0, 1, false, true, 0);
     m_downloadPreviewJob->setAutoDelete(true);
@@ -545,23 +510,11 @@ void LibraryXmlGuiWindow::libraryDownloadSlot()
 
     foreach(const DownloadProvider & provider, allDownloadProviders()) {
         switch (provider) {
-        /*
-        case HoustonChronicle:
-            ui_download.providers->addItem(i18n("Houston Chronicle (daily)"), static_cast<int>(provider));
-            break;
-        */
+
         case JonesinCrosswords:
             ui_download.providers->addItem(i18n("Matt Jones (thursdays)"), static_cast<int>(provider));
             break;
-        /*
-        case BostonGlobe:
-            ui_download.providers->addItem(i18n("Boston Globe (sundays)"), static_cast<int>(provider));
-            break;
 
-        case OnionCrosswords:
-            ui_download.providers->addItem(i18n("Onion Crosswords by Ben Tausig (wednesdays)"), static_cast<int>(provider));
-            break;
-        */
         case WallStreetJournal:
             ui_download.providers->addItem(i18n("Wall Street Journal by Mike Shenk (fridays)"), static_cast<int>(provider));
             break;
@@ -577,21 +530,15 @@ void LibraryXmlGuiWindow::libraryDownloadSlot()
         case SwearCrossword:
             ui_download.providers->addItem(i18n("I Swear Crossword by Victor Fleming (fridays)"), static_cast<int>(provider));
             break;
-        /*
-        case WashingtonPost:
-            ui_download.providers->addItem(i18n("Washington Post by Fred Piscop (sundays)"), static_cast<int>(provider));
-            break;
-        */
         }
     }
 
-    ui_download.crosswordsSearchLine->searchLine()->addTreeWidget(ui_download.crosswords);
     ui_download.providers->setCurrentIndex(0);
 
     connect(ui_download.providers, SIGNAL(currentIndexChanged(int)), this, SLOT(downloadProviderChanged(int)));
     connect(ui_download.crosswords,
-            SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
-            this, SLOT(downloadCurrentCrosswordChanged(QTreeWidgetItem*, QTreeWidgetItem*)));
+            SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)),
+            this, SLOT(downloadCurrentCrosswordChanged(QListWidgetItem*, QListWidgetItem*)));
 
     downloadProviderChanged(0);
 
@@ -952,26 +899,21 @@ QString LibraryXmlGuiWindow::getFolderText(const QString& path, int crosswordCou
            .arg(i18ncp("Text to describe the contents of library folders in the library tree view", "%1 crossword", "%1 crosswords", containedCrosswords));
 }
 
-QList<QTreeWidgetItem*> LibraryXmlGuiWindow::getDownloadCrosswordItems(const QString& rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset, const KIcon &puzIcon)
+void LibraryXmlGuiWindow::getDownloadCrosswordItems(const QString& rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset)
 {
-    QList<QTreeWidgetItem*> items;
-
     QDate date = startDate;
     for (int year = startDate.year(); year <= endDate.year(); ++year) {
         int curMonth = date.month();
         while (date.year() == year && date < endDate) {
-            QTreeWidgetItem *item = new QTreeWidgetItem(QStringList() << i18n("Weekly crossword %1", KGlobal::locale()->formatDate(date, KLocale::FancyShortDate)));
-            item->setIcon(0, puzIcon);
-            item->setData(0, Qt::UserRole, rawUrl.arg(date.toString("yyMMdd")));
-            items << item;
+            QListWidgetItem *item = new QListWidgetItem(QString(i18n("%1", KGlobal::locale()->formatDate(date, KLocale::FancyLongDate))));
+            item->setData(Qt::UserRole, rawUrl.arg(date.toString("yyMMdd")));
+            ui_download.crosswords->addItem(item);
 
             date = date.addDays(dayOffset);
             if (date.month() != curMonth)
                 curMonth = date.month();
         }
     }
-
-    return items;
 }
 
 QList<LibraryXmlGuiWindow::DownloadProvider> LibraryXmlGuiWindow::allDownloadProviders()

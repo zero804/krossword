@@ -53,15 +53,11 @@ public:
     };
 
     enum DownloadProvider {
-        HoustonChronicle,
         JonesinCrosswords,
-        BostonGlobe,
-        OnionCrosswords,
         WallStreetJournal,
         ChronicleHigherEducation,
         CrossNerd,
-        SwearCrossword,
-        WashingtonPost
+        SwearCrossword
     };
 
     LibraryXmlGuiWindow(KrossWordPuzzle* parent = 0);
@@ -82,7 +78,7 @@ protected slots:
     void downloadPreviewJobFailed(const KFileItem &fi);
 
     void downloadProviderChanged(int index);
-    void downloadCurrentCrosswordChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+    void downloadCurrentCrosswordChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
     void libraryItemChanged(QStandardItem *item);
     void libraryTreeContextMenuRequested(const QPoint &pos);
@@ -121,7 +117,7 @@ private:
     void fillLibrary();
     QString getFolderText(const QString &path, int crosswordCountOffset = 0);
 
-    QList<QTreeWidgetItem*> getDownloadCrosswordItems(const QString &rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset, const KIcon &puzIcon);
+    void getDownloadCrosswordItems(const QString &rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset);
 
     static QList<DownloadProvider> allDownloadProviders();
 };
