@@ -850,7 +850,7 @@ void LibraryXmlGuiWindow::fillLibrary()
             libraryItem->setData(false, Qt::UserRole + 2);
             libraryItem->setDropEnabled(false);
 
-            QStandardItem *lastModifiedItem = new QStandardItem(KGlobal::locale()->formatDate(fi.lastModified().date(), KLocale::FancyShortDate));
+            QStandardItem *lastModifiedItem = new QStandardItem(QLocale().toString(fi.lastModified().date()));
             lastModifiedItem->setData(fi.lastModified(), Qt::UserRole + 1);
             lastModifiedItem->setDropEnabled(false);
 
@@ -905,7 +905,7 @@ void LibraryXmlGuiWindow::getDownloadCrosswordItems(const QString& rawUrl, const
     for (int year = startDate.year(); year <= endDate.year(); ++year) {
         int curMonth = date.month();
         while (date.year() == year && date < endDate) {
-            QListWidgetItem *item = new QListWidgetItem(QString(i18n("%1", KGlobal::locale()->formatDate(date, KLocale::FancyLongDate))));
+            QListWidgetItem *item = new QListWidgetItem(QString(i18n("%1", QLocale().toString(date)))); //KGlobal::locale()->formatDate(date, KLocale::FancyLongDate))));
             item->setData(Qt::UserRole, rawUrl.arg(date.toString("yyMMdd")));
             ui_download.crosswords->addItem(item);
 
