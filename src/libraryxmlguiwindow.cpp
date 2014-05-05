@@ -107,7 +107,7 @@ const char* LibraryXmlGuiWindow::actionName(LibraryXmlGuiWindow::Action actionEn
         return "library_update";
 
     default:
-        kWarning() << "Action enumerable not handled in switch" << actionEnum;
+        qWarning() << "Action enumerable not handled in switch" << actionEnum;
         return "";
     }
 }
@@ -197,7 +197,8 @@ void LibraryXmlGuiWindow::downloadPreviewJobGotPreview(const KFileItem& fi, cons
 
 void LibraryXmlGuiWindow::downloadPreviewJobFailed(const KFileItem& fi)
 {
-    qDebug() << fi.url();
+    qDebug() << "Preview job failed:" << fi.url();
+    ui_download.preview->setText(i18n("Failed")); // improve the message
 }
 
 void LibraryXmlGuiWindow::downloadProviderChanged(int index)
