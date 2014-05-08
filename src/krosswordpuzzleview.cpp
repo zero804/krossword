@@ -24,7 +24,7 @@
 
 
 KrossWordPuzzleView::KrossWordPuzzleView(KrossWordPuzzleScene *scene, QWidget *parent)
-    : QGraphicsView(scene, parent), m_scene(scene), m_minimum_zoom(0)
+    : QGraphicsView(scene, parent), m_scene(scene), m_minimumZoomScale(1.0f)
 {
     // setOptimizationFlags( QGraphicsView::DontSavePainterState );
     setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
@@ -74,7 +74,7 @@ void KrossWordPuzzleView::keyReleaseEvent(QKeyEvent* event)
 void KrossWordPuzzleView::wheelEvent(QWheelEvent* event)
 {
     if (event->modifiers().testFlag(Qt::ControlModifier))
-        emit signalChangeZoom(event->delta() / 10, m_minimum_zoom);
+        emit signalChangeZoom(event->delta() / 10);
     else
         QGraphicsView::wheelEvent(event);
     
@@ -86,8 +86,8 @@ void KrossWordPuzzleView::resizeEvent(QResizeEvent* event)
     emit resized(event->oldSize(), event->size());
     
     this->fitInView(this->sceneRect().adjusted(150, 150, -150, -150), Qt::KeepAspectRatio);
-    m_minimum_zoom = this->matrix().m11() * 100;
-    emit signalChangeZoom(0, m_minimum_zoom);
+    m_minimumZoomScale = this->matrix().m11();
+    emit signalChangeZoom(0);
 }
 
 void KrossWordPuzzleView::renderToPrinter(QPainter* painter, const QRectF& target, const QRect& source, Qt::AspectRatioMode aspectRatioMode)
@@ -104,4 +104,9 @@ void KrossWordPuzzleView::settingsChanged()
 {
     Settings::self()->writeConfig();
     emit signalChangeStatusbar(i18n("Settings changed"));
+}
+
+qreal KrossWordPuzzleView::getMinimumZoomScale() const
+{
+    return m_minimumZoomScale;
 }

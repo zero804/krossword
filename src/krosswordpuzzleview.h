@@ -50,6 +50,8 @@ public:
 
     virtual QSize sizeHint() const;
 
+    qreal getMinimumZoomScale() const;
+
 protected:
     virtual void keyPressEvent(QKeyEvent* event);
     virtual void keyReleaseEvent(QKeyEvent* event);
@@ -59,7 +61,7 @@ protected:
 
 private:
     KrossWordPuzzleScene *m_scene;
-    int m_minimum_zoom;
+    qreal m_minimumZoomScale;
 
 signals:
     /**
@@ -72,7 +74,7 @@ signals:
      */
     void signalChangeCaption(const QString& text);
 
-    void signalChangeZoom(int zoomChange, int minimum_zoom);
+    void signalChangeZoom(int zoomChange);
 
     void resized(const QSize &oldSize, const QSize &newSize);
 

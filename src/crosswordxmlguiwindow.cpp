@@ -55,6 +55,8 @@
 #include <QTimer>
 #include <QStringListModel>
 
+#include <QToolButton>
+
 #include <QParallelAnimationGroup>
 #include <QPropertyAnimation>
 
@@ -154,13 +156,142 @@ void ClueListView::scrollAnimationFinished()
     m_scrollAnimation = NULL;
 }
 
+//===========================================================
+
+ZoomWidget::ZoomWidget(unsigned int min, unsigned int max, unsigned int buttonStep , QWidget *parent)
+    : QWidget(parent),
+      m_layout(new QBoxLayout(QBoxLayout::LeftToRight)),
+      m_btnZoomOut(new QToolButton),
+      m_btnZoomIn(new QToolButton),
+      m_zoomSlider(new QSlider(Qt::Horizontal))
+{
+    this->setLayout(m_layout);
+
+    m_btnZoomOut->setIcon(KIcon("zoom-out"));
+    m_btnZoomIn->setIcon(KIcon("zoom-in"));
+    m_btnZoomOut->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    m_btnZoomIn->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    m_btnZoomOut->setAutoRaise(true);
+    m_btnZoomIn->setAutoRaise(true);
+    m_zoomSlider->setPageStep(buttonStep);
+    m_zoomSlider->setRange(min, max);
+    m_zoomSlider->setValue(min);
+
+    m_layout->setSpacing(0);
+    m_layout->setMargin(0);
+    m_layout->addWidget(m_btnZoomOut);
+    m_layout->addWidget(m_zoomSlider);
+    m_layout->addWidget(m_btnZoomIn);
+
+
+    connect(m_btnZoomOut, SIGNAL(pressed()), this, SLOT(zoomOutBtnPressedSlot()));
+    connect(m_btnZoomIn,  SIGNAL(pressed()), this, SLOT(zoomInBtnPressedSlot()));
+    connect(m_zoomSlider, SIGNAL(valueChanged(int)), this, SLOT(zoomSliderChangedSlot(int)));
+    //KStandardAction::zoomIn(this, SLOT(zoomInBtnPressedSlot()), ac)->setStatusTip(i18n("Zoom in"));
+    //KStandardAction::zoomOut(this, SLOT(zoomOutBtnPressedSlot()), ac)->setStatusTip(i18n("Zoom out"));
+}
+
+int ZoomWidget::currentZoom() const
+{
+    return m_zoomSlider->value();
+}
+
+int ZoomWidget::minimumZoom() const
+{
+    return m_zoomSlider->minimum();
+}
+
+int ZoomWidget::maximumZoom() const
+{
+    return m_zoomSlider->maximum();
+}
+
+void ZoomWidget::setZoom(int zoom)
+{
+    m_zoomSlider->setValue(zoom);
+    emit zoomChanged(zoom);
+}
+
+void ZoomWidget::setSliderToolTip(const QString& tooltip)
+{
+    m_zoomSlider->setToolTip(tooltip);
+}
+
+QString ZoomWidget::sliderToolTip() const
+{
+    return m_zoomSlider->toolTip();
+}
+
+void ZoomWidget::zoomOutBtnPressedSlot()
+{
+    setZoom(currentZoom() - m_zoomSlider->pageStep());
+}
+
+void ZoomWidget::zoomInBtnPressedSlot()
+{
+    setZoom(currentZoom() + m_zoomSlider->pageStep());
+}
+
+void ZoomWidget::zoomSliderChangedSlot(int change)
+{
+    setZoom(change);
+}
+
+//===========================================================
+
+ViewZoomController::ViewZoomController(KrossWordPuzzleView* view, ZoomWidget* widget, QObject *parent)
+    : QObject(parent),
+      m_controlledWidget(widget),
+      m_view(view)
+{
+    Q_ASSERT(view != nullptr);
+    Q_ASSERT(widget != nullptr);
+    connect(m_controlledWidget, SIGNAL(zoomChanged(int)), this, SLOT(changeViewZoomSlot(int)));
+    connect(m_view, SIGNAL(signalChangeZoom(int)), this, SLOT(changeZoomSliderSlot(int)));
+}
+
+void ViewZoomController::changeViewZoomSlot(int zoomValue)
+{
+    qreal zoom = zoomValue / 100.0;
+    qreal min = m_view->getMinimumZoomScale();
+
+    zoom += min;
+
+    QTransform t = m_view->transform();
+    t.setMatrix(zoom,    t.m12(), t.m13(),
+                t.m21(), zoom,    t.m23(),
+                t.m31(), t.m32(), t.m33());
+    m_view->setTransform(t);
+
+    QTimer::singleShot(500, m_view->krossWord(), SLOT(clearCache()));
+
+    m_controlledWidget->setSliderToolTip(i18n("Zoom: %1%", zoomValue));
+    QToolTip::showText(QCursor::pos(), m_controlledWidget->sliderToolTip(), m_controlledWidget);
+}
+
+void ViewZoomController::changeZoomSliderSlot(int zoomValue)
+{
+    int new_zoom = m_controlledWidget->currentZoom() + zoomValue;
+
+    if(new_zoom >= m_controlledWidget->minimumZoom()) {
+        if(new_zoom <= m_controlledWidget->maximumZoom())
+            m_controlledWidget->setZoom(new_zoom);
+        else
+            m_controlledWidget->setZoom(m_controlledWidget->maximumZoom());
+    }
+    else
+        m_controlledWidget->setZoom(m_controlledWidget->minimumZoom());
+}
+
+//===========================================================
+
 
 CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent)
     : KXmlGuiWindow(parent, Qt::Widget),
       m_view(nullptr),
       m_viewSolution(nullptr),
-      m_zoomSlider(nullptr),
       m_zoomWidget(nullptr),
+      m_zoomController(nullptr),
       m_solutionProgress(nullptr),
       m_clueModel(nullptr),
       m_clueSelectionModel(nullptr),
@@ -209,7 +340,10 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent)
     statusBar()->addPermanentWidget(m_solutionProgress);
 
     // Create zoom widgets:
-    m_zoomWidget = createZoomWidget();
+    m_zoomWidget = new ZoomWidget(0, 100, 2); //createZoomWidget();
+    m_zoomWidget->setFixedWidth(150);
+    m_zoomController = new ViewZoomController(m_view, m_zoomWidget, this);
+
     statusBar()->addPermanentWidget(m_zoomWidget);
 
     statusBar()->show();
@@ -1223,41 +1357,6 @@ void CrossWordXmlGuiWindow::moveSetConfidenceConfidentSlot()
 
 //======================================================
 
-
-QWidget* CrossWordXmlGuiWindow::createZoomWidget()
-{
-    QToolButton *btnZoomOut = new QToolButton;
-    QToolButton *btnZoomIn = new QToolButton;
-    btnZoomOut->setIcon(KIcon("zoom-out"));
-    btnZoomIn->setIcon(KIcon("zoom-in"));
-    btnZoomOut->setToolButtonStyle(Qt::ToolButtonIconOnly);
-    btnZoomIn->setToolButtonStyle(Qt::ToolButtonIconOnly);
-    btnZoomOut->setAutoRaise(true);
-    btnZoomIn->setAutoRaise(true);
-    m_zoomSlider = new QSlider(Qt::Horizontal);
-    m_zoomSlider->setRange(10, 300);
-    m_zoomSlider->setValue(100);
-
-    setZoom(100);
-
-    QBoxLayout *layout = new QBoxLayout(QBoxLayout::LeftToRight);
-    layout->setSpacing(0);
-    layout->setMargin(0);
-    layout->addWidget(btnZoomOut);
-    layout->addWidget(m_zoomSlider);
-    layout->addWidget(btnZoomIn);
-
-    QWidget *zoomWidget = new QWidget;
-    zoomWidget->setFixedWidth(150);
-    zoomWidget->setLayout(layout);
-
-    connect(btnZoomOut, SIGNAL(pressed()), this, SLOT(zoomOutSlot()));
-    connect(btnZoomIn, SIGNAL(pressed()), this, SLOT(zoomInSlot()));
-    connect(m_zoomSlider, SIGNAL(valueChanged(int)), this, SLOT(setZoom(int)));
-
-    return zoomWidget;
-}
-
 bool CrossWordXmlGuiWindow::setupActions()
 {
     KActionCollection *ac = actionCollection();
@@ -1304,8 +1403,6 @@ bool CrossWordXmlGuiWindow::setupActions()
     connect(dictionariesAction, SIGNAL(triggered()), this, SLOT(optionsDictionarySlot()));
 
     // View
-    KStandardAction::zoomIn(this, SLOT(zoomInSlot()), ac)->setStatusTip(i18n("Zoom in"));
-    KStandardAction::zoomOut(this, SLOT(zoomOutSlot()), ac)->setStatusTip(i18n("Zoom out"));
     KAction *fitToPageAction = KStandardAction::fitToPage(this, SLOT(fitToPageSlot()), ac);
     fitToPageAction->setStatusTip(i18n("Fit the whole crossword into the window"));
     fitToPageAction->setIcon(KIcon("zoom-fit-best"));
@@ -2175,7 +2272,7 @@ KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
     view->setBackgroundBrush(brush);
 
     connect(view, SIGNAL(signalChangeStatusbar(const QString&)), this, SLOT(signalChangeStatusbar(const QString&)));
-    connect(view, SIGNAL(signalChangeZoom(int, int)), this, SLOT(zoomSlot(int, int)));
+    //connect(view, SIGNAL(signalChangeZoom(int, int)), this, SLOT(zoomSlot(int, int)));
     connect(view->krossWord(), SIGNAL(cluesAdded(ClueCellList)), this, SLOT(cluesAdded(ClueCellList)));
     connect(view->krossWord(), SIGNAL(cluesAboutToBeRemoved(ClueCellList)), this, SLOT(cluesAboutToBeRemoved(ClueCellList)));
     connect(view->krossWord(), SIGNAL(solutionWordLetterAdded(SolutionLetterCell*)), this, SLOT(solutionWordLetterAdded(SolutionLetterCell*)));
@@ -2290,55 +2387,10 @@ void CrossWordXmlGuiWindow::showCongratulationsItems()
     m_animation->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
-void CrossWordXmlGuiWindow::setZoom(int value)
-{
-    if (m_view) {
-        qreal zoom = value / 100.0;
-
-        QTransform t = m_view->transform();
-        t.setMatrix(zoom, t.m12(), t.m13(),
-                    t.m21(), zoom, t.m23(),
-                    t.m31(), t.m32(), t.m33());
-        m_view->setTransform(t);
-
-        QTimer::singleShot(500, krossWord(), SLOT(clearCache()));
-//  krossWord()->clearCache();
-//  KrossWordCellList cellList = krossWord()->cells();
-//  foreach ( KrossWordCell *cell, cellList )
-//      cell->clearCache();
-    }
-
-    m_zoomSlider->setToolTip(i18n("Zoom: %1%", value));
-    QToolTip::showText(QCursor::pos(), m_zoomSlider->toolTip(), m_zoomSlider);
-}
-
-void CrossWordXmlGuiWindow::zoomInSlot()
-{
-    m_zoomSlider->setValue(m_zoomSlider->value() + m_zoomSlider->pageStep());
-}
-
-void CrossWordXmlGuiWindow::zoomOutSlot()
-{
-    m_zoomSlider->setValue(m_zoomSlider->value() - m_zoomSlider->pageStep());
-}
-
-void CrossWordXmlGuiWindow::zoomSlot(int zoomChange, int minimum_zoom)
-{
-    int new_zoom = m_zoomSlider->value() + zoomChange;
-    
-    if(new_zoom > minimum_zoom)
-        m_zoomSlider->setValue(m_zoomSlider->value() + zoomChange);
-    else
-        m_zoomSlider->setValue(minimum_zoom);
-}
-
 void CrossWordXmlGuiWindow::fitToPageSlot()
 {
     m_view->fitInView(m_view->sceneRect().adjusted(150, 150, -150, -150), Qt::KeepAspectRatio);
-
-    if (m_zoomSlider && m_view)
-        m_zoomSlider->setValue(m_view->matrix().m11() * 100);
-    
+    m_zoomWidget->setZoom(m_zoomWidget->minimumZoom());
     krossWord()->clearCache();
 }
 

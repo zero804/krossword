@@ -60,6 +60,8 @@ class KRecentFilesAction;
 class QPropertyAnimation;
 class QParallelAnimationGroup;
 
+class QToolButton;
+
 class ClueListView : public QTreeView
 {
     Q_OBJECT
@@ -81,6 +83,54 @@ protected slots:
 private:
     QPropertyAnimation *m_scrollAnimation;
     QPoint m_curScrollPos;
+};
+
+// Temporary location
+class ZoomWidget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    ZoomWidget(unsigned int min, unsigned int max, unsigned int buttonStep, QWidget *parent = nullptr);
+
+    int currentZoom() const;
+    void setZoom(int zoom);
+    void setSliderToolTip(const QString& tooltip);
+
+    int minimumZoom() const;
+    int maximumZoom() const;
+    QString sliderToolTip() const;
+
+signals:
+    void zoomChanged(int zoomValue);
+
+private slots:
+    void zoomOutBtnPressedSlot();
+    void zoomInBtnPressedSlot();
+    void zoomSliderChangedSlot(int change);
+
+private:
+    int m_currentZoomValue;
+    QBoxLayout  *m_layout;
+    QToolButton *m_btnZoomOut;
+    QToolButton *m_btnZoomIn;
+    QSlider     *m_zoomSlider;
+};
+
+class ViewZoomController : QObject
+{
+    Q_OBJECT
+
+public:
+    ViewZoomController(KrossWordPuzzleView* view, ZoomWidget* widget, QObject *parent=nullptr);
+
+public slots:
+    void changeViewZoomSlot(int zoomValue);
+    void changeZoomSliderSlot(int zoomValue);
+
+private:
+    ZoomWidget* m_controlledWidget; // Not owned
+    KrossWordPuzzleView* m_view;    // Now owned
 };
 
 class CrossWordXmlGuiWindow : public KXmlGuiWindow
@@ -285,9 +335,6 @@ public slots:
 
     // View actions
     void fitToPageSlot();
-    void zoomInSlot();
-    void zoomOutSlot();
-    void zoomSlot(int zoomChange, int minumum_zoom);
     void viewPanSlot(bool enabled);
 
     // Settings actions
@@ -295,7 +342,6 @@ public slots:
 //     void changeThemeSlot( int themeId );
     void optionsDictionarySlot();
 
-    void setZoom(int value);
     void hideCongratulations();
 
     void autoSaveToTempFile();
@@ -400,8 +446,9 @@ private:
     KrossWordPuzzleView *m_view;                // Owned
     KrossWordPuzzleView *m_viewSolution;        // Owned
 
-    QSlider *m_zoomSlider;                      // Owned
-    QWidget *m_zoomWidget;                      // Owned
+    //QSlider *m_zoomSlider;                      // Owned
+    ZoomWidget *m_zoomWidget;                   // Owned
+    ViewZoomController *m_zoomController;       // Owned
     QProgressBar *m_solutionProgress;           // Owned
 
     QDockWidget *m_clueDock;                    // Owned
