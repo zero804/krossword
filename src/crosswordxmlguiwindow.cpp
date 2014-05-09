@@ -158,13 +158,18 @@ void ClueListView::scrollAnimationFinished()
 
 //===========================================================
 
-ZoomWidget::ZoomWidget(unsigned int min, unsigned int max, unsigned int buttonStep , QWidget *parent)
+ZoomWidget::ZoomWidget(unsigned int maxZoomFactor, unsigned int buttonStep , QWidget *parent)
     : QWidget(parent),
       m_layout(new QBoxLayout(QBoxLayout::LeftToRight)),
       m_btnZoomOut(new QToolButton),
       m_btnZoomIn(new QToolButton),
       m_zoomSlider(new QSlider(Qt::Horizontal))
 {
+    if(maxZoomFactor <= 1) {
+        qDebug() << "\'maxZoomFactor\' in ZoomWidget ctor must be at least 2";
+        maxZoomFactor = 2;
+    }
+
     this->setLayout(m_layout);
 
     m_btnZoomOut->setIcon(KIcon("zoom-out"));
@@ -174,8 +179,8 @@ ZoomWidget::ZoomWidget(unsigned int min, unsigned int max, unsigned int buttonSt
     m_btnZoomOut->setAutoRaise(true);
     m_btnZoomIn->setAutoRaise(true);
     m_zoomSlider->setPageStep(buttonStep);
-    m_zoomSlider->setRange(min, max);
-    m_zoomSlider->setValue(min);
+    m_zoomSlider->setRange(100, 100*maxZoomFactor);
+    m_zoomSlider->setValue(100);
 
     m_layout->setSpacing(0);
     m_layout->setMargin(0);
@@ -191,25 +196,37 @@ ZoomWidget::ZoomWidget(unsigned int min, unsigned int max, unsigned int buttonSt
     //KStandardAction::zoomOut(this, SLOT(zoomOutBtnPressedSlot()), ac)->setStatusTip(i18n("Zoom out"));
 }
 
-int ZoomWidget::currentZoom() const
+unsigned int ZoomWidget::currentZoom() const
 {
     return m_zoomSlider->value();
 }
 
-int ZoomWidget::minimumZoom() const
+unsigned int ZoomWidget::minimumZoom() const
 {
     return m_zoomSlider->minimum();
 }
 
-int ZoomWidget::maximumZoom() const
+unsigned int ZoomWidget::maximumZoom() const
 {
     return m_zoomSlider->maximum();
 }
 
-void ZoomWidget::setZoom(int zoom)
+void ZoomWidget::setZoom(unsigned int zoom)
 {
-    m_zoomSlider->setValue(zoom);
-    emit zoomChanged(zoom);
+    unsigned int min = minimumZoom();
+    if(zoom >= min) {
+        unsigned int max = maximumZoom();
+        if(zoom <= max) {
+            m_zoomSlider->setValue(zoom);
+            emit zoomChanged(zoom);
+        } else {
+            m_zoomSlider->setValue(max);
+            emit zoomChanged(max);
+        }
+    } else {
+        m_zoomSlider->setValue(min);
+        emit zoomChanged(min);
+    }
 }
 
 void ZoomWidget::setSliderToolTip(const QString& tooltip)
@@ -252,10 +269,12 @@ ViewZoomController::ViewZoomController(KrossWordPuzzleView* view, ZoomWidget* wi
 
 void ViewZoomController::changeViewZoomSlot(int zoomValue)
 {
-    qreal zoom = zoomValue / 100.0;
-    qreal min = m_view->getMinimumZoomScale();
+    qreal maximumZoomFactor = m_controlledWidget->maximumZoom() / qreal(m_controlledWidget->minimumZoom());
+    qreal minZoomScale = m_view->getMinimumZoomScale();
+    qreal maxZoomScale = maximumZoomFactor * minZoomScale;
 
-    zoom += min;
+    qreal zoom = zoomValue / qreal(m_controlledWidget->maximumZoom());
+    zoom *= maxZoomScale;
 
     QTransform t = m_view->transform();
     t.setMatrix(zoom,    t.m12(), t.m13(),
@@ -271,16 +290,8 @@ void ViewZoomController::changeViewZoomSlot(int zoomValue)
 
 void ViewZoomController::changeZoomSliderSlot(int zoomValue)
 {
-    int new_zoom = m_controlledWidget->currentZoom() + zoomValue;
-
-    if(new_zoom >= m_controlledWidget->minimumZoom()) {
-        if(new_zoom <= m_controlledWidget->maximumZoom())
-            m_controlledWidget->setZoom(new_zoom);
-        else
-            m_controlledWidget->setZoom(m_controlledWidget->maximumZoom());
-    }
-    else
-        m_controlledWidget->setZoom(m_controlledWidget->minimumZoom());
+    unsigned int new_zoom = m_controlledWidget->currentZoom() + zoomValue;
+    m_controlledWidget->setZoom(new_zoom);
 }
 
 //===========================================================
@@ -340,7 +351,7 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent)
     statusBar()->addPermanentWidget(m_solutionProgress);
 
     // Create zoom widgets:
-    m_zoomWidget = new ZoomWidget(0, 100, 2); //createZoomWidget();
+    m_zoomWidget = new ZoomWidget(3, 2);
     m_zoomWidget->setFixedWidth(150);
     m_zoomController = new ViewZoomController(m_view, m_zoomWidget, this);
 
@@ -2732,7 +2743,7 @@ void CrossWordXmlGuiWindow::clearSlot()
     }
     foreach(ClueCell * cell, krossWord()->clues())
     answerChanged(cell, cell->currentAnswer(), false, KIcon(iconLaugh));
-    
+
     connect(krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));
 }
 

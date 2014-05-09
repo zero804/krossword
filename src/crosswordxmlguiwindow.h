@@ -91,14 +91,14 @@ class ZoomWidget : public QWidget
     Q_OBJECT
 
 public:
-    ZoomWidget(unsigned int min, unsigned int max, unsigned int buttonStep, QWidget *parent = nullptr);
+    ZoomWidget(unsigned int maxZoomFactor, unsigned int buttonStep, QWidget *parent = nullptr);
 
-    int currentZoom() const;
-    void setZoom(int zoom);
+    unsigned int currentZoom() const;
+    void setZoom(unsigned int zoom);
     void setSliderToolTip(const QString& tooltip);
 
-    int minimumZoom() const;
-    int maximumZoom() const;
+    unsigned int minimumZoom() const;
+    unsigned int maximumZoom() const;
     QString sliderToolTip() const;
 
 signals:
@@ -446,7 +446,6 @@ private:
     KrossWordPuzzleView *m_view;                // Owned
     KrossWordPuzzleView *m_viewSolution;        // Owned
 
-    //QSlider *m_zoomSlider;                      // Owned
     ZoomWidget *m_zoomWidget;                   // Owned
     ViewZoomController *m_zoomController;       // Owned
     QProgressBar *m_solutionProgress;           // Owned
