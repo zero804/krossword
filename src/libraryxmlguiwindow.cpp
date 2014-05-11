@@ -239,17 +239,14 @@ void LibraryXmlGuiWindow::downloadCurrentCrosswordChanged(QListWidgetItem* curre
 {
     Q_UNUSED(previous);
 
-    m_dialog->button(KDialog::Ok)->setEnabled(current);
     if (!current)
         return;
 
+    ui_download.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
+
     ui_download.preview->setPixmap(QPixmap());
     ui_download.preview->setEnabled(false);
-    if (ui_download.splitter->sizes().last() == 0) {
-        ui_download.preview->setText(i18n("Please reselect the crossword to show a preview..."));
-        return;
-    } else
-        ui_download.preview->setText(i18n("Loading..."));
+    ui_download.preview->setText(i18n("Loading..."));
 
     QString url = current->data(Qt::UserRole).toString();
     KFileItem crossword(KUrl(url), "application/x-acrosslite-puz", KFileItem::Unknown);
@@ -500,14 +497,12 @@ void LibraryXmlGuiWindow::libraryExportSlot()
 
 void LibraryXmlGuiWindow::libraryDownloadSlot()
 {
-    m_dialog = new KDialog(m_mainWindow);
-    m_dialog->setWindowTitle(i18n("Download Crossword To Library"));
-
-    QWidget *downloadCrosswordsDlg = new QWidget(m_dialog);
+    QDialog *downloadCrosswordsDlg = new QDialog(m_mainWindow);
+    downloadCrosswordsDlg->setWindowTitle(i18n("Download Crossword To Library"));
     ui_download.setupUi(downloadCrosswordsDlg);
+    ui_download.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 
-    m_dialog->setMainWidget(downloadCrosswordsDlg);
-    m_dialog->setModal(true);
+    //downloadCrosswordsDlg->setModal(true);
 
     foreach(const DownloadProvider & provider, allDownloadProviders()) {
         switch (provider) {
@@ -577,7 +572,7 @@ void LibraryXmlGuiWindow::libraryDownloadSlot()
     if (downloadDirIndex >= 0)
         ui_download.targetDirectory->setCurrentIndex(downloadDirIndex);
 
-    if (m_dialog->exec() == KDialog::Accepted) {
+    if (downloadCrosswordsDlg->exec() == QDialog::Accepted) {
         QModelIndex item = ui_download.crosswords->currentIndex();
         if (item.isValid()) {
             QString url = item.data(Qt::UserRole).toString();
@@ -588,8 +583,7 @@ void LibraryXmlGuiWindow::libraryDownloadSlot()
         }
     }
 
-    delete m_dialog;
-    m_dialog = NULL;
+    delete downloadCrosswordsDlg;
 }
 
 void LibraryXmlGuiWindow::libraryDeleteSlot()
@@ -654,15 +648,25 @@ void LibraryXmlGuiWindow::libraryDeleteSlot()
 
 void LibraryXmlGuiWindow::libraryNewFolderSlot()
 {
-    QPointer<KDialog> dlg = new KDialog(this);
+    QPointer<QDialog> dlg = new QDialog(this);
     KLineEdit *newFolderName = new KLineEdit(dlg);
     newFolderName->setClearButtonShown(true);
     newFolderName->setClickMessage("Insert the name of the new library folder");
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dlg);
+    connect(buttonBox, SIGNAL(accepted()), dlg, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), dlg, SLOT(reject()));
+
+    QVBoxLayout *layout = new QVBoxLayout(dlg);
+    layout->addWidget(newFolderName);
+    layout->addWidget(buttonBox);
+    dlg->setLayout(layout);
+
     dlg->setWindowTitle(i18n("New Library Folder"));
-    dlg->setMainWidget(newFolderName);
+
     newFolderName->setFocus();
 
-    if (dlg->exec() == KDialog::Accepted) {
+    if (dlg->exec() == QDialog::Accepted) {
         QString folderName = newFolderName->text();
         if (!folderName.isEmpty()) {
             QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
