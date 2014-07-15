@@ -432,6 +432,8 @@ private:
     QMenu *popupMenuEditCrosswordEmptyCell();
     QMenu *popupMenuEditCrosswordImageCell();
 
+    void draw_background(KrossWordPuzzleView *view) const;
+
     Ui::print_crossword ui_print_crossword;
     Ui::export_to_image ui_export_to_image;
     Ui::clue_number_mapping ui_clue_number_mapping;

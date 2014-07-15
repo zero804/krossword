@@ -47,7 +47,7 @@ public:
 
     bool isDatabaseOk() const {
         return m_databaseOk;
-    };
+    }
 
     bool isEmpty();
     int entryCount();

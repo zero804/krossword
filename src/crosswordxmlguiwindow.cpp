@@ -81,6 +81,7 @@
 #include <KStatusBar>
 #include <KEmoticons>
 #include <KCharSelect>
+#include <QDesktopWidget>
 //#include <KGameDifficulty>
 
 #include <KCursor>
@@ -1776,12 +1777,7 @@ void CrossWordXmlGuiWindow::updateTheme()
         viewSolution()->scene()->update();
 
     // Add background
-    QBrush brush = QBrush(KrosswordRenderer::self()->background(QSize(800, 800)));
-    QMatrix m = brush.matrix();
-    m.translate(-300, -300);
-    m.scale(1.7, 1.7);
-    brush.setMatrix(m);
-    view()->setBackgroundBrush(brush);
+    draw_background(view());
 
     krossWord()->clearCache();
     view()->scene()->update();
@@ -2275,12 +2271,16 @@ KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
     view->setMinimumSize(300, 200);
 
     // Add background
+    //draw_background(view);
+    //! Can't use draw_background here, since background size is calculated using item's scene bounding box.
+    //! At this point there are none...
     QBrush brush = QBrush(KrosswordRenderer::self()->background(QSize(800, 800)));
     QMatrix m = brush.matrix();
     m.translate(-300, -300);
     m.scale(1.7, 1.7);
     brush.setMatrix(m);
     view->setBackgroundBrush(brush);
+
 
     connect(view, SIGNAL(signalChangeStatusbar(const QString&)), this, SLOT(signalChangeStatusbar(const QString&)));
     //connect(view, SIGNAL(signalChangeZoom(int, int)), this, SLOT(zoomSlot(int, int)));
@@ -3211,6 +3211,23 @@ QMenu* CrossWordXmlGuiWindow::popupMenuEditCrosswordEmptyCell()
 QMenu* CrossWordXmlGuiWindow::popupMenuEditCrosswordImageCell()
 {
     return static_cast<QMenu*>(factory()->container("edit_crossword_image_cell_popup", this));
+}
+
+void CrossWordXmlGuiWindow::draw_background(KrossWordPuzzleView *view) const
+{
+    // Add background
+    QDesktopWidget *mydesk = QApplication::desktop();
+    int desktop_height = mydesk->screenGeometry().height();
+    int scene_x = view->scene()->itemsBoundingRect().x();
+    int scene_y = view->scene()->itemsBoundingRect().y();
+    int scene_w = view->scene()->itemsBoundingRect().width();
+    int scene_h = view->scene()->itemsBoundingRect().height();
+
+    QBrush brush = QBrush(KrosswordRenderer::self()->background(QSize(desktop_height, desktop_height)));
+    QMatrix m = brush.matrix();
+    m.translate(-(desktop_height-(scene_x+scene_w))/2, -(desktop_height-(scene_y+scene_h))/2);
+    brush.setMatrix(m);
+    view->setBackgroundBrush(brush);
 }
 
 #include "crosswordxmlguiwindow.moc"

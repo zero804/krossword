@@ -83,10 +83,11 @@ bool KrosswordDictionary::checkDatabase()
 //     }
 //     return m_databaseOk;
 
+
     {
         QSqlDatabase db = QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false);
         if (!db.isValid()) {
-            db = QSqlDatabase::addDatabase("QMYSQL"/*, "krosswordpuzzle"*/);
+            db = QSqlDatabase::addDatabase("QMYSQL");//, "krosswordpuzzle");
             db.setHostName("localhost");
             db.setDatabaseName("krosswordpuzzle");
             db.setUserName("krosswordpuzzle");
@@ -106,6 +107,25 @@ bool KrosswordDictionary::checkDatabase()
         QSqlDatabase::removeDatabase(QLatin1String(QSqlDatabase::defaultConnection));
 
     return m_databaseOk;
+
+
+/*
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("krosswordpuzzle"); // Warning: needs a complete path... must decide where to put this
+
+    if (!db.open()) {
+        qDebug() << "Error opening the database connection" << db.lastError();
+        m_databaseOk = false;
+    } else {
+        db.close();
+        m_databaseOk = true;
+    }
+
+    if (!m_databaseOk)
+        QSqlDatabase::removeDatabase(QLatin1String(QSqlDatabase::defaultConnection));
+
+    return m_databaseOk;
+    */
 }
 
 void KrosswordDictionary::closeDatabase()
@@ -116,7 +136,7 @@ void KrosswordDictionary::closeDatabase()
 
 bool KrosswordDictionary::openDatabase(QWidget *dlgParent)
 {
-    bool ok;
+    bool ok = false;
 
     {
         QSqlDatabase db = QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false);
