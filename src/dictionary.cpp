@@ -83,7 +83,6 @@ bool KrosswordDictionary::checkDatabase()
 //     }
 //     return m_databaseOk;
 
-
     {
         QSqlDatabase db = QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false);
         if (!db.isValid()) {
@@ -107,25 +106,6 @@ bool KrosswordDictionary::checkDatabase()
         QSqlDatabase::removeDatabase(QLatin1String(QSqlDatabase::defaultConnection));
 
     return m_databaseOk;
-
-
-/*
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("krosswordpuzzle"); // Warning: needs a complete path... must decide where to put this
-
-    if (!db.open()) {
-        qDebug() << "Error opening the database connection" << db.lastError();
-        m_databaseOk = false;
-    } else {
-        db.close();
-        m_databaseOk = true;
-    }
-
-    if (!m_databaseOk)
-        QSqlDatabase::removeDatabase(QLatin1String(QSqlDatabase::defaultConnection));
-
-    return m_databaseOk;
-    */
 }
 
 void KrosswordDictionary::closeDatabase()
@@ -241,13 +221,13 @@ bool KrosswordDictionary::createTables()
     }
 
     QSqlQuery query(db);
-    ok = query.exec("CREATE TABLE dictionary ( "
-                    "id INTEGER NOT NULL AUTO_INCREMENT, "
-                    "word VARCHAR (256) NOT NULL, "
-                    "clue VARCHAR (256), "
-                    "score INTEGER DEFAULT 0, "
-                    "language VARCHAR (3) DEFAULT 'en', "
-                    "PRIMARY KEY(id), "
+    ok = query.exec("CREATE TABLE dictionary ( " \
+                    "id INTEGER NOT NULL AUTO_INCREMENT, " \
+                    "word VARCHAR (255) NOT NULL, " \
+                    "clue VARCHAR (255), " \
+                    "score INTEGER DEFAULT 0, " \
+                    "language VARCHAR (3) DEFAULT 'en', " \
+                    "PRIMARY KEY(id), " \
                     "UNIQUE (word) );");
     if (!ok)
         qDebug() << "Couldn't create table" << query.lastError();

@@ -863,6 +863,8 @@ bool CrossWordXmlGuiWindow::saveAs()
 
     if (fileDlg->exec() == KFileDialog::Accepted)
         fileName = fileDlg->selectedFile();
+    bool save_as_template = chkSaveAsTemplate->isChecked();
+    bool save_undo_stack = chkSaveUndoStack->isChecked();
     delete fileDlg;
 
     if (!fileName.isEmpty()) {
@@ -870,7 +872,7 @@ bool CrossWordXmlGuiWindow::saveAs()
         if (fileName.indexOf(QRegExp("\\.(kwp|kwpz|puz)$", Qt::CaseInsensitive)) == -1)
             fileName += ".kwpz";
 
-        return writeTo(fileName, chkSaveAsTemplate->isChecked() ? KrossWord::Template : KrossWord::Normal, chkSaveUndoStack->isChecked());
+        return writeTo(fileName, save_as_template ? KrossWord::Template : KrossWord::Normal, save_undo_stack);
     } else
         return false;
 }
@@ -3217,7 +3219,6 @@ void CrossWordXmlGuiWindow::draw_background(KrossWordPuzzleView *view) const
     m.translate(-(desktop_height-(scene_x+scene_w))/2, -(desktop_height-(scene_y+scene_h))/2);
     brush.setMatrix(m);
     view->setBackgroundBrush(brush);
-    qDebug() << view->scene()->itemsBoundingRect();
 }
 
 #include "crosswordxmlguiwindow.moc"
