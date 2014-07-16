@@ -33,18 +33,18 @@ public:
           m_krossWord(krossWord) {
         addItem(m_krossWord);
         setItemIndexMethod(NoIndex);
-    };
+    }
 
     KrossWordPuzzleScene(QObject* parent = 0)
         : QGraphicsScene(parent),
           m_krossWord(new Crossword::KrossWord()) {
         addItem(m_krossWord);
         setItemIndexMethod(NoIndex);
-    };
+    }
 
     Crossword::KrossWord *krossWord() {
         return m_krossWord;
-    };
+    }
 
 private:
     Crossword::KrossWord *m_krossWord;

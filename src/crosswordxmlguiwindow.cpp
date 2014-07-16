@@ -2270,18 +2270,6 @@ KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
     view->krossWord()->setInteractive();
     view->setMinimumSize(300, 200);
 
-    // Add background
-    //draw_background(view);
-    //! Can't use draw_background here, since background size is calculated using item's scene bounding box.
-    //! At this point there are none...
-    QBrush brush = QBrush(KrosswordRenderer::self()->background(QSize(800, 800)));
-    QMatrix m = brush.matrix();
-    m.translate(-300, -300);
-    m.scale(1.7, 1.7);
-    brush.setMatrix(m);
-    view->setBackgroundBrush(brush);
-
-
     connect(view, SIGNAL(signalChangeStatusbar(const QString&)), this, SLOT(signalChangeStatusbar(const QString&)));
     //connect(view, SIGNAL(signalChangeZoom(int, int)), this, SLOT(zoomSlot(int, int)));
     connect(view->krossWord(), SIGNAL(cluesAdded(ClueCellList)), this, SLOT(cluesAdded(ClueCellList)));
@@ -3070,6 +3058,7 @@ void CrossWordXmlGuiWindow::cluesAdded(ClueCellList clues)
     m_clueModel->addClue(clue);
 
     m_clueModel->sort(0);
+    draw_background(view());
 }
 
 void CrossWordXmlGuiWindow::cluesAboutToBeRemoved(ClueCellList clues)
@@ -3228,6 +3217,7 @@ void CrossWordXmlGuiWindow::draw_background(KrossWordPuzzleView *view) const
     m.translate(-(desktop_height-(scene_x+scene_w))/2, -(desktop_height-(scene_y+scene_h))/2);
     brush.setMatrix(m);
     view->setBackgroundBrush(brush);
+    qDebug() << view->scene()->itemsBoundingRect();
 }
 
 #include "crosswordxmlguiwindow.moc"
