@@ -228,15 +228,13 @@ protected:
     virtual void focusInEvent(QFocusEvent* event);
     virtual void focusOutEvent(QFocusEvent* event);
     virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
-    virtual void paint(QPainter* painter,
-                       const QStyleOptionGraphicsItem* option,
-                       QWidget* widget = 0);
+    virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
     // Virtual methods
-    virtual void drawBackground(QPainter*, const QStyleOptionGraphicsItem*) { };
-    virtual void drawForeground(QPainter*, const QStyleOptionGraphicsItem*) { };
-    virtual void drawBackgroundForPrinting(QPainter*, const QStyleOptionGraphicsItem*) { };
-    virtual void drawForegroundForPrinting(QPainter*, const QStyleOptionGraphicsItem*) { };
+    virtual void drawBackground(QPainter*, const QStyleOptionGraphicsItem*) { }
+    virtual void drawForeground(QPainter*, const QStyleOptionGraphicsItem*) { }
+    virtual void drawBackgroundForPrinting(QPainter*, const QStyleOptionGraphicsItem*) { }
+    virtual void drawForegroundForPrinting(QPainter*, const QStyleOptionGraphicsItem*) { }
 
     KrossWord *m_krossWord;
 
@@ -303,14 +301,6 @@ inline QDebug &operator <<(QDebug debug, KrossWordCell *cell)
 // Sorting functions
 bool lessThanCellType(const KrossWordCell *cell1, const KrossWordCell *cell2);
 bool greaterThanCellType(const KrossWordCell *cell1, const KrossWordCell *cell2);
-
-
-// Serialization
-// QDataStream &operator<< ( QDataStream &s, const KrossWordCell *cell );
-// QDataStream &operator<< ( QDataStream &s, const LetterCell *cell );
-// QDataStream &operator<< ( QDataStream &s, const ClueCell *cell );
-//
-// QDataStream &operator>> ( QDataStream &s, ClueCell cell );
 
 }; // namespace Crossword
 

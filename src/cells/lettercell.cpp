@@ -736,7 +736,6 @@ void LetterCell::setPropertiesFrom(LetterCell* other)
 void LetterCell::drawBackground(QPainter* p, const QStyleOptionGraphicsItem* option)
 {
     if (option->state.testFlag(QStyle::State_HasFocus) && !krossWord()->isDrawingForPrinting())
-//   if ( (hasFocus() /*|| krossWord()->currentCell() == this*/) && !krossWord()->isDrawingForPrinting() )
         KrosswordRenderer::self()->renderElement(p, "letter_cell_focus", option->rect);
     else if (isHighlighted())
         KrosswordRenderer::self()->renderElement(p, "letter_cell_highlight", option->rect);

@@ -30,7 +30,7 @@
 #include <QStyleOption>
 #include <qevent.h>
 
-#include <KDebug>
+#include <QDebug>
 #include <kdeversion.h>
 
 #if QT_VERSION >= 0x040600
@@ -48,26 +48,18 @@ void GlowEffect::draw(QPainter* painter)
     drawSource(painter);
 
     painter->save();
-//   painter->setClipRegion( QRegion(boundingRect().toRect())
-//      .subtracted(QRegion(sourcePixmap()
-//      .scaledToHeight(sourceBoundingRect().height())
-//      .mask())) );
-    painter->setClipRegion(QRegion(boundingRect().toRect())
-                           .subtracted(QRegion(sourceBoundingRect().toRect())));
+    painter->setClipRegion(QRegion(boundingRect().toRect()).subtracted(QRegion(sourceBoundingRect().toRect())));
     QGraphicsDropShadowEffect::draw(painter);
     painter->restore();
 }
 #endif
 
 #if QT_VERSION >= 0x040600
-KrossWordCell::KrossWordCell(KrossWord* krossWord, CellType cellType,
-                             const Coord& coord)
-    : QGraphicsObject(krossWord), m_blockCacheClearing(false),
-      m_cache(0), m_blurAnim(0)
+KrossWordCell::KrossWordCell(KrossWord* krossWord, CellType cellType, const Coord& coord)
+    : QGraphicsObject(krossWord), m_blockCacheClearing(false), m_cache(0), m_blurAnim(0)
 {
 #else
-KrossWordCell::KrossWordCell(KrossWord* krossWord, CellType cellType,
-                             const Coord& coord)
+KrossWordCell::KrossWordCell(KrossWord* krossWord, CellType cellType, const Coord& coord)
     : QGraphicsItem(krossWord), m_cache(0), m_redraw(true)
 {
 #endif
@@ -218,18 +210,13 @@ void KrossWordCell::synchronizeWith(KrossWordCell* cell,
 //     qDebug() << "Synchronize" << coord() << "with" << cell->coord()
 //  << "syncMethods =" << syncMethods << "syncCategory =" << syncCategory;
     if (syncContent && !contentSynced) {
-//  kDebug() << "Connected content sync" << coord() << "with" << cell->coord();
-        connect(cell, SIGNAL(currentLetterChanged(LetterCell*, QChar)),
-                this, SLOT(setCurrentLetterSlot(LetterCell*, QChar)));
-        connect(this, SIGNAL(currentLetterChanged(LetterCell*, QChar)),
-                cell, SLOT(setCurrentLetterSlot(LetterCell*, QChar)));
+        connect(cell, SIGNAL(currentLetterChanged(LetterCell*, QChar)), this, SLOT(setCurrentLetterSlot(LetterCell*, QChar)));
+        connect(this, SIGNAL(currentLetterChanged(LetterCell*, QChar)), cell, SLOT(setCurrentLetterSlot(LetterCell*, QChar)));
     }
 
     if (syncSelection && !selectionSynced) {
-        connect(cell, SIGNAL(gotFocus(KrossWordCell*)),
-                this, SLOT(setFocusSlot(KrossWordCell*)));
-        connect(this, SIGNAL(gotFocus(KrossWordCell*)),
-                cell, SLOT(setFocusSlot(KrossWordCell*)));
+        connect(cell, SIGNAL(gotFocus(KrossWordCell*)), this, SLOT(setFocusSlot(KrossWordCell*)));
+        connect(this, SIGNAL(gotFocus(KrossWordCell*)), cell, SLOT(setFocusSlot(KrossWordCell*)));
     }
 
     if (m_synchronizedCells[syncCategory].contains(cell)) {
@@ -284,20 +271,13 @@ bool KrossWordCell::removeSynchronizationWith(KrossWordCell* cell,
     bool stillSyncedContent = false, stillSyncedSelection = false;
     foreach(const SyncCategory & cat, cats) {
         if (syncCategories.testFlag(cat)) {
-//      kDebug() << "Remove sync methods" << syncMethods << "from cat" << cat
-//   << this->coord() << this->m_synchronizedCells[ cat ][cell]
-//   << cell->coord() << cell->m_synchronizedCells[ cat ][this];
-
             cell->m_synchronizedCells[ cat ][this] &= ~syncMethods;
             this->m_synchronizedCells[ cat ][cell] &= ~syncMethods;
 
             if (this->m_synchronizedCells[ cat ][cell] == SyncNothing) {
                 cell->m_synchronizedCells[ cat ].remove(this);
                 this->m_synchronizedCells[ cat ].remove(cell);
-//   kDebug() << "  No sync methods left, removed";
-            } // else
-//   kDebug() << "  Left sync methods" << this->m_synchronizedCells[ cat ][cell]
-//       << cell->m_synchronizedCells[ cat ][cell];
+            }
         } else if (!stillSyncedContent && m_synchronizedCells[cat].contains(cell)
                    && m_synchronizedCells[cat][cell].testFlag(SyncContent)) {
             stillSyncedContent = true;
@@ -309,18 +289,13 @@ bool KrossWordCell::removeSynchronizationWith(KrossWordCell* cell,
 
     if (!stillSyncedContent && syncMethods.testFlag(SyncContent)
             && isLetterCell() && cell->isLetterCell()) {
-//     kDebug() << "Disconnected content sync" << coord() << "with" << cell->coord();
-        disconnect(cell, SIGNAL(currentLetterChanged(LetterCell*, QChar)),
-                   this, SLOT(setCurrentLetterSlot(LetterCell*, QChar)));
-        disconnect(this, SIGNAL(currentLetterChanged(LetterCell*, QChar)),
-                   cell, SLOT(setCurrentLetterSlot(LetterCell*, QChar)));
+        disconnect(cell, SIGNAL(currentLetterChanged(LetterCell*, QChar)), this, SLOT(setCurrentLetterSlot(LetterCell*, QChar)));
+        disconnect(this, SIGNAL(currentLetterChanged(LetterCell*, QChar)), cell, SLOT(setCurrentLetterSlot(LetterCell*, QChar)));
     }
 
     if (!stillSyncedSelection && syncMethods.testFlag(SyncSelection)) {
-        disconnect(cell, SIGNAL(gotFocus(KrossWordCell*)),
-                   this, SLOT(setFocusSlot(KrossWordCell*)));
-        disconnect(this, SIGNAL(gotFocus(KrossWordCell*)),
-                   cell, SLOT(setFocusSlot(KrossWordCell*)));
+        disconnect(cell, SIGNAL(gotFocus(KrossWordCell*)), this, SLOT(setFocusSlot(KrossWordCell*)));
+        disconnect(this, SIGNAL(gotFocus(KrossWordCell*)), cell, SLOT(setFocusSlot(KrossWordCell*)));
     }
 
     return true;
@@ -346,8 +321,6 @@ void KrossWordCell::removeSynchronization(SyncMethods syncMethods,
 
         for (int i = m_synchronizedCells[cat].count() - 1; i >= 0; --i) {
             KrossWordCell *cell = m_synchronizedCells[cat].keys()[ i ];
-//       qDebug() << "Remove synchronization " /*<< ((SolutionLetterCell*)this)->correctLetter()*/
-//    << "of cell at" << coord() << "with cell at" << cell->coord();
             removeSynchronizationWith(cell, syncMethods, cat);
         }
     }
@@ -356,7 +329,6 @@ void KrossWordCell::removeSynchronization(SyncMethods syncMethods,
 void KrossWordCell::setFocusSlot(KrossWordCell* cell)
 {
     Q_UNUSED(cell);   // TODO: remove cell parameter?
-//     kDebug() << "SET FOCUS" << this->coord() << "hasFocus()?" << hasFocus();
 
     setFocus(); // TEST
 }
@@ -371,18 +343,12 @@ void KrossWordCell::deleteAndRemoveFromSceneLater()
 
 QRectF KrossWordCell::boundingRect() const
 {
-//     kDebug() << "bounding size =" << krossWord()->cellSize();
-//     qreal penWidth = 1;
-//     return QRectF( pos().x() - penWidth / 2, pos().y() - penWidth / 2,
-//      krossWord()->cellSize().width() + penWidth,
-//      krossWord()->cellSize().height() + penWidth );
     qreal width = krossWord()->cellSize().width();
     qreal height = krossWord()->cellSize().height();
     return QRectF(-width / 2 - 0.5, -height / 2 - 0.5, width + 1, height + 1);
 }
 
-QVariant KrossWordCell::itemChange(QGraphicsItem::GraphicsItemChange change,
-                                   const QVariant& value)
+QVariant KrossWordCell::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value)
 {
     if (change == ItemSelectedChange)
         update();
@@ -391,12 +357,6 @@ QVariant KrossWordCell::itemChange(QGraphicsItem::GraphicsItemChange change,
 
 void KrossWordCell::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
-//     if ( event->button() != Qt::LeftButton )
-//  event->ignore();
-//     else {
-//  event->accept();
-//  kDebug() << "Cell clicked at" << coord() << "Type =" << cellType();
-//     }
     if (!krossWord()->acceptedMouseButtons().testFlag(event->button())) {
         event->ignore();
         return;
@@ -591,8 +551,7 @@ void KrossWordCell::setHighlight(bool enable)
 }
 
 
-EmptyCell::EmptyCell(KrossWord* krossWord, Coord coord)
-    : KrossWordCell(krossWord, EmptyCellType, coord)
+EmptyCell::EmptyCell(KrossWord* krossWord, Coord coord) : KrossWordCell(krossWord, EmptyCellType, coord)
 {
     setFlag(QGraphicsItem::ItemIsFocusable, krossWord->isEditable());
     setFlag(QGraphicsItem::ItemIsSelectable, krossWord->isEditable());
@@ -689,24 +648,17 @@ void KrossWordCell::paint(QPainter* painter,
 {
     Q_UNUSED(widget);
 
-//     drawBackground( painter, option );
-//     drawForeground( painter, option );
-// painter->setClipRect( boundingRect() );
-// qDebug() << option->rect;
-// qDebug() << QStyleOptionGraphicsItem::levelOfDetailFromTransform(
-//  QTransform(option->matrix) );
     if (krossWord()->isDrawingForPrinting()) {
         drawBackgroundForPrinting(painter, option);
         drawForegroundForPrinting(painter, option);
     } else {
 #if QT_VERSION >= 0x040600
-        qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(
-                                  QTransform(option->matrix));
+        qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
 #else
         qreal levelOfDetail = option->levelOfDetail;
 #endif
         QSize size = option->rect.size() * levelOfDetail;
-//  qDebug() << "SIZE =" << size << "FROM" << option->rect.size() << "*" << levelOfDetail;
+        //  qDebug() << "SIZE =" << size << "FROM" << option->rect.size() << "*" << levelOfDetail;
 
         if (m_cache) {
             if (m_cache->size() != size) {

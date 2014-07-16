@@ -39,10 +39,11 @@
 #include <KIO/PreviewJob>
 #include <KStandardDirs>
 
+#include <QDebug>
+
 
 LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
       m_mainWindow(parent),
-      m_dialog(0),
       m_libraryTree(new QTreeView()),
       m_libraryDelegate(0),
       m_libraryModel(0),
@@ -188,16 +189,16 @@ void LibraryXmlGuiWindow::previewJobFailed(const KFileItem &fi)
 void LibraryXmlGuiWindow::downloadPreviewJobGotPreview(const KFileItem& fi, const QPixmap& pix)
 {
     Q_UNUSED(fi);
-    if (!m_dialog)
-        return;
 
-    ui_download.preview->setPixmap(pix);
-    ui_download.preview->setEnabled(true);
+    if (ui_download.preview) {
+        ui_download.preview->setPixmap(pix);
+        ui_download.preview->setEnabled(true);
+    }
 }
 
 void LibraryXmlGuiWindow::downloadPreviewJobFailed(const KFileItem& fi)
 {
-    qDebug() << "Preview job failed:" << fi.url();
+    qDebug() << "Preview job failed:" << fi.url().pathOrUrl();
     ui_download.preview->setText(i18n("Failed")); // improve the message
 }
 
@@ -250,6 +251,7 @@ void LibraryXmlGuiWindow::downloadCurrentCrosswordChanged(QListWidgetItem* curre
 
     QString url = current->data(Qt::UserRole).toString();
     KFileItem crossword(KUrl(url), "application/x-acrosslite-puz", KFileItem::Unknown);
+
     m_downloadPreviewJob = new KIO::PreviewJob(KFileItemList() << crossword, 256, 256, 0, 1, false, true, 0);
     m_downloadPreviewJob->setAutoDelete(true);
 
@@ -584,6 +586,7 @@ void LibraryXmlGuiWindow::libraryDownloadSlot()
     }
 
     delete downloadCrosswordsDlg;
+    downloadCrosswordsDlg = nullptr;
 }
 
 void LibraryXmlGuiWindow::libraryDeleteSlot()

@@ -103,7 +103,6 @@ private:
     Ui::download ui_download;
 
     KrossWordPuzzle *m_mainWindow;
-    KDialog *m_dialog;
 
     QTreeView *m_libraryTree;
     HtmlDelegate *m_libraryDelegate;

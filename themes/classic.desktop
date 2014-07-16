@@ -1,0 +1,31 @@
+[KGameTheme]
+Name=Classic
+FileName=classic.svgz
+Author=Caig
+AuthorEmail=
+Description=A classic theme for KrossWord.
+Preview=classic.png
+
+# Wheather or not the background is dark (affects shadows)
+HasDarkBackground=false
+
+# The glow color of highlighted cells
+GlowColor=64,64,255
+# The glow color of focused cells
+FocusGlowColor=255,64,64
+
+# The color for selected cells in edit mode
+SelectionColor=255,100,100,128
+# The color for empty cells in edit mode
+EmptyCellColor=100,100,100,128
+
+# The position of clue numbers for american crosswords
+ClueNumberPos=BottomRight
+# The position of number clues inside letter cells for number puzzles
+NumberPuzzleCluePos=TopRight
+# The position of the index for solution letters
+SolutionLetterIndexPos=BottomLeft
+
+# Margins of cell contents: Left, Top, Right, Bottom
+LetterCellMargins=4,4,4,4
+ClueCellMargins=4,4,4,4

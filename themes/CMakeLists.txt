@@ -1,5 +1,9 @@
 
 set( krosswordpuzzle_THEME_SRCS
+        classic.desktop
+        classic.svgz
+        classic.png
+
 	default.desktop
 	default.svgz
 	default.png
