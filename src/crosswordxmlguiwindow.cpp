@@ -3209,14 +3209,12 @@ void CrossWordXmlGuiWindow::draw_background(KrossWordPuzzleView *view) const
     // Add background
     QDesktopWidget *mydesk = QApplication::desktop();
     int desktop_height = mydesk->screenGeometry().height();
-    int scene_x = view->scene()->itemsBoundingRect().x();
-    int scene_y = view->scene()->itemsBoundingRect().y();
-    int scene_w = view->scene()->itemsBoundingRect().width();
-    int scene_h = view->scene()->itemsBoundingRect().height();
+    QRectF scene_rect = view->scene()->itemsBoundingRect();
 
     QBrush brush = QBrush(KrosswordRenderer::self()->background(QSize(desktop_height, desktop_height)));
     QMatrix m = brush.matrix();
-    m.translate(-(desktop_height-(scene_x+scene_w))/2, -(desktop_height-(scene_y+scene_h))/2);
+    m.translate(scene_rect.x() - (desktop_height - (scene_rect.x() + scene_rect.width()))/2,
+                scene_rect.y() - (desktop_height - (scene_rect.y() + scene_rect.height()))/2);
     brush.setMatrix(m);
     view->setBackgroundBrush(brush);
 }

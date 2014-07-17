@@ -72,6 +72,7 @@ signals:
 private:
     KDialog *createProgressDialog(QWidget *parent, const QString &text, QProgressBar *progressBar);
     bool checkDatabase();
+    QSqlDatabase getDatabaseConnection(bool *ok) const;
 
     Ui::database_connection ui_database_connection;
     bool m_cancel;

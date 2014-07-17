@@ -52,13 +52,13 @@ public:
 
     bool isExecuting() const {
         return m_executingRedo;
-    };
+    }
     void clear() {
         KUndoStack::clear();
         m_data.clear();
         m_dataIndexPos.clear();
         m_dataIndexPos << sizeof(qint16);
-    };
+    }
 
 public slots:
     void indexChanged(int idx);
@@ -106,7 +106,7 @@ public:
     virtual UndoCommandExt *mergedWith(const QUndoCommand* other) {
         Q_UNUSED(other);
         return nullptr;
-    };
+    }
 
     /** Checks if the redo action can be performed or would lead to an error.
     * The default implementation always returns true.
@@ -119,7 +119,7 @@ public:
     virtual bool checkRedo(QString *errorMessage = 0) const {
         Q_UNUSED(errorMessage);
         return true;
-    };
+    }
 
     /** Checks if the undo action can be performed or would lead to an error.
     * The default implementation always returns true.
@@ -132,11 +132,11 @@ public:
     virtual bool checkUndo(QString *errorMessage = 0) const {
         Q_UNUSED(errorMessage);
         return true;
-    };
+    }
 
     UndoStackExt *undoStack() const {
         return m_undoStack;
-    };
+    }
     void setUndoStack(UndoStackExt *undoStack);
 
     void redo() {
@@ -146,10 +146,10 @@ public:
             redoMaybe();
         } else if (m_undoStack->isExecuting())
             redoMaybe();
-    };
+    }
     virtual void redoMaybe() {
         QUndoCommand::redo();
-    };
+    }
 
     void undo() {
 //       qDebug() << "UndoCommandExt::undo()  type =" << type();
@@ -158,16 +158,16 @@ public:
             undoMaybe();
         } else if (m_undoStack->isExecuting())
             undoMaybe();
-    };
+    }
     virtual void undoMaybe() {
         QUndoCommand::undo();
-    };
+    }
 
 
     virtual Command type() const = 0;
     virtual void appendToData(QDataStream *stream) const {
         Q_UNUSED(stream);
-    };
+    }
 
     static UndoCommandExt *fromData(KrossWord *krossWord, QDataStream *stream,
                                     UndoCommandExt *parent = NULL);
@@ -228,12 +228,12 @@ public:
 
     virtual Command type() const {
         return CommandCrosswordCompound;
-    };
+    }
     static CrosswordCompoundUndoCommand *fromData(KrossWord *krossWord,
             QDataStream *stream,
             UndoCommandExt *parent = NULL) {
         return new CrosswordCompoundUndoCommand(krossWord, stream, parent);
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
 
     ResizeCrosswordCommand *addResizeCrosswordCommand(int newWidth, int newHeight,
@@ -289,33 +289,33 @@ public:
 
     virtual Command type() const {
         return CommandRemoveClue;
-    };
+    }
     static RemoveClueCommand *fromData(KrossWord *krossWord, QDataStream *stream,
                                        UndoCommandExt *parent = NULL) {
         return new RemoveClueCommand(krossWord, stream, parent);
-    };
+    }
 
     KrossWord *krossWord() const {
         return m_krossWord;
-    };
+    }
     Coord coord() const {
         return m_coord;
-    };
+    }
     Qt::Orientation orientation() const {
         return m_orientation;
-    };
+    }
     QString clue() const {
         return m_clue;
-    };
+    }
     QString answer() const {
         return m_answer;
-    };
+    }
     QString currentAnswer() const {
         return m_currentAnswer;
-    };
+    }
     AnswerOffset answerOffset() const {
         return m_answerOffset;
-    };
+    }
 
     virtual void appendToData(QDataStream *stream) const;
 
@@ -350,11 +350,11 @@ public:
 
     virtual Command type() const {
         return CommandAddClue;
-    };
+    }
     static AddClueCommand *fromData(KrossWord *krossWord, QDataStream *stream,
                                     UndoCommandExt *parent = NULL) {
         return new AddClueCommand(krossWord, stream, parent);
-    };
+    }
 
 protected:
     AddClueCommand(KrossWord *krossWord, QDataStream *stream,
@@ -383,29 +383,29 @@ public:
 
     virtual Command type() const {
         return CommandRemoveImage;
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
     static RemoveImageCommand *fromData(KrossWord *krossWord,
                                         QDataStream *stream,
                                         UndoCommandExt *parent = NULL) {
         return new RemoveImageCommand(krossWord, stream, parent);
-    };
+    }
 
     KrossWord *krossWord() const {
         return m_krossWord;
-    };
+    }
     Coord coord() const {
         return m_coord;
-    };
+    }
     int horizontalCellSpan() const {
         return m_horizontalCellSpan;
-    };
+    }
     int verticalCellSpan() const {
         return m_verticalCellSpan;
-    };
+    }
     KUrl url() const {
         return m_url;
-    };
+    }
 
 protected:
     RemoveImageCommand(KrossWord *krossWord, QDataStream *stream,
@@ -428,33 +428,33 @@ public:
 
     virtual void redoMaybe() {
         RemoveImageCommand::undoMaybe();
-    };
+    }
     virtual void undoMaybe() {
         RemoveImageCommand::redoMaybe();
-    };
+    }
 
     virtual bool checkRedo(QString* errorMessage = 0) const {
         return RemoveImageCommand::checkUndo(errorMessage);
-    };
+    }
     virtual bool checkUndo(QString* errorMessage = 0) const {
         return RemoveImageCommand::checkRedo(errorMessage);
-    };
+    }
 
     virtual Command type() const {
         return CommandAddImage;
-    };
+    }
 
     static AddImageCommand *fromData(KrossWord *krossWord, QDataStream *stream,
                                      UndoCommandExt *parent = NULL) {
         return new AddImageCommand(krossWord, stream, parent);
-    };
+    }
 
 protected:
     AddImageCommand(KrossWord *krossWord, QDataStream *stream,
                     UndoCommandExt *parent = NULL)
         : RemoveImageCommand(krossWord, stream, parent) {
         setupText();
-    };
+    }
 
     void setupText();
 };
@@ -476,23 +476,23 @@ public:
 
     virtual Command type() const {
         return CommandConvertToLetter;
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
     static ConvertToLetterCommand *fromData(KrossWord *krossWord,
                                             QDataStream *stream,
                                             UndoCommandExt *parent = NULL) {
         return new ConvertToLetterCommand(krossWord, stream, parent);
-    };
+    }
 
     KrossWord *krossWord() const {
         return m_krossWord;
-    };
+    }
     Coord coord() const {
         return m_coord;
-    };
+    }
     int solutionWordIndex() const {
         return m_solutionWordIndex;
-    };
+    }
 
 protected:
     ConvertToLetterCommand(KrossWord *krossWord, QDataStream *stream,
@@ -513,32 +513,32 @@ public:
 
     virtual void redoMaybe() {
         ConvertToLetterCommand::undoMaybe();
-    };
+    }
     virtual void undoMaybe() {
         ConvertToLetterCommand::redoMaybe();
-    };
+    }
 
     virtual bool checkRedo(QString* errorMessage = 0) const {
         return ConvertToLetterCommand::checkUndo(errorMessage);
-    };
+    }
     virtual bool checkUndo(QString* errorMessage = 0) const {
         return ConvertToLetterCommand::checkRedo(errorMessage);
-    };
+    }
 
     virtual Command type() const {
         return CommandConvertToSolutionLetter;
-    };
+    }
     static ConvertToSolutionLetterCommand *fromData(KrossWord *krossWord,
             QDataStream *stream, UndoCommandExt *parent = NULL) {
         return new ConvertToSolutionLetterCommand(krossWord, stream, parent);
-    };
+    }
 
 protected:
     ConvertToSolutionLetterCommand(KrossWord *krossWord, QDataStream *stream,
                                    UndoCommandExt *parent = NULL)
         : ConvertToLetterCommand(krossWord, stream, parent) {
         setupText();
-    };
+    }
 
 private:
     void setupText();
@@ -560,7 +560,7 @@ public:
 
     virtual int id() const {
         return static_cast<int>(CommandChangeClue);
-    };
+    }
     virtual bool mergeWith(const QUndoCommand* other);
 
     virtual void redoMaybe();
@@ -576,13 +576,13 @@ public:
 
     virtual Command type() const {
         return CommandChangeClue;
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
     static ChangeClueCommand *fromData(KrossWord *krossWord,
                                        QDataStream *stream,
                                        UndoCommandExt *parent = NULL) {
         return new ChangeClueCommand(krossWord, stream, parent);
-    };
+    }
 
 protected:
     ChangeClueCommand(KrossWord *krossWord, QDataStream *stream,
@@ -613,7 +613,7 @@ public:
 
     virtual int id() const {
         return static_cast<int>(CommandAddLettersToClue);
-    };
+    }
     virtual bool mergeWith(const QUndoCommand* other);
     virtual UndoCommandExt *mergedWith(const QUndoCommand* other);
 
@@ -625,15 +625,13 @@ public:
 
     virtual Command type() const {
         return CommandAddLettersToClue;
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
     static AddLettersToClueCommand *fromData(KrossWord *krossWord,
             QDataStream *stream,
             UndoCommandExt *parent = NULL) {
         return new AddLettersToClueCommand(krossWord, stream, parent);
-    };
-
-
+    }
 
 protected:
     AddLettersToClueCommand(KrossWord* krossWord, QDataStream *stream,
@@ -689,12 +687,12 @@ public:
 
     virtual Command type() const {
         return CommandLetterEdit;
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
     static LetterEditCommand *fromData(KrossWord *krossWord,
                                        QDataStream *stream, UndoCommandExt *parent = NULL) {
         return new LetterEditCommand(krossWord, stream, parent);
-    };
+    }
 
 protected:
     LetterEditCommand(KrossWord *krossWord, QDataStream *stream,
@@ -724,12 +722,12 @@ public:
 
     virtual Command type() const {
         return CommandClearClue;
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
     static ClearClueCommand *fromData(KrossWord *krossWord,
                                       QDataStream *stream, UndoCommandExt *parent = NULL) {
         return new ClearClueCommand(krossWord, stream, parent);
-    };
+    }
 
 protected:
     ClearClueCommand(KrossWord *krossWord, QDataStream *stream,
@@ -758,11 +756,11 @@ public:
 
     virtual Command type() const {
         return CommandClearCrossword;
-    };
+    }
     static ClearCrosswordCommand *fromData(KrossWord *krossWord,
                                            QDataStream *stream, UndoCommandExt *parent = NULL) {
         return new ClearCrosswordCommand(krossWord, stream, parent);
-    };
+    }
 
 
 protected:
@@ -770,7 +768,7 @@ protected:
                           UndoCommandExt *parent = NULL)
         : CrosswordCompoundUndoCommand(krossWord, stream, parent) {
         setupText();
-    };
+    }
 
 private:
     void setupText();
@@ -793,12 +791,12 @@ public:
 
     virtual Command type() const {
         return CommandChangeCrosswordProperties;
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
     static ChangeCrosswordPropertiesCommand *fromData(KrossWord *krossWord,
             QDataStream *stream, UndoCommandExt *parent = NULL) {
         return new ChangeCrosswordPropertiesCommand(krossWord, stream, parent);
-    };
+    }
 
 //  TODO: Could check string lengths, if a PUZ file is opened
 //  virtual bool checkRedo( QString* errorMessage = 0 ) const;
@@ -828,12 +826,12 @@ public:
 
     virtual Command type() const {
         return CommandSetClueHidden;
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
     static SetClueHiddenCommand *fromData(KrossWord *krossWord,
                                           QDataStream *stream, UndoCommandExt *parent = NULL) {
         return new SetClueHiddenCommand(krossWord, stream, parent);
-    };
+    }
 
 protected:
     SetClueHiddenCommand(KrossWord *krossWord, QDataStream *stream,
@@ -864,12 +862,12 @@ public:
 
     virtual Command type() const {
         return CommandMakeClueCellVisible;
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
     static MakeClueCellVisibleCommand *fromData(KrossWord *krossWord,
             QDataStream *stream, UndoCommandExt *parent = NULL) {
         return new MakeClueCellVisibleCommand(krossWord, stream, parent);
-    };
+    }
 
 protected:
     MakeClueCellVisibleCommand(KrossWord *krossWord, QDataStream *stream,
@@ -896,12 +894,12 @@ public:
 
     virtual Command type() const {
         return CommandSetNumberPuzzleMapping;
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
     static SetNumberPuzzleMappingCommand *fromData(KrossWord *krossWord,
             QDataStream *stream, UndoCommandExt *parent = NULL) {
         return new SetNumberPuzzleMappingCommand(krossWord, stream, parent);
-    };
+    }
 
 protected:
     SetNumberPuzzleMappingCommand(KrossWord *krossWord, QDataStream *stream,
@@ -926,12 +924,12 @@ public:
 
     virtual Command type() const {
         return CommandSetupSameLetterSynchronization;
-    };
+    }
     static SetupSameLetterSynchronizationCommand *fromData(KrossWord *krossWord,
             QDataStream *stream, UndoCommandExt *parent = NULL) {
         return new SetupSameLetterSynchronizationCommand(
                    krossWord, stream, parent);
-    };
+    }
 
 protected:
     SetupSameLetterSynchronizationCommand(KrossWord *krossWord,
@@ -952,26 +950,26 @@ public:
 
     virtual void redoMaybe() {
         SetupSameLetterSynchronizationCommand::undoMaybe();
-    };
+    }
     virtual void undoMaybe() {
         SetupSameLetterSynchronizationCommand::redoMaybe();
-    };
+    }
 
     virtual Command type() const {
         return CommandRemoveSameLetterSynchronization;
-    };
+    }
     static RemoveSameLetterSynchronizationCommand *fromData(KrossWord *krossWord,
             QDataStream *stream, UndoCommandExt *parent = NULL) {
         return new RemoveSameLetterSynchronizationCommand(
                    krossWord, stream, parent);
-    };
+    }
 
 protected:
     RemoveSameLetterSynchronizationCommand(KrossWord *krossWord,
                                            QDataStream *stream, UndoCommandExt *parent = NULL)
         : SetupSameLetterSynchronizationCommand(krossWord, stream, parent) {
         setupText();
-    };
+    }
 
 private:
     void setupText();
@@ -995,12 +993,12 @@ public:
 
     virtual Command type() const {
         return CommandConvertCrossword;
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
     static ConvertCrosswordCommand *fromData(KrossWord *krossWord,
             QDataStream *stream, UndoCommandExt *parent = NULL) {
         return new ConvertCrosswordCommand(krossWord, stream, parent);
-    };
+    }
 
 protected:
     ConvertCrosswordCommand(KrossWord *krossWord,
@@ -1023,7 +1021,7 @@ public:
     virtual bool mergeWith(const QUndoCommand* other);
     virtual int id() const {
         return static_cast<int>(CommandResizeCrossword);
-    };
+    }
 
     virtual void redoMaybe();
     virtual void undoMaybe();
@@ -1034,12 +1032,12 @@ public:
 
     virtual Command type() const {
         return CommandResizeCrossword;
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
     static ResizeCrosswordCommand *fromData(KrossWord *krossWord,
                                             QDataStream *stream, UndoCommandExt *parent = NULL) {
         return new ResizeCrosswordCommand(krossWord, stream, parent);
-    };
+    }
 
 protected:
     ResizeCrosswordCommand(KrossWord *krossWord, QDataStream *stream,
@@ -1062,19 +1060,19 @@ public:
     virtual bool mergeWith(const QUndoCommand* other);
     virtual int id() const {
         return static_cast<int>(CommandMoveCells);
-    };
+    }
 
     virtual void redoMaybe();
     virtual void undoMaybe();
 
     virtual Command type() const {
         return CommandMoveCells;
-    };
+    }
     virtual void appendToData(QDataStream *stream) const;
     static MoveCellsCommand *fromData(KrossWord *krossWord,
                                       QDataStream *stream, UndoCommandExt *parent = NULL) {
         return new MoveCellsCommand(krossWord, stream, parent);
-    };
+    }
 
 protected:
     MoveCellsCommand(KrossWord *krossWord, QDataStream *stream,

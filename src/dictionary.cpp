@@ -83,6 +83,7 @@ bool KrosswordDictionary::checkDatabase()
 //     }
 //     return m_databaseOk;
 
+/*
     {
         QSqlDatabase db = QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false);
         if (!db.isValid()) {
@@ -101,11 +102,36 @@ bool KrosswordDictionary::checkDatabase()
             m_databaseOk = true;
         }
     }
+*/
+    getDatabaseConnection(&m_databaseOk);
 
     if (!m_databaseOk)
         QSqlDatabase::removeDatabase(QLatin1String(QSqlDatabase::defaultConnection));
 
     return m_databaseOk;
+}
+
+QSqlDatabase KrosswordDictionary::getDatabaseConnection(bool *ok) const
+{
+    QSqlDatabase db = QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false);
+    if (!db.isValid()) {
+        db = QSqlDatabase::addDatabase("QMYSQL");
+        db.setHostName("localhost");
+        db.setDatabaseName("krosswordpuzzle");
+        db.setUserName("krosswordpuzzle");
+        db.setPassword("krosswordpuzzle");
+    }
+
+    if (!db.open()) {
+        qDebug() << "Error opening the database connection" << db.lastError();
+        if(ok != nullptr)
+            *ok = false;
+    } else {
+        if(ok != nullptr)
+            *ok = true;
+    }
+
+    return db;
 }
 
 void KrosswordDictionary::closeDatabase()
@@ -117,26 +143,31 @@ void KrosswordDictionary::closeDatabase()
 bool KrosswordDictionary::openDatabase(QWidget *dlgParent)
 {
     bool ok = false;
-
+/*
     {
+
         QSqlDatabase db = QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false);
         if (!db.isValid()) {
             qDebug() << "Creating MySQL database connection";
-            db = QSqlDatabase::addDatabase("QMYSQL"/*, "krosswordpuzzle"*/);
+            db = QSqlDatabase::addDatabase("QMYSQL");
             db.setHostName("localhost");
             //  db.setDatabaseName( "krosswordpuzzle" );
             db.setUserName("krosswordpuzzle");
             db.setPassword("krosswordpuzzle");
         }
 
-        ok = db.open();
+*/
+        QSqlDatabase db = getDatabaseConnection(&ok);
+        if(ok)
+            ok = db.open();
+
         if (!ok)
             qDebug() << "Error opening the database connection" << db.lastError();
         else if (!db.databaseName().isEmpty()) {
             m_databaseOk = true;
             return true;
         }
-    }
+    //}
 
     if (!ok) {
         if (KMessageBox::warningContinueCancel(dlgParent,

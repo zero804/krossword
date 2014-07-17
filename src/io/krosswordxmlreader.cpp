@@ -481,6 +481,7 @@ void KrossWordXmlReader::readClue(KrossWord *krossWord)
 //  kDebug() << "Finished reading clue:" << clue << answer << coord << "orientation ="
 //   << orientation << "answerOffset =" << answerOffset
 //   << "currentAnswer =" << currentAnswer;;
+
         ClueCell *clueCell;
         ErrorType errorType = krossWord->insertClue(
                                   coord, orientation, answerOffset, clue, answer,
@@ -495,11 +496,13 @@ void KrossWordXmlReader::readClue(KrossWord *krossWord)
 
             if (clueSelected)
                 clueCell->setHighlight();
+
         } else {
             kDebug() << KrossWord::errorMessageFromErrorType(errorType);
             //      raiseError( KrossWord::errorMessageFromErrorType(errorType) );
         }
     }
+
 }
 
 void KrossWordXmlReader::readImage(KrossWord* krossWord)
