@@ -27,12 +27,10 @@
 #include "dialogs/createnewcrossworddialog.h"
 
 #include <QStandardItemModel>
-#include <QDebug>
 #include <KMessageBox>
 #include <KFileDialog>
 #include <KActionMenu>
 #include <KIO/CopyJob>
-#include <KColorScheme>
 #include <KMenuBar>
 #include <KStatusBar>
 #include <KActionCollection>

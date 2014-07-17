@@ -29,6 +29,7 @@ namespace Crossword
 {
 
 class KrossWord;
+
 /** A crossword cell that contains the clue text in it. */
 class ClueCell : public KrossWordCell
 {

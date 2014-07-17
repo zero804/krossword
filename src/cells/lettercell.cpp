@@ -857,22 +857,21 @@ void LetterCell::drawClueForCell(QPainter* p, const QStyleOptionGraphicsItem* op
     p->save();
 
     QString text;
-    if (krossWord()->crosswordTypeInfo().clueType == NumberClues1To26
-            && krossWord()->crosswordTypeInfo().letterCellContent == Characters) {
-        int clueNumber = krossWord()->letterContentToClueNumberMapping()
-                         .indexOf(correctLetter()) + 1;
+    if (krossWord()->crosswordTypeInfo().clueType == NumberClues1To26 && krossWord()->crosswordTypeInfo().letterCellContent == Characters) {
+        int clueNumber = krossWord()->letterContentToClueNumberMapping().indexOf(correctLetter()) + 1;
         if (clueNumber > 0)
             text = QString::number(clueNumber);
     } else
         text = clue()->clue();
 
     QFont font = KGlobalSettings::smallestReadableFont();
+
 #if QT_VERSION >= 0x040600
-    qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(
-                              QTransform(option->matrix));
+    qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
 #else
     qreal levelOfDetail = option->levelOfDetail;
 #endif
+
     font.setPixelSize(10 * levelOfDetail);
     font.setBold(true);
     p->setFont(font);
@@ -880,10 +879,8 @@ void LetterCell::drawClueForCell(QPainter* p, const QStyleOptionGraphicsItem* op
     QFontMetrics fontMetrics(font);
     QRect rect = fontMetrics.boundingRect(text);
     rect.setWidth(fontMetrics.width(text));
-    QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect,
-                        krossWord()->theme()->marginsLetterCell(levelOfDetail));
-    p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect,
-                                          krossWord()->theme()->numberPuzzleCluePos()), text);
+    QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect, krossWord()->theme()->marginsLetterCell(levelOfDetail));
+    p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect, krossWord()->theme()->numberPuzzleCluePos()), text);
     p->restore();
 }
 
