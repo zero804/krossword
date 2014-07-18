@@ -321,7 +321,6 @@ void KrossWordPuzzle::optionsPreferencesSlot()
     ui_settings.setupUi(animationSettingsDlg);
     dialog->addPage(animationSettingsDlg, i18n("Animations"), "package_settings");
 
-    // What is his purpose? Maybe useless?
     QWidget *themeSelectorDlg = new QWidget;
 
     KgThemeSelector *themeSelector = new KgThemeSelector(KrosswordRenderer::self()->getThemeProvider(), KgThemeSelector::EnableNewStuffDownload, themeSelectorDlg);

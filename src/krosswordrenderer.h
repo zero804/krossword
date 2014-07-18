@@ -22,9 +22,12 @@
 
 #include <QPixmap>
 
+#include <QDebug>
+
 class KgTheme;
 class KGameRenderer;
 class KgThemeProvider;
+class KrosswordTheme;
 
 class KrosswordRenderer
 {
@@ -35,11 +38,11 @@ public:
 
     void renderBackground(QPainter *p, const QRectF& r) const;
     QPixmap background(const QSize &size) const;
-    //void renderElement( QPainter *p, const QString& elementid, const QRectF& r ) const;
     void renderElement(QPainter *p, const QString& elementid, const QRectF& r, const QColor &alpha = Qt::black) const;
     bool setTheme(const QString &themeName);
     KgThemeProvider* getThemeProvider() const;
     QString getCurrentThemeName() const;
+    const KgTheme *getCurrentTheme() const;
 
 private:
     // disable copy - it's singleton

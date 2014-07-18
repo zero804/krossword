@@ -2263,8 +2263,13 @@ void CrossWordXmlGuiWindow::setCurrentFileName(const QString& fileName)
 
 KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
 {
-    //!Warning Krossword class needs a pointer to a theme but doesn't seems to be in trouble with a null pointer
-    KrossWordPuzzleView *view = new KrossWordPuzzleView(new KrossWordPuzzleScene(new KrossWord(nullptr)));
+    //!Krossword class needs a theme (?)
+    KrossWordPuzzleView *view = new KrossWordPuzzleView(
+                new KrossWordPuzzleScene(
+                    new KrossWord( //! ↓ This is always null...
+                        dynamic_cast<const KrosswordTheme*>(KrosswordRenderer::self()->getCurrentTheme())
+                        )));
+
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->scene()->setStickyFocus(true);
@@ -2273,7 +2278,6 @@ KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
     view->setMinimumSize(300, 200);
 
     connect(view, SIGNAL(signalChangeStatusbar(const QString&)), this, SLOT(signalChangeStatusbar(const QString&)));
-    //connect(view, SIGNAL(signalChangeZoom(int, int)), this, SLOT(zoomSlot(int, int)));
     connect(view->krossWord(), SIGNAL(cluesAdded(ClueCellList)), this, SLOT(cluesAdded(ClueCellList)));
     connect(view->krossWord(), SIGNAL(cluesAboutToBeRemoved(ClueCellList)), this, SLOT(cluesAboutToBeRemoved(ClueCellList)));
     connect(view->krossWord(), SIGNAL(solutionWordLetterAdded(SolutionLetterCell*)), this, SLOT(solutionWordLetterAdded(SolutionLetterCell*)));

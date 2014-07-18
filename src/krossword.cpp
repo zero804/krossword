@@ -201,7 +201,7 @@ void KrossWordTitleItem::crosswordResized(KrossWord *krossWord,
 
 
 
-KrossWord::KrossWord(KrosswordTheme *theme, int width, int height)
+KrossWord::KrossWord(const KrosswordTheme *theme, int width, int height)
     : QGraphicsObject(0), m_animator(new Animator()),
     m_currentCell(0), m_previousCell(0),
     m_highlightedClue(0), m_previousHighlightedClue(0),
@@ -242,10 +242,11 @@ KrossWord::~KrossWord()
     deleteAllCells(); // Cells are delete'd by QGraphicsScene only if they are in a QGraphicsScene
 }
 
+
 void KrossWord::setTheme(KrosswordTheme* theme)
 {
-    if (m_theme)
-        delete m_theme;     //WARNING: DELETE THIS??? WHAT ABOUT THE PROVIDER??
+    //if (m_theme)
+    //    delete m_theme;     //WARNING: DELETE THIS??? WHAT ABOUT THE PROVIDER??
 
     m_theme = theme;
     m_focusItem->setPen(QPen(m_theme->selectionColor()));

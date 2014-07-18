@@ -253,7 +253,7 @@ public:
     * @param height The height of the new crossword. That is, how many vertical
     * cells should be created.
     * @see resizeGrid() */
-    explicit KrossWord(KrosswordTheme *theme = NULL, int width = 0, int height = 0);
+    explicit KrossWord(const KrosswordTheme *theme = NULL, int width = 0, int height = 0);
 
     virtual ~KrossWord();
 
@@ -801,9 +801,9 @@ public:
 
     virtual QRectF boundingRect() const;
 
-    KrosswordTheme *theme() const {
+    const KrosswordTheme *theme() const {
         return m_theme;
-    };
+    }
     void setTheme(KrosswordTheme *theme);
 
 protected:
@@ -997,7 +997,7 @@ private:
     KrossWordTitleItem *m_titleItem;
     QPointF m_topLeftCellOffset;
 
-    KrosswordTheme *m_theme;
+    const KrosswordTheme *m_theme;
 }; // class KrossWord
 
 
