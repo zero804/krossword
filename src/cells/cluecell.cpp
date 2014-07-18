@@ -1140,24 +1140,28 @@ void ClueCell::drawClueNumber(QPainter *p, const QStyleOptionGraphicsItem *optio
     if (m_answerOffset == OnClueCell && m_clueNumber != -1) {
         QString text = QString("%1.").arg(m_clueNumber + 1);
         QFont font = KGlobalSettings::smallestReadableFont();
+
 #if QT_VERSION >= 0x040600
-        qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(
-                                  QTransform(option->matrix));
+        qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
 #else
         qreal levelOfDetail = option->levelOfDetail;
 #endif
+
         font.setPointSizeF(7.0 * levelOfDetail);
         p->setFont(font);
         QFontMetrics fontMetrics(font);
         QRect rect = fontMetrics.boundingRect(text);
         rect.setWidth(fontMetrics.width(text));
-        QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect,
-                            krossWord()->theme()->marginsClueCell(levelOfDetail));
+<<<<<<< HEAD
+        QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect, krossWord()->theme()->marginsClueCell(levelOfDetail));
 
-        p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect,
-                                              krossWord()->theme()->clueNumberPos()), text);
+        p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect, krossWord()->theme()->clueNumberPos()), text);
 //  QPoint topLeft = option->rect.bottomRight() - QPoint( rect.width(), rect.height() );
 //  p->drawText( QRect( topLeft, rect.size()).adjusted(-3, -3, -3, -3), text );
+=======
+        QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect, krossWord()->theme()->marginsClueCell(levelOfDetail));
+        p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect, krossWord()->theme()->clueNumberPos()), text);
+>>>>>>> c9d6d44c2f6f3c471eded0cfc56f0bc4e564160d
     }
 }
 

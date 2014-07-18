@@ -94,6 +94,8 @@
 #include <kapplication.h>
 #include "kdeversion.h"
 
+#include <KgThemeProvider>
+
 ClueListView::ClueListView(QWidget* parent)
     : QTreeView(parent), m_scrollAnimation(0)
 {
@@ -2263,6 +2265,7 @@ void CrossWordXmlGuiWindow::setCurrentFileName(const QString& fileName)
 
 KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
 {
+<<<<<<< HEAD
     //!Krossword class needs a theme (?)
     KrossWordPuzzleView *view = new KrossWordPuzzleView(
                 new KrossWordPuzzleScene(
@@ -2270,6 +2273,10 @@ KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
                         dynamic_cast<const KrosswordTheme*>(KrosswordRenderer::self()->getCurrentTheme())
                         )));
 
+=======
+    //!Warning Krossword class needs a pointer to a theme but doesn't seems to be in trouble with a null pointer
+    KrossWordPuzzleView *view = new KrossWordPuzzleView(new KrossWordPuzzleScene(new KrossWord(nullptr))); //needs a real theme
+>>>>>>> c9d6d44c2f6f3c471eded0cfc56f0bc4e564160d
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->scene()->setStickyFocus(true);
