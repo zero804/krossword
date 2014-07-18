@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>create_new</class>
- <widget class="QWidget" name="create_new">
+ <widget class="QDialog" name="create_new">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>465</height>
+    <width>436</width>
+    <height>483</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
@@ -26,7 +32,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabGeneral">
       <attribute name="title">
@@ -35,6 +41,12 @@
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">
         <widget class="QGroupBox" name="grpInfo">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="title">
           <string>Crossword Type Information</string>
          </property>
@@ -85,6 +97,12 @@
           </item>
           <item row="0" column="1" colspan="5">
            <widget class="KLineEdit" name="title">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="clickMessage">
              <string>The title of the crossword</string>
             </property>
@@ -108,6 +126,12 @@
           </item>
           <item row="1" column="1" colspan="5">
            <widget class="KLineEdit" name="author">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="clickMessage">
              <string>The author(s) of the crossword</string>
             </property>
@@ -131,6 +155,12 @@
           </item>
           <item row="2" column="1" colspan="5">
            <widget class="KLineEdit" name="copyright">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="clickMessage">
              <string>Copyright information about the crossword</string>
             </property>
@@ -154,6 +184,12 @@
           </item>
           <item row="3" column="1" colspan="5">
            <widget class="KLineEdit" name="notes">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="clickMessage">
              <string>Notes about the crossword</string>
             </property>
@@ -183,48 +219,15 @@
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
            </widget>
           </item>
           <item row="5" column="0">
-           <widget class="QLabel" name="lblDifficulty">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>&amp;Difficulty:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="buddy">
-             <cstring>difficulty</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1" colspan="3">
-           <widget class="KComboBox" name="difficulty">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="frame">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="4" colspan="2">
-           <spacer name="horizontalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="6" column="0">
            <widget class="QLabel" name="lblSize">
             <property name="text">
              <string>Crossword &amp;Size:</string>
@@ -237,7 +240,7 @@
             </property>
            </widget>
           </item>
-          <item row="6" column="1">
+          <item row="5" column="1">
            <widget class="KIntNumInput" name="columns">
             <property name="value">
              <number>15</number>
@@ -256,7 +259,7 @@
             </property>
            </widget>
           </item>
-          <item row="6" column="2">
+          <item row="5" column="2">
            <widget class="QLabel" name="label">
             <property name="text">
              <string notr="true">x</string>
@@ -266,7 +269,7 @@
             </property>
            </widget>
           </item>
-          <item row="6" column="3" colspan="2">
+          <item row="5" column="3" colspan="2">
            <widget class="KIntNumInput" name="rows">
             <property name="value">
              <number>15</number>
@@ -288,7 +291,7 @@
             </property>
            </widget>
           </item>
-          <item row="6" column="5">
+          <item row="5" column="5">
            <spacer name="horizontalSpacer">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -597,13 +600,20 @@
      </widget>
     </widget>
    </item>
+   <item row="1" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
+   <class>KLanguageButton</class>
+   <extends>QWidget</extends>
+   <header>klanguagebutton.h</header>
   </customwidget>
   <customwidget>
    <class>KComboBox</class>
@@ -611,14 +621,14 @@
    <header>kcombobox.h</header>
   </customwidget>
   <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
    <class>KIntNumInput</class>
    <extends>QWidget</extends>
    <header>knuminput.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KLanguageButton</class>
-   <extends>QWidget</extends>
-   <header>klanguagebutton.h</header>
   </customwidget>
   <customwidget>
    <class>CrosswordTypeWidget</class>
@@ -639,7 +649,6 @@
   <tabstop>copyright</tabstop>
   <tabstop>notes</tabstop>
   <tabstop>language</tabstop>
-  <tabstop>difficulty</tabstop>
   <tabstop>useTemplate</tabstop>
   <tabstop>templateLocation</tabstop>
   <tabstop>templateSearchLine</tabstop>
@@ -655,12 +664,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>108</x>
-     <y>45</y>
+     <x>101</x>
+     <y>38</y>
     </hint>
     <hint type="destinationlabel">
-     <x>121</x>
-     <y>68</y>
+     <x>101</x>
+     <y>44</y>
     </hint>
    </hints>
   </connection>
@@ -671,12 +680,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>152</x>
-     <y>46</y>
+     <x>101</x>
+     <y>38</y>
     </hint>
     <hint type="destinationlabel">
-     <x>165</x>
-     <y>116</y>
+     <x>101</x>
+     <y>56</y>
     </hint>
    </hints>
   </connection>
@@ -687,12 +696,44 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>198</x>
-     <y>46</y>
+     <x>101</x>
+     <y>38</y>
     </hint>
     <hint type="destinationlabel">
-     <x>59</x>
-     <y>74</y>
+     <x>54</x>
+     <y>44</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>create_new</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>343</x>
+     <y>438</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>340</x>
+     <y>459</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>create_new</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>440</x>
+     <y>434</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>441</x>
+     <y>460</y>
     </hint>
    </hints>
   </connection>

@@ -30,14 +30,10 @@
 #include <io/krosswordxmlreader.h>
 #include <QTimer>
 
-CreateNewCrosswordDialog::CreateNewCrosswordDialog(
-    QWidget* parent, Qt::WFlags flags)
-    : KDialog(parent, flags)
+CreateNewCrosswordDialog::CreateNewCrosswordDialog(QWidget* parent, Qt::WFlags flags) : QDialog(parent, flags)
 {
     setWindowTitle(i18n("Create New Crossword"));
-    QWidget *mainWidget = new QWidget;
-    ui_create_new.setupUi(mainWidget);
-    setMainWidget(mainWidget);
+    ui_create_new.setupUi(this);
     setModal(true);
     m_changedUserDefinedSettings = false;
 
@@ -47,6 +43,39 @@ CreateNewCrosswordDialog::CreateNewCrosswordDialog(
     setCrosswordType(CrosswordTypeInfo::american());
     if (previousIndex == ui_create_new.crosswordType->currentIndex())
         crosswordTypeChanged(ui_create_new.crosswordType->currentIndex());
+}
+
+CreateNewCrosswordDialog::~CreateNewCrosswordDialog()
+{
+    delete m_templateModel;
+}
+
+CrosswordTypeInfo CreateNewCrosswordDialog::crosswordTypeInfo() const {
+    return m_typeInfo;
+}
+
+QSize CreateNewCrosswordDialog::crosswordSize() const {
+    return QSize(ui_create_new.columns->value(), ui_create_new.rows->value());
+}
+
+QString CreateNewCrosswordDialog::title() const {
+    return ui_create_new.title->text();
+}
+
+QString CreateNewCrosswordDialog::author() const {
+    return ui_create_new.author->text();
+}
+
+QString CreateNewCrosswordDialog::copyright() const {
+    return ui_create_new.copyright->text();
+}
+
+QString CreateNewCrosswordDialog::notes() const {
+    return ui_create_new.notes->text();
+}
+
+bool CreateNewCrosswordDialog::useTemplate() const {
+    return ui_create_new.useTemplate->isChecked();
 }
 
 void CreateNewCrosswordDialog::setCrosswordType(
@@ -114,8 +143,7 @@ void CreateNewCrosswordDialog::setup()
             this, SLOT(useTemplateToggled(bool)));
 
     // Select a location with at least one template in it
-    for (int i = 0; i < templateDirs.count()
-            && ui_create_new.templates->model()->rowCount() == 0; ++i) {
+    for (int i = 0; i < templateDirs.count() && ui_create_new.templates->model()->rowCount() == 0; ++i) {
         ui_create_new.templateLocation->setCurrentIndex(i);
     }
 
@@ -133,11 +161,6 @@ void CreateNewCrosswordDialog::useTemplateToggled(bool checked)
     ui_create_new.columns->setEnabled(!checked);
     ui_create_new.rows->setEnabled(!checked);
     ui_create_new.crosswordType->setEnabled(!checked);
-}
-
-CreateNewCrosswordDialog::~CreateNewCrosswordDialog()
-{
-    delete m_templateModel;
 }
 
 QString CreateNewCrosswordDialog::templateFilePath() const
@@ -217,8 +240,7 @@ void CreateNewCrosswordDialog::crosswordTypeChanged(int index)
 
     // Warn when trashing user defined crossword type settings
     if (m_changedUserDefinedSettings) {
-        if (static_cast<CrosswordType>(previous.data(
-                                           Qt::UserRole + 1).toInt()) != UserDefinedCrossword) {
+        if (static_cast<CrosswordType>(previous.data(Qt::UserRole + 1).toInt()) != UserDefinedCrossword) {
             return;
         } else if (KMessageBox::warningContinueCancel(this, i18n("Changing the "
                    "crossword type will discard user defined crossword type settings."),

@@ -682,7 +682,7 @@ void LibraryXmlGuiWindow::libraryNewCrosswordSlot()
 {
     QPointer<CreateNewCrosswordDialog> dialog = new CreateNewCrosswordDialog(this);
 
-    if (dialog->exec() == KDialog::Accepted) {
+    if (dialog->exec() == QDialog::Accepted) {
         if (dialog->useTemplate()) {
             m_mainWindow->createNewCrossWordFromTemplate(dialog->templateFilePath(),
                     dialog->title(),

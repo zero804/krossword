@@ -23,14 +23,14 @@
 #include "krossword.h"
 #include "ui_create_new.h"
 
-#include <KDialog>
+#include <QDialog>
 
 class SubFileSystemProxyModel;
 
 using namespace Crossword;
 
 /** A dialog to configure settings for a new crossword. */
-class CreateNewCrosswordDialog : public KDialog
+class CreateNewCrosswordDialog : public QDialog
 {
     Q_OBJECT
 
@@ -40,43 +40,34 @@ public:
     ~CreateNewCrosswordDialog();
 
     /** Returns the current crossword type info. */
-    CrosswordTypeInfo crosswordTypeInfo() const {
-        return m_typeInfo;
-    };
+    CrosswordTypeInfo crosswordTypeInfo() const;
+
     /** Sets another crossword type info. */
     void setCrosswordType(CrosswordTypeInfo crosswordTypeInfo);
 
     /** Returns the current crossword size. */
-    QSize crosswordSize() const {
-        return QSize(ui_create_new.columns->value(), ui_create_new.rows->value());
-    };
+    QSize crosswordSize() const;
+
     /** Return the current title. */
-    QString title() const {
-        return ui_create_new.title->text();
-    };
+    QString title() const;
+
     /** Return the current author(s). */
-    QString author() const {
-        return ui_create_new.author->text();
-    };
+    QString author() const;
+
     /** Return the current copyright. */
-    QString copyright() const {
-        return ui_create_new.copyright->text();
-    };
+    QString copyright() const ;
+
     /** Return the current notes. */
-    QString notes() const {
-        return ui_create_new.notes->text();
-    };
-    bool useTemplate() const {
-        return ui_create_new.useTemplate->isChecked();
-    };
+    QString notes() const;
+
+    bool useTemplate() const;
     QString templateFilePath() const;
 
 protected slots:
     void crosswordTypeChanged(int index);
     void typeInfoChanged(const CrosswordTypeInfo &typeInfo);
     void templateFilterChanged(const QString &text);
-    void currentTemplateChanged(const QModelIndex &current,
-                                const QModelIndex &previous);
+    void currentTemplateChanged(const QModelIndex &current, const QModelIndex &previous);
     void templateLocationChanged(const QString &path);
     void expandTemplateDirs();
     void useTemplateToggled(bool checked);
