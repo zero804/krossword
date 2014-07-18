@@ -1044,21 +1044,23 @@ void CrossWordXmlGuiWindow::exportSlot()
         if (fileSuffix.compare("png", Qt::CaseInsensitive) == 0
                 || fileSuffix.compare("jpeg", Qt::CaseInsensitive) == 0
                 || fileSuffix.compare("jpg", Qt::CaseInsensitive) == 0) {
-            QPointer<KDialog> dlg = new KDialog(this);
-            dlg->setWindowTitle(i18n("Export Settings"));
-            dlg->setModal(true);
-            QWidget *exportToImageDlg = new QWidget;
+            QPointer<QDialog> exportToImageDlg = new QDialog(this);
+            exportToImageDlg->setWindowTitle(i18n("Export Settings"));
+            exportToImageDlg->setModal(true);
+
             ui_export_to_image.setupUi(exportToImageDlg);
-            dlg->setMainWidget(exportToImageDlg);
-            if (dlg->exec() == KDialog::Rejected)
+
+            if (exportToImageDlg->exec() == QDialog::Rejected) {
+                delete exportToImageDlg;
                 return;
+            }
 
             QPixmap pix = krossWord()->toPixmap(QSize(ui_export_to_image.width->value(), ui_export_to_image.height->value()));
             int quality = ui_export_to_image.quality->value();
-            delete dlg;
+            delete exportToImageDlg;
 
             if (!pix.save(fileName, 0, quality)) {
-                kDebug() << "Couldn't export the crossword to the specified image file." << fileName;
+                qDebug() << "Couldn't export the crossword to the specified image file." << fileName;
                 KMessageBox::error(this, i18n("Couldn't export the crossword to the specified image file."));
             }
         } else {

@@ -66,8 +66,8 @@ KrosswordTheme* KrosswordTheme::defaultValues()
 {
     KrosswordTheme *theme = new KrosswordTheme;
 
-    theme->m_marginsLetterCell = QMargins();
-    theme->m_marginsClueCell = QMargins();
+    theme->m_marginsLetterCell = QMargins(6,6,6,6);
+    theme->m_marginsClueCell = QMargins(6,6,6,6);
 
     theme->m_hasDarkBackground = false;
     theme->m_glowColor = QColor(64, 64, 255);

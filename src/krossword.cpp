@@ -216,6 +216,7 @@ void KrossWord::init(uint width, uint height)
 {
     if (!m_theme)
         m_theme = KrosswordTheme::defaultValues();
+
     m_topLeftCellOffset = QPointF(0, 0);
     m_krossWordGrid = new KrosswordGrid(width, height);
     m_editable = false;

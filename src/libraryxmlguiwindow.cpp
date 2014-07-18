@@ -465,31 +465,25 @@ void LibraryXmlGuiWindow::libraryExportSlot()
             } else if (fileSuffix.compare("png", Qt::CaseInsensitive) == 0
                     || fileSuffix.compare("jpeg", Qt::CaseInsensitive) == 0
                     || fileSuffix.compare("jpg", Qt::CaseInsensitive) == 0) {
-                QPointer<KDialog> dlg = new KDialog(this);
-                dlg->setWindowTitle(i18n("Export Settings"));
-                dlg->setModal(true);
+                QPointer<QDialog> exportToImageDlg = new QDialog(this);
+                exportToImageDlg->setWindowTitle(i18n("Export Settings"));
+                exportToImageDlg->setModal(true);
 
-                QWidget *exportToImageDlg = new QWidget(dlg);
                 ui_export_to_image.setupUi(exportToImageDlg);
-                dlg->setMainWidget(exportToImageDlg);
 
-                if (dlg->exec() == KDialog::Rejected) {
-                    delete dlg;
+                if (exportToImageDlg->exec() == QDialog::Rejected) {
+                    delete exportToImageDlg;
                     return;
                 }
 
                 QPixmap pix = krossWord.toPixmap(QSize(ui_export_to_image.width->value(), ui_export_to_image.height->value()));
                 int quality = ui_export_to_image.quality->value();
-                delete dlg;
+                delete exportToImageDlg;
 
                 if (!pix.save(fileName, 0, quality)) {
                     qDebug() << "Export failed:" << fileName;
                     KMessageBox::error(this, i18n("Couldn't export the image to the specified file."));
-                } /*else {
-                    if (!krossWord.write(fileName, &errorString)) {
-                        KMessageBox::error(this, i18n("Couldn't write the crossword to the specified file.\n%1", errorString));
-                    }
-                }*/
+                }
             }
         } // !krossWord.read() .. else
     } // fileInfo.isDir() .. else

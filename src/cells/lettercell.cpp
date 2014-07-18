@@ -760,7 +760,7 @@ void LetterCell::drawForeground(QPainter* p, const QStyleOptionGraphicsItem* opt
 
     drawEndBarIfNeeded(p, option);
 
-    // Draw current / correct letter
+    // Draw current/correct letter
     QString id;
     QChar letter;
     if (krossWord()->isEditable()) {
@@ -777,14 +777,9 @@ void LetterCell::drawForeground(QPainter* p, const QStyleOptionGraphicsItem* opt
         id = QString("letter_%1").arg(currentLetter().toLower());
     }
 
-#if QT_VERSION >= 0x040600
-    qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(
-                              QTransform(option->matrix));
-#else
-    qreal levelOfDetail = option->levelOfDetail;
-#endif
-    QRect rect = KrosswordTheme::trimmedRect(option->rect,
-                 krossWord()->theme()->marginsLetterCell(levelOfDetail));
+    qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
+
+    QRect rect = KrosswordTheme::trimmedRect(option->rect, krossWord()->theme()->marginsLetterCell(levelOfDetail));
     const KrosswordRenderer *renderer = KrosswordRenderer::self();
     const QColor alpha = !krossWord()->isEditable() && confidence() == Unsure
                          ? QColor(128, 128, 128) : Qt::black;
@@ -866,11 +861,7 @@ void LetterCell::drawClueForCell(QPainter* p, const QStyleOptionGraphicsItem* op
 
     QFont font = KGlobalSettings::smallestReadableFont();
 
-#if QT_VERSION >= 0x040600
     qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
-#else
-    qreal levelOfDetail = option->levelOfDetail;
-#endif
 
     font.setPixelSize(10 * levelOfDetail);
     font.setBold(true);
@@ -1259,11 +1250,7 @@ void SolutionLetterCell::drawForeground(QPainter* p, const QStyleOptionGraphicsI
     QString text = QString("(%1)").arg(solutionWordIndex() + 1);
     QFont font = KGlobalSettings::smallestReadableFont();
 
-#if QT_VERSION >= 0x040600
     qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
-#else
-    qreal levelOfDetail = option->levelOfDetail;
-#endif
 
     font.setPointSizeF(10 * levelOfDetail);
 
