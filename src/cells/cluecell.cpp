@@ -1154,9 +1154,7 @@ void ClueCell::drawClueNumber(QPainter *p, const QStyleOptionGraphicsItem *optio
         rect.setWidth(fontMetrics.width(text));
         QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect, krossWord()->theme()->marginsClueCell(levelOfDetail));
 
-        p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect, krossWord()->theme()->clueNumberPos()), text);
-//  QPoint topLeft = option->rect.bottomRight() - QPoint( rect.width(), rect.height() );
-//  p->drawText( QRect( topLeft, rect.size()).adjusted(-3, -3, -3, -3), text );
+        p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect, TopLeft/*krossWord()->theme()->clueNumberPos()*/), text);
     }
 }
 

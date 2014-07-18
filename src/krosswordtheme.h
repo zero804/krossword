@@ -64,13 +64,13 @@ public:
     QColor emptyCellColor() const;
 
     /** The position of number clues inside letter cells for number puzzles. */
-    ItemPosition numberPuzzleCluePos() const;
+    //ItemPosition numberPuzzleCluePos() const;
 
     /** The position of clue numbers for american crosswords. */
-    ItemPosition clueNumberPos() const;
+    //ItemPosition clueNumberPos() const;
 
     /** The position of the index for solution letters. */
-    ItemPosition solutionLetterIndexPos() const;
+    //ItemPosition solutionLetterIndexPos() const;
 
     /** Returns the given @p itemRect aligned at @p position inside @p bounds. */
     static QRect rectAtPos(const QRect &bounds, const QRect &itemRect, ItemPosition position);
@@ -79,12 +79,12 @@ public:
     static QRect trimmedRect(const QRect &source, const QMargins &margins);
 
 private:
-    ItemPosition positionFromString(const QString &s, ItemPosition defaultPos) const;
+    //ItemPosition positionFromString(const QString &s, ItemPosition defaultPos) const;
 
     QMargins m_marginsLetterCell, m_marginsClueCell;
     QColor m_glowColor, m_glowFocusColor, m_selectionColor, m_emptyCellColor;
     bool m_hasDarkBackground;
-    ItemPosition m_numberPuzzleCluePos, m_clueNumberPos, m_solutionLetterIndexPos;
+    //ItemPosition m_numberPuzzleCluePos, m_clueNumberPos, m_solutionLetterIndexPos;
 };
 
 #endif // KROSSWORDTHEME_H

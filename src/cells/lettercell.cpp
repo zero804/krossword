@@ -880,16 +880,14 @@ void LetterCell::drawClueForCell(QPainter* p, const QStyleOptionGraphicsItem* op
     QRect rect = fontMetrics.boundingRect(text);
     rect.setWidth(fontMetrics.width(text));
     QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect, krossWord()->theme()->marginsLetterCell(levelOfDetail));
-    p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect, krossWord()->theme()->numberPuzzleCluePos()), text);
+    p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect, TopRight /*krossWord()->theme()->numberPuzzleCluePos()*/), text);
     p->restore();
 }
 
 void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* option)
 {
-    bool isFirstLetterOfVerticalClue = clueVertical()
-                                       && clueVertical()->firstLetter() == this;
-    bool isFirstLetterOfHorizontalClue = clueHorizontal()
-                                         && clueHorizontal()->firstLetter() == this;
+    bool isFirstLetterOfVerticalClue = clueVertical() && clueVertical()->firstLetter() == this;
+    bool isFirstLetterOfHorizontalClue = clueHorizontal() && clueHorizontal()->firstLetter() == this;
     if (!isFirstLetterOfVerticalClue && !isFirstLetterOfHorizontalClue)
         return;
 
@@ -911,14 +909,12 @@ void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* opt
         case OffsetRight:
             KrosswordRenderer::self()->renderElement(p,
                     "arrow_right",
-                    QRect(option->rect.left() + 1, option->rect.top() + y,
-                          arrowLength, arrowWidth));
+                    QRect(option->rect.left() + 1, option->rect.top() + y, arrowLength, arrowWidth));
             break;
         case OffsetTop:
             KrosswordRenderer::self()->renderElement(p,
                     "arrow_bottom_right",
-                    QRect(option->rect.left() + x, option->rect.top() +
-                          krossWord()->cellSize().height() - 1 - arrowWidth,
+                    QRect(option->rect.left() + x, option->rect.top() + krossWord()->cellSize().height() - 1 - arrowWidth,
                           arrowLength, arrowWidth));
             break;
         case OffsetBottom:
@@ -1254,8 +1250,7 @@ SolutionLetterCell* SolutionLetterCell::fromLetterCell(LetterCell *&letter,
     return solutionLetter;
 }
 
-void SolutionLetterCell::drawForeground(QPainter* p,
-                                        const QStyleOptionGraphicsItem* option)
+void SolutionLetterCell::drawForeground(QPainter* p, const QStyleOptionGraphicsItem* option)
 {
     LetterCell::drawForeground(p, option);
 
@@ -1263,26 +1258,22 @@ void SolutionLetterCell::drawForeground(QPainter* p,
     p->save();
     QString text = QString("(%1)").arg(solutionWordIndex() + 1);
     QFont font = KGlobalSettings::smallestReadableFont();
+
 #if QT_VERSION >= 0x040600
-    qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(
-                              QTransform(option->matrix));
+    qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
 #else
     qreal levelOfDetail = option->levelOfDetail;
 #endif
+
     font.setPointSizeF(10 * levelOfDetail);
-//   font.setPixelSize( 10 );
+
     p->setFont(font);
     p->setPen(isEnabled() ? Qt::black : Qt::darkGray);
     QFontMetrics fontMetrics(font);
     QRect rect = fontMetrics.boundingRect(text);
     rect.setWidth(fontMetrics.width(text));
-    QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect,
-                        krossWord()->theme()->marginsLetterCell(levelOfDetail));
-    p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect,
-                                          krossWord()->theme()->solutionLetterIndexPos()), text);
-//   p->drawText( QRect(option->rect.right() - rect.width(),
-//        option->rect.bottom() - rect.height(),
-//        rect.width(), rect.height()).adjusted(-3, -3, -3, -3), text );
+    QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect, krossWord()->theme()->marginsLetterCell(levelOfDetail));
+    p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect, BottomLeft /*krossWord()->theme()->solutionLetterIndexPos()*/), text);
     p->restore();
 }
 
@@ -1308,14 +1299,12 @@ QDebug& operator<<(QDebug debug, LetterCell* cell)
 }
 
 // Sorting functions:
-bool lessThanSolutionWordIndex(const SolutionLetterCell* cell1,
-                               const SolutionLetterCell* cell2)
+bool lessThanSolutionWordIndex(const SolutionLetterCell* cell1, const SolutionLetterCell* cell2)
 {
     return cell1->solutionWordIndex() < cell2->solutionWordIndex();
 }
 
-bool greaterThanSolutionWordIndex(const SolutionLetterCell* cell1,
-                                  const SolutionLetterCell* cell2)
+bool greaterThanSolutionWordIndex(const SolutionLetterCell* cell1, const SolutionLetterCell* cell2)
 {
     return cell1->solutionWordIndex() > cell2->solutionWordIndex();
 }

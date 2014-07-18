@@ -26,8 +26,7 @@ KrosswordTheme::KrosswordTheme()
 {
 }
 
-KrosswordTheme::KrosswordTheme(const QByteArray &identifier, QObject *parent)
-    : KrosswordTheme()
+KrosswordTheme::KrosswordTheme(const QByteArray &identifier, QObject *parent) : KrosswordTheme()
 { }
 
 bool KrosswordTheme::readFromDesktopFile(const QString& file)
@@ -56,9 +55,9 @@ bool KrosswordTheme::readFromDesktopFile(const QString& file)
     m_emptyCellColor = QColor(customData("EmptyCellColor", "100, 100, 100, 128"));
 
     // (original) TODO only use "free" positions as default values
-    m_clueNumberPos = positionFromString(customData("ClueNumberPos", ""), BottomRight);
-    m_numberPuzzleCluePos = positionFromString(customData("NumberPuzzleCluePos", ""), TopRight);
-    m_solutionLetterIndexPos = positionFromString(customData("SolutionLetterIndexPos", ""), BottomLeft);
+    //m_clueNumberPos = positionFromString(customData("ClueNumberPos", ""), BottomRight);
+    //m_numberPuzzleCluePos = positionFromString(customData("NumberPuzzleCluePos", ""), TopRight);
+    //m_solutionLetterIndexPos = positionFromString(customData("SolutionLetterIndexPos", ""), BottomLeft);
 
     return true;
 }
@@ -76,13 +75,14 @@ KrosswordTheme* KrosswordTheme::defaultValues()
     theme->m_selectionColor = QColor(255, 100, 100, 128);
     theme->m_emptyCellColor = QColor(100, 100, 100, 128);
 
-    theme->m_clueNumberPos = BottomRight;
-    theme->m_numberPuzzleCluePos = TopRight;
-    theme->m_solutionLetterIndexPos = BottomLeft;
+    //theme->m_clueNumberPos = BottomRight;
+    //theme->m_numberPuzzleCluePos = TopRight;
+    //theme->m_solutionLetterIndexPos = BottomLeft;
 
     return theme;
 }
 
+/*
 ItemPosition KrosswordTheme::positionFromString(const QString& s, ItemPosition defaultPos) const
 {
     if (s.compare("TopLeft", Qt::CaseInsensitive) == 0)
@@ -96,6 +96,7 @@ ItemPosition KrosswordTheme::positionFromString(const QString& s, ItemPosition d
     else
         return defaultPos;
 }
+*/
 
 QRect KrosswordTheme::rectAtPos(const QRect& bounds, const QRect& itemRect, ItemPosition position)
 {
@@ -165,14 +166,20 @@ QColor KrosswordTheme::emptyCellColor() const {
     return m_emptyCellColor;
 }
 
+/*
 ItemPosition KrosswordTheme::numberPuzzleCluePos() const {
     return m_numberPuzzleCluePos;
 }
+*/
 
+/*
 ItemPosition KrosswordTheme::clueNumberPos() const {
     return m_clueNumberPos;
 }
+*/
 
+/*
 ItemPosition KrosswordTheme::solutionLetterIndexPos() const {
     return m_solutionLetterIndexPos;
 }
+*/

@@ -65,13 +65,6 @@ SelectionColor=255,100,100,128
 # The color for empty cells in edit mode
 EmptyCellColor=70,70,70,128
 
-# The position of clue numbers for american crosswords
-ClueNumberPos=BottomRight
-# The position of number clues inside letter cells for number puzzles
-NumberPuzzleCluePos=TopRight
-# The position of the index for solution letters
-SolutionLetterIndexPos=BottomLeft
-
 # Margins of cell contents: Left, Top, Right, Bottom
 LetterCellMargins=6,6,6,6
 ClueCellMargins=7,6,7,6
