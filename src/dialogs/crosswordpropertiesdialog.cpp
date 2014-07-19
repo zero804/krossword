@@ -299,77 +299,13 @@ void CrosswordPropertiesDialog::updateInfoText(KrossWord::ResizeAnchor anchor, i
 void CrosswordPropertiesDialog::convertClicked()
 {
     ConvertCrosswordDialog *dialog = new ConvertCrosswordDialog(m_krossWord, this);
-//   dialog->set()
-    // TODO:
-//     KDialog *dialog = new KDialog( m_propertiesDialog );
-//     dialog->setWindowTitle( i18n("Convert Crossword Type To") );
-//     QWidget *convertDlg = new QWidget;
-//     ui_convert_crossword_type.setupUi( convertDlg );
-//
-// //     ui_convert_crossword_type.arrow->setText( QString() );
-// //     ui_convert_crossword_type.arrow->setPixmap( KIcon("arrow-down").pixmap(32, 32, QIcon::Normal) );
-//
-//     ui_convert_crossword_type.toolBox->setItemText( 0, i18n("Convert From: %1",
-//  krossWord()->crosswordTypeInfo().name) );
-//     ui_convert_crossword_type.typeInfoFromWidget->setElements(
-//  CrosswordTypeWidget::DefaultElements | CrosswordTypeWidget::ElementIcon );
-//     ui_convert_crossword_type.typeInfoToWidget->setElements();
-//     ui_convert_crossword_type.typeInfoFromWidget->setTypeInfo(
-//  krossWord()->crosswordTypeInfo() );
-// //     ui_convert_crossword_type.lblInfoOld->setText( krossWord()->crosswordTypeInfo().description );
-//
-//     // Setup crossword type view
-//     QList<CrosswordTypeInfo> additionalInfos;
-//     if ( krossWord()->crosswordTypeInfo().crosswordType
-//   == UserDefinedCrossword )
-//  additionalInfos << krossWord()->crosswordTypeInfo();
-//     QStandardItemModel *model = KrossWord::createCrosswordTypeModel( additionalInfos );
-//     ui_convert_crossword_type.crosswordType->setModel( model );
-//     ui_convert_crossword_type.crosswordType->setModelColumn( 0 );
-//
-//     m_convertTypeInfo = CrosswordTypeInfo::american();
-//     m_convertChangedUserDefinedSettings = false;
-//
-//     m_previousConvertToTypeIndex = -1;
-//     ui_convert_crossword_type.crosswordType->setCurrentIndex( 0 );
-//     createNewCurrentCrosswordTypeChanged( 0 );
-    /*
-        connect( ui_convert_crossword_type.crosswordType,
-          SIGNAL(currentIndexChanged(int)),
-          this, SLOT(createNewCurrentCrosswordTypeChanged(int)) );
-        connect( ui_convert_crossword_type.typeInfoToWidget,
-          SIGNAL(crosswordTypeInfoChanged(CrosswordTypeInfo)),
-          this, SLOT(createNewCrosswordTypeInfoChanged(CrosswordTypeInfo)) );
-    //     connect( ui_convert_crossword_type.crosswordType->selectionModel(),
-    //       SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-    //       this, SLOT(createNewCurrentCrosswordTypeChanged(QModelIndex,QModelIndex)) );
-    //     connect( ui_convert_crossword_type.configureDetailsFrom, SIGNAL(clicked()),
-    //       this, SLOT(createNewConfigureRulesFrom()) );
-    //     connect( ui_convert_crossword_type.configureDetailsTo, SIGNAL(clicked()),
-    //       this, SLOT(createNewConfigureRulesTo()) );
 
-        dialog->setModal( true );
-        dialog->setMainWidget( convertDlg );*/
-    if (dialog->exec() == KDialog::Accepted) {
+    if (dialog->exec() == QDialog::Accepted) {
         CrosswordTypeInfo typeInfo = dialog->crosswordTypeInfo();
         emit conversionRequested(typeInfo);
-//       QString errorMessage;
-//       if ( !m_undoStack->tryPush(
-//  new ConvertCrosswordCommand(m_krossWord, m_krossWord->crosswordTypeInfo()), &errorMessage) ) {
-//  statusBar()->showMessage(
-//    i18nc("%1 contains the reason why the crossword couldn't be converted",
-//    "Can't convert crossword. %1", errorMessage) );
-//       } else {
-//  stateChanged( "clue_cell_highlighted" );
 
         ui_properties.toolBox->setItemText(ui_properties.toolBox->indexOf(ui_properties.pageCrosswordType), i18n("Crossword Type: %1", typeInfo.name));
         ui_properties.typeInfoWidget->setTypeInfo(typeInfo);
-//  ui_properties.lblInfo->setText( krossWord()->crosswordTypeInfo().description );
-
-//  enableEditActions();
-//  adjustGuiToCrosswordType();
-//  setModificationType( ModifiedCrossword );
-//       }
     }
 
     delete dialog;

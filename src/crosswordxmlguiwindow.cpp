@@ -791,7 +791,7 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
                                            "(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")")) == KMessageBox::Yes) {
                 //  Open conversion dialog
                 QPointer<ConvertCrosswordDialog> dialog = new ConvertCrosswordDialog(krossWord(), this);
-                if (dialog->exec() == KDialog::Accepted) {
+                if (dialog->exec() == QDialog::Accepted) {
                     krossWord()->convertToType(dialog->crosswordTypeInfo());
                     setModificationType(ModifiedCrossword);
                 }

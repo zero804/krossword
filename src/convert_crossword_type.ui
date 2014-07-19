@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>convert_crossword_type</class>
- <widget class="QWidget" name="convert_crossword_type">
+ <widget class="QDialog" name="convert_crossword_type">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -54,8 +54,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>406</width>
-           <height>185</height>
+           <width>412</width>
+           <height>154</height>
           </rect>
          </property>
          <attribute name="label">
@@ -72,8 +72,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>406</width>
-           <height>185</height>
+           <width>412</width>
+           <height>154</height>
           </rect>
          </property>
          <attribute name="label">
@@ -137,6 +137,13 @@
      </layout>
     </widget>
    </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -156,5 +163,38 @@
   <tabstop>crosswordType</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>convert_crossword_type</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>282</x>
+     <y>303</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-5</x>
+     <y>302</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>convert_crossword_type</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>373</x>
+     <y>305</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>364</x>
+     <y>330</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

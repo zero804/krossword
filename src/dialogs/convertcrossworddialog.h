@@ -25,13 +25,12 @@
 using namespace Crossword;
 
 /** A dialog to convert a crossword. */
-class ConvertCrosswordDialog : public KDialog
+class ConvertCrosswordDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit ConvertCrosswordDialog(KrossWord *krossWord,
-                                    QWidget* parent = 0, Qt::WFlags flags = 0);
+    explicit ConvertCrosswordDialog(KrossWord *krossWord, QWidget* parent = 0, Qt::WFlags flags = 0);
 
     CrosswordTypeInfo crosswordTypeInfo() {
         return m_convertTypeInfo;
