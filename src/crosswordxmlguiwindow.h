@@ -265,10 +265,6 @@ public:
     bool writeTo(const QString &fileName, KrossWord::WriteMode writeMode = KrossWord::Normal, bool saveUndoStack = false);
     bool isModified() const;
     QString currentFileName() const;
-//     QStandardItemModel *createCrosswordTypeModel() const;
-
-//     KDialog *createCrosswordTypeConfigureDetailsDialog( QWidget *parent,
-//      KrossWord::CrosswordTypeInformation crosswordTypeInfo );
 
 protected:
     virtual void keyPressEvent(QKeyEvent*);

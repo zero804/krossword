@@ -20,15 +20,11 @@
 #include "crosswordtypeconfiguredetailsdialog.h"
 #include "cells/krosswordcell.h"
 
-CrosswordTypeConfigureDetailsDialog::CrosswordTypeConfigureDetailsDialog(
-    QWidget* parent,
-    CrosswordTypeInfo crosswordTypeInfo, Qt::WFlags flags)
-    : KDialog(parent, flags)
+CrosswordTypeConfigureDetailsDialog::CrosswordTypeConfigureDetailsDialog(QWidget* parent, CrosswordTypeInfo crosswordTypeInfo, Qt::WFlags flags)
+    :QDialog(parent, flags)
 {
     setWindowTitle(i18n("Detailed Configuration"));
-    QWidget *mainWidget = new QWidget;
-    ui_configure_details.setupUi(mainWidget);
-    setMainWidget(mainWidget);
+    ui_configure_details.setupUi(this);
     setModal(true);
     m_changed = false;
 
@@ -86,8 +82,7 @@ void CrosswordTypeConfigureDetailsDialog::minAnswerLengthChanged(int minAnswerLe
 
 void CrosswordTypeConfigureDetailsDialog::clueCellHandlingChanged(int index)
 {
-    ClueCellHandling clueCellHandling = static_cast<ClueCellHandling>(
-                                            ui_configure_details.clueCellHandling->itemData(index).toInt());
+    ClueCellHandling clueCellHandling = static_cast<ClueCellHandling>(ui_configure_details.clueCellHandling->itemData(index).toInt());
     if (m_typeInfo.clueCellHandling != clueCellHandling) {
         m_typeInfo.clueCellHandling = clueCellHandling;
         m_changed = true;
@@ -99,8 +94,7 @@ void CrosswordTypeConfigureDetailsDialog::clueCellHandlingChanged(int index)
 
 void CrosswordTypeConfigureDetailsDialog::clueTypeChanged(int index)
 {
-    ClueType clueType = static_cast<ClueType>(
-                            ui_configure_details.clueType->itemData(index).toInt());
+    ClueType clueType = static_cast<ClueType>(ui_configure_details.clueType->itemData(index).toInt());
     if (m_typeInfo.clueType != clueType) {
         m_typeInfo.clueType = clueType;
         m_changed = true;
@@ -110,8 +104,7 @@ void CrosswordTypeConfigureDetailsDialog::clueTypeChanged(int index)
 
 void CrosswordTypeConfigureDetailsDialog::letterCellContentChanged(int index)
 {
-    LetterCellContent letterCellContent = static_cast<LetterCellContent>(
-            ui_configure_details.letterCellContent->itemData(index).toInt());
+    LetterCellContent letterCellContent = static_cast<LetterCellContent>(ui_configure_details.letterCellContent->itemData(index).toInt());
     if (m_typeInfo.letterCellContent != letterCellContent) {
         m_typeInfo.letterCellContent = letterCellContent;
         m_changed = true;
@@ -121,8 +114,7 @@ void CrosswordTypeConfigureDetailsDialog::letterCellContentChanged(int index)
 
 void CrosswordTypeConfigureDetailsDialog::clueMappingChanged(int index)
 {
-    ClueMapping clueMapping = static_cast<ClueMapping>(
-                                  ui_configure_details.clueMapping->itemData(index).toInt());
+    ClueMapping clueMapping = static_cast<ClueMapping>(ui_configure_details.clueMapping->itemData(index).toInt());
     if (m_typeInfo.clueMapping != clueMapping) {
         m_typeInfo.clueMapping = clueMapping;
         m_changed = true;
@@ -196,34 +188,24 @@ void CrosswordTypeConfigureDetailsDialog::setup()
     ui_configure_details.lblReadOnlyInfo->setVisible(false);
     ui_configure_details.line->setVisible(false);
 
-    foreach(const ClueCellHandling & clueCellHandling,
-            CrosswordTypeInfo::allClueCellHandlingValues()) {
-        QString displayString = CrosswordTypeInfo::
-                                displayStringFromClueCellHandling(clueCellHandling);
-        ui_configure_details.clueCellHandling->addItem(
-            displayString, static_cast<int>(clueCellHandling));
+    foreach(const ClueCellHandling & clueCellHandling, CrosswordTypeInfo::allClueCellHandlingValues()) {
+        QString displayString = CrosswordTypeInfo::displayStringFromClueCellHandling(clueCellHandling);
+        ui_configure_details.clueCellHandling->addItem(displayString, static_cast<int>(clueCellHandling));
     }
 
     foreach(ClueType clueType, CrosswordTypeInfo::allClueTypeValues()) {
-        QString displayString = CrosswordTypeInfo::
-                                displayStringFromClueType(clueType);
-        ui_configure_details.clueType->addItem(
-            displayString, static_cast<int>(clueType));
+        QString displayString = CrosswordTypeInfo::displayStringFromClueType(clueType);
+        ui_configure_details.clueType->addItem(displayString, static_cast<int>(clueType));
     }
 
-    foreach(const LetterCellContent & letterCellContent,
-            CrosswordTypeInfo::allLetterCellContentValues()) {
-        QString displayString = CrosswordTypeInfo::
-                                displayStringFromLetterCellContent(letterCellContent);
-        ui_configure_details.letterCellContent->addItem(
-            displayString, static_cast<int>(letterCellContent));
+    foreach(const LetterCellContent & letterCellContent, CrosswordTypeInfo::allLetterCellContentValues()) {
+        QString displayString = CrosswordTypeInfo::displayStringFromLetterCellContent(letterCellContent);
+        ui_configure_details.letterCellContent->addItem(displayString, static_cast<int>(letterCellContent));
     }
 
     foreach(const ClueMapping & clueMapping, CrosswordTypeInfo::allClueMappingValues()) {
-        QString displayString = CrosswordTypeInfo::
-                                displayStringFromClueMapping(clueMapping);
-        ui_configure_details.clueMapping->addItem(
-            displayString, static_cast<int>(clueMapping));
+        QString displayString = CrosswordTypeInfo::displayStringFromClueMapping(clueMapping);
+        ui_configure_details.clueMapping->addItem(displayString, static_cast<int>(clueMapping));
     }
 
     foreach(CellType cellType, allCellTypes()) {
@@ -232,8 +214,7 @@ void CrosswordTypeConfigureDetailsDialog::setup()
         item->setData(Qt::UserRole, static_cast<int>(cellType));
 
         // Don't allow empty or letter cells to be disallowed
-        if (cellType == EmptyCellType
-                || cellType == LetterCellType)
+        if (cellType == EmptyCellType || cellType == LetterCellType)
             item->setFlags(item->flags() ^ Qt::ItemIsEnabled);
 
         ui_configure_details.cellTypes->addItem(item);
@@ -334,8 +315,7 @@ void CrosswordTypeConfigureDetailsDialog::setCrosswordType(
     setupConnections();
 }
 
-void CrosswordTypeConfigureDetailsDialog::setReadOnly(
-    ReadOnlyMode readOnlyMode)
+void CrosswordTypeConfigureDetailsDialog::setReadOnly(ReadOnlyMode readOnlyMode)
 {
     if (readOnlyMode == ReadOnly) {
         ui_configure_details.lblReadOnlyInfo->hide();
@@ -359,10 +339,17 @@ void CrosswordTypeConfigureDetailsDialog::setReadOnly(
     ui_configure_details.clueMapping->setEnabled(!m_readOnly);
     ui_configure_details.cellTypes->setEnabled(!m_readOnly);
 
-    if (m_readOnly)
-        setButtons(Close);
-    else
-        setButtons(Ok | Cancel);
+    if (m_readOnly) {
+        //setButtons(Close);
+        ui_configure_details.buttonBox->addButton(QDialogButtonBox::Close);
+        connect(ui_configure_details.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    } else {
+        //setButtons(Ok | Cancel);
+        ui_configure_details.buttonBox->addButton(QDialogButtonBox::Ok);
+        ui_configure_details.buttonBox->addButton(QDialogButtonBox::Cancel);
+        connect(ui_configure_details.buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+        connect(ui_configure_details.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    }
 }
 
 

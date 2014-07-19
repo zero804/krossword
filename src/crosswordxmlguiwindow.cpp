@@ -1323,7 +1323,7 @@ void CrossWordXmlGuiWindow::editClueNumberMappingSlot()
 void CrossWordXmlGuiWindow::editMoveCellsSlot()
 {
     QPointer<MoveCellsDialog> dialog = new MoveCellsDialog(krossWord(), this);
-    if (dialog->exec() == KDialog::Accepted) {
+    if (dialog->exec() == QDialog::Accepted) {
         QString errorMessage;
         if (!m_undoStack->tryPush(new MoveCellsCommand(krossWord(), dialog->moveHorizontal(), dialog->moveVertical()), &errorMessage)) {
             statusBar()->showMessage(i18nc("%1 contains the reason why the cells couldn't be moved", "Can't move cells. %1", errorMessage));

@@ -29,19 +29,15 @@ class KrossWord;
 using namespace Crossword;
 
 /** A dialog to move all cells of a crossword. */
-class MoveCellsDialog : public KDialog
+class MoveCellsDialog : public QDialog
 {
     Q_OBJECT
 
 public:
     explicit MoveCellsDialog(KrossWord *krossWord, QWidget* parent = 0);
 
-    int moveHorizontal() const {
-        return ui_move_cells.dx->value();
-    };
-    int moveVertical() const {
-        return ui_move_cells.dy->value();
-    };
+    int moveHorizontal() const;
+    int moveVertical() const;
 
 protected slots:
     void updateInfoText();

@@ -24,12 +24,10 @@
 
 
 MoveCellsDialog::MoveCellsDialog(KrossWord* krossWord, QWidget* parent)
-    : KDialog(parent), m_krossWord(krossWord)
+    : QDialog(parent), m_krossWord(krossWord)
 {
     setWindowTitle(i18n("Move Cells"));
-    QWidget *mainWidget = new QWidget;
-    ui_move_cells.setupUi(mainWidget);
-    setMainWidget(mainWidget);
+    ui_move_cells.setupUi(this);
     setModal(true);
 
     ui_move_cells.dx->setRange(-krossWord->width(), krossWord->width());
@@ -40,16 +38,21 @@ MoveCellsDialog::MoveCellsDialog(KrossWord* krossWord, QWidget* parent)
 
     updateInfoText();
 
-    connect(ui_move_cells.dx, SIGNAL(valueChanged(int)),
-            this, SLOT(updateInfoText()));
-    connect(ui_move_cells.dy, SIGNAL(valueChanged(int)),
-            this, SLOT(updateInfoText()));
+    connect(ui_move_cells.dx, SIGNAL(valueChanged(int)), this, SLOT(updateInfoText()));
+    connect(ui_move_cells.dy, SIGNAL(valueChanged(int)), this, SLOT(updateInfoText()));
+}
+
+int MoveCellsDialog::moveHorizontal() const {
+    return ui_move_cells.dx->value();
+}
+
+int MoveCellsDialog::moveVertical() const {
+    return ui_move_cells.dy->value();
 }
 
 void MoveCellsDialog::updateInfoText()
 {
-    KrossWordCellList removedCells = m_krossWord->moveCells(
-                                         ui_move_cells.dx->value(), ui_move_cells.dy->value(), true);
+    KrossWordCellList removedCells = m_krossWord->moveCells(ui_move_cells.dx->value(), ui_move_cells.dy->value(), true);
     int clueCount = 0, imageCount = 0;
     foreach(KrossWordCell * cell, removedCells) {
         if (cell->isType(ClueCellType))

@@ -23,13 +23,13 @@
 #include "krossword.h"
 #include "ui_configure_details.h"
 
-#include <KDialog>
+#include <QDialog>
 
 using namespace Crossword;
 
 /** A dialog to configure name, description, etc. and the rules of a crossword
 * type. */
-class CrosswordTypeConfigureDetailsDialog : public KDialog
+class CrosswordTypeConfigureDetailsDialog : public QDialog
 {
     Q_OBJECT
 
@@ -43,9 +43,7 @@ public:
     };
 
     /** Constructs a dialog with the given @p crosswordTypeInfo. */
-    CrosswordTypeConfigureDetailsDialog(QWidget* parent,
-                                        CrosswordTypeInfo crosswordTypeInfo,
-                                        Qt::WFlags flags = 0);
+    CrosswordTypeConfigureDetailsDialog(QWidget* parent, CrosswordTypeInfo crosswordTypeInfo, Qt::WFlags flags = 0);
 
     /** Returns the current crossword type info. */
     CrosswordTypeInfo crosswordTypeInfo() const {

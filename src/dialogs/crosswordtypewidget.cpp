@@ -346,20 +346,18 @@ void CrosswordTypeWidget::showDetailsToggled(bool checked)
 
 void CrosswordTypeWidget::configureRulesClicked()
 {
-    CrosswordTypeConfigureDetailsDialog *dialog =
-        new CrosswordTypeConfigureDetailsDialog(this, m_typeInfo);
+    CrosswordTypeConfigureDetailsDialog *dialog = new CrosswordTypeConfigureDetailsDialog(this, m_typeInfo);
 
     // Make the dialog read only depending on the value of m_editMode
-    if (m_editMode == EditAlwaysReadOnly ||
-            (m_editMode == EditReadOnlyExceptForUserDefined
-             && m_typeInfo.crosswordType != UserDefinedCrossword)) {
-        if (m_editMode == EditAlwaysReadOnly)
+    if (m_editMode == EditAlwaysReadOnly || (m_editMode == EditReadOnlyExceptForUserDefined && m_typeInfo.crosswordType != UserDefinedCrossword)) {
+        if (m_editMode == EditAlwaysReadOnly) {
             dialog->setReadOnly(CrosswordTypeConfigureDetailsDialog::ReadOnly);
-        else
+        } else {
             dialog->setReadOnly(CrosswordTypeConfigureDetailsDialog::ReadOnlyWithInfo);
+        }
     }
 
-    if (dialog->exec() == KDialog::Accepted && dialog->changed()) {
+    if (dialog->exec() == QDialog::Accepted && dialog->changed()) {
         m_typeInfo = dialog->crosswordTypeInfo();
         emit crosswordTypeInfoChanged(m_typeInfo);
     }
