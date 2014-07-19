@@ -31,7 +31,7 @@ class KrossWord;
 using namespace Crossword;
 
 /** A dialog to show statistics of a crossword. */
-class StatisticsDialog : public KDialog
+class StatisticsDialog : public QDialog
 {
     Q_OBJECT
 

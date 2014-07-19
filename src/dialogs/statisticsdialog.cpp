@@ -23,15 +23,15 @@
 #include <QScrollArea>
 #include <QGridLayout>
 #include <QLabel>
+#include <QDialogButtonBox>
 #include <KLocale>
 
 StatisticsDialog::StatisticsDialog(KrossWord* krossWord, QWidget* parent)
-    : KDialog(parent), m_krossWord(krossWord)
+    : QDialog(parent), m_krossWord(krossWord)
 {
     setWindowTitle(i18n("Statistics"));
     setWindowIcon(KIcon("view-statistics"));
     setMinimumWidth(300);
-    setButtons(KDialog::Close);
     setModal(true);
 
     setup();
@@ -122,14 +122,19 @@ void StatisticsDialog::setup()
         }
     }
 
-    QWidget *w = new QWidget;
+    QWidget *w = new QWidget(this);
     w->setLayout(layout);
 
-    QScrollArea *scrollArea = new QScrollArea();
+    QScrollArea *scrollArea = new QScrollArea(this);
     scrollArea->setWidgetResizable(true);
     scrollArea->setWidget(w);
 
-    setMainWidget(scrollArea);
+    QDialogButtonBox *closeButton = new QDialogButtonBox(QDialogButtonBox::Close, Qt::Horizontal, this);
+    connect(closeButton, SIGNAL(rejected()), this, SLOT(reject()));
+
+    QBoxLayout *vertLayout = new QBoxLayout(QBoxLayout::TopToBottom, this);
+    vertLayout->addWidget(scrollArea);
+    vertLayout->addWidget(closeButton);
 }
 
 void StatisticsDialog::addStatisticsValue(QGridLayout* layout,

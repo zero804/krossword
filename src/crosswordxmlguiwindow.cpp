@@ -1280,7 +1280,7 @@ void CrossWordXmlGuiWindow::editCheckRotationSymmetrySlot()
 
 void CrossWordXmlGuiWindow::editStatisticsSlot()
 {
-    KDialog *dialog = new StatisticsDialog(krossWord(), this);
+    QDialog *dialog = new StatisticsDialog(krossWord(), this);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     dialog->show();
 }
