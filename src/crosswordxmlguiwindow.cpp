@@ -1287,9 +1287,8 @@ void CrossWordXmlGuiWindow::editStatisticsSlot()
 
 void CrossWordXmlGuiWindow::editClueNumberMappingSlot()
 {
-    KDialog *dialog = new KDialog(this);
-    dialog->setWindowTitle(i18n("Clue Number Mapping"));
-    QWidget *clueNumberMappingDlg = new QWidget;
+    QDialog *clueNumberMappingDlg = new QDialog(this);
+    clueNumberMappingDlg->setWindowTitle(i18n("Clue Number Mapping"));
     ui_clue_number_mapping.setupUi(clueNumberMappingDlg);
 
     for (int i = 0; i < ui_clue_number_mapping.letterContentList->topLevelItemCount(); ++i) {
@@ -1301,9 +1300,9 @@ void CrossWordXmlGuiWindow::editClueNumberMappingSlot()
     connect(ui_clue_number_mapping.letterContentList, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), this, SLOT(clueMappingCurrentLetterChanged(QTreeWidgetItem*, QTreeWidgetItem*)));
     connect(ui_clue_number_mapping.setMapping, SIGNAL(clicked()), this, SLOT(clueMappingSetMappingClicked()));
 
-    dialog->setMainWidget(clueNumberMappingDlg);
-    dialog->setModal(true);
-    if (dialog->exec() == KDialog::Accepted) {
+    clueNumberMappingDlg->setModal(true);
+
+    if (clueNumberMappingDlg->exec() == QDialog::Accepted) {
         QString clueMapping;
         clueMapping.reserve(26);
         for (int i = 0; i < ui_clue_number_mapping.letterContentList->topLevelItemCount(); ++i) {
@@ -1318,7 +1317,7 @@ void CrossWordXmlGuiWindow::editClueNumberMappingSlot()
         }
     }
 
-    delete dialog;
+    delete clueNumberMappingDlg;
 }
 
 void CrossWordXmlGuiWindow::editMoveCellsSlot()
