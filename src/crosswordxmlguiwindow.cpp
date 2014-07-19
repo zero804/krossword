@@ -1237,7 +1237,8 @@ void CrossWordXmlGuiWindow::propertiesSlot()
 {
     QPointer<CrosswordPropertiesDialog> dialog = new CrosswordPropertiesDialog(krossWord(), this);
     connect(dialog, SIGNAL(conversionRequested(CrosswordTypeInfo)), this, SLOT(propertiesConversionRequested(CrosswordTypeInfo)));
-    if (dialog->exec() == KDialog::Accepted) {
+
+    if (dialog->exec() == QDialog::Accepted) {
         QString errorMessage;
         ChangeCrosswordPropertiesCommand *command = new ChangeCrosswordPropertiesCommand(krossWord(), dialog->title(), dialog->author(), dialog->copyright(),
             dialog->notes(), dialog->columns(), dialog->rows(), dialog->anchor());

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>properties</class>
- <widget class="QWidget" name="properties">
+ <widget class="QDialog" name="properties">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>350</width>
-    <height>330</height>
+    <height>371</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -33,8 +33,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>332</width>
-        <height>237</height>
+        <width>338</width>
+        <height>230</height>
        </rect>
       </property>
       <attribute name="label">
@@ -166,156 +166,6 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0" colspan="2">
-        <widget class="QLabel" name="label_7">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="palette">
-          <palette>
-           <active>
-            <colorrole role="WindowText">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>170</red>
-               <green>0</green>
-               <blue>0</blue>
-              </color>
-             </brush>
-            </colorrole>
-            <colorrole role="Text">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>0</red>
-               <green>0</green>
-               <blue>0</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </active>
-           <inactive>
-            <colorrole role="WindowText">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>170</red>
-               <green>0</green>
-               <blue>0</blue>
-              </color>
-             </brush>
-            </colorrole>
-            <colorrole role="Text">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>0</red>
-               <green>0</green>
-               <blue>0</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </inactive>
-           <disabled>
-            <colorrole role="WindowText">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>126</red>
-               <green>125</green>
-               <blue>124</blue>
-              </color>
-             </brush>
-            </colorrole>
-            <colorrole role="Text">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>126</red>
-               <green>125</green>
-               <blue>124</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </disabled>
-          </palette>
-         </property>
-         <property name="font">
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>↓ Not implemented yet! ↓</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="lblLanguage">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>&amp;Language:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="buddy">
-          <cstring>language</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1">
-        <widget class="KLanguageButton" name="language">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="lblDifficulty">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>&amp;Difficulty:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="buddy">
-          <cstring>difficulty</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <widget class="KComboBox" name="difficulty">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="frame">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="page_3">
@@ -323,8 +173,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>332</width>
-        <height>237</height>
+        <width>338</width>
+        <height>230</height>
        </rect>
       </property>
       <attribute name="label">
@@ -797,8 +647,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>100</width>
-        <height>30</height>
+        <width>338</width>
+        <height>230</height>
        </rect>
       </property>
       <attribute name="label">
@@ -825,6 +675,13 @@
      </widget>
     </widget>
    </item>
+   <item row="1" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -835,29 +692,19 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
-  <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
+   <class>KPushButton</class>
+   <extends>QPushButton</extends>
+   <header>kpushbutton.h</header>
   </customwidget>
   <customwidget>
    <class>KIntNumInput</class>
    <extends>QWidget</extends>
    <header>knuminput.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KLanguageButton</class>
-   <extends>QWidget</extends>
-   <header>klanguagebutton.h</header>
   </customwidget>
   <customwidget>
    <class>CrosswordTypeWidget</class>
@@ -871,15 +718,53 @@
   <tabstop>author</tabstop>
   <tabstop>copyright</tabstop>
   <tabstop>notes</tabstop>
-  <tabstop>language</tabstop>
-  <tabstop>difficulty</tabstop>
-  <tabstop>anchorTopLeft</tabstop>
+  <tabstop>buttonBox</tabstop>
   <tabstop>anchorTop</tabstop>
   <tabstop>anchorTopRight</tabstop>
   <tabstop>anchorLeft</tabstop>
   <tabstop>anchorCenter</tabstop>
   <tabstop>anchorRight</tabstop>
+  <tabstop>anchorTopLeft</tabstop>
+  <tabstop>columns</tabstop>
+  <tabstop>rows</tabstop>
+  <tabstop>anchorBottomLeft</tabstop>
+  <tabstop>anchorBottom</tabstop>
+  <tabstop>anchorBottomRight</tabstop>
+  <tabstop>btnReset</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>properties</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>309</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>165</x>
+     <y>324</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>properties</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>293</x>
+     <y>307</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>291</x>
+     <y>327</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

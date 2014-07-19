@@ -25,31 +25,20 @@
 using namespace Crossword;
 
 /** A dialog to move all cells of a crossword. */
-class CrosswordPropertiesDialog : public KDialog
+class CrosswordPropertiesDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit CrosswordPropertiesDialog(KrossWord *krossWord,
-                                       QWidget* parent = 0, Qt::WFlags flags = 0);
+    explicit CrosswordPropertiesDialog(KrossWord *krossWord, QWidget* parent = 0, Qt::WFlags flags = 0);
 
     int columns() const;
     int rows() const;
-    KrossWord::ResizeAnchor anchor() const {
-        return m_anchorIdToAnchor[ui_properties.buttonGroupAnchor->selected()];
-    };
-    QString title() const {
-        return ui_properties.title->text();
-    };
-    QString author() const {
-        return ui_properties.author->text();
-    };
-    QString copyright() const {
-        return ui_properties.copyright->text();
-    };
-    QString notes() const {
-        return ui_properties.notes->text();
-    };
+    KrossWord::ResizeAnchor anchor() const;
+    QString title() const;
+    QString author() const;
+    QString copyright() const;
+    QString notes() const;
 
 signals:
     void conversionRequested(const CrosswordTypeInfo &targetTypeInfo);
@@ -68,22 +57,18 @@ private:
         ArrowW = 3, ArrowNone = 4, ArrowE = 5,
         ArrowSW = 6, ArrowS = 7, ArrowSE = 8
     };
+
     static const QList< QChar > ArrowChars;
 
     void setAnchorIcons(KrossWord::ResizeAnchor anchor);
-    void updateInfoText(KrossWord::ResizeAnchor anchor) {
-        updateInfoText(anchor,
-                       ui_properties.columns->value(), ui_properties.rows->value());
-    };
-    void updateInfoText(int columns, int rows) {
-        updateInfoText(anchor(), columns, rows);
-    };
+    void updateInfoText(KrossWord::ResizeAnchor anchor);
+    void updateInfoText(int columns, int rows);
     void updateInfoText(KrossWord::ResizeAnchor anchor, int columns, int rows);
 
     KrossWord *m_krossWord;
     Ui::properties ui_properties;
     QHash< int, KrossWord::ResizeAnchor > m_anchorIdToAnchor;
-//     QHash< int, QAbstractButton* > m_anchorGroupIdToButton;
+
 };
 
 #endif // CROSSWORDPROPERTIESDIALOG_H

@@ -23,7 +23,6 @@
 #include "krossword.h"
 #include "cells/krosswordcell.h"
 
-#include <KgDifficulty>
 #include <KColorScheme>
 
 
@@ -32,11 +31,10 @@ const QList< QChar > CrosswordPropertiesDialog::ArrowChars = QList<QChar>()
         << QChar(0x2190) << QChar(0x2022) << QChar(0x2192)
         << QChar(0x2199) << QChar(0x2193) << QChar(0x2198);
 
-CrosswordPropertiesDialog::CrosswordPropertiesDialog(KrossWord* krossWord, QWidget* parent, Qt::WFlags flags) : KDialog(parent, flags), m_krossWord(krossWord)
+CrosswordPropertiesDialog::CrosswordPropertiesDialog(KrossWord* krossWord, QWidget* parent, Qt::WFlags flags) : QDialog(parent, flags), m_krossWord(krossWord)
 {
     setWindowTitle(i18n("Properties"));
-    QWidget *propertiesDlg = new QWidget;
-    ui_properties.setupUi(propertiesDlg);
+    ui_properties.setupUi(this);
     setModal(true);
 
     ui_properties.btnReset->setIcon(KIcon("edit-undo"));
@@ -47,18 +45,6 @@ CrosswordPropertiesDialog::CrosswordPropertiesDialog(KrossWord* krossWord, QWidg
     ui_properties.typeInfoWidget->setEditMode(CrosswordTypeWidget::EditAlwaysReadOnly);
     ui_properties.typeInfoWidget->addUserButtonElement(i18n("&Convert..."), this, SLOT(convertClicked()));
     ui_properties.typeInfoWidget->setTypeInfo(krossWord->crosswordTypeInfo());
-
-    QStringList languages = KGlobal::locale()->allLanguagesList();
-    languages.sort();
-    foreach(const QString & language, languages)
-        ui_properties.language->insertLanguage(language);
-
-    //QMap<QByteArray, QString> difficulties = KGameDifficulty::localizedLevelStrings();
-    //ui_properties.difficulty->addItems(difficulties.values());
-    KgDifficulty dif;
-    QList<const KgDifficultyLevel*> difLevels = dif.levels();
-    foreach(const KgDifficultyLevel *difLevel, difLevels)
-        ui_properties.difficulty->addItem(difLevel->title());
 
     ui_properties.title->setText(krossWord->title());
     ui_properties.author->setText(krossWord->authors());
@@ -98,8 +84,6 @@ CrosswordPropertiesDialog::CrosswordPropertiesDialog(KrossWord* krossWord, QWidg
     connect(ui_properties.rows, SIGNAL(valueChanged(int)),this, SLOT(rowsChanged(int)));
     // To update the resize info label
     sizeChanged(krossWord->width(), krossWord->height());
-
-    setMainWidget(propertiesDlg);
 }
 
 void CrosswordPropertiesDialog::resetSizeClicked()
@@ -255,9 +239,7 @@ void CrosswordPropertiesDialog::sizeChanged(int columns, int rows)
     setAnchorIcons(anchor());
     updateInfoText(columns, rows);
 
-    ui_properties.btnReset->setEnabled(
-        ui_properties.columns->value() != (int)m_krossWord->width()
-        || ui_properties.rows->value() != (int)m_krossWord->height());
+    ui_properties.btnReset->setEnabled(ui_properties.columns->value() != (int)m_krossWord->width() || ui_properties.rows->value() != (int)m_krossWord->height());
 }
 
 void CrosswordPropertiesDialog::updateInfoText(KrossWord::ResizeAnchor anchor, int columns, int rows)
@@ -270,8 +252,7 @@ void CrosswordPropertiesDialog::updateInfoText(KrossWord::ResizeAnchor anchor, i
         else if (cell->isType(ImageCellType))
             ++imageCount;
     }
-    if (ui_properties.columns->value() == (int)m_krossWord->width()
-            && ui_properties.rows->value() == (int)m_krossWord->height()) {
+    if (ui_properties.columns->value() == (int)m_krossWord->width() && ui_properties.rows->value() == (int)m_krossWord->height()) {
         ui_properties.lblResizeInfo->setText(i18nc("No changes to the crossword grid size.", "No change"));
         ui_properties.lblResizeInfo->setEnabled(false);
     } else {
@@ -321,3 +302,30 @@ int CrosswordPropertiesDialog::rows() const
     return ui_properties.rows->value();
 }
 
+KrossWord::ResizeAnchor CrosswordPropertiesDialog::anchor() const {
+    return m_anchorIdToAnchor[ui_properties.buttonGroupAnchor->selected()];
+}
+
+QString CrosswordPropertiesDialog::title() const {
+    return ui_properties.title->text();
+}
+
+QString CrosswordPropertiesDialog::author() const {
+    return ui_properties.author->text();
+}
+
+QString CrosswordPropertiesDialog::copyright() const {
+    return ui_properties.copyright->text();
+}
+
+QString CrosswordPropertiesDialog::notes() const {
+    return ui_properties.notes->text();
+}
+
+void CrosswordPropertiesDialog::updateInfoText(KrossWord::ResizeAnchor anchor) {
+    updateInfoText(anchor, ui_properties.columns->value(), ui_properties.rows->value());
+}
+
+void CrosswordPropertiesDialog::updateInfoText(int columns, int rows) {
+    updateInfoText(anchor(), columns, rows);
+}
