@@ -225,13 +225,8 @@ public:
     void setTransitionHeightFactor(qreal transitionHeightFactor) {
         prepareGeometryChange();
         m_transitionHeightFactor = transitionHeightFactor;
-#if QT_VERSION >= 0x040600
         clearCache(Animator::Instant);
     };
-#else
-        clearCache();
-    };
-#endif
 
 signals:
     /** Emitted, when the current answer changes. */

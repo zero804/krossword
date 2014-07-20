@@ -197,9 +197,7 @@ bool KrossWordPuzStream::read(QIODevice* device, KrossWord* krossWord)
 
     // Don't emit currentAnswerChanged signals
     bool wasBlockingSignals = krossWord->blockSignals(true);
-#if QT_VERSION >= 0x040600
     krossWord->animator()->setEnabled(false);
-#endif
 
     ClueCell *clue;
     foreach(ClueInfo clueInfo, acrossClues) {
@@ -283,9 +281,7 @@ bool KrossWordPuzStream::read(QIODevice* device, KrossWord* krossWord)
         }
     }
 
-#if QT_VERSION >= 0x040600
     krossWord->animator()->setEnabled(true);
-#endif
     krossWord->blockSignals(wasBlockingSignals);
 
     return mappingCluesOk;

@@ -34,15 +34,8 @@
 
 
 KrossWord::KrossWord(int width, int height)
-#if QT_VERSION >= 0x040600
-    :
-    QGraphicsObject(0)
+    : QGraphicsObject(0)
 {
-#else
-    :
-    QGraphicsItem(0)
-{
-#endif
     init(width, height);
     fillWithEmptyCells();
 }

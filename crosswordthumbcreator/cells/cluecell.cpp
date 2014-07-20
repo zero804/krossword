@@ -288,11 +288,7 @@ void ClueCell::drawForegroundForPrinting(QPainter *p, const QStyleOptionGraphics
 //     if ( (option->rect.height() / 3) > 6 )
 //  font.setPixelSize( option->rect.height() / 3 );
 //     QFont font = p->font();
-// #if QT_VERSION >= 0x040600
 //     qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(sceneTransform());
-// #else
-//     qreal levelOfDetail = option->levelOfDetail;
-// #endif
 //     font.setPointSizeF( pointSize * levelOfDetail );
     p->setFont(font);
 
@@ -328,11 +324,7 @@ void ClueCell::drawClueNumber(QPainter *p, const QStyleOptionGraphicsItem *optio
         if ((option->rect.height() / 3) > 6)
             font.setPixelSize(option->rect.height() / 3);
 
-// #if QT_VERSION >= 0x040600
 //  qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(transform());
-// #else
-//  qreal levelOfDetail = option->levelOfDetail;
-// #endif
 //  font.setPointSizeF( 7.0 * levelOfDetail );
         p->setFont(font);
 //  QFontMetrics fontMetrics( font );

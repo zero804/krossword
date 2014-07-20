@@ -36,15 +36,9 @@ Coord operator+=(Coord & coord1, const Coord & coord2)
     return coord1 = coord1 + coord2;
 }
 
-#if QT_VERSION >= 0x040600
 KrossWordCell::KrossWordCell(KrossWord* krossWord, CellType cellType,
                              const Coord& coord)
     : QGraphicsObject(krossWord),
-#else
-KrossWordCell::KrossWordCell(KrossWord* krossWord, CellType cellType,
-                             const Coord& coord)
-    : QGraphicsItem(krossWord),
-#endif
       m_cache(0)
 {
     m_krossWord = krossWord;

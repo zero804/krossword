@@ -20,9 +20,7 @@
 #include "spannedcell.h"
 #include "krossword.h"
 
-#if QT_VERSION >= 0x040600
 #include <QPropertyAnimation>
-#endif
 
 namespace Crossword
 {
@@ -35,16 +33,13 @@ SpannedCell::SpannedCell(KrossWord* krossWord, CellType cellType,
     m_horizontalCellSpan = horizontalCellSpan;
     m_verticalCellSpan = verticalCellSpan;
 
-#if QT_VERSION >= 0x040600
     m_transitionSize = QSizeF();
 //   setTransformOriginPoint( -m_transitionSize.width() / 2 - 0.5,
 //       -m_transitionSize.height() / 2 - 0.5 );
-#endif
 }
 
 QRectF SpannedCell::boundingRect() const
 {
-#if QT_VERSION >= 0x040600
     if (m_transitionSize.isValid()) {
         return QRectF(QPointF(-krossWord()->cellSize().width() / 2 - 0.5,
                               -krossWord()->cellSize().height() / 2 - 0.5),
@@ -55,15 +50,8 @@ QRectF SpannedCell::boundingRect() const
                       krossWord()->cellSize().width() * m_horizontalCellSpan + 1,
                       krossWord()->cellSize().height() * m_verticalCellSpan + 1);
     }
-#else
-    return QRectF(-krossWord()->cellSize().width() / 2 - 0.5,
-                  -krossWord()->cellSize().height() / 2 - 0.5,
-                  krossWord()->cellSize().width() * m_horizontalCellSpan + 1,
-                  krossWord()->cellSize().height() * m_verticalCellSpan + 1);
-#endif
 }
 
-#if QT_VERSION >= 0x040600
 void SpannedCell::setTransitionSize(const QSizeF& transitionSize)
 {
     prepareGeometryChange();
@@ -79,13 +67,11 @@ void SpannedCell::endSizeTransizionAnim()
     clearCache();
     update();
 }
-#endif
 
 void SpannedCell::setCellSpan(int horizontalCellSpan, int verticalCellSpan)
 {
     QList< Coord > coordsBefore = spannedCoords();
 
-#if QT_VERSION >= 0x040600
     if (krossWord()->isAnimationTypeEnabled(AnimateSizeChange)) {
         QPropertyAnimation *transitionSizeAnim = new QPropertyAnimation(this, "transitionSize");
         transitionSizeAnim->setDuration(krossWord()->animator()->defaultDuration());
@@ -98,9 +84,7 @@ void SpannedCell::setCellSpan(int horizontalCellSpan, int verticalCellSpan)
         transitionSizeAnim->start(QAbstractAnimation::DeleteWhenStopped);
     } else
         prepareGeometryChange();
-#else
-    prepareGeometryChange();
-#endif
+
     m_horizontalCellSpan = horizontalCellSpan;
     m_verticalCellSpan = verticalCellSpan;
 

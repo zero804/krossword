@@ -26,18 +26,11 @@
 #include <KColorScheme>
 
 
-#if QT_VERSION >= 0x040600
 #include <QPropertyAnimation>
 ClueExpanderItem::ClueExpanderItem(KrossWord* krossWord, ClueCell* clueCell)
     : QGraphicsObject(krossWord), m_krossWord(krossWord), m_clue(clueCell),
       m_lastLetter(0)
 {
-#else
-ClueExpanderItem::ClueExpanderItem(KrossWord* krossWord, ClueCell* clueCell)
-    : QGraphicsItem(krossWord), m_krossWord(krossWord), m_clue(clueCell),
-      m_lastLetter(0)
-{
-#endif
     Q_ASSERT(clueCell);
 
     m_isDragging = false;
@@ -173,15 +166,11 @@ void ClueExpanderItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
     m_isDragging = true;
     grabMouse();
 
-#if QT_VERSION >= 0x040600
     QPropertyAnimation *fadeAnim = new QPropertyAnimation(this, "color");
     fadeAnim->setDuration(250);
     fadeAnim->setStartValue(color());
     fadeAnim->setEndValue(dragColor());
     fadeAnim->start(QAbstractAnimation::DeleteWhenStopped);
-#else
-    setColor(dragColor());
-#endif
 //   QGraphicsItem::mousePressEvent( event );
 }
 
@@ -192,15 +181,11 @@ void ClueExpanderItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
     setPos(m_homePos);
     ungrabMouse();
 
-#if QT_VERSION >= 0x040600
     QPropertyAnimation *fadeAnim = new QPropertyAnimation(this, "color");
     fadeAnim->setDuration(250);
     fadeAnim->setStartValue(color());
     fadeAnim->setEndValue(normalColor());
     fadeAnim->start(QAbstractAnimation::DeleteWhenStopped);
-#else
-    setColor(normalColor());
-#endif
 //   QGraphicsItem::mouseReleaseEvent( event );
 }
 

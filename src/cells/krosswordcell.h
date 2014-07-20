@@ -30,14 +30,10 @@
 #include <KDebug>
 #include <kdeversion.h>
 
-#if QT_VERSION >= 0x040600
 #include "animator.h"
 #include <QGraphicsObject>
 #include <QGraphicsEffect>
 class QPropertyAnimation;
-#else
-#include <QGraphicsItem>
-#endif
 
 class QPainter;
 
@@ -53,7 +49,6 @@ class LetterCell;
 class SolutionLetterCell;
 class ImageCell;
 
-#if QT_VERSION >= 0x040600
 /** An effect that provides a glow effect, based on QGraphcisDropShadowEffect. */
 class GlowEffect : public QGraphicsDropShadowEffect
 {
@@ -63,7 +58,6 @@ public:
 protected:
     virtual void draw(QPainter* painter);
 };
-#endif
 
 /** Base class for all crossword cells.
   * @see EmptyCell
@@ -73,20 +67,13 @@ protected:
   * @see DoubleClueCell
   * @see SpannedCell
   * @see ImageCell */
-#if QT_VERSION >= 0x040600
 class KrossWordCell : public QGraphicsObject
 {
-#else
-class KrossWordCell : public QObject, public QGraphicsItem
-{
-#endif
     friend class KrossWord;
     friend class DoubleClueCell; // To be able to set m_coord of the child clue cells in the constructor
     Q_OBJECT
-#if QT_VERSION >= 0x040600
     Q_INTERFACES(QGraphicsItem)
     Q_PROPERTY(qreal scaleX READ scaleX WRITE setScaleX)
-#endif
 
 public:
     KrossWordCell(KrossWord *krossWord, CellType cellType,
@@ -183,11 +170,7 @@ public:
     /** Clears the cache pixmap of this cell.
       * @param durationFactor The factor for the duration of a transition
       *  animation. Only used if transition animations are enabled. */
-#if QT_VERSION >= 0x040600
     void clearCache(Animator::Duration duration = Animator::DefaultDuration);
-#else
-    void clearCache();
-#endif
 
 signals:
     void gotFocus(KrossWordCell *cell);
@@ -199,7 +182,6 @@ public slots:
     void setFocusSlot(KrossWordCell *cell);
     void deleteAndRemoveFromSceneLater();
 
-#if QT_VERSION >= 0x040600
 public slots:
 //  void updateTransformOriginPoint();
 
@@ -210,13 +192,6 @@ protected slots:
         clearCache(Crossword::Animator::Instant);
         update();
     };
-#else
-protected slots:
-    void clearCacheAndUpdate() {
-        clearCache();
-        update();
-    };
-#endif
 
 protected:
     virtual bool setPositionFromCoordinates(bool animate = true);
@@ -238,9 +213,7 @@ protected:
 
     KrossWord *m_krossWord;
 
-#if QT_VERSION >= 0x040600
     bool m_blockCacheClearing;
-#endif
 
 private:
     Coord m_coord;
@@ -250,9 +223,7 @@ private:
     QPixmap *m_cache;
     bool m_redraw;
 
-#if QT_VERSION >= 0x040600
     QPropertyAnimation *m_blurAnim;
-#endif
 };
 
 

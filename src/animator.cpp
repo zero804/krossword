@@ -19,7 +19,6 @@
 
 #include "animator.h"
 
-#if QT_VERSION >= 0x040600
 #include "krossword.h"
 #include "cells/krosswordcell.h"
 #include <QGraphicsObject>
@@ -341,5 +340,3 @@ bool Animator::startOrEnqueue(QAbstractAnimation* anim, AnimateFlags flags)
 }
 
 } // namespace
-
-#endif // QT_VERSION >= 0x040600

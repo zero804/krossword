@@ -163,10 +163,8 @@ protected slots:
     void orientationChanged(ClueCell *clue, Qt::Orientation orientation);
     void correctAnswerChanged(ClueCell *clue, const QString &correctAnswer);
 
-#if QT_VERSION >= 0x040600
     void changeAnimValueChanged(const QVariant &value);
     void changeAnimFinished();
-#endif
 
 protected:
     LetterCell(KrossWord *krossWord, const Coord &coord,
@@ -237,9 +235,7 @@ private:
     Confidence m_confidence;
     bool m_hadFocusBeforeMousePress;
 
-#if QT_VERSION >= 0x040600
     QPropertyAnimation *m_changeAnim;
-#endif
 };
 
 

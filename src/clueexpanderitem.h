@@ -23,28 +23,17 @@
 #include "krossword.h"
 #include "cells/cluecell.h"
 
-#if QT_VERSION >= 0x040600
 #include <QGraphicsObject>
-#else
-#include <QGraphicsItem>
-#endif
 
 using namespace Crossword;
 
 class QGraphicsSceneMouseEvent;
-#if QT_VERSION >= 0x040600
 class ClueExpanderItem : public QGraphicsObject
 {
-#else
-class ClueExpanderItem : public QObject, public QGraphicsItem
-{
-#endif
     Q_OBJECT
     Q_PROPERTY(QColor color READ color WRITE setColor)
 
-#if QT_VERSION >= 0x040600
     Q_INTERFACES(QGraphicsItem)
-#endif
 
 public:
     ClueExpanderItem(KrossWord *krossWord, ClueCell *clueCell);

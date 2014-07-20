@@ -22,9 +22,7 @@
 #include "htmldelegate.h"
 #include "dictionary.h"
 
-#if QT_VERSION >= 0x040600
 #include <QPropertyAnimation>
-#endif
 
 #include <QTimer>
 #include <QSqlRecord>
@@ -126,7 +124,6 @@ void DictionaryDialog::showInfoMessage(const QString& infoMessage)
     QRect rect = QRect(ui_dictionaries.tableDictionary->mapToGlobal(
                            ui_dictionaries.tableDictionary->rect().bottomLeft() + QPoint(5, -size.height() - 5)), size);
 
-#if QT_VERSION >= 0x040600
     QRect rectStart = rect.adjusted(0, rect.height(), 0, 0);
     m_infoMessage->setGeometry(rectStart);
     m_infoMessage->show();
@@ -135,10 +132,6 @@ void DictionaryDialog::showInfoMessage(const QString& infoMessage)
     anim->setEndValue(rect);
     anim->setDuration(250);
     anim->start(QAbstractAnimation::DeleteWhenStopped);
-#else
-    m_infoMessage->setGeometry(rect);
-    m_infoMessage->show();
-#endif
 
     QTimer::singleShot(3000, this, SLOT(hideInfoMessage()));
 }
@@ -148,7 +141,6 @@ void DictionaryDialog::hideInfoMessage()
     if (!m_infoMessage)
         return;
 
-#if QT_VERSION >= 0x040600
     QRect rectEnd = m_infoMessage->geometry().adjusted(0, m_infoMessage->height(), 0, 0);
     QPropertyAnimation *anim = new QPropertyAnimation(m_infoMessage, "geometry");
     anim->setStartValue(m_infoMessage->geometry());
@@ -156,9 +148,6 @@ void DictionaryDialog::hideInfoMessage()
     anim->setDuration(250);
     anim->start(QAbstractAnimation::DeleteWhenStopped);
     QTimer::singleShot(250, m_infoMessage, SLOT(close()));
-#else
-    m_infoMessage->close();
-#endif
 
     m_infoMessage = NULL;
 }

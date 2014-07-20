@@ -28,9 +28,7 @@ namespace Crossword
 class SpannedCell : public KrossWordCell
 {
     Q_OBJECT
-#if QT_VERSION >= 0x040600
     Q_PROPERTY(QSizeF transitionSize READ transitionSize WRITE setTransitionSize FINAL)
-#endif
     friend class KrossWord;
 
 public:
@@ -46,12 +44,10 @@ public:
         return Type;
     };
 
-#if QT_VERSION >= 0x040600
     QSizeF transitionSize() const {
         return m_transitionSize;
     };
     void setTransitionSize(const QSizeF &transitionSize);
-#endif
 
     int horizontalCellSpan() const {
         return m_horizontalCellSpan;
@@ -75,17 +71,13 @@ public:
     QList<Coord> spannedCoords() const;
 
 protected slots:
-#if QT_VERSION >= 0x040600
     void endSizeTransizionAnim();
-#endif
 
 private:
     int m_horizontalCellSpan;
     int m_verticalCellSpan;
 
-#if QT_VERSION >= 0x040600
     QSizeF m_transitionSize;
-#endif
 };
 
 inline void SpannedCell::setHorizontalCellSpan(int horizontalCellSpan)

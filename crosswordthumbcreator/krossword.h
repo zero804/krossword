@@ -28,9 +28,7 @@
 #include <KLocalizedString>
 #include <kdeversion.h>
 
-#if QT_VERSION >= 0x040600
 #include <QGraphicsObject>
-#endif
 
 class SpannedCell;
 class ImageCell;

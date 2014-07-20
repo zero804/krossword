@@ -549,18 +549,9 @@ void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
         break;
 
     case ShowingCongratulations:
-#if QT_VERSION >= 0x040600
         m_animation->setCurrentTime(0);
         m_animation->stop();
         m_animation = NULL;
-#else
-        foreach(QGraphicsItemAnimation * anim, m_animationList) {
-            anim->timeLine()->setCurrentTime(0);
-            anim->timeLine()->stop();
-            anim->clear();
-            delete anim;
-        }
-#endif
 
         m_view->scene()->removeItem(m_winItems);
 //      m_winItems->deleteLater();
@@ -575,14 +566,10 @@ void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
     case ShowingNothing:
         kDebug() << "New state: ShowingNothing";
 
-#if QT_VERSION >= 0x040600
         krossWord()->animator()->setEnabled(false);
-#endif
         krossWord()->removeAllCells();
         krossWord()->resizeGrid(0, 0);
-#if QT_VERSION >= 0x040600
         krossWord()->animator()->setEnabled(true);
-#endif
 
         m_undoStackLoaded = false;
         setCurrentFileName(QString());
@@ -1909,11 +1896,8 @@ void CrossWordXmlGuiWindow::solutionViewResized(const QSize &oldSize,
 
 QDockWidget *CrossWordXmlGuiWindow::createClueDock()
 {
-#if QT_VERSION >= 0x040600
     m_clueTree = new ClueListView();
-#else
-    m_clueTree = new QTreeView();
-#endif
+
     m_clueTree->setRootIsDecorated(false);
     m_clueTree->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_clueTree->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -2270,9 +2254,7 @@ KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
     //!Krossword class needs a theme (?)
     KrossWordPuzzleView *view = new KrossWordPuzzleView(
                 new KrossWordPuzzleScene(
-                    new KrossWord( //! ↓ This is always null...
-                        dynamic_cast<const KrosswordTheme*>(KrosswordRenderer::self()->getCurrentTheme())
-                        )));
+                    new KrossWord(nullptr)));   //! TODO find out why you should pass the theme to the krossword
 
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -2590,11 +2572,7 @@ void CrossWordXmlGuiWindow::selectClueWithSwitchedOrientationSlot()
 
     LetterCell *letterCell = dynamic_cast<LetterCell*>(krossWord()->currentCell());
     if (!letterCell) {
-#if QT_VERSION >= 0x040600
         letterCell = dynamic_cast<LetterCell*>(krossWord()->focusItem());
-#else
-        letterCell = dynamic_cast<LetterCell*>(krossWord()->scene()->focusItem());
-#endif
     }
 
     if (letterCell)
@@ -2807,12 +2785,8 @@ void CrossWordXmlGuiWindow::currentClueChanged(ClueCell* clue)
 
     ClueItem *clueItem = m_clueModel->clueItem(clue);
     if (clueItem) {
-#if QT_VERSION >= 0x040600
         m_clueTree->selectionModel()->select(clueItem->index(), QItemSelectionModel::SelectCurrent | QItemSelectionModel::Rows);
         ((ClueListView*)m_clueTree)->animateScrollTo(clueItem->index());
-#else
-        m_clueTree->setCurrentIndex(clueItem->index());
-#endif
     } else
         kDebug() << "Clue not found in clue tree view:" << clue->clue();
 }

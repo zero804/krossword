@@ -32,9 +32,7 @@
 #include <QStyleOption>
 #include <QPainter>
 
-#if QT_VERSION >= 0x040600
 #include <QPropertyAnimation>
-#endif
 #include <kglobalsettings.h>
 #include <KAction>
 
@@ -44,20 +42,14 @@ namespace Crossword
 LetterCell::LetterCell(KrossWord* krossWord, const Coord& coord,
                        ClueCell* clueHorizontal, ClueCell* clueVertical)
     : KrossWordCell(krossWord, LetterCellType, coord),
-      m_clueHorizontal(0), m_clueVertical(0)
-#if QT_VERSION >= 0x040600
-      , m_changeAnim(0)
-#endif
+      m_clueHorizontal(0), m_clueVertical(0), m_changeAnim(0)
 {
     init(clueHorizontal, clueVertical);
 }
 LetterCell::LetterCell(KrossWord* krossWord, const Coord& coord,
                        ClueCell* clue, AnswerOffset answerOffset)
     : KrossWordCell(krossWord, LetterCellType, coord),
-      m_clueHorizontal(0), m_clueVertical(0)
-#if QT_VERSION >= 0x040600
-      , m_changeAnim(0)
-#endif
+      m_clueHorizontal(0), m_clueVertical(0), m_changeAnim(0)
 {
     init(clue, answerOffset);
 }
@@ -66,10 +58,7 @@ LetterCell::LetterCell(KrossWord* krossWord, const Coord& coord,
                        ClueCell* clueHorizontal, ClueCell* clueVertical,
                        CellType cellType)
     : KrossWordCell(krossWord, cellType, coord),
-      m_clueHorizontal(0), m_clueVertical(0)
-#if QT_VERSION >= 0x040600
-      , m_changeAnim(0)
-#endif
+      m_clueHorizontal(0), m_clueVertical(0), m_changeAnim(0)
 {
     init(clueHorizontal, clueVertical);
 }
@@ -78,10 +67,7 @@ LetterCell::LetterCell(KrossWord* krossWord, const Coord& coord,
                        ClueCell* clue, CellType cellType,
                        AnswerOffset answerOffset)
     : KrossWordCell(krossWord, cellType, coord),
-      m_clueHorizontal(0), m_clueVertical(0)
-#if QT_VERSION >= 0x040600
-      , m_changeAnim(0)
-#endif
+      m_clueHorizontal(0), m_clueVertical(0), m_changeAnim(0)
 {
     init(clue, answerOffset);
 }
@@ -576,7 +562,6 @@ void LetterCell::setCorrectLetter(const QChar& correctLetter)
             m_clueHorizontal->correctAnswer().replace(letterOffset, 1, correctLetter));
     }
 
-#if QT_VERSION >= 0x040600
     if (krossWord()->isAnimationTypeEnabled(AnimateChangeLetter)) {
         if (m_changeAnim) {
             if (!m_blockCacheClearing) {   // changeAnimValueChanged() already disconnected
@@ -603,13 +588,8 @@ void LetterCell::setCorrectLetter(const QChar& correctLetter)
         clearCache(Crossword::Animator::Slow);
         update();
     }
-#else
-    clearCache();
-    update();
-#endif // QT_VERSION >= 0x040600
 }
 
-#if QT_VERSION >= 0x040600
 void LetterCell::changeAnimValueChanged(const QVariant& value)
 {
     if (m_blockCacheClearing && (value.toReal() < 0.01
@@ -628,7 +608,6 @@ void LetterCell::changeAnimFinished()
     delete m_changeAnim;
     m_changeAnim = NULL;
 }
-#endif // QT_VERSION >= 0x040600
 
 void LetterCell::setCurrentLetter(const QChar& currentLetter,
                                   Confidence confidence)
@@ -645,7 +624,6 @@ void LetterCell::setCurrentLetter(const QChar& currentLetter,
     m_currentLetter = newCurrentLetter;
     m_confidence = confidence;
 
-#if QT_VERSION >= 0x040600
     if (krossWord()->isAnimationTypeEnabled(AnimateChangeLetter)) {
         if (m_changeAnim) {
             if (!m_blockCacheClearing) {   // changeAnimValueChanged() already disconnected
@@ -672,10 +650,6 @@ void LetterCell::setCurrentLetter(const QChar& currentLetter,
         clearCache(Crossword::Animator::Slow);
         update();
     }
-#else
-    clearCache();
-    update();
-#endif // QT_VERSION >= 0x040600
 
     emit currentLetterChanged(this, m_currentLetter);
 }

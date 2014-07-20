@@ -33,16 +33,13 @@
 #include <QDebug>
 #include <kdeversion.h>
 
-#if QT_VERSION >= 0x040600
 #include <QPropertyAnimation>
 #include <QGraphicsEffect>
 #include "animator.h"
-#endif
 
 namespace Crossword
 {
 
-#if QT_VERSION >= 0x040600
 void GlowEffect::draw(QPainter* painter)
 {
     drawSource(painter);
@@ -52,17 +49,10 @@ void GlowEffect::draw(QPainter* painter)
     QGraphicsDropShadowEffect::draw(painter);
     painter->restore();
 }
-#endif
 
-#if QT_VERSION >= 0x040600
 KrossWordCell::KrossWordCell(KrossWord* krossWord, CellType cellType, const Coord& coord)
     : QGraphicsObject(krossWord), m_blockCacheClearing(false), m_cache(0), m_blurAnim(0)
 {
-#else
-KrossWordCell::KrossWordCell(KrossWord* krossWord, CellType cellType, const Coord& coord)
-    : QGraphicsItem(krossWord), m_cache(0), m_redraw(true)
-{
-#endif
 
     m_krossWord = krossWord;
     m_cellType = cellType;
@@ -74,7 +64,6 @@ KrossWordCell::KrossWordCell(KrossWord* krossWord, CellType cellType, const Coor
 
     setPositionFromCoordinates(false);
 
-#if QT_VERSION >= 0x040600
     // Set new cells completely transparent, they will fade in when they are
     // added to the crossword by KrossWord::replaceCell.
     setOpacity(0);
@@ -86,7 +75,6 @@ KrossWordCell::KrossWordCell(KrossWord* krossWord, CellType cellType, const Coor
     effect->setOffset(0);
     effect->setEnabled(false);
     setGraphicsEffect(effect);
-#endif
 }
 
 KrossWordCell::~KrossWordCell()
@@ -138,7 +126,6 @@ bool KrossWordCell::setPositionFromCoordinates(bool animate)
                    (coord().second + 0.5) * krossWord()->cellSize().height());
     newPos += krossWord()->topLeftCellOffset();
 
-#if QT_VERSION >= 0x040600
     if (animate && krossWord()->isAnimationTypeEnabled(AnimatePosChange)) {
         /*QAbstractAnimation *anim =*/
         krossWord()->m_animator->animate(
@@ -148,22 +135,16 @@ bool KrossWordCell::setPositionFromCoordinates(bool animate)
         setPos(newPos);
 //     updateTransformOriginPoint();
     }
-#else
-    setPos(newPos);
-#endif
 
     return true;
 }
 
-#if QT_VERSION >= 0x040600
 // void KrossWordCell::updateTransformOriginPoint() {
 //   setTransformOriginPoint( 0, 0 );
 // //   setTransformOriginPoint( boundingRect().width() / 2,
 // //       boundingRect().height() / 2 );
 // }
-#endif
 
-#if QT_VERSION >= 0x040600
 void KrossWordCell::clearCache(Animator::Duration duration)
 {
     if (m_blockCacheClearing)   // Only used with Qt 4.6 to wait for animations
@@ -175,10 +156,6 @@ void KrossWordCell::clearCache(Animator::Duration duration)
                 && krossWord()->isAnimationTypeEnabled(AnimateTransition))
             krossWord()->m_animator->animateTransition(this, duration);
     }
-#else
-void KrossWordCell::clearCache()
-{
-#endif
 
     m_redraw = true;
     update();
@@ -398,7 +375,6 @@ void KrossWordCell::focusInEvent(QFocusEvent* event)
 
     clearCache();
 
-#if QT_VERSION >= 0x040600
     GlowEffect *effect = static_cast< GlowEffect* >(graphicsEffect());
     if (effect) {
 //       kDebug() << "Enable Glow Effect for" << coord();
@@ -439,10 +415,8 @@ void KrossWordCell::focusInEvent(QFocusEvent* event)
     if (krossWord()->isAnimationTypeEnabled(AnimateFocusIn))
         krossWord()->animator()->animate(Animator::AnimateBounce, this,
                                          Crossword::Animator::Slow);
-#endif
 }
 
-#if QT_VERSION >= 0x040600
 void KrossWordCell::blurAnimationInFinished()
 {
     delete m_blurAnim;
@@ -458,7 +432,6 @@ void KrossWordCell::blurAnimationOutFinished()
     if (effect)
         effect->setEnabled(false);
 }
-#endif
 
 void KrossWordCell::focusOutEvent(QFocusEvent* event)
 {
@@ -467,7 +440,6 @@ void KrossWordCell::focusOutEvent(QFocusEvent* event)
 //     else
     // focus not any longer in the scene or no scene
 
-#if QT_VERSION >= 0x040600
     GlowEffect *effect = static_cast< GlowEffect* >(graphicsEffect());
     if (effect) {
 //       kDebug() << "Disable Glow Effect for" << coord();
@@ -504,7 +476,6 @@ void KrossWordCell::focusOutEvent(QFocusEvent* event)
         setZValue(0);
 
     }
-#endif // QT_VERSION >= 0x040600
 
 //     m_highlight = false;
 //     kDebug() << "KROSSWORDCELL OUT" << this->coord();
@@ -515,7 +486,6 @@ void KrossWordCell::focusOutEvent(QFocusEvent* event)
 
 void KrossWordCell::setHighlight(bool enable)
 {
-#if QT_VERSION >= 0x040600
 //   if ( enable ) {
 //     GlowEffect *effect = static_cast< GlowEffect* >( graphicsEffect() );
 //     if ( effect ) {
@@ -534,18 +504,13 @@ void KrossWordCell::setHighlight(bool enable)
 //     }
 //   } else if ( graphicsEffect() )
 //     graphicsEffect()->setEnabled( false );
-#endif
 
     m_highlight = enable;
 
-#if QT_VERSION >= 0x040600
     if (enable)
         clearCache(Animator::Instant);   // No animation when getting highlight
     else
         clearCache(Animator::VerySlow);   // Longer animation when loosing highlight
-#else
-    clearCache();
-#endif
 
     update();
 }
@@ -556,9 +521,7 @@ EmptyCell::EmptyCell(KrossWord* krossWord, Coord coord) : KrossWordCell(krossWor
     setFlag(QGraphicsItem::ItemIsFocusable, krossWord->isEditable());
     setFlag(QGraphicsItem::ItemIsSelectable, krossWord->isEditable());
 
-#if QT_VERSION >= 0x040600
     setFlag(QGraphicsItem::ItemHasNoContents, !krossWord->isEditable());
-#endif
 }
 
 LetterCell* EmptyCell::toLetterCell(const QChar& correctContent)
@@ -652,11 +615,7 @@ void KrossWordCell::paint(QPainter* painter,
         drawBackgroundForPrinting(painter, option);
         drawForegroundForPrinting(painter, option);
     } else {
-#if QT_VERSION >= 0x040600
         qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
-#else
-        qreal levelOfDetail = option->levelOfDetail;
-#endif
         QSize size = option->rect.size() * levelOfDetail;
         //  qDebug() << "SIZE =" << size << "FROM" << option->rect.size() << "*" << levelOfDetail;
 

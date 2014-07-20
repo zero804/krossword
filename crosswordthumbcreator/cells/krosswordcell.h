@@ -30,11 +30,7 @@
 #include <KDebug>
 #include <kdeversion.h>
 
-#if QT_VERSION >= 0x040600
 #include <QGraphicsObject>
-#else
-#include <QGraphicsItem>
-#endif
 
 class KrossWord;
 typedef KGrid2D::Coord Coord;
@@ -58,18 +54,11 @@ Coord operator +=(Coord & coord1, const Coord & coord2);
 
 const QString ALLOWED_CHARACTERS = QLatin1String("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
-#if QT_VERSION >= 0x040600
 class KrossWordCell : public QGraphicsObject
 {
-#else
-class KrossWordCell : public QObject, public QGraphicsItem
-{
-#endif
     friend class KrossWord;
     Q_OBJECT
-#if QT_VERSION >= 0x040600
     Q_INTERFACES(QGraphicsItem)
-#endif
 
 public:
     /** Different cell types for crosswords. */

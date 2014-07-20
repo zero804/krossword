@@ -34,10 +34,8 @@
 #include <kglobalsettings.h>
 #include <kdeversion.h>
 
-#if QT_VERSION >= 0x040600
 #include "animator.h"
 #include <QPropertyAnimation>
-#endif
 
 namespace Crossword
 {
@@ -137,7 +135,7 @@ void DoubleClueCell::removeClueCell(ClueCell* clueCell)
     m_clue1 = m_clue2 = NULL;
 
     bool otherIsBelow = otherClueCell->y() > quartHeight * 1.1;
-#if QT_VERSION >= 0x040600
+
     if (otherIsBelow) {
         QPointF targetPos = newPos + QPointF(0, -quartHeight);
         krossWord()->animator()->animate(Crossword::Animator::AnimatePositionChange,
@@ -151,12 +149,6 @@ void DoubleClueCell::removeClueCell(ClueCell* clueCell)
     sizeAnim->setEndValue(1.0);
     sizeAnim->setEasingCurve(QEasingCurve(QEasingCurve::InOutBack));
     krossWord()->animator()->startOrEnqueue(sizeAnim, Crossword::Animator::Slow);
-#else
-    if (otherIsBelow)
-        otherClueCell->setPos(newPos + QPointF(0, -quartHeight));
-    else
-        otherClueCell->setPos(newPos);
-#endif
 
     otherClueCell->m_transitionHeightFactor = 0.5;
     krossWord()->replaceCell(this, otherClueCell);
@@ -436,10 +428,9 @@ void ClueCell::setProperties(Qt::Orientation newOrientation,
         if (newAnswerOffset != OnClueCell
                 && m_answerOffset == OnClueCell) {
             setVisible(true);
-#if QT_VERSION >= 0x040600
+
             if (krossWord()->isAnimationTypeEnabled(AnimateAppear))
                 krossWord()->animator()->animate(Animator::AnimateFadeIn, this);
-#endif
         }
         m_answerOffset = newAnswerOffset;
 
@@ -689,9 +680,7 @@ int ClueCell::addLetters(int count)
     if (count == 0)
         return 0;
 
-#if QT_VERSION >= 0x040600
     krossWord()->animator()->beginEnqueueAnimations();
-#endif
 
     LetterCell *oldLastLetter = lastLetter();
     bool oldLastLetterHasEndBar = oldLastLetter->needsEndBar(orientation());
@@ -792,9 +781,7 @@ int ClueCell::addLetters(int count)
         }
     }
 
-#if QT_VERSION >= 0x040600
     krossWord()->animator()->endEnqueueAnimations();
-#endif
     return actualCount;
 }
 
@@ -1141,11 +1128,7 @@ void ClueCell::drawClueNumber(QPainter *p, const QStyleOptionGraphicsItem *optio
         QString text = QString("%1.").arg(m_clueNumber + 1);
         QFont font = KGlobalSettings::smallestReadableFont();
 
-#if QT_VERSION >= 0x040600
         qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
-#else
-        qreal levelOfDetail = option->levelOfDetail;
-#endif
 
         font.setPointSizeF(7.0 * levelOfDetail);
         p->setFont(font);
@@ -1251,9 +1234,7 @@ void ClueCell::setHighlight(bool enable)
     if (isHighlighted() == enable)
         return;
 
-#if QT_VERSION >= 0x040600
     krossWord()->animator()->beginEnqueueAnimations();
-#endif
 
     KrossWordCell::setHighlight(enable);
     if (enable)
@@ -1265,9 +1246,8 @@ void ClueCell::setHighlight(bool enable)
     foreach(LetterCell * letterCell, letterList)
     letterCell->setHighlight(enable);
 
-#if QT_VERSION >= 0x040600
     krossWord()->animator()->endEnqueueAnimations();
-#endif
+
 }
 
 void ClueCell::answerLetterChanged(LetterCell* letter, const QChar &newLetter)
@@ -1295,9 +1275,8 @@ void ClueCell::setCorrectAnswer(const QString& correctAnswer)
     int pos = 0;
     LetterCellList list = letters();
 
-#if QT_VERSION >= 0x040600
     krossWord()->animator()->beginEnqueueAnimations();
-#endif
+
     foreach(LetterCell * cell, list) {
         // Adjust correct letter of clues in the other direction
         if (cell->hasClueInDirection(otherOrientation)) {
@@ -1317,9 +1296,8 @@ void ClueCell::setCorrectAnswer(const QString& correctAnswer)
 
         ++pos;
     }
-#if QT_VERSION >= 0x040600
+
     krossWord()->animator()->endEnqueueAnimations();
-#endif
 
     emit correctAnswerChanged(this, m_correctAnswer);
 }

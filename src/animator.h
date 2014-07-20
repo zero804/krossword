@@ -22,7 +22,6 @@
 
 #include <kdeversion.h>
 
-#if QT_VERSION >= 0x040600
 #include <QList>
 #include <QGraphicsPixmapItem>
 #include <QVariantAnimation>
@@ -296,7 +295,5 @@ private:
 
 }; // namespace
 Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::Animator::AnimateFlags)
-
-#endif // QT_VERSION >= 0x040600
 
 #endif // ANIMATOR_H

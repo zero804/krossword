@@ -160,9 +160,7 @@ bool KrossWordXmlReader::read(QIODevice* device, KrossWord *krossWord,
         return false;
     setDevice(device);
 
-#if QT_VERSION >= 0x040600
     krossWord->animator()->setEnabled(false);
-#endif
     while (!atEnd()) {
         readNext();
 
@@ -176,9 +174,7 @@ bool KrossWordXmlReader::read(QIODevice* device, KrossWord *krossWord,
                 raiseError(i18n("The file is not a KrossWordPuzzle version &lt;= 1.1 file."));
         }
     }
-#if QT_VERSION >= 0x040600
     krossWord->animator()->setEnabled(true);
-#endif
 
     if (closeAfterRead)
         device->close();

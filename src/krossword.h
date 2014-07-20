@@ -27,12 +27,8 @@
 #include <KDebug>
 #include <kdeversion.h>
 
-#if QT_VERSION >= 0x040600
 #include <QGraphicsObject>
 class QGraphicsDropShadowEffect;
-#else
-#include <QGraphicsItem>
-#endif
 
 #include "global.h"
 
@@ -956,9 +952,7 @@ private:
     void setTopLeftCellOffset(const QPointF &topLeftCellOffset);
     void updateTitleItem();
 
-#if QT_VERSION >= 0x040600
     Animator *m_animator;
-#endif
 
     KrosswordGrid *m_krossWordGrid; // Stores all cells in the crossword
     QSizeF m_cellSize; // The size of one crossword cell

@@ -40,27 +40,18 @@
 #include <KIcon>
 #include <kglobalsettings.h>
 
-#if QT_VERSION >= 0x040600
 #include "animator.h"
 #include <QPropertyAnimation>
 #include <QGraphicsEffect>
-#endif
 
 
 namespace Crossword
 {
 
 KrossWordTitleItem::KrossWordTitleItem(QGraphicsItem* parent)
-#if QT_VERSION >= 0x040600
-    :
-    QGraphicsObject(parent),
-#else
-    :
-    QGraphicsItem(parent),
-#endif
+    : QGraphicsObject(parent),
     m_titleItem(0), m_authorsItem(0)
-{
-}
+{ }
 
 QRectF KrossWordTitleItem::boundingRect() const
 {
@@ -88,7 +79,6 @@ void KrossWordTitleItem::paint(QPainter* painter,
 
 void KrossWordTitleItem::updateTheme(KrossWord* krossWord)
 {
-#if QT_VERSION >= 0x040600
     if (m_titleItem) {
         updateGraphicsEffect(krossWord,
                              static_cast< QGraphicsDropShadowEffect* >(m_titleItem->graphicsEffect()));
@@ -97,12 +87,8 @@ void KrossWordTitleItem::updateTheme(KrossWord* krossWord)
         updateGraphicsEffect(krossWord,
                              static_cast< QGraphicsDropShadowEffect* >(m_authorsItem->graphicsEffect()));
     }
-#else
-    Q_UNUSED(krossWord);
-#endif
 }
 
-#if QT_VERSION >= 0x040600
 void KrossWordTitleItem::updateGraphicsEffect(KrossWord* krossWord,
         QGraphicsDropShadowEffect* effect)
 {
@@ -121,7 +107,6 @@ void KrossWordTitleItem::updateGraphicsEffect(KrossWord* krossWord,
         effect->setColor(QColor(63, 63, 63, 180));
     }
 }
-#endif
 
 void KrossWordTitleItem::setContent(KrossWord *krossWord)
 {
@@ -143,11 +128,9 @@ void KrossWordTitleItem::setContent(KrossWord *krossWord)
         m_titleItem->setFont(font);
 
         m_titleItem->setPlainText(krossWord->title());
-#if QT_VERSION >= 0x040600
         QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
         updateGraphicsEffect(krossWord, effect);
         m_titleItem->setGraphicsEffect(effect);
-#endif
     }
 
     if (krossWord->authors().isEmpty()) {
@@ -169,11 +152,9 @@ void KrossWordTitleItem::setContent(KrossWord *krossWord)
         else
             m_authorsItem->setHtml(QString("<p style=\"text-align:right;\">%1<br>%2</p>").arg(krossWord->authors()).arg(krossWord->copyright()));
 
-#if QT_VERSION >= 0x040600
         QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
         updateGraphicsEffect(krossWord, effect);
         m_authorsItem->setGraphicsEffect(effect);
-#endif
     }
     prepareGeometryChange();
 
@@ -737,7 +718,6 @@ void KrossWord::setCurrentCell(KrossWordCell* cell)
     if (m_currentCell) {
         m_focusItem->setRect(QRectF(m_currentCell->pos() + m_currentCell->boundingRect().topLeft(),
                                     m_currentCell->boundingRect().size()));
-#if QT_VERSION >= 0x040600
         if (isAnimationTypeEnabled(AnimateFocusIn)) {
             QPropertyAnimation *anim = new QPropertyAnimation(m_focusItem, "opacity");
             anim->setStartValue(m_focusItem->opacity());
@@ -745,9 +725,6 @@ void KrossWord::setCurrentCell(KrossWordCell* cell)
             animator()->startOrEnqueue(anim, Animator::Slowest);
         } else
             m_focusItem->show();
-#else
-        m_focusItem->show();
-#endif
     }
 
     if (cell) {
@@ -1679,7 +1656,6 @@ ErrorType KrossWord::changeClueProperties(ClueCell* clue,
                         }
                     }
 
-#if QT_VERSION >= 0x040600
                     if (isAnimationTypeEnabled(AnimatePosChange)) {
                         QAbstractAnimation *anim = animator()->animate(
                                                        Animator::AnimatePositionChange, oldLetter, targetCell->pos(),
@@ -1691,9 +1667,6 @@ ErrorType KrossWord::changeClueProperties(ClueCell* clue,
                         animator()->startOrEnqueue(anim);
                     } else
                         delete oldLetter;
-#else
-                    delete oldLetter;
-#endif
                 }
             } else {
                 // Letter cell was crossed, so create a new one
@@ -2060,14 +2033,10 @@ void KrossWord::replaceCell(const Coord& coord,
                     EmptyCell *emptyCell = new EmptyCell(this, Coord(x, y));
                     (*m_krossWordGrid)[ Coord(x, y)] = emptyCell;
 
-#if QT_VERSION >= 0x040600
                     if (isAnimationTypeEnabled(AnimateAppear))
                         animator()->animate(Animator::AnimateFadeIn, emptyCell);
                     else
                         emptyCell->setOpacity(1);
-#else
-                    emptyCell->setOpacity(1);
-#endif
                 }
             }
         }
@@ -2093,14 +2062,10 @@ void KrossWord::replaceCell(const Coord& coord,
         // wrongly move spanned cells when adding spanned cells because they
         // are referenced by all contained cells with m_coord pointing to the
         // top left cell.
-#if QT_VERSION >= 0x040600
         if (isAnimationTypeEnabled(AnimateAppear))
             animator()->animate(Animator::AnimateFadeIn, newCell);
         else
             newCell->setOpacity(1);
-#else
-        newCell->setOpacity(1);
-#endif
 
         newCell->setCoord(coord, false);
         newCellMoving = newCell->setPositionFromCoordinates();
@@ -2113,7 +2078,6 @@ void KrossWord::replaceCell(const Coord& coord,
         emit solutionWordLetterAdded((SolutionLetterCell*)newCell);
     }
 
-#if QT_VERSION >= 0x040600
     if (isAnimationTypeEnabled(AnimateDisappear)
             && !(dynamic_cast<SpannedCell*>(oldCell))) {
 
@@ -2143,10 +2107,6 @@ void KrossWord::replaceCell(const Coord& coord,
         if (deleteOldCell)
             oldCell->deleteAndRemoveFromSceneLater();
     }
-#else
-    if (deleteOldCell)
-        oldCell->deleteAndRemoveFromSceneLater();
-#endif
 }
 
 KrossWordCellList KrossWord::invalidateCell(const Coord& coord, bool simulate)
@@ -2309,7 +2269,6 @@ void KrossWord::setEditable(bool editable)
 
     EmptyCellList cells = emptyCells();
 
-#if QT_VERSION >= 0x040600
     m_animator->beginEnqueueAnimations();
 
     foreach(EmptyCell * cell, cells) {
@@ -2324,15 +2283,6 @@ void KrossWord::setEditable(bool editable)
         cell->clearCache();
         cell->update();
     }
-#else
-    foreach(EmptyCell * cell, cells) {
-        cell->setFlag(QGraphicsItem::ItemIsFocusable, editable);
-        cell->setFlag(QGraphicsItem::ItemIsSelectable, editable);
-        cell->setVisible(editable);
-        cell->clearCache();
-        cell->update();
-    }
-#endif
 
     ImageCellList imageCells = images();
     foreach(ImageCell * image, imageCells) {
@@ -2357,9 +2307,7 @@ void KrossWord::setEditable(bool editable)
 
     emit editModeChanged(editable);
 
-#if QT_VERSION >= 0x040600
     m_animator->endEnqueueAnimations();
-#endif
 }
 
 void KrossWord::setInteractive(bool interactive)
@@ -2401,20 +2349,16 @@ void KrossWord::setDrawForPrinting(bool drawForPrinting)
 {
     m_drawForPrinting = drawForPrinting;
 
-#if QT_VERSION >= 0x040600
     EmptyCellList emptys = emptyCells();
     foreach(EmptyCell * emptyCell, emptys) {
         emptyCell->setFlag(QGraphicsItem::ItemHasNoContents,
                            !drawForPrinting && !m_editable);
     }
-#endif
 }
 
 void KrossWord::clearCache()
 {
-#if QT_VERSION >= 0x040600
     m_animator->beginEnqueueAnimations();
-#endif
 
     KrossWordCellList cellList = cells();
     foreach(KrossWordCell * cell, cellList) {
@@ -2430,9 +2374,7 @@ void KrossWord::clearCache()
     if (m_titleItem)
         m_titleItem->updateTheme(this);
 
-#if QT_VERSION >= 0x040600
     m_animator->endEnqueueAnimations();
-#endif
 }
 
 KrossWord* KrossWord::createSeparateSolutionKrossWord(
@@ -2930,12 +2872,10 @@ void KrossWord::fillWithEmptyCells(const Coord& coordTopLeft,
             if (!(*m_krossWordGrid)[coord]) {
                 EmptyCell *newEmptyCell = new EmptyCell(this, coord);
                 (*m_krossWordGrid)[ coord ] = newEmptyCell;
-#if QT_VERSION >= 0x040600
                 if (isAnimationTypeEnabled(AnimateAppear))
                     animator()->animate(Animator::AnimateFadeIn, newEmptyCell);
                 else
                     newEmptyCell->show();
-#endif
             }
         }
     }
