@@ -1,7 +1,6 @@
 - title alignment issue opening a crossword file (not via the library)
 - show black cells
 - fix cell arrows size proportion (changing the themes?)
-- ask to add to library a crossword opened from filemanager/browser/... ?
 - providers url on a xml resource file (not directly in the code)
 - more file formats support (just reading)?
 - fixed background when zooming?

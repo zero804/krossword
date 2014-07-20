@@ -58,12 +58,9 @@ int main(int argc, char **argv)
             //krosswordpuzzle *widget = new krosswordpuzzle;
             widget->show();
         } else {
-            for (int i = 0; i < args->count(); i++) {
-                // krosswordpuzzle *widget = new krosswordpuzzle;
-                widget->show();
-                widget->loadSlot(args->arg(i)); //! Should open just ONE crossword at a time
-                // widget->load( );
-            }
+            // Load just one crossword at once
+            widget->show();;
+            widget->loadSlot(args->arg(0));
         }
 
         args->clear();

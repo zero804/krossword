@@ -986,6 +986,8 @@ bool KrossWord::read(const KUrl& url, QString *errorString, QWidget *mainWindow,
 {
     bool removeTempFile;
     QString fileName;
+    qDebug() << url;
+
     if (url.isLocalFile()) {
         fileName = url.path();
         removeTempFile = false;

@@ -84,7 +84,15 @@ void KrossWordPuzzle::loadFile(const KUrl &url, Crossword::KrossWord::FileFormat
     m_loadProgressDialog = createLoadProgressDialog();
     m_loadProgressDialog->show();
 
-    m_mainCrossword->loadFile(url, fileFormat, loadCrashedFile);
+    if(m_mainCrossword->loadFile(url, fileFormat, loadCrashedFile)) {
+        QString msg = i18n("Would you like to add the crossword into the library?");
+        int result = KMessageBox::questionYesNo(this, msg, i18n("Save crossword"), KStandardGuiItem::yes(), KStandardGuiItem::no());
+        if (result == KMessageBox::Yes)
+            m_mainLibrary->libraryAddCrossword(QList<QUrl>() << url);
+    } else {
+        QString msg = i18n("Could not open resource at ") + url.pathOrUrl();
+        KMessageBox::sorry(this, msg, i18n("Resource unavailable"));
+    }
 }
 
 bool KrossWordPuzzle::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo,
