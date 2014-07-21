@@ -82,7 +82,6 @@
 #include <KEmoticons>
 #include <KCharSelect>
 #include <QDesktopWidget>
-//#include <KGameDifficulty>
 
 #include <KCursor>
 #include <KPrintPreview>
@@ -110,11 +109,9 @@ void ClueListView::animateScrollTo(const QModelIndex &index)
     target.setY(target.y() - (viewport()->height() - rc.height()) / 2);
 
     if (m_scrollAnimation) {
-//       m_scrollAnimation->pause();
         m_scrollAnimation->setStartValue(m_curScrollPos);
         m_scrollAnimation->setEndValue(target);
         m_scrollAnimation->setCurrentTime(0);
-//       m_scrollAnimation->resume();
     } else {
         m_curScrollPos = scrollPos();
         m_scrollAnimation = new QPropertyAnimation(this, "scrollPos");
@@ -122,16 +119,14 @@ void ClueListView::animateScrollTo(const QModelIndex &index)
         m_scrollAnimation->setEasingCurve(QEasingCurve(QEasingCurve::InOutCirc));
         m_scrollAnimation->setStartValue(m_curScrollPos);
         m_scrollAnimation->setEndValue(target);
-        connect(m_scrollAnimation, SIGNAL(finished()),
-                this, SLOT(scrollAnimationFinished()));
+        connect(m_scrollAnimation, SIGNAL(finished()), this, SLOT(scrollAnimationFinished()));
         m_scrollAnimation->start(QAbstractAnimation::DeleteWhenStopped);
     }
 }
 
 QPoint ClueListView::scrollPos() const
 {
-    return m_scrollAnimation ? m_curScrollPos
-           : QPoint(horizontalScrollBar()->value(), verticalScrollBar()->value());
+    return m_scrollAnimation ? m_curScrollPos : QPoint(horizontalScrollBar()->value(), verticalScrollBar()->value());
 }
 
 void ClueListView::setScrollPos(const QPoint& p)
@@ -143,7 +138,6 @@ void ClueListView::setScrollPos(const QPoint& p)
     }
 
     m_curScrollPos = p;
-//   horizontalScrollBar()->setValue( p.x() );
     verticalScrollBar()->setValue(p.y());
 }
 
@@ -369,15 +363,10 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent)
     if (!setupActions())
         return;
 
-//     QString xmlFile = KGlobal::dirs()->findResource( "appdata",
-//          "krosswordpuzzle_crossword_ui.rc" );
-//     setXMLFile( xmlFile );
-//     kDebug() << "used XML file" << xmlFile;
-    setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create,
-             "krosswordpuzzle/krosswordpuzzle_crossword_ui.rc");
+    setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krosswordpuzzle/krosswordpuzzle_crossword_ui.rc");
     menuBar()->hide();
 
-    // Hide the settings menu beacuse it's already shown as corner widget in the main tab widget
+    // Hide the settings menu because it's already shown as corner widget in the main tab widget
     foreach(QAction * action,  menuBar()->actions()) {
         if (action->menu() && action->menu()->objectName() == "settings") {
             action->setVisible(false);
@@ -1909,10 +1898,9 @@ QDockWidget *CrossWordXmlGuiWindow::createClueDock()
     m_clueTree->setIconSize(QSize(32, 32));
     m_clueTree->setContextMenuPolicy(Qt::CustomContextMenu);
     m_clueTree->setItemDelegate(new HtmlDelegate(this));
-    connect(m_clueTree, SIGNAL(clicked(QModelIndex)),
-            this, SLOT(clickedClueInDock(QModelIndex)));
-    connect(m_clueTree, SIGNAL(customContextMenuRequested(QPoint)),
-            this, SLOT(clueListContextMenuRequested(QPoint)));
+
+    connect(m_clueTree, SIGNAL(clicked(QModelIndex)), this, SLOT(clickedClueInDock(QModelIndex)));
+    connect(m_clueTree, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(clueListContextMenuRequested(QPoint)));
 
     m_clueDock = new QDockWidget(i18n("Clue List"), this);
     m_clueDock->setObjectName("clueDock");

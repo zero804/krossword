@@ -20,7 +20,7 @@
 #ifndef STATISTICSDIALOG_H
 #define STATISTICSDIALOG_H
 
-#include <kdialog.h>
+#include <qdialog.h>
 
 class QLabel;
 class QGridLayout;

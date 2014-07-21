@@ -40,7 +40,6 @@
 // Other KDE includes
 #include <KStandardDirs>
 
-//#include <KGameDifficulty> -> #include <KgDifficulty>
 #include <kapplication.h>
 #include <kfileplacesmodel.h>
 
@@ -179,16 +178,14 @@ void KrossWordPuzzle::dropEvent(QDropEvent *event)
 
 //=====================================================================================
 
-KDialog* KrossWordPuzzle::createLoadProgressDialog()
+QDialog* KrossWordPuzzle::createLoadProgressDialog()
 {
-    KDialog *dialog = new KDialog(this);
-    dialog->setButtons(KDialog::None);
+    QDialog *dialog = new QDialog(this);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     // TODO: No max/min buttons
     dialog->setWindowTitle(i18n("Loading..."));
-    QLabel *lblLoad = new QLabel(i18n("Loading the crossword, please wait..."));
+    QLabel *lblLoad = new QLabel(i18n("Loading the crossword, please wait..."), this);
 
-    dialog->setMainWidget(lblLoad);
     dialog->setModal(true);
     return dialog;
 }
@@ -520,6 +517,3 @@ void KrossWordPuzzle::crosswordAutoSaveFileChanged(const QString &fileName)
     Settings::setLastUnsavedFileBeforeCrash(fileName);
     Settings::self()->writeConfig();
 }
-
-//!????
-//#include "krosswordpuzzle.moc"

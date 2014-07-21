@@ -87,7 +87,7 @@ protected slots:
     void crosswordAutoSaveFileChanged(const QString &fileName);
 
 private:
-    KDialog* createLoadProgressDialog();
+    QDialog* createLoadProgressDialog();
     void setupMainTabWidget();
     void setupPlaces();
     void setupActions();
@@ -101,7 +101,7 @@ private:
     LibraryXmlGuiWindow   *m_mainLibrary;           //Owned
     CrossWordXmlGuiWindow *m_mainCrossword;         //Owned
 
-    KDialog               *m_loadProgressDialog;    //Owned
+    QDialog               *m_loadProgressDialog;    //Owned
     QString                m_caption;
     KTabWidget            *m_mainTabBar;            //Owned
 };

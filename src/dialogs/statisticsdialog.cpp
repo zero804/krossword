@@ -24,7 +24,9 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QDialogButtonBox>
+
 #include <KLocale>
+#include <KIcon>
 
 StatisticsDialog::StatisticsDialog(KrossWord* krossWord, QWidget* parent)
     : QDialog(parent), m_krossWord(krossWord)
