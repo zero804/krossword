@@ -84,12 +84,30 @@ void KrossWordPuzzle::loadFile(const KUrl &url, Crossword::KrossWord::FileFormat
     m_loadProgressDialog = createLoadProgressDialog();
     m_loadProgressDialog->show();
 
-    if(m_mainCrossword->loadFile(url, fileFormat, loadCrashedFile)) {
-        QString msg = i18n("Would you like to add the crossword into the library?");
-        int result = KMessageBox::questionYesNo(this, msg, i18n("Save crossword"), KStandardGuiItem::yes(), KStandardGuiItem::no());
-        if (result == KMessageBox::Yes)
-            m_mainLibrary->libraryAddCrossword(QList<QUrl>() << url);
-    } else {
+    bool loaded = m_mainCrossword->loadFile(url, fileFormat, loadCrashedFile);
+
+    // A terrible thing here -- search if the file was saved in the library before...
+    bool extern_file = true;
+    QStandardItemModel* model = dynamic_cast<QStandardItemModel*>(m_mainLibrary->libraryTree()->model());
+    for(int i = 0; i < model->rowCount(); ++i) {
+        if(model->item(i, 0)->data().toString().replace("00001", "") == QFileInfo(url.fileName()).baseName() + ".") {
+            extern_file = false;
+            break;
+        }
+    }
+    // =====================
+
+    if(extern_file) {
+        if(loaded) {
+            QString msg = i18n("Would you like to add the crossword into the library?");
+            int result = KMessageBox::questionYesNo(this, msg, i18n("Save crossword"), KStandardGuiItem::yes(), KStandardGuiItem::no());
+
+            if (result == KMessageBox::Yes)
+                m_mainLibrary->libraryAddCrossword(QList<QUrl>() << url);
+        }
+    }
+
+    if(!loaded) {
         QString msg = i18n("Could not open resource at ") + url.pathOrUrl();
         KMessageBox::sorry(this, msg, i18n("Resource unavailable"));
     }
