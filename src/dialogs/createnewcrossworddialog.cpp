@@ -111,8 +111,7 @@ void CreateNewCrosswordDialog::setup()
                                            "crosswords, 'YEAR, by USER'", "© %1, by %2",
                                            QDate::currentDate().year(), KUser().fullName()));
     ui_create_new.notes->setText(i18nc("Default notes value for new crosswords",
-                                       "Created with KrossWordPuzzle, "
-                                       "see http://kde-apps.org/content/show.php?content=111726"));
+                                       "Created with Krossword."));
 
     connect(ui_create_new.crosswordType, SIGNAL(currentIndexChanged(int)),
             this, SLOT(crosswordTypeChanged(int)));

@@ -38,7 +38,21 @@
 #include <KStandardDirs>
 
 #include <QDebug>
+#include <QCryptographicHash>
 
+QByteArray calculate_file_hash(QCryptographicHash& function, const QString& url)
+{
+    QFile f(url);
+    f.open(QIODevice::ReadOnly);
+    if(f.isOpen()) {
+        function.addData(f.readAll());
+        QByteArray hash = function.result();
+        f.close();
+        function.reset();
+        return hash;
+    }
+    return QByteArray();
+}
 
 LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
       m_mainWindow(parent),
@@ -109,6 +123,47 @@ const char* LibraryXmlGuiWindow::actionName(LibraryXmlGuiWindow::Action actionEn
         qWarning() << "Action enumerable not handled in switch" << actionEnum;
         return "";
     }
+}
+
+bool LibraryXmlGuiWindow::in_library(const KUrl& url) const
+{
+    bool found = false;
+    KUrl libraryUrl = KUrl(KGlobal::dirs()->saveLocation("appdata", "library"));
+
+    if(libraryUrl.isParentOf(url))
+        found = true;
+    else {
+        QCryptographicHash hashFunction(QCryptographicHash::Md5);
+        QByteArray fileHash = calculate_file_hash(hashFunction, url.path());
+
+        QFileInfoList subDirs = QDir(libraryUrl.url()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot) << QFileInfo(libraryUrl.url());
+
+        // Add contained crosswords for each folder (including the root folder)
+        foreach(QFileInfo fi, subDirs) {
+            QString filter;
+            bool isBaseLibraryDir = fi.absoluteFilePath() == QFileInfo(libraryUrl.url()).absoluteFilePath();
+            if (isBaseLibraryDir)
+                filter = "library/*.kwp?";
+            else
+                filter = "library/" + fi.fileName() + "/*.kwp?";
+
+            QStringList libraryFiles = KGlobal::dirs()->findAllResources("appdata", filter, KStandardDirs::NoDuplicates);
+
+            foreach(QString file, libraryFiles) {
+                QByteArray hash = calculate_file_hash(hashFunction, file);
+
+                if(fileHash == hash) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if(found == true)
+                break;
+        }
+    }
+
+    return found;
 }
 
 //======================================================
@@ -456,7 +511,7 @@ void LibraryXmlGuiWindow::libraryExportSlot()
             QString fileSuffix = QFileInfo(fileName).suffix();
             if (fileSuffix.compare("pdf", Qt::CaseInsensitive) == 0 || fileSuffix.compare("ps", Qt::CaseInsensitive) == 0) {
                 QPrinter printer;
-                printer.setCreator("KrossWordPuzzle");
+                printer.setCreator("Krossword");
                 printer.setDocName(fileName);   // TODO: set krossword title if available
 
                 printer.setOutputFileName(fileName);

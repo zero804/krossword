@@ -67,6 +67,8 @@ public:
 
     const char *actionName(Action actionEnum) const;
 
+    bool in_library(const KUrl& url) const;
+
 public slots:
     void libraryAddCrossword(const QList<QUrl> &urls, const QString &subFolder = QString());
 

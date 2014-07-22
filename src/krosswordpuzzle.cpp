@@ -64,7 +64,7 @@ KrossWordPuzzle::KrossWordPuzzle()
 
     setupMainTabWidget();
     setCentralWidget(m_mainTabBar);
-    m_mainLibrary->statusBar()->showMessage(i18n("Welcome to KrossWordPuzzle!"));
+    m_mainLibrary->statusBar()->showMessage(i18n("Welcome to Krossword!"));
 
     // For compatibility with versions of KrossWordPuzzle <= 0.15.6.2 where the
     // menuBar was invisible (another menuBar was created and then set as the
@@ -85,18 +85,9 @@ void KrossWordPuzzle::loadFile(const KUrl &url, Crossword::KrossWord::FileFormat
 
     bool loaded = m_mainCrossword->loadFile(url, fileFormat, loadCrashedFile);
 
-    // A terrible thing here -- search if the file was saved in the library before...
-    bool extern_file = true;
-    QStandardItemModel* model = dynamic_cast<QStandardItemModel*>(m_mainLibrary->libraryTree()->model());
-    for(int i = 0; i < model->rowCount(); ++i) {
-        if(model->item(i, 0)->data().toString().replace("00001", "") == QFileInfo(url.fileName()).baseName() + ".") {
-            extern_file = false;
-            break;
-        }
-    }
-    // =====================
+    bool is_internal_file = m_mainLibrary->in_library(url);
 
-    if(extern_file) {
+    if(!is_internal_file) {
         if(loaded) {
             QString msg = i18n("Would you like to add the crossword into the library?");
             int result = KMessageBox::questionYesNo(this, msg, i18n("Save crossword"), KStandardGuiItem::yes(), KStandardGuiItem::no());
@@ -311,7 +302,7 @@ QString KrossWordPuzzle::displayFileName(const QString &fileName)
         QString libraryFileName = fileName.mid(libraryDir.length());
         libraryFileName.prepend(i18nc("This string is used to replace the library path "
                                       "for crossword files that are in the library with a shorter user visible string, "
-                                      "e.g. replacing ~/.kde4/apps/krosswordpuzzle/library/crossword.kwpz with "
+                                      "e.g. replacing ~/.kde4/apps/krossword/library/crossword.kwpz with "
                                       "Library/crossword.kwpz", "Library") + QDir::separator());
         return libraryFileName;
     } else {

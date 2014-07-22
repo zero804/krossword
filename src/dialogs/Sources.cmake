@@ -1,4 +1,4 @@
-set( krosswordpuzzle_SRCS ${krosswordpuzzle_SRCS}
+set( krossword_SRCS ${krossword_SRCS}
    dialogs/crosswordtypewidget.cpp
    dialogs/crosswordpreviewwidget.cpp
    dialogs/answerwidget.cpp

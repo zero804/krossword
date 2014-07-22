@@ -22,13 +22,8 @@
 #include <QDebug>
 
 KrosswordTheme::KrosswordTheme()
-    : KgTheme("krosswordpuzzle")
+    : KgTheme("krossword")
 { }
-
-/*
-KrosswordTheme::KrosswordTheme(const QByteArray &identifier, QObject *parent) : KrosswordTheme()
-{ }
-*/
 
 bool KrosswordTheme::readFromDesktopFile(const QString& file)
 {

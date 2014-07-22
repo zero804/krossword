@@ -52,17 +52,7 @@ CrosswordPropertiesDialog::CrosswordPropertiesDialog(KrossWord* krossWord, QWidg
     ui_properties.notes->setText(krossWord->notes());
 
     ui_properties.anchorCenter->setChecked(true);
-#if KDE_IS_VERSION(4,3,0)
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorTopLeft), KrossWord::AnchorTopLeft);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorTop), KrossWord::AnchorTop);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorTopRight), KrossWord::AnchorTopRight);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorLeft), KrossWord::AnchorLeft);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorCenter), KrossWord::AnchorCenter);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorRight), KrossWord::AnchorRight);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorBottomLeft), KrossWord::AnchorBottomLeft);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorBottom), KrossWord::AnchorBottom);
-    m_anchorIdToAnchor.insert(ui_properties.buttonGroupAnchor->id(ui_properties.anchorBottomRight), KrossWord::AnchorBottomRight);
-#else
+
     m_anchorIdToAnchor.insert(0, KrossWord::AnchorTopLeft);
     m_anchorIdToAnchor.insert(1, KrossWord::AnchorTop);
     m_anchorIdToAnchor.insert(2, KrossWord::AnchorTopRight);
@@ -72,7 +62,6 @@ CrosswordPropertiesDialog::CrosswordPropertiesDialog(KrossWord* krossWord, QWidg
     m_anchorIdToAnchor.insert(6, KrossWord::AnchorBottomLeft);
     m_anchorIdToAnchor.insert(7, KrossWord::AnchorBottom);
     m_anchorIdToAnchor.insert(8, KrossWord::AnchorBottomRight);
-#endif
 
     connect(ui_properties.buttonGroupAnchor, SIGNAL(changed(int)),this, SLOT(resizeAnchorChanged(int)));
     connect(ui_properties.btnReset, SIGNAL(clicked()),this, SLOT(resetSizeClicked()));

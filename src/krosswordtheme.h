@@ -34,8 +34,6 @@ class KrosswordTheme : public KgTheme
 public:
     KrosswordTheme();
 
-    //Q_INVOKABLE KrosswordTheme(const QByteArray &identifier, QObject *parent=0);
-
     virtual bool readFromDesktopFile(const QString& file);
 
     static KrosswordTheme *defaultValues();

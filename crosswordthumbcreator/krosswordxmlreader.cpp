@@ -138,7 +138,7 @@ bool KrossWordXmlReader::read(QIODevice* device, KrossWord *krossWord)
                 readKrossWord(krossWord);
                 readEnd = true;
             } else
-                raiseError(i18n("The file is not a KrossWordPuzzle version <= 1.1 file."));
+                raiseError(i18n("The file is not a Krossword version <= 1.1 file."));
         }
     }
 
@@ -168,7 +168,7 @@ bool KrossWordXmlReader::readInfo(QIODevice* device,
                 krossWordInfo = readKrossWordInfo();
                 readEnd = true;
             } else
-                raiseError(i18n("The file is not a KrossWordPuzzle version <= 1.1 file."));
+                raiseError(i18n("The file is not a Krossword version <= 1.1 file."));
         }
     }
 

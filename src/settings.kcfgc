@@ -1,5 +1,5 @@
 # Code generation options for kconfig_compiler
-File=krosswordpuzzle.kcfg
+File=krossword.kcfg
 ClassName=Settings
 SetUserTexts=true
 ItemAccessors=true

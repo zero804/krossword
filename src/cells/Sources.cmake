@@ -1,4 +1,4 @@
-set( krosswordpuzzle_SRCS ${krosswordpuzzle_SRCS}
+set( krossword_SRCS ${krossword_SRCS}
    cells/krosswordcell.cpp
    cells/spannedcell.cpp
    cells/cluecell.cpp

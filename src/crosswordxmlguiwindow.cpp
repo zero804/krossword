@@ -888,7 +888,7 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
         if (hasConfidencesSet) {
             int result = KMessageBox::warningContinueCancel(this,
                          i18n("Can't store confidence values in *.puz files!\nIf you want confidence "
-                              "values to be stored please use a KrossWordPuzzle file format (*.kwp or *.kwpz)."),
+                              "values to be stored please use a Krossword file format (*.kwp or *.kwpz)."),
                          QString(), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
                          "dont_show_cant_write_confidences_to_puz_confirmation");
             if (result == KMessageBox::Cancel)
@@ -899,7 +899,7 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
         if (!imageList.isEmpty()) {
             int result = KMessageBox::warningContinueCancel(this,
                          i18n("Can't store image cells in *.puz files!\nIf you want image "
-                              "cells to be stored please use a KrossWordPuzzle file format (*.kwp or *.kwpz)."),
+                              "cells to be stored please use a Krossword file format (*.kwp or *.kwpz)."),
                          QString(), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
                          "dont_show_cant_write_images_to_puz_confirmation");
             if (result == KMessageBox::Cancel)
@@ -993,13 +993,6 @@ void CrossWordXmlGuiWindow::exportSlot()
 {
     Q_ASSERT(m_view);
 
-#if KDE_IS_VERSION(4,3,60)
-    QString fileName = KFileDialog::getSaveFileName(KUrl(m_curFileName).upUrl(),
-                       "application/pdf "
-                       "application/postscript "
-                       "image/png "
-                       "image/jpeg", this, i18n("Export"), KFileDialog::ConfirmOverwrite);
-#else
     QString fileName;
     QPointer<KFileDialog> fileDlg = new KFileDialog(KUrl(m_curFileName).upUrl(),
             "application/pdf "
@@ -1013,7 +1006,6 @@ void CrossWordXmlGuiWindow::exportSlot()
     if (fileDlg->exec() == KFileDialog::Accepted)
         fileName = fileDlg->selectedFile();
     delete fileDlg;
-#endif
 
     if (!fileName.isEmpty()) {
         QString fileSuffix = QFileInfo(fileName).suffix();
@@ -2275,7 +2267,7 @@ void CrossWordXmlGuiWindow::signalChangeStatusbar(const QString& text)
 
 void CrossWordXmlGuiWindow::setupPrinter(QPrinter &printer)
 {
-    printer.setCreator("KrossWordPuzzle");
+    printer.setCreator("Krossword");
     printer.setDocName(m_curFileName);
 }
 

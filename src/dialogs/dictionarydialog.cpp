@@ -224,11 +224,6 @@ void DictionaryDialog::clearClicked()
 
 void DictionaryDialog::exportToCsvClicked()
 {
-#if KDE_IS_VERSION(4,3,60)
-    QString fileName = KFileDialog::getSaveFileName(KUrl(), QString(),
-                       this, i18n("Export To CSV"),
-                       KFileDialog::ConfirmOverwrite);
-#else
     QString fileName;
     QPointer<KFileDialog> fileDlg = new KFileDialog(KUrl(), QString(), this);
     fileDlg->setWindowTitle(i18n("Export To CSV"));
@@ -238,7 +233,6 @@ void DictionaryDialog::exportToCsvClicked()
     if (fileDlg->exec() == KFileDialog::Accepted)
         fileName = fileDlg->selectedFile();
     delete fileDlg;
-#endif
 
     if (fileName.isEmpty())
         return;

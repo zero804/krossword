@@ -1,6 +1,6 @@
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}) # kgrid2d.h
 
-set( krosswordpuzzle_SRCS
+set( krossword_SRCS
    krosswordpuzzle.cpp
    main.cpp
    global.cpp
@@ -28,7 +28,7 @@ INCLUDE ( cells/Sources.cmake )
 INCLUDE ( dialogs/Sources.cmake )
 INCLUDE ( dialogs/cellwidgets/Sources.cmake )
 
-kde4_add_ui_files( krosswordpuzzle_SRCS
+kde4_add_ui_files( krossword_SRCS
     settings.ui
     create_new.ui
     properties.ui
@@ -45,22 +45,22 @@ kde4_add_ui_files( krosswordpuzzle_SRCS
     configure_details.ui
     move_cells.ui )
 
-kde4_add_kcfg_files( krosswordpuzzle_SRCS settings.kcfgc )
+kde4_add_kcfg_files( krossword_SRCS settings.kcfgc )
 
-kde4_add_executable( krosswordpuzzle ${krosswordpuzzle_SRCS} )
+kde4_add_executable( krossword ${krossword_SRCS} )
 
-target_link_libraries( krosswordpuzzle ${KDE4_KDEUI_LIBS} ${KDE4_KUTILS_LIBS}
+target_link_libraries( krossword ${KDE4_KDEUI_LIBS} ${KDE4_KUTILS_LIBS}
     ${KDE4_KFILE_LIBRARY} ${KDEGAMES_LIBRARY} ${KDE4_KNEWSTUFF2_LIBS} ${QT_QTSQL_LIBRARY} ) # QtOpenGL ) #ksysguard  )
 
-install( TARGETS krosswordpuzzle ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS krossword ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
 ########### install files ###############
 
-install( FILES krosswordpuzzle.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES krosswordpuzzle.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
-install( FILES krosswordpuzzleui.rc
-               krosswordpuzzle_library_ui.rc
-               krosswordpuzzle_crossword_ui.rc
-         DESTINATION ${DATA_INSTALL_DIR}/krosswordpuzzle )
-install( FILES krosswordpuzzle.knsrc DESTINATION ${CONFIG_INSTALL_DIR} )
+install( FILES krossword.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
+install( FILES krossword.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
+install( FILES krosswordui.rc
+               krossword_library_ui.rc
+               krossword_crossword_ui.rc
+         DESTINATION ${DATA_INSTALL_DIR}/krossword )
+install( FILES krossword.knsrc DESTINATION ${CONFIG_INSTALL_DIR} )
