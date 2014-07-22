@@ -1,3 +1,19 @@
+== Krossword ==
+
+Version 0.16 alpha:
+    - Ported to current libkdegames.
+    - Reworked zoom handling.
+    - Updated download providers for crosswords (and added some new ones).
+    - Now it's possible to add to library a crossword opened from file manager, etc.
+    - Some background rendering improvements.
+    - Fixed a bug on table generation in Dictionary handling.
+    - Tweaks to library view.
+    - Initial works on a Qt5/Frameworks 5 porting perspective.
+    - Removed old code for compatibility with Qt < 4.6 and KDE 4.3.
+    - Added C++11 support.
+    
+== KrossWordPuzzle ==
+
 Version 0.15.6:
     - Changed the theme handling. Each theme now has a .desktop file with ten optional settings plus author, description... The themes are loaded with a class derived from KGameTheme. Theme selection is no longer done in a submenu but in the settings dialog with a KThemeSelector (with nice previews). Feel free to improve the themes (changing the SVGs or the .desktop settings) or create new ones :)
     - Changed the entry name in the config file to store the used theme from "theme" to "Theme", because otherwise KThemeSelector crashes.
