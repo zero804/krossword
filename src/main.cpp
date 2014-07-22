@@ -34,7 +34,7 @@ int main(int argc, char **argv)
                      ki18n(description), KAboutData::License_GPL_V2,
                      ki18n("© 2014 Andrea Barazzetti\n© 2014 Giacomo Barazzetti\n© 2009 Friedrich Pülz"), KLocalizedString(), 0, "https://bitbucket.org/Caig/krosswordpuzzle");
 
-    about.addAuthor(ki18n("Andrea Barazzetti"), ki18n("Developer"), "", "https://bitbucket.org/Cilium");
+    about.addAuthor(ki18n("Andrea Barazzetti"), ki18n("Developer"), "andreadevsrv@gmail.com");
     about.addAuthor(ki18n("Giacomo Barazzetti"), ki18n("Developer"), "giacomosrv@gmail.com");
     about.addAuthor(ki18n("Friedrich Pülz"), ki18n("Previous developer"), "");
 
