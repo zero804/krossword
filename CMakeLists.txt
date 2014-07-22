@@ -22,5 +22,5 @@ add_subdirectory(crosswordthumbcreator)
 # add_subdirectory( l10n )
 
 ########### install mimetype file ###############
-install(FILES krosswordpuzzle.xml DESTINATION ${XDG_MIME_INSTALL_DIR})
+install(FILES krossword.xml DESTINATION ${XDG_MIME_INSTALL_DIR})
 update_xdg_mimetypes(${XDG_MIME_INSTALL_DIR})
