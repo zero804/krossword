@@ -363,7 +363,7 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent)
     if (!setupActions())
         return;
 
-    setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krosswordpuzzle/krosswordpuzzle_crossword_ui.rc");
+    setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krossword/krossword_crossword_ui.rc");
     menuBar()->hide();
 
     // Hide the settings menu because it's already shown as corner widget in the main tab widget

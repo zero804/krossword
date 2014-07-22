@@ -83,7 +83,7 @@ LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindo
     setCentralWidget(m_libraryTree);
 
     setupActions();
-    setupGUI(StatusBar | ToolBar | /*Keys | */Save | Create, "krosswordpuzzle/krosswordpuzzle_library_ui.rc");
+    setupGUI(StatusBar | ToolBar | /*Keys | */Save | Create, "krossword/krossword_library_ui.rc");
     menuBar()->hide();
 
     connect(m_libraryTree, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(libraryTreeContextMenuRequested(QPoint)));
