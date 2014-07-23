@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 {
     KAboutData about("krossword", 0, ki18n("Krossword"), version,
                      ki18n(description), KAboutData::License_GPL_V2,
-                     ki18n("© 2014 Andrea Barazzetti\n© 2014 Giacomo Barazzetti\n© 2009 Friedrich Pülz"), KLocalizedString(), 0, "https://bitbucket.org/Caig/krosswordpuzzle");
+                     ki18n("© 2014 Andrea Barazzetti\n© 2014 Giacomo Barazzetti\n© 2009 Friedrich Pülz"), KLocalizedString(), 0, "http://kde-apps.org/content/show.php/Krossword?content=166281");
 
     about.addAuthor(ki18n("Andrea Barazzetti"), ki18n("Developer"), "andreadevsrv@gmail.com");
     about.addAuthor(ki18n("Giacomo Barazzetti"), ki18n("Developer"), "giacomosrv@gmail.com");
