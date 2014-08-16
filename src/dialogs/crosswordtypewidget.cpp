@@ -355,6 +355,8 @@ void CrosswordTypeWidget::configureRulesClicked()
         } else {
             dialog->setReadOnly(CrosswordTypeConfigureDetailsDialog::ReadOnlyWithInfo);
         }
+    } else {
+        dialog->setReadOnly(CrosswordTypeConfigureDetailsDialog::Editable);
     }
 
     if (dialog->exec() == QDialog::Accepted && dialog->changed()) {

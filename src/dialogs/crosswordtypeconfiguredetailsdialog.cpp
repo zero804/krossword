@@ -152,8 +152,7 @@ void CrosswordTypeConfigureDetailsDialog::cellTypeToggled(QListWidgetItem* item)
     }
 }
 
-void CrosswordTypeConfigureDetailsDialog::setValuesForClueCellHandling(
-    ClueCellHandling clueCellHandling)
+void CrosswordTypeConfigureDetailsDialog::setValuesForClueCellHandling(ClueCellHandling clueCellHandling)
 {
     int i = 0;
     foreach(CellType cellType, allCellTypes()) {
@@ -268,8 +267,7 @@ void CrosswordTypeConfigureDetailsDialog::setupConnections(bool disconnection)
     }
 }
 
-void CrosswordTypeConfigureDetailsDialog::setCrosswordType(
-    CrosswordTypeInfo crosswordTypeInfo)
+void CrosswordTypeConfigureDetailsDialog::setCrosswordType(CrosswordTypeInfo crosswordTypeInfo)
 {
     m_typeInfo = crosswordTypeInfo;
 
