@@ -337,12 +337,11 @@ void CrosswordTypeConfigureDetailsDialog::setReadOnly(ReadOnlyMode readOnlyMode)
     ui_configure_details.clueMapping->setEnabled(!m_readOnly);
     ui_configure_details.cellTypes->setEnabled(!m_readOnly);
 
+    //CrosswordTypeConfigureDetailsDialog needs different buttons depending on using case
     if (m_readOnly) {
-        //setButtons(Close);
         ui_configure_details.buttonBox->addButton(QDialogButtonBox::Close);
         connect(ui_configure_details.buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     } else {
-        //setButtons(Ok | Cancel);
         ui_configure_details.buttonBox->addButton(QDialogButtonBox::Ok);
         ui_configure_details.buttonBox->addButton(QDialogButtonBox::Cancel);
         connect(ui_configure_details.buttonBox, SIGNAL(accepted()), this, SLOT(accept()));

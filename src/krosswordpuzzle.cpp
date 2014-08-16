@@ -193,7 +193,11 @@ QDialog* KrossWordPuzzle::createLoadProgressDialog()
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     // TODO: No max/min buttons
     dialog->setWindowTitle(i18n("Loading..."));
+
+    QVBoxLayout *layout = new QVBoxLayout(dialog);
     QLabel *lblLoad = new QLabel(i18n("Loading the crossword, please wait..."), this);
+    layout->addWidget(lblLoad);
+    dialog->setLayout(layout);
 
     dialog->setModal(true);
     return dialog;
