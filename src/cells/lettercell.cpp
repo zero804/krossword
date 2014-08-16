@@ -754,9 +754,10 @@ void LetterCell::drawForeground(QPainter* p, const QStyleOptionGraphicsItem* opt
     qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
 
     QRect rect = KrosswordTheme::trimmedRect(option->rect, krossWord()->theme()->marginsLetterCell(levelOfDetail));
+
+    /*
     const KrosswordRenderer *renderer = KrosswordRenderer::self();
-    const QColor alpha = !krossWord()->isEditable() && confidence() == Unsure
-                         ? QColor(128, 128, 128) : Qt::black;
+    const QColor alpha = !krossWord()->isEditable() && confidence() == Unsure ? QColor(128, 128, 128) : Qt::black;
     if (renderer->hasElement(id)) {
         renderer->renderElement(p, id, rect, alpha);
     } else {
@@ -766,7 +767,13 @@ void LetterCell::drawForeground(QPainter* p, const QStyleOptionGraphicsItem* opt
         letterFont.setBold(true);
         p->setFont(letterFont);
         p->drawText(rect, Qt::AlignCenter, letter);
-    }
+    }*/
+
+    QFont letterFont = p->font();
+    letterFont.setPixelSize(rect.height());
+    letterFont.setBold(true);
+    p->setFont(letterFont);
+    p->drawText(rect, Qt::AlignCenter, letter);
 }
 
 bool LetterCell::needsEndBar(Qt::Orientation orientation) const
