@@ -32,14 +32,11 @@
 
 
 DictionaryDialog::DictionaryDialog(KrosswordDictionary* dictionary, QWidget* parent)
-    : KDialog(parent), m_dictionary(dictionary), m_infoMessage(0)
+    : QDialog(parent), m_dictionary(dictionary), m_infoMessage(0)
 {
     setWindowTitle(i18n("Dictionary"));
-    QWidget *dictionariesDlg = new QWidget;
-    ui_dictionaries.setupUi(dictionariesDlg);
-    setMainWidget(dictionariesDlg);
+    ui_dictionaries.setupUi(this);;
     setWindowIcon(KIcon("crossword-dictionary"));
-    setButtons(KDialog::Close);
     setModal(true);
 
     ui_dictionaries.extractFromLibrary->setIcon(KIcon("extract-from-library"));
@@ -59,8 +56,7 @@ DictionaryDialog::DictionaryDialog(KrosswordDictionary* dictionary, QWidget* par
     ui_dictionaries.tableDictionary->hideColumn(0);   // Hide id
     ui_dictionaries.tableDictionary->hideColumn(3);   // Hide score
     ui_dictionaries.tableDictionary->hideColumn(4);   // Hide language
-    ui_dictionaries.tableDictionary->setItemDelegateForColumn(
-        1, new CrosswordAnswerDelegate);  // Set delegate for column 'answer'
+    ui_dictionaries.tableDictionary->setItemDelegateForColumn(1, new CrosswordAnswerDelegate);  // Set delegate for column 'answer'
     ui_dictionaries.removeEntries->setDisabled(true);
 
     connect(ui_dictionaries.addEntry, SIGNAL(clicked()),

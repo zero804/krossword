@@ -21,12 +21,12 @@
 #define DICTIONARYDIALOG_H
 
 #include "ui_dictionaries.h"
-#include <KDialog>
+#include <QDialog>
 
 class ExtendedSqlTableModel;
 class KrosswordDictionary;
 
-class DictionaryDialog : public KDialog
+class DictionaryDialog : public QDialog
 {
     Q_OBJECT
 

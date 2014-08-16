@@ -42,7 +42,7 @@
 #include <KUrl>
 #include <KStandardGuiItem>
 #include <KMessageBox>
-#include <KDialog>
+#include <QDialog>
 
 using namespace Crossword;
 
@@ -177,18 +177,12 @@ bool KrosswordDictionary::openDatabase(QWidget *dlgParent)
                                                i18n("No Database Connection")) == KMessageBox::Cancel)
             return false;
 
-        QPointer<KDialog> dialog = new KDialog(dlgParent);
+        QPointer<QDialog> dialog = new QDialog(dlgParent);
         dialog->setWindowTitle(i18n("Connect Database"));
-        QWidget *databaseConnectionDlg = new QWidget;
-        ui_database_connection.setupUi(databaseConnectionDlg);
-        dialog->setMainWidget(databaseConnectionDlg);
+        ui_database_connection.setupUi(dialog);
         dialog->setModal(true);
-        dialog->setButtons(KDialog::Ok | KDialog::Cancel);
-//  dialog->setButtonGuiItem( KDialog::User1, KStandardGuiItem::next
-        /*  dialog->setButtonGuiItem( KDialog::User1, KGuiItem(i18n("&Retry"), KIcon("edit-redo"),
-                i18n("Tries again to connect to the database. "
-                "Click here if you have created the user 'krossword' as described above.")) );*/
-        if (dialog->exec() == KDialog::Accepted) {
+
+        if (dialog->exec() == QDialog::Accepted) {
             {
                 QSqlDatabase dbRoot = QSqlDatabase::addDatabase("QMYSQL", "root_connection");
                 dbRoot.setHostName(ui_database_connection.host->text());
@@ -316,26 +310,25 @@ bool KrosswordDictionary::exportToCsv(const QString& fileName)
     return true;
 }
 
-KDialog* KrosswordDictionary::createProgressDialog(QWidget *parent,
-        const QString& text, QProgressBar *progressBar)
+QDialog* KrosswordDictionary::createProgressDialog(QWidget *parent, const QString& text, QProgressBar *progressBar)
 {
-    KDialog *dlgProgress = new KDialog(parent);
+    QDialog *dlgProgress = new QDialog(parent);
     dlgProgress->setAttribute(Qt::WA_DeleteOnClose);
-    dlgProgress->setWindowFlags(dlgProgress->windowFlags() ^
-                                (Qt::WindowMinMaxButtonsHint | Qt::WindowCloseButtonHint));
+    dlgProgress->setWindowFlags(dlgProgress->windowFlags() ^ (Qt::WindowMinMaxButtonsHint | Qt::WindowCloseButtonHint));
     dlgProgress->setWindowTitle(i18n("Importing Dictionary"));
-    dlgProgress->setButtons(KDialog::Cancel);
     dlgProgress->setModal(true);
 
-    QWidget *w = new QWidget;
     QVBoxLayout *layout = new QVBoxLayout;
     QLabel *label = new QLabel(text);
     label->setWordWrap(true);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Cancel);
+    connect(buttonBox, SIGNAL(rejected()), dlgProgress, SLOT(reject()));
 
     layout->addWidget(label);
     layout->addWidget(progressBar);
-    w->setLayout(layout);
-    dlgProgress->setMainWidget(w);
+    layout->addWidget(buttonBox);
+
+    dlgProgress->setLayout(layout);
 
     m_cancel = false;
     connect(dlgProgress, SIGNAL(cancelClicked()), this, SLOT(cancelCurrentActionClicked()));
@@ -359,7 +352,7 @@ int KrosswordDictionary::importFromCsv(const QString& fileName, QWidget *parent)
 
     // Setup a dialog to indicate progress
     QProgressBar *progressBar = new QProgressBar;
-    KDialog *dlgProgress = createProgressDialog(parent,
+    QDialog *dlgProgress = createProgressDialog(parent,
                            i18n("Importing word clue pairs from '%1' to the database.\nPlease wait.",
                                 fileName), progressBar);
     dlgProgress->show();
@@ -488,7 +481,7 @@ int KrosswordDictionary::addEntriesFromDictionary(const QString& fileName, QWidg
 
     // Setup a dialog to indicate progress
     QProgressBar *progressBar = new QProgressBar;
-    KDialog *dlgProgress = createProgressDialog(parent,
+    QDialog *dlgProgress = createProgressDialog(parent,
                            i18n("Adding words from the dictionary '%1' to the database.\nPlease wait.",
                                 fileName), progressBar);
     dlgProgress->show();
@@ -570,7 +563,7 @@ int KrosswordDictionary::addEntriesFromCrosswords(
 
     // Setup a dialog to indicate progress
     QProgressBar *progressBar = new QProgressBar;
-    KDialog *dlgProgress = createProgressDialog(parent,
+    QDialog *dlgProgress = createProgressDialog(parent,
                            i18n("Adding words from %1 crossword files to the database.\nPlease wait.",
                                 fileNames.count()), progressBar);
     dlgProgress->show();

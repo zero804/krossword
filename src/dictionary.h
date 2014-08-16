@@ -29,7 +29,7 @@
 #include <QSqlDatabase>
 
 class QProgressBar;
-class KDialog;
+class QDialog;
 class ExtendedSqlTableModel;
 
 class KrosswordDictionary : public QObject
@@ -70,7 +70,7 @@ signals:
     void errorExtractedEntriesFromCrossword(const QString &fileName, const QString &errorString);
 
 private:
-    KDialog *createProgressDialog(QWidget *parent, const QString &text, QProgressBar *progressBar);
+    QDialog *createProgressDialog(QWidget *parent, const QString &text, QProgressBar *progressBar);
     bool checkDatabase();
     QSqlDatabase getDatabaseConnection(bool *ok) const;
 
