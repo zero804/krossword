@@ -2376,25 +2376,30 @@ void CrossWordXmlGuiWindow::viewPanSlot(bool enabled)
 
 void CrossWordXmlGuiWindow::solveSlot()
 {
-    disconnect(krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));
+    int result = KMessageBox::questionYesNo(this, i18n("Do you really want to solve the crossword?"), i18n("Solve"), KStandardGuiItem::yes(), KStandardGuiItem::no());
 
-    krossWord()->solve();
+    if (result == KMessageBox::Yes) {
+        disconnect(krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));
 
-    // Sync manually and connect signal again
-    KEmoticonsTheme emoTheme = KEmoticons().theme();
-    QHash<QString, QStringList> emoticonsMap = emoTheme.emoticonsMap();
-    QString iconLaugh;
-    for (QHash<QString, QStringList>::const_iterator it = emoticonsMap.constBegin(); it != emoticonsMap.constEnd(); ++it) {
-        if ((*it).contains(":D") || (*it).contains(":-D")) {
-            iconLaugh = it.key();
-            break;
+        krossWord()->solve();
+
+        // Sync manually and connect signal again
+        KEmoticonsTheme emoTheme = KEmoticons().theme();
+        QHash<QString, QStringList> emoticonsMap = emoTheme.emoticonsMap();
+        QString iconLaugh;
+        for (QHash<QString, QStringList>::const_iterator it = emoticonsMap.constBegin(); it != emoticonsMap.constEnd(); ++it) {
+            if ((*it).contains(":D") || (*it).contains(":-D")) {
+                iconLaugh = it.key();
+                break;
+            }
         }
-    }
-    foreach(ClueCell * cell, krossWord()->clues())
-    answerChanged(cell, cell->currentAnswer(), false, KIcon(iconLaugh));
-    connect(krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));
+        foreach(ClueCell * cell, krossWord()->clues()) {
+            answerChanged(cell, cell->currentAnswer(), false, KIcon(iconLaugh));
+        }
+        connect(krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));
 
-    m_solutionProgress->setValue(100);
+        m_solutionProgress->setValue(100);
+    }
 }
 
 void CrossWordXmlGuiWindow::moveSetConfidenceUnsureSlot()

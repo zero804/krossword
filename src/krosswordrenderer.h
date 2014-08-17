@@ -49,7 +49,6 @@ private:
     KrosswordRenderer();
     KrosswordRenderer(const KrosswordRenderer&);
     KrosswordRenderer& operator=(const KrosswordRenderer&);
-    ~KrosswordRenderer();
 
 
     KgThemeProvider *m_provider;
