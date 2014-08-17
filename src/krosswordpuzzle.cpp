@@ -344,7 +344,7 @@ void KrossWordPuzzle::optionsPreferencesSlot()
     KgThemeSelector *themeSelector = new KgThemeSelector(KrosswordRenderer::self()->getThemeProvider(), KgThemeSelector::EnableNewStuffDownload, themeSelectorDlg);
     dialog->addPage(themeSelector, i18n("Theme"), "games-config-theme");
 
-    connect(KrosswordRenderer::self()->getThemeProvider(), SIGNAL(currentThemeChanged(const KgTheme*)), m_mainCrossword ,SLOT(updateTheme()));
+    connect(KrosswordRenderer::self()->getThemeProvider(), SIGNAL(currentThemeChanged(const KgTheme*)), m_mainCrossword, SLOT(updateTheme()));
     connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(settingsChanged()));
     dialog->setAttribute(Qt::WA_DeleteOnClose);
 

@@ -42,7 +42,8 @@ KrosswordRenderer::KrosswordRenderer()
     : m_provider(new KgThemeProvider(QByteArray("Theme"))),
       m_renderer(new KGameRenderer(m_provider))
 {
-    m_provider->discoverThemes("appdata", QLatin1String("themes"), QLatin1String("default"));//, &KrosswordTheme::staticMetaObject);
+    //m_provider->discoverThemes("appdata", QLatin1String("themes"), QLatin1String("default"));
+    m_provider->discoverThemes("appdata", QLatin1String("themes"), QLatin1String("default"), &KrosswordTheme::staticMetaObject);
 }
 
 KrosswordRenderer::~KrosswordRenderer()
@@ -119,7 +120,7 @@ QString KrosswordRenderer::getCurrentThemeName() const
     return m_provider->currentThemeName();
 }
 
-const KgTheme* KrosswordRenderer::getCurrentTheme() const
+const KrosswordTheme *KrosswordRenderer::getCurrentTheme() const
 {
-    return m_provider->currentTheme();
+    return (const KrosswordTheme*)m_provider->currentTheme();
 }

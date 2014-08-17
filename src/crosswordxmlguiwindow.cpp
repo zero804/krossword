@@ -1753,6 +1753,7 @@ void CrossWordXmlGuiWindow::updateTheme()
     // Add background
     draw_background(view());
 
+    krossWord()->setTheme(KrosswordRenderer::self()->getCurrentTheme());
     krossWord()->clearCache();
     view()->scene()->update();
 }
@@ -2231,10 +2232,9 @@ void CrossWordXmlGuiWindow::setCurrentFileName(const QString& fileName)
 
 KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
 {
-    //!Krossword class needs a theme (?)
     KrossWordPuzzleView *view = new KrossWordPuzzleView(
                 new KrossWordPuzzleScene(
-                    new KrossWord(nullptr)));   //! TODO find out why you should pass the theme to the krossword
+                    new KrossWord(KrosswordRenderer::self()->getCurrentTheme())));
 
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

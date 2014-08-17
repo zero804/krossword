@@ -42,7 +42,7 @@ public:
     bool setTheme(const QString &themeName);
     KgThemeProvider* getThemeProvider() const;
     QString getCurrentThemeName() const;
-    const KgTheme *getCurrentTheme() const;
+    const KrosswordTheme *getCurrentTheme() const;
 
 private:
     // disable copy - it's singleton
@@ -53,7 +53,7 @@ private:
 
 
     KgThemeProvider *m_provider;
-    KGameRenderer   *m_renderer;
+    QScopedPointer<KGameRenderer> m_renderer;
 
     QString m_themeName;
 };

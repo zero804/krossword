@@ -21,8 +21,8 @@
 
 #include <QDebug>
 
-KrosswordTheme::KrosswordTheme()
-    : KgTheme("krossword")
+KrosswordTheme::KrosswordTheme(const QByteArray &identifier, QObject *parent)
+    : KgTheme(identifier, parent)
 { }
 
 bool KrosswordTheme::readFromDesktopFile(const QString& file)
@@ -60,7 +60,7 @@ bool KrosswordTheme::readFromDesktopFile(const QString& file)
 
 KrosswordTheme* KrosswordTheme::defaultValues()
 {
-    KrosswordTheme *theme = new KrosswordTheme;
+    KrosswordTheme *theme = new KrosswordTheme("default-krosswordtheme");
 
     theme->m_marginsLetterCell = QMargins(6,6,6,6);
     theme->m_marginsClueCell = QMargins(6,6,6,6);

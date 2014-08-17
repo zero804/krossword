@@ -351,33 +351,33 @@ public:
     ClueCellList clueCellsFromClueNumber(int clueNumber) const;
     int maxClueNumber() const {
         return m_maxClueNumber;
-    };
+    }
 
     /** The title of the crossword. */
     QString title() const {
         return m_title;
-    };
+    }
     /** Sets the title of the crossword to @p title. */
     void setTitle(const QString &title);
 
     /** The authors of the crossword. */
     QString authors() const {
         return m_authors;
-    };
+    }
     /** Sets the authors string to @p authors. */
     void setAuthors(const QString &authors);
 
     /** The copyright information string of the crossword. */
     QString copyright() const {
         return m_copyright;
-    };
+    }
     /** Sets the copyright information string to @p copyright. */
     void setCopyright(const QString &copyright);
 
     /** Notes of the crossword. */
     QString notes() const {
         return m_notes;
-    };
+    }
     /** Sets the notes of the crossword to @p notes. */
     void setNotes(const QString &notes);
 
@@ -530,7 +530,7 @@ public:
     * @param clue The clue to be removed. */
     inline QList<Coord> removeClue(ClueCell* clue) {
         return removeClue(clue, RemoveFromGridAndDelete);
-    };
+    }
 
     /** Removes the given image from the crossword.
     * @param clue The image to be removed. */
@@ -596,7 +596,7 @@ public:
     /** Returns a list of all clues of the crossword. */
     ClueCellList clues() const {
         return m_clues;
-    };
+    }
     /** Gets all horizontal and vertical clues, sorted by clue number (if the
     * clues have a clue number). */
     void clues(ClueCellList *horizontalClues,
@@ -608,7 +608,7 @@ public:
     /** Returns a list of all letters that form the solution word of the crossword. */
     SolutionLetterCellList solutionWordLetters() const {
         return m_solutionLetters;
-    };
+    }
     /** Returns a list of all images of the crossword. */
     ImageCellList images() const;
 
@@ -637,12 +637,12 @@ public:
     /** Returns the size of one crossword cell. */
     QSizeF cellSize() const {
         return m_cellSize;
-    };
+    }
     /** Checks if this crossword has a solution word. It checks if there are any
     * solution letter cells. */
     bool hasSolutionWord() const {
         return !solutionWordLetters().isEmpty();
-    };
+    }
     /** Gets the correct solution word.
     * @see currentSolutionWord */
     QString solutionWord(const QChar &charNonLinkedLetters = ' ') const;
@@ -654,10 +654,10 @@ public:
     * @see setHighlightedClue */
     ClueCell *highlightedClue() const {
         return m_highlightedClue;
-    };
+    }
     ClueCell *previousHighlightedClue() const {
         return m_previousHighlightedClue;
-    };
+    }
     /** Sets the highlighted clue. All letter cells and the clue cell
     * are then highlighted. A previously highlighted clue will no longer be
     * highlighted.
@@ -670,10 +670,10 @@ public:
             bool apply = true);
     QString letterContentToClueNumberMapping() const {
         return m_numberPuzzleMapping;
-    };
+    }
     static const QString defaultNumberPuzzleMapping() {
         return "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    };
+    }
 
     QString contentString() const;
     QString synchronizationString() const;
@@ -692,27 +692,27 @@ public:
 //  KrossWordCell *cell = m_krossWordGrid->at( coord );
 //  Q_ASSERT( !cell || cell->isType(KrossWordCell::ImageCellType) || cell->coord() == coord );
         return m_krossWordGrid->at(coord);
-    };
+    }
 
     /** Gets the width of the crossword grid. */
     inline uint width() const {
         return m_krossWordGrid->width();
-    };
+    }
     /** Gets the height of the crossword grid. */
     inline uint height() const {
         return m_krossWordGrid->height();
-    };
+    }
     /** Returns true, if the given coordinates are inside the crossword grid. */
     inline bool inside(Coord coord) const {
         return m_krossWordGrid->inside(coord);
-    };
+    }
 
     inline KrossWordCell *const&operator[](const Coord &coord) const {
         return m_krossWordGrid->operator[](coord);
-    };
+    }
     inline KrossWordCell *&operator[](const Coord &coord) {
         return m_krossWordGrid->operator[](coord);
-    };
+    }
 
     void removeSolutionSynchronizationTo(KrossWord *solutionKrossWord);
     QPixmap toPixmap(const QSize &size = QSize(64, 64));
@@ -740,7 +740,7 @@ public:
     * @see isInteractive. */
     bool isEditable() const {
         return m_editable;
-    };
+    }
     /** Enables / disables the edit mode for the crossword.
     * @see isEditable.
     * @see setInteractive. */
@@ -748,20 +748,20 @@ public:
 
     bool isInteractive() const {
         return m_interactive;
-    };
+    }
     void setInteractive(bool interactive = true);
 
     bool isDrawingForPrinting() const {
         return m_drawForPrinting;
-    };
+    }
     void setDrawForPrinting(bool drawForPrinting = true);
 
     QColor emptyCellColorForPrinting() const {
         return m_emptyCellColorForPrinting;
-    };
+    }
     void setEmptyCellColorForPrinting(const QColor &color) {
         m_emptyCellColorForPrinting = color;
-    };
+    }
 
     /** Returns the minimal size of the crossword to include all current cells,
     * ie. the "bounding rect" of all non-empty cells. */
@@ -769,27 +769,27 @@ public:
 
     KrossWordCell *currentCell() const {
         return m_currentCell;
-    };
+    }
     KrossWordCell *previousCell() const {
         return m_previousCell;
-    };
+    }
 
     /** Gets the edit mode of letter cells. */
     EditMode letterEditMode() const {
         return m_letterEditMode;
-    };
+    }
     /** Changes the edit mode of all letter cells. */
     void setLetterEditMode(EditMode editMode) {
         m_letterEditMode = editMode;
-    };
+    }
 
     KeyboardNavigation keyboardNavigation() const {
         return m_keyboardNavigation;
-    };
+    }
     void setKeyboardNavigation(KeyboardNavigation keyboardNavigation =
                                    DefaultKeyboardNavigation) {
         m_keyboardNavigation = keyboardNavigation;
-    };
+    }
 
 //     void enableSignalAnswerChanged( bool enable ) {
 //  m_signalAnswerChanged = enable; };
@@ -800,7 +800,7 @@ public:
     const KrosswordTheme *theme() const {
         return m_theme;
     }
-    void setTheme(KrosswordTheme *theme);
+    void setTheme(const KrosswordTheme *theme);
 
 protected:
     enum RemoveMode {
