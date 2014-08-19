@@ -79,5 +79,5 @@ SelectionColor=255,100,100,128
 EmptyCellColor=100,100,100,128
 
 # Margins of cell contents: Left, Top, Right, Bottom
-LetterCellMargins=4,4,4,4
+LetterCellMargins=8,12,8,4
 ClueCellMargins=4,4,4,4
