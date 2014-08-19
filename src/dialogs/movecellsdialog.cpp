@@ -23,8 +23,7 @@
 #include <KColorScheme>
 
 
-MoveCellsDialog::MoveCellsDialog(KrossWord* krossWord, QWidget* parent)
-    : QDialog(parent), m_krossWord(krossWord)
+MoveCellsDialog::MoveCellsDialog(KrossWord* krossWord, QWidget* parent) : QDialog(parent), m_krossWord(krossWord)
 {
     setWindowTitle(i18n("Move Cells"));
     ui_move_cells.setupUi(this);

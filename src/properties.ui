@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>350</width>
-    <height>371</height>
+    <height>369</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -26,7 +26,7 @@
       <enum>QFrame::NoFrame</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="page_2">
       <property name="geometry">
@@ -34,7 +34,7 @@
         <x>0</x>
         <y>0</y>
         <width>338</width>
-        <height>230</height>
+        <height>228</height>
        </rect>
       </property>
       <attribute name="label">
@@ -174,7 +174,7 @@
         <x>0</x>
         <y>0</y>
         <width>338</width>
-        <height>230</height>
+        <height>228</height>
        </rect>
       </property>
       <attribute name="label">
@@ -209,12 +209,15 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="KIntNumInput" name="columns">
-           <property name="enabled">
-            <bool>true</bool>
+          <widget class="QSpinBox" name="columns">
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
            </property>
-           <property name="value">
-            <number>15</number>
+           <property name="inputMethodHints">
+            <set>Qt::ImhNone</set>
+           </property>
+           <property name="suffix">
+            <string> columns</string>
            </property>
            <property name="minimum">
             <number>2</number>
@@ -222,11 +225,8 @@
            <property name="maximum">
             <number>255</number>
            </property>
-           <property name="referencePoint">
+           <property name="value">
             <number>15</number>
-           </property>
-           <property name="suffix">
-            <string> columns</string>
            </property>
           </widget>
          </item>
@@ -244,12 +244,15 @@
           </widget>
          </item>
          <item>
-          <widget class="KIntNumInput" name="rows">
-           <property name="enabled">
-            <bool>true</bool>
+          <widget class="QSpinBox" name="rows">
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
            </property>
-           <property name="value">
-            <number>15</number>
+           <property name="inputMethodHints">
+            <set>Qt::ImhNone</set>
+           </property>
+           <property name="suffix">
+            <string> rows</string>
            </property>
            <property name="minimum">
             <number>2</number>
@@ -257,14 +260,8 @@
            <property name="maximum">
             <number>255</number>
            </property>
-           <property name="referencePoint">
+           <property name="value">
             <number>15</number>
-           </property>
-           <property name="suffix">
-            <string> rows</string>
-           </property>
-           <property name="sliderEnabled">
-            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -648,7 +645,7 @@
         <x>0</x>
         <y>0</y>
         <width>338</width>
-        <height>230</height>
+        <height>228</height>
        </rect>
       </property>
       <attribute name="label">
@@ -702,11 +699,6 @@
    <header>kpushbutton.h</header>
   </customwidget>
   <customwidget>
-   <class>KIntNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
-  </customwidget>
-  <customwidget>
    <class>CrosswordTypeWidget</class>
    <extends>QWidget</extends>
    <header>dialogs/crosswordtypewidget.h</header>
@@ -725,8 +717,6 @@
   <tabstop>anchorCenter</tabstop>
   <tabstop>anchorRight</tabstop>
   <tabstop>anchorTopLeft</tabstop>
-  <tabstop>columns</tabstop>
-  <tabstop>rows</tabstop>
   <tabstop>anchorBottomLeft</tabstop>
   <tabstop>anchorBottom</tabstop>
   <tabstop>anchorBottomRight</tabstop>
