@@ -308,11 +308,12 @@ void KrossWord::removeSameLetterSynchronization()
 QRectF KrossWord::boundingRect() const
 {
     if (m_titleItem) {
-        return QRectF(0, 0, cellSize().width() * width(),
-                      cellSize().height() * height() + m_titleItem->boundingRect().height());
+        if (m_titleItem->boundingRect().width() > cellSize().width() * width())
+            return QRectF(0, 0, m_titleItem->boundingRect().width(), cellSize().height() * height() + m_titleItem->boundingRect().height());
+        else
+            return QRectF(0, 0, cellSize().width() * width(), cellSize().height() * height() + m_titleItem->boundingRect().height());
     } else {
-        return QRectF(0, 0, cellSize().width() * width(),
-                      cellSize().height() * height());
+        return QRectF(0, 0, cellSize().width() * width(), cellSize().height() * height());
     }
 }
 
