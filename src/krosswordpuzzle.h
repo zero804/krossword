@@ -32,9 +32,8 @@ class PreviewJob;
 
 class LibraryXmlGuiWindow;
 class KUrl;
-class KTabWidget;
+class QStackedWidget;
 
-class MenuTabWidget;
 /**
  * This class serves as the main window for KrossWordPuzzle.  It handles the
  * menus, toolbars, and status bars.
@@ -103,7 +102,7 @@ private:
 
     QDialog               *m_loadProgressDialog;    //Owned
     QString                m_caption;
-    KTabWidget            *m_mainTabBar;            //Owned
+    QStackedWidget          *m_mainTabBar;            //Owned
 };
 
 #endif // _KROSSWORDPUZZLE_H_

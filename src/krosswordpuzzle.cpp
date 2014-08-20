@@ -22,15 +22,12 @@
 #include "settings.h"
 #include "libraryxmlguiwindow.h"
 
-// KDE UI includes
 #include <KConfigDialog>
 #include <KMessageBox>
 #include <KStatusBar>
 #include <KMenuBar>
-#include <KTabWidget>
-
+#include <QStackedWidget>
 #include <KgThemeSelector>
-
 #include <KShortcutsDialog>
 
 // KDE action includes
@@ -48,7 +45,7 @@ KrossWordPuzzle::KrossWordPuzzle()
       m_mainLibrary(nullptr),
       m_mainCrossword(nullptr),
       m_loadProgressDialog(nullptr),
-      m_mainTabBar(new KTabWidget(this))
+      m_mainTabBar(new QStackedWidget(this))
 {
     if (Settings::libraryDownloadSubDir().isEmpty()) {
         Settings::setLibraryDownloadSubDir(i18n("Downloads"));
@@ -110,7 +107,6 @@ bool KrossWordPuzzle::createNewCrossWord(const Crossword::CrosswordTypeInfo &cro
 {
     if (m_mainCrossword->createNewCrossWord(crosswordTypeInfo, crosswordSize, title, authors, copyright, notes)) {
         int indexCrossword = m_mainTabBar->indexOf(m_mainCrossword);
-        m_mainTabBar->setTabEnabled(indexCrossword, true);
         m_mainTabBar->setCurrentIndex(indexCrossword);
         return true;
     } else {
@@ -122,7 +118,6 @@ bool KrossWordPuzzle::createNewCrossWordFromTemplate(const QString& templateFile
 {
     if (m_mainCrossword->createNewCrossWordFromTemplate(templateFilePath, title, authors, copyright, notes)) {
         int indexCrossword = m_mainTabBar->indexOf(m_mainCrossword);
-        m_mainTabBar->setTabEnabled(indexCrossword, true);
         m_mainTabBar->setCurrentIndex(indexCrossword);
         return true;
     } else {
@@ -135,8 +130,7 @@ bool KrossWordPuzzle::createNewCrossWordFromTemplate(const QString& templateFile
 void KrossWordPuzzle::closeEvent(QCloseEvent* event)
 {
     if (m_mainCrossword->isModified()) {
-        QString msg = i18n("The current crossword has been modified.\n"
-                           "Would you like to save it?");
+        QString msg = i18n("The current crossword has been modified.\nWould you like to save it?");
 
         int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"), KStandardGuiItem::save(), KStandardGuiItem::discard());
 
@@ -206,18 +200,9 @@ QDialog* KrossWordPuzzle::createLoadProgressDialog()
 void KrossWordPuzzle::setupMainTabWidget()
 {
     m_mainLibrary      = new LibraryXmlGuiWindow(this);
-    int indexLibrary   = m_mainTabBar->addTab(m_mainLibrary, i18n("&Library"));
+    int indexLibrary   = m_mainTabBar->addWidget(m_mainLibrary);
     m_mainCrossword    = new CrossWordXmlGuiWindow(this);
-    int indexCrossword = m_mainTabBar->addTab(m_mainCrossword, i18n("&Crossword"));
-
-    // Set tab icons
-    QString puzIconName = KMimeType::findByPath("crossword.kwp", 0, true)->iconName();
-    KIcon puzIcon;
-    puzIcon.addPixmap(KIconLoader::global()->loadMimeTypeIcon(puzIconName, KIconLoader::Dialog));
-
-    m_mainTabBar->setTabIcon(indexLibrary, KIcon("favorites"));
-    m_mainTabBar->setTabIcon(indexCrossword, puzIcon);
-    m_mainTabBar->setTabEnabled(indexCrossword, false);
+    int indexCrossword = m_mainTabBar->addWidget(m_mainCrossword);
 
     m_mainCrossword->krossWord()->setAnimationTypes(animationTypesFromSettings());
 
@@ -461,7 +446,6 @@ void KrossWordPuzzle::crosswordLoadingComplete(const QString& fileName)
         m_loadProgressDialog->close();
 
     int indexCrossword = m_mainTabBar->indexOf(m_mainCrossword);
-    m_mainTabBar->setTabEnabled(indexCrossword, true);
     m_mainTabBar->setCurrentIndex(indexCrossword);
 
     m_mainLibrary->statusBar()->showMessage(i18nc("Loaded '%1'", "Statusbar text "
@@ -481,7 +465,6 @@ void KrossWordPuzzle::crosswordClosed(const QString& fileName)
 {
     Q_UNUSED(fileName);
 
-    m_mainTabBar->setTabEnabled(m_mainTabBar->indexOf(m_mainCrossword), false);
     m_mainTabBar->setCurrentWidget(m_mainLibrary);
 }
 
@@ -505,23 +488,6 @@ void KrossWordPuzzle::crosswordCurrentChanged(const QString& fileName, const QSt
 
 void KrossWordPuzzle::crosswordModificationsChanged(CrossWordXmlGuiWindow::ModificationTypes modificationTypes)
 {
-    int iCrossword = m_mainTabBar->indexOf(m_mainCrossword);
-    if (modificationTypes == CrossWordXmlGuiWindow::NoModification) {
-        m_mainTabBar->setTabText(iCrossword, i18nc("The title for the "
-                                 "crossword tab with an unmodified or no crossword opened",
-                                 "&Crossword"));
-    } else {
-        if (modificationTypes.testFlag(CrossWordXmlGuiWindow::ModifiedCrossword)) {
-            m_mainTabBar->setTabText(iCrossword, i18nc("The title for the "
-                                     "crossword tab with an edited crossword opened",
-                                     "&Crossword *"));
-        } else if (modificationTypes.testFlag(CrossWordXmlGuiWindow::ModifiedState)) {
-            m_mainTabBar->setTabText(iCrossword, i18nc("The title for the "
-                                     "crossword tab with an unmodified or no crossword opened",
-                                     "&Crossword"));
-        }
-    }
-
     crosswordCurrentChanged(m_mainCrossword->currentFileName(), m_mainCrossword->currentFileName());
 }
 
