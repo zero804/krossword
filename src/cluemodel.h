@@ -34,7 +34,7 @@ class ClueItem : public QObject, public QStandardItem
     Q_OBJECT
 
 public:
-    ClueItem(const QIcon &icon, ClueCell *clueCell);
+    ClueItem(ClueCell *clueCell);
 
     virtual QVariant data(int role = Qt::UserRole + 1) const;
     virtual void setData(const QVariant& value, int role = Qt::UserRole + 1);
@@ -89,7 +89,6 @@ protected slots:
 private:
     QStandardItem *m_itemHorizontal;
     QStandardItem *m_itemVertical;
-    QString m_iconSad;
 };
 
 #endif // CLUEMODEL_H

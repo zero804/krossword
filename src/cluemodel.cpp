@@ -22,12 +22,8 @@
 #include "cells/cluecell.h"
 
 #include <KLocalizedString>
-#include <KEmoticons>
-#include <KIcon>
 
-
-ClueItem::ClueItem(const QIcon& icon, ClueCell *clueCell)
-    : QStandardItem(icon, clueCell->clueWithNumber())
+ClueItem::ClueItem(ClueCell *clueCell) : QStandardItem(clueCell->clueWithNumber())
 {
     m_clueCell = clueCell;
 
@@ -83,17 +79,6 @@ ClueModel::ClueModel(QObject* parent)
 
     appendRow(m_itemHorizontal);
     appendRow(m_itemVertical);
-
-    // Get emoticon icon names
-    KEmoticonsTheme emoTheme = KEmoticons().theme();
-    QHash<QString, QStringList> emoticonsMap = emoTheme.emoticonsMap();
-    for (QHash<QString, QStringList>::const_iterator it = emoticonsMap.constBegin();
-            it != emoticonsMap.constEnd(); ++it) {
-        if ((*it).contains(":(") || (*it).contains(":-(")) {
-            m_iconSad = it.key();
-            break;
-        }
-    }
 }
 
 void ClueModel::clear()
@@ -109,7 +94,7 @@ void ClueModel::addClue(ClueCell* clueCell)
     QStandardItem *currentAnswerItem = new QStandardItem(clueCell->currentAnswer());
     currentAnswerItem->setEditable(false);
 
-    ClueItem *clueItem = new ClueItem(KIcon(m_iconSad), clueCell);
+    ClueItem *clueItem = new ClueItem(clueCell);
     connect(clueItem, SIGNAL(changeClueTextRequest(ClueCell*, QString)),
             this, SLOT(changeClueTextRequested(ClueCell*, QString)));
 

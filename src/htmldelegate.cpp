@@ -44,12 +44,13 @@ void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem & option,
 
     // Call this to get the focus rect and selection background
     options.text = "";
-    options.widget->style()->drawControl(QStyle::CE_ItemViewItem, &options,
-                                         painter, options.widget);
+    options.widget->style()->drawControl(QStyle::CE_ItemViewItem, &options, painter, options.widget);
 
     QRect rc = options.rect.adjusted(0, 0, 0, -2);
-    if (index.data(Qt::DecorationRole).isValid())
+    if (index.data(Qt::DecorationRole).isValid()) {
         rc.adjust(option.decorationSize.width() + 4, 0, 0, 0);
+    }
+
     doc.setTextWidth(rc.width());
 
     // Center vertically
@@ -77,8 +78,7 @@ QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem & option, const QModelIn
     doc.setHtml(options.text);
     doc.setTextWidth(options.rect.width() - rcDeco.width() - 4);
 
-    return QSize(rcDeco.width() + 4 + doc.idealWidth(),
-                 qMax(rcDeco.height() + 4, (int)doc.size().height()));
+    return QSize(rcDeco.width() + 4 + doc.idealWidth(), qMax(rcDeco.height() + 4, (int)doc.size().height()));
 }
 
 

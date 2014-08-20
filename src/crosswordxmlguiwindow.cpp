@@ -79,7 +79,6 @@
 #include <KTemporaryFile>
 #include <KXMLGUIFactory>
 #include <KStatusBar>
-#include <KEmoticons>
 #include <KCharSelect>
 #include <QDesktopWidget>
 
@@ -294,8 +293,7 @@ void ViewZoomController::changeZoomSliderSlot(int zoomValue)
 //===========================================================
 
 
-CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent)
-    : KXmlGuiWindow(parent, Qt::Widget),
+CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
       m_view(nullptr),
       m_viewSolution(nullptr),
       m_zoomWidget(nullptr),
@@ -1888,7 +1886,6 @@ QDockWidget *CrossWordXmlGuiWindow::createClueDock()
     m_clueTree->setAlternatingRowColors(true);
     m_clueTree->setUniformRowHeights(false);
     m_clueTree->setWordWrap(true);
-    m_clueTree->setIconSize(QSize(32, 32));
     m_clueTree->setContextMenuPolicy(Qt::CustomContextMenu);
     m_clueTree->setItemDelegate(new HtmlDelegate(this));
 
@@ -2384,17 +2381,8 @@ void CrossWordXmlGuiWindow::solveSlot()
         krossWord()->solve();
 
         // Sync manually and connect signal again
-        KEmoticonsTheme emoTheme = KEmoticons().theme();
-        QHash<QString, QStringList> emoticonsMap = emoTheme.emoticonsMap();
-        QString iconLaugh;
-        for (QHash<QString, QStringList>::const_iterator it = emoticonsMap.constBegin(); it != emoticonsMap.constEnd(); ++it) {
-            if ((*it).contains(":D") || (*it).contains(":-D")) {
-                iconLaugh = it.key();
-                break;
-            }
-        }
         foreach(ClueCell * cell, krossWord()->clues()) {
-            answerChanged(cell, cell->currentAnswer(), false, KIcon(iconLaugh));
+            answerChanged(cell, cell->currentAnswer(), false);
         }
         connect(krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));
 
@@ -2693,17 +2681,8 @@ void CrossWordXmlGuiWindow::clearSlot()
     krossWord()->clear();
 
     // Sync manually and connect signal again
-    KEmoticonsTheme emoTheme = KEmoticons().theme();
-    QHash<QString, QStringList> emoticonsMap = emoTheme.emoticonsMap();
-    QString iconLaugh;
-    for (QHash<QString, QStringList>::const_iterator it = emoticonsMap.constBegin(); it != emoticonsMap.constEnd(); ++it) {
-        if ((*it).contains(":D") || (*it).contains(":-D")) {
-            iconLaugh = it.key();
-            break;
-        }
-    }
     foreach(ClueCell * cell, krossWord()->clues())
-    answerChanged(cell, cell->currentAnswer(), false, KIcon(iconLaugh));
+        answerChanged(cell, cell->currentAnswer(), false);
 
     connect(krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));
 }
@@ -2776,7 +2755,7 @@ void CrossWordXmlGuiWindow::currentClueChanged(ClueCell* clue)
         kDebug() << "Clue not found in clue tree view:" << clue->clue();
 }
 
-void CrossWordXmlGuiWindow::answerChanged(ClueCell* clue, const QString &currentAnswer, bool statusbar, const KIcon &icon)
+void CrossWordXmlGuiWindow::answerChanged(ClueCell* clue, const QString &currentAnswer, bool statusbar)
 {
 //   qDebug() << "answerChanged(" << clue->correctAnswer() << "," << currentAnswer << ")";
     m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
@@ -2796,37 +2775,9 @@ void CrossWordXmlGuiWindow::answerChanged(ClueCell* clue, const QString &current
         }
     }
 
-//     QStandardItem *itemAnswer = findAnswerItem( clue );
     QStandardItem *itemAnswer = m_clueModel->answerItem(clue);
     if (itemAnswer) {
         itemAnswer->setText(currentAnswer);
-
-        KIcon _icon;
-        if (icon.isNull()) {
-            KEmoticonsTheme emoTheme = KEmoticons().theme();
-            QHash<QString, QStringList> emoticonsMap = emoTheme.emoticonsMap();
-            QString iconSmile, iconSad, iconLaugh, iconWink;
-            for (QHash<QString, QStringList>::const_iterator it = emoticonsMap.constBegin();
-                    it != emoticonsMap.constEnd(); ++it) {
-                if ((*it).contains(":)") || (*it).contains(":-)"))
-                    iconSmile = it.key();
-                if ((*it).contains(":(") || (*it).contains(":-("))
-                    iconSad = it.key();
-                if ((*it).contains(":D") || (*it).contains(":-D"))
-                    iconLaugh = it.key();
-            }
-
-            if (currentAnswer.isEmpty())
-                _icon = KIcon(iconSad);
-            else if (clue->isAnswerComplete())
-                _icon = KIcon(iconLaugh);
-            else
-                _icon = KIcon(iconSmile);
-        } else
-            _icon = icon;
-
-        QStandardItem *itemClue = itemAnswer->parent()->child(itemAnswer->index().row(), 0);
-        itemClue->setIcon(_icon);
     }
 }
 
