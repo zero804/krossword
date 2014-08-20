@@ -93,6 +93,7 @@
 #include "kdeversion.h"
 
 #include <KgThemeProvider>
+#include <KGuiItem>
 
 ClueListView::ClueListView(QWidget* parent)
     : QTreeView(parent), m_scrollAnimation(0)
@@ -2286,24 +2287,18 @@ void CrossWordXmlGuiWindow::showCongratulationsItems()
 
     QFont font2(font);
     font.setPixelSize(20);
-    KPushButton *btnContinue = new KPushButton(KStandardGuiItem::cont());
+    QPushButton *btnContinue = new QPushButton;
+    //KGuiItem::assign(btnContinue,KStandardGuiItem::cont()); //added by convert-kpushbutton.pl << reactivate with kf5
     btnContinue->setIconSize(QSize(32, 32));
     btnContinue->setFont(font2);
     QGraphicsProxyWidget *btnContinueItem = m_view->scene()->addWidget(btnContinue);
     btnContinueItem->setZValue(1001);
     connect(btnContinue, SIGNAL(clicked()), this, SLOT(hideCongratulations()));
 
-    //KPushButton *btnStart = new KPushButton(KIcon("krosswordpuzzle"), "&Start a new crossword");
-    //btnStart->setIconSize(QSize(32, 32));
-    //btnStart->setFont(font2);
-    //QGraphicsProxyWidget *btnStartItem = m_view->scene()->addWidget(btnStart);
-    //connect(btnStart, SIGNAL(clicked()), this, SLOT(showStartPage()));
-
     // Create a layout
     QGraphicsGridLayout *layout = new QGraphicsGridLayout;
     layout->addItem(labelItem, 0, 0);
     layout->addItem(btnContinueItem, 1, 0, Qt::AlignCenter);
-    //layout->addItem(btnStartItem, 1, 0, Qt::AlignCenter);
 
     QFrame *frame = new QFrame;
     frame->setFrameShape(QFrame::Panel);

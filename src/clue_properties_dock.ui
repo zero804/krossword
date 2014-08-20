@@ -179,7 +179,7 @@
       <number>0</number>
      </property>
      <item row="0" column="0">
-      <widget class="KPushButton" name="firstLetterPositionTopLeft">
+      <widget class="QPushButton" name="firstLetterPositionTopLeft">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -210,7 +210,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="KPushButton" name="firstLetterPositionTop">
+      <widget class="QPushButton" name="firstLetterPositionTop">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -241,7 +241,7 @@
       </widget>
      </item>
      <item row="0" column="2">
-      <widget class="KPushButton" name="firstLetterPositionTopRight">
+      <widget class="QPushButton" name="firstLetterPositionTopRight">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -272,7 +272,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="KPushButton" name="firstLetterPositionLeft">
+      <widget class="QPushButton" name="firstLetterPositionLeft">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -303,7 +303,7 @@
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="KPushButton" name="firstLetterPositionBottomLeft">
+      <widget class="QPushButton" name="firstLetterPositionBottomLeft">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -334,7 +334,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="KPushButton" name="firstLetterPositionOnClueCell">
+      <widget class="QPushButton" name="firstLetterPositionOnClueCell">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -365,7 +365,7 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="KPushButton" name="firstLetterPositionRight">
+      <widget class="QPushButton" name="firstLetterPositionRight">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -396,7 +396,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="KPushButton" name="firstLetterPositionBottom">
+      <widget class="QPushButton" name="firstLetterPositionBottom">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -427,7 +427,7 @@
       </widget>
      </item>
      <item row="2" column="2">
-      <widget class="KPushButton" name="firstLetterPositionBottomRight">
+      <widget class="QPushButton" name="firstLetterPositionBottomRight">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -569,11 +569,6 @@ p, li { white-space: pre-wrap; }
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
   <customwidget>
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>

@@ -23,7 +23,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QCheckBox>
-#include <KPushButton>
+#include <QPushButton>
 #include <qscrollarea.h>
 
 CrosswordTypeWidget::CrosswordTypeWidget(QWidget* parent)
@@ -158,7 +158,7 @@ bool CrosswordTypeWidget::addUserButtonElementNoLayout(const QString& text,
         QObject *receiver, const char *memberClicked)
 {
     if (!hasUserButtonElement()) {
-        m_btnUser = new KPushButton(text);
+        m_btnUser = new QPushButton(text);
 
         if (receiver)
             connect(m_btnUser, SIGNAL(clicked()), receiver, memberClicked);
@@ -223,7 +223,7 @@ bool CrosswordTypeWidget::setRulesElementNoLayout(bool shown)
 {
     if (shown) {
         if (!hasRulesElement()) {
-            m_btnRules = new KPushButton(i18n("&Rules..."));
+            m_btnRules = new QPushButton(i18n("&Rules..."));
             connect(m_btnRules, SIGNAL(clicked()),
                     this, SLOT(configureRulesClicked()));
             return true; // Only return true, if the element is newly created

@@ -27,7 +27,7 @@
 class QFrame;
 class ClueCellWidget;
 class QVBoxLayout;
-class KPushButton;
+class QPushButton;
 namespace Crossword
 {
 class KrossWord;
@@ -112,7 +112,7 @@ private:
     KrossWordCell *m_currentCell;
     ClueCell *m_currentClue;
     bool m_noCell;
-    KPushButton *m_convertToSolutionLetter;
+    QPushButton *m_convertToSolutionLetter;
 
     CellType m_currentCellType;
     QHash< CellType, QWidget* > m_widgets;
@@ -129,7 +129,7 @@ public:
     ClueCellWidget *clueCellWidget() const {
         return m_clueCellWidget;
     };
-    KPushButton *convertToSolLetterButton() const {
+    QPushButton *convertToSolLetterButton() const {
         return m_convertToSolLetterButton;
     };
     ClueCell *clueCell() const;
@@ -140,7 +140,7 @@ public:
 private:
     ClueCellWidget *m_clueCellWidget;
     LetterCell *m_letterCell;
-    KPushButton *m_convertToSolLetterButton;
+    QPushButton *m_convertToSolLetterButton;
     QFrame *m_hLine;
 };
 

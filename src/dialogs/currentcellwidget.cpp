@@ -427,7 +427,7 @@ void ClueCellWidgetWithConvertButton::setCells(ClueCell *clue, LetterCell *lette
 
     if (letter) {
         if (!m_letterCell) {
-            m_convertToSolLetterButton = new KPushButton();
+            m_convertToSolLetterButton = new QPushButton();
             l->insertRow(0, m_convertToSolLetterButton);
 
             m_hLine = new QFrame;

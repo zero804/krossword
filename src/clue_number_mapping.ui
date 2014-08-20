@@ -285,7 +285,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="KPushButton" name="setMapping">
+      <widget class="QPushButton" name="setMapping">
        <property name="toolTip">
         <string>Remap the selected letter to the given clue number.</string>
        </property>
@@ -305,13 +305,6 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>letterContentList</tabstop>
   <tabstop>setMapping</tabstop>

@@ -26,7 +26,7 @@
 class QScrollArea;
 class QSpacerItem;
 class QGridLayout;
-class KPushButton;
+class QPushButton;
 class QLabel;
 class QCheckBox;
 
@@ -109,7 +109,7 @@ public:
     /** Gets a pointer to the user defined button or NULL, if no user defined
     * button has been set.
     * @see hasUserButtonElement() */
-    KPushButton *userButton() const {
+    QPushButton *userButton() const {
         return m_btnUser;
     };
     /** Returns the edit mode. */
@@ -164,7 +164,7 @@ private:
     QGridLayout *m_layout;
     QLabel *m_lblInfo, *m_icon;
     QCheckBox *m_chkDetails;
-    KPushButton *m_btnRules, *m_btnUser;
+    QPushButton *m_btnRules, *m_btnUser;
     QSpacerItem *m_spacer;
     QScrollArea *m_infoScroller;
     bool m_showingDetails;
