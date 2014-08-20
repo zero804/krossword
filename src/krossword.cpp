@@ -119,13 +119,13 @@ void KrossWordTitleItem::setContent(KrossWord *krossWord)
     } else {
         if (!m_titleItem) {
             m_titleItem = new QGraphicsTextItem(this);
-//       connect( m_titleItem->
         }
 
         QFont font = KGlobalSettings::generalFont();
         font.setBold(true);
         font.setPointSize(24);
         m_titleItem->setFont(font);
+        m_titleItem->setTextWidth(krossWord->boundingRect().width());
 
         m_titleItem->setPlainText(krossWord->title());
         QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
@@ -308,10 +308,7 @@ void KrossWord::removeSameLetterSynchronization()
 QRectF KrossWord::boundingRect() const
 {
     if (m_titleItem) {
-        if (m_titleItem->boundingRect().width() > cellSize().width() * width())
-            return QRectF(0, 0, m_titleItem->boundingRect().width(), cellSize().height() * height() + m_titleItem->boundingRect().height());
-        else
-            return QRectF(0, 0, cellSize().width() * width(), cellSize().height() * height() + m_titleItem->boundingRect().height());
+        return QRectF(0, 0, cellSize().width() * width(), cellSize().height() * height() + m_titleItem->boundingRect().height());
     } else {
         return QRectF(0, 0, cellSize().width() * width(), cellSize().height() * height());
     }
