@@ -63,8 +63,7 @@ QRectF KrossWordTitleItem::boundingRect() const
                       m_titleItem->boundingRect().height() +
                       m_authorsItem->boundingRect().height() + 10);
     } else {
-        return QRectF(0, 0, m_titleItem->boundingRect().width(),
-                      m_titleItem->boundingRect().height() + 10);
+        return QRectF(0, 0, m_titleItem->boundingRect().width(), m_titleItem->boundingRect().height() + 10);
     }
 }
 
@@ -80,12 +79,10 @@ void KrossWordTitleItem::paint(QPainter* painter,
 void KrossWordTitleItem::updateTheme(KrossWord* krossWord)
 {
     if (m_titleItem) {
-        updateGraphicsEffect(krossWord,
-                             static_cast< QGraphicsDropShadowEffect* >(m_titleItem->graphicsEffect()));
+        updateGraphicsEffect(krossWord, static_cast< QGraphicsDropShadowEffect* >(m_titleItem->graphicsEffect()));
     }
     if (m_authorsItem) {
-        updateGraphicsEffect(krossWord,
-                             static_cast< QGraphicsDropShadowEffect* >(m_authorsItem->graphicsEffect()));
+        updateGraphicsEffect(krossWord, static_cast< QGraphicsDropShadowEffect* >(m_authorsItem->graphicsEffect()));
     }
 }
 
@@ -161,22 +158,21 @@ void KrossWordTitleItem::setContent(KrossWord *krossWord)
     crosswordResized(krossWord, krossWord->width(), krossWord->height());
 }
 
-void KrossWordTitleItem::crosswordResized(KrossWord *krossWord,
-        int columns, int rows)
+void KrossWordTitleItem::crosswordResized(KrossWord *krossWord, int columns, int rows)
 {
     Q_UNUSED(columns);
     Q_UNUSED(rows);
 
     qreal y = 0;
     if (m_titleItem) {
-        m_titleItem->setPos((krossWord->boundingRect().width() -
-                             m_titleItem->boundingRect().width()) / 2, 0);
+        //m_titleItem->setPos((krossWord->boundingRect().width() - m_titleItem->boundingRect().width())/2, 0);
+        m_titleItem->setPos(krossWord->boundingRect().left(), 0);
         y = m_titleItem->boundingRect().height();
     }
 
     if (m_authorsItem) {
-        m_authorsItem->setPos(krossWord->boundingRect().width() -
-                              m_authorsItem->boundingRect().width(), y);
+        //m_authorsItem->setPos(krossWord->boundingRect().width() - m_authorsItem->boundingRect().width(), y);
+        m_authorsItem->setPos(m_titleItem->boundingRect().left(), y);
     }
 }
 
