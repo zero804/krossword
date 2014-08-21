@@ -28,6 +28,8 @@
 #include <KLocalizedString>
 #include <kdeversion.h>
 
+#include <KUrl>
+
 #include <QGraphicsObject>
 
 class SpannedCell;
@@ -305,7 +307,7 @@ public:
     * @see inside */
     KrossWordCell *at(Coord coord) const {
         if (!inside(coord)) {
-            kDebug() << coord << "is outside of the grid! Returning NULL.";
+            qDebug() << coord << "is outside of the grid! Returning NULL.";
             return NULL;
         }
         KrossWordCell *cell = m_krossWordGrid->at(coord);

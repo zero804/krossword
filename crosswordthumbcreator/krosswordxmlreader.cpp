@@ -37,21 +37,21 @@ bool KrossWordXmlReader::readCompressed(QIODevice* device, KrossWord* krossWord)
     KZip zip(device);
     zip.setCompression(KZip::DeflateCompression);
     if (!zip.open(QIODevice::ReadOnly)) {
-        kDebug() << "Couldn't open the ZIP archive for reading";
+        qDebug() << "Couldn't open the ZIP archive for reading";
         return false;
     }
     const KArchiveDirectory *archive = zip.directory();
     if (!archive) {
-        kDebug() << "Couldn't get the archive contents";
+        qDebug() << "Couldn't get the archive contents";
         return false;
     }
     if (!archive->entries().contains("crossword.kwp")) {
-        kDebug() << "Not a valid *.kwpz-file! The crossword file wasn't found (crossword.kwp).";
+        qDebug() << "Not a valid *.kwpz-file! The crossword file wasn't found (crossword.kwp).";
         return false;
     }
     const KArchiveEntry *crosswordEntry = archive->entry("crossword.kwp");
     if (!crosswordEntry->isFile()) {
-        kDebug() << "Not a valid *.kwpz-file! No file 'crossword.kwp' found, it's a directory.";
+        qDebug() << "Not a valid *.kwpz-file! No file 'crossword.kwp' found, it's a directory.";
         return false;
     }
     KArchiveFile *crosswordFile = (KArchiveFile*)crosswordEntry;
@@ -63,7 +63,7 @@ bool KrossWordXmlReader::readCompressed(QIODevice* device, KrossWord* krossWord)
     crosswordDevice->close();
     delete crosswordDevice;
     if (!zip.close()) {
-        kDebug() << "Couldn't close the ZIP archive";
+        qDebug() << "Couldn't close the ZIP archive";
         return false;
     }
 
@@ -84,21 +84,21 @@ bool KrossWordXmlReader::readCompressedInfo(QIODevice* device,
     KZip zip(device);
     zip.setCompression(KZip::DeflateCompression);
     if (!zip.open(QIODevice::ReadOnly)) {
-        kDebug() << "Couldn't open the ZIP archive for reading";
+        qDebug() << "Couldn't open the ZIP archive for reading";
         return false;
     }
     const KArchiveDirectory *archive = zip.directory();
     if (!archive) {
-        kDebug() << "Couldn't get the archive contents";
+        qDebug() << "Couldn't get the archive contents";
         return false;
     }
     if (!archive->entries().contains("crossword.kwp")) {
-        kDebug() << "Not a valid *.kwpz-file! The crossword file wasn't found (crossword.kwp).";
+        qDebug() << "Not a valid *.kwpz-file! The crossword file wasn't found (crossword.kwp).";
         return false;
     }
     const KArchiveEntry *crosswordEntry = archive->entry("crossword.kwp");
     if (!crosswordEntry->isFile()) {
-        kDebug() << "Not a valid *.kwpz-file! No file 'crossword.kwp' found, it's a directory.";
+        qDebug() << "Not a valid *.kwpz-file! No file 'crossword.kwp' found, it's a directory.";
         return false;
     }
     KArchiveFile *crosswordFile = (KArchiveFile*)crosswordEntry;
@@ -110,7 +110,7 @@ bool KrossWordXmlReader::readCompressedInfo(QIODevice* device,
     crosswordDevice->close();
     delete crosswordDevice;
     if (!zip.close()) {
-        kDebug() << "Couldn't close the ZIP archive";
+        qDebug() << "Couldn't close the ZIP archive";
         return false;
     }
 
@@ -127,7 +127,7 @@ bool KrossWordXmlReader::read(QIODevice* device, KrossWord *krossWord)
         return false;
     setDevice(device);
 
-    kDebug() << "Start reading of XML file.";
+    qDebug() << "Start reading of XML file.";
     bool readEnd = false;
     while (!atEnd() && !readEnd) {
         readNext();
@@ -157,7 +157,7 @@ bool KrossWordXmlReader::readInfo(QIODevice* device,
         return false;
     setDevice(device);
 
-    kDebug() << "Start reading of XML file.";
+    qDebug() << "Start reading of XML file.";
     bool readEnd = false;
     while (!atEnd() && !readEnd) {
         readNext();
@@ -279,9 +279,9 @@ void KrossWordXmlReader::readKrossWord(KrossWord *krossWord)
                                 if (cell->isLetterCell()) {
                                     LetterCell *letter = (LetterCell*)cell;
                                     letter->setConfidence(confidence);
-                                    kDebug() << "Set confidence to" << confidenceString << "at" << sCoord;
+                                    qDebug() << "Set confidence to" << confidenceString << "at" << sCoord;
                                 } else
-                                    kDebug() << "Letter cell not found to set confidence at" << coord.first << coord.second;
+                                    qDebug() << "Letter cell not found to set confidence at" << coord.first << coord.second;
                             }
                         } // if [ is at <letter>-tag]
                     }
@@ -290,12 +290,12 @@ void KrossWordXmlReader::readKrossWord(KrossWord *krossWord)
         }
     } // if [is at <confidence>-tag]
 
-    kDebug() << "END";
+    qDebug() << "END";
 }
 
 void KrossWordXmlReader::readSolutionLetter(KrossWord *krossWord)
 {
-    kDebug() << "Reading <solutionLetter>";
+    qDebug() << "Reading <solutionLetter>";
 
     if (!attributes().hasAttribute("coord"))
         raiseError("<solutionLetter>-tags need a 'coord' attribute with value 'x,y'.");
@@ -348,7 +348,7 @@ void KrossWordXmlReader::readClue(KrossWord *krossWord)
             return;
         }
 
-//  kDebug() << "Trying to read clue, answer and currentAnswer";
+//  qDebug() << "Trying to read clue, answer and currentAnswer";
         QString clue, answer, currentAnswer;
         // To allow clues with no text (which are only useful for editing the clue text later):
         bool hasTextTag = false;
@@ -389,7 +389,7 @@ void KrossWordXmlReader::readClue(KrossWord *krossWord)
             return;
         }
 
-//  kDebug() << "Finished reading clue:" << clue << answer << coord << "orientation ="
+//  qDebug() << "Finished reading clue:" << clue << answer << coord << "orientation ="
 //   << orientation << "answerOffset =" << answerOffset
 //   << "currentAnswer =" << currentAnswer;;
         ClueCell *clueCell;
@@ -401,10 +401,10 @@ void KrossWordXmlReader::readClue(KrossWord *krossWord)
             if (answer.length() == currentAnswer.length())
                 clueCell->setCurrentAnswer(currentAnswer);
             else
-                kDebug() << "The length of the current answer doesn't match the length of the correct answer:"
+                qDebug() << "The length of the current answer doesn't match the length of the correct answer:"
                          << answer << "current =" << currentAnswer;
         } else {
-            kDebug() << KrossWord::errorMessageFromErrorType(correctness);
+            qDebug() << KrossWord::errorMessageFromErrorType(correctness);
 //      raiseError( KrossWord::errorMessageFromCorrectness(correctness) );
         }
     }
@@ -439,7 +439,7 @@ void KrossWordXmlReader::readImage(KrossWord* krossWord)
                 coord, horizontalCellSpan, verticalCellSpan, url,
                 KrossWord::DontIgnoreErrors, &imageCell);
         if (correctness != KrossWord::NoError) {
-            kDebug() << KrossWord::errorMessageFromErrorType(correctness);
+            qDebug() << KrossWord::errorMessageFromErrorType(correctness);
 //      raiseError( KrossWord::errorMessageFromCorrectness(correctness) );
         }
     }

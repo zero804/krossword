@@ -27,7 +27,7 @@
 #include <QVariantAnimation>
 #include <QParallelAnimationGroup>
 
-#include <KDebug>
+#include <QDebug>
 
 namespace Crossword
 {

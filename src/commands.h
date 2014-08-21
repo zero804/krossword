@@ -142,7 +142,7 @@ public:
     void redo() {
 //       qDebug() << "UndoCommandExt::redo()  type =" << type();
         if (!m_undoStack) {
-            kDebug() << "No undo stack for undo command" << type();
+            qDebug() << "No undo stack for undo command" << type();
             redoMaybe();
         } else if (m_undoStack->isExecuting())
             redoMaybe();
@@ -154,7 +154,7 @@ public:
     void undo() {
 //       qDebug() << "UndoCommandExt::undo()  type =" << type();
         if (!m_undoStack) {
-            kDebug() << "No undo stack for undo command" << type();
+            qDebug() << "No undo stack for undo command" << type();
             undoMaybe();
         } else if (m_undoStack->isExecuting())
             undoMaybe();

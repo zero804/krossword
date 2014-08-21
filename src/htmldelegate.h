@@ -22,7 +22,7 @@
 
 #include <QStyledItemDelegate>
 #include <QItemDelegate>
-#include <KDebug>
+#include <QDebug>
 #include "krossword.h"
 
 

@@ -239,7 +239,7 @@ bool KrossWordCell::removeSynchronizationWith(KrossWordCell* cell,
 //  return false;
 //     Q_ASSERT( cell->m_synchronizedCells.contains(this) );
     if (!isSynchronizedWith(cell)) {
-        kDebug() << "Not Synchronized";
+        qDebug() << "Not Synchronized";
         return false;
     }
     Q_ASSERT(cell->isSynchronizedWith(this));
@@ -366,7 +366,7 @@ void KrossWordCell::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 
 void KrossWordCell::focusInEvent(QFocusEvent* event)
 {
-//     kDebug() << "KROSSWORDCELL IN AND EMITTING gotFocus()" << this->coord();
+//     qDebug() << "KROSSWORDCELL IN AND EMITTING gotFocus()" << this->coord();
     QGraphicsItem::focusInEvent(event);
 
     krossWord()->setCurrentCell(this);
@@ -377,7 +377,7 @@ void KrossWordCell::focusInEvent(QFocusEvent* event)
 
     GlowEffect *effect = static_cast< GlowEffect* >(graphicsEffect());
     if (effect) {
-//       kDebug() << "Enable Glow Effect for" << coord();
+//       qDebug() << "Enable Glow Effect for" << coord();
         effect->setEnabled(true);
         if (krossWord()->isAnimationTypeEnabled(AnimateTransition)) {
             if (m_blurAnim) {
@@ -442,7 +442,7 @@ void KrossWordCell::focusOutEvent(QFocusEvent* event)
 
     GlowEffect *effect = static_cast< GlowEffect* >(graphicsEffect());
     if (effect) {
-//       kDebug() << "Disable Glow Effect for" << coord();
+//       qDebug() << "Disable Glow Effect for" << coord();
 
         if (krossWord()->isAnimationTypeEnabled(AnimateTransition)) {
             if (m_blurAnim) {
@@ -478,7 +478,7 @@ void KrossWordCell::focusOutEvent(QFocusEvent* event)
     }
 
 //     m_highlight = false;
-//     kDebug() << "KROSSWORDCELL OUT" << this->coord();
+//     qDebug() << "KROSSWORDCELL OUT" << this->coord();
     clearCache();
     update();
     QGraphicsItem::focusOutEvent(event);

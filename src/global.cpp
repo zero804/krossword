@@ -18,7 +18,7 @@
 */
 
 #include "global.h"
-#include <KDebug>
+#include <QDebug>
 #include <KLocalizedString>
 
 namespace Crossword
@@ -106,7 +106,7 @@ CellType cellTypeFromString(const QString& sCellType)
     else if (sl == "user")
         return UserType;
     else {
-        kDebug() << "Couldn't get enumerable for" << sl;
+        qDebug() << "Couldn't get enumerable for" << sl;
         Q_ASSERT(false);
         return UserType;
     }
@@ -123,7 +123,7 @@ ClueCellHandling CrosswordTypeInfo::clueCellHandlingFromString(
     else if (sl == "cluecellsrequired")
         return ClueCellsRequired;
     else {
-        kDebug() << "Couldn't get enumerable for" << sl;
+        qDebug() << "Couldn't get enumerable for" << sl;
         Q_ASSERT(false);
         return ClueCellsAllowed;
     }
@@ -138,7 +138,7 @@ ClueMapping CrosswordTypeInfo::clueMappingFromString(
     else if (sl == "cluesrefertocells")
         return CluesReferToCells;
     else {
-        kDebug() << "Couldn't get enumerable for" << sl;
+        qDebug() << "Couldn't get enumerable for" << sl;
         Q_ASSERT(false);
         return CluesReferToSetsOfCells;
     }
@@ -153,7 +153,7 @@ ClueType CrosswordTypeInfo::clueTypeFromString(
     else if (sl == "numberclues1to26")
         return NumberClues1To26;
     else {
-        kDebug() << "Couldn't get enumerable for" << sl;
+        qDebug() << "Couldn't get enumerable for" << sl;
         Q_ASSERT(false);
         return StringClues;
     }
@@ -170,7 +170,7 @@ LetterCellContent CrosswordTypeInfo::letterCellContentFromString(
     else if (sl == "charactersordigits")
         return CharactersOrDigits;
     else {
-        kDebug() << "Couldn't get enumerable for" << sl;
+        qDebug() << "Couldn't get enumerable for" << sl;
         Q_ASSERT(false);
         return CharactersOrDigits;
     }
@@ -348,7 +348,7 @@ CrosswordType CrosswordTypeInfo::typeFromString(const QString& crosswordType)
     else if (type == "unknown")
         return UnknownCrosswordType;
     else {
-        kDebug() << "Unknown crossword type:" << crosswordType
+        qDebug() << "Unknown crossword type:" << crosswordType
                  << "Using 'Unknown' as crossword type (same as 'Free')";
         return UnknownCrosswordType;
     }
@@ -399,7 +399,7 @@ const CrosswordTypeInfo CrosswordTypeInfo::infoFromType(
     case FreeCrossword:
         return free();
     default:
-        kDebug() << "Crossword type unknown, using 'Free' as type" << crosswordType;
+        qDebug() << "Crossword type unknown, using 'Free' as type" << crosswordType;
         return free();
     };
 }
@@ -539,7 +539,7 @@ QString CrosswordTypeInfo::allowedChars() const
 
 bool CrosswordTypeInfo::isCharacterLegal(const QChar& testCharacter) const
 {
-    kDebug() << testCharacter;
+    qDebug() << testCharacter;
     switch (letterCellContent) {
     case Characters:
         return QString::fromUtf8("ABCDEFGHIJKLMNOPQRSTUVWXYZÅÆŒØ")
@@ -632,7 +632,7 @@ bool operator<( Coord& coord1, const Coord& coord2 ) {
 }
 
 bool operator<=( Coord& coord1, const Coord& coord2 ) {
-  kDebug() << coord1 << "<=?" << coord2;
+  qDebug() << coord1 << "<=?" << coord2;
   return coord1.first <= coord2.first && coord1.second <= coord2.second;
 }
 

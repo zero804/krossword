@@ -158,7 +158,7 @@ ClueItem* ClueModel::clueItem(ClueCell* clueCell) const
             return curClueItem;
     }
 
-    kDebug() << "Clue not found in model" << clueCell;
+    qDebug() << "Clue not found in model" << clueCell;
     return NULL; // Item for clueCell not found
 }
 

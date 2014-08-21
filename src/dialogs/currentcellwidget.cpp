@@ -104,7 +104,7 @@ void CurrentCellWidget::convertToSolutionLetterCellRequested()
 
 void CurrentCellWidget::setupNoCell()
 {
-//   kDebug() << "Setup no cell";
+//   qDebug() << "Setup no cell";
 
     m_noCell = true;
     m_currentClue = NULL;
@@ -122,7 +122,7 @@ void CurrentCellWidget::setupNoCell()
 
 void CurrentCellWidget::setupNoPropertiesCell(KrossWordCell *cell)
 {
-//   kDebug() << "Setup no properties cell" << cell;
+//   qDebug() << "Setup no properties cell" << cell;
 
     // Give some time to animations TODO: fix crash here
 //   QApplication::processEvents( QEventLoop::ExcludeUserInputEvents, 20 );
@@ -208,7 +208,7 @@ void CurrentCellWidget::setupClueCell(ClueCell* clue, LetterCell *letter)
     if (!clue)
         return;
 
-//   kDebug() << "setupClueCell";
+//   qDebug() << "setupClueCell";
 
     if (!letter)
         letter = clue->firstLetter();
@@ -400,7 +400,7 @@ void CurrentCellWidget::clearLayout()
     QList< QWidget* > children = findChildren< QWidget* >();
     foreach(QWidget * child, children) {
         layout()->removeWidget(child);
-//     kDebug() << "DELETE" << child;
+//     qDebug() << "DELETE" << child;
         child->deleteLater();
     }
     delete this->layout();

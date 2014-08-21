@@ -23,7 +23,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <qevent.h>
-#include <kdebug.h>
+#include <QDebug>
 #include <kdeversion.h>
 
 Offset operator *(const Offset &offset, int factor)
@@ -89,7 +89,7 @@ void KrossWordCell::setPositionFromCoordinates()
 
 QRectF KrossWordCell::boundingRect() const
 {
-//     kDebug() << "bounding size =" << krossWord()->cellSize();
+//     qDebug() << "bounding size =" << krossWord()->cellSize();
 //     qreal penWidth = 1;
 //     return QRectF( pos().x() - penWidth / 2, pos().y() - penWidth / 2,
 //      krossWord()->cellSize().width() + penWidth,

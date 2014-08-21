@@ -43,14 +43,14 @@ bool UndoStackExt::tryPush(UndoCommandExt* command,
     if (command->checkRedo(errorMessage)) {
         command->setUndoStack(this);
 
-//     kDebug() << command->type();
+//     qDebug() << command->type();
 //     m_data.open( QIODevice::Append );
         if (index() < m_dataIndexPos.count()) {
             QDataStream stream(&m_data, QIODevice::WriteOnly);
 
-//       kDebug() << "UndoStackExt::tryPush() | seeked to"
+//       qDebug() << "UndoStackExt::tryPush() | seeked to"
 //         << m_dataIndexPos[index()] << "for type" << command->type();
-//       kDebug() << "TEST TYPE" << static_cast<qint8>( command->type() );
+//       qDebug() << "TEST TYPE" << static_cast<qint8>( command->type() );
 
 //       UndoCommandExt *mergedCommand = NULL;
 //       if ( command->id() != -1 && m_lastCommand
@@ -75,7 +75,7 @@ bool UndoStackExt::tryPush(UndoCommandExt* command,
 //       }
             stream.device()->close();
         } else {
-            kDebug() << "Wrong index" << index() << "size =" << m_dataIndexPos.size()
+            qDebug() << "Wrong index" << index() << "size =" << m_dataIndexPos.size()
                      << "Clearing stored undo stack";
 //       QDataStream stream( &m_data, QIODevice::Append );
 //       stream << static_cast<qint8>( command->type() );
@@ -95,15 +95,15 @@ bool UndoStackExt::tryPush(UndoCommandExt* command,
 
         m_dataIndexPos = m_dataIndexPos.mid(0, index() + 1 - m_storedStartIndex);
         m_dataIndexPos << m_data.size();
-//     kDebug() << " new data ending at:" << m_data.size()
+//     qDebug() << " new data ending at:" << m_data.size()
 //       << "| data:" << m_data.toBase64();
 //     m_data << (QString::number(command->type()) + "|" + command->data());
 
-//     kDebug() << "PUSH COMMAND" << command->type();
+//     qDebug() << "PUSH COMMAND" << command->type();
         push(command);
         return true;
     } else {
-        kDebug() << "Error:" << *errorMessage;
+        qDebug() << "Error:" << *errorMessage;
         return false;
     }
 }
@@ -126,7 +126,7 @@ void UndoStackExt::createFromData(KrossWord *krossWord, const QByteArray& data)
     QDataStream stream(&m_data, QIODevice::ReadOnly);
     qint16 index;
     stream >> index;
-//   kDebug() << "UndoStackExt::createFromData()   index =" << index;
+//   qDebug() << "UndoStackExt::createFromData()   index =" << index;
     m_dataIndexPos.clear();
     m_dataIndexPos << sizeof(qint16);
 
@@ -137,23 +137,23 @@ void UndoStackExt::createFromData(KrossWord *krossWord, const QByteArray& data)
 //   foreach ( QString cmdData, m_data ) {
 //     cmd = UndoCommandExt::fromData( cmdData, krossWord );
     while (!stream.atEnd()) {
-//     kDebug() << "BEGIN create UndoCommandExt fromData";
+//     qDebug() << "BEGIN create UndoCommandExt fromData";
         cmd = UndoCommandExt::fromData(krossWord, &stream);
         if (cmd) {
             cmd->setUndoStack(this);
             m_dataIndexPos << stream.device()->pos();
-//       kDebug() << "UndoStackExt::createFromData() | new data start pos ="
+//       qDebug() << "UndoStackExt::createFromData() | new data start pos ="
 //         << stream.device()->pos();
 
             push(cmd);
             ++curIndex;
         } else {
-            kDebug() << "UndoStackExt::createFromData  No undo command created! Stopping now.";
+            qDebug() << "UndoStackExt::createFromData  No undo command created! Stopping now.";
             m_executingRedo = true;
             clear();
             return;
         }
-//     kDebug() << "END create UndoCommandExt fromData";
+//     qDebug() << "END create UndoCommandExt fromData";
     }
 
     while (curIndex-- > index)
@@ -219,9 +219,9 @@ UndoCommandExt* UndoCommandExt::fromData(KrossWord* krossWord,
 {
     qint8 type;
     *stream >> type;
-//   kDebug() << "TEST TYPE" << type << (int)type;
+//   qDebug() << "TEST TYPE" << type << (int)type;
     Command command = static_cast<Command>(type);
-    kDebug() << "UndoCommandExt::fromData() | type =" << command;
+    qDebug() << "UndoCommandExt::fromData() | type =" << command;
 
     switch (command) {
     case CommandCrosswordCompound:
@@ -268,7 +268,7 @@ UndoCommandExt* UndoCommandExt::fromData(KrossWord* krossWord,
         return AddLettersToClueCommand::fromData(krossWord, stream, parent);
     }
 
-    kDebug() << "Undo command type" << command
+    qDebug() << "Undo command type" << command
              << "is unknown. Further processing will fail...";
     return NULL;
 }
@@ -362,11 +362,11 @@ void RemoveClueCommand::redoMaybe()
     ClueCell *clue = m_krossWord->findClueCell(m_coord, m_orientation, m_answerOffset);
 
     if (clue) {
-//     kDebug() << "Clue gets removed:" << m_clue << m_coord << m_orientation
+//     qDebug() << "Clue gets removed:" << m_clue << m_coord << m_orientation
 //  << ClueCell::answerOffsetToOffset( m_answerOffset ) << clue;
         m_krossWord->removeClue(clue);
     } else
-        kDebug() << "Clue not found" << m_clue << m_coord << m_orientation
+        qDebug() << "Clue not found" << m_clue << m_coord << m_orientation
                  << ClueCell::answerOffsetToOffset(m_answerOffset);
 }
 
@@ -392,15 +392,15 @@ void RemoveClueCommand::undoMaybe()
                               true, &clue);
 
     if (errorType == ErrorNone) {
-//     kDebug() << "Clue inserted:" << m_clue << m_coord << m_orientation
+//     qDebug() << "Clue inserted:" << m_clue << m_coord << m_orientation
 //  << ClueCell::answerOffsetToOffset(m_answerOffset);
 
         clue->setCurrentAnswer(m_currentAnswer);
     } else
-        kDebug() << "Couldn't perform undo, insertClue returns"
+        qDebug() << "Couldn't perform undo, insertClue returns"
                  << KrossWord::errorMessageFromErrorType(errorType);
 
-//   kDebug() << "Undo RemoveClueCommand completed";
+//   qDebug() << "Undo RemoveClueCommand completed";
 }
 
 
@@ -440,7 +440,7 @@ void AddClueCommand::init()
                 // Change the correct letter of existing letter cell
                 new LetterEditCommand(m_krossWord, true, letter->coord(),
                                       letter->correctLetter(), m_answer[i], this);
-//  kDebug() << "new LetterEditCommand for" << letter;
+//  qDebug() << "new LetterEditCommand for" << letter;
             }
         }
         ++i;
@@ -583,7 +583,7 @@ void RemoveImageCommand::redoMaybe()
     if (image)
         m_krossWord->removeImage(image);
     else
-        kDebug() << "Image not found" << m_url << m_coord;
+        qDebug() << "Image not found" << m_url << m_coord;
 }
 
 void RemoveImageCommand::undoMaybe()
@@ -594,7 +594,7 @@ void RemoveImageCommand::undoMaybe()
                               DontIgnoreErrors, &image);
 
     if (errorType != ErrorNone)
-        kDebug() << "Couldn't perform undo, insertImage returns"
+        qDebug() << "Couldn't perform undo, insertImage returns"
                  << KrossWord::errorMessageFromErrorType(errorType);
 }
 
@@ -681,8 +681,8 @@ void ConvertToLetterCommand::redoMaybe()
         qgraphicsitem_cast<SolutionLetterCell*>(m_krossWord->at(m_coord));
 
     if (!solutionLetter) {
-        kDebug() << "No solution letter at" << m_coord << m_krossWord->at(m_coord);
-        kDebug() << m_krossWord;
+        qDebug() << "No solution letter at" << m_coord << m_krossWord->at(m_coord);
+        qDebug() << m_krossWord;
     }
     Q_ASSERT(solutionLetter);
 
@@ -889,7 +889,7 @@ void ChangeClueCommand::init(KrossWord* krossWord, ClueCell* clueCell,
 
     m_krossWord = krossWord;
 
-//   kDebug() << clueCell;
+//   qDebug() << clueCell;
     m_oldCoord = clueCell->coord();
     m_oldOrientation = clueCell->orientation();
     m_oldAnswerOffset = clueCell->answerOffset();
@@ -914,11 +914,11 @@ void ChangeClueCommand::init(KrossWord* krossWord, ClueCell* clueCell,
         new ConvertToLetterCommand(m_krossWord, solLetter, this);
     }
 
-//   kDebug() << m_oldCoord << "=>" << m_newCoord;
-//   kDebug() << m_oldAnswerOffset << "=>" << m_newAnswerOffset;
-//   kDebug() << m_oldOrientation << "=>" << m_newOrientation;
-//   kDebug() << m_oldCorrectAnswer << "=>" << m_newCorrectAnswer;
-//   kDebug() << m_oldCurrentAnswer << "=>" << m_newCurrentAnswer;
+//   qDebug() << m_oldCoord << "=>" << m_newCoord;
+//   qDebug() << m_oldAnswerOffset << "=>" << m_newAnswerOffset;
+//   qDebug() << m_oldOrientation << "=>" << m_newOrientation;
+//   qDebug() << m_oldCorrectAnswer << "=>" << m_newCorrectAnswer;
+//   qDebug() << m_oldCurrentAnswer << "=>" << m_newCurrentAnswer;
 
     setupText();
 }
@@ -929,13 +929,13 @@ bool ChangeClueCommand::mergeWith(const QUndoCommand* other)
     if (!cmd)
         return false;
 
-//   kDebug() << "  > Merge" << m_oldCoord << "=>" << m_newCoord
+//   qDebug() << "  > Merge" << m_oldCoord << "=>" << m_newCoord
 //     << m_oldClueText << "=>" << m_newClueText
 //     << m_oldAnswerOffset << "=>" << m_newAnswerOffset
 //     << m_oldOrientation << "=>" << m_newOrientation
 //     << m_oldCorrectAnswer << "=>" << m_newCorrectAnswer
 //     << m_oldCurrentAnswer << "=>" << m_newCurrentAnswer;
-//   kDebug() << "  > With" << cmd->m_oldCoord << "=>" << cmd->m_newCoord
+//   qDebug() << "  > With" << cmd->m_oldCoord << "=>" << cmd->m_newCoord
 //     << cmd->m_oldClueText << "=>" << cmd->m_newClueText
 //     << cmd->m_oldAnswerOffset << "=>" << cmd->m_newAnswerOffset
 //     << cmd->m_oldOrientation << "=>" << cmd->m_newOrientation
@@ -1025,9 +1025,9 @@ void ChangeClueCommand::redoMaybe()
                      m_oldAnswerOffset);
 
     if (!clue) {
-        kDebug() << "No clue cell found at" << m_oldCoord << m_oldAnswerOffset
+        qDebug() << "No clue cell found at" << m_oldCoord << m_oldAnswerOffset
                  << "with orientation" << m_oldOrientation;
-        kDebug() << m_krossWord;
+        qDebug() << m_krossWord;
         return;
     }
 
@@ -1035,10 +1035,10 @@ void ChangeClueCommand::redoMaybe()
     // before changing the clues properties
     UndoCommandExt::redoMaybe();
 
-//   kDebug() << m_oldOrientation << "=>" << m_newOrientation;
-//   kDebug() << m_oldAnswerOffset << "=>" << m_newAnswerOffset;
-//   kDebug() << m_oldCorrectAnswer << "=>" << m_newCorrectAnswer;
-//   kDebug() << m_oldCurrentAnswer << "=>" << m_newCurrentAnswer;
+//   qDebug() << m_oldOrientation << "=>" << m_newOrientation;
+//   qDebug() << m_oldAnswerOffset << "=>" << m_newAnswerOffset;
+//   qDebug() << m_oldCorrectAnswer << "=>" << m_newCorrectAnswer;
+//   qDebug() << m_oldCurrentAnswer << "=>" << m_newCurrentAnswer;
 
     clue->setProperties(m_newOrientation, m_newAnswerOffset, m_newCorrectAnswer);
     clue->setClue(m_newClueText);
@@ -1055,9 +1055,9 @@ void ChangeClueCommand::undoMaybe()
     ClueCell *clue = m_krossWord->findClueCell(m_newCoord, m_newOrientation,
                      m_newAnswerOffset);
     if (!clue) {
-        kDebug() << "No clue cell found at" << m_oldCoord << m_oldAnswerOffset
+        qDebug() << "No clue cell found at" << m_oldCoord << m_oldAnswerOffset
                  << "with orientation" << m_oldOrientation;
-        kDebug() << m_krossWord;
+        qDebug() << m_krossWord;
         return;
     }
 
@@ -1132,7 +1132,7 @@ LetterEditCommand::LetterEditCommand(KrossWord *krossWord,
     m_currentLetter = currentLetter;
     m_newLetter = newLetter;
 
-//   kDebug() << "at" << m_coord << "edit correct?" << m_editCorrectLetter
+//   qDebug() << "at" << m_coord << "edit correct?" << m_editCorrectLetter
 //     << "from" << m_currentLetter << "to" << m_newLetter;
     setupText();
 }
@@ -1185,7 +1185,7 @@ void LetterEditCommand::redoMaybe()
         else
             letter->setCurrentLetter(m_newLetter);
     } else
-        kDebug() << "Can't redo, because the LetterCell couldn't be found";
+        qDebug() << "Can't redo, because the LetterCell couldn't be found";
 }
 
 bool LetterEditCommand::checkUndo(QString* errorMessage) const
@@ -1204,7 +1204,7 @@ void LetterEditCommand::undoMaybe()
         else
             letter->setCurrentLetter(m_currentLetter);
     } else
-        kDebug() << "Can't undo, because the LetterCell couldn't be found";
+        qDebug() << "Can't undo, because the LetterCell couldn't be found";
 }
 
 ClearCrosswordCommand::ClearCrosswordCommand(KrossWord* krossWord,
@@ -1337,7 +1337,7 @@ SetClueHiddenCommand::SetClueHiddenCommand(KrossWord* krossWord,
     m_firstLetterCoord = clue->firstLetterCoords();
 
     setupText();
-//   kDebug() << "Hiding clue" << clue->clue() << "at" << clue->coord()
+//   qDebug() << "Hiding clue" << clue->clue() << "at" << clue->coord()
 //     << "first letter pos is" << m_firstLetterCoord;
 }
 
@@ -1360,7 +1360,7 @@ void SetClueHiddenCommand::redoMaybe()
                                doubleClue->clue(m_oldAnswerOffset, m_clueOrientation))) {
             clue->setHidden();
         } else {
-            kDebug() << "Clue cell not found at "
+            qDebug() << "Clue cell not found at "
                      << m_firstLetterCoord - ClueCell::answerOffsetToOffset(m_oldAnswerOffset);
         }
     }
@@ -1374,7 +1374,7 @@ void SetClueHiddenCommand::undoMaybe()
 
     ClueCell *clue = firstLetter->clue(m_clueOrientation);
     if (!clue) {
-        kDebug() << "No clue cell found in the given orientation " << m_clueOrientation
+        qDebug() << "No clue cell found in the given orientation " << m_clueOrientation
                  << " for the given (first) letter cell at " << m_firstLetterCoord
                  << ", answerOffset should get " << ClueCell::answerOffsetToOffset(m_oldAnswerOffset);
     } else
@@ -1421,7 +1421,7 @@ bool MakeClueCellVisibleCommand::checkRedo(QString* errorMessage) const
             if (errorMessage)
                 *errorMessage = "Couldn't make clue cell visible";
 
-            kDebug() << "Couldn't make clue cell visible with first letter at" << m_firstLetterCoord
+            qDebug() << "Couldn't make clue cell visible with first letter at" << m_firstLetterCoord
                      << "with orientation" << m_clueOrientation;
             return false;
         } else
@@ -1430,7 +1430,7 @@ bool MakeClueCellVisibleCommand::checkRedo(QString* errorMessage) const
         if (errorMessage)
             *errorMessage = "No clue cell found";
 
-        kDebug() << "No clue cell found for first letter at" << m_firstLetterCoord
+        qDebug() << "No clue cell found for first letter at" << m_firstLetterCoord
                  << "with orientation" << m_clueOrientation;
         return false;
     }
@@ -1439,13 +1439,13 @@ bool MakeClueCellVisibleCommand::checkRedo(QString* errorMessage) const
 void MakeClueCellVisibleCommand::redoMaybe()
 {
     if (m_newAnswerOffset == OffsetInvalid)
-        kDebug() << "Couldn't make the clue cell visible";
+        qDebug() << "Couldn't make the clue cell visible";
     else {
         ClueCell *clue = m_krossWord->findClueCell(m_firstLetterCoord,
                          m_clueOrientation,
                          OnClueCell);
         if (!clue->setUnhidden(m_newAnswerOffset))
-            kDebug() << "Couldn't make the clue cell visible at"
+            qDebug() << "Couldn't make the clue cell visible at"
                      << ClueCell::answerOffsetToOffset(m_newAnswerOffset)
                      << clue->clue();
     }
@@ -1459,7 +1459,7 @@ void MakeClueCellVisibleCommand::undoMaybe()
     if (clue)
         clue->setHidden();
     else
-        kDebug() << "No clue found for first letter at" << m_firstLetterCoord
+        qDebug() << "No clue found for first letter at" << m_firstLetterCoord
                  << "with orientation" << m_clueOrientation;
 }
 
@@ -1709,7 +1709,7 @@ ConvertCrosswordCommand::ConvertCrosswordCommand(KrossWord* krossWord,
 
     // Setup child commands
     foreach(ClueCell * clue, conversionInfo.cluesToRemove) {
-        kDebug() << "Remove command for" << clue->clue();
+        qDebug() << "Remove command for" << clue->clue();
         addRemoveClueCommand(clue);
     }
 
@@ -1725,7 +1725,7 @@ ConvertCrosswordCommand::ConvertCrosswordCommand(KrossWord* krossWord,
         else if ((solutionLetter = qgraphicsitem_cast<SolutionLetterCell*>(cell)))
             addConvertToLetterCommand(solutionLetter);
         else
-            kDebug() << "TODO?: RemoveCellCommand for"
+            qDebug() << "TODO?: RemoveCellCommand for"
                      << stringFromCellType(cell->cellType());
         //       new RemoveCellCommand( krossWord, cell, this );
         //       removeCell( cell );
@@ -1758,7 +1758,7 @@ ConvertCrosswordCommand::ConvertCrosswordCommand(KrossWord* krossWord,
     if (conversionInfo.conversionCommands.testFlag(KrossWord::SetDefaultNumberPuzzleMapping))
         addSetDefaultNumberPuzzleMappingCommand();
 //     new SetDefaultNumberPuzzleMappingCommand( m_krossWord, this );
-//     kDebug() << "TODO: SetDefaultNumberPuzzleMappingCommand";
+//     qDebug() << "TODO: SetDefaultNumberPuzzleMappingCommand";
 //     m_numberPuzzleMapping = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     if (conversionInfo.conversionCommands.testFlag(KrossWord::SetupSameLetterSynchronization))
@@ -1766,7 +1766,7 @@ ConvertCrosswordCommand::ConvertCrosswordCommand(KrossWord* krossWord,
     else
         addRemoveSameLetterSynchronizationCommand();
 //     new SetupSameLetterSynchronizationCommand( m_krossWord, this );
-//     kDebug() << "TODO: SetupSameLetterSynchronizationCommand";
+//     qDebug() << "TODO: SetupSameLetterSynchronizationCommand";
 //     setupSameLetterSynchronization();
 
     setupText();
@@ -1785,35 +1785,35 @@ void ConvertCrosswordCommand::redoMaybe()
     m_krossWord->setHighlightedClue(NULL);
 
     CrosswordCompoundUndoCommand::redoMaybe();
-//   kDebug() << "REDO CONVERSION...";
+//   qDebug() << "REDO CONVERSION...";
 //   for ( int i = childCount() - 1; i >= 0; --i ) {
 //     CheckableUndoCommand *cmd = (CheckableUndoCommand*)child( i );
 //     RemoveClueCommand *removeClueCmd;
 //     if ( (removeClueCmd = dynamic_cast<RemoveClueCommand*>(cmd)) ) {
-//       kDebug() << "RemoveClueCommand" << removeClueCmd->coord()
+//       qDebug() << "RemoveClueCommand" << removeClueCmd->coord()
 //       << removeClueCmd->clue() << removeClueCmd->answer()
 //       << removeClueCmd->answerOffset();
 //     } else if ( dynamic_cast<AddClueCommand*>(cmd) )
-//       kDebug() << "AddClueCommand";
+//       qDebug() << "AddClueCommand";
 //     else if ( dynamic_cast<LetterEditCommand*>(cmd) )
-//       kDebug() << "LetterEditClueCommand";
+//       qDebug() << "LetterEditClueCommand";
 //     else if ( dynamic_cast<SetClueHiddenCommand*>(cmd) )
-//       kDebug() << "SetClueHiddenCommand";
+//       qDebug() << "SetClueHiddenCommand";
 //     else if ( dynamic_cast<MakeClueCellVisibleCommand*>(cmd) )
-//       kDebug() << "MakeClueCellVisibleCommand";
+//       qDebug() << "MakeClueCellVisibleCommand";
 //     else if ( dynamic_cast<SetupSameLetterSynchronizationCommand*>(cmd) )
-//       kDebug() << "SetupSameLetterSynchronizationCommand";
+//       qDebug() << "SetupSameLetterSynchronizationCommand";
 //     else if ( dynamic_cast<RemoveSameLetterSynchronizationCommand*>(cmd) )
-//       kDebug() << "RemoveSameLetterSynchronizationCommand";
+//       qDebug() << "RemoveSameLetterSynchronizationCommand";
 //     else
-//       kDebug() << "Unknown" << cmd;
+//       qDebug() << "Unknown" << cmd;
 //
 //     QString errorMessage;
 //     if ( !cmd->checkRedo(&errorMessage) )
-//       kDebug() << errorMessage;
+//       qDebug() << errorMessage;
 //     cmd->redo();
 //   }
-//   kDebug() << "...END: REDO CONVERSION";
+//   qDebug() << "...END: REDO CONVERSION";
 }
 
 void ConvertCrosswordCommand::undoMaybe()
@@ -1822,35 +1822,35 @@ void ConvertCrosswordCommand::undoMaybe()
     m_krossWord->setHighlightedClue(NULL);
 
     CrosswordCompoundUndoCommand::undoMaybe();
-//   kDebug() << "UNDO CONVERSION...";
+//   qDebug() << "UNDO CONVERSION...";
 //   for ( int i = childCount() - 1; i >= 0; --i ) {
 //     CheckableUndoCommand *cmd = (CheckableUndoCommand*)child( i );
 //     RemoveClueCommand *removeClueCmd;
 //     if ( (removeClueCmd = dynamic_cast<RemoveClueCommand*>(cmd)) ) {
-//       kDebug() << "RemoveClueCommand" << removeClueCmd->coord()
+//       qDebug() << "RemoveClueCommand" << removeClueCmd->coord()
 //  << removeClueCmd->clue() << removeClueCmd->answer()
 //  << removeClueCmd->answerOffset();
 //     } else if ( dynamic_cast<AddClueCommand*>(cmd) )
-//       kDebug() << "AddClueCommand";
+//       qDebug() << "AddClueCommand";
 //     else if ( dynamic_cast<LetterEditCommand*>(cmd) )
-//       kDebug() << "LetterEditClueCommand";
+//       qDebug() << "LetterEditClueCommand";
 //     else if ( dynamic_cast<SetClueHiddenCommand*>(cmd) )
-//       kDebug() << "SetClueHiddenCommand";
+//       qDebug() << "SetClueHiddenCommand";
 //     else if ( dynamic_cast<MakeClueCellVisibleCommand*>(cmd) )
-//       kDebug() << "MakeClueCellVisibleCommand";
+//       qDebug() << "MakeClueCellVisibleCommand";
 //     else if ( dynamic_cast<SetupSameLetterSynchronizationCommand*>(cmd) )
-//       kDebug() << "SetupSameLetterSynchronizationCommand";
+//       qDebug() << "SetupSameLetterSynchronizationCommand";
 //     else if ( dynamic_cast<RemoveSameLetterSynchronizationCommand*>(cmd) )
-//       kDebug() << "RemoveSameLetterSynchronizationCommand";
+//       qDebug() << "RemoveSameLetterSynchronizationCommand";
 //     else
-//       kDebug() << "Unknown" << cmd;
+//       qDebug() << "Unknown" << cmd;
 //
 //     QString errorMessage;
 //     if ( !cmd->checkUndo(&errorMessage) )
-//       kDebug() << errorMessage;
+//       qDebug() << errorMessage;
 //     cmd->undoMaybe();
 //   }
-//   kDebug() << "...END: UNDO CONVERSION";
+//   qDebug() << "...END: UNDO CONVERSION";
 }
 
 
@@ -1865,7 +1865,7 @@ ResizeCrosswordCommand::ResizeCrosswordCommand(KrossWord *krossWord,
     m_newHeight = newHeight;
     m_anchor = anchor;
 
-//   kDebug() << "Resize Command | Anchor =" << anchor
+//   qDebug() << "Resize Command | Anchor =" << anchor
 //       << "| New Size =" << newWidth << newHeight;
     KrossWordCellList removedCells = krossWord->resizeGrid(
                                          newWidth, newHeight, anchor, true);
@@ -1873,13 +1873,13 @@ ResizeCrosswordCommand::ResizeCrosswordCommand(KrossWord *krossWord,
         ClueCell *clue;
         ImageCell *image;
         if ((clue = qgraphicsitem_cast<ClueCell*>(cell))) {
-//       kDebug() << "ResizeCrosswordCommand clue to remove"
+//       qDebug() << "ResizeCrosswordCommand clue to remove"
 //    << clue->correctAnswer() << clue->clue();
             addRemoveClueCommand(clue);
         } else if ((image = qgraphicsitem_cast<ImageCell*>(cell))) {
             addRemoveImageCommand(image);
         } else if (!cell->isType(EmptyCellType)) {
-            kDebug() << "No undo command to remove cells of type"
+            qDebug() << "No undo command to remove cells of type"
                      << stringFromCellType(cell->cellType());
         }
     }
@@ -1960,7 +1960,7 @@ MoveCellsCommand::MoveCellsCommand(KrossWord* krossWord, int dx, int dy,
         else if ((image = qgraphicsitem_cast<ImageCell*>(cell)))
             addRemoveImageCommand(image);
         else
-            kDebug() << "No undo command to remove cells of type"
+            qDebug() << "No undo command to remove cells of type"
                      << stringFromCellType(cell->cellType());
     }
 
@@ -2004,12 +2004,12 @@ void CrosswordCompoundUndoCommand::appendToData(QDataStream *stream) const
 {
     *stream << (qint16)childCount();
 
-//   kDebug() << "CrosswordCompoundUndoCommand::appendToData()"
+//   qDebug() << "CrosswordCompoundUndoCommand::appendToData()"
 //     << childCount() << "children" << type();
     for (int i = 0; i < childCount(); ++i) {
         const UndoCommandExt *cmd = dynamic_cast< const UndoCommandExt* >(child(i));
 
-//     kDebug() << "CrosswordCompoundUndoCommand::appendToData()  child" << i
+//     qDebug() << "CrosswordCompoundUndoCommand::appendToData()  child" << i
 //       << "is of type" << cmd->type() << type();
         *stream << static_cast<qint8>(cmd->type());
         cmd->appendToData(stream);
@@ -2022,10 +2022,10 @@ CrosswordCompoundUndoCommand::CrosswordCompoundUndoCommand(
 {
     qint16 children;
     *stream >> children;
-//   kDebug() << "CrosswordCompoundUndoCommand()" << children << "children";
+//   qDebug() << "CrosswordCompoundUndoCommand()" << children << "children";
 
     for (int i = 0; i < children; ++i) {
-//     kDebug() << "CrosswordCompoundUndoCommand()   child" << i;
+//     qDebug() << "CrosswordCompoundUndoCommand()   child" << i;
         UndoCommandExt::fromData(krossWord, stream, this);
     }
 }
@@ -2034,7 +2034,7 @@ void RemoveClueCommand::appendToData(QDataStream *stream) const
 {
 //   int size = sizeof(int)*4 + sizeof(qint8) * 2 + sizeof(qint16) * 2 + sizeof(qint32) * 3
 //  + sizeof(char) * (m_clue.length() + m_answer.length() + m_currentAnswer.length() + 3);
-//   kDebug() << "RemoveClueCommand::appendToData()" << "Size should be" << size
+//   qDebug() << "RemoveClueCommand::appendToData()" << "Size should be" << size
 //     << "Current pos" << stream->device()->pos();
 //   qint64 prevPos = stream->device()->pos();
     CrosswordCompoundUndoCommand::appendToData(stream);
@@ -2042,7 +2042,7 @@ void RemoveClueCommand::appendToData(QDataStream *stream) const
     *stream << static_cast<qint8>(m_answerOffset);
     *stream << static_cast<qint8>(m_orientation);
     *stream << m_clue << m_answer << m_currentAnswer;
-//   kDebug() << "RemoveClueCommand::appendToData()" << "New pos" << stream->device()->pos()
+//   qDebug() << "RemoveClueCommand::appendToData()" << "New pos" << stream->device()->pos()
 //     << "Computed size" << (stream->device()->pos() - prevPos);
 }
 
@@ -2063,7 +2063,7 @@ RemoveClueCommand::RemoveClueCommand(KrossWord *krossWord, QDataStream *stream,
 
     *stream >> m_clue >> m_answer >> m_currentAnswer;
 
-//   kDebug() << "RemoveClueCommand()" << m_coord << m_answerOffset
+//   qDebug() << "RemoveClueCommand()" << m_coord << m_answerOffset
 //     << m_orientation << m_clue << m_currentAnswer;
     setupText();
 }
@@ -2289,7 +2289,7 @@ void MoveCellsCommand::appendToData(QDataStream *stream) const
 {
     CrosswordCompoundUndoCommand::appendToData(stream);
     *stream << (qint16)m_dx << (qint16)m_dy;
-//   kDebug() << "MoveCellsCommand::appendToData" << m_dx << m_dy;
+//   qDebug() << "MoveCellsCommand::appendToData" << m_dx << m_dy;
 }
 
 MoveCellsCommand::MoveCellsCommand(KrossWord* krossWord,
@@ -2301,7 +2301,7 @@ MoveCellsCommand::MoveCellsCommand(KrossWord* krossWord,
     m_dx = dx;
     m_dy = dy;
 
-//   kDebug() << "MoveCellsCommand()" << m_dx << m_dy;
+//   qDebug() << "MoveCellsCommand()" << m_dx << m_dy;
     setupText();
 }
 

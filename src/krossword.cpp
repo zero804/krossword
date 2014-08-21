@@ -90,7 +90,7 @@ void KrossWordTitleItem::updateGraphicsEffect(KrossWord* krossWord,
         QGraphicsDropShadowEffect* effect)
 {
     if (!effect) {
-        kDebug() << "No drop shadow effect found for title item";
+        qDebug() << "No drop shadow effect found for title item";
         return;
     }
 
@@ -216,7 +216,7 @@ void KrossWord::init(uint width, uint height)
 
 KrossWord::~KrossWord()
 {
-//     kDebug() << "Cleaning crossword";
+//     qDebug() << "Cleaning crossword";
     deleteAllCells(); // Cells are delete'd by QGraphicsScene only if they are in a QGraphicsScene
 }
 
@@ -340,7 +340,7 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
 
     ClueCellList clueList = clues();
     if (m_crosswordTypeInfo.minAnswerLength < newInfo.minAnswerLength) {
-        kDebug() << "Remove clues with answers shorter than the new minimal "
+        qDebug() << "Remove clues with answers shorter than the new minimal "
                  "answer length " << newInfo.minAnswerLength;
 
         for (int i = clueList.count() - 1; i >= 0; --i) {
@@ -368,7 +368,7 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
 
     if (m_crosswordTypeInfo.clueCellHandling != ClueCellsRequired
             && newInfo.clueCellHandling == ClueCellsRequired) {
-        kDebug() << "Make clue cells visible in the crossword grid";
+        qDebug() << "Make clue cells visible in the crossword grid";
 
         QList<Coord> disallowedCoords, coordsWithNewClueCell;
         for (int i = clueList.count() - 1; i >= 0; --i) {
@@ -376,11 +376,11 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
             if (clue->answerOffset() != OnClueCell)
                 continue; // Clue is already visible
 
-//       kDebug() << "DISALLOWED ARE:" << disallowedCoords;
+//       qDebug() << "DISALLOWED ARE:" << disallowedCoords;
             AnswerOffset offset = clue->tryToMakeVisible(true, disallowedCoords);
             if (offset == OffsetInvalid) {
                 conversionInfo.cluesToRemove << clueList.takeAt(i);
-//  kDebug() << "Added clue to remove list:" << clue->clue();
+//  qDebug() << "Added clue to remove list:" << clue->clue();
             } else {
                 Coord newCoord = clue->coord() - ClueCell::answerOffsetToOffset(offset);
                 KrossWordCell *cell = at(newCoord);
@@ -395,12 +395,12 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
 
                 conversionInfo.cluesToMakeVisible.insert(clue, offset);
 //  conversionInfo.cluesToMakeVisible << clue;
-//  kDebug() << "Added clue to make visible list:" << clue->clue();
+//  qDebug() << "Added clue to make visible list:" << clue->clue();
             }
         }
     } else if (m_crosswordTypeInfo.clueCellHandling != ClueCellsDisallowed
                && newInfo.clueCellHandling == ClueCellsDisallowed) {
-        kDebug() << "Hide all clue cells from the crossword grid";
+        qDebug() << "Hide all clue cells from the crossword grid";
 
         for (int i = clueList.count() - 1; i >= 0; --i) {
             ClueCell *clue = clueList[ i ];
@@ -416,11 +416,11 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
 
     if (m_crosswordTypeInfo.clueType == StringClues
             && newInfo.clueType == NumberClues1To26) {
-        kDebug() << "Convert from clueType StringClues to NumberClues1To26";
+        qDebug() << "Convert from clueType StringClues to NumberClues1To26";
 
         if (newInfo.clueMapping == CluesReferToCells
                 && newInfo.letterCellContent == Characters) {
-            kDebug() << "Convert to number puzzle clue mapping";
+            qDebug() << "Convert to number puzzle clue mapping";
 
             // Mark all clue cells to get removed from the crossword grid
             for (int i = clueList.count() - 1; i >= 0; --i) {
@@ -433,7 +433,7 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
             conversionInfo.conversionCommands |= SetDefaultNumberPuzzleMapping;
             conversionInfo.conversionCommands |= SetupSameLetterSynchronization;
         } else {
-            kDebug() << "Can't convert, removing all clues";
+            qDebug() << "Can't convert, removing all clues";
             conversionInfo.cluesToMakeVisible.clear();
             for (int i = clueList.count() - 1; i >= 0; --i) {
                 ClueCell *clue = clueList[ i ];
@@ -445,7 +445,7 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
     // NOTHING TO DO HERE (ie. no conversion needed, just works™):
 //    else if ( m_crosswordTypeInfo.clueType == NumberClues1To26
 //      && newInfo.clueType == StringClues ) {
-//     kDebug() << "Can't convert, removing all clues (2)";
+//     qDebug() << "Can't convert, removing all clues (2)";
 //     conversionInfo.cluesToMakeVisible.clear();
 //
 //     for ( int i = clueList.count() - 1; i >= 0; --i ) {
@@ -459,7 +459,7 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
     // Convert letter cell content if needed (characters <=> digits)
     if (m_crosswordTypeInfo.letterCellContent != Characters
             && newInfo.letterCellContent == Characters) {
-        kDebug() << "Convert letter content to characters";
+        qDebug() << "Convert letter content to characters";
         LetterCellList letterList = letters();
 
         foreach(LetterCell * letter, letterList) {
@@ -483,7 +483,7 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
         }
     } else if (m_crosswordTypeInfo.letterCellContent != Digits
                && newInfo.letterCellContent == Digits) {
-        kDebug() << "Convert letter content to digits";
+        qDebug() << "Convert letter content to digits";
         LetterCellList letterList = letters();
         foreach(LetterCell * letter, letterList) {
             bool letterGetsRemoved = true;
@@ -540,7 +540,7 @@ void KrossWord::executeConversionInfo(KrossWord::ConversionInfo conversionInfo)
 //   foreach ( ClueCell *clue, conversionInfo.cluesToMakeVisible.keys() ) {
 //     if ( clue->tryToMakeVisible() == ClueCell::OffsetInvalid )
         if (!it.key()->setUnhidden(it.value()))
-            kDebug() << "Couldn't make clue cell visible" << it.key()->coord() << it.key()->clue();
+            qDebug() << "Couldn't make clue cell visible" << it.key()->coord() << it.key()->clue();
     }
 
     QHash<LetterCell*, QChar>::const_iterator it;
@@ -691,13 +691,13 @@ void KrossWord::applyLetterContentToClueNumberMapping(
 void KrossWord::setCurrentCell(KrossWordCell* cell)
 {
     if (m_currentCell == cell) {
-//  kDebug() << "current is equal to new current"
+//  qDebug() << "current is equal to new current"
 //      << (cell ? KrossWordCell::cellTypeToString(cell->cellType()) : "NULL" );
         return;
     }
 
-//     kDebug() << "from" << (m_currentCell ? KrossWordCell::cellTypeToString(m_currentCell->cellType()) : "NULL");
-//     kDebug() << "to" << (cell ? KrossWordCell::cellTypeToString(cell->cellType()) : "NULL" );
+//     qDebug() << "from" << (m_currentCell ? KrossWordCell::cellTypeToString(m_currentCell->cellType()) : "NULL");
+//     qDebug() << "to" << (cell ? KrossWordCell::cellTypeToString(cell->cellType()) : "NULL" );
     if (m_currentCell) {
         disconnect(m_currentCell, SIGNAL(destroyed(QObject*)),
                    this, SLOT(currentCellDestroyed(QObject*)));
@@ -730,9 +730,9 @@ void KrossWord::setCurrentCell(KrossWordCell* cell)
 void KrossWord::currentCellDestroyed(QObject*)
 {
 //     if ( m_currentCell )
-//  kDebug() << KrossWordCell::cellTypeToString( m_currentCell->cellType() );
+//  qDebug() << KrossWordCell::cellTypeToString( m_currentCell->cellType() );
 //     else
-//  kDebug() << "Nothing destroyed?!?";
+//  qDebug() << "Nothing destroyed?!?";
 
     if (inside(m_currentCell->coord()) && at(m_currentCell->coord()) != m_currentCell)
         setCurrentCell(at(m_currentCell->coord()));
@@ -913,7 +913,7 @@ bool KrossWord::write(const QString& fileName, QString* errorString,
     if (fileFormat == DetermineByFileName) {
         fileFormat = fileFormatFromFileName(fileName);
         if (fileFormat == DetermineByFileName) {
-            kDebug() << QString("File format unknown for file '%1'").arg(fileName);
+            qDebug() << QString("File format unknown for file '%1'").arg(fileName);
             return false;
         }
     }
@@ -935,7 +935,7 @@ bool KrossWord::write(const QString& fileName, QString* errorString,
         }
     } else if (fileFormat == AcrossLitePuzFile) {
         if (!undoData.isEmpty())
-            kDebug() << "Can't store undoData to *.puz-files";
+            qDebug() << "Can't store undoData to *.puz-files";
 
         KrossWordPuzStream puzWriter;
         bool writeOk = puzWriter.write(&file, this, writeMode);
@@ -969,7 +969,7 @@ bool KrossWord::read(const KUrl& url, QString *errorString, QWidget *mainWindow,
     if (!file.open(QIODevice::ReadOnly)) {
         if (errorString != NULL)
             *errorString = file.errorString();
-        kWarning() << file.errorString();
+        qWarning() << file.errorString();
         if (removeTempFile)
             KIO::NetAccess::removeTempFile(fileName);
         return false;
@@ -1294,8 +1294,8 @@ QList< AnswerOffset > KrossWord::legalAnswerOffsets(
     int answerLength, ClueCell *excludedClue) const
 {
     KrossWordCell *cell = at(clueCellCoord);
-//   kDebug() << "KrossWord::legalAnswerOffsets()  " << orientation << clueCellCoord;
-//   kDebug() << "  excludedClue:" << excludedClue;
+//   qDebug() << "KrossWord::legalAnswerOffsets()  " << orientation << clueCellCoord;
+//   qDebug() << "  excludedClue:" << excludedClue;
     QList< AnswerOffset > offsets;
 
     // If adding a clue at coordinates containing a letter cell or if clue cells
@@ -1303,14 +1303,14 @@ QList< AnswerOffset > KrossWord::legalAnswerOffsets(
     // (ie. the answer offset must be OnClueCell).
     if ((cell->isLetterCell() && !((LetterCell*)cell)->isAttachedToClueExclusivly(excludedClue))
             || m_crosswordTypeInfo.clueCellHandling == ClueCellsDisallowed) {
-//     kDebug() << "Clue cells need to be hidden";
+//     qDebug() << "Clue cells need to be hidden";
         offsets << OnClueCell;
     } else {
         offsets = ClueCell::allAnswerOffsets();
 
         // Remove OnClueCell if clue cells are required
         if (m_crosswordTypeInfo.clueCellHandling == ClueCellsRequired) {
-//       kDebug() << "OnClueCell isn't legal because Clue cells are required";
+//       qDebug() << "OnClueCell isn't legal because Clue cells are required";
             offsets.removeOne(OnClueCell);
         }
 
@@ -1342,7 +1342,7 @@ QList< AnswerOffset > KrossWord::legalAnswerOffsets(
 
         ClueCell *clueCell = qgraphicsitem_cast<ClueCell*>(cell);
         if (clueCell && clueCell != excludedClue) {   // When creating a double clue cell
-            //     kDebug() << "Need to create a double clue cell, OnClueCell isn't legal";
+            //     qDebug() << "Need to create a double clue cell, OnClueCell isn't legal";
             offsets.removeOne(OnClueCell);
 
             // If the clue has the same orientation like the new clue
@@ -1370,12 +1370,12 @@ QList< AnswerOffset > KrossWord::legalAnswerOffsets(
                 continue;
             }
 
-//       kDebug() << "    " << offsets[i] << n << cellAtPos;
+//       qDebug() << "    " << offsets[i] << n << cellAtPos;
             if (cellAtPos->cellType() != EmptyCellType
                     && !cellAtPos->isLetterCell()) {
                 if (cellAtPos != excludedClue) {   // TEST
                     // Only allow empty or letter cells as cells for the first answer cell
-//    kDebug() << offsets[ i ] << "isn't legal, because there isn't an empty "
+//    qDebug() << offsets[ i ] << "isn't legal, because there isn't an empty "
 //           "or letter cell";
                     offsets.removeAt(i);
                     break;
@@ -1390,20 +1390,20 @@ QList< AnswerOffset > KrossWord::legalAnswerOffsets(
                         // same as the other clue of [letter] (ie. other than the orientation
                         // of [excludedClue]).
                         if (orientation != excludedClue->orientation()) {
-//        kDebug() << offsets[ i ] << "isn't legal, because there is a letter "
+//        qDebug() << offsets[ i ] << "isn't legal, because there is a letter "
 //     "cell with a not excluded clue in the given orientation";
                             offsets.removeAt(i);
                             break;
                         }
                     } else {
-//      kDebug() << offsets[ i ] << "isn't legal, because there is a crossed "
+//      qDebug() << offsets[ i ] << "isn't legal, because there is a crossed "
 //   "letter cell";
                         offsets.removeAt(i);
                         break;
                     }
                 } else if (orientation == letter->clue()->orientation()
                            && letter->clue() != excludedClue) {
-//    kDebug() << offsets[ i ] << "isn't legal, because there is an uncrossed "
+//    qDebug() << offsets[ i ] << "isn't legal, because there is an uncrossed "
 //      "letter cell with a not excluded clue in the given orientation";
                     offsets.removeAt(i);
                     break;
@@ -1476,7 +1476,7 @@ bool KrossWord::canTakeClueCell(const Coord& coord,
         if ((firstLetterOffset != Offset(0, 0) && !cellIsEmptyIfClueIsExcluded)
                 || (((LetterCell*)cellAtCoord)->isCrossed()
                     && !((LetterCell*)cellAtCoord)->clues().contains(excludedClue))) {
-//   kDebug() << "Can only add clue's with hidden clue cells at coordinates containing letter cells";
+//   qDebug() << "Can only add clue's with hidden clue cells at coordinates containing letter cells";
             return false;
         }
         break;
@@ -1484,20 +1484,20 @@ bool KrossWord::canTakeClueCell(const Coord& coord,
     case ClueCellType:
         if ((!allowDoubleClueCells || !m_crosswordTypeInfo.cellTypes.testFlag(DoubleClueCellType))
                 && !cellIsEmptyIfClueIsExcluded) {
-            kDebug() << "Double clue cells not allowed";
+            qDebug() << "Double clue cells not allowed";
             return false;
         }
         break;
 
     case DoubleClueCellType:
         if (!((DoubleClueCell*)cellAtCoord)->hasClue(excludedClue)) {
-            kDebug() << "Can't add clue cells to double clue cells";
+            qDebug() << "Can't add clue cells to double clue cells";
             return false;
         }
         break;
 
     default:
-//      kDebug() << "Can't add clue cells at coordinates containing cells with type"
+//      qDebug() << "Can't add clue cells at coordinates containing cells with type"
 //    << KrossWordCell::displayStringFromCellType( cellAtCoord->cellType() );
         return false;
         break;
@@ -1516,7 +1516,7 @@ ErrorType KrossWord::canInsertImage(const KGrid2D::Coord& coord,
     // Check if the image will fit into the grid
     if (!errorTypesToIgnore.testFlag(ErrorImageDoesntFit)
             && (!inside(coord) || !inside(coord + Offset(horizontalCellSpan - 1, verticalCellSpan - 1)))) {
-        kDebug() << "Image doesn't fit into the grid" << coord
+        qDebug() << "Image doesn't fit into the grid" << coord
                  << horizontalCellSpan << verticalCellSpan;
         return ErrorImageDoesntFit;
     }
@@ -1570,7 +1570,7 @@ ErrorType KrossWord::changeClueProperties(ClueCell* clue,
     bool changeAnswerOffset = clue->answerOffset() != newAnswerOffset;
     bool changeCorrectAnswer = clue->correctAnswer() != newCorrectAnswer;
     if (!changeOrientation && !changeAnswerOffset && !changeCorrectAnswer) {
-        kDebug() << "No changes";
+        qDebug() << "No changes";
         return ErrorNone; // Nothing to change
     }
 
@@ -1703,7 +1703,7 @@ ErrorType KrossWord::changeClueProperties(ClueCell* clue,
     clue->setHighlight(wasHighlighted);
     clue->setCorrectAnswer(newCorrectAnswer);
 
-//   kDebug() << "AFTER CHANGE" << this;
+//   qDebug() << "AFTER CHANGE" << this;
     insertCluePostProcessing(clue);
 
     SolutionLetterCellList solLettersAfter = solutionWordLetters(); // TODO
@@ -1741,7 +1741,7 @@ ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
                     && !inside(coord + answerOffset + KGrid2D::Coord(answer.length() - 1, 0)))
                 || (orientation == Qt::Vertical
                     && !inside(coord + answerOffset + KGrid2D::Coord(0, answer.length() - 1))))) {
-        kDebug() << "Clue doesn't fit into the grid" << coord << answerOffset << answer
+        qDebug() << "Clue doesn't fit into the grid" << coord << answerOffset << answer
                  << "orientation =" << orientation << "answer-length =" << answer.length();
         return ErrorClueDoesntFit;
     }
@@ -1749,7 +1749,7 @@ ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
     // Check if the orientation and answer offset combination isn't illegal
     if ((orientation == Qt::Horizontal && answerOffset == Offset(-1, 0))
             || (orientation == Qt::Vertical && answerOffset == Offset(0, -1))) {
-        kDebug() << "ErrorAnswerOverwritesClueCell";
+        qDebug() << "ErrorAnswerOverwritesClueCell";
         return ErrorAnswerOverwritesClueCell;
     }
 
@@ -1772,7 +1772,7 @@ ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
                 && !m_crosswordTypeInfo.isCharacterLegal(answerUpper[i])
                 && answerUpper[i] != ' ') {
 //       && !ALLOWED_CHARACTERS.contains(answerUpper[i]) && answerUpper[i] != ' ' ) {
-            kDebug() << "Illegal character" << answerUpper[i];
+            qDebug() << "Illegal character" << answerUpper[i];
             return ErrorAnswerContainsIllegalCharacters;
         }
 
@@ -1780,7 +1780,7 @@ ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
             KrossWordCell *oldCell = at(letterCoord);
             if (!errorTypesToIgnore.testFlag(ErrorAnswerCrossesClueCell)
                     && oldCell->isType(ClueCellType)) {
-                kDebug() << "Answer crosses a clue cell at" << letterCoord
+                qDebug() << "Answer crosses a clue cell at" << letterCoord
                          /*<< clue*/ << answer << "crossed clue:"
                          << qgraphicsitem_cast<ClueCell*>(oldCell)->clue();
                 return ErrorAnswerCrossesClueCell;
@@ -1788,7 +1788,7 @@ ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
                 LetterCell *letterCell = (LetterCell*)oldCell;
                 if (!errorTypesToIgnore.testFlag(ErrorAnswerIsIllegal)
                         && letterCell->correctLetter() != answerUpper.at(i)) {
-                    kDebug() << "Answer is illegal in the current crossword at" << letterCoord
+                    qDebug() << "Answer is illegal in the current crossword at" << letterCoord
                              /*<< clue*/ << answer << "wanted letter:" << i << answerUpper.at(i)
                              << "letter from other clue:" << letterCell->correctLetter() << endl
                              << "for clue at" << coord << "answer offset" << answerOffset
@@ -1799,7 +1799,7 @@ ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
                 } else if (!errorTypesToIgnore.testFlag(ErrorAnswerOverwritesClueInSameOrientation)
                            && letterCell->hasClueInDirection(orientation)
                            && letterCell->clue(orientation) != excludedClue) {
-                    kDebug() << "Answer overwrites answer to clue"
+                    qDebug() << "Answer overwrites answer to clue"
                              << letterCell->clue(orientation)->clue() << "at" << letterCoord;
                     return ErrorAnswerOverwritesClueInSameOrientation;
                 }
@@ -2001,7 +2001,7 @@ void KrossWord::replaceCell(const Coord& coord,
     Q_ASSERT(newCell);
 
     KrossWordCell *oldCell = at(coord);
-//   kDebug() << "KrossWord::replaceCell(): oldCell =" << oldCell;
+//   qDebug() << "KrossWord::replaceCell(): oldCell =" << oldCell;
     SpannedCell *spannedCell;
     SolutionLetterCell *solutionLetterCell;
     ClueCell *clueCell;
@@ -2107,7 +2107,7 @@ KrossWordCellList KrossWord::invalidateCell(const Coord& coord, bool simulate)
     if (!oldCell)
         return removedCells; // Cell at coord is already NULL, ie. invalidated
 
-//   kDebug() << "invalidate cell" << simulate << oldCell;
+//   qDebug() << "invalidate cell" << simulate << oldCell;
     SpannedCell *spannedCell;
     ClueCell *clueCell;
     DoubleClueCell *doubleClueCell;
@@ -2148,7 +2148,7 @@ KrossWordCellList KrossWord::invalidateCell(const Coord& coord, bool simulate)
             foreach(const Coord & coord, removedCoords) {
                 KrossWordCell *cell = at(coord);
                 if (cell) {
-                    kDebug() << "Delete cell" << cell;
+                    qDebug() << "Delete cell" << cell;
                     if (cell->scene())
                         cell->scene()->removeItem(cell);
                     (*m_krossWordGrid)[ coord ] = NULL;
@@ -2170,7 +2170,7 @@ KrossWordCellList KrossWord::invalidateCell(const Coord& coord, bool simulate)
                 foreach(const Coord & coord, removedCoords) {
                     KrossWordCell *cell = at(coord);
                     if (cell) {
-                        kDebug() << "Delete cell" << cell;
+                        qDebug() << "Delete cell" << cell;
                         if (cell->scene())
                             cell->scene()->removeItem(cell);
                         (*m_krossWordGrid)[ coord ] = NULL;
@@ -2198,7 +2198,7 @@ KrossWordCellList KrossWord::invalidateCell(const Coord& coord, bool simulate)
                 foreach(const Coord & coord, removedCoords) {
                     KrossWordCell *cell = at(coord);
                     if (cell) {
-                        kDebug() << "Delete cell" << cell;
+                        qDebug() << "Delete cell" << cell;
                         if (cell->scene())
                             cell->scene()->removeItem(cell);
                         (*m_krossWordGrid)[ coord ] = NULL;
@@ -2216,7 +2216,7 @@ KrossWordCellList KrossWord::invalidateCell(const Coord& coord, bool simulate)
 
         // Invalidate cell, by setting it to NULL
         (*m_krossWordGrid)[ coord ] = NULL;
-//     kDebug() << "Cell at" << coord << "is now NULL";
+//     qDebug() << "Cell at" << coord << "is now NULL";
 
         // Remove cell from scene
 //     if ( oldCell->scene() )
@@ -2232,7 +2232,7 @@ KrossWordCellList KrossWord::invalidateCell(const Coord& coord, bool simulate)
         }
     } // if ( !simulate )
 
-//   kDebug() << "  END: invalidate cell" << this;
+//   qDebug() << "  END: invalidate cell" << this;
     return removedCells;
 }
 
@@ -2241,7 +2241,7 @@ KrossWordCellList KrossWord::invalidateCellRegion(const Coord& coordTopLeft,
         const Coord& coordBottomRight, bool simulate)
 {
     KrossWordCellList removedCells;
-//   kDebug() << coordTopLeft << "to" << coordBottomRight;
+//   qDebug() << coordTopLeft << "to" << coordBottomRight;
     for (int x = coordTopLeft.first; x <= coordBottomRight.first; ++x) {
         for (int y = coordTopLeft.second; y <= coordBottomRight.second; ++y) {
             removedCells << invalidateCell(Coord(x, y), simulate);
@@ -2353,7 +2353,7 @@ void KrossWord::clearCache()
     KrossWordCellList cellList = cells();
     foreach(KrossWordCell * cell, cellList) {
         if (!cell) {
-            kDebug() << "NULL cell";
+            qDebug() << "NULL cell";
             continue;
         }
 
@@ -2395,7 +2395,7 @@ KrossWord* KrossWord::createSeparateSolutionKrossWord(
                               solutionClue, answer, SolutionLetterCellType,
                               DontIgnoreErrors, true, &clue);
     if (errorType != ErrorNone) {
-        kDebug() << "Couldn't create separate solution crossword:"
+        qDebug() << "Couldn't create separate solution crossword:"
                  << KrossWord::errorMessageFromErrorType(errorType);
         return NULL;
     }
@@ -2611,8 +2611,8 @@ KrossWordCellList KrossWord::resizeGrid(uint width, uint height,
     if (prevWidth == width && prevHeight == height)
         return removedCells;
 //   if ( simulate )
-//     kDebug() << "SIMULATION";
-//   kDebug() << "Resizing from" << QString("%1x%2").arg(prevWidth).arg(prevHeight)
+//     qDebug() << "SIMULATION";
+//   qDebug() << "Resizing from" << QString("%1x%2").arg(prevWidth).arg(prevHeight)
 //     << "to" << QString("%1x%2").arg(width).arg(height);
 
     QRect sourceRect;
@@ -2647,8 +2647,8 @@ KrossWordCellList KrossWord::resizeGrid(uint width, uint height,
         offset = Offset(dw, dh);
         break;
     }
-//   kDebug() << "Moving the crossword content according to anchor" << negOffset << anchor;
-//   kDebug() << this;
+//   qDebug() << "Moving the crossword content according to anchor" << negOffset << anchor;
+//   qDebug() << this;
 
     // Move coords of hidden clue cells
     KrosswordGrid *krossWordGrid = new KrosswordGrid(width, height);
@@ -2663,7 +2663,7 @@ KrossWordCellList KrossWord::resizeGrid(uint width, uint height,
             if (simulate)
                 continue;
 
-//       kDebug() << "inside" << sourceCoord << "=>" << targetCoord;
+//       qDebug() << "inside" << sourceCoord << "=>" << targetCoord;
             clue->setCoord(targetCoord, false);
         }
     }
@@ -2710,7 +2710,7 @@ KrossWordCellList KrossWord::resizeGrid(uint width, uint height,
         delete m_krossWordGrid;
         m_krossWordGrid = krossWordGrid;
 
-//     kDebug() << "filling with empty cells";
+//     qDebug() << "filling with empty cells";
         fillWithEmptyCells();
         resizeScene();
     } else
@@ -2763,7 +2763,7 @@ QString KrossWord::contentString() const
                 line += "| NULL\t";
         }
         lines << line;
-//     kDebug() << "        " << line;
+//     qDebug() << "        " << line;
     }
 
     QString firstLine('\t');
@@ -2884,18 +2884,18 @@ QString KrossWord::currentSolutionWord() const
 void KrossWord::setHighlightedClue(ClueCell* clue)
 {
     if (clue && !clue->flags().testFlag(ItemIsFocusable)) {
-        kDebug() << "Clue isn't focusable";
+        qDebug() << "Clue isn't focusable";
         return;
     }
 
 //     if ( m_highlightedClue )
-//  kDebug() << "old highlight for" << m_highlightedClue->clue()
+//  qDebug() << "old highlight for" << m_highlightedClue->clue()
 //      << m_highlightedClue->orientation();
 //     if ( clue )
-//  kDebug() << "new highlight for" << clue->clue() << clue->orientation();
+//  qDebug() << "new highlight for" << clue->clue() << clue->orientation();
 //     else
-//  kDebug() << "no new highlighted clue";
-//     kDebug() << "";
+//  qDebug() << "no new highlighted clue";
+//     qDebug() << "";
 
     if (m_highlightedClue == clue)
         return;
@@ -3103,7 +3103,7 @@ AnswerOffset KrossWord::answerOffsetFromString(const QString &s)
     else if (sl == "bottomright")
         return OffsetBottomRight;
     else {
-        kDebug() << "Couldn't get enumerable for" << s;
+        qDebug() << "Couldn't get enumerable for" << s;
         return OffsetInvalid;
     }
 }
@@ -3128,7 +3128,7 @@ QString KrossWord::answerOffsetToString(AnswerOffset answerOffset)
     case OffsetBottomRight:
         return "BottomRight";
     case OffsetInvalid: // Shouldn't appear here..
-        kDebug() << "Got an invalid answerOffset";
+        qDebug() << "Got an invalid answerOffset";
     case OnClueCell:
     default:
         return "ClueHidden";

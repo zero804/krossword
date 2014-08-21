@@ -339,7 +339,7 @@ Offset ClueCell::answerOffsetToOffset(AnswerOffset answerOffset)
     case OffsetBottomRight:
         return Offset(1, 1);
     case OffsetInvalid:
-        kDebug() << "Invalid answerOffset value.";
+        qDebug() << "Invalid answerOffset value.";
         return Offset(0, 0);
     }
 
@@ -369,7 +369,7 @@ AnswerOffset ClueCell::offsetToAnswerOffset(Offset offset)
     if (offset == Offset(1, 1))
         return OffsetBottomRight;
     else {
-        kDebug() << "Invalid offset.";
+        qDebug() << "Invalid offset.";
         return OffsetInvalid;
     }
 }
@@ -379,7 +379,7 @@ void ClueCell::setHidden()
     if (m_answerOffset == OnClueCell)
         return;
 
-//   kDebug() << "Set hidden" << clue() << coord();
+//   qDebug() << "Set hidden" << clue() << coord();
     DoubleClueCell *doubleClueCell = qgraphicsitem_cast< DoubleClueCell* >(parentItem());
     if (doubleClueCell) {
         ClueCell *otherClueCell = doubleClueCell->clue1() == this
@@ -497,13 +497,13 @@ bool ClueCell::setUnhidden(AnswerOffset newAnswerOffset)
         return true; // Clue cell is already visible
 
     Offset offset = answerOffsetToOffset(newAnswerOffset);
-//   kDebug() << "Set unhidden" << clue() << coord() << "answer offset" << offset;
+//   qDebug() << "Set unhidden" << clue() << coord() << "answer offset" << offset;
 
     Coord newClueCellCoord = coord() - offset;
     KrossWordCell *cell = krossWord()->at(newClueCellCoord);
     ClueCell *clue;
     if ((clue = qgraphicsitem_cast<ClueCell*>(cell))) {
-//     kDebug() << "Creating a new double clue cell";
+//     qDebug() << "Creating a new double clue cell";
         DoubleClueCell *doubleClueCell = new DoubleClueCell(krossWord(),
                 newClueCellCoord, clue, this);
         krossWord()->replaceCell(newClueCellCoord, doubleClueCell, false);
@@ -526,7 +526,7 @@ AnswerOffset ClueCell::tryToMakeVisible(bool simulate,
     if (m_answerOffset != OnClueCell)
         return m_answerOffset; // Clue cell is already visible
 
-//   kDebug() << "Clue" << clue() << "at" << coord() << "with answer offset =" <<
+//   qDebug() << "Clue" << clue() << "at" << coord() << "with answer offset =" <<
 //       answerOffsetToOffset(m_answerOffset) << "| First letter pos is" << firstLetter()->coord();
 
     QList< AnswerOffset > offsets;
@@ -544,7 +544,7 @@ AnswerOffset ClueCell::tryToMakeVisible(bool simulate,
     Coord newClueCellCoord;
     ClueCell *clueCell = NULL;
     foreach(const AnswerOffset & offset, offsets) {
-//     kDebug() << "Test offset" << ClueCell::answerOffsetToOffset( offset );
+//     qDebug() << "Test offset" << ClueCell::answerOffsetToOffset( offset );
         Coord testNewClueCellCoord = coord() - ClueCell::answerOffsetToOffset(offset);
         if (!krossWord()->inside(testNewClueCellCoord)
                 || disallowedCoords.contains(testNewClueCellCoord)) {
@@ -715,7 +715,7 @@ int ClueCell::addLetters(int count)
             // Add letter cell to clue
             if ((letter = dynamic_cast<LetterCell*>(cell))) {
                 if (letter->hasClueInDirection(m_orientation)) {
-//    kDebug() << "Can't add letters to this clue";
+//    qDebug() << "Can't add letters to this clue";
                     break;
                 }
 
@@ -837,7 +837,7 @@ void ClueCell::letterRemoved(LetterCell* letter)
         emit lastLetterChanged(lastLetter());
     }
 //   else
-//     kDebug() << "Letter removed that isn't the last one, pos =" << posOfLetter( letter );
+//     qDebug() << "Letter removed that isn't the last one, pos =" << posOfLetter( letter );
 }
 
 void ClueCell::findLetters(LetterCell *newLetter)
@@ -861,7 +861,7 @@ void ClueCell::findLetters(Qt::Orientation newOrientation,
         else if (newLetter && newLetter->coord() == letterPos)
             m_letters << newLetter;
         else
-            kDebug() << "No letter cell at" << letterPos << i;
+            qDebug() << "No letter cell at" << letterPos << i;
 
         letterPos += letterOffset;
     }
@@ -1230,7 +1230,7 @@ bool ClueCell::isCorrectAnswerEmpty() const
 
 void ClueCell::setHighlight(bool enable)
 {
-//   kDebug() << enable;
+//   qDebug() << enable;
     if (isHighlighted() == enable)
         return;
 

@@ -21,7 +21,7 @@
 #define CLUEMODEL_H
 
 #include <QStandardItemModel>
-#include <KDebug>
+#include <QDebug>
 
 namespace Crossword
 {

@@ -24,7 +24,7 @@
 
 #include <KLocalizedString>
 #include <KUrl>
-#include <KDebug>
+#include <QDebug>
 #include <kdeversion.h>
 
 #include <QGraphicsObject>
@@ -686,7 +686,7 @@ public:
     * @see inside */
     inline KrossWordCell *at(Coord coord) const {
         if (!inside(coord)) {
-            kDebug() << coord << "isn't inside the grid! Returning NULL.";
+            qDebug() << coord << "isn't inside the grid! Returning NULL.";
             return NULL;
         }
 //  KrossWordCell *cell = m_krossWordGrid->at( coord );

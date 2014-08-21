@@ -271,7 +271,7 @@ void LetterCell::drawEndBarIfNeeded(QPainter* p, const QStyleOptionGraphicsItem*
 
 void LetterCell::drawBackgroundForPrinting(QPainter* p, const QStyleOptionGraphicsItem* option)
 {
-    kDebug() << "Draw Letter Cell Background";
+    qDebug() << "Draw Letter Cell Background";
 
     QPen pen(Qt::black);
     p->setPen(pen);
@@ -280,7 +280,7 @@ void LetterCell::drawBackgroundForPrinting(QPainter* p, const QStyleOptionGraphi
 
 void LetterCell::drawForegroundForPrinting(QPainter* p, const QStyleOptionGraphicsItem* option)
 {
-    kDebug() << "Draw Letter Cell Foreground";
+    qDebug() << "Draw Letter Cell Foreground";
 
     drawClueArrows(p, option);
     drawEndBarIfNeeded(p, option);
@@ -336,7 +336,7 @@ void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* opt
 //       QRect(option->rect.left() + 1, option->rect.top() + 1, arrowLength, arrowWidth) );
             break;
         default:
-            kDebug() << "Can't draw clue arrow for letterPosition" << clueHorizontal()->answerOffset();
+            qDebug() << "Can't draw clue arrow for letterPosition" << clueHorizontal()->answerOffset();
         }
         p->restore();
 
@@ -374,7 +374,7 @@ void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* opt
 //       QRect(option->rect.left() + krossWord()->cellSize().width() - 1 - arrowLength, option->rect.top() + 1, arrowLength, arrowWidth) );
             break;
         default:
-            kDebug() << "Can't draw clue arrow for letterPosition" << clueVertical()->answerOffset();
+            qDebug() << "Can't draw clue arrow for letterPosition" << clueVertical()->answerOffset();
         }
         p->restore();
 

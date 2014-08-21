@@ -499,7 +499,7 @@ const char *CrossWordXmlGuiWindow::actionName(CrossWordXmlGuiWindow::Action acti
         return "recent_files_remove";
 
     default:
-        kWarning() << "Action enumerable not handled in switch" << actionEnum;
+        qWarning() << "Action enumerable not handled in switch" << actionEnum;
         return "";
     }
 }
@@ -552,7 +552,7 @@ void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
     // Set new state
     switch (state) {
     case ShowingNothing:
-        kDebug() << "New state: ShowingNothing";
+        qDebug() << "New state: ShowingNothing";
 
         krossWord()->animator()->setEnabled(false);
         krossWord()->removeAllCells();
@@ -568,7 +568,7 @@ void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
         break;
 
     case ShowingCrossword:
-        kDebug() << "New state: ShowingCrossword";
+        qDebug() << "New state: ShowingCrossword";
 
         krossWord()->setInteractive(true);
         m_zoomWidget->setEnabled(true);
@@ -581,9 +581,9 @@ void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
         break;
 
     case ShowingCongratulations:
-        kDebug() << "New state: ShowingCongratulations";
+        qDebug() << "New state: ShowingCongratulations";
         if (m_state != ShowingCrossword) {
-            kDebug() << "Showing congrats without having a crossword doesn't make sense...";
+            qDebug() << "Showing congrats without having a crossword doesn't make sense...";
         }
 
         statusBar()->showMessage(i18n("Congratulations! You solved the crossword perfectly."));
@@ -1153,7 +1153,7 @@ void CrossWordXmlGuiWindow::addClueSlot()
             newClue->setHighlight();
             newClue->firstLetter()->setFocus();
         } else
-            kDebug() << "New clue not found" << cell;
+            qDebug() << "New clue not found" << cell;
     }
 }
 
@@ -1323,7 +1323,7 @@ void CrossWordXmlGuiWindow::editPasteSpecialCharacter()
     const QChar character = text.at(0);
     LetterCell *cell = qgraphicsitem_cast<LetterCell*>(m_popupMenuCell);
     if (!cell) {
-        kDebug() << "No letter cell selected to insert special character";
+        qDebug() << "No letter cell selected to insert special character";
         return;
     }
 
@@ -1836,7 +1836,7 @@ void CrossWordXmlGuiWindow::updateSolutionInToolBar()
     KToolBar *solutionToolBar = toolBar("solutionToolBar");
 
     if (m_viewSolution) {
-        kDebug() << "Delete old solution view and remove all cells";
+        qDebug() << "Delete old solution view and remove all cells";
 //     m_viewSolution->krossWord()->removeAllCells();
         delete m_viewSolution->scene();
         delete m_viewSolution;
@@ -1852,7 +1852,7 @@ void CrossWordXmlGuiWindow::updateSolutionInToolBar()
                 Qt::Horizontal, SyncContent | SyncSelection);
     if (!separateSolutionCrossword) {
         if (krossWord()->hasSolutionWord())
-            kDebug() << "Couldn't create a separate solution crossword.";
+            qDebug() << "Couldn't create a separate solution crossword.";
         return;
     }
 
@@ -2098,7 +2098,7 @@ void CrossWordXmlGuiWindow::setModificationType(
 {
     if (modificationType == NoModification) {
         if (!set)
-            kDebug() << "Can't unset NoModification flag";
+            qDebug() << "Can't unset NoModification flag";
         m_modified = NoModification;
     } else if (set) {
         autoSaveToTempFile();
@@ -2174,9 +2174,9 @@ void CrossWordXmlGuiWindow::autoSaveToTempFile()
                                       m_undoStack->data());
 
     if (!writeOk)
-        kDebug() << "Error while automatically saving temporary file:" << errorString;
+        qDebug() << "Error while automatically saving temporary file:" << errorString;
     else {
-        kDebug() << "Saved crossword to temporary file.";
+        qDebug() << "Saved crossword to temporary file.";
         m_lastAutoSave = QDateTime::currentDateTime();
 
         if (m_curTmpFileName != tmpFileName) {
@@ -2192,7 +2192,7 @@ void CrossWordXmlGuiWindow::removeTempFile(const QString &fileName)
         m_curTmpFileName = fileName;
     if (m_curTmpFileName.isEmpty())
         return;
-    kDebug() << "remove temp file";
+    qDebug() << "remove temp file";
 
     QFile::remove(m_curTmpFileName);
     m_curTmpFileName.clear();
@@ -2747,7 +2747,7 @@ void CrossWordXmlGuiWindow::currentClueChanged(ClueCell* clue)
         m_clueTree->selectionModel()->select(clueItem->index(), QItemSelectionModel::SelectCurrent | QItemSelectionModel::Rows);
         ((ClueListView*)m_clueTree)->animateScrollTo(clueItem->index());
     } else
-        kDebug() << "Clue not found in clue tree view:" << clue->clue();
+        qDebug() << "Clue not found in clue tree view:" << clue->clue();
 }
 
 void CrossWordXmlGuiWindow::answerChanged(ClueCell* clue, const QString &currentAnswer, bool statusbar)
@@ -2781,7 +2781,7 @@ void CrossWordXmlGuiWindow::currentCellChanged(KrossWordCell* currentCell, Kross
     if (!currentCell)
         return;
 
-//     kDebug() << currentCell->cellType();
+//     qDebug() << currentCell->cellType();
     m_view->ensureVisible(currentCell);
 
     if (m_popupMenuCell && m_popupMenuCell != previousCell) {
@@ -2926,7 +2926,7 @@ void CrossWordXmlGuiWindow::customContextMenuRequestedForCell(const QPointF &sce
         break;
 
     default:
-        kDebug() << "No popup menu defined for cell type"
+        qDebug() << "No popup menu defined for cell type"
                  << displayStringFromCellType(cell->cellType());
     }
 
@@ -3002,7 +3002,7 @@ void CrossWordXmlGuiWindow::solutionWordLetterAdded(SolutionLetterCell* solution
 
 void CrossWordXmlGuiWindow::popupMenuCellDestroyed(QObject *)
 {
-//     kDebug() << "m_popupMenuCell destroyed";
+//     qDebug() << "m_popupMenuCell destroyed";
     m_popupMenuCell = NULL;
 }
 

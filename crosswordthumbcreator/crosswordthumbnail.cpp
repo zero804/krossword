@@ -27,7 +27,7 @@ bool CrosswordThumbCreator::create(const QString& path, int width, int height, Q
     KrossWord krossWord;
     QString errorString;
     if (!krossWord.read(KUrl(path), &errorString)) {
-        kDebug() << errorString;
+        qDebug() << errorString;
         return false;
     }
 

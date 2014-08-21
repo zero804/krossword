@@ -27,7 +27,7 @@
 #include "kgrid2d.h"
 #include <qstyleoption.h>
 
-#include <KDebug>
+#include <QDebug>
 #include <kdeversion.h>
 
 #include <QGraphicsObject>

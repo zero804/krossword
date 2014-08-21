@@ -148,11 +148,11 @@ Offset ClueCell::answerOffsetToOffset(AnswerOffset answerOffset)
     case OffsetBottomRight:
         return Offset(1, 1);
     case OffsetInvalid:
-        kDebug() << "Invalid answerOffset value.";
+        qDebug() << "Invalid answerOffset value.";
         return Offset(0, 0);
     }
 
-    kDebug() << "Unknown value of AnswerOffset:" << answerOffset;
+    qDebug() << "Unknown value of AnswerOffset:" << answerOffset;
     Q_ASSERT(false);   // Error
     return Offset(0, 0);
 }

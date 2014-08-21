@@ -29,7 +29,7 @@
 #include <KUrl>
 #include <KMimeType>
 #include <qfileinfo.h>
-#include <KDebug>
+#include <QDebug>
 #include <QRgb>
 
 
@@ -49,7 +49,7 @@ void KrossWord::init(uint width, uint height)
 
 KrossWord::~KrossWord()
 {
-//     kDebug() << "Cleaning crossword";
+//     qDebug() << "Cleaning crossword";
     deleteAllCells(); // Cells are delete'd by QGraphicsScene only if they are in a QGraphicsScene
 }
 
@@ -176,7 +176,7 @@ bool KrossWord::read(const KUrl& url, QString *errorString, FileFormat fileForma
     if (!file.open(QIODevice::ReadOnly)) {
         if (errorString != NULL)
             *errorString = file.errorString();
-        kWarning() << file.errorString();
+        qWarning() << file.errorString();
         return false;
     }
 
@@ -539,27 +539,27 @@ bool KrossWord::canTakeClueCell(const Coord& coord,
     case KrossWordCell::SolutionLetterCellType:
         if ((firstLetterOffset != Offset(0, 0) || ((LetterCell*)cellAtCoord)->isCrossed())
                 && !cellIsEmptyIfClueIsExcluded) {
-//   kDebug() << "Can only add clue's with hidden clue cells at coordinates containing letter cells";
+//   qDebug() << "Can only add clue's with hidden clue cells at coordinates containing letter cells";
             return false;
         }
         break;
 
     case KrossWordCell::ClueCellType:
         if (!allowDoubleClueCells && !cellIsEmptyIfClueIsExcluded) {
-            kDebug() << "Double clue cells not allowed";
+            qDebug() << "Double clue cells not allowed";
             return false;
         }
         break;
 
     case KrossWordCell::DoubleClueCellType:
         if (!((DoubleClueCell*)cellAtCoord)->hasClue(excludedClue)) {
-            kDebug() << "Can't add clue cells to double clue cells";
+            qDebug() << "Can't add clue cells to double clue cells";
             return false;
         }
         break;
 
     default:
-        kDebug() << "Can't add clue cells at coordinates containing cells with type"
+        qDebug() << "Can't add clue cells at coordinates containing cells with type"
                  << KrossWordCell::displayStringFromCellType(cellAtCoord->cellType());
         return false;
         break;
@@ -575,7 +575,7 @@ KrossWord::ErrorType KrossWord::canInsertImage(const KGrid2D::Coord& coord,
     // Check if the image will fit into the grid
     if (!correctnessesToIgnore.testFlag(ErrorImageDoesntFit)
             && (!inside(coord) || !inside(coord + Offset(horizontalCellSpan - 1, verticalCellSpan - 1)))) {
-        kDebug() << "Image doesn't fit into the grid" << coord
+        qDebug() << "Image doesn't fit into the grid" << coord
                  << horizontalCellSpan << verticalCellSpan;
         return ErrorImageDoesntFit;
     }
@@ -599,7 +599,7 @@ KrossWord::ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
                     && !inside(coord + firstLetterOffset + KGrid2D::Coord(answer.length() - 1, 0)))
                 || (orientation == Qt::Vertical
                     && !inside(coord + firstLetterOffset + KGrid2D::Coord(0, answer.length() - 1))))) {
-        kDebug() << "Clue doesn't fit into the grid" << coord << firstLetterOffset << answer
+        qDebug() << "Clue doesn't fit into the grid" << coord << firstLetterOffset << answer
                  << "orientation =" << orientation << "answer-length =" << answer.length();
         return ErrorClueDoesntFit;
     }
@@ -618,7 +618,7 @@ KrossWord::ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
     for (int i = 0; i < answerUpper.length(); ++i) {
         if (!correctnessesToIgnore.testFlag(ErrorAnswerContainsIllegalCharacters)
                 && !ALLOWED_CHARACTERS.contains(answerUpper[i]) && answerUpper[i] != ' ') {
-            kDebug() << "Illegal character" << answerUpper[i];
+            qDebug() << "Illegal character" << answerUpper[i];
             return ErrorAnswerContainsIllegalCharacters;
         }
 
@@ -626,7 +626,7 @@ KrossWord::ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
             KrossWordCell *oldCell = at(letterCoord);
             if (!correctnessesToIgnore.testFlag(ErrorAnswerCrossesClueCell)
                     && oldCell->cellType() == KrossWordCell::ClueCellType) {
-                kDebug() << "Answer crosses a clue cell at" << letterCoord
+                qDebug() << "Answer crosses a clue cell at" << letterCoord
                          /*<< clue*/ << answer << "crossed clue:"
                          << qgraphicsitem_cast<ClueCell*>(oldCell)->clue();
                 return ErrorAnswerCrossesClueCell;
@@ -634,14 +634,14 @@ KrossWord::ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
                 LetterCell *letterCell = (LetterCell*)oldCell;
                 if (!correctnessesToIgnore.testFlag(ErrorAnswerIsIllegal)
                         && letterCell->correctLetter() != answerUpper.at(i)) {
-                    kDebug() << "Answer is illegal in the current crossword at" << letterCoord
+                    qDebug() << "Answer is illegal in the current crossword at" << letterCoord
                              /*<< clue*/ << answer << "wanted letter:" << answerUpper.at(i)
                              << "letter from other clue:" << letterCell->correctLetter();
                     return ErrorAnswerIsIllegal;
                 } else if (!correctnessesToIgnore.testFlag(ErrorAnswerOverwritesClueInSameOrientation)
                            && letterCell->hasClueInDirection(orientation)
                            && letterCell->clue(orientation) != excludedClue) {
-                    kDebug() << "Answer overwrites answer to clue"
+                    qDebug() << "Answer overwrites answer to clue"
                              << letterCell->clue(orientation)->clue() << "at" << letterCoord;
                     return ErrorAnswerOverwritesClueInSameOrientation;
                 }
@@ -836,7 +836,7 @@ void KrossWord::resizeScene()
 //     scene()->setSceneRect( rect );
     scene()->setSceneRect(rect.adjusted(-150, -150, 150, 150));
 
-//     kDebug() << scene()->sceneRect();
+//     qDebug() << scene()->sceneRect();
 }
 
 bool KrossWord::isEmpty() const
@@ -945,7 +945,7 @@ ClueCell::AnswerOffset KrossWord::answerOffsetFromString(const QString &s)
     else if (sl == "bottomright")
         return ClueCell::OffsetBottomRight;
     else {
-        kDebug() << "Couldn't get enumerable for" << s;
+        qDebug() << "Couldn't get enumerable for" << s;
         return ClueCell::OffsetInvalid;
     }
 }
@@ -970,7 +970,7 @@ QString KrossWord::answerOffsetToString(ClueCell::AnswerOffset answerOffset)
     case ClueCell::OffsetBottomRight:
         return "BottomRight";
     case ClueCell::OffsetInvalid: // Shouldn't appear here..
-        kDebug() << "Got an invalid answerOffset";
+        qDebug() << "Got an invalid answerOffset";
     case ClueCell::OnClueCell:
     default:
         return "ClueHidden";
@@ -992,12 +992,12 @@ void KrossWordReader::run()
 {
 //     QThread::run();
     QString errorString;
-kDebug() << "Running read inside a new thread";
+qDebug() << "Running read inside a new thread";
 
 //     QFile file( m_fileName );
     if ( !m_device->open(QIODevice::ReadOnly) ) {
  errorString = m_device->errorString();
- kWarning() << errorString;
+ qWarning() << errorString;
 //  if ( removeTempFile )
 //      KIO::NetAccess::removeTempFile( fileName );
  return;

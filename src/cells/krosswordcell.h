@@ -27,7 +27,7 @@
 // #include <qstyleoption.h>
 #include <qnamespace.h>
 
-#include <KDebug>
+#include <QDebug>
 #include <kdeversion.h>
 
 #include "animator.h"

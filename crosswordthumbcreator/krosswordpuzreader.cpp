@@ -19,7 +19,7 @@
 
 #include "krosswordpuzreader.h"
 #include <QIODevice>
-#include <KDebug>
+#include <QDebug>
 #include <QStringList>
 #include <qtextcodec.h>
 #include "krossword.h"
@@ -64,7 +64,7 @@ bool KrossWordPuzStream::read(QIODevice *device,
         return false;
     }
     if (QString(fileMagic) == (FILE_MAGIC)) {
-        kDebug() << QString("Wrong file magic '%1', should be '%2'").arg(fileMagic.data()).arg(FILE_MAGIC);
+        qDebug() << QString("Wrong file magic '%1', should be '%2'").arg(fileMagic.data()).arg(FILE_MAGIC);
         if (closeAfterRead) device->close();
         return false;
     }
@@ -90,7 +90,7 @@ bool KrossWordPuzStream::read(QIODevice *device,
         return false;
     }
     if (!QString(version).startsWith(QLatin1String("1.2"))) {
-        kDebug() << "Unsupported PUZ-version:" << version << "Should be 1.2";
+        qDebug() << "Unsupported PUZ-version:" << version << "Should be 1.2";
 //  delete[] version;
 //  if ( closeAfterRead ) device->close();
 //  return false;
@@ -144,7 +144,7 @@ bool KrossWordPuzStream::read(QIODevice *device,
         krossWordData->title = krossWordData->authors.left(pos).trimmed();
         krossWordData->authors = krossWordData->authors.mid(pos).trimmed();
 
-        kDebug() << "Extracted title from author field:" << krossWordData->title
+        qDebug() << "Extracted title from author field:" << krossWordData->title
                  << "author is now" << krossWordData->authors;
     }
 
@@ -172,10 +172,10 @@ bool KrossWordPuzStream::read(QIODevice* device, KrossWord* krossWord)
         return false;
 
     PuzChecksums generatedChecksums = generateChecksums(device, krossWordData);
-    kDebug() << "main" << checksums.main << "=?=" << generatedChecksums.main;
-    kDebug() << "cib" << checksums.cib << "=?=" << generatedChecksums.cib;
+    qDebug() << "main" << checksums.main << "=?=" << generatedChecksums.main;
+    qDebug() << "cib" << checksums.cib << "=?=" << generatedChecksums.cib;
     for (int i = 0; i < 8; ++i)
-        kDebug() << "masked" << i << checksums.masked[i] << "=?=" << generatedChecksums.masked[i];
+        qDebug() << "masked" << i << checksums.masked[i] << "=?=" << generatedChecksums.masked[i];
 
     QList<ClueInfo> acrossClues, downClues;
     bool mappingCluesOk = mapClues(krossWordData, acrossClues, downClues);
@@ -205,14 +205,14 @@ bool KrossWordPuzStream::read(QIODevice* device, KrossWord* krossWord)
 
                 char chState = krossWordData.state[ index ];
                 if (chState == '.') {
-                    kDebug() << "The solution and state strings in the PUZ-file aren't compatible.";
-                    kDebug() << "The solution string has no empty cell at"
+                    qDebug() << "The solution and state strings in the PUZ-file aren't compatible.";
+                    qDebug() << "The solution string has no empty cell at"
                              << QString("(%1, %2)").arg(x).arg(coords.second) << "but the state string has";
                     currentAnswer += ' ';
                 } else if (chState == '-') {
                     currentAnswer += ' ';
                 } else if (!LetterCell::isLetterAllowed(chState)) {
-                    kDebug() << "The state string contains a not allowed letter" << chState;
+                    qDebug() << "The state string contains a not allowed letter" << chState;
                     currentAnswer += ' ';
                 } else
                     currentAnswer += chState;
@@ -248,14 +248,14 @@ bool KrossWordPuzStream::read(QIODevice* device, KrossWord* krossWord)
 
             char chState = krossWordData.state[ index ];
             if (chState == '.') {
-                kDebug() << "The solution and state strings in the PUZ-file aren't compatible.";
-                kDebug() << "The solution string has no empty cell at"
+                qDebug() << "The solution and state strings in the PUZ-file aren't compatible.";
+                qDebug() << "The solution string has no empty cell at"
                          << QString("(%1, %2)").arg(coords.first).arg(y) << "but the state string has";
                 currentAnswer += ' ';
             } else if (chState == '-') {
                 currentAnswer += ' ';
             } else if (!LetterCell::isLetterAllowed(chState)) {
-                kDebug() << "The state string contains a not allowed letter" << chState;
+                qDebug() << "The state string contains a not allowed letter" << chState;
                 currentAnswer += ' ';
             } else
                 currentAnswer += chState;
@@ -329,7 +329,7 @@ bool KrossWordPuzStream::write(QIODevice* device, KrossWord* krossWord)
     Q_ASSERT(krossWord != NULL);
 
     if (krossWord->width() > 255 || krossWord->height() > 255) {
-        kDebug() << "Maximal size of crosswords to be saved in the PUZ-format version 1.2/1.3 is 255x255.";
+        qDebug() << "Maximal size of crosswords to be saved in the PUZ-format version 1.2/1.3 is 255x255.";
         return false;
     }
 
@@ -523,8 +523,8 @@ bool KrossWordPuzStream::mapClues(const KrossWordData &krossWordData,
             bool assignedNumber = false;
             if (cellNeedsAcrossNumber(x, y, krossWordData.width, krossWordData.solution)) {
                 if (curClueIndex >= (uint)krossWordData.clues.count()) {
-                    kDebug() << "Error in reading PUZ from device" << device();
-                    kDebug() << "Too few clues:" << krossWordData.clues.count()
+                    qDebug() << "Error in reading PUZ from device" << device();
+                    qDebug() << "Too few clues:" << krossWordData.clues.count()
                              << "Tried index" << curClueIndex;
                     return false;
                 }
@@ -534,8 +534,8 @@ bool KrossWordPuzStream::mapClues(const KrossWordData &krossWordData,
             }
             if (cellNeedsDownNumber(x, y, krossWordData.width, krossWordData.solution)) {
                 if (curClueIndex >= (uint)krossWordData.clues.count()) {
-                    kDebug() << "Error in reading PUZ from device" << device();
-                    kDebug() << "Too few clues:" << krossWordData.clues.count()
+                    qDebug() << "Error in reading PUZ from device" << device();
+                    qDebug() << "Too few clues:" << krossWordData.clues.count()
                              << "Tried index" << curClueIndex;
                     return false;
                 }
@@ -584,7 +584,7 @@ QByteArray KrossWordPuzStream::readZeroTerminatedString()
     char *buffer = new char[1];
 
     while (readRawData(buffer, 1) == 1 && buffer[0] != '\0') {
-//  kDebug() << buffer[0];
+//  qDebug() << buffer[0];
         string.append(buffer[0]);
     }
 

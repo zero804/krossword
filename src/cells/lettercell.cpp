@@ -139,10 +139,10 @@ void LetterCell::setConfidence(Confidence confidence)
 
 void LetterCell::focusInEvent(QFocusEvent* event)
 {
-//     kDebug() << "IN" << this->coord();
+//     qDebug() << "IN" << this->coord();
 
     if (event->reason() == Qt::MouseFocusReason) {
-//       kDebug() << "    IN > MOUSE FOCUS REASON";
+//       qDebug() << "    IN > MOUSE FOCUS REASON";
         return; // Handled by mousePressEvent(), also if the cell already has focus
     }
     m_hadFocusBeforeMousePress = true;
@@ -176,7 +176,7 @@ void LetterCell::focusInEvent(QFocusEvent* event)
 
 void LetterCell::focusOutEvent(QFocusEvent* event)
 {
-//     kDebug() << "OUT" << this->coord();
+//     qDebug() << "OUT" << this->coord();
 
     // Only remove highlight if the scene still has focus
 //     if ( scene() && scene()->hasFocus() )
@@ -483,8 +483,8 @@ void LetterCell::keyPressEvent(QKeyEvent* event)
 bool LetterCell::switchHighlightedClue()
 {
     ClueCell *clueCell = krossWord()->highlightedClue();
-//     kDebug() << (clueCell ? clueCell->clue() : "<empty>");
-//     kDebug() << "SWITCH" << this;
+//     qDebug() << (clueCell ? clueCell->clue() : "<empty>");
+//     qDebug() << "SWITCH" << this;
 
     if (clueCell && isCrossed()) {
         if (clueCell == clueHorizontal()) {
@@ -523,7 +523,7 @@ QChar LetterCell::correctLetterFromClue(AnswerOffset answerOffset) const
         firstLetterOffset = clue->firstLetterOffset(answerOffset).second;
         letterOffset = coord().second - clue->coord().second - firstLetterOffset;
 
-//  kDebug() << clue->clue() << "at" << clue->coord() << "| Letter is at" << coord()
+//  qDebug() << clue->clue() << "at" << clue->coord() << "| Letter is at" << coord()
 //      << "| letterOffset (y) =" << coord().second << "-" << clue->coord().second
 //      << "-" << firstLetterOffset << "=" << letterOffset
 //      << "| answerOffset =" << clue->firstLetterOffset();
@@ -532,13 +532,13 @@ QChar LetterCell::correctLetterFromClue(AnswerOffset answerOffset) const
         firstLetterOffset = clue->firstLetterOffset(answerOffset).first;
         letterOffset = coord().first - clue->coord().first - firstLetterOffset;
 
-//  kDebug() << clue->clue() << "at" << clue->coord() << "| Letter is at" << coord()
+//  qDebug() << clue->clue() << "at" << clue->coord() << "| Letter is at" << coord()
 //      << "| letterOffset (x) =" << coord().first << "-" << clue->coord().first
 //      << "-" << firstLetterOffset << "=" << letterOffset
 //      << "| answerOffset =" << clue->firstLetterOffset();
     }
 
-//     kDebug() << "LetterCell::correctLetter | letterOffset =" << letterOffset
+//     qDebug() << "LetterCell::correctLetter | letterOffset =" << letterOffset
 //       << "| firstLetterOffset =" << firstLetterOffset << "| clue =" << clue;
     Q_ASSERT(letterOffset >= 0 && letterOffset < clue->correctAnswer().length());
     return clue->correctAnswer().at(letterOffset);
@@ -594,7 +594,7 @@ void LetterCell::changeAnimValueChanged(const QVariant& value)
 {
     if (m_blockCacheClearing && (value.toReal() < 0.01
                                  || m_changeAnim->currentTime() >= 0.5 * m_changeAnim->totalDuration())) {
-//     kDebug() << value.toReal() << m_changeAnim->currentTime() << "/" << m_changeAnim->totalDuration();
+//     qDebug() << value.toReal() << m_changeAnim->currentTime() << "/" << m_changeAnim->totalDuration();
         disconnect(m_changeAnim, SIGNAL(valueChanged(QVariant)),
                    this, SLOT(changeAnimValueChanged(QVariant)));
         m_blockCacheClearing = false;
@@ -922,7 +922,7 @@ void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* opt
                           option->rect.top() + 1, arrowLength, arrowWidth));
             break;
         default:
-            kDebug() << "Can't draw clue arrow for letterPosition"
+            qDebug() << "Can't draw clue arrow for letterPosition"
                      << clueHorizontal()->answerOffset()
                      << "and orientation horizontal";
         }
@@ -985,7 +985,7 @@ void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* opt
                           arrowLength, arrowWidth));
             break;
         default:
-            kDebug() << "Can't draw clue arrow for letterPosition"
+            qDebug() << "Can't draw clue arrow for letterPosition"
                      << clueVertical()->answerOffset()
                      << "and orientation Vertical";
         }
@@ -1000,7 +1000,7 @@ void LetterCell::orientationChanged(ClueCell* clueCell,
 {
     if (hasClueInDirection(orientation)) {
         // The clue cells orientation has been changed wrongly
-        kDebug() << "Can't set clue as this letters clue with orientation"
+        qDebug() << "Can't set clue as this letters clue with orientation"
                  << orientation << "because there already is a clue with that "
                  "orientation:" << clue(orientation);
         return;
@@ -1103,14 +1103,14 @@ void LetterCell::detachClues()
 
 void LetterCell::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
-//   kDebug() << "MOUSE PRESS" << this->coord();
+//   qDebug() << "MOUSE PRESS" << this->coord();
 
     if (m_hadFocusBeforeMousePress)
         switchHighlightedClue();
 
     KrossWordCell::mousePressEvent(event);
     if (m_clueHorizontal || m_clueVertical) {
-//     kDebug() << "CALL FOCUS IN" << this->coord();
+//     qDebug() << "CALL FOCUS IN" << this->coord();
         // Call focus in event with reason != MouseReason
         // (needed to handle focus in events AFTER mouse press )
         focusInEvent(new QFocusEvent(QEvent::FocusIn));

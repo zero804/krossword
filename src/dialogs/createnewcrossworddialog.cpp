@@ -184,7 +184,7 @@ void CreateNewCrosswordDialog::currentTemplateChanged(
     KrossWordXmlReader::KrossWordInfo info =
         KrossWordXmlReader::readInfo(KUrl(filePath), &errorString);
     if (!info.isValid()) {
-        kDebug() << "Error reading crossword info from library file"
+        qDebug() << "Error reading crossword info from library file"
                  << errorString;
 //     ui_create_new.lblTemplateInfo->setText( i18n("Couldn't read template: %1",
 //        errorString) );

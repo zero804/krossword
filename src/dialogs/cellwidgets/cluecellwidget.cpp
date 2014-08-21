@@ -99,7 +99,7 @@ ClueCellWidget::ClueCellWidget(ClueCell* clueCell,
     } else {
         ExtendedSqlTableModel *model = dictionary->createModel();
         if (!model->select())
-            kDebug() << "Select failed" << model->lastError();
+            qDebug() << "Select failed" << model->lastError();
         else {
             ui_clue_properties_dock.dictionaryAnswers->setModel(model);
             ui_clue_properties_dock.dictionaryAnswers->setModelColumn(1);
@@ -500,7 +500,7 @@ void ClueCellWidget::fillDictionaryAnswers()
                               m_clueCell->firstLetterCoords(), m_clueCell->orientation(),
                               m_clueCell->answerLength(), &pattern, m_clueCell);
     if (!canTakeLetters) {
-        kDebug() << "Can't take enough letter cells";
+        qDebug() << "Can't take enough letter cells";
         return;
     }
     pattern.replace(QRegExp("\\s{2,}$"), "*");

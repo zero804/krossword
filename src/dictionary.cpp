@@ -38,7 +38,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
-#include <KDebug>
+#include <QDebug>
 #include <KUrl>
 #include <KStandardGuiItem>
 #include <KMessageBox>

@@ -96,7 +96,7 @@ void TransitionAnimation::cellDestroyed(QObject *obj)
 
 QPixmap TransitionAnimation::composedCellPixmap() const
 {
-//   kDebug() << "Draw composed cell pixmap" << m_cell->coord();
+//   qDebug() << "Draw composed cell pixmap" << m_cell->coord();
 
     int opacity = m_pixmapObject->opacity() * 255;
     if (opacity <= 1)
@@ -155,8 +155,8 @@ void TransitionAnimation::updateState(QAbstractAnimation::State newState,
                                       QAbstractAnimation::State oldState)
 {
     if (newState == QAbstractAnimation::Stopped && m_pixmapObject) {
-//     kDebug() << "FINISHED transition of" << m_cell;
-//     kDebug() << "Delete transition item for" << m_cell->coord();
+//     qDebug() << "FINISHED transition of" << m_cell;
+//     qDebug() << "Delete transition item for" << m_cell->coord();
         if (m_cell) {
 //       disconnect( m_cell, SIGNAL(destroyed(QObject*)),
 //        this, SLOT(cellDestroyed(QObject*)) );
@@ -283,7 +283,7 @@ QAbstractAnimation* Animator::animate(BasicAnimation basicAnimation,
             break;
 
         default:
-            kWarning() << "Animation type unknown:" << basicAnimation;
+            qWarning() << "Animation type unknown:" << basicAnimation;
             return NULL;
         }
 
@@ -316,7 +316,7 @@ QAbstractAnimation* Animator::animate(OneParameterAnimation animation,
             break;
 
         default:
-            kWarning() << "Animation type unknown:" << animation;
+            qWarning() << "Animation type unknown:" << animation;
             return NULL;
         }
 

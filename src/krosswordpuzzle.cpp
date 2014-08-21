@@ -427,7 +427,7 @@ void KrossWordPuzzle::currentTabChanged(int index)
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowUndoViewDock));
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowCurrentCellDock));
 
-        kDebug() << optionsList;
+        qDebug() << optionsList;
     } else { // tabLibrary
         setCaption(i18n("Library"));
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::Options_Dictionaries));

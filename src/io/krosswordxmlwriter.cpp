@@ -48,28 +48,28 @@ bool KrossWordXmlWriter::writeCompressed(QIODevice* device,
     KZip zip(device);
     zip.setCompression(KZip::DeflateCompression);
     if (!zip.open(QIODevice::WriteOnly)) {
-        kDebug() << "Couldn't open the ZIP archive for writing";
+        qDebug() << "Couldn't open the ZIP archive for writing";
         m_errorString = i18n("Couldn't open the ZIP archive for writing");
         return false;
     }
     if (!zip.prepareWriting("crossword.kwp", "krosswordpuzzle",
                             "krosswordpuzzle", buffer.size())) {
-        kDebug() << "Error while calling KZip::prepareWriting()";
+        qDebug() << "Error while calling KZip::prepareWriting()";
         m_errorString = i18n("Error writing to the compressed file");
         return false;
     }
     if (!zip.writeData(buffer.data(), buffer.size())) {
-        kDebug() << "Error while calling KZip::writeData()";
+        qDebug() << "Error while calling KZip::writeData()";
         m_errorString = i18n("Error writing to the compressed file");
         return false;
     }
     if (!zip.finishWriting(buffer.size())) {
-        kDebug() << "Error while calling KZip::finishWriting()";
+        qDebug() << "Error while calling KZip::finishWriting()";
         m_errorString = i18n("Error writing to the compressed file");
         return false;
     }
     if (!zip.close()) {
-        kDebug() << "Couldn't close the ZIP archive";
+        qDebug() << "Couldn't close the ZIP archive";
         m_errorString = i18n("Couldn't close the ZIP archive");
         return false;
     }
@@ -220,7 +220,7 @@ void KrossWordXmlWriter::writeClue(ClueCell* clue,
         writeTextElement("answer", emptyAnswer);
         writeTextElement("currentAnswer", emptyAnswer);
     } else
-        kWarning() << "Write mode unknown" << static_cast<int>(writeMode);
+        qWarning() << "Write mode unknown" << static_cast<int>(writeMode);
 
     writeEndElement();
 }
@@ -238,7 +238,7 @@ void KrossWordXmlWriter::writeImage(ImageCell* image,
     else if (writeMode == KrossWord::Template)
         writeAttribute("url", QString());
     else
-        kWarning() << "Write mode unknown" << static_cast<int>(writeMode);
+        qWarning() << "Write mode unknown" << static_cast<int>(writeMode);
 }
 
 void KrossWordXmlWriter::writeSolutionLetter(SolutionLetterCell* solutionLetter)
