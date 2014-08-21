@@ -186,11 +186,6 @@ bool KrossWordPuzStream::read(QIODevice* device, KrossWord* krossWord)
     QList<ClueInfo> acrossClues, downClues;
     bool mappingCluesOk = mapClues(krossWordData, acrossClues, downClues);
 
-    krossWord->setTitle(krossWordData.title);
-    krossWord->setAuthors(krossWordData.authors);
-    krossWord->setCopyright(krossWordData.copyright);
-    krossWord->setNotes(krossWordData.notes);
-
     krossWord->removeAllCells();
     // Crosswords in *.puz-files are always american style
     krossWord->createNew(American, QSize(krossWordData.width, krossWordData.height));
@@ -280,6 +275,11 @@ bool KrossWordPuzStream::read(QIODevice* device, KrossWord* krossWord)
             clue->setCurrentAnswer(currentAnswer, Unknown);
         }
     }
+
+    krossWord->setTitle(krossWordData.title);
+    krossWord->setAuthors(krossWordData.authors);
+    krossWord->setCopyright(krossWordData.copyright);
+    krossWord->setNotes(krossWordData.notes);
 
     krossWord->animator()->setEnabled(true);
     krossWord->blockSignals(wasBlockingSignals);
