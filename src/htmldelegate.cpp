@@ -24,8 +24,7 @@
 #include <KColorScheme>
 #include <klineedit.h>
 
-HtmlDelegate::HtmlDelegate(QObject *parent)
-    : QStyledItemDelegate(parent)
+HtmlDelegate::HtmlDelegate(QObject *parent) : QStyledItemDelegate(parent)
 {
 }
 
@@ -75,10 +74,13 @@ QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem & option, const QModelIn
         rcDeco.setSize(option.decorationSize);
 
     QTextDocument doc;
+    QTextOption textOption;
+    textOption.setWrapMode(QTextOption::WordWrap);
+    doc.setDefaultTextOption(textOption);
     doc.setHtml(options.text);
-    doc.setTextWidth(options.rect.width() - rcDeco.width() - 4);
+    doc.adjustSize();
 
-    return QSize(rcDeco.width() + 4 + doc.idealWidth(), qMax(rcDeco.height() + 4, (int)doc.size().height()));
+    return QSize(rcDeco.width() + 4 + doc.size().width(), qMax(rcDeco.height() + 4, (int)doc.size().height()));
 }
 
 

@@ -18,7 +18,6 @@
 */
 
 #include "cluemodel.h"
-
 #include "cells/cluecell.h"
 
 #include <KLocalizedString>
@@ -39,8 +38,7 @@ QVariant ClueItem::data(int role) const
     if (role == Qt::EditRole)
         return m_clueCell->clue();
     else if (role == Qt::DisplayRole)
-        return m_clueCell->clueWithNumber(
-                   "<table><tr><td><b>%1. </b></td><td>%2</td></tr></table>");
+        return m_clueCell->clueWithNumber("<table><tr><td><b>%1. </b></td><td>%2</td></tr></table>"); //("<b>%1. </b>%2")
     else
         return QStandardItem::data(role);
 }
@@ -59,8 +57,7 @@ void ClueItem::setData(const QVariant& value, int role)
 ClueModel::ClueModel(QObject* parent)
     : QStandardItemModel(0, 2, parent)
 {
-    setHorizontalHeaderLabels(
-        QStringList() << i18n("Clue") << i18n("Answer"));
+    setHorizontalHeaderLabels(QStringList() << i18n("Clue") << i18n("Answer"));
     setSortRole(Qt::UserRole + 1);
 
     m_itemHorizontal = new QStandardItem("<b><h3>" + i18n("Across clues") + "</h3></b>");
@@ -178,8 +175,6 @@ QStandardItem* ClueModel::answerItem(ClueCell* clueCell) const
     if (!_item)
         return NULL;
 
-//     QStandardItem *parentItem = clueCell->isHorizontal()
-//      ? m_itemHorizontal : m_itemVertical;
     return _item->parent()->child(_item->row(), 1);
 }
 

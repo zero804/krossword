@@ -1810,21 +1810,19 @@ void CrossWordXmlGuiWindow::updateClueDock()
             this, SLOT(changeClueTextRequested(ClueCell*, QString)));
 
     m_clueTree->setModel(m_clueModel);
-    m_clueTree->setFirstColumnSpanned(m_clueModel->horizontalCluesItem()->row(),
-                                      QModelIndex(), true);
-    m_clueTree->setFirstColumnSpanned(m_clueModel->verticalCluesItem()->row(),
-                                      QModelIndex(), true);
-    m_clueTree->setColumnWidth(0, 200);
-    m_clueTree->header()->setStretchLastSection(true);
+    m_clueTree->setFirstColumnSpanned(m_clueModel->horizontalCluesItem()->row(), QModelIndex(), true);
+    m_clueTree->setFirstColumnSpanned(m_clueModel->verticalCluesItem()->row(), QModelIndex(), true);
     m_clueTree->expandAll();
+    m_clueTree->header()->setResizeMode(QHeaderView::ResizeToContents);
 
     // Update selection model
-    if (m_clueSelectionModel)
+    if (m_clueSelectionModel) {
         m_clueSelectionModel->clear();
-    else
+    } else {
         m_clueSelectionModel = new QItemSelectionModel(m_clueModel);
-
+    }
     m_clueTree->setSelectionModel(m_clueSelectionModel);
+
     connect(m_clueSelectionModel, SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
             this, SLOT(currentClueInDockChanged(QModelIndex, QModelIndex)));
 
@@ -1867,8 +1865,7 @@ void CrossWordXmlGuiWindow::updateSolutionInToolBar()
     connect(m_viewSolution, SIGNAL(resized(QSize, QSize)), this, SLOT(solutionViewResized(QSize, QSize)));
 }
 
-void CrossWordXmlGuiWindow::solutionViewResized(const QSize &oldSize,
-        const QSize &newSize)
+void CrossWordXmlGuiWindow::solutionViewResized(const QSize &oldSize, const QSize &newSize)
 {
     Q_UNUSED(oldSize);
     Q_UNUSED(newSize);
@@ -1885,8 +1882,6 @@ QDockWidget *CrossWordXmlGuiWindow::createClueDock()
     m_clueTree->setSelectionBehavior(QAbstractItemView::SelectRows);
     m_clueTree->setAllColumnsShowFocus(true);
     m_clueTree->setAlternatingRowColors(true);
-    m_clueTree->setUniformRowHeights(false);
-    m_clueTree->setWordWrap(true);
     m_clueTree->setContextMenuPolicy(Qt::CustomContextMenu);
     m_clueTree->setItemDelegate(new HtmlDelegate(this));
 
@@ -1895,7 +1890,6 @@ QDockWidget *CrossWordXmlGuiWindow::createClueDock()
 
     m_clueDock = new QDockWidget(i18n("Clue List"), this);
     m_clueDock->setObjectName("clueDock");
-    m_clueDock->setWidget(m_clueTree);
 
     updateClueDock();
 

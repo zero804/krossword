@@ -120,7 +120,7 @@ void KrossWordTitleItem::setContent(KrossWord *krossWord)
 
         QFont font = KGlobalSettings::generalFont();
         font.setBold(true);
-        font.setPointSize(24);
+        font.setPointSize(20);
         m_titleItem->setFont(font);
         m_titleItem->setTextWidth(krossWord->boundingRect().width());
 
@@ -141,7 +141,7 @@ void KrossWordTitleItem::setContent(KrossWord *krossWord)
             m_authorsItem = new QGraphicsTextItem(this);
 
         QFont font = KGlobalSettings::generalFont();
-        font.setPointSize(14);
+        font.setPointSize(12);
         m_authorsItem->setFont(font);
 
         if (krossWord->copyright().isEmpty())
