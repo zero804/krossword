@@ -114,16 +114,10 @@ void ClueCell::drawBackgroundForPrinting(QPainter *p, const QStyleOptionGraphics
     if (!isVisible())
         return;
 
-//     p->save();
     QPen pen(Qt::black);
     p->setPen(pen);
     p->fillRect(option->rect, Qt::lightGray);
     p->drawRect(option->rect);
-
-//     p->setPen( Qt::transparent );
-//     p->setBrush( Qt::gray );
-//     p->drawEllipse( option->rect.center(), (int)option->rect.width() / 4, (int)option->rect.height() / 4 );
-//     p->restore();
 }
 
 Offset ClueCell::answerOffsetToOffset(AnswerOffset answerOffset)
@@ -285,14 +279,9 @@ void ClueCell::drawForegroundForPrinting(QPainter *p, const QStyleOptionGraphics
     QFont font = KGlobalSettings::generalFont();
     qreal pointSize = option->rect.height() / 4;
     font.setPointSize(pointSize);
-//     if ( (option->rect.height() / 3) > 6 )
-//  font.setPixelSize( option->rect.height() / 3 );
-//     QFont font = p->font();
-//     qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(sceneTransform());
-//     font.setPointSizeF( pointSize * levelOfDetail );
     p->setFont(font);
 
-// TODO Less line spacing when using smaller fonts? (Howto?)
+    // TODO Less line spacing when using smaller fonts? (Howto?)
     boundingRect = p->fontMetrics().boundingRect(testRect, Qt::TextWordWrap, clueText);
     while ((boundingRect.height() > drawRect.height() ||
             boundingRect.width() > drawRect.width()) && font.pointSize() > 6) {
@@ -309,7 +298,6 @@ void ClueCell::drawForegroundForPrinting(QPainter *p, const QStyleOptionGraphics
         textOption.setWrapMode(QTextOption::WordWrap);
 
     p->drawText(drawRect, clueText, textOption);
-//     p->fillRect( option->rect, Qt::gray );
 
     drawClueNumber(p, option);
 }

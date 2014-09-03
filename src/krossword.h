@@ -689,8 +689,6 @@ public:
             qDebug() << coord << "isn't inside the grid! Returning NULL.";
             return NULL;
         }
-//  KrossWordCell *cell = m_krossWordGrid->at( coord );
-//  Q_ASSERT( !cell || cell->isType(KrossWordCell::ImageCellType) || cell->coord() == coord );
         return m_krossWordGrid->at(coord);
     }
 
@@ -716,7 +714,6 @@ public:
 
     void removeSolutionSynchronizationTo(KrossWord *solutionKrossWord);
     QPixmap toPixmap(const QSize &size = QSize(64, 64));
-    void resizeTo(const QSizeF &size);
     void resizeScene();
     void assignClueNumbers();
 
@@ -796,6 +793,7 @@ public:
 //     bool isSignalAnswerChangedEnabled() const { return m_signalAnswerChanged; };
 
     virtual QRectF boundingRect() const;
+    QRectF boundingRectCrossword() const;
 
     const KrosswordTheme *theme() const {
         return m_theme;

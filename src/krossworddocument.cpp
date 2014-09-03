@@ -26,21 +26,22 @@
 #include <QAbstractTextDocumentLayout>
 #include <QPrinter>
 
+#include <QDebug>
+
 KrossWordDocument::KrossWordDocument(KrossWord* krossWord, QPrinter *printer)
 {
     m_krossWord = krossWord;
 
     // Create title
-    QString notes = krossWord->notes().isEmpty() ? ""
-                    : QString("<h5>%1</h5>").arg(krossWord->notes());
+    QString notes = krossWord->notes().isEmpty() ? "" : QString("<h5>%1</h5>").arg(krossWord->notes());
     m_titleDoc = new QTextDocument;
     m_titleDoc->setHtml(QString("<html><body>"
-                                "<center><h1><crosswordTitle /></h1>"
-                                "<crosswordNotes /></center>"
+                                "<h1><crosswordTitle /></h1>"
+                                "<crosswordNotes />"
                                 "<table width='100%'><tr>"
                                 "<td><crosswordAuthors /></td>"
                                 "<td align='right'><crosswordCopyright /></td>"
-                                "</tr></table></body></body>")
+                                "</tr></table></body>")
                         .replace("<crosswordNotes />", notes)
                         .replace("<crosswordTitle />", krossWord->title())
                         .replace("<crosswordAuthors />", krossWord->authors())
@@ -52,7 +53,8 @@ KrossWordDocument::KrossWordDocument(KrossWord* krossWord, QPrinter *printer)
     else
         m_krossWordScene = NULL;
     m_krossWordView = new KrossWordPuzzleView((KrossWordPuzzleScene*)krossWord->scene());
-    m_krossWordView->fitInView(krossWord, Qt::KeepAspectRatio);
+
+    m_krossWordView->fitInView(krossWord->boundingRectCrossword(), Qt::KeepAspectRatio);
 
     // Create clue list
     ClueCellList horizontalClues, verticalClues;

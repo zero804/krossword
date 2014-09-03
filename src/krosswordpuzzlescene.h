@@ -35,8 +35,7 @@ public:
         setItemIndexMethod(NoIndex);
     }
 
-    KrossWordPuzzleScene(QObject* parent = 0)
-        : QGraphicsScene(parent),
+    KrossWordPuzzleScene(QObject* parent = 0) : QGraphicsScene(parent),
           m_krossWord(new Crossword::KrossWord()) {
         addItem(m_krossWord);
         setItemIndexMethod(NoIndex);

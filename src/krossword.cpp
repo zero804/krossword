@@ -297,37 +297,35 @@ void KrossWord::setupSameLetterSynchronization()
 
 void KrossWord::removeSameLetterSynchronization()
 {
-    removeSynchronization(SyncContent,
-                          SameCharacterLetterSynchronization);
+    removeSynchronization(SyncContent, SameCharacterLetterSynchronization);
+}
+
+QRectF KrossWord::boundingRectCrossword() const
+{
+    QRectF rect = QRectF(0, 0, cellSize().width() * width(), cellSize().height() * height());
+    if (m_titleItem) {
+        rect.translate(0, m_titleItem->boundingRect().bottom());
+    }
+    return rect;
 }
 
 QRectF KrossWord::boundingRect() const
 {
     if (m_titleItem) {
-        return QRectF(0, 0, cellSize().width() * width(), cellSize().height() * height() + m_titleItem->boundingRect().height());
+        QRectF rect = boundingRectCrossword();
+        return rect.united(m_titleItem->boundingRect());
     } else {
-        return QRectF(0, 0, cellSize().width() * width(), cellSize().height() * height());
+        return boundingRectCrossword();
     }
 }
 
-void KrossWord::paint(QPainter* painter,
-                      const QStyleOptionGraphicsItem* option, QWidget* widget)
+void KrossWord::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
     if (isDrawingForPrinting())
         painter->fillRect(boundingRect(), Qt::white);
-}
-
-void KrossWord::resizeTo(const QSizeF& size)
-{
-    // TODO When called twice with the same parameter, it will scale twice...
-    QSizeF actualSize = boundingRect().size();
-    float zoomH = size.width() / actualSize.width();
-    float zoomV = size.height() / actualSize.height();
-    float zoom = zoomH < zoomV ? zoomH : zoomV;
-    scale(zoom, zoom);
 }
 
 KrossWord::ConversionInfo KrossWord::generateConversionInfo(
@@ -1168,8 +1166,7 @@ void KrossWord::updateTitleItem()
     } else {
         if (!m_titleItem) {
             m_titleItem = new KrossWordTitleItem(this);
-            connect(this, SIGNAL(resized(KrossWord*, int, int)),
-                    m_titleItem, SLOT(crosswordResized(KrossWord*, int, int)));
+            connect(this, SIGNAL(resized(KrossWord*, int, int)), m_titleItem, SLOT(crosswordResized(KrossWord*, int, int)));
         }
         m_titleItem->setContent(this);
         prepareGeometryChange();
