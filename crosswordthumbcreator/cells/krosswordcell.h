@@ -118,12 +118,11 @@ protected:
 
     // Overloaded methods
     virtual QRectF boundingRect() const;
-    virtual void paint(QPainter* painter,
-                       const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
+    virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
     // Virtual methods
-    virtual void drawBackgroundForPrinting(QPainter*, const QStyleOptionGraphicsItem*) { };
-    virtual void drawForegroundForPrinting(QPainter*, const QStyleOptionGraphicsItem*) { };
+    virtual void drawBackgroundForPrinting(QPainter*, const QStyleOptionGraphicsItem*) { }
+    virtual void drawForegroundForPrinting(QPainter*, const QStyleOptionGraphicsItem*) { }
 
 private:
     CellType m_cellType;
@@ -131,7 +130,6 @@ private:
     KrossWord *m_krossWord;
     QPixmap *m_cache;
 };
-
 
 class EmptyCell : public KrossWordCell
 {
@@ -144,25 +142,15 @@ public:
     enum { Type = UserType + 2 };
     virtual int type() const {
         return Type;
-    };
+    }
 
 protected:
     virtual void drawBackgroundForPrinting(QPainter *p, const QStyleOptionGraphicsItem *option);
 };
 
 
-
 // Sorting functions
 bool lessThanCellType(const KrossWordCell *cell1, const KrossWordCell *cell2);
 bool greaterThanCellType(const KrossWordCell *cell1, const KrossWordCell *cell2);
-
-
-// Serialization
-// QDataStream &operator<< ( QDataStream &s, const KrossWordCell *cell );
-// QDataStream &operator<< ( QDataStream &s, const LetterCell *cell );
-// QDataStream &operator<< ( QDataStream &s, const ClueCell *cell );
-//
-// QDataStream &operator>> ( QDataStream &s, ClueCell cell );
-
 
 #endif // KROSSWORDCELL_H

@@ -227,6 +227,7 @@ private:
 };
 
 
+// the black cells
 class EmptyCell : public KrossWordCell
 {
     friend class KrossWord;
@@ -239,7 +240,7 @@ public:
     enum { Type = UserType + 2 };
     virtual int type() const {
         return Type;
-    };
+    }
 
     LetterCell *toLetterCell(const QChar &correctContent = ' ');
 

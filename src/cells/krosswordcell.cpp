@@ -521,18 +521,15 @@ EmptyCell::EmptyCell(KrossWord* krossWord, Coord coord) : KrossWordCell(krossWor
     setFlag(QGraphicsItem::ItemIsFocusable, krossWord->isEditable());
     setFlag(QGraphicsItem::ItemIsSelectable, krossWord->isEditable());
 
-    setFlag(QGraphicsItem::ItemHasNoContents, !krossWord->isEditable());
+    //setFlag(QGraphicsItem::ItemHasNoContents, !krossWord->isEditable());
 }
 
 LetterCell* EmptyCell::toLetterCell(const QChar& correctContent)
 {
     Q_ASSERT(!krossWord()->letterContentToClueNumberMapping().isEmpty());
 
-    int clueNumber = krossWord()->letterContentToClueNumberMapping()
-                     .indexOf(correctContent) + 1;
-    ClueCell *numberClue = new ClueCell(krossWord(), coord(),
-                                        Qt::Horizontal, OnClueCell,
-                                        clueNumber <= 0 ? QString() : QString::number(clueNumber), correctContent);
+    int clueNumber = krossWord()->letterContentToClueNumberMapping().indexOf(correctContent) + 1;
+    ClueCell *numberClue = new ClueCell(krossWord(), coord(), Qt::Horizontal, OnClueCell, clueNumber <= 0 ? QString() : QString::number(clueNumber), correctContent);
     LetterCell *letter = new LetterCell(krossWord(), coord(), numberClue);
 
     krossWord()->replaceCell(coord(), letter, false);
@@ -544,8 +541,9 @@ LetterCell* EmptyCell::toLetterCell(const QChar& correctContent)
 void EmptyCell::focusInEvent(QFocusEvent* event)
 {
     krossWord()->setHighlightedClue(NULL);
-    if (krossWord()->isEditable())
+    if (krossWord()->isEditable()) {
         setHighlight();
+    }
     KrossWordCell::focusInEvent(event);
 }
 
@@ -589,25 +587,33 @@ void EmptyCell::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
 void EmptyCell::drawBackground(QPainter* p, const QStyleOptionGraphicsItem* option)
 {
-    if (krossWord()->isEditable()) {
+    if (krossWord()->isEditable()) { // in editor mode
         if (isHighlighted()) {
             p->fillRect(option->rect, krossWord()->theme()->selectionColor());
             p->drawRect(option->rect.adjusted(0, 0, -1, -1));
-        } else {
+        } else {   
             p->fillRect(option->rect, krossWord()->theme()->emptyCellColor());
+            p->drawRect(option->rect.adjusted(0, 0, -1, -1));
+        }
+    } else { // and in game mode
+        const KrosswordRenderer *renderer = KrosswordRenderer::self();
+        const QColor alpha = QColor(128, 128, 128);
+        if (renderer->hasElement("empty_cell")) {
+            renderer->renderElement(p, "empty_cell", option->rect, alpha);
+        } else {
+            // The empty cell isn't themed in the current theme
+            p->fillRect(option->rect, Qt::black);
             p->drawRect(option->rect.adjusted(0, 0, -1, -1));
         }
     }
 }
 
-void EmptyCell::drawBackgroundForPrinting(QPainter* p,
-        const QStyleOptionGraphicsItem* option)
+void EmptyCell::drawBackgroundForPrinting(QPainter* p, const QStyleOptionGraphicsItem* option)
 {
     p->fillRect(option->rect, krossWord()->emptyCellColorForPrinting());
 }
 
-void KrossWordCell::paint(QPainter* painter,
-                          const QStyleOptionGraphicsItem* option, QWidget* widget)
+void KrossWordCell::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
     Q_UNUSED(widget);
 
@@ -674,4 +680,4 @@ bool greaterThanCellType(const KrossWordCell* cell1, const KrossWordCell* cell2)
 }
 
 }
-; // namespace Crossword
+// namespace Crossword
