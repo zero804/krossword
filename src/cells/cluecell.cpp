@@ -1125,7 +1125,7 @@ void ClueCell::drawClueNumber(QPainter *p, const QStyleOptionGraphicsItem *optio
 {
     // Draw clue number if any
     if (m_answerOffset == OnClueCell && m_clueNumber != -1) {
-        QString text = QString("%1.").arg(m_clueNumber + 1);
+        QString text = QString("%1").arg(m_clueNumber + 1);
         QFont font = KGlobalSettings::smallestReadableFont();
 
         qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));

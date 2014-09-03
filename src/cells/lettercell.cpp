@@ -863,8 +863,8 @@ void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* opt
     if (!isFirstLetterOfVerticalClue && !isFirstLetterOfHorizontalClue)
         return;
 
-    int arrowLength = option->rect.height() / 5;
-    int arrowWidth = option->rect.height() * 0.3f;
+    int arrowLength = option->rect.height()/5;
+    int arrowWidth = arrowLength; //option->rect.height() * 0.3f;
     int x = option->rect.width() * 0.35f;
     int y;
 

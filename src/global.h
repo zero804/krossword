@@ -279,8 +279,7 @@ enum ClueType {
 
 /** The type of clue mapping used by the crossword. */
 enum ClueMapping {
-    CluesReferToSetsOfCells, /**< Each clue refers to a set of cells, eg.
-            * a set of letter cells, ie. answers. */
+    CluesReferToSetsOfCells, /**< Each clue refers to a set of cells, eg. a set of letter cells, ie. answers. */
     CluesReferToCells /**< Each clue refers to a single letter.
             * The crossword has a fixed set of clues, eg. numbers. This is used by
             * number puzzles. */
