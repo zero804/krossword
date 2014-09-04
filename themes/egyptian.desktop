@@ -30,40 +30,43 @@ Name[x-test]=xxEgyptianxx
 FileName=egyptian.svgz
 Author=Friedrich Pülz
 AuthorEmail=fpuelz@gmx.de
-Description=KrossWordPuzzle, Egyptian style.
-Description[bs]=KrossWordPuzzle, Egipatski stil
-Description[de]=Das ägyptische Design für KrossWordPuzzle.
-Description[en_GB]=KrossWordPuzzle, Egyptian style.
-Description[es]=KrossWordPuzzle, estilo egipcio.
-Description[et]=KrossWordPuzzle Egiptuse stiilis.
-Description[fr]=KrossWordPuzzle avec un style Égyptien.
-Description[it]=KrossWordPuzzle, stile egiziano.
-Description[km]=KrossWordPuzzle រចនាប័ទ្ម​អេស៊ីប ។
-Description[pl]=Styl egipski KrossWordPuzzle.
-Description[pt]=KrossWordPuzzle, estilo Egípcio.
-Description[pt_BR]=KrossWordPuzzle, estilo Egípcio.
+Description=Krossword, Egyptian style.
+Description[bs]=Krossword, Egipatski stil
+Description[de]=Das ägyptische Design für Krossword.
+Description[en_GB]=Krossword, Egyptian style.
+Description[es]=Krossword, estilo egipcio.
+Description[et]=Krossword Egiptuse stiilis.
+Description[fr]=Krossword avec un style Égyptien.
+Description[it]=Krossword, stile egiziano.
+Description[km]=Krossword រចនាប័ទ្ម​អេស៊ីប ។
+Description[pl]=Styl egipski Krossword.
+Description[pt]=Krossword, estilo Egípcio.
+Description[pt_BR]=Krossword, estilo Egípcio.
 Description[sr]=К‑укрштеница у египатском стилу
 Description[sr@ijekavian]=К‑укрштеница у египатском стилу
 Description[sr@ijekavianlatin]=K‑ukrštenica u egipatskom stilu
 Description[sr@latin]=K‑ukrštenica u egipatskom stilu
 Description[sv]=Korsord, egyptisk stil.
-Description[tr]=KrossWordPuzzle, Mısır biçemi.
-Description[uk]=KrossWordPuzzle, єгипетський стиль.
-Description[x-test]=xxKrossWordPuzzle, Egyptian style.xx
+Description[tr]=Krossword, Mısır biçemi.
+Description[uk]=Krossword, єгипетський стиль.
+Description[x-test]=xxKrossword, Egyptian style.xx
 Preview=egyptian.png
 
 # Wheather or not the background is dark (affects shadows)
 HasDarkBackground=true
 
-# The glow color of highlighted cells
-GlowColor=255,220,40
-# The glow color of focused cells
-FocusGlowColor=255,40,20
+# The glow color of highlighted cells (255,220,40)
+GlowColor=#FFDC28
+# The glow color of focused cells (255,40,20)
+FocusGlowColor=#FF2814
 
-# The color for selected cells in edit mode
-SelectionColor=255,100,100,128
-# The color for empty cells in edit mode
-EmptyCellColor=70,70,70,128
+# The color for selected cells in edit mode (255,100,100,128) TODO: fix transparency
+SelectionColor=#FF6464
+# The color for empty cells in edit mode (70,70,70,128)
+EmptyCellColor=#464646
+
+# The font color (245,177,17)
+FontColor=#F5B111
 
 # Margins of cell contents: Left, Top, Right, Bottom
 LetterCellMargins=6,6,6,6

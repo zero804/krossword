@@ -41,42 +41,45 @@ Name[x-test]=xxDefaultxx
 FileName=default.svgz
 Author=Friedrich Pülz
 AuthorEmail=fpuelz@gmx.de
-Description=Default theme for KrossWordPuzzle.
-Description[bs]=Podrazumjevana tema za KrossWordPuzzle
-Description[de]=Standard-Design für KrossWordPuzzle
-Description[en_GB]=Default theme for KrossWordPuzzle.
-Description[es]=Tema predeterminado para KrossWordPuzzle.
-Description[et]=KrossWordPuzzle vaikimisi teema.
-Description[fr]=Thème par défaut de KrossWordPuzzle.
-Description[ga]=Téama réamhshocraithe le haghaidh KrossWordPuzzle.
-Description[it]=Tema predefinito per KrossWordPuzzle.
-Description[km]=ស្បែក​លំនាំ​ដើម​សម្រាប់ KrossWordPuzzle ។
+Description=Default theme for Krossword.
+Description[bs]=Podrazumjevana tema za Krossword
+Description[de]=Standard-Design für Krossword
+Description[en_GB]=Default theme for Krossword.
+Description[es]=Tema predeterminado para Krossword.
+Description[et]=Krossword vaikimisi teema.
+Description[fr]=Thème par défaut de Krossword.
+Description[ga]=Téama réamhshocraithe le haghaidh Krossword.
+Description[it]=Tema predefinito per Krossword.
+Description[km]=ស្បែក​លំនាំ​ដើម​សម្រាប់ Krossword ។
 Description[nds]=Standardmuster för Krüüzwoortradel
-Description[pl]=Domyślny motyw dla KrossWordPuzzle.
-Description[pt]=Tema predefinido do KrossWordPuzzle.
-Description[pt_BR]=Tema padrão do KrossWordPuzzle.
+Description[pl]=Domyślny motyw dla Krossword.
+Description[pt]=Tema predefinido do Krossword.
+Description[pt_BR]=Tema padrão do Krossword.
 Description[sr]=Подразумевана тема за К‑укрштеницу
 Description[sr@ijekavian]=Подразумијевана тема за К‑укрштеницу
 Description[sr@ijekavianlatin]=Podrazumijevana tema za K‑ukrštenicu
 Description[sr@latin]=Podrazumevana tema za K‑ukrštenicu
 Description[sv]=Standardtema för Korsord
-Description[tr]=KrossWordPuzzle için öntanımlı tema
-Description[uk]=Типова тема для KrossWordPuzzle.
-Description[x-test]=xxDefault theme for KrossWordPuzzle.xx
+Description[tr]=Krossword için öntanımlı tema
+Description[uk]=Типова тема для Krossword.
+Description[x-test]=xxDefault theme for Krossword.xx
 Preview=default.png
 
 # Wheather or not the background is dark (affects shadows)
 HasDarkBackground=false
 
-# The glow color of highlighted cells
-GlowColor=64,64,255
-# The glow color of focused cells
-FocusGlowColor=255,64,64
+# The glow color of highlighted cells (64,64,255)
+GlowColor=#4040FF
+# The glow color of focused cells (255,64,64)
+FocusGlowColor=#FF4040
 
-# The color for selected cells in edit mode
-SelectionColor=255,100,100,128
-# The color for empty cells in edit mode
-EmptyCellColor=100,100,100,128
+# The color for selected cells in edit mode (255,100,100,128) TODO must fix transparency value
+SelectionColor=#FF6464
+# The color for empty cells in edit mode (100,100,100,128)
+EmptyCellColor=#646464
+
+# The font color (0,0,0)
+FontColor=#000000
 
 # Margins of cell contents: Left, Top, Right, Bottom
 LetterCellMargins=8,12,8,4

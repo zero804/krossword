@@ -61,6 +61,9 @@ public:
     /** The color for empty cells in edit mode. */
     QColor emptyCellColor() const;
 
+    /** The color used by the font. */
+    QColor fontColor() const;
+
     /** The position of number clues inside letter cells for number puzzles. */
     //ItemPosition numberPuzzleCluePos() const;
 
@@ -80,7 +83,7 @@ private:
     //ItemPosition positionFromString(const QString &s, ItemPosition defaultPos) const;
 
     QMargins m_marginsLetterCell, m_marginsClueCell;
-    QColor m_glowColor, m_glowFocusColor, m_selectionColor, m_emptyCellColor;
+    QColor m_glowColor, m_glowFocusColor, m_selectionColor, m_emptyCellColor, m_fontColor;
     bool m_hasDarkBackground;
     //ItemPosition m_numberPuzzleCluePos, m_clueNumberPos, m_solutionLetterIndexPos;
 };
