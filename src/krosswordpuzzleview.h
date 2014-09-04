@@ -50,7 +50,9 @@ public:
 
     virtual QSize sizeHint() const;
 
-    qreal getMinimumZoomScale() const;
+    void updateZoomMinimumScale();
+    qreal getMinimumZoomScale();
+
 
 protected:
     virtual void keyPressEvent(QKeyEvent* event);

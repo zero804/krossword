@@ -86,7 +86,7 @@ void KrossWordPuzzleView::resizeEvent(QResizeEvent* event)
     emit resized(event->oldSize(), event->size());
     
     this->fitInView(this->sceneRect().adjusted(150, 150, -150, -150), Qt::KeepAspectRatio);
-    m_minimumZoomScale = this->matrix().m11();
+    updateZoomMinimumScale();
     emit signalChangeZoom(0);
 }
 
@@ -106,7 +106,14 @@ void KrossWordPuzzleView::settingsChanged()
     emit signalChangeStatusbar(i18n("Settings changed"));
 }
 
-qreal KrossWordPuzzleView::getMinimumZoomScale() const
+qreal KrossWordPuzzleView::getMinimumZoomScale()
 {
     return m_minimumZoomScale;
+}
+
+void KrossWordPuzzleView::updateZoomMinimumScale()
+{
+    m_minimumZoomScale = this->matrix().m11();
+    if (m_minimumZoomScale > 3.0)
+        m_minimumZoomScale /= 2.0;
 }

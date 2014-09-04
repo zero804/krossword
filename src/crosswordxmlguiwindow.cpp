@@ -2347,6 +2347,7 @@ void CrossWordXmlGuiWindow::showCongratulationsItems()
 void CrossWordXmlGuiWindow::fitToPageSlot()
 {
     m_view->fitInView(m_view->sceneRect().adjusted(150, 150, -150, -150), Qt::KeepAspectRatio);
+    m_view->updateZoomMinimumScale();
     m_zoomWidget->setZoom(m_zoomWidget->minimumZoom());
     krossWord()->clearCache();
 }
