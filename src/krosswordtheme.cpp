@@ -46,9 +46,11 @@ bool KrosswordTheme::readFromDesktopFile(const QString& file)
 
     m_hasDarkBackground = (customData("HasDarkBackground", "false") == "false") ? false : true;
     m_glowColor = QColor(customData("GlowColor", "64, 64, 255"));
+
     m_glowFocusColor = QColor(customData("FocusGlowColor", "255, 64, 64"));
     m_selectionColor = QColor(customData("SelectionColor", "255, 100, 100, 128"));
     m_emptyCellColor = QColor(customData("EmptyCellColor", "100, 100, 100, 128"));
+    m_fontColor = QColor(customData("FontColor", "#000000"));
 
     // (original) TODO only use "free" positions as default values
     //m_clueNumberPos = positionFromString(customData("ClueNumberPos", ""), BottomRight);
@@ -70,6 +72,7 @@ KrosswordTheme* KrosswordTheme::defaultValues()
     theme->m_glowFocusColor = QColor(255, 64, 64);
     theme->m_selectionColor = QColor(255, 100, 100, 128);
     theme->m_emptyCellColor = QColor(100, 100, 100, 128);
+    theme->m_fontColor = QColor(0, 0, 0);
 
     //theme->m_clueNumberPos = BottomRight;
     //theme->m_numberPuzzleCluePos = TopRight;
@@ -160,6 +163,10 @@ QColor KrosswordTheme::selectionColor() const {
 
 QColor KrosswordTheme::emptyCellColor() const {
     return m_emptyCellColor;
+}
+
+QColor KrosswordTheme::fontColor() const {
+    return m_fontColor;
 }
 
 /*

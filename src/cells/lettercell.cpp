@@ -772,6 +772,7 @@ void LetterCell::drawForeground(QPainter* p, const QStyleOptionGraphicsItem* opt
     QFont letterFont = p->font();
     letterFont.setPixelSize(rect.height());
     letterFont.setBold(true);
+    p->setPen(QPen(krossWord()->theme()->fontColor()));
     p->setFont(letterFont);
     p->drawText(rect, Qt::AlignCenter, letter);
 }
