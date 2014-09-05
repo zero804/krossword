@@ -623,7 +623,7 @@ void KrossWordCell::paint(QPainter* painter, const QStyleOptionGraphicsItem* opt
     } else {
         qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
         QSize size = option->rect.size() * levelOfDetail;
-        //  qDebug() << "SIZE =" << size << "FROM" << option->rect.size() << "*" << levelOfDetail;
+        //qDebug() << "SIZE =" << size << "FROM" << option->rect.size() << "*" << levelOfDetail;
 
         if (m_cache) {
             if (m_cache->size() != size) {
