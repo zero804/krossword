@@ -634,11 +634,9 @@ void CrossWordXmlGuiWindow::setEditMode(EditMode editMode)
     }
 }
 
-bool CrossWordXmlGuiWindow::createNewCrossWord(
-    const CrosswordTypeInfo &crosswordTypeInfo,
-    const QSize &crosswordSize,
-    const QString& title, const QString& authors,
-    const QString& copyright, const QString& notes)
+bool CrossWordXmlGuiWindow::createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,const QSize &crosswordSize,
+                                               const QString& title, const QString& authors,
+                                               const QString& copyright, const QString& notes)
 {
     if (!closeFile())
         return false;
@@ -662,14 +660,14 @@ bool CrossWordXmlGuiWindow::createNewCrossWord(
     setState(ShowingCrossword);
     setEditMode();
     fitToPageSlot();
+    draw_background(m_view);
 
     return true;
 }
 
-bool CrossWordXmlGuiWindow::createNewCrossWordFromTemplate(
-    const QString& templateFilePath, const QString& title,
-    const QString& authors, const QString& copyright,
-    const QString& notes)
+bool CrossWordXmlGuiWindow::createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title,
+                                                           const QString& authors, const QString& copyright,
+                                                           const QString& notes)
 {
     if (!closeFile())
         return false;
@@ -694,6 +692,8 @@ bool CrossWordXmlGuiWindow::createNewCrossWordFromTemplate(
 
     setState(ShowingCrossword);
     setEditMode();
+    fitToPageSlot();
+    draw_background(m_view);
 
     return true;
 }
