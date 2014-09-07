@@ -211,8 +211,8 @@ unsigned int ZoomWidget::maximumZoom() const
 void ZoomWidget::setZoom(unsigned int zoom)
 {
     unsigned int min = minimumZoom();
+    unsigned int max = maximumZoom();
     if(zoom >= min) {
-        unsigned int max = maximumZoom();
         if(zoom <= max) {
             m_zoomSlider->setValue(zoom);
             emit zoomChanged(zoom);
@@ -223,6 +223,15 @@ void ZoomWidget::setZoom(unsigned int zoom)
     } else {
         m_zoomSlider->setValue(min);
         emit zoomChanged(min);
+    }
+
+    if(zoom == min) {
+        m_btnZoomOut->setEnabled(false);
+    } else if(zoom == max) {
+        m_btnZoomIn->setEnabled(false);
+    } else {
+        m_btnZoomOut->setEnabled(true);
+        m_btnZoomIn->setEnabled(true);
     }
 }
 
