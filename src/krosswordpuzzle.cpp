@@ -45,7 +45,7 @@ KrossWordPuzzle::KrossWordPuzzle()
       m_mainLibrary(nullptr),
       m_mainCrossword(nullptr),
       m_loadProgressDialog(nullptr),
-      m_mainTabBar(new QStackedWidget(this))
+      m_mainStackedBar(new QStackedWidget(this))
 {
     if (Settings::libraryDownloadSubDir().isEmpty()) {
         Settings::setLibraryDownloadSubDir(i18n("Downloads"));
@@ -60,13 +60,8 @@ KrossWordPuzzle::KrossWordPuzzle()
     setupGUI(Save | Create);
 
     setupMainTabWidget();
-    setCentralWidget(m_mainTabBar);
+    setCentralWidget(m_mainStackedBar);
     m_mainLibrary->statusBar()->showMessage(i18n("Welcome to Krossword!"));
-
-    // For compatibility with versions of KrossWordPuzzle <= 0.15.6.2 where the
-    // menuBar was invisible (another menuBar was created and then set as the
-    // corner widget of the tab widget instead).
-    menuBar()->show();
 
     QString lastUnsavedFileBeforeCrash = Settings::lastUnsavedFileBeforeCrash();
     if (!lastUnsavedFileBeforeCrash.isEmpty()) {
@@ -106,8 +101,8 @@ bool KrossWordPuzzle::createNewCrossWord(const Crossword::CrosswordTypeInfo &cro
                                          const QString& notes)
 {
     if (m_mainCrossword->createNewCrossWord(crosswordTypeInfo, crosswordSize, title, authors, copyright, notes)) {
-        int indexCrossword = m_mainTabBar->indexOf(m_mainCrossword);
-        m_mainTabBar->setCurrentIndex(indexCrossword);
+        int indexCrossword = m_mainStackedBar->indexOf(m_mainCrossword);
+        m_mainStackedBar->setCurrentIndex(indexCrossword);
         return true;
     } else {
         return false;
@@ -117,8 +112,8 @@ bool KrossWordPuzzle::createNewCrossWord(const Crossword::CrosswordTypeInfo &cro
 bool KrossWordPuzzle::createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title, const QString& authors, const QString& copyright, const QString& notes)
 {
     if (m_mainCrossword->createNewCrossWordFromTemplate(templateFilePath, title, authors, copyright, notes)) {
-        int indexCrossword = m_mainTabBar->indexOf(m_mainCrossword);
-        m_mainTabBar->setCurrentIndex(indexCrossword);
+        int indexCrossword = m_mainStackedBar->indexOf(m_mainCrossword);
+        m_mainStackedBar->setCurrentIndex(indexCrossword);
         return true;
     } else {
         return false;
@@ -200,9 +195,9 @@ QDialog* KrossWordPuzzle::createLoadProgressDialog()
 void KrossWordPuzzle::setupMainTabWidget()
 {
     m_mainLibrary      = new LibraryXmlGuiWindow(this);
-    int indexLibrary   = m_mainTabBar->addWidget(m_mainLibrary);
+    int indexLibrary   = m_mainStackedBar->addWidget(m_mainLibrary);
     m_mainCrossword    = new CrossWordXmlGuiWindow(this);
-    int indexCrossword = m_mainTabBar->addWidget(m_mainCrossword);
+    m_mainStackedBar->addWidget(m_mainCrossword);
 
     m_mainCrossword->krossWord()->setAnimationTypes(animationTypesFromSettings());
 
@@ -226,19 +221,18 @@ void KrossWordPuzzle::setupMainTabWidget()
 
 
     // Add menus of the embedded crossword window to the menu bar of this (main) window
-    QAction *firstMenu = this->menuBar()->actions().last();
+    QAction *lastMenu = this->menuBar()->actions().last();
     foreach(QAction * action, m_mainCrossword->menuBar()->actions()) {
         if (action->menu() && (action->menu()->objectName() == "game" ||
                                action->menu()->objectName() == "edit" ||
                                action->menu()->objectName() == "move" ||
                                action->menu()->objectName() == "view")) {
-            this->menuBar()->insertMenu(firstMenu, action->menu());
+            this->menuBar()->insertMenu(lastMenu, action->menu());
         }
     }
 
-
-    m_mainTabBar->setCurrentIndex(indexLibrary);
-    connect(m_mainTabBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
+    m_mainStackedBar->setCurrentIndex(indexLibrary);
+    connect(m_mainStackedBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
     currentTabChanged(indexLibrary);
 }
 
@@ -371,7 +365,7 @@ AnimationTypes KrossWordPuzzle::animationTypesFromSettings()
 
 void KrossWordPuzzle::showStatusbarGlobal(bool show)
 {
-    if (m_mainTabBar->currentWidget() == m_mainCrossword) {
+    if (m_mainStackedBar->currentWidget() == m_mainCrossword) {
         m_mainCrossword->statusBar()->setVisible(show);
     } else {
         m_mainLibrary->statusBar()->setVisible(show);
@@ -381,7 +375,7 @@ void KrossWordPuzzle::showStatusbarGlobal(bool show)
 int KrossWordPuzzle::configureShortcutsGlobal()
 {
     KShortcutsDialog dlg(KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcutsAllowed, this);
-    if (m_mainTabBar->currentWidget() == m_mainCrossword) {
+    if (m_mainStackedBar->currentWidget() == m_mainCrossword) {
         dlg.addCollection(m_mainCrossword->actionCollection());
     } else {
         dlg.addCollection(m_mainLibrary->actionCollection());
@@ -392,7 +386,7 @@ int KrossWordPuzzle::configureShortcutsGlobal()
 
 void KrossWordPuzzle::configureToolbarsGlobal()
 {
-    if (m_mainTabBar->currentWidget() == m_mainCrossword) {
+    if (m_mainStackedBar->currentWidget() == m_mainCrossword) {
         m_mainCrossword->configureToolbars();
     } else {
         m_mainLibrary->configureToolbars();
@@ -401,7 +395,7 @@ void KrossWordPuzzle::configureToolbarsGlobal()
 
 void KrossWordPuzzle::currentTabChanged(int index)
 {
-    bool crosswordTabShown = index == m_mainTabBar->indexOf(m_mainCrossword);
+    bool crosswordTabShown = index == m_mainStackedBar->indexOf(m_mainCrossword);
 
     foreach(QAction * action, this->menuBar()->actions()) {
         if (action->menu() && (action->menu()->objectName() == "game" ||
@@ -445,8 +439,8 @@ void KrossWordPuzzle::crosswordLoadingComplete(const QString& fileName)
     if (m_loadProgressDialog) // When loading a template there is no load progress dialog
         m_loadProgressDialog->close();
 
-    int indexCrossword = m_mainTabBar->indexOf(m_mainCrossword);
-    m_mainTabBar->setCurrentIndex(indexCrossword);
+    int indexCrossword = m_mainStackedBar->indexOf(m_mainCrossword);
+    m_mainStackedBar->setCurrentIndex(indexCrossword);
 
     m_mainLibrary->statusBar()->showMessage(i18nc("Loaded '%1'", "Statusbar text "
                                             "when a crossword has been loaded, %1 gets replaced by the file name",
@@ -465,7 +459,7 @@ void KrossWordPuzzle::crosswordClosed(const QString& fileName)
 {
     Q_UNUSED(fileName);
 
-    m_mainTabBar->setCurrentWidget(m_mainLibrary);
+    m_mainStackedBar->setCurrentWidget(m_mainLibrary);
 }
 
 void KrossWordPuzzle::crosswordCurrentChanged(const QString& fileName, const QString& oldFileName)

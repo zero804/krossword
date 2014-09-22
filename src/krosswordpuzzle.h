@@ -102,7 +102,7 @@ private:
 
     QDialog               *m_loadProgressDialog;    //Owned
     QString                m_caption;
-    QStackedWidget          *m_mainTabBar;            //Owned
+    QStackedWidget        *m_mainStackedBar;            //Owned
 };
 
 #endif // _KROSSWORDPUZZLE_H_
