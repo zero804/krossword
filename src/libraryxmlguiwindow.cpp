@@ -26,7 +26,6 @@
 #include "settings.h"
 #include "dialogs/createnewcrossworddialog.h"
 
-#include <QStandardItemModel>
 #include <KMessageBox>
 #include <KFileDialog>
 #include <KActionMenu>
@@ -54,29 +53,131 @@ QByteArray calculate_file_hash(QCryptographicHash& function, const QString& url)
     return QByteArray();
 }
 
+//-------------------------------
+
+FileSystemModel::FileSystemModel(QObject *parent) : QFileSystemModel(parent)
+{
+    setReadOnly(false); // so the files (crosswords) can be moved...
+    setNameFilters(QStringList() << "*.kwpz");
+    setNameFilterDisables(false); //hidden (not just disable) the unwanted files
+    connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(loadThumbnails(QString)));
+}
+
+QVariant FileSystemModel::data(const QModelIndex &index, int role) const
+{
+    //we need to customize just the files column, not the dates one
+    if(index.column() == 0) {
+        QString libraryItem = QFileSystemModel::data(index, QFileSystemModel::FilePathRole).toString();
+        QFileInfo fi(libraryItem);
+
+        if(fi.isFile()) {
+            QString errorString;
+            KrossWordXmlReader::KrossWordInfo info = KrossWordXmlReader::readInfo(KUrl(libraryItem), &errorString);
+            if (!info.isValid()) {
+                qDebug() << "Error reading crossword info from library file" << errorString;
+            }
+
+            QString title = info.title.isEmpty() ? fi.fileName().remove(QRegExp("\\." + fi.suffix() + '$', Qt::CaseInsensitive)) : info.title;
+
+            QString itemText = QString("<b>%1</b><br>%2 %3x%4<br>%5 %6 - %7")
+                               .arg(title)
+                               .arg(i18nc("The title for sizes of crosswords in the library tree view", "Size:"))
+                               .arg(info.width)
+                               .arg(info.height)
+                               .arg(i18nc("The title for authors of crosswords in the library tree view", "Author(s):"))
+                               .arg(info.authors)
+                               .arg(info.copyright);
+
+            switch (role) {
+            case Qt::DisplayRole:
+                return itemText;
+                break;
+            case Qt::DecorationRole:
+                if (m_thumbs.contains(libraryItem))
+                    return m_thumbs.value(libraryItem);
+                break;
+            //case Qt::UserRole: //remember userRole + 1/2/3 are already used by qfilesystemmodel
+            //    break;
+            default:
+                return QFileSystemModel::data(index, role);
+            }
+        }
+    }
+
+    return QFileSystemModel::data(index, role);
+}
+
+void FileSystemModel::loadThumbnails(QString path)
+{
+    QModelIndexList fileIndexList = match(index(path), QFileSystemModel::FileNameRole, "*.kwpz", -1, Qt::MatchWildcard | Qt::MatchRecursive);
+
+    QModelIndex fileIndex;
+    KFileItemList fileItemList;
+    foreach (fileIndex, fileIndexList) {
+        if(fileIndex.data(QFileSystemModel::FilePathRole).toString().startsWith(path + "/"))
+            fileItemList.append(KFileItem(KFileItem::Unknown, KFileItem::Unknown, KUrl("file://" + fileIndex.data(QFileSystemModel::FilePathRole).toString()), true));
+    }
+
+    if(fileItemList.count() != 0) {
+        m_previewJob = new KIO::PreviewJob(fileItemList, 64, 64, 0, 1, false, true, 0);
+        m_previewJob->setAutoDelete(true);
+        connect(m_previewJob, SIGNAL(gotPreview(KFileItem, QPixmap)), this, SLOT(previewJobGotPreview(KFileItem, QPixmap)));
+        connect(m_previewJob, SIGNAL(failed(KFileItem)), this, SLOT(previewJobFailed(KFileItem)));
+        m_previewJob->start();
+    }
+}
+
+void FileSystemModel::previewJobGotPreview(const KFileItem &fi, const QPixmap &pix)
+{
+    QString fileName = fi.url().path();
+    QModelIndex idx = index(fileName);
+    if (!idx.isValid()) {
+        qDebug() << "Item for preview image not found";
+    } else {
+        m_thumbs.insert(fileName, QIcon(pix));
+        emit dataChanged(idx, idx); // to trigger the update via FileSystemModel::data
+    }
+
+}
+
+void FileSystemModel::previewJobFailed(const KFileItem &fi)
+{
+    qDebug() << fi.url();
+}
+
+//-------------------------------
+
 LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
       m_mainWindow(parent),
       m_libraryTree(new QTreeView()),
       m_libraryDelegate(0),
-      m_libraryModel(0),
-      m_previewJob(0),
+      m_libraryModel(new FileSystemModel(this)),
       m_downloadPreviewJob(0)
 {
+    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
+    m_libraryModel->setRootPath(libraryDir);
+
+    if (!m_libraryDelegate) {
+        m_libraryDelegate = new HtmlDelegate(this);
+        m_libraryTree->setItemDelegate(m_libraryDelegate);
+    }
+
+    m_libraryTree->setModel(m_libraryModel);
+    m_libraryTree->setRootIndex(m_libraryModel->index(libraryDir));
+
     m_libraryTree->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_libraryTree->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_libraryTree->setDragDropMode(QAbstractItemView::InternalMove);
     m_libraryTree->setAlternatingRowColors(true);
     m_libraryTree->setIconSize(QSize(64, 64));
-    m_libraryTree->setSortingEnabled(true);
     m_libraryTree->setAnimated(true);
     m_libraryTree->setAllColumnsShowFocus(true);
-    m_libraryTree->setWordWrap(true);
-    m_libraryTree->header()->setMinimumSectionSize(125);
-    m_libraryTree->setWhatsThis(i18n("This is the library view.<br/>You can see all crosswords that are inside the library."));
-    m_libraryTree->setContextMenuPolicy(Qt::CustomContextMenu);
 
-    statusBar()->show();
-    setHelpMenuEnabled(false);
+    m_libraryTree->header()->hideSection(1); //hide size column
+    m_libraryTree->header()->hideSection(2); //hide type
+
+    m_libraryTree->header()->setResizeMode(QHeaderView::Stretch);
+
     setObjectName("library");
     setAutoSaveSettings(QLatin1String("LibraryWindow"), false);
 
@@ -84,12 +185,8 @@ LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindo
 
     setupActions();
     setupGUI(StatusBar | ToolBar | /*Keys | */Save | Create, "krossword/krossword_library_ui.rc");
-    menuBar()->hide();
 
-    connect(m_libraryTree, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(libraryTreeContextMenuRequested(QPoint)));
     connect(m_libraryTree, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(libraryItemDoubleClicked(QModelIndex)));
-
-    fillLibrary();
 }
 
 QTreeView* LibraryXmlGuiWindow::libraryTree() const
@@ -116,8 +213,6 @@ const char* LibraryXmlGuiWindow::actionName(LibraryXmlGuiWindow::Action actionEn
         return "library_new_folder";
     case Library_NewCrossword:
         return "library_new_crossword";
-    case Library_Update:
-        return "library_update";
 
     default:
         qWarning() << "Action enumerable not handled in switch" << actionEnum;
@@ -208,36 +303,15 @@ void LibraryXmlGuiWindow::libraryAddCrossword(const QList< QUrl >& urls, const Q
         }
     }
 
+    // Select new crossword in the tree view
     if (!lastCrosswordFileName.isEmpty()) {
-        fillLibrary();
-
-        // Select new crossword in the tree view
-        QModelIndexList list = m_libraryModel->match(m_libraryModel->index(0, 0), Qt::UserRole, lastCrosswordFileName, 1,
-                               Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive);
-
-        if (!list.isEmpty()) {
-            m_libraryTree->setCurrentIndex(list.first());
-            m_libraryTree->scrollTo(list.first());
-        }
+        QModelIndex index = m_libraryModel->index(lastCrosswordFileName);
+        m_libraryTree->setCurrentIndex(index);
+        m_libraryTree->scrollTo(index);
     }
 }
 
 //======================================================
-
-void LibraryXmlGuiWindow::previewJobGotPreview(const KFileItem &fi, const QPixmap &pix)
-{
-    QString fileName = fi.url().path();
-    QModelIndexList list = m_libraryModel->match(m_libraryModel->index(0, 0), Qt::UserRole, fileName, 1, Qt::MatchFixedString | Qt::MatchCaseSensitive | Qt::MatchRecursive);
-    if (list.isEmpty())
-        qDebug() << "Item for preview image not found";
-    else
-        m_libraryModel->itemFromIndex(list.first())->setIcon(pix);
-}
-
-void LibraryXmlGuiWindow::previewJobFailed(const KFileItem &fi)
-{
-    qDebug() << fi.url();
-}
 
 void LibraryXmlGuiWindow::downloadPreviewJobGotPreview(const KFileItem& fi, const QPixmap& pix)
 {
@@ -314,112 +388,6 @@ void LibraryXmlGuiWindow::downloadCurrentCrosswordChanged(QListWidgetItem* curre
     m_downloadPreviewJob->start();
 }
 
-void LibraryXmlGuiWindow::libraryItemChanged(QStandardItem *item)
-{
-    // Move crossword in the library from one folder to another
-    // or from/to the base library folder
-
-    // Get item of the first column
-    if (item->parent()) {
-        if (!item->parent()->child(item->row(), 0)) {
-            // Item copied/moved to another column...
-            qDebug() << "Remove copied item";
-            m_libraryModel->removeRow(item->row(), item->index().parent());
-            return;
-        }
-
-        item = m_libraryModel->itemFromIndex(item->parent()->child(item->row(), 0)->index());
-    } else {
-        int row = item->row();
-        item = m_libraryModel->item(row);
-
-        if (!item) {
-            // Item copied/moved to another column...
-            qDebug() << "Remove copied item";
-            m_libraryModel->removeRow(row);
-            return;
-        }
-    }
-
-    QString oldCrosswordFilePath = item->data(Qt::UserRole).toString();
-
-    if (!QFileInfo(oldCrosswordFilePath).isFile())
-        return;
-
-    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
-    QFileInfo oldCrosswordFileInfo = QFileInfo(oldCrosswordFilePath);
-    QString oldCrosswordPath = oldCrosswordFileInfo.absolutePath();
-    QString newCrosswordPath = item->parent() ? item->parent()->data(Qt::UserRole).toString() : libraryDir;
-
-    if (oldCrosswordPath.endsWith(QDir::separator()))
-        oldCrosswordPath = oldCrosswordPath.left(oldCrosswordPath.length() - 1);
-
-    if (newCrosswordPath.endsWith(QDir::separator()))
-        newCrosswordPath = newCrosswordPath.left(newCrosswordPath.length() - 1);
-
-    if (libraryDir.endsWith(QDir::separator()))
-        libraryDir = libraryDir.left(libraryDir.length() - 1);
-
-    //  qDebug() << "LIBRARY DIR" << libraryDir;
-    //  qDebug() << "OLD FILE PATH" << oldCrosswordFilePath;
-    //  qDebug() << "OLD DIR" << oldCrosswordPath;
-    //  qDebug() << "NEW DIR" << newCrosswordPath;
-
-    if (oldCrosswordPath != newCrosswordPath) {
-        QString fileName = oldCrosswordFileInfo.fileName();
-        item->setData(newCrosswordPath + QDir::separator() + fileName, Qt::UserRole);
-
-        QModelIndexList indices = m_libraryModel->match(m_libraryModel->index(0, 0), Qt::UserRole, oldCrosswordPath, 1, Qt::MatchCaseSensitive | Qt::MatchFixedString);
-        QStandardItem *oldParentItem = indices.isEmpty() ? NULL : m_libraryModel->itemFromIndex(indices[0]);
-
-        if (oldCrosswordPath == libraryDir) {
-            if (item->parent()) {
-                item->parent()->setText(getFolderText(newCrosswordPath, + 1));
-            }
-
-            statusBar()->showMessage(i18n("Moved crossword \"%1\" from the main library folder to \"%2\"", fileName, QFileInfo(newCrosswordPath).absoluteDir().dirName()));
-        } else if (newCrosswordPath == libraryDir) {
-            if (oldParentItem) {
-                oldParentItem->setText(getFolderText(oldCrosswordPath, -1));
-            }
-
-            statusBar()->showMessage(i18n("Moved crossword \"%1\" from \"%2\" to the main library folder", fileName, QFileInfo(oldCrosswordPath).absoluteDir().dirName()));
-        } else {
-            if (oldParentItem) {
-                oldParentItem->setText(getFolderText(oldCrosswordPath, -1));
-            }
-
-            if (item->parent()) {
-                item->parent()->setText(getFolderText(newCrosswordPath, + 1));
-            }
-
-            statusBar()->showMessage(i18n("Moved crossword \"%1\" from \"%2\" to \"%3\"", fileName, QFileInfo(oldCrosswordPath).absoluteDir().dirName(),
-                     QFileInfo(newCrosswordPath).absoluteDir().dirName()));
-        }
-
-        KIO::move(KUrl(oldCrosswordFilePath), KUrl(newCrosswordPath));
-    }
-}
-
-void LibraryXmlGuiWindow::libraryTreeContextMenuRequested(const QPoint& pos)
-{
-    QMenu *menu = createPopupMenu();
-
-    QModelIndex index = m_libraryTree->indexAt(pos);
-    if (index.isValid() && index.data(Qt::UserRole + 2).toBool()) {
-        m_libraryPopupIndex = index;
-        QAction *setAsSubDirAction = menu->addAction(KIcon("folder-downloads"), i18n("Set as Folder For New &Downloads"), this, SLOT(librarySetAsSubDirForDownloads()));
-        setAsSubDirAction->setCheckable(true);
-
-        if (QFileInfo(index.data(Qt::UserRole).toString()).fileName() == Settings::libraryDownloadSubDir()) {
-            setAsSubDirAction->setChecked(true);
-        }
-    }
-
-    menu->exec(m_libraryTree->mapToGlobal(pos));
-    delete menu;
-}
-
 void LibraryXmlGuiWindow::libraryItemDoubleClicked(const QModelIndex &index)
 {
     libraryOpenItem(index);
@@ -430,37 +398,8 @@ void LibraryXmlGuiWindow::libraryOpenItem(const QModelIndex& index)
     if (!index.isValid())
         return;
 
-    QString fileName = index.sibling(index.row(), 0).data(Qt::UserRole).toString();
-    if (!QFileInfo(fileName).isDir())
-        m_mainWindow->loadFile(KUrl(fileName));
-}
-
-void LibraryXmlGuiWindow::libraryCurrentChanged(const QModelIndex& current, const QModelIndex& previous)
-{
-    Q_UNUSED(previous);
-
-    QString fileName = current.data(Qt::UserRole).toString();
-    bool crosswordSelected = current.isValid() && QFileInfo(fileName).isFile();
-
-    action(actionName(Library_Export))->setEnabled(crosswordSelected);
-    action(actionName(Library_Open))->setEnabled(crosswordSelected);
-    action(actionName(Library_Delete))->setEnabled(current.isValid());
-
-    if (crosswordSelected)
-        statusBar()->showMessage(i18n("Current crossword filename: \"%1\"", fileName));
-}
-
-void LibraryXmlGuiWindow::librarySetAsSubDirForDownloads()
-{
-    if (m_libraryPopupIndex.isValid()) {
-        QString folderPath = m_libraryPopupIndex.data(Qt::UserRole).toString();
-        QString folderName = QFileInfo(folderPath).fileName();
-
-        Settings::setLibraryDownloadSubDir(folderName);
-        Settings::self()->writeConfig();
-
-        // TODO: Move crosswords from old downloads folder to the new one?
-    }
+    if (!m_libraryModel->isDir(index))
+        m_mainWindow->loadFile(KUrl(index.data(QFileSystemModel::FilePathRole).toString()));
 }
 
 void LibraryXmlGuiWindow::libraryOpenSlot()
@@ -479,20 +418,20 @@ void LibraryXmlGuiWindow::libraryImportSlot()
         libraryAddCrossword(QList<QUrl>() << url);
 }
 
+//missing kwp, kwpz (and puz?) export
 void LibraryXmlGuiWindow::libraryExportSlot()
 {
     QModelIndex index = m_libraryTree->currentIndex();
     if (!index.isValid())
         return;
 
-    QString fileName = index.data(Qt::UserRole).toString();
-    QFileInfo fileInfo(fileName);
-    if (fileInfo.isDir()) {
+    if (m_libraryModel->isDir(index)) {
         KMessageBox::information(this, i18n("Can't export whole directories. Please select a crossword."));
     } else {
         Crossword::KrossWord krossWord;
         QString errorString;
-        if (!krossWord.read(KUrl(fileName), &errorString)) {
+        QString filePath = index.data(QFileSystemModel::FilePathRole).toString();
+        if (!krossWord.read(KUrl(filePath), &errorString)) {
             KMessageBox::error(this, i18n("There was an error opening the crossword.\n%1", errorString));
         } else {
             QString fileName = KFileDialog::getSaveFileName(
@@ -541,7 +480,7 @@ void LibraryXmlGuiWindow::libraryExportSlot()
                 }
             }
         } // !krossWord.read() .. else
-    } // fileInfo.isDir() .. else
+    }
 }
 
 void LibraryXmlGuiWindow::libraryDownloadSlot()
@@ -550,8 +489,6 @@ void LibraryXmlGuiWindow::libraryDownloadSlot()
     downloadCrosswordsDlg->setWindowTitle(i18n("Download Crossword To Library"));
     ui_download.setupUi(downloadCrosswordsDlg);
     ui_download.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-
-    //downloadCrosswordsDlg->setModal(true);
 
     foreach(const DownloadProvider & provider, allDownloadProviders()) {
         switch (provider) {
@@ -589,7 +526,6 @@ void LibraryXmlGuiWindow::libraryDownloadSlot()
 
     QHash< int, QDir > cmbIndexToDir;
     QString sLibraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
-    //QDir libraryDir(sLibraryDir);
     QFileInfoList fiSubDirs = QDir(sLibraryDir).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
     int i = 0, downloadDirIndex = -1;
 
@@ -640,9 +576,7 @@ void LibraryXmlGuiWindow::libraryDeleteSlot()
 {
     QModelIndex index = m_libraryTree->currentIndex();
     if (index.isValid()) {
-        QString fileName = index.data(Qt::UserRole).toString();
-        QFileInfo fileInfo(fileName);
-        if (fileInfo.isDir()) {
+        if (m_libraryModel->isDir(index)) {
             int result = KMessageBox::warningContinueCancel(this,
                          i18n("This will permanently delete the selected directory and all contained "
                               "crosswords from the library. The operation can't be undone!"), QString(),
@@ -650,29 +584,10 @@ void LibraryXmlGuiWindow::libraryDeleteSlot()
             if (result == KMessageBox::Cancel)
                 return;
 
-            QDir dir(fileName);
-            QFileInfoList infoList = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::Files);
-            bool error = false;
-            foreach(QFileInfo fi, infoList) {
-                QFile file(fi.absoluteFilePath());
-                if (!file.remove()) {
-                    error = true;
-                    KMessageBox::error(this, i18n("Couldn't remove a crossword from the library's directory.\n"
-                                                  "You need root privileges to remove crosswords which belong to the global library."));
-                    fillLibrary(); // Refill the library model
-                    break;
-                }
-            }
+            bool error = m_libraryModel->remove(index);
+            if(error == false)
+                KMessageBox::error(this, i18n("Couldn't remove the directory from the library.\nYou need root privileges to remove directories which belong to the global library."));
 
-            if (!error) {
-                QString dirName = dir.dirName();
-                dir.cdUp();
-                if (dir.rmdir(dirName)) {
-                    m_libraryModel->removeRow(index.row(), index.parent());
-                } else
-                    KMessageBox::error(this, i18n("Couldn't remove the directory from the library.\n"
-                                                  "You need root privileges to remove directories which belong to the global library."));
-            }
         } else {
             int result = KMessageBox::warningContinueCancel(this,
                          i18n("This will permanently delete the selected crossword from the library.\nThe operation can't be undone!"), QString(),
@@ -680,18 +595,9 @@ void LibraryXmlGuiWindow::libraryDeleteSlot()
             if (result == KMessageBox::Cancel)
                 return;
 
-            QFile file(fileName);
-            //      QFile previewFile( fileName.replace(QRegExp("\\.kwpz?$", Qt::CaseInsensitive), ".png") ); // .png
-            if (file.remove() /*&& (!previewFile.exists() || previewFile.remove())*/) {
-                m_libraryModel->removeRow(index.row(), index.parent());
-            } else {
-                if (file.error() == QFile::PermissionsError) {
-                    KMessageBox::error(this, i18n("Couldn't remove the crossword from the library.\n"
-                                                  "You need root privileges to remove crosswords which belong to the global library."));
-                } else {
-                    KMessageBox::error(this, i18n("Couldn't remove the crossword from the library.\n%1", file.errorString()));
-                }
-            }
+            bool error = m_libraryModel->remove(index);
+            if(error == false)
+                KMessageBox::error(this, i18n("Couldn't remove the crossword from the library."));
         }
     }
 }
@@ -725,7 +631,7 @@ void LibraryXmlGuiWindow::libraryNewFolderSlot()
                 KMessageBox::information(this, i18n("The folder already exists in the library."));
             else {
                 dir.mkdir(folderName);
-                fillLibrary();
+                //fillLibrary();
             }
         }
     }
@@ -753,11 +659,6 @@ void LibraryXmlGuiWindow::libraryNewCrosswordSlot()
     }
 
     delete dialog;
-}
-
-void LibraryXmlGuiWindow::libraryUpdateSlot()
-{
-    fillLibrary();
 }
 
 //======================================================
@@ -799,159 +700,6 @@ void LibraryXmlGuiWindow::setupActions()
     libraryNewCrosswordAction->setStatusTip(i18n("Create a new crossword in the library."));
     actionCollection()->addAction(actionName(Library_NewCrossword), libraryNewCrosswordAction);
     connect(libraryNewCrosswordAction, SIGNAL(triggered()), this, SLOT(libraryNewCrosswordSlot()));
-
-    KAction *libraryUpdateAction = new KAction(KIcon("view-refresh"), i18n("&Refresh"), this);
-    libraryUpdateAction->setShortcut(QKeySequence(QKeySequence::Refresh));
-    libraryUpdateAction->setStatusTip(i18n("Refreshes the library view after changes in the library folder."));
-    actionCollection()->addAction(actionName(Library_Update), libraryUpdateAction);
-    connect(libraryUpdateAction, SIGNAL(triggered()), this, SLOT(libraryUpdateSlot()));
-}
-
-void LibraryXmlGuiWindow::fillLibrary()
-{
-    // Get mime type icon
-    QString puzIconName = KMimeType::findByPath("crossword.kwp", 0, true)->iconName();
-    KIcon puzIcon;
-    puzIcon.addPixmap(KIconLoader::global()->loadMimeTypeIcon(puzIconName, KIconLoader::Dialog));
-
-    // Create library model or clear it if it already exists
-    m_libraryModel = dynamic_cast<QStandardItemModel*>(m_libraryTree->model());
-    if (!m_libraryModel) {
-        m_libraryModel = new QStandardItemModel();
-
-        connect(m_libraryModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(libraryItemChanged(QStandardItem*)));
-        m_libraryTree->setModel(m_libraryModel);
-        connect(m_libraryTree->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(libraryCurrentChanged(QModelIndex, QModelIndex)));
-    } else
-        m_libraryModel->clear();
-
-    // Create HTML delegate
-    if (!m_libraryDelegate) {
-        m_libraryDelegate = new HtmlDelegate(this);
-        m_libraryTree->setItemDelegate(m_libraryDelegate);
-    }
-
-    // Get library folders
-    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
-    QFileInfoList fiSubDirs = QDir(libraryDir).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot) << QFileInfo(libraryDir);
-
-    // Add contained crosswords for each folder (including the root folder)
-    KFileItemList fileItemList, fileItemListBaseDir;
-    foreach(QFileInfo fi, fiSubDirs) {
-        QString filter;
-        bool isBaseLibraryDir = fi.absoluteFilePath() == QFileInfo(libraryDir).absoluteFilePath();
-        if (isBaseLibraryDir)
-            filter = "library/*.kwp?";
-        else
-            filter = "library/" + fi.fileName() + "/*.kwp?";
-
-        QStringList libraryFiles = KGlobal::dirs()->findAllResources("appdata", filter, KStandardDirs::NoDuplicates);
-        QStandardItem *subDirectoryItem = NULL;
-        if (!isBaseLibraryDir) {
-            int containedCrosswords = QDir(fi.absoluteFilePath()).entryInfoList(
-                                          QStringList() << "*.kwp" << "*.kwpz", QDir::NoDotAndDotDot | QDir::Files).count();
-            QString itemText = QString("<b>%1</b><br>%2 %3")
-                               .arg(fi.fileName())
-                               .arg(i18nc("The title for contents descriptions of folders in the library tree view", "Content:"))
-                               .arg(i18ncp("Text to describe the contents of library folders in the library tree view", "%1 crossword", "%1 crosswords", containedCrosswords));
-
-            if (fi.fileName() == Settings::libraryDownloadSubDir())
-                subDirectoryItem = new QStandardItem(KIcon("folder-downloads"), itemText);
-            else
-                subDirectoryItem = new QStandardItem(KIcon("folder"), itemText);
-
-            subDirectoryItem->setData(fi.absoluteFilePath(), Qt::UserRole);
-            subDirectoryItem->setData("00000" + fi.fileName(), Qt::UserRole + 1);
-            subDirectoryItem->setData(true, Qt::UserRole + 2);
-            subDirectoryItem->setDragEnabled(false);
-
-            QStandardItem *lastModifiedItem = new QStandardItem("");
-            lastModifiedItem->setData("00000" + fi.fileName(), Qt::UserRole + 1);
-            lastModifiedItem->setDragEnabled(false);
-
-            m_libraryModel->appendRow(QList<QStandardItem*>() << subDirectoryItem << lastModifiedItem);
-        }
-
-        foreach(const QString & libraryFile, libraryFiles) {
-            QFileInfo fi(libraryFile);
-
-            QString errorString;
-            KrossWordXmlReader::KrossWordInfo info = KrossWordXmlReader::readInfo(KUrl(libraryFile), &errorString);
-            if (!info.isValid()) {
-                qDebug() << "Error reading crossword info from library file" << errorString;
-            }
-
-            if (isBaseLibraryDir) {
-                fileItemListBaseDir << KFileItem(KFileItem::Unknown, KFileItem::Unknown, KUrl(libraryFile), true);
-            } else {
-                fileItemList << KFileItem(KFileItem::Unknown, KFileItem::Unknown, KUrl(libraryFile), true);
-            }
-
-            QIcon preview = puzIcon;
-            QString title = info.title.isEmpty() ? fi.fileName().remove(QRegExp("\\." + fi.suffix() + '$', Qt::CaseInsensitive)) : info.title;
-
-            QString itemText = QString("<b>%1</b><br>%2 %3x%4<br>%5 %6 - %7")
-                               .arg(title)
-                               .arg(i18nc("The title for sizes of crosswords in the library tree view", "Size:"))
-                               .arg(info.width)
-                               .arg(info.height)
-                               .arg(i18nc("The title for authors of crosswords in the library tree view", "Author(s):"))
-                               .arg(info.authors)
-                               .arg(info.copyright);
-
-            QStandardItem *libraryItem = new QStandardItem(preview, itemText);
-            libraryItem->setData(libraryFile, Qt::UserRole);
-            libraryItem->setData("00001" + info.title, Qt::UserRole + 1);
-            libraryItem->setData(false, Qt::UserRole + 2);
-            libraryItem->setDropEnabled(false);
-
-            QStandardItem *lastModifiedItem = new QStandardItem(QLocale().toString(fi.lastModified().date()));
-            lastModifiedItem->setData(fi.lastModified(), Qt::UserRole + 1);
-            lastModifiedItem->setDropEnabled(false);
-
-            QList<QStandardItem*> itemList;
-            itemList << libraryItem << lastModifiedItem;
-
-            if (subDirectoryItem)
-                subDirectoryItem->appendRow(itemList);
-            else // File from root folder of the library
-                m_libraryModel->appendRow(itemList);
-        }
-    }
-
-    m_libraryModel->setSortRole(Qt::UserRole + 1);
-    m_libraryModel->sort(0, Qt::AscendingOrder);
-
-    m_libraryTree->setCurrentIndex(QModelIndex());
-    libraryCurrentChanged(QModelIndex(), QModelIndex());
-
-    m_libraryModel->setHeaderData(0, Qt::Horizontal, i18nc("Used as label of the header for the "
-                                  "column containing the crossword names in the library model.", "Name"), Qt::DisplayRole);
-    m_libraryModel->setHeaderData(1, Qt::Horizontal, i18nc("Used as label of the header for the "
-                                  "column containing the times when the crosswords have been last edited in the library "
-                                  "model.", "Last Modified"), Qt::DisplayRole);
-    m_libraryTree->resizeColumnToContents(0);
-
-    // Get previews
-    while (!fileItemListBaseDir.isEmpty())
-        fileItemList.prepend(fileItemListBaseDir.takeLast());
-
-    m_previewJob = new KIO::PreviewJob(fileItemList, 64, 64, 0, 1, false, true, 0);
-    m_previewJob->setAutoDelete(true);
-    connect(m_previewJob, SIGNAL(gotPreview(KFileItem, QPixmap)), this, SLOT(previewJobGotPreview(KFileItem, QPixmap)));
-    connect(m_previewJob, SIGNAL(failed(KFileItem)), this, SLOT(previewJobFailed(KFileItem)));
-    m_previewJob->start();
-}
-
-QString LibraryXmlGuiWindow::getFolderText(const QString& path, int crosswordCountOffset)
-{
-    QFileInfo fi(path);
-    int containedCrosswords = crosswordCountOffset + QDir(fi.absoluteFilePath()).entryInfoList(QStringList() << "*.kwp" << "*.kwpz", QDir::NoDotAndDotDot | QDir::Files).count();
-
-    return QString("<b>%1</b><br>%2 %3")
-           .arg(fi.fileName())
-           .arg(i18nc("The title for contents descriptions of folders in the library tree view", "Content:"))
-           .arg(i18ncp("Text to describe the contents of library folders in the library tree view", "%1 crossword", "%1 crosswords", containedCrosswords));
 }
 
 void LibraryXmlGuiWindow::getDownloadCrosswordItems(const QString& rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset)

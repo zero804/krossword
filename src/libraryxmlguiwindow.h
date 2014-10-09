@@ -20,12 +20,31 @@
 #ifndef LIBRARYXMLGUIWINDOW_H
 #define LIBRARYXMLGUIWINDOW_H
 
-// #include "ui_print_crossword.h"
 #include "ui_export_to_image.h"
 #include "ui_create_new.h"
 #include "ui_download.h"
 
 #include <KXmlGuiWindow>
+#include <QFileSystemModel>
+
+class FileSystemModel : public QFileSystemModel
+{
+    Q_OBJECT
+
+public:
+    explicit FileSystemModel(QObject *parent = 0);
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+
+private:
+    QHash<QString, QIcon> m_thumbs;
+    KIO::PreviewJob *m_previewJob;
+
+protected slots:
+    void loadThumbnails(QString path);
+    void previewJobGotPreview(const KFileItem &fi, const QPixmap &pix);
+    void previewJobFailed(const KFileItem &fi);
+
+};
 
 namespace KIO
 {
@@ -34,7 +53,6 @@ class PreviewJob;
 
 class HtmlDelegate;
 class KrossWordPuzzle;
-class QStandardItem;
 
 class LibraryXmlGuiWindow : public KXmlGuiWindow
 {
@@ -73,22 +91,15 @@ public slots:
     void libraryAddCrossword(const QList<QUrl> &urls, const QString &subFolder = QString());
 
 protected slots:
-    void previewJobGotPreview(const KFileItem &fi, const QPixmap &pix);
-    void previewJobFailed(const KFileItem &fi);
-
     void downloadPreviewJobGotPreview(const KFileItem &fi, const QPixmap &pix);
     void downloadPreviewJobFailed(const KFileItem &fi);
 
     void downloadProviderChanged(int index);
     void downloadCurrentCrosswordChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
-    void libraryItemChanged(QStandardItem *item);
-    void libraryTreeContextMenuRequested(const QPoint &pos);
     void libraryItemDoubleClicked(const QModelIndex &index);
 
     void libraryOpenItem(const QModelIndex &index);
-    void libraryCurrentChanged(const QModelIndex &current, const QModelIndex &previous);
-    void librarySetAsSubDirForDownloads();
 
     void libraryOpenSlot();
     void libraryImportSlot();
@@ -97,7 +108,6 @@ protected slots:
     void libraryDeleteSlot();
     void libraryNewFolderSlot();
     void libraryNewCrosswordSlot();
-    void libraryUpdateSlot();
 
 private:
     Ui::create_new ui_create_new;
@@ -108,15 +118,12 @@ private:
 
     QTreeView *m_libraryTree;
     HtmlDelegate *m_libraryDelegate;
-    QStandardItemModel *m_libraryModel;
+    FileSystemModel *m_libraryModel;
     QModelIndex m_libraryPopupIndex;
 
-    KIO::PreviewJob *m_previewJob, *m_downloadPreviewJob;
+    KIO::PreviewJob *m_downloadPreviewJob;
 
     void setupActions();
-
-    void fillLibrary();
-    QString getFolderText(const QString &path, int crosswordCountOffset = 0);
 
     void getDownloadCrosswordItems(const QString &rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset);
 
