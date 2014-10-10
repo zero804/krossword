@@ -9,9 +9,9 @@
 	<Separator />
 
 	<Action name="library_download" />
-	<Action name="libary_import" />
-	<Action name="libary_export" />
-	<Action name="libary_delete" />
+	<Action name="library_import" />
+	<Action name="library_export" />
+	<Action name="library_delete" />
 	<Separator />
 
 	<Action name="library_new_folder" />

@@ -17,34 +17,16 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef LIBRARYXMLGUIWINDOW_H
-#define LIBRARYXMLGUIWINDOW_H
+#ifndef LIBRARYGUI_H
+#define LIBRARYGUI_H
 
 #include "ui_export_to_image.h"
 #include "ui_create_new.h"
 #include "ui_download.h"
 
+#include "library/librarymanager.h"
+
 #include <KXmlGuiWindow>
-#include <QFileSystemModel>
-
-class FileSystemModel : public QFileSystemModel
-{
-    Q_OBJECT
-
-public:
-    explicit FileSystemModel(QObject *parent = 0);
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-
-private:
-    QHash<QString, QIcon> m_thumbs;
-    KIO::PreviewJob *m_previewJob;
-
-protected slots:
-    void loadThumbnails(QString path);
-    void previewJobGotPreview(const KFileItem &fi, const QPixmap &pix);
-    void previewJobFailed(const KFileItem &fi);
-
-};
 
 namespace KIO
 {
@@ -85,10 +67,10 @@ public:
 
     const char *actionName(Action actionEnum) const;
 
-    bool in_library(const KUrl& url) const;
+    bool inLibrary(QString &path) const;
 
 public slots:
-    void libraryAddCrossword(const QList<QUrl> &urls, const QString &subFolder = QString());
+    void libraryAddCrossword(const QUrl &url, const QString &folder = QString());
 
 protected slots:
     void downloadPreviewJobGotPreview(const KFileItem &fi, const QPixmap &pix);
@@ -130,4 +112,4 @@ private:
     static QList<DownloadProvider> allDownloadProviders();
 };
 
-#endif // LIBRARYXMLGUIWINDOW_H
+#endif // LIBRARYGUI_H
