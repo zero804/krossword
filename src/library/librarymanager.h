@@ -23,14 +23,18 @@ public:
     bool isInLibrary(const QString &path) const;
     E_ERROR_TYPE addCrossword(const QUrl &url, QString &outAddedCrosswordFilename, const QString &folder = QString());
 
+    QStringList getKrosswordsFilePath() const;
+
 private:
     QHash<QString, QIcon> m_thumbs;
+    QList<QByteArray> m_krosswords_hash;
     KIO::PreviewJob *m_previewJob;
 
 protected slots:
-    void loadThumbnails(QString path);
+    void loadThumbnailsSlot(QString path);
     void previewJobGotPreview(const KFileItem &fi, const QPixmap &pix);
     void previewJobFailed(const KFileItem &fi);
+    void computeKrosswordsHashSlot(const QString& path);
 
 };
 

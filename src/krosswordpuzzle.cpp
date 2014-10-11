@@ -77,7 +77,7 @@ void KrossWordPuzzle::loadFile(const KUrl &url, Crossword::KrossWord::FileFormat
 
     bool loaded = m_mainCrossword->loadFile(url, fileFormat, loadCrashedFile);
 
-    QString path = url.url();
+    QString path = url.path();
     bool is_internal_file = m_mainLibrary->inLibrary(path);
 
     if(!is_internal_file) {

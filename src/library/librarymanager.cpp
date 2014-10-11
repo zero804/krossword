@@ -8,8 +8,9 @@
 #include <QDebug>
 #include <QCryptographicHash>
 
-QByteArray calculate_file_hash(QCryptographicHash& function, const QString& url)
+QByteArray calculate_file_hash(const QString& url)
 {
+    QCryptographicHash function(QCryptographicHash::Md5);
     QFile f(url);
     f.open(QIODevice::ReadOnly);
     if (f.isOpen()) {
@@ -27,7 +28,8 @@ FileSystemModel::FileSystemModel(QObject *parent) : QFileSystemModel(parent)
     setReadOnly(false); // so the files (crosswords) can be moved...
     setNameFilters(QStringList() << "*.kwpz");
     setNameFilterDisables(false); //hidden (not just disable) the unwanted files
-    connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(loadThumbnails(QString)));
+    connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(loadThumbnailsSlot(QString)));
+    connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(computeKrosswordsHashSlot(QString)));
 }
 
 QVariant FileSystemModel::data(const QModelIndex &index, int role) const
@@ -74,7 +76,7 @@ QVariant FileSystemModel::data(const QModelIndex &index, int role) const
     return QFileSystemModel::data(index, role);
 }
 
-void FileSystemModel::loadThumbnails(QString path)
+void FileSystemModel::loadThumbnailsSlot(QString path)
 {
     QModelIndexList fileIndexList = match(index(path), QFileSystemModel::FileNameRole, "*.kwpz", -1, Qt::MatchWildcard | Qt::MatchRecursive);
 
@@ -92,6 +94,19 @@ void FileSystemModel::loadThumbnails(QString path)
         connect(m_previewJob, SIGNAL(failed(KFileItem)), this, SLOT(previewJobFailed(KFileItem)));
         m_previewJob->start();
     }
+}
+
+void FileSystemModel::computeKrosswordsHashSlot(const QString& path)
+{
+    QStringList krosswords_path = getKrosswordsFilePath();
+
+    foreach(QString path, krosswords_path) {
+        QByteArray hash = calculate_file_hash(path);
+
+        m_krosswords_hash.append(hash);
+    }
+
+    disconnect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(computeKrosswordsHashSlot(QString)));
 }
 
 void FileSystemModel::previewJobGotPreview(const KFileItem &fi, const QPixmap &pix)
@@ -115,24 +130,11 @@ void FileSystemModel::previewJobFailed(const KFileItem &fi)
 bool FileSystemModel::isInLibrary(const QString &path) const
 {
     bool found = false;
-    QString libraryPath = rootDirectory().path();
 
-    if(path.startsWith(libraryPath + "/")) {
+    QByteArray fileHash = calculate_file_hash(path);
+
+    if(m_krosswords_hash.contains(fileHash))
         found = true;
-    } else {
-        QCryptographicHash hashFunction(QCryptographicHash::Md5);
-        QByteArray fileHash = calculate_file_hash(hashFunction, path);
-
-        QModelIndexList fileIndexList = match(index(libraryPath), QFileSystemModel::FileNameRole, "*.kwpz", -1, Qt::MatchWildcard | Qt::MatchRecursive);
-        foreach (QModelIndex index, fileIndexList) {
-            QByteArray hash = calculate_file_hash(hashFunction, index.data(QFileSystemModel::FileNameRole).toString());
-
-            if(fileHash == hash) {
-                found = true;
-                break;
-            }
-        }
-    }
 
     return found;
 }
@@ -176,7 +178,23 @@ FileSystemModel::E_ERROR_TYPE FileSystemModel::addCrossword(const QUrl &url, QSt
             return E_ERROR_TYPE::WriteError;
         } else {
             outAddedCrosswordFilename = saveFileName;
+            m_krosswords_hash.append(calculate_file_hash(saveFileName));
             return E_ERROR_TYPE::Succeeded;
         }
     }
+}
+
+QStringList FileSystemModel::getKrosswordsFilePath() const
+{
+    QStringList krossword_paths;
+    QFileInfoList fiSubDirs = QDir(this->rootPath()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot) << QFileInfo(this->rootPath());
+
+    foreach(QFileInfo fi, fiSubDirs) {
+        QFileInfoList fifiles = QDir(fi.filePath()).entryInfoList(QDir::Files);
+        foreach(QFileInfo file, fifiles) {
+            krossword_paths.append(file.filePath());
+        }
+    }
+
+    return krossword_paths;
 }
