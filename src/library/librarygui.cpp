@@ -1,5 +1,7 @@
 /*
 *   Copyright 2010 Friedrich Pülz <fpuelz@gmx.de>
+*   Copyright 2014 Andrea Barazzetti <andreadevsrv@gmail.com>
+*   Copyright 2014 Giacomo Barazzetti <giacomosrv@gmail.com>
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU Library General Public License as
@@ -26,6 +28,8 @@
 #include "settings.h"
 #include "dialogs/createnewcrossworddialog.h"
 
+#include <QDebug>
+
 #include <KMessageBox>
 #include <KFileDialog>
 #include <KActionMenu>
@@ -35,8 +39,6 @@
 #include <KActionCollection>
 #include <KIO/PreviewJob>
 #include <KStandardDirs>
-
-#include <QDebug>
 
 LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
       m_mainWindow(parent),
@@ -76,8 +78,10 @@ LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindo
 
     setupActions();
     setupGUI(StatusBar | ToolBar | /*Keys | */Save | Create, "krossword/krossword_library_ui.rc");
+    menuBar()->hide();
 
     connect(m_libraryTree, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(libraryItemDoubleClicked(QModelIndex)));
+    connect(m_libraryTree->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(libraryCurrentChanged(QModelIndex, QModelIndex))); // to keep updated the available actions
 }
 
 QTreeView* LibraryXmlGuiWindow::libraryTree() const
@@ -235,6 +239,22 @@ void LibraryXmlGuiWindow::libraryOpenSlot()
     libraryOpenItem(m_libraryTree->currentIndex());
 }
 
+void LibraryXmlGuiWindow::libraryCurrentChanged(const QModelIndex& current, const QModelIndex& previous)
+{
+    Q_UNUSED(previous);
+
+    bool isCrosswordSelected = !(m_libraryModel->isDir(current));
+    action(actionName(Library_Open))->setEnabled(isCrosswordSelected);
+    action(actionName(Library_Export))->setEnabled(isCrosswordSelected);
+
+    action(actionName(Library_Delete))->setEnabled(current.isValid());
+
+    /*
+    if (isCrosswordSelected)
+        statusBar()->showMessage(i18n("Current crossword filename: \"%1\"", fileName));
+    */
+}
+
 void LibraryXmlGuiWindow::libraryImportSlot()
 {
     KUrl url = KFileDialog::getOpenUrl(KUrl("kfiledialog:///importCrossword"),
@@ -246,68 +266,69 @@ void LibraryXmlGuiWindow::libraryImportSlot()
         libraryAddCrossword(url);
 }
 
-//missing kwp, kwpz (and puz?) export
+// MISSING kwp, kwpz (and puz?) EXPORT
 void LibraryXmlGuiWindow::libraryExportSlot()
 {
     QModelIndex index = m_libraryTree->currentIndex();
+
     if (!index.isValid())
         return;
 
-    if (m_libraryModel->isDir(index)) {
+    // should not be the case because of libraryCurrentChanged filtering actions
+    if (m_libraryModel->isDir(index))
         KMessageBox::information(this, i18n("Can't export whole directories. Please select a crossword."));
+
+    Crossword::KrossWord krossWord;
+    QString errorString;
+    QString filePath = index.data(QFileSystemModel::FilePathRole).toString();
+    if (!krossWord.read(KUrl(filePath), &errorString)) {
+        KMessageBox::error(this, i18n("There was an error opening the crossword.\n%1", errorString));
     } else {
-        Crossword::KrossWord krossWord;
-        QString errorString;
-        QString filePath = index.data(QFileSystemModel::FilePathRole).toString();
-        if (!krossWord.read(KUrl(filePath), &errorString)) {
-            KMessageBox::error(this, i18n("There was an error opening the crossword.\n%1", errorString));
-        } else {
-            QString fileName = KFileDialog::getSaveFileName(
-                                   KGlobalSettings::documentPath(),
-                                   "application/x-krosswordpuzzle "
-                                   "application/x-krosswordpuzzle-compressed "
-                                   "application/x-acrosslite-puz "
-                                   "application/pdf "
-                                   "application/postscript "
-                                   "image/png "
-                                   "image/jpeg", this, i18n("Export"),
-                                   KFileDialog::ConfirmOverwrite);
-            if (fileName.isEmpty())
-                return;
+        QString fileName = KFileDialog::getSaveFileName(
+                    KGlobalSettings::documentPath(),
+                    "application/x-krosswordpuzzle "
+                    "application/x-krosswordpuzzle-compressed "
+                    "application/x-acrosslite-puz "
+                    "application/pdf "
+                    "application/postscript "
+                    "image/png "
+                    "image/jpeg", this, i18n("Export"),
+                    KFileDialog::ConfirmOverwrite);
+        if (fileName.isEmpty())
+            return;
 
-            QString fileSuffix = QFileInfo(fileName).suffix();
-            if (fileSuffix.compare("pdf", Qt::CaseInsensitive) == 0 || fileSuffix.compare("ps", Qt::CaseInsensitive) == 0) {
-                QPrinter printer;
-                printer.setCreator("Krossword");
-                printer.setDocName(fileName);   // TODO: set krossword title if available
+        QString fileSuffix = QFileInfo(fileName).suffix();
+        if (fileSuffix.compare("pdf", Qt::CaseInsensitive) == 0 || fileSuffix.compare("ps", Qt::CaseInsensitive) == 0) {
+            QPrinter printer;
+            printer.setCreator("Krossword");
+            printer.setDocName(fileName);   // TODO: set krossword title if available
 
-                printer.setOutputFileName(fileName);
-                KrossWordDocument document(&krossWord, &printer);
-                document.print();
-            } else if (fileSuffix.compare("png", Qt::CaseInsensitive) == 0
-                    || fileSuffix.compare("jpeg", Qt::CaseInsensitive) == 0
-                    || fileSuffix.compare("jpg", Qt::CaseInsensitive) == 0) {
-                QPointer<QDialog> exportToImageDlg = new QDialog(this);
-                exportToImageDlg->setWindowTitle(i18n("Export Settings"));
-                exportToImageDlg->setModal(true);
+            printer.setOutputFileName(fileName);
+            KrossWordDocument document(&krossWord, &printer);
+            document.print();
+        } else if (fileSuffix.compare("png", Qt::CaseInsensitive) == 0
+                   || fileSuffix.compare("jpeg", Qt::CaseInsensitive) == 0
+                   || fileSuffix.compare("jpg", Qt::CaseInsensitive) == 0) {
+            QPointer<QDialog> exportToImageDlg = new QDialog(this);
+            exportToImageDlg->setWindowTitle(i18n("Export Settings"));
+            exportToImageDlg->setModal(true);
 
-                ui_export_to_image.setupUi(exportToImageDlg);
+            ui_export_to_image.setupUi(exportToImageDlg);
 
-                if (exportToImageDlg->exec() == QDialog::Rejected) {
-                    delete exportToImageDlg;
-                    return;
-                }
-
-                QPixmap pix = krossWord.toPixmap(QSize(ui_export_to_image.width->value(), ui_export_to_image.height->value()));
-                int quality = ui_export_to_image.quality->value();
+            if (exportToImageDlg->exec() == QDialog::Rejected) {
                 delete exportToImageDlg;
-
-                if (!pix.save(fileName, 0, quality)) {
-                    qDebug() << "Export failed:" << fileName;
-                    KMessageBox::error(this, i18n("Couldn't export the image to the specified file."));
-                }
+                return;
             }
-        } // !krossWord.read() .. else
+
+            QPixmap pix = krossWord.toPixmap(QSize(ui_export_to_image.width->value(), ui_export_to_image.height->value()));
+            int quality = ui_export_to_image.quality->value();
+            delete exportToImageDlg;
+
+            if (!pix.save(fileName, 0, quality)) {
+                qDebug() << "Export failed:" << fileName;
+                KMessageBox::error(this, i18n("Couldn't export the image to the specified file."));
+            }
+        }
     }
 }
 
@@ -352,45 +373,30 @@ void LibraryXmlGuiWindow::libraryDownloadSlot()
 
     downloadProviderChanged(0);
 
-    QHash< int, QDir > cmbIndexToDir;
-    QString sLibraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
-    QFileInfoList fiSubDirs = QDir(sLibraryDir).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
-    int i = 0, downloadDirIndex = -1;
+    // search for all the directories and add them (the library root too) as available download dir
+    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
 
-    foreach(QFileInfo fi, fiSubDirs) {
-        int level = 0;
-        QDir dir = fi.dir();
-        while (dir != sLibraryDir) {
-            ++level;
-            dir.cdUp();
-        }
+    QFileInfoList directories = QDir(libraryDir).entryInfoList(QDir::Dirs|QDir::NoDotAndDotDot);
+    QHash<int, QString> directoriesIndex;
 
-        if (level == 0 && fi.fileName() == Settings::libraryDownloadSubDir())
-            downloadDirIndex = i;
+    directoriesIndex.insert(0, libraryDir);
+    ui_download.targetDirectory->addItem(KIcon("folder"), i18n("Library"));
 
-        QString pad;
-        while (level-- > 0) {
-            pad += "  ";
-        }
-
-        if (i == downloadDirIndex)
-            ui_download.targetDirectory->addItem(KIcon("folder-downloads"), pad + fi.fileName());
-        else
-            ui_download.targetDirectory->addItem(KIcon("folder"), pad + fi.fileName());
-
-        cmbIndexToDir.insert(i, fi.fileName());
+    int i = 1;
+    foreach(QFileInfo fi, directories) {
+        directoriesIndex.insert(i, fi.filePath());
         ++i;
+        ui_download.targetDirectory->addItem(KIcon("folder"), fi.fileName());
     }
 
-    if (downloadDirIndex >= 0)
-        ui_download.targetDirectory->setCurrentIndex(downloadDirIndex);
+    // maybe restore here the directory previously selected by the user
 
     if (downloadCrosswordsDlg->exec() == QDialog::Accepted) {
         QModelIndex item = ui_download.crosswords->currentIndex();
         if (item.isValid()) {
             QString url = item.data(Qt::UserRole).toString();
             if (!url.isEmpty()) {
-                QString downloadDir = cmbIndexToDir[ui_download.targetDirectory->currentIndex()].path();
+                QString downloadDir = directoriesIndex.value(ui_download.targetDirectory->currentIndex());
                 libraryAddCrossword(QUrl(url), downloadDir);
             }
         }
@@ -430,7 +436,6 @@ void LibraryXmlGuiWindow::libraryDeleteSlot()
     }
 }
 
-//convert to filesystemmodel
 void LibraryXmlGuiWindow::libraryNewFolderSlot()
 {
     QPointer<QDialog> dlg = new QDialog(this);
@@ -454,13 +459,8 @@ void LibraryXmlGuiWindow::libraryNewFolderSlot()
     if (dlg->exec() == QDialog::Accepted) {
         QString folderName = newFolderName->text();
         if (!folderName.isEmpty()) {
-            QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
-            QDir dir(libraryDir);
-            if (dir.exists(folderName))
+            if (!m_libraryModel->newFolder(folderName)) {
                 KMessageBox::information(this, i18n("The folder already exists in the library."));
-            else {
-                dir.mkdir(folderName);
-                //fillLibrary();
             }
         }
     }
@@ -495,7 +495,7 @@ void LibraryXmlGuiWindow::libraryNewCrosswordSlot()
 void LibraryXmlGuiWindow::setupActions()
 {
     // Library actions
-    KAction *libraryOpenAction = new KAction(KIcon("document-open"), i18nc("&Open", "Open a crossword file"), this);
+    KAction *libraryOpenAction = new KAction(KIcon("document-open"), i18nc("&Open", "Open a crossword"), this);
     libraryOpenAction->setStatusTip(i18n("Open the selected crossword."));
     actionCollection()->addAction(actionName(Library_Open), libraryOpenAction);
     connect(libraryOpenAction, SIGNAL(triggered()), this, SLOT(libraryOpenSlot()));

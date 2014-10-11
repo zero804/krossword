@@ -1,12 +1,30 @@
+/*
+* Copyright 2014 Andrea Barazzetti <andreadevsrv@gmail.com>
+* Copyright 2014 Giacomo Barazzetti <giacomosrv@gmail.com>
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License as
+* published by the Free Software Foundation; either version 2 of
+* the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "librarymanager.h"
 
 #include "io/krosswordxmlreader.h"
 #include "krossword.h" // TO REMOVE FOR A I/O MANAGER
 
-#include <klocalizedstring.h>
-
 #include <QDebug>
 #include <QCryptographicHash>
+
+#include <klocalizedstring.h> // temporary for i18nc
 
 QByteArray calculate_file_hash(QCryptographicHash& function, const QString& url)
 {
@@ -104,7 +122,6 @@ void FileSystemModel::previewJobGotPreview(const KFileItem &fi, const QPixmap &p
         m_thumbs.insert(fileName, QIcon(pix));
         emit dataChanged(idx, idx); // to trigger the update via FileSystemModel::data
     }
-
 }
 
 void FileSystemModel::previewJobFailed(const KFileItem &fi)
@@ -135,6 +152,17 @@ bool FileSystemModel::isInLibrary(const QString &path) const
     }
 
     return found;
+}
+
+bool FileSystemModel::newFolder(const QString &folderName)
+{
+    QDir dir(rootDirectory().path());
+    if (dir.exists(folderName)) {
+        return false;
+    } else {
+        dir.mkdir(folderName);
+        return true;
+    }
 }
 
 FileSystemModel::E_ERROR_TYPE FileSystemModel::addCrossword(const QUrl &url, QString &outAddedCrosswordFilename, const QString &folder)

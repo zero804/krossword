@@ -1,5 +1,7 @@
 /*
 *   Copyright 2010 Friedrich Pülz <fpuelz@gmx.de>
+*   Copyright 2014 Andrea Barazzetti <andreadevsrv@gmail.com>
+*   Copyright 2014 Giacomo Barazzetti <giacomosrv@gmail.com>
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU Library General Public License as
@@ -79,9 +81,9 @@ protected slots:
     void downloadProviderChanged(int index);
     void downloadCurrentCrosswordChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
-    void libraryItemDoubleClicked(const QModelIndex &index);
-
     void libraryOpenItem(const QModelIndex &index);
+    void libraryItemDoubleClicked(const QModelIndex &index);
+    void libraryCurrentChanged(const QModelIndex &current, const QModelIndex &previous);
 
     void libraryOpenSlot();
     void libraryImportSlot();
