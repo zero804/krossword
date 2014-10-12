@@ -3124,14 +3124,31 @@ QMenu* CrossWordXmlGuiWindow::popupMenuEditCrosswordImageCell()
 void CrossWordXmlGuiWindow::draw_background(KrossWordPuzzleView *view) const
 {
     // Add background
-    QDesktopWidget *mydesk = QApplication::desktop();
-    int desktop_height = mydesk->screenGeometry().height();
+    QBrush brush;
     QRectF scene_rect = view->scene()->itemsBoundingRect();
+    int desktop_height = 0;
+    QSize preferred_size = KrosswordRenderer::self()->getCurrentTheme()->preferredRenderSize();
+    bool preferred_size_cond = false;
 
-    QBrush brush = QBrush(KrosswordRenderer::self()->background(QSize(desktop_height, desktop_height)));
+
+    if (preferred_size.isValid() && preferred_size != QSize(0, 0)) {
+            preferred_size_cond = true;
+        brush = QBrush(KrosswordRenderer::self()->background(preferred_size));
+    } else { // Default behavior
+        QDesktopWidget *mydesk = QApplication::desktop();
+        desktop_height = mydesk->screenGeometry().height();
+        brush = QBrush(KrosswordRenderer::self()->background(QSize(desktop_height, desktop_height)));
+    }
+
     QMatrix m = brush.matrix();
-    m.translate(scene_rect.x() - (desktop_height - (scene_rect.x() + scene_rect.width()))/2,
-                scene_rect.y() - (desktop_height - (scene_rect.y() + scene_rect.height()))/2);
+
+    if (preferred_size_cond) {
+        m.translate(scene_rect.x() - (preferred_size.height() - (scene_rect.x() + scene_rect.width()))/2,
+                    scene_rect.y() - (preferred_size.height() - (scene_rect.y() + scene_rect.height()))/2);
+    } else {
+        m.translate(scene_rect.x() - (desktop_height - (scene_rect.x() + scene_rect.width()))/2,
+                    scene_rect.y() - (desktop_height - (scene_rect.y() + scene_rect.height()))/2);
+    }
     brush.setMatrix(m);
     view->setBackgroundBrush(brush);
 }

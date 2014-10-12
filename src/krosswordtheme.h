@@ -64,6 +64,9 @@ public:
     /** The color used by the font. */
     QColor fontColor() const;
 
+    /** The background preferred render size */
+    QSize preferredRenderSize() const;
+
     /** The position of number clues inside letter cells for number puzzles. */
     //ItemPosition numberPuzzleCluePos() const;
 
@@ -84,6 +87,7 @@ private:
 
     QMargins m_marginsLetterCell, m_marginsClueCell;
     QColor m_glowColor, m_glowFocusColor, m_selectionColor, m_emptyCellColor, m_fontColor;
+    QSize m_preferredRenderSize;
     bool m_hasDarkBackground;
     //ItemPosition m_numberPuzzleCluePos, m_clueNumberPos, m_solutionLetterIndexPos;
 };

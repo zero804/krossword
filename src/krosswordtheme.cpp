@@ -52,6 +52,11 @@ bool KrosswordTheme::readFromDesktopFile(const QString& file)
     m_emptyCellColor = QColor(customData("EmptyCellColor", "100, 100, 100, 128"));
     m_fontColor = QColor(customData("FontColor", "#000000"));
 
+    QStringList preferredRenderSize = (customData("PreferredRenderSize", "0,0")).split(",", QString::SkipEmptyParts);
+    if (preferredRenderSize.count() != 2)
+        preferredRenderSize = QStringList() << "0" << "0";
+    m_preferredRenderSize = QSize(preferredRenderSize.at(0).toInt(), preferredRenderSize.at(1).toInt());
+
     // (original) TODO only use "free" positions as default values
     //m_clueNumberPos = positionFromString(customData("ClueNumberPos", ""), BottomRight);
     //m_numberPuzzleCluePos = positionFromString(customData("NumberPuzzleCluePos", ""), TopRight);
@@ -73,6 +78,7 @@ KrosswordTheme* KrosswordTheme::defaultValues()
     theme->m_selectionColor = QColor(255, 100, 100, 128);
     theme->m_emptyCellColor = QColor(100, 100, 100, 128);
     theme->m_fontColor = QColor(0, 0, 0);
+    theme->m_preferredRenderSize = QSize(0, 0);
 
     //theme->m_clueNumberPos = BottomRight;
     //theme->m_numberPuzzleCluePos = TopRight;
@@ -167,6 +173,10 @@ QColor KrosswordTheme::emptyCellColor() const {
 
 QColor KrosswordTheme::fontColor() const {
     return m_fontColor;
+}
+
+QSize KrosswordTheme::preferredRenderSize() const {
+    return m_preferredRenderSize;
 }
 
 /*
