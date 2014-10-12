@@ -20,7 +20,7 @@
 #include "krosswordpuzzle.h"
 #include "krosswordrenderer.h"
 #include "settings.h"
-#include "libraryxmlguiwindow.h"
+#include "library/librarygui.h"
 
 #include <KConfigDialog>
 #include <KMessageBox>
@@ -77,7 +77,8 @@ void KrossWordPuzzle::loadFile(const KUrl &url, Crossword::KrossWord::FileFormat
 
     bool loaded = m_mainCrossword->loadFile(url, fileFormat, loadCrashedFile);
 
-    bool is_internal_file = m_mainLibrary->in_library(url);
+    QString path = url.path();
+    bool is_internal_file = m_mainLibrary->libraryManager()->isInLibrary(path);
 
     if(!is_internal_file) {
         if(loaded) {
@@ -85,7 +86,7 @@ void KrossWordPuzzle::loadFile(const KUrl &url, Crossword::KrossWord::FileFormat
             int result = KMessageBox::questionYesNo(this, msg, i18n("Save crossword"), KStandardGuiItem::yes(), KStandardGuiItem::no());
 
             if (result == KMessageBox::Yes)
-                m_mainLibrary->libraryAddCrossword(QList<QUrl>() << url);
+                m_mainLibrary->libraryAddCrossword(url);
         }
     }
 
@@ -157,16 +158,11 @@ void KrossWordPuzzle::dropEvent(QDropEvent *event)
         QModelIndex index = m_mainLibrary->libraryTree()->indexAt(pt);
 
         if (index.isValid()) {
-            if (index.data(Qt::UserRole + 2).toBool() || index.parent().isValid()) {
-                // Dropped onto library folder
-                QString subFolder = index.parent().isValid() ?
-                                    QFileInfo(index.parent().data(Qt::UserRole).toString()).fileName() :
-                                    QFileInfo(index.data(Qt::UserRole).toString()).fileName();
-
-                m_mainLibrary->libraryAddCrossword(event->mimeData()->urls(), subFolder);
-            } else {
-                m_mainLibrary->libraryAddCrossword(event->mimeData()->urls());
+            if (dynamic_cast<LibraryManager*>(m_mainLibrary->libraryTree()->model())->isDir(index)) {
+                QString folder = index.data(QFileSystemModel::FilePathRole).toString();
+                m_mainLibrary->libraryAddCrossword(event->mimeData()->urls().at(0), folder); //TODO: handle more than 1 dropped crossword?
             }
+            //else, if isn't a dir, just load it or add it to the parent folder?
         } else {
             QList<QUrl> urls = event->mimeData()->urls();
             loadFile(urls.first());
@@ -194,7 +190,7 @@ QDialog* KrossWordPuzzle::createLoadProgressDialog()
 
 void KrossWordPuzzle::setupMainTabWidget()
 {
-    m_mainLibrary      = new LibraryXmlGuiWindow(this);
+    m_mainLibrary      = new LibraryGui(this);
     int indexLibrary   = m_mainStackedBar->addWidget(m_mainLibrary);
     m_mainCrossword    = new CrossWordXmlGuiWindow(this);
     m_mainStackedBar->addWidget(m_mainCrossword);

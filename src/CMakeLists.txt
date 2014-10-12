@@ -4,7 +4,6 @@ set( krossword_SRCS
    krosswordpuzzle.cpp
    main.cpp
    global.cpp
-   libraryxmlguiwindow.cpp
    crosswordxmlguiwindow.cpp
    animator.cpp
    krosswordtheme.cpp
@@ -27,6 +26,7 @@ INCLUDE ( io/Sources.cmake )
 INCLUDE ( cells/Sources.cmake )
 INCLUDE ( dialogs/Sources.cmake )
 INCLUDE ( dialogs/cellwidgets/Sources.cmake )
+INCLUDE ( library/Sources.cmake )
 
 kde4_add_ui_files( krossword_SRCS
     settings.ui

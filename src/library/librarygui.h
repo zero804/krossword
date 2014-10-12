@@ -1,5 +1,7 @@
 /*
 *   Copyright 2010 Friedrich Pülz <fpuelz@gmx.de>
+*   Copyright 2014 Andrea Barazzetti <andreadevsrv@gmail.com>
+*   Copyright 2014 Giacomo Barazzetti <giacomosrv@gmail.com>
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU Library General Public License as
@@ -17,13 +19,14 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef LIBRARYXMLGUIWINDOW_H
-#define LIBRARYXMLGUIWINDOW_H
+#ifndef LIBRARYGUI_H
+#define LIBRARYGUI_H
 
-// #include "ui_print_crossword.h"
 #include "ui_export_to_image.h"
 #include "ui_create_new.h"
 #include "ui_download.h"
+
+#include "library/librarymanager.h"
 
 #include <KXmlGuiWindow>
 
@@ -34,9 +37,8 @@ class PreviewJob;
 
 class HtmlDelegate;
 class KrossWordPuzzle;
-class QStandardItem;
 
-class LibraryXmlGuiWindow : public KXmlGuiWindow
+class LibraryGui : public KXmlGuiWindow
 {
     Q_OBJECT
 
@@ -48,8 +50,7 @@ public:
         Library_Download,
         Library_Delete,
         Library_NewFolder,
-        Library_NewCrossword,
-        Library_Update
+        Library_NewCrossword
     };
 
     enum DownloadProvider {
@@ -60,35 +61,28 @@ public:
         SwearCrossword
     };
 
-    LibraryXmlGuiWindow(KrossWordPuzzle* parent = 0);
-    virtual ~LibraryXmlGuiWindow() { }
+    LibraryGui(KrossWordPuzzle* parent = 0);
+    virtual ~LibraryGui() { }
 
     QTreeView* libraryTree() const;
 
     const char *actionName(Action actionEnum) const;
 
-    bool in_library(const KUrl& url) const;
+    LibraryManager* libraryManager() const;
 
 public slots:
-    void libraryAddCrossword(const QList<QUrl> &urls, const QString &subFolder = QString());
+    void libraryAddCrossword(const QUrl &url, const QString &folder = QString());
 
 protected slots:
-    void previewJobGotPreview(const KFileItem &fi, const QPixmap &pix);
-    void previewJobFailed(const KFileItem &fi);
-
     void downloadPreviewJobGotPreview(const KFileItem &fi, const QPixmap &pix);
     void downloadPreviewJobFailed(const KFileItem &fi);
 
     void downloadProviderChanged(int index);
     void downloadCurrentCrosswordChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
-    void libraryItemChanged(QStandardItem *item);
-    void libraryTreeContextMenuRequested(const QPoint &pos);
-    void libraryItemDoubleClicked(const QModelIndex &index);
-
     void libraryOpenItem(const QModelIndex &index);
+    void libraryItemDoubleClicked(const QModelIndex &index);
     void libraryCurrentChanged(const QModelIndex &current, const QModelIndex &previous);
-    void librarySetAsSubDirForDownloads();
 
     void libraryOpenSlot();
     void libraryImportSlot();
@@ -97,7 +91,6 @@ protected slots:
     void libraryDeleteSlot();
     void libraryNewFolderSlot();
     void libraryNewCrosswordSlot();
-    void libraryUpdateSlot();
 
 private:
     Ui::create_new ui_create_new;
@@ -108,19 +101,18 @@ private:
 
     QTreeView *m_libraryTree;
     HtmlDelegate *m_libraryDelegate;
-    QStandardItemModel *m_libraryModel;
+    LibraryManager *m_libraryModel;
     QModelIndex m_libraryPopupIndex;
 
-    KIO::PreviewJob *m_previewJob, *m_downloadPreviewJob;
+    KIO::PreviewJob *m_downloadPreviewJob;
+
+    QDialog *m_downloadCrosswordsDlg;
 
     void setupActions();
-
-    void fillLibrary();
-    QString getFolderText(const QString &path, int crosswordCountOffset = 0);
 
     void getDownloadCrosswordItems(const QString &rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset);
 
     static QList<DownloadProvider> allDownloadProviders();
 };
 
-#endif // LIBRARYXMLGUIWINDOW_H
+#endif // LIBRARYGUI_H

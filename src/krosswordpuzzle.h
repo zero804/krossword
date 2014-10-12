@@ -30,7 +30,7 @@ namespace KIO
 class PreviewJob;
 }
 
-class LibraryXmlGuiWindow;
+class LibraryGui;
 class KUrl;
 class QStackedWidget;
 
@@ -97,7 +97,7 @@ private:
 
     Ui::settings           ui_settings;
 
-    LibraryXmlGuiWindow   *m_mainLibrary;           //Owned
+    LibraryGui   *m_mainLibrary;           //Owned
     CrossWordXmlGuiWindow *m_mainCrossword;         //Owned
 
     QDialog               *m_loadProgressDialog;    //Owned
