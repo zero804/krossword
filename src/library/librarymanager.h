@@ -23,28 +23,78 @@
 
 #include <KIO/PreviewJob>
 
+/**
+ * @brief This is the library model. It's essentially a wrapper of QFileSystemModel with some
+ *        special methods and informations.
+ */
 class LibraryManager : public QFileSystemModel
 {
     Q_OBJECT
 
 public:
     enum E_ERROR_TYPE {
+        /**
+         * Return value for no error
+         */
         Succeeded = 0,
+
+        /**
+         * Something went wrong when reading a file
+         */
         ReadError,
+
+        /**
+         * Something went wrong when writing a file
+         */
         WriteError
     };
 
 public:
     explicit LibraryManager(QObject *parent = 0);
 
+    /**
+     * @param path is the filepath of a crossword
+     * @return true if the crossword is in the library
+     */
     bool isInLibrary(const QString &path) const;
+
+    /**
+     * @brief Make a new folder (!FIXME folder are category) in the library
+     * @param folderName will be the name of the new folder
+     * @return true if there is no other folder named folderName
+     */
     bool newFolder(const QString &folderName);
+
+    /**
+     * @brief Add a crossword in the library (can be a new one or dropped from GUI)
+     * @param url is the path where to find the resource
+     * @param outAddedCrosswordFilename is the new crossword filename added to the library
+     * @param folder the subfolder name where to copy it
+     * @return E_ERROR_TYPE::Succeeded (all good), E_ERROR_TYPE::ReadError (bad resource), E_ERROR_TYPE::WriteError(cannot write there)
+     */
     E_ERROR_TYPE addCrossword(const QUrl &url, QString &outAddedCrosswordFilename, const QString &folder = QString());
 
+    /**
+     * @brief Removes crosswords and folders
+     * @param index of item to remove
+     * @return true if was able to remove the item
+     */
     bool remove(const QModelIndex &index);
+
+    /**
+     * @brief Returns some extra info for our model
+     * @see QFileSystemModel::data
+     */
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
+    /**
+     * @return all crosswords in the library
+     */
     QFileInfoList getCrosswordsFilePath() const;
+
+    /**
+     * @return all folders in the library
+     */
     QFileInfoList getFoldersPath() const;
 
 private:

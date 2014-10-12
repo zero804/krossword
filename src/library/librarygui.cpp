@@ -90,8 +90,6 @@ QTreeView* LibraryGui::libraryTree() const
     return m_libraryTree;
 }
 
-//======================================================
-
 const char* LibraryGui::actionName(LibraryGui::Action actionEnum) const
 {
     switch (actionEnum) {
@@ -116,9 +114,9 @@ const char* LibraryGui::actionName(LibraryGui::Action actionEnum) const
     }
 }
 
-bool LibraryGui::inLibrary(QString &path) const
+LibraryManager* LibraryGui::libraryManager() const
 {
-    return m_libraryModel->isInLibrary(path);
+    return m_libraryModel;
 }
 
 //======================================================

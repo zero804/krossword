@@ -143,7 +143,7 @@ void LibraryManager::previewJobGotPreview(const KFileItem &fi, const QPixmap &pi
 
 void LibraryManager::previewJobFailed(const KFileItem &fi)
 {
-    qDebug() << fi.url();
+    qDebug() << "Preview job failed for file" << fi.url();
 }
 
 bool LibraryManager::isInLibrary(const QString &path) const
@@ -239,11 +239,24 @@ QFileInfoList LibraryManager::getFoldersPath() const
 
 bool LibraryManager::remove(const QModelIndex& index)
 {
+    QStringList filenames;
+    if (this->isDir(index)) {
+        for(int i = 0; i < this->rowCount(index); ++i) {
+
+            QModelIndex childIndex = this->index(i, 0, index);
+            QString path = this->data(childIndex, QFileSystemModel::FileNameRole).toString();
+            filenames << path;
+        }
+    } else {
+        filenames << this->data(index, QFileSystemModel::FileNameRole).toString();
+    }
+
     bool removed = QFileSystemModel::remove(index);
 
     if (removed) {
-        QString filename = this->data(index, QFileSystemModel::FileNameRole).toString();
-        m_crosswordsHash.remove(filename);
+        foreach(QString filename, filenames) {
+            m_crosswordsHash.remove(filename);
+        }
     }
 
     return removed;

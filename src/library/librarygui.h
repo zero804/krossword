@@ -68,7 +68,7 @@ public:
 
     const char *actionName(Action actionEnum) const;
 
-    bool inLibrary(QString &path) const;
+    LibraryManager* libraryManager() const;
 
 public slots:
     void libraryAddCrossword(const QUrl &url, const QString &folder = QString());
