@@ -123,7 +123,7 @@ void LibraryManager::computeCrosswordsHashSlot(const QString& path)
     foreach(QFileInfo path, crosswordsPath) {
         QByteArray hash = calculate_file_hash(path.filePath());
 
-        m_crosswordsHash.append(hash);
+        m_crosswordsHash.insert(path.fileName(), hash);
     }
 
     disconnect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(computeCrosswordsHashSlot(QString)));
@@ -152,7 +152,7 @@ bool LibraryManager::isInLibrary(const QString &path) const
 
     QByteArray fileHash = calculate_file_hash(path);
 
-    if(m_crosswordsHash.contains(fileHash))
+    if(m_crosswordsHash.values().contains(fileHash))
         found = true;
 
     return found;
@@ -208,7 +208,7 @@ LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QStri
             return E_ERROR_TYPE::WriteError;
         } else {
             outAddedCrosswordFilename = saveFileName;
-            m_crosswordsHash.append(calculate_file_hash(saveFileName));
+            m_crosswordsHash.insert(QUrl(saveFileName).path(), calculate_file_hash(saveFileName));
             return E_ERROR_TYPE::Succeeded;
         }
     }
@@ -235,4 +235,16 @@ QFileInfoList LibraryManager::getFoldersPath() const
     folderPaths << QFileInfo(this->rootPath()) << QDir(this->rootPath()).entryInfoList(QDir::Dirs|QDir::NoDotAndDotDot);
 
     return folderPaths;
+}
+
+bool LibraryManager::remove(const QModelIndex& index)
+{
+    bool removed = QFileSystemModel::remove(index);
+
+    if (removed) {
+        QString filename = this->data(index, QFileSystemModel::FileNameRole).toString();
+        m_crosswordsHash.remove(filename);
+    }
+
+    return removed;
 }

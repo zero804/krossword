@@ -106,6 +106,8 @@ private:
 
     KIO::PreviewJob *m_downloadPreviewJob;
 
+    QDialog *m_downloadCrosswordsDlg;
+
     void setupActions();
 
     void getDownloadCrosswordItems(const QString &rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset);

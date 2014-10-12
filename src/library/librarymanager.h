@@ -36,18 +36,20 @@ public:
 
 public:
     explicit LibraryManager(QObject *parent = 0);
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
     bool isInLibrary(const QString &path) const;
     bool newFolder(const QString &folderName);
     E_ERROR_TYPE addCrossword(const QUrl &url, QString &outAddedCrosswordFilename, const QString &folder = QString());
+
+    bool remove(const QModelIndex &index);
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
     QFileInfoList getCrosswordsFilePath() const;
     QFileInfoList getFoldersPath() const;
 
 private:
     QHash<QString, QIcon> m_thumbs;
-    QList<QByteArray> m_crosswordsHash;
+    QHash<QString, QByteArray> m_crosswordsHash;
     KIO::PreviewJob *m_previewJob;
 
 protected slots:

@@ -43,9 +43,10 @@
 LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
       m_mainWindow(parent),
       m_libraryTree(new QTreeView()),
-      m_libraryDelegate(0),
+      m_libraryDelegate(nullptr),
       m_libraryModel(new LibraryManager(this)),
-      m_downloadPreviewJob(0)
+      m_downloadPreviewJob(nullptr),
+      m_downloadCrosswordsDlg(nullptr)
 {
     QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
     m_libraryModel->setRootPath(libraryDir);
@@ -149,16 +150,21 @@ void LibraryGui::downloadPreviewJobGotPreview(const KFileItem& fi, const QPixmap
 {
     Q_UNUSED(fi);
 
-    if (ui_download.preview) {
+    if (m_downloadCrosswordsDlg && ui_download.preview) {
         ui_download.preview->setPixmap(pix);
         ui_download.preview->setEnabled(true);
+
+        ui_download.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     }
 }
 
 void LibraryGui::downloadPreviewJobFailed(const KFileItem& fi)
 {
     qDebug() << "Preview job failed:" << fi.url().pathOrUrl();
-    ui_download.preview->setText(i18n("Failed")); // improve the message
+
+    if (m_downloadCrosswordsDlg && ui_download.preview) {
+        ui_download.preview->setText(i18n("Failed")); // improve the message
+    }
 }
 
 void LibraryGui::downloadProviderChanged(int index)
@@ -202,7 +208,7 @@ void LibraryGui::downloadCurrentCrosswordChanged(QListWidgetItem* current, QList
     if (!current)
         return;
 
-    ui_download.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
+    ui_download.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 
     ui_download.preview->setPixmap(QPixmap());
     ui_download.preview->setEnabled(false);
@@ -329,9 +335,9 @@ void LibraryGui::libraryExportSlot()
 
 void LibraryGui::libraryDownloadSlot()
 {
-    QDialog *downloadCrosswordsDlg = new QDialog(m_mainWindow);
-    downloadCrosswordsDlg->setWindowTitle(i18n("Download Crossword To Library"));
-    ui_download.setupUi(downloadCrosswordsDlg);
+    m_downloadCrosswordsDlg = new QDialog(m_mainWindow);
+    m_downloadCrosswordsDlg->setWindowTitle(i18n("Download Crossword To Library"));
+    ui_download.setupUi(m_downloadCrosswordsDlg);
     ui_download.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 
     foreach(const DownloadProvider & provider, allDownloadProviders()) {
@@ -385,7 +391,7 @@ void LibraryGui::libraryDownloadSlot()
 
     // maybe restore here the directory previously selected by the user
 
-    if (downloadCrosswordsDlg->exec() == QDialog::Accepted) {
+    if (m_downloadCrosswordsDlg->exec() == QDialog::Accepted) {
         QModelIndex item = ui_download.crosswords->currentIndex();
         if (item.isValid()) {
             QString url = item.data(Qt::UserRole).toString();
@@ -396,8 +402,8 @@ void LibraryGui::libraryDownloadSlot()
         }
     }
 
-    delete downloadCrosswordsDlg;
-    downloadCrosswordsDlg = nullptr;
+    delete m_downloadCrosswordsDlg;
+    m_downloadCrosswordsDlg = nullptr;
 }
 
 void LibraryGui::libraryDeleteSlot()
