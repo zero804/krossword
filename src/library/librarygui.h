@@ -38,7 +38,7 @@ class PreviewJob;
 class HtmlDelegate;
 class KrossWordPuzzle;
 
-class LibraryXmlGuiWindow : public KXmlGuiWindow
+class LibraryGui : public KXmlGuiWindow
 {
     Q_OBJECT
 
@@ -50,8 +50,7 @@ public:
         Library_Download,
         Library_Delete,
         Library_NewFolder,
-        Library_NewCrossword,
-        Library_Update
+        Library_NewCrossword
     };
 
     enum DownloadProvider {
@@ -62,8 +61,8 @@ public:
         SwearCrossword
     };
 
-    LibraryXmlGuiWindow(KrossWordPuzzle* parent = 0);
-    virtual ~LibraryXmlGuiWindow() { }
+    LibraryGui(KrossWordPuzzle* parent = 0);
+    virtual ~LibraryGui() { }
 
     QTreeView* libraryTree() const;
 
@@ -102,7 +101,7 @@ private:
 
     QTreeView *m_libraryTree;
     HtmlDelegate *m_libraryDelegate;
-    FileSystemModel *m_libraryModel;
+    LibraryManager *m_libraryModel;
     QModelIndex m_libraryPopupIndex;
 
     KIO::PreviewJob *m_downloadPreviewJob;

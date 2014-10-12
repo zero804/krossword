@@ -41,16 +41,16 @@ QByteArray calculate_file_hash(const QString& url)
     return QByteArray();
 }
 
-FileSystemModel::FileSystemModel(QObject *parent) : QFileSystemModel(parent)
+LibraryManager::LibraryManager(QObject *parent) : QFileSystemModel(parent)
 {
     setReadOnly(false); // so the files (crosswords) can be moved...
     setNameFilters(QStringList() << "*.kwpz");
     setNameFilterDisables(false); //hidden (not just disable) the unwanted files
     connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(loadThumbnailsSlot(QString)));
-    connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(computeKrosswordsHashSlot(QString)));
+    connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(computeCrosswordsHashSlot(QString)));
 }
 
-QVariant FileSystemModel::data(const QModelIndex &index, int role) const
+QVariant LibraryManager::data(const QModelIndex &index, int role) const
 {
     //we need to customize just the files column, not the dates one
     if(index.column() == 0) {
@@ -94,7 +94,7 @@ QVariant FileSystemModel::data(const QModelIndex &index, int role) const
     return QFileSystemModel::data(index, role);
 }
 
-void FileSystemModel::loadThumbnailsSlot(QString path)
+void LibraryManager::loadThumbnailsSlot(QString path)
 {
     QModelIndexList fileIndexList = match(index(path), QFileSystemModel::FileNameRole, "*.kwpz", -1, Qt::MatchWildcard | Qt::MatchRecursive);
 
@@ -114,20 +114,22 @@ void FileSystemModel::loadThumbnailsSlot(QString path)
     }
 }
 
-void FileSystemModel::computeKrosswordsHashSlot(const QString& path)
+void LibraryManager::computeCrosswordsHashSlot(const QString& path)
 {
-    QStringList krosswords_path = getKrosswordsFilePath();
+    Q_UNUSED(path);
 
-    foreach(QString path, krosswords_path) {
+    QStringList crosswordsPath = getCrosswordsFilePath();
+
+    foreach(QString path, crosswordsPath) {
         QByteArray hash = calculate_file_hash(path);
 
-        m_krosswords_hash.append(hash);
+        m_crosswordsHash.append(hash);
     }
 
-    disconnect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(computeKrosswordsHashSlot(QString)));
+    disconnect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(computeCrosswordsHashSlot(QString)));
 }
 
-void FileSystemModel::previewJobGotPreview(const KFileItem &fi, const QPixmap &pix)
+void LibraryManager::previewJobGotPreview(const KFileItem &fi, const QPixmap &pix)
 {
     QString fileName = fi.url().path();
     QModelIndex idx = index(fileName);
@@ -135,28 +137,28 @@ void FileSystemModel::previewJobGotPreview(const KFileItem &fi, const QPixmap &p
         qDebug() << "Item for preview image not found";
     } else {
         m_thumbs.insert(fileName, QIcon(pix));
-        emit dataChanged(idx, idx); // to trigger the update via FileSystemModel::data
+        emit dataChanged(idx, idx); // to trigger the update via LibraryManager::data
     }
 }
 
-void FileSystemModel::previewJobFailed(const KFileItem &fi)
+void LibraryManager::previewJobFailed(const KFileItem &fi)
 {
     qDebug() << fi.url();
 }
 
-bool FileSystemModel::isInLibrary(const QString &path) const
+bool LibraryManager::isInLibrary(const QString &path) const
 {
     bool found = false;
 
     QByteArray fileHash = calculate_file_hash(path);
 
-    if(m_krosswords_hash.contains(fileHash))
+    if(m_crosswordsHash.contains(fileHash))
         found = true;
 
     return found;
 }
 
-bool FileSystemModel::newFolder(const QString &folderName)
+bool LibraryManager::newFolder(const QString &folderName)
 {
     QDir dir(rootDirectory().path());
     if (dir.exists(folderName)) {
@@ -167,7 +169,7 @@ bool FileSystemModel::newFolder(const QString &folderName)
     }
 }
 
-FileSystemModel::E_ERROR_TYPE FileSystemModel::addCrossword(const QUrl &url, QString &outAddedCrosswordFilename, const QString &folder)
+LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QString &outAddedCrosswordFilename, const QString &folder)
 {
     QString libraryDir;
     if (folder.isEmpty() || !folder.startsWith(rootDirectory().path())) {
@@ -206,23 +208,23 @@ FileSystemModel::E_ERROR_TYPE FileSystemModel::addCrossword(const QUrl &url, QSt
             return E_ERROR_TYPE::WriteError;
         } else {
             outAddedCrosswordFilename = saveFileName;
-            m_krosswords_hash.append(calculate_file_hash(saveFileName));
+            m_crosswordsHash.append(calculate_file_hash(saveFileName));
             return E_ERROR_TYPE::Succeeded;
         }
     }
 }
 
-QStringList FileSystemModel::getKrosswordsFilePath() const
+QStringList LibraryManager::getCrosswordsFilePath() const
 {
-    QStringList krossword_paths;
+    QStringList crosswordPaths;
     QFileInfoList fiSubDirs = QDir(this->rootPath()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot) << QFileInfo(this->rootPath());
 
     foreach(QFileInfo fi, fiSubDirs) {
         QFileInfoList fifiles = QDir(fi.filePath()).entryInfoList(QDir::Files);
         foreach(QFileInfo file, fifiles) {
-            krossword_paths.append(file.filePath());
+            crosswordPaths.append(file.filePath());
         }
     }
 
-    return krossword_paths;
+    return crosswordPaths;
 }

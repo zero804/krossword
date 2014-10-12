@@ -158,7 +158,7 @@ void KrossWordPuzzle::dropEvent(QDropEvent *event)
         QModelIndex index = m_mainLibrary->libraryTree()->indexAt(pt);
 
         if (index.isValid()) {
-            if (dynamic_cast<FileSystemModel*>(m_mainLibrary->libraryTree()->model())->isDir(index)) {
+            if (dynamic_cast<LibraryManager*>(m_mainLibrary->libraryTree()->model())->isDir(index)) {
                 QString folder = index.data(QFileSystemModel::FilePathRole).toString();
                 m_mainLibrary->libraryAddCrossword(event->mimeData()->urls().at(0), folder); //TODO: handle more than 1 dropped crossword?
             }
@@ -190,7 +190,7 @@ QDialog* KrossWordPuzzle::createLoadProgressDialog()
 
 void KrossWordPuzzle::setupMainTabWidget()
 {
-    m_mainLibrary      = new LibraryXmlGuiWindow(this);
+    m_mainLibrary      = new LibraryGui(this);
     int indexLibrary   = m_mainStackedBar->addWidget(m_mainLibrary);
     m_mainCrossword    = new CrossWordXmlGuiWindow(this);
     m_mainStackedBar->addWidget(m_mainCrossword);

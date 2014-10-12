@@ -23,7 +23,7 @@
 
 #include <KIO/PreviewJob>
 
-class FileSystemModel : public QFileSystemModel
+class LibraryManager : public QFileSystemModel
 {
     Q_OBJECT
 
@@ -35,25 +35,25 @@ public:
     };
 
 public:
-    explicit FileSystemModel(QObject *parent = 0);
+    explicit LibraryManager(QObject *parent = 0);
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
     bool isInLibrary(const QString &path) const;
     bool newFolder(const QString &folderName);
     E_ERROR_TYPE addCrossword(const QUrl &url, QString &outAddedCrosswordFilename, const QString &folder = QString());
 
-    QStringList getKrosswordsFilePath() const;
+    QStringList getCrosswordsFilePath() const;
 
 private:
     QHash<QString, QIcon> m_thumbs;
-    QList<QByteArray> m_krosswords_hash;
+    QList<QByteArray> m_crosswordsHash;
     KIO::PreviewJob *m_previewJob;
 
 protected slots:
     void loadThumbnailsSlot(QString path);
     void previewJobGotPreview(const KFileItem &fi, const QPixmap &pix);
     void previewJobFailed(const KFileItem &fi);
-    void computeKrosswordsHashSlot(const QString& path);
+    void computeCrosswordsHashSlot(const QString& path);
 
 };
 

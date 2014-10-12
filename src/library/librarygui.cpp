@@ -40,11 +40,11 @@
 #include <KIO/PreviewJob>
 #include <KStandardDirs>
 
-LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
+LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
       m_mainWindow(parent),
       m_libraryTree(new QTreeView()),
       m_libraryDelegate(0),
-      m_libraryModel(new FileSystemModel(this)),
+      m_libraryModel(new LibraryManager(this)),
       m_downloadPreviewJob(0)
 {
     QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
@@ -84,14 +84,14 @@ LibraryXmlGuiWindow::LibraryXmlGuiWindow(KrossWordPuzzle* parent) : KXmlGuiWindo
     connect(m_libraryTree->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(libraryCurrentChanged(QModelIndex, QModelIndex))); // to keep updated the available actions
 }
 
-QTreeView* LibraryXmlGuiWindow::libraryTree() const
+QTreeView* LibraryGui::libraryTree() const
 {
     return m_libraryTree;
 }
 
 //======================================================
 
-const char* LibraryXmlGuiWindow::actionName(LibraryXmlGuiWindow::Action actionEnum) const
+const char* LibraryGui::actionName(LibraryGui::Action actionEnum) const
 {
     switch (actionEnum) {
     case Library_Open:
@@ -115,20 +115,20 @@ const char* LibraryXmlGuiWindow::actionName(LibraryXmlGuiWindow::Action actionEn
     }
 }
 
-bool LibraryXmlGuiWindow::inLibrary(QString &path) const
+bool LibraryGui::inLibrary(QString &path) const
 {
     return m_libraryModel->isInLibrary(path);
 }
 
 //======================================================
 
-void LibraryXmlGuiWindow::libraryAddCrossword(const QUrl &url, const QString &folder)
+void LibraryGui::libraryAddCrossword(const QUrl &url, const QString &folder)
 {
     QUrl crossword = url;
     QString addedCrosswordFileName;
-    FileSystemModel::E_ERROR_TYPE errorCode = m_libraryModel->addCrossword(crossword, addedCrosswordFileName, folder);
+    LibraryManager::E_ERROR_TYPE errorCode = m_libraryModel->addCrossword(crossword, addedCrosswordFileName, folder);
 
-    if (errorCode == FileSystemModel::E_ERROR_TYPE::Succeeded) {
+    if (errorCode == LibraryManager::E_ERROR_TYPE::Succeeded) {
         // Select new crossword in the tree view
         QModelIndex index = m_libraryModel->index(addedCrosswordFileName);
         if (index.isValid()) {
@@ -136,16 +136,16 @@ void LibraryXmlGuiWindow::libraryAddCrossword(const QUrl &url, const QString &fo
             m_libraryTree->scrollTo(index);
         }
     } else {
-        if (errorCode == FileSystemModel::E_ERROR_TYPE::ReadError)
+        if (errorCode == LibraryManager::E_ERROR_TYPE::ReadError)
             KMessageBox::error(this, i18n("The crossword couldn't be imported to the library."));
-        else if (errorCode == FileSystemModel::E_ERROR_TYPE::WriteError)
+        else if (errorCode == LibraryManager::E_ERROR_TYPE::WriteError)
             KMessageBox::error(this, i18n("The crossword couldn't be written to the library folder."));
     }
 }
 
 //======================================================
 
-void LibraryXmlGuiWindow::downloadPreviewJobGotPreview(const KFileItem& fi, const QPixmap& pix)
+void LibraryGui::downloadPreviewJobGotPreview(const KFileItem& fi, const QPixmap& pix)
 {
     Q_UNUSED(fi);
 
@@ -155,13 +155,13 @@ void LibraryXmlGuiWindow::downloadPreviewJobGotPreview(const KFileItem& fi, cons
     }
 }
 
-void LibraryXmlGuiWindow::downloadPreviewJobFailed(const KFileItem& fi)
+void LibraryGui::downloadPreviewJobFailed(const KFileItem& fi)
 {
     qDebug() << "Preview job failed:" << fi.url().pathOrUrl();
     ui_download.preview->setText(i18n("Failed")); // improve the message
 }
 
-void LibraryXmlGuiWindow::downloadProviderChanged(int index)
+void LibraryGui::downloadProviderChanged(int index)
 {
     QListWidgetItem *item;
 
@@ -195,7 +195,7 @@ void LibraryXmlGuiWindow::downloadProviderChanged(int index)
     }
 }
 
-void LibraryXmlGuiWindow::downloadCurrentCrosswordChanged(QListWidgetItem* current, QListWidgetItem* previous)
+void LibraryGui::downloadCurrentCrosswordChanged(QListWidgetItem* current, QListWidgetItem* previous)
 {
     Q_UNUSED(previous);
 
@@ -220,12 +220,12 @@ void LibraryXmlGuiWindow::downloadCurrentCrosswordChanged(QListWidgetItem* curre
     m_downloadPreviewJob->start();
 }
 
-void LibraryXmlGuiWindow::libraryItemDoubleClicked(const QModelIndex &index)
+void LibraryGui::libraryItemDoubleClicked(const QModelIndex &index)
 {
     libraryOpenItem(index);
 }
 
-void LibraryXmlGuiWindow::libraryOpenItem(const QModelIndex& index)
+void LibraryGui::libraryOpenItem(const QModelIndex& index)
 {
     if (!index.isValid())
         return;
@@ -234,12 +234,12 @@ void LibraryXmlGuiWindow::libraryOpenItem(const QModelIndex& index)
         m_mainWindow->loadFile(KUrl(index.data(QFileSystemModel::FilePathRole).toString()));
 }
 
-void LibraryXmlGuiWindow::libraryOpenSlot()
+void LibraryGui::libraryOpenSlot()
 {
     libraryOpenItem(m_libraryTree->currentIndex());
 }
 
-void LibraryXmlGuiWindow::libraryCurrentChanged(const QModelIndex& current, const QModelIndex& previous)
+void LibraryGui::libraryCurrentChanged(const QModelIndex& current, const QModelIndex& previous)
 {
     Q_UNUSED(previous);
 
@@ -248,14 +248,9 @@ void LibraryXmlGuiWindow::libraryCurrentChanged(const QModelIndex& current, cons
     action(actionName(Library_Export))->setEnabled(isCrosswordSelected);
 
     action(actionName(Library_Delete))->setEnabled(current.isValid());
-
-    /*
-    if (isCrosswordSelected)
-        statusBar()->showMessage(i18n("Current crossword filename: \"%1\"", fileName));
-    */
 }
 
-void LibraryXmlGuiWindow::libraryImportSlot()
+void LibraryGui::libraryImportSlot()
 {
     KUrl url = KFileDialog::getOpenUrl(KUrl("kfiledialog:///importCrossword"),
                                        "application/x-krosswordpuzzle "
@@ -267,7 +262,7 @@ void LibraryXmlGuiWindow::libraryImportSlot()
 }
 
 // MISSING kwp, kwpz (and puz?) EXPORT
-void LibraryXmlGuiWindow::libraryExportSlot()
+void LibraryGui::libraryExportSlot()
 {
     QModelIndex index = m_libraryTree->currentIndex();
 
@@ -332,7 +327,7 @@ void LibraryXmlGuiWindow::libraryExportSlot()
     }
 }
 
-void LibraryXmlGuiWindow::libraryDownloadSlot()
+void LibraryGui::libraryDownloadSlot()
 {
     QDialog *downloadCrosswordsDlg = new QDialog(m_mainWindow);
     downloadCrosswordsDlg->setWindowTitle(i18n("Download Crossword To Library"));
@@ -406,7 +401,7 @@ void LibraryXmlGuiWindow::libraryDownloadSlot()
     downloadCrosswordsDlg = nullptr;
 }
 
-void LibraryXmlGuiWindow::libraryDeleteSlot()
+void LibraryGui::libraryDeleteSlot()
 {
     QModelIndex index = m_libraryTree->currentIndex();
     if (index.isValid()) {
@@ -436,7 +431,7 @@ void LibraryXmlGuiWindow::libraryDeleteSlot()
     }
 }
 
-void LibraryXmlGuiWindow::libraryNewFolderSlot()
+void LibraryGui::libraryNewFolderSlot()
 {
     QPointer<QDialog> dlg = new QDialog(this);
     KLineEdit *newFolderName = new KLineEdit(dlg);
@@ -468,7 +463,7 @@ void LibraryXmlGuiWindow::libraryNewFolderSlot()
     delete dlg;
 }
 
-void LibraryXmlGuiWindow::libraryNewCrosswordSlot()
+void LibraryGui::libraryNewCrosswordSlot()
 {
     QPointer<CreateNewCrosswordDialog> dialog = new CreateNewCrosswordDialog(this);
 
@@ -492,7 +487,7 @@ void LibraryXmlGuiWindow::libraryNewCrosswordSlot()
 
 //======================================================
 
-void LibraryXmlGuiWindow::setupActions()
+void LibraryGui::setupActions()
 {
     // Library actions
     KAction *libraryOpenAction = new KAction(KIcon("document-open"), i18nc("&Open", "Open a crossword"), this);
@@ -531,7 +526,7 @@ void LibraryXmlGuiWindow::setupActions()
     connect(libraryNewCrosswordAction, SIGNAL(triggered()), this, SLOT(libraryNewCrosswordSlot()));
 }
 
-void LibraryXmlGuiWindow::getDownloadCrosswordItems(const QString& rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset)
+void LibraryGui::getDownloadCrosswordItems(const QString& rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset)
 {
     QDate date = startDate;
     for (int year = startDate.year(); year <= endDate.year(); ++year) {
@@ -548,7 +543,7 @@ void LibraryXmlGuiWindow::getDownloadCrosswordItems(const QString& rawUrl, const
     }
 }
 
-QList<LibraryXmlGuiWindow::DownloadProvider> LibraryXmlGuiWindow::allDownloadProviders()
+QList<LibraryGui::DownloadProvider> LibraryGui::allDownloadProviders()
 {
     return QList<DownloadProvider>() << JonesinCrosswords << WallStreetJournal << ChronicleHigherEducation << CrossNerd << SwearCrossword;
 }
