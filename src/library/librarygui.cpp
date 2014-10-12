@@ -369,19 +369,18 @@ void LibraryGui::libraryDownloadSlot()
     downloadProviderChanged(0);
 
     // search for all the directories and add them (the library root too) as available download dir
-    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
-
-    QFileInfoList directories = QDir(libraryDir).entryInfoList(QDir::Dirs|QDir::NoDotAndDotDot);
+    QFileInfoList directories = m_libraryModel->getFoldersPath();
     QHash<int, QString> directoriesIndex;
 
-    directoriesIndex.insert(0, libraryDir);
-    ui_download.targetDirectory->addItem(KIcon("folder"), i18n("Library"));
-
-    int i = 1;
+    int i = 0;
     foreach(QFileInfo fi, directories) {
         directoriesIndex.insert(i, fi.filePath());
         ++i;
-        ui_download.targetDirectory->addItem(KIcon("folder"), fi.fileName());
+        if(fi.filePath() == m_libraryModel->rootPath()) {
+            ui_download.targetDirectory->addItem(KIcon("folder"), i18n("Library"));
+        } else {
+            ui_download.targetDirectory->addItem(KIcon("folder"), fi.fileName());
+        }
     }
 
     // maybe restore here the directory previously selected by the user

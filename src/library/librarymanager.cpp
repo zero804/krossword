@@ -118,10 +118,10 @@ void LibraryManager::computeCrosswordsHashSlot(const QString& path)
 {
     Q_UNUSED(path);
 
-    QStringList crosswordsPath = getCrosswordsFilePath();
+    QFileInfoList crosswordsPath = getCrosswordsFilePath();
 
-    foreach(QString path, crosswordsPath) {
-        QByteArray hash = calculate_file_hash(path);
+    foreach(QFileInfo path, crosswordsPath) {
+        QByteArray hash = calculate_file_hash(path.filePath());
 
         m_crosswordsHash.append(hash);
     }
@@ -214,9 +214,9 @@ LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QStri
     }
 }
 
-QStringList LibraryManager::getCrosswordsFilePath() const
+QFileInfoList LibraryManager::getCrosswordsFilePath() const
 {
-    QStringList crosswordPaths;
+    QFileInfoList crosswordPaths;
     QFileInfoList fiSubDirs = QDir(this->rootPath()).entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot) << QFileInfo(this->rootPath());
 
     foreach(QFileInfo fi, fiSubDirs) {
@@ -227,4 +227,12 @@ QStringList LibraryManager::getCrosswordsFilePath() const
     }
 
     return crosswordPaths;
+}
+
+QFileInfoList LibraryManager::getFoldersPath() const
+{
+    QFileInfoList folderPaths;
+    folderPaths << QFileInfo(this->rootPath()) << QDir(this->rootPath()).entryInfoList(QDir::Dirs|QDir::NoDotAndDotDot);
+
+    return folderPaths;
 }

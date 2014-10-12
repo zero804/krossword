@@ -42,7 +42,8 @@ public:
     bool newFolder(const QString &folderName);
     E_ERROR_TYPE addCrossword(const QUrl &url, QString &outAddedCrosswordFilename, const QString &folder = QString());
 
-    QStringList getCrosswordsFilePath() const;
+    QFileInfoList getCrosswordsFilePath() const;
+    QFileInfoList getFoldersPath() const;
 
 private:
     QHash<QString, QIcon> m_thumbs;
