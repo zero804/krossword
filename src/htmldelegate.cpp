@@ -21,6 +21,7 @@
 
 #include <QTextDocument>
 #include <QPainter>
+
 #include <KColorScheme>
 #include <klineedit.h>
 
@@ -64,7 +65,7 @@ void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem & option,
     painter->restore();
 }
 
-QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem & option, const QModelIndex & index) const
+QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex & index) const
 {
     QStyleOptionViewItemV4 options = option;
     initStyleOption(&options, index);

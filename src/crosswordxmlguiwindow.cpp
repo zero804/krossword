@@ -80,25 +80,29 @@
 #include <KXMLGUIFactory>
 #include <KStatusBar>
 #include <KCharSelect>
-#include <QDesktopWidget>
 
 #include <KCursor>
 #include <KPrintPreview>
 #include <kdeprintdialog.h>
-#include <KStandardDirs>
-#include <KShortcutsDialog>
-#include <kfilewidget.h>
-#include <kabstractfilewidget.h>
-#include <kapplication.h>
-#include "kdeversion.h"
 
 #include <KgThemeProvider>
-#include <KGuiItem>
 
-ClueListView::ClueListView(QWidget* parent)
-    : QTreeView(parent), m_scrollAnimation(0)
+ClueListView::ClueListView(QWidget* parent) : QTreeView(parent), m_scrollAnimation(0)
 {
+    setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+
+    setRootIsDecorated(false);
+    setEditTriggers(QAbstractItemView::NoEditTriggers);
+    setSelectionMode(QAbstractItemView::SingleSelection);
+    setSelectionBehavior(QAbstractItemView::SelectRows);
+    setAllColumnsShowFocus(true);
+    setAlternatingRowColors(true);
     setVerticalScrollMode(ScrollPerPixel);
+    setContextMenuPolicy(Qt::CustomContextMenu);
+
+    header()->setResizeMode(QHeaderView::Stretch);
+
+    setItemDelegate(new HtmlDelegate(this));
 }
 
 void ClueListView::animateScrollTo(const QModelIndex &index)
@@ -1824,7 +1828,6 @@ void CrossWordXmlGuiWindow::updateClueDock()
     m_clueTree->setFirstColumnSpanned(m_clueModel->horizontalCluesItem()->row(), QModelIndex(), true);
     m_clueTree->setFirstColumnSpanned(m_clueModel->verticalCluesItem()->row(), QModelIndex(), true);
     m_clueTree->expandAll();
-    m_clueTree->header()->setResizeMode(QHeaderView::ResizeToContents);
 
     // Update selection model
     if (m_clueSelectionModel) {
@@ -1837,7 +1840,6 @@ void CrossWordXmlGuiWindow::updateClueDock()
     connect(m_clueSelectionModel, SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
             this, SLOT(currentClueInDockChanged(QModelIndex, QModelIndex)));
 
-    m_clueDock->setWidget(m_clueTree);
 }
 
 void CrossWordXmlGuiWindow::updateSolutionInToolBar()
@@ -1887,20 +1889,15 @@ QDockWidget *CrossWordXmlGuiWindow::createClueDock()
 {
     m_clueTree = new ClueListView();
 
-    m_clueTree->setRootIsDecorated(false);
-    m_clueTree->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    m_clueTree->setSelectionMode(QAbstractItemView::SingleSelection);
-    m_clueTree->setSelectionBehavior(QAbstractItemView::SelectRows);
-    m_clueTree->setAllColumnsShowFocus(true);
-    m_clueTree->setAlternatingRowColors(true);
-    m_clueTree->setContextMenuPolicy(Qt::CustomContextMenu);
-    m_clueTree->setItemDelegate(new HtmlDelegate(this));
-
     connect(m_clueTree, SIGNAL(clicked(QModelIndex)), this, SLOT(clickedClueInDock(QModelIndex)));
     connect(m_clueTree, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(clueListContextMenuRequested(QPoint)));
 
     m_clueDock = new QDockWidget(i18n("Clue List"), this);
     m_clueDock->setObjectName("clueDock");
+
+    QVBoxLayout *layout = new QVBoxLayout(m_clueDock);
+    layout->addWidget(m_clueTree);
+    m_clueDock->setWidget(m_clueTree);
 
     updateClueDock();
 
