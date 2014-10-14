@@ -84,3 +84,6 @@ FontColor=#000000
 # Margins of cell contents: Left, Top, Right, Bottom
 LetterCellMargins=8,12,8,4
 ClueCellMargins=4,4,4,4
+
+#Size for the background element
+PreferredRenderSize=305,267

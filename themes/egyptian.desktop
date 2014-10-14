@@ -66,8 +66,11 @@ SelectionColor=#FF6464
 EmptyCellColor=#464646
 
 # The font color (245,177,17)
-FontColor=#F5B111
+FontColor=#F7CF42
 
 # Margins of cell contents: Left, Top, Right, Bottom
-LetterCellMargins=6,6,6,6
+LetterCellMargins=10,10,8,5
 ClueCellMargins=7,6,7,6
+
+#Size for the background element
+PreferredRenderSize=1900,1240
