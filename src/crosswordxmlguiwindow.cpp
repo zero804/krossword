@@ -2237,8 +2237,6 @@ KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
                 new KrossWordPuzzleScene(
                     new KrossWord(KrosswordRenderer::self()->getCurrentTheme())));
 
-    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->scene()->setStickyFocus(true);
     view->krossWord()->setLetterEditMode(EmitEditRequestsOnKeyboardEdit);
     view->krossWord()->setInteractive();
