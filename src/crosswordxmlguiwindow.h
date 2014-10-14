@@ -210,9 +210,11 @@ public:
         ShowingCongratulations /**< A crossword with a congratulations overlay is currently shown. */
     };
 
+    /*
     enum StatusBarItems {
         CoordinatesItem = 0
     };
+    */
 
     /** Origins of (current) documents. */
     enum DocumentOrigin {

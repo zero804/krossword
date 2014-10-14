@@ -341,9 +341,11 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
     m_view = createKrossWordPuzzleView();
     setCentralWidget(m_view);
 
+    /*
     // Create coordinates item in the status bar
     statusBar()->insertPermanentFixedItem(QString(), CoordinatesItem);
     statusBar()->setItemFixed(CoordinatesItem, 75);
+    */
 
     // Create solution progress bar:
     m_solutionProgress = new QProgressBar;
@@ -2803,10 +2805,12 @@ void CrossWordXmlGuiWindow::currentCellChanged(KrossWordCell* currentCell, Kross
     else
         enableActions(currentCell);
 
+    /*
     // Update coordinates in the status bar
     statusBar()->changeItem(QString("%1, %2")
                             .arg(currentCell->coord().first + 1)
                             .arg(currentCell->coord().second + 1), CoordinatesItem);
+    */
 
     // Show cell type in status bar
     if (currentCell->isType(EmptyCellType) && statusBar()->currentMessage().isEmpty()) {
