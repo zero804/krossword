@@ -337,10 +337,9 @@ public slots:
 
     // Settings actions
     void updateTheme();
-//     void changeThemeSlot( int themeId );
     void optionsDictionarySlot();
 
-    void hideCongratulations();
+    //void hideCongratulations();
 
     void autoSaveToTempFile();
     void removeTempFile(const QString &fileName = QString());

@@ -2269,16 +2269,19 @@ void CrossWordXmlGuiWindow::setupPrinter(QPrinter &printer)
     printer.setDocName(m_curFileName);
 }
 
+/*
 void CrossWordXmlGuiWindow::hideCongratulations()
 {
     setState(ShowingCrossword);
 }
+*/
 
 void CrossWordXmlGuiWindow::showCongratulationsItems()
 {
+    /*
     // Add text item
     QFont font = KGlobalSettings::largeFont();
-    font.setPixelSize(30);
+    //font.setPixelSize(30);
     font.setBold(true);
     QLabel *label = new QLabel("<span style='color:darkred;'><center>Congratulations!<br>You solved the crossword perfectly.</center></span>");
     label->setFont(font);
@@ -2314,6 +2317,7 @@ void CrossWordXmlGuiWindow::showCongratulationsItems()
 
     layout->activate();
     m_view->fitInView(layout->contentsRect().adjusted(-150, -150, 150, 150), Qt::KeepAspectRatio);
+    */
 
     // Animate using QtKinetic
     m_animation = new QParallelAnimationGroup(this);
@@ -2348,6 +2352,10 @@ void CrossWordXmlGuiWindow::showCongratulationsItems()
     }
 
     m_animation->start(QAbstractAnimation::DeleteWhenStopped);
+
+    // show the congratulations...
+    // MESSAGEBOX WILL BE REPLACED WITH SOMETHING BETTER
+    KMessageBox::information(this, i18n("Congratulations!\nYou solved the crossword perfectly."));
 }
 
 void CrossWordXmlGuiWindow::fitToPageSlot()
