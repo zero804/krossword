@@ -62,26 +62,12 @@ KrossWordDocument::KrossWordDocument(KrossWord* krossWord, QPrinter *printer)
 
     QString clueTableHorizontal = "<table cellspacing='10'>";
     foreach(ClueCell * clue, horizontalClues) {
-//  QString answerPad;
-//  for ( int n = 0; n < clue->correctAnswer().length(); ++n )
-//      answerPad += "_ ";
-
-        clueTableHorizontal += QString("<tr><td>%1</td><td>%2</td></tr>")
-                               .arg(clue->clueWithNumber())
-                               .arg(i18n("%1 letters", clue->correctAnswer().length()));
-//      .arg( i18n("%1 letters: %2", clue->correctAnswer().length(), answerPad) );
+        clueTableHorizontal += QString("<tr><td>%1</td></tr>").arg(clue->clueWithNumber());
     }
 
     QString clueTableVertical = "<table cellspacing='10'>";
     foreach(ClueCell * clue, verticalClues) {
-//  QString answerPad;
-//  for ( int n = 0; n < clue->correctAnswer().length(); ++n )
-//      answerPad += "_ ";
-
-        clueTableVertical += QString("<tr><td>%1</td><td>%2</td></tr>")
-                             .arg(clue->clueWithNumber())
-                             .arg(i18n("%1 letters", clue->correctAnswer().length()));
-//      .arg( i18n("%1 letters: %2", clue->correctAnswer().length(), answerPad) );
+        clueTableVertical += QString("<tr><td>%1</td></tr>").arg(clue->clueWithNumber());
     }
     clueTableHorizontal += "</table>";
     clueTableVertical += "</table>";

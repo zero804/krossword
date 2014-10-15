@@ -285,9 +285,9 @@ void LibraryGui::libraryExportSlot()
     } else {
         QString fileName = KFileDialog::getSaveFileName(
                     KGlobalSettings::documentPath(),
-                    "application/x-krosswordpuzzle "
+                    /*"application/x-krosswordpuzzle "
                     "application/x-krosswordpuzzle-compressed "
-                    "application/x-acrosslite-puz "
+                    "application/x-acrosslite-puz "*/
                     "application/pdf "
                     "application/postscript "
                     "image/png "
