@@ -2622,15 +2622,19 @@ void CrossWordXmlGuiWindow::checkSlot()
 
 void CrossWordXmlGuiWindow::clearSlot()
 {
-    disconnect(krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));
+    int result = KMessageBox::questionYesNo(this, i18n("Do you really want to clear the crossword?"), i18n("Clear"), KStandardGuiItem::yes(), KStandardGuiItem::no());
 
-    krossWord()->clear();
+    if (result == KMessageBox::Yes) {
+        disconnect(krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));
 
-    // Sync manually and connect signal again
-    foreach(ClueCell * cell, krossWord()->clues())
-        answerChanged(cell, cell->currentAnswer(), false);
+        krossWord()->clear();
 
-    connect(krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));
+        // Sync manually and connect signal again
+        foreach(ClueCell * cell, krossWord()->clues())
+            answerChanged(cell, cell->currentAnswer(), false);
+
+        connect(krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));
+    }
 }
 
 void CrossWordXmlGuiWindow::eraseSlot(bool enable)
