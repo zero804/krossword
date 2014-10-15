@@ -1003,59 +1003,6 @@ void CrossWordXmlGuiWindow::saveAsSlot()
     saveAs();
 }
 
-void CrossWordXmlGuiWindow::exportSlot()
-{
-    Q_ASSERT(m_view);
-
-    QString fileName;
-    QPointer<KFileDialog> fileDlg = new KFileDialog(KUrl(m_curFileName).upUrl(),
-            "application/pdf "
-            "application/postscript "
-            "image/png "
-            "image/jpeg", this);
-    fileDlg->setWindowTitle(i18n("Export"));
-    fileDlg->setMode(KFile::File);
-    fileDlg->setOperationMode(KFileDialog::Saving);
-    fileDlg->setConfirmOverwrite(true);
-    if (fileDlg->exec() == KFileDialog::Accepted)
-        fileName = fileDlg->selectedFile();
-    delete fileDlg;
-
-    if (!fileName.isEmpty()) {
-        QString fileSuffix = QFileInfo(fileName).suffix();
-        if (fileSuffix.compare("png", Qt::CaseInsensitive) == 0
-                || fileSuffix.compare("jpeg", Qt::CaseInsensitive) == 0
-                || fileSuffix.compare("jpg", Qt::CaseInsensitive) == 0) {
-            QPointer<QDialog> exportToImageDlg = new QDialog(this);
-            exportToImageDlg->setWindowTitle(i18n("Export Settings"));
-            exportToImageDlg->setModal(true);
-
-            ui_export_to_image.setupUi(exportToImageDlg);
-
-            if (exportToImageDlg->exec() == QDialog::Rejected) {
-                delete exportToImageDlg;
-                return;
-            }
-
-            QPixmap pix = krossWord()->toPixmap(QSize(ui_export_to_image.width->value(), ui_export_to_image.height->value()));
-            int quality = ui_export_to_image.quality->value();
-            delete exportToImageDlg;
-
-            if (!pix.save(fileName, 0, quality)) {
-                qDebug() << "Couldn't export the crossword to the specified image file." << fileName;
-                KMessageBox::error(this, i18n("Couldn't export the crossword to the specified image file."));
-            }
-        } else {
-            QPrinter printer;
-            setupPrinter(printer);
-
-            printer.setOutputFileName(fileName);
-            KrossWordDocument document(krossWord(), &printer);
-            document.print();
-        }
-    }
-}
-
 void CrossWordXmlGuiWindow::printSlot()
 {
     Q_ASSERT(m_view);
@@ -1092,11 +1039,6 @@ void CrossWordXmlGuiWindow::printPreviewSlot()
     document.print();
 
     preview.exec();
-}
-
-void CrossWordXmlGuiWindow::showMenuBarSlot()
-{
-    menuBar()->setVisible(!menuBar()->isVisible());
 }
 
 void CrossWordXmlGuiWindow::closeSlot()

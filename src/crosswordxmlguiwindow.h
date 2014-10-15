@@ -284,10 +284,8 @@ public slots:
     // Game actions
     void saveSlot();
     void saveAsSlot();
-    void exportSlot();  //Unused functionality?
     void printSlot();
     void printPreviewSlot();
-    void showMenuBarSlot();  //Unused functionality?
     void closeSlot();
 
     // Edit actions
