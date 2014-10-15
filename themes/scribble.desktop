@@ -55,22 +55,22 @@ Preview=scribble.png
 # Wheather or not the background is dark (affects shadows)
 HasDarkBackground=false
 
-# The glow color of highlighted cells (64,64,255)
+# The glow color of highlighted cells
 GlowColor=#4040FF
-# The glow color of focused cells (255,64,64)
+# The glow color of focused cells
 FocusGlowColor=#FF4040
 
-# The color for selected cells in edit mode (255,100,100,128) TODO: fix transparency
+# The color for selected cells in edit mode
 SelectionColor=#FF6464
-# The color for empty cells in edit mode (100,100,100,128)
+# The color for empty cells in edit mode
 EmptyCellColor=#646464
 
-# The font color (28,70,255)
-FontColor=#1C46FF
+# The font color
+FontColor=#396FB3
 
 # Margins of cell contents: Left, Top, Right, Bottom
-LetterCellMargins=3,3,3,3
+LetterCellMargins=4,10,4,2
 ClueCellMargins=3,3,3,3
 
-#Size for the background element
-PreferredRenderSize=466,350
+#Size for the background element (image from http://subtlepatterns.com/paper-fibers - CC BY-SA 3.0)
+PreferredRenderSize=410,410
