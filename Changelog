@@ -1,5 +1,23 @@
 == Krossword ==
 
+Version 0.17 alpha 2:
+    - More standard and simple interface (no more tabs, they weren't really useful and wasted vertical space).
+    - Added support for black cells/squares.
+    - Heavy (under the hood) reworking/rewriting of the library to simplify the code and solve some bugs.
+    - Ask for user confirmation for Solve and Clear answers actions (to avoid unwanted clicks).
+    - Removed emoticons in clue list (they were ambiguous...smiles for a potentially wrong answer).
+    - Using system font for the crossword view (to avoid ugly mix between themed/not themed letters with "special" characters common in many not-English languages).
+    - Added font color option for themes.
+    - Improved the background handling in themes.
+    - Fixed theme loading of some color options.
+    - Updated (to reflect the code changes) and improved the themes.
+    - Fixed the the congratulations message size issue with a simpler approach.
+    - Fixed minimum zoom for very small crosswords.
+    - Fixed a (not common) crash in download dialog caused by preview generation.
+    - Some fixes for image/pdf exporting.
+    - Continuing work in preparation of Qt5/Frameworks 5 porting.
+    - And other minor changes.
+
 Version 0.16 alpha:
     - Ported to current libkdegames.
     - Reworked zoom handling.

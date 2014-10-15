@@ -26,7 +26,7 @@
 static const char description[] =
     I18N_NOOP("A crossword puzzle game and editor for KDE.\nBased on KrossWordPuzzle.");
 
-static const char version[] = "0.16 alpha";
+static const char version[] = "0.17 alpha 2";
 
 int main(int argc, char **argv)
 {
