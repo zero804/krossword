@@ -85,7 +85,7 @@ void KrossWordPuzzleView::resizeEvent(QResizeEvent* event)
     QGraphicsView::resizeEvent(event);
     emit resized(event->oldSize(), event->size());
     
-    this->fitInView(this->sceneRect().adjusted(150, 150, -150, -150), Qt::KeepAspectRatio);
+    this->fitInView(this->sceneRect()/*.adjusted(150, 150, -150, -150)*/, Qt::KeepAspectRatio);
     updateZoomMinimumScale();
     emit signalChangeZoom(0);
 }

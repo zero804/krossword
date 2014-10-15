@@ -2778,11 +2778,8 @@ void KrossWord::resizeScene()
     if (!scene())
         return;
 
-    /*
-        QRect rect( 0, 0, cellSize().toSize().width() * width(),
-           cellSize().toSize().height() * height() );*/
     QRect rect = QRect(QPoint(), boundingRect().size().toSize());
-    scene()->setSceneRect(rect.adjusted(-150, -150, 150, 150));
+    //scene()->setSceneRect(rect.adjusted(-150, -150, 150, 150));
 }
 
 bool KrossWord::isEmpty() const
