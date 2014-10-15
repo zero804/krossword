@@ -735,8 +735,8 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
                                             "application/x-krosswordpuzzle "
                                             "application/x-krosswordpuzzle-compressed "
                                             "application/x-acrosslite-puz", this);
-    if (resultUrl.isEmpty())
-        return false; // No file was chosen
+        if (resultUrl.isEmpty())
+            return false; // No file was chosen
     } else
         resultUrl = url;
 
@@ -1065,7 +1065,7 @@ void CrossWordXmlGuiWindow::printSlot()
 
     QWidget *printCrossWord = new QWidget;
     ui_print_crossword.setupUi(printCrossWord);
-    ui_print_crossword.emptyCellColor->setColor(Qt::gray);
+    ui_print_crossword.emptyCellColor->setColor(Qt::black);
 
     QPrintDialog *dlg = KdePrint::createPrintDialog(&printer, QList<QWidget*>() << printCrossWord, this);
     KrossWordDocument document(krossWord(), &printer);
@@ -2264,9 +2264,9 @@ void CrossWordXmlGuiWindow::signalChangeStatusbar(const QString& text)
 }
 
 void CrossWordXmlGuiWindow::setupPrinter(QPrinter &printer)
-{
+{   
     printer.setCreator("Krossword");
-    printer.setDocName(m_curFileName);
+    printer.setDocName("print.pdf");
 }
 
 /*

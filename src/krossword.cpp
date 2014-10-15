@@ -2336,11 +2336,12 @@ void KrossWord::setDrawForPrinting(bool drawForPrinting)
 {
     m_drawForPrinting = drawForPrinting;
 
+    /*
     EmptyCellList emptys = emptyCells();
     foreach(EmptyCell * emptyCell, emptys) {
-        emptyCell->setFlag(QGraphicsItem::ItemHasNoContents,
-                           !drawForPrinting && !m_editable);
+        emptyCell->setFlag(QGraphicsItem::ItemHasNoContents, !drawForPrinting && !m_editable);
     }
+    */
 }
 
 void KrossWord::clearCache()
