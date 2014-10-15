@@ -89,13 +89,15 @@ void KrosswordRenderer::renderBackground(QPainter* p, const QRectF& r) const
 void KrosswordRenderer::renderElement(QPainter* p, const QString& elementid, const QRectF& r, const QColor &alpha) const
 {
     QPixmap pix;
-    
+
+    /*
     if (alpha != Qt::black) {
         QPixmap pixAlpha = QPixmap(r.size().toSize());
         pixAlpha.fill(alpha);
         pix.setAlphaChannel(pixAlpha);
     }
-    
+    */
+
     pix = m_renderer->spritePixmap(elementid, r.size().toSize());
     
     p->setRenderHints(QPainter::HighQualityAntialiasing | QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing);
