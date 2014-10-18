@@ -2,23 +2,17 @@
 <kpartgui name="krosswordpuzzle_library" version="1">
 
 <!-- Toolbars -->
-<ToolBar name="mainToolBar">
-	<text>Library</text>
-
-	<Action name="library_open" />
-	<Separator />
-
-	<Action name="library_download" />
-	<Action name="library_import" />
-	<Action name="library_export" />
-	<Action name="library_delete" />
-	<Separator />
-
-	<Action name="library_new_folder" />
-	<Action name="library_new_crossword" />
-	<Separator />
-
-    <Action name="library_update" />
+<ToolBar name="libraryToolBar">
+    <text>Library</text>
+    <Action name="library_open" />
+    <Action name="library_delete" />
+    <Separator />
+    <Action name="library_new_crossword" />
+    <Action name="library_new_folder" />
+    <Separator />
+    <Action name="library_download" />
+    <Action name="library_import" />
+    <Action name="library_export" />   
 </ToolBar>
 
 </kpartgui>

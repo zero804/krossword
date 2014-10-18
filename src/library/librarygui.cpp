@@ -493,38 +493,38 @@ void LibraryGui::libraryNewCrosswordSlot()
 void LibraryGui::setupActions()
 {
     // Library actions
-    KAction *libraryOpenAction = new KAction(KIcon("document-open"), i18nc("&Open", "Open a crossword"), this);
-    libraryOpenAction->setStatusTip(i18n("Open the selected crossword."));
+    KAction *libraryOpenAction = new KAction(KIcon("document-open"), i18nc("@action:intoolbar", "&Open"), this);
+    libraryOpenAction->setToolTip(i18n("Open the selected crossword."));
     actionCollection()->addAction(actionName(Library_Open), libraryOpenAction);
     connect(libraryOpenAction, SIGNAL(triggered()), this, SLOT(libraryOpenSlot()));
 
-    KAction *libraryImportAction = new KAction(KIcon("document-import"), i18n("&Import"), this);
-    libraryImportAction->setStatusTip(i18n("Import a crossword to the library."));
+    KAction *libraryImportAction = new KAction(KIcon("document-import"), i18nc("@action:intoolbar", "&Import"), this);
+    libraryImportAction->setToolTip(i18n("Import a crossword to the library."));
     actionCollection()->addAction(actionName(Library_Import), libraryImportAction);
     connect(libraryImportAction, SIGNAL(triggered()), this, SLOT(libraryImportSlot()));
 
-    KAction *libraryExportAction = new KAction(KIcon("document-export"), i18n("&Export"), this);
-    libraryExportAction->setStatusTip(i18n("Export the selected crossword from the library."));
+    KAction *libraryExportAction = new KAction(KIcon("document-export"), i18nc("@action:intoolbar", "&Export"), this);
+    libraryExportAction->setToolTip(i18n("Export the selected crossword from the library."));
     actionCollection()->addAction(actionName(Library_Export), libraryExportAction);
     connect(libraryExportAction, SIGNAL(triggered()), this, SLOT(libraryExportSlot()));
 
-    KAction *libraryDownloadAction = new KAction(KIcon("download"), i18n("&Download"), this);
-    libraryDownloadAction->setStatusTip(i18n("Download a crossword and add it to the library."));
+    KAction *libraryDownloadAction = new KAction(KIcon("download"), i18nc("@action:intoolbar", "&Download"), this);
+    libraryDownloadAction->setToolTip(i18n("Download a crossword and add it to the library."));
     actionCollection()->addAction(actionName(Library_Download), libraryDownloadAction);
     connect(libraryDownloadAction, SIGNAL(triggered()), this, SLOT(libraryDownloadSlot()));
 
-    KAction *libraryDeleteAction = new KAction(KIcon("edit-delete"), i18n("&Delete"), this);
-    libraryDeleteAction->setStatusTip(i18n("Delete the selected crossword from the library."));
+    KAction *libraryDeleteAction = new KAction(KIcon("edit-delete"), i18nc("@action:intoolbar", "&Delete"), this);
+    libraryDeleteAction->setToolTip(i18n("Delete the selected crossword from the library."));
     actionCollection()->addAction(actionName(Library_Delete), libraryDeleteAction);
     connect(libraryDeleteAction, SIGNAL(triggered()), this, SLOT(libraryDeleteSlot()));
 
-    KAction *libraryNewFolderAction = new KAction(KIcon("folder-new"), i18n("New &Folder"), this);
-    libraryNewFolderAction->setStatusTip(i18n("Create a new folder in the library."));
+    KAction *libraryNewFolderAction = new KAction(KIcon("folder-new"), i18nc("@action:intoolbar", "New &Folder"), this);
+    libraryNewFolderAction->setToolTip(i18n("Create a new folder in the library."));
     actionCollection()->addAction(actionName(Library_NewFolder), libraryNewFolderAction);
     connect(libraryNewFolderAction, SIGNAL(triggered()), this, SLOT(libraryNewFolderSlot()));
 
-    KAction *libraryNewCrosswordAction = new KAction(KIcon("document-new"), i18n("New &Crossword"), this);
-    libraryNewCrosswordAction->setStatusTip(i18n("Create a new crossword in the library."));
+    KAction *libraryNewCrosswordAction = new KAction(KIcon("document-new"), i18nc("@action:intoolbar", "New &Crossword"), this);
+    libraryNewCrosswordAction->setToolTip(i18n("Create a new crossword in the library."));
     actionCollection()->addAction(actionName(Library_NewCrossword), libraryNewCrosswordAction);
     connect(libraryNewCrosswordAction, SIGNAL(triggered()), this, SLOT(libraryNewCrosswordSlot()));
 }

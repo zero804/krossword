@@ -357,7 +357,7 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
                                         "solved letter cells",
                                         // xgettext: no-c-format
                                         "%p% solved"));
-    m_solutionProgress->setToolTip(i18n("Shows the percentage of solved letter cells."));
+    m_solutionProgress->setToolTip(i18n("Shows the percentage of solved letter cells"));
     m_solutionProgress->setMaximumWidth(150);
     statusBar()->addPermanentWidget(m_solutionProgress);
 
@@ -1302,336 +1302,226 @@ void CrossWordXmlGuiWindow::moveSetConfidenceConfidentSlot()
 bool CrossWordXmlGuiWindow::setupActions()
 {
     KActionCollection *ac = actionCollection();
-//     KStandardGameAction::load(this, SLOT(loadSlot()), ac)->setStatusTip( i18n("Load a crossword from a file") );
-
-//     m_recentFilesAction = KStandardGameAction::loadRecent(
-//      this, SLOT(loadRecentSlot(KUrl)), ac);
-//     m_recentFilesAction->setIcon( KIcon("document-open-recent") ); // Not set by KStandardAction...
-//     m_recentFilesAction->loadEntries( Settings::self()->config()->group("") );
-//     m_recentFilesAction->setStatusTip( i18n("Load recent crosswords") );
-    //     KStandardAction::openNew(this, SLOT(fileNew()), ac);
-//     KStandardGameAction::quit(qApp, SLOT(closeAllWindows()), ac)->setStatusTip( i18n("Quit the game") );
-    //     KStandardAction::preferences(this, SLOT(optionsPreferences()), ac);
 
     m_undoStack->createUndoAction(ac, actionName(Edit_Undo));
     m_undoStack->createRedoAction(ac, actionName(Edit_Redo));
 
-//     KStandardGameAction::gameNew(this, SLOT(gameNewSlot()), ac)->setStatusTip( i18n("Start a new crossword") );
-
     // Change the text of the "End Game" action to "Close". It's more appropriate here, I think.
     KAction *closeAction = KStandardGameAction::end(this, SLOT(closeSlot()), ac);
-    closeAction->setStatusTip(i18n("Close the current crossword."));
+    closeAction->setToolTip(i18n("Close the current crossword"));
     closeAction->setText(KStandardGuiItem::close().text());
 
     // Save / export
-    KStandardGameAction::save(this, SLOT(saveSlot()), ac)->setStatusTip(
-        i18n("Save the crossword with solved letters"));
-    KStandardGameAction::saveAs(this, SLOT(saveAsSlot()), ac)->setStatusTip(
-        i18n("Choose a filename to save the crossword with solved letters"));
+    KStandardGameAction::save(this, SLOT(saveSlot()), ac)->setToolTip(i18n("Save the crossword with solved letters"));
+    KStandardGameAction::saveAs(this, SLOT(saveAsSlot()), ac)->setToolTip(i18n("Choose a filename to save the crossword with solved letters"));
 
     // Print
-    KStandardGameAction::print(this, SLOT(printSlot()), ac)->setStatusTip(i18n("Print the crossword"));
+    KStandardGameAction::print(this, SLOT(printSlot()), ac)->setToolTip(i18n("Print the crossword"));
     KAction *printPreviewAction = KStandardAction::printPreview(this, SLOT(printPreviewSlot()), 0);
-    printPreviewAction->setStatusTip(i18n("Show a print preview"));
+    printPreviewAction->setToolTip(i18n("Show a print preview"));
     ac->addAction(actionName(Game_PrintPreview), printPreviewAction);
 
-//     KStandardAction::showMenubar( this, SLOT(showMenuBarSlot()), ac );
-
     // Settings
-    KAction *dictionariesAction = new KAction(KIcon("crossword-dictionary"),
-            i18n("&Dictionary..."), this);
-    dictionariesAction->setStatusTip(i18n("Add or remove crossword dictionaries."));
+    KAction *dictionariesAction = new KAction(KIcon("crossword-dictionary"), i18n("&Dictionary..."), this);
+    dictionariesAction->setToolTip(i18n("Add or remove crossword dictionaries"));
     actionCollection()->addAction(actionName(Options_Dictionaries), dictionariesAction);
     connect(dictionariesAction, SIGNAL(triggered()), this, SLOT(optionsDictionarySlot()));
 
     // View
     KAction *fitToPageAction = KStandardAction::fitToPage(this, SLOT(fitToPageSlot()), ac);
-    fitToPageAction->setStatusTip(i18n("Fit the whole crossword into the window"));
+    fitToPageAction->setToolTip(i18n("Fit the whole crossword into the window"));
     fitToPageAction->setIcon(KIcon("zoom-fit-best"));
 
-    KAction *viewPanAction = new KToggleAction(KIcon("transform-move"),
-            i18n("Pan"), ac);
-    viewPanAction->setStatusTip(i18n("Pan the view. Note that you can also pan "
-                                     "while pressing the control key."));
+    KAction *viewPanAction = new KToggleAction(KIcon("transform-move"), i18n("Pan"), ac);
+    viewPanAction->setToolTip(i18n("Pan the view. Note that you can also pan while pressing the control key."));
     ac->addAction(actionName(View_Pan), viewPanAction);
     connect(viewPanAction, SIGNAL(toggled(bool)), this, SLOT(viewPanSlot(bool)));
 
-    KStandardGameAction::hint(this, SLOT(hintSlot()), ac)->setStatusTip(
-        i18n("Solve the currently selected letter or a random one if none is selected"));
-
+    KStandardGameAction::hint(this, SLOT(hintSlot()), ac)->setToolTip(i18n("Solve the selected letter or a random one if none is selected"));
 
     // Popup menu actions:
-    KAction *infoConfidenceIsSolved = new KAction(KIcon("games-solve"),
-            i18n("This letter has been solved"), ac);
-    infoConfidenceIsSolved->setStatusTip(i18n("The currently selected letter cell has been solved"));
+    KAction *infoConfidenceIsSolved = new KAction(KIcon("games-solve"), i18n("This letter has been solved"), ac);
+    infoConfidenceIsSolved->setToolTip(i18n("The selected letter cell has been solved"));
     infoConfidenceIsSolved->setEnabled(false);   // Always disabled, this action serves only as info item
     ac->addAction(actionName(Info_ConfidenceIsSolved), infoConfidenceIsSolved);
     connect(infoConfidenceIsSolved, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *moveSetConfidenceConfident = new KToggleAction(KIcon("flag-green"),
-            i18n("Mark as confident"), ac);
-    moveSetConfidenceConfident->setStatusTip(
-        i18n("Mark the currently selected letter cell's confidence as confident"));
+    KAction *moveSetConfidenceConfident = new KToggleAction(KIcon("flag-green"), i18n("Mark as confident"), ac);
+    moveSetConfidenceConfident->setToolTip(i18n("Mark the selected letter cell's confidence as confident"));
     ac->addAction(actionName(Move_SetConfidenceConfident), moveSetConfidenceConfident);
     connect(moveSetConfidenceConfident, SIGNAL(triggered()), this, SLOT(moveSetConfidenceConfidentSlot()));
     connect(moveSetConfidenceConfident, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *moveSetConfidenceUnsure = new KToggleAction(KIcon("flag-red"),
-            i18n("Mark as unsure"), ac);
-    moveSetConfidenceUnsure->setStatusTip(
-        i18n("Mark the currently selected letter cell's confidence as unsure"));
+    KAction *moveSetConfidenceUnsure = new KToggleAction(KIcon("flag-red"), i18n("Mark as unsure"), ac);
+    moveSetConfidenceUnsure->setToolTip(i18n("Mark the selected letter cell's confidence as unsure"));
     ac->addAction(actionName(Move_SetConfidenceUnsure), moveSetConfidenceUnsure);
     connect(moveSetConfidenceUnsure, SIGNAL(triggered()), this, SLOT(moveSetConfidenceUnsureSlot()));
     connect(moveSetConfidenceUnsure, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *clearCell = new KAction(KIcon("edit-clear"),
-                                     i18n("Clear This Cell"), ac);
-    clearCell->setStatusTip(i18n("Clears the currently selected letter cell"));
+    KAction *clearCell = new KAction(KIcon("edit-clear"), i18n("Clear This Cell"), ac);
+    clearCell->setToolTip(i18n("Clears the selected letter cell"));
     ac->addAction(actionName(Move_ClearCurrentCell), clearCell);
     connect(clearCell, SIGNAL(triggered()), this, SLOT(clearCellSlot()));
     connect(clearCell, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *clearClue = new KAction(KIcon("edit-clear"),
-                                     i18n("Clear This Answer"), ac);
-    clearClue->setStatusTip(i18n("Clears the answer to the current clue"));
+    KAction *clearClue = new KAction(KIcon("edit-clear"), i18n("Clear This Answer"), ac);
+    clearClue->setToolTip(i18n("Clears the answer to the current clue"));
     ac->addAction(actionName(Move_ClearClue), clearClue);
     connect(clearClue, SIGNAL(triggered()), this, SLOT(clearClueSlot()));
     connect(clearClue, SIGNAL(hovered()), this, SLOT(highlightClueForPopup()));
 
-    KAction *clearHorizontalClue = new KAction(KIcon("edit-clear"),
-            i18n("Clear Across Answer"), this);
-    clearHorizontalClue->setStatusTip(i18n("Clears the answer to the current across clue"));
+    KAction *clearHorizontalClue = new KAction(KIcon("edit-clear"), i18n("Clear Across Answer"), this);
+    clearHorizontalClue->setToolTip(i18n("Clears the answer to the current across clue"));
     ac->addAction(actionName(Move_ClearHorizontalClue), clearHorizontalClue);
     connect(clearHorizontalClue, SIGNAL(triggered()), this, SLOT(clearHorizontalClueSlot()));
     connect(clearHorizontalClue, SIGNAL(hovered()), this, SLOT(highlightHorizontalClueForPopup()));
 
-    KAction *clearVerticalClue = new KAction(KIcon("edit-clear"),
-            i18n("Clear Down Answer"), ac);
-    clearVerticalClue->setStatusTip(i18n("Clears the answer to the current down clue"));
+    KAction *clearVerticalClue = new KAction(KIcon("edit-clear"), i18n("Clear Down Answer"), ac);
+    clearVerticalClue->setToolTip(i18n("Clears the answer to the current down clue"));
     ac->addAction(actionName(Move_ClearVerticalClue), clearVerticalClue);
     connect(clearVerticalClue, SIGNAL(triggered()), this, SLOT(clearVerticalClueSlot()));
     connect(clearVerticalClue, SIGNAL(hovered()), this, SLOT(highlightVerticalClueForPopup()));
 
-    KAction *hintCell = new KAction(KIcon("games-hint"),
-                                    i18n("Hint For This Cell"), ac);
-    hintCell->setStatusTip(i18n("Solve the currently selected letter cell"));
+    KAction *hintCell = new KAction(KIcon("games-hint"), i18n("Hint For This Cell"), ac);
+    hintCell->setToolTip(i18n("Solve the selected letter cell"));
     ac->addAction(actionName(Move_HintCurrentCell), hintCell);
     connect(hintCell, SIGNAL(triggered()), this, SLOT(hintCellSlot()));
     connect(hintCell, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *hintClue = new KAction(KIcon("clue-solve"/*"games-solve"*/),
-                                    i18n("Solve Clue"), ac);
-    hintClue->setStatusTip(i18n("Solve the current clue"));
+    KAction *hintClue = new KAction(KIcon("clue-solve"), i18n("Solve Clue"), ac);
+    hintClue->setToolTip(i18n("Solve the current clue"));
     ac->addAction(actionName(Move_HintClue), hintClue);
     connect(hintClue, SIGNAL(triggered()), this, SLOT(hintClueSlot()));
     connect(hintClue, SIGNAL(hovered()), this, SLOT(highlightClueForPopup()));
 
-    KAction *hintHorizontalClue = new KAction(KIcon("clue-solve"/*"games-solve"*/),
-            i18n("Solve Across Clue"), ac);
-    hintHorizontalClue->setStatusTip(i18n("Solve the current across clue"));
+    KAction *hintHorizontalClue = new KAction(KIcon("clue-solve"), i18n("Solve Across Clue"), ac);
+    hintHorizontalClue->setToolTip(i18n("Solve the current across clue"));
     ac->addAction(actionName(Move_HintHorizontalClue), hintHorizontalClue);
     connect(hintHorizontalClue, SIGNAL(triggered()), this, SLOT(hintHorizontalClueSlot()));
     connect(hintHorizontalClue, SIGNAL(hovered()), this, SLOT(highlightHorizontalClueForPopup()));
 
-    KAction *hintVerticalClue = new KAction(KIcon("clue-solve-vertical"/*"games-solve"*/),
-                                            i18n("Solve Down Clue"), ac);
-    hintVerticalClue->setStatusTip(i18n("Solve the current down clue"));
+    KAction *hintVerticalClue = new KAction(KIcon("clue-solve-vertical"), i18n("Solve Down Clue"), ac);
+    hintVerticalClue->setToolTip(i18n("Solve the current down clue"));
     ac->addAction(actionName(Move_HintVerticalClue), hintVerticalClue);
     connect(hintVerticalClue, SIGNAL(triggered()), this, SLOT(hintVerticalClueSlot()));
     connect(hintVerticalClue, SIGNAL(hovered()), this, SLOT(highlightVerticalClueForPopup()));
 
-    KAction *selectClueWithSwitchedOrientationAction = new KAction(
-        KIcon("select-clue-with-switched-orientation"),
-        i18n("Select Clue With Switched Orientation"), ac);
-    selectClueWithSwitchedOrientationAction->setStatusTip(
-        i18n("Select clue with switched orientation to the currently selected clue"));
-    ac->addAction(actionName(Move_SelectClueWithSwitchedOrientation),
-                  selectClueWithSwitchedOrientationAction);
-    connect(selectClueWithSwitchedOrientationAction, SIGNAL(triggered()),
-            this, SLOT(selectClueWithSwitchedOrientationSlot()));
+    KAction *selectClueWithSwitchedOrientationAction = new KAction(KIcon("select-clue-with-switched-orientation"), i18n("Clue With Switched Orientation"), ac);
+    selectClueWithSwitchedOrientationAction->setToolTip(i18n("Select clue with switched orientation to the currently selected clue"));
+    ac->addAction(actionName(Move_SelectClueWithSwitchedOrientation), selectClueWithSwitchedOrientationAction);
+    connect(selectClueWithSwitchedOrientationAction, SIGNAL(triggered()), this, SLOT(selectClueWithSwitchedOrientationSlot()));
 
-    KAction *selectFirstLetterOfClueAction = new KAction(KIcon("clue-go-first-letter"/*"go-first-view"*/),
-            i18n("Select &First Letter"), ac);
-    selectFirstLetterOfClueAction->setStatusTip(
-        i18n("Select the first letter of the current clue"));
+    KAction *selectFirstLetterOfClueAction = new KAction(KIcon("clue-go-first-letter"), i18nc("@action:intoolbar", "&First Letter"), ac);
+    selectFirstLetterOfClueAction->setToolTip(i18n("Select the first letter of the current clue"));
     ac->addAction(actionName(Move_SelectFirstLetterOfClue), selectFirstLetterOfClueAction);
-    connect(selectFirstLetterOfClueAction, SIGNAL(triggered()),
-            this, SLOT(selectFirstLetterOfClueSlot()));
+    connect(selectFirstLetterOfClueAction, SIGNAL(triggered()), this, SLOT(selectFirstLetterOfClueSlot()));
 
-    KAction *selectLastLetterOfClueAction = new KAction(KIcon("clue-go-last-letter"/*"go-last-view"*/),
-            i18n("Select &Last Letter"), ac);
-    selectLastLetterOfClueAction->setStatusTip(
-        i18n("Select the last letter of the current clue"));
+    KAction *selectLastLetterOfClueAction = new KAction(KIcon("clue-go-last-letter"), i18nc("@action:intoolbar", "&Last Letter"), ac);
+    selectLastLetterOfClueAction->setToolTip(i18n("Select the last letter of the current clue"));
     ac->addAction(actionName(Move_SelectLastLetterOfClue), selectLastLetterOfClueAction);
-    connect(selectLastLetterOfClueAction, SIGNAL(triggered()),
-            this, SLOT(selectLastLetterOfClueSlot()));
+    connect(selectLastLetterOfClueAction, SIGNAL(triggered()), this, SLOT(selectLastLetterOfClueSlot()));
 
-    KAction *selectFirstClueAction = new KAction(KIcon("go-first"),
-            i18n("Select First Clue"), ac);
-    selectFirstClueAction->setStatusTip(i18n("Select the first clue"));
+    KAction *selectFirstClueAction = new KAction(KIcon("go-first"), i18nc("@action:intoolbar", "First Clue"), ac);
+    selectFirstClueAction->setToolTip(i18n("Select the first clue"));
     ac->addAction(actionName(Move_SelectFirstClue), selectFirstClueAction);
-    connect(selectFirstClueAction, SIGNAL(triggered()),
-            this, SLOT(selectFirstClueSlot()));
+    connect(selectFirstClueAction, SIGNAL(triggered()), this, SLOT(selectFirstClueSlot()));
 
-    KAction *selectNextClueAction = new KAction(KIcon("go-next"),
-            i18n("Select &Next Clue"), ac);
-    selectNextClueAction->setStatusTip(i18n("Select the next clue"));
+    KAction *selectNextClueAction = new KAction(KIcon("go-next"), i18nc("@action:intoolbar", "&Next Clue"), ac);
+    selectNextClueAction->setToolTip(i18n("Select the next clue"));
     ac->addAction(actionName(Move_SelectNextClue), selectNextClueAction);
-    connect(selectNextClueAction, SIGNAL(triggered()),
-            this, SLOT(selectNextClueSlot()));
+    connect(selectNextClueAction, SIGNAL(triggered()), this, SLOT(selectNextClueSlot()));
 
-    KAction *selectPreviousClueAction = new KAction(KIcon("go-previous"),
-            i18n("Select &Previous Clue"), ac);
-    selectPreviousClueAction->setStatusTip(i18n("Select the previous clue"));
+    KAction *selectPreviousClueAction = new KAction(KIcon("go-previous"), i18nc("@action:intoolbar", "&Previous Clue"), ac);
+    selectPreviousClueAction->setToolTip(i18n("Select the previous clue"));
     ac->addAction(actionName(Move_SelectPreviousClue), selectPreviousClueAction);
-    connect(selectPreviousClueAction, SIGNAL(triggered()),
-            this, SLOT(selectPreviousClueSlot()));
+    connect(selectPreviousClueAction, SIGNAL(triggered()), this, SLOT(selectPreviousClueSlot()));
 
-    KAction *selectLastClueAction = new KAction(KIcon("go-last"),
-            i18n("Select Last Clue"), ac);
-    selectLastClueAction->setStatusTip(i18n("Select the last clue"));
+    KAction *selectLastClueAction = new KAction(KIcon("go-last"), i18nc("@action:intoolbar", "Last Clue"), ac);
+    selectLastClueAction->setToolTip(i18n("Select the last clue"));
     ac->addAction(actionName(Move_SelectLastClue), selectLastClueAction);
-    connect(selectLastClueAction, SIGNAL(triggered()),
-            this, SLOT(selectLastClueSlot()));
+    connect(selectLastClueAction, SIGNAL(triggered()), this, SLOT(selectLastClueSlot()));
 
     // Dock toggle actions
     QAction *showClueDockAction = m_clueDock->toggleViewAction();
     ac->addAction(actionName(ShowClueDock), showClueDockAction);
-//     KAction* showClueDockAction = ac->addAction( actionName(ShowClueDock) );
     showClueDockAction->setShortcut(QKeySequence(Qt::Key_F3));
     showClueDockAction->setText(i18n("Show Clue Dock"));
-//     showClueDockAction->setIcon(KIcon(""));
-//     showClueDockAction->setCheckable( true );
-//     showClueDockAction->setChecked( m_clueDock->isVisible() );
-//     connect( showClueDockAction, SIGNAL(toggled(bool)),
-//       m_clueDock, SLOT(setVisible(bool)) );
-//     connect( m_clueDock, SIGNAL(visibilityChanged(bool)),
-//       showClueDockAction, SLOT(setChecked(bool)) );
 
     QAction *showUndoViewDockAction = m_undoViewDock->toggleViewAction();
     ac->addAction(actionName(ShowUndoViewDock), showUndoViewDockAction);
-//     KAction* showUndoViewDockAction =
-//      ac->addAction( actionName(ShowUndoViewDock) );
     showUndoViewDockAction->setShortcut(QKeySequence(Qt::Key_F4));
     showUndoViewDockAction->setText(i18n("Show Edit History Dock"));
-//     showUndoViewDockAction->setIcon(KIcon(""));
-//     showUndoViewDockAction->setCheckable( true );
-//     showUndoViewDockAction->setChecked( m_undoViewDock->isVisible() );
-//     connect( showUndoViewDockAction, SIGNAL(toggled(bool)),
-//       m_undoViewDock, SLOT(setVisible(bool)) );
-//     connect( m_undoViewDock, SIGNAL(visibilityChanged(bool)),
-//       showUndoViewDockAction, SLOT(setChecked(bool)) );
 
     QAction *showCurrentCellDockAction = m_currentCellDock->toggleViewAction();
     ac->addAction(actionName(ShowCurrentCellDock), showCurrentCellDockAction);
-//     KAction* showCurrentCellDockAction =
-//      ac->addAction( actionName(ShowCurrentCellDock) );
     showCurrentCellDockAction->setShortcut(QKeySequence(Qt::Key_F2));
     showCurrentCellDockAction->setText(i18n("Show Current Cell Dock"));
-    connect(showCurrentCellDockAction, SIGNAL(toggled(bool)),
-            this, SLOT(currentCellDockToggled(bool)));
-//     showCurrentCellDockAction->setIcon(KIcon(""));
-//     showCurrentCellDockAction->setCheckable( true );
-//     showCurrentCellDockAction->setChecked( m_currentCellDock->isVisible() );
-//     connect( showCurrentCellDockAction, SIGNAL(toggled(bool)),
-//       m_currentCellDock, SLOT(setVisible(bool)) );
-//     connect( m_currentCellDock, SIGNAL(visibilityChanged(bool)),
-//       showCurrentCellDockAction, SLOT(setChecked(bool)) );
+    connect(showCurrentCellDockAction, SIGNAL(toggled(bool)), this, SLOT(currentCellDockToggled(bool)));
 
     // Edit mode actions
-    KToggleAction *enableEditModeAction = new KToggleAction(
-        KIcon("document-edit"), i18n("Edit Mode"), this);
-    enableEditModeAction->setStatusTip(i18n("Enables/disables the edit mode. "
-                                            "All correct letters are shown in edit mode!"));
+    KToggleAction *enableEditModeAction = new KToggleAction(KIcon("document-edit"), i18nc("@action:intoolbar", "Edit Mode"), this);
+    enableEditModeAction->setToolTip(i18n("Enables/disables the edit mode. All correct letters are shown in edit mode!"));
     ac->addAction(actionName(Edit_EnableEditMode), enableEditModeAction);
-    connect(enableEditModeAction, SIGNAL(toggled(bool)),
-            this, SLOT(enableEditModeSlot(bool)));
+    connect(enableEditModeAction, SIGNAL(toggled(bool)), this, SLOT(enableEditModeSlot(bool)));
 
-    KAction *addClueAction = new KAction(KIcon("clue-add"/*"list-add"*/),
-                                         i18n("&Add Clue"), this);
-    addClueAction->setStatusTip(i18n("Adds a new clue at the current cell."));
+    KAction *addClueAction = new KAction(KIcon("clue-add"), i18n("&Add Clue"), this);
+    addClueAction->setToolTip(i18n("Adds a new clue at the current cell"));
     ac->addAction(actionName(Edit_AddClue), addClueAction);
     connect(addClueAction, SIGNAL(triggered()), this, SLOT(addClueSlot()));
     connect(addClueAction, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *removeAction = new KAction(
-        KIcon(/*"edit-delete"*/ "clue-delete"), i18n("&Remove"), this);
-    removeAction->setStatusTip(i18n("Removes the highlighted clue or image."));
+    KAction *removeAction = new KAction(KIcon("clue-delete"), i18n("&Remove"), this);
+    removeAction->setToolTip(i18n("Removes the highlighted clue or image"));
     ac->addAction(actionName(Edit_Remove), removeAction);
     connect(removeAction, SIGNAL(triggered()), this, SLOT(removeSlot()));
 
-    KAction *removeHorizontalClueAction = new KAction(
-        KIcon("clue-delete"), i18n("Remove &Across Clue"), this);
-    removeHorizontalClueAction->setStatusTip(i18n("Removes the highlighted across clue."));
-    ac->addAction(actionName(Edit_RemoveHorizontalClue),
-                  removeHorizontalClueAction);
-    connect(removeHorizontalClueAction, SIGNAL(triggered()),
-            this, SLOT(removeHorizontalClueSlot()));
-    connect(removeHorizontalClueAction, SIGNAL(hovered()),
-            this, SLOT(highlightHorizontalClueForPopup()));
+    KAction *removeHorizontalClueAction = new KAction(KIcon("clue-delete"), i18n("Remove &Across Clue"), this);
+    removeHorizontalClueAction->setToolTip(i18n("Removes the highlighted across clue"));
+    ac->addAction(actionName(Edit_RemoveHorizontalClue), removeHorizontalClueAction);
+    connect(removeHorizontalClueAction, SIGNAL(triggered()), this, SLOT(removeHorizontalClueSlot()));
+    connect(removeHorizontalClueAction, SIGNAL(hovered()), this, SLOT(highlightHorizontalClueForPopup()));
 
-    KAction *removeVerticalClueAction = new KAction(
-        KIcon("clue-delete-vertical"), i18n("Remove &Down Clue"), this);
-    removeVerticalClueAction->setStatusTip(i18n("Removes the highlighted down clue."));
-    ac->addAction(actionName(Edit_RemoveVerticalClue),
-                  removeVerticalClueAction);
-    connect(removeVerticalClueAction, SIGNAL(triggered()),
-            this, SLOT(removeVerticalClueSlot()));
-    connect(removeVerticalClueAction, SIGNAL(hovered()),
-            this, SLOT(highlightVerticalClueForPopup()));
-
+    KAction *removeVerticalClueAction = new KAction(KIcon("clue-delete-vertical"), i18n("Remove &Down Clue"), this);
+    removeVerticalClueAction->setToolTip(i18n("Removes the highlighted down clue"));
+    ac->addAction(actionName(Edit_RemoveVerticalClue), removeVerticalClueAction);
+    connect(removeVerticalClueAction, SIGNAL(triggered()), this, SLOT(removeVerticalClueSlot()));
+    connect(removeVerticalClueAction, SIGNAL(hovered()), this, SLOT(highlightVerticalClueForPopup()));
 
     KAction *addImageAction = new KAction(KIcon("insert-image"), i18n("&Add Image"), this);
-    addImageAction->setStatusTip(i18n("Adds a new image at the current cell."));
+    addImageAction->setToolTip(i18n("Adds a new image at the current cell"));
     ac->addAction(actionName(Edit_AddImage), addImageAction);
     connect(addImageAction, SIGNAL(triggered()), this, SLOT(addImageSlot()));
     connect(addImageAction, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *clearCrosswordAction = new KAction(
-        KIcon("edit-clear"), i18n("&Clear Crossword"), this);
-    clearCrosswordAction->setStatusTip(i18n("Removes all clues from the crossword."));
+    KAction *clearCrosswordAction = new KAction(KIcon("edit-clear"), i18n("&Clear Crossword"), this);
+    clearCrosswordAction->setToolTip(i18n("Removes all clues from the crossword"));
     ac->addAction(actionName(Edit_ClearCrossword), clearCrosswordAction);
-    connect(clearCrosswordAction, SIGNAL(triggered()),
-            this, SLOT(clearCrosswordSlot()));
+    connect(clearCrosswordAction, SIGNAL(triggered()), this, SLOT(clearCrosswordSlot()));
 
-    KAction *propertiesAction = new KAction(
-        KIcon("document-properties"), i18n("&Crossword Properties..."), this);
-    propertiesAction->setStatusTip(i18n("Change the size of the crossword or it's title, author, copyright..."));
+    KAction *propertiesAction = new KAction(KIcon("document-properties"), i18n("&Crossword Properties..."), this);
+    propertiesAction->setToolTip(i18n("Change the size of the crossword or it's title, author, copyright..."));
     ac->addAction(actionName(Edit_Properties), propertiesAction);
-    connect(propertiesAction, SIGNAL(triggered()),
-            this, SLOT(propertiesSlot()));
+    connect(propertiesAction, SIGNAL(triggered()), this, SLOT(propertiesSlot()));
 
-    KAction *editCheckRotationSymmetryAction = new KAction(
-        KIcon(""), i18n("&Check for rotation symmetry..."), this);
-    editCheckRotationSymmetryAction->setStatusTip(
-        i18n("Checks if the crossword has 180 degree rotation symmetry."));
+    KAction *editCheckRotationSymmetryAction = new KAction(KIcon(""), i18n("&Check for rotation symmetry..."), this);
+    editCheckRotationSymmetryAction->setToolTip(i18n("Checks if the crossword has 180 degree rotation symmetry"));
     ac->addAction(actionName(Edit_CheckRotationSymmetry), editCheckRotationSymmetryAction);
-    connect(editCheckRotationSymmetryAction, SIGNAL(triggered()),
-            this, SLOT(editCheckRotationSymmetrySlot()));
+    connect(editCheckRotationSymmetryAction, SIGNAL(triggered()), this, SLOT(editCheckRotationSymmetrySlot()));
 
-    KAction *editStatisticsAction = new KAction(
-        KIcon("view-statistics"), i18n("&Statistics..."), this);
-    editStatisticsAction->setStatusTip(
-        i18n("Shows statistics about the crossword."));
+    KAction *editStatisticsAction = new KAction(KIcon("view-statistics"), i18n("&Statistics..."), this);
+    editStatisticsAction->setToolTip(i18n("Shows statistics about the crossword"));
     ac->addAction(actionName(Edit_Statistics), editStatisticsAction);
-    connect(editStatisticsAction, SIGNAL(triggered()),
-            this, SLOT(editStatisticsSlot()));
+    connect(editStatisticsAction, SIGNAL(triggered()), this, SLOT(editStatisticsSlot()));
 
-    KAction *editClueNumberMappingAction = new KAction(
-        KIcon(""), i18n("Clue Number &Mapping..."), this);
-    editClueNumberMappingAction->setStatusTip(
-        i18n("Changes the mapping of clue numbers to letters."));
+    KAction *editClueNumberMappingAction = new KAction(KIcon(""), i18n("Clue Number &Mapping..."), this);
+    editClueNumberMappingAction->setToolTip(i18n("Changes the mapping of clue numbers to letters"));
     ac->addAction(actionName(Edit_ClueNumberMapping), editClueNumberMappingAction);
-    connect(editClueNumberMappingAction, SIGNAL(triggered()),
-            this, SLOT(editClueNumberMappingSlot()));
+    connect(editClueNumberMappingAction, SIGNAL(triggered()), this, SLOT(editClueNumberMappingSlot()));
 
-    KAction *editMoveCellsAction = new KAction(
-        KIcon(""), i18n("Move All Cells..."), this);
-    editMoveCellsAction->setStatusTip(
-        i18n("Moves all cells of the crossword."));
+    KAction *editMoveCellsAction = new KAction(KIcon(""), i18n("Move All Cells..."), this);
+    editMoveCellsAction->setToolTip(i18n("Moves all cells of the crossword"));
     ac->addAction(actionName(Edit_MoveCells), editMoveCellsAction);
-    connect(editMoveCellsAction, SIGNAL(triggered()),
-            this, SLOT(editMoveCellsSlot()));
+    connect(editMoveCellsAction, SIGNAL(triggered()), this, SLOT(editMoveCellsSlot()));
 
     KAction *pasteSpecialCharacter = new KAction(ac);
     QWidget *specialCharacterButtonsWidget = new QWidget(this);
@@ -1643,55 +1533,37 @@ bool CrossWordXmlGuiWindow::setupActions()
         specialCharacterButton->setText(specialCharacter);
         specialCharacterButton->setAutoRaise(true);
         specialCharacterButtonsLayout->addWidget(specialCharacterButton);
-        connect(specialCharacterButton, SIGNAL(clicked()),
-                this, SLOT(editPasteSpecialCharacter()));
+        connect(specialCharacterButton, SIGNAL(clicked()), this, SLOT(editPasteSpecialCharacter()));
     }
     QWidget *specialCharacterWidget = new QWidget(this);
     QVBoxLayout *specialCharacterLayout = new QVBoxLayout(specialCharacterWidget);
-    QLabel *specialCharacterLabel = new QLabel(i18n("Insert special character:"),
-            specialCharacterWidget);
+    QLabel *specialCharacterLabel = new QLabel(i18n("Insert special character:"), specialCharacterWidget);
     specialCharacterLayout->addWidget(specialCharacterLabel);
     specialCharacterLayout->addWidget(specialCharacterButtonsWidget);
 
-    pasteSpecialCharacter->setStatusTip(i18n("Let you select a special character to paste."));
+    pasteSpecialCharacter->setToolTip(i18n("Let you select a special character to paste"));
     pasteSpecialCharacter->setDefaultWidget(specialCharacterWidget);
     ac->addAction(actionName(Edit_PasteSpecialCharacter), pasteSpecialCharacter);
 
     // Move actions
     KAction *solveAction = KStandardGameAction::solve(this, SLOT(solveSlot()), ac);
-    solveAction->setStatusTip(i18n("Fills all letter cells with the correct letters."));
-    solveAction->setToolTip(i18n("Give up the Game"));
+    solveAction->setToolTip(i18n("Fills all letter cells with the correct letters"));
     solveAction->setWhatsThis(i18n("<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The solution will be displayed.</p><p>If you filled in all letters and do not want to give up, choose \"Done!\".</p></qt>"));
 
     KAction *checkAction = new KAction(KIcon("games-endturn"), i18n("&Check"), this);
-    checkAction->setStatusTip(i18n("Checks if all letters are correct."));
+    checkAction->setToolTip(i18n("Checks if all letters are correct"));
     ac->addAction(actionName(Move_Check), checkAction);
     connect(checkAction, SIGNAL(triggered()), this, SLOT(checkSlot()));
 
     KAction *clearAction = new KAction(KIcon("edit-clear"), i18n("&Clear Answers"), this);
-    clearAction->setStatusTip(i18n("Clears all letter cells."));
+    clearAction->setToolTip(i18n("Clears all letter cells"));
     ac->addAction(actionName(Move_Clear), clearAction);
     connect(clearAction, SIGNAL(triggered()), this, SLOT(clearSlot()));
 
     KAction *eraseAction = new KToggleAction(KIcon("draw-eraser"), i18n("&Eraser"), this);
-    eraseAction->setStatusTip(i18n("Enables the eraser, to clear letter cells / answers."));
+    eraseAction->setToolTip(i18n("Enables the eraser, to clear letter cells/answers"));
     ac->addAction(actionName(Move_Eraser), eraseAction);
     connect(eraseAction, SIGNAL(triggered(bool)), this, SLOT(eraseSlot(bool)));
-
-    // Popup menu actions
-//     KGuiItem remove = KStandardGuiItem::remove();
-//     KAction *recentFilesRemoveAction = new KAction( remove.icon(), remove.text(), this );
-//     KAction *recentFilesRemoveAction = new KAction( KIcon("list-remove"), i18n("&Remove"), this );
-//     recentFilesRemoveAction->setStatusTip( i18n("Remove this entry from the list of recent files.") );
-//     ac->addAction( actionName(RecentTab_RecentFilesRemove), recentFilesRemoveAction );
-//     connect( recentFilesRemoveAction, SIGNAL(triggered()), this, SLOT(recentFilesRemoveSlot()) );
-
-//     KGuiItem clear = KStandardGuiItem::clear();
-//     KAction *recentFilesClearAction = new KAction( clear.icon(), clear.text(), this );
-//     KAction *recentFilesClearAction = new KAction( KIcon("edit-clear-list"), i18n("&Clear list"), this );
-//     recentFilesClearAction->setStatusTip( i18n("Clear the list of recent files.") );
-//     ac->addAction( QLatin1String("recent_files_clear"), recentFilesClearAction );
-//     connect( recentFilesClearAction, SIGNAL(triggered()), this, SLOT(recentFilesClearSlot()) );
 
     return true;
 }
