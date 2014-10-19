@@ -78,8 +78,8 @@ LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::Wind
     setCentralWidget(m_libraryTree);
 
     setupActions();
-    setupGUI(StatusBar | ToolBar | /*Keys | */Save | Create, "krossword/krossword_library_ui.rc");
-    menuBar()->hide();
+    setupGUI(ToolBar | /*Keys | */Save | Create, "krossword/krossword_library_ui.rc");
+    //menuBar()->hide();
 
     connect(m_libraryTree, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(libraryItemDoubleClicked(QModelIndex)));
     connect(m_libraryTree->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(libraryCurrentChanged(QModelIndex, QModelIndex))); // to keep updated the available actions

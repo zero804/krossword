@@ -2,15 +2,7 @@
 <kpartgui name="krosswordpuzzle_crossword" version="5">
 
 <!-- Menu bar -->
-<MenuBar>
-    <Menu name="game">
-        <Separator append="save_merge" />
-        <Action name="move_check" />
-        <Action name="move_clear" />
-        <Separator />
-        <Action name="move_eraser" />
-    </Menu>
-
+<MenuBar> 
     <Menu name="edit">
         <Action name="edit_enable_edit_mode" />
         <Separator />
@@ -33,6 +25,11 @@
     </Menu>
 
     <Menu name="move">
+        <Action name="move_check" />
+        <Action name="move_clear" />
+        <Separator />
+        <Action name="move_eraser" />
+        <Separator />
         <Action name="move_select_first_letter_of_clue" />
         <Action name="move_select_last_letter_of_clue" />
         <Separator />
@@ -47,7 +44,6 @@
     <Menu name="view">
         <Action name="view_pan" />
     </Menu>
-
 </MenuBar>
 
 
@@ -55,12 +51,10 @@
 <ToolBar name="crosswordToolBar">
     <text>Crossword</text>
     <Action name="game_save" />
-    <Action name="game_end" />
+    <Action name="game_close" />
     <Separator />
     <Action name="move_hint" />
     <Action name="move_check" />
-    <Separator />
-    <Action name="view_pan" />
     <Separator />
     <Action name="edit_enable_edit_mode" />
 </ToolBar>

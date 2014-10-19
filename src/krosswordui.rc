@@ -1,11 +1,14 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="krosswordpuzzle" version="3">
+<kpartgui name="krosswordpuzzle" version="4">
 
 <!-- Menu bar -->
 <MenuBar>
+    <Menu name="game">
+        <ActionList name="library_game_list" />
+        <ActionList name="crossword_game_list" />
+    </Menu>
     <Menu name="settings">
         <ActionList name="options_list" />
-        <Action name="" />
     </Menu>
 </MenuBar>
 

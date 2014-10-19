@@ -32,6 +32,7 @@
 
 // KDE action includes
 #include <KStandardAction>
+#include <KStandardGameAction>
 #include <KActionCollection>
 
 // Other KDE includes
@@ -40,8 +41,7 @@
 #include <kapplication.h>
 #include <kfileplacesmodel.h>
 
-KrossWordPuzzle::KrossWordPuzzle()
-    : KXmlGuiWindow(),
+KrossWordPuzzle::KrossWordPuzzle() : KXmlGuiWindow(),
       m_mainLibrary(nullptr),
       m_mainCrossword(nullptr),
       m_loadProgressDialog(nullptr),
@@ -55,13 +55,12 @@ KrossWordPuzzle::KrossWordPuzzle()
     setAcceptDrops(true);
     setObjectName("mainKrossWordPuzzle");
     setupPlaces();
-    setupActions();
 
-    setupGUI(Save | Create);
+    setupActions();
+    setupGUI(StatusBar | Save | Create);
 
     setupMainTabWidget();
     setCentralWidget(m_mainStackedBar);
-    m_mainLibrary->statusBar()->showMessage(i18n("Welcome to Krossword!"));
 
     QString lastUnsavedFileBeforeCrash = Settings::lastUnsavedFileBeforeCrash();
     if (!lastUnsavedFileBeforeCrash.isEmpty()) {
@@ -215,15 +214,13 @@ void KrossWordPuzzle::setupMainTabWidget()
     connect(m_mainCrossword, SIGNAL(tempAutoSaveFileChanged(QString)),
             this,            SLOT(crosswordAutoSaveFileChanged(QString)));
 
-
     // Add menus of the embedded crossword window to the menu bar of this (main) window
-    QAction *lastMenu = this->menuBar()->actions().last();
-    foreach(QAction * action, m_mainCrossword->menuBar()->actions()) {
-        if (action->menu() && (action->menu()->objectName() == "game" ||
-                               action->menu()->objectName() == "edit" ||
+    QAction *settingsMenu = this->menuBar()->actions().at(1);
+    foreach(QAction * action, m_mainCrossword->menuBar()->actions()) {                              
+        if (action->menu() && (action->menu()->objectName() == "edit" ||
                                action->menu()->objectName() == "move" ||
                                action->menu()->objectName() == "view")) {
-            this->menuBar()->insertMenu(lastMenu, action->menu());
+            this->menuBar()->insertMenu(settingsMenu, action->menu());
         }
     }
 
@@ -255,7 +252,7 @@ void KrossWordPuzzle::setupActions()
     KStandardAction::keyBindings(this, SLOT(configureShortcutsGlobal()), actionCollection());
     KStandardAction::configureToolbars(this, SLOT(configureToolbarsGlobal()), actionCollection());
     KStandardAction::preferences(this, SLOT(optionsPreferencesSlot()), actionCollection());
-    KStandardAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
+    KStandardGameAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
 }
 
 void KrossWordPuzzle::showRestoreOption(const QString& lastUnsavedFileBeforeCrash)
@@ -394,37 +391,59 @@ void KrossWordPuzzle::currentTabChanged(int index)
     bool crosswordTabShown = index == m_mainStackedBar->indexOf(m_mainCrossword);
 
     foreach(QAction * action, this->menuBar()->actions()) {
-        if (action->menu() && (action->menu()->objectName() == "game" ||
-                               action->menu()->objectName() == "edit" ||
+        if (action->menu() && (action->menu()->objectName() == "edit" ||
                                action->menu()->objectName() == "move" ||
                                action->menu()->objectName() == "view")) {
             action->setEnabled(crosswordTabShown);
         }
     }
 
+    unplugActionList("library_game_list");
+    unplugActionList("crossword_game_list");
     unplugActionList("options_list");
 
+    QList<QAction*> libraryGameList;
+    QList<QAction*> crosswordGameList;
     QList<QAction*> optionsList;
+
     QAction *separator = new QAction(this);
     separator->setSeparator(true);
+
     if (crosswordTabShown) {
         setCaption(m_caption, m_mainCrossword->isModified());
+
+        crosswordGameList << m_mainCrossword->action("game_save");
+        crosswordGameList << m_mainCrossword->action("game_save_as");
+        crosswordGameList << m_mainCrossword->action("game_close");
+        crosswordGameList << separator;
+        crosswordGameList << m_mainCrossword->action("game_print");
+        crosswordGameList << m_mainCrossword->action("game_print_preview");
+
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::Options_Dictionaries));
         optionsList << separator;
-        //  optionsList << m_mainCrossword->action( "options_show_menubar" );
         optionsList << m_mainCrossword->toolBarMenuAction();
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowClueDock));
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowUndoViewDock));
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowCurrentCellDock));
-
-        qDebug() << optionsList;
     } else { // tabLibrary
         setCaption(i18n("Library"));
+
+        libraryGameList << m_mainLibrary->action("library_new_crossword");
+        libraryGameList << m_mainLibrary->action("library_open");
+        libraryGameList << m_mainLibrary->action("library_delete");
+        libraryGameList << m_mainLibrary->action("library_new_folder");
+        libraryGameList << separator;
+        libraryGameList << m_mainLibrary->action("library_download");
+        libraryGameList << m_mainLibrary->action("library_import");
+        libraryGameList << m_mainLibrary->action("library_export");
+
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::Options_Dictionaries));
         optionsList << separator;
         optionsList << m_mainLibrary->toolBarMenuAction();
     }
 
+    plugActionList("library_game_list", libraryGameList);
+    plugActionList("crossword_game_list", crosswordGameList);
     plugActionList("options_list", optionsList);
 }
 

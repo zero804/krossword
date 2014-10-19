@@ -193,8 +193,6 @@ ZoomWidget::ZoomWidget(unsigned int maxZoomFactor, unsigned int buttonStep , QWi
     connect(m_btnZoomOut, SIGNAL(pressed()), this, SLOT(zoomOutBtnPressedSlot()));
     connect(m_btnZoomIn,  SIGNAL(pressed()), this, SLOT(zoomInBtnPressedSlot()));
     connect(m_zoomSlider, SIGNAL(valueChanged(int)), this, SLOT(zoomSliderChangedSlot(int)));
-    //KStandardAction::zoomIn(this, SLOT(zoomInBtnPressedSlot()), ac)->setStatusTip(i18n("Zoom in"));
-    //KStandardAction::zoomOut(this, SLOT(zoomOutBtnPressedSlot()), ac)->setStatusTip(i18n("Zoom out"));
 }
 
 unsigned int ZoomWidget::currentZoom() const
@@ -345,12 +343,6 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
     m_view = createKrossWordPuzzleView();
     setCentralWidget(m_view);
 
-    /*
-    // Create coordinates item in the status bar
-    statusBar()->insertPermanentFixedItem(QString(), CoordinatesItem);
-    statusBar()->setItemFixed(CoordinatesItem, 75);
-    */
-
     // Create solution progress bar:
     m_solutionProgress = new QProgressBar;
     m_solutionProgress->setFormat(i18nc("%p is replaced by the percentage of "
@@ -377,9 +369,10 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
     if (!setupActions())
         return;
 
-    setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krossword/krossword_crossword_ui.rc");
-    menuBar()->hide();
+    setupGUI(ToolBar /*| Keys*/ | Save | Create, "krossword/krossword_crossword_ui.rc");
+    //menuBar()->hide();
 
+    /*
     // Hide the settings menu because it's already shown as corner widget in the main tab widget
     foreach(QAction * action,  menuBar()->actions()) {
         if (action->menu() && action->menu()->objectName() == "settings") {
@@ -387,6 +380,7 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
             break;
         }
     }
+    */
 
     m_dictionary = new KrosswordDictionary;
 }
@@ -1306,17 +1300,24 @@ bool CrossWordXmlGuiWindow::setupActions()
     m_undoStack->createUndoAction(ac, actionName(Edit_Undo));
     m_undoStack->createRedoAction(ac, actionName(Edit_Redo));
 
-    // Change the text of the "End Game" action to "Close". It's more appropriate here, I think.
-    KAction *closeAction = KStandardGameAction::end(this, SLOT(closeSlot()), ac);
+    KAction *closeAction = KStandardAction::close(this, SLOT(closeSlot()), ac);
     closeAction->setToolTip(i18n("Close the current crossword"));
-    closeAction->setText(KStandardGuiItem::close().text());
+    ac->addAction("game_close", closeAction);
 
-    // Save / export
-    KStandardGameAction::save(this, SLOT(saveSlot()), ac)->setToolTip(i18n("Save the crossword with solved letters"));
-    KStandardGameAction::saveAs(this, SLOT(saveAsSlot()), ac)->setToolTip(i18n("Choose a filename to save the crossword with solved letters"));
+    // Save
+    KAction *saveAction = KStandardAction::save(this, SLOT(saveSlot()), ac);
+    saveAction->setToolTip(i18n("Save the crossword with solved letters"));
+    ac->addAction("game_save", saveAction);
 
-    // Print
-    KStandardGameAction::print(this, SLOT(printSlot()), ac)->setToolTip(i18n("Print the crossword"));
+    KAction *saveAsAction = KStandardAction::saveAs(this, SLOT(saveAsSlot()), ac);
+    saveAsAction->setToolTip(i18n("Choose a filename to save the crossword with solved letters"));
+    ac->addAction("game_save_as", saveAsAction);
+
+    // Print and print preview
+    KAction *printAction = KStandardAction::print(this, SLOT(printSlot()), 0);
+    printAction->setToolTip(i18n("Print the crossword"));
+    ac->addAction("game_print", printAction);
+
     KAction *printPreviewAction = KStandardAction::printPreview(this, SLOT(printPreviewSlot()), 0);
     printPreviewAction->setToolTip(i18n("Show a print preview"));
     ac->addAction(actionName(Game_PrintPreview), printPreviewAction);
