@@ -3,7 +3,7 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
-  <kcfgfile name="krosswordpuzzlerc"/>
+  <kcfgfile name="krosswordrc"/>
   
   <group name="Preferences">
     <entry name="lastUnsavedFileBeforeCrash" type="String">
@@ -14,11 +14,6 @@
     <entry name="Theme" type="String">
       <label>Name of the current theme.</label>
       <default>default</default>
-    </entry>
-    
-    <entry name="libraryDownloadSubDir" type="String">
-      <label>Name of the subdirectory in the library directory in which new downloads are saved.</label>
-      <default></default>
     </entry>
 
     <entry name="animate" type="Bool">

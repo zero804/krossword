@@ -47,11 +47,6 @@ KrossWordPuzzle::KrossWordPuzzle() : KXmlGuiWindow(),
       m_loadProgressDialog(nullptr),
       m_mainStackedBar(new QStackedWidget(this))
 {
-    if (Settings::libraryDownloadSubDir().isEmpty()) {
-        Settings::setLibraryDownloadSubDir(i18n("Downloads"));
-        Settings::self()->writeConfig();
-    }
-
     setAcceptDrops(true);
     setObjectName("mainKrossWordPuzzle");
     setupPlaces();
@@ -240,7 +235,7 @@ void KrossWordPuzzle::setupPlaces()
     }
 
     if (placesModel->url(placesModel->closestItem(templatesUrl)) != templatesUrl) {
-        placesModel->addPlace(i18n("Templates"), KUrl(templatesUrl), "krosswordpuzzle", KApplication::applicationName());
+        placesModel->addPlace(i18n("Templates"), KUrl(templatesUrl), "krossword", KApplication::applicationName());
     }
 
     delete placesModel;
