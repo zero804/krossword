@@ -738,11 +738,6 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
         m_undoStackLoaded = !undoData.isEmpty();
         m_lastAutoSave = QDateTime::currentDateTime();
 
-//     if ( krossWord()->highlightedClue() )
-//       m_view->ensureVisible( krossWord()->highlightedClue() );
-//     else
-        //fitToPageSlot();
-
         statusBar()->showMessage(i18n("Loaded crossword from file '%1'", fileName), 5000);
         if (loadCrashedFile) {
             m_curDocumentOrigin = DocumentRestoredAfterCrash;
@@ -778,11 +773,8 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
         adjustGuiToCrosswordType();
         emit loadingFileComplete(m_curFileName);
 
-//  m_recentFilesAction->addUrl( resultUrl,
-//      isFileInLibrary(resultUrl.path()) ? "Library: " + resultUrl.fileName() : resultUrl.fileName() );
-//  m_recentFilesAction->saveEntries( Settings::self()->config()->group("") );
-
         fitToPageSlot();
+        selectFirstClueSlot();
         return true;
     } else {
         setState(ShowingNothing);
