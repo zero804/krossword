@@ -1132,11 +1132,15 @@ void CrossWordXmlGuiWindow::removeSlot()
 
 void CrossWordXmlGuiWindow::clearCrosswordSlot()
 {
-    QString errorMessage;
-    if (!m_undoStack->tryPush(new ClearCrosswordCommand(krossWord()), &errorMessage)) {
-        statusBar()->showMessage(i18nc("%1 contains the reason why the crossword couldn't be cleared", "Can't clear crossword. %1", errorMessage));
-    } else {
-        stateChanged("clue_cell_highlighted");
+    int result = KMessageBox::questionYesNo(this, i18n("Do you really want to clear the crossword?"), i18n("Clear"), KStandardGuiItem::yes(), KStandardGuiItem::no());
+
+    if (result == KMessageBox::Yes) {
+        QString errorMessage;
+        if (!m_undoStack->tryPush(new ClearCrosswordCommand(krossWord()), &errorMessage)) {
+            statusBar()->showMessage(i18nc("%1 contains the reason why the crossword couldn't be cleared", "Can't clear crossword. %1", errorMessage));
+        } else {
+            stateChanged("clue_cell_highlighted");
+        }
     }
 }
 
