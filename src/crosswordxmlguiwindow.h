@@ -46,7 +46,6 @@ class ClueModel;
 
 class QStringListModel;
 class QStandardItemModel;
-//class QFutureWatcher;
 class QProgressBar;
 class QStandardItem;
 class QTreeView;
@@ -401,7 +400,7 @@ private:
     void setActionVisibility();
     QWidget *createZoomWidget();
 
-    bool setupActions();
+    void setupActions();
     void setupPrinter(QPrinter &printer);
     void updateClueDock();
     void updateSolutionInToolBar();

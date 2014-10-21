@@ -407,17 +407,20 @@ void KrossWordPuzzle::currentTabChanged(int index)
     QList<QAction*> optionsList;
 
     QAction *separator = new QAction(this);
+    QAction *separator2 = new QAction(this);
     separator->setSeparator(true);
+    separator2->setSeparator(true);
 
     if (crosswordTabShown) {
         setCaption(m_caption, m_mainCrossword->isModified());
 
         crosswordGameList << m_mainCrossword->action("game_save");
         crosswordGameList << m_mainCrossword->action("game_save_as");
-        crosswordGameList << m_mainCrossword->action("game_close");
         crosswordGameList << separator;
         crosswordGameList << m_mainCrossword->action("game_print");
         crosswordGameList << m_mainCrossword->action("game_print_preview");
+        crosswordGameList << separator2;
+        crosswordGameList << m_mainCrossword->action("game_close");
 
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::Options_Dictionaries));
         optionsList << separator;
@@ -429,10 +432,11 @@ void KrossWordPuzzle::currentTabChanged(int index)
         setCaption(i18n("Library"));
 
         libraryGameList << m_mainLibrary->action("library_new_crossword");
-        libraryGameList << m_mainLibrary->action("library_open");
-        libraryGameList << m_mainLibrary->action("library_delete");
         libraryGameList << m_mainLibrary->action("library_new_folder");
         libraryGameList << separator;
+        libraryGameList << m_mainLibrary->action("library_open");
+        libraryGameList << m_mainLibrary->action("library_delete");
+        libraryGameList << separator2;
         libraryGameList << m_mainLibrary->action("library_download");
         libraryGameList << m_mainLibrary->action("library_import");
         libraryGameList << m_mainLibrary->action("library_export");

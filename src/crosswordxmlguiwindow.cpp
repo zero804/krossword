@@ -366,21 +366,10 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
     addDockWidget(Qt::RightDockWidgetArea, createUndoViewDock());
     addDockWidget(Qt::RightDockWidgetArea, createCurrentCellDock());
 
-    if (!setupActions())
-        return;
+    setupActions();
 
     setupGUI(ToolBar /*| Keys*/ | Save | Create, "krossword/krossword_crossword_ui.rc");
     //menuBar()->hide();
-
-    /*
-    // Hide the settings menu because it's already shown as corner widget in the main tab widget
-    foreach(QAction * action,  menuBar()->actions()) {
-        if (action->menu() && action->menu()->objectName() == "settings") {
-            action->setVisible(false);
-            break;
-        }
-    }
-    */
 
     m_dictionary = new KrosswordDictionary;
 }
@@ -1293,7 +1282,7 @@ void CrossWordXmlGuiWindow::moveSetConfidenceConfidentSlot()
 
 //======================================================
 
-bool CrossWordXmlGuiWindow::setupActions()
+void CrossWordXmlGuiWindow::setupActions()
 {
     KActionCollection *ac = actionCollection();
 
@@ -1461,7 +1450,7 @@ bool CrossWordXmlGuiWindow::setupActions()
 
     // Edit mode actions
     KToggleAction *enableEditModeAction = new KToggleAction(KIcon("document-edit"), i18nc("@action:intoolbar", "Edit Mode"), this);
-    enableEditModeAction->setToolTip(i18n("Enables/disables the edit mode. All correct letters are shown in edit mode!"));
+    enableEditModeAction->setToolTip(i18n("Enables/disables the edit mode"));
     ac->addAction(actionName(Edit_EnableEditMode), enableEditModeAction);
     connect(enableEditModeAction, SIGNAL(toggled(bool)), this, SLOT(enableEditModeSlot(bool)));
 
@@ -1494,7 +1483,7 @@ bool CrossWordXmlGuiWindow::setupActions()
     connect(addImageAction, SIGNAL(triggered()), this, SLOT(addImageSlot()));
     connect(addImageAction, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *clearCrosswordAction = new KAction(KIcon("edit-clear"), i18n("&Clear Crossword"), this);
+    KAction *clearCrosswordAction = new KAction(KIcon("edit-clear"), i18n("&Clear Crossword..."), this);
     clearCrosswordAction->setToolTip(i18n("Removes all clues from the crossword"));
     ac->addAction(actionName(Edit_ClearCrossword), clearCrosswordAction);
     connect(clearCrosswordAction, SIGNAL(triggered()), this, SLOT(clearCrosswordSlot()));
@@ -1565,8 +1554,6 @@ bool CrossWordXmlGuiWindow::setupActions()
     eraseAction->setToolTip(i18n("Enables the eraser, to clear letter cells/answers"));
     ac->addAction(actionName(Move_Eraser), eraseAction);
     connect(eraseAction, SIGNAL(triggered(bool)), this, SLOT(eraseSlot(bool)));
-
-    return true;
 }
 
 void CrossWordXmlGuiWindow::updateTheme()
