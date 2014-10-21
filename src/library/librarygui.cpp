@@ -35,7 +35,6 @@
 #include <KActionMenu>
 #include <KIO/CopyJob>
 #include <KMenuBar>
-#include <KStatusBar>
 #include <KActionCollection>
 #include <KIO/PreviewJob>
 #include <KStandardDirs>

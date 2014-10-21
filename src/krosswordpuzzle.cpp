@@ -52,7 +52,7 @@ KrossWordPuzzle::KrossWordPuzzle() : KXmlGuiWindow(),
     setupPlaces();
 
     setupActions();
-    setupGUI(StatusBar | Save | Create);
+    setupGUI(Save | Create);
 
     setupMainTabWidget();
     setCentralWidget(m_mainStackedBar);
@@ -65,7 +65,6 @@ KrossWordPuzzle::KrossWordPuzzle() : KXmlGuiWindow(),
 
 void KrossWordPuzzle::loadFile(const KUrl &url, Crossword::KrossWord::FileFormat fileFormat, bool loadCrashedFile)
 {
-    m_mainLibrary->statusBar()->showMessage(i18n("Loading..."));
     m_loadProgressDialog = createLoadProgressDialog();
     m_loadProgressDialog->show();
 
@@ -455,18 +454,12 @@ void KrossWordPuzzle::crosswordLoadingComplete(const QString& fileName)
 
     int indexCrossword = m_mainStackedBar->indexOf(m_mainCrossword);
     m_mainStackedBar->setCurrentIndex(indexCrossword);
-
-    m_mainLibrary->statusBar()->showMessage(i18nc("Loaded '%1'", "Statusbar text "
-                                            "when a crossword has been loaded, %1 gets replaced by the file name",
-                                            fileName));
 }
 
 void KrossWordPuzzle::crosswordErrorLoading(const QString& fileName)
 {
     m_loadProgressDialog->close();
-    m_mainLibrary->statusBar()->showMessage(i18nc("Error loading file '%1'",
-                                            "Statusbar text when there was an error while loading a crossword, "
-                                            "%1 gets replaced by the file name", fileName));
+    KMessageBox::error(this, i18n("Error loading file '%1'", fileName));
 }
 
 void KrossWordPuzzle::crosswordClosed(const QString& fileName)

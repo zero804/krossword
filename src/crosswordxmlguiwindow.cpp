@@ -368,7 +368,7 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
 
     setupActions();
 
-    setupGUI(ToolBar /*| Keys*/ | Save | Create, "krossword/krossword_crossword_ui.rc");
+    setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krossword/krossword_crossword_ui.rc");
     menuBar()->hide(); // because it will be exposed as needed in the mainwindow
 
     m_dictionary = new KrosswordDictionary;
