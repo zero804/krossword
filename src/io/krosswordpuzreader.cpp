@@ -615,7 +615,7 @@ QByteArray KrossWordPuzStream::readZeroTerminatedString()
         string.append(buffer[0]);
     }
 
-    delete buffer;
+    delete [] buffer;
     return string;
 }
 
