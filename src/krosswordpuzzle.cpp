@@ -52,15 +52,23 @@ KrossWordPuzzle::KrossWordPuzzle() : KXmlGuiWindow(),
     setupPlaces();
 
     setupActions();
-    setupGUI(Save | Create);
 
     setupMainTabWidget();
     setCentralWidget(m_mainStackedBar);
+
+    setupGUI(Save | Create);
 
     QString lastUnsavedFileBeforeCrash = Settings::lastUnsavedFileBeforeCrash();
     if (!lastUnsavedFileBeforeCrash.isEmpty()) {
         showRestoreOption(lastUnsavedFileBeforeCrash);
     }
+}
+
+QSize KrossWordPuzzle::sizeHint() const
+{
+    // expand a bit the window ("The size of top-level widgets are constrained to 2/3 of the desktop's height and width")
+    // to define the default size for the first run
+    return KXmlGuiWindow::sizeHint().expandedTo(QSize(1024, 768));
 }
 
 void KrossWordPuzzle::loadFile(const KUrl &url, Crossword::KrossWord::FileFormat fileFormat, bool loadCrashedFile)

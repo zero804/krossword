@@ -50,6 +50,8 @@ public:
     KrossWordPuzzle();
     virtual ~KrossWordPuzzle() {}
 
+    QSize sizeHint() const;
+
     void loadFile(const KUrl &url, Crossword::KrossWord::FileFormat fileFormat = Crossword::KrossWord::DetermineByFileName, bool loadCrashedFile = false);
 
     bool createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize,
