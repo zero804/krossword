@@ -17,9 +17,7 @@ add_subdirectory(themes)
 add_subdirectory(templates)
 add_subdirectory(crosswordthumbcreator)
 
-# This installs translations for some selected languages from KDE SVN
-# You can comment out translations you do not need in "l10n/CMakeLists.txt"
-# add_subdirectory( l10n )
+add_subdirectory(po)
 
 ########### install mimetype file ###############
 install(FILES krossword.xml DESTINATION ${XDG_MIME_INSTALL_DIR})

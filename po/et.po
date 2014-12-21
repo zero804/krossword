@@ -1,0 +1,3498 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Marek Laane <bald@smail.ee>, 2011, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: krossword\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-21 18:48+0100\n"
+"PO-Revision-Date: 2012-12-04 12:49+0200\n"
+"Last-Translator: Marek Laane <bald@smail.ee>\n"
+"Language-Team: Estonian <kde-et@linux.ee>\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: build/src/settings.cpp:37
+msgid ""
+"Filename of the last unsaved file, before a crash or unexpected behaviour, "
+"which caused that an edited crossword wasn't saved without confirmation of "
+"the user."
+msgstr ""
+"Viimase salvestamata faili nimi, mis jäi salvestamata krahhi või ootamatu "
+"käitumise tõttu, mille tõttu muudetud ristsõna ei salvestatud ilma "
+"kasutajalt kinnitust küsimata."
+
+#: build/src/settings.cpp:40
+msgid "Name of the current theme."
+msgstr "Aktiivse teema nimi."
+
+#: build/src/settings.cpp:43
+msgid "Enable Animations"
+msgstr "Animatsioonide lubamine"
+
+#: build/src/settings.cpp:44
+msgid "whether or not animations should be enabled"
+msgstr "kas animatsioone lubada või mitte"
+
+#: build/src/settings.cpp:47 build/src/ui_settings.h:124
+msgid "Animate Size Changes"
+msgstr "Suuruse muutmise animeerimine"
+
+#: build/src/settings.cpp:48
+msgid "whether or not changes to items sizes should be animated."
+msgstr "kas elementide suuruse muutumist animeerida või mitte"
+
+#: build/src/settings.cpp:51 build/src/ui_settings.h:125
+msgid "Animate Position Changes"
+msgstr "Asukoha muutmise animeerimine"
+
+#: build/src/settings.cpp:52
+msgid "whether or not changes to items positions should be animated."
+msgstr "kas elementide asukohtade muutumist animeerida või mitte"
+
+#: build/src/settings.cpp:55 build/src/ui_settings.h:126
+msgid "Animate Items Appearance"
+msgstr "Elementide ilmumise animeerimine"
+
+#: build/src/settings.cpp:56
+msgid "whether or not the appearance of items should be animated."
+msgstr "kas elementide ilmumist animeerida või mitte"
+
+#: build/src/settings.cpp:59 build/src/ui_settings.h:127
+msgid "Animate Items Disappearance"
+msgstr "Elementide kadumise animeerimine"
+
+#: build/src/settings.cpp:60
+msgid "whether or not the disappearance of items should be animated."
+msgstr "kas elementide kadumist animeerida või mitte"
+
+#: build/src/settings.cpp:63 build/src/ui_settings.h:128
+msgid "Animate Focus In"
+msgstr "Fokuseerimise animeerimine"
+
+#: build/src/settings.cpp:64
+msgid "whether or not items should be animated when getting focus."
+msgstr "kas animeerida elemente, kui nad saavad fookuse, või mitte"
+
+#: build/src/settings.cpp:67
+msgid "Animate Change Letter"
+msgstr "Tähe muutmise animeerimine"
+
+#: build/src/settings.cpp:68
+msgid ""
+"whether or not letter cells should be animated when their letter changes."
+msgstr "kas animeerida täheruute, kui täht muutub, või mitte"
+
+#: build/src/settings.cpp:71 build/src/ui_settings.h:130
+msgid "Animate Changes to an Items Appearance"
+msgstr "Elementide välimuse muutumise animeerimine"
+
+#: build/src/settings.cpp:72
+msgid "whether or not changes to an items appearance should be animated."
+msgstr "kas elementide välimuse muutumist animeerida või mitte"
+
+#: build/src/ui_clue_number_mapping.h:160 src/crosswordxmlguiwindow.cpp:1194
+msgid "Clue Number Mapping"
+msgstr "Küsimusenumbrite seosed"
+
+#: build/src/ui_clue_number_mapping.h:161
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">In a \"Number Puzzle\" "
+"each answer letter is mapped to a clue number. The solver has to find out "
+"which clue number belongs to which letter.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">To change the mapping of "
+"an answer letter select it in the list, enter it's new clue number and click "
+"\"Set Mapping\".</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> Conflicting mappings are resolved automatically.</"
+"p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Krüptogrammis seostatakse "
+"iga vastustäht konkreetse küsimusnumbriga. Lahendaja peab leidma, millisele "
+"numbrile vastab milline täht.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Vastustähe seose "
+"muutmiseks vali see nimekirjas, sisesta uus küsimusnumber ja klõpsa "
+"\"Kehtesta seos\".</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Märkus:</span> konfliktis seosed lahendatakse automaatselt.</"
+"p></body></html>"
+
+#: build/src/ui_clue_number_mapping.h:171
+msgid "Clue Number"
+msgstr "Küsimusnumber"
+
+#: build/src/ui_clue_number_mapping.h:172
+msgid "Letter"
+msgstr "Täht"
+
+#: build/src/ui_clue_number_mapping.h:179
+msgid "Shows the current mapping of answer letters to clue numbers."
+msgstr "Kehtivate vastustähtede ja küsimusnumbrite seoste näitamine."
+
+#: build/src/ui_clue_number_mapping.h:181
+msgid "&Mapped Clue Number:"
+msgstr "Seostatud küsi&musnumber:"
+
+#: build/src/ui_clue_number_mapping.h:183
+msgid "The new clue number for the selected letter."
+msgstr "Valitud tähe uus küsimusnumber."
+
+#: build/src/ui_clue_number_mapping.h:186
+msgid "Remap the selected letter to the given clue number."
+msgstr "Valitud tähe ümberseostamine määratud küsimusnumbriga."
+
+#: build/src/ui_clue_number_mapping.h:188
+msgid "&Set Mapping"
+msgstr "Ke&htesta seos"
+
+#: build/src/ui_clue_properties_dock.h:318
+msgid "&Clue:"
+msgstr "&Küsimus:"
+
+#: build/src/ui_clue_properties_dock.h:320
+msgid "The clue to the answer."
+msgstr "Vastuse küsimus."
+
+#: build/src/ui_clue_properties_dock.h:322
+msgid "The clue text"
+msgstr "Küsimuse tekst"
+
+#: build/src/ui_clue_properties_dock.h:324
+msgid "Insert special characters to the clue text"
+msgstr "Erimärkide lisamine küsimuse teksti"
+
+#: build/src/ui_clue_properties_dock.h:327
+msgid "&Orientation:"
+msgstr "&Orientatsioon:"
+
+#: build/src/ui_clue_properties_dock.h:329
+msgid "Arrange the answer letters horizontally."
+msgstr "Vastuse tähtede esitamine põiksuunas."
+
+#: build/src/ui_clue_properties_dock.h:331
+#, fuzzy
+msgid "Horizontal"
+msgstr "Põiki"
+
+#: build/src/ui_clue_properties_dock.h:333
+msgid "Arrange the answer letters vertically."
+msgstr "Vastuse tähtede esitamine püstsuunas."
+
+#: build/src/ui_clue_properties_dock.h:335
+#, fuzzy
+msgid "Vertical"
+msgstr "Püsti"
+
+#: build/src/ui_clue_properties_dock.h:336
+msgid "Answer &Offset:"
+msgstr "Vastuse &nihe:"
+
+#: build/src/ui_clue_properties_dock.h:338
+msgid "First letter cell on the top left of the clue cell."
+msgstr "Esimese tähe ruut küsimusruudust vasakul ülal."
+
+#: build/src/ui_clue_properties_dock.h:342
+msgid "First letter cell on the top of the clue cell."
+msgstr "Esimese tähe ruut küsimusruudu peal."
+
+#: build/src/ui_clue_properties_dock.h:346
+msgid "First letter cell on the top right of the clue cell."
+msgstr "Esimese tähe ruut küsimusruudust ülal paremal."
+
+#: build/src/ui_clue_properties_dock.h:350
+msgid "First letter cell on the left of the clue cell."
+msgstr "Esimese tähe ruut küsimusruudust vasakul."
+
+#: build/src/ui_clue_properties_dock.h:354
+msgid "First letter cell on the bottom left of the clue cell."
+msgstr "Esimese tähe ruut küsimusruudust all vasakul."
+
+#: build/src/ui_clue_properties_dock.h:358
+msgid ""
+"Hides the clue cell. The first letter cell is placed at the coordinates of "
+"the clue cell."
+msgstr ""
+"Vastusruudu peitmine. Esimese tähe ruut asetatakse küsimusruudu "
+"koordinaatidele."
+
+#: build/src/ui_clue_properties_dock.h:362
+msgid "First letter cell on the right of the clue cell."
+msgstr "Esimese tähe ruut küsimusruudust paremal."
+
+#: build/src/ui_clue_properties_dock.h:366
+msgid "First letter cell on the bottom of the clue cell."
+msgstr "Esimese tähe ruut küsimusruudu all."
+
+#: build/src/ui_clue_properties_dock.h:370
+msgid "First letter cell on the bottom right of the clue cell."
+msgstr "Esimese tähe ruut küsimusruudust all paremal."
+
+#: build/src/ui_clue_properties_dock.h:373
+msgid "&Dictionary"
+msgstr "&Sõnaraamat"
+
+#: build/src/ui_clue_properties_dock.h:374
+msgid "&Pattern:"
+msgstr "&Muster:"
+
+#: build/src/ui_clue_properties_dock.h:376
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Enter a pattern with "
+"letters, <span style=\" font-weight:600;\">? </span>for one arbitrary letter "
+"and <span style=\" font-weight:600;\">*</span> for any number of arbitrary "
+"letters.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Sisesta tähtede muster, "
+"<span style=\" font-weight:600;\">? </span>suvalise tähe ja <span style=\" "
+"font-weight:600;\">*</span> suvalise arvu suvaliste tähtede jaoks.</p></"
+"body></html>"
+
+#: build/src/ui_clue_properties_dock.h:383
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can enter wildcard "
+"patterns to search the dictionary for answers.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">The pattern can contain "
+"letters, <span style=\" font-weight:600;\">? </span>for one arbitrary letter "
+"and <span style=\" font-weight:600;\">*</span> for any number of arbitrary "
+"letters.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">For example \"HO??E\" "
+"matches all answers starting with \"HO\", ending with \"E\" and having two "
+"arbitrary letters in between. \"HOUSE\" would be matched by that pattern.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Answers are searched while "
+"typing the pattern.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> When you change the settings of the clue, a "
+"pattern is automatically constructed, based on the letters that are already "
+"in the crossword at the positions of the clue.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Sõnaraamatust vastuste "
+"otsimiseks võib sisestada metamärkidega mustri.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Muster võib sisaldada "
+"tähti, <span style=\" font-weight:600;\">? </span>suvalise märgi ja <span "
+"style=\" font-weight:600;\">*</span> suvalise arvu suvaliste märkide jaoks.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Näiteks mustrile \"HO??E\" "
+"vastavad kõik vastused, mille alguses on \"HO\", lõpus \"E\" ja seal vahel "
+"kaks suvalist tähte. Sellel mustrile vastab näiteks \"HOONE\".</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Vastuseid hakatakse otsima "
+"kohe mustri kirjutamise ajal.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Märkus:</span> kui muuda küsimuse seadistusi. luuakse muster "
+"automaatselt nende tähtede põhjal, mis on juba ristsõnas küsimuse "
+"asukohtades.</p></body></html>"
+
+#: build/src/ui_clue_properties_dock.h:396
+msgid "Wildcard pattern to search for answers"
+msgstr "Metamärkidega muster vastuste otsimiseks"
+
+#: build/src/ui_clue_properties_dock.h:397
+msgid "&Answers:"
+msgstr "V&astused:"
+
+#: build/src/ui_clue_properties_dock.h:399
+msgid ""
+"Click / double click an answer to set it as the correct answer of the clue."
+msgstr ""
+"Tee vastusel klõps või topeltklõps selle määramiseks küsimuse õigeks "
+"vastuseks."
+
+#: build/src/ui_configure_details.h:276
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> To change these values please first select \"User "
+"Defined\" as the crossword type.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Märkus:</span> nende väärtuste muutmiseks vali palun esmalt "
+"ristsõna tüübiks \"Kasutaja määratud\".</p></body></html>"
+
+#: build/src/ui_configure_details.h:281
+msgid "&Name:"
+msgstr "&Nimi:"
+
+#: build/src/ui_configure_details.h:282
+msgid "The name of the crossword type"
+msgstr "Ristsõnatüübi nimi"
+
+#: build/src/ui_configure_details.h:283
+msgid "&Description:"
+msgstr "Kirjel&dus:"
+
+#: build/src/ui_configure_details.h:284
+msgid "&Icon:"
+msgstr "&Ikoon:"
+
+#: build/src/ui_configure_details.h:285
+msgid "&Long Description:"
+msgstr "&Pikk kirjeldus:"
+
+#: build/src/ui_configure_details.h:286
+msgid "Basic Settings"
+msgstr "Põhiseadistused"
+
+#: build/src/ui_configure_details.h:288
+msgid "The type of content of letter cells"
+msgstr "Täheruutude sisu tüüp"
+
+#: build/src/ui_configure_details.h:291
+msgid "Clues can be mapped to single cells or sets of cells"
+msgstr "Küsimusi võib seostada konkreetsete ruutudega või ruutude kogumitega"
+
+#: build/src/ui_configure_details.h:294
+msgid ""
+"If a clue cell can, can't or has to be inserted into the crossword grid for "
+"each clue"
+msgstr ""
+"Kas iga küsimuse jaoks võib, ei või või peab lisama ruudustikku küsimusruudu"
+
+#: build/src/ui_configure_details.h:296
+msgid "Clue &Type:"
+msgstr "Küsimuse &tüüp:"
+
+#: build/src/ui_configure_details.h:297
+msgid "Letter Cell &Content:"
+msgstr "Täheruudu &sisu:"
+
+#: build/src/ui_configure_details.h:299
+msgid "Only the checked cell types can be added into the crossword grid"
+msgstr "Ristsõnaruudustikku saab lisada ainult märgitud ruudutüüpe"
+
+#: build/src/ui_configure_details.h:302
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Only the checked cell "
+"types can be added into the crossword grid.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Empty Cells</span> are also called \"Shaded Cells\", \"Blanks"
+"\", \"Darks\", \"Blocks\", \"Black Squares\" or \"Shaded Squares\". You "
+"cannot disallow empty cells.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Letter Cells</span> are also called \"White Cells\" or \"Lights"
+"\". They contain one letter (or digit) of one or two answers / entries. A "
+"letter cell that is part of two answers (both Across and Down) is called "
+"<span style=\" font-style:italic;\">checked</span>, <span style=\" font-"
+"style:italic;\">keyed</span> or <span style=\" font-style:italic;\">crossed</"
+"span>. A letter cell that is part of only one answer is called <span style="
+"\" font-style:italic;\">unchecked</span>, <span style=\" font-style:italic;"
+"\">unkeyed</span> or <span style=\" font-style:italic;\">uncrossed</span>.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Clue Cells</span> contain the clue text in small print inside "
+"and act as empty cells. Each clue cell has a little arrow indicating in "
+"which direction from its initial cell the answer is to be written.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Double Clue Cells</span> contain two clue cells inside, one "
+"above the other.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Solution Letter Cells</span> are letter cells that are part of "
+"a solution word for the whole crossword.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Image Cells</span> contain images and can be stretched over a "
+"block of multiple cells.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Ristsõna ruudustikku saab "
+"lisada ainult märgitud ruudutüüpe.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Tühjad ruudud</span> või ka \"mustad ruudud\". Neid ei saa "
+"keelata.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Täheruudud</span> või ka \"valged ruudud\". Need sisaldavad "
+"üht tähte või arvu, mis kuulub ühele või kahele vastusele. Täheruutu, mis "
+"kuulub kahte vastusesse (nii põiki kui ka alla), nimetatakse <span style=\" "
+"font-style:italic;\">ristuvaks</span>. Täheruutu, mis kuulub ainult ühte "
+"vastusesse, nimetatakse <span style=\" font-style:italic;\">mitteristuvaks</"
+"span> või <span style=\" font-style:italic;\">üksikuks</span>.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Küsimusruudud</span> sisaldavad väikeses kirjas küsimuse "
+"teksti ja toimivad muidu kui tühjad ruudud. Igal küsimusruudul on väike "
+"nooleke, mis osutab vastuse esimesele ruudule.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Kahe küsimusega ruudud</span> sisaldavad teineteise peal kaht "
+"küsimusruutu.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Lahendustäheruudud</span> on täheruudud, mis kuuluvad kogu "
+"ristsõna vastussõnasse.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Pildiruudud</span> sisaldavad pilti ja võivad ulatuda üle "
+"mitme ruudu.</p></body></html>"
+
+#: build/src/ui_configure_details.h:316
+msgid "Allowed Cell T&ypes:"
+msgstr "Lu&batud ruudutüübid:"
+
+#: build/src/ui_configure_details.h:317
+msgid "Clue &Mapping:"
+msgstr "Küsi&muste seosed:"
+
+#: build/src/ui_configure_details.h:319
+msgid "The type of clues (strings or numbers)"
+msgstr "Küsimuste tüüp (stringid või arvud)"
+
+#: build/src/ui_configure_details.h:321
+msgid "Clue Cell &Handling:"
+msgstr "Küsimusruu&dud:"
+
+#: build/src/ui_configure_details.h:322
+msgid "&Minimum Answer Length:"
+msgstr "Vastuse &miinimumpikkus:"
+
+#: build/src/ui_configure_details.h:324
+msgid "The minimum length of answers to clues"
+msgstr "Küsimuste vastuste minimaalne pikkus"
+
+#: build/src/ui_configure_details.h:326
+msgid "Rules"
+msgstr "Reeglid"
+
+#: build/src/ui_convert_crossword_type.h:148
+msgid "Convert To Crossword Type"
+msgstr "Ristsõnatüübi teisendamine"
+
+#: build/src/ui_convert_crossword_type.h:150
+msgid "Conversion Info"
+msgstr "Teisendamise teave"
+
+#: build/src/ui_create_new.h:451
+msgid "Crossword Type Information"
+msgstr "Ristsõnatüübi teave"
+
+#: build/src/ui_create_new.h:452
+msgid "Document &Information"
+msgstr "Dokumend&i teave"
+
+#: build/src/ui_create_new.h:453 build/src/ui_properties.h:429
+msgid "The title of the crossword"
+msgstr "Ristsõna nimi"
+
+#: build/src/ui_create_new.h:454 build/src/ui_properties.h:430
+msgid "&Author:"
+msgstr "&Autor:"
+
+#: build/src/ui_create_new.h:455 build/src/ui_properties.h:431
+msgid "The author(s) of the crossword"
+msgstr "Ristsõna autor(id)"
+
+#: build/src/ui_create_new.h:456 build/src/ui_properties.h:432
+msgid "&Copyright:"
+msgstr "Autoriõi&gus:"
+
+#: build/src/ui_create_new.h:457 build/src/ui_properties.h:428
+msgid "&Title:"
+msgstr "&Nimi:"
+
+#: build/src/ui_create_new.h:458
+msgid "Crossword &Size:"
+msgstr "Ristsõna &suurus:"
+
+#: build/src/ui_create_new.h:459 build/src/ui_properties.h:434
+msgid "&Notes:"
+msgstr "&Märkused:"
+
+#: build/src/ui_create_new.h:460 build/src/ui_properties.h:433
+msgid "Copyright information about the crossword"
+msgstr "Teave ristsõna autoriõiguse kohta"
+
+#: build/src/ui_create_new.h:461 build/src/ui_properties.h:435
+msgid "Notes about the crossword"
+msgstr "Märkused ristsõna kohta"
+
+#: build/src/ui_create_new.h:462 build/src/ui_properties.h:438
+msgid " columns"
+msgstr " veergu"
+
+#: build/src/ui_create_new.h:463 build/src/ui_properties.h:439
+msgid " rows"
+msgstr " rida"
+
+#: build/src/ui_create_new.h:464
+#, fuzzy
+msgid "General"
+msgstr "Üldine"
+
+#: build/src/ui_create_new.h:466
+msgid "&Location:"
+msgstr "&Asukoht:"
+
+#: build/src/ui_create_new.h:467
+msgid "S&earch:"
+msgstr "&Otsing:"
+
+#: build/src/ui_create_new.h:468
+msgid "Preview:"
+msgstr "Eelvaatlus:"
+
+#: build/src/ui_create_new.h:469
+msgid "Crossword Type:"
+msgstr "Ristsõnatüüp:"
+
+#: build/src/ui_create_new.h:470 build/src/ui_download.h:193
+msgid "Size:"
+msgstr "Suurus:"
+
+#: build/src/ui_create_new.h:471
+msgid "Notes:"
+msgstr "Märkused:"
+
+#: build/src/ui_create_new.h:472
+msgid "&Use Template:"
+msgstr "Malli kas&utamine:"
+
+#: build/src/ui_create_new.h:473
+msgid "Template"
+msgstr "Mall"
+
+#: build/src/ui_database_connection.h:130
+msgid "Create Database"
+msgstr "Andmebaasi loomine"
+
+#: build/src/ui_database_connection.h:131
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">The MySQL root password is "
+"needed to automatically setup the database:</p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-"
+"right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-"
+"bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
+"indent:0px;\">Add a new user to the MySQL server (username and password: "
+"krosswordpuzzle)</li>\n"
+"<li style=\" font-weight:600;\" style=\" margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+"\"><span style=\" font-weight:400;\">Give privileges for a new database "
+"(named krosswordpuzzle) to that user</span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note: </span>You can also do these steps yourself by using a "
+"MySQL administrator tool.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Andmebaasi automaatseks "
+"seadistamiseks on vajalik MySQL-i administraatori parool:</p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-"
+"right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-"
+"bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
+"indent:0px;\">Lisa MySQL-i serverile uus kasutaja (kasutajanimi ja parool: "
+"krosswordpuzzle)</li>\n"
+"<li style=\" font-weight:600;\" style=\" margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+"\"><span style=\" font-weight:400;\">Anna uue andmebaasi (selle nimeks on "
+"krosswordpuzzle) privileegid sellele kasutajale</span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note: </span>Need sammud võid ka ise ette võtta MySQL-i "
+"haldustööriista abil.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p></body></html>"
+
+#: build/src/ui_database_connection.h:141
+msgid "&Host:"
+msgstr "&Masin:"
+
+#: build/src/ui_database_connection.h:142
+msgid "&User:"
+msgstr "Kas&utaja:"
+
+#: build/src/ui_database_connection.h:143
+msgid "&Password:"
+msgstr "&Parool:"
+
+#: build/src/ui_dictionaries.h:288 src/dialogs/dictionarydialog.cpp:37
+msgid "Dictionary"
+msgstr "Sõnaraamat"
+
+#: build/src/ui_dictionaries.h:290
+msgid "Extracts words with associated clues from crosswords in the library"
+msgstr "Küsimustega seotud sõnade hankimine kogu ristsõnadest"
+
+#: build/src/ui_dictionaries.h:293
+msgid ""
+"Extracts words with associated clues from crosswords in the library.\n"
+"This does the same as \"Extract From Crosswords...\" with all crossword "
+"files in the library."
+msgstr ""
+"Küsimustega seotud sõnade hankimine kogu ristsõnadest.\n"
+"Teeb sama, mis \"Hankimine ristsõnadest...\" kõigi kogus leiduvate "
+"ristsõnafailidega."
+
+#: build/src/ui_dictionaries.h:296
+msgid "Extract From &Library"
+msgstr "Ha&ngi kogust"
+
+#: build/src/ui_dictionaries.h:298
+msgid ""
+"Lets you choose crossword files to extracts words with associated clues from"
+msgstr "Võimaldab valida ristsõnafailid, kus hankida küsimustega seotud sõnad"
+
+#: build/src/ui_dictionaries.h:301
+msgid ""
+"Lets you choose crossword files to extracts words with associated clues "
+"from.\n"
+"This does the same as \"Extract From Library\", but you can select from "
+"which files words should be extracted."
+msgstr ""
+"Võimaldab valida ristsõnafailid, kus hankida küsimustega seotud sõnad.\n"
+"Teeb sama, mis \"Hankimine kogust\", kuid sa saad valida, millistest "
+"failidest sõnu hangitakse."
+
+#: build/src/ui_dictionaries.h:304
+msgid "&Extract From Crosswords..."
+msgstr "&Hangi ristsõnadest..."
+
+#: build/src/ui_dictionaries.h:306
+msgid "Extracts words from plain text dictionary files"
+msgstr "Sõnade hankimine lihttekstis sõnaraamatufailidest"
+
+#: build/src/ui_dictionaries.h:309
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Imports words from a plain "
+"text dictionary (eg. in /usr/dict/ or /usr/share/dict/). A dictionary for "
+"crosswords is available from <a href=\"http://www.quinapalus.com/xwfaq.html"
+"\"><span style=\" text-decoration: underline; color:#0057ae;\">http://www."
+"quinapalus.com/xwfaq.html</span></a> (UKACD).</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">The dictionary file must "
+"be a plain text file with one word per line.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Sõnade importimine "
+"lihttekstis sõnaraamatust (nt. kataloogis /usr/dict/ või /usr/share/dict/). "
+"Ristsõnadele mõeldud sõnaraamatu leiab aadressilt <a href=\"http://www."
+"quinapalus.com/xwfaq.html\"><span style=\" text-decoration: underline; color:"
+"#0057ae;\">http://www.quinapalus.com/xwfaq.html</span></a> (UKACD).</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Sõnaraamatufail peab olema "
+"lihttekstifail, kus igal real on üks sõna.</p></body></html>"
+
+#: build/src/ui_dictionaries.h:316
+msgid "Add &Words From Dictionary..."
+msgstr "Lisa &sõnad sõnaraamatust..."
+
+#: build/src/ui_dictionaries.h:317
+msgid "Fill Dictionary"
+msgstr "Sõnaraamatu täitmine"
+
+#: build/src/ui_dictionaries.h:319
+msgid "Adds an entry to the dictionary"
+msgstr "Kirje lisamine sõnaraamatusse"
+
+#: build/src/ui_dictionaries.h:321
+msgid "&Add Entry"
+msgstr "Lis&a kirje"
+
+#: build/src/ui_dictionaries.h:323
+msgid "Removes the selected entries from the dictionary"
+msgstr "Valitud kirjete eemaldamine sõnaraamatust"
+
+#: build/src/ui_dictionaries.h:325
+msgid "&Remove Selected"
+msgstr "&Eemalda valitud"
+
+#: build/src/ui_dictionaries.h:327
+msgid "Clears the dictionary"
+msgstr "Sõnaraamatu puhastamine"
+
+#: build/src/ui_dictionaries.h:329
+msgid "&Clear Dictionary"
+msgstr "&Puhasta sõnaraamat"
+
+#: build/src/ui_dictionaries.h:330
+msgid "Edit"
+msgstr "Redigeerimine"
+
+#: build/src/ui_dictionaries.h:332
+msgid "Imports entries from a comma separated text file."
+msgstr "Kirjete importimine komadega eraldatud tekstifailist."
+
+#: build/src/ui_dictionaries.h:335
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Imports entries from a "
+"comma separated text file.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can use that to <span "
+"style=\" font-weight:600;\">restore</span> a previously created backup of "
+"your dictionary or to import dictionaries from others.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Kirjete importimine "
+"komadega eraldatud tekstifailist.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Seda saab kasutada <span "
+"style=\" font-weight:600;\">taastamaks</span> oma sõnaraamatu varem loodud "
+"varukoopiat või importimaks teiste sõnaraamatuid.</p></body></html>"
+
+#: build/src/ui_dictionaries.h:342
+msgid "&Import (CSV)..."
+msgstr "&Impordi (CSV)..."
+
+#: build/src/ui_dictionaries.h:344
+msgid "Exports the whole dictionary to a comma separated text file."
+msgstr "Kogu sõnaraamatu eksportimine komadega eraldatud tekstifailina."
+
+#: build/src/ui_dictionaries.h:347
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Exports the whole "
+"dictionary to a comma separated text file.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can use that to create "
+"a <span style=\" font-weight:600;\">backup</span> of your dictionary or to "
+"<span style=\" font-weight:600;\">share</span> your dictionary with others.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">It is also possible to "
+"open that file in a spread sheet application.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Kogu sõnaraamatu "
+"eksportimine komadega eraldatud tekstifailina.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Seda võib kasutada loomaks "
+"oma sõnaraamatu <span style=\" font-weight:600;\">varukoopiat</span> või "
+"<span style=\" font-weight:600;\">jagamaks</span> oma sõnaraamatut teistega."
+"</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Samuti võib selle faili "
+"avada mõnes tabelarvutuse rakenduses.</p></body></html>"
+
+#: build/src/ui_dictionaries.h:356
+msgid "&Export (CSV)..."
+msgstr "&Ekspordi (CSV)..."
+
+#: build/src/ui_dictionaries.h:357
+msgid "Backup"
+msgstr "Varundamine"
+
+#: build/src/ui_dictionaries.h:358
+msgid "&Filter:"
+msgstr "&Filter:"
+
+#: build/src/ui_dictionaries.h:361
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">This view contains all "
+"entries in the dictionary. </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can <span style=\" "
+"font-weight:600;\">edit</span> each entry.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">To <span style=\" font-"
+"weight:600;\">find entries</span> in the possibly huge list you can enter a "
+"substring of the answer word into the edit line above.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">See vaade sisaldab kõiki "
+"sõnaraamatu kirjeid. </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Sa võid <span style=\" "
+"font-weight:600;\">muuta</span> iga kirjet.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Kirjete otsimiseks</span> mõnikord tohutus nimekirjas võid "
+"sisestada vastussõna osa ülalolevasse tekstikasti.</p></body></html>"
+
+#: build/src/ui_download.h:187
+msgid "Download Crosswords"
+msgstr "Ristsõnade allalaadimine"
+
+#: build/src/ui_download.h:188
+msgid "&Provider:"
+msgstr "&Pakkuja:"
+
+#: build/src/ui_download.h:189
+#, fuzzy
+msgid "Download &to:"
+msgstr "Allalaadimise asukoh&t:"
+
+#: build/src/ui_download.h:190
+#, fuzzy
+msgid "Available crosswords"
+msgstr "Uus ristsõna"
+
+#: build/src/ui_download.h:191
+#, fuzzy
+msgid "Title:"
+msgstr "&Nimi:"
+
+#: build/src/ui_download.h:192 build/src/ui_download.h:194
+msgid "-"
+msgstr ""
+
+#: build/src/ui_export_to_image.h:164
+#, fuzzy
+msgid "The size will be shrinked to match the aspect ratio of the crossword"
+msgstr "(Suurust vähendatakse sobimaks ristsõna proportsiooniga)"
+
+#: build/src/ui_export_to_image.h:165
+msgid "&Size:"
+msgstr "&Suurus:"
+
+#: build/src/ui_export_to_image.h:166 build/src/ui_export_to_image.h:167
+msgid " pixel"
+msgstr ""
+
+#: build/src/ui_export_to_image.h:168
+msgid "&Quality:"
+msgstr "&Kvaliteet:"
+
+#: build/src/ui_image_properties_dock.h:153
+msgid "Image &File:"
+msgstr "Pildi&fail:"
+
+#: build/src/ui_image_properties_dock.h:154
+msgid "&Positioning:"
+msgstr "&Asetus:"
+
+#: build/src/ui_image_properties_dock.h:157
+#, fuzzy
+msgid "Scaled and Cropped"
+msgstr "Skaleeritud ja kärbitud"
+
+#: build/src/ui_image_properties_dock.h:158
+#, fuzzy
+msgid "Scaled"
+msgstr "Skaleeritud"
+
+#: build/src/ui_image_properties_dock.h:159
+#, fuzzy
+msgid "Scaled (Keep Aspect Ratio)"
+msgstr "Skaleeritud (proportsioon säilitatakse)"
+
+#: build/src/ui_image_properties_dock.h:160
+#, fuzzy
+msgid "Centered"
+msgstr "Keskjoondatud"
+
+#: build/src/ui_image_properties_dock.h:161
+#, fuzzy
+msgid "Tiled"
+msgstr "Paanidena"
+
+#: build/src/ui_image_properties_dock.h:163
+msgid "&Horizontal Cells:"
+msgstr "Ruute &põiksuunas:"
+
+#: build/src/ui_image_properties_dock.h:164
+msgid "&Vertical Cells:"
+msgstr "R&uute püstsuunas:"
+
+#: build/src/ui_move_cells.h:145
+msgid "Move Horizontal:"
+msgstr "Liigutamine põiksuunas:"
+
+#: build/src/ui_move_cells.h:146
+msgid "Move Vertical:"
+msgstr "Liigutamine püstsuunas:"
+
+#: build/src/ui_print_crossword.h:74
+msgid "Crossword"
+msgstr "Ristsõna"
+
+#: build/src/ui_print_crossword.h:75
+msgid "Empty cell &color:"
+msgstr "Tühja ruudu &värv:"
+
+#: build/src/ui_properties.h:427 src/dialogs/crosswordpropertiesdialog.cpp:36
+msgid "Properties"
+msgstr "Omadused"
+
+#: build/src/ui_properties.h:436
+msgid "Document Information"
+msgstr "Dokumendi teave"
+
+#: build/src/ui_properties.h:437
+msgid "New Size:"
+msgstr "Uus suurus:"
+
+#: build/src/ui_properties.h:440
+msgid "Anchor:"
+msgstr "Ankur:"
+
+#: build/src/ui_properties.h:441
+msgid "&Reset"
+msgstr "Lä&htesta"
+
+#: build/src/ui_properties.h:442
+msgid "Resize Crossword"
+msgstr "Ristsõna suuruse muutmine"
+
+#: build/src/ui_settings.h:123
+msgid "&Enable Animations"
+msgstr "&Animatsioonide lubamine"
+
+#: build/src/ui_settings.h:129
+msgid "Animate Changing Letters"
+msgstr "Tähtede muutmise animeerimine"
+
+#: build/src/ui_solution_letter_properties.h:110
+msgid "Solution Letter"
+msgstr "Lahendustäht"
+
+#: build/src/ui_solution_letter_properties.h:111
+msgid "&Position in the solution word:"
+msgstr "&Asukoht vastussõnas:"
+
+#: build/src/ui_solution_letter_properties.h:112
+msgid "Current solution word:"
+msgstr "Aktiivne vastussõna:"
+
+#: build/src/ui_solution_letter_properties.h:114
+msgid "&Apply"
+msgstr "&Rakenda"
+
+#: build/src/ui_solution_letter_properties.h:115
+msgid "&Convert to Letter Cell"
+msgstr "&Teisenda täheruuduks"
+
+#: crosswordthumbcreator/cells/cluecell.cpp:209
+msgctxt "Display text for empty clue texts"
+msgid "<empty>"
+msgstr ""
+
+#: crosswordthumbcreator/krossword.cpp:171
+#, fuzzy
+msgid "Error while downloading from url"
+msgstr "Tõrge allalaadimisel URL-ilt: %1"
+
+#: crosswordthumbcreator/krossword.cpp:222 src/krossword.cpp:1017
+msgid "Error reading AcrossLite's .puz-format."
+msgstr "Tõrge AcrossLite'i puz-vormingu lugemisel."
+
+#: crosswordthumbcreator/krossword.cpp:902 src/krossword.cpp:3045
+msgid "No error."
+msgstr "Tõrkeid pole."
+
+#: crosswordthumbcreator/krossword.cpp:905 src/krossword.cpp:3048
+msgid "The clue doesn't fit in the grid with the given settings."
+msgstr "Küsimus ei mahu määratud seadistuste korral ruudustikku."
+
+#: crosswordthumbcreator/krossword.cpp:907 src/krossword.cpp:3050
+msgid "The cell for the new clue isn't empty."
+msgstr "Uue küsimuse ruut ei ole tühi."
+
+#: crosswordthumbcreator/krossword.cpp:909
+#, fuzzy
+msgid "The answer contains illegal characters. Allowed are A-Z."
+msgstr ""
+"Vastus sisaldab lubamatuid märke. Lubatud on A-Z (inglise tähestik) ja/või "
+"0-9."
+
+#: crosswordthumbcreator/krossword.cpp:911 src/krossword.cpp:3054
+msgid "The answer produces mismatching letter cells at the same positions."
+msgstr "Vastus toob kaasa kokkusobimatud täheruudud samas asukohas."
+
+#: crosswordthumbcreator/krossword.cpp:913
+#, fuzzy
+msgid ""
+"The answer overwrites the answer to another clue in the same orientation"
+msgstr "Vastus kirjutab üle teise samasuunalise küsimuse vastuse."
+
+#: crosswordthumbcreator/krossword.cpp:915 src/krossword.cpp:3058
+msgid "The answer's letter cells cross a clue cell."
+msgstr "Vastuse täheruudud ristuvad küsimusruuduga."
+
+#: crosswordthumbcreator/krossword.cpp:918 src/krossword.cpp:3069
+msgid "The image doesn't fit in the grid with the given settings."
+msgstr "Pilt ei mahu määratud seadistuste korral ruudustikku."
+
+#: crosswordthumbcreator/krossword.cpp:920 src/krossword.cpp:3071
+msgid "The cells for the new image aren't empty."
+msgstr "Uuele pildile ette nähtud ruudud pole tühjad."
+
+#: crosswordthumbcreator/krosswordxmlreader.cpp:141
+#: crosswordthumbcreator/krosswordxmlreader.cpp:171
+#, fuzzy
+msgid "The file is not a Krossword version <= 1.1 file."
+msgstr "See ei ole KrossWordPuzzle'i versiooni &lt;= 1.1 fail."
+
+#: po/rc.cpp:1 rc.cpp:1
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Marek Laane"
+
+#: po/rc.cpp:2 rc.cpp:2
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "bald@smail.ee"
+
+#: src/cells/cluecell.cpp:888
+msgctxt "Display text for empty clue texts"
+msgid "<placeholder>empty</placeholder>"
+msgstr "<placeholder>tühi</placeholder>"
+
+#: src/cells/imagecell.cpp:68
+msgid "Edit image properties to set an image"
+msgstr "Pildi omaduste muutmine pildi määramiseks"
+
+#: src/cluemodel.cpp:60
+msgid "Clue"
+msgstr "Küsimus"
+
+#: src/cluemodel.cpp:60
+msgid "Answer"
+msgstr "Vastus"
+
+#: src/cluemodel.cpp:63
+msgid "Across clues"
+msgstr "Küsimused põiksuunas"
+
+#: src/cluemodel.cpp:64
+msgid "Down clues"
+msgstr "Küsimused püstsuunas"
+
+#: src/commands.cpp:334
+msgid "Remove Clue Without Text"
+msgstr "Eemalda tekstita küsimus"
+
+#: src/commands.cpp:336
+msgid "Remove Clue '%1'"
+msgstr "Eemalda küsimus '%1'"
+
+#: src/commands.cpp:343 src/commands.cpp:552 src/commands.cpp:662
+#: src/commands.cpp:697
+msgid "No cell at the given coordinates (%1, %2)"
+msgstr "Antud koordinaatidel (%1, %2) pole ühtegi ruutu"
+
+#: src/commands.cpp:352
+msgctxt ""
+"%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
+msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
+msgstr "Antud koordinaatidel (%1, %2) ei leitud küsimusruutu: '%3'"
+
+#: src/commands.cpp:423
+msgid "Add Clue Without Text"
+msgstr "Lisa tekstita küsimus"
+
+#: src/commands.cpp:425
+msgid "Add Clue '%1'"
+msgstr "Lisa küsimus '%1'"
+
+#: src/commands.cpp:544
+msgid "Remove Image '%1'"
+msgstr "Eemalda pilt '%1'"
+
+#: src/commands.cpp:559
+msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
+msgstr "Antud koordinaatidel (%1, %2) ei leitud pildiruutu: '%3'"
+
+#: src/commands.cpp:612
+msgid "Add Image '%1'"
+msgstr "Lisa pilt '%1'"
+
+#: src/commands.cpp:626
+msgid "Convert Letter at (%1, %2) to Solution Letter"
+msgstr "Teisenda täht asukohas (%1, %2) lahendustäheks"
+
+#: src/commands.cpp:654
+msgctxt "%1 contains the position of the solution letter in the solution word."
+msgid "Convert Solution Letter %1 to Letter"
+msgstr "Teisenda lahendustäht %1 täheks"
+
+#: src/commands.cpp:669
+msgid "Solution letter cell not found at the given coordinates (%1, %2)"
+msgstr "Antud koordinaatidel (%1, %2) ei leitud lahendustäheruutu"
+
+#: src/commands.cpp:704 src/commands.cpp:1172
+msgid "Letter cell not found at the given coordinates (%1, %2)"
+msgstr "Antud koordinaatidel (%1, %2) ei leitud täheruutu"
+
+#: src/commands.cpp:725
+msgctxt ""
+"Error message to be displayed, when the user tries to convert a letter to a "
+"solution letter, but the position of the new solution letter is already "
+"used. Each solution letter has a position in the solution word of the "
+"crossword and all solution letters of a crossword form it's solution word. "
+"%1 is replaced by the (already used) position."
+msgid "The solution letter position %1 is already assigned."
+msgstr "Lahendustähe asukoht %1 on juba kasutusel."
+
+#: src/commands.cpp:774
+msgid "Add %1 letter"
+msgid_plural "Add %1 letters"
+msgstr[0] "Lisa %1 täht"
+msgstr[1] "Lisa %1 tähte"
+
+#: src/commands.cpp:776
+msgid "Remove %1 letter"
+msgid_plural "Remove %1 letters"
+msgstr[0] "Eemalda %1 täht"
+msgstr[1] "Eemalda %1 tähte"
+
+#: src/commands.cpp:778
+msgctxt "This string shouldn't happen to be used"
+msgid "Remove no letters"
+msgstr "Ära eemalda ühtegi tähte"
+
+#: src/commands.cpp:813 src/commands.cpp:1006 src/commands.cpp:1100
+msgid "No clue cell given"
+msgstr "Küsimusruutu pole antud"
+
+#: src/commands.cpp:993
+msgctxt ""
+"Used for the text of the change clue undo command, when the clue text is "
+"empty."
+msgid "<placeholder>empty</placeholder>"
+msgstr "<placeholder>tühi</placeholder>"
+
+#: src/commands.cpp:991
+msgid "Change Clue '%1'"
+msgstr "Muuda küsimust '%1'"
+
+#: src/commands.cpp:1092
+msgid "Clear Correct Answer of Clue at (%1, %2)"
+msgstr "Puhasta küsimuse õige vastus asukohas (%1, %2)"
+
+#: src/commands.cpp:1144
+msgid "Clear Correct Letter at (%1, %2), was %3"
+msgstr "Puhasta õige täht asukohas (%1, %2) %3"
+
+#: src/commands.cpp:1147
+msgid "Set Correct Letter at (%1, %2) to %3"
+msgstr "Määra õigeks täheks asukohas (%1, %2) %3"
+
+#: src/commands.cpp:1150
+msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
+msgstr "Muuda õigeks täheks asukohas (%1, %2) %3 asemel %4"
+
+#: src/commands.cpp:1154
+msgid "Clear Letter at (%1, %2), was %3"
+msgstr "Puhasta täht asukohas (%1, %2), oli %3"
+
+#: src/commands.cpp:1157
+msgid "Set Letter at (%1, %2) to %3"
+msgstr "Määra täheks asukohas (%1, %2) %3"
+
+#: src/commands.cpp:1160
+msgid "Edit Letter at (%1, %2) From %3 to %4"
+msgstr "Muuda täheks asukohas (%1, %2) %3 asemel %4"
+
+#: src/commands.cpp:1222
+msgid "Clear Crossword"
+msgstr "Puhasta ristsõna"
+
+#: src/commands.cpp:1268
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Title"
+msgstr "Nimi"
+
+#: src/commands.cpp:1271
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Authors"
+msgstr "Autorid"
+
+#: src/commands.cpp:1274
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Copyright"
+msgstr "Autoriõigus"
+
+#: src/commands.cpp:1277
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Notes"
+msgstr "Märkused"
+
+#: src/commands.cpp:1284
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Size"
+msgstr "Suurus"
+
+#: src/commands.cpp:1292
+msgid "Changed Crossword Properties (%1)"
+msgstr "Muudetud ristsõna omadused (%1)"
+
+#: src/commands.cpp:1297
+msgctxt ""
+"%1 may be a list of changes separated by ',' if the list of changes contains "
+"more than 2 items. %2 is the last item"
+msgid "Changed Crossword Properties (%1 and %2)"
+msgstr "Muudetud ristsõna omadused (%1 ja %2)"
+
+#: src/commands.cpp:1299
+msgid "No Action"
+msgstr "Toiming puudub"
+
+#: src/commands.cpp:1346
+msgid "Hide Clue Cell"
+msgstr "Peida küsimusruut"
+
+#: src/commands.cpp:1410
+msgid "Make Clue Cell Visible"
+msgstr "Muuda küsimusruut nähtavaks"
+
+#: src/commands.cpp:1481
+msgid "Set Default Number Puzzle Mapping"
+msgstr "Kehtesta vaikimisi krüptogrammi seos"
+
+#: src/commands.cpp:1483
+msgid "Change Number Puzzle Mapping"
+msgstr "Muuda krüptogrammi seost"
+
+#: src/commands.cpp:1506
+msgid "Setup Same Letter Synchronization"
+msgstr "Seadista ühesuguste tähtede sünkroonimist"
+
+#: src/commands.cpp:1529
+msgid "Remove Same Letter Synchronization"
+msgstr "Eemalda ühesuguste tähtede sünkroonimine"
+
+#: src/commands.cpp:1777
+msgid "Convert Crossword From '%1' to '%2'"
+msgstr "Teisenda ristsõna tüübist '%1' tüüpi '%2'"
+
+#: src/commands.cpp:1894
+msgid "Resize Crossword From %1x%2 to %3x%4"
+msgstr "Muuda ristsõna suuruseks %1x%2 asemel %3x%4"
+
+#: src/commands.cpp:1972
+msgid "Move All Cells By %1, %2"
+msgstr "Liiguta  kõiki ruute %1, %2 võrra"
+
+#: src/crosswordxmlguiwindow.cpp:295
+msgid "Zoom: %1%"
+msgstr "Suurendus: %1%"
+
+#: src/crosswordxmlguiwindow.cpp:351
+#, no-c-format
+msgctxt "%p is replaced by the percentage of solved letter cells"
+msgid "%p% solved"
+msgstr "%p% lahendatud"
+
+#: src/crosswordxmlguiwindow.cpp:352
+#, fuzzy
+msgid "Shows the percentage of solved letter cells"
+msgstr "Lahendatud täheruutude protsendi näitamine."
+
+#: src/crosswordxmlguiwindow.cpp:587
+msgid "Congratulations! You solved the crossword perfectly."
+msgstr "Õnnitlused! Lahendasid ristsõna täiesti õigesti."
+
+#: src/crosswordxmlguiwindow.cpp:653 src/crosswordxmlguiwindow.cpp:686
+msgid "New crossword"
+msgstr "Uus ristsõna"
+
+#: src/crosswordxmlguiwindow.cpp:707 src/crosswordxmlguiwindow.cpp:850
+#: src/krosswordpuzzle.cpp:122
+msgid ""
+"The current crossword has been modified.\n"
+"Would you like to save it?"
+msgstr ""
+"Aktiivset ristsõna on muudetud.\n"
+"Kas soovid selle salvestada?"
+
+#: src/crosswordxmlguiwindow.cpp:708 src/crosswordxmlguiwindow.cpp:852
+#: src/krosswordpuzzle.cpp:124
+msgid "Close Document"
+msgstr "Sulge dokument"
+
+#: src/crosswordxmlguiwindow.cpp:741
+msgid "Loaded crossword from file '%1'"
+msgstr "Laaditi ristsõna failist '%1'"
+
+#: src/crosswordxmlguiwindow.cpp:756
+msgid ""
+"The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
+"\n"
+"Do you want to convert the crossword to another type now?\n"
+"\n"
+"(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")"
+msgstr ""
+"Ristsõna tüüpi ei õnnestunud määrata, mistõttu eeldatakse, et see on 'vaba "
+"ristsõna'.\n"
+"\n"
+"Kas soovid teisendada ristsõna mõnda muusse tüüpi?\n"
+"\n"
+"(Märkus: teisendada saab ka hiljem \"Redigeerimine\" > \"Ristsõna omadused\" "
+"abil)"
+
+#: src/crosswordxmlguiwindow.cpp:782
+msgid "Error while loading file '%1': %2"
+msgstr "Tõrge faili '%1' laadimisel: %2"
+
+#: src/crosswordxmlguiwindow.cpp:808
+msgid "Save &Edit History"
+msgstr "Muudatust&e ajaloo salvestamine"
+
+#: src/crosswordxmlguiwindow.cpp:811
+msgid "Save As &Template"
+msgstr "Salves&tamine mallina"
+
+#: src/crosswordxmlguiwindow.cpp:813
+msgid "Save without correct answers, clue texts, images"
+msgstr "Salvestamime ilma õigete vastuste, küsimuste teksti, piltideta"
+
+#: src/crosswordxmlguiwindow.cpp:879
+#, fuzzy
+msgid ""
+"Can't store confidence values in *.puz files!\n"
+"If you want confidence values to be stored please use a Krossword file "
+"format (*.kwp or *.kwpz)."
+msgstr ""
+"Usaldusväärsuse väärtusi ei saa salvestada *.puz-failidesse!\n"
+"Kui soovid neid väärtusi salvestada, kasuta palun KrossWordPuzzle "
+"failivormingut (*.kwp või *.kwpz)."
+
+#: src/crosswordxmlguiwindow.cpp:890
+#, fuzzy
+msgid ""
+"Can't store image cells in *.puz files!\n"
+"If you want image cells to be stored please use a Krossword file format (*."
+"kwp or *.kwpz)."
+msgstr ""
+"Pildiruute ei saa salvestada *.puz-failidesse!\n"
+"Kui soovid pildiruute salvestada, kasuta palun KrossWordPuzzle "
+"failivormingut (*.kwp või *.kwpz)."
+
+#: src/crosswordxmlguiwindow.cpp:913
+msgid "Wrote crossword to file '%1'"
+msgstr "Ristsõna salvestati failina '%1'"
+
+#: src/crosswordxmlguiwindow.cpp:928
+msgid "Error while writing file: %1"
+msgstr "Tõrge faili kirjutamisel: %1"
+
+#: src/crosswordxmlguiwindow.cpp:1040
+msgid "Can't add clues on crossed letter cells"
+msgstr "Küsimuste lisamine ristuvatele täheruutudele nurjus"
+
+#: src/crosswordxmlguiwindow.cpp:1049
+msgid "Can't add clue at the current cell"
+msgstr "Küsimuse lisamine aktiivsesse ruutu nurjus"
+
+#: src/crosswordxmlguiwindow.cpp:1070
+msgctxt "%1 contains the reason why the clue couldn't be added"
+msgid "Can't add clue. %1"
+msgstr "Küsimuse lisamine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:1084
+msgid "Clue added ('%1')"
+msgstr "Küsimus on lisatud ('%1')"
+
+#: src/crosswordxmlguiwindow.cpp:1101
+msgctxt "%1 contains the reason why the image couldn't be added"
+msgid "Can't add image. %1"
+msgstr "Pildi lisamine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:1114
+msgctxt "%1 contains the reason why the clue couldn't be removed"
+msgid "Can't remove clue. %1"
+msgstr "Küsimuse eemaldamine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:1119
+msgctxt "%1 contains the reason why the image couldn't be removed"
+msgid "Can't remove image. %1"
+msgstr "Pildi eemaldamine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:1122
+msgid "No removable cell selected."
+msgstr "Eemaldatavat ruutu pole valitud."
+
+#: src/crosswordxmlguiwindow.cpp:1127 src/crosswordxmlguiwindow.cpp:2481
+#, fuzzy
+msgid "Do you really want to clear the crossword?"
+msgstr "Kõigi küsimuste eemaldamine ristsõnast."
+
+#: src/crosswordxmlguiwindow.cpp:1127 src/crosswordxmlguiwindow.cpp:2481
+msgid "Clear"
+msgstr ""
+
+#: src/crosswordxmlguiwindow.cpp:1132
+msgctxt "%1 contains the reason why the crossword couldn't be cleared"
+msgid "Can't clear crossword. %1"
+msgstr "Ristsõna puhastamine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:1149
+msgctxt ""
+"%1 contains the reason why the crossword properties couldn't be changed"
+msgid "Can't change crossword properties. %1"
+msgstr "Ristsõna omaduste muutmine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:1161
+msgid "The crossword has 180 degree rotation symmetry."
+msgstr "Ristsõna vastab 180 kraadi all pööramise sümmeetriale."
+
+#: src/crosswordxmlguiwindow.cpp:1165
+msgid ""
+"The crossword doesn't have 180 degree rotation symmetry.\n"
+"To achieve symmetry make sure that each empty cell has a counterpart at it's "
+"180 degree rotated position.\n"
+msgstr ""
+"Ristsõna ei vasta 180 kraadi all pööramise sümmeetriale.\n"
+"Sümmeetria saavutamiseks kontrolli, et igal tühjal ruudul oleks vaste 180 "
+"kraadi all pööratud positsioonis.\n"
+
+#: src/crosswordxmlguiwindow.cpp:1169
+msgid ""
+"The crossword doesn't have 180 degree rotation symmetry.\n"
+"To achieve symmetry make sure that each empty cell and each clue cell has a "
+"counterpart at it's 180 degree rotated position.\n"
+msgstr ""
+"Ristsõna ei vasta 180 kraadi all pööramise sümmeetriale.\n"
+"Sümmeetria saavutamiseks kontrolli, et igal tühjal ruudul ja küsimusruudul "
+"oleks vaste 180 kraadi all pööratud positsioonis.\n"
+
+#: src/crosswordxmlguiwindow.cpp:1175
+msgid ""
+"Quality crosswords of the current crossword type (%1) are usually symmetric."
+msgstr ""
+"Aktiivse ristsõnatüübi (%1) kvaliteetsed ristsõnad on tavaliselt "
+"sümmeetrilised."
+
+#: src/crosswordxmlguiwindow.cpp:1219
+msgctxt ""
+"%1 contains the reason why the new clue number mapping couldn't be applied"
+msgid "Can't apply clue number mapping. %1"
+msgstr "Küsimusenumbri seose rakendamine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:1232
+msgctxt "%1 contains the reason why the cells couldn't be moved"
+msgid "Can't move cells. %1"
+msgstr "Ruutude liigutamine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:1242
+msgid ""
+"This will cause all answers to be shown and editable.\n"
+"If you want to solve the crossword you should cancel."
+msgstr ""
+"See põhjustab kõigi vastuse näitamise ja nende muutumise muudetavaks.\n"
+"Kui soovid ikka ristsõna lahendada, peaksid loobuma."
+
+#: src/crosswordxmlguiwindow.cpp:1289
+#, fuzzy
+msgid "Close the current crossword"
+msgstr "Aktiivse ristsõna sulgemine."
+
+#: src/crosswordxmlguiwindow.cpp:1294
+msgid "Save the crossword with solved letters"
+msgstr "Ristsõna salvestamine koos lahendatud tähtedega"
+
+#: src/crosswordxmlguiwindow.cpp:1298
+msgid "Choose a filename to save the crossword with solved letters"
+msgstr "Failinime valimine ristsõna salvestamiseks koos lahendatud tähtedega"
+
+#: src/crosswordxmlguiwindow.cpp:1303
+msgid "Print the crossword"
+msgstr "Ristsõna trükkimine"
+
+#: src/crosswordxmlguiwindow.cpp:1307
+msgid "Show a print preview"
+msgstr "Trükkimise eelvaatluse näitamine"
+
+#: src/crosswordxmlguiwindow.cpp:1311
+msgid "&Dictionary..."
+msgstr "&Sõnaraamat..."
+
+#: src/crosswordxmlguiwindow.cpp:1312
+#, fuzzy
+msgid "Add or remove crossword dictionaries"
+msgstr "Ristsõna sõnastike lisamine või eemaldamine."
+
+#: src/crosswordxmlguiwindow.cpp:1318
+msgid "Fit the whole crossword into the window"
+msgstr "Kogu ristsõna mahutamine aknasse"
+
+#: src/crosswordxmlguiwindow.cpp:1321
+msgid "Pan"
+msgstr "Liiguta"
+
+#: src/crosswordxmlguiwindow.cpp:1322
+msgid ""
+"Pan the view. Note that you can also pan while pressing the control key."
+msgstr ""
+"Vaate liigutamine: Pane tähele, et liigutada saab ka Ctrl-klahvi all hoides."
+
+#: src/crosswordxmlguiwindow.cpp:1326
+#, fuzzy
+msgid "Solve the selected letter or a random one if none is selected"
+msgstr ""
+"Parajasti valitud või juhusliku tähe vastuse näitamine, kui ühtegi pole "
+"valitud"
+
+#: src/crosswordxmlguiwindow.cpp:1329
+msgid "This letter has been solved"
+msgstr "Selle tähe vastus on teada"
+
+#: src/crosswordxmlguiwindow.cpp:1330
+#, fuzzy
+msgid "The selected letter cell has been solved"
+msgstr "Parajasti valitud täheruudu vastus on teada"
+
+#: src/crosswordxmlguiwindow.cpp:1335
+msgid "Mark as confident"
+msgstr "Märgi kindlaks"
+
+#: src/crosswordxmlguiwindow.cpp:1336
+#, fuzzy
+msgid "Mark the selected letter cell's confidence as confident"
+msgstr "Parajasti valitud täheruudu usaldusväärsuse märkimine kindlaks"
+
+#: src/crosswordxmlguiwindow.cpp:1341
+msgid "Mark as unsure"
+msgstr "Märgi kaheldavaks"
+
+#: src/crosswordxmlguiwindow.cpp:1342
+#, fuzzy
+msgid "Mark the selected letter cell's confidence as unsure"
+msgstr "Parajasti valitud täheruudu usaldusväärsuse märkimine kaheldavaks"
+
+#: src/crosswordxmlguiwindow.cpp:1347
+msgid "Clear This Cell"
+msgstr "Puhasta ruut"
+
+#: src/crosswordxmlguiwindow.cpp:1348
+#, fuzzy
+msgid "Clears the selected letter cell"
+msgstr "Parajasti valitud täheruudu puhastamine"
+
+#: src/crosswordxmlguiwindow.cpp:1353
+msgid "Clear This Answer"
+msgstr "Puhasta vastus"
+
+#: src/crosswordxmlguiwindow.cpp:1354
+msgid "Clears the answer to the current clue"
+msgstr "Aktiivse küsimuse vastuse puhastamine"
+
+#: src/crosswordxmlguiwindow.cpp:1359
+msgid "Clear Across Answer"
+msgstr "Puhasta vastus põiksuunas"
+
+#: src/crosswordxmlguiwindow.cpp:1360
+msgid "Clears the answer to the current across clue"
+msgstr "Aktiivse põiksuunas küsimuse vastuse puhastamine"
+
+#: src/crosswordxmlguiwindow.cpp:1365
+msgid "Clear Down Answer"
+msgstr "Puhasta vastus alla"
+
+#: src/crosswordxmlguiwindow.cpp:1366
+msgid "Clears the answer to the current down clue"
+msgstr "Aktiivse püstsuunas küsimuse vastuse puhastamine"
+
+#: src/crosswordxmlguiwindow.cpp:1371
+msgid "Hint For This Cell"
+msgstr "Ruudu vihje"
+
+#: src/crosswordxmlguiwindow.cpp:1372
+#, fuzzy
+msgid "Solve the selected letter cell"
+msgstr "Parajasti valitud täheruudu vastuse näitamine"
+
+#: src/crosswordxmlguiwindow.cpp:1377
+msgid "Solve Clue"
+msgstr "Vasta küsimusele"
+
+#: src/crosswordxmlguiwindow.cpp:1378
+msgid "Solve the current clue"
+msgstr "Aktiivse küsimuse vastuse näitamine"
+
+#: src/crosswordxmlguiwindow.cpp:1383
+msgid "Solve Across Clue"
+msgstr "Vasta küsimusele põiksuunas"
+
+#: src/crosswordxmlguiwindow.cpp:1384
+msgid "Solve the current across clue"
+msgstr "Aktiivse põiksuunas küsimuse vastuse näitamine"
+
+#: src/crosswordxmlguiwindow.cpp:1389
+msgid "Solve Down Clue"
+msgstr "Vasta küsimusele alla"
+
+#: src/crosswordxmlguiwindow.cpp:1390
+msgid "Solve the current down clue"
+msgstr "Aktiivse püstsuunas küsimuse vastuse näitamine"
+
+#: src/crosswordxmlguiwindow.cpp:1395
+#, fuzzy
+msgid "Clue With Switched Orientation"
+msgstr "Vali teise suunaga küsimus"
+
+#: src/crosswordxmlguiwindow.cpp:1396
+msgid "Select clue with switched orientation to the currently selected clue"
+msgstr "Aktiivsele valitud küsimuse suhtes teise suunaga küsimuse valimine"
+
+#: src/crosswordxmlguiwindow.cpp:1400
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&First Letter"
+msgstr "Vali &esimene täht"
+
+#: src/crosswordxmlguiwindow.cpp:1401
+msgid "Select the first letter of the current clue"
+msgstr "Aktiivse küsimuse esimese tähe valimine"
+
+#: src/crosswordxmlguiwindow.cpp:1405
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Last Letter"
+msgstr "Va&li viimane täht"
+
+#: src/crosswordxmlguiwindow.cpp:1406
+msgid "Select the last letter of the current clue"
+msgstr "Aktiivse küsimuse viimase tähe valimine"
+
+#: src/crosswordxmlguiwindow.cpp:1410
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "First Clue"
+msgstr "Vali esimene küsimus"
+
+#: src/crosswordxmlguiwindow.cpp:1411
+msgid "Select the first clue"
+msgstr "Esimese küsimuse valimine"
+
+#: src/crosswordxmlguiwindow.cpp:1415
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Next Clue"
+msgstr "Vali &järgmine küsimus"
+
+#: src/crosswordxmlguiwindow.cpp:1416
+msgid "Select the next clue"
+msgstr "Järgmise küsimuse valimine"
+
+#: src/crosswordxmlguiwindow.cpp:1420
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Previous Clue"
+msgstr "Vali &eelmine küsimus"
+
+#: src/crosswordxmlguiwindow.cpp:1421
+msgid "Select the previous clue"
+msgstr "Eelmise küsimuse valimine"
+
+#: src/crosswordxmlguiwindow.cpp:1425
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "Last Clue"
+msgstr "Vali viimane küsimus"
+
+#: src/crosswordxmlguiwindow.cpp:1426
+msgid "Select the last clue"
+msgstr "Viimase küsimuse valimine"
+
+#: src/crosswordxmlguiwindow.cpp:1434
+msgid "Show Clue Dock"
+msgstr "Näita küsimuste dokki"
+
+#: src/crosswordxmlguiwindow.cpp:1439
+msgid "Show Edit History Dock"
+msgstr "Näita muutmisajaloo dokki"
+
+#: src/crosswordxmlguiwindow.cpp:1444
+msgid "Show Current Cell Dock"
+msgstr "Aktiivse ruudu doki näitamine"
+
+#: src/crosswordxmlguiwindow.cpp:1448
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "Edit Mode"
+msgstr "Redigeerimisrežiim"
+
+#: src/crosswordxmlguiwindow.cpp:1449
+msgid "Enables/disables the edit mode"
+msgstr ""
+
+#: src/crosswordxmlguiwindow.cpp:1453
+msgid "&Add Clue"
+msgstr "Lis&a küsimus"
+
+#: src/crosswordxmlguiwindow.cpp:1454
+#, fuzzy
+msgid "Adds a new clue at the current cell"
+msgstr "Aktiivsele ruudule uue küsimuse lisamine"
+
+#: src/crosswordxmlguiwindow.cpp:1459 src/crosswordxmlguiwindow.cpp:1889
+msgid "&Remove"
+msgstr "&Eemalda"
+
+#: src/crosswordxmlguiwindow.cpp:1460
+#, fuzzy
+msgid "Removes the highlighted clue or image"
+msgstr "Esile tõstetud küsimuse või pildi eemaldamine."
+
+#: src/crosswordxmlguiwindow.cpp:1464
+msgid "Remove &Across Clue"
+msgstr "Ee&malda küsimus põiksuunas"
+
+#: src/crosswordxmlguiwindow.cpp:1465
+#, fuzzy
+msgid "Removes the highlighted across clue"
+msgstr "Esile tõstetud põiksuunas küsimuse eemaldamine."
+
+#: src/crosswordxmlguiwindow.cpp:1470
+msgid "Remove &Down Clue"
+msgstr "Eemal&da küsimus alla"
+
+#: src/crosswordxmlguiwindow.cpp:1471
+#, fuzzy
+msgid "Removes the highlighted down clue"
+msgstr "Esile tõstetud püstsuunas küsimuse eemaldamine."
+
+#: src/crosswordxmlguiwindow.cpp:1476
+msgid "&Add Image"
+msgstr "Lis&a pilt"
+
+#: src/crosswordxmlguiwindow.cpp:1477
+#, fuzzy
+msgid "Adds a new image at the current cell"
+msgstr "Aktiivsele ruudule uue pildi lisamine"
+
+#: src/crosswordxmlguiwindow.cpp:1482
+#, fuzzy
+msgid "&Clear Crossword..."
+msgstr "&Puhasta ristsõna"
+
+#: src/crosswordxmlguiwindow.cpp:1483
+#, fuzzy
+msgid "Removes all clues from the crossword"
+msgstr "Kõigi küsimuste eemaldamine ristsõnast."
+
+#: src/crosswordxmlguiwindow.cpp:1487
+msgid "&Crossword Properties..."
+msgstr "&Ristsõna omadused..."
+
+#: src/crosswordxmlguiwindow.cpp:1488
+msgid "Change the size of the crossword or it's title, author, copyright..."
+msgstr ""
+"Ristsõna suuruse või selle nime, autori või autoriõiguse jms. muutmine."
+
+#: src/crosswordxmlguiwindow.cpp:1492
+msgid "&Check for rotation symmetry..."
+msgstr "&Kontrolli pööramise sümmeetriat..."
+
+#: src/crosswordxmlguiwindow.cpp:1493
+#, fuzzy
+msgid "Checks if the crossword has 180 degree rotation symmetry"
+msgstr ""
+"Kontrollimine, kas ristsõna vastab 180 kraadi all pööramise sümmeetriale."
+
+#: src/crosswordxmlguiwindow.cpp:1497
+msgid "&Statistics..."
+msgstr "&Statistika..."
+
+#: src/crosswordxmlguiwindow.cpp:1498
+#, fuzzy
+msgid "Shows statistics about the crossword"
+msgstr "Ristsõna statistika näitamine."
+
+#: src/crosswordxmlguiwindow.cpp:1502
+msgid "Clue Number &Mapping..."
+msgstr "Küsi&musenumbrite seosed..."
+
+#: src/crosswordxmlguiwindow.cpp:1503
+#, fuzzy
+msgid "Changes the mapping of clue numbers to letters"
+msgstr "Küsimusenumbrite ja tähtede seoste muutmine."
+
+#: src/crosswordxmlguiwindow.cpp:1507
+msgid "Move All Cells..."
+msgstr "Liiguta kõiki ruute..."
+
+#: src/crosswordxmlguiwindow.cpp:1508
+#, fuzzy
+msgid "Moves all cells of the crossword"
+msgstr "Kõigi ristsõna ruutude liigutamine."
+
+#: src/crosswordxmlguiwindow.cpp:1526
+msgid "Insert special character:"
+msgstr "Erimärgi lisamine:"
+
+#: src/crosswordxmlguiwindow.cpp:1530
+#, fuzzy
+msgid "Let you select a special character to paste"
+msgstr "Võimaldab valida asetatava erimärgi."
+
+#: src/crosswordxmlguiwindow.cpp:1536
+#, fuzzy
+msgid "Fills all letter cells with the correct letters"
+msgstr "Kõigi täheruutude täitmine õigete tähtedega."
+
+#: src/crosswordxmlguiwindow.cpp:1537
+msgid ""
+"<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
+"solution will be displayed.</p><p>If you filled in all letters and do not "
+"want to give up, choose \"Done!\".</p></qt>"
+msgstr ""
+"<qt><p>Vali \"<b>Lahenda</b>\", kui soovid aktiivsest mängust loobuda. "
+"Seejärel näidatakse lahendust.</p><p>Kui oled asetanud paika kõik tähed ega "
+"soovi loobuda, vali \"Valmis!\"</p></qt>"
+
+#: src/crosswordxmlguiwindow.cpp:1539
+msgid "&Check"
+msgstr "K&ontrolli"
+
+#: src/crosswordxmlguiwindow.cpp:1540
+#, fuzzy
+msgid "Checks if all letters are correct"
+msgstr "Kontroll, kas kõik tähed on õiged."
+
+#: src/crosswordxmlguiwindow.cpp:1544
+msgid "&Clear Answers"
+msgstr "&Puhasta vastused"
+
+#: src/crosswordxmlguiwindow.cpp:1545
+#, fuzzy
+msgid "Clears all letter cells"
+msgstr "Kõigi täheruutude puhastamine."
+
+#: src/crosswordxmlguiwindow.cpp:1549
+msgid "&Eraser"
+msgstr "K&ustutaja"
+
+#: src/crosswordxmlguiwindow.cpp:1550
+#, fuzzy
+msgid "Enables the eraser, to clear letter cells/answers"
+msgstr "Kustutaja sisselülitamine täheruutude või vastuste puhastamiseks."
+
+#: src/crosswordxmlguiwindow.cpp:1660 src/krossword.h:555
+msgid "Solution"
+msgstr "Lahendus"
+
+#: src/crosswordxmlguiwindow.cpp:1693
+msgid "Clue List"
+msgstr "Küsimused"
+
+#: src/crosswordxmlguiwindow.cpp:1708
+msgid "Edit History"
+msgstr "Muudatuste ajalugu"
+
+#: src/crosswordxmlguiwindow.cpp:1718
+msgid "Current Cell"
+msgstr "Aktiivne ruut"
+
+#: src/crosswordxmlguiwindow.cpp:1760
+msgctxt "%1 contains the reason why the answer offset couldn't be changed"
+msgid "Can't change answer offset. %1"
+msgstr "Nihet ei saa muuta: %1"
+
+#: src/crosswordxmlguiwindow.cpp:1773
+msgctxt "%1 contains the reason why the orientation couldn't be changed"
+msgid "Can't change orientation. %1"
+msgstr "Orientatsiooni ei saa muuta. %1"
+
+#: src/crosswordxmlguiwindow.cpp:1785
+msgctxt "%1 contains the reason why the clue text couldn't be changed"
+msgid "Can't change clue text. %1"
+msgstr "Küsimuse teksti ei saa muuta. %1"
+
+#: src/crosswordxmlguiwindow.cpp:1798
+msgctxt "%1 contains the reason why the correct answer couldn't be changed"
+msgid "Can't change correct answer. %1"
+msgstr "Õiget vastust ei saa muuta. %1"
+
+#: src/crosswordxmlguiwindow.cpp:1818
+msgctxt ""
+"%1 contains the reason why the solution letter couldn't be converted to a "
+"letter"
+msgid "Can't convert solution letter. %1"
+msgstr "Vastusetähte ei saa teisendada. %1"
+
+#: src/crosswordxmlguiwindow.cpp:1837
+msgctxt ""
+"%1 contains the reason why the letter couldn't be converted to a solution "
+"letter"
+msgid "Can't convert letter. %1"
+msgstr "Tähte ei saa teisendada. %1"
+
+#: src/crosswordxmlguiwindow.cpp:1885
+msgid "&Remove Clue"
+msgstr "&Eemalda küsimus"
+
+#: src/crosswordxmlguiwindow.cpp:1887
+msgid "&Remove Image"
+msgstr "&Eemalda pilt"
+
+#: src/crosswordxmlguiwindow.cpp:2156
+#, fuzzy
+msgid ""
+"Congratulations!\n"
+"You solved the crossword perfectly."
+msgstr "Õnnitlused! Lahendasid ristsõna täiesti õigesti."
+
+#: src/crosswordxmlguiwindow.cpp:2178
+msgid "Do you really want to solve the crossword?"
+msgstr ""
+
+#: src/crosswordxmlguiwindow.cpp:2178
+#, fuzzy
+msgid "Solve"
+msgstr "Vasta küsimusele"
+
+#: src/crosswordxmlguiwindow.cpp:2263 src/crosswordxmlguiwindow.cpp:2762
+msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
+msgid "Can't clear letter cell. %1"
+msgstr "Täheruudu puhastamine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:2286 src/crosswordxmlguiwindow.cpp:2310
+#: src/crosswordxmlguiwindow.cpp:2335 src/crosswordxmlguiwindow.cpp:2768
+msgctxt "%1 contains the reason why the answer couldn't be cleared"
+msgid "Can't clear answer. %1"
+msgstr "Vastuse puhastamine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:2547 src/crosswordxmlguiwindow.cpp:2574
+msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
+msgstr "Küsimus (põiki): \"%1\", %2 tähte, praegune vastus: \"%3\""
+
+#: src/crosswordxmlguiwindow.cpp:2552 src/crosswordxmlguiwindow.cpp:2578
+msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
+msgstr "Küsimus (alla): \"%1\",  %2 tähte, praegune vastus: \"%3\""
+
+#: src/crosswordxmlguiwindow.cpp:2624 src/global.cpp:36
+msgid "Empty cell"
+msgstr "Tühi ruut"
+
+#: src/crosswordxmlguiwindow.cpp:2626
+msgid "Image '%1'"
+msgstr "Pilt '%1'"
+
+#: src/crosswordxmlguiwindow.cpp:2827
+msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
+msgid "Can't add letter cells. %1"
+msgstr "Täheruutude lisamine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:2829
+msgctxt ""
+"%1 contains the reason why the letters couldn't be removed to the clue"
+msgid "Can't remove letter cells. %1"
+msgstr "Täheruutude eemaldamine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:2840
+msgctxt "%1 contains the reason why the letter cell couldn't be edited"
+msgid "Can't edit letter cell. %1"
+msgstr "Täheruudu muutmine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:2875
+msgctxt "%1 contains the reason why the crossword couldn't be converted"
+msgid "Can't convert crossword. %1"
+msgstr "Ristsõna teisendamine nurjus. %1"
+
+#: src/crosswordxmlguiwindow.cpp:2887
+msgid "Couldn't connect to the database."
+msgstr "Andmebaasiga ühendumine nurjus."
+
+#: src/dialogs/answerwidget.cpp:28 src/dialogs/answerwidget.cpp:38
+msgid ""
+"The correct answer to the clue. For each letter a letter cell is created"
+msgstr "Küsimuse õige vastus. Igale tähele luuakse täheruut"
+
+#: src/dialogs/answerwidget.cpp:30 src/dialogs/answerwidget.cpp:40
+msgid "The answer to the clue"
+msgstr "Küsimuse vastus"
+
+#: src/dialogs/cellwidgets/cluecellwidget.cpp:112
+msgid "Show Only Answers With Current Answer &Length"
+msgstr ""
+
+#: src/dialogs/cellwidgets/cluecellwidget.cpp:121
+msgid "Show Only Answers With &Clue"
+msgstr ""
+
+#: src/dialogs/cellwidgets/cluecellwidget.cpp:128
+msgid "Show Only the &First 100 Answers"
+msgstr ""
+
+#: src/dialogs/cellwidgets/solutionlettercellwidget.cpp:94
+#, fuzzy
+msgid ""
+"The solution letter position %1 is already assigned.\n"
+"Please change the solution word position of that letter first."
+msgstr "Lahendustähe asukoht %1 on juba kasutusel."
+
+#: src/dialogs/convertcrossworddialog.cpp:29
+msgid "Convert Crossword Type To"
+msgstr "Ristsõnatüübi teisendamine"
+
+#: src/dialogs/convertcrossworddialog.cpp:33
+msgid "Convert From: %1"
+msgstr "Algtüüp: %1"
+
+#: src/dialogs/convertcrossworddialog.cpp:81
+#: src/dialogs/createnewcrossworddialog.cpp:244
+msgid ""
+"Changing the crossword type will discard user defined crossword type "
+"settings."
+msgstr ""
+"Ristsõnatüübi muutmine tühistab kasutaja määratud ristsõnatüübi seadistused."
+
+#: src/dialogs/convertcrossworddialog.cpp:105
+msgid "Convert To: %1"
+msgstr "Lõpptüüp: %1"
+
+#: src/dialogs/createnewcrossworddialog.cpp:35
+msgid "Create New Crossword"
+msgstr "Uue ristsõna loomine"
+
+#: src/dialogs/createnewcrossworddialog.cpp:111
+msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
+msgid "© %1, by %2"
+msgstr "© %1, autor %2"
+
+#: src/dialogs/createnewcrossworddialog.cpp:114
+#, fuzzy
+msgctxt "Default notes value for new crosswords"
+msgid "Created with Krossword."
+msgstr "Uue ristsõna loomine"
+
+#: src/dialogs/createnewcrossworddialog.cpp:199
+msgid "Crossword Type"
+msgstr "Ristsõna tüüp"
+
+#: src/dialogs/createnewcrossworddialog.cpp:200
+msgid "Size"
+msgstr "Suurus"
+
+#: src/dialogs/createnewcrossworddialog.cpp:201
+msgid "Notes"
+msgstr "Märkused"
+
+#: src/dialogs/crosswordpreviewwidget.cpp:46
+msgid "Loading preview..."
+msgstr "Eelvaatluse laadimine..."
+
+#: src/dialogs/crosswordpreviewwidget.cpp:55
+msgid "Preview failed"
+msgstr "Eelvaatluse näitamine nurjus"
+
+#: src/dialogs/crosswordpropertiesdialog.cpp:43
+#: src/dialogs/crosswordpropertiesdialog.cpp:277
+msgid "Crossword Type: %1"
+msgstr "Ristsõnatüüp: %1"
+
+#: src/dialogs/crosswordpropertiesdialog.cpp:46
+msgid "&Convert..."
+msgstr "&Teisenda..."
+
+#: src/dialogs/crosswordpropertiesdialog.cpp:245
+msgctxt "No changes to the crossword grid size."
+msgid "No change"
+msgstr "Muutusteta"
+
+#: src/dialogs/crosswordpropertiesdialog.cpp:257
+msgctxt ""
+"How many images are removed when resizing the crossword. This string gets "
+"combined with a plural string indicating how many clue cells will be removed "
+"when resizing."
+msgid "and %1 image"
+msgid_plural "and %1 images"
+msgstr[0] "ja %1 pilt"
+msgstr[1] "ja %1 pilti"
+
+#: src/dialogs/crosswordpropertiesdialog.cpp:251
+msgctxt ""
+"How many clues are removed when resizing the crossword. %2 is replaced by a "
+"plural indicating how many images will be removed when resizing."
+msgid "Resizing from %3x%4 will remove %1 clue %2"
+msgid_plural "Resizing from %3x%4 will remove %1 clues %2"
+msgstr[0] "Suuruse muutmisel %3x%4 pealt eemaldatakse %1 küsimus %2"
+msgstr[1] "Suuruse muutmisel %3x%4 pealt eemaldatakse %1 küsimust %2"
+
+#: src/dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
+msgid "Detailed Configuration"
+msgstr "Üksikasjalik seadistamine"
+
+#: src/dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
+msgid "New Crossword Type"
+msgstr "Uus ristsõnatüüp"
+
+#: src/dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
+msgid "Describe your crossword type here."
+msgstr "Siia käib ristsõnatüübi kirjeldus."
+
+#: src/dialogs/crosswordtypewidget.cpp:204
+msgid "Show Details"
+msgstr "Üksikasjade näitamine"
+
+#: src/dialogs/crosswordtypewidget.cpp:226
+msgid "&Rules..."
+msgstr "&Reeglid..."
+
+#: src/dialogs/currentcellwidget.cpp:114
+msgid "No cell selected."
+msgstr "Ühtegi ruutu pole valitud."
+
+#: src/dialogs/currentcellwidget.cpp:145
+msgid "%1 selected at (%2, %3)."
+msgstr "%1 valitud asukohas (%2, %3)."
+
+#: src/dialogs/currentcellwidget.cpp:154
+msgid "Clue:"
+msgstr "Küsimus:"
+
+#: src/dialogs/currentcellwidget.cpp:155
+msgid "Current Answer:"
+msgstr "Aktiivne vastus:"
+
+#: src/dialogs/currentcellwidget.cpp:439
+msgid "Convert &Letter %1 to Solution Letter"
+msgstr "Teise&nda täht %1 lahendustäheks"
+
+#: src/dialogs/dictionarydialog.cpp:165
+msgid "%1 entries added from this dictionary: '%2'"
+msgstr "Sellest sõnaraamatust lisati %1 kirjet: '%2'"
+
+#: src/dialogs/dictionarydialog.cpp:175 src/dialogs/dictionarydialog.cpp:190
+msgid "%1 entries added from %2 crosswords"
+msgstr "%2 ristsõnast lisati %1 kirjet"
+
+#: src/dialogs/dictionarydialog.cpp:206
+msgid "Couldn't submit removed entries to the database: %1"
+msgstr "Eemaldatud kirjete saatmine andmebaasi nurjus: %1"
+
+#: src/dialogs/dictionarydialog.cpp:209
+msgid "%1 entry removed"
+msgid_plural "%1 entries removed"
+msgstr[0] "%1 kirje eemaldatud"
+msgstr[1] "%1 kirjet eemaldatud"
+
+#: src/dialogs/dictionarydialog.cpp:218
+msgid "Dictionary cleared"
+msgstr "Sõnaraamat on puhastatud"
+
+#: src/dialogs/dictionarydialog.cpp:225
+msgid "Export To CSV"
+msgstr "Eksport CSV-na"
+
+#: src/dialogs/dictionarydialog.cpp:238
+msgid "There was an error while exporting to '%1'"
+msgstr "Failina '%1' eksportimisel tekkis tõrge"
+
+#: src/dialogs/dictionarydialog.cpp:240
+msgid "Export to '%1' was successful"
+msgstr "Eksport failina '%1' õnnestus"
+
+#: src/dialogs/dictionarydialog.cpp:246
+msgid "Import From CSV"
+msgstr "Import CSV-st"
+
+#: src/dialogs/dictionarydialog.cpp:252
+msgid "There was an error while importing from '%1'"
+msgstr "Importimisel failist '%1' tekkis tõrge"
+
+#: src/dialogs/dictionarydialog.cpp:255
+msgid "%1 entry imported from '%2'"
+msgid_plural "%1 entries imported from '%2'"
+msgstr[0] "Failist '%2' imporditi %1 kirje"
+msgstr[1] "Failist '%2' imporditi %1 kirjet"
+
+#: src/dialogs/movecellsdialog.cpp:28
+msgid "Move Cells"
+msgstr "Ruutude liigutamine"
+
+#: src/dialogs/movecellsdialog.cpp:71
+msgctxt ""
+"How many images are removed when moving all cells of the crossword. This "
+"string gets combined with a plural string indicating how many clue cells "
+"will be removed when moving the cells."
+msgid "and %1 image"
+msgid_plural "and %1 images"
+msgstr[0] "ja %1 pilt"
+msgstr[1] "ja %1 pilti"
+
+#: src/dialogs/movecellsdialog.cpp:65
+msgctxt ""
+"How many clues are removed when moving all cells of the crossword. %2 is "
+"replaced by a plural indicating how many images will be removed when moving "
+"the cells."
+msgid "Moving all cells will remove %1 clue %2"
+msgid_plural "Moving all cells will remove %1 clues %2"
+msgstr[0] "Kõigi ruutude liigutamisel eemaldatakse %1 küsimus %2"
+msgstr[1] "Kõigi ruutude liigutamisel eemaldatakse %1 küsimust %2"
+
+#: src/dialogs/statisticsdialog.cpp:34
+msgid "Statistics"
+msgstr "Statistika"
+
+#: src/dialogs/statisticsdialog.cpp:49
+msgid "Total Cell Count:"
+msgstr "Ruute kokku:"
+
+#: src/dialogs/statisticsdialog.cpp:57
+msgid "Empty Cells:"
+msgstr "Tühje ruute:"
+
+#: src/dialogs/statisticsdialog.cpp:59
+msgid "Number of empty cells, percentage of total cell count in braces"
+msgstr "Tühjade ruutude arv, sulgudes protsent ruutude koguarvust"
+
+#: src/dialogs/statisticsdialog.cpp:60
+msgid "Letter Cells:"
+msgstr "Täheruute:"
+
+#: src/dialogs/statisticsdialog.cpp:62
+msgid "Number of letter cells, percentage of total cell count in braces"
+msgstr "Täheruutude arv, sulgudes protsent ruutude koguarvust"
+
+#: src/dialogs/statisticsdialog.cpp:70
+msgid "Crossed:"
+msgstr "Ristuvaid:"
+
+#: src/dialogs/statisticsdialog.cpp:72
+msgid ""
+"Number of crossed letter cells, percentage of total letter cell count in "
+"braces"
+msgstr "Ristuvate täheruutude arv, sulgudes protsent täheruutude koguarvust"
+
+#: src/dialogs/statisticsdialog.cpp:74
+msgid "Uncrossed:"
+msgstr "Mitteristuvaid:"
+
+#: src/dialogs/statisticsdialog.cpp:76
+msgid ""
+"Number of uncrossed letter cells, percentage of total letter cell count in "
+"braces"
+msgstr ""
+"Mitteristuvate täheruutude arv, sulgudes protsent täheruutude koguarvust"
+
+#: src/dialogs/statisticsdialog.cpp:85
+msgid "Clues:"
+msgstr "Küsimusi:"
+
+#: src/dialogs/statisticsdialog.cpp:88
+msgctxt "Horizontal:"
+msgid "Label for the number  of horizontal clues"
+msgstr "Põiksuunas:"
+
+#: src/dialogs/statisticsdialog.cpp:90
+msgid "Number of horizontal clues, percentage of total clue count in braces"
+msgstr "Põiksuunas küsimuste arv, sulgudes protsent küsimuste koguarvust"
+
+#: src/dialogs/statisticsdialog.cpp:92
+msgctxt "Vertical:"
+msgid "Label for the number  of vertical clues"
+msgstr "Püstsuunas:"
+
+#: src/dialogs/statisticsdialog.cpp:94
+msgid "Number of vertical clues, percentage of total clue count in braces"
+msgstr "Püstsuunas küsimuste arv, sulgudes protsent küsimuste koguarvust"
+
+#: src/dialogs/statisticsdialog.cpp:98
+msgid "Min. Answer Length:"
+msgstr "Vastuse min. pikkus:"
+
+#: src/dialogs/statisticsdialog.cpp:101
+msgid "Max. Answer Length:"
+msgstr "Vastuse maks. pikkus:"
+
+#: src/dialogs/statisticsdialog.cpp:104
+msgid "Avg. Answer Length:"
+msgstr "Vastuse keskm. pikkus:"
+
+#: src/dialogs/statisticsdialog.cpp:115
+msgid "Occurrences Of Letters:"
+msgstr "Tähtede esinemiskorrad:"
+
+#: src/dialogs/statisticsdialog.cpp:121
+msgid ""
+"Number of letter cells containing '%1', percentage of total letter cell "
+"count in braces"
+msgstr ""
+"'%1' sisaldavate täheruutude arv, sulgudes protsent täheruutude koguarvust"
+
+#: src/dictionary.cpp:174
+msgid ""
+"No Connection to the database! Please make sure the MySQL server is running. "
+"Afterwards click \"Continue\" to retry connecting to the database."
+msgstr ""
+"Ühendus andmebaasiga puudub! Palun kontrolli, kas MySQL-i server ikka "
+"töötab. Seejärel klõpsa \"Jätka\", et proovida uuesti andmebaasiga ühenduda."
+
+#: src/dictionary.cpp:177
+msgid "No Database Connection"
+msgstr "Ühendus andmebaasiga puudub"
+
+#: src/dictionary.cpp:181
+msgid "Connect Database"
+msgstr "Ühendumine andmebaasiga"
+
+#: src/dictionary.cpp:269
+msgctxt "The header title for answers in the dictionary database"
+msgid "Answer"
+msgstr "Vastus"
+
+#: src/dictionary.cpp:271
+msgctxt ""
+"The header title for clues associated with answer words in the dictionary "
+"database"
+msgid "Clue"
+msgstr "Küsimus"
+
+#: src/dictionary.cpp:273
+msgctxt ""
+"The header title for scores/difficulties of clue/answer pairs in the "
+"dictionary database"
+msgid "Score"
+msgstr "Hinne"
+
+#: src/dictionary.cpp:275
+msgctxt ""
+"The header title for languages of clue/answer pairs in the dictionary "
+"database"
+msgid "Language"
+msgstr "Keel"
+
+#: src/dictionary.cpp:318
+msgid "Importing Dictionary"
+msgstr "Sõnaraamatu import"
+
+#: src/dictionary.cpp:356
+msgid ""
+"Importing word clue pairs from '%1' to the database.\n"
+"Please wait."
+msgstr ""
+"Sõna ja küsimuse paaride importimine failist '%1' andmebaasi.\n"
+"Palun oota."
+
+#: src/dictionary.cpp:485
+msgid ""
+"Adding words from the dictionary '%1' to the database.\n"
+"Please wait."
+msgstr ""
+"Sõnade lisamine sõnaraamatust '%1' andmebaasi.\n"
+"Palun oota."
+
+#: src/dictionary.cpp:567
+msgid ""
+"Adding words from %1 crossword files to the database.\n"
+"Please wait."
+msgstr ""
+"Sõnade lisamine %1 ristsõnafailist andmebaasi.\n"
+"Palun oota."
+
+#: src/global.cpp:38
+msgid "Clue cell"
+msgstr "Küsimusruut"
+
+#: src/global.cpp:40
+msgid "Double clue cell"
+msgstr "Kahe küsimusega ruut"
+
+#: src/global.cpp:42
+msgid "Letter cell"
+msgstr "Täheruut"
+
+#: src/global.cpp:44
+msgid "Solution letter cell"
+msgstr "Lahendustäheruut"
+
+#: src/global.cpp:46
+msgid "Image cell"
+msgstr "Pildiruut"
+
+#: src/global.cpp:48
+msgid "All cells"
+msgstr "Kõik ruudud"
+
+#: src/global.cpp:50
+msgid "Interactive cells"
+msgstr "Interaktiivsed ruudud"
+
+#: src/global.cpp:52
+msgid "User cell type"
+msgstr "Kasutaja ruudutüüp"
+
+#: src/global.cpp:260
+msgid "Clue cells are allowed"
+msgstr "Küsimusruudud on lubatud"
+
+#: src/global.cpp:262
+msgid "Clue cells are disallowed"
+msgstr "Küsimusruudud on keelatud"
+
+#: src/global.cpp:264
+msgid "Clue cells are required"
+msgstr "Küsimusruudud on nõutavad"
+
+#: src/global.cpp:275
+msgid "Clues refer to sets of cells"
+msgstr "Küsimused osutavad ruudukogumitele"
+
+#: src/global.cpp:277
+msgid "Clues refer to cells"
+msgstr "Küsimused osutavad ruutudele"
+
+#: src/global.cpp:287
+msgid "String clues"
+msgstr "Stringküsimused"
+
+#: src/global.cpp:289
+msgid "Number clues (1 to 26)"
+msgstr "Arvküsimused (1 kuni 26)"
+
+#: src/global.cpp:300
+msgid "Characters"
+msgstr "Tähed"
+
+#: src/global.cpp:302
+msgid "Digits"
+msgstr "Arvud"
+
+#: src/global.cpp:304
+msgid "Characters or digits"
+msgstr "Tähed või arvud"
+
+#: src/global.cpp:409
+msgid "Free Crossword"
+msgstr "Vaba ristsõna"
+
+#: src/global.cpp:411
+msgctxt "Short description of the crossword type 'Free'"
+msgid "This is a special type that tries to be least restrictive."
+msgstr "See on eritüüp, mis püüab seada kõige vähem piiranguid."
+
+#: src/global.cpp:413
+msgctxt "Long description of the crossword type 'Free'"
+msgid ""
+"This is a special type that tries to be least restrictive. You can use all "
+"available cell types (eg. clue cells, double clue cells, image cells, "
+"solution letter cells). You can mix answers that have a clue cell with "
+"answers that don't. Answers may contain characters as well as numbers."
+msgstr ""
+"See on eritüüp, mis püüab seada kõige vähem piiranguid. Sa võid kasutada "
+"kõiki saadaolevaid ruudutüüpe (nt. küsimusruudud, kahe küsimusega ruudud, "
+"pildiruudud, lahendustäheruudud). Sa võid kasutada korraga nii vastuseid, "
+"millel on küsimusruut, kui ka vastuseid, millel seda ei ole. Vastused võivad "
+"sisaldada nii tähti kui ka arve."
+
+#: src/global.cpp:424
+msgid "User Defined Crossword"
+msgstr "Kasutaja määratud ristsõna"
+
+#: src/global.cpp:426
+msgctxt "Short description of the crossword type 'User Defined'"
+msgid "Lets you specify your own rules."
+msgstr "Võimaldab kindlaks määrata omaenda reeglid."
+
+#: src/global.cpp:434
+msgid "Swedish Crossword"
+msgstr "Rootsi ristsõna"
+
+#: src/global.cpp:436
+msgctxt "Short description of the crossword type 'Swedish'"
+msgid ""
+"Swedish crosswords contain clue cells which contain the clue text in it and "
+"an arrow to indicate in which direction the clues have to be answered."
+msgstr ""
+"Rootsi ristsõna sisaldab küsimusruute, mis sisaldavad endas küsimuse teksti "
+"ja noolt, mis osutab, millises suunas tuleb küsimusele vastata."
+
+#: src/global.cpp:439
+msgctxt "Long description of the crossword type 'Swedish'"
+msgid ""
+"The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
+"the cells which would normally be black in other countries. Arrows indicate "
+"in which direction the clues have to be answered, vertical or horizontal. "
+"This style of grid is used in several countries other than Sweden, usually "
+"in magazines with pages of A4 or similar size. The grid often has a photo of "
+"a pop or movie star replacing a block of squares, as a clue to one answer. "
+"These puzzles usually have no symmetry in the grid.\n"
+"Crosswords with clue cells inside the crossword grid are also called "
+"\"Arrowwords\", \"Pointers\" or \"Tipwords\" in English, \"Autodefinidos\" "
+"in Spanish, \"Mots Fléchés\" in French, etc.\n"
+"(text taken from wikipedia)"
+msgstr ""
+"Rootsi stiilis ruudustiku korral ei kasutata küsimustenumbreid: küsimused "
+"sisalduvad ruutudes, mida teistes maades näidatakse tavaliselt mustade "
+"ruutudena. Nooled osutavad, millises suunas tuleb küsimusele vastata (põiki- "
+"või püstsuunas). Sellist ruudustikku kasutatakse ka mitmel teisel maal peale "
+"Rootsi, tavaliselt A4 või sarnase suurusega ajakirjades. Sageli on "
+"ruudustikus mõne pop- või filmitähe foto, mis võtab enda alla terve ruutude "
+"ploki ja on omaette küsimus. Tavaliselt ei valitse neis ristsõnades "
+"sümmeetriat.\n"
+"Wikipedia väitel kannavad sellised ristsõnad inglise keeles veel nimetusi "
+"\"Arrowwords\", \"Pointers\" või \"Tipwords\", hispaania keeles "
+"\"Audofefinidos\", prantsuse keeles \"Mots Fléchés\" jne. Eesti keeles "
+"nimetatakse neid tavaliselt skandinaavia tüüpi ristsõnadeks."
+
+#: src/global.cpp:457
+msgid "American Crossword"
+msgstr "Ameerika ristsõna"
+
+#: src/global.cpp:459
+msgctxt "Short description of the crossword type 'American'"
+msgid ""
+"American crosswords have numbered clues and a list of clues on the side of "
+"the crossword. They have usually 180 degree rotational symmetry."
+msgstr ""
+"Ameerika ristsõnadel on nummerdatud küsimused, mis esitatakse ristsõna "
+"kõrval. Tavaliselt on nad 180 kraadi all pööramisel sümmeetrilised."
+
+#: src/global.cpp:462
+msgctxt "Long description of the crossword type 'American'"
+msgid ""
+"Crossword grids such as those appearing in most North American newspapers "
+"and magazines feature solid areas of white squares. Every letter is checked, "
+"and usually each answer is required to contain at least three letters. In "
+"such puzzles shaded squares are traditionally limited to about one-sixth of "
+"the design. Crossword grids elsewhere, such as in Britain and Australia, "
+"have a lattice-like structure, with a higher percentage of shaded squares, "
+"leaving up to half the letters in an answer unchecked. For example, if the "
+"top row has an answer running all the way across, there will be no across "
+"answers in the second row.\n"
+"Another tradition in puzzle design (in North America and Britain "
+"particularly) is that the grid should have 180-degree rotational symmetry, "
+"so that its pattern appears the same if the paper is turned upside down. "
+"Most puzzle designs also require that all white cells be orthogonally "
+"contiguous (that is, connected in one mass through shared sides, to form a "
+"single polyomino).\n"
+"(text taken from wikipedia)"
+msgstr ""
+"Enamikus Põhja-Ameerika ajalehtedes ja ajakirjades ilmuvad ristsõnad pakuvad "
+"rohkelt valgeid ruute. Kõik tähed ristuvad ning enamasti peab iga vastus "
+"olema vähemalt kolmetäheline. Tavaliselt ei ületa mittetäidetavate tumedate "
+"ruutude arv neis üht kuuendikku. Mujal, näiteks Suurbritannias ja "
+"Austraalias, on ristsõnad sageli sõrestikulise ülesehitusega, mistõttu "
+"mittetäidetav ala on suurem ning isegi kuni pooled tähed võivad kuuluda "
+"ainult ühte vastusse. Kui näiteks ülemises reas on kogu ristsõna laiust "
+"hõlmav vastus, siis teises reas põikisuunas vastuseid ei esine.\n"
+"Teine tava, mis on eriti levinud Põhja-Ameerikas ja Suurbritannias, näeb "
+"ette ristsõna sümmeetria 180 kraadi all pööramisel, nii et ka ristsõna pea "
+"peale keeramisel jääb muster samaks. Tihtipeale on nõutav seegi, et valged "
+"ruudud oleksid katkematult ühendatud."
+
+#: src/global.cpp:488
+msgid "Number Puzzle"
+msgstr "Krüptogramm"
+
+#: src/global.cpp:490
+msgctxt "Short description of the crossword type 'Number Puzzle'"
+msgid ""
+"Number puzzles are a variant of crosswords in which each cell has a number "
+"between 1 and 26. The solver has to find out for which letter of the "
+"alphabet a number stands."
+msgstr ""
+"Krüptogrammid on ristsõnade variant, kus igas ruudus esineb arv vahemikus 1 "
+"kuni 26. Lahendaja peab leidma, millisele tähele iga arv vastab."
+
+#: src/global.cpp:503
+msgid "Crossnumber"
+msgstr "Arvristsõna"
+
+#: src/global.cpp:505
+msgctxt "Short description of the crossword type 'Crossnumber'"
+msgid ""
+"Crossnumbers are the numerical analogy of a crossword, in which the "
+"solutions to the clues are numbers instead of words."
+msgstr ""
+"Arvristsõnad on tavalise ristsõna selline vorm, kus vastused küsimustele "
+"tuleb sõnade asemel kirjutada arvudega."
+
+#: src/global.cpp:508
+msgctxt "Long description of the crossword type 'Crossnumber'"
+msgid ""
+"A crossnumber (also known as a cross-figure) is the numerical analogy of a "
+"crossword, in which the solutions to the clues are numbers instead of words. "
+"Clues are usually arithmetical expressions, but can also be general "
+"knowledge clues to which the answer is a number or year. There are also "
+"numerical fill-in crosswords.\n"
+"The Daily Mail Weekend magazine used to feature crossnumbers under the "
+"misnomer Number Word. This kind of puzzle should not be confused with a "
+"different puzzle that the Daily Mail refers to as Cross Number.\n"
+"(text taken from wikipedia)"
+msgstr ""
+"Arvristsõnad on tavalise ristsõna selline vorm, kus vastused küsimustele "
+"tuleb sõnade asemel kirjutada arvudega. Enamasti on küsimusteks "
+"matemaatilised tehted, aga need võivad olla ka niisugused küsimused, mille "
+"vastuseks on aastaarv või mõni arv.\n"
+"Ingliskeelses maailmas võib tekitada segadust asjaolu, et arvristsõnade "
+"kohta kasutatakse väljendeid 'crossnumber' või 'cross-figure', samas "
+"krüptogrammide kohta 'number puzzle'."
+
+#: src/io/krosswordxmlreader.cpp:174 src/io/krosswordxmlreader.cpp:206
+#, fuzzy
+msgid "The file is not a Krossword version &lt;= 1.1 file."
+msgstr "See ei ole KrossWordPuzzle'i versiooni &lt;= 1.1 fail."
+
+#: src/io/krosswordxmlwriter.cpp:52
+msgid "Couldn't open the ZIP archive for writing"
+msgstr "ZIP-arhiivi avamine kirjutamiseks nurjus"
+
+#: src/io/krosswordxmlwriter.cpp:58 src/io/krosswordxmlwriter.cpp:63
+#: src/io/krosswordxmlwriter.cpp:68
+msgid "Error writing to the compressed file"
+msgstr "Tõrge kirjutamisel tihendatud faili"
+
+#: src/io/krosswordxmlwriter.cpp:73
+msgid "Couldn't close the ZIP archive"
+msgstr "ZIP-arhiivi sulgemine nurjus"
+
+#: src/krossword.cpp:612
+msgid "%1 clue cell"
+msgid_plural "%1 clue cells"
+msgstr[0] "%1 küsimusruut"
+msgstr[1] "%1 küsimusruutu"
+
+#: src/krossword.cpp:617
+msgid "%1 double clue cell"
+msgid_plural "%1 double clue cells"
+msgstr[0] "%1 kahe küsimusega ruut"
+msgstr[1] "%1 kahe küsimusega ruutu"
+
+#: src/krossword.cpp:622
+msgid "%1 solution letter cell"
+msgid_plural "%1 solution letter cells"
+msgstr[0] "%1 lahendustäheruut"
+msgstr[1] "%1 lahendustäheruutu"
+
+#: src/krossword.cpp:633
+msgid "The conversion will remove %1 of %2 clues"
+msgstr "Teisendamine eemaldab %2 küsimusest %1"
+
+#: src/krossword.cpp:636
+msgid "The conversion will remove %1 of %2 clues, %3 of %4 images"
+msgstr "Teisendamine eemaldab %2 küsimusest %1, %4 pildist %3"
+
+#: src/krossword.cpp:649
+msgid "Letters can't be converted back correctly after this conversion."
+msgstr ""
+"Pärast seda teisendamist ei saa tähti enam korrektselt tagasi teisendada."
+
+#: src/krossword.cpp:656
+msgid ""
+"All clue cells get removed. The initial letter to clue number mapping is "
+"A=1, B=2, ..., Z=26."
+msgstr ""
+"Kõik küsimusruudud eemaldati. Küsimusnumbri ja tähtede seosed on A=1, "
+"B=2, ..., Z=26."
+
+#: src/krossword.cpp:923
+msgid "Error writing crossword: %1"
+msgstr "Tõrge ristsõna kirjutamisel: %1"
+
+#: src/krossword.cpp:930
+msgid "Error writing compressed crossword: %1"
+msgstr "Tõrge tihendatud ristsõna kirjutamisel: %1"
+
+#: src/krossword.cpp:941
+msgid "Error writing AcrossLite's .puz-format."
+msgstr "Tõrge AcrossLite'i puz-vormingu kirjutamisel."
+
+#: src/krossword.cpp:962
+msgid "Error while downloading from url: %1"
+msgstr "Tõrge allalaadimisel URL-ilt: %1"
+
+#: src/krossword.cpp:2959
+msgctxt "Name"
+msgid ""
+"Used as header label for the column containing the names in the crossword "
+"type model."
+msgstr ""
+"Kasutatakse selle veeru päisena, mis sisaldab ristsõna tüübi mudeli nimesid."
+
+#: src/krossword.cpp:2962
+msgctxt "Description"
+msgid ""
+"Used as header label for the column containing the descriptions in the "
+"crossword type model."
+msgstr ""
+"Kasutatakse selle veeru päisena, mis sisaldab ristsõna tüübi mudeli "
+"kirjeldusi."
+
+#: src/krossword.cpp:3052
+msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
+msgstr ""
+"Vastus sisaldab lubamatuid märke. Lubatud on A-Z (inglise tähestik) ja/või "
+"0-9."
+
+#: src/krossword.cpp:3056
+msgid ""
+"The answer overwrites the answer to another clue with the same orientation."
+msgstr "Vastus kirjutab üle teise samasuunalise küsimuse vastuse."
+
+#: src/krossword.cpp:3060
+msgid "The current crossword type doesn't allow clue cells."
+msgstr "Aktiivne ristsõnatüüp ei luba küsimusruute."
+
+#: src/krossword.cpp:3062
+msgid "The current crossword type requires a clue cell for each clue."
+msgstr "Aktiivne ristsõnatüüp nõuab igale küsimusele küsimusruutu."
+
+#: src/krossword.cpp:3064
+msgid "The answer is too short for the current crossword type."
+msgstr "Vastus on aktiivse ristsõnatüübi jaoks liiga lühike."
+
+#: src/krossword.cpp:3066
+msgid "The answer overwrites the clue cell."
+msgstr "Vastus kirjutab üle küsimusruudu."
+
+#: src/krossword.cpp:3073
+msgid "The current crossword type doesn't allow image cells."
+msgstr "Aktiivne ristsõnatüüp ei luba pildiruute."
+
+#: src/krossworddocument.cpp:86
+msgctxt "Title for the clue list when printing"
+msgid "Clue list"
+msgstr "Küsimused"
+
+#: src/krossworddocument.cpp:87
+msgctxt "Title for the list of down/vertical clues when printing"
+msgid "Down clues"
+msgstr "Küsimused püstsuunas"
+
+#: src/krossworddocument.cpp:88
+msgctxt "Title for the list of across/horizontal clues when printing"
+msgid "Across clues"
+msgstr "Küsimused põiksuunas"
+
+#: src/krosswordpuzzle.cpp:78
+#, fuzzy
+msgid "Would you like to add the crossword into the library?"
+msgstr "Uue ristsõna loomine kogus."
+
+#: src/krosswordpuzzle.cpp:79
+#, fuzzy
+msgid "Save crossword"
+msgstr "Uus ristsõna"
+
+#: src/krosswordpuzzle.cpp:87
+msgid "Could not open resource at "
+msgstr ""
+
+#: src/krosswordpuzzle.cpp:88
+msgid "Resource unavailable"
+msgstr ""
+
+#: src/krosswordpuzzle.cpp:173 src/library/librarygui.cpp:212
+msgid "Loading..."
+msgstr "Laadimine..."
+
+#: src/krosswordpuzzle.cpp:176
+msgid "Loading the crossword, please wait..."
+msgstr "Ristsõna laadimine, palun oota..."
+
+#: src/krosswordpuzzle.cpp:233 src/krosswordpuzzle.cpp:426
+#: src/library/librarygui.cpp:383
+msgid "Library"
+msgstr "Kogu"
+
+#: src/krosswordpuzzle.cpp:237
+msgid "Templates"
+msgstr "Mallid"
+
+#: src/krosswordpuzzle.cpp:254
+msgid "&Restore"
+msgstr "&Taasta"
+
+#: src/krosswordpuzzle.cpp:254
+msgid ""
+"Restore the automatically saved version of an edited crossword before the "
+"crash"
+msgstr ""
+"Redigeeritud ristsõna enne krahhi automaatselt salvestatud versiooni "
+"taastamine"
+
+#: src/krosswordpuzzle.cpp:255
+msgid ""
+"An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
+" Do you want to restore the crossword?"
+msgstr ""
+"Leiti salvestamata ristsõna. Tõenäoliselt tabas mängu krahh. Vabandame!\n"
+" Kas taastada ristsõna?"
+
+#: src/krosswordpuzzle.cpp:276
+#, fuzzy
+msgctxt ""
+"This string is used to replace the library path for crossword files that are "
+"in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
+"apps/krossword/library/crossword.kwpz with Library/crossword.kwpz"
+msgid "Library"
+msgstr "Kogu"
+
+#: src/krosswordpuzzle.cpp:306
+msgid "Animations"
+msgstr "Animatsioonid"
+
+#: src/krosswordpuzzle.cpp:311
+msgid "Theme"
+msgstr "Teema"
+
+#: src/krosswordpuzzle.cpp:462
+#, fuzzy
+msgid "Error loading file '%1'"
+msgstr "Tõrge faili \"%1\" laadimisel"
+
+#: src/krosswordpuzzleview.cpp:106
+msgid "Settings changed"
+msgstr "Seadistused on muudetud"
+
+#: src/library/librarygui.cpp:138
+#, fuzzy
+msgid "The crossword couldn't be imported to the library."
+msgstr ""
+"Ristsõna ei saa kogusse importida.\n"
+"%1"
+
+#: src/library/librarygui.cpp:140
+#, fuzzy
+msgid "The crossword couldn't be written to the library folder."
+msgstr ""
+"Ristsõna ei saa kogu kataloogi salvestada.\n"
+"%1"
+
+#: src/library/librarygui.cpp:163
+#, fuzzy
+msgid "Failed"
+msgstr "Paanidena"
+
+#: src/library/librarygui.cpp:190
+#, fuzzy
+msgid "The Cross Nerd current crossword"
+msgstr "Aktiivse ristsõna sulgemine."
+
+#: src/library/librarygui.cpp:277
+msgid "Can't export whole directories. Please select a crossword."
+msgstr "Terveid katalooge ei saa eksportida. Palun vali ristsõna."
+
+#: src/library/librarygui.cpp:283
+msgid ""
+"There was an error opening the crossword.\n"
+"%1"
+msgstr ""
+"Ristsõna avamisel tekkis tõrge.\n"
+"%1"
+
+#: src/library/librarygui.cpp:293
+msgid "Export"
+msgstr "Eksport"
+
+#: src/library/librarygui.cpp:311
+msgid "Export Settings"
+msgstr "Ekspordiseadistused"
+
+#: src/library/librarygui.cpp:327
+msgid "Couldn't export the image to the specified file."
+msgstr "Pildi eksportimine määratud failina nurjus."
+
+#: src/library/librarygui.cpp:336
+msgid "Download Crossword To Library"
+msgstr "Ristsõna allalaadimine kogusse"
+
+#: src/library/librarygui.cpp:344
+msgid "Matt Jones (thursdays)"
+msgstr "Matt Jones (neljapäeviti)"
+
+#: src/library/librarygui.cpp:348
+msgid "Wall Street Journal by Mike Shenk (fridays)"
+msgstr "Wall Street Journali ristsõna Mike Shenkilt (reedeti)"
+
+#: src/library/librarygui.cpp:352
+msgid "The Chronicle of Higher Education (fridays)"
+msgstr ""
+
+#: src/library/librarygui.cpp:356
+msgid "The Cross Nerd (tuesdays)"
+msgstr ""
+
+#: src/library/librarygui.cpp:360
+msgid "I Swear Crossword by Victor Fleming (fridays)"
+msgstr ""
+
+#: src/library/librarygui.cpp:412
+msgid ""
+"This will permanently delete the selected directory and all contained "
+"crosswords from the library. The operation can't be undone!"
+msgstr ""
+"See kustutab valitud kataloogi ja kõik selles leiduvad ristsõnad jäädavalt "
+"kogust. Seda toimingut ei saa tagasi võtta!"
+
+#: src/library/librarygui.cpp:420
+msgid ""
+"Couldn't remove the directory from the library.\n"
+"You need root privileges to remove directories which belong to the global "
+"library."
+msgstr ""
+"Kataloogi eemaldamine kogust nurjus.\n"
+"Kataloogi eemaldamiseks, mis kuulub globaalsesse kogusse, läheb tarvis "
+"administraatori õigusi."
+
+#: src/library/librarygui.cpp:424
+msgid ""
+"This will permanently delete the selected crossword from the library.\n"
+"The operation can't be undone!"
+msgstr ""
+"See kustutab valitud ristsõna jäädavalt kogust.\n"
+"Seda toimingut ei saa tagasi võtta!"
+
+#: src/library/librarygui.cpp:431
+#, fuzzy
+msgid "Couldn't remove the crossword from the library."
+msgstr ""
+"Ristsõna eemaldamine kogust nurjus.\n"
+"%1"
+
+#: src/library/librarygui.cpp:452
+msgid "New Library Folder"
+msgstr "Kogu uus kataloog"
+
+#: src/library/librarygui.cpp:460
+msgid "The folder already exists in the library."
+msgstr "Kataloog on kogus juba olemas."
+
+#: src/library/librarygui.cpp:495
+msgctxt "@action:intoolbar"
+msgid "&Open..."
+msgstr ""
+
+#: src/library/librarygui.cpp:496
+msgid "Open the selected crossword."
+msgstr "Valitud ristsõna avamine."
+
+#: src/library/librarygui.cpp:500
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Import..."
+msgstr "&Impordi"
+
+#: src/library/librarygui.cpp:501
+msgid "Import a crossword to the library."
+msgstr "Ristsõna importimine kogusse."
+
+#: src/library/librarygui.cpp:505
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Export..."
+msgstr "&Ekspordi"
+
+#: src/library/librarygui.cpp:506
+msgid "Export the selected crossword from the library."
+msgstr "Valitud ristsõna eksportimine kogust."
+
+#: src/library/librarygui.cpp:510
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Download..."
+msgstr "Laa&di alla"
+
+#: src/library/librarygui.cpp:511
+msgid "Download a crossword and add it to the library."
+msgstr "Ristsõna allalaadimine ja lisamine kogusse."
+
+#: src/library/librarygui.cpp:515
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Delete..."
+msgstr "&Kustuta"
+
+#: src/library/librarygui.cpp:516
+msgid "Delete the selected crossword from the library."
+msgstr "Valitud ristsõna kustutamine kogust."
+
+#: src/library/librarygui.cpp:520
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "New &Folder..."
+msgstr "Uus kataloo&g"
+
+#: src/library/librarygui.cpp:521
+msgid "Create a new folder in the library."
+msgstr "Uue kataloogi loomine kogus."
+
+#: src/library/librarygui.cpp:525
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "New &Crossword..."
+msgstr "Uus &ristsõna"
+
+#: src/library/librarygui.cpp:526
+msgid "Create a new crossword in the library."
+msgstr "Uue ristsõna loomine kogus."
+
+#: src/library/librarygui.cpp:537
+msgid "%1"
+msgstr ""
+
+#: src/library/librarymanager.cpp:71
+msgctxt "The title for sizes of crosswords in the library tree view"
+msgid "Size:"
+msgstr "Suurus:"
+
+#: src/library/librarymanager.cpp:74
+msgctxt "The title for authors of crosswords in the library tree view"
+msgid "Author(s):"
+msgstr "Autor(id):"
+
+#: src/main.cpp:27
+#, fuzzy
+msgid ""
+"A crossword puzzle game and editor for KDE.\n"
+"Based on KrossWordPuzzle."
+msgstr "KDE 4 ristsõnade lahendamise ja muutmise rakendus"
+
+#: src/main.cpp:33
+#, fuzzy
+msgid "Krossword"
+msgstr "Ristsõna"
+
+#: src/main.cpp:35
+msgid ""
+"© 2014 Andrea Barazzetti\n"
+"© 2014 Giacomo Barazzetti\n"
+"© 2009 Friedrich Pülz"
+msgstr ""
+
+#: src/main.cpp:37
+msgid "Andrea Barazzetti"
+msgstr ""
+
+#: src/main.cpp:37 src/main.cpp:38
+msgid "Developer"
+msgstr ""
+
+#: src/main.cpp:38
+msgid "Giacomo Barazzetti"
+msgstr ""
+
+#: src/main.cpp:39
+msgid "Friedrich Pülz"
+msgstr "Friedrich Pülz"
+
+#: src/main.cpp:39
+msgid "Previous developer"
+msgstr ""
+
+#: src/main.cpp:44
+msgid "Document to open"
+msgstr "Avatav dokument"
+
+#~ msgctxt ""
+#~ "Text to describe the contents of library folders in the library tree view"
+#~ msgid "%1 crossword"
+#~ msgid_plural "%1 crosswords"
+#~ msgstr[0] "%1 ristsõna"
+#~ msgstr[1] "%1 ristsõna"
+
+#~ msgid "%1 letters"
+#~ msgstr "%1 tähte"
+
+#~ msgid "&Crossword"
+#~ msgstr "&Ristsõna"
+
+#~ msgctxt ""
+#~ "The title for the crossword tab with an unmodified or no crossword opened"
+#~ msgid "&Crossword"
+#~ msgstr "&Ristsõna"
+
+#~ msgctxt "The title for the crossword tab with an edited crossword opened"
+#~ msgid "&Crossword *"
+#~ msgstr "&Ristsõna *"
+
+#~ msgid "&Difficulty:"
+#~ msgstr "&Raskusaste:"
+
+#~ msgid "&Language:"
+#~ msgstr "&Keel:"
+
+#~ msgid "&Letters:"
+#~ msgstr "&Tähed:"
+
+#~ msgid "&Library"
+#~ msgstr "&Kogu"
+
+#~ msgid "&Refresh"
+#~ msgstr "&Värskenda"
+
+#~ msgid "(C) 2009 Friedrich Pülz"
+#~ msgstr "(C) 2009: Friedrich Pülz"
+
+#~ msgid "Boston Globe (sundays)"
+#~ msgstr "Boston Globe (pühapäeviti)"
+
+#~ msgctxt ""
+#~ "The title for contents descriptions of folders in the library tree view"
+#~ msgid "Content:"
+#~ msgstr "Sisu:"
+
+#~ msgid "Couldn't export the crossword to the specified image file."
+#~ msgstr "Ristsõna importimine määratud pildifailina nurjus."
+
+#~ msgid ""
+#~ "Couldn't remove a crossword from the library's directory.\n"
+#~ "You need root privileges to remove crosswords which belong to the global "
+#~ "library."
+#~ msgstr ""
+#~ "Ristsõna eemaldamine kogu kataloogist nurjus.\n"
+#~ "Ristsõna eemaldamiseks, mis kuulub globaalsesse kogusse, läheb tarvis "
+#~ "administraatori õigusi."
+
+#~ msgid ""
+#~ "Couldn't remove the crossword from the library.\n"
+#~ "You need root privileges to remove crosswords which belong to the global "
+#~ "library."
+#~ msgstr ""
+#~ "Ristsõna eemaldamine kogust nurjus\n"
+#~ "Ristsõna eemaldamiseks, mis kuulub globaalsesse kogusse, läheb tarvis "
+#~ "administraatori õigusi."
+
+#~ msgid ""
+#~ "Couldn't write the crossword to the specified file.\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Ristsõna salvestamine määratud failina nurjus.\n"
+#~ "%1"
+
+#~ msgctxt "Default notes value for new crosswords"
+#~ msgid ""
+#~ "Created with KrossWordPuzzle, see http://kde-apps.org/content/show.php?"
+#~ "content=111726"
+#~ msgstr ""
+#~ "Loodud KrossWordPuzzle'iga, vaata http://kde-apps.org/content/show.php?"
+#~ "content=111726"
+
+#~ msgid "Current crossword filename: \"%1\""
+#~ msgstr "Aktiivse ristsõna failinimi: \"%1\""
+
+#~ msgid "Daily Crossword From Houston Chronicle"
+#~ msgstr "Houston Chronicle'i igapäevane ristsõna"
+
+#~ msgid "Downloads"
+#~ msgstr "Allalaadimised"
+
+#~ msgid ""
+#~ "Enables/disables the edit mode. All correct letters are shown in edit "
+#~ "mode!"
+#~ msgstr ""
+#~ "Redigeerimisrežiimi sisse- või väljalülitamine. Redigeerimisrežiimis "
+#~ "näidatakse kõiki õigeid tähti!"
+
+#~ msgid "Give up the Game"
+#~ msgstr "Lahendamisest loobumine"
+
+#~ msgid "Houston Chronicle (daily)"
+#~ msgstr "Houston Chronicle (igapäevane)"
+
+#~ msgid "KrossWordPuzzle"
+#~ msgstr "KrossWordPuzzle"
+
+#~ msgctxt ""
+#~ "Used as label of the header for the column containing the times when the "
+#~ "crosswords have been last edited in the library model."
+#~ msgid "Last Modified"
+#~ msgstr "Viimati muudetud"
+
+#~ msgctxt ""
+#~ "This string is used to replace the library path for crossword files that "
+#~ "are in the library with a shorter user visible string, e.g. replacing ~/."
+#~ "kde4/apps/krosswordpuzzle/library/crossword.kwpz with Library/crossword."
+#~ "kwpz"
+#~ msgid "Library"
+#~ msgstr "Kogu"
+
+#~ msgctxt ""
+#~ "Statusbar text when a crossword has been loaded, %1 gets replaced by the "
+#~ "file name"
+#~ msgid "Loaded '%1'"
+#~ msgstr "\"%1\" on laaditud"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Peamine tööriistariba"
+
+#~ msgid "Moved crossword \"%1\" from \"%2\" to \"%3\""
+#~ msgstr "Ristsõna \"%1\" liigutati asukohast \"%2\" asukohta \"%3\""
+
+#~ msgid "Moved crossword \"%1\" from \"%2\" to the main library folder"
+#~ msgstr "Ristsõna \"%1\" liigutati asukohast \"%2\" kogu põhikataloogi"
+
+#~ msgid "Moved crossword \"%1\" from the main library folder to \"%2\""
+#~ msgstr "Ristsõna \"%1\" liigutati kogu põhikataloogist asukohta \"%2\""
+
+#~ msgctxt ""
+#~ "Used as label of the header for the column containing the crossword names "
+#~ "in the library model."
+#~ msgid "Name"
+#~ msgstr "Nimi"
+
+#~ msgid ""
+#~ "Name of the subdirectory in the library directory in which new downloads "
+#~ "are saved."
+#~ msgstr ""
+#~ "Kogu kataloogi alamkataloogi nimi, kuhu salvestatakse uued allalaadimised."
+
+#~ msgid ""
+#~ "Neither the chosen theme '%1' nor the default theme could be found.\n"
+#~ "Check your installation."
+#~ msgstr ""
+#~ "Ei leitud ei valitud teemat '%1' ega vaiketeemat.\n"
+#~ "Kontrolli oma paigaldust."
+
+#~ msgid ""
+#~ "Neither the last used theme '%1' nor the default theme could be found.\n"
+#~ "Check your installation."
+#~ msgstr ""
+#~ "Ei leitud ei viimati kasutatud teemat '%1' ega vaiketeemat.\n"
+#~ "Kontrolli oma paigaldust."
+
+#~ msgid "Onion Crosswords by Ben Tausig (wednesdays)"
+#~ msgstr "Onioni ristsõnad Ben Tausigilt (kolmapäeviti)"
+
+#~ msgctxt "&Open"
+#~ msgid "Open a crossword file"
+#~ msgstr "Ristsõnafaili avamine"
+
+#~ msgid "Please reselect the crossword to show a preview..."
+#~ msgstr "Palun vali uuesti ristsõna, mille eelvaatlust näidata..."
+
+#~ msgid "Refreshes the library view after changes in the library folder."
+#~ msgstr "Koguvaate värskendamine pärast muudatusi kogu kataloogis."
+
+#~ msgid "Selection"
+#~ msgstr "Valik"
+
+#~ msgid "Set as Folder For New &Downloads"
+#~ msgstr "Määra uu&te allalaadimiste kataloogiks"
+
+#~ msgctxt "Loaded '%1'"
+#~ msgid ""
+#~ "Statusbar text when a crossword has been loaded, %1 gets replaced by the "
+#~ "file name"
+#~ msgstr ""
+#~ "Olekuriba tekst, kui ristsõna on laaditud: %1 asendatakse failinimega"
+
+#~ msgctxt "Error loading file '%1'"
+#~ msgid ""
+#~ "Statusbar text when there was an error while loading a crossword, %1 gets "
+#~ "replaced by the file name"
+#~ msgstr ""
+#~ "Olekuriba tekst, kui ristsõna laadimisel tekkis tõrge: %1 asendatakse "
+#~ "failinimega"
+
+#~ msgid "The theme '%1' couldn't be found. The default theme is now used."
+#~ msgstr "Teemat '%1' ei leitud, kasutatakse vaiketeemat."
+
+#~ msgid ""
+#~ "This is the library view.<br/>You can see all crosswords that are inside "
+#~ "the library."
+#~ msgstr "See on koguvaade.<br/>Siin näeb kõiki kogusse kuuluvaid ristsõnu."
+
+#~ msgctxt "Name"
+#~ msgid ""
+#~ "Used as label of the header for the column containing the crossword names "
+#~ "in the library model."
+#~ msgstr ""
+#~ "Kasutatakse selle veeru päisena, mis sisaldab kogu mudeli ristsõna "
+#~ "nimesid."
+
+#~ msgctxt "Last Modified"
+#~ msgid ""
+#~ "Used as label of the header for the column containing the times when the "
+#~ "crosswords have been last edited in the library model."
+#~ msgstr ""
+#~ "Kasutatakse selle veeru päisena, mis sisaldab aegu, mil ristsõna viimati "
+#~ "kogu mudelis muudeti."
+
+#~ msgid "Washington Post by Fred Piscop (sundays)"
+#~ msgstr "Washington Posti ristsõna Fred Piscopilt (pühapäeviti)"
+
+#~ msgid "Weekly crossword %1"
+#~ msgstr "Nädalaristsõna %1"
+
+#~ msgid "Welcome to KrossWordPuzzle!"
+#~ msgstr "Tere tulemast kasutama KrossWordPuzzle'i!"
+
+#~ msgid "Zoom in"
+#~ msgstr "Suurendamine"
+
+#~ msgid "Zoom out"
+#~ msgstr "Vähendamine"
+
+#~ msgctxt "Using default image quality settings"
+#~ msgid "default"
+#~ msgstr "vaikimisi"
+
+#~ msgid "↓ Not implemented yet! ↓"
+#~ msgstr "↓ Pole veel teostatud! ↓"
