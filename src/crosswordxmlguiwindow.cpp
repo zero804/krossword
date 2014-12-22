@@ -2563,11 +2563,12 @@ void CrossWordXmlGuiWindow::currentClueChanged(ClueCell* clue)
 
 void CrossWordXmlGuiWindow::answerChanged(ClueCell* clue, const QString &currentAnswer, bool statusbar)
 {
-//   qDebug() << "answerChanged(" << clue->correctAnswer() << "," << currentAnswer << ")";
     m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
 
+    /* disabled because it doesn't permit to update the clue list after a Solve action
     if (clue != krossWord()->highlightedClue())
         return;
+    */
 
     if (statusbar) {
         if (clue->isHorizontal()) {
