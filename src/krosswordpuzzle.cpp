@@ -52,11 +52,10 @@ KrossWordPuzzle::KrossWordPuzzle() : KXmlGuiWindow(),
     setupPlaces();
 
     setupActions();
+    setupGUI(Save | Create);
 
     setupMainTabWidget();
     setCentralWidget(m_mainStackedBar);
-
-    setupGUI(Save | Create);
 
     QString lastUnsavedFileBeforeCrash = Settings::lastUnsavedFileBeforeCrash();
     if (!lastUnsavedFileBeforeCrash.isEmpty()) {
