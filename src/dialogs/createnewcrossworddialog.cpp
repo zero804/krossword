@@ -104,14 +104,11 @@ void CreateNewCrosswordDialog::setup()
     ui_create_new.crosswordType->setModelColumn(0);
 
     // TODO: Setup default sizes toolbutton menu on crosswordTypes->selectionModel() => currentChanged
-//   ui_create_new.scrollLongInfo->setVisible( false );
 
     ui_create_new.author->setText(KUser().fullName());
-    ui_create_new.copyright->setText(i18nc("Default copyright value for new "
-                                           "crosswords, 'YEAR, by USER'", "© %1, by %2",
-                                           QDate::currentDate().year(), KUser().fullName()));
-    ui_create_new.notes->setText(i18nc("Default notes value for new crosswords",
-                                       "Created with Krossword."));
+    ui_create_new.copyright->setText(i18nc("Default copyright value for new crosswords, 'YEAR, by USER'", "© %1, by %2",
+                                           QDate::currentDate().toString("yyyy"), KUser().fullName()));
+    ui_create_new.notes->setText(i18nc("Default notes value for new crosswords", "Created with Krossword"));
 
     connect(ui_create_new.crosswordType, SIGNAL(currentIndexChanged(int)),
             this, SLOT(crosswordTypeChanged(int)));
@@ -125,14 +122,11 @@ void CreateNewCrosswordDialog::setup()
     m_templateModel = new SubFileSystemProxyModel;
     m_templateModel->setRootPath(templateDirs.first());
     ui_create_new.templates->setModel(m_templateModel);
-    for (int i = 1; i < m_templateModel->columnCount(); ++i)
-        ui_create_new.templates->hideColumn(i);
 
-    // Hide search line as it crashes in the model somehow...
-    ui_create_new.lblTemplateSearchLine->hide();
-    ui_create_new.templateSearchLine->hide();
-    connect(ui_create_new.templateSearchLine, SIGNAL(textChanged(QString)),
-            this, SLOT(templateFilterChanged(QString)));
+    for (int i = 1; i < m_templateModel->columnCount(); ++i) {
+        ui_create_new.templates->hideColumn(i);
+    }
+
     connect(ui_create_new.templates->selectionModel(),
             SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
             this, SLOT(currentTemplateChanged(QModelIndex, QModelIndex)));
@@ -186,8 +180,6 @@ void CreateNewCrosswordDialog::currentTemplateChanged(
     if (!info.isValid()) {
         qDebug() << "Error reading crossword info from library file"
                  << errorString;
-//     ui_create_new.lblTemplateInfo->setText( i18n("Couldn't read template: %1",
-//        errorString) );
     } else {
         CrosswordTypeInfo typeInfo =
             CrosswordTypeInfo::infoFromType(
@@ -210,11 +202,6 @@ void CreateNewCrosswordDialog::currentTemplateChanged(
         ui_create_new.rows->setValue(info.height);
         setCrosswordType(typeInfo);
     }
-}
-
-void CreateNewCrosswordDialog::templateFilterChanged(const QString &text)
-{
-    m_templateModel->setFilterWildcard('*' + text + '*');
 }
 
 void CreateNewCrosswordDialog::typeInfoChanged(

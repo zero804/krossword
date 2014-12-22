@@ -66,7 +66,6 @@ public:
 protected slots:
     void crosswordTypeChanged(int index);
     void typeInfoChanged(const CrosswordTypeInfo &typeInfo);
-    void templateFilterChanged(const QString &text);
     void currentTemplateChanged(const QModelIndex &current, const QModelIndex &previous);
     void templateLocationChanged(const QString &path);
     void expandTemplateDirs();
