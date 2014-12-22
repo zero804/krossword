@@ -88,6 +88,9 @@ void KrosswordRenderer::renderBackground(QPainter* p, const QRectF& r) const
 
 void KrosswordRenderer::renderElement(QPainter* p, const QString& elementid, const QRectF& r, const QColor &alpha) const
 {
+    //! NOTE: Suppress warning, but you should remove it when you are sure it's not important
+    Q_UNUSED(alpha);
+
     QPixmap pix;
 
     /*

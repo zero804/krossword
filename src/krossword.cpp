@@ -1184,8 +1184,6 @@ void KrossWord::setTopLeftCellOffset(const QPointF& topLeftCellOffset)
     KrossWordCellList cellList = cells();
     foreach(KrossWordCell * cell, cellList)
     cell->setPositionFromCoordinates();
-
-    resizeScene();
 }
 
 KrossWordCellList KrossWord::cells(CellTypes cellTypes) const
@@ -2710,7 +2708,6 @@ KrossWordCellList KrossWord::resizeGrid(uint width, uint height,
 
 //     qDebug() << "filling with empty cells";
         fillWithEmptyCells();
-        resizeScene();
     } else
         delete krossWordGrid;
 
@@ -2771,15 +2768,6 @@ QString KrossWord::contentString() const
     s += '\n' + lines.join("\n");
 
     return s;
-}
-
-void KrossWord::resizeScene()
-{
-    if (!scene())
-        return;
-
-    QRect rect = QRect(QPoint(), boundingRect().size().toSize());
-    //scene()->setSceneRect(rect.adjusted(-150, -150, 150, 150));
 }
 
 bool KrossWord::isEmpty() const

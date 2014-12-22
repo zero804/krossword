@@ -67,7 +67,7 @@ protected:
 
 public slots:
     void loadSlot(const KUrl &url = KUrl());
-    void loadFile(const QString &fileName);
+    //void loadFile(const QString &fileName);
 
     // Settings actions
     void optionsPreferencesSlot();
@@ -99,12 +99,12 @@ private:
 
     Ui::settings           ui_settings;
 
-    LibraryGui   *m_mainLibrary;           //Owned
+    LibraryGui            *m_mainLibrary;           //Owned
     CrossWordXmlGuiWindow *m_mainCrossword;         //Owned
 
     QDialog               *m_loadProgressDialog;    //Owned
     QString                m_caption;
-    QStackedWidget        *m_mainStackedBar;            //Owned
+    QStackedWidget        *m_mainStackedBar;        //Owned
 };
 
 #endif // _KROSSWORDPUZZLE_H_

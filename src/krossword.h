@@ -714,7 +714,6 @@ public:
 
     void removeSolutionSynchronizationTo(KrossWord *solutionKrossWord);
     QPixmap toPixmap(const QSize &size = QSize(64, 64));
-    void resizeScene();
     void assignClueNumbers();
 
     /** Gets an error message from a error type value. You can use this error

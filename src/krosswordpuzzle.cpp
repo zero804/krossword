@@ -295,11 +295,6 @@ void KrossWordPuzzle::loadSlot(const KUrl &url)
     loadFile(url);
 }
 
-void KrossWordPuzzle::loadFile(const QString &fileName)
-{
-    loadFile(KUrl(fileName));
-}
-
 void KrossWordPuzzle::optionsPreferencesSlot()
 {
     // Avoid to have 2 dialogs shown
@@ -497,6 +492,7 @@ void KrossWordPuzzle::crosswordCurrentChanged(const QString& fileName, const QSt
 
 void KrossWordPuzzle::crosswordModificationsChanged(CrossWordXmlGuiWindow::ModificationTypes modificationTypes)
 {
+    Q_UNUSED(modificationTypes);
     crosswordCurrentChanged(m_mainCrossword->currentFileName(), m_mainCrossword->currentFileName());
 }
 
