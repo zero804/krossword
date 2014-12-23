@@ -43,10 +43,12 @@ public:
     void renderPage(QPainter *painter, int page);
     int pages() const;
 
-    QPrinter *printer() const {
-        return m_printer;
-    };
+    QPrinter *printer() const;
     void setPrinter(QPrinter *printer);
+
+private:
+    void makeTitlePage();
+    void makeClueListPage();
 
 private:
     KrossWord *m_krossWord;
