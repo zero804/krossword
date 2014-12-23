@@ -1,0 +1,76 @@
+[KGameTheme]
+Name=Ink
+Name[bs]=Ink
+Name[cs]=Ink
+Name[de]=Ink
+Name[en_GB]=Ink
+Name[eo]=Ink
+Name[es]=Ink
+Name[et]=Ink
+Name[fr]=Ink
+Name[ga]=Ink
+Name[it]=Ink
+Name[km]=ដែល​អាច​គូសវាស​បាន
+Name[mr]=Ink
+Name[nds]=Ink
+Name[nl]=Ink
+Name[nn]=Ink
+Name[pl]=Ink
+Name[pt]=Ink
+Name[pt_BR]=Ink
+Name[sk]=Ink
+Name[sr]=Ink
+Name[sr@ijekavian]=Ink
+Name[sr@ijekavianlatin]=Ink
+Name[sr@latin]=Ink
+Name[sv]=Ink
+Name[tr]=Ink
+Name[uk]=Ink
+Name[x-test]=xxInkxx
+FileName=ink.svgz
+Author=Andrea Barazzetti
+AuthorEmail=andreadevsrv@gmail.com
+Description=Ink theme for Krossword.
+Description[bs]=Tema sa Ink za Krossword.
+Description[de]=Ink-Design für Krossword
+Description[en_GB]=Ink theme for Krossword.
+Description[es]=Tema Ink para Krossword.
+Description[et]=Krossword Ink teema
+Description[fr]=Thème « Ink » pour Krossword
+Description[it]=Tema inchiostro per Krossword.
+Description[km]=ស្បែក​ដែល​អាច​គូសវាស​បាន​សម្រាប់ Krossword ។
+Description[pl]=Motyw Ink dla Krossword.
+Description[pt]=Tema Ink para o Krossword.
+Description[pt_BR]=Tema Ink para o Krossword.
+Description[sr]=Тема Ink за К‑укрштеницу
+Description[sr@ijekavian]=Тема Ink за К‑укрштеницу
+Description[sr@ijekavianlatin]=Tema Ink za K‑ukrštenicu
+Description[sr@latin]=Tema Ink za K‑ukrštenicu
+Description[sv]=Ink tema för Korsord
+Description[tr]=Krossword için Ink teması
+Description[uk]=Тема «Ink» для Krossword.
+Description[x-test]=xxInk theme for Krossword.xx
+Preview=ink.png
+
+# Wheather or not the background is dark (affects shadows)
+HasDarkBackground=false
+
+# The glow color of highlighted cells
+GlowColor=#B5B5B5
+# The glow color of focused cells
+FocusGlowColor=#525252
+
+# The color for selected cells in edit mode
+SelectionColor=#525252
+# The color for empty cells in edit mode
+EmptyCellColor=#B8B8B8
+
+# The font color
+FontColor=#1F1F1F
+
+# Margins of cell contents: Left, Top, Right, Bottom
+LetterCellMargins=4,10,4,2
+ClueCellMargins=3,3,3,3
+
+#Size for the background element (image from http://subtlepatterns.com/paper-1/ - CC BY-SA 3.0)
+PreferredRenderSize=400,400

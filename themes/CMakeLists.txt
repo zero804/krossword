@@ -10,7 +10,11 @@ set( krossword_THEME_SRCS
 
 	egyptian.desktop
 	egyptian.svgz
-	egyptian.png )
+	egyptian.png 
+
+    ink.desktop
+    ink.svgz
+    ink.png)
 
 install( FILES ${krossword_THEME_SRCS}
 	 DESTINATION ${DATA_INSTALL_DIR}/krossword/themes )
