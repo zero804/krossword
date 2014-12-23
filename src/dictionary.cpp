@@ -479,7 +479,8 @@ int KrosswordDictionary::addEntriesFromDictionary(const QString& fileName, QWidg
     if (!file.open(QIODevice::ReadOnly))
         return 0;
 
-    QSqlDatabase db = QSqlDatabase::database();
+    //QSqlDatabase db = QSqlDatabase::database();
+    QSqlDatabase db = getDatabaseConnection(nullptr);
     if (!db.isValid())
         return 0;
 

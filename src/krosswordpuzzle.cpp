@@ -418,8 +418,10 @@ void KrossWordPuzzle::currentTabChanged(int index)
         crosswordGameList << separator2;
         crosswordGameList << m_mainCrossword->action("game_close");
 
+        /* FIXME: Dictionary is temporary inactive
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::Options_Dictionaries));
         optionsList << separator;
+        */
         optionsList << m_mainCrossword->toolBarMenuAction();
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowClueDock));
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowUndoViewDock));
@@ -437,8 +439,10 @@ void KrossWordPuzzle::currentTabChanged(int index)
         libraryGameList << m_mainLibrary->action("library_import");
         libraryGameList << m_mainLibrary->action("library_export");
 
+        /* FIXME: Dictionary is temporary inactive
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::Options_Dictionaries));
         optionsList << separator;
+        */
         optionsList << m_mainLibrary->toolBarMenuAction();
     }
 
