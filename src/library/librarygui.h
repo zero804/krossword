@@ -59,7 +59,8 @@ public:
         ChronicleHigherEducation,
         CrossNerd,
         SwearCrossword,
-        Motscroisesch
+        Motscroisesch,
+        ChrisWords
     };
 
     LibraryGui(KrossWordPuzzle* parent = 0);
