@@ -198,7 +198,7 @@ void LibraryGui::downloadProviderChanged(int index)
 
     case Motscroisesch:
         for (int i = 1; i <= 18; ++i) {
-            item = new QListWidgetItem(QString("Mots croisés %1").arg(i));
+            item = new QListWidgetItem(QString(i18n("Crossword %1")).arg(i));
             item->setData(Qt::UserRole, QString("http://www.mots-croises.ch/Grilles/HC/HC-00%1.puz").arg(i, 2, 10, QChar('0')));
             ui_download.crosswords->addItem(item);
         }
