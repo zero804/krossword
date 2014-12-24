@@ -32,16 +32,25 @@
 
 #include <QStyleOptionGraphicsItem>
 
+#include <cmath>
+
 
 KrossWordDocument::KrossWordDocument(KrossWord *krossWord, QPrinter *printer)
     : m_krossWord(krossWord),
       m_titleDoc(new QTextDocument),
       m_clueListDoc(new QTextDocument),
-      m_printer(nullptr)
+      m_printer(nullptr),
+      m_cellSize(0.0),
+      m_titleHeight(0.0),
+      m_translation(QPointF())
 {
     makeTitlePage();
     makeClueListPage();
     setPrinter(printer);
+
+    computeCellSize();
+    computeTitleHeight();
+    computeTranslationPoint();
 }
 
 KrossWordDocument::~KrossWordDocument()
@@ -90,85 +99,79 @@ void KrossWordDocument::renderPage(QPainter *painter, int page)
     if (page == 1) {
         m_titleDoc->drawContents(painter);
 
-        const int cellSize = 40;
-        //QRectF crossWordRect = QRectF(QPointF(0, m_titleDoc->size().height() + marginTitle), m_printer->pageRect().size());
-
-        /*
-        EmptyCellType = 0x001,
-        ClueCellType = 0x002,
-        DoubleClueCellType = 0x004,
-        LetterCellType = 0x008,
-        SolutionLetterCellType = 0x010,
-        ImageCellType = 0x020,
-        */
-
         foreach(KrossWordCell* cell, m_krossWord->cells()) {
             // Black cells
             if(cell->cellType() == Crossword::CellType::EmptyCellType) {
                 painter->setPen(Qt::black);
+                painter->setBrush(QBrush(Qt::black, Qt::SolidPattern));
+                drawCell(painter, cell->coord());
+
+                /*
+                //painter->setPen(Qt::black);
                 painter->setBrush(Qt::SolidPattern);
-                painter->drawRect(cell->coord().first * cellSize, cell->coord().second * cellSize, cellSize, cellSize);
+                painter->drawRect((cell->coord().first * cellSize) + cellSize*0.05,
+                                  (cell->coord().second * cellSize) + cellSize*0.05,
+                                  cellSize - (cellSize*0.1),
+                                  cellSize - (cellSize*0.1));
+                */
 
             // Cell with one clue inside
             } else if(cell->cellType() == Crossword::CellType::ClueCellType) {
                 painter->setPen(Qt::green);
                 painter->setBrush(Qt::SolidPattern);
-                painter->drawRect(cell->coord().first * cellSize, cell->coord().second * cellSize, cellSize, cellSize);
+                drawCell(painter, cell->coord());
 
             // Cell with two clues inside
             } else if(cell->cellType() == Crossword::CellType::DoubleClueCellType) {
                 painter->setPen(Qt::blue);
                 painter->setBrush(Qt::SolidPattern);
-                painter->drawRect(cell->coord().first * cellSize, cell->coord().second * cellSize, cellSize, cellSize);
+                drawCell(painter, cell->coord());
 
             // Standard letter cell
             } else if(cell->cellType() == Crossword::CellType::LetterCellType) {
-                painter->setPen(Qt::black);
-                painter->setBrush(QBrush(Qt::white, Qt::SolidPattern));
-                painter->drawRect(cell->coord().first * cellSize, cell->coord().second * cellSize, cellSize, cellSize);
 
-                // These 2 things don't work as expected, they return always OnClueCell
-                AnswerOffset afhor = static_cast<LetterCell*>(cell)->clueHorizontal()->answerOffset();
-                AnswerOffset afver = static_cast<LetterCell*>(cell)->clueVertical()->answerOffset();
-                //-------------------
+                LetterCell* lcell = static_cast<LetterCell*>(cell);
+
+                Coord cellCoord = cell->coord();
+                Coord horClueCoord = lcell->clueHorizontal()->coord();
+                Coord verClueCoord = lcell->clueVertical()->coord();
 
                 int clueNumber = -1;
-                int clueNumberHor = static_cast<LetterCell*>(cell)->clueHorizontal()->clueNumber();
-                int clueNumberVer = static_cast<LetterCell*>(cell)->clueVertical()->clueNumber();;
 
-                clueNumber = clueNumberHor > clueNumberVer ? clueNumberHor : clueNumberVer;
-                QString clueString = QString::number(clueNumber + 1);
+                if (horClueCoord == verClueCoord) {
+                    clueNumber = lcell->clueHorizontal()->clueNumber();
+                } else if (verClueCoord == cellCoord) {
+                    clueNumber = lcell->clueVertical()->clueNumber();
+                }
 
-                QFont font = KGlobalSettings::smallestReadableFont();
-                qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(painter->matrix()));
-                font.setPointSizeF(7.0 * levelOfDetail);
+                painter->setPen(Qt::black);
+                painter->setBrush(QBrush(Qt::white, Qt::SolidPattern));
+                drawCell(painter, cell->coord());
 
-                painter->setFont(font);
-                painter->drawText(QRectF(cell->coord().first * cellSize,
-                                         cell->coord().second * cellSize,
-                                         cellSize,
-                                         cellSize),
-                                  clueString);
+                if (clueNumber != -1) {
+                    clueNumber += 1;
+
+                    QFont font = KGlobalSettings::smallestReadableFont();
+                    qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(painter->matrix()));
+                    font.setPointSizeF(7.0 * levelOfDetail);
+
+                    painter->setFont(font);
+                    drawCellNumbers(painter, cell->coord(), clueNumber);
+                }
 
             // Cell with two clues inside
             } else if(cell->cellType() == Crossword::CellType::SolutionLetterCellType) {
                 painter->setPen(Qt::gray);
                 painter->setBrush(Qt::SolidPattern);
-                painter->drawRect(cell->coord().first * cellSize, cell->coord().second * cellSize, cellSize, cellSize);
+                drawCell(painter, cell->coord());
 
             } else if(cell->cellType() == Crossword::CellType::ImageCellType) {
                 painter->setPen(Qt::red);
                 painter->setBrush(Qt::SolidPattern);
-                painter->drawRect(cell->coord().first * cellSize, cell->coord().second * cellSize, cellSize, cellSize);
-
+                drawCell(painter, cell->coord());
             }
         }
 
-        /*
-        int marginTitle = 15;
-        QRectF crossWordRect = QRectF(QPointF(0, m_titleDoc->size().height() + marginTitle), m_printer->pageRect().size());
-        m_krossWordView->renderToPrinter(painter, crossWordRect);
-        */
     } else {
         painter->setFont(m_clueListDoc->defaultFont());
         QRectF body(QPoint(0, 0), m_clueListDoc->pageSize());
@@ -266,4 +269,50 @@ void KrossWordDocument::makeClueListPage()
                            .replace("<clueListHorizontalTitle />", i18nc("Title for the list of across/horizontal clues when printing", "Across clues"))
                            .replace("<clueTableVertical />", clueTableVertical)
                            .replace("<clueTableHorizontal />", clueTableHorizontal));
+}
+
+void KrossWordDocument::computeTitleHeight() const
+{
+    const int marginTitle = 15;
+    m_titleHeight = m_titleDoc->size().height() + marginTitle;
+}
+
+void KrossWordDocument::computeTranslationPoint() const
+{
+    const int crosswordSize = computeCrosswordSize();
+    m_translation = QPointF((m_printer->pageRect().width() - crosswordSize)/2.0,
+                            (m_printer->pageRect().height() - crosswordSize))/2.0;
+
+    qDebug() << m_translation;
+}
+
+void KrossWordDocument::computeCellSize() const
+{
+    const uint w = m_krossWord->width();
+    const int crossword_size = computeCrosswordSize();
+    m_cellSize = crossword_size / w;
+}
+
+int KrossWordDocument::computeCrosswordSize() const
+{
+    return std::min(m_printer->pageRect().width(),
+                    m_printer->pageRect().height() - int(m_titleHeight));
+}
+
+void KrossWordDocument::drawCell(QPainter *painter, QPair<int, int> p) const
+{
+
+    painter->drawRect(m_translation.x() + p.first * m_cellSize,
+                      m_translation.y() + p.second * m_cellSize,
+                      m_cellSize,
+                      m_cellSize);
+}
+
+void KrossWordDocument::drawCellNumbers(QPainter *painter, QPair<int, int> p, int number) const
+{
+    painter->drawText(QRectF(m_translation.x() + (p.first * m_cellSize) + 1.0,
+                             m_translation.y() + (p.second * m_cellSize) + 1.0,
+                             m_cellSize,
+                             m_cellSize),
+                      QString::number(number));
 }

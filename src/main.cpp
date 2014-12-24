@@ -28,8 +28,7 @@ static const char description[] =
 
 static const char version[] = "0.17 alpha 2";
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv){
     KAboutData about("krossword", 0, ki18n("Krossword"), version,
                      ki18n(description), KAboutData::License_GPL_V2,
                      ki18n("© 2014 Andrea Barazzetti\n© 2014 Giacomo Barazzetti\n© 2009 Friedrich Pülz"), KLocalizedString(), 0, "http://kde-apps.org/content/show.php/Krossword?content=166281");

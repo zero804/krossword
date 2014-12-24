@@ -23,6 +23,9 @@
 class KrossWordPuzzleScene;
 class KrossWordPuzzleView;
 
+#include <QPair>
+#include <QPointF>
+
 namespace Crossword
 {
 class KrossWord;
@@ -49,6 +52,12 @@ public:
 private:
     void makeTitlePage();
     void makeClueListPage();
+    void computeTitleHeight() const;
+    void computeTranslationPoint() const;
+    void computeCellSize() const;
+    int computeCrosswordSize() const;
+    void drawCell(QPainter *painter, QPair<int, int> p) const;
+    void drawCellNumbers(QPainter *painter, QPair<int, int> p, int number) const;
 
 private:
     KrossWord *m_krossWord;
@@ -57,6 +66,10 @@ private:
     QTextDocument *m_titleDoc;
     QTextDocument *m_clueListDoc;
     QPrinter *m_printer;
+
+    mutable float m_cellSize;
+    mutable float m_titleHeight;
+    mutable QPointF m_translation;
 };
 
 #endif // KROSSWORDDOCUMENT_H
