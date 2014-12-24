@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krossword\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-21 20:14+0100\n"
+"POT-Creation-Date: 2014-12-24 18:18+0100\n"
 "PO-Revision-Date: 2012-12-04 12:49+0200\n"
 "Last-Translator: Marek Laane <bald@smail.ee>\n"
 "Language-Team: Estonian <kde-et@linux.ee>\n"
@@ -281,7 +281,7 @@ msgid "New crossword"
 msgstr "Uus ristsõna"
 
 #: crosswordxmlguiwindow.cpp:707 crosswordxmlguiwindow.cpp:850
-#: krosswordpuzzle.cpp:122
+#: krosswordpuzzle.cpp:129
 msgid ""
 "The current crossword has been modified.\n"
 "Would you like to save it?"
@@ -290,7 +290,7 @@ msgstr ""
 "Kas soovid selle salvestada?"
 
 #: crosswordxmlguiwindow.cpp:708 crosswordxmlguiwindow.cpp:852
-#: krosswordpuzzle.cpp:124
+#: krosswordpuzzle.cpp:131
 msgid "Close Document"
 msgstr "Sulge dokument"
 
@@ -931,55 +931,55 @@ msgstr ""
 msgid "Solve"
 msgstr "Vasta küsimusele"
 
-#: crosswordxmlguiwindow.cpp:2263 crosswordxmlguiwindow.cpp:2762
+#: crosswordxmlguiwindow.cpp:2263 crosswordxmlguiwindow.cpp:2763
 msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
 msgid "Can't clear letter cell. %1"
 msgstr "Täheruudu puhastamine nurjus. %1"
 
 #: crosswordxmlguiwindow.cpp:2286 crosswordxmlguiwindow.cpp:2310
-#: crosswordxmlguiwindow.cpp:2335 crosswordxmlguiwindow.cpp:2768
+#: crosswordxmlguiwindow.cpp:2335 crosswordxmlguiwindow.cpp:2769
 msgctxt "%1 contains the reason why the answer couldn't be cleared"
 msgid "Can't clear answer. %1"
 msgstr "Vastuse puhastamine nurjus. %1"
 
-#: crosswordxmlguiwindow.cpp:2547 crosswordxmlguiwindow.cpp:2574
+#: crosswordxmlguiwindow.cpp:2547 crosswordxmlguiwindow.cpp:2575
 msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
 msgstr "Küsimus (põiki): \"%1\", %2 tähte, praegune vastus: \"%3\""
 
-#: crosswordxmlguiwindow.cpp:2552 crosswordxmlguiwindow.cpp:2578
+#: crosswordxmlguiwindow.cpp:2552 crosswordxmlguiwindow.cpp:2579
 msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
 msgstr "Küsimus (alla): \"%1\",  %2 tähte, praegune vastus: \"%3\""
 
-#: crosswordxmlguiwindow.cpp:2624 global.cpp:36
+#: crosswordxmlguiwindow.cpp:2625 global.cpp:36
 msgid "Empty cell"
 msgstr "Tühi ruut"
 
-#: crosswordxmlguiwindow.cpp:2626
+#: crosswordxmlguiwindow.cpp:2627
 msgid "Image '%1'"
 msgstr "Pilt '%1'"
 
-#: crosswordxmlguiwindow.cpp:2827
+#: crosswordxmlguiwindow.cpp:2828
 msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
 msgid "Can't add letter cells. %1"
 msgstr "Täheruutude lisamine nurjus. %1"
 
-#: crosswordxmlguiwindow.cpp:2829
+#: crosswordxmlguiwindow.cpp:2830
 msgctxt ""
 "%1 contains the reason why the letters couldn't be removed to the clue"
 msgid "Can't remove letter cells. %1"
 msgstr "Täheruutude eemaldamine nurjus. %1"
 
-#: crosswordxmlguiwindow.cpp:2840
+#: crosswordxmlguiwindow.cpp:2841
 msgctxt "%1 contains the reason why the letter cell couldn't be edited"
 msgid "Can't edit letter cell. %1"
 msgstr "Täheruudu muutmine nurjus. %1"
 
-#: crosswordxmlguiwindow.cpp:2875
+#: crosswordxmlguiwindow.cpp:2876
 msgctxt "%1 contains the reason why the crossword couldn't be converted"
 msgid "Can't convert crossword. %1"
 msgstr "Ristsõna teisendamine nurjus. %1"
 
-#: crosswordxmlguiwindow.cpp:2887
+#: crosswordxmlguiwindow.cpp:2888
 msgid "Couldn't connect to the database."
 msgstr "Andmebaasiga ühendumine nurjus."
 
@@ -1020,7 +1020,7 @@ msgid "Convert From: %1"
 msgstr "Algtüüp: %1"
 
 #: dialogs/convertcrossworddialog.cpp:81
-#: dialogs/createnewcrossworddialog.cpp:244
+#: dialogs/createnewcrossworddialog.cpp:231
 msgid ""
 "Changing the crossword type will discard user defined crossword type "
 "settings."
@@ -1035,26 +1035,26 @@ msgstr "Lõpptüüp: %1"
 msgid "Create New Crossword"
 msgstr "Uue ristsõna loomine"
 
-#: dialogs/createnewcrossworddialog.cpp:111
+#: dialogs/createnewcrossworddialog.cpp:109
 msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
 msgid "© %1, by %2"
 msgstr "© %1, autor %2"
 
-#: dialogs/createnewcrossworddialog.cpp:114
+#: dialogs/createnewcrossworddialog.cpp:111
 #, fuzzy
 msgctxt "Default notes value for new crosswords"
-msgid "Created with Krossword."
+msgid "Created with Krossword"
 msgstr "Uue ristsõna loomine"
 
-#: dialogs/createnewcrossworddialog.cpp:199
+#: dialogs/createnewcrossworddialog.cpp:191
 msgid "Crossword Type"
 msgstr "Ristsõna tüüp"
 
-#: dialogs/createnewcrossworddialog.cpp:200
+#: dialogs/createnewcrossworddialog.cpp:192
 msgid "Size"
 msgstr "Suurus"
 
-#: dialogs/createnewcrossworddialog.cpp:201
+#: dialogs/createnewcrossworddialog.cpp:193
 msgid "Notes"
 msgstr "Märkused"
 
@@ -1325,37 +1325,37 @@ msgstr "Ühendus andmebaasiga puudub"
 msgid "Connect Database"
 msgstr "Ühendumine andmebaasiga"
 
-#: dictionary.cpp:269
+#: dictionary.cpp:273
 msgctxt "The header title for answers in the dictionary database"
 msgid "Answer"
 msgstr "Vastus"
 
-#: dictionary.cpp:271
+#: dictionary.cpp:275
 msgctxt ""
 "The header title for clues associated with answer words in the dictionary "
 "database"
 msgid "Clue"
 msgstr "Küsimus"
 
-#: dictionary.cpp:273
+#: dictionary.cpp:277
 msgctxt ""
 "The header title for scores/difficulties of clue/answer pairs in the "
 "dictionary database"
 msgid "Score"
 msgstr "Hinne"
 
-#: dictionary.cpp:275
+#: dictionary.cpp:279
 msgctxt ""
 "The header title for languages of clue/answer pairs in the dictionary "
 "database"
 msgid "Language"
 msgstr "Keel"
 
-#: dictionary.cpp:318
+#: dictionary.cpp:322
 msgid "Importing Dictionary"
 msgstr "Sõnaraamatu import"
 
-#: dictionary.cpp:356
+#: dictionary.cpp:360
 msgid ""
 "Importing word clue pairs from '%1' to the database.\n"
 "Please wait."
@@ -1363,7 +1363,7 @@ msgstr ""
 "Sõna ja küsimuse paaride importimine failist '%1' andmebaasi.\n"
 "Palun oota."
 
-#: dictionary.cpp:485
+#: dictionary.cpp:490
 msgid ""
 "Adding words from the dictionary '%1' to the database.\n"
 "Please wait."
@@ -1371,7 +1371,7 @@ msgstr ""
 "Sõnade lisamine sõnaraamatust '%1' andmebaasi.\n"
 "Palun oota."
 
-#: dictionary.cpp:567
+#: dictionary.cpp:572
 msgid ""
 "Adding words from %1 crossword files to the database.\n"
 "Please wait."
@@ -1695,7 +1695,7 @@ msgstr "Tõrge allalaadimisel URL-ilt: %1"
 msgid "Error reading AcrossLite's .puz-format."
 msgstr "Tõrge AcrossLite'i puz-vormingu lugemisel."
 
-#: krossword.cpp:2959
+#: krossword.cpp:2947
 msgctxt "Name"
 msgid ""
 "Used as header label for the column containing the names in the crossword "
@@ -1703,7 +1703,7 @@ msgid ""
 msgstr ""
 "Kasutatakse selle veeru päisena, mis sisaldab ristsõna tüübi mudeli nimesid."
 
-#: krossword.cpp:2962
+#: krossword.cpp:2950
 msgctxt "Description"
 msgid ""
 "Used as header label for the column containing the descriptions in the "
@@ -1712,62 +1712,62 @@ msgstr ""
 "Kasutatakse selle veeru päisena, mis sisaldab ristsõna tüübi mudeli "
 "kirjeldusi."
 
-#: krossword.cpp:3045
+#: krossword.cpp:3033
 msgid "No error."
 msgstr "Tõrkeid pole."
 
-#: krossword.cpp:3048
+#: krossword.cpp:3036
 msgid "The clue doesn't fit in the grid with the given settings."
 msgstr "Küsimus ei mahu määratud seadistuste korral ruudustikku."
 
-#: krossword.cpp:3050
+#: krossword.cpp:3038
 msgid "The cell for the new clue isn't empty."
 msgstr "Uue küsimuse ruut ei ole tühi."
 
-#: krossword.cpp:3052
+#: krossword.cpp:3040
 msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
 msgstr ""
 "Vastus sisaldab lubamatuid märke. Lubatud on A-Z (inglise tähestik) ja/või "
 "0-9."
 
-#: krossword.cpp:3054
+#: krossword.cpp:3042
 msgid "The answer produces mismatching letter cells at the same positions."
 msgstr "Vastus toob kaasa kokkusobimatud täheruudud samas asukohas."
 
-#: krossword.cpp:3056
+#: krossword.cpp:3044
 msgid ""
 "The answer overwrites the answer to another clue with the same orientation."
 msgstr "Vastus kirjutab üle teise samasuunalise küsimuse vastuse."
 
-#: krossword.cpp:3058
+#: krossword.cpp:3046
 msgid "The answer's letter cells cross a clue cell."
 msgstr "Vastuse täheruudud ristuvad küsimusruuduga."
 
-#: krossword.cpp:3060
+#: krossword.cpp:3048
 msgid "The current crossword type doesn't allow clue cells."
 msgstr "Aktiivne ristsõnatüüp ei luba küsimusruute."
 
-#: krossword.cpp:3062
+#: krossword.cpp:3050
 msgid "The current crossword type requires a clue cell for each clue."
 msgstr "Aktiivne ristsõnatüüp nõuab igale küsimusele küsimusruutu."
 
-#: krossword.cpp:3064
+#: krossword.cpp:3052
 msgid "The answer is too short for the current crossword type."
 msgstr "Vastus on aktiivse ristsõnatüübi jaoks liiga lühike."
 
-#: krossword.cpp:3066
+#: krossword.cpp:3054
 msgid "The answer overwrites the clue cell."
 msgstr "Vastus kirjutab üle küsimusruudu."
 
-#: krossword.cpp:3069
+#: krossword.cpp:3057
 msgid "The image doesn't fit in the grid with the given settings."
 msgstr "Pilt ei mahu määratud seadistuste korral ruudustikku."
 
-#: krossword.cpp:3071
+#: krossword.cpp:3059
 msgid "The cells for the new image aren't empty."
 msgstr "Uuele pildile ette nähtud ruudud pole tühjad."
 
-#: krossword.cpp:3073
+#: krossword.cpp:3061
 msgid "The current crossword type doesn't allow image cells."
 msgstr "Aktiivne ristsõnatüüp ei luba pildiruute."
 
@@ -1786,45 +1786,45 @@ msgctxt "Title for the list of across/horizontal clues when printing"
 msgid "Across clues"
 msgstr "Küsimused põiksuunas"
 
-#: krosswordpuzzle.cpp:78
+#: krosswordpuzzle.cpp:85
 #, fuzzy
 msgid "Would you like to add the crossword into the library?"
 msgstr "Uue ristsõna loomine kogus."
 
-#: krosswordpuzzle.cpp:79
+#: krosswordpuzzle.cpp:86
 #, fuzzy
 msgid "Save crossword"
 msgstr "Uus ristsõna"
 
-#: krosswordpuzzle.cpp:87
+#: krosswordpuzzle.cpp:94
 msgid "Could not open resource at "
 msgstr ""
 
-#: krosswordpuzzle.cpp:88
+#: krosswordpuzzle.cpp:95
 msgid "Resource unavailable"
 msgstr ""
 
-#: krosswordpuzzle.cpp:173 library/librarygui.cpp:212
+#: krosswordpuzzle.cpp:180 library/librarygui.cpp:233
 msgid "Loading..."
 msgstr "Laadimine..."
 
-#: krosswordpuzzle.cpp:176
+#: krosswordpuzzle.cpp:183
 msgid "Loading the crossword, please wait..."
 msgstr "Ristsõna laadimine, palun oota..."
 
-#: krosswordpuzzle.cpp:233 krosswordpuzzle.cpp:426 library/librarygui.cpp:383
+#: krosswordpuzzle.cpp:240 krosswordpuzzle.cpp:429 library/librarygui.cpp:412
 msgid "Library"
 msgstr "Kogu"
 
-#: krosswordpuzzle.cpp:237
+#: krosswordpuzzle.cpp:244
 msgid "Templates"
 msgstr "Mallid"
 
-#: krosswordpuzzle.cpp:254
+#: krosswordpuzzle.cpp:261
 msgid "&Restore"
 msgstr "&Taasta"
 
-#: krosswordpuzzle.cpp:254
+#: krosswordpuzzle.cpp:261
 msgid ""
 "Restore the automatically saved version of an edited crossword before the "
 "crash"
@@ -1832,7 +1832,7 @@ msgstr ""
 "Redigeeritud ristsõna enne krahhi automaatselt salvestatud versiooni "
 "taastamine"
 
-#: krosswordpuzzle.cpp:255
+#: krosswordpuzzle.cpp:262
 msgid ""
 "An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
 " Do you want to restore the crossword?"
@@ -1840,7 +1840,7 @@ msgstr ""
 "Leiti salvestamata ristsõna. Tõenäoliselt tabas mängu krahh. Vabandame!\n"
 " Kas taastada ristsõna?"
 
-#: krosswordpuzzle.cpp:276
+#: krosswordpuzzle.cpp:283
 #, fuzzy
 msgctxt ""
 "This string is used to replace the library path for crossword files that are "
@@ -1849,15 +1849,15 @@ msgctxt ""
 msgid "Library"
 msgstr "Kogu"
 
-#: krosswordpuzzle.cpp:306
+#: krosswordpuzzle.cpp:308
 msgid "Animations"
 msgstr "Animatsioonid"
 
-#: krosswordpuzzle.cpp:311
+#: krosswordpuzzle.cpp:313
 msgid "Theme"
 msgstr "Teema"
 
-#: krosswordpuzzle.cpp:462
+#: krosswordpuzzle.cpp:466
 #, fuzzy
 msgid "Error loading file '%1'"
 msgstr "Tõrge faili \"%1\" laadimisel"
@@ -1890,11 +1890,17 @@ msgstr "Paanidena"
 msgid "The Cross Nerd current crossword"
 msgstr "Aktiivse ristsõna sulgemine."
 
-#: library/librarygui.cpp:277
+#: library/librarygui.cpp:201 library/librarygui.cpp:206
+#: library/librarygui.cpp:214
+#, fuzzy
+msgid "Crossword %1"
+msgstr "Ristsõna"
+
+#: library/librarygui.cpp:298
 msgid "Can't export whole directories. Please select a crossword."
 msgstr "Terveid katalooge ei saa eksportida. Palun vali ristsõna."
 
-#: library/librarygui.cpp:283
+#: library/librarygui.cpp:304
 msgid ""
 "There was an error opening the crossword.\n"
 "%1"
@@ -1902,43 +1908,51 @@ msgstr ""
 "Ristsõna avamisel tekkis tõrge.\n"
 "%1"
 
-#: library/librarygui.cpp:293
+#: library/librarygui.cpp:314
 msgid "Export"
 msgstr "Eksport"
 
-#: library/librarygui.cpp:311
+#: library/librarygui.cpp:332
 msgid "Export Settings"
 msgstr "Ekspordiseadistused"
 
-#: library/librarygui.cpp:327
+#: library/librarygui.cpp:348
 msgid "Couldn't export the image to the specified file."
 msgstr "Pildi eksportimine määratud failina nurjus."
 
-#: library/librarygui.cpp:336
+#: library/librarygui.cpp:357
 msgid "Download Crossword To Library"
 msgstr "Ristsõna allalaadimine kogusse"
 
-#: library/librarygui.cpp:344
+#: library/librarygui.cpp:365
 msgid "Matt Jones (thursdays)"
 msgstr "Matt Jones (neljapäeviti)"
 
-#: library/librarygui.cpp:348
+#: library/librarygui.cpp:369
 msgid "Wall Street Journal by Mike Shenk (fridays)"
 msgstr "Wall Street Journali ristsõna Mike Shenkilt (reedeti)"
 
-#: library/librarygui.cpp:352
+#: library/librarygui.cpp:373
 msgid "The Chronicle of Higher Education (fridays)"
 msgstr ""
 
-#: library/librarygui.cpp:356
+#: library/librarygui.cpp:377
 msgid "The Cross Nerd (tuesdays)"
 msgstr ""
 
-#: library/librarygui.cpp:360
+#: library/librarygui.cpp:381
 msgid "I Swear Crossword by Victor Fleming (fridays)"
 msgstr ""
 
-#: library/librarygui.cpp:412
+#: library/librarygui.cpp:385
+msgid "ChrisWords.com"
+msgstr ""
+
+#: library/librarygui.cpp:389
+msgid "Mots-croisés.ch free French crosswords"
+msgstr ""
+
+#: library/librarygui.cpp:441
 msgid ""
 "This will permanently delete the selected directory and all contained "
 "crosswords from the library. The operation can't be undone!"
@@ -1946,7 +1960,7 @@ msgstr ""
 "See kustutab valitud kataloogi ja kõik selles leiduvad ristsõnad jäädavalt "
 "kogust. Seda toimingut ei saa tagasi võtta!"
 
-#: library/librarygui.cpp:420
+#: library/librarygui.cpp:449
 msgid ""
 "Couldn't remove the directory from the library.\n"
 "You need root privileges to remove directories which belong to the global "
@@ -1956,7 +1970,7 @@ msgstr ""
 "Kataloogi eemaldamiseks, mis kuulub globaalsesse kogusse, läheb tarvis "
 "administraatori õigusi."
 
-#: library/librarygui.cpp:424
+#: library/librarygui.cpp:453
 msgid ""
 "This will permanently delete the selected crossword from the library.\n"
 "The operation can't be undone!"
@@ -1964,91 +1978,91 @@ msgstr ""
 "See kustutab valitud ristsõna jäädavalt kogust.\n"
 "Seda toimingut ei saa tagasi võtta!"
 
-#: library/librarygui.cpp:431
+#: library/librarygui.cpp:460
 #, fuzzy
 msgid "Couldn't remove the crossword from the library."
 msgstr ""
 "Ristsõna eemaldamine kogust nurjus.\n"
 "%1"
 
-#: library/librarygui.cpp:452
+#: library/librarygui.cpp:481
 msgid "New Library Folder"
 msgstr "Kogu uus kataloog"
 
-#: library/librarygui.cpp:460
+#: library/librarygui.cpp:489
 msgid "The folder already exists in the library."
 msgstr "Kataloog on kogus juba olemas."
 
-#: library/librarygui.cpp:495
+#: library/librarygui.cpp:524
 msgctxt "@action:intoolbar"
 msgid "&Open..."
 msgstr ""
 
-#: library/librarygui.cpp:496
+#: library/librarygui.cpp:525
 msgid "Open the selected crossword."
 msgstr "Valitud ristsõna avamine."
 
-#: library/librarygui.cpp:500
+#: library/librarygui.cpp:529
 #, fuzzy
 msgctxt "@action:intoolbar"
 msgid "&Import..."
 msgstr "&Impordi"
 
-#: library/librarygui.cpp:501
+#: library/librarygui.cpp:530
 msgid "Import a crossword to the library."
 msgstr "Ristsõna importimine kogusse."
 
-#: library/librarygui.cpp:505
+#: library/librarygui.cpp:534
 #, fuzzy
 msgctxt "@action:intoolbar"
 msgid "&Export..."
 msgstr "&Ekspordi"
 
-#: library/librarygui.cpp:506
+#: library/librarygui.cpp:535
 msgid "Export the selected crossword from the library."
 msgstr "Valitud ristsõna eksportimine kogust."
 
-#: library/librarygui.cpp:510
+#: library/librarygui.cpp:539
 #, fuzzy
 msgctxt "@action:intoolbar"
 msgid "&Download..."
 msgstr "Laa&di alla"
 
-#: library/librarygui.cpp:511
+#: library/librarygui.cpp:540
 msgid "Download a crossword and add it to the library."
 msgstr "Ristsõna allalaadimine ja lisamine kogusse."
 
-#: library/librarygui.cpp:515
+#: library/librarygui.cpp:544
 #, fuzzy
 msgctxt "@action:intoolbar"
 msgid "&Delete..."
 msgstr "&Kustuta"
 
-#: library/librarygui.cpp:516
+#: library/librarygui.cpp:545
 msgid "Delete the selected crossword from the library."
 msgstr "Valitud ristsõna kustutamine kogust."
 
-#: library/librarygui.cpp:520
+#: library/librarygui.cpp:549
 #, fuzzy
 msgctxt "@action:intoolbar"
 msgid "New &Folder..."
 msgstr "Uus kataloo&g"
 
-#: library/librarygui.cpp:521
+#: library/librarygui.cpp:550
 msgid "Create a new folder in the library."
 msgstr "Uue kataloogi loomine kogus."
 
-#: library/librarygui.cpp:525
+#: library/librarygui.cpp:554
 #, fuzzy
 msgctxt "@action:intoolbar"
 msgid "New &Crossword..."
 msgstr "Uus &ristsõna"
 
-#: library/librarygui.cpp:526
+#: library/librarygui.cpp:555
 msgid "Create a new crossword in the library."
 msgstr "Uue ristsõna loomine kogus."
 
-#: library/librarygui.cpp:537
+#: library/librarygui.cpp:566
 msgid "%1"
 msgstr ""
 
@@ -2798,9 +2812,6 @@ msgstr "bald@smail.ee"
 
 #~ msgid "Create Database"
 #~ msgstr "Andmebaasi loomine"
-
-#~ msgid "Crossword"
-#~ msgstr "Ristsõna"
 
 #~ msgid "Crossword &Size:"
 #~ msgstr "Ristsõna &suurus:"
