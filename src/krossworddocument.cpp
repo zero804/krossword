@@ -114,7 +114,7 @@ void KrossWordDocument::renderPage(QPainter *painter, int page)
                                   cellSize - (cellSize*0.1),
                                   cellSize - (cellSize*0.1));
                 */
-
+            /*
             // Cell with one clue inside
             } else if(cell->cellType() == Crossword::CellType::ClueCellType) {
                 painter->setPen(Qt::green);
@@ -128,25 +128,40 @@ void KrossWordDocument::renderPage(QPainter *painter, int page)
                 drawCell(painter, cell->coord());
 
             // Standard letter cell
+            */
             } else if(cell->cellType() == Crossword::CellType::LetterCellType) {
-
                 LetterCell* lcell = static_cast<LetterCell*>(cell);
+                ClueCell* horiz = lcell->clueHorizontal();
+                ClueCell* vert = lcell->clueVertical();
 
                 Coord cellCoord = cell->coord();
-                Coord horClueCoord = lcell->clueHorizontal()->coord();
-                Coord verClueCoord = lcell->clueVertical()->coord();
+                Coord horClueCoord;
+                Coord verClueCoord;
 
                 int clueNumber = -1;
+                int hclueNumber = -1;
+                int vclueNumber = -1;
 
-                if (horClueCoord == verClueCoord) {
-                    clueNumber = lcell->clueHorizontal()->clueNumber();
+                if (horiz != nullptr) {
+                    horClueCoord = horiz->coord();
+                    hclueNumber = horiz->clueNumber();
+                }
+
+                if (vert != nullptr) {
+                    verClueCoord = vert->coord();
+                    vclueNumber = vert->clueNumber();
+                }
+
+
+                if (horClueCoord == cellCoord) {
+                    clueNumber = hclueNumber;
                 } else if (verClueCoord == cellCoord) {
-                    clueNumber = lcell->clueVertical()->clueNumber();
+                    clueNumber = vclueNumber;
                 }
 
                 painter->setPen(Qt::black);
                 painter->setBrush(QBrush(Qt::white, Qt::SolidPattern));
-                drawCell(painter, cell->coord());
+                drawCell(painter, cellCoord);
 
                 if (clueNumber != -1) {
                     clueNumber += 1;
@@ -156,9 +171,10 @@ void KrossWordDocument::renderPage(QPainter *painter, int page)
                     font.setPointSizeF(7.0 * levelOfDetail);
 
                     painter->setFont(font);
-                    drawCellNumbers(painter, cell->coord(), clueNumber);
+                    drawCellNumbers(painter, cellCoord, clueNumber);
                 }
 
+            /*
             // Cell with two clues inside
             } else if(cell->cellType() == Crossword::CellType::SolutionLetterCellType) {
                 painter->setPen(Qt::gray);
@@ -170,6 +186,8 @@ void KrossWordDocument::renderPage(QPainter *painter, int page)
                 painter->setBrush(Qt::SolidPattern);
                 drawCell(painter, cell->coord());
             }
+            */
+        }
         }
 
     } else {
@@ -281,7 +299,7 @@ void KrossWordDocument::computeTranslationPoint() const
 {
     const int crosswordSize = computeCrosswordSize();
     m_translation = QPointF((m_printer->pageRect().width() - crosswordSize)/2.0,
-                            (m_printer->pageRect().height() - crosswordSize))/2.0;
+                            (m_titleHeight + (m_printer->pageRect().height() - 130 - m_titleHeight) - crosswordSize)/2.0);
 
     qDebug() << m_translation;
 }
