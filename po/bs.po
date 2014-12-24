@@ -20,118 +20,185 @@ msgstr ""
 "X-Generator: Launchpad (build 16890)\n"
 "X-Launchpad-Export-Date: 2014-01-11 06:22+0000\n"
 
+#: library/librarygui.cpp:566
+msgid "%1"
+msgstr ""
+
+#: krossword.cpp:612
+msgid "%1 clue cell"
+msgid_plural "%1 clue cells"
+msgstr[0] "%1 ćelija traga"
+msgstr[1] "%1 ćelije traga"
+msgstr[2] "%1 ćelija traga"
+
+#: krossword.cpp:617
+msgid "%1 double clue cell"
+msgid_plural "%1 double clue cells"
+msgstr[0] "%1 dupla ćelija traga"
+msgstr[1] "%1 duple ćelije traga"
+msgstr[2] "%1 duplih ćelija traga"
+
+#: dialogs/dictionarydialog.cpp:175 dialogs/dictionarydialog.cpp:190
+msgid "%1 entries added from %2 crosswords"
+msgstr "%1 ulazi dodani iz %2 križaljki"
+
+#: dialogs/dictionarydialog.cpp:165
+msgid "%1 entries added from this dictionary: '%2'"
+msgstr "%1 ulazi dodani iz ovog rječnika: '%2'"
+
+#: dialogs/dictionarydialog.cpp:255
+msgid "%1 entry imported from '%2'"
+msgid_plural "%1 entries imported from '%2'"
+msgstr[0] "%1 ulaz uvezen iz '%2'"
+msgstr[1] "%1 ulaza uvezena iz '%2'"
+msgstr[2] "%1 ulaza uvezeno iz '%2'"
+
+#: dialogs/dictionarydialog.cpp:209
+msgid "%1 entry removed"
+msgid_plural "%1 entries removed"
+msgstr[0] "%1 ulaz uklonjen"
+msgstr[1] "%1 ulaza uklonjena"
+msgstr[2] "%1 ulaza uklonjeno"
+
+#: dialogs/currentcellwidget.cpp:145
+msgid "%1 selected at (%2, %3)."
+msgstr "%1 odabrano na (%2, %3)."
+
+#: krossword.cpp:622
+msgid "%1 solution letter cell"
+msgid_plural "%1 solution letter cells"
+msgstr[0] "%1 ćelija slova rješenja"
+msgstr[1] "%1 ćelije slova rješenja"
+msgstr[2] "%1 ćelija slova rješenja"
+
+#: crosswordxmlguiwindow.cpp:351
+#, no-c-format
+msgctxt "%p is replaced by the percentage of solved letter cells"
+msgid "%p% solved"
+msgstr "%p% rješeno"
+
+#: crosswordxmlguiwindow.cpp:1453
+msgid "&Add Clue"
+msgstr "&Dodaj trag"
+
+#: crosswordxmlguiwindow.cpp:1476
+msgid "&Add Image"
+msgstr "&Dodaj sliku"
+
+#: crosswordxmlguiwindow.cpp:1539
+msgid "&Check"
+msgstr "&Provjeri"
+
+#: crosswordxmlguiwindow.cpp:1492
+msgid "&Check for rotation symmetry..."
+msgstr "&Provjeri da li ima rotaciona simetrija..."
+
+#: crosswordxmlguiwindow.cpp:1544
+msgid "&Clear Answers"
+msgstr "&Čisti odgovore"
+
+#: crosswordxmlguiwindow.cpp:1482
+#, fuzzy
+msgid "&Clear Crossword..."
+msgstr "&Očisti križaljku"
+
+#: dialogs/crosswordpropertiesdialog.cpp:46
+msgid "&Convert..."
+msgstr "&Pretvori..."
+
+#: crosswordxmlguiwindow.cpp:1487
+msgid "&Crossword Properties..."
+msgstr "Postavke &križaljke..."
+
+#: library/librarygui.cpp:544
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Delete..."
+msgstr "&Obriši"
+
+#: crosswordxmlguiwindow.cpp:1311
+msgid "&Dictionary..."
+msgstr "&Rječnik..."
+
+#: library/librarygui.cpp:539
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Download..."
+msgstr "&Preuzimanje"
+
+#: crosswordxmlguiwindow.cpp:1549
+msgid "&Eraser"
+msgstr "&Brisač"
+
+#: library/librarygui.cpp:534
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Export..."
+msgstr "&Izvezi"
+
+#: crosswordxmlguiwindow.cpp:1400
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&First Letter"
+msgstr "Odaberi &prvo slovo"
+
+#: library/librarygui.cpp:529
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Import..."
+msgstr "&Uvezi"
+
+#: crosswordxmlguiwindow.cpp:1405
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Last Letter"
+msgstr "Odaberi &posljednje slovo"
+
+#: crosswordxmlguiwindow.cpp:1415
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Next Clue"
+msgstr "Odaberi &sljedeći trag"
+
+#: library/librarygui.cpp:524
+msgctxt "@action:intoolbar"
+msgid "&Open..."
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1420
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Previous Clue"
+msgstr "Odaberi &prethodni trag"
+
+#: crosswordxmlguiwindow.cpp:1459 crosswordxmlguiwindow.cpp:1889
+msgid "&Remove"
+msgstr "Uk&loni"
+
+#: crosswordxmlguiwindow.cpp:1885
+msgid "&Remove Clue"
+msgstr "&Ukloni trag"
+
+#: crosswordxmlguiwindow.cpp:1887
+msgid "&Remove Image"
+msgstr "&Ukloni sliku"
+
+#: krosswordpuzzle.cpp:261
+msgid "&Restore"
+msgstr "&Obnovi"
+
+#: dialogs/crosswordtypewidget.cpp:226
+msgid "&Rules..."
+msgstr "&Pravila..."
+
+#: crosswordxmlguiwindow.cpp:1497
+msgid "&Statistics..."
+msgstr "&Statistike..."
+
 #: cells/cluecell.cpp:888
 msgctxt "Display text for empty clue texts"
 msgid "<placeholder>empty</placeholder>"
 msgstr "<placeholder>prazno</placeholder>"
-
-#: cells/imagecell.cpp:68
-msgid "Edit image properties to set an image"
-msgstr "Uredi postavke slike da postavite sliku"
-
-#: cluemodel.cpp:60
-msgid "Clue"
-msgstr "Trag"
-
-#: cluemodel.cpp:60
-msgid "Answer"
-msgstr "Odgovoriti"
-
-#: cluemodel.cpp:63
-msgid "Across clues"
-msgstr "Preko tragova"
-
-#: cluemodel.cpp:64
-msgid "Down clues"
-msgstr "Donji tragovi"
-
-#: commands.cpp:334
-msgid "Remove Clue Without Text"
-msgstr "Ukloni trag bez teksta"
-
-#: commands.cpp:336
-msgid "Remove Clue '%1'"
-msgstr "Ukloni trag '%1'"
-
-#: commands.cpp:343 commands.cpp:552 commands.cpp:662 commands.cpp:697
-msgid "No cell at the given coordinates (%1, %2)"
-msgstr "Nema ćelije na datim koordinatama (%1, %2)"
-
-#: commands.cpp:352
-msgctxt ""
-"%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
-msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
-msgstr "Trag ćelija nije pronađena na datim koordinatama (%1, %2): '%3'"
-
-#: commands.cpp:423
-msgid "Add Clue Without Text"
-msgstr "Dodaj trag bez teksta"
-
-#: commands.cpp:425
-msgid "Add Clue '%1'"
-msgstr "Dodaj trag '%1'"
-
-#: commands.cpp:544
-msgid "Remove Image '%1'"
-msgstr "Ukloni sliku '%1'"
-
-#: commands.cpp:559
-msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
-msgstr "Ćelija slike nije pronađena na datim koordinatama (%1, %2): '%3'"
-
-#: commands.cpp:612
-msgid "Add Image '%1'"
-msgstr "Dodaj sliku '%1'"
-
-#: commands.cpp:626
-msgid "Convert Letter at (%1, %2) to Solution Letter"
-msgstr "Pretvori slovo na (%1, %2) u slovo rješenja"
-
-#: commands.cpp:654
-msgctxt "%1 contains the position of the solution letter in the solution word."
-msgid "Convert Solution Letter %1 to Letter"
-msgstr "Pretvori slovo rješenja %1 u slovo"
-
-#: commands.cpp:669
-msgid "Solution letter cell not found at the given coordinates (%1, %2)"
-msgstr "Ćelija slova rješenja nije pronađena na datim koordinatama (%1, %2)"
-
-#: commands.cpp:704 commands.cpp:1172
-msgid "Letter cell not found at the given coordinates (%1, %2)"
-msgstr "Ćelija slova nije pronađena na datim koordinatama (%1, %2)"
-
-#: commands.cpp:725
-msgctxt ""
-"Error message to be displayed, when the user tries to convert a letter to a "
-"solution letter, but the position of the new solution letter is already "
-"used. Each solution letter has a position in the solution word of the "
-"crossword and all solution letters of a crossword form it's solution word. "
-"%1 is replaced by the (already used) position."
-msgid "The solution letter position %1 is already assigned."
-msgstr "Pozicija slova rješenja %1 je već dodjeljena."
-
-#: commands.cpp:774
-msgid "Add %1 letter"
-msgid_plural "Add %1 letters"
-msgstr[0] "Dodaj %1 slovo"
-msgstr[1] "Dodaj %1 slova"
-msgstr[2] "Dodaj %1 slova"
-
-#: commands.cpp:776
-msgid "Remove %1 letter"
-msgid_plural "Remove %1 letters"
-msgstr[0] "Ukloni %1 slovo"
-msgstr[1] "Ukloni %1 slova"
-msgstr[2] "Ukloni %1 slova"
-
-#: commands.cpp:778
-msgctxt "This string shouldn't happen to be used"
-msgid "Remove no letters"
-msgstr "Uklonite ne slova"
-
-#: commands.cpp:813 commands.cpp:1006 commands.cpp:1100
-msgid "No clue cell given"
-msgstr "Nije data ćelija traga"
 
 #: commands.cpp:993
 msgctxt ""
@@ -140,48 +207,147 @@ msgctxt ""
 msgid "<placeholder>empty</placeholder>"
 msgstr "<placeholder>prazno</placeholder>"
 
-#: commands.cpp:991
-msgid "Change Clue '%1'"
-msgstr "Promijeni trag '%1'"
+#: crosswordxmlguiwindow.cpp:1537
+msgid ""
+"<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
+"solution will be displayed.</p><p>If you filled in all letters and do not "
+"want to give up, choose \"Done!\".</p></qt>"
+msgstr ""
+"<qt><p>Izaberite \"<b>Solve</b>\" iako želite da predate trenutačnu igru. "
+"Rješenje će biti prikazano.</p><p>Ako ste popunili sva slova i ne želite da "
+"odustanete, izaberite \"Done!\".</p></qt>"
 
-#: commands.cpp:1092
-msgid "Clear Correct Answer of Clue at (%1, %2)"
-msgstr "Ukloni tačan odgovor od traga na (%1,%2)"
+#: global.cpp:508
+msgctxt "Long description of the crossword type 'Crossnumber'"
+msgid ""
+"A crossnumber (also known as a cross-figure) is the numerical analogy of a "
+"crossword, in which the solutions to the clues are numbers instead of words. "
+"Clues are usually arithmetical expressions, but can also be general "
+"knowledge clues to which the answer is a number or year. There are also "
+"numerical fill-in crosswords.\n"
+"The Daily Mail Weekend magazine used to feature crossnumbers under the "
+"misnomer Number Word. This kind of puzzle should not be confused with a "
+"different puzzle that the Daily Mail refers to as Cross Number.\n"
+"(text taken from wikipedia)"
+msgstr ""
 
-#: commands.cpp:1144
-msgid "Clear Correct Letter at (%1, %2), was %3"
-msgstr "Ukloni tačno slovo na (%1,%2), je bilo %3"
+#: main.cpp:27
+msgid ""
+"A crossword puzzle game and editor for KDE.\n"
+"Based on KrossWordPuzzle."
+msgstr ""
 
-#: commands.cpp:1147
-msgid "Set Correct Letter at (%1, %2) to %3"
-msgstr "Postavi tačno slovo na (%1, %2) do %3"
+#: cluemodel.cpp:63
+msgid "Across clues"
+msgstr "Preko tragova"
 
-#: commands.cpp:1150
-msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
-msgstr "Uredi tačno slovo na (%1, %2) od %3 do %4"
+#: krossworddocument.cpp:88
+msgctxt "Title for the list of across/horizontal clues when printing"
+msgid "Across clues"
+msgstr "Preko tragova"
 
-#: commands.cpp:1154
-msgid "Clear Letter at (%1, %2), was %3"
-msgstr "Ukloni slovo na (%1,%2), je bilo %3"
+#: commands.cpp:774
+msgid "Add %1 letter"
+msgid_plural "Add %1 letters"
+msgstr[0] "Dodaj %1 slovo"
+msgstr[1] "Dodaj %1 slova"
+msgstr[2] "Dodaj %1 slova"
 
-#: commands.cpp:1157
-msgid "Set Letter at (%1, %2) to %3"
-msgstr "Postavi slovo na (%1, %2) do %3"
+#: commands.cpp:425
+msgid "Add Clue '%1'"
+msgstr "Dodaj trag '%1'"
 
-#: commands.cpp:1160
-msgid "Edit Letter at (%1, %2) From %3 to %4"
-msgstr "Uredi slovo na (%1, %2) od %3 do %4"
+#: commands.cpp:423
+msgid "Add Clue Without Text"
+msgstr "Dodaj trag bez teksta"
 
-#: commands.cpp:1222
-msgid "Clear Crossword"
-msgstr "Očisti Crossword"
+#: commands.cpp:612
+msgid "Add Image '%1'"
+msgstr "Dodaj sliku '%1'"
 
-#: commands.cpp:1268
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Title"
-msgstr "Naslov"
+#: crosswordxmlguiwindow.cpp:1312
+#, fuzzy
+msgid "Add or remove crossword dictionaries"
+msgstr "Dodaj ili ukloni rječnike križaljke."
+
+#: dictionary.cpp:572
+msgid ""
+"Adding words from %1 crossword files to the database.\n"
+"Please wait."
+msgstr ""
+"Dodaje riječi iz %1 datoteka križaljke u bazu podataka.\n"
+"Molimo sačekajte."
+
+#: dictionary.cpp:490
+msgid ""
+"Adding words from the dictionary '%1' to the database.\n"
+"Please wait."
+msgstr ""
+"Dodaje riječi iz rječnika '%1' u bazu podataka.\n"
+"Molimo sačekajte."
+
+#: crosswordxmlguiwindow.cpp:1454
+#, fuzzy
+msgid "Adds a new clue at the current cell"
+msgstr "Dodaje novi trag u trenutačnu ćeliju."
+
+#: crosswordxmlguiwindow.cpp:1477
+#, fuzzy
+msgid "Adds a new image at the current cell"
+msgstr "Dodaje novu sliku trenutačnoj ćeliji."
+
+#: global.cpp:48
+msgid "All cells"
+msgstr "Sve ćelije"
+
+#: krossword.cpp:656
+msgid ""
+"All clue cells get removed. The initial letter to clue number mapping is "
+"A=1, B=2, ..., Z=26."
+msgstr ""
+"Sve ćelije traga su uklonjene. Početno slovo mapiranja traga broja je A=1, "
+"B=2, ..., Z=26."
+
+#: global.cpp:457
+msgid "American Crossword"
+msgstr "Američka križaljka"
+
+#: global.cpp:459
+msgctxt "Short description of the crossword type 'American'"
+msgid ""
+"American crosswords have numbered clues and a list of clues on the side of "
+"the crossword. They have usually 180 degree rotational symmetry."
+msgstr ""
+"Američka križaljka ima numeričke tragove i listu tragova sa strane "
+"križaljke. One obično imaju 180 stepeni racionalnu simetriju."
+
+#: krosswordpuzzle.cpp:262
+msgid ""
+"An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
+" Do you want to restore the crossword?"
+msgstr ""
+
+#: main.cpp:37
+msgid "Andrea Barazzetti"
+msgstr ""
+
+#: krosswordpuzzle.cpp:308
+msgid "Animations"
+msgstr "Animacije"
+
+#: cluemodel.cpp:60
+msgid "Answer"
+msgstr "Odgovoriti"
+
+#: dictionary.cpp:273
+msgctxt "The header title for answers in the dictionary database"
+msgid "Answer"
+msgstr ""
+
+#: library/librarymanager.cpp:74
+msgctxt "The title for authors of crosswords in the library tree view"
+msgid "Author(s):"
+msgstr ""
 
 #: commands.cpp:1271
 msgctxt ""
@@ -190,149 +356,129 @@ msgctxt ""
 msgid "Authors"
 msgstr "Pisci"
 
-#: commands.cpp:1274
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Copyright"
-msgstr "Autorsko pravo"
+#: dialogs/statisticsdialog.cpp:104
+msgid "Avg. Answer Length:"
+msgstr "Pro. dužina odgovora:"
 
-#: commands.cpp:1277
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Notes"
-msgstr "Zabilješke"
+#: crosswordxmlguiwindow.cpp:1049
+msgid "Can't add clue at the current cell"
+msgstr "Ne može dodati trag na trenutačnu ćeliju"
 
-#: commands.cpp:1284
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Size"
-msgstr "Veličina"
+#: crosswordxmlguiwindow.cpp:1070
+msgctxt "%1 contains the reason why the clue couldn't be added"
+msgid "Can't add clue. %1"
+msgstr "Ne može dodati trag. %1"
 
-#: commands.cpp:1292
-msgid "Changed Crossword Properties (%1)"
-msgstr "Promjenje postavke Crossword-a (%1)"
+#: crosswordxmlguiwindow.cpp:1040
+msgid "Can't add clues on crossed letter cells"
+msgstr "Ne može dodati tragove na ukrštene ćelije slova"
 
-#: commands.cpp:1297
+#: crosswordxmlguiwindow.cpp:1101
+msgctxt "%1 contains the reason why the image couldn't be added"
+msgid "Can't add image. %1"
+msgstr "Ne može dodati sliku. %1"
+
+#: crosswordxmlguiwindow.cpp:2828
+msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
+msgid "Can't add letter cells. %1"
+msgstr "Ne može dodati ćeliju slova. %1"
+
+#: crosswordxmlguiwindow.cpp:1219
 msgctxt ""
-"%1 may be a list of changes separated by ',' if the list of changes contains "
-"more than 2 items. %2 is the last item"
-msgid "Changed Crossword Properties (%1 and %2)"
+"%1 contains the reason why the new clue number mapping couldn't be applied"
+msgid "Can't apply clue number mapping. %1"
+msgstr "Ne može primjeniti mapiranje broja. %1"
+
+#: crosswordxmlguiwindow.cpp:1760
+msgctxt "%1 contains the reason why the answer offset couldn't be changed"
+msgid "Can't change answer offset. %1"
+msgstr "Ne može promijeniti ofset odgovora. %1"
+
+#: crosswordxmlguiwindow.cpp:1785
+msgctxt "%1 contains the reason why the clue text couldn't be changed"
+msgid "Can't change clue text. %1"
+msgstr "Ne može promijeniti trag tekst. %1"
+
+#: crosswordxmlguiwindow.cpp:1798
+msgctxt "%1 contains the reason why the correct answer couldn't be changed"
+msgid "Can't change correct answer. %1"
+msgstr "Ne može promijeniti tačan odgovor. %1"
+
+#: crosswordxmlguiwindow.cpp:1149
+msgctxt ""
+"%1 contains the reason why the crossword properties couldn't be changed"
+msgid "Can't change crossword properties. %1"
+msgstr "Ne može promijeniti postavke križaljke. %1"
+
+#: crosswordxmlguiwindow.cpp:1773
+msgctxt "%1 contains the reason why the orientation couldn't be changed"
+msgid "Can't change orientation. %1"
+msgstr "Ne može promijeniti orijentaciju. %1"
+
+#: crosswordxmlguiwindow.cpp:2286 crosswordxmlguiwindow.cpp:2310
+#: crosswordxmlguiwindow.cpp:2335 crosswordxmlguiwindow.cpp:2769
+msgctxt "%1 contains the reason why the answer couldn't be cleared"
+msgid "Can't clear answer. %1"
+msgstr "Ne može očistiti odgovor. %1"
+
+#: crosswordxmlguiwindow.cpp:1132
+msgctxt "%1 contains the reason why the crossword couldn't be cleared"
+msgid "Can't clear crossword. %1"
+msgstr "Ne može očistiti križaljku. %1"
+
+#: crosswordxmlguiwindow.cpp:2263 crosswordxmlguiwindow.cpp:2763
+msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
+msgid "Can't clear letter cell. %1"
+msgstr "Ne može očistiti ćeliju slova. %1"
+
+#: crosswordxmlguiwindow.cpp:2876
+msgctxt "%1 contains the reason why the crossword couldn't be converted"
+msgid "Can't convert crossword. %1"
+msgstr "Ne može pretvoriti križaljku. %1"
+
+#: crosswordxmlguiwindow.cpp:1837
+msgctxt ""
+"%1 contains the reason why the letter couldn't be converted to a solution "
+"letter"
+msgid "Can't convert letter. %1"
+msgstr "Ne može pretvoriti slovo. %1"
+
+#: crosswordxmlguiwindow.cpp:1818
+msgctxt ""
+"%1 contains the reason why the solution letter couldn't be converted to a "
+"letter"
+msgid "Can't convert solution letter. %1"
+msgstr "Ne može pretvoriti slovo rješenja. %1"
+
+#: crosswordxmlguiwindow.cpp:2841
+msgctxt "%1 contains the reason why the letter cell couldn't be edited"
+msgid "Can't edit letter cell. %1"
+msgstr "Ne može urediti ćeliju slova. %1"
+
+#: library/librarygui.cpp:298
+msgid "Can't export whole directories. Please select a crossword."
 msgstr ""
 
-#: commands.cpp:1299
-msgid "No Action"
-msgstr "Nema akcije"
+#: crosswordxmlguiwindow.cpp:1232
+msgctxt "%1 contains the reason why the cells couldn't be moved"
+msgid "Can't move cells. %1"
+msgstr "Ne može pomjeriti ćelije. %1"
 
-#: commands.cpp:1346
-msgid "Hide Clue Cell"
-msgstr "Sakrij ćeliju traga"
+#: crosswordxmlguiwindow.cpp:1114
+msgctxt "%1 contains the reason why the clue couldn't be removed"
+msgid "Can't remove clue. %1"
+msgstr "Ne može ukloniti trag. %1"
 
-#: commands.cpp:1410
-msgid "Make Clue Cell Visible"
-msgstr "Napravi ćeliju traga vidljivom"
+#: crosswordxmlguiwindow.cpp:1119
+msgctxt "%1 contains the reason why the image couldn't be removed"
+msgid "Can't remove image. %1"
+msgstr "Ne može ukloniti sliku. %1"
 
-#: commands.cpp:1481
-msgid "Set Default Number Puzzle Mapping"
-msgstr "Postavi mapiranje zadanog broja zagonetke"
-
-#: commands.cpp:1483
-msgid "Change Number Puzzle Mapping"
-msgstr "Promijeni broj mapiranja zagonetke"
-
-#: commands.cpp:1506
-msgid "Setup Same Letter Synchronization"
-msgstr "Postavi sinhronizaciju istih slova"
-
-#: commands.cpp:1529
-msgid "Remove Same Letter Synchronization"
-msgstr "Ukloni sinhronizaciju istih slova"
-
-#: commands.cpp:1777
-msgid "Convert Crossword From '%1' to '%2'"
-msgstr "Pretvori Crossword od '%1' do '%2'"
-
-#: commands.cpp:1894
-msgid "Resize Crossword From %1x%2 to %3x%4"
-msgstr "Promijeni veličinu Crossword-a od %1x%2 do %3x%4"
-
-#: commands.cpp:1972
-msgid "Move All Cells By %1, %2"
-msgstr "Premjesti sve ćelija za %1, %2"
-
-#: crosswordxmlguiwindow.cpp:295
-msgid "Zoom: %1%"
-msgstr "Povećaj: %1%"
-
-#: crosswordxmlguiwindow.cpp:351
-#, no-c-format
-msgctxt "%p is replaced by the percentage of solved letter cells"
-msgid "%p% solved"
-msgstr "%p% rješeno"
-
-#: crosswordxmlguiwindow.cpp:352
-#, fuzzy
-msgid "Shows the percentage of solved letter cells"
-msgstr "Pokazuje procenat rješenih ćelija slova."
-
-#: crosswordxmlguiwindow.cpp:587
-msgid "Congratulations! You solved the crossword perfectly."
-msgstr "Čestitamo! Riješili ste križaljku savršeno."
-
-#: crosswordxmlguiwindow.cpp:653 crosswordxmlguiwindow.cpp:686
-msgid "New crossword"
-msgstr "Nova križaljka"
-
-#: crosswordxmlguiwindow.cpp:707 crosswordxmlguiwindow.cpp:850
-#: krosswordpuzzle.cpp:129
-msgid ""
-"The current crossword has been modified.\n"
-"Would you like to save it?"
-msgstr ""
-"Trenutačna križaljka je bila promijenjen.\n"
-"Da li želite ovo da spasite?"
-
-#: crosswordxmlguiwindow.cpp:708 crosswordxmlguiwindow.cpp:852
-#: krosswordpuzzle.cpp:131
-msgid "Close Document"
-msgstr "Zatvori dokument"
-
-#: crosswordxmlguiwindow.cpp:741
-msgid "Loaded crossword from file '%1'"
-msgstr "Popunjena križaljka iz datoteke '%1'"
-
-#: crosswordxmlguiwindow.cpp:756
-msgid ""
-"The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
-"\n"
-"Do you want to convert the crossword to another type now?\n"
-"\n"
-"(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")"
-msgstr ""
-"Tip križaljke ne može biti odlučen, tako da je pretpostavljena 'Slobodna "
-"križaljka'.\n"
-"\n"
-"Da li želite da pretvorite križaljku u drugi tip sada?\n"
-"\n"
-"(Napomena: Možete je kasnije pretvoriti u \"Uredi\" > \"Postavke križaljke\")"
-
-#: crosswordxmlguiwindow.cpp:782
-msgid "Error while loading file '%1': %2"
-msgstr "Greška pri otvaranju datoteke '%1': %2"
-
-#: crosswordxmlguiwindow.cpp:808
-msgid "Save &Edit History"
-msgstr "Snimi &uredi historiju"
-
-#: crosswordxmlguiwindow.cpp:811
-msgid "Save As &Template"
-msgstr "Snimi kao &šablon"
-
-#: crosswordxmlguiwindow.cpp:813
-msgid "Save without correct answers, clue texts, images"
-msgstr "Snimi bez tačnih odgovora, tragova teksta, slika"
+#: crosswordxmlguiwindow.cpp:2830
+msgctxt ""
+"%1 contains the reason why the letters couldn't be removed to the clue"
+msgid "Can't remove letter cells. %1"
+msgstr "Ne može ukloniti ćeliju slova. %1"
 
 #: crosswordxmlguiwindow.cpp:879
 #, fuzzy
@@ -356,669 +502,33 @@ msgstr ""
 "Ako želite da pohranite ćelije slika, molimo koristite KrossWordPuzzle "
 "format datoteke (*.kwp ili *.kwpz)."
 
-#: crosswordxmlguiwindow.cpp:913
-msgid "Wrote crossword to file '%1'"
-msgstr "Zapisao križaljku u datoteku '%1'"
-
-#: crosswordxmlguiwindow.cpp:928
-msgid "Error while writing file: %1"
-msgstr "Greška pri zapisivanju datoteke: %1"
-
-#: crosswordxmlguiwindow.cpp:1040
-msgid "Can't add clues on crossed letter cells"
-msgstr "Ne može dodati tragove na ukrštene ćelije slova"
-
-#: crosswordxmlguiwindow.cpp:1049
-msgid "Can't add clue at the current cell"
-msgstr "Ne može dodati trag na trenutačnu ćeliju"
-
-#: crosswordxmlguiwindow.cpp:1070
-msgctxt "%1 contains the reason why the clue couldn't be added"
-msgid "Can't add clue. %1"
-msgstr "Ne može dodati trag. %1"
-
-#: crosswordxmlguiwindow.cpp:1084
-msgid "Clue added ('%1')"
-msgstr "Trag dodan ('%1')"
-
-#: crosswordxmlguiwindow.cpp:1101
-msgctxt "%1 contains the reason why the image couldn't be added"
-msgid "Can't add image. %1"
-msgstr "Ne može dodati sliku. %1"
-
-#: crosswordxmlguiwindow.cpp:1114
-msgctxt "%1 contains the reason why the clue couldn't be removed"
-msgid "Can't remove clue. %1"
-msgstr "Ne može ukloniti trag. %1"
-
-#: crosswordxmlguiwindow.cpp:1119
-msgctxt "%1 contains the reason why the image couldn't be removed"
-msgid "Can't remove image. %1"
-msgstr "Ne može ukloniti sliku. %1"
-
-#: crosswordxmlguiwindow.cpp:1122
-msgid "No removable cell selected."
-msgstr "Nije odabrana prenosna ćelija."
-
-#: crosswordxmlguiwindow.cpp:1127 crosswordxmlguiwindow.cpp:2481
-#, fuzzy
-msgid "Do you really want to clear the crossword?"
-msgstr "Uklanja sve tragove iz križaljke."
-
-#: crosswordxmlguiwindow.cpp:1127 crosswordxmlguiwindow.cpp:2481
-msgid "Clear"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1132
-msgctxt "%1 contains the reason why the crossword couldn't be cleared"
-msgid "Can't clear crossword. %1"
-msgstr "Ne može očistiti križaljku. %1"
-
-#: crosswordxmlguiwindow.cpp:1149
-msgctxt ""
-"%1 contains the reason why the crossword properties couldn't be changed"
-msgid "Can't change crossword properties. %1"
-msgstr "Ne može promijeniti postavke križaljke. %1"
-
-#: crosswordxmlguiwindow.cpp:1161
-msgid "The crossword has 180 degree rotation symmetry."
-msgstr "Križaljka ima 180 stepenu rotacionu simetriju."
-
-#: crosswordxmlguiwindow.cpp:1165
-msgid ""
-"The crossword doesn't have 180 degree rotation symmetry.\n"
-"To achieve symmetry make sure that each empty cell has a counterpart at it's "
-"180 degree rotated position.\n"
-msgstr ""
-"Križaljka nema 180 stepenu rotacionu simetriju.\n"
-"Da bi postigli simetriju provjerite da svaka prazna ćelija ima duplikat na "
-"njenoj 180 stepeni rotacionoj poziciji.\n"
-
-#: crosswordxmlguiwindow.cpp:1169
-msgid ""
-"The crossword doesn't have 180 degree rotation symmetry.\n"
-"To achieve symmetry make sure that each empty cell and each clue cell has a "
-"counterpart at it's 180 degree rotated position.\n"
-msgstr ""
-"Križaljka nema 180 stepenu rotacionu simetriju.\n"
-"Da bi postigli simetriju provjerite da svaka prazna ćelija i svaki trag ima "
-"duplikat na njihovoj 180 stepeni rotacionoj poziciji.\n"
-
-#: crosswordxmlguiwindow.cpp:1175
-msgid ""
-"Quality crosswords of the current crossword type (%1) are usually symmetric."
-msgstr ""
-"Kvalitetne križaljke trenutačnog tipa križaljke (%1) su obično simetrične."
-
-#: crosswordxmlguiwindow.cpp:1194
-msgid "Clue Number Mapping"
-msgstr "Mapiranje traga broja"
-
-#: crosswordxmlguiwindow.cpp:1219
-msgctxt ""
-"%1 contains the reason why the new clue number mapping couldn't be applied"
-msgid "Can't apply clue number mapping. %1"
-msgstr "Ne može primjeniti mapiranje broja. %1"
-
-#: crosswordxmlguiwindow.cpp:1232
-msgctxt "%1 contains the reason why the cells couldn't be moved"
-msgid "Can't move cells. %1"
-msgstr "Ne može pomjeriti ćelije. %1"
-
-#: crosswordxmlguiwindow.cpp:1242
-msgid ""
-"This will cause all answers to be shown and editable.\n"
-"If you want to solve the crossword you should cancel."
-msgstr ""
-"Ovo će uzrokovati da svi odgovori budu prikazani i sa mogućnostima izmjene.\n"
-"Ako želite da riješite ovu križaljku, trebali biste otkazati."
-
-#: crosswordxmlguiwindow.cpp:1289
-#, fuzzy
-msgid "Close the current crossword"
-msgstr "Zatvorite trenutačnu križaljku."
-
-#: crosswordxmlguiwindow.cpp:1294
-msgid "Save the crossword with solved letters"
-msgstr "Spasite križalju sa riješenim slovima"
-
-#: crosswordxmlguiwindow.cpp:1298
-msgid "Choose a filename to save the crossword with solved letters"
-msgstr "Izaberite ime dokumenta da spasite križeljku sa riješenim slovima"
-
-#: crosswordxmlguiwindow.cpp:1303
-msgid "Print the crossword"
-msgstr "Odštampajte križaljku"
-
-#: crosswordxmlguiwindow.cpp:1307
-msgid "Show a print preview"
-msgstr "Prikažite pregled štampanja"
-
-#: crosswordxmlguiwindow.cpp:1311
-msgid "&Dictionary..."
-msgstr "&Rječnik..."
-
-#: crosswordxmlguiwindow.cpp:1312
-#, fuzzy
-msgid "Add or remove crossword dictionaries"
-msgstr "Dodaj ili ukloni rječnike križaljke."
-
-#: crosswordxmlguiwindow.cpp:1318
-msgid "Fit the whole crossword into the window"
-msgstr "Uklopi cijelu križaljku u prozor"
-
-#: crosswordxmlguiwindow.cpp:1321
-msgid "Pan"
-msgstr "Paniraj"
-
-#: crosswordxmlguiwindow.cpp:1322
-msgid ""
-"Pan the view. Note that you can also pan while pressing the control key."
-msgstr ""
-"Paniraj pogled. Imajte na umu da takođe možete panirati dok držite kontrolni "
-"ključ."
-
-#: crosswordxmlguiwindow.cpp:1326
-#, fuzzy
-msgid "Solve the selected letter or a random one if none is selected"
-msgstr ""
-"Rješite trenutačno izabrano slovo ili nasumično ako nijedno nije izabrano"
-
-#: crosswordxmlguiwindow.cpp:1329
-msgid "This letter has been solved"
-msgstr "Ovo slovo je bilo riješeno"
-
-#: crosswordxmlguiwindow.cpp:1330
-#, fuzzy
-msgid "The selected letter cell has been solved"
-msgstr "Trenutačno izabrana ćelija slova je bila riješena"
-
-#: crosswordxmlguiwindow.cpp:1335
-msgid "Mark as confident"
-msgstr "Označite kao sigurno"
-
-#: crosswordxmlguiwindow.cpp:1336
-#, fuzzy
-msgid "Mark the selected letter cell's confidence as confident"
-msgstr "Označite sigurnost trenutačno odabrane ćelije slova kao sigurno"
-
-#: crosswordxmlguiwindow.cpp:1341
-msgid "Mark as unsure"
-msgstr "Označite kao nesigurno"
-
-#: crosswordxmlguiwindow.cpp:1342
-#, fuzzy
-msgid "Mark the selected letter cell's confidence as unsure"
-msgstr "Označite sigurnost trenutačno odabrane ćelije slova kao nesigurno"
-
-#: crosswordxmlguiwindow.cpp:1347
-msgid "Clear This Cell"
-msgstr "Ispraznite ovu ćeliju"
-
-#: crosswordxmlguiwindow.cpp:1348
-#, fuzzy
-msgid "Clears the selected letter cell"
-msgstr "Čisti trenutačno odabranu ćeliju slova"
-
-#: crosswordxmlguiwindow.cpp:1353
-msgid "Clear This Answer"
-msgstr "Čisti ovaj odgovor"
-
-#: crosswordxmlguiwindow.cpp:1354
-msgid "Clears the answer to the current clue"
-msgstr "Čisti odgovor trenutačnog traga"
-
-#: crosswordxmlguiwindow.cpp:1359
-msgid "Clear Across Answer"
-msgstr "Očisti odgovor preko"
-
-#: crosswordxmlguiwindow.cpp:1360
-msgid "Clears the answer to the current across clue"
-msgstr "Čisti odgovor trenutačnog preko traga"
-
-#: crosswordxmlguiwindow.cpp:1365
-msgid "Clear Down Answer"
-msgstr "Čisti donji odgovor"
-
-#: crosswordxmlguiwindow.cpp:1366
-msgid "Clears the answer to the current down clue"
-msgstr "Čisti odgovor trenutnog donjeg traga"
-
-#: crosswordxmlguiwindow.cpp:1371
-msgid "Hint For This Cell"
-msgstr "Nagovještaj za ovu ćeliju"
-
-#: crosswordxmlguiwindow.cpp:1372
-#, fuzzy
-msgid "Solve the selected letter cell"
-msgstr "Riješi trenutačno odabranu ćeliju slova"
-
-#: crosswordxmlguiwindow.cpp:1377
-msgid "Solve Clue"
-msgstr "Riješi trag"
-
-#: crosswordxmlguiwindow.cpp:1378
-msgid "Solve the current clue"
-msgstr "Rijesi trenutačni trag"
-
-#: crosswordxmlguiwindow.cpp:1383
-msgid "Solve Across Clue"
-msgstr "Riješi preko trag"
-
-#: crosswordxmlguiwindow.cpp:1384
-msgid "Solve the current across clue"
-msgstr "Riješi trenutačni preko trag"
-
-#: crosswordxmlguiwindow.cpp:1389
-msgid "Solve Down Clue"
-msgstr "Riješi donji trag"
-
-#: crosswordxmlguiwindow.cpp:1390
-msgid "Solve the current down clue"
-msgstr "Riješi trenutačni donji trag"
-
-#: crosswordxmlguiwindow.cpp:1395
-#, fuzzy
-msgid "Clue With Switched Orientation"
-msgstr "Odaberi trag sa promijenjenom orijentacijom"
-
-#: crosswordxmlguiwindow.cpp:1396
-msgid "Select clue with switched orientation to the currently selected clue"
-msgstr "Odaberi trag sa promijenjenom orijentacijom na trenutačno odabran trag"
-
-#: crosswordxmlguiwindow.cpp:1400
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&First Letter"
-msgstr "Odaberi &prvo slovo"
-
-#: crosswordxmlguiwindow.cpp:1401
-msgid "Select the first letter of the current clue"
-msgstr "Odaberi prvo slovo trenutačnog traga"
-
-#: crosswordxmlguiwindow.cpp:1405
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Last Letter"
-msgstr "Odaberi &posljednje slovo"
-
-#: crosswordxmlguiwindow.cpp:1406
-msgid "Select the last letter of the current clue"
-msgstr "Odaberi posljednje slovo trenutačnog traga"
-
-#: crosswordxmlguiwindow.cpp:1410
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "First Clue"
-msgstr "Odaberi prvi trag"
-
-#: crosswordxmlguiwindow.cpp:1411
-msgid "Select the first clue"
-msgstr "Odaberi prvi trag"
-
-#: crosswordxmlguiwindow.cpp:1415
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Next Clue"
-msgstr "Odaberi &sljedeći trag"
-
-#: crosswordxmlguiwindow.cpp:1416
-msgid "Select the next clue"
-msgstr "Odaberi sljedeći trag"
-
-#: crosswordxmlguiwindow.cpp:1420
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Previous Clue"
-msgstr "Odaberi &prethodni trag"
-
-#: crosswordxmlguiwindow.cpp:1421
-msgid "Select the previous clue"
-msgstr "Odaberi prethodni trag"
-
-#: crosswordxmlguiwindow.cpp:1425
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "Last Clue"
-msgstr "Odaberi posljednji trag"
-
-#: crosswordxmlguiwindow.cpp:1426
-msgid "Select the last clue"
-msgstr "Odaberi posljednji trag"
-
-#: crosswordxmlguiwindow.cpp:1434
-msgid "Show Clue Dock"
-msgstr "Pokaži pristanište traga"
-
-#: crosswordxmlguiwindow.cpp:1439
-msgid "Show Edit History Dock"
-msgstr "Pokaži pristanište historije urednika"
-
-#: crosswordxmlguiwindow.cpp:1444
-msgid "Show Current Cell Dock"
-msgstr "Pokaži pristanište trenutačne ćelije"
-
-#: crosswordxmlguiwindow.cpp:1448
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "Edit Mode"
-msgstr "Režim za uređivanje"
-
-#: crosswordxmlguiwindow.cpp:1449
-msgid "Enables/disables the edit mode"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1453
-msgid "&Add Clue"
-msgstr "&Dodaj trag"
-
-#: crosswordxmlguiwindow.cpp:1454
-#, fuzzy
-msgid "Adds a new clue at the current cell"
-msgstr "Dodaje novi trag u trenutačnu ćeliju."
-
-#: crosswordxmlguiwindow.cpp:1459 crosswordxmlguiwindow.cpp:1889
-msgid "&Remove"
-msgstr "Uk&loni"
-
-#: crosswordxmlguiwindow.cpp:1460
-#, fuzzy
-msgid "Removes the highlighted clue or image"
-msgstr "Uklanja istaknuti trag ili sliku."
-
-#: crosswordxmlguiwindow.cpp:1464
-msgid "Remove &Across Clue"
-msgstr "Ukloni &preko trag"
-
-#: crosswordxmlguiwindow.cpp:1465
-#, fuzzy
-msgid "Removes the highlighted across clue"
-msgstr "Uklanja istaknuti preko trag."
-
-#: crosswordxmlguiwindow.cpp:1470
-msgid "Remove &Down Clue"
-msgstr "Ukloni &donji trag"
-
-#: crosswordxmlguiwindow.cpp:1471
-#, fuzzy
-msgid "Removes the highlighted down clue"
-msgstr "Uklanja istaknuti donji trag."
-
-#: crosswordxmlguiwindow.cpp:1476
-msgid "&Add Image"
-msgstr "&Dodaj sliku"
-
-#: crosswordxmlguiwindow.cpp:1477
-#, fuzzy
-msgid "Adds a new image at the current cell"
-msgstr "Dodaje novu sliku trenutačnoj ćeliji."
-
-#: crosswordxmlguiwindow.cpp:1482
-#, fuzzy
-msgid "&Clear Crossword..."
-msgstr "&Očisti križaljku"
-
-#: crosswordxmlguiwindow.cpp:1483
-#, fuzzy
-msgid "Removes all clues from the crossword"
-msgstr "Uklanja sve tragove iz križaljke."
-
-#: crosswordxmlguiwindow.cpp:1487
-msgid "&Crossword Properties..."
-msgstr "Postavke &križaljke..."
+#: commands.cpp:991
+msgid "Change Clue '%1'"
+msgstr "Promijeni trag '%1'"
+
+#: commands.cpp:1483
+msgid "Change Number Puzzle Mapping"
+msgstr "Promijeni broj mapiranja zagonetke"
 
 #: crosswordxmlguiwindow.cpp:1488
 msgid "Change the size of the crossword or it's title, author, copyright..."
 msgstr "Promijeni veličinu križaljke ili njen naziv, autora, autorska prava..."
 
-#: crosswordxmlguiwindow.cpp:1492
-msgid "&Check for rotation symmetry..."
-msgstr "&Provjeri da li ima rotaciona simetrija..."
+#: commands.cpp:1297
+msgctxt ""
+"%1 may be a list of changes separated by ',' if the list of changes contains "
+"more than 2 items. %2 is the last item"
+msgid "Changed Crossword Properties (%1 and %2)"
+msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1493
-#, fuzzy
-msgid "Checks if the crossword has 180 degree rotation symmetry"
-msgstr "Provjeri da li križaljka ima za 180 stepeni rotacionu simetriju."
-
-#: crosswordxmlguiwindow.cpp:1497
-msgid "&Statistics..."
-msgstr "&Statistike..."
-
-#: crosswordxmlguiwindow.cpp:1498
-#, fuzzy
-msgid "Shows statistics about the crossword"
-msgstr "Pokazuje statistike o križaljci."
-
-#: crosswordxmlguiwindow.cpp:1502
-msgid "Clue Number &Mapping..."
-msgstr "&Mapiranje traga broja..."
+#: commands.cpp:1292
+msgid "Changed Crossword Properties (%1)"
+msgstr "Promjenje postavke Crossword-a (%1)"
 
 #: crosswordxmlguiwindow.cpp:1503
 #, fuzzy
 msgid "Changes the mapping of clue numbers to letters"
 msgstr "Mijenja mapiranje traga broja u slova."
-
-#: crosswordxmlguiwindow.cpp:1507
-msgid "Move All Cells..."
-msgstr "Pomjeri sve ćelije..."
-
-#: crosswordxmlguiwindow.cpp:1508
-#, fuzzy
-msgid "Moves all cells of the crossword"
-msgstr "Pomjera sve ćelije križaljke."
-
-#: crosswordxmlguiwindow.cpp:1526
-msgid "Insert special character:"
-msgstr "Ubaci poseban znak:"
-
-#: crosswordxmlguiwindow.cpp:1530
-#, fuzzy
-msgid "Let you select a special character to paste"
-msgstr "Pušta vas da izaberete poseban znak za zalijepiti."
-
-#: crosswordxmlguiwindow.cpp:1536
-#, fuzzy
-msgid "Fills all letter cells with the correct letters"
-msgstr "Popunjava sve ćelije slova sa tačnim slovima."
-
-#: crosswordxmlguiwindow.cpp:1537
-msgid ""
-"<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
-"solution will be displayed.</p><p>If you filled in all letters and do not "
-"want to give up, choose \"Done!\".</p></qt>"
-msgstr ""
-"<qt><p>Izaberite \"<b>Solve</b>\" iako želite da predate trenutačnu igru. "
-"Rješenje će biti prikazano.</p><p>Ako ste popunili sva slova i ne želite da "
-"odustanete, izaberite \"Done!\".</p></qt>"
-
-#: crosswordxmlguiwindow.cpp:1539
-msgid "&Check"
-msgstr "&Provjeri"
-
-#: crosswordxmlguiwindow.cpp:1540
-#, fuzzy
-msgid "Checks if all letters are correct"
-msgstr "Provjerava da li su sva slova tačna."
-
-#: crosswordxmlguiwindow.cpp:1544
-msgid "&Clear Answers"
-msgstr "&Čisti odgovore"
-
-#: crosswordxmlguiwindow.cpp:1545
-#, fuzzy
-msgid "Clears all letter cells"
-msgstr "Čisti sve ćelije slova."
-
-#: crosswordxmlguiwindow.cpp:1549
-msgid "&Eraser"
-msgstr "&Brisač"
-
-#: crosswordxmlguiwindow.cpp:1550
-#, fuzzy
-msgid "Enables the eraser, to clear letter cells/answers"
-msgstr "Omogućava brisaču, da očisti sve ćelije slova / odgovore."
-
-#: crosswordxmlguiwindow.cpp:1660 krossword.h:555
-msgid "Solution"
-msgstr "&Rješenje"
-
-#: crosswordxmlguiwindow.cpp:1693
-msgid "Clue List"
-msgstr "Lista tragova"
-
-#: crosswordxmlguiwindow.cpp:1708
-msgid "Edit History"
-msgstr "Uredi historiju"
-
-#: crosswordxmlguiwindow.cpp:1718
-msgid "Current Cell"
-msgstr "Trenutačna ćelija"
-
-#: crosswordxmlguiwindow.cpp:1760
-msgctxt "%1 contains the reason why the answer offset couldn't be changed"
-msgid "Can't change answer offset. %1"
-msgstr "Ne može promijeniti ofset odgovora. %1"
-
-#: crosswordxmlguiwindow.cpp:1773
-msgctxt "%1 contains the reason why the orientation couldn't be changed"
-msgid "Can't change orientation. %1"
-msgstr "Ne može promijeniti orijentaciju. %1"
-
-#: crosswordxmlguiwindow.cpp:1785
-msgctxt "%1 contains the reason why the clue text couldn't be changed"
-msgid "Can't change clue text. %1"
-msgstr "Ne može promijeniti trag tekst. %1"
-
-#: crosswordxmlguiwindow.cpp:1798
-msgctxt "%1 contains the reason why the correct answer couldn't be changed"
-msgid "Can't change correct answer. %1"
-msgstr "Ne može promijeniti tačan odgovor. %1"
-
-#: crosswordxmlguiwindow.cpp:1818
-msgctxt ""
-"%1 contains the reason why the solution letter couldn't be converted to a "
-"letter"
-msgid "Can't convert solution letter. %1"
-msgstr "Ne može pretvoriti slovo rješenja. %1"
-
-#: crosswordxmlguiwindow.cpp:1837
-msgctxt ""
-"%1 contains the reason why the letter couldn't be converted to a solution "
-"letter"
-msgid "Can't convert letter. %1"
-msgstr "Ne može pretvoriti slovo. %1"
-
-#: crosswordxmlguiwindow.cpp:1885
-msgid "&Remove Clue"
-msgstr "&Ukloni trag"
-
-#: crosswordxmlguiwindow.cpp:1887
-msgid "&Remove Image"
-msgstr "&Ukloni sliku"
-
-#: crosswordxmlguiwindow.cpp:2156
-#, fuzzy
-msgid ""
-"Congratulations!\n"
-"You solved the crossword perfectly."
-msgstr "Čestitamo! Riješili ste križaljku savršeno."
-
-#: crosswordxmlguiwindow.cpp:2178
-msgid "Do you really want to solve the crossword?"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:2178
-#, fuzzy
-msgid "Solve"
-msgstr "Riješi trag"
-
-#: crosswordxmlguiwindow.cpp:2263 crosswordxmlguiwindow.cpp:2763
-msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
-msgid "Can't clear letter cell. %1"
-msgstr "Ne može očistiti ćeliju slova. %1"
-
-#: crosswordxmlguiwindow.cpp:2286 crosswordxmlguiwindow.cpp:2310
-#: crosswordxmlguiwindow.cpp:2335 crosswordxmlguiwindow.cpp:2769
-msgctxt "%1 contains the reason why the answer couldn't be cleared"
-msgid "Can't clear answer. %1"
-msgstr "Ne može očistiti odgovor. %1"
-
-#: crosswordxmlguiwindow.cpp:2547 crosswordxmlguiwindow.cpp:2575
-msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
-msgstr "Trag (preko): \"%1\", %2 slova, trenutačni odgovor: \"%3\""
-
-#: crosswordxmlguiwindow.cpp:2552 crosswordxmlguiwindow.cpp:2579
-msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
-msgstr "Trag (dolje): \"%1\", %2 slova, trenutačni odgovor: \"%3\""
-
-#: crosswordxmlguiwindow.cpp:2625 global.cpp:36
-msgid "Empty cell"
-msgstr "Prazna ćelija"
-
-#: crosswordxmlguiwindow.cpp:2627
-msgid "Image '%1'"
-msgstr "Slika '%1'"
-
-#: crosswordxmlguiwindow.cpp:2828
-msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
-msgid "Can't add letter cells. %1"
-msgstr "Ne može dodati ćeliju slova. %1"
-
-#: crosswordxmlguiwindow.cpp:2830
-msgctxt ""
-"%1 contains the reason why the letters couldn't be removed to the clue"
-msgid "Can't remove letter cells. %1"
-msgstr "Ne može ukloniti ćeliju slova. %1"
-
-#: crosswordxmlguiwindow.cpp:2841
-msgctxt "%1 contains the reason why the letter cell couldn't be edited"
-msgid "Can't edit letter cell. %1"
-msgstr "Ne može urediti ćeliju slova. %1"
-
-#: crosswordxmlguiwindow.cpp:2876
-msgctxt "%1 contains the reason why the crossword couldn't be converted"
-msgid "Can't convert crossword. %1"
-msgstr "Ne može pretvoriti križaljku. %1"
-
-#: crosswordxmlguiwindow.cpp:2888
-msgid "Couldn't connect to the database."
-msgstr "Nije moguće ostvariti konekciju sa bazom podataka."
-
-#: dialogs/answerwidget.cpp:28 dialogs/answerwidget.cpp:38
-msgid ""
-"The correct answer to the clue. For each letter a letter cell is created"
-msgstr "Tačan odgovor na trag. Za svako slovo kreirana je ćelija slova"
-
-#: dialogs/answerwidget.cpp:30 dialogs/answerwidget.cpp:40
-msgid "The answer to the clue"
-msgstr "Odgovor na trag"
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:112
-msgid "Show Only Answers With Current Answer &Length"
-msgstr ""
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:121
-msgid "Show Only Answers With &Clue"
-msgstr ""
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:128
-msgid "Show Only the &First 100 Answers"
-msgstr ""
-
-#: dialogs/cellwidgets/solutionlettercellwidget.cpp:94
-#, fuzzy
-msgid ""
-"The solution letter position %1 is already assigned.\n"
-"Please change the solution word position of that letter first."
-msgstr "Pozicija slova rješenja %1 je već dodjeljena."
-
-#: dialogs/convertcrossworddialog.cpp:29
-msgid "Convert Crossword Type To"
-msgstr "Pretvori tip križaljke u"
-
-#: dialogs/convertcrossworddialog.cpp:33
-msgid "Convert From: %1"
-msgstr "Pretvori iz: %1"
 
 #: dialogs/convertcrossworddialog.cpp:81
 #: dialogs/createnewcrossworddialog.cpp:231
@@ -1029,318 +539,103 @@ msgstr ""
 "Promjena tipa križaljke će odbaciti postavke tipa križaljke koje je "
 "definisao korisnik."
 
-#: dialogs/convertcrossworddialog.cpp:105
-msgid "Convert To: %1"
-msgstr "Pretvori u: %1"
+#: global.cpp:300
+msgid "Characters"
+msgstr "&Karakteri"
 
-#: dialogs/createnewcrossworddialog.cpp:35
-msgid "Create New Crossword"
-msgstr "Kreiraj novu križaljku"
+#: global.cpp:304
+msgid "Characters or digits"
+msgstr "Znakovi ili cifre"
 
-#: dialogs/createnewcrossworddialog.cpp:109
-msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
-msgid "© %1, by %2"
-msgstr "© %1, po %2"
-
-#: dialogs/createnewcrossworddialog.cpp:111
+#: crosswordxmlguiwindow.cpp:1540
 #, fuzzy
-msgctxt "Default notes value for new crosswords"
-msgid "Created with Krossword"
-msgstr "Kreiraj novu križaljku"
+msgid "Checks if all letters are correct"
+msgstr "Provjerava da li su sva slova tačna."
 
-#: dialogs/createnewcrossworddialog.cpp:191
-msgid "Crossword Type"
-msgstr "Tip križaljke"
+#: crosswordxmlguiwindow.cpp:1493
+#, fuzzy
+msgid "Checks if the crossword has 180 degree rotation symmetry"
+msgstr "Provjeri da li križaljka ima za 180 stepeni rotacionu simetriju."
 
-#: dialogs/createnewcrossworddialog.cpp:192
-msgid "Size"
-msgstr "Veličina"
+#: crosswordxmlguiwindow.cpp:1298
+msgid "Choose a filename to save the crossword with solved letters"
+msgstr "Izaberite ime dokumenta da spasite križeljku sa riješenim slovima"
 
-#: dialogs/createnewcrossworddialog.cpp:193
-msgid "Notes"
-msgstr "Zabilješke"
-
-#: dialogs/crosswordpreviewwidget.cpp:46
-msgid "Loading preview..."
-msgstr "Učitavam prikaz..."
-
-#: dialogs/crosswordpreviewwidget.cpp:55
-msgid "Preview failed"
-msgstr "Prikaz nije moguć"
-
-#: dialogs/crosswordpropertiesdialog.cpp:36
-msgid "Properties"
-msgstr "&Postavke"
-
-#: dialogs/crosswordpropertiesdialog.cpp:43
-#: dialogs/crosswordpropertiesdialog.cpp:277
-msgid "Crossword Type: %1"
-msgstr "Tip križaljke: %1"
-
-#: dialogs/crosswordpropertiesdialog.cpp:46
-msgid "&Convert..."
-msgstr "&Pretvori..."
-
-#: dialogs/crosswordpropertiesdialog.cpp:245
-msgctxt "No changes to the crossword grid size."
-msgid "No change"
-msgstr "Nema promjene"
-
-#: dialogs/crosswordpropertiesdialog.cpp:257
-msgctxt ""
-"How many images are removed when resizing the crossword. This string gets "
-"combined with a plural string indicating how many clue cells will be removed "
-"when resizing."
-msgid "and %1 image"
-msgid_plural "and %1 images"
-msgstr[0] "i %1 slika"
-msgstr[1] "i %1 slike"
-msgstr[2] "i %1 slika"
-
-#: dialogs/crosswordpropertiesdialog.cpp:251
-msgctxt ""
-"How many clues are removed when resizing the crossword. %2 is replaced by a "
-"plural indicating how many images will be removed when resizing."
-msgid "Resizing from %3x%4 will remove %1 clue %2"
-msgid_plural "Resizing from %3x%4 will remove %1 clues %2"
-msgstr[0] "Mjenjanje veličine od %3x%4 će ukloniti %1 trag %2"
-msgstr[1] "Mjenjanje veličine od %3x%4 će ukloniti %1 tragove %2"
-msgstr[2] "Mjenjanje veličine od %3x%4 će ukloniti %1 tragove %2"
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
-msgid "Detailed Configuration"
-msgstr "Detaljna konfiguracija"
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
-msgid "New Crossword Type"
-msgstr "Novi tip križaljke"
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
-msgid "Describe your crossword type here."
-msgstr "Opišite svoj tip križaljke ovdje."
-
-#: dialogs/crosswordtypewidget.cpp:204
-msgid "Show Details"
-msgstr "Pokaži detalje"
-
-#: dialogs/crosswordtypewidget.cpp:226
-msgid "&Rules..."
-msgstr "&Pravila..."
-
-#: dialogs/currentcellwidget.cpp:114
-msgid "No cell selected."
-msgstr "Ćelija nije odabrana."
-
-#: dialogs/currentcellwidget.cpp:145
-msgid "%1 selected at (%2, %3)."
-msgstr "%1 odabrano na (%2, %3)."
-
-#: dialogs/currentcellwidget.cpp:154
-msgid "Clue:"
-msgstr "Trag:"
-
-#: dialogs/currentcellwidget.cpp:155
-msgid "Current Answer:"
-msgstr "Trenutačni odgovor:"
-
-#: dialogs/currentcellwidget.cpp:439
-msgid "Convert &Letter %1 to Solution Letter"
-msgstr "Pretvori &slovo %1 u slovo rješenja"
-
-#: dialogs/dictionarydialog.cpp:37
-msgid "Dictionary"
-msgstr "&Rječnik"
-
-#: dialogs/dictionarydialog.cpp:165
-msgid "%1 entries added from this dictionary: '%2'"
-msgstr "%1 ulazi dodani iz ovog rječnika: '%2'"
-
-#: dialogs/dictionarydialog.cpp:175 dialogs/dictionarydialog.cpp:190
-msgid "%1 entries added from %2 crosswords"
-msgstr "%1 ulazi dodani iz %2 križaljki"
-
-#: dialogs/dictionarydialog.cpp:206
-msgid "Couldn't submit removed entries to the database: %1"
-msgstr "Ne može proslijediti izbrisane ulaze bazi podataka: %1"
-
-#: dialogs/dictionarydialog.cpp:209
-msgid "%1 entry removed"
-msgid_plural "%1 entries removed"
-msgstr[0] "%1 ulaz uklonjen"
-msgstr[1] "%1 ulaza uklonjena"
-msgstr[2] "%1 ulaza uklonjeno"
-
-#: dialogs/dictionarydialog.cpp:218
-msgid "Dictionary cleared"
-msgstr "Rječnik očišćen"
-
-#: dialogs/dictionarydialog.cpp:225
-msgid "Export To CSV"
-msgstr "Izvezi u CSV"
-
-#: dialogs/dictionarydialog.cpp:238
-msgid "There was an error while exporting to '%1'"
-msgstr "Postoji greška pri izvozu u '%1'"
-
-#: dialogs/dictionarydialog.cpp:240
-msgid "Export to '%1' was successful"
-msgstr "Izvoz u '%1' je uspješan"
-
-#: dialogs/dictionarydialog.cpp:246
-msgid "Import From CSV"
-msgstr "Uvezi iz CSV"
-
-#: dialogs/dictionarydialog.cpp:252
-msgid "There was an error while importing from '%1'"
-msgstr "Postoji greška pri uvozu iz '%1'"
-
-#: dialogs/dictionarydialog.cpp:255
-msgid "%1 entry imported from '%2'"
-msgid_plural "%1 entries imported from '%2'"
-msgstr[0] "%1 ulaz uvezen iz '%2'"
-msgstr[1] "%1 ulaza uvezena iz '%2'"
-msgstr[2] "%1 ulaza uvezeno iz '%2'"
-
-#: dialogs/movecellsdialog.cpp:28
-msgid "Move Cells"
-msgstr "Premjesti ćelije"
-
-#: dialogs/movecellsdialog.cpp:71
-msgctxt ""
-"How many images are removed when moving all cells of the crossword. This "
-"string gets combined with a plural string indicating how many clue cells "
-"will be removed when moving the cells."
-msgid "and %1 image"
-msgid_plural "and %1 images"
-msgstr[0] "i %1 slika"
-msgstr[1] "i %1 slike"
-msgstr[2] "i %1 slika"
-
-#: dialogs/movecellsdialog.cpp:65
-msgctxt ""
-"How many clues are removed when moving all cells of the crossword. %2 is "
-"replaced by a plural indicating how many images will be removed when moving "
-"the cells."
-msgid "Moving all cells will remove %1 clue %2"
-msgid_plural "Moving all cells will remove %1 clues %2"
-msgstr[0] "Premještanje svih ćelija će ukloniti %1 trag %2"
-msgstr[1] "Premještanje svih ćelija će ukloniti %1 tragove %2"
-msgstr[2] "Premještanje svih ćelija će ukloniti %1 tragove %2"
-
-#: dialogs/statisticsdialog.cpp:34
-msgid "Statistics"
-msgstr "Statistike"
-
-#: dialogs/statisticsdialog.cpp:49
-msgid "Total Cell Count:"
-msgstr "Ukupni broj ćelija:"
-
-#: dialogs/statisticsdialog.cpp:57
-msgid "Empty Cells:"
-msgstr "Prazne čelije:"
-
-#: dialogs/statisticsdialog.cpp:59
-msgid "Number of empty cells, percentage of total cell count in braces"
-msgstr "Broj praznih ćelija, postotak ukupnog broja ćelija."
-
-#: dialogs/statisticsdialog.cpp:60
-msgid "Letter Cells:"
-msgstr "Ćelije slova:"
-
-#: dialogs/statisticsdialog.cpp:62
-msgid "Number of letter cells, percentage of total cell count in braces"
-msgstr "Broj ćelija slova, postotak ukupnog broja čelija u zagradama"
-
-#: dialogs/statisticsdialog.cpp:70
-msgid "Crossed:"
-msgstr "Ukršteno:"
-
-#: dialogs/statisticsdialog.cpp:72
-msgid ""
-"Number of crossed letter cells, percentage of total letter cell count in "
-"braces"
+#: library/librarygui.cpp:385
+msgid "ChrisWords.com"
 msgstr ""
-"Broj ukrštenih ćelija slova, postotak ukupnog broja ćelija slova u zagradama"
 
-#: dialogs/statisticsdialog.cpp:74
-msgid "Uncrossed:"
-msgstr "Neukršteno:"
-
-#: dialogs/statisticsdialog.cpp:76
-msgid ""
-"Number of uncrossed letter cells, percentage of total letter cell count in "
-"braces"
+#: crosswordxmlguiwindow.cpp:1127 crosswordxmlguiwindow.cpp:2481
+msgid "Clear"
 msgstr ""
-"Broj neukrštenih ćelija slova, postotak ukupnog broja ćelija slova u "
-"zagradama"
 
-#: dialogs/statisticsdialog.cpp:85
-msgid "Clues:"
-msgstr "Tragovi:"
+#: crosswordxmlguiwindow.cpp:1359
+msgid "Clear Across Answer"
+msgstr "Očisti odgovor preko"
 
-#: dialogs/statisticsdialog.cpp:88
-msgctxt "Horizontal:"
-msgid "Label for the number  of horizontal clues"
-msgstr "Oznaka za broj horizontalnih tragova"
+#: commands.cpp:1092
+msgid "Clear Correct Answer of Clue at (%1, %2)"
+msgstr "Ukloni tačan odgovor od traga na (%1,%2)"
 
-#: dialogs/statisticsdialog.cpp:90
-msgid "Number of horizontal clues, percentage of total clue count in braces"
-msgstr "Broj horizontalnih tragova, postotak ukupnog broja tragova u zagradam"
+#: commands.cpp:1144
+msgid "Clear Correct Letter at (%1, %2), was %3"
+msgstr "Ukloni tačno slovo na (%1,%2), je bilo %3"
 
-#: dialogs/statisticsdialog.cpp:92
-msgctxt "Vertical:"
-msgid "Label for the number  of vertical clues"
-msgstr "Oznaka za broj vertikalnih tragova"
+#: commands.cpp:1222
+msgid "Clear Crossword"
+msgstr "Očisti Crossword"
 
-#: dialogs/statisticsdialog.cpp:94
-msgid "Number of vertical clues, percentage of total clue count in braces"
-msgstr "Broj vertikalnih trragova, postotak ukupnog broja tragova u zagradama"
+#: crosswordxmlguiwindow.cpp:1365
+msgid "Clear Down Answer"
+msgstr "Čisti donji odgovor"
 
-#: dialogs/statisticsdialog.cpp:98
-msgid "Min. Answer Length:"
-msgstr "Min. dužina odgovora:"
+#: commands.cpp:1154
+msgid "Clear Letter at (%1, %2), was %3"
+msgstr "Ukloni slovo na (%1,%2), je bilo %3"
 
-#: dialogs/statisticsdialog.cpp:101
-msgid "Max. Answer Length:"
-msgstr "Max. dužina odgovora:"
+#: crosswordxmlguiwindow.cpp:1353
+msgid "Clear This Answer"
+msgstr "Čisti ovaj odgovor"
 
-#: dialogs/statisticsdialog.cpp:104
-msgid "Avg. Answer Length:"
-msgstr "Pro. dužina odgovora:"
+#: crosswordxmlguiwindow.cpp:1347
+msgid "Clear This Cell"
+msgstr "Ispraznite ovu ćeliju"
 
-#: dialogs/statisticsdialog.cpp:115
-msgid "Occurrences Of Letters:"
-msgstr "Pojave slova:"
+#: crosswordxmlguiwindow.cpp:1545
+#, fuzzy
+msgid "Clears all letter cells"
+msgstr "Čisti sve ćelije slova."
 
-#: dialogs/statisticsdialog.cpp:121
-msgid ""
-"Number of letter cells containing '%1', percentage of total letter cell "
-"count in braces"
-msgstr ""
-"Broj ćelija slova koje sadrže '%1', postotak ukupnog broja ćelija slova u "
-"zagradama"
+#: crosswordxmlguiwindow.cpp:1360
+msgid "Clears the answer to the current across clue"
+msgstr "Čisti odgovor trenutačnog preko traga"
 
-#: dictionary.cpp:174
-msgid ""
-"No Connection to the database! Please make sure the MySQL server is running. "
-"Afterwards click \"Continue\" to retry connecting to the database."
-msgstr ""
-"Nije uspostavljena konekcija sa bazom podataka! Molimo, uvjerite se da je "
-"pokrenut MySQL servis. Poslije pritisnite \"Nastavi\" da osvježite "
-"povezivanje sa bazom podataka."
+#: crosswordxmlguiwindow.cpp:1354
+msgid "Clears the answer to the current clue"
+msgstr "Čisti odgovor trenutačnog traga"
 
-#: dictionary.cpp:177
-msgid "No Database Connection"
-msgstr "Nije uspostavljena konekcija sa bazom podataka"
+#: crosswordxmlguiwindow.cpp:1366
+msgid "Clears the answer to the current down clue"
+msgstr "Čisti odgovor trenutnog donjeg traga"
 
-#: dictionary.cpp:181
-msgid "Connect Database"
-msgstr "Uspostavi konekciju sa bazom podataka"
+#: crosswordxmlguiwindow.cpp:1348
+#, fuzzy
+msgid "Clears the selected letter cell"
+msgstr "Čisti trenutačno odabranu ćeliju slova"
 
-#: dictionary.cpp:273
-msgctxt "The header title for answers in the dictionary database"
-msgid "Answer"
-msgstr ""
+#: crosswordxmlguiwindow.cpp:708 crosswordxmlguiwindow.cpp:852
+#: krosswordpuzzle.cpp:131
+msgid "Close Document"
+msgstr "Zatvori dokument"
+
+#: crosswordxmlguiwindow.cpp:1289
+#, fuzzy
+msgid "Close the current crossword"
+msgstr "Zatvorite trenutačnu križaljku."
+
+#: cluemodel.cpp:60
+msgid "Clue"
+msgstr "Trag"
 
 #: dictionary.cpp:275
 msgctxt ""
@@ -1349,79 +644,44 @@ msgctxt ""
 msgid "Clue"
 msgstr ""
 
-#: dictionary.cpp:277
-msgctxt ""
-"The header title for scores/difficulties of clue/answer pairs in the "
-"dictionary database"
-msgid "Score"
-msgstr "Zbir"
+#: crosswordxmlguiwindow.cpp:2547 crosswordxmlguiwindow.cpp:2575
+msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
+msgstr "Trag (preko): \"%1\", %2 slova, trenutačni odgovor: \"%3\""
 
-#: dictionary.cpp:279
-msgctxt ""
-"The header title for languages of clue/answer pairs in the dictionary "
-"database"
-msgid "Language"
-msgstr "Jezik"
+#: crosswordxmlguiwindow.cpp:2552 crosswordxmlguiwindow.cpp:2579
+msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
+msgstr "Trag (dolje): \"%1\", %2 slova, trenutačni odgovor: \"%3\""
 
-#: dictionary.cpp:322
-msgid "Importing Dictionary"
-msgstr "Uvozi rječnik"
+#: crosswordxmlguiwindow.cpp:1693
+msgid "Clue List"
+msgstr "Lista tragova"
 
-#: dictionary.cpp:360
-msgid ""
-"Importing word clue pairs from '%1' to the database.\n"
-"Please wait."
-msgstr ""
-"Uvozi parove traga riječi iz '%1' u bazu podataka.\n"
-"Molimo sačekajte."
+#: crosswordxmlguiwindow.cpp:1502
+msgid "Clue Number &Mapping..."
+msgstr "&Mapiranje traga broja..."
 
-#: dictionary.cpp:490
-msgid ""
-"Adding words from the dictionary '%1' to the database.\n"
-"Please wait."
-msgstr ""
-"Dodaje riječi iz rječnika '%1' u bazu podataka.\n"
-"Molimo sačekajte."
+#: crosswordxmlguiwindow.cpp:1194
+msgid "Clue Number Mapping"
+msgstr "Mapiranje traga broja"
 
-#: dictionary.cpp:572
-msgid ""
-"Adding words from %1 crossword files to the database.\n"
-"Please wait."
-msgstr ""
-"Dodaje riječi iz %1 datoteka križaljke u bazu podataka.\n"
-"Molimo sačekajte."
+#: crosswordxmlguiwindow.cpp:1395
+#, fuzzy
+msgid "Clue With Switched Orientation"
+msgstr "Odaberi trag sa promijenjenom orijentacijom"
+
+#: crosswordxmlguiwindow.cpp:1084
+msgid "Clue added ('%1')"
+msgstr "Trag dodan ('%1')"
 
 #: global.cpp:38
 msgid "Clue cell"
 msgstr "ćelija traga"
 
-#: global.cpp:40
-msgid "Double clue cell"
-msgstr "Dupla ćelija traga"
-
-#: global.cpp:42
-msgid "Letter cell"
-msgstr "ćelija slova"
-
-#: global.cpp:44
-msgid "Solution letter cell"
-msgstr "Ćelija slova rješenja"
-
-#: global.cpp:46
-msgid "Image cell"
-msgstr "Ćelija slike"
-
-#: global.cpp:48
-msgid "All cells"
-msgstr "Sve ćelije"
-
-#: global.cpp:50
-msgid "Interactive cells"
-msgstr "Interaktivne ćelije"
-
-#: global.cpp:52
-msgid "User cell type"
-msgstr "Korisnikov tip ćelije"
+#: commands.cpp:352
+msgctxt ""
+"%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
+msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
+msgstr "Trag ćelija nije pronađena na datim koordinatama (%1, %2): '%3'"
 
 #: global.cpp:260
 msgid "Clue cells are allowed"
@@ -1435,107 +695,163 @@ msgstr "Ćelije traga su poništene"
 msgid "Clue cells are required"
 msgstr "Ćelije traga su obavezne"
 
-#: global.cpp:275
-msgid "Clues refer to sets of cells"
-msgstr "Tragovi upućuju na setove ćelija"
+#: krossworddocument.cpp:86
+msgctxt "Title for the clue list when printing"
+msgid "Clue list"
+msgstr "Lista tragova"
+
+#: dialogs/currentcellwidget.cpp:154
+msgid "Clue:"
+msgstr "Trag:"
 
 #: global.cpp:277
 msgid "Clues refer to cells"
 msgstr "Tragovi upućuju na ćelije"
 
-#: global.cpp:287
-msgid "String clues"
-msgstr "Tekstualni tragovi"
+#: global.cpp:275
+msgid "Clues refer to sets of cells"
+msgstr "Tragovi upućuju na setove ćelija"
 
-#: global.cpp:289
-msgid "Number clues (1 to 26)"
-msgstr "Numerički tragovi (1 do 26)"
+#: dialogs/statisticsdialog.cpp:85
+msgid "Clues:"
+msgstr "Tragovi:"
 
-#: global.cpp:300
-msgid "Characters"
-msgstr "&Karakteri"
-
-#: global.cpp:302
-msgid "Digits"
-msgstr "Cifre"
-
-#: global.cpp:304
-msgid "Characters or digits"
-msgstr "Znakovi ili cifre"
-
-#: global.cpp:409
-msgid "Free Crossword"
-msgstr "Slobodna križaljka"
-
-#: global.cpp:411
-msgctxt "Short description of the crossword type 'Free'"
-msgid "This is a special type that tries to be least restrictive."
-msgstr "Ovo je poseban tip koji pokušava da bude najmanje ograničen."
-
-#: global.cpp:413
-msgctxt "Long description of the crossword type 'Free'"
+#: crosswordxmlguiwindow.cpp:2156
+#, fuzzy
 msgid ""
-"This is a special type that tries to be least restrictive. You can use all "
-"available cell types (eg. clue cells, double clue cells, image cells, "
-"solution letter cells). You can mix answers that have a clue cell with "
-"answers that don't. Answers may contain characters as well as numbers."
-msgstr ""
-"Ovo je poseban tip koji pokušava da bude najmanje ograničen. Možete "
-"koristiti sve dostupne tipove ćelija (pr. ćelije traga, duple ćelije traga, "
-"ćelije slike, ćelije slova rješenja). Možete mješati odgovore koji imaju "
-"ćeliju traga sa odgovorima koji nemaju. Odgovori mogu sadržavati znakove, "
-"kao i brojeve."
+"Congratulations!\n"
+"You solved the crossword perfectly."
+msgstr "Čestitamo! Riješili ste križaljku savršeno."
 
-#: global.cpp:424
-msgid "User Defined Crossword"
-msgstr "Korisnički definirana križaljka"
+#: crosswordxmlguiwindow.cpp:587
+msgid "Congratulations! You solved the crossword perfectly."
+msgstr "Čestitamo! Riješili ste križaljku savršeno."
 
-#: global.cpp:426
-msgctxt "Short description of the crossword type 'User Defined'"
-msgid "Lets you specify your own rules."
-msgstr "Dopušta da definišete vlastita pravila."
+#: dictionary.cpp:181
+msgid "Connect Database"
+msgstr "Uspostavi konekciju sa bazom podataka"
 
-#: global.cpp:434
-msgid "Swedish Crossword"
-msgstr "Švedska križaljka"
+#: dialogs/currentcellwidget.cpp:439
+msgid "Convert &Letter %1 to Solution Letter"
+msgstr "Pretvori &slovo %1 u slovo rješenja"
 
-#: global.cpp:436
-msgctxt "Short description of the crossword type 'Swedish'"
-msgid ""
-"Swedish crosswords contain clue cells which contain the clue text in it and "
-"an arrow to indicate in which direction the clues have to be answered."
-msgstr ""
-"Švedske križaljke sadrže ćelije traga koje sadrže tekst traga u sebi i "
-"strelicu koja pokazuje u kojem pravcu tragovi moraju biti odgovoreni."
+#: commands.cpp:1777
+msgid "Convert Crossword From '%1' to '%2'"
+msgstr "Pretvori Crossword od '%1' do '%2'"
 
-#: global.cpp:439
-msgctxt "Long description of the crossword type 'Swedish'"
-msgid ""
-"The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
-"the cells which would normally be black in other countries. Arrows indicate "
-"in which direction the clues have to be answered, vertical or horizontal. "
-"This style of grid is used in several countries other than Sweden, usually "
-"in magazines with pages of A4 or similar size. The grid often has a photo of "
-"a pop or movie star replacing a block of squares, as a clue to one answer. "
-"These puzzles usually have no symmetry in the grid.\n"
-"Crosswords with clue cells inside the crossword grid are also called "
-"\"Arrowwords\", \"Pointers\" or \"Tipwords\" in English, \"Autodefinidos\" "
-"in Spanish, \"Mots Fléchés\" in French, etc.\n"
-"(text taken from wikipedia)"
+#: dialogs/convertcrossworddialog.cpp:29
+msgid "Convert Crossword Type To"
+msgstr "Pretvori tip križaljke u"
+
+#: dialogs/convertcrossworddialog.cpp:33
+msgid "Convert From: %1"
+msgstr "Pretvori iz: %1"
+
+#: commands.cpp:626
+msgid "Convert Letter at (%1, %2) to Solution Letter"
+msgstr "Pretvori slovo na (%1, %2) u slovo rješenja"
+
+#: commands.cpp:654
+msgctxt "%1 contains the position of the solution letter in the solution word."
+msgid "Convert Solution Letter %1 to Letter"
+msgstr "Pretvori slovo rješenja %1 u slovo"
+
+#: dialogs/convertcrossworddialog.cpp:105
+msgid "Convert To: %1"
+msgstr "Pretvori u: %1"
+
+#: commands.cpp:1274
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Copyright"
+msgstr "Autorsko pravo"
+
+#: krosswordpuzzle.cpp:94
+msgid "Could not open resource at "
 msgstr ""
 
-#: global.cpp:457
-msgid "American Crossword"
-msgstr "Američka križaljka"
+#: io/krosswordxmlwriter.cpp:73
+msgid "Couldn't close the ZIP archive"
+msgstr "Ne može zatvoriti ZIP arhivu"
 
-#: global.cpp:459
-msgctxt "Short description of the crossword type 'American'"
-msgid ""
-"American crosswords have numbered clues and a list of clues on the side of "
-"the crossword. They have usually 180 degree rotational symmetry."
+#: crosswordxmlguiwindow.cpp:2888
+msgid "Couldn't connect to the database."
+msgstr "Nije moguće ostvariti konekciju sa bazom podataka."
+
+#: library/librarygui.cpp:348
+msgid "Couldn't export the image to the specified file."
 msgstr ""
-"Američka križaljka ima numeričke tragove i listu tragova sa strane "
-"križaljke. One obično imaju 180 stepeni racionalnu simetriju."
+
+#: io/krosswordxmlwriter.cpp:52
+msgid "Couldn't open the ZIP archive for writing"
+msgstr "Ne može otvoriti ZIP arhivu za pisanje"
+
+#: library/librarygui.cpp:460
+#, fuzzy
+msgid "Couldn't remove the crossword from the library."
+msgstr "Ne moeže izvesti križaljku u posebnu slikovnu datoteku."
+
+#: library/librarygui.cpp:449
+msgid ""
+"Couldn't remove the directory from the library.\n"
+"You need root privileges to remove directories which belong to the global "
+"library."
+msgstr ""
+
+#: dialogs/dictionarydialog.cpp:206
+msgid "Couldn't submit removed entries to the database: %1"
+msgstr "Ne može proslijediti izbrisane ulaze bazi podataka: %1"
+
+#: dialogs/createnewcrossworddialog.cpp:35
+msgid "Create New Crossword"
+msgstr "Kreiraj novu križaljku"
+
+#: library/librarygui.cpp:555
+msgid "Create a new crossword in the library."
+msgstr ""
+
+#: library/librarygui.cpp:550
+msgid "Create a new folder in the library."
+msgstr ""
+
+#: dialogs/createnewcrossworddialog.cpp:111
+#, fuzzy
+msgctxt "Default notes value for new crosswords"
+msgid "Created with Krossword"
+msgstr "Kreiraj novu križaljku"
+
+#: dialogs/statisticsdialog.cpp:70
+msgid "Crossed:"
+msgstr "Ukršteno:"
+
+#: global.cpp:503
+msgid "Crossnumber"
+msgstr "Crossnumber"
+
+#: global.cpp:505
+msgctxt "Short description of the crossword type 'Crossnumber'"
+msgid ""
+"Crossnumbers are the numerical analogy of a crossword, in which the "
+"solutions to the clues are numbers instead of words."
+msgstr ""
+"Crossnumber-i su numerička analogija križaljke, u kojima su rješenja tragova "
+"brojevi umjesto riječi."
+
+#: library/librarygui.cpp:201 library/librarygui.cpp:206
+#: library/librarygui.cpp:214
+#, fuzzy
+msgid "Crossword %1"
+msgstr "&Križaljka *"
+
+#: dialogs/createnewcrossworddialog.cpp:191
+msgid "Crossword Type"
+msgstr "Tip križaljke"
+
+#: dialogs/crosswordpropertiesdialog.cpp:43
+#: dialogs/crosswordpropertiesdialog.cpp:277
+msgid "Crossword Type: %1"
+msgstr "Tip križaljke: %1"
 
 #: global.cpp:462
 msgctxt "Long description of the crossword type 'American'"
@@ -1558,9 +874,528 @@ msgid ""
 "(text taken from wikipedia)"
 msgstr ""
 
+#: dialogs/currentcellwidget.cpp:155
+msgid "Current Answer:"
+msgstr "Trenutačni odgovor:"
+
+#: crosswordxmlguiwindow.cpp:1718
+msgid "Current Cell"
+msgstr "Trenutačna ćelija"
+
+#: library/librarygui.cpp:545
+msgid "Delete the selected crossword from the library."
+msgstr ""
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
+msgid "Describe your crossword type here."
+msgstr "Opišite svoj tip križaljke ovdje."
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
+msgid "Detailed Configuration"
+msgstr "Detaljna konfiguracija"
+
+#: main.cpp:37 main.cpp:38
+msgid "Developer"
+msgstr ""
+
+#: dialogs/dictionarydialog.cpp:37
+msgid "Dictionary"
+msgstr "&Rječnik"
+
+#: dialogs/dictionarydialog.cpp:218
+msgid "Dictionary cleared"
+msgstr "Rječnik očišćen"
+
+#: global.cpp:302
+msgid "Digits"
+msgstr "Cifre"
+
+#: crosswordxmlguiwindow.cpp:1127 crosswordxmlguiwindow.cpp:2481
+#, fuzzy
+msgid "Do you really want to clear the crossword?"
+msgstr "Uklanja sve tragove iz križaljke."
+
+#: crosswordxmlguiwindow.cpp:2178
+msgid "Do you really want to solve the crossword?"
+msgstr ""
+
+#: main.cpp:44
+msgid "Document to open"
+msgstr "Dokument za otvaranje"
+
+#: global.cpp:40
+msgid "Double clue cell"
+msgstr "Dupla ćelija traga"
+
+#: cluemodel.cpp:64
+msgid "Down clues"
+msgstr "Donji tragovi"
+
+#: krossworddocument.cpp:87
+msgctxt "Title for the list of down/vertical clues when printing"
+msgid "Down clues"
+msgstr "Donji tragovi"
+
+#: library/librarygui.cpp:357
+msgid "Download Crossword To Library"
+msgstr ""
+
+#: library/librarygui.cpp:540
+msgid "Download a crossword and add it to the library."
+msgstr ""
+
+#: commands.cpp:1150
+msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
+msgstr "Uredi tačno slovo na (%1, %2) od %3 do %4"
+
+#: crosswordxmlguiwindow.cpp:1708
+msgid "Edit History"
+msgstr "Uredi historiju"
+
+#: commands.cpp:1160
+msgid "Edit Letter at (%1, %2) From %3 to %4"
+msgstr "Uredi slovo na (%1, %2) od %3 do %4"
+
+#: crosswordxmlguiwindow.cpp:1448
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "Edit Mode"
+msgstr "Režim za uređivanje"
+
+#: cells/imagecell.cpp:68
+msgid "Edit image properties to set an image"
+msgstr "Uredi postavke slike da postavite sliku"
+
+#: dialogs/statisticsdialog.cpp:57
+msgid "Empty Cells:"
+msgstr "Prazne čelije:"
+
+#: crosswordxmlguiwindow.cpp:2625 global.cpp:36
+msgid "Empty cell"
+msgstr "Prazna ćelija"
+
+#: crosswordxmlguiwindow.cpp:1550
+#, fuzzy
+msgid "Enables the eraser, to clear letter cells/answers"
+msgstr "Omogućava brisaču, da očisti sve ćelije slova / odgovore."
+
+#: crosswordxmlguiwindow.cpp:1449
+msgid "Enables/disables the edit mode"
+msgstr ""
+
+#: krosswordpuzzle.cpp:466
+#, fuzzy
+msgid "Error loading file '%1'"
+msgstr "Greška pri otvaranju datoteke '%1'"
+
+#: krossword.cpp:1017
+msgid "Error reading AcrossLite's .puz-format."
+msgstr "Greška pri čitanju AcrossLite -puz formata."
+
+#: krossword.cpp:962
+msgid "Error while downloading from url: %1"
+msgstr "Greška pri preuzimanju sa url-a: %1"
+
+#: crosswordxmlguiwindow.cpp:782
+msgid "Error while loading file '%1': %2"
+msgstr "Greška pri otvaranju datoteke '%1': %2"
+
+#: crosswordxmlguiwindow.cpp:928
+msgid "Error while writing file: %1"
+msgstr "Greška pri zapisivanju datoteke: %1"
+
+#: krossword.cpp:941
+msgid "Error writing AcrossLite's .puz-format."
+msgstr "Greška pri zapisu AcrossLite .puz formata."
+
+#: krossword.cpp:930
+msgid "Error writing compressed crossword: %1"
+msgstr "Greška pri zapisu kompresovanje križaljke: %1"
+
+#: krossword.cpp:923
+msgid "Error writing crossword: %1"
+msgstr "Greška pri zapisu križaljke: %1"
+
+#: io/krosswordxmlwriter.cpp:58 io/krosswordxmlwriter.cpp:63
+#: io/krosswordxmlwriter.cpp:68
+msgid "Error writing to the compressed file"
+msgstr "Greška  pri zapisivanju u kompresovanu datoteku"
+
+#: library/librarygui.cpp:314
+msgid "Export"
+msgstr "Izvezi"
+
+#: library/librarygui.cpp:332
+msgid "Export Settings"
+msgstr "Postavke izvoza"
+
+#: dialogs/dictionarydialog.cpp:225
+msgid "Export To CSV"
+msgstr "Izvezi u CSV"
+
+#: library/librarygui.cpp:535
+msgid "Export the selected crossword from the library."
+msgstr ""
+
+#: dialogs/dictionarydialog.cpp:240
+msgid "Export to '%1' was successful"
+msgstr "Izvoz u '%1' je uspješan"
+
+#: library/librarygui.cpp:163
+#, fuzzy
+msgid "Failed"
+msgstr "tiled"
+
+#: crosswordxmlguiwindow.cpp:1536
+#, fuzzy
+msgid "Fills all letter cells with the correct letters"
+msgstr "Popunjava sve ćelije slova sa tačnim slovima."
+
+#: crosswordxmlguiwindow.cpp:1410
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "First Clue"
+msgstr "Odaberi prvi trag"
+
+#: crosswordxmlguiwindow.cpp:1318
+msgid "Fit the whole crossword into the window"
+msgstr "Uklopi cijelu križaljku u prozor"
+
+#: global.cpp:409
+msgid "Free Crossword"
+msgstr "Slobodna križaljka"
+
+#: main.cpp:39
+msgid "Friedrich Pülz"
+msgstr ""
+
+#: main.cpp:38
+msgid "Giacomo Barazzetti"
+msgstr ""
+
+#: commands.cpp:1346
+msgid "Hide Clue Cell"
+msgstr "Sakrij ćeliju traga"
+
+#: crosswordxmlguiwindow.cpp:1371
+msgid "Hint For This Cell"
+msgstr "Nagovještaj za ovu ćeliju"
+
+#: library/librarygui.cpp:381
+msgid "I Swear Crossword by Victor Fleming (fridays)"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:2627
+msgid "Image '%1'"
+msgstr "Slika '%1'"
+
+#: global.cpp:46
+msgid "Image cell"
+msgstr "Ćelija slike"
+
+#: commands.cpp:559
+msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
+msgstr "Ćelija slike nije pronađena na datim koordinatama (%1, %2): '%3'"
+
+#: dialogs/dictionarydialog.cpp:246
+msgid "Import From CSV"
+msgstr "Uvezi iz CSV"
+
+#: library/librarygui.cpp:530
+msgid "Import a crossword to the library."
+msgstr ""
+
+#: dictionary.cpp:322
+msgid "Importing Dictionary"
+msgstr "Uvozi rječnik"
+
+#: dictionary.cpp:360
+msgid ""
+"Importing word clue pairs from '%1' to the database.\n"
+"Please wait."
+msgstr ""
+"Uvozi parove traga riječi iz '%1' u bazu podataka.\n"
+"Molimo sačekajte."
+
+#: crosswordxmlguiwindow.cpp:1526
+msgid "Insert special character:"
+msgstr "Ubaci poseban znak:"
+
+#: global.cpp:50
+msgid "Interactive cells"
+msgstr "Interaktivne ćelije"
+
+#: main.cpp:33
+#, fuzzy
+msgid "Krossword"
+msgstr "&Križaljka"
+
+#: dialogs/statisticsdialog.cpp:88
+msgctxt "Horizontal:"
+msgid "Label for the number  of horizontal clues"
+msgstr "Oznaka za broj horizontalnih tragova"
+
+#: dialogs/statisticsdialog.cpp:92
+msgctxt "Vertical:"
+msgid "Label for the number  of vertical clues"
+msgstr "Oznaka za broj vertikalnih tragova"
+
+#: dictionary.cpp:279
+msgctxt ""
+"The header title for languages of clue/answer pairs in the dictionary "
+"database"
+msgid "Language"
+msgstr "Jezik"
+
+#: crosswordxmlguiwindow.cpp:1425
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "Last Clue"
+msgstr "Odaberi posljednji trag"
+
+#: crosswordxmlguiwindow.cpp:1530
+#, fuzzy
+msgid "Let you select a special character to paste"
+msgstr "Pušta vas da izaberete poseban znak za zalijepiti."
+
+#: global.cpp:426
+msgctxt "Short description of the crossword type 'User Defined'"
+msgid "Lets you specify your own rules."
+msgstr "Dopušta da definišete vlastita pravila."
+
+#: dialogs/statisticsdialog.cpp:60
+msgid "Letter Cells:"
+msgstr "Ćelije slova:"
+
+#: global.cpp:42
+msgid "Letter cell"
+msgstr "ćelija slova"
+
+#: commands.cpp:704 commands.cpp:1172
+msgid "Letter cell not found at the given coordinates (%1, %2)"
+msgstr "Ćelija slova nije pronađena na datim koordinatama (%1, %2)"
+
+#: krossword.cpp:649
+msgid "Letters can't be converted back correctly after this conversion."
+msgstr "Slova ne mogu biti konvertovana nazad tačno nakon ove konverzije."
+
+#: krosswordpuzzle.cpp:240 krosswordpuzzle.cpp:429 library/librarygui.cpp:412
+msgid "Library"
+msgstr "Biblioteka"
+
+#: krosswordpuzzle.cpp:283
+#, fuzzy
+msgctxt ""
+"This string is used to replace the library path for crossword files that are "
+"in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
+"apps/krossword/library/crossword.kwpz with Library/crossword.kwpz"
+msgid "Library"
+msgstr "Biblioteka"
+
+#: crosswordxmlguiwindow.cpp:741
+msgid "Loaded crossword from file '%1'"
+msgstr "Popunjena križaljka iz datoteke '%1'"
+
+#: dialogs/crosswordpreviewwidget.cpp:46
+msgid "Loading preview..."
+msgstr "Učitavam prikaz..."
+
+#: krosswordpuzzle.cpp:183
+msgid "Loading the crossword, please wait..."
+msgstr "Učitava križaljku, molimo sačekajte..."
+
+#: krosswordpuzzle.cpp:180 library/librarygui.cpp:233
+msgid "Loading..."
+msgstr "Učitavam..."
+
+#: commands.cpp:1410
+msgid "Make Clue Cell Visible"
+msgstr "Napravi ćeliju traga vidljivom"
+
+#: crosswordxmlguiwindow.cpp:1335
+msgid "Mark as confident"
+msgstr "Označite kao sigurno"
+
+#: crosswordxmlguiwindow.cpp:1341
+msgid "Mark as unsure"
+msgstr "Označite kao nesigurno"
+
+#: crosswordxmlguiwindow.cpp:1336
+#, fuzzy
+msgid "Mark the selected letter cell's confidence as confident"
+msgstr "Označite sigurnost trenutačno odabrane ćelije slova kao sigurno"
+
+#: crosswordxmlguiwindow.cpp:1342
+#, fuzzy
+msgid "Mark the selected letter cell's confidence as unsure"
+msgstr "Označite sigurnost trenutačno odabrane ćelije slova kao nesigurno"
+
+#: library/librarygui.cpp:365
+msgid "Matt Jones (thursdays)"
+msgstr ""
+
+#: dialogs/statisticsdialog.cpp:101
+msgid "Max. Answer Length:"
+msgstr "Max. dužina odgovora:"
+
+#: dialogs/statisticsdialog.cpp:98
+msgid "Min. Answer Length:"
+msgstr "Min. dužina odgovora:"
+
+#: library/librarygui.cpp:389
+msgid "Mots-croisés.ch free French crosswords"
+msgstr ""
+
+#: commands.cpp:1972
+msgid "Move All Cells By %1, %2"
+msgstr "Premjesti sve ćelija za %1, %2"
+
+#: crosswordxmlguiwindow.cpp:1507
+msgid "Move All Cells..."
+msgstr "Pomjeri sve ćelije..."
+
+#: dialogs/movecellsdialog.cpp:28
+msgid "Move Cells"
+msgstr "Premjesti ćelije"
+
+#: crosswordxmlguiwindow.cpp:1508
+#, fuzzy
+msgid "Moves all cells of the crossword"
+msgstr "Pomjera sve ćelije križaljke."
+
+#: dialogs/movecellsdialog.cpp:65
+msgctxt ""
+"How many clues are removed when moving all cells of the crossword. %2 is "
+"replaced by a plural indicating how many images will be removed when moving "
+"the cells."
+msgid "Moving all cells will remove %1 clue %2"
+msgid_plural "Moving all cells will remove %1 clues %2"
+msgstr[0] "Premještanje svih ćelija će ukloniti %1 trag %2"
+msgstr[1] "Premještanje svih ćelija će ukloniti %1 tragove %2"
+msgstr[2] "Premještanje svih ćelija će ukloniti %1 tragove %2"
+
+#: library/librarygui.cpp:554
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "New &Crossword..."
+msgstr "Nova križaljka"
+
+#: library/librarygui.cpp:549
+msgctxt "@action:intoolbar"
+msgid "New &Folder..."
+msgstr ""
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
+msgid "New Crossword Type"
+msgstr "Novi tip križaljke"
+
+#: library/librarygui.cpp:481
+msgid "New Library Folder"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:653 crosswordxmlguiwindow.cpp:686
+msgid "New crossword"
+msgstr "Nova križaljka"
+
+#: commands.cpp:1299
+msgid "No Action"
+msgstr "Nema akcije"
+
+#: dictionary.cpp:174
+msgid ""
+"No Connection to the database! Please make sure the MySQL server is running. "
+"Afterwards click \"Continue\" to retry connecting to the database."
+msgstr ""
+"Nije uspostavljena konekcija sa bazom podataka! Molimo, uvjerite se da je "
+"pokrenut MySQL servis. Poslije pritisnite \"Nastavi\" da osvježite "
+"povezivanje sa bazom podataka."
+
+#: dictionary.cpp:177
+msgid "No Database Connection"
+msgstr "Nije uspostavljena konekcija sa bazom podataka"
+
+#: commands.cpp:343 commands.cpp:552 commands.cpp:662 commands.cpp:697
+msgid "No cell at the given coordinates (%1, %2)"
+msgstr "Nema ćelije na datim koordinatama (%1, %2)"
+
+#: dialogs/currentcellwidget.cpp:114
+msgid "No cell selected."
+msgstr "Ćelija nije odabrana."
+
+#: dialogs/crosswordpropertiesdialog.cpp:245
+msgctxt "No changes to the crossword grid size."
+msgid "No change"
+msgstr "Nema promjene"
+
+#: commands.cpp:813 commands.cpp:1006 commands.cpp:1100
+msgid "No clue cell given"
+msgstr "Nije data ćelija traga"
+
+#: krossword.cpp:3033
+msgid "No error."
+msgstr "Nema greške"
+
+#: crosswordxmlguiwindow.cpp:1122
+msgid "No removable cell selected."
+msgstr "Nije odabrana prenosna ćelija."
+
+#: dialogs/createnewcrossworddialog.cpp:193
+msgid "Notes"
+msgstr "Zabilješke"
+
+#: commands.cpp:1277
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Notes"
+msgstr "Zabilješke"
+
 #: global.cpp:488
 msgid "Number Puzzle"
 msgstr "Numerička zagonetka"
+
+#: global.cpp:289
+msgid "Number clues (1 to 26)"
+msgstr "Numerički tragovi (1 do 26)"
+
+#: dialogs/statisticsdialog.cpp:72
+msgid ""
+"Number of crossed letter cells, percentage of total letter cell count in "
+"braces"
+msgstr ""
+"Broj ukrštenih ćelija slova, postotak ukupnog broja ćelija slova u zagradama"
+
+#: dialogs/statisticsdialog.cpp:59
+msgid "Number of empty cells, percentage of total cell count in braces"
+msgstr "Broj praznih ćelija, postotak ukupnog broja ćelija."
+
+#: dialogs/statisticsdialog.cpp:90
+msgid "Number of horizontal clues, percentage of total clue count in braces"
+msgstr "Broj horizontalnih tragova, postotak ukupnog broja tragova u zagradam"
+
+#: dialogs/statisticsdialog.cpp:121
+msgid ""
+"Number of letter cells containing '%1', percentage of total letter cell "
+"count in braces"
+msgstr ""
+"Broj ćelija slova koje sadrže '%1', postotak ukupnog broja ćelija slova u "
+"zagradama"
+
+#: dialogs/statisticsdialog.cpp:62
+msgid "Number of letter cells, percentage of total cell count in braces"
+msgstr "Broj ćelija slova, postotak ukupnog broja čelija u zagradama"
+
+#: dialogs/statisticsdialog.cpp:76
+msgid ""
+"Number of uncrossed letter cells, percentage of total letter cell count in "
+"braces"
+msgstr ""
+"Broj neukrštenih ćelija slova, postotak ukupnog broja ćelija slova u "
+"zagradama"
+
+#: dialogs/statisticsdialog.cpp:94
+msgid "Number of vertical clues, percentage of total clue count in braces"
+msgstr "Broj vertikalnih trragova, postotak ukupnog broja tragova u zagradama"
 
 #: global.cpp:490
 msgctxt "Short description of the crossword type 'Number Puzzle'"
@@ -1572,236 +1407,120 @@ msgstr ""
 "Numeričke zagonetke su varijante križaljki u kojima svaka ćelija ima broj "
 "između 1 i 26. Rješavač mora saznati za koje slovo abecede važi koji broj."
 
-#: global.cpp:503
-msgid "Crossnumber"
-msgstr "Crossnumber"
+#: dialogs/statisticsdialog.cpp:115
+msgid "Occurrences Of Letters:"
+msgstr "Pojave slova:"
 
-#: global.cpp:505
-msgctxt "Short description of the crossword type 'Crossnumber'"
-msgid ""
-"Crossnumbers are the numerical analogy of a crossword, in which the "
-"solutions to the clues are numbers instead of words."
-msgstr ""
-"Crossnumber-i su numerička analogija križaljke, u kojima su rješenja tragova "
-"brojevi umjesto riječi."
-
-#: global.cpp:508
-msgctxt "Long description of the crossword type 'Crossnumber'"
-msgid ""
-"A crossnumber (also known as a cross-figure) is the numerical analogy of a "
-"crossword, in which the solutions to the clues are numbers instead of words. "
-"Clues are usually arithmetical expressions, but can also be general "
-"knowledge clues to which the answer is a number or year. There are also "
-"numerical fill-in crosswords.\n"
-"The Daily Mail Weekend magazine used to feature crossnumbers under the "
-"misnomer Number Word. This kind of puzzle should not be confused with a "
-"different puzzle that the Daily Mail refers to as Cross Number.\n"
-"(text taken from wikipedia)"
+#: library/librarygui.cpp:525
+msgid "Open the selected crossword."
 msgstr ""
 
-#: io/krosswordxmlreader.cpp:174 io/krosswordxmlreader.cpp:206
+#: crosswordxmlguiwindow.cpp:1321
+msgid "Pan"
+msgstr "Paniraj"
+
+#: crosswordxmlguiwindow.cpp:1322
+msgid ""
+"Pan the view. Note that you can also pan while pressing the control key."
+msgstr ""
+"Paniraj pogled. Imajte na umu da takođe možete panirati dok držite kontrolni "
+"ključ."
+
+#: dialogs/crosswordpreviewwidget.cpp:55
+msgid "Preview failed"
+msgstr "Prikaz nije moguć"
+
+#: main.cpp:39
+msgid "Previous developer"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1303
+msgid "Print the crossword"
+msgstr "Odštampajte križaljku"
+
+#: dialogs/crosswordpropertiesdialog.cpp:36
+msgid "Properties"
+msgstr "&Postavke"
+
+#: crosswordxmlguiwindow.cpp:1175
+msgid ""
+"Quality crosswords of the current crossword type (%1) are usually symmetric."
+msgstr ""
+"Kvalitetne križaljke trenutačnog tipa križaljke (%1) su obično simetrične."
+
+#: commands.cpp:776
+msgid "Remove %1 letter"
+msgid_plural "Remove %1 letters"
+msgstr[0] "Ukloni %1 slovo"
+msgstr[1] "Ukloni %1 slova"
+msgstr[2] "Ukloni %1 slova"
+
+#: crosswordxmlguiwindow.cpp:1464
+msgid "Remove &Across Clue"
+msgstr "Ukloni &preko trag"
+
+#: crosswordxmlguiwindow.cpp:1470
+msgid "Remove &Down Clue"
+msgstr "Ukloni &donji trag"
+
+#: commands.cpp:336
+msgid "Remove Clue '%1'"
+msgstr "Ukloni trag '%1'"
+
+#: commands.cpp:334
+msgid "Remove Clue Without Text"
+msgstr "Ukloni trag bez teksta"
+
+#: commands.cpp:544
+msgid "Remove Image '%1'"
+msgstr "Ukloni sliku '%1'"
+
+#: commands.cpp:1529
+msgid "Remove Same Letter Synchronization"
+msgstr "Ukloni sinhronizaciju istih slova"
+
+#: commands.cpp:778
+msgctxt "This string shouldn't happen to be used"
+msgid "Remove no letters"
+msgstr "Uklonite ne slova"
+
+#: crosswordxmlguiwindow.cpp:1483
 #, fuzzy
-msgid "The file is not a Krossword version &lt;= 1.1 file."
-msgstr "Ova datoteka nije verzija KrossWordPuzzle-a &lt;= 1.1 datoteka."
+msgid "Removes all clues from the crossword"
+msgstr "Uklanja sve tragove iz križaljke."
 
-#: io/krosswordxmlwriter.cpp:52
-msgid "Couldn't open the ZIP archive for writing"
-msgstr "Ne može otvoriti ZIP arhivu za pisanje"
-
-#: io/krosswordxmlwriter.cpp:58 io/krosswordxmlwriter.cpp:63
-#: io/krosswordxmlwriter.cpp:68
-msgid "Error writing to the compressed file"
-msgstr "Greška  pri zapisivanju u kompresovanu datoteku"
-
-#: io/krosswordxmlwriter.cpp:73
-msgid "Couldn't close the ZIP archive"
-msgstr "Ne može zatvoriti ZIP arhivu"
-
-#: krossword.cpp:612
-msgid "%1 clue cell"
-msgid_plural "%1 clue cells"
-msgstr[0] "%1 ćelija traga"
-msgstr[1] "%1 ćelije traga"
-msgstr[2] "%1 ćelija traga"
-
-#: krossword.cpp:617
-msgid "%1 double clue cell"
-msgid_plural "%1 double clue cells"
-msgstr[0] "%1 dupla ćelija traga"
-msgstr[1] "%1 duple ćelije traga"
-msgstr[2] "%1 duplih ćelija traga"
-
-#: krossword.cpp:622
-msgid "%1 solution letter cell"
-msgid_plural "%1 solution letter cells"
-msgstr[0] "%1 ćelija slova rješenja"
-msgstr[1] "%1 ćelije slova rješenja"
-msgstr[2] "%1 ćelija slova rješenja"
-
-#: krossword.cpp:633
-msgid "The conversion will remove %1 of %2 clues"
-msgstr "Konverzija će ukloniti %1 od %2 tragova"
-
-#: krossword.cpp:636
-msgid "The conversion will remove %1 of %2 clues, %3 of %4 images"
-msgstr "Konverzija će ukloniti %1 od %2 tragova, %3 od %4 slika"
-
-#: krossword.cpp:649
-msgid "Letters can't be converted back correctly after this conversion."
-msgstr "Slova ne mogu biti konvertovana nazad tačno nakon ove konverzije."
-
-#: krossword.cpp:656
-msgid ""
-"All clue cells get removed. The initial letter to clue number mapping is "
-"A=1, B=2, ..., Z=26."
-msgstr ""
-"Sve ćelije traga su uklonjene. Početno slovo mapiranja traga broja je A=1, "
-"B=2, ..., Z=26."
-
-#: krossword.cpp:923
-msgid "Error writing crossword: %1"
-msgstr "Greška pri zapisu križaljke: %1"
-
-#: krossword.cpp:930
-msgid "Error writing compressed crossword: %1"
-msgstr "Greška pri zapisu kompresovanje križaljke: %1"
-
-#: krossword.cpp:941
-msgid "Error writing AcrossLite's .puz-format."
-msgstr "Greška pri zapisu AcrossLite .puz formata."
-
-#: krossword.cpp:962
-msgid "Error while downloading from url: %1"
-msgstr "Greška pri preuzimanju sa url-a: %1"
-
-#: krossword.cpp:1017
-msgid "Error reading AcrossLite's .puz-format."
-msgstr "Greška pri čitanju AcrossLite -puz formata."
-
-#: krossword.cpp:2947
-msgctxt "Name"
-msgid ""
-"Used as header label for the column containing the names in the crossword "
-"type model."
-msgstr ""
-"Korišteno kao oznaka u zaglavlju za kolonu koja sadrži imena u modelu tipa "
-"križaljke."
-
-#: krossword.cpp:2950
-msgctxt "Description"
-msgid ""
-"Used as header label for the column containing the descriptions in the "
-"crossword type model."
-msgstr ""
-
-#: krossword.cpp:3033
-msgid "No error."
-msgstr "Nema greške"
-
-#: krossword.cpp:3036
-msgid "The clue doesn't fit in the grid with the given settings."
-msgstr ""
-
-#: krossword.cpp:3038
-msgid "The cell for the new clue isn't empty."
-msgstr "Ćelija novog traga nije prazna."
-
-#: krossword.cpp:3040
-msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
-msgstr ""
-
-#: krossword.cpp:3042
-msgid "The answer produces mismatching letter cells at the same positions."
-msgstr ""
-
-#: krossword.cpp:3044
-msgid ""
-"The answer overwrites the answer to another clue with the same orientation."
-msgstr ""
-
-#: krossword.cpp:3046
-msgid "The answer's letter cells cross a clue cell."
-msgstr ""
-
-#: krossword.cpp:3048
-msgid "The current crossword type doesn't allow clue cells."
-msgstr ""
-
-#: krossword.cpp:3050
-msgid "The current crossword type requires a clue cell for each clue."
-msgstr ""
-
-#: krossword.cpp:3052
-msgid "The answer is too short for the current crossword type."
-msgstr ""
-
-#: krossword.cpp:3054
-msgid "The answer overwrites the clue cell."
-msgstr ""
-
-#: krossword.cpp:3057
-msgid "The image doesn't fit in the grid with the given settings."
-msgstr ""
-
-#: krossword.cpp:3059
-msgid "The cells for the new image aren't empty."
-msgstr ""
-
-#: krossword.cpp:3061
-msgid "The current crossword type doesn't allow image cells."
-msgstr ""
-
-#: krossworddocument.cpp:86
-msgctxt "Title for the clue list when printing"
-msgid "Clue list"
-msgstr "Lista tragova"
-
-#: krossworddocument.cpp:87
-msgctxt "Title for the list of down/vertical clues when printing"
-msgid "Down clues"
-msgstr "Donji tragovi"
-
-#: krossworddocument.cpp:88
-msgctxt "Title for the list of across/horizontal clues when printing"
-msgid "Across clues"
-msgstr "Preko tragova"
-
-#: krosswordpuzzle.cpp:85
-msgid "Would you like to add the crossword into the library?"
-msgstr ""
-
-#: krosswordpuzzle.cpp:86
+#: crosswordxmlguiwindow.cpp:1465
 #, fuzzy
-msgid "Save crossword"
-msgstr "Nova križaljka"
+msgid "Removes the highlighted across clue"
+msgstr "Uklanja istaknuti preko trag."
 
-#: krosswordpuzzle.cpp:94
-msgid "Could not open resource at "
-msgstr ""
+#: crosswordxmlguiwindow.cpp:1460
+#, fuzzy
+msgid "Removes the highlighted clue or image"
+msgstr "Uklanja istaknuti trag ili sliku."
+
+#: crosswordxmlguiwindow.cpp:1471
+#, fuzzy
+msgid "Removes the highlighted down clue"
+msgstr "Uklanja istaknuti donji trag."
+
+#: commands.cpp:1894
+msgid "Resize Crossword From %1x%2 to %3x%4"
+msgstr "Promijeni veličinu Crossword-a od %1x%2 do %3x%4"
+
+#: dialogs/crosswordpropertiesdialog.cpp:251
+msgctxt ""
+"How many clues are removed when resizing the crossword. %2 is replaced by a "
+"plural indicating how many images will be removed when resizing."
+msgid "Resizing from %3x%4 will remove %1 clue %2"
+msgid_plural "Resizing from %3x%4 will remove %1 clues %2"
+msgstr[0] "Mjenjanje veličine od %3x%4 će ukloniti %1 trag %2"
+msgstr[1] "Mjenjanje veličine od %3x%4 će ukloniti %1 tragove %2"
+msgstr[2] "Mjenjanje veličine od %3x%4 će ukloniti %1 tragove %2"
 
 #: krosswordpuzzle.cpp:95
 msgid "Resource unavailable"
 msgstr ""
-
-#: krosswordpuzzle.cpp:180 library/librarygui.cpp:233
-msgid "Loading..."
-msgstr "Učitavam..."
-
-#: krosswordpuzzle.cpp:183
-msgid "Loading the crossword, please wait..."
-msgstr "Učitava križaljku, molimo sačekajte..."
-
-#: krosswordpuzzle.cpp:240 krosswordpuzzle.cpp:429 library/librarygui.cpp:412
-msgid "Library"
-msgstr "Biblioteka"
-
-#: krosswordpuzzle.cpp:244
-msgid "Templates"
-msgstr "Šabloni"
-
-#: krosswordpuzzle.cpp:261
-msgid "&Restore"
-msgstr "&Obnovi"
 
 #: krosswordpuzzle.cpp:261
 msgid ""
@@ -1809,94 +1528,231 @@ msgid ""
 "crash"
 msgstr ""
 
-#: krosswordpuzzle.cpp:262
-msgid ""
-"An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
-" Do you want to restore the crossword?"
-msgstr ""
+#: crosswordxmlguiwindow.cpp:808
+msgid "Save &Edit History"
+msgstr "Snimi &uredi historiju"
 
-#: krosswordpuzzle.cpp:283
+#: crosswordxmlguiwindow.cpp:811
+msgid "Save As &Template"
+msgstr "Snimi kao &šablon"
+
+#: krosswordpuzzle.cpp:86
 #, fuzzy
+msgid "Save crossword"
+msgstr "Nova križaljka"
+
+#: crosswordxmlguiwindow.cpp:1294
+msgid "Save the crossword with solved letters"
+msgstr "Spasite križalju sa riješenim slovima"
+
+#: crosswordxmlguiwindow.cpp:813
+msgid "Save without correct answers, clue texts, images"
+msgstr "Snimi bez tačnih odgovora, tragova teksta, slika"
+
+#: dictionary.cpp:277
 msgctxt ""
-"This string is used to replace the library path for crossword files that are "
-"in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
-"apps/krossword/library/crossword.kwpz with Library/crossword.kwpz"
-msgid "Library"
-msgstr "Biblioteka"
+"The header title for scores/difficulties of clue/answer pairs in the "
+"dictionary database"
+msgid "Score"
+msgstr "Zbir"
 
-#: krosswordpuzzle.cpp:308
-msgid "Animations"
-msgstr "Animacije"
+#: crosswordxmlguiwindow.cpp:1396
+msgid "Select clue with switched orientation to the currently selected clue"
+msgstr "Odaberi trag sa promijenjenom orijentacijom na trenutačno odabran trag"
 
-#: krosswordpuzzle.cpp:313
-msgid "Theme"
-msgstr "Tema"
+#: crosswordxmlguiwindow.cpp:1411
+msgid "Select the first clue"
+msgstr "Odaberi prvi trag"
 
-#: krosswordpuzzle.cpp:466
-#, fuzzy
-msgid "Error loading file '%1'"
-msgstr "Greška pri otvaranju datoteke '%1'"
+#: crosswordxmlguiwindow.cpp:1401
+msgid "Select the first letter of the current clue"
+msgstr "Odaberi prvo slovo trenutačnog traga"
+
+#: crosswordxmlguiwindow.cpp:1426
+msgid "Select the last clue"
+msgstr "Odaberi posljednji trag"
+
+#: crosswordxmlguiwindow.cpp:1406
+msgid "Select the last letter of the current clue"
+msgstr "Odaberi posljednje slovo trenutačnog traga"
+
+#: crosswordxmlguiwindow.cpp:1416
+msgid "Select the next clue"
+msgstr "Odaberi sljedeći trag"
+
+#: crosswordxmlguiwindow.cpp:1421
+msgid "Select the previous clue"
+msgstr "Odaberi prethodni trag"
+
+#: commands.cpp:1147
+msgid "Set Correct Letter at (%1, %2) to %3"
+msgstr "Postavi tačno slovo na (%1, %2) do %3"
+
+#: commands.cpp:1481
+msgid "Set Default Number Puzzle Mapping"
+msgstr "Postavi mapiranje zadanog broja zagonetke"
+
+#: commands.cpp:1157
+msgid "Set Letter at (%1, %2) to %3"
+msgstr "Postavi slovo na (%1, %2) do %3"
 
 #: krosswordpuzzleview.cpp:106
 msgid "Settings changed"
 msgstr ""
 
-#: library/librarygui.cpp:138
-msgid "The crossword couldn't be imported to the library."
+#: commands.cpp:1506
+msgid "Setup Same Letter Synchronization"
+msgstr "Postavi sinhronizaciju istih slova"
+
+#: crosswordxmlguiwindow.cpp:1434
+msgid "Show Clue Dock"
+msgstr "Pokaži pristanište traga"
+
+#: crosswordxmlguiwindow.cpp:1444
+msgid "Show Current Cell Dock"
+msgstr "Pokaži pristanište trenutačne ćelije"
+
+#: dialogs/crosswordtypewidget.cpp:204
+msgid "Show Details"
+msgstr "Pokaži detalje"
+
+#: crosswordxmlguiwindow.cpp:1439
+msgid "Show Edit History Dock"
+msgstr "Pokaži pristanište historije urednika"
+
+#: dialogs/cellwidgets/cluecellwidget.cpp:121
+msgid "Show Only Answers With &Clue"
 msgstr ""
 
-#: library/librarygui.cpp:140
-msgid "The crossword couldn't be written to the library folder."
+#: dialogs/cellwidgets/cluecellwidget.cpp:112
+msgid "Show Only Answers With Current Answer &Length"
 msgstr ""
 
-#: library/librarygui.cpp:163
-#, fuzzy
-msgid "Failed"
-msgstr "tiled"
-
-#: library/librarygui.cpp:190
-#, fuzzy
-msgid "The Cross Nerd current crossword"
-msgstr "Zatvorite trenutačnu križaljku."
-
-#: library/librarygui.cpp:201 library/librarygui.cpp:206
-#: library/librarygui.cpp:214
-#, fuzzy
-msgid "Crossword %1"
-msgstr "&Križaljka *"
-
-#: library/librarygui.cpp:298
-msgid "Can't export whole directories. Please select a crossword."
+#: dialogs/cellwidgets/cluecellwidget.cpp:128
+msgid "Show Only the &First 100 Answers"
 msgstr ""
 
-#: library/librarygui.cpp:304
+#: crosswordxmlguiwindow.cpp:1307
+msgid "Show a print preview"
+msgstr "Prikažite pregled štampanja"
+
+#: crosswordxmlguiwindow.cpp:1498
+#, fuzzy
+msgid "Shows statistics about the crossword"
+msgstr "Pokazuje statistike o križaljci."
+
+#: crosswordxmlguiwindow.cpp:352
+#, fuzzy
+msgid "Shows the percentage of solved letter cells"
+msgstr "Pokazuje procenat rješenih ćelija slova."
+
+#: dialogs/createnewcrossworddialog.cpp:192
+msgid "Size"
+msgstr "Veličina"
+
+#: commands.cpp:1284
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Size"
+msgstr "Veličina"
+
+#: library/librarymanager.cpp:71
+msgctxt "The title for sizes of crosswords in the library tree view"
+msgid "Size:"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1660 krossword.h:555
+msgid "Solution"
+msgstr "&Rješenje"
+
+#: global.cpp:44
+msgid "Solution letter cell"
+msgstr "Ćelija slova rješenja"
+
+#: commands.cpp:669
+msgid "Solution letter cell not found at the given coordinates (%1, %2)"
+msgstr "Ćelija slova rješenja nije pronađena na datim koordinatama (%1, %2)"
+
+#: crosswordxmlguiwindow.cpp:2178
+#, fuzzy
+msgid "Solve"
+msgstr "Riješi trag"
+
+#: crosswordxmlguiwindow.cpp:1383
+msgid "Solve Across Clue"
+msgstr "Riješi preko trag"
+
+#: crosswordxmlguiwindow.cpp:1377
+msgid "Solve Clue"
+msgstr "Riješi trag"
+
+#: crosswordxmlguiwindow.cpp:1389
+msgid "Solve Down Clue"
+msgstr "Riješi donji trag"
+
+#: crosswordxmlguiwindow.cpp:1384
+msgid "Solve the current across clue"
+msgstr "Riješi trenutačni preko trag"
+
+#: crosswordxmlguiwindow.cpp:1378
+msgid "Solve the current clue"
+msgstr "Rijesi trenutačni trag"
+
+#: crosswordxmlguiwindow.cpp:1390
+msgid "Solve the current down clue"
+msgstr "Riješi trenutačni donji trag"
+
+#: crosswordxmlguiwindow.cpp:1372
+#, fuzzy
+msgid "Solve the selected letter cell"
+msgstr "Riješi trenutačno odabranu ćeliju slova"
+
+#: crosswordxmlguiwindow.cpp:1326
+#, fuzzy
+msgid "Solve the selected letter or a random one if none is selected"
+msgstr ""
+"Rješite trenutačno izabrano slovo ili nasumično ako nijedno nije izabrano"
+
+#: dialogs/statisticsdialog.cpp:34
+msgid "Statistics"
+msgstr "Statistike"
+
+#: global.cpp:287
+msgid "String clues"
+msgstr "Tekstualni tragovi"
+
+#: global.cpp:434
+msgid "Swedish Crossword"
+msgstr "Švedska križaljka"
+
+#: global.cpp:436
+msgctxt "Short description of the crossword type 'Swedish'"
 msgid ""
-"There was an error opening the crossword.\n"
-"%1"
+"Swedish crosswords contain clue cells which contain the clue text in it and "
+"an arrow to indicate in which direction the clues have to be answered."
 msgstr ""
+"Švedske križaljke sadrže ćelije traga koje sadrže tekst traga u sebi i "
+"strelicu koja pokazuje u kojem pravcu tragovi moraju biti odgovoreni."
 
-#: library/librarygui.cpp:314
-msgid "Export"
-msgstr "Izvezi"
+#: krosswordpuzzle.cpp:244
+msgid "Templates"
+msgstr "Šabloni"
 
-#: library/librarygui.cpp:332
-msgid "Export Settings"
-msgstr "Postavke izvoza"
-
-#: library/librarygui.cpp:348
-msgid "Couldn't export the image to the specified file."
-msgstr ""
-
-#: library/librarygui.cpp:357
-msgid "Download Crossword To Library"
-msgstr ""
-
-#: library/librarygui.cpp:365
-msgid "Matt Jones (thursdays)"
-msgstr ""
-
-#: library/librarygui.cpp:369
-msgid "Wall Street Journal by Mike Shenk (fridays)"
+#: global.cpp:439
+msgctxt "Long description of the crossword type 'Swedish'"
+msgid ""
+"The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
+"the cells which would normally be black in other countries. Arrows indicate "
+"in which direction the clues have to be answered, vertical or horizontal. "
+"This style of grid is used in several countries other than Sweden, usually "
+"in magazines with pages of A4 or similar size. The grid often has a photo of "
+"a pop or movie star replacing a block of squares, as a clue to one answer. "
+"These puzzles usually have no symmetry in the grid.\n"
+"Crosswords with clue cells inside the crossword grid are also called "
+"\"Arrowwords\", \"Pointers\" or \"Tipwords\" in English, \"Autodefinidos\" "
+"in Spanish, \"Mots Fléchés\" in French, etc.\n"
+"(text taken from wikipedia)"
 msgstr ""
 
 #: library/librarygui.cpp:373
@@ -1907,16 +1763,221 @@ msgstr ""
 msgid "The Cross Nerd (tuesdays)"
 msgstr ""
 
-#: library/librarygui.cpp:381
-msgid "I Swear Crossword by Victor Fleming (fridays)"
+#: library/librarygui.cpp:190
+#, fuzzy
+msgid "The Cross Nerd current crossword"
+msgstr "Zatvorite trenutačnu križaljku."
+
+#: krossword.cpp:3040
+msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
 msgstr ""
 
-#: library/librarygui.cpp:385
-msgid "ChrisWords.com"
+#: krossword.cpp:3052
+msgid "The answer is too short for the current crossword type."
 msgstr ""
 
-#: library/librarygui.cpp:389
-msgid "Mots-croisés.ch free French crosswords"
+#: krossword.cpp:3044
+msgid ""
+"The answer overwrites the answer to another clue with the same orientation."
+msgstr ""
+
+#: krossword.cpp:3054
+msgid "The answer overwrites the clue cell."
+msgstr ""
+
+#: krossword.cpp:3042
+msgid "The answer produces mismatching letter cells at the same positions."
+msgstr ""
+
+#: dialogs/answerwidget.cpp:30 dialogs/answerwidget.cpp:40
+msgid "The answer to the clue"
+msgstr "Odgovor na trag"
+
+#: krossword.cpp:3046
+msgid "The answer's letter cells cross a clue cell."
+msgstr ""
+
+#: krossword.cpp:3038
+msgid "The cell for the new clue isn't empty."
+msgstr "Ćelija novog traga nije prazna."
+
+#: krossword.cpp:3059
+msgid "The cells for the new image aren't empty."
+msgstr ""
+
+#: krossword.cpp:3036
+msgid "The clue doesn't fit in the grid with the given settings."
+msgstr ""
+
+#: krossword.cpp:633
+msgid "The conversion will remove %1 of %2 clues"
+msgstr "Konverzija će ukloniti %1 od %2 tragova"
+
+#: krossword.cpp:636
+msgid "The conversion will remove %1 of %2 clues, %3 of %4 images"
+msgstr "Konverzija će ukloniti %1 od %2 tragova, %3 od %4 slika"
+
+#: dialogs/answerwidget.cpp:28 dialogs/answerwidget.cpp:38
+msgid ""
+"The correct answer to the clue. For each letter a letter cell is created"
+msgstr "Tačan odgovor na trag. Za svako slovo kreirana je ćelija slova"
+
+#: library/librarygui.cpp:138
+msgid "The crossword couldn't be imported to the library."
+msgstr ""
+
+#: library/librarygui.cpp:140
+msgid "The crossword couldn't be written to the library folder."
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1169
+msgid ""
+"The crossword doesn't have 180 degree rotation symmetry.\n"
+"To achieve symmetry make sure that each empty cell and each clue cell has a "
+"counterpart at it's 180 degree rotated position.\n"
+msgstr ""
+"Križaljka nema 180 stepenu rotacionu simetriju.\n"
+"Da bi postigli simetriju provjerite da svaka prazna ćelija i svaki trag ima "
+"duplikat na njihovoj 180 stepeni rotacionoj poziciji.\n"
+
+#: crosswordxmlguiwindow.cpp:1165
+msgid ""
+"The crossword doesn't have 180 degree rotation symmetry.\n"
+"To achieve symmetry make sure that each empty cell has a counterpart at it's "
+"180 degree rotated position.\n"
+msgstr ""
+"Križaljka nema 180 stepenu rotacionu simetriju.\n"
+"Da bi postigli simetriju provjerite da svaka prazna ćelija ima duplikat na "
+"njenoj 180 stepeni rotacionoj poziciji.\n"
+
+#: crosswordxmlguiwindow.cpp:1161
+msgid "The crossword has 180 degree rotation symmetry."
+msgstr "Križaljka ima 180 stepenu rotacionu simetriju."
+
+#: crosswordxmlguiwindow.cpp:756
+msgid ""
+"The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
+"\n"
+"Do you want to convert the crossword to another type now?\n"
+"\n"
+"(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")"
+msgstr ""
+"Tip križaljke ne može biti odlučen, tako da je pretpostavljena 'Slobodna "
+"križaljka'.\n"
+"\n"
+"Da li želite da pretvorite križaljku u drugi tip sada?\n"
+"\n"
+"(Napomena: Možete je kasnije pretvoriti u \"Uredi\" > \"Postavke križaljke\")"
+
+#: crosswordxmlguiwindow.cpp:707 crosswordxmlguiwindow.cpp:850
+#: krosswordpuzzle.cpp:129
+msgid ""
+"The current crossword has been modified.\n"
+"Would you like to save it?"
+msgstr ""
+"Trenutačna križaljka je bila promijenjen.\n"
+"Da li želite ovo da spasite?"
+
+#: krossword.cpp:3048
+msgid "The current crossword type doesn't allow clue cells."
+msgstr ""
+
+#: krossword.cpp:3061
+msgid "The current crossword type doesn't allow image cells."
+msgstr ""
+
+#: krossword.cpp:3050
+msgid "The current crossword type requires a clue cell for each clue."
+msgstr ""
+
+#: io/krosswordxmlreader.cpp:174 io/krosswordxmlreader.cpp:206
+#, fuzzy
+msgid "The file is not a Krossword version &lt;= 1.1 file."
+msgstr "Ova datoteka nije verzija KrossWordPuzzle-a &lt;= 1.1 datoteka."
+
+#: library/librarygui.cpp:489
+msgid "The folder already exists in the library."
+msgstr ""
+
+#: krossword.cpp:3057
+msgid "The image doesn't fit in the grid with the given settings."
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1330
+#, fuzzy
+msgid "The selected letter cell has been solved"
+msgstr "Trenutačno izabrana ćelija slova je bila riješena"
+
+#: commands.cpp:725
+msgctxt ""
+"Error message to be displayed, when the user tries to convert a letter to a "
+"solution letter, but the position of the new solution letter is already "
+"used. Each solution letter has a position in the solution word of the "
+"crossword and all solution letters of a crossword form it's solution word. "
+"%1 is replaced by the (already used) position."
+msgid "The solution letter position %1 is already assigned."
+msgstr "Pozicija slova rješenja %1 je već dodjeljena."
+
+#: dialogs/cellwidgets/solutionlettercellwidget.cpp:94
+#, fuzzy
+msgid ""
+"The solution letter position %1 is already assigned.\n"
+"Please change the solution word position of that letter first."
+msgstr "Pozicija slova rješenja %1 je već dodjeljena."
+
+#: krosswordpuzzle.cpp:313
+msgid "Theme"
+msgstr "Tema"
+
+#: library/librarygui.cpp:304
+msgid ""
+"There was an error opening the crossword.\n"
+"%1"
+msgstr ""
+
+#: dialogs/dictionarydialog.cpp:238
+msgid "There was an error while exporting to '%1'"
+msgstr "Postoji greška pri izvozu u '%1'"
+
+#: dialogs/dictionarydialog.cpp:252
+msgid "There was an error while importing from '%1'"
+msgstr "Postoji greška pri uvozu iz '%1'"
+
+#: global.cpp:411
+msgctxt "Short description of the crossword type 'Free'"
+msgid "This is a special type that tries to be least restrictive."
+msgstr "Ovo je poseban tip koji pokušava da bude najmanje ograničen."
+
+#: global.cpp:413
+msgctxt "Long description of the crossword type 'Free'"
+msgid ""
+"This is a special type that tries to be least restrictive. You can use all "
+"available cell types (eg. clue cells, double clue cells, image cells, "
+"solution letter cells). You can mix answers that have a clue cell with "
+"answers that don't. Answers may contain characters as well as numbers."
+msgstr ""
+"Ovo je poseban tip koji pokušava da bude najmanje ograničen. Možete "
+"koristiti sve dostupne tipove ćelija (pr. ćelije traga, duple ćelije traga, "
+"ćelije slike, ćelije slova rješenja). Možete mješati odgovore koji imaju "
+"ćeliju traga sa odgovorima koji nemaju. Odgovori mogu sadržavati znakove, "
+"kao i brojeve."
+
+#: crosswordxmlguiwindow.cpp:1329
+msgid "This letter has been solved"
+msgstr "Ovo slovo je bilo riješeno"
+
+#: crosswordxmlguiwindow.cpp:1242
+msgid ""
+"This will cause all answers to be shown and editable.\n"
+"If you want to solve the crossword you should cancel."
+msgstr ""
+"Ovo će uzrokovati da svi odgovori budu prikazani i sa mogućnostima izmjene.\n"
+"Ako želite da riješite ovu križaljku, trebali biste otkazati."
+
+#: library/librarygui.cpp:453
+msgid ""
+"This will permanently delete the selected crossword from the library.\n"
+"The operation can't be undone!"
 msgstr ""
 
 #: library/librarygui.cpp:441
@@ -1925,124 +1986,97 @@ msgid ""
 "crosswords from the library. The operation can't be undone!"
 msgstr ""
 
-#: library/librarygui.cpp:449
+#: commands.cpp:1268
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Title"
+msgstr "Naslov"
+
+#: dialogs/statisticsdialog.cpp:49
+msgid "Total Cell Count:"
+msgstr "Ukupni broj ćelija:"
+
+#: dialogs/statisticsdialog.cpp:74
+msgid "Uncrossed:"
+msgstr "Neukršteno:"
+
+#: krossword.cpp:2950
+msgctxt "Description"
 msgid ""
-"Couldn't remove the directory from the library.\n"
-"You need root privileges to remove directories which belong to the global "
-"library."
+"Used as header label for the column containing the descriptions in the "
+"crossword type model."
 msgstr ""
 
-#: library/librarygui.cpp:453
+#: krossword.cpp:2947
+msgctxt "Name"
 msgid ""
-"This will permanently delete the selected crossword from the library.\n"
-"The operation can't be undone!"
+"Used as header label for the column containing the names in the crossword "
+"type model."
+msgstr ""
+"Korišteno kao oznaka u zaglavlju za kolonu koja sadrži imena u modelu tipa "
+"križaljke."
+
+#: global.cpp:424
+msgid "User Defined Crossword"
+msgstr "Korisnički definirana križaljka"
+
+#: global.cpp:52
+msgid "User cell type"
+msgstr "Korisnikov tip ćelije"
+
+#: library/librarygui.cpp:369
+msgid "Wall Street Journal by Mike Shenk (fridays)"
 msgstr ""
 
-#: library/librarygui.cpp:460
-#, fuzzy
-msgid "Couldn't remove the crossword from the library."
-msgstr "Ne moeže izvesti križaljku u posebnu slikovnu datoteku."
-
-#: library/librarygui.cpp:481
-msgid "New Library Folder"
+#: krosswordpuzzle.cpp:85
+msgid "Would you like to add the crossword into the library?"
 msgstr ""
 
-#: library/librarygui.cpp:489
-msgid "The folder already exists in the library."
-msgstr ""
+#: crosswordxmlguiwindow.cpp:913
+msgid "Wrote crossword to file '%1'"
+msgstr "Zapisao križaljku u datoteku '%1'"
 
-#: library/librarygui.cpp:524
-msgctxt "@action:intoolbar"
-msgid "&Open..."
-msgstr ""
+#: rc.cpp:2
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
 
-#: library/librarygui.cpp:525
-msgid "Open the selected crossword."
-msgstr ""
+#: rc.cpp:1
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Samir Ribić,Adna Čolpa"
 
-#: library/librarygui.cpp:529
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Import..."
-msgstr "&Uvezi"
+#: crosswordxmlguiwindow.cpp:295
+msgid "Zoom: %1%"
+msgstr "Povećaj: %1%"
 
-#: library/librarygui.cpp:530
-msgid "Import a crossword to the library."
-msgstr ""
+#: dialogs/movecellsdialog.cpp:71
+msgctxt ""
+"How many images are removed when moving all cells of the crossword. This "
+"string gets combined with a plural string indicating how many clue cells "
+"will be removed when moving the cells."
+msgid "and %1 image"
+msgid_plural "and %1 images"
+msgstr[0] "i %1 slika"
+msgstr[1] "i %1 slike"
+msgstr[2] "i %1 slika"
 
-#: library/librarygui.cpp:534
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Export..."
-msgstr "&Izvezi"
+#: dialogs/crosswordpropertiesdialog.cpp:257
+msgctxt ""
+"How many images are removed when resizing the crossword. This string gets "
+"combined with a plural string indicating how many clue cells will be removed "
+"when resizing."
+msgid "and %1 image"
+msgid_plural "and %1 images"
+msgstr[0] "i %1 slika"
+msgstr[1] "i %1 slike"
+msgstr[2] "i %1 slika"
 
-#: library/librarygui.cpp:535
-msgid "Export the selected crossword from the library."
-msgstr ""
-
-#: library/librarygui.cpp:539
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Download..."
-msgstr "&Preuzimanje"
-
-#: library/librarygui.cpp:540
-msgid "Download a crossword and add it to the library."
-msgstr ""
-
-#: library/librarygui.cpp:544
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Delete..."
-msgstr "&Obriši"
-
-#: library/librarygui.cpp:545
-msgid "Delete the selected crossword from the library."
-msgstr ""
-
-#: library/librarygui.cpp:549
-msgctxt "@action:intoolbar"
-msgid "New &Folder..."
-msgstr ""
-
-#: library/librarygui.cpp:550
-msgid "Create a new folder in the library."
-msgstr ""
-
-#: library/librarygui.cpp:554
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "New &Crossword..."
-msgstr "Nova križaljka"
-
-#: library/librarygui.cpp:555
-msgid "Create a new crossword in the library."
-msgstr ""
-
-#: library/librarygui.cpp:566
-msgid "%1"
-msgstr ""
-
-#: library/librarymanager.cpp:71
-msgctxt "The title for sizes of crosswords in the library tree view"
-msgid "Size:"
-msgstr ""
-
-#: library/librarymanager.cpp:74
-msgctxt "The title for authors of crosswords in the library tree view"
-msgid "Author(s):"
-msgstr ""
-
-#: main.cpp:27
-msgid ""
-"A crossword puzzle game and editor for KDE.\n"
-"Based on KrossWordPuzzle."
-msgstr ""
-
-#: main.cpp:33
-#, fuzzy
-msgid "Krossword"
-msgstr "&Križaljka"
+#: dialogs/createnewcrossworddialog.cpp:109
+msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
+msgid "© %1, by %2"
+msgstr "© %1, po %2"
 
 #: main.cpp:35
 msgid ""
@@ -2051,53 +2085,14 @@ msgid ""
 "© 2009 Friedrich Pülz"
 msgstr ""
 
-#: main.cpp:37
-msgid "Andrea Barazzetti"
-msgstr ""
-
-#: main.cpp:37 main.cpp:38
-msgid "Developer"
-msgstr ""
-
-#: main.cpp:38
-msgid "Giacomo Barazzetti"
-msgstr ""
-
-#: main.cpp:39
-msgid "Friedrich Pülz"
-msgstr ""
-
-#: main.cpp:39
-msgid "Previous developer"
-msgstr ""
-
-#: main.cpp:44
-msgid "Document to open"
-msgstr "Dokument za otvaranje"
-
-#: rc.cpp:1
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Samir Ribić,Adna Čolpa"
-
-#: rc.cpp:2
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
-
-#, fuzzy
-#~ msgid "Error while downloading from url"
-#~ msgstr "Greška pri preuzimanju sa url-a: %1"
-
-#, fuzzy
-#~ msgid "The file is not a Krossword version <= 1.1 file."
-#~ msgstr "Ova datoteka nije verzija KrossWordPuzzle-a &lt;= 1.1 datoteka."
-
 #~ msgid " columns"
 #~ msgstr " kolone"
 
 #~ msgid " rows"
 #~ msgstr " redovi"
+
+#~ msgid "%1 letters"
+#~ msgstr "%1 slova"
 
 #~ msgid "&Add Entry"
 #~ msgstr "&Dodaj ulaz"
@@ -2120,11 +2115,19 @@ msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
 #~ msgid "&Copyright:"
 #~ msgstr "&Autorska prava:"
 
+#~ msgctxt ""
+#~ "The title for the crossword tab with an unmodified or no crossword opened"
+#~ msgid "&Crossword"
+#~ msgstr "&Križaljka"
+
 #~ msgid "&Description:"
 #~ msgstr "&Opis:"
 
 #~ msgid "&Dictionary"
 #~ msgstr "&Leksikon"
+
+#~ msgid "&Difficulty:"
+#~ msgstr "&Težina:"
 
 #~ msgid "&Export (CSV)..."
 #~ msgstr "&Izvoz (CSV)..."
@@ -2146,6 +2149,15 @@ msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
 
 #~ msgid "&Import (CSV)..."
 #~ msgstr "&Uvoz CSV)..."
+
+#~ msgid "&Language:"
+#~ msgstr "&Jezik:"
+
+#~ msgid "&Letters:"
+#~ msgstr "&Slova"
+
+#~ msgid "&Library"
+#~ msgstr "&Biblioteka"
 
 #~ msgid "&Location:"
 #~ msgstr "&Lokacija:"
@@ -2182,6 +2194,9 @@ msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
 
 #~ msgid "&Quality:"
 #~ msgstr "&Kvalitet:"
+
+#~ msgid "&Refresh"
+#~ msgstr "&Osvježi"
 
 #~ msgid "&Remove Selected"
 #~ msgstr "&Ukloni odabrano"
@@ -2526,6 +2541,14 @@ msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
 #~ msgid "Create Database"
 #~ msgstr "Kreiraj bazu podataka"
 
+#~ msgctxt "Default notes value for new crosswords"
+#~ msgid ""
+#~ "Created with KrossWordPuzzle, see http://kde-apps.org/content/show.php?"
+#~ "content=111726"
+#~ msgstr ""
+#~ "Kreirano sa KrossWordPuzzle, pogledaj http://kde-apps.org/content/show."
+#~ "php?content=111726"
+
 #~ msgid "Crossword &Size:"
 #~ msgstr "&Veličina križaljke"
 
@@ -2548,11 +2571,25 @@ msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
 #~ msgid "Download Crosswords"
 #~ msgstr "Preuzmi križaljke"
 
+#~ msgid "Downloads"
+#~ msgstr "Preuzimanja"
+
 #~ msgid "Edit"
 #~ msgstr "Uredi"
 
 #~ msgid "Enable Animations"
 #~ msgstr "Omogući animacije"
+
+#~ msgid ""
+#~ "Enables/disables the edit mode. All correct letters are shown in edit "
+#~ "mode!"
+#~ msgstr ""
+#~ "Omogući/onemogući režim uređivanja. Sva tačna slova će biti prikazana u "
+#~ "režimu uređivanja!"
+
+#, fuzzy
+#~ msgid "Error while downloading from url"
+#~ msgstr "Greška pri preuzimanju sa url-a: %1"
 
 #~ msgid "Exports the whole dictionary to a comma separated text file."
 #~ msgstr "Izvozi cijeli rječnik u datoteku sa tekstom odvojenim zarezima."
@@ -2606,6 +2643,9 @@ msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
 #~ msgid "General"
 #~ msgstr "Općenito"
 
+#~ msgid "Give up the Game"
+#~ msgstr "Predaje igru"
+
 #~ msgid ""
 #~ "Hides the clue cell. The first letter cell is placed at the coordinates "
 #~ "of the clue cell."
@@ -2657,8 +2697,40 @@ msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
 #~ msgid "Letter Cell &Content:"
 #~ msgstr "&Sadržaj ćelije slova"
 
+#~ msgctxt ""
+#~ "This string is used to replace the library path for crossword files that "
+#~ "are in the library with a shorter user visible string, e.g. replacing ~/."
+#~ "kde4/apps/krosswordpuzzle/library/crossword.kwpz with Library/crossword."
+#~ "kwpz"
+#~ msgid "Library"
+#~ msgstr "Biblioteka"
+
+#~ msgctxt ""
+#~ "Statusbar text when a crossword has been loaded, %1 gets replaced by the "
+#~ "file name"
+#~ msgid "Loaded '%1'"
+#~ msgstr "Popunjeno '%1'"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Glavna alatna traka"
+
 #~ msgid "Name of the current theme."
 #~ msgstr "Ime trenutačne teme."
+
+#~ msgid ""
+#~ "Neither the chosen theme '%1' nor the default theme could be found.\n"
+#~ "Check your installation."
+#~ msgstr ""
+#~ "Ni izabrana tema '%1' niti zadana tema ne mogu biti pronađene.\n"
+#~ "Provjerite vašu instalaciju."
+
+#~ msgid ""
+#~ "Neither the last used theme '%1' nor the default theme could be found.\n"
+#~ "Check your installation."
+#~ msgstr ""
+#~ "Niti posljednja korištena tema '%1' niti zadana tema ne mogu biti "
+#~ "pronađene.\n"
+#~ "Provjerite vašu instalaciju."
 
 #~ msgid "New Size:"
 #~ msgstr "Nova veličina"
@@ -2699,6 +2771,9 @@ msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
 #~ msgid "Scaled and Cropped"
 #~ msgstr "Skalirano i podrezano"
 
+#~ msgid "Selection"
+#~ msgstr "Izbor"
+
 #~ msgid "Shows the current mapping of answer letters to clue numbers."
 #~ msgstr "Pokazuje trenutačno mapiranje pisma odgovora brojevima traga."
 
@@ -2717,6 +2792,10 @@ msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
 #~ msgid "The clue to the answer."
 #~ msgstr "Trag ka odgovoru."
 
+#, fuzzy
+#~ msgid "The file is not a Krossword version <= 1.1 file."
+#~ msgstr "Ova datoteka nije verzija KrossWordPuzzle-a &lt;= 1.1 datoteka."
+
 #~ msgid "The minimum length of answers to clues"
 #~ msgstr "Minimalna dužina odgovora na tragove"
 
@@ -2731,6 +2810,9 @@ msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
 #~ msgstr ""
 #~ "(Ova velčina će biti smanjena da odgovara odnosu dužine i širine "
 #~ "križaljke)"
+
+#~ msgid "The theme '%1' couldn't be found. The default theme is now used."
+#~ msgstr "Tema '%1' ne može biti pronađena. Zadana tema se koristi sada."
 
 #~ msgid "The title of the crossword"
 #~ msgstr "Naslov križaljke"
@@ -2753,93 +2835,11 @@ msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
 #~ msgid "Vertical"
 #~ msgstr "Vertikalan"
 
-#~ msgid "Wildcard pattern to search for answers"
-#~ msgstr "Zamjenski obrazac za traženje odgovora"
-
-#~ msgid "%1 letters"
-#~ msgstr "%1 slova"
-
-#~ msgctxt ""
-#~ "The title for the crossword tab with an unmodified or no crossword opened"
-#~ msgid "&Crossword"
-#~ msgstr "&Križaljka"
-
-#~ msgid "&Difficulty:"
-#~ msgstr "&Težina:"
-
-#~ msgid "&Language:"
-#~ msgstr "&Jezik:"
-
-#~ msgid "&Letters:"
-#~ msgstr "&Slova"
-
-#~ msgid "&Library"
-#~ msgstr "&Biblioteka"
-
-#~ msgid "&Refresh"
-#~ msgstr "&Osvježi"
-
-#~ msgctxt "Default notes value for new crosswords"
-#~ msgid ""
-#~ "Created with KrossWordPuzzle, see http://kde-apps.org/content/show.php?"
-#~ "content=111726"
-#~ msgstr ""
-#~ "Kreirano sa KrossWordPuzzle, pogledaj http://kde-apps.org/content/show."
-#~ "php?content=111726"
-
-#~ msgid "Downloads"
-#~ msgstr "Preuzimanja"
-
-#~ msgid ""
-#~ "Enables/disables the edit mode. All correct letters are shown in edit "
-#~ "mode!"
-#~ msgstr ""
-#~ "Omogući/onemogući režim uređivanja. Sva tačna slova će biti prikazana u "
-#~ "režimu uređivanja!"
-
-#~ msgid "Give up the Game"
-#~ msgstr "Predaje igru"
-
-#~ msgctxt ""
-#~ "This string is used to replace the library path for crossword files that "
-#~ "are in the library with a shorter user visible string, e.g. replacing ~/."
-#~ "kde4/apps/krosswordpuzzle/library/crossword.kwpz with Library/crossword."
-#~ "kwpz"
-#~ msgid "Library"
-#~ msgstr "Biblioteka"
-
-#~ msgctxt ""
-#~ "Statusbar text when a crossword has been loaded, %1 gets replaced by the "
-#~ "file name"
-#~ msgid "Loaded '%1'"
-#~ msgstr "Popunjeno '%1'"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Glavna alatna traka"
-
-#~ msgid ""
-#~ "Neither the chosen theme '%1' nor the default theme could be found.\n"
-#~ "Check your installation."
-#~ msgstr ""
-#~ "Ni izabrana tema '%1' niti zadana tema ne mogu biti pronađene.\n"
-#~ "Provjerite vašu instalaciju."
-
-#~ msgid ""
-#~ "Neither the last used theme '%1' nor the default theme could be found.\n"
-#~ "Check your installation."
-#~ msgstr ""
-#~ "Niti posljednja korištena tema '%1' niti zadana tema ne mogu biti "
-#~ "pronađene.\n"
-#~ "Provjerite vašu instalaciju."
-
-#~ msgid "Selection"
-#~ msgstr "Izbor"
-
-#~ msgid "The theme '%1' couldn't be found. The default theme is now used."
-#~ msgstr "Tema '%1' ne može biti pronađena. Zadana tema se koristi sada."
-
 #~ msgid "Welcome to KrossWordPuzzle!"
 #~ msgstr "Dobro došli u KrossWordPuzzle!"
+
+#~ msgid "Wildcard pattern to search for answers"
+#~ msgstr "Zamjenski obrazac za traženje odgovora"
 
 #~ msgid "Zoom in"
 #~ msgstr "&Uvećaj"

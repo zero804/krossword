@@ -101,8 +101,11 @@ void LibraryManager::loadThumbnailsSlot(QString path)
     QModelIndex fileIndex;
     KFileItemList fileItemList;
     foreach (fileIndex, fileIndexList) {
-        if(fileIndex.data(QFileSystemModel::FilePathRole).toString().startsWith(path + "/"))
-            fileItemList.append(KFileItem(KFileItem::Unknown, KFileItem::Unknown, KUrl("file://" + fileIndex.data(QFileSystemModel::FilePathRole).toString()), true));
+        if(fileIndex.data(QFileSystemModel::FilePathRole).toString().startsWith(path + "/")) {
+            QUrl url = fileIndex.data(QFileSystemModel::FilePathRole).toUrl();
+            url.setScheme("file");
+            fileItemList.append(KFileItem(KFileItem::Unknown, KFileItem::Unknown, KUrl(url), true));
+        }
     }
 
     if(fileItemList.count() != 0) {
@@ -193,6 +196,7 @@ LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QStri
         if (!libraryDir.endsWith(QDir::separator()))
             libraryDir.append(QDir::separator());
 
+        name.remove("#");
         name.prepend(libraryDir);
 
         QString tmpFileName = name;
