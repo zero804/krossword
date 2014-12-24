@@ -58,7 +58,8 @@ public:
         WallStreetJournal,
         ChronicleHigherEducation,
         CrossNerd,
-        SwearCrossword
+        SwearCrossword,
+        Motscroisesch
     };
 
     LibraryGui(KrossWordPuzzle* parent = 0);

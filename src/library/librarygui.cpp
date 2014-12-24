@@ -195,6 +195,14 @@ void LibraryGui::downloadProviderChanged(int index)
     case SwearCrossword:
         getDownloadCrosswordItems("http://wij.theworld.com/puzzles/dailyrecord/DR%1.puz", QDate(2011, 1, 7), QDate(2013, 12, 27), 7);
         break;
+
+    case Motscroisesch:
+        for (int i = 1; i <= 18; ++i) {
+            item = new QListWidgetItem(QString("Mots croisés %1").arg(i));
+            item->setData(Qt::UserRole, QString("http://www.mots-croises.ch/Grilles/HC/HC-00%1.puz").arg(i, 2, 10, QChar('0')));
+            ui_download.crosswords->addItem(item);
+        }
+        break;
     }
 }
 
@@ -358,6 +366,10 @@ void LibraryGui::libraryDownloadSlot()
 
         case SwearCrossword:
             ui_download.providers->addItem(i18n("I Swear Crossword by Victor Fleming (fridays)"), static_cast<int>(provider));
+            break;
+
+        case Motscroisesch:
+            ui_download.providers->addItem(i18n("Mots-croisés.ch free French crosswords"), static_cast<int>(provider));
             break;
         }
     }
@@ -547,5 +559,5 @@ void LibraryGui::getDownloadCrosswordItems(const QString& rawUrl, const QDate& s
 
 QList<LibraryGui::DownloadProvider> LibraryGui::allDownloadProviders()
 {
-    return QList<DownloadProvider>() << JonesinCrosswords << WallStreetJournal << ChronicleHigherEducation << CrossNerd << SwearCrossword;
+    return QList<DownloadProvider>() << JonesinCrosswords << WallStreetJournal << ChronicleHigherEducation << CrossNerd << SwearCrossword << Motscroisesch;
 }
