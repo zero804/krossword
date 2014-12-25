@@ -1,6 +1,15 @@
 == Krossword ==
 
-Version 0.17 alpha 2:
+Version 0.18 alpha 3 - 25 December 14:
+    - Added language support (with KrossWordPuzzle old translations. Thank you KDE translators!).
+    - Added a French provider (mots-croises.ch, just the free crosswords).
+    - Added a new English provider (ChrisWords.com).
+    - Reworked menu layout (better organization).
+    - Added a new plain theme (Ink).
+    - Improved default theme.
+    - And various minor changes and fixes.
+
+Version 0.17 alpha 2 - 15 October 14:
     - More standard and simple interface (no more tabs, they weren't really useful and wasted vertical space).
     - Added support for black cells/squares.
     - Heavy (under the hood) reworking/rewriting of the library to simplify the code and solve some bugs.
@@ -18,7 +27,7 @@ Version 0.17 alpha 2:
     - Continuing work in preparation of Qt5/Frameworks 5 porting.
     - And other minor changes.
 
-Version 0.16 alpha:
+Version 0.16 alpha - 22 July 14:
     - Ported to current libkdegames.
     - Reworked zoom handling.
     - Updated download providers for crosswords (and added some new ones).
