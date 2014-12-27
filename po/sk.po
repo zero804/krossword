@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krossword\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-21 20:14+0100\n"
+"POT-Creation-Date: 2014-12-24 18:18+0100\n"
 "PO-Revision-Date: 2012-10-22 23:52+0200\n"
 "Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -15,105 +15,243 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
+#: library/librarygui.cpp:566
+msgid "%1"
+msgstr ""
+
+#: krossword.cpp:612
+#, fuzzy
+msgid "%1 clue cell"
+msgid_plural "%1 clue cells"
+msgstr[0] "Vyčistiť pole"
+msgstr[1] ""
+msgstr[2] ""
+
+#: krossword.cpp:617
+#, fuzzy
+msgid "%1 double clue cell"
+msgid_plural "%1 double clue cells"
+msgstr[0] "Komentár v bunke %s!%s"
+msgstr[1] ""
+msgstr[2] ""
+
+#: dialogs/dictionarydialog.cpp:175 dialogs/dictionarydialog.cpp:190
+#, fuzzy
+msgid "%1 entries added from %2 crosswords"
+msgstr "Pridaný kľúč zo súboru"
+
+#: dialogs/dictionarydialog.cpp:165
+#, fuzzy
+msgid "%1 entries added from this dictionary: '%2'"
+msgstr "Toto natrvalo odstráni zdroj slovníka zo zoznamu."
+
+#: dialogs/dictionarydialog.cpp:255
+#, fuzzy
+msgid "%1 entry imported from '%2'"
+msgid_plural "%1 entries imported from '%2'"
+msgstr[0] "Položka Od je neakceptovaná"
+msgstr[1] ""
+msgstr[2] ""
+
+#: dialogs/dictionarydialog.cpp:209
+#, fuzzy
+msgid "%1 entry removed"
+msgid_plural "%1 entries removed"
+msgstr[0] "Bude odstránený <b>%s</b>\n"
+msgstr[1] ""
+msgstr[2] ""
+
+#: dialogs/currentcellwidget.cpp:145
+#, fuzzy
+msgid "%1 selected at (%2, %3)."
+msgstr "Spracované %1 z %2 pri %3/s"
+
+#: krossword.cpp:622
+#, fuzzy
+msgid "%1 solution letter cell"
+msgid_plural "%1 solution letter cells"
+msgstr[0] "Komentár v bunke %s!%s"
+msgstr[1] ""
+msgstr[2] ""
+
+#: crosswordxmlguiwindow.cpp:351
+#, fuzzy, no-c-format
+msgctxt "%p is replaced by the percentage of solved letter cells"
+msgid "%p% solved"
+msgstr "Problém vyriešený!"
+
+#: crosswordxmlguiwindow.cpp:1453
+#, fuzzy
+msgid "&Add Clue"
+msgstr "Pridať záložku"
+
+#: crosswordxmlguiwindow.cpp:1476
+msgid "&Add Image"
+msgstr "Pridať obrázak"
+
+#: crosswordxmlguiwindow.cpp:1539
+msgid "&Check"
+msgstr "&Kontrola"
+
+#: crosswordxmlguiwindow.cpp:1492
+#, fuzzy
+msgid "&Check for rotation symmetry..."
+msgstr "Automaticky kontrolovať dostupnosť aktualizácií"
+
+#: crosswordxmlguiwindow.cpp:1544
+#, fuzzy
+msgid "&Clear Answers"
+msgstr "Správne odpovede: %1/%2"
+
+#: crosswordxmlguiwindow.cpp:1482
+#, fuzzy
+msgid "&Clear Crossword..."
+msgstr "Vyprázdniť front"
+
+#: dialogs/crosswordpropertiesdialog.cpp:46
+msgid "&Convert..."
+msgstr "Previesť..."
+
+#: crosswordxmlguiwindow.cpp:1487
+#, fuzzy
+msgid "&Crossword Properties..."
+msgstr "Vlastnosti účtu '%s'"
+
+#: library/librarygui.cpp:544
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Delete..."
+msgstr "Odstrá&niť"
+
+#: crosswordxmlguiwindow.cpp:1311
+msgid "&Dictionary..."
+msgstr "Slovník..."
+
+#: library/librarygui.cpp:539
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Download..."
+msgstr "&Stiahnuť"
+
+#: crosswordxmlguiwindow.cpp:1549
+msgid "&Eraser"
+msgstr "Guma"
+
+#: library/librarygui.cpp:534
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Export..."
+msgstr "&Exportovať"
+
+#: crosswordxmlguiwindow.cpp:1400
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&First Letter"
+msgstr "Prvé písmená pre automatické opravy"
+
+#: library/librarygui.cpp:529
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Import..."
+msgstr "&Importovať"
+
+#: crosswordxmlguiwindow.cpp:1405
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Last Letter"
+msgstr "Klikni na písmenko"
+
+#: crosswordxmlguiwindow.cpp:1415
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Next Clue"
+msgstr "Vybrať nasledujúci zoznam skladieb"
+
+#: library/librarygui.cpp:524
+msgctxt "@action:intoolbar"
+msgid "&Open..."
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1420
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Previous Clue"
+msgstr "Vybrať predchádzajúci zoznam skladieb"
+
+#: crosswordxmlguiwindow.cpp:1459 crosswordxmlguiwindow.cpp:1889
+msgid "&Remove"
+msgstr "O&dstrániť"
+
+#: crosswordxmlguiwindow.cpp:1885
+#, fuzzy
+msgid "&Remove Clue"
+msgstr "Odstrániť ich"
+
+#: crosswordxmlguiwindow.cpp:1887
+msgid "&Remove Image"
+msgstr "Odstrániť obrázok"
+
+#: krosswordpuzzle.cpp:261
+msgid "&Restore"
+msgstr "&Obnoviť"
+
+#: dialogs/crosswordtypewidget.cpp:226
+msgid "&Rules..."
+msgstr "Pravidlá..."
+
+#: crosswordxmlguiwindow.cpp:1497
+msgid "&Statistics..."
+msgstr "Štatistika..."
+
 #: cells/cluecell.cpp:888
 msgctxt "Display text for empty clue texts"
 msgid "<placeholder>empty</placeholder>"
 msgstr "<placeholder>prázdne</placeholder>"
 
-#: cells/imagecell.cpp:68
-#, fuzzy
-msgid "Edit image properties to set an image"
-msgstr "Nastavenie veľkosti tlače na veľkosť obrázku"
+#: commands.cpp:993
+msgctxt ""
+"Used for the text of the change clue undo command, when the clue text is "
+"empty."
+msgid "<placeholder>empty</placeholder>"
+msgstr "<placeholder>prázdne</placeholder>"
 
-#: cluemodel.cpp:60
-msgid "Clue"
+#: crosswordxmlguiwindow.cpp:1537
+msgid ""
+"<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
+"solution will be displayed.</p><p>If you filled in all letters and do not "
+"want to give up, choose \"Done!\".</p></qt>"
 msgstr ""
 
-#: cluemodel.cpp:60
-msgid "Answer"
-msgstr "Odpoveď"
+#: global.cpp:508
+msgctxt "Long description of the crossword type 'Crossnumber'"
+msgid ""
+"A crossnumber (also known as a cross-figure) is the numerical analogy of a "
+"crossword, in which the solutions to the clues are numbers instead of words. "
+"Clues are usually arithmetical expressions, but can also be general "
+"knowledge clues to which the answer is a number or year. There are also "
+"numerical fill-in crosswords.\n"
+"The Daily Mail Weekend magazine used to feature crossnumbers under the "
+"misnomer Number Word. This kind of puzzle should not be confused with a "
+"different puzzle that the Daily Mail refers to as Cross Number.\n"
+"(text taken from wikipedia)"
+msgstr ""
+
+#: main.cpp:27
+msgid ""
+"A crossword puzzle game and editor for KDE.\n"
+"Based on KrossWordPuzzle."
+msgstr ""
 
 #: cluemodel.cpp:63
 #, fuzzy
 msgid "Across clues"
 msgstr "Desať naprieč"
 
-#: cluemodel.cpp:64
+#: krossworddocument.cpp:88
 #, fuzzy
-msgid "Down clues"
-msgstr "Stíšiť"
-
-#: commands.cpp:334
-#, fuzzy
-msgid "Remove Clue Without Text"
-msgstr "Zadávanie textu bez klávesnice"
-
-#: commands.cpp:336
-#, fuzzy
-msgid "Remove Clue '%1'"
-msgstr "Odstrániť ich"
-
-#: commands.cpp:343 commands.cpp:552 commands.cpp:662 commands.cpp:697
-#, fuzzy
-msgid "No cell at the given coordinates (%1, %2)"
-msgstr "Zobraziť mapu na danej súradnici zemepsinej šírky a dĺžky"
-
-#: commands.cpp:352
-msgctxt ""
-"%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
-msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
-msgstr ""
-
-#: commands.cpp:423
-#, fuzzy
-msgid "Add Clue Without Text"
-msgstr "Zadávanie textu bez klávesnice"
-
-#: commands.cpp:425
-#, fuzzy
-msgid "Add Clue '%1'"
-msgstr "Pridať záložku"
-
-#: commands.cpp:544
-msgid "Remove Image '%1'"
-msgstr "Odstrániť obrázok '%1'"
-
-#: commands.cpp:559
-msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
-msgstr ""
-
-#: commands.cpp:612
-msgid "Add Image '%1'"
-msgstr "Pridať obrázok '%1'"
-
-#: commands.cpp:626
-#, fuzzy
-msgid "Convert Letter at (%1, %2) to Solution Letter"
-msgstr "Zmeniť prvé &písmeno na veľké"
-
-#: commands.cpp:654
-#, fuzzy
-msgctxt "%1 contains the position of the solution letter in the solution word."
-msgid "Convert Solution Letter %1 to Letter"
-msgstr "Zmeniť prvé &písmeno na veľké"
-
-#: commands.cpp:669
-msgid "Solution letter cell not found at the given coordinates (%1, %2)"
-msgstr ""
-
-#: commands.cpp:704 commands.cpp:1172
-msgid "Letter cell not found at the given coordinates (%1, %2)"
-msgstr ""
-
-#: commands.cpp:725
-msgctxt ""
-"Error message to be displayed, when the user tries to convert a letter to a "
-"solution letter, but the position of the new solution letter is already "
-"used. Each solution letter has a position in the solution word of the "
-"crossword and all solution letters of a crossword form it's solution word. "
-"%1 is replaced by the (already used) position."
-msgid "The solution letter position %1 is already assigned."
-msgstr ""
+msgctxt "Title for the list of across/horizontal clues when printing"
+msgid "Across clues"
+msgstr "Desať naprieč"
 
 #: commands.cpp:774
 #, fuzzy
@@ -123,78 +261,95 @@ msgstr[0] "Chýbajúce písmeno"
 msgstr[1] ""
 msgstr[2] ""
 
-#: commands.cpp:776
+#: commands.cpp:425
 #, fuzzy
-msgid "Remove %1 letter"
-msgid_plural "Remove %1 letters"
-msgstr[0] "Chýbajúce písmeno"
-msgstr[1] ""
-msgstr[2] ""
+msgid "Add Clue '%1'"
+msgstr "Pridať záložku"
 
-#: commands.cpp:778
-msgctxt "This string shouldn't happen to be used"
-msgid "Remove no letters"
+#: commands.cpp:423
+#, fuzzy
+msgid "Add Clue Without Text"
+msgstr "Zadávanie textu bez klávesnice"
+
+#: commands.cpp:612
+msgid "Add Image '%1'"
+msgstr "Pridať obrázok '%1'"
+
+#: crosswordxmlguiwindow.cpp:1312
+#, fuzzy
+msgid "Add or remove crossword dictionaries"
+msgstr "Pridať alebo dostrániť kódovanie terminálu"
+
+#: dictionary.cpp:572
+msgid ""
+"Adding words from %1 crossword files to the database.\n"
+"Please wait."
 msgstr ""
 
-#: commands.cpp:813 commands.cpp:1006 commands.cpp:1100
-#, fuzzy
-msgid "No clue cell given"
-msgstr "Nebolo dané ID sedenia"
-
-#: commands.cpp:993
-msgctxt ""
-"Used for the text of the change clue undo command, when the clue text is "
-"empty."
-msgid "<placeholder>empty</placeholder>"
-msgstr "<placeholder>prázdne</placeholder>"
-
-#: commands.cpp:991
-#, fuzzy
-msgid "Change Clue '%1'"
-msgstr "Zmeniť heslo"
-
-#: commands.cpp:1092
-msgid "Clear Correct Answer of Clue at (%1, %2)"
+#: dictionary.cpp:490
+msgid ""
+"Adding words from the dictionary '%1' to the database.\n"
+"Please wait."
 msgstr ""
 
-#: commands.cpp:1144
-msgid "Clear Correct Letter at (%1, %2), was %3"
+#: crosswordxmlguiwindow.cpp:1454
+msgid "Adds a new clue at the current cell"
 msgstr ""
 
-#: commands.cpp:1147
-#, fuzzy
-msgid "Set Correct Letter at (%1, %2) to %3"
-msgstr "Nastaviť pri najbližšom prihlásení"
-
-#: commands.cpp:1150
-msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
+#: crosswordxmlguiwindow.cpp:1477
+msgid "Adds a new image at the current cell"
 msgstr ""
 
-#: commands.cpp:1154
+#: global.cpp:48
 #, fuzzy
-msgid "Clear Letter at (%1, %2), was %3"
-msgstr "Súbor skriptu '%1' bol nájdený na: %2"
+msgid "All cells"
+msgstr "_Zmenou buniek:"
 
-#: commands.cpp:1157
-#, fuzzy
-msgid "Set Letter at (%1, %2) to %3"
-msgstr "Nastaviť pri najbližšom prihlásení"
-
-#: commands.cpp:1160
-msgid "Edit Letter at (%1, %2) From %3 to %4"
+#: krossword.cpp:656
+msgid ""
+"All clue cells get removed. The initial letter to clue number mapping is "
+"A=1, B=2, ..., Z=26."
 msgstr ""
 
-#: commands.cpp:1222
+#: global.cpp:457
 #, fuzzy
-msgid "Clear Crossword"
-msgstr "Vyprázdniť front"
+msgid "American Crossword"
+msgstr "Americká Samoa"
 
-#: commands.cpp:1268
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Title"
-msgstr "Názov"
+#: global.cpp:459
+msgctxt "Short description of the crossword type 'American'"
+msgid ""
+"American crosswords have numbered clues and a list of clues on the side of "
+"the crossword. They have usually 180 degree rotational symmetry."
+msgstr ""
+
+#: krosswordpuzzle.cpp:262
+msgid ""
+"An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
+" Do you want to restore the crossword?"
+msgstr ""
+
+#: main.cpp:37
+msgid "Andrea Barazzetti"
+msgstr ""
+
+#: krosswordpuzzle.cpp:308
+msgid "Animations"
+msgstr "Animácie"
+
+#: cluemodel.cpp:60
+msgid "Answer"
+msgstr "Odpoveď"
+
+#: dictionary.cpp:273
+msgctxt "The header title for answers in the dictionary database"
+msgid "Answer"
+msgstr "Odpoveď"
+
+#: library/librarymanager.cpp:74
+msgctxt "The title for authors of crosswords in the library tree view"
+msgid "Author(s):"
+msgstr "Autor(i):"
 
 #: commands.cpp:1271
 msgctxt ""
@@ -203,153 +358,149 @@ msgctxt ""
 msgid "Authors"
 msgstr "Autori"
 
-#: commands.cpp:1274
+#: dialogs/statisticsdialog.cpp:104
+#, fuzzy
+msgid "Avg. Answer Length:"
+msgstr "Predvolená dĺžka skladby:"
+
+#: crosswordxmlguiwindow.cpp:1049
+msgid "Can't add clue at the current cell"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1070
+#, fuzzy
+msgctxt "%1 contains the reason why the clue couldn't be added"
+msgid "Can't add clue. %1"
+msgstr "Nemožno pridať výplň"
+
+#: crosswordxmlguiwindow.cpp:1040
+msgid "Can't add clues on crossed letter cells"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1101
+#, fuzzy
+msgctxt "%1 contains the reason why the image couldn't be added"
+msgid "Can't add image. %1"
+msgstr "Pridať nový obrázok"
+
+#: crosswordxmlguiwindow.cpp:2828
+#, fuzzy
+msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
+msgid "Can't add letter cells. %1"
+msgstr "Nemožno pridať ďalšiu oblasť."
+
+#: crosswordxmlguiwindow.cpp:1219
 msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Copyright"
-msgstr "Copyright"
+"%1 contains the reason why the new clue number mapping couldn't be applied"
+msgid "Can't apply clue number mapping. %1"
+msgstr ""
 
-#: commands.cpp:1277
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Notes"
-msgstr "Poznámky"
-
-#: commands.cpp:1284
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Size"
-msgstr "Veľkosť"
-
-#: commands.cpp:1292
+#: crosswordxmlguiwindow.cpp:1760
 #, fuzzy
-msgid "Changed Crossword Properties (%1)"
-msgstr "Vlastnosti zmenené naposledy"
+msgctxt "%1 contains the reason why the answer offset couldn't be changed"
+msgid "Can't change answer offset. %1"
+msgstr "Zmeniť posun priehradky farebného prechodu"
 
-#: commands.cpp:1297
+#: crosswordxmlguiwindow.cpp:1785
+#, fuzzy
+msgctxt "%1 contains the reason why the clue text couldn't be changed"
+msgid "Can't change clue text. %1"
+msgstr "Zmeníť text vybraného identifikátoru."
+
+#: crosswordxmlguiwindow.cpp:1798
+#, fuzzy
+msgctxt "%1 contains the reason why the correct answer couldn't be changed"
+msgid "Can't change correct answer. %1"
+msgstr "Toto bola správna odpoveď"
+
+#: crosswordxmlguiwindow.cpp:1149
 #, fuzzy
 msgctxt ""
-"%1 may be a list of changes separated by ',' if the list of changes contains "
-"more than 2 items. %2 is the last item"
-msgid "Changed Crossword Properties (%1 and %2)"
-msgstr "Upraviť vlastnosti albumu a informácie o kolekcii."
+"%1 contains the reason why the crossword properties couldn't be changed"
+msgid "Can't change crossword properties. %1"
+msgstr "Zmeniť vlastnosti celej stránky"
 
-#: commands.cpp:1299
-msgid "No Action"
-msgstr "Žiadna akcia"
-
-#: commands.cpp:1346
+#: crosswordxmlguiwindow.cpp:1773
 #, fuzzy
-msgid "Hide Clue Cell"
-msgstr "Komentár v bunke %s!%s"
+msgctxt "%1 contains the reason why the orientation couldn't be changed"
+msgid "Can't change orientation. %1"
+msgstr "Text: Zmeniť orientáciu"
 
-#: commands.cpp:1410
+#: crosswordxmlguiwindow.cpp:2286 crosswordxmlguiwindow.cpp:2310
+#: crosswordxmlguiwindow.cpp:2335 crosswordxmlguiwindow.cpp:2769
 #, fuzzy
-msgid "Make Clue Cell Visible"
-msgstr "Urobiť viditeľným cez Bluetooth"
+msgctxt "%1 contains the reason why the answer couldn't be cleared"
+msgid "Can't clear answer. %1"
+msgstr "Odpoveď je 42."
 
-#: commands.cpp:1481
+#: crosswordxmlguiwindow.cpp:1132
 #, fuzzy
-msgid "Set Default Number Puzzle Mapping"
-msgstr "Nastaviť počet stĺpcov na predvolený:"
+msgctxt "%1 contains the reason why the crossword couldn't be cleared"
+msgid "Can't clear crossword. %1"
+msgstr "Vyčistiť uložené dáta"
 
-#: commands.cpp:1483
+#: crosswordxmlguiwindow.cpp:2263 crosswordxmlguiwindow.cpp:2763
 #, fuzzy
-msgid "Change Number Puzzle Mapping"
-msgstr "Zmení počet farieb v mapovaní"
+msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
+msgid "Can't clear letter cell. %1"
+msgstr "Vizuálne rozpoznávanie písmen. Vedieť hýbať myšou."
 
-#: commands.cpp:1506
-msgid "Setup Same Letter Synchronization"
+#: crosswordxmlguiwindow.cpp:2876
+#, fuzzy
+msgctxt "%1 contains the reason why the crossword couldn't be converted"
+msgid "Can't convert crossword. %1"
+msgstr "Nemôžem skonvertovať znakovú sadu na '%s'"
+
+#: crosswordxmlguiwindow.cpp:1837
+#, fuzzy
+msgctxt ""
+"%1 contains the reason why the letter couldn't be converted to a solution "
+"letter"
+msgid "Can't convert letter. %1"
+msgstr "Nemôžem skonvertovať znakovú sadu na '%s'"
+
+#: crosswordxmlguiwindow.cpp:1818
+#, fuzzy
+msgctxt ""
+"%1 contains the reason why the solution letter couldn't be converted to a "
+"letter"
+msgid "Can't convert solution letter. %1"
+msgstr "Nemôžem skonvertovať znakovú sadu na '%s'"
+
+#: crosswordxmlguiwindow.cpp:2841
+#, fuzzy
+msgctxt "%1 contains the reason why the letter cell couldn't be edited"
+msgid "Can't edit letter cell. %1"
+msgstr "Edituje komentár vybranej bunky"
+
+#: library/librarygui.cpp:298
+msgid "Can't export whole directories. Please select a crossword."
 msgstr ""
 
-#: commands.cpp:1529
-msgid "Remove Same Letter Synchronization"
-msgstr ""
-
-#: commands.cpp:1777
+#: crosswordxmlguiwindow.cpp:1232
 #, fuzzy
-msgid "Convert Crossword From '%1' to '%2'"
-msgstr "CONVERT(hodnota; z jednotiek; do jednotiek)"
+msgctxt "%1 contains the reason why the cells couldn't be moved"
+msgid "Can't move cells. %1"
+msgstr "Vie hýbať myšou."
 
-#: commands.cpp:1894
-msgid "Resize Crossword From %1x%2 to %3x%4"
-msgstr ""
-
-#: commands.cpp:1972
+#: crosswordxmlguiwindow.cpp:1114
 #, fuzzy
-msgid "Move All Cells By %1, %2"
-msgstr "Šípky (klávesy) posunú o:"
+msgctxt "%1 contains the reason why the clue couldn't be removed"
+msgid "Can't remove clue. %1"
+msgstr "Nie je možné odstrániť súbor %s: %s\n"
 
-#: crosswordxmlguiwindow.cpp:295
-msgid "Zoom: %1%"
-msgstr "Priblíženie: %1%"
-
-#: crosswordxmlguiwindow.cpp:351
-#, fuzzy, no-c-format
-msgctxt "%p is replaced by the percentage of solved letter cells"
-msgid "%p% solved"
-msgstr "Problém vyriešený!"
-
-#: crosswordxmlguiwindow.cpp:352
+#: crosswordxmlguiwindow.cpp:1119
 #, fuzzy
-msgid "Shows the percentage of solved letter cells"
-msgstr "Vyčistí obsah zvolených buniek"
+msgctxt "%1 contains the reason why the image couldn't be removed"
+msgid "Can't remove image. %1"
+msgstr "Nedá sa načítať obrázok."
 
-#: crosswordxmlguiwindow.cpp:587
-msgid "Congratulations! You solved the crossword perfectly."
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:653 crosswordxmlguiwindow.cpp:686
+#: crosswordxmlguiwindow.cpp:2830
 #, fuzzy
-msgid "New crossword"
-msgstr "Nový zoznam skladieb"
-
-#: crosswordxmlguiwindow.cpp:707 crosswordxmlguiwindow.cpp:850
-#: krosswordpuzzle.cpp:122
-msgid ""
-"The current crossword has been modified.\n"
-"Would you like to save it?"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:708 crosswordxmlguiwindow.cpp:852
-#: krosswordpuzzle.cpp:124
-msgid "Close Document"
-msgstr "Zavrieť dokument"
-
-#: crosswordxmlguiwindow.cpp:741
-#, fuzzy
-msgid "Loaded crossword from file '%1'"
-msgstr "Zo súboru WinAMP EQF"
-
-#: crosswordxmlguiwindow.cpp:756
-msgid ""
-"The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
-"\n"
-"Do you want to convert the crossword to another type now?\n"
-"\n"
-"(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:782
-#, fuzzy
-msgid "Error while loading file '%1': %2"
-msgstr "Chyba pri nahrávaní zvukov."
-
-#: crosswordxmlguiwindow.cpp:808
-#, fuzzy
-msgid "Save &Edit History"
-msgstr "Uložiť hi&stóriu ako..."
-
-#: crosswordxmlguiwindow.cpp:811
-msgid "Save As &Template"
-msgstr "Uložiť ako ša&blónu"
-
-#: crosswordxmlguiwindow.cpp:813
-msgid "Save without correct answers, clue texts, images"
-msgstr ""
+msgctxt ""
+"%1 contains the reason why the letters couldn't be removed to the clue"
+msgid "Can't remove letter cells. %1"
+msgstr "nedá sa odstrániť stará správa\n"
 
 #: crosswordxmlguiwindow.cpp:879
 msgid ""
@@ -365,224 +516,72 @@ msgid ""
 "kwp or *.kwpz)."
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:913
+#: commands.cpp:991
 #, fuzzy
-msgid "Wrote crossword to file '%1'"
-msgstr "Zápis logu uspešný do: %s\n"
+msgid "Change Clue '%1'"
+msgstr "Zmeniť heslo"
 
-#: crosswordxmlguiwindow.cpp:928
+#: commands.cpp:1483
 #, fuzzy
-msgid "Error while writing file: %1"
-msgstr ""
-"Chyba počas zapisovania do súboru :\n"
-"%1"
-
-#: crosswordxmlguiwindow.cpp:1040
-msgid "Can't add clues on crossed letter cells"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1049
-msgid "Can't add clue at the current cell"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1070
-#, fuzzy
-msgctxt "%1 contains the reason why the clue couldn't be added"
-msgid "Can't add clue. %1"
-msgstr "Nemožno pridať výplň"
-
-#: crosswordxmlguiwindow.cpp:1084
-#, fuzzy
-msgid "Clue added ('%1')"
-msgstr "%1 funkcia pridaná"
-
-#: crosswordxmlguiwindow.cpp:1101
-#, fuzzy
-msgctxt "%1 contains the reason why the image couldn't be added"
-msgid "Can't add image. %1"
-msgstr "Pridať nový obrázok"
-
-#: crosswordxmlguiwindow.cpp:1114
-#, fuzzy
-msgctxt "%1 contains the reason why the clue couldn't be removed"
-msgid "Can't remove clue. %1"
-msgstr "Nie je možné odstrániť súbor %s: %s\n"
-
-#: crosswordxmlguiwindow.cpp:1119
-#, fuzzy
-msgctxt "%1 contains the reason why the image couldn't be removed"
-msgid "Can't remove image. %1"
-msgstr "Nedá sa načítať obrázok."
-
-#: crosswordxmlguiwindow.cpp:1122
-#, fuzzy
-msgid "No removable cell selected."
-msgstr "Edituje komentár vybranej bunky"
-
-#: crosswordxmlguiwindow.cpp:1127 crosswordxmlguiwindow.cpp:2481
-#, fuzzy
-msgid "Do you really want to clear the crossword?"
-msgstr "Zo zoznamu odstráni všetky skladby."
-
-#: crosswordxmlguiwindow.cpp:1127 crosswordxmlguiwindow.cpp:2481
-msgid "Clear"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1132
-#, fuzzy
-msgctxt "%1 contains the reason why the crossword couldn't be cleared"
-msgid "Can't clear crossword. %1"
-msgstr "Vyčistiť uložené dáta"
-
-#: crosswordxmlguiwindow.cpp:1149
-#, fuzzy
-msgctxt ""
-"%1 contains the reason why the crossword properties couldn't be changed"
-msgid "Can't change crossword properties. %1"
-msgstr "Zmeniť vlastnosti celej stránky"
-
-#: crosswordxmlguiwindow.cpp:1161
-msgid "The crossword has 180 degree rotation symmetry."
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1165
-msgid ""
-"The crossword doesn't have 180 degree rotation symmetry.\n"
-"To achieve symmetry make sure that each empty cell has a counterpart at it's "
-"180 degree rotated position.\n"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1169
-msgid ""
-"The crossword doesn't have 180 degree rotation symmetry.\n"
-"To achieve symmetry make sure that each empty cell and each clue cell has a "
-"counterpart at it's 180 degree rotated position.\n"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1175
-msgid ""
-"Quality crosswords of the current crossword type (%1) are usually symmetric."
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1194
-#, fuzzy
-msgid "Clue Number Mapping"
+msgid "Change Number Puzzle Mapping"
 msgstr "Zmení počet farieb v mapovaní"
 
-#: crosswordxmlguiwindow.cpp:1219
+#: crosswordxmlguiwindow.cpp:1488
+msgid "Change the size of the crossword or it's title, author, copyright..."
+msgstr ""
+
+#: commands.cpp:1297
+#, fuzzy
 msgctxt ""
-"%1 contains the reason why the new clue number mapping couldn't be applied"
-msgid "Can't apply clue number mapping. %1"
+"%1 may be a list of changes separated by ',' if the list of changes contains "
+"more than 2 items. %2 is the last item"
+msgid "Changed Crossword Properties (%1 and %2)"
+msgstr "Upraviť vlastnosti albumu a informácie o kolekcii."
+
+#: commands.cpp:1292
+#, fuzzy
+msgid "Changed Crossword Properties (%1)"
+msgstr "Vlastnosti zmenené naposledy"
+
+#: crosswordxmlguiwindow.cpp:1503
+msgid "Changes the mapping of clue numbers to letters"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1232
-#, fuzzy
-msgctxt "%1 contains the reason why the cells couldn't be moved"
-msgid "Can't move cells. %1"
-msgstr "Vie hýbať myšou."
-
-#: crosswordxmlguiwindow.cpp:1242
+#: dialogs/convertcrossworddialog.cpp:81
+#: dialogs/createnewcrossworddialog.cpp:231
 msgid ""
-"This will cause all answers to be shown and editable.\n"
-"If you want to solve the crossword you should cancel."
+"Changing the crossword type will discard user defined crossword type "
+"settings."
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1289
+#: global.cpp:300
+msgid "Characters"
+msgstr "Znaky"
+
+#: global.cpp:304
 #, fuzzy
-msgid "Close the current crossword"
-msgstr "Zatvorí aktuálny súbor"
+msgid "Characters or digits"
+msgstr "Minimálny počet číslic:"
 
-#: crosswordxmlguiwindow.cpp:1294
-msgid "Save the crossword with solved letters"
+#: crosswordxmlguiwindow.cpp:1540
+msgid "Checks if all letters are correct"
 msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1493
+#, fuzzy
+msgid "Checks if the crossword has 180 degree rotation symmetry"
+msgstr "Automaticky kontrolovať dostupnosť aktualizácií"
 
 #: crosswordxmlguiwindow.cpp:1298
 msgid "Choose a filename to save the crossword with solved letters"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1303
-#, fuzzy
-msgid "Print the crossword"
-msgstr "Vypíše verziu "
-
-#: crosswordxmlguiwindow.cpp:1307
-#, fuzzy
-msgid "Show a print preview"
-msgstr "Zatvoriť náhľad tlače"
-
-#: crosswordxmlguiwindow.cpp:1311
-msgid "&Dictionary..."
-msgstr "Slovník..."
-
-#: crosswordxmlguiwindow.cpp:1312
-#, fuzzy
-msgid "Add or remove crossword dictionaries"
-msgstr "Pridať alebo dostrániť kódovanie terminálu"
-
-#: crosswordxmlguiwindow.cpp:1318
-msgid "Fit the whole crossword into the window"
+#: library/librarygui.cpp:385
+msgid "ChrisWords.com"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1321
-msgid "Pan"
-msgstr "Pan"
-
-#: crosswordxmlguiwindow.cpp:1322
-msgid ""
-"Pan the view. Note that you can also pan while pressing the control key."
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1326
-msgid "Solve the selected letter or a random one if none is selected"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1329
-#, fuzzy
-msgid "This letter has been solved"
-msgstr "Toto písmeno ste už skúšali."
-
-#: crosswordxmlguiwindow.cpp:1330
-#, fuzzy
-msgid "The selected letter cell has been solved"
-msgstr "Toto písmeno ste už skúšali."
-
-#: crosswordxmlguiwindow.cpp:1335
-#, fuzzy
-msgid "Mark as confident"
-msgstr "Pridať označenie autorských práv"
-
-#: crosswordxmlguiwindow.cpp:1336
-#, fuzzy
-msgid "Mark the selected letter cell's confidence as confident"
-msgstr "Zo zoznamu odstráni označené skladby."
-
-#: crosswordxmlguiwindow.cpp:1341
-#, fuzzy
-msgid "Mark as unsure"
-msgstr "Pridať označenie autorských práv"
-
-#: crosswordxmlguiwindow.cpp:1342
-#, fuzzy
-msgid "Mark the selected letter cell's confidence as unsure"
-msgstr "Zo zoznamu odstráni označené skladby."
-
-#: crosswordxmlguiwindow.cpp:1347
-#, fuzzy
-msgid "Clear This Cell"
-msgstr "Odstrániť komentár tejto bunky"
-
-#: crosswordxmlguiwindow.cpp:1348
-#, fuzzy
-msgid "Clears the selected letter cell"
-msgstr "Vyčistí obsah zvolených buniek"
-
-#: crosswordxmlguiwindow.cpp:1353
-#, fuzzy
-msgid "Clear This Answer"
-msgstr "Toto je _____ odpoveď"
-
-#: crosswordxmlguiwindow.cpp:1354
-msgid "Clears the answer to the current clue"
+#: crosswordxmlguiwindow.cpp:1127 crosswordxmlguiwindow.cpp:2481
+msgid "Clear"
 msgstr ""
 
 #: crosswordxmlguiwindow.cpp:1359
@@ -590,909 +589,124 @@ msgstr ""
 msgid "Clear Across Answer"
 msgstr "Odpoveď je 42."
 
-#: crosswordxmlguiwindow.cpp:1360
-msgid "Clears the answer to the current across clue"
+#: commands.cpp:1092
+msgid "Clear Correct Answer of Clue at (%1, %2)"
 msgstr ""
+
+#: commands.cpp:1144
+msgid "Clear Correct Letter at (%1, %2), was %3"
+msgstr ""
+
+#: commands.cpp:1222
+#, fuzzy
+msgid "Clear Crossword"
+msgstr "Vyprázdniť front"
 
 #: crosswordxmlguiwindow.cpp:1365
 #, fuzzy
 msgid "Clear Down Answer"
 msgstr "Odpoveď je 42."
 
-#: crosswordxmlguiwindow.cpp:1366
-msgid "Clears the answer to the current down clue"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1371
+#: commands.cpp:1154
 #, fuzzy
-msgid "Hint For This Cell"
-msgstr "Upraviť komentár pre túto bunku"
+msgid "Clear Letter at (%1, %2), was %3"
+msgstr "Súbor skriptu '%1' bol nájdený na: %2"
 
-#: crosswordxmlguiwindow.cpp:1372
+#: crosswordxmlguiwindow.cpp:1353
 #, fuzzy
-msgid "Solve the selected letter cell"
-msgstr "Komentár v bunke %s!%s"
+msgid "Clear This Answer"
+msgstr "Toto je _____ odpoveď"
 
-#: crosswordxmlguiwindow.cpp:1377
+#: crosswordxmlguiwindow.cpp:1347
 #, fuzzy
-msgid "Solve Clue"
-msgstr "Vyriešiť hru"
-
-#: crosswordxmlguiwindow.cpp:1378
-#, fuzzy
-msgid "Solve the current clue"
-msgstr "U&končiť aktuálne sedenie"
-
-#: crosswordxmlguiwindow.cpp:1383
-#, fuzzy
-msgid "Solve Across Clue"
-msgstr "Na stred _výberu"
-
-#: crosswordxmlguiwindow.cpp:1384
-msgid "Solve the current across clue"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1389
-#, fuzzy
-msgid "Solve Down Clue"
-msgstr "Hlasitosť->Znížiť o 10"
-
-#: crosswordxmlguiwindow.cpp:1390
-#, fuzzy
-msgid "Solve the current down clue"
-msgstr "Presunúť rozdeľovač aktuálneho pohľadu dolu"
-
-#: crosswordxmlguiwindow.cpp:1395
-msgid "Clue With Switched Orientation"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1396
-msgid "Select clue with switched orientation to the currently selected clue"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1400
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&First Letter"
-msgstr "Prvé písmená pre automatické opravy"
-
-#: crosswordxmlguiwindow.cpp:1401
-msgid "Select the first letter of the current clue"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1405
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Last Letter"
-msgstr "Klikni na písmenko"
-
-#: crosswordxmlguiwindow.cpp:1406
-msgid "Select the last letter of the current clue"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1410
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "First Clue"
-msgstr "Vyberte prvé zoskupenie:\n"
-
-#: crosswordxmlguiwindow.cpp:1411
-#, fuzzy
-msgid "Select the first clue"
-msgstr "Vyberte prvé zoskupenie:\n"
-
-#: crosswordxmlguiwindow.cpp:1415
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Next Clue"
-msgstr "Vybrať nasledujúci zoznam skladieb"
-
-#: crosswordxmlguiwindow.cpp:1416
-#, fuzzy
-msgid "Select the next clue"
-msgstr "Vybrať nasledujúci zoznam skladieb"
-
-#: crosswordxmlguiwindow.cpp:1420
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Previous Clue"
-msgstr "Vybrať predchádzajúci zoznam skladieb"
-
-#: crosswordxmlguiwindow.cpp:1421
-#, fuzzy
-msgid "Select the previous clue"
-msgstr "Vybrať predchádzajúci zoznam skladieb"
-
-#: crosswordxmlguiwindow.cpp:1425
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "Last Clue"
-msgstr "Naposledy použitý modul"
-
-#: crosswordxmlguiwindow.cpp:1426
-#, fuzzy
-msgid "Select the last clue"
-msgstr "Naposledy použitý modul"
-
-#: crosswordxmlguiwindow.cpp:1434
-#, fuzzy
-msgid "Show Clue Dock"
-msgstr "/Zobraziť/Show Dock"
-
-#: crosswordxmlguiwindow.cpp:1439
-#, fuzzy
-msgid "Show Edit History Dock"
-msgstr "Ukázať históriu rozhovoru v novom rozhovore"
-
-#: crosswordxmlguiwindow.cpp:1444
-#, fuzzy
-msgid "Show Current Cell Dock"
-msgstr "Súčet do aktuálnej bunky"
-
-#: crosswordxmlguiwindow.cpp:1448
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "Edit Mode"
-msgstr "Režim úprav"
-
-#: crosswordxmlguiwindow.cpp:1449
-msgid "Enables/disables the edit mode"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1453
-#, fuzzy
-msgid "&Add Clue"
-msgstr "Pridať záložku"
-
-#: crosswordxmlguiwindow.cpp:1454
-msgid "Adds a new clue at the current cell"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1459 crosswordxmlguiwindow.cpp:1889
-msgid "&Remove"
-msgstr "O&dstrániť"
-
-#: crosswordxmlguiwindow.cpp:1460
-msgid "Removes the highlighted clue or image"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1464
-#, fuzzy
-msgid "Remove &Across Clue"
-msgstr "Na stred _výberu"
-
-#: crosswordxmlguiwindow.cpp:1465
-msgid "Removes the highlighted across clue"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1470
-#, fuzzy
-msgid "Remove &Down Clue"
-msgstr "Hlasitosť->Znížiť o 10"
-
-#: crosswordxmlguiwindow.cpp:1471
-#, fuzzy
-msgid "Removes the highlighted down clue"
-msgstr "Presunúť rozdeľovač aktuálneho pohľadu dolu"
-
-#: crosswordxmlguiwindow.cpp:1476
-msgid "&Add Image"
-msgstr "Pridať obrázak"
-
-#: crosswordxmlguiwindow.cpp:1477
-msgid "Adds a new image at the current cell"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1482
-#, fuzzy
-msgid "&Clear Crossword..."
-msgstr "Vyprázdniť front"
-
-#: crosswordxmlguiwindow.cpp:1483
-#, fuzzy
-msgid "Removes all clues from the crossword"
-msgstr "Zo zoznamu odstráni všetky skladby."
-
-#: crosswordxmlguiwindow.cpp:1487
-#, fuzzy
-msgid "&Crossword Properties..."
-msgstr "Vlastnosti účtu '%s'"
-
-#: crosswordxmlguiwindow.cpp:1488
-msgid "Change the size of the crossword or it's title, author, copyright..."
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1492
-#, fuzzy
-msgid "&Check for rotation symmetry..."
-msgstr "Automaticky kontrolovať dostupnosť aktualizácií"
-
-#: crosswordxmlguiwindow.cpp:1493
-#, fuzzy
-msgid "Checks if the crossword has 180 degree rotation symmetry"
-msgstr "Automaticky kontrolovať dostupnosť aktualizácií"
-
-#: crosswordxmlguiwindow.cpp:1497
-msgid "&Statistics..."
-msgstr "Štatistika..."
-
-#: crosswordxmlguiwindow.cpp:1498
-#, fuzzy
-msgid "Shows statistics about the crossword"
-msgstr "      --statistics            zobraziť štatistiky prekladov\n"
-
-#: crosswordxmlguiwindow.cpp:1502
-#, fuzzy
-msgid "Clue Number &Mapping..."
-msgstr "Zmení počet farieb v mapovaní"
-
-#: crosswordxmlguiwindow.cpp:1503
-msgid "Changes the mapping of clue numbers to letters"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1507
-#, fuzzy
-msgid "Move All Cells..."
-msgstr "Odstrániť _všetky"
-
-#: crosswordxmlguiwindow.cpp:1508
-#, fuzzy
-msgid "Moves all cells of the crossword"
-msgstr "Hľadať vo všetkých bunkách zošita"
-
-#: crosswordxmlguiwindow.cpp:1526
-msgid "Insert special character:"
-msgstr "Vložiť špeciálny znak:"
-
-#: crosswordxmlguiwindow.cpp:1530
-#, fuzzy
-msgid "Let you select a special character to paste"
-msgstr "Vložiť špeciálny znak:"
-
-#: crosswordxmlguiwindow.cpp:1536
-msgid "Fills all letter cells with the correct letters"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1537
-msgid ""
-"<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
-"solution will be displayed.</p><p>If you filled in all letters and do not "
-"want to give up, choose \"Done!\".</p></qt>"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1539
-msgid "&Check"
-msgstr "&Kontrola"
-
-#: crosswordxmlguiwindow.cpp:1540
-msgid "Checks if all letters are correct"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1544
-#, fuzzy
-msgid "&Clear Answers"
-msgstr "Správne odpovede: %1/%2"
+msgid "Clear This Cell"
+msgstr "Odstrániť komentár tejto bunky"
 
 #: crosswordxmlguiwindow.cpp:1545
 #, fuzzy
 msgid "Clears all letter cells"
 msgstr "Vyčistí obsah zvolených buniek"
 
-#: crosswordxmlguiwindow.cpp:1549
-msgid "&Eraser"
-msgstr "Guma"
-
-#: crosswordxmlguiwindow.cpp:1550
-msgid "Enables the eraser, to clear letter cells/answers"
+#: crosswordxmlguiwindow.cpp:1360
+msgid "Clears the answer to the current across clue"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1660 krossword.h:555
-msgid "Solution"
-msgstr "Riešenie"
-
-#: crosswordxmlguiwindow.cpp:1693
-#, fuzzy
-msgid "Clue List"
-msgstr "Správca zoznamov"
-
-#: crosswordxmlguiwindow.cpp:1708
-msgid "Edit History"
-msgstr "Upraviť históriu"
-
-#: crosswordxmlguiwindow.cpp:1718
-#, fuzzy
-msgid "Current Cell"
-msgstr "Súčet do aktuálnej bunky"
-
-#: crosswordxmlguiwindow.cpp:1760
-#, fuzzy
-msgctxt "%1 contains the reason why the answer offset couldn't be changed"
-msgid "Can't change answer offset. %1"
-msgstr "Zmeniť posun priehradky farebného prechodu"
-
-#: crosswordxmlguiwindow.cpp:1773
-#, fuzzy
-msgctxt "%1 contains the reason why the orientation couldn't be changed"
-msgid "Can't change orientation. %1"
-msgstr "Text: Zmeniť orientáciu"
-
-#: crosswordxmlguiwindow.cpp:1785
-#, fuzzy
-msgctxt "%1 contains the reason why the clue text couldn't be changed"
-msgid "Can't change clue text. %1"
-msgstr "Zmeníť text vybraného identifikátoru."
-
-#: crosswordxmlguiwindow.cpp:1798
-#, fuzzy
-msgctxt "%1 contains the reason why the correct answer couldn't be changed"
-msgid "Can't change correct answer. %1"
-msgstr "Toto bola správna odpoveď"
-
-#: crosswordxmlguiwindow.cpp:1818
-#, fuzzy
-msgctxt ""
-"%1 contains the reason why the solution letter couldn't be converted to a "
-"letter"
-msgid "Can't convert solution letter. %1"
-msgstr "Nemôžem skonvertovať znakovú sadu na '%s'"
-
-#: crosswordxmlguiwindow.cpp:1837
-#, fuzzy
-msgctxt ""
-"%1 contains the reason why the letter couldn't be converted to a solution "
-"letter"
-msgid "Can't convert letter. %1"
-msgstr "Nemôžem skonvertovať znakovú sadu na '%s'"
-
-#: crosswordxmlguiwindow.cpp:1885
-#, fuzzy
-msgid "&Remove Clue"
-msgstr "Odstrániť ich"
-
-#: crosswordxmlguiwindow.cpp:1887
-msgid "&Remove Image"
-msgstr "Odstrániť obrázok"
-
-#: crosswordxmlguiwindow.cpp:2156
-msgid ""
-"Congratulations!\n"
-"You solved the crossword perfectly."
+#: crosswordxmlguiwindow.cpp:1354
+msgid "Clears the answer to the current clue"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:2178
-msgid "Do you really want to solve the crossword?"
+#: crosswordxmlguiwindow.cpp:1366
+msgid "Clears the answer to the current down clue"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:2178
+#: crosswordxmlguiwindow.cpp:1348
 #, fuzzy
-msgid "Solve"
-msgstr "Vyriešiť hru"
+msgid "Clears the selected letter cell"
+msgstr "Vyčistí obsah zvolených buniek"
 
-#: crosswordxmlguiwindow.cpp:2263 crosswordxmlguiwindow.cpp:2762
+#: crosswordxmlguiwindow.cpp:708 crosswordxmlguiwindow.cpp:852
+#: krosswordpuzzle.cpp:131
+msgid "Close Document"
+msgstr "Zavrieť dokument"
+
+#: crosswordxmlguiwindow.cpp:1289
 #, fuzzy
-msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
-msgid "Can't clear letter cell. %1"
-msgstr "Vizuálne rozpoznávanie písmen. Vedieť hýbať myšou."
+msgid "Close the current crossword"
+msgstr "Zatvorí aktuálny súbor"
 
-#: crosswordxmlguiwindow.cpp:2286 crosswordxmlguiwindow.cpp:2310
-#: crosswordxmlguiwindow.cpp:2335 crosswordxmlguiwindow.cpp:2768
-#, fuzzy
-msgctxt "%1 contains the reason why the answer couldn't be cleared"
-msgid "Can't clear answer. %1"
-msgstr "Odpoveď je 42."
-
-#: crosswordxmlguiwindow.cpp:2547 crosswordxmlguiwindow.cpp:2574
-msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
+#: cluemodel.cpp:60
+msgid "Clue"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:2552 crosswordxmlguiwindow.cpp:2578
-msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:2624 global.cpp:36
-#, fuzzy
-msgid "Empty cell"
-msgstr "Cieľová bunka je prázdna"
-
-#: crosswordxmlguiwindow.cpp:2626
-msgid "Image '%1'"
-msgstr "Obrázok '%1'"
-
-#: crosswordxmlguiwindow.cpp:2827
-#, fuzzy
-msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
-msgid "Can't add letter cells. %1"
-msgstr "Nemožno pridať ďalšiu oblasť."
-
-#: crosswordxmlguiwindow.cpp:2829
-#, fuzzy
-msgctxt ""
-"%1 contains the reason why the letters couldn't be removed to the clue"
-msgid "Can't remove letter cells. %1"
-msgstr "nedá sa odstrániť stará správa\n"
-
-#: crosswordxmlguiwindow.cpp:2840
-#, fuzzy
-msgctxt "%1 contains the reason why the letter cell couldn't be edited"
-msgid "Can't edit letter cell. %1"
-msgstr "Edituje komentár vybranej bunky"
-
-#: crosswordxmlguiwindow.cpp:2875
-#, fuzzy
-msgctxt "%1 contains the reason why the crossword couldn't be converted"
-msgid "Can't convert crossword. %1"
-msgstr "Nemôžem skonvertovať znakovú sadu na '%s'"
-
-#: crosswordxmlguiwindow.cpp:2887
-#, fuzzy
-msgid "Couldn't connect to the database."
-msgstr "Pripojiť sa k databázovému serveru"
-
-#: dialogs/answerwidget.cpp:28 dialogs/answerwidget.cpp:38
-msgid ""
-"The correct answer to the clue. For each letter a letter cell is created"
-msgstr ""
-
-#: dialogs/answerwidget.cpp:30 dialogs/answerwidget.cpp:40
-#, fuzzy
-msgid "The answer to the clue"
-msgstr "Napíšte odpoveď na otázku"
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:112
-msgid "Show Only Answers With Current Answer &Length"
-msgstr ""
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:121
-msgid "Show Only Answers With &Clue"
-msgstr ""
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:128
-msgid "Show Only the &First 100 Answers"
-msgstr ""
-
-#: dialogs/cellwidgets/solutionlettercellwidget.cpp:94
-msgid ""
-"The solution letter position %1 is already assigned.\n"
-"Please change the solution word position of that letter first."
-msgstr ""
-
-#: dialogs/convertcrossworddialog.cpp:29
-#, fuzzy
-msgid "Convert Crossword Type To"
-msgstr "Nemožno skonvertovať \"%s\" na typ \"%s\"\n"
-
-#: dialogs/convertcrossworddialog.cpp:33
-#, fuzzy
-msgid "Convert From: %1"
-msgstr "Konvertovať všetky vrstvy z"
-
-#: dialogs/convertcrossworddialog.cpp:81
-#: dialogs/createnewcrossworddialog.cpp:244
-msgid ""
-"Changing the crossword type will discard user defined crossword type "
-"settings."
-msgstr ""
-
-#: dialogs/convertcrossworddialog.cpp:105
-msgid "Convert To: %1"
-msgstr "Previesť do: %1"
-
-#: dialogs/createnewcrossworddialog.cpp:35
-#, fuzzy
-msgid "Create New Crossword"
-msgstr "Vytvoriť nový zoznam skladieb"
-
-#: dialogs/createnewcrossworddialog.cpp:111
-msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
-msgid "© %1, by %2"
-msgstr "© %1, od %2"
-
-#: dialogs/createnewcrossworddialog.cpp:114
-#, fuzzy
-msgctxt "Default notes value for new crosswords"
-msgid "Created with Krossword."
-msgstr "Vytvoriť nový zoznam skladieb"
-
-#: dialogs/createnewcrossworddialog.cpp:199
-#, fuzzy
-msgid "Crossword Type"
-msgstr "Typ súboru: "
-
-#: dialogs/createnewcrossworddialog.cpp:200
-msgid "Size"
-msgstr "Veľkosť"
-
-#: dialogs/createnewcrossworddialog.cpp:201
-msgid "Notes"
-msgstr "Poznámky"
-
-#: dialogs/crosswordpreviewwidget.cpp:46
-msgid "Loading preview..."
-msgstr "Načítava sa náhľad..."
-
-#: dialogs/crosswordpreviewwidget.cpp:55
-#, fuzzy
-msgid "Preview failed"
-msgstr "Prehľadávanie zlyhalo: %1"
-
-#: dialogs/crosswordpropertiesdialog.cpp:36
-msgid "Properties"
-msgstr "Vlastnosti"
-
-#: dialogs/crosswordpropertiesdialog.cpp:43
-#: dialogs/crosswordpropertiesdialog.cpp:277
-#, fuzzy
-msgid "Crossword Type: %1"
-msgstr "Typ súboru: "
-
-#: dialogs/crosswordpropertiesdialog.cpp:46
-msgid "&Convert..."
-msgstr "Previesť..."
-
-#: dialogs/crosswordpropertiesdialog.cpp:245
-msgctxt "No changes to the crossword grid size."
-msgid "No change"
-msgstr "Bez zmeny"
-
-#: dialogs/crosswordpropertiesdialog.cpp:257
-#, fuzzy
-msgctxt ""
-"How many images are removed when resizing the crossword. This string gets "
-"combined with a plural string indicating how many clue cells will be removed "
-"when resizing."
-msgid "and %1 image"
-msgid_plural "and %1 images"
-msgstr[0] "Zobraziť obrázok a bublinový tip"
-msgstr[1] ""
-msgstr[2] ""
-
-#: dialogs/crosswordpropertiesdialog.cpp:251
-msgctxt ""
-"How many clues are removed when resizing the crossword. %2 is replaced by a "
-"plural indicating how many images will be removed when resizing."
-msgid "Resizing from %3x%4 will remove %1 clue %2"
-msgid_plural "Resizing from %3x%4 will remove %1 clues %2"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
-#, fuzzy
-msgid "Detailed Configuration"
-msgstr "AdPlug :: Nastavenie"
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
-#, fuzzy
-msgid "New Crossword Type"
-msgstr "Nový typ súboru"
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
-#, fuzzy
-msgid "Describe your crossword type here."
-msgstr "Sem napíšte obsah novej poznámky."
-
-#: dialogs/crosswordtypewidget.cpp:204
-msgid "Show Details"
-msgstr "Zobraziť podrobnosti"
-
-#: dialogs/crosswordtypewidget.cpp:226
-msgid "&Rules..."
-msgstr "Pravidlá..."
-
-#: dialogs/currentcellwidget.cpp:114
-#, fuzzy
-msgid "No cell selected."
-msgstr "Nie je vybraný žiadny dokument"
-
-#: dialogs/currentcellwidget.cpp:145
-#, fuzzy
-msgid "%1 selected at (%2, %3)."
-msgstr "Spracované %1 z %2 pri %3/s"
-
-#: dialogs/currentcellwidget.cpp:154
-msgid "Clue:"
-msgstr ""
-
-#: dialogs/currentcellwidget.cpp:155
-#, fuzzy
-msgid "Current Answer:"
-msgstr "Správna odpoveď"
-
-#: dialogs/currentcellwidget.cpp:439
-#, fuzzy
-msgid "Convert &Letter %1 to Solution Letter"
-msgstr "Zmeniť prvé &písmeno na veľké"
-
-#: dialogs/dictionarydialog.cpp:37
-msgid "Dictionary"
-msgstr "Slovník"
-
-#: dialogs/dictionarydialog.cpp:165
-#, fuzzy
-msgid "%1 entries added from this dictionary: '%2'"
-msgstr "Toto natrvalo odstráni zdroj slovníka zo zoznamu."
-
-#: dialogs/dictionarydialog.cpp:175 dialogs/dictionarydialog.cpp:190
-#, fuzzy
-msgid "%1 entries added from %2 crosswords"
-msgstr "Pridaný kľúč zo súboru"
-
-#: dialogs/dictionarydialog.cpp:206
-msgid "Couldn't submit removed entries to the database: %1"
-msgstr ""
-
-#: dialogs/dictionarydialog.cpp:209
-#, fuzzy
-msgid "%1 entry removed"
-msgid_plural "%1 entries removed"
-msgstr[0] "Bude odstránený <b>%s</b>\n"
-msgstr[1] ""
-msgstr[2] ""
-
-#: dialogs/dictionarydialog.cpp:218
-#, fuzzy
-msgid "Dictionary cleared"
-msgstr "Slovníkový server"
-
-#: dialogs/dictionarydialog.cpp:225
-msgid "Export To CSV"
-msgstr "Exportovať do CSV"
-
-#: dialogs/dictionarydialog.cpp:238
-#, fuzzy
-msgid "There was an error while exporting to '%1'"
-msgstr "Vyskytla sa chyba počas zverejňovania na %s:"
-
-#: dialogs/dictionarydialog.cpp:240
-#, fuzzy
-msgid "Export to '%1' was successful"
-msgstr "Test fotoaparátu bol úspešný."
-
-#: dialogs/dictionarydialog.cpp:246
-#, fuzzy
-msgid "Import From CSV"
-msgstr "Importovať CSV dáta zo súboru"
-
-#: dialogs/dictionarydialog.cpp:252
-#, fuzzy
-msgid "There was an error while importing from '%1'"
-msgstr "Počas importovania účtov nastala chyba."
-
-#: dialogs/dictionarydialog.cpp:255
-#, fuzzy
-msgid "%1 entry imported from '%2'"
-msgid_plural "%1 entries imported from '%2'"
-msgstr[0] "Položka Od je neakceptovaná"
-msgstr[1] ""
-msgstr[2] ""
-
-#: dialogs/movecellsdialog.cpp:28
-#, fuzzy
-msgid "Move Cells"
-msgstr "_Zmenou buniek:"
-
-#: dialogs/movecellsdialog.cpp:71
-#, fuzzy
-msgctxt ""
-"How many images are removed when moving all cells of the crossword. This "
-"string gets combined with a plural string indicating how many clue cells "
-"will be removed when moving the cells."
-msgid "and %1 image"
-msgid_plural "and %1 images"
-msgstr[0] "Zobraziť obrázok a bublinový tip"
-msgstr[1] ""
-msgstr[2] ""
-
-#: dialogs/movecellsdialog.cpp:65
-msgctxt ""
-"How many clues are removed when moving all cells of the crossword. %2 is "
-"replaced by a plural indicating how many images will be removed when moving "
-"the cells."
-msgid "Moving all cells will remove %1 clue %2"
-msgid_plural "Moving all cells will remove %1 clues %2"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#: dialogs/statisticsdialog.cpp:34
-msgid "Statistics"
-msgstr "Štatistika"
-
-#: dialogs/statisticsdialog.cpp:49
-#, fuzzy
-msgid "Total Cell Count:"
-msgstr "Celkový počet prehratí"
-
-#: dialogs/statisticsdialog.cpp:57
-#, fuzzy
-msgid "Empty Cells:"
-msgstr "_Zmenou buniek:"
-
-#: dialogs/statisticsdialog.cpp:59
-msgid "Number of empty cells, percentage of total cell count in braces"
-msgstr ""
-
-#: dialogs/statisticsdialog.cpp:60
-#, fuzzy
-msgid "Letter Cells:"
-msgstr "_Zmenou buniek:"
-
-#: dialogs/statisticsdialog.cpp:62
-msgid "Number of letter cells, percentage of total cell count in braces"
-msgstr ""
-
-#: dialogs/statisticsdialog.cpp:70
-msgid "Crossed:"
-msgstr ""
-
-#: dialogs/statisticsdialog.cpp:72
-msgid ""
-"Number of crossed letter cells, percentage of total letter cell count in "
-"braces"
-msgstr ""
-
-#: dialogs/statisticsdialog.cpp:74
-msgid "Uncrossed:"
-msgstr ""
-
-#: dialogs/statisticsdialog.cpp:76
-msgid ""
-"Number of uncrossed letter cells, percentage of total letter cell count in "
-"braces"
-msgstr ""
-
-#: dialogs/statisticsdialog.cpp:85
-msgid "Clues:"
-msgstr ""
-
-#: dialogs/statisticsdialog.cpp:88
-msgctxt "Horizontal:"
-msgid "Label for the number  of horizontal clues"
-msgstr ""
-
-#: dialogs/statisticsdialog.cpp:90
-msgid "Number of horizontal clues, percentage of total clue count in braces"
-msgstr ""
-
-#: dialogs/statisticsdialog.cpp:92
-msgctxt "Vertical:"
-msgid "Label for the number  of vertical clues"
-msgstr ""
-
-#: dialogs/statisticsdialog.cpp:94
-msgid "Number of vertical clues, percentage of total clue count in braces"
-msgstr ""
-
-#: dialogs/statisticsdialog.cpp:98
-#, fuzzy
-msgid "Min. Answer Length:"
-msgstr "Predvolená dĺžka skladby:"
-
-#: dialogs/statisticsdialog.cpp:101
-#, fuzzy
-msgid "Max. Answer Length:"
-msgstr "Max. dĺžka ťahu"
-
-#: dialogs/statisticsdialog.cpp:104
-#, fuzzy
-msgid "Avg. Answer Length:"
-msgstr "Predvolená dĺžka skladby:"
-
-#: dialogs/statisticsdialog.cpp:115
-#, fuzzy
-msgid "Occurrences Of Letters:"
-msgstr "Jednoduché písmená"
-
-#: dialogs/statisticsdialog.cpp:121
-msgid ""
-"Number of letter cells containing '%1', percentage of total letter cell "
-"count in braces"
-msgstr ""
-
-#: dictionary.cpp:174
-msgid ""
-"No Connection to the database! Please make sure the MySQL server is running. "
-"Afterwards click \"Continue\" to retry connecting to the database."
-msgstr ""
-
-#: dictionary.cpp:177
-#, fuzzy
-msgid "No Database Connection"
-msgstr "Žiadne spojenie na databázu nie je dostupné."
-
-#: dictionary.cpp:181
-#, fuzzy
-msgid "Connect Database"
-msgstr "Chyba pripojenia k databáze"
-
-#: dictionary.cpp:269
-msgctxt "The header title for answers in the dictionary database"
-msgid "Answer"
-msgstr "Odpoveď"
-
-#: dictionary.cpp:271
+#: dictionary.cpp:275
 msgctxt ""
 "The header title for clues associated with answer words in the dictionary "
 "database"
 msgid "Clue"
 msgstr ""
 
-#: dictionary.cpp:273
-msgctxt ""
-"The header title for scores/difficulties of clue/answer pairs in the "
-"dictionary database"
-msgid "Score"
-msgstr "Stav"
+#: crosswordxmlguiwindow.cpp:2547 crosswordxmlguiwindow.cpp:2575
+msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
+msgstr ""
 
-#: dictionary.cpp:275
-msgctxt ""
-"The header title for languages of clue/answer pairs in the dictionary "
-"database"
-msgid "Language"
-msgstr "Jazyk"
+#: crosswordxmlguiwindow.cpp:2552 crosswordxmlguiwindow.cpp:2579
+msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
+msgstr ""
 
-#: dictionary.cpp:318
+#: crosswordxmlguiwindow.cpp:1693
 #, fuzzy
-msgid "Importing Dictionary"
-msgstr "Slovníkový server"
+msgid "Clue List"
+msgstr "Správca zoznamov"
 
-#: dictionary.cpp:356
-msgid ""
-"Importing word clue pairs from '%1' to the database.\n"
-"Please wait."
+#: crosswordxmlguiwindow.cpp:1502
+#, fuzzy
+msgid "Clue Number &Mapping..."
+msgstr "Zmení počet farieb v mapovaní"
+
+#: crosswordxmlguiwindow.cpp:1194
+#, fuzzy
+msgid "Clue Number Mapping"
+msgstr "Zmení počet farieb v mapovaní"
+
+#: crosswordxmlguiwindow.cpp:1395
+msgid "Clue With Switched Orientation"
 msgstr ""
 
-#: dictionary.cpp:485
-msgid ""
-"Adding words from the dictionary '%1' to the database.\n"
-"Please wait."
-msgstr ""
-
-#: dictionary.cpp:567
-msgid ""
-"Adding words from %1 crossword files to the database.\n"
-"Please wait."
-msgstr ""
+#: crosswordxmlguiwindow.cpp:1084
+#, fuzzy
+msgid "Clue added ('%1')"
+msgstr "%1 funkcia pridaná"
 
 #: global.cpp:38
 #, fuzzy
 msgid "Clue cell"
 msgstr "Vyčistiť pole"
 
-#: global.cpp:40
-#, fuzzy
-msgid "Double clue cell"
-msgstr "Komentár v bunke %s!%s"
-
-#: global.cpp:42
-#, fuzzy
-msgid "Letter cell"
-msgstr "Vyčistiť pole"
-
-#: global.cpp:44
-#, fuzzy
-msgid "Solution letter cell"
-msgstr "Komentár v bunke %s!%s"
-
-#: global.cpp:46
-#, fuzzy
-msgid "Image cell"
-msgstr "Vyčistiť pole"
-
-#: global.cpp:48
-#, fuzzy
-msgid "All cells"
-msgstr "_Zmenou buniek:"
-
-#: global.cpp:50
-#, fuzzy
-msgid "Interactive cells"
-msgstr "_Zmenou buniek:"
-
-#: global.cpp:52
-#, fuzzy
-msgid "User cell type"
-msgstr "Zadajte používateľa, ktorého blokovať"
+#: commands.cpp:352
+msgctxt ""
+"%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
+msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
+msgstr ""
 
 #: global.cpp:260
 #, fuzzy
@@ -1508,8 +722,14 @@ msgstr ""
 msgid "Clue cells are required"
 msgstr "Povinné políčka sú podčiarknuté."
 
-#: global.cpp:275
-msgid "Clues refer to sets of cells"
+#: krossworddocument.cpp:86
+#, fuzzy
+msgctxt "Title for the clue list when printing"
+msgid "Clue list"
+msgstr "Správca zoznamov"
+
+#: dialogs/currentcellwidget.cpp:154
+msgid "Clue:"
 msgstr ""
 
 #: global.cpp:277
@@ -1517,97 +737,162 @@ msgstr ""
 msgid "Clues refer to cells"
 msgstr "pokus o odkaz na vymazaný buffer"
 
-#: global.cpp:287
-#, fuzzy
-msgid "String clues"
-msgstr "Reťazec pre &zavesenie:"
-
-#: global.cpp:289
-#, fuzzy
-msgid "Number clues (1 to 26)"
-msgstr "Počet jadier pre zachovanie"
-
-#: global.cpp:300
-msgid "Characters"
-msgstr "Znaky"
-
-#: global.cpp:302
-msgid "Digits"
-msgstr "Číslice"
-
-#: global.cpp:304
-#, fuzzy
-msgid "Characters or digits"
-msgstr "Minimálny počet číslic:"
-
-#: global.cpp:409
-#, fuzzy
-msgid "Free Crossword"
-msgstr "%1 voľných z %2 (%3% použitých)"
-
-#: global.cpp:411
-msgctxt "Short description of the crossword type 'Free'"
-msgid "This is a special type that tries to be least restrictive."
+#: global.cpp:275
+msgid "Clues refer to sets of cells"
 msgstr ""
 
-#: global.cpp:413
-msgctxt "Long description of the crossword type 'Free'"
+#: dialogs/statisticsdialog.cpp:85
+msgid "Clues:"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:2156
 msgid ""
-"This is a special type that tries to be least restrictive. You can use all "
-"available cell types (eg. clue cells, double clue cells, image cells, "
-"solution letter cells). You can mix answers that have a clue cell with "
-"answers that don't. Answers may contain characters as well as numbers."
+"Congratulations!\n"
+"You solved the crossword perfectly."
 msgstr ""
 
-#: global.cpp:424
+#: crosswordxmlguiwindow.cpp:587
+msgid "Congratulations! You solved the crossword perfectly."
+msgstr ""
+
+#: dictionary.cpp:181
 #, fuzzy
-msgid "User Defined Crossword"
-msgstr "<b>Používateľom definované konštanty:</b>"
+msgid "Connect Database"
+msgstr "Chyba pripojenia k databáze"
 
-#: global.cpp:426
-msgctxt "Short description of the crossword type 'User Defined'"
-msgid "Lets you specify your own rules."
-msgstr ""
-
-#: global.cpp:434
+#: dialogs/currentcellwidget.cpp:439
 #, fuzzy
-msgid "Swedish Crossword"
-msgstr "Švédčina (Fínsko)"
+msgid "Convert &Letter %1 to Solution Letter"
+msgstr "Zmeniť prvé &písmeno na veľké"
 
-#: global.cpp:436
-msgctxt "Short description of the crossword type 'Swedish'"
-msgid ""
-"Swedish crosswords contain clue cells which contain the clue text in it and "
-"an arrow to indicate in which direction the clues have to be answered."
-msgstr ""
-
-#: global.cpp:439
-msgctxt "Long description of the crossword type 'Swedish'"
-msgid ""
-"The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
-"the cells which would normally be black in other countries. Arrows indicate "
-"in which direction the clues have to be answered, vertical or horizontal. "
-"This style of grid is used in several countries other than Sweden, usually "
-"in magazines with pages of A4 or similar size. The grid often has a photo of "
-"a pop or movie star replacing a block of squares, as a clue to one answer. "
-"These puzzles usually have no symmetry in the grid.\n"
-"Crosswords with clue cells inside the crossword grid are also called "
-"\"Arrowwords\", \"Pointers\" or \"Tipwords\" in English, \"Autodefinidos\" "
-"in Spanish, \"Mots Fléchés\" in French, etc.\n"
-"(text taken from wikipedia)"
-msgstr ""
-
-#: global.cpp:457
+#: commands.cpp:1777
 #, fuzzy
-msgid "American Crossword"
-msgstr "Americká Samoa"
+msgid "Convert Crossword From '%1' to '%2'"
+msgstr "CONVERT(hodnota; z jednotiek; do jednotiek)"
 
-#: global.cpp:459
-msgctxt "Short description of the crossword type 'American'"
-msgid ""
-"American crosswords have numbered clues and a list of clues on the side of "
-"the crossword. They have usually 180 degree rotational symmetry."
+#: dialogs/convertcrossworddialog.cpp:29
+#, fuzzy
+msgid "Convert Crossword Type To"
+msgstr "Nemožno skonvertovať \"%s\" na typ \"%s\"\n"
+
+#: dialogs/convertcrossworddialog.cpp:33
+#, fuzzy
+msgid "Convert From: %1"
+msgstr "Konvertovať všetky vrstvy z"
+
+#: commands.cpp:626
+#, fuzzy
+msgid "Convert Letter at (%1, %2) to Solution Letter"
+msgstr "Zmeniť prvé &písmeno na veľké"
+
+#: commands.cpp:654
+#, fuzzy
+msgctxt "%1 contains the position of the solution letter in the solution word."
+msgid "Convert Solution Letter %1 to Letter"
+msgstr "Zmeniť prvé &písmeno na veľké"
+
+#: dialogs/convertcrossworddialog.cpp:105
+msgid "Convert To: %1"
+msgstr "Previesť do: %1"
+
+#: commands.cpp:1274
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Copyright"
+msgstr "Copyright"
+
+#: krosswordpuzzle.cpp:94
+msgid "Could not open resource at "
 msgstr ""
+
+#: io/krosswordxmlwriter.cpp:73
+#, fuzzy
+msgid "Couldn't close the ZIP archive"
+msgstr "Do ZIP/TAR archívu"
+
+#: crosswordxmlguiwindow.cpp:2888
+#, fuzzy
+msgid "Couldn't connect to the database."
+msgstr "Pripojiť sa k databázovému serveru"
+
+#: library/librarygui.cpp:348
+msgid "Couldn't export the image to the specified file."
+msgstr ""
+
+#: io/krosswordxmlwriter.cpp:52
+#, fuzzy
+msgid "Couldn't open the ZIP archive for writing"
+msgstr "Nepodarilo sa otvoriť archív pre zápis."
+
+#: library/librarygui.cpp:460
+#, fuzzy
+msgid "Couldn't remove the crossword from the library."
+msgstr "Odstrániť vybrané fotografie z knižnice"
+
+#: library/librarygui.cpp:449
+msgid ""
+"Couldn't remove the directory from the library.\n"
+"You need root privileges to remove directories which belong to the global "
+"library."
+msgstr ""
+
+#: dialogs/dictionarydialog.cpp:206
+msgid "Couldn't submit removed entries to the database: %1"
+msgstr ""
+
+#: dialogs/createnewcrossworddialog.cpp:35
+#, fuzzy
+msgid "Create New Crossword"
+msgstr "Vytvoriť nový zoznam skladieb"
+
+#: library/librarygui.cpp:555
+#, fuzzy
+msgid "Create a new crossword in the library."
+msgstr "Vytvoriť nový priečinok záložiek v %1"
+
+#: library/librarygui.cpp:550
+#, fuzzy
+msgid "Create a new folder in the library."
+msgstr "Vytvoriť nový priečinok záložiek v %1"
+
+#: dialogs/createnewcrossworddialog.cpp:111
+#, fuzzy
+msgctxt "Default notes value for new crosswords"
+msgid "Created with Krossword"
+msgstr "Vytvoriť nový zoznam skladieb"
+
+#: dialogs/statisticsdialog.cpp:70
+msgid "Crossed:"
+msgstr ""
+
+#: global.cpp:503
+msgid "Crossnumber"
+msgstr ""
+
+#: global.cpp:505
+msgctxt "Short description of the crossword type 'Crossnumber'"
+msgid ""
+"Crossnumbers are the numerical analogy of a crossword, in which the "
+"solutions to the clues are numbers instead of words."
+msgstr ""
+
+#: library/librarygui.cpp:201 library/librarygui.cpp:206
+#: library/librarygui.cpp:214
+#, fuzzy
+msgid "Crossword %1"
+msgstr "Typ súboru: "
+
+#: dialogs/createnewcrossworddialog.cpp:191
+#, fuzzy
+msgid "Crossword Type"
+msgstr "Typ súboru: "
+
+#: dialogs/crosswordpropertiesdialog.cpp:43
+#: dialogs/crosswordpropertiesdialog.cpp:277
+#, fuzzy
+msgid "Crossword Type: %1"
+msgstr "Typ súboru: "
 
 #: global.cpp:462
 msgctxt "Long description of the crossword type 'American'"
@@ -1630,10 +915,573 @@ msgid ""
 "(text taken from wikipedia)"
 msgstr ""
 
+#: dialogs/currentcellwidget.cpp:155
+#, fuzzy
+msgid "Current Answer:"
+msgstr "Správna odpoveď"
+
+#: crosswordxmlguiwindow.cpp:1718
+#, fuzzy
+msgid "Current Cell"
+msgstr "Súčet do aktuálnej bunky"
+
+#: library/librarygui.cpp:545
+#, fuzzy
+msgid "Delete the selected crossword from the library."
+msgstr "Odstrániť vybrané fotografie z knižnice"
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
+#, fuzzy
+msgid "Describe your crossword type here."
+msgstr "Sem napíšte obsah novej poznámky."
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
+#, fuzzy
+msgid "Detailed Configuration"
+msgstr "AdPlug :: Nastavenie"
+
+#: main.cpp:37 main.cpp:38
+msgid "Developer"
+msgstr ""
+
+#: dialogs/dictionarydialog.cpp:37
+msgid "Dictionary"
+msgstr "Slovník"
+
+#: dialogs/dictionarydialog.cpp:218
+#, fuzzy
+msgid "Dictionary cleared"
+msgstr "Slovníkový server"
+
+#: global.cpp:302
+msgid "Digits"
+msgstr "Číslice"
+
+#: crosswordxmlguiwindow.cpp:1127 crosswordxmlguiwindow.cpp:2481
+#, fuzzy
+msgid "Do you really want to clear the crossword?"
+msgstr "Zo zoznamu odstráni všetky skladby."
+
+#: crosswordxmlguiwindow.cpp:2178
+msgid "Do you really want to solve the crossword?"
+msgstr ""
+
+#: main.cpp:44
+msgid "Document to open"
+msgstr "Otváraný dokument"
+
+#: global.cpp:40
+#, fuzzy
+msgid "Double clue cell"
+msgstr "Komentár v bunke %s!%s"
+
+#: cluemodel.cpp:64
+#, fuzzy
+msgid "Down clues"
+msgstr "Stíšiť"
+
+#: krossworddocument.cpp:87
+#, fuzzy
+msgctxt "Title for the list of down/vertical clues when printing"
+msgid "Down clues"
+msgstr "Stíšiť"
+
+#: library/librarygui.cpp:357
+#, fuzzy
+msgid "Download Crossword To Library"
+msgstr "Pridať do knižnice médií"
+
+#: library/librarygui.cpp:540
+msgid "Download a crossword and add it to the library."
+msgstr ""
+
+#: commands.cpp:1150
+msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1708
+msgid "Edit History"
+msgstr "Upraviť históriu"
+
+#: commands.cpp:1160
+msgid "Edit Letter at (%1, %2) From %3 to %4"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1448
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "Edit Mode"
+msgstr "Režim úprav"
+
+#: cells/imagecell.cpp:68
+#, fuzzy
+msgid "Edit image properties to set an image"
+msgstr "Nastavenie veľkosti tlače na veľkosť obrázku"
+
+#: dialogs/statisticsdialog.cpp:57
+#, fuzzy
+msgid "Empty Cells:"
+msgstr "_Zmenou buniek:"
+
+#: crosswordxmlguiwindow.cpp:2625 global.cpp:36
+#, fuzzy
+msgid "Empty cell"
+msgstr "Cieľová bunka je prázdna"
+
+#: crosswordxmlguiwindow.cpp:1550
+msgid "Enables the eraser, to clear letter cells/answers"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1449
+msgid "Enables/disables the edit mode"
+msgstr ""
+
+#: krosswordpuzzle.cpp:466
+#, fuzzy
+msgid "Error loading file '%1'"
+msgstr "Chyba pri nahrávaní súboru používateľského rozhrania"
+
+#: krossword.cpp:1017
+msgid "Error reading AcrossLite's .puz-format."
+msgstr ""
+
+#: krossword.cpp:962
+#, fuzzy
+msgid "Error while downloading from url: %1"
+msgstr "Chyba pri čítaní zo súboru %1"
+
+#: crosswordxmlguiwindow.cpp:782
+#, fuzzy
+msgid "Error while loading file '%1': %2"
+msgstr "Chyba pri nahrávaní zvukov."
+
+#: crosswordxmlguiwindow.cpp:928
+#, fuzzy
+msgid "Error while writing file: %1"
+msgstr ""
+"Chyba počas zapisovania do súboru :\n"
+"%1"
+
+#: krossword.cpp:941
+msgid "Error writing AcrossLite's .puz-format."
+msgstr ""
+
+#: krossword.cpp:930
+#, fuzzy
+msgid "Error writing compressed crossword: %1"
+msgstr ""
+"Chyba počas zapisovania do súboru :\n"
+"%1"
+
+#: krossword.cpp:923
+#, fuzzy
+msgid "Error writing crossword: %1"
+msgstr "Chyba pri ukladaní zoznamu skladieb „%s“: %s"
+
+#: io/krosswordxmlwriter.cpp:58 io/krosswordxmlwriter.cpp:63
+#: io/krosswordxmlwriter.cpp:68
+#, fuzzy
+msgid "Error writing to the compressed file"
+msgstr "Chyba zápisu do výstupného súboru"
+
+#: library/librarygui.cpp:314
+msgid "Export"
+msgstr "Exportovať"
+
+#: library/librarygui.cpp:332
+msgid "Export Settings"
+msgstr "Nastavenia exportu"
+
+#: dialogs/dictionarydialog.cpp:225
+msgid "Export To CSV"
+msgstr "Exportovať do CSV"
+
+#: library/librarygui.cpp:535
+#, fuzzy
+msgid "Export the selected crossword from the library."
+msgstr "Odstrániť vybrané fotografie z knižnice"
+
+#: dialogs/dictionarydialog.cpp:240
+#, fuzzy
+msgid "Export to '%1' was successful"
+msgstr "Test fotoaparátu bol úspešný."
+
+#: library/librarygui.cpp:163
+#, fuzzy
+msgid "Failed"
+msgstr "Vydláždené"
+
+#: crosswordxmlguiwindow.cpp:1536
+msgid "Fills all letter cells with the correct letters"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1410
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "First Clue"
+msgstr "Vyberte prvé zoskupenie:\n"
+
+#: crosswordxmlguiwindow.cpp:1318
+msgid "Fit the whole crossword into the window"
+msgstr ""
+
+#: global.cpp:409
+#, fuzzy
+msgid "Free Crossword"
+msgstr "%1 voľných z %2 (%3% použitých)"
+
+#: main.cpp:39
+msgid "Friedrich Pülz"
+msgstr "Friedrich Pülz"
+
+#: main.cpp:38
+msgid "Giacomo Barazzetti"
+msgstr ""
+
+#: commands.cpp:1346
+#, fuzzy
+msgid "Hide Clue Cell"
+msgstr "Komentár v bunke %s!%s"
+
+#: crosswordxmlguiwindow.cpp:1371
+#, fuzzy
+msgid "Hint For This Cell"
+msgstr "Upraviť komentár pre túto bunku"
+
+#: library/librarygui.cpp:381
+msgid "I Swear Crossword by Victor Fleming (fridays)"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:2627
+msgid "Image '%1'"
+msgstr "Obrázok '%1'"
+
+#: global.cpp:46
+#, fuzzy
+msgid "Image cell"
+msgstr "Vyčistiť pole"
+
+#: commands.cpp:559
+msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
+msgstr ""
+
+#: dialogs/dictionarydialog.cpp:246
+#, fuzzy
+msgid "Import From CSV"
+msgstr "Importovať CSV dáta zo súboru"
+
+#: library/librarygui.cpp:530
+#, fuzzy
+msgid "Import a crossword to the library."
+msgstr "Importovať súbory do knižnice"
+
+#: dictionary.cpp:322
+#, fuzzy
+msgid "Importing Dictionary"
+msgstr "Slovníkový server"
+
+#: dictionary.cpp:360
+msgid ""
+"Importing word clue pairs from '%1' to the database.\n"
+"Please wait."
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1526
+msgid "Insert special character:"
+msgstr "Vložiť špeciálny znak:"
+
+#: global.cpp:50
+#, fuzzy
+msgid "Interactive cells"
+msgstr "_Zmenou buniek:"
+
+#: main.cpp:33
+#, fuzzy
+msgid "Krossword"
+msgstr "Typ súboru: "
+
+#: dialogs/statisticsdialog.cpp:88
+msgctxt "Horizontal:"
+msgid "Label for the number  of horizontal clues"
+msgstr ""
+
+#: dialogs/statisticsdialog.cpp:92
+msgctxt "Vertical:"
+msgid "Label for the number  of vertical clues"
+msgstr ""
+
+#: dictionary.cpp:279
+msgctxt ""
+"The header title for languages of clue/answer pairs in the dictionary "
+"database"
+msgid "Language"
+msgstr "Jazyk"
+
+#: crosswordxmlguiwindow.cpp:1425
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "Last Clue"
+msgstr "Naposledy použitý modul"
+
+#: crosswordxmlguiwindow.cpp:1530
+#, fuzzy
+msgid "Let you select a special character to paste"
+msgstr "Vložiť špeciálny znak:"
+
+#: global.cpp:426
+msgctxt "Short description of the crossword type 'User Defined'"
+msgid "Lets you specify your own rules."
+msgstr ""
+
+#: dialogs/statisticsdialog.cpp:60
+#, fuzzy
+msgid "Letter Cells:"
+msgstr "_Zmenou buniek:"
+
+#: global.cpp:42
+#, fuzzy
+msgid "Letter cell"
+msgstr "Vyčistiť pole"
+
+#: commands.cpp:704 commands.cpp:1172
+msgid "Letter cell not found at the given coordinates (%1, %2)"
+msgstr ""
+
+#: krossword.cpp:649
+msgid "Letters can't be converted back correctly after this conversion."
+msgstr ""
+
+#: krosswordpuzzle.cpp:240 krosswordpuzzle.cpp:429 library/librarygui.cpp:412
+msgid "Library"
+msgstr "Knižnica"
+
+#: krosswordpuzzle.cpp:283
+#, fuzzy
+msgctxt ""
+"This string is used to replace the library path for crossword files that are "
+"in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
+"apps/krossword/library/crossword.kwpz with Library/crossword.kwpz"
+msgid "Library"
+msgstr "Knižnica"
+
+#: crosswordxmlguiwindow.cpp:741
+#, fuzzy
+msgid "Loaded crossword from file '%1'"
+msgstr "Zo súboru WinAMP EQF"
+
+#: dialogs/crosswordpreviewwidget.cpp:46
+msgid "Loading preview..."
+msgstr "Načítava sa náhľad..."
+
+#: krosswordpuzzle.cpp:183
+#, fuzzy
+msgid "Loading the crossword, please wait..."
+msgstr "Prosím, počkajte, kým sa projekt načíta."
+
+#: krosswordpuzzle.cpp:180 library/librarygui.cpp:233
+msgid "Loading..."
+msgstr "Načítava sa..."
+
+#: commands.cpp:1410
+#, fuzzy
+msgid "Make Clue Cell Visible"
+msgstr "Urobiť viditeľným cez Bluetooth"
+
+#: crosswordxmlguiwindow.cpp:1335
+#, fuzzy
+msgid "Mark as confident"
+msgstr "Pridať označenie autorských práv"
+
+#: crosswordxmlguiwindow.cpp:1341
+#, fuzzy
+msgid "Mark as unsure"
+msgstr "Pridať označenie autorských práv"
+
+#: crosswordxmlguiwindow.cpp:1336
+#, fuzzy
+msgid "Mark the selected letter cell's confidence as confident"
+msgstr "Zo zoznamu odstráni označené skladby."
+
+#: crosswordxmlguiwindow.cpp:1342
+#, fuzzy
+msgid "Mark the selected letter cell's confidence as unsure"
+msgstr "Zo zoznamu odstráni označené skladby."
+
+#: library/librarygui.cpp:365
+#, fuzzy
+msgid "Matt Jones (thursdays)"
+msgstr "Andrew Stanley-Jones"
+
+#: dialogs/statisticsdialog.cpp:101
+#, fuzzy
+msgid "Max. Answer Length:"
+msgstr "Max. dĺžka ťahu"
+
+#: dialogs/statisticsdialog.cpp:98
+#, fuzzy
+msgid "Min. Answer Length:"
+msgstr "Predvolená dĺžka skladby:"
+
+#: library/librarygui.cpp:389
+msgid "Mots-croisés.ch free French crosswords"
+msgstr ""
+
+#: commands.cpp:1972
+#, fuzzy
+msgid "Move All Cells By %1, %2"
+msgstr "Šípky (klávesy) posunú o:"
+
+#: crosswordxmlguiwindow.cpp:1507
+#, fuzzy
+msgid "Move All Cells..."
+msgstr "Odstrániť _všetky"
+
+#: dialogs/movecellsdialog.cpp:28
+#, fuzzy
+msgid "Move Cells"
+msgstr "_Zmenou buniek:"
+
+#: crosswordxmlguiwindow.cpp:1508
+#, fuzzy
+msgid "Moves all cells of the crossword"
+msgstr "Hľadať vo všetkých bunkách zošita"
+
+#: dialogs/movecellsdialog.cpp:65
+msgctxt ""
+"How many clues are removed when moving all cells of the crossword. %2 is "
+"replaced by a plural indicating how many images will be removed when moving "
+"the cells."
+msgid "Moving all cells will remove %1 clue %2"
+msgid_plural "Moving all cells will remove %1 clues %2"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: library/librarygui.cpp:554
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "New &Crossword..."
+msgstr "Nový zoznam skladieb"
+
+#: library/librarygui.cpp:549
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "New &Folder..."
+msgstr "Nový priečinok"
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
+#, fuzzy
+msgid "New Crossword Type"
+msgstr "Nový typ súboru"
+
+#: library/librarygui.cpp:481
+#, fuzzy
+msgid "New Library Folder"
+msgstr "Ako nový priečinok"
+
+#: crosswordxmlguiwindow.cpp:653 crosswordxmlguiwindow.cpp:686
+#, fuzzy
+msgid "New crossword"
+msgstr "Nový zoznam skladieb"
+
+#: commands.cpp:1299
+msgid "No Action"
+msgstr "Žiadna akcia"
+
+#: dictionary.cpp:174
+msgid ""
+"No Connection to the database! Please make sure the MySQL server is running. "
+"Afterwards click \"Continue\" to retry connecting to the database."
+msgstr ""
+
+#: dictionary.cpp:177
+#, fuzzy
+msgid "No Database Connection"
+msgstr "Žiadne spojenie na databázu nie je dostupné."
+
+#: commands.cpp:343 commands.cpp:552 commands.cpp:662 commands.cpp:697
+#, fuzzy
+msgid "No cell at the given coordinates (%1, %2)"
+msgstr "Zobraziť mapu na danej súradnici zemepsinej šírky a dĺžky"
+
+#: dialogs/currentcellwidget.cpp:114
+#, fuzzy
+msgid "No cell selected."
+msgstr "Nie je vybraný žiadny dokument"
+
+#: dialogs/crosswordpropertiesdialog.cpp:245
+msgctxt "No changes to the crossword grid size."
+msgid "No change"
+msgstr "Bez zmeny"
+
+#: commands.cpp:813 commands.cpp:1006 commands.cpp:1100
+#, fuzzy
+msgid "No clue cell given"
+msgstr "Nebolo dané ID sedenia"
+
+#: krossword.cpp:3033
+msgid "No error."
+msgstr "Žiadna chyba."
+
+#: crosswordxmlguiwindow.cpp:1122
+#, fuzzy
+msgid "No removable cell selected."
+msgstr "Edituje komentár vybranej bunky"
+
+#: dialogs/createnewcrossworddialog.cpp:193
+msgid "Notes"
+msgstr "Poznámky"
+
+#: commands.cpp:1277
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Notes"
+msgstr "Poznámky"
+
 #: global.cpp:488
 #, fuzzy
 msgid "Number Puzzle"
 msgstr "Počet stĺpcov v puzzle"
+
+#: global.cpp:289
+#, fuzzy
+msgid "Number clues (1 to 26)"
+msgstr "Počet jadier pre zachovanie"
+
+#: dialogs/statisticsdialog.cpp:72
+msgid ""
+"Number of crossed letter cells, percentage of total letter cell count in "
+"braces"
+msgstr ""
+
+#: dialogs/statisticsdialog.cpp:59
+msgid "Number of empty cells, percentage of total cell count in braces"
+msgstr ""
+
+#: dialogs/statisticsdialog.cpp:90
+msgid "Number of horizontal clues, percentage of total clue count in braces"
+msgstr ""
+
+#: dialogs/statisticsdialog.cpp:121
+msgid ""
+"Number of letter cells containing '%1', percentage of total letter cell "
+"count in braces"
+msgstr ""
+
+#: dialogs/statisticsdialog.cpp:62
+msgid "Number of letter cells, percentage of total cell count in braces"
+msgstr ""
+
+#: dialogs/statisticsdialog.cpp:76
+msgid ""
+"Number of uncrossed letter cells, percentage of total letter cell count in "
+"braces"
+msgstr ""
+
+#: dialogs/statisticsdialog.cpp:94
+msgid "Number of vertical clues, percentage of total clue count in braces"
+msgstr ""
 
 #: global.cpp:490
 msgctxt "Short description of the crossword type 'Number Puzzle'"
@@ -1643,75 +1491,428 @@ msgid ""
 "alphabet a number stands."
 msgstr ""
 
-#: global.cpp:503
-msgid "Crossnumber"
+#: dialogs/statisticsdialog.cpp:115
+#, fuzzy
+msgid "Occurrences Of Letters:"
+msgstr "Jednoduché písmená"
+
+#: library/librarygui.cpp:525
+#, fuzzy
+msgid "Open the selected crossword."
+msgstr "Otvoriť vybrané hlásenie"
+
+#: crosswordxmlguiwindow.cpp:1321
+msgid "Pan"
+msgstr "Pan"
+
+#: crosswordxmlguiwindow.cpp:1322
+msgid ""
+"Pan the view. Note that you can also pan while pressing the control key."
 msgstr ""
 
-#: global.cpp:505
-msgctxt "Short description of the crossword type 'Crossnumber'"
-msgid ""
-"Crossnumbers are the numerical analogy of a crossword, in which the "
-"solutions to the clues are numbers instead of words."
+#: dialogs/crosswordpreviewwidget.cpp:55
+#, fuzzy
+msgid "Preview failed"
+msgstr "Prehľadávanie zlyhalo: %1"
+
+#: main.cpp:39
+msgid "Previous developer"
 msgstr ""
 
-#: global.cpp:508
-msgctxt "Long description of the crossword type 'Crossnumber'"
+#: crosswordxmlguiwindow.cpp:1303
+#, fuzzy
+msgid "Print the crossword"
+msgstr "Vypíše verziu "
+
+#: dialogs/crosswordpropertiesdialog.cpp:36
+msgid "Properties"
+msgstr "Vlastnosti"
+
+#: crosswordxmlguiwindow.cpp:1175
 msgid ""
-"A crossnumber (also known as a cross-figure) is the numerical analogy of a "
-"crossword, in which the solutions to the clues are numbers instead of words. "
-"Clues are usually arithmetical expressions, but can also be general "
-"knowledge clues to which the answer is a number or year. There are also "
-"numerical fill-in crosswords.\n"
-"The Daily Mail Weekend magazine used to feature crossnumbers under the "
-"misnomer Number Word. This kind of puzzle should not be confused with a "
-"different puzzle that the Daily Mail refers to as Cross Number.\n"
+"Quality crosswords of the current crossword type (%1) are usually symmetric."
+msgstr ""
+
+#: commands.cpp:776
+#, fuzzy
+msgid "Remove %1 letter"
+msgid_plural "Remove %1 letters"
+msgstr[0] "Chýbajúce písmeno"
+msgstr[1] ""
+msgstr[2] ""
+
+#: crosswordxmlguiwindow.cpp:1464
+#, fuzzy
+msgid "Remove &Across Clue"
+msgstr "Na stred _výberu"
+
+#: crosswordxmlguiwindow.cpp:1470
+#, fuzzy
+msgid "Remove &Down Clue"
+msgstr "Hlasitosť->Znížiť o 10"
+
+#: commands.cpp:336
+#, fuzzy
+msgid "Remove Clue '%1'"
+msgstr "Odstrániť ich"
+
+#: commands.cpp:334
+#, fuzzy
+msgid "Remove Clue Without Text"
+msgstr "Zadávanie textu bez klávesnice"
+
+#: commands.cpp:544
+msgid "Remove Image '%1'"
+msgstr "Odstrániť obrázok '%1'"
+
+#: commands.cpp:1529
+msgid "Remove Same Letter Synchronization"
+msgstr ""
+
+#: commands.cpp:778
+msgctxt "This string shouldn't happen to be used"
+msgid "Remove no letters"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1483
+#, fuzzy
+msgid "Removes all clues from the crossword"
+msgstr "Zo zoznamu odstráni všetky skladby."
+
+#: crosswordxmlguiwindow.cpp:1465
+msgid "Removes the highlighted across clue"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1460
+msgid "Removes the highlighted clue or image"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1471
+#, fuzzy
+msgid "Removes the highlighted down clue"
+msgstr "Presunúť rozdeľovač aktuálneho pohľadu dolu"
+
+#: commands.cpp:1894
+msgid "Resize Crossword From %1x%2 to %3x%4"
+msgstr ""
+
+#: dialogs/crosswordpropertiesdialog.cpp:251
+msgctxt ""
+"How many clues are removed when resizing the crossword. %2 is replaced by a "
+"plural indicating how many images will be removed when resizing."
+msgid "Resizing from %3x%4 will remove %1 clue %2"
+msgid_plural "Resizing from %3x%4 will remove %1 clues %2"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: krosswordpuzzle.cpp:95
+msgid "Resource unavailable"
+msgstr ""
+
+#: krosswordpuzzle.cpp:261
+msgid ""
+"Restore the automatically saved version of an edited crossword before the "
+"crash"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:808
+#, fuzzy
+msgid "Save &Edit History"
+msgstr "Uložiť hi&stóriu ako..."
+
+#: crosswordxmlguiwindow.cpp:811
+msgid "Save As &Template"
+msgstr "Uložiť ako ša&blónu"
+
+#: krosswordpuzzle.cpp:86
+#, fuzzy
+msgid "Save crossword"
+msgstr "Nový zoznam skladieb"
+
+#: crosswordxmlguiwindow.cpp:1294
+msgid "Save the crossword with solved letters"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:813
+msgid "Save without correct answers, clue texts, images"
+msgstr ""
+
+#: dictionary.cpp:277
+msgctxt ""
+"The header title for scores/difficulties of clue/answer pairs in the "
+"dictionary database"
+msgid "Score"
+msgstr "Stav"
+
+#: crosswordxmlguiwindow.cpp:1396
+msgid "Select clue with switched orientation to the currently selected clue"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1411
+#, fuzzy
+msgid "Select the first clue"
+msgstr "Vyberte prvé zoskupenie:\n"
+
+#: crosswordxmlguiwindow.cpp:1401
+msgid "Select the first letter of the current clue"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1426
+#, fuzzy
+msgid "Select the last clue"
+msgstr "Naposledy použitý modul"
+
+#: crosswordxmlguiwindow.cpp:1406
+msgid "Select the last letter of the current clue"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1416
+#, fuzzy
+msgid "Select the next clue"
+msgstr "Vybrať nasledujúci zoznam skladieb"
+
+#: crosswordxmlguiwindow.cpp:1421
+#, fuzzy
+msgid "Select the previous clue"
+msgstr "Vybrať predchádzajúci zoznam skladieb"
+
+#: commands.cpp:1147
+#, fuzzy
+msgid "Set Correct Letter at (%1, %2) to %3"
+msgstr "Nastaviť pri najbližšom prihlásení"
+
+#: commands.cpp:1481
+#, fuzzy
+msgid "Set Default Number Puzzle Mapping"
+msgstr "Nastaviť počet stĺpcov na predvolený:"
+
+#: commands.cpp:1157
+#, fuzzy
+msgid "Set Letter at (%1, %2) to %3"
+msgstr "Nastaviť pri najbližšom prihlásení"
+
+#: krosswordpuzzleview.cpp:106
+msgid "Settings changed"
+msgstr "Nastavenia uložené"
+
+#: commands.cpp:1506
+msgid "Setup Same Letter Synchronization"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1434
+#, fuzzy
+msgid "Show Clue Dock"
+msgstr "/Zobraziť/Show Dock"
+
+#: crosswordxmlguiwindow.cpp:1444
+#, fuzzy
+msgid "Show Current Cell Dock"
+msgstr "Súčet do aktuálnej bunky"
+
+#: dialogs/crosswordtypewidget.cpp:204
+msgid "Show Details"
+msgstr "Zobraziť podrobnosti"
+
+#: crosswordxmlguiwindow.cpp:1439
+#, fuzzy
+msgid "Show Edit History Dock"
+msgstr "Ukázať históriu rozhovoru v novom rozhovore"
+
+#: dialogs/cellwidgets/cluecellwidget.cpp:121
+msgid "Show Only Answers With &Clue"
+msgstr ""
+
+#: dialogs/cellwidgets/cluecellwidget.cpp:112
+msgid "Show Only Answers With Current Answer &Length"
+msgstr ""
+
+#: dialogs/cellwidgets/cluecellwidget.cpp:128
+msgid "Show Only the &First 100 Answers"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1307
+#, fuzzy
+msgid "Show a print preview"
+msgstr "Zatvoriť náhľad tlače"
+
+#: crosswordxmlguiwindow.cpp:1498
+#, fuzzy
+msgid "Shows statistics about the crossword"
+msgstr "      --statistics            zobraziť štatistiky prekladov\n"
+
+#: crosswordxmlguiwindow.cpp:352
+#, fuzzy
+msgid "Shows the percentage of solved letter cells"
+msgstr "Vyčistí obsah zvolených buniek"
+
+#: dialogs/createnewcrossworddialog.cpp:192
+msgid "Size"
+msgstr "Veľkosť"
+
+#: commands.cpp:1284
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Size"
+msgstr "Veľkosť"
+
+#: library/librarymanager.cpp:71
+msgctxt "The title for sizes of crosswords in the library tree view"
+msgid "Size:"
+msgstr "Veľkosť:"
+
+#: crosswordxmlguiwindow.cpp:1660 krossword.h:555
+msgid "Solution"
+msgstr "Riešenie"
+
+#: global.cpp:44
+#, fuzzy
+msgid "Solution letter cell"
+msgstr "Komentár v bunke %s!%s"
+
+#: commands.cpp:669
+msgid "Solution letter cell not found at the given coordinates (%1, %2)"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:2178
+#, fuzzy
+msgid "Solve"
+msgstr "Vyriešiť hru"
+
+#: crosswordxmlguiwindow.cpp:1383
+#, fuzzy
+msgid "Solve Across Clue"
+msgstr "Na stred _výberu"
+
+#: crosswordxmlguiwindow.cpp:1377
+#, fuzzy
+msgid "Solve Clue"
+msgstr "Vyriešiť hru"
+
+#: crosswordxmlguiwindow.cpp:1389
+#, fuzzy
+msgid "Solve Down Clue"
+msgstr "Hlasitosť->Znížiť o 10"
+
+#: crosswordxmlguiwindow.cpp:1384
+msgid "Solve the current across clue"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1378
+#, fuzzy
+msgid "Solve the current clue"
+msgstr "U&končiť aktuálne sedenie"
+
+#: crosswordxmlguiwindow.cpp:1390
+#, fuzzy
+msgid "Solve the current down clue"
+msgstr "Presunúť rozdeľovač aktuálneho pohľadu dolu"
+
+#: crosswordxmlguiwindow.cpp:1372
+#, fuzzy
+msgid "Solve the selected letter cell"
+msgstr "Komentár v bunke %s!%s"
+
+#: crosswordxmlguiwindow.cpp:1326
+msgid "Solve the selected letter or a random one if none is selected"
+msgstr ""
+
+#: dialogs/statisticsdialog.cpp:34
+msgid "Statistics"
+msgstr "Štatistika"
+
+#: global.cpp:287
+#, fuzzy
+msgid "String clues"
+msgstr "Reťazec pre &zavesenie:"
+
+#: global.cpp:434
+#, fuzzy
+msgid "Swedish Crossword"
+msgstr "Švédčina (Fínsko)"
+
+#: global.cpp:436
+msgctxt "Short description of the crossword type 'Swedish'"
+msgid ""
+"Swedish crosswords contain clue cells which contain the clue text in it and "
+"an arrow to indicate in which direction the clues have to be answered."
+msgstr ""
+
+#: krosswordpuzzle.cpp:244
+msgid "Templates"
+msgstr "Šablóny"
+
+#: global.cpp:439
+msgctxt "Long description of the crossword type 'Swedish'"
+msgid ""
+"The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
+"the cells which would normally be black in other countries. Arrows indicate "
+"in which direction the clues have to be answered, vertical or horizontal. "
+"This style of grid is used in several countries other than Sweden, usually "
+"in magazines with pages of A4 or similar size. The grid often has a photo of "
+"a pop or movie star replacing a block of squares, as a clue to one answer. "
+"These puzzles usually have no symmetry in the grid.\n"
+"Crosswords with clue cells inside the crossword grid are also called "
+"\"Arrowwords\", \"Pointers\" or \"Tipwords\" in English, \"Autodefinidos\" "
+"in Spanish, \"Mots Fléchés\" in French, etc.\n"
 "(text taken from wikipedia)"
 msgstr ""
 
-#: io/krosswordxmlreader.cpp:174 io/krosswordxmlreader.cpp:206
-#, fuzzy
-msgid "The file is not a Krossword version &lt;= 1.1 file."
-msgstr "Verzia %s formátu GIF nie je podporovaná"
+#: library/librarygui.cpp:373
+msgid "The Chronicle of Higher Education (fridays)"
+msgstr ""
 
-#: io/krosswordxmlwriter.cpp:52
-#, fuzzy
-msgid "Couldn't open the ZIP archive for writing"
-msgstr "Nepodarilo sa otvoriť archív pre zápis."
+#: library/librarygui.cpp:377
+msgid "The Cross Nerd (tuesdays)"
+msgstr ""
 
-#: io/krosswordxmlwriter.cpp:58 io/krosswordxmlwriter.cpp:63
-#: io/krosswordxmlwriter.cpp:68
+#: library/librarygui.cpp:190
 #, fuzzy
-msgid "Error writing to the compressed file"
-msgstr "Chyba zápisu do výstupného súboru"
+msgid "The Cross Nerd current crossword"
+msgstr "Zatvorí aktuálny súbor"
 
-#: io/krosswordxmlwriter.cpp:73
-#, fuzzy
-msgid "Couldn't close the ZIP archive"
-msgstr "Do ZIP/TAR archívu"
+#: krossword.cpp:3040
+msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
+msgstr ""
 
-#: krossword.cpp:612
-#, fuzzy
-msgid "%1 clue cell"
-msgid_plural "%1 clue cells"
-msgstr[0] "Vyčistiť pole"
-msgstr[1] ""
-msgstr[2] ""
+#: krossword.cpp:3052
+msgid "The answer is too short for the current crossword type."
+msgstr ""
 
-#: krossword.cpp:617
-#, fuzzy
-msgid "%1 double clue cell"
-msgid_plural "%1 double clue cells"
-msgstr[0] "Komentár v bunke %s!%s"
-msgstr[1] ""
-msgstr[2] ""
+#: krossword.cpp:3044
+msgid ""
+"The answer overwrites the answer to another clue with the same orientation."
+msgstr ""
 
-#: krossword.cpp:622
+#: krossword.cpp:3054
+msgid "The answer overwrites the clue cell."
+msgstr ""
+
+#: krossword.cpp:3042
+msgid "The answer produces mismatching letter cells at the same positions."
+msgstr ""
+
+#: dialogs/answerwidget.cpp:30 dialogs/answerwidget.cpp:40
 #, fuzzy
-msgid "%1 solution letter cell"
-msgid_plural "%1 solution letter cells"
-msgstr[0] "Komentár v bunke %s!%s"
-msgstr[1] ""
-msgstr[2] ""
+msgid "The answer to the clue"
+msgstr "Napíšte odpoveď na otázku"
+
+#: krossword.cpp:3046
+msgid "The answer's letter cells cross a clue cell."
+msgstr ""
+
+#: krossword.cpp:3038
+msgid "The cell for the new clue isn't empty."
+msgstr ""
+
+#: krossword.cpp:3059
+msgid "The cells for the new image aren't empty."
+msgstr ""
+
+#: krossword.cpp:3036
+msgid "The clue doesn't fit in the grid with the given settings."
+msgstr ""
 
 #: krossword.cpp:633
 #, fuzzy
@@ -1723,206 +1924,10 @@ msgstr "Odstrániť nedostupné súbory"
 msgid "The conversion will remove %1 of %2 clues, %3 of %4 images"
 msgstr "Odstrániť obrazy z disku po dokončení"
 
-#: krossword.cpp:649
-msgid "Letters can't be converted back correctly after this conversion."
-msgstr ""
-
-#: krossword.cpp:656
+#: dialogs/answerwidget.cpp:28 dialogs/answerwidget.cpp:38
 msgid ""
-"All clue cells get removed. The initial letter to clue number mapping is "
-"A=1, B=2, ..., Z=26."
+"The correct answer to the clue. For each letter a letter cell is created"
 msgstr ""
-
-#: krossword.cpp:923
-#, fuzzy
-msgid "Error writing crossword: %1"
-msgstr "Chyba pri ukladaní zoznamu skladieb „%s“: %s"
-
-#: krossword.cpp:930
-#, fuzzy
-msgid "Error writing compressed crossword: %1"
-msgstr ""
-"Chyba počas zapisovania do súboru :\n"
-"%1"
-
-#: krossword.cpp:941
-msgid "Error writing AcrossLite's .puz-format."
-msgstr ""
-
-#: krossword.cpp:962
-#, fuzzy
-msgid "Error while downloading from url: %1"
-msgstr "Chyba pri čítaní zo súboru %1"
-
-#: krossword.cpp:1017
-msgid "Error reading AcrossLite's .puz-format."
-msgstr ""
-
-#: krossword.cpp:2959
-msgctxt "Name"
-msgid ""
-"Used as header label for the column containing the names in the crossword "
-"type model."
-msgstr ""
-
-#: krossword.cpp:2962
-msgctxt "Description"
-msgid ""
-"Used as header label for the column containing the descriptions in the "
-"crossword type model."
-msgstr ""
-
-#: krossword.cpp:3045
-msgid "No error."
-msgstr "Žiadna chyba."
-
-#: krossword.cpp:3048
-msgid "The clue doesn't fit in the grid with the given settings."
-msgstr ""
-
-#: krossword.cpp:3050
-msgid "The cell for the new clue isn't empty."
-msgstr ""
-
-#: krossword.cpp:3052
-msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
-msgstr ""
-
-#: krossword.cpp:3054
-msgid "The answer produces mismatching letter cells at the same positions."
-msgstr ""
-
-#: krossword.cpp:3056
-msgid ""
-"The answer overwrites the answer to another clue with the same orientation."
-msgstr ""
-
-#: krossword.cpp:3058
-msgid "The answer's letter cells cross a clue cell."
-msgstr ""
-
-#: krossword.cpp:3060
-msgid "The current crossword type doesn't allow clue cells."
-msgstr ""
-
-#: krossword.cpp:3062
-msgid "The current crossword type requires a clue cell for each clue."
-msgstr ""
-
-#: krossword.cpp:3064
-msgid "The answer is too short for the current crossword type."
-msgstr ""
-
-#: krossword.cpp:3066
-msgid "The answer overwrites the clue cell."
-msgstr ""
-
-#: krossword.cpp:3069
-msgid "The image doesn't fit in the grid with the given settings."
-msgstr ""
-
-#: krossword.cpp:3071
-msgid "The cells for the new image aren't empty."
-msgstr ""
-
-#: krossword.cpp:3073
-msgid "The current crossword type doesn't allow image cells."
-msgstr ""
-
-#: krossworddocument.cpp:86
-#, fuzzy
-msgctxt "Title for the clue list when printing"
-msgid "Clue list"
-msgstr "Správca zoznamov"
-
-#: krossworddocument.cpp:87
-#, fuzzy
-msgctxt "Title for the list of down/vertical clues when printing"
-msgid "Down clues"
-msgstr "Stíšiť"
-
-#: krossworddocument.cpp:88
-#, fuzzy
-msgctxt "Title for the list of across/horizontal clues when printing"
-msgid "Across clues"
-msgstr "Desať naprieč"
-
-#: krosswordpuzzle.cpp:78
-#, fuzzy
-msgid "Would you like to add the crossword into the library?"
-msgstr "Vytvoriť nový priečinok záložiek v %1"
-
-#: krosswordpuzzle.cpp:79
-#, fuzzy
-msgid "Save crossword"
-msgstr "Nový zoznam skladieb"
-
-#: krosswordpuzzle.cpp:87
-msgid "Could not open resource at "
-msgstr ""
-
-#: krosswordpuzzle.cpp:88
-msgid "Resource unavailable"
-msgstr ""
-
-#: krosswordpuzzle.cpp:173 library/librarygui.cpp:212
-msgid "Loading..."
-msgstr "Načítava sa..."
-
-#: krosswordpuzzle.cpp:176
-#, fuzzy
-msgid "Loading the crossword, please wait..."
-msgstr "Prosím, počkajte, kým sa projekt načíta."
-
-#: krosswordpuzzle.cpp:233 krosswordpuzzle.cpp:426 library/librarygui.cpp:383
-msgid "Library"
-msgstr "Knižnica"
-
-#: krosswordpuzzle.cpp:237
-msgid "Templates"
-msgstr "Šablóny"
-
-#: krosswordpuzzle.cpp:254
-msgid "&Restore"
-msgstr "&Obnoviť"
-
-#: krosswordpuzzle.cpp:254
-msgid ""
-"Restore the automatically saved version of an edited crossword before the "
-"crash"
-msgstr ""
-
-#: krosswordpuzzle.cpp:255
-msgid ""
-"An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
-" Do you want to restore the crossword?"
-msgstr ""
-
-#: krosswordpuzzle.cpp:276
-#, fuzzy
-msgctxt ""
-"This string is used to replace the library path for crossword files that are "
-"in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
-"apps/krossword/library/crossword.kwpz with Library/crossword.kwpz"
-msgid "Library"
-msgstr "Knižnica"
-
-#: krosswordpuzzle.cpp:306
-msgid "Animations"
-msgstr "Animácie"
-
-#: krosswordpuzzle.cpp:311
-msgid "Theme"
-msgstr "Téma"
-
-#: krosswordpuzzle.cpp:462
-#, fuzzy
-msgid "Error loading file '%1'"
-msgstr "Chyba pri nahrávaní súboru používateľského rozhrania"
-
-#: krosswordpuzzleview.cpp:106
-msgid "Settings changed"
-msgstr "Nastavenia uložené"
 
 #: library/librarygui.cpp:138
 #, fuzzy
@@ -1933,198 +1938,241 @@ msgstr "Importovať súbory do knižnice"
 msgid "The crossword couldn't be written to the library folder."
 msgstr ""
 
-#: library/librarygui.cpp:163
-#, fuzzy
-msgid "Failed"
-msgstr "Vydláždené"
-
-#: library/librarygui.cpp:190
-#, fuzzy
-msgid "The Cross Nerd current crossword"
-msgstr "Zatvorí aktuálny súbor"
-
-#: library/librarygui.cpp:277
-msgid "Can't export whole directories. Please select a crossword."
+#: crosswordxmlguiwindow.cpp:1169
+msgid ""
+"The crossword doesn't have 180 degree rotation symmetry.\n"
+"To achieve symmetry make sure that each empty cell and each clue cell has a "
+"counterpart at it's 180 degree rotated position.\n"
 msgstr ""
 
-#: library/librarygui.cpp:283
+#: crosswordxmlguiwindow.cpp:1165
+msgid ""
+"The crossword doesn't have 180 degree rotation symmetry.\n"
+"To achieve symmetry make sure that each empty cell has a counterpart at it's "
+"180 degree rotated position.\n"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1161
+msgid "The crossword has 180 degree rotation symmetry."
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:756
+msgid ""
+"The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
+"\n"
+"Do you want to convert the crossword to another type now?\n"
+"\n"
+"(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:707 crosswordxmlguiwindow.cpp:850
+#: krosswordpuzzle.cpp:129
+msgid ""
+"The current crossword has been modified.\n"
+"Would you like to save it?"
+msgstr ""
+
+#: krossword.cpp:3048
+msgid "The current crossword type doesn't allow clue cells."
+msgstr ""
+
+#: krossword.cpp:3061
+msgid "The current crossword type doesn't allow image cells."
+msgstr ""
+
+#: krossword.cpp:3050
+msgid "The current crossword type requires a clue cell for each clue."
+msgstr ""
+
+#: io/krosswordxmlreader.cpp:174 io/krosswordxmlreader.cpp:206
+#, fuzzy
+msgid "The file is not a Krossword version &lt;= 1.1 file."
+msgstr "Verzia %s formátu GIF nie je podporovaná"
+
+#: library/librarygui.cpp:489
+#, fuzzy
+msgid "The folder already exists in the library."
+msgstr "<p>Súbor <em>%1</em> už existuje v priečinku projektu <em>%2</em>."
+
+#: krossword.cpp:3057
+msgid "The image doesn't fit in the grid with the given settings."
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1330
+#, fuzzy
+msgid "The selected letter cell has been solved"
+msgstr "Toto písmeno ste už skúšali."
+
+#: commands.cpp:725
+msgctxt ""
+"Error message to be displayed, when the user tries to convert a letter to a "
+"solution letter, but the position of the new solution letter is already "
+"used. Each solution letter has a position in the solution word of the "
+"crossword and all solution letters of a crossword form it's solution word. "
+"%1 is replaced by the (already used) position."
+msgid "The solution letter position %1 is already assigned."
+msgstr ""
+
+#: dialogs/cellwidgets/solutionlettercellwidget.cpp:94
+msgid ""
+"The solution letter position %1 is already assigned.\n"
+"Please change the solution word position of that letter first."
+msgstr ""
+
+#: krosswordpuzzle.cpp:313
+msgid "Theme"
+msgstr "Téma"
+
+#: library/librarygui.cpp:304
 #, fuzzy
 msgid ""
 "There was an error opening the crossword.\n"
 "%1"
 msgstr "Nastala chyba pri otváraní súboru %s."
 
-#: library/librarygui.cpp:293
-msgid "Export"
-msgstr "Exportovať"
-
-#: library/librarygui.cpp:311
-msgid "Export Settings"
-msgstr "Nastavenia exportu"
-
-#: library/librarygui.cpp:327
-msgid "Couldn't export the image to the specified file."
-msgstr ""
-
-#: library/librarygui.cpp:336
+#: dialogs/dictionarydialog.cpp:238
 #, fuzzy
-msgid "Download Crossword To Library"
-msgstr "Pridať do knižnice médií"
+msgid "There was an error while exporting to '%1'"
+msgstr "Vyskytla sa chyba počas zverejňovania na %s:"
 
-#: library/librarygui.cpp:344
+#: dialogs/dictionarydialog.cpp:252
 #, fuzzy
-msgid "Matt Jones (thursdays)"
-msgstr "Andrew Stanley-Jones"
+msgid "There was an error while importing from '%1'"
+msgstr "Počas importovania účtov nastala chyba."
 
-#: library/librarygui.cpp:348
-msgid "Wall Street Journal by Mike Shenk (fridays)"
+#: global.cpp:411
+msgctxt "Short description of the crossword type 'Free'"
+msgid "This is a special type that tries to be least restrictive."
 msgstr ""
 
-#: library/librarygui.cpp:352
-msgid "The Chronicle of Higher Education (fridays)"
-msgstr ""
-
-#: library/librarygui.cpp:356
-msgid "The Cross Nerd (tuesdays)"
-msgstr ""
-
-#: library/librarygui.cpp:360
-msgid "I Swear Crossword by Victor Fleming (fridays)"
-msgstr ""
-
-#: library/librarygui.cpp:412
+#: global.cpp:413
+msgctxt "Long description of the crossword type 'Free'"
 msgid ""
-"This will permanently delete the selected directory and all contained "
-"crosswords from the library. The operation can't be undone!"
+"This is a special type that tries to be least restrictive. You can use all "
+"available cell types (eg. clue cells, double clue cells, image cells, "
+"solution letter cells). You can mix answers that have a clue cell with "
+"answers that don't. Answers may contain characters as well as numbers."
 msgstr ""
 
-#: library/librarygui.cpp:420
+#: crosswordxmlguiwindow.cpp:1329
+#, fuzzy
+msgid "This letter has been solved"
+msgstr "Toto písmeno ste už skúšali."
+
+#: crosswordxmlguiwindow.cpp:1242
 msgid ""
-"Couldn't remove the directory from the library.\n"
-"You need root privileges to remove directories which belong to the global "
-"library."
+"This will cause all answers to be shown and editable.\n"
+"If you want to solve the crossword you should cancel."
 msgstr ""
 
-#: library/librarygui.cpp:424
+#: library/librarygui.cpp:453
 msgid ""
 "This will permanently delete the selected crossword from the library.\n"
 "The operation can't be undone!"
 msgstr ""
 
-#: library/librarygui.cpp:431
-#, fuzzy
-msgid "Couldn't remove the crossword from the library."
-msgstr "Odstrániť vybrané fotografie z knižnice"
-
-#: library/librarygui.cpp:452
-#, fuzzy
-msgid "New Library Folder"
-msgstr "Ako nový priečinok"
-
-#: library/librarygui.cpp:460
-#, fuzzy
-msgid "The folder already exists in the library."
-msgstr "<p>Súbor <em>%1</em> už existuje v priečinku projektu <em>%2</em>."
-
-#: library/librarygui.cpp:495
-msgctxt "@action:intoolbar"
-msgid "&Open..."
-msgstr ""
-
-#: library/librarygui.cpp:496
-#, fuzzy
-msgid "Open the selected crossword."
-msgstr "Otvoriť vybrané hlásenie"
-
-#: library/librarygui.cpp:500
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Import..."
-msgstr "&Importovať"
-
-#: library/librarygui.cpp:501
-#, fuzzy
-msgid "Import a crossword to the library."
-msgstr "Importovať súbory do knižnice"
-
-#: library/librarygui.cpp:505
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Export..."
-msgstr "&Exportovať"
-
-#: library/librarygui.cpp:506
-#, fuzzy
-msgid "Export the selected crossword from the library."
-msgstr "Odstrániť vybrané fotografie z knižnice"
-
-#: library/librarygui.cpp:510
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Download..."
-msgstr "&Stiahnuť"
-
-#: library/librarygui.cpp:511
-msgid "Download a crossword and add it to the library."
-msgstr ""
-
-#: library/librarygui.cpp:515
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Delete..."
-msgstr "Odstrá&niť"
-
-#: library/librarygui.cpp:516
-#, fuzzy
-msgid "Delete the selected crossword from the library."
-msgstr "Odstrániť vybrané fotografie z knižnice"
-
-#: library/librarygui.cpp:520
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "New &Folder..."
-msgstr "Nový priečinok"
-
-#: library/librarygui.cpp:521
-#, fuzzy
-msgid "Create a new folder in the library."
-msgstr "Vytvoriť nový priečinok záložiek v %1"
-
-#: library/librarygui.cpp:525
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "New &Crossword..."
-msgstr "Nový zoznam skladieb"
-
-#: library/librarygui.cpp:526
-#, fuzzy
-msgid "Create a new crossword in the library."
-msgstr "Vytvoriť nový priečinok záložiek v %1"
-
-#: library/librarygui.cpp:537
-msgid "%1"
-msgstr ""
-
-#: library/librarymanager.cpp:71
-msgctxt "The title for sizes of crosswords in the library tree view"
-msgid "Size:"
-msgstr "Veľkosť:"
-
-#: library/librarymanager.cpp:74
-msgctxt "The title for authors of crosswords in the library tree view"
-msgid "Author(s):"
-msgstr "Autor(i):"
-
-#: main.cpp:27
+#: library/librarygui.cpp:441
 msgid ""
-"A crossword puzzle game and editor for KDE.\n"
-"Based on KrossWordPuzzle."
+"This will permanently delete the selected directory and all contained "
+"crosswords from the library. The operation can't be undone!"
 msgstr ""
 
-#: main.cpp:33
+#: commands.cpp:1268
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Title"
+msgstr "Názov"
+
+#: dialogs/statisticsdialog.cpp:49
 #, fuzzy
-msgid "Krossword"
-msgstr "Typ súboru: "
+msgid "Total Cell Count:"
+msgstr "Celkový počet prehratí"
+
+#: dialogs/statisticsdialog.cpp:74
+msgid "Uncrossed:"
+msgstr ""
+
+#: krossword.cpp:2950
+msgctxt "Description"
+msgid ""
+"Used as header label for the column containing the descriptions in the "
+"crossword type model."
+msgstr ""
+
+#: krossword.cpp:2947
+msgctxt "Name"
+msgid ""
+"Used as header label for the column containing the names in the crossword "
+"type model."
+msgstr ""
+
+#: global.cpp:424
+#, fuzzy
+msgid "User Defined Crossword"
+msgstr "<b>Používateľom definované konštanty:</b>"
+
+#: global.cpp:52
+#, fuzzy
+msgid "User cell type"
+msgstr "Zadajte používateľa, ktorého blokovať"
+
+#: library/librarygui.cpp:369
+msgid "Wall Street Journal by Mike Shenk (fridays)"
+msgstr ""
+
+#: krosswordpuzzle.cpp:85
+#, fuzzy
+msgid "Would you like to add the crossword into the library?"
+msgstr "Vytvoriť nový priečinok záložiek v %1"
+
+#: crosswordxmlguiwindow.cpp:913
+#, fuzzy
+msgid "Wrote crossword to file '%1'"
+msgstr "Zápis logu uspešný do: %s\n"
+
+#: rc.cpp:2
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "wizzardsk@gmail.com"
+
+#: rc.cpp:1
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Roman Paholík"
+
+#: crosswordxmlguiwindow.cpp:295
+msgid "Zoom: %1%"
+msgstr "Priblíženie: %1%"
+
+#: dialogs/movecellsdialog.cpp:71
+#, fuzzy
+msgctxt ""
+"How many images are removed when moving all cells of the crossword. This "
+"string gets combined with a plural string indicating how many clue cells "
+"will be removed when moving the cells."
+msgid "and %1 image"
+msgid_plural "and %1 images"
+msgstr[0] "Zobraziť obrázok a bublinový tip"
+msgstr[1] ""
+msgstr[2] ""
+
+#: dialogs/crosswordpropertiesdialog.cpp:257
+#, fuzzy
+msgctxt ""
+"How many images are removed when resizing the crossword. This string gets "
+"combined with a plural string indicating how many clue cells will be removed "
+"when resizing."
+msgid "and %1 image"
+msgid_plural "and %1 images"
+msgstr[0] "Zobraziť obrázok a bublinový tip"
+msgstr[1] ""
+msgstr[2] ""
+
+#: dialogs/createnewcrossworddialog.cpp:109
+msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
+msgid "© %1, by %2"
+msgstr "© %1, od %2"
 
 #: main.cpp:35
 msgid ""
@@ -2133,53 +2181,15 @@ msgid ""
 "© 2009 Friedrich Pülz"
 msgstr ""
 
-#: main.cpp:37
-msgid "Andrea Barazzetti"
-msgstr ""
-
-#: main.cpp:37 main.cpp:38
-msgid "Developer"
-msgstr ""
-
-#: main.cpp:38
-msgid "Giacomo Barazzetti"
-msgstr ""
-
-#: main.cpp:39
-msgid "Friedrich Pülz"
-msgstr "Friedrich Pülz"
-
-#: main.cpp:39
-msgid "Previous developer"
-msgstr ""
-
-#: main.cpp:44
-msgid "Document to open"
-msgstr "Otváraný dokument"
-
-#: rc.cpp:1
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Roman Paholík"
-
-#: rc.cpp:2
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "wizzardsk@gmail.com"
-
-#, fuzzy
-#~ msgid "Error while downloading from url"
-#~ msgstr "Chyba pri čítaní zo súboru %1"
-
-#, fuzzy
-#~ msgid "The file is not a Krossword version <= 1.1 file."
-#~ msgstr "Verzia %s formátu GIF nie je podporovaná"
-
 #~ msgid " columns"
 #~ msgstr " stĺpcov"
 
 #~ msgid " rows"
 #~ msgstr " riadkov"
+
+#, fuzzy
+#~ msgid "%1 letters"
+#~ msgstr "Text"
 
 #~ msgid "&Add Entry"
 #~ msgstr "Pridať položku"
@@ -2214,6 +2224,9 @@ msgstr "wizzardsk@gmail.com"
 #~ msgid "&Dictionary"
 #~ msgstr "&Slovník"
 
+#~ msgid "&Difficulty:"
+#~ msgstr "O&btiažnosť:"
+
 #~ msgid "&Enable Animations"
 #~ msgstr "Povoliť animácie"
 
@@ -2240,6 +2253,16 @@ msgstr "wizzardsk@gmail.com"
 #, fuzzy
 #~ msgid "&Import (CSV)..."
 #~ msgstr "Nastavenia importu CSV"
+
+#~ msgid "&Language:"
+#~ msgstr "&Jazyk:"
+
+#, fuzzy
+#~ msgid "&Letters:"
+#~ msgstr "Text"
+
+#~ msgid "&Library"
+#~ msgstr "&Knižnica"
 
 #~ msgid "&Location:"
 #~ msgstr "U&miestnenie:"
@@ -2283,6 +2306,9 @@ msgstr "wizzardsk@gmail.com"
 #~ msgid "&Quality:"
 #~ msgstr "&Kvalita:"
 
+#~ msgid "&Refresh"
+#~ msgstr "O&bnoviť"
+
 #~ msgid "&Remove Selected"
 #~ msgstr "Odstrániť vybrané"
 
@@ -2308,6 +2334,9 @@ msgstr "wizzardsk@gmail.com"
 
 #~ msgid "&Vertical Cells:"
 #~ msgstr "Vertikálne bunky:"
+
+#~ msgid "(C) 2009 Friedrich Pülz"
+#~ msgstr "(C) 2009 Friedrich Pülz"
 
 #, fuzzy
 #~ msgid "Add &Words From Dictionary..."
@@ -2371,6 +2400,10 @@ msgstr "wizzardsk@gmail.com"
 #~ msgstr "Základné nastavenie"
 
 #, fuzzy
+#~ msgid "Boston Globe (sundays)"
+#~ msgstr "Marble - virtuálny glóbus"
+
+#, fuzzy
 #~ msgid "Centered"
 #~ msgstr "Vycentrované"
 
@@ -2394,6 +2427,11 @@ msgstr "wizzardsk@gmail.com"
 #~ msgid "Clue Number"
 #~ msgstr "Číslo skladby:"
 
+#~ msgctxt ""
+#~ "The title for contents descriptions of folders in the library tree view"
+#~ msgid "Content:"
+#~ msgstr "Obsah:"
+
 #, fuzzy
 #~ msgid "Conversion Info"
 #~ msgstr "Všeobecné informácie"
@@ -2407,12 +2445,15 @@ msgstr "wizzardsk@gmail.com"
 #~ msgstr "RAW informácia o autorských právach ICC profilu"
 
 #, fuzzy
-#~ msgid "Create Database"
-#~ msgstr "Vytvoriť priečinok databázy?"
+#~ msgid ""
+#~ "Couldn't write the crossword to the specified file.\n"
+#~ "%1"
+#~ msgstr ""
+#~ "  -o, --output-file=SÚBOR     zapísať výstup do zadaného PO súboru\n"
 
 #, fuzzy
-#~ msgid "Crossword"
-#~ msgstr "Typ súboru: "
+#~ msgid "Create Database"
+#~ msgstr "Vytvoriť priečinok databázy?"
 
 #, fuzzy
 #~ msgid "Crossword &Size:"
@@ -2425,6 +2466,10 @@ msgstr "wizzardsk@gmail.com"
 #, fuzzy
 #~ msgid "Crossword Type:"
 #~ msgstr "Typ súboru: "
+
+#, fuzzy
+#~ msgid "Current crossword filename: \"%1\""
+#~ msgstr "Podľa cesty a názvu súboru"
 
 #, fuzzy
 #~ msgid "Current solution word:"
@@ -2444,6 +2489,9 @@ msgstr "wizzardsk@gmail.com"
 #~ msgid "Download Crosswords"
 #~ msgstr "Stiahnuť z:"
 
+#~ msgid "Downloads"
+#~ msgstr "Sťahovania"
+
 #~ msgid "Edit"
 #~ msgstr "Upraviť"
 
@@ -2453,6 +2501,10 @@ msgstr "wizzardsk@gmail.com"
 
 #~ msgid "Enable Animations"
 #~ msgstr "Povoliť animácie"
+
+#, fuzzy
+#~ msgid "Error while downloading from url"
+#~ msgstr "Chyba pri čítaní zo súboru %1"
 
 #, fuzzy
 #~ msgid "Extract From &Library"
@@ -2471,8 +2523,16 @@ msgstr "wizzardsk@gmail.com"
 #~ msgstr "Všeobecné"
 
 #, fuzzy
+#~ msgid "Give up the Game"
+#~ msgstr "vzdať sa a ukončiť program"
+
+#, fuzzy
 #~ msgid "Horizontal"
 #~ msgstr "Horizontálne"
+
+#, fuzzy
+#~ msgid "Houston Chronicle (daily)"
+#~ msgstr "Denné obrázky Slnka"
 
 #~ msgid "Image &File:"
 #~ msgstr "Súbor obrazu:"
@@ -2481,12 +2541,35 @@ msgstr "wizzardsk@gmail.com"
 #~ msgid "Insert special characters to the clue text"
 #~ msgstr "Vložiť špeciálny znak:"
 
+#~ msgctxt ""
+#~ "Used as label of the header for the column containing the times when the "
+#~ "crosswords have been last edited in the library model."
+#~ msgid "Last Modified"
+#~ msgstr "Posledná zmena"
+
 #~ msgid "Letter"
 #~ msgstr "List"
 
 #, fuzzy
 #~ msgid "Letter Cell &Content:"
 #~ msgstr "Môže zobraziť obsah"
+
+#~ msgctxt ""
+#~ "This string is used to replace the library path for crossword files that "
+#~ "are in the library with a shorter user visible string, e.g. replacing ~/."
+#~ "kde4/apps/krosswordpuzzle/library/crossword.kwpz with Library/crossword."
+#~ "kwpz"
+#~ msgid "Library"
+#~ msgstr "Knižnica"
+
+#~ msgctxt ""
+#~ "Statusbar text when a crossword has been loaded, %1 gets replaced by the "
+#~ "file name"
+#~ msgid "Loaded '%1'"
+#~ msgstr "Načítané '%1'"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Hlavný panel nástrojov"
 
 #, fuzzy
 #~ msgid "Move Horizontal:"
@@ -2495,6 +2578,16 @@ msgstr "wizzardsk@gmail.com"
 #, fuzzy
 #~ msgid "Move Vertical:"
 #~ msgstr "Vertikálne čiary"
+
+#, fuzzy
+#~ msgid "Moved crossword \"%1\" from \"%2\" to \"%3\""
+#~ msgstr "áno: od %@ do %@ sekúnd"
+
+#~ msgctxt ""
+#~ "Used as label of the header for the column containing the crossword names "
+#~ "in the library model."
+#~ msgid "Name"
+#~ msgstr "Názov"
 
 #, fuzzy
 #~ msgid "Name of the current theme."
@@ -2509,6 +2602,11 @@ msgstr "wizzardsk@gmail.com"
 
 #~ msgid "Notes:"
 #~ msgstr "Poznámky:"
+
+#, fuzzy
+#~ msgctxt "&Open"
+#~ msgid "Open a crossword file"
+#~ msgstr "Otvoriť súbory"
 
 #~ msgid "Preview:"
 #~ msgstr "Náhľad:"
@@ -2543,6 +2641,9 @@ msgstr "wizzardsk@gmail.com"
 #~ msgid "Scaled and Cropped"
 #~ msgstr "Body a riadky"
 
+#~ msgid "Selection"
+#~ msgstr "Výber"
+
 #~ msgid "Size:"
 #~ msgstr "Veľkosť:"
 
@@ -2564,6 +2665,10 @@ msgstr "wizzardsk@gmail.com"
 #, fuzzy
 #~ msgid "The clue to the answer."
 #~ msgstr "Napíšte odpoveď na otázku"
+
+#, fuzzy
+#~ msgid "The file is not a Krossword version <= 1.1 file."
+#~ msgstr "Verzia %s formátu GIF nie je podporovaná"
 
 #, fuzzy
 #~ msgid "The minimum length of answers to clues"
@@ -2594,8 +2699,26 @@ msgstr "wizzardsk@gmail.com"
 #~ msgstr "Vertikálne"
 
 #, fuzzy
+#~ msgid "Weekly crossword %1"
+#~ msgstr "Zobraziť každý týždeň"
+
+#, fuzzy
+#~ msgid "Welcome to KrossWordPuzzle!"
+#~ msgstr "Víta vás %s na %n"
+
+#, fuzzy
 #~ msgid "Wildcard pattern to search for answers"
 #~ msgstr "Musíte zadať vzorku kľúča, ktorú hľadať.\n"
+
+#~ msgid "Zoom in"
+#~ msgstr "Priblížiť"
+
+#~ msgid "Zoom out"
+#~ msgstr "Oddialiť"
+
+#~ msgctxt "Using default image quality settings"
+#~ msgid "default"
+#~ msgstr "predvolené"
 
 #, fuzzy
 #~ msgid "whether or not animations should be enabled"
@@ -2624,119 +2747,6 @@ msgstr "wizzardsk@gmail.com"
 #, fuzzy
 #~ msgid "whether or not the disappearance of items should be animated."
 #~ msgstr "Či majú byť pohyby animované alebo nie."
-
-#, fuzzy
-#~ msgid "%1 letters"
-#~ msgstr "Text"
-
-#~ msgid "&Difficulty:"
-#~ msgstr "O&btiažnosť:"
-
-#~ msgid "&Language:"
-#~ msgstr "&Jazyk:"
-
-#, fuzzy
-#~ msgid "&Letters:"
-#~ msgstr "Text"
-
-#~ msgid "&Library"
-#~ msgstr "&Knižnica"
-
-#~ msgid "&Refresh"
-#~ msgstr "O&bnoviť"
-
-#~ msgid "(C) 2009 Friedrich Pülz"
-#~ msgstr "(C) 2009 Friedrich Pülz"
-
-#, fuzzy
-#~ msgid "Boston Globe (sundays)"
-#~ msgstr "Marble - virtuálny glóbus"
-
-#~ msgctxt ""
-#~ "The title for contents descriptions of folders in the library tree view"
-#~ msgid "Content:"
-#~ msgstr "Obsah:"
-
-#, fuzzy
-#~ msgid ""
-#~ "Couldn't write the crossword to the specified file.\n"
-#~ "%1"
-#~ msgstr ""
-#~ "  -o, --output-file=SÚBOR     zapísať výstup do zadaného PO súboru\n"
-
-#, fuzzy
-#~ msgid "Current crossword filename: \"%1\""
-#~ msgstr "Podľa cesty a názvu súboru"
-
-#~ msgid "Downloads"
-#~ msgstr "Sťahovania"
-
-#, fuzzy
-#~ msgid "Give up the Game"
-#~ msgstr "vzdať sa a ukončiť program"
-
-#, fuzzy
-#~ msgid "Houston Chronicle (daily)"
-#~ msgstr "Denné obrázky Slnka"
-
-#~ msgctxt ""
-#~ "Used as label of the header for the column containing the times when the "
-#~ "crosswords have been last edited in the library model."
-#~ msgid "Last Modified"
-#~ msgstr "Posledná zmena"
-
-#~ msgctxt ""
-#~ "This string is used to replace the library path for crossword files that "
-#~ "are in the library with a shorter user visible string, e.g. replacing ~/."
-#~ "kde4/apps/krosswordpuzzle/library/crossword.kwpz with Library/crossword."
-#~ "kwpz"
-#~ msgid "Library"
-#~ msgstr "Knižnica"
-
-#~ msgctxt ""
-#~ "Statusbar text when a crossword has been loaded, %1 gets replaced by the "
-#~ "file name"
-#~ msgid "Loaded '%1'"
-#~ msgstr "Načítané '%1'"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Hlavný panel nástrojov"
-
-#, fuzzy
-#~ msgid "Moved crossword \"%1\" from \"%2\" to \"%3\""
-#~ msgstr "áno: od %@ do %@ sekúnd"
-
-#~ msgctxt ""
-#~ "Used as label of the header for the column containing the crossword names "
-#~ "in the library model."
-#~ msgid "Name"
-#~ msgstr "Názov"
-
-#, fuzzy
-#~ msgctxt "&Open"
-#~ msgid "Open a crossword file"
-#~ msgstr "Otvoriť súbory"
-
-#~ msgid "Selection"
-#~ msgstr "Výber"
-
-#, fuzzy
-#~ msgid "Weekly crossword %1"
-#~ msgstr "Zobraziť každý týždeň"
-
-#, fuzzy
-#~ msgid "Welcome to KrossWordPuzzle!"
-#~ msgstr "Víta vás %s na %n"
-
-#~ msgid "Zoom in"
-#~ msgstr "Priblížiť"
-
-#~ msgid "Zoom out"
-#~ msgstr "Oddialiť"
-
-#~ msgctxt "Using default image quality settings"
-#~ msgid "default"
-#~ msgstr "predvolené"
 
 #~ msgid "↓ Not implemented yet! ↓"
 #~ msgstr "↓ Ešte neimplemetované! ↓"

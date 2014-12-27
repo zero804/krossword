@@ -420,6 +420,7 @@ void KrossWordPuzzle::currentTabChanged(int index)
 
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::Options_Dictionaries));
         optionsList << separator;
+
         optionsList << m_mainCrossword->toolBarMenuAction();
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowClueDock));
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowUndoViewDock));
@@ -439,6 +440,7 @@ void KrossWordPuzzle::currentTabChanged(int index)
 
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::Options_Dictionaries));
         optionsList << separator;
+
         optionsList << m_mainLibrary->toolBarMenuAction();
     }
 

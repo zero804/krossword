@@ -6,7 +6,7 @@ For these reasons we decided to try to bring it back.
 
 General aims of the project:
 
- - maintain the codebase (now it compiles again!)
+ - maintain the codebase
  - simplify the code where possible aiming to port it to Qt5/KDE Frameworks 5
  - improve the user experience
 
