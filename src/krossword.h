@@ -93,13 +93,13 @@ public:
 
 
 class KrossWord;
-class KrossWordTitleItem : public QGraphicsObject
+class KrossWordHeaderItem : public QGraphicsObject
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
 
 public:
-    KrossWordTitleItem(QGraphicsItem *parent = 0);
+    KrossWordHeaderItem(QGraphicsItem *parent = 0);
 
     void setContent(KrossWord *krossWord);
     void updateTheme(KrossWord *krossWord);
@@ -985,7 +985,7 @@ private:
     float m_animationDurationFactor;
 
     FocusItem *m_focusItem;
-    KrossWordTitleItem *m_titleItem;
+    KrossWordHeaderItem *m_titleItem;
     QPointF m_topLeftCellOffset;
 
     const KrosswordTheme *m_theme;
