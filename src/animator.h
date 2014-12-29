@@ -20,8 +20,6 @@
 #ifndef ANIMATOR_H
 #define ANIMATOR_H
 
-#include <kdeversion.h>
-
 #include <QList>
 #include <QGraphicsPixmapItem>
 #include <QVariantAnimation>

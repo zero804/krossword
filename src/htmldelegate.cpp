@@ -22,7 +22,6 @@
 #include <QTextDocument>
 #include <QPainter>
 
-#include <KColorScheme>
 #include <klineedit.h>
 
 HtmlDelegate::HtmlDelegate(QObject *parent) : QStyledItemDelegate(parent)
@@ -85,22 +84,7 @@ QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelInd
 }
 
 
-void RemovedDelegate::drawDisplay(QPainter* painter,
-                                  const QStyleOptionViewItem& option,
-                                  const QRect& rect, const QString& text) const
-{
-    QFont font = option.font;
-    font.setStrikeOut(true);
-    painter->setFont(font);
-    painter->setPen(KColorScheme(QPalette::Disabled).foreground().color());
-    painter->drawText(rect.adjusted(3, 1, 0, 0), text);
-//     QItemDelegate::drawDisplay( painter, option, rect, text );
-}
-
-
-QWidget* CrosswordAnswerDelegate::createEditor(QWidget* parent,
-        const QStyleOptionViewItem& option,
-        const QModelIndex& index) const
+QWidget* CrosswordAnswerDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
     Q_UNUSED(option);
 
@@ -112,22 +96,17 @@ QWidget* CrosswordAnswerDelegate::createEditor(QWidget* parent,
 }
 
 
-CrosswordAnswerValidator::CrosswordAnswerValidator(
-    const QString& allowedChars, QObject* parent)
-    : QValidator(parent)
+CrosswordAnswerValidator::CrosswordAnswerValidator(const QString& allowedChars, QObject* parent) : QValidator(parent)
 {
     m_allowedChars = allowedChars;
 }
 
-CrosswordAnswerValidator::CrosswordAnswerValidator(
-    const Crossword::CrosswordTypeInfo& crosswordType, QObject* parent)
-    : QValidator(parent)
+CrosswordAnswerValidator::CrosswordAnswerValidator(const Crossword::CrosswordTypeInfo& crosswordType, QObject* parent) : QValidator(parent)
 {
     m_allowedChars = crosswordType.allowedChars();
 }
 
-QValidator::State CrosswordAnswerValidator::validate(QString &input,
-        int &pos) const
+QValidator::State CrosswordAnswerValidator::validate(QString &input, int &pos) const
 {
     fix(input, &pos, m_allowedChars);
 
@@ -150,14 +129,12 @@ void CrosswordAnswerValidator::fix(QString& input,
     fix(input, NULL, crosswordType.allowedChars());
 }
 
-void CrosswordAnswerValidator::fix(QString& input, int* pos,
-                                   const Crossword::CrosswordTypeInfo& crosswordType)
+void CrosswordAnswerValidator::fix(QString& input, int* pos, const Crossword::CrosswordTypeInfo& crosswordType)
 {
     fix(input, pos, crosswordType.allowedChars());
 }
 
-void CrosswordAnswerValidator::fix(QString& input, int *pos,
-                                   const QString &allowedChars)
+void CrosswordAnswerValidator::fix(QString& input, int *pos, const QString &allowedChars)
 {
     static QHash< QChar, QString > replacements;
     if (replacements.isEmpty()) {

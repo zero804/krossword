@@ -26,7 +26,6 @@
 #include "cells/krosswordcell.h"
 #include "cells/cluecell.h"
 #include <KLocalizedString>
-#include <kdeversion.h>
 
 #include <KUrl>
 

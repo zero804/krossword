@@ -23,9 +23,7 @@
 #include "ui_database_connection.h"
 
 #include <QObject>
-#include <QHash>
 #include <QStringList>
-#include <QThread>
 #include <QSqlDatabase>
 
 class QProgressBar;

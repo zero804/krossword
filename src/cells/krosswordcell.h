@@ -28,7 +28,6 @@
 #include <qnamespace.h>
 
 #include <QDebug>
-#include <kdeversion.h>
 
 #include "animator.h"
 #include <QGraphicsObject>

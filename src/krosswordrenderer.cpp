@@ -19,10 +19,6 @@
 
 #include "krosswordrenderer.h"
 
-#include <kstandarddirs.h>
-#include <ksvgrenderer.h>
-#include <kimagecache.h>
-
 #include <QPainter>
 #include "settings.h"
 

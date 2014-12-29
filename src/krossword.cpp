@@ -30,8 +30,6 @@
 #include <QGraphicsView>
 #include <QFile>
 #include <QStandardItemModel>
-#include <QTimer>
-#include <QApplication>
 #include <qfileinfo.h>
 
 #include <KUrl>

@@ -39,20 +39,6 @@ protected:
                    const QModelIndex & index) const;
 };
 
-class RemovedDelegate : public QItemDelegate
-{
-    Q_OBJECT
-
-protected:
-    virtual void drawDisplay(QPainter* painter, const QStyleOptionViewItem& option,
-                             const QRect& rect, const QString& text) const;
-
-
-    virtual QWidget* createEditor(QWidget*, const QStyleOptionViewItem&,
-                                  const QModelIndex&) const {
-        return NULL; // No editing allowed
-    };
-};
 
 /** A delegate to edit crossword answers. It uses the CrosswordAnswerValidator. */
 class CrosswordAnswerDelegate : public QStyledItemDelegate

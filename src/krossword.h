@@ -25,7 +25,6 @@
 #include <KLocalizedString>
 #include <KUrl>
 #include <QDebug>
-#include <kdeversion.h>
 
 #include <QGraphicsObject>
 class QGraphicsDropShadowEffect;
