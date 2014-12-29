@@ -22,7 +22,6 @@
 #include "cells/cluecell.h"
 
 #include <QString>
-#include <QTextDocument>
 #include <QAbstractTextDocumentLayout>
 #include <QPrinter>
 
@@ -35,17 +34,117 @@
 #include <cmath>
 
 
+
+DocumentLayout::DocumentLayout(KrossWord &crossword)
+    : m_crosswordPage(),
+      m_cluesPage(),
+      m_crossword(crossword),
+      m_relativeCellSize(0.0)
+{
+    makeCrosswordPage();
+    makeCluesPage();
+
+    computeCellSize();
+}
+
+void DocumentLayout::drawCrosswordPage(QPainter *painter)
+{
+    m_crosswordPage.drawContents(painter);
+}
+
+void DocumentLayout::drawCluesPage(QPainter *painter)
+{
+    m_cluesPage.drawContents(painter);
+}
+
+int DocumentLayout::getCluesPagesCount() const
+{
+    return m_cluesPage.pageCount();
+}
+
+float DocumentLayout::getRelativeCellSize() const
+{
+    return m_relativeCellSize;
+}
+
+QTextDocument& DocumentLayout::getCrosswordPage() {
+    return m_crosswordPage;
+}
+
+QTextDocument& DocumentLayout::getCluesPage() {
+    return m_cluesPage;
+}
+
+void DocumentLayout::makeCrosswordPage()
+{
+    QString notes;
+    if (!m_crossword.notes().isEmpty())
+        notes = QString("<h5>%1</h5>").arg(m_crossword.notes());
+
+    m_crosswordPage.setHtml(QString("<html><body>"
+                                    "<h1><crosswordTitle /></h1>"
+                                    "<crosswordNotes />"
+                                    "<table width='100%'><tr>"
+                                    "<td><crosswordAuthors /></td>"
+                                    "<td align='right'><crosswordCopyright /></td>"
+                                    "</tr></table></body>")
+                            .replace("<crosswordNotes />",     notes)
+                            .replace("<crosswordTitle />",     m_crossword.title())
+                            .replace("<crosswordAuthors />",   m_crossword.authors())
+                            .replace("<crosswordCopyright />", m_crossword.copyright()));
+}
+
+void DocumentLayout::makeCluesPage()
+{
+    // Create clue list
+    ClueCellList horizontalClues, verticalClues;
+    m_crossword.clues(&horizontalClues, &verticalClues);
+
+    QString clueTableHorizontal = "<table cellspacing='10'>";
+    foreach(ClueCell * clue, horizontalClues) {
+        clueTableHorizontal += QString("<tr><td>%1</td></tr>").arg(clue->clueWithNumber());
+    }
+
+    QString clueTableVertical = "<table cellspacing='10'>";
+    foreach(ClueCell * clue, verticalClues) {
+        clueTableVertical += QString("<tr><td>%1</td></tr>").arg(clue->clueWithNumber());
+    }
+    clueTableHorizontal += "</table>";
+    clueTableVertical   += "</table>";
+
+    m_cluesPage.setHtml(QString("<html><body>"
+                                   "<center><h1><clueListTitle /></h1></center><br>"
+                                   "<table><tr><td>"
+                                   "<h2><clueListHorizontalTitle /></h2>"
+                                   "<clueTableHorizontal />"
+                                   "</td><td>"
+                                   "<h2><clueListVerticalTitle /></h2>"
+                                   "<clueTableVertical />"
+                                   "</td></tr></table>"
+                                   "</body></html>")
+                           .replace("<clueListTitle />", i18nc("Title for the clue list when printing", "Clue list"))
+                           .replace("<clueListVerticalTitle />", i18nc("Title for the list of down/vertical clues when printing", "Down clues"))
+                           .replace("<clueListHorizontalTitle />", i18nc("Title for the list of across/horizontal clues when printing", "Across clues"))
+                           .replace("<clueTableVertical />", clueTableVertical)
+                        .replace("<clueTableHorizontal />", clueTableHorizontal));
+}
+
+void DocumentLayout::computeRelativeCellSize()
+{
+    const uint w = m_crossword.width();
+    m_relativeCellSize = 100.0 / w;
+}
+
+//==================================================
+
 KrossWordDocument::KrossWordDocument(KrossWord *krossWord, QPrinter *printer)
     : m_krossWord(krossWord),
-      m_titleDoc(new QTextDocument),
-      m_clueListDoc(new QTextDocument),
+      m_docLayout(*m_krossWord),
       m_printer(nullptr),
       m_cellSize(0.0),
       m_titleHeight(0.0),
       m_translation(QPointF())
 {
-    makeTitlePage();
-    makeClueListPage();
     setPrinter(printer);
 
     computeCellSize();
@@ -54,13 +153,7 @@ KrossWordDocument::KrossWordDocument(KrossWord *krossWord, QPrinter *printer)
 }
 
 KrossWordDocument::~KrossWordDocument()
-{
-    delete m_titleDoc;
-    delete m_clueListDoc;
-
-    m_titleDoc    = nullptr;
-    m_clueListDoc = nullptr;
-}
+{ }
 
 void KrossWordDocument::print(int fromPage, int toPage)
 {
@@ -97,7 +190,7 @@ void KrossWordDocument::renderPage(QPainter *painter, int page)
     Q_ASSERT(page >= 1 && page <= pages());
 
     if (page == 1) {
-        m_titleDoc->drawContents(painter);
+        m_docLayout.drawCrosswordPage(painter);
 
         foreach(KrossWordCell* cell, m_krossWord->cells()) {
             // Black cells
@@ -187,18 +280,18 @@ void KrossWordDocument::renderPage(QPainter *painter, int page)
                 drawCell(painter, cell->coord());
             }
             */
-        }
+            }
         }
 
     } else {
-        painter->setFont(m_clueListDoc->defaultFont());
-        QRectF body(QPoint(0, 0), m_clueListDoc->pageSize());
+        painter->setFont(m_docLayout.getCluesPage().defaultFont());
+        QRectF body(QPoint(0, 0), m_docLayout.getCluesPage().pageSize());
 
         int clueListPage = page - 2; // clueListPage is zero-based, page isn't
         painter->save();
         painter->translate(body.left(), body.top() - clueListPage * body.height());
         QRectF view(0, clueListPage * body.height(), body.width(), body.height());
-        QAbstractTextDocumentLayout *layout = m_clueListDoc->documentLayout();
+        QAbstractTextDocumentLayout *layout = m_docLayout.getCluesPage().documentLayout();
         QAbstractTextDocumentLayout::PaintContext ctx;
 
         ctx.clip = view;
@@ -214,7 +307,7 @@ void KrossWordDocument::renderPage(QPainter *painter, int page)
 
 int KrossWordDocument::pages() const
 {
-    return 1 + m_clueListDoc->pageCount(); // The crossword gets always printed to one page
+    return 1 + m_docLayout.getCluesPagesCount(); // The crossword gets always printed to one page
 }
 
 QPrinter *KrossWordDocument::printer() const
@@ -226,76 +319,19 @@ void KrossWordDocument::setPrinter(QPrinter *printer)
 {
     Q_ASSERT(printer);
 
-    m_titleDoc->setPageSize(printer->pageRect().size());
-    m_clueListDoc->setPageSize(printer->pageRect().size());
+    m_docLayout.getCrosswordPage().setPageSize(printer->pageRect().size());
+    m_docLayout.getCluesPage().setPageSize(printer->pageRect().size());
 
     m_printer = printer;
 }
 
-void KrossWordDocument::makeTitlePage()
-{
-    QString notes;
-
-    if (!m_krossWord->notes().isEmpty()) {
-        notes = QString("<h5>" + m_krossWord->notes() + "</h5>");
-    }
-
-    m_titleDoc->setHtml(QString("<html><body>"
-                                "<h1><crosswordTitle /></h1>"
-                                "<crosswordNotes />"
-                                "<table width='100%'><tr>"
-                                "<td><crosswordAuthors /></td>"
-                                "<td align='right'><crosswordCopyright /></td>"
-                                "</tr></table></body>")
-                        .replace("<crosswordNotes />", notes)
-                        .replace("<crosswordTitle />", m_krossWord->title())
-                        .replace("<crosswordAuthors />", m_krossWord->authors())
-                        .replace("<crosswordCopyright />", m_krossWord->copyright()));
-}
-
-void KrossWordDocument::makeClueListPage()
-{
-    // Create clue list
-    ClueCellList horizontalClues, verticalClues;
-    m_krossWord->clues(&horizontalClues, &verticalClues);
-
-    QString clueTableHorizontal = "<table cellspacing='10'>";
-    foreach(ClueCell * clue, horizontalClues) {
-        clueTableHorizontal += QString("<tr><td>%1</td></tr>").arg(clue->clueWithNumber());
-    }
-
-    QString clueTableVertical = "<table cellspacing='10'>";
-    foreach(ClueCell * clue, verticalClues) {
-        clueTableVertical += QString("<tr><td>%1</td></tr>").arg(clue->clueWithNumber());
-    }
-    clueTableHorizontal += "</table>";
-    clueTableVertical += "</table>";
-
-    m_clueListDoc = new QTextDocument;
-    m_clueListDoc->setHtml(QString("<html><body>"
-                                   "<center><h1><clueListTitle /></h1></center><br>"
-                                   "<table><tr><td>"
-                                   "<h2><clueListHorizontalTitle /></h2>"
-                                   "<clueTableHorizontal />"
-                                   "</td><td>"
-                                   "<h2><clueListVerticalTitle /></h2>"
-                                   "<clueTableVertical />"
-                                   "</td></tr></table>"
-                                   "</body></html>")
-                           .replace("<clueListTitle />", i18nc("Title for the clue list when printing", "Clue list"))
-                           .replace("<clueListVerticalTitle />", i18nc("Title for the list of down/vertical clues when printing", "Down clues"))
-                           .replace("<clueListHorizontalTitle />", i18nc("Title for the list of across/horizontal clues when printing", "Across clues"))
-                           .replace("<clueTableVertical />", clueTableVertical)
-                           .replace("<clueTableHorizontal />", clueTableHorizontal));
-}
-
-void KrossWordDocument::computeTitleHeight() const
+void KrossWordDocument::computeTitleHeight()
 {
     const int marginTitle = 15;
-    m_titleHeight = m_titleDoc->size().height() + marginTitle;
+    m_titleHeight = m_docLayout.getCrosswordPage().size().height() + marginTitle;
 }
 
-void KrossWordDocument::computeTranslationPoint() const
+void KrossWordDocument::computeTranslationPoint()
 {
     const int crosswordSize = computeCrosswordSize();
     m_translation = QPointF((m_printer->pageRect().width() - crosswordSize)/2.0,
@@ -304,7 +340,7 @@ void KrossWordDocument::computeTranslationPoint() const
     qDebug() << m_translation;
 }
 
-void KrossWordDocument::computeCellSize() const
+void KrossWordDocument::computeCellSize()
 {
     const uint w = m_krossWord->width();
     const int crossword_size = computeCrosswordSize();
