@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krossword\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-24 18:18+0100\n"
+"POT-Creation-Date: 2015-01-02 13:44+0100\n"
 "PO-Revision-Date: 2012-01-21 11:22+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -18,241 +18,97 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 1.2\n"
 
-#: library/librarygui.cpp:566
-msgid "%1"
-msgstr ""
-
-#: krossword.cpp:612
-msgid "%1 clue cell"
-msgid_plural "%1 clue cells"
-msgstr[0] "%1 kratka określenia"
-msgstr[1] "%1 kratki określenia"
-msgstr[2] "%1 kratek określenia"
-
-#: krossword.cpp:617
-msgid "%1 double clue cell"
-msgid_plural "%1 double clue cells"
-msgstr[0] "%1 podwójna kratka określenia"
-msgstr[1] "%1 podwójne kratki określenia"
-msgstr[2] "%1 podwójnych kratek określenia"
-
-#: dialogs/dictionarydialog.cpp:175 dialogs/dictionarydialog.cpp:190
-msgid "%1 entries added from %2 crosswords"
-msgstr "Dodano %1 wpisy z %2 krzyżówek"
-
-#: dialogs/dictionarydialog.cpp:165
-msgid "%1 entries added from this dictionary: '%2'"
-msgstr "Dodano %1 wpisy z tego słownika: '%2'"
-
-#: dialogs/dictionarydialog.cpp:255
-msgid "%1 entry imported from '%2'"
-msgid_plural "%1 entries imported from '%2'"
-msgstr[0] "zaimportowano %1 wpis z '%2'"
-msgstr[1] "zaimportowano %1 wpisy z '%2'"
-msgstr[2] "zaimportowano %1 wpisów z '%2'"
-
-#: dialogs/dictionarydialog.cpp:209
-msgid "%1 entry removed"
-msgid_plural "%1 entries removed"
-msgstr[0] "usunięto %1 wpis"
-msgstr[1] "usunięto %1 wpisy"
-msgstr[2] "usunięto %1 wpisów"
-
-#: dialogs/currentcellwidget.cpp:145
-msgid "%1 selected at (%2, %3)."
-msgstr "%1 wybrano przy (%2, %3)."
-
-#: krossword.cpp:622
-msgid "%1 solution letter cell"
-msgid_plural "%1 solution letter cells"
-msgstr[0] "%1 kratka litery rozwiązania"
-msgstr[1] "%1 kratki liter rozwiązania"
-msgstr[2] "%1 kratek liter rozwiązania"
-
-#: crosswordxmlguiwindow.cpp:351
-#, no-c-format
-msgctxt "%p is replaced by the percentage of solved letter cells"
-msgid "%p% solved"
-msgstr "%p% rozwiązanych"
-
-#: crosswordxmlguiwindow.cpp:1453
-msgid "&Add Clue"
-msgstr "Dod&aj określenie"
-
-#: crosswordxmlguiwindow.cpp:1476
-msgid "&Add Image"
-msgstr "Dod&aj obraz"
-
-#: crosswordxmlguiwindow.cpp:1539
-msgid "&Check"
-msgstr "&Sprawdź"
-
-#: crosswordxmlguiwindow.cpp:1492
-msgid "&Check for rotation symmetry..."
-msgstr "&Sprawdź symetrię obrotu..."
-
-#: crosswordxmlguiwindow.cpp:1544
-msgid "&Clear Answers"
-msgstr "Wy&czyść odpowiedzi"
-
-#: crosswordxmlguiwindow.cpp:1482
-#, fuzzy
-msgid "&Clear Crossword..."
-msgstr "Wy&czyść krzyżówkę"
-
-#: dialogs/crosswordpropertiesdialog.cpp:46
-msgid "&Convert..."
-msgstr "&Przekształć..."
-
-#: crosswordxmlguiwindow.cpp:1487
-msgid "&Crossword Properties..."
-msgstr "Właściwoś&ci krzyżówki..."
-
-#: library/librarygui.cpp:544
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Delete..."
-msgstr "&Usuń"
-
-#: crosswordxmlguiwindow.cpp:1311
-msgid "&Dictionary..."
-msgstr "&Słownik..."
-
-#: library/librarygui.cpp:539
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Download..."
-msgstr "&Pobierz"
-
-#: crosswordxmlguiwindow.cpp:1549
-msgid "&Eraser"
-msgstr "&Gumka"
-
-#: library/librarygui.cpp:534
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Export..."
-msgstr "&Eksportuj"
-
-#: crosswordxmlguiwindow.cpp:1400
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&First Letter"
-msgstr "Zaznacz &pierwszą literę"
-
-#: library/librarygui.cpp:529
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Import..."
-msgstr "&Importuj"
-
-#: crosswordxmlguiwindow.cpp:1405
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Last Letter"
-msgstr "Zaznacz &ostatnią literę"
-
-#: crosswordxmlguiwindow.cpp:1415
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Next Clue"
-msgstr "Zaznacz &następną określenie"
-
-#: library/librarygui.cpp:524
-msgctxt "@action:intoolbar"
-msgid "&Open..."
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1420
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Previous Clue"
-msgstr "Zaznacz &poprzednią określenie"
-
-#: crosswordxmlguiwindow.cpp:1459 crosswordxmlguiwindow.cpp:1889
-msgid "&Remove"
-msgstr "&Usuń"
-
-#: crosswordxmlguiwindow.cpp:1885
-msgid "&Remove Clue"
-msgstr "&Usuń określenie"
-
-#: crosswordxmlguiwindow.cpp:1887
-msgid "&Remove Image"
-msgstr "&Usuń obraz"
-
-#: krosswordpuzzle.cpp:261
-msgid "&Restore"
-msgstr "P&rzywróć"
-
-#: dialogs/crosswordtypewidget.cpp:226
-msgid "&Rules..."
-msgstr "&Zasady..."
-
-#: crosswordxmlguiwindow.cpp:1497
-msgid "&Statistics..."
-msgstr "&Statystyki..."
-
-#: cells/cluecell.cpp:888
+#: cells/cluecell.cpp:887
 msgctxt "Display text for empty clue texts"
 msgid "<placeholder>empty</placeholder>"
 msgstr "<placeholder>puste</placeholder>"
 
-#: commands.cpp:993
-msgctxt ""
-"Used for the text of the change clue undo command, when the clue text is "
-"empty."
-msgid "<placeholder>empty</placeholder>"
-msgstr "<placeholder>puste</placeholder>"
+#: cells/imagecell.cpp:68
+msgid "Edit image properties to set an image"
+msgstr "Edytuj właściwości obrazu, aby ustawić obraz"
 
-#: crosswordxmlguiwindow.cpp:1537
-msgid ""
-"<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
-"solution will be displayed.</p><p>If you filled in all letters and do not "
-"want to give up, choose \"Done!\".</p></qt>"
-msgstr ""
-"<qt><p>Wybierz \"<b>Rozwiąż</b>\", jeśli chcesz się podać w tej grze. "
-"Zostanie wyświetlone rozwiązanie.</p><p>Jeżeli wypełniono wszystkie litery i "
-"nie masz zamiaru się poddawać, to wybierz \"Gotowe!\".</p></qt>"
+#: cluemodel.cpp:60
+msgid "Clue"
+msgstr "Podpowiedź"
 
-#: global.cpp:508
-msgctxt "Long description of the crossword type 'Crossnumber'"
-msgid ""
-"A crossnumber (also known as a cross-figure) is the numerical analogy of a "
-"crossword, in which the solutions to the clues are numbers instead of words. "
-"Clues are usually arithmetical expressions, but can also be general "
-"knowledge clues to which the answer is a number or year. There are also "
-"numerical fill-in crosswords.\n"
-"The Daily Mail Weekend magazine used to feature crossnumbers under the "
-"misnomer Number Word. This kind of puzzle should not be confused with a "
-"different puzzle that the Daily Mail refers to as Cross Number.\n"
-"(text taken from wikipedia)"
-msgstr ""
-"Krzyżówka numerowa (znana także jako krzyżówka cyfrowa) jest numeryczną "
-"analogią krzyżówki, w której rozwiązaniami do określeń są numery zamiast "
-"słów. Określenia są zazwyczaj wyrażeniami arytmetycznymi, ale mogą być także "
-"określeniami z wiedzy ogólnej, które wymagają odpowiedzi w postaci numeru "
-"lub roku. Istnieją także krzyżówki wypełnianie numerycznie.\n"
-"Magazyn Daily Mail Weekend miał w zwyczaju przedstawiać krzyżówki numerowe "
-"pod niewłaściwą nazwą Number Word. Ten typ puzzli nie powinien być mylony z "
-"innymi puzzlami, do których Daily Mail odnosi się  jako Cross Number.\n"
-"(wzięto z Wikipedii)"
-
-#: main.cpp:27
-#, fuzzy
-msgid ""
-"A crossword puzzle game and editor for KDE.\n"
-"Based on KrossWordPuzzle."
-msgstr "Krzyżówki i ich edytor dla KDE 4"
+#: cluemodel.cpp:60
+msgid "Answer"
+msgstr "Odpowiedź"
 
 #: cluemodel.cpp:63
 msgid "Across clues"
 msgstr "Określenia poziome"
 
-#: krossworddocument.cpp:88
-msgctxt "Title for the list of across/horizontal clues when printing"
-msgid "Across clues"
-msgstr "Określenia poziome"
+#: cluemodel.cpp:64
+msgid "Down clues"
+msgstr "Określenia pionowe"
+
+#: commands.cpp:334
+msgid "Remove Clue Without Text"
+msgstr "Usuń określenie bez tekstu"
+
+#: commands.cpp:336
+msgid "Remove Clue '%1'"
+msgstr "Usuń określenie '%1'"
+
+#: commands.cpp:343 commands.cpp:552 commands.cpp:662 commands.cpp:697
+msgid "No cell at the given coordinates (%1, %2)"
+msgstr "Brak kratki przy podanych współrzędnych (%1, %2)"
+
+#: commands.cpp:352
+msgctxt ""
+"%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
+msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
+msgstr ""
+"Nie znaleziono kratki określenia przy podanych współrzędnych (%1, %2): '%3'"
+
+#: commands.cpp:423
+msgid "Add Clue Without Text"
+msgstr "Dodaj określenie bez tekstu"
+
+#: commands.cpp:425
+msgid "Add Clue '%1'"
+msgstr "Dodaj określenie '%1'"
+
+#: commands.cpp:544
+msgid "Remove Image '%1'"
+msgstr "Usuń obraz '%1'"
+
+#: commands.cpp:559
+msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
+msgstr ""
+"Nie znaleziono kratki obrazu przy podanych współrzędnych (%1, %2): '%3'"
+
+#: commands.cpp:612
+msgid "Add Image '%1'"
+msgstr "Dodaj obraz '%1'"
+
+#: commands.cpp:626
+msgid "Convert Letter at (%1, %2) to Solution Letter"
+msgstr "Przekształć literę przy (%1, %2) na literę rozwiązania"
+
+#: commands.cpp:654
+msgctxt "%1 contains the position of the solution letter in the solution word."
+msgid "Convert Solution Letter %1 to Letter"
+msgstr "Przekształć literę rozwiązania %1 na literę"
+
+#: commands.cpp:669
+msgid "Solution letter cell not found at the given coordinates (%1, %2)"
+msgstr "Nie znaleziono litery rozwiązania przy podanych współrzędnych (%1, %2)"
+
+#: commands.cpp:704 commands.cpp:1172
+msgid "Letter cell not found at the given coordinates (%1, %2)"
+msgstr "Nie znaleziono kratki litery przy podanych współrzędnych (%1, %2)"
+
+#: commands.cpp:725
+msgctxt ""
+"Error message to be displayed, when the user tries to convert a letter to a "
+"solution letter, but the position of the new solution letter is already "
+"used. Each solution letter has a position in the solution word of the "
+"crossword and all solution letters of a crossword form it's solution word. "
+"%1 is replaced by the (already used) position."
+msgid "The solution letter position %1 is already assigned."
+msgstr "Pozycja litery rozwiązania %1 jest już przypisana."
 
 #: commands.cpp:774
 msgid "Add %1 letter"
@@ -261,104 +117,71 @@ msgstr[0] "Dodaj %1 literę"
 msgstr[1] "Dodaj %1 litery"
 msgstr[2] "Dodaj %1 liter"
 
-#: commands.cpp:425
-msgid "Add Clue '%1'"
-msgstr "Dodaj określenie '%1'"
+#: commands.cpp:776
+msgid "Remove %1 letter"
+msgid_plural "Remove %1 letters"
+msgstr[0] "Usuń %1 literę"
+msgstr[1] "Usuń %1 litery"
+msgstr[2] "Usuń %1 liter"
 
-#: commands.cpp:423
-msgid "Add Clue Without Text"
-msgstr "Dodaj określenie bez tekstu"
+#: commands.cpp:778
+msgctxt "This string shouldn't happen to be used"
+msgid "Remove no letters"
+msgstr "Nie usuwaj żadnych liter"
 
-#: commands.cpp:612
-msgid "Add Image '%1'"
-msgstr "Dodaj obraz '%1'"
+#: commands.cpp:813 commands.cpp:1006 commands.cpp:1100
+msgid "No clue cell given"
+msgstr "Nie podano żadnej kratki określenia"
 
-#: crosswordxmlguiwindow.cpp:1312
-#, fuzzy
-msgid "Add or remove crossword dictionaries"
-msgstr "Dodaj lub usuń słowniki krzyżówek."
+#: commands.cpp:993
+msgctxt ""
+"Used for the text of the change clue undo command, when the clue text is "
+"empty."
+msgid "<placeholder>empty</placeholder>"
+msgstr "<placeholder>puste</placeholder>"
 
-#: dictionary.cpp:572
-msgid ""
-"Adding words from %1 crossword files to the database.\n"
-"Please wait."
-msgstr ""
-"Dodawanie słów z plików krzyżówki '%1' do bazy danych.\n"
-"Proszę czekać."
+#: commands.cpp:991
+msgid "Change Clue '%1'"
+msgstr "Zmień określenie '%1'"
 
-#: dictionary.cpp:490
-msgid ""
-"Adding words from the dictionary '%1' to the database.\n"
-"Please wait."
-msgstr ""
-"Dodawanie słów ze słownika '%1' do bazy danych.\n"
-"Proszę czekać."
+#: commands.cpp:1092
+msgid "Clear Correct Answer of Clue at (%1, %2)"
+msgstr "Wyczyść poprawną odpowiedź określenia przy (%1, %2)"
 
-#: crosswordxmlguiwindow.cpp:1454
-#, fuzzy
-msgid "Adds a new clue at the current cell"
-msgstr "Dodaje nową określenie do obecnej kratki."
+#: commands.cpp:1144
+msgid "Clear Correct Letter at (%1, %2), was %3"
+msgstr "Wyczyść poprawną literę przy (%1, %2), było %3"
 
-#: crosswordxmlguiwindow.cpp:1477
-#, fuzzy
-msgid "Adds a new image at the current cell"
-msgstr "Dodaje nowy obraz do bieżącej kratki."
+#: commands.cpp:1147
+msgid "Set Correct Letter at (%1, %2) to %3"
+msgstr "Ustaw poprawną literę przy (%1, %2) na %3"
 
-#: global.cpp:48
-msgid "All cells"
-msgstr "Wszystkie kratki"
+#: commands.cpp:1150
+msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
+msgstr "Edytuj poprawną literę przy (%1, %2) z %3 na %4"
 
-#: krossword.cpp:656
-msgid ""
-"All clue cells get removed. The initial letter to clue number mapping is "
-"A=1, B=2, ..., Z=26."
-msgstr ""
-"Wszystkie kratki określeń zostają usunięte. Początkową literą do mapowania "
-"numeru określenia jest A=1, B=2, ..., Z=26."
+#: commands.cpp:1154
+msgid "Clear Letter at (%1, %2), was %3"
+msgstr "Wyczyść literę przy (%1, %2), było %3"
 
-#: global.cpp:457
-msgid "American Crossword"
-msgstr "Amerykańska krzyżówka"
+#: commands.cpp:1157
+msgid "Set Letter at (%1, %2) to %3"
+msgstr "Ustaw literę przy (%1, %2) na %3"
 
-#: global.cpp:459
-msgctxt "Short description of the crossword type 'American'"
-msgid ""
-"American crosswords have numbered clues and a list of clues on the side of "
-"the crossword. They have usually 180 degree rotational symmetry."
-msgstr ""
-"Amerykańskie krzyżówki mają ponumerowane określenia i listę określeń na boku "
-"krzyżówki. Zazwyczaj zachowują symetrię przy obrocie o 180 stopni."
+#: commands.cpp:1160
+msgid "Edit Letter at (%1, %2) From %3 to %4"
+msgstr "Edytuj literę przy (%1, %2) z %3 na %4"
 
-#: krosswordpuzzle.cpp:262
-msgid ""
-"An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
-" Do you want to restore the crossword?"
-msgstr ""
-"Znaleziono niezapisane krzyżówki. Najprawdopodobniej gra uległa awarii, "
-"przepraszamy!\n"
-" Czy chcesz przywrócić krzyżówkę?"
+#: commands.cpp:1222
+msgid "Clear Crossword"
+msgstr "Wyczyść słowo krzyżowe"
 
-#: main.cpp:37
-msgid "Andrea Barazzetti"
-msgstr ""
-
-#: krosswordpuzzle.cpp:308
-msgid "Animations"
-msgstr "Animacje"
-
-#: cluemodel.cpp:60
-msgid "Answer"
-msgstr "Odpowiedź"
-
-#: dictionary.cpp:273
-msgctxt "The header title for answers in the dictionary database"
-msgid "Answer"
-msgstr "Odpowiedź"
-
-#: library/librarymanager.cpp:74
-msgctxt "The title for authors of crosswords in the library tree view"
-msgid "Author(s):"
-msgstr "Autor(zy):"
+#: commands.cpp:1268
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Title"
+msgstr "Tytuł"
 
 #: commands.cpp:1271
 msgctxt ""
@@ -367,131 +190,151 @@ msgctxt ""
 msgid "Authors"
 msgstr "Autorzy"
 
-#: dialogs/statisticsdialog.cpp:104
-msgid "Avg. Answer Length:"
-msgstr "Śr. długość odpowiedzi:"
-
-#: crosswordxmlguiwindow.cpp:1049
-msgid "Can't add clue at the current cell"
-msgstr "Nie można dodać określenia na obecnej komórce"
-
-#: crosswordxmlguiwindow.cpp:1070
-msgctxt "%1 contains the reason why the clue couldn't be added"
-msgid "Can't add clue. %1"
-msgstr "Nie można dodać określenia. %1"
-
-#: crosswordxmlguiwindow.cpp:1040
-msgid "Can't add clues on crossed letter cells"
-msgstr "Nie można dodać określenia dla krzyżowych kratek literowych"
-
-#: crosswordxmlguiwindow.cpp:1101
-msgctxt "%1 contains the reason why the image couldn't be added"
-msgid "Can't add image. %1"
-msgstr "Nie można dodać obrazu. %1"
-
-#: crosswordxmlguiwindow.cpp:2828
-msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
-msgid "Can't add letter cells. %1"
-msgstr "Nie można dodać kratek literowych. %1"
-
-#: crosswordxmlguiwindow.cpp:1219
+#: commands.cpp:1274
 msgctxt ""
-"%1 contains the reason why the new clue number mapping couldn't be applied"
-msgid "Can't apply clue number mapping. %1"
-msgstr "Nie można zastosować mapowania liczby określeń. %1"
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Copyright"
+msgstr "Prawa autorskie"
 
-#: crosswordxmlguiwindow.cpp:1760
-msgctxt "%1 contains the reason why the answer offset couldn't be changed"
-msgid "Can't change answer offset. %1"
-msgstr "Nie można zmienić przesunięcia odpowiedzi. %1"
-
-#: crosswordxmlguiwindow.cpp:1785
-msgctxt "%1 contains the reason why the clue text couldn't be changed"
-msgid "Can't change clue text. %1"
-msgstr "Nie można zmienić tekstu określenia. %1"
-
-#: crosswordxmlguiwindow.cpp:1798
-msgctxt "%1 contains the reason why the correct answer couldn't be changed"
-msgid "Can't change correct answer. %1"
-msgstr "Nie można zmienić poprawnej odpowiedzi%1"
-
-#: crosswordxmlguiwindow.cpp:1149
+#: commands.cpp:1277
 msgctxt ""
-"%1 contains the reason why the crossword properties couldn't be changed"
-msgid "Can't change crossword properties. %1"
-msgstr "Nie można zmienić właściwości krzyżówki. %1"
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Notes"
+msgstr "Notatki"
 
-#: crosswordxmlguiwindow.cpp:1773
-msgctxt "%1 contains the reason why the orientation couldn't be changed"
-msgid "Can't change orientation. %1"
-msgstr "Nie można zmienić orientacji. %1"
-
-#: crosswordxmlguiwindow.cpp:2286 crosswordxmlguiwindow.cpp:2310
-#: crosswordxmlguiwindow.cpp:2335 crosswordxmlguiwindow.cpp:2769
-msgctxt "%1 contains the reason why the answer couldn't be cleared"
-msgid "Can't clear answer. %1"
-msgstr "Nie można wyczyścić odpowiedzi. %1"
-
-#: crosswordxmlguiwindow.cpp:1132
-msgctxt "%1 contains the reason why the crossword couldn't be cleared"
-msgid "Can't clear crossword. %1"
-msgstr "Nie można wyczyścić krzyżówki. %1"
-
-#: crosswordxmlguiwindow.cpp:2263 crosswordxmlguiwindow.cpp:2763
-msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
-msgid "Can't clear letter cell. %1"
-msgstr "Nie można wyczyścić kratki literowej. %1"
-
-#: crosswordxmlguiwindow.cpp:2876
-msgctxt "%1 contains the reason why the crossword couldn't be converted"
-msgid "Can't convert crossword. %1"
-msgstr "Nie można przekształcić krzyżówki. %1"
-
-#: crosswordxmlguiwindow.cpp:1837
+#: commands.cpp:1284
 msgctxt ""
-"%1 contains the reason why the letter couldn't be converted to a solution "
-"letter"
-msgid "Can't convert letter. %1"
-msgstr "Nie można przekształcić litery. %1"
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Size"
+msgstr "Rozmiar"
 
-#: crosswordxmlguiwindow.cpp:1818
+#: commands.cpp:1292
+msgid "Changed Crossword Properties (%1)"
+msgstr "Zmieniono właściwości krzyżówki (%1)"
+
+#: commands.cpp:1297
 msgctxt ""
-"%1 contains the reason why the solution letter couldn't be converted to a "
-"letter"
-msgid "Can't convert solution letter. %1"
-msgstr "Nie można przekształcić litery rozwiązania. %1"
+"%1 may be a list of changes separated by ',' if the list of changes contains "
+"more than 2 items. %2 is the last item"
+msgid "Changed Crossword Properties (%1 and %2)"
+msgstr "Zmieniono właściwości krzyżówki (%1 i %2)"
 
-#: crosswordxmlguiwindow.cpp:2841
-msgctxt "%1 contains the reason why the letter cell couldn't be edited"
-msgid "Can't edit letter cell. %1"
-msgstr "Nie można edytować kratki literowej. %1"
+#: commands.cpp:1299
+msgid "No Action"
+msgstr "Brak działania"
 
-#: library/librarygui.cpp:298
-msgid "Can't export whole directories. Please select a crossword."
-msgstr "Nie można eksportować całych katalogów. Proszę wybrać krzyżówkę."
+#: commands.cpp:1346
+msgid "Hide Clue Cell"
+msgstr "Ukryj kratkę określenia"
 
-#: crosswordxmlguiwindow.cpp:1232
-msgctxt "%1 contains the reason why the cells couldn't be moved"
-msgid "Can't move cells. %1"
-msgstr "Nie można przemieścić komórek. %1"
+#: commands.cpp:1410
+msgid "Make Clue Cell Visible"
+msgstr "Uczyń kratkę określenia widoczną"
 
-#: crosswordxmlguiwindow.cpp:1114
-msgctxt "%1 contains the reason why the clue couldn't be removed"
-msgid "Can't remove clue. %1"
-msgstr "Nie można usuną określenia. %1"
+#: commands.cpp:1481
+msgid "Set Default Number Puzzle Mapping"
+msgstr "Ustaw domyślną liczbę mapowania puzzli"
 
-#: crosswordxmlguiwindow.cpp:1119
-msgctxt "%1 contains the reason why the image couldn't be removed"
-msgid "Can't remove image. %1"
-msgstr "Nie można usuną obrazu. %1"
+#: commands.cpp:1483
+msgid "Change Number Puzzle Mapping"
+msgstr "Zmień liczbę mapowania puzzli"
 
-#: crosswordxmlguiwindow.cpp:2830
-msgctxt ""
-"%1 contains the reason why the letters couldn't be removed to the clue"
-msgid "Can't remove letter cells. %1"
-msgstr "Nie można usunąć kratek literowych. %1"
+#: commands.cpp:1506
+msgid "Setup Same Letter Synchronization"
+msgstr "Ustaw taką samą synchronizację liter"
 
-#: crosswordxmlguiwindow.cpp:879
+#: commands.cpp:1529
+msgid "Remove Same Letter Synchronization"
+msgstr "Usuń taką samą synchronizację liter"
+
+#: commands.cpp:1777
+msgid "Convert Crossword From '%1' to '%2'"
+msgstr "Przekształć krzyżówkę z '%1' na '%2'"
+
+#: commands.cpp:1894
+msgid "Resize Crossword From %1x%2 to %3x%4"
+msgstr "Zmień rozmiar krzyżówki z %1x%2 na %3x%4"
+
+#: commands.cpp:1972
+msgid "Move All Cells By %1, %2"
+msgstr "Przemieść wszystkie kratki o %1, %2"
+
+#: crosswordxmlguiwindow.cpp:267
+msgid "Zoom: %1%"
+msgstr "Przybliżenie: %1%"
+
+#: crosswordxmlguiwindow.cpp:323
+#, no-c-format
+msgctxt "%p is replaced by the percentage of solved letter cells"
+msgid "%p% solved"
+msgstr "%p% rozwiązanych"
+
+#: crosswordxmlguiwindow.cpp:324
+#, fuzzy
+msgid "Shows the percentage of solved letter cells"
+msgstr "Pokazuje procent rozwiązanych kratek literowych."
+
+#: crosswordxmlguiwindow.cpp:559
+msgid "Congratulations! You solved the crossword perfectly."
+msgstr "Gratulacje! Krzyżówka została perfekcyjnie rozwiązana."
+
+#: crosswordxmlguiwindow.cpp:625 crosswordxmlguiwindow.cpp:658
+msgid "New crossword"
+msgstr "Nowa krzyżówka"
+
+#: crosswordxmlguiwindow.cpp:679 crosswordxmlguiwindow.cpp:822
+#: krosswordpuzzle.cpp:129
+msgid ""
+"The current crossword has been modified.\n"
+"Would you like to save it?"
+msgstr ""
+"Obecna krzyżówka została zmodyfikowana.\n"
+"Czy chcesz ją zapisać?"
+
+#: crosswordxmlguiwindow.cpp:680 crosswordxmlguiwindow.cpp:824
+#: krosswordpuzzle.cpp:131
+msgid "Close Document"
+msgstr "Zamknij dokument"
+
+#: crosswordxmlguiwindow.cpp:713
+msgid "Loaded crossword from file '%1'"
+msgstr "Wczytano krzyżówkę z pliku '%1'"
+
+#: crosswordxmlguiwindow.cpp:728
+msgid ""
+"The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
+"\n"
+"Do you want to convert the crossword to another type now?\n"
+"\n"
+"(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")"
+msgstr ""
+"Nie można określić typu krzyżówki, tak więc przyjęto 'Dowolną Krzyżówkę'.\n"
+"\n"
+"Czy chcesz teraz przekształcić krzyżówkę do innego typu?\n"
+"\n"
+"(Zauważ: Możesz ją później przekształcić przy pomocy \"Edycja\" > "
+"\"Właściwości krzyżówki\")"
+
+#: crosswordxmlguiwindow.cpp:754
+msgid "Error while loading file '%1': %2"
+msgstr "Błąd podczas wczytywania pliku '%1': %2"
+
+#: crosswordxmlguiwindow.cpp:780
+msgid "Save &Edit History"
+msgstr "Zapisz historię &edycji"
+
+#: crosswordxmlguiwindow.cpp:783
+msgid "Save As &Template"
+msgstr "Zapisz jako &szablon"
+
+#: crosswordxmlguiwindow.cpp:785
+msgid "Save without correct answers, clue texts, images"
+msgstr "Zapisz bez poprawnych odpowiedzi, tekstów określenia, obrazów"
+
+#: crosswordxmlguiwindow.cpp:851
 #, fuzzy
 msgid ""
 "Can't store confidence values in *.puz files!\n"
@@ -502,7 +345,7 @@ msgstr ""
 "Jeżeli chcesz, aby wartości pewności zostały zapisane, to proszę użyj "
 "formatu pliku KrossWordPuzzle (*.kwp or *.kwpz)."
 
-#: crosswordxmlguiwindow.cpp:890
+#: crosswordxmlguiwindow.cpp:862
 #, fuzzy
 msgid ""
 "Can't store image cells in *.puz files!\n"
@@ -513,33 +356,673 @@ msgstr ""
 "Jeżeli chcesz, aby kratki obrazów zostały zapisane, to proszę użyj formatu "
 "pliku KrossWordPuzzle (*.kwp or *.kwpz)."
 
-#: commands.cpp:991
-msgid "Change Clue '%1'"
-msgstr "Zmień określenie '%1'"
+#: crosswordxmlguiwindow.cpp:885
+msgid "Wrote crossword to file '%1'"
+msgstr "Zapisano krzyżówkę do pliku '%1'"
 
-#: commands.cpp:1483
-msgid "Change Number Puzzle Mapping"
-msgstr "Zmień liczbę mapowania puzzli"
+#: crosswordxmlguiwindow.cpp:900
+msgid "Error while writing file: %1"
+msgstr "Błąd podczas zapisywania pliku: %1"
 
-#: crosswordxmlguiwindow.cpp:1488
+#: crosswordxmlguiwindow.cpp:1012
+msgid "Can't add clues on crossed letter cells"
+msgstr "Nie można dodać określenia dla krzyżowych kratek literowych"
+
+#: crosswordxmlguiwindow.cpp:1021
+msgid "Can't add clue at the current cell"
+msgstr "Nie można dodać określenia na obecnej komórce"
+
+#: crosswordxmlguiwindow.cpp:1042
+msgctxt "%1 contains the reason why the clue couldn't be added"
+msgid "Can't add clue. %1"
+msgstr "Nie można dodać określenia. %1"
+
+#: crosswordxmlguiwindow.cpp:1056
+msgid "Clue added ('%1')"
+msgstr "Dodano określenie ('%1')"
+
+#: crosswordxmlguiwindow.cpp:1073
+msgctxt "%1 contains the reason why the image couldn't be added"
+msgid "Can't add image. %1"
+msgstr "Nie można dodać obrazu. %1"
+
+#: crosswordxmlguiwindow.cpp:1086
+msgctxt "%1 contains the reason why the clue couldn't be removed"
+msgid "Can't remove clue. %1"
+msgstr "Nie można usuną określenia. %1"
+
+#: crosswordxmlguiwindow.cpp:1091
+msgctxt "%1 contains the reason why the image couldn't be removed"
+msgid "Can't remove image. %1"
+msgstr "Nie można usuną obrazu. %1"
+
+#: crosswordxmlguiwindow.cpp:1094
+msgid "No removable cell selected."
+msgstr "Nie zaznaczono usuwalnej komórki."
+
+#: crosswordxmlguiwindow.cpp:1099 crosswordxmlguiwindow.cpp:2453
+#, fuzzy
+msgid "Do you really want to clear the crossword?"
+msgstr "Usuwa wszystkie określenia z krzyżówki."
+
+#: crosswordxmlguiwindow.cpp:1099 crosswordxmlguiwindow.cpp:2453
+msgid "Clear"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1104
+msgctxt "%1 contains the reason why the crossword couldn't be cleared"
+msgid "Can't clear crossword. %1"
+msgstr "Nie można wyczyścić krzyżówki. %1"
+
+#: crosswordxmlguiwindow.cpp:1121
+msgctxt ""
+"%1 contains the reason why the crossword properties couldn't be changed"
+msgid "Can't change crossword properties. %1"
+msgstr "Nie można zmienić właściwości krzyżówki. %1"
+
+#: crosswordxmlguiwindow.cpp:1133
+msgid "The crossword has 180 degree rotation symmetry."
+msgstr "Krzyżówka zachowuje symetrię przy obrocie o 180 stopni."
+
+#: crosswordxmlguiwindow.cpp:1137
+msgid ""
+"The crossword doesn't have 180 degree rotation symmetry.\n"
+"To achieve symmetry make sure that each empty cell has a counterpart at it's "
+"180 degree rotated position.\n"
+msgstr ""
+"Krzyżówka nie zachowuje symetrii przy obrocie o 10 stopni.\n"
+"Aby osiągnąć symetrię upewnij się, że każda pusta kratka ma swój odpowiednik "
+"w pozycji obróconej o 180 stopni.\n"
+
+#: crosswordxmlguiwindow.cpp:1141
+msgid ""
+"The crossword doesn't have 180 degree rotation symmetry.\n"
+"To achieve symmetry make sure that each empty cell and each clue cell has a "
+"counterpart at it's 180 degree rotated position.\n"
+msgstr ""
+"Krzyżówka nie zachowuje symetrii przy obrocie o 10 stopni.\n"
+"Aby osiągnąć symetrię upewnij się, że każda pusta kratka ma swój i każda "
+"kratka określenia ma odpowiednik w pozycji obróconej o 180 stopni.\n"
+
+#: crosswordxmlguiwindow.cpp:1147
+msgid ""
+"Quality crosswords of the current crossword type (%1) are usually symmetric."
+msgstr ""
+"Krzyżówki o wysokiej jakości obecnego typu krzyżówki (%1) są zazwyczaj "
+"symetryczne."
+
+#: crosswordxmlguiwindow.cpp:1166
+msgid "Clue Number Mapping"
+msgstr "Mapowanie liczby określeń"
+
+#: crosswordxmlguiwindow.cpp:1191
+msgctxt ""
+"%1 contains the reason why the new clue number mapping couldn't be applied"
+msgid "Can't apply clue number mapping. %1"
+msgstr "Nie można zastosować mapowania liczby określeń. %1"
+
+#: crosswordxmlguiwindow.cpp:1204
+msgctxt "%1 contains the reason why the cells couldn't be moved"
+msgid "Can't move cells. %1"
+msgstr "Nie można przemieścić komórek. %1"
+
+#: crosswordxmlguiwindow.cpp:1214
+msgid ""
+"This will cause all answers to be shown and editable.\n"
+"If you want to solve the crossword you should cancel."
+msgstr ""
+"Spowoduje to, że wszystkie odpowiedzi zostaną pokazane i staną się "
+"edytowalne.\n"
+"Jeżeli chcesz rozwiązać krzyżówkę, to należy anulować."
+
+#: crosswordxmlguiwindow.cpp:1261
+#, fuzzy
+msgid "Close the current crossword"
+msgstr "Zamknij obecną krzyżówkę."
+
+#: crosswordxmlguiwindow.cpp:1266
+msgid "Save the crossword with solved letters"
+msgstr "Zapisz krzyżówkę z rozwiązanymi literami"
+
+#: crosswordxmlguiwindow.cpp:1270
+msgid "Choose a filename to save the crossword with solved letters"
+msgstr "Wybierz nazwę pliku do zapisania krzyżówki z rozwiązanymi literami"
+
+#: crosswordxmlguiwindow.cpp:1275
+msgid "Print the crossword"
+msgstr "Wydrukuj krzyżówkę"
+
+#: crosswordxmlguiwindow.cpp:1279
+msgid "Show a print preview"
+msgstr "Pokaż podgląd wydruku"
+
+#: crosswordxmlguiwindow.cpp:1283
+msgid "&Dictionary..."
+msgstr "&Słownik..."
+
+#: crosswordxmlguiwindow.cpp:1284
+#, fuzzy
+msgid "Add or remove crossword dictionaries"
+msgstr "Dodaj lub usuń słowniki krzyżówek."
+
+#: crosswordxmlguiwindow.cpp:1290
+msgid "Fit the whole crossword into the window"
+msgstr "Dopasuj całą krzyżówkę do okna"
+
+#: crosswordxmlguiwindow.cpp:1293
+msgid "Pan"
+msgstr "Przesuń"
+
+#: crosswordxmlguiwindow.cpp:1294
+msgid ""
+"Pan the view. Note that you can also pan while pressing the control key."
+msgstr ""
+"Przesuń widok. Zauważ, że możesz również przesuwać przytrzymując klawisz "
+"ctrl."
+
+#: crosswordxmlguiwindow.cpp:1298
+#, fuzzy
+msgid "Solve the selected letter or a random one if none is selected"
+msgstr "Rozwiąż obecnie wybraną literę lub losową, jeśli nie zaznaczono żadnej"
+
+#: crosswordxmlguiwindow.cpp:1301
+msgid "This letter has been solved"
+msgstr "Litera ta został rozwiązana"
+
+#: crosswordxmlguiwindow.cpp:1302
+#, fuzzy
+msgid "The selected letter cell has been solved"
+msgstr "Obecnie wybrana kratka literowa została rozwiązana"
+
+#: crosswordxmlguiwindow.cpp:1307
+msgid "Mark as confident"
+msgstr "Oznacz jako pewna"
+
+#: crosswordxmlguiwindow.cpp:1308
+#, fuzzy
+msgid "Mark the selected letter cell's confidence as confident"
+msgstr "Oznacz pewność obecnie zaznaczonej kratki literowej jako pewna"
+
+#: crosswordxmlguiwindow.cpp:1313
+msgid "Mark as unsure"
+msgstr "Oznacz jako niepewna"
+
+#: crosswordxmlguiwindow.cpp:1314
+#, fuzzy
+msgid "Mark the selected letter cell's confidence as unsure"
+msgstr "Oznacz pewność obecnie zaznaczonej kratki literowej jako niepewna"
+
+#: crosswordxmlguiwindow.cpp:1319
+msgid "Clear This Cell"
+msgstr "Wyczyść tą kratkę"
+
+#: crosswordxmlguiwindow.cpp:1320
+#, fuzzy
+msgid "Clears the selected letter cell"
+msgstr "Czyści obecnie zaznaczoną kratkę literową"
+
+#: crosswordxmlguiwindow.cpp:1325
+msgid "Clear This Answer"
+msgstr "Wyczyść tą odpowiedź"
+
+#: crosswordxmlguiwindow.cpp:1326
+msgid "Clears the answer to the current clue"
+msgstr "Czyści odpowiedź na obecną określenie"
+
+#: crosswordxmlguiwindow.cpp:1331
+msgid "Clear Across Answer"
+msgstr "Wyczyść odpowiedź poziomą"
+
+#: crosswordxmlguiwindow.cpp:1332
+msgid "Clears the answer to the current across clue"
+msgstr "Czyści odpowiedź do obecnego określenia poziomego"
+
+#: crosswordxmlguiwindow.cpp:1337
+msgid "Clear Down Answer"
+msgstr "Wyczyść odpowiedź pionową"
+
+#: crosswordxmlguiwindow.cpp:1338
+msgid "Clears the answer to the current down clue"
+msgstr "Czyści odpowiedź do obecnego określenia pionowego"
+
+#: crosswordxmlguiwindow.cpp:1343
+msgid "Hint For This Cell"
+msgstr "Wskazówka do tej kratki"
+
+#: crosswordxmlguiwindow.cpp:1344
+#, fuzzy
+msgid "Solve the selected letter cell"
+msgstr "Rozwiąż obecnie zaznaczoną kratkę literową"
+
+#: crosswordxmlguiwindow.cpp:1349
+msgid "Solve Clue"
+msgstr "Rozwiąż określenie"
+
+#: crosswordxmlguiwindow.cpp:1350
+msgid "Solve the current clue"
+msgstr "Rozwiąż bieżące określenie"
+
+#: crosswordxmlguiwindow.cpp:1355
+msgid "Solve Across Clue"
+msgstr "Rozwiąż określenie poziome"
+
+#: crosswordxmlguiwindow.cpp:1356
+msgid "Solve the current across clue"
+msgstr "Rozwiąż obecne określenie poziome"
+
+#: crosswordxmlguiwindow.cpp:1361
+msgid "Solve Down Clue"
+msgstr "Rozwiąż określenie pionowe"
+
+#: crosswordxmlguiwindow.cpp:1362
+msgid "Solve the current down clue"
+msgstr "Rozwiąż bieżące określenie pionowe"
+
+#: crosswordxmlguiwindow.cpp:1367
+#, fuzzy
+msgid "Clue With Switched Orientation"
+msgstr "Zaznacz określenie z przełączoną orientacją"
+
+#: crosswordxmlguiwindow.cpp:1368
+msgid "Select clue with switched orientation to the currently selected clue"
+msgstr ""
+"Zaznacz określenie z przełączoną orientacją na obecnie zaznaczoną określenie"
+
+#: crosswordxmlguiwindow.cpp:1372
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&First Letter"
+msgstr "Zaznacz &pierwszą literę"
+
+#: crosswordxmlguiwindow.cpp:1373
+msgid "Select the first letter of the current clue"
+msgstr "Zaznacz pierwszą literę bieżącego określenia"
+
+#: crosswordxmlguiwindow.cpp:1377
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Last Letter"
+msgstr "Zaznacz &ostatnią literę"
+
+#: crosswordxmlguiwindow.cpp:1378
+msgid "Select the last letter of the current clue"
+msgstr "Zaznacz ostatnią literę bieżącego określenia"
+
+#: crosswordxmlguiwindow.cpp:1382
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "First Clue"
+msgstr "Zaznacz pierwszą określenie"
+
+#: crosswordxmlguiwindow.cpp:1383
+msgid "Select the first clue"
+msgstr "Zaznacz pierwszą określenie"
+
+#: crosswordxmlguiwindow.cpp:1387
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Next Clue"
+msgstr "Zaznacz &następną określenie"
+
+#: crosswordxmlguiwindow.cpp:1388
+msgid "Select the next clue"
+msgstr "Zaznacz następną określenie"
+
+#: crosswordxmlguiwindow.cpp:1392
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Previous Clue"
+msgstr "Zaznacz &poprzednią określenie"
+
+#: crosswordxmlguiwindow.cpp:1393
+msgid "Select the previous clue"
+msgstr "Zaznacz poprzednią określenie"
+
+#: crosswordxmlguiwindow.cpp:1397
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "Last Clue"
+msgstr "Zaznacz ostatnią określenie"
+
+#: crosswordxmlguiwindow.cpp:1398
+msgid "Select the last clue"
+msgstr "Zaznacz ostatnią określenie"
+
+#: crosswordxmlguiwindow.cpp:1406
+msgid "Show Clue Dock"
+msgstr "Pokaż dokowanie określenia"
+
+#: crosswordxmlguiwindow.cpp:1411
+msgid "Show Edit History Dock"
+msgstr "Pokaż dokowanie historii edycji"
+
+#: crosswordxmlguiwindow.cpp:1416
+msgid "Show Current Cell Dock"
+msgstr "Pokaż dokowanie obecnej kratki"
+
+#: crosswordxmlguiwindow.cpp:1420
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "Edit Mode"
+msgstr "Tryb edycji"
+
+#: crosswordxmlguiwindow.cpp:1421
+msgid "Enables/disables the edit mode"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1425
+msgid "&Add Clue"
+msgstr "Dod&aj określenie"
+
+#: crosswordxmlguiwindow.cpp:1426
+#, fuzzy
+msgid "Adds a new clue at the current cell"
+msgstr "Dodaje nową określenie do obecnej kratki."
+
+#: crosswordxmlguiwindow.cpp:1431 crosswordxmlguiwindow.cpp:1861
+msgid "&Remove"
+msgstr "&Usuń"
+
+#: crosswordxmlguiwindow.cpp:1432
+#, fuzzy
+msgid "Removes the highlighted clue or image"
+msgstr "Usuwa podświetloną określenie lub obraz."
+
+#: crosswordxmlguiwindow.cpp:1436
+msgid "Remove &Across Clue"
+msgstr "Usuń odpowiedź po&ziomą"
+
+#: crosswordxmlguiwindow.cpp:1437
+#, fuzzy
+msgid "Removes the highlighted across clue"
+msgstr "Usuwa podświetloną odpowiedź poziomą."
+
+#: crosswordxmlguiwindow.cpp:1442
+msgid "Remove &Down Clue"
+msgstr "Usuń odpowiedź &pionową"
+
+#: crosswordxmlguiwindow.cpp:1443
+#, fuzzy
+msgid "Removes the highlighted down clue"
+msgstr "Usuwa podświetloną odpowiedź pionową."
+
+#: crosswordxmlguiwindow.cpp:1448
+msgid "&Add Image"
+msgstr "Dod&aj obraz"
+
+#: crosswordxmlguiwindow.cpp:1449
+#, fuzzy
+msgid "Adds a new image at the current cell"
+msgstr "Dodaje nowy obraz do bieżącej kratki."
+
+#: crosswordxmlguiwindow.cpp:1454
+#, fuzzy
+msgid "&Clear Crossword..."
+msgstr "Wy&czyść krzyżówkę"
+
+#: crosswordxmlguiwindow.cpp:1455
+#, fuzzy
+msgid "Removes all clues from the crossword"
+msgstr "Usuwa wszystkie określenia z krzyżówki."
+
+#: crosswordxmlguiwindow.cpp:1459
+msgid "&Crossword Properties..."
+msgstr "Właściwoś&ci krzyżówki..."
+
+#: crosswordxmlguiwindow.cpp:1460
 msgid "Change the size of the crossword or it's title, author, copyright..."
 msgstr "Zmień rozmiar krzyżówki lub jej tytuł, autora, prawa autorskie..."
 
-#: commands.cpp:1297
-msgctxt ""
-"%1 may be a list of changes separated by ',' if the list of changes contains "
-"more than 2 items. %2 is the last item"
-msgid "Changed Crossword Properties (%1 and %2)"
-msgstr "Zmieniono właściwości krzyżówki (%1 i %2)"
+#: crosswordxmlguiwindow.cpp:1464
+msgid "&Check for rotation symmetry..."
+msgstr "&Sprawdź symetrię obrotu..."
 
-#: commands.cpp:1292
-msgid "Changed Crossword Properties (%1)"
-msgstr "Zmieniono właściwości krzyżówki (%1)"
+#: crosswordxmlguiwindow.cpp:1465
+#, fuzzy
+msgid "Checks if the crossword has 180 degree rotation symmetry"
+msgstr "Sprawdza czy krzyżówka zachowuje symetrię przy obrocie o 180 stopni."
 
-#: crosswordxmlguiwindow.cpp:1503
+#: crosswordxmlguiwindow.cpp:1469
+msgid "&Statistics..."
+msgstr "&Statystyki..."
+
+#: crosswordxmlguiwindow.cpp:1470
+#, fuzzy
+msgid "Shows statistics about the crossword"
+msgstr "Pokazuje statystyki o krzyżówce."
+
+#: crosswordxmlguiwindow.cpp:1474
+msgid "Clue Number &Mapping..."
+msgstr "&Mapowanie liczby określenia..."
+
+#: crosswordxmlguiwindow.cpp:1475
 #, fuzzy
 msgid "Changes the mapping of clue numbers to letters"
 msgstr "Zmienia mapowanie liczb określenia do liter."
+
+#: crosswordxmlguiwindow.cpp:1479
+msgid "Move All Cells..."
+msgstr "Przemieść wszystkie kratki..."
+
+#: crosswordxmlguiwindow.cpp:1480
+#, fuzzy
+msgid "Moves all cells of the crossword"
+msgstr "Przemieszcza wszystkie kratki krzyżówki."
+
+#: crosswordxmlguiwindow.cpp:1498
+msgid "Insert special character:"
+msgstr "Wstaw znak specjalny:"
+
+#: crosswordxmlguiwindow.cpp:1502
+#, fuzzy
+msgid "Let you select a special character to paste"
+msgstr "Pozwala tobie wybrać znak specjalny do wklejenia."
+
+#: crosswordxmlguiwindow.cpp:1508
+#, fuzzy
+msgid "Fills all letter cells with the correct letters"
+msgstr "Wypełnia wszystkie kratki literowe poprawnymi literami."
+
+#: crosswordxmlguiwindow.cpp:1509
+msgid ""
+"<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
+"solution will be displayed.</p><p>If you filled in all letters and do not "
+"want to give up, choose \"Done!\".</p></qt>"
+msgstr ""
+"<qt><p>Wybierz \"<b>Rozwiąż</b>\", jeśli chcesz się podać w tej grze. "
+"Zostanie wyświetlone rozwiązanie.</p><p>Jeżeli wypełniono wszystkie litery i "
+"nie masz zamiaru się poddawać, to wybierz \"Gotowe!\".</p></qt>"
+
+#: crosswordxmlguiwindow.cpp:1511
+msgid "&Check"
+msgstr "&Sprawdź"
+
+#: crosswordxmlguiwindow.cpp:1512
+#, fuzzy
+msgid "Checks if all letters are correct"
+msgstr "Sprawdza czy wszystkie litery są poprawne."
+
+#: crosswordxmlguiwindow.cpp:1516
+msgid "&Clear Answers"
+msgstr "Wy&czyść odpowiedzi"
+
+#: crosswordxmlguiwindow.cpp:1517
+#, fuzzy
+msgid "Clears all letter cells"
+msgstr "Czyści wszystkie kratki literowe."
+
+#: crosswordxmlguiwindow.cpp:1521
+msgid "&Eraser"
+msgstr "&Gumka"
+
+#: crosswordxmlguiwindow.cpp:1522
+#, fuzzy
+msgid "Enables the eraser, to clear letter cells/answers"
+msgstr "Włącza gumkę, aby wyczyścić kratki literowe / odpowiedzi."
+
+#: crosswordxmlguiwindow.cpp:1632 krossword.h:554
+msgid "Solution"
+msgstr "Rozwiązanie"
+
+#: crosswordxmlguiwindow.cpp:1665
+msgid "Clue List"
+msgstr "Lista określeń"
+
+#: crosswordxmlguiwindow.cpp:1680
+msgid "Edit History"
+msgstr "Historia edycji"
+
+#: crosswordxmlguiwindow.cpp:1690
+msgid "Current Cell"
+msgstr "Bieżąca kratka"
+
+#: crosswordxmlguiwindow.cpp:1732
+msgctxt "%1 contains the reason why the answer offset couldn't be changed"
+msgid "Can't change answer offset. %1"
+msgstr "Nie można zmienić przesunięcia odpowiedzi. %1"
+
+#: crosswordxmlguiwindow.cpp:1745
+msgctxt "%1 contains the reason why the orientation couldn't be changed"
+msgid "Can't change orientation. %1"
+msgstr "Nie można zmienić orientacji. %1"
+
+#: crosswordxmlguiwindow.cpp:1757
+msgctxt "%1 contains the reason why the clue text couldn't be changed"
+msgid "Can't change clue text. %1"
+msgstr "Nie można zmienić tekstu określenia. %1"
+
+#: crosswordxmlguiwindow.cpp:1770
+msgctxt "%1 contains the reason why the correct answer couldn't be changed"
+msgid "Can't change correct answer. %1"
+msgstr "Nie można zmienić poprawnej odpowiedzi%1"
+
+#: crosswordxmlguiwindow.cpp:1790
+msgctxt ""
+"%1 contains the reason why the solution letter couldn't be converted to a "
+"letter"
+msgid "Can't convert solution letter. %1"
+msgstr "Nie można przekształcić litery rozwiązania. %1"
+
+#: crosswordxmlguiwindow.cpp:1809
+msgctxt ""
+"%1 contains the reason why the letter couldn't be converted to a solution "
+"letter"
+msgid "Can't convert letter. %1"
+msgstr "Nie można przekształcić litery. %1"
+
+#: crosswordxmlguiwindow.cpp:1857
+msgid "&Remove Clue"
+msgstr "&Usuń określenie"
+
+#: crosswordxmlguiwindow.cpp:1859
+msgid "&Remove Image"
+msgstr "&Usuń obraz"
+
+#: crosswordxmlguiwindow.cpp:2128
+#, fuzzy
+msgid ""
+"Congratulations!\n"
+"You solved the crossword perfectly."
+msgstr "Gratulacje! Krzyżówka została perfekcyjnie rozwiązana."
+
+#: crosswordxmlguiwindow.cpp:2150
+msgid "Do you really want to solve the crossword?"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:2150
+#, fuzzy
+msgid "Solve"
+msgstr "Rozwiąż określenie"
+
+#: crosswordxmlguiwindow.cpp:2235 crosswordxmlguiwindow.cpp:2735
+msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
+msgid "Can't clear letter cell. %1"
+msgstr "Nie można wyczyścić kratki literowej. %1"
+
+#: crosswordxmlguiwindow.cpp:2258 crosswordxmlguiwindow.cpp:2282
+#: crosswordxmlguiwindow.cpp:2307 crosswordxmlguiwindow.cpp:2741
+msgctxt "%1 contains the reason why the answer couldn't be cleared"
+msgid "Can't clear answer. %1"
+msgstr "Nie można wyczyścić odpowiedzi. %1"
+
+#: crosswordxmlguiwindow.cpp:2519 crosswordxmlguiwindow.cpp:2547
+msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
+msgstr "Określenie (poziome): \"%1\", %2 litery, obecna odpowiedź: \"%3\""
+
+#: crosswordxmlguiwindow.cpp:2524 crosswordxmlguiwindow.cpp:2551
+msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
+msgstr "Określenie (pionowe): \"%1\", %2 litery, obecna odpowiedź: \"%3\""
+
+#: crosswordxmlguiwindow.cpp:2597 global.cpp:36
+msgid "Empty cell"
+msgstr "Pusta kratka"
+
+#: crosswordxmlguiwindow.cpp:2599
+msgid "Image '%1'"
+msgstr "Obraz '%1'"
+
+#: crosswordxmlguiwindow.cpp:2800
+msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
+msgid "Can't add letter cells. %1"
+msgstr "Nie można dodać kratek literowych. %1"
+
+#: crosswordxmlguiwindow.cpp:2802
+msgctxt ""
+"%1 contains the reason why the letters couldn't be removed to the clue"
+msgid "Can't remove letter cells. %1"
+msgstr "Nie można usunąć kratek literowych. %1"
+
+#: crosswordxmlguiwindow.cpp:2813
+msgctxt "%1 contains the reason why the letter cell couldn't be edited"
+msgid "Can't edit letter cell. %1"
+msgstr "Nie można edytować kratki literowej. %1"
+
+#: crosswordxmlguiwindow.cpp:2848
+msgctxt "%1 contains the reason why the crossword couldn't be converted"
+msgid "Can't convert crossword. %1"
+msgstr "Nie można przekształcić krzyżówki. %1"
+
+#: crosswordxmlguiwindow.cpp:2860
+msgid "Couldn't connect to the database."
+msgstr "Nie można połączyć się do bazy danych."
+
+#: dialogs/answerwidget.cpp:28 dialogs/answerwidget.cpp:38
+msgid ""
+"The correct answer to the clue. For each letter a letter cell is created"
+msgstr ""
+"Poprawna odpowiedź na określenie. Dla każdej litery zostaje utworzona kratka "
+"litery"
+
+#: dialogs/answerwidget.cpp:30 dialogs/answerwidget.cpp:40
+msgid "The answer to the clue"
+msgstr "Odpowiedź na określenie"
+
+#: dialogs/cellwidgets/cluecellwidget.cpp:112
+msgid "Show Only Answers With Current Answer &Length"
+msgstr ""
+
+#: dialogs/cellwidgets/cluecellwidget.cpp:121
+msgid "Show Only Answers With &Clue"
+msgstr ""
+
+#: dialogs/cellwidgets/cluecellwidget.cpp:128
+msgid "Show Only the &First 100 Answers"
+msgstr ""
+
+#: dialogs/cellwidgets/solutionlettercellwidget.cpp:94
+#, fuzzy
+msgid ""
+"The solution letter position %1 is already assigned.\n"
+"Please change the solution word position of that letter first."
+msgstr "Pozycja litery rozwiązania %1 jest już przypisana."
+
+#: dialogs/convertcrossworddialog.cpp:29
+msgid "Convert Crossword Type To"
+msgstr "Przekształć typ krzyżówki na"
+
+#: dialogs/convertcrossworddialog.cpp:33
+msgid "Convert From: %1"
+msgstr "Przekształć z: %1"
 
 #: dialogs/convertcrossworddialog.cpp:81
 #: dialogs/createnewcrossworddialog.cpp:231
@@ -550,150 +1033,407 @@ msgstr ""
 "Zmienienie typu krzyżówki porzuci ustawienia typu krzyżówki określone przez "
 "użytkownika."
 
-#: global.cpp:300
-msgid "Characters"
-msgstr "Znaki"
+#: dialogs/convertcrossworddialog.cpp:105
+msgid "Convert To: %1"
+msgstr "Przekształć do: %1"
 
-#: global.cpp:304
-msgid "Characters or digits"
-msgstr "Znaki lub cyfry"
+#: dialogs/createnewcrossworddialog.cpp:35
+msgid "Create New Crossword"
+msgstr "Utwórz nową krzyżówkę"
 
-#: crosswordxmlguiwindow.cpp:1540
+#: dialogs/createnewcrossworddialog.cpp:109
+msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
+msgid "© %1, by %2"
+msgstr "© %1, przez %2"
+
+#: dialogs/createnewcrossworddialog.cpp:111
 #, fuzzy
-msgid "Checks if all letters are correct"
-msgstr "Sprawdza czy wszystkie litery są poprawne."
+msgctxt "Default notes value for new crosswords"
+msgid "Created with Krossword"
+msgstr "Utwórz nową krzyżówkę"
 
-#: crosswordxmlguiwindow.cpp:1493
-#, fuzzy
-msgid "Checks if the crossword has 180 degree rotation symmetry"
-msgstr "Sprawdza czy krzyżówka zachowuje symetrię przy obrocie o 180 stopni."
+#: dialogs/createnewcrossworddialog.cpp:191
+msgid "Crossword Type"
+msgstr "Typ krzyżówki"
 
-#: crosswordxmlguiwindow.cpp:1298
-msgid "Choose a filename to save the crossword with solved letters"
-msgstr "Wybierz nazwę pliku do zapisania krzyżówki z rozwiązanymi literami"
+#: dialogs/createnewcrossworddialog.cpp:192
+msgid "Size"
+msgstr "Rozmiar"
 
-#: library/librarygui.cpp:385
-msgid "ChrisWords.com"
+#: dialogs/createnewcrossworddialog.cpp:193
+msgid "Notes"
+msgstr "Uwagi"
+
+#: dialogs/crosswordpreviewwidget.cpp:46
+msgid "Loading preview..."
+msgstr "Wczytywanie podglądu..."
+
+#: dialogs/crosswordpreviewwidget.cpp:55
+msgid "Preview failed"
+msgstr "Nieudany podgląd"
+
+#: dialogs/crosswordpropertiesdialog.cpp:36
+msgid "Properties"
+msgstr "Właściwości"
+
+#: dialogs/crosswordpropertiesdialog.cpp:43
+#: dialogs/crosswordpropertiesdialog.cpp:277
+msgid "Crossword Type: %1"
+msgstr "Typ krzyżówki: %1"
+
+#: dialogs/crosswordpropertiesdialog.cpp:46
+msgid "&Convert..."
+msgstr "&Przekształć..."
+
+#: dialogs/crosswordpropertiesdialog.cpp:245
+msgctxt "No changes to the crossword grid size."
+msgid "No change"
+msgstr "Bez zmian"
+
+#: dialogs/crosswordpropertiesdialog.cpp:257
+msgctxt ""
+"How many images are removed when resizing the crossword. This string gets "
+"combined with a plural string indicating how many clue cells will be removed "
+"when resizing."
+msgid "and %1 image"
+msgid_plural "and %1 images"
+msgstr[0] "i %1 obraz"
+msgstr[1] "i %1 obrazy"
+msgstr[2] "i %1 obrazów"
+
+#: dialogs/crosswordpropertiesdialog.cpp:251
+msgctxt ""
+"How many clues are removed when resizing the crossword. %2 is replaced by a "
+"plural indicating how many images will be removed when resizing."
+msgid "Resizing from %3x%4 will remove %1 clue %2"
+msgid_plural "Resizing from %3x%4 will remove %1 clues %2"
+msgstr[0] "Zmiana rozmiaru z %3x%4 usunie %1 określenie %2"
+msgstr[1] "Zmiana rozmiaru z %3x%4 usunie %1 określenia %2"
+msgstr[2] "Zmiana rozmiaru z %3x%4 usunie %1 określeń %2"
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
+msgid "Detailed Configuration"
+msgstr "Szczegółowa konfiguracja"
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
+msgid "New Crossword Type"
+msgstr "Nowy typ krzyżówki"
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
+msgid "Describe your crossword type here."
+msgstr "Tutaj opisz swój własny typ krzyżówki"
+
+#: dialogs/crosswordtypewidget.cpp:204
+msgid "Show Details"
+msgstr "Pokaż szczegóły"
+
+#: dialogs/crosswordtypewidget.cpp:226
+msgid "&Rules..."
+msgstr "&Zasady..."
+
+#: dialogs/currentcellwidget.cpp:114
+msgid "No cell selected."
+msgstr "Nie wybrano żadnych kratek."
+
+#: dialogs/currentcellwidget.cpp:145
+msgid "%1 selected at (%2, %3)."
+msgstr "%1 wybrano przy (%2, %3)."
+
+#: dialogs/currentcellwidget.cpp:154
+msgid "Clue:"
+msgstr "Określenie:"
+
+#: dialogs/currentcellwidget.cpp:155
+msgid "Current Answer:"
+msgstr "Obecna odpowiedź:"
+
+#: dialogs/currentcellwidget.cpp:439
+msgid "Convert &Letter %1 to Solution Letter"
+msgstr "Przekształć &literę %1 na literę rozwiązania"
+
+#: dialogs/dictionarydialog.cpp:37
+msgid "Dictionary"
+msgstr "Słownik"
+
+#: dialogs/dictionarydialog.cpp:165
+msgid "%1 entries added from this dictionary: '%2'"
+msgstr "Dodano %1 wpisy z tego słownika: '%2'"
+
+#: dialogs/dictionarydialog.cpp:175 dialogs/dictionarydialog.cpp:190
+msgid "%1 entries added from %2 crosswords"
+msgstr "Dodano %1 wpisy z %2 krzyżówek"
+
+#: dialogs/dictionarydialog.cpp:206
+msgid "Couldn't submit removed entries to the database: %1"
+msgstr "Nie można wysłać usuniętych wpisów bazy danych: %1"
+
+#: dialogs/dictionarydialog.cpp:209
+msgid "%1 entry removed"
+msgid_plural "%1 entries removed"
+msgstr[0] "usunięto %1 wpis"
+msgstr[1] "usunięto %1 wpisy"
+msgstr[2] "usunięto %1 wpisów"
+
+#: dialogs/dictionarydialog.cpp:218
+msgid "Dictionary cleared"
+msgstr "Wyczyszczono słownik"
+
+#: dialogs/dictionarydialog.cpp:225
+msgid "Export To CSV"
+msgstr "Eksportuj do CSV"
+
+#: dialogs/dictionarydialog.cpp:238
+msgid "There was an error while exporting to '%1'"
+msgstr "Wystąpił błąd podczas eksportowania do '%1'"
+
+#: dialogs/dictionarydialog.cpp:240
+msgid "Export to '%1' was successful"
+msgstr "Pomyślne eksportowanie do '%1' "
+
+#: dialogs/dictionarydialog.cpp:246
+msgid "Import From CSV"
+msgstr "Importuj z CSV"
+
+#: dialogs/dictionarydialog.cpp:252
+msgid "There was an error while importing from '%1'"
+msgstr "Wystąpił błąd podczas importowania z '%1'"
+
+#: dialogs/dictionarydialog.cpp:255
+msgid "%1 entry imported from '%2'"
+msgid_plural "%1 entries imported from '%2'"
+msgstr[0] "zaimportowano %1 wpis z '%2'"
+msgstr[1] "zaimportowano %1 wpisy z '%2'"
+msgstr[2] "zaimportowano %1 wpisów z '%2'"
+
+#: dialogs/movecellsdialog.cpp:28
+msgid "Move Cells"
+msgstr "Przemieść kratki"
+
+#: dialogs/movecellsdialog.cpp:71
+msgctxt ""
+"How many images are removed when moving all cells of the crossword. This "
+"string gets combined with a plural string indicating how many clue cells "
+"will be removed when moving the cells."
+msgid "and %1 image"
+msgid_plural "and %1 images"
+msgstr[0] "i %1 obraz"
+msgstr[1] "i %1 obrazy"
+msgstr[2] "i %1 obrazów"
+
+#: dialogs/movecellsdialog.cpp:65
+msgctxt ""
+"How many clues are removed when moving all cells of the crossword. %2 is "
+"replaced by a plural indicating how many images will be removed when moving "
+"the cells."
+msgid "Moving all cells will remove %1 clue %2"
+msgid_plural "Moving all cells will remove %1 clues %2"
+msgstr[0] "Przemieszczanie wszystkich kratek usunie %1 określenie %2"
+msgstr[1] "Przemieszczanie wszystkich kratek usunie %1 określenia %2"
+msgstr[2] "Przemieszczanie wszystkich kratek usunie %1 określeń %2"
+
+#: dialogs/statisticsdialog.cpp:34
+msgid "Statistics"
+msgstr "Statystyki"
+
+#: dialogs/statisticsdialog.cpp:49
+msgid "Total Cell Count:"
+msgstr "Całkowita liczba kratek:"
+
+#: dialogs/statisticsdialog.cpp:57
+msgid "Empty Cells:"
+msgstr "Puste kratki:"
+
+#: dialogs/statisticsdialog.cpp:59
+msgid "Number of empty cells, percentage of total cell count in braces"
 msgstr ""
+"Liczba pustych kratek, procent liczby całkowitych kratek w nawiasach "
+"klamrowych"
 
-#: crosswordxmlguiwindow.cpp:1127 crosswordxmlguiwindow.cpp:2481
-msgid "Clear"
+#: dialogs/statisticsdialog.cpp:60
+msgid "Letter Cells:"
+msgstr "Kratki liter:"
+
+#: dialogs/statisticsdialog.cpp:62
+msgid "Number of letter cells, percentage of total cell count in braces"
 msgstr ""
+"Liczba kratek liter, procent liczby całkowitych kratek w nawiasach klamrowych"
 
-#: crosswordxmlguiwindow.cpp:1359
-msgid "Clear Across Answer"
-msgstr "Wyczyść odpowiedź poziomą"
+#: dialogs/statisticsdialog.cpp:70
+msgid "Crossed:"
+msgstr "Skrzyżowane:"
 
-#: commands.cpp:1092
-msgid "Clear Correct Answer of Clue at (%1, %2)"
-msgstr "Wyczyść poprawną odpowiedź określenia przy (%1, %2)"
+#: dialogs/statisticsdialog.cpp:72
+msgid ""
+"Number of crossed letter cells, percentage of total letter cell count in "
+"braces"
+msgstr ""
+"Liczba skrzyżowanych kratek liter, procent liczby całkowitych kratek w "
+"nawiasach klamrowych"
 
-#: commands.cpp:1144
-msgid "Clear Correct Letter at (%1, %2), was %3"
-msgstr "Wyczyść poprawną literę przy (%1, %2), było %3"
+#: dialogs/statisticsdialog.cpp:74
+msgid "Uncrossed:"
+msgstr "Nieskrzyżowane:"
 
-#: commands.cpp:1222
-msgid "Clear Crossword"
-msgstr "Wyczyść słowo krzyżowe"
+#: dialogs/statisticsdialog.cpp:76
+msgid ""
+"Number of uncrossed letter cells, percentage of total letter cell count in "
+"braces"
+msgstr ""
+"Liczba nieskrzyżowanych kratek liter, procent liczby całkowitych kratek w "
+"nawiasach klamrowych"
 
-#: crosswordxmlguiwindow.cpp:1365
-msgid "Clear Down Answer"
-msgstr "Wyczyść odpowiedź pionową"
+#: dialogs/statisticsdialog.cpp:85
+msgid "Clues:"
+msgstr "Określenia:"
 
-#: commands.cpp:1154
-msgid "Clear Letter at (%1, %2), was %3"
-msgstr "Wyczyść literę przy (%1, %2), było %3"
+#: dialogs/statisticsdialog.cpp:88
+msgctxt "Horizontal:"
+msgid "Label for the number  of horizontal clues"
+msgstr "Etykieta dla liczby  poziomych określeń"
 
-#: crosswordxmlguiwindow.cpp:1353
-msgid "Clear This Answer"
-msgstr "Wyczyść tą odpowiedź"
+#: dialogs/statisticsdialog.cpp:90
+msgid "Number of horizontal clues, percentage of total clue count in braces"
+msgstr ""
+"Liczba poziomych określeń, procent liczby całkowitych określeń w nawiasach "
+"klamrowych"
 
-#: crosswordxmlguiwindow.cpp:1347
-msgid "Clear This Cell"
-msgstr "Wyczyść tą kratkę"
+#: dialogs/statisticsdialog.cpp:92
+msgctxt "Vertical:"
+msgid "Label for the number  of vertical clues"
+msgstr "Etykieta dla liczby  pionowych określeń"
 
-#: crosswordxmlguiwindow.cpp:1545
-#, fuzzy
-msgid "Clears all letter cells"
-msgstr "Czyści wszystkie kratki literowe."
+#: dialogs/statisticsdialog.cpp:94
+msgid "Number of vertical clues, percentage of total clue count in braces"
+msgstr ""
+"Liczba pionowych określeń, procent liczby całkowitych określeń w nawiasach "
+"klamrowych"
 
-#: crosswordxmlguiwindow.cpp:1360
-msgid "Clears the answer to the current across clue"
-msgstr "Czyści odpowiedź do obecnego określenia poziomego"
+#: dialogs/statisticsdialog.cpp:98
+msgid "Min. Answer Length:"
+msgstr "Min. długość odpowiedzi:"
 
-#: crosswordxmlguiwindow.cpp:1354
-msgid "Clears the answer to the current clue"
-msgstr "Czyści odpowiedź na obecną określenie"
+#: dialogs/statisticsdialog.cpp:101
+msgid "Max. Answer Length:"
+msgstr "Maks. długość odpowiedzi:"
 
-#: crosswordxmlguiwindow.cpp:1366
-msgid "Clears the answer to the current down clue"
-msgstr "Czyści odpowiedź do obecnego określenia pionowego"
+#: dialogs/statisticsdialog.cpp:104
+msgid "Avg. Answer Length:"
+msgstr "Śr. długość odpowiedzi:"
 
-#: crosswordxmlguiwindow.cpp:1348
-#, fuzzy
-msgid "Clears the selected letter cell"
-msgstr "Czyści obecnie zaznaczoną kratkę literową"
+#: dialogs/statisticsdialog.cpp:115
+msgid "Occurrences Of Letters:"
+msgstr "Wystąpienia liter:"
 
-#: crosswordxmlguiwindow.cpp:708 crosswordxmlguiwindow.cpp:852
-#: krosswordpuzzle.cpp:131
-msgid "Close Document"
-msgstr "Zamknij dokument"
+#: dialogs/statisticsdialog.cpp:121
+msgid ""
+"Number of letter cells containing '%1', percentage of total letter cell "
+"count in braces"
+msgstr ""
+"Liczba kratek liter zawierających %1, procent liczby całkowitych liter w "
+"nawiasach klamrowych"
 
-#: crosswordxmlguiwindow.cpp:1289
-#, fuzzy
-msgid "Close the current crossword"
-msgstr "Zamknij obecną krzyżówkę."
+#: dictionary.cpp:173
+msgid ""
+"No Connection to the database! Please make sure the MySQL server is running. "
+"Afterwards click \"Continue\" to retry connecting to the database."
+msgstr ""
+"Brak połączenia do bazy danych! Upewnij się, że serwer MySQL został "
+"uruchomiony. Po tym kliknij \"Kontynuuj\", aby ponowić łączenie do bazy "
+"danych."
 
-#: cluemodel.cpp:60
-msgid "Clue"
-msgstr "Podpowiedź"
+#: dictionary.cpp:176
+msgid "No Database Connection"
+msgstr "Brak połączenia do bazy danych"
 
-#: dictionary.cpp:275
+#: dictionary.cpp:180
+msgid "Connect Database"
+msgstr "Podłącz bazę danych"
+
+#: dictionary.cpp:272
+msgctxt "The header title for answers in the dictionary database"
+msgid "Answer"
+msgstr "Odpowiedź"
+
+#: dictionary.cpp:274
 msgctxt ""
 "The header title for clues associated with answer words in the dictionary "
 "database"
 msgid "Clue"
 msgstr "Określenie"
 
-#: crosswordxmlguiwindow.cpp:2547 crosswordxmlguiwindow.cpp:2575
-msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
-msgstr "Określenie (poziome): \"%1\", %2 litery, obecna odpowiedź: \"%3\""
+#: dictionary.cpp:276
+msgctxt ""
+"The header title for scores/difficulties of clue/answer pairs in the "
+"dictionary database"
+msgid "Score"
+msgstr "Wynik"
 
-#: crosswordxmlguiwindow.cpp:2552 crosswordxmlguiwindow.cpp:2579
-msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
-msgstr "Określenie (pionowe): \"%1\", %2 litery, obecna odpowiedź: \"%3\""
+#: dictionary.cpp:278
+msgctxt ""
+"The header title for languages of clue/answer pairs in the dictionary "
+"database"
+msgid "Language"
+msgstr "Język"
 
-#: crosswordxmlguiwindow.cpp:1693
-msgid "Clue List"
-msgstr "Lista określeń"
+#: dictionary.cpp:321
+msgid "Importing Dictionary"
+msgstr "Importowanie słownika"
 
-#: crosswordxmlguiwindow.cpp:1502
-msgid "Clue Number &Mapping..."
-msgstr "&Mapowanie liczby określenia..."
+#: dictionary.cpp:359
+msgid ""
+"Importing word clue pairs from '%1' to the database.\n"
+"Please wait."
+msgstr ""
+"Importowanie słów par określeń z '%1' do bazy danych.\n"
+"Proszę czekać."
 
-#: crosswordxmlguiwindow.cpp:1194
-msgid "Clue Number Mapping"
-msgstr "Mapowanie liczby określeń"
+#: dictionary.cpp:489
+msgid ""
+"Adding words from the dictionary '%1' to the database.\n"
+"Please wait."
+msgstr ""
+"Dodawanie słów ze słownika '%1' do bazy danych.\n"
+"Proszę czekać."
 
-#: crosswordxmlguiwindow.cpp:1395
-#, fuzzy
-msgid "Clue With Switched Orientation"
-msgstr "Zaznacz określenie z przełączoną orientacją"
-
-#: crosswordxmlguiwindow.cpp:1084
-msgid "Clue added ('%1')"
-msgstr "Dodano określenie ('%1')"
+#: dictionary.cpp:571
+msgid ""
+"Adding words from %1 crossword files to the database.\n"
+"Please wait."
+msgstr ""
+"Dodawanie słów z plików krzyżówki '%1' do bazy danych.\n"
+"Proszę czekać."
 
 #: global.cpp:38
 msgid "Clue cell"
 msgstr "Kratka określenia"
 
-#: commands.cpp:352
-msgctxt ""
-"%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
-msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
-msgstr ""
-"Nie znaleziono kratki określenia przy podanych współrzędnych (%1, %2): '%3'"
+#: global.cpp:40
+msgid "Double clue cell"
+msgstr "Podwójna kratka określenia"
+
+#: global.cpp:42
+msgid "Letter cell"
+msgstr "Kratka litery"
+
+#: global.cpp:44
+msgid "Solution letter cell"
+msgstr "Krata litery rozwiązania"
+
+#: global.cpp:46
+msgid "Image cell"
+msgstr "Krata obrazu"
+
+#: global.cpp:48
+msgid "All cells"
+msgstr "Wszystkie kratki"
+
+#: global.cpp:50
+msgid "Interactive cells"
+msgstr "Interaktywne kratki"
+
+#: global.cpp:52
+msgid "User cell type"
+msgstr "Typ kratki użytkownika"
 
 #: global.cpp:260
 msgid "Clue cells are allowed"
@@ -707,169 +1447,119 @@ msgstr "Kratki określeń są niedozwolone"
 msgid "Clue cells are required"
 msgstr "Kratki określeń są wymagane"
 
-#: krossworddocument.cpp:86
-msgctxt "Title for the clue list when printing"
-msgid "Clue list"
-msgstr "Lista określeń"
-
-#: dialogs/currentcellwidget.cpp:154
-msgid "Clue:"
-msgstr "Określenie:"
+#: global.cpp:275
+msgid "Clues refer to sets of cells"
+msgstr "Określenia odnoszą się do zestawów kratek"
 
 #: global.cpp:277
 msgid "Clues refer to cells"
 msgstr "Określenia odnoszą się do kratek"
 
-#: global.cpp:275
-msgid "Clues refer to sets of cells"
-msgstr "Określenia odnoszą się do zestawów kratek"
+#: global.cpp:287
+msgid "String clues"
+msgstr "Określenia ciągu znaków"
 
-#: dialogs/statisticsdialog.cpp:85
-msgid "Clues:"
-msgstr "Określenia:"
+#: global.cpp:289
+msgid "Number clues (1 to 26)"
+msgstr "Liczba określeń (1 do 26)"
 
-#: crosswordxmlguiwindow.cpp:2156
-#, fuzzy
+#: global.cpp:300
+msgid "Characters"
+msgstr "Znaki"
+
+#: global.cpp:302
+msgid "Digits"
+msgstr "Cyfry"
+
+#: global.cpp:304
+msgid "Characters or digits"
+msgstr "Znaki lub cyfry"
+
+#: global.cpp:409
+msgid "Free Crossword"
+msgstr "Dowolna krzyżówka"
+
+#: global.cpp:411
+msgctxt "Short description of the crossword type 'Free'"
+msgid "This is a special type that tries to be least restrictive."
+msgstr "Jest to specjalny typ, który usiłuje być najmniej restrykcyjny."
+
+#: global.cpp:413
+msgctxt "Long description of the crossword type 'Free'"
 msgid ""
-"Congratulations!\n"
-"You solved the crossword perfectly."
-msgstr "Gratulacje! Krzyżówka została perfekcyjnie rozwiązana."
-
-#: crosswordxmlguiwindow.cpp:587
-msgid "Congratulations! You solved the crossword perfectly."
-msgstr "Gratulacje! Krzyżówka została perfekcyjnie rozwiązana."
-
-#: dictionary.cpp:181
-msgid "Connect Database"
-msgstr "Podłącz bazę danych"
-
-#: dialogs/currentcellwidget.cpp:439
-msgid "Convert &Letter %1 to Solution Letter"
-msgstr "Przekształć &literę %1 na literę rozwiązania"
-
-#: commands.cpp:1777
-msgid "Convert Crossword From '%1' to '%2'"
-msgstr "Przekształć krzyżówkę z '%1' na '%2'"
-
-#: dialogs/convertcrossworddialog.cpp:29
-msgid "Convert Crossword Type To"
-msgstr "Przekształć typ krzyżówki na"
-
-#: dialogs/convertcrossworddialog.cpp:33
-msgid "Convert From: %1"
-msgstr "Przekształć z: %1"
-
-#: commands.cpp:626
-msgid "Convert Letter at (%1, %2) to Solution Letter"
-msgstr "Przekształć literę przy (%1, %2) na literę rozwiązania"
-
-#: commands.cpp:654
-msgctxt "%1 contains the position of the solution letter in the solution word."
-msgid "Convert Solution Letter %1 to Letter"
-msgstr "Przekształć literę rozwiązania %1 na literę"
-
-#: dialogs/convertcrossworddialog.cpp:105
-msgid "Convert To: %1"
-msgstr "Przekształć do: %1"
-
-#: commands.cpp:1274
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Copyright"
-msgstr "Prawa autorskie"
-
-#: krosswordpuzzle.cpp:94
-msgid "Could not open resource at "
+"This is a special type that tries to be least restrictive. You can use all "
+"available cell types (eg. clue cells, double clue cells, image cells, "
+"solution letter cells). You can mix answers that have a clue cell with "
+"answers that don't. Answers may contain characters as well as numbers."
 msgstr ""
+"Jest to specjalny typ, który usiłuje być najmniej restrykcyjny. Możesz "
+"używać wszystkich dostępnych typów kratek (np. kratki określeń, podwójne "
+"kratki określeń, kratki obrazów, kratki liter rozwiązania). Możesz mieszać "
+"odpowiedzi, które mają kratkę określającą z odpowiedziami, które takiej nie "
+"mają. Odpowiedzi mogą zawierać zarówno znaki jaki i liczby."
 
-#: io/krosswordxmlwriter.cpp:73
-msgid "Couldn't close the ZIP archive"
-msgstr "Nie można zamknąć archiwum ZIP"
+#: global.cpp:424
+msgid "User Defined Crossword"
+msgstr "Krzyżówka zdefiniowana przez użytkownika"
 
-#: crosswordxmlguiwindow.cpp:2888
-msgid "Couldn't connect to the database."
-msgstr "Nie można połączyć się do bazy danych."
+#: global.cpp:426
+msgctxt "Short description of the crossword type 'User Defined'"
+msgid "Lets you specify your own rules."
+msgstr "Pozwala tobie określić swoje własne zasady."
 
-#: library/librarygui.cpp:348
-msgid "Couldn't export the image to the specified file."
-msgstr "Nie można eksportować obrazu do podanego pliku."
+#: global.cpp:434
+msgid "Swedish Crossword"
+msgstr "Szwedzka krzyżówka"
 
-#: io/krosswordxmlwriter.cpp:52
-msgid "Couldn't open the ZIP archive for writing"
-msgstr "Nie można otworzyć archiwum ZIP do zapisywania"
-
-#: library/librarygui.cpp:460
-#, fuzzy
-msgid "Couldn't remove the crossword from the library."
-msgstr ""
-"Nie można usunąć krzyżówki z biblioteki.\n"
-"%1"
-
-#: library/librarygui.cpp:449
+#: global.cpp:436
+msgctxt "Short description of the crossword type 'Swedish'"
 msgid ""
-"Couldn't remove the directory from the library.\n"
-"You need root privileges to remove directories which belong to the global "
-"library."
+"Swedish crosswords contain clue cells which contain the clue text in it and "
+"an arrow to indicate in which direction the clues have to be answered."
 msgstr ""
-"Nie można usunąć katalogu z biblioteki\n"
-"Musisz mieć uprawnienia administratora, aby usuwać katalogi, które należą do "
-"globalnej biblioteki."
+"Szwedzkie krzyżówki zawierają kratki, które zawierają tekst określenia w "
+"sobie i strzałkę, aby wskazać, w którym kierunku odpowiedzieć na określenie"
 
-#: dialogs/dictionarydialog.cpp:206
-msgid "Couldn't submit removed entries to the database: %1"
-msgstr "Nie można wysłać usuniętych wpisów bazy danych: %1"
-
-#: dialogs/createnewcrossworddialog.cpp:35
-msgid "Create New Crossword"
-msgstr "Utwórz nową krzyżówkę"
-
-#: library/librarygui.cpp:555
-msgid "Create a new crossword in the library."
-msgstr "Utwórz nową krzyżówkę w bibliotece."
-
-#: library/librarygui.cpp:550
-msgid "Create a new folder in the library."
-msgstr "Utwórz nowy katalog w bibliotece."
-
-#: dialogs/createnewcrossworddialog.cpp:111
-#, fuzzy
-msgctxt "Default notes value for new crosswords"
-msgid "Created with Krossword"
-msgstr "Utwórz nową krzyżówkę"
-
-#: dialogs/statisticsdialog.cpp:70
-msgid "Crossed:"
-msgstr "Skrzyżowane:"
-
-#: global.cpp:503
-msgid "Crossnumber"
-msgstr "Krzyżówka numerowa"
-
-#: global.cpp:505
-msgctxt "Short description of the crossword type 'Crossnumber'"
+#: global.cpp:439
+msgctxt "Long description of the crossword type 'Swedish'"
 msgid ""
-"Crossnumbers are the numerical analogy of a crossword, in which the "
-"solutions to the clues are numbers instead of words."
+"The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
+"the cells which would normally be black in other countries. Arrows indicate "
+"in which direction the clues have to be answered, vertical or horizontal. "
+"This style of grid is used in several countries other than Sweden, usually "
+"in magazines with pages of A4 or similar size. The grid often has a photo of "
+"a pop or movie star replacing a block of squares, as a clue to one answer. "
+"These puzzles usually have no symmetry in the grid.\n"
+"Crosswords with clue cells inside the crossword grid are also called "
+"\"Arrowwords\", \"Pointers\" or \"Tipwords\" in English, \"Autodefinidos\" "
+"in Spanish, \"Mots Fléchés\" in French, etc.\n"
+"(text taken from wikipedia)"
 msgstr ""
-"Krzyżówki numerowe są numeryczną analogią do zwykłych krzyżówek, gdzie używa "
-"się słów. Różnica polega na tym, że rozwiązaniem określeń są numery zamiast "
-"słów."
+"Siatka w \"Szwedzkim stylu\" nie używa numerów określeń - określenia zostają "
+"zawarte w kratkach, które normalnie byłyby czarne w innych krajach. Strzałki "
+"wskazują, w którym kierunku odpowiedzieć na określenia, pionowo lub poziomo. "
+"Ten styl siatki jest wykorzystywany w kilku innych krajach, oprócz Szwecji, "
+"zazwyczaj w magazynach ze stronami A4 lub o podobnym rozmiarze. Siatka "
+"często ma zdjęcie gwiazdy pop lub filmowej, zastępując blok kwadratów, jako "
+"określenie do odpowiedzi. Puzzle te zazwyczaj nie zachowują symetrii w "
+"siatce.\n"
+"Krzyżówki z kratkami określeń wewnątrz siatki krzyżówki są określane również "
+"jako \"Arrowwords\", \"Pointers\" lub \"Tipwords\" po Angielsku, "
+"\"Autodefinidos\" po Hiszpańsku, \"Mots Fléchés\" po Francusku, itp.\n"
+"(tekst pobrany z wikipedi)"
 
-#: library/librarygui.cpp:201 library/librarygui.cpp:206
-#: library/librarygui.cpp:214
-#, fuzzy
-msgid "Crossword %1"
-msgstr "Krzyżówka"
+#: global.cpp:457
+msgid "American Crossword"
+msgstr "Amerykańska krzyżówka"
 
-#: dialogs/createnewcrossworddialog.cpp:191
-msgid "Crossword Type"
-msgstr "Typ krzyżówki"
-
-#: dialogs/crosswordpropertiesdialog.cpp:43
-#: dialogs/crosswordpropertiesdialog.cpp:277
-msgid "Crossword Type: %1"
-msgstr "Typ krzyżówki: %1"
+#: global.cpp:459
+msgctxt "Short description of the crossword type 'American'"
+msgid ""
+"American crosswords have numbered clues and a list of clues on the side of "
+"the crossword. They have usually 180 degree rotational symmetry."
+msgstr ""
+"Amerykańskie krzyżówki mają ponumerowane określenia i listę określeń na boku "
+"krzyżówki. Zazwyczaj zachowują symetrię przy obrocie o 180 stopni."
 
 #: global.cpp:462
 msgctxt "Long description of the crossword type 'American'"
@@ -909,538 +1599,9 @@ msgstr ""
 "stronach, tak aby tworzyły pojedynczy wielobok).\n"
 "(wzięto z Wikipedii)"
 
-#: dialogs/currentcellwidget.cpp:155
-msgid "Current Answer:"
-msgstr "Obecna odpowiedź:"
-
-#: crosswordxmlguiwindow.cpp:1718
-msgid "Current Cell"
-msgstr "Bieżąca kratka"
-
-#: library/librarygui.cpp:545
-msgid "Delete the selected crossword from the library."
-msgstr "Usuń wybraną krzyżówkę z biblioteki."
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
-msgid "Describe your crossword type here."
-msgstr "Tutaj opisz swój własny typ krzyżówki"
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
-msgid "Detailed Configuration"
-msgstr "Szczegółowa konfiguracja"
-
-#: main.cpp:37 main.cpp:38
-msgid "Developer"
-msgstr ""
-
-#: dialogs/dictionarydialog.cpp:37
-msgid "Dictionary"
-msgstr "Słownik"
-
-#: dialogs/dictionarydialog.cpp:218
-msgid "Dictionary cleared"
-msgstr "Wyczyszczono słownik"
-
-#: global.cpp:302
-msgid "Digits"
-msgstr "Cyfry"
-
-#: crosswordxmlguiwindow.cpp:1127 crosswordxmlguiwindow.cpp:2481
-#, fuzzy
-msgid "Do you really want to clear the crossword?"
-msgstr "Usuwa wszystkie określenia z krzyżówki."
-
-#: crosswordxmlguiwindow.cpp:2178
-msgid "Do you really want to solve the crossword?"
-msgstr ""
-
-#: main.cpp:44
-msgid "Document to open"
-msgstr "Dokument do otwarcia"
-
-#: global.cpp:40
-msgid "Double clue cell"
-msgstr "Podwójna kratka określenia"
-
-#: cluemodel.cpp:64
-msgid "Down clues"
-msgstr "Określenia pionowe"
-
-#: krossworddocument.cpp:87
-msgctxt "Title for the list of down/vertical clues when printing"
-msgid "Down clues"
-msgstr "Określenia pionowe"
-
-#: library/librarygui.cpp:357
-msgid "Download Crossword To Library"
-msgstr "Pobieranie krzyżówki do biblioteki"
-
-#: library/librarygui.cpp:540
-msgid "Download a crossword and add it to the library."
-msgstr "Pobierz krzyżówkę i dodaj ją do biblioteki."
-
-#: commands.cpp:1150
-msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
-msgstr "Edytuj poprawną literę przy (%1, %2) z %3 na %4"
-
-#: crosswordxmlguiwindow.cpp:1708
-msgid "Edit History"
-msgstr "Historia edycji"
-
-#: commands.cpp:1160
-msgid "Edit Letter at (%1, %2) From %3 to %4"
-msgstr "Edytuj literę przy (%1, %2) z %3 na %4"
-
-#: crosswordxmlguiwindow.cpp:1448
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "Edit Mode"
-msgstr "Tryb edycji"
-
-#: cells/imagecell.cpp:68
-msgid "Edit image properties to set an image"
-msgstr "Edytuj właściwości obrazu, aby ustawić obraz"
-
-#: dialogs/statisticsdialog.cpp:57
-msgid "Empty Cells:"
-msgstr "Puste kratki:"
-
-#: crosswordxmlguiwindow.cpp:2625 global.cpp:36
-msgid "Empty cell"
-msgstr "Pusta kratka"
-
-#: crosswordxmlguiwindow.cpp:1550
-#, fuzzy
-msgid "Enables the eraser, to clear letter cells/answers"
-msgstr "Włącza gumkę, aby wyczyścić kratki literowe / odpowiedzi."
-
-#: crosswordxmlguiwindow.cpp:1449
-msgid "Enables/disables the edit mode"
-msgstr ""
-
-#: krosswordpuzzle.cpp:466
-#, fuzzy
-msgid "Error loading file '%1'"
-msgstr "Błąd wczytywania pliku '%1'"
-
-#: krossword.cpp:1017
-msgid "Error reading AcrossLite's .puz-format."
-msgstr "Błąd odczytywania formatu AcrossLite .puz."
-
-#: krossword.cpp:962
-msgid "Error while downloading from url: %1"
-msgstr "Błąd podczas pobierania z adresu url: %1"
-
-#: crosswordxmlguiwindow.cpp:782
-msgid "Error while loading file '%1': %2"
-msgstr "Błąd podczas wczytywania pliku '%1': %2"
-
-#: crosswordxmlguiwindow.cpp:928
-msgid "Error while writing file: %1"
-msgstr "Błąd podczas zapisywania pliku: %1"
-
-#: krossword.cpp:941
-msgid "Error writing AcrossLite's .puz-format."
-msgstr "Błąd zapisywania formatu AcrossLite .puz."
-
-#: krossword.cpp:930
-msgid "Error writing compressed crossword: %1"
-msgstr "Błąd zapisywania skompresowanej krzyżówki: %1"
-
-#: krossword.cpp:923
-msgid "Error writing crossword: %1"
-msgstr "Błąd zapisywania krzyżówki: %1"
-
-#: io/krosswordxmlwriter.cpp:58 io/krosswordxmlwriter.cpp:63
-#: io/krosswordxmlwriter.cpp:68
-msgid "Error writing to the compressed file"
-msgstr "Błąd zapisywania skompresowanego pliku"
-
-#: library/librarygui.cpp:314
-msgid "Export"
-msgstr "Eksport"
-
-#: library/librarygui.cpp:332
-msgid "Export Settings"
-msgstr "Ustawienia eksportu"
-
-#: dialogs/dictionarydialog.cpp:225
-msgid "Export To CSV"
-msgstr "Eksportuj do CSV"
-
-#: library/librarygui.cpp:535
-msgid "Export the selected crossword from the library."
-msgstr "Eksportuj wybraną krzyżówkę z biblioteki."
-
-#: dialogs/dictionarydialog.cpp:240
-msgid "Export to '%1' was successful"
-msgstr "Pomyślne eksportowanie do '%1' "
-
-#: library/librarygui.cpp:163
-#, fuzzy
-msgid "Failed"
-msgstr "Kafelki"
-
-#: crosswordxmlguiwindow.cpp:1536
-#, fuzzy
-msgid "Fills all letter cells with the correct letters"
-msgstr "Wypełnia wszystkie kratki literowe poprawnymi literami."
-
-#: crosswordxmlguiwindow.cpp:1410
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "First Clue"
-msgstr "Zaznacz pierwszą określenie"
-
-#: crosswordxmlguiwindow.cpp:1318
-msgid "Fit the whole crossword into the window"
-msgstr "Dopasuj całą krzyżówkę do okna"
-
-#: global.cpp:409
-msgid "Free Crossword"
-msgstr "Dowolna krzyżówka"
-
-#: main.cpp:39
-msgid "Friedrich Pülz"
-msgstr "Friedrich Pülz"
-
-#: main.cpp:38
-msgid "Giacomo Barazzetti"
-msgstr ""
-
-#: commands.cpp:1346
-msgid "Hide Clue Cell"
-msgstr "Ukryj kratkę określenia"
-
-#: crosswordxmlguiwindow.cpp:1371
-msgid "Hint For This Cell"
-msgstr "Wskazówka do tej kratki"
-
-#: library/librarygui.cpp:381
-msgid "I Swear Crossword by Victor Fleming (fridays)"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:2627
-msgid "Image '%1'"
-msgstr "Obraz '%1'"
-
-#: global.cpp:46
-msgid "Image cell"
-msgstr "Krata obrazu"
-
-#: commands.cpp:559
-msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
-msgstr ""
-"Nie znaleziono kratki obrazu przy podanych współrzędnych (%1, %2): '%3'"
-
-#: dialogs/dictionarydialog.cpp:246
-msgid "Import From CSV"
-msgstr "Importuj z CSV"
-
-#: library/librarygui.cpp:530
-msgid "Import a crossword to the library."
-msgstr "Importuj krzyżówkę do biblioteki."
-
-#: dictionary.cpp:322
-msgid "Importing Dictionary"
-msgstr "Importowanie słownika"
-
-#: dictionary.cpp:360
-msgid ""
-"Importing word clue pairs from '%1' to the database.\n"
-"Please wait."
-msgstr ""
-"Importowanie słów par określeń z '%1' do bazy danych.\n"
-"Proszę czekać."
-
-#: crosswordxmlguiwindow.cpp:1526
-msgid "Insert special character:"
-msgstr "Wstaw znak specjalny:"
-
-#: global.cpp:50
-msgid "Interactive cells"
-msgstr "Interaktywne kratki"
-
-#: main.cpp:33
-#, fuzzy
-msgid "Krossword"
-msgstr "Krzyżówka"
-
-#: dialogs/statisticsdialog.cpp:88
-msgctxt "Horizontal:"
-msgid "Label for the number  of horizontal clues"
-msgstr "Etykieta dla liczby  poziomych określeń"
-
-#: dialogs/statisticsdialog.cpp:92
-msgctxt "Vertical:"
-msgid "Label for the number  of vertical clues"
-msgstr "Etykieta dla liczby  pionowych określeń"
-
-#: dictionary.cpp:279
-msgctxt ""
-"The header title for languages of clue/answer pairs in the dictionary "
-"database"
-msgid "Language"
-msgstr "Język"
-
-#: crosswordxmlguiwindow.cpp:1425
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "Last Clue"
-msgstr "Zaznacz ostatnią określenie"
-
-#: crosswordxmlguiwindow.cpp:1530
-#, fuzzy
-msgid "Let you select a special character to paste"
-msgstr "Pozwala tobie wybrać znak specjalny do wklejenia."
-
-#: global.cpp:426
-msgctxt "Short description of the crossword type 'User Defined'"
-msgid "Lets you specify your own rules."
-msgstr "Pozwala tobie określić swoje własne zasady."
-
-#: dialogs/statisticsdialog.cpp:60
-msgid "Letter Cells:"
-msgstr "Kratki liter:"
-
-#: global.cpp:42
-msgid "Letter cell"
-msgstr "Kratka litery"
-
-#: commands.cpp:704 commands.cpp:1172
-msgid "Letter cell not found at the given coordinates (%1, %2)"
-msgstr "Nie znaleziono kratki litery przy podanych współrzędnych (%1, %2)"
-
-#: krossword.cpp:649
-msgid "Letters can't be converted back correctly after this conversion."
-msgstr "Litery mogą zostać przekształcone z powrotem po tym przekształceniu"
-
-#: krosswordpuzzle.cpp:240 krosswordpuzzle.cpp:429 library/librarygui.cpp:412
-msgid "Library"
-msgstr "Biblioteka"
-
-#: krosswordpuzzle.cpp:283
-#, fuzzy
-msgctxt ""
-"This string is used to replace the library path for crossword files that are "
-"in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
-"apps/krossword/library/crossword.kwpz with Library/crossword.kwpz"
-msgid "Library"
-msgstr "Biblioteka"
-
-#: crosswordxmlguiwindow.cpp:741
-msgid "Loaded crossword from file '%1'"
-msgstr "Wczytano krzyżówkę z pliku '%1'"
-
-#: dialogs/crosswordpreviewwidget.cpp:46
-msgid "Loading preview..."
-msgstr "Wczytywanie podglądu..."
-
-#: krosswordpuzzle.cpp:183
-msgid "Loading the crossword, please wait..."
-msgstr "Wczytywanie krzyżówki, proszę czekać..."
-
-#: krosswordpuzzle.cpp:180 library/librarygui.cpp:233
-msgid "Loading..."
-msgstr "Wczytywanie..."
-
-#: commands.cpp:1410
-msgid "Make Clue Cell Visible"
-msgstr "Uczyń kratkę określenia widoczną"
-
-#: crosswordxmlguiwindow.cpp:1335
-msgid "Mark as confident"
-msgstr "Oznacz jako pewna"
-
-#: crosswordxmlguiwindow.cpp:1341
-msgid "Mark as unsure"
-msgstr "Oznacz jako niepewna"
-
-#: crosswordxmlguiwindow.cpp:1336
-#, fuzzy
-msgid "Mark the selected letter cell's confidence as confident"
-msgstr "Oznacz pewność obecnie zaznaczonej kratki literowej jako pewna"
-
-#: crosswordxmlguiwindow.cpp:1342
-#, fuzzy
-msgid "Mark the selected letter cell's confidence as unsure"
-msgstr "Oznacz pewność obecnie zaznaczonej kratki literowej jako niepewna"
-
-#: library/librarygui.cpp:365
-msgid "Matt Jones (thursdays)"
-msgstr "Matt Jones (czwartki)"
-
-#: dialogs/statisticsdialog.cpp:101
-msgid "Max. Answer Length:"
-msgstr "Maks. długość odpowiedzi:"
-
-#: dialogs/statisticsdialog.cpp:98
-msgid "Min. Answer Length:"
-msgstr "Min. długość odpowiedzi:"
-
-#: library/librarygui.cpp:389
-msgid "Mots-croisés.ch free French crosswords"
-msgstr ""
-
-#: commands.cpp:1972
-msgid "Move All Cells By %1, %2"
-msgstr "Przemieść wszystkie kratki o %1, %2"
-
-#: crosswordxmlguiwindow.cpp:1507
-msgid "Move All Cells..."
-msgstr "Przemieść wszystkie kratki..."
-
-#: dialogs/movecellsdialog.cpp:28
-msgid "Move Cells"
-msgstr "Przemieść kratki"
-
-#: crosswordxmlguiwindow.cpp:1508
-#, fuzzy
-msgid "Moves all cells of the crossword"
-msgstr "Przemieszcza wszystkie kratki krzyżówki."
-
-#: dialogs/movecellsdialog.cpp:65
-msgctxt ""
-"How many clues are removed when moving all cells of the crossword. %2 is "
-"replaced by a plural indicating how many images will be removed when moving "
-"the cells."
-msgid "Moving all cells will remove %1 clue %2"
-msgid_plural "Moving all cells will remove %1 clues %2"
-msgstr[0] "Przemieszczanie wszystkich kratek usunie %1 określenie %2"
-msgstr[1] "Przemieszczanie wszystkich kratek usunie %1 określenia %2"
-msgstr[2] "Przemieszczanie wszystkich kratek usunie %1 określeń %2"
-
-#: library/librarygui.cpp:554
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "New &Crossword..."
-msgstr "Nowa &krzyżówka"
-
-#: library/librarygui.cpp:549
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "New &Folder..."
-msgstr "Nowy &katalog"
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
-msgid "New Crossword Type"
-msgstr "Nowy typ krzyżówki"
-
-#: library/librarygui.cpp:481
-msgid "New Library Folder"
-msgstr "Nowy katalog biblioteki"
-
-#: crosswordxmlguiwindow.cpp:653 crosswordxmlguiwindow.cpp:686
-msgid "New crossword"
-msgstr "Nowa krzyżówka"
-
-#: commands.cpp:1299
-msgid "No Action"
-msgstr "Brak działania"
-
-#: dictionary.cpp:174
-msgid ""
-"No Connection to the database! Please make sure the MySQL server is running. "
-"Afterwards click \"Continue\" to retry connecting to the database."
-msgstr ""
-"Brak połączenia do bazy danych! Upewnij się, że serwer MySQL został "
-"uruchomiony. Po tym kliknij \"Kontynuuj\", aby ponowić łączenie do bazy "
-"danych."
-
-#: dictionary.cpp:177
-msgid "No Database Connection"
-msgstr "Brak połączenia do bazy danych"
-
-#: commands.cpp:343 commands.cpp:552 commands.cpp:662 commands.cpp:697
-msgid "No cell at the given coordinates (%1, %2)"
-msgstr "Brak kratki przy podanych współrzędnych (%1, %2)"
-
-#: dialogs/currentcellwidget.cpp:114
-msgid "No cell selected."
-msgstr "Nie wybrano żadnych kratek."
-
-#: dialogs/crosswordpropertiesdialog.cpp:245
-msgctxt "No changes to the crossword grid size."
-msgid "No change"
-msgstr "Bez zmian"
-
-#: commands.cpp:813 commands.cpp:1006 commands.cpp:1100
-msgid "No clue cell given"
-msgstr "Nie podano żadnej kratki określenia"
-
-#: krossword.cpp:3033
-msgid "No error."
-msgstr "Bez błędu."
-
-#: crosswordxmlguiwindow.cpp:1122
-msgid "No removable cell selected."
-msgstr "Nie zaznaczono usuwalnej komórki."
-
-#: dialogs/createnewcrossworddialog.cpp:193
-msgid "Notes"
-msgstr "Uwagi"
-
-#: commands.cpp:1277
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Notes"
-msgstr "Notatki"
-
 #: global.cpp:488
 msgid "Number Puzzle"
 msgstr "Numerowane puzzle"
-
-#: global.cpp:289
-msgid "Number clues (1 to 26)"
-msgstr "Liczba określeń (1 do 26)"
-
-#: dialogs/statisticsdialog.cpp:72
-msgid ""
-"Number of crossed letter cells, percentage of total letter cell count in "
-"braces"
-msgstr ""
-"Liczba skrzyżowanych kratek liter, procent liczby całkowitych kratek w "
-"nawiasach klamrowych"
-
-#: dialogs/statisticsdialog.cpp:59
-msgid "Number of empty cells, percentage of total cell count in braces"
-msgstr ""
-"Liczba pustych kratek, procent liczby całkowitych kratek w nawiasach "
-"klamrowych"
-
-#: dialogs/statisticsdialog.cpp:90
-msgid "Number of horizontal clues, percentage of total clue count in braces"
-msgstr ""
-"Liczba poziomych określeń, procent liczby całkowitych określeń w nawiasach "
-"klamrowych"
-
-#: dialogs/statisticsdialog.cpp:121
-msgid ""
-"Number of letter cells containing '%1', percentage of total letter cell "
-"count in braces"
-msgstr ""
-"Liczba kratek liter zawierających %1, procent liczby całkowitych liter w "
-"nawiasach klamrowych"
-
-#: dialogs/statisticsdialog.cpp:62
-msgid "Number of letter cells, percentage of total cell count in braces"
-msgstr ""
-"Liczba kratek liter, procent liczby całkowitych kratek w nawiasach klamrowych"
-
-#: dialogs/statisticsdialog.cpp:76
-msgid ""
-"Number of uncrossed letter cells, percentage of total letter cell count in "
-"braces"
-msgstr ""
-"Liczba nieskrzyżowanych kratek liter, procent liczby całkowitych kratek w "
-"nawiasach klamrowych"
-
-#: dialogs/statisticsdialog.cpp:94
-msgid "Number of vertical clues, percentage of total clue count in braces"
-msgstr ""
-"Liczba pionowych określeń, procent liczby całkowitych określeń w nawiasach "
-"klamrowych"
 
 #: global.cpp:490
 msgctxt "Short description of the crossword type 'Number Puzzle'"
@@ -1452,640 +1613,123 @@ msgstr ""
 "Numerowane puzzle są wariantem krzyżówki, w której każda kratka ma numer od "
 "1 do 26. Solver musi znaleźć, której literze alfabetu odpowiada numer."
 
-#: dialogs/statisticsdialog.cpp:115
-msgid "Occurrences Of Letters:"
-msgstr "Wystąpienia liter:"
+#: global.cpp:503
+msgid "Crossnumber"
+msgstr "Krzyżówka numerowa"
 
-#: library/librarygui.cpp:525
-msgid "Open the selected crossword."
-msgstr "Otwórz wybraną krzyżówkę."
-
-#: crosswordxmlguiwindow.cpp:1321
-msgid "Pan"
-msgstr "Przesuń"
-
-#: crosswordxmlguiwindow.cpp:1322
+#: global.cpp:505
+msgctxt "Short description of the crossword type 'Crossnumber'"
 msgid ""
-"Pan the view. Note that you can also pan while pressing the control key."
+"Crossnumbers are the numerical analogy of a crossword, in which the "
+"solutions to the clues are numbers instead of words."
 msgstr ""
-"Przesuń widok. Zauważ, że możesz również przesuwać przytrzymując klawisz "
-"ctrl."
+"Krzyżówki numerowe są numeryczną analogią do zwykłych krzyżówek, gdzie używa "
+"się słów. Różnica polega na tym, że rozwiązaniem określeń są numery zamiast "
+"słów."
 
-#: dialogs/crosswordpreviewwidget.cpp:55
-msgid "Preview failed"
-msgstr "Nieudany podgląd"
-
-#: main.cpp:39
-msgid "Previous developer"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1303
-msgid "Print the crossword"
-msgstr "Wydrukuj krzyżówkę"
-
-#: dialogs/crosswordpropertiesdialog.cpp:36
-msgid "Properties"
-msgstr "Właściwości"
-
-#: crosswordxmlguiwindow.cpp:1175
+#: global.cpp:508
+msgctxt "Long description of the crossword type 'Crossnumber'"
 msgid ""
-"Quality crosswords of the current crossword type (%1) are usually symmetric."
-msgstr ""
-"Krzyżówki o wysokiej jakości obecnego typu krzyżówki (%1) są zazwyczaj "
-"symetryczne."
-
-#: commands.cpp:776
-msgid "Remove %1 letter"
-msgid_plural "Remove %1 letters"
-msgstr[0] "Usuń %1 literę"
-msgstr[1] "Usuń %1 litery"
-msgstr[2] "Usuń %1 liter"
-
-#: crosswordxmlguiwindow.cpp:1464
-msgid "Remove &Across Clue"
-msgstr "Usuń odpowiedź po&ziomą"
-
-#: crosswordxmlguiwindow.cpp:1470
-msgid "Remove &Down Clue"
-msgstr "Usuń odpowiedź &pionową"
-
-#: commands.cpp:336
-msgid "Remove Clue '%1'"
-msgstr "Usuń określenie '%1'"
-
-#: commands.cpp:334
-msgid "Remove Clue Without Text"
-msgstr "Usuń określenie bez tekstu"
-
-#: commands.cpp:544
-msgid "Remove Image '%1'"
-msgstr "Usuń obraz '%1'"
-
-#: commands.cpp:1529
-msgid "Remove Same Letter Synchronization"
-msgstr "Usuń taką samą synchronizację liter"
-
-#: commands.cpp:778
-msgctxt "This string shouldn't happen to be used"
-msgid "Remove no letters"
-msgstr "Nie usuwaj żadnych liter"
-
-#: crosswordxmlguiwindow.cpp:1483
-#, fuzzy
-msgid "Removes all clues from the crossword"
-msgstr "Usuwa wszystkie określenia z krzyżówki."
-
-#: crosswordxmlguiwindow.cpp:1465
-#, fuzzy
-msgid "Removes the highlighted across clue"
-msgstr "Usuwa podświetloną odpowiedź poziomą."
-
-#: crosswordxmlguiwindow.cpp:1460
-#, fuzzy
-msgid "Removes the highlighted clue or image"
-msgstr "Usuwa podświetloną określenie lub obraz."
-
-#: crosswordxmlguiwindow.cpp:1471
-#, fuzzy
-msgid "Removes the highlighted down clue"
-msgstr "Usuwa podświetloną odpowiedź pionową."
-
-#: commands.cpp:1894
-msgid "Resize Crossword From %1x%2 to %3x%4"
-msgstr "Zmień rozmiar krzyżówki z %1x%2 na %3x%4"
-
-#: dialogs/crosswordpropertiesdialog.cpp:251
-msgctxt ""
-"How many clues are removed when resizing the crossword. %2 is replaced by a "
-"plural indicating how many images will be removed when resizing."
-msgid "Resizing from %3x%4 will remove %1 clue %2"
-msgid_plural "Resizing from %3x%4 will remove %1 clues %2"
-msgstr[0] "Zmiana rozmiaru z %3x%4 usunie %1 określenie %2"
-msgstr[1] "Zmiana rozmiaru z %3x%4 usunie %1 określenia %2"
-msgstr[2] "Zmiana rozmiaru z %3x%4 usunie %1 określeń %2"
-
-#: krosswordpuzzle.cpp:95
-msgid "Resource unavailable"
-msgstr ""
-
-#: krosswordpuzzle.cpp:261
-msgid ""
-"Restore the automatically saved version of an edited crossword before the "
-"crash"
-msgstr ""
-"Przywróć automatycznie zapisane wersje edytowanych krzyżówek przed awarią"
-
-#: crosswordxmlguiwindow.cpp:808
-msgid "Save &Edit History"
-msgstr "Zapisz historię &edycji"
-
-#: crosswordxmlguiwindow.cpp:811
-msgid "Save As &Template"
-msgstr "Zapisz jako &szablon"
-
-#: krosswordpuzzle.cpp:86
-#, fuzzy
-msgid "Save crossword"
-msgstr "Nowa krzyżówka"
-
-#: crosswordxmlguiwindow.cpp:1294
-msgid "Save the crossword with solved letters"
-msgstr "Zapisz krzyżówkę z rozwiązanymi literami"
-
-#: crosswordxmlguiwindow.cpp:813
-msgid "Save without correct answers, clue texts, images"
-msgstr "Zapisz bez poprawnych odpowiedzi, tekstów określenia, obrazów"
-
-#: dictionary.cpp:277
-msgctxt ""
-"The header title for scores/difficulties of clue/answer pairs in the "
-"dictionary database"
-msgid "Score"
-msgstr "Wynik"
-
-#: crosswordxmlguiwindow.cpp:1396
-msgid "Select clue with switched orientation to the currently selected clue"
-msgstr ""
-"Zaznacz określenie z przełączoną orientacją na obecnie zaznaczoną określenie"
-
-#: crosswordxmlguiwindow.cpp:1411
-msgid "Select the first clue"
-msgstr "Zaznacz pierwszą określenie"
-
-#: crosswordxmlguiwindow.cpp:1401
-msgid "Select the first letter of the current clue"
-msgstr "Zaznacz pierwszą literę bieżącego określenia"
-
-#: crosswordxmlguiwindow.cpp:1426
-msgid "Select the last clue"
-msgstr "Zaznacz ostatnią określenie"
-
-#: crosswordxmlguiwindow.cpp:1406
-msgid "Select the last letter of the current clue"
-msgstr "Zaznacz ostatnią literę bieżącego określenia"
-
-#: crosswordxmlguiwindow.cpp:1416
-msgid "Select the next clue"
-msgstr "Zaznacz następną określenie"
-
-#: crosswordxmlguiwindow.cpp:1421
-msgid "Select the previous clue"
-msgstr "Zaznacz poprzednią określenie"
-
-#: commands.cpp:1147
-msgid "Set Correct Letter at (%1, %2) to %3"
-msgstr "Ustaw poprawną literę przy (%1, %2) na %3"
-
-#: commands.cpp:1481
-msgid "Set Default Number Puzzle Mapping"
-msgstr "Ustaw domyślną liczbę mapowania puzzli"
-
-#: commands.cpp:1157
-msgid "Set Letter at (%1, %2) to %3"
-msgstr "Ustaw literę przy (%1, %2) na %3"
-
-#: krosswordpuzzleview.cpp:106
-msgid "Settings changed"
-msgstr "Zmieniono ustawienia"
-
-#: commands.cpp:1506
-msgid "Setup Same Letter Synchronization"
-msgstr "Ustaw taką samą synchronizację liter"
-
-#: crosswordxmlguiwindow.cpp:1434
-msgid "Show Clue Dock"
-msgstr "Pokaż dokowanie określenia"
-
-#: crosswordxmlguiwindow.cpp:1444
-msgid "Show Current Cell Dock"
-msgstr "Pokaż dokowanie obecnej kratki"
-
-#: dialogs/crosswordtypewidget.cpp:204
-msgid "Show Details"
-msgstr "Pokaż szczegóły"
-
-#: crosswordxmlguiwindow.cpp:1439
-msgid "Show Edit History Dock"
-msgstr "Pokaż dokowanie historii edycji"
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:121
-msgid "Show Only Answers With &Clue"
-msgstr ""
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:112
-msgid "Show Only Answers With Current Answer &Length"
-msgstr ""
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:128
-msgid "Show Only the &First 100 Answers"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1307
-msgid "Show a print preview"
-msgstr "Pokaż podgląd wydruku"
-
-#: crosswordxmlguiwindow.cpp:1498
-#, fuzzy
-msgid "Shows statistics about the crossword"
-msgstr "Pokazuje statystyki o krzyżówce."
-
-#: crosswordxmlguiwindow.cpp:352
-#, fuzzy
-msgid "Shows the percentage of solved letter cells"
-msgstr "Pokazuje procent rozwiązanych kratek literowych."
-
-#: dialogs/createnewcrossworddialog.cpp:192
-msgid "Size"
-msgstr "Rozmiar"
-
-#: commands.cpp:1284
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Size"
-msgstr "Rozmiar"
-
-#: library/librarymanager.cpp:71
-msgctxt "The title for sizes of crosswords in the library tree view"
-msgid "Size:"
-msgstr "Rozmiar:"
-
-#: crosswordxmlguiwindow.cpp:1660 krossword.h:555
-msgid "Solution"
-msgstr "Rozwiązanie"
-
-#: global.cpp:44
-msgid "Solution letter cell"
-msgstr "Krata litery rozwiązania"
-
-#: commands.cpp:669
-msgid "Solution letter cell not found at the given coordinates (%1, %2)"
-msgstr "Nie znaleziono litery rozwiązania przy podanych współrzędnych (%1, %2)"
-
-#: crosswordxmlguiwindow.cpp:2178
-#, fuzzy
-msgid "Solve"
-msgstr "Rozwiąż określenie"
-
-#: crosswordxmlguiwindow.cpp:1383
-msgid "Solve Across Clue"
-msgstr "Rozwiąż określenie poziome"
-
-#: crosswordxmlguiwindow.cpp:1377
-msgid "Solve Clue"
-msgstr "Rozwiąż określenie"
-
-#: crosswordxmlguiwindow.cpp:1389
-msgid "Solve Down Clue"
-msgstr "Rozwiąż określenie pionowe"
-
-#: crosswordxmlguiwindow.cpp:1384
-msgid "Solve the current across clue"
-msgstr "Rozwiąż obecne określenie poziome"
-
-#: crosswordxmlguiwindow.cpp:1378
-msgid "Solve the current clue"
-msgstr "Rozwiąż bieżące określenie"
-
-#: crosswordxmlguiwindow.cpp:1390
-msgid "Solve the current down clue"
-msgstr "Rozwiąż bieżące określenie pionowe"
-
-#: crosswordxmlguiwindow.cpp:1372
-#, fuzzy
-msgid "Solve the selected letter cell"
-msgstr "Rozwiąż obecnie zaznaczoną kratkę literową"
-
-#: crosswordxmlguiwindow.cpp:1326
-#, fuzzy
-msgid "Solve the selected letter or a random one if none is selected"
-msgstr "Rozwiąż obecnie wybraną literę lub losową, jeśli nie zaznaczono żadnej"
-
-#: dialogs/statisticsdialog.cpp:34
-msgid "Statistics"
-msgstr "Statystyki"
-
-#: global.cpp:287
-msgid "String clues"
-msgstr "Określenia ciągu znaków"
-
-#: global.cpp:434
-msgid "Swedish Crossword"
-msgstr "Szwedzka krzyżówka"
-
-#: global.cpp:436
-msgctxt "Short description of the crossword type 'Swedish'"
-msgid ""
-"Swedish crosswords contain clue cells which contain the clue text in it and "
-"an arrow to indicate in which direction the clues have to be answered."
-msgstr ""
-"Szwedzkie krzyżówki zawierają kratki, które zawierają tekst określenia w "
-"sobie i strzałkę, aby wskazać, w którym kierunku odpowiedzieć na określenie"
-
-#: krosswordpuzzle.cpp:244
-msgid "Templates"
-msgstr "Szablony"
-
-#: global.cpp:439
-msgctxt "Long description of the crossword type 'Swedish'"
-msgid ""
-"The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
-"the cells which would normally be black in other countries. Arrows indicate "
-"in which direction the clues have to be answered, vertical or horizontal. "
-"This style of grid is used in several countries other than Sweden, usually "
-"in magazines with pages of A4 or similar size. The grid often has a photo of "
-"a pop or movie star replacing a block of squares, as a clue to one answer. "
-"These puzzles usually have no symmetry in the grid.\n"
-"Crosswords with clue cells inside the crossword grid are also called "
-"\"Arrowwords\", \"Pointers\" or \"Tipwords\" in English, \"Autodefinidos\" "
-"in Spanish, \"Mots Fléchés\" in French, etc.\n"
+"A crossnumber (also known as a cross-figure) is the numerical analogy of a "
+"crossword, in which the solutions to the clues are numbers instead of words. "
+"Clues are usually arithmetical expressions, but can also be general "
+"knowledge clues to which the answer is a number or year. There are also "
+"numerical fill-in crosswords.\n"
+"The Daily Mail Weekend magazine used to feature crossnumbers under the "
+"misnomer Number Word. This kind of puzzle should not be confused with a "
+"different puzzle that the Daily Mail refers to as Cross Number.\n"
 "(text taken from wikipedia)"
 msgstr ""
-"Siatka w \"Szwedzkim stylu\" nie używa numerów określeń - określenia zostają "
-"zawarte w kratkach, które normalnie byłyby czarne w innych krajach. Strzałki "
-"wskazują, w którym kierunku odpowiedzieć na określenia, pionowo lub poziomo. "
-"Ten styl siatki jest wykorzystywany w kilku innych krajach, oprócz Szwecji, "
-"zazwyczaj w magazynach ze stronami A4 lub o podobnym rozmiarze. Siatka "
-"często ma zdjęcie gwiazdy pop lub filmowej, zastępując blok kwadratów, jako "
-"określenie do odpowiedzi. Puzzle te zazwyczaj nie zachowują symetrii w "
-"siatce.\n"
-"Krzyżówki z kratkami określeń wewnątrz siatki krzyżówki są określane również "
-"jako \"Arrowwords\", \"Pointers\" lub \"Tipwords\" po Angielsku, "
-"\"Autodefinidos\" po Hiszpańsku, \"Mots Fléchés\" po Francusku, itp.\n"
-"(tekst pobrany z wikipedi)"
-
-#: library/librarygui.cpp:373
-msgid "The Chronicle of Higher Education (fridays)"
-msgstr ""
-
-#: library/librarygui.cpp:377
-msgid "The Cross Nerd (tuesdays)"
-msgstr ""
-
-#: library/librarygui.cpp:190
-#, fuzzy
-msgid "The Cross Nerd current crossword"
-msgstr "Zamknij obecną krzyżówkę."
-
-#: krossword.cpp:3040
-msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
-msgstr "Odpowiedź zawiera niepoprawne znaki. Dozwolone są A-Z i/lub 0-9."
-
-#: krossword.cpp:3052
-msgid "The answer is too short for the current crossword type."
-msgstr "Odpowiedź jest zbyt krótka dla obecnego typu krzyżówki."
-
-#: krossword.cpp:3044
-msgid ""
-"The answer overwrites the answer to another clue with the same orientation."
-msgstr ""
-"Odpowiedź zastępuje odpowiedź na inne określenie o tej samej orientacji."
-
-#: krossword.cpp:3054
-msgid "The answer overwrites the clue cell."
-msgstr "Odpowiedź zastępuje kratkę określenia."
-
-#: krossword.cpp:3042
-msgid "The answer produces mismatching letter cells at the same positions."
-msgstr "Odpowiedź tworzy niezgodne kratki liter na pewnych pozycjach."
-
-#: dialogs/answerwidget.cpp:30 dialogs/answerwidget.cpp:40
-msgid "The answer to the clue"
-msgstr "Odpowiedź na określenie"
-
-#: krossword.cpp:3046
-msgid "The answer's letter cells cross a clue cell."
-msgstr "Kratki liter odpowiedzi przekraczają kratkę określenia."
-
-#: krossword.cpp:3038
-msgid "The cell for the new clue isn't empty."
-msgstr "Kratka dla nowego określenia nie jest pusta."
-
-#: krossword.cpp:3059
-msgid "The cells for the new image aren't empty."
-msgstr "Określenia dla nowego obrazu nie są puste."
-
-#: krossword.cpp:3036
-msgid "The clue doesn't fit in the grid with the given settings."
-msgstr "Określenie nie mieści się w siatce o podanych ustawieniach."
-
-#: krossword.cpp:633
-msgid "The conversion will remove %1 of %2 clues"
-msgstr "Przekształcenie usunie %1 z %2 określeń"
-
-#: krossword.cpp:636
-msgid "The conversion will remove %1 of %2 clues, %3 of %4 images"
-msgstr "Przekształcenie usunie %1 z %2 określeń, %3 z %4 obrazów"
-
-#: dialogs/answerwidget.cpp:28 dialogs/answerwidget.cpp:38
-msgid ""
-"The correct answer to the clue. For each letter a letter cell is created"
-msgstr ""
-"Poprawna odpowiedź na określenie. Dla każdej litery zostaje utworzona kratka "
-"litery"
-
-#: library/librarygui.cpp:138
-#, fuzzy
-msgid "The crossword couldn't be imported to the library."
-msgstr ""
-"Nie można importować krzyżówki do biblioteki.\n"
-"%1"
-
-#: library/librarygui.cpp:140
-#, fuzzy
-msgid "The crossword couldn't be written to the library folder."
-msgstr ""
-"Nie można zapisać krzyżówki do katalogu biblioteki.\n"
-"%1"
-
-#: crosswordxmlguiwindow.cpp:1169
-msgid ""
-"The crossword doesn't have 180 degree rotation symmetry.\n"
-"To achieve symmetry make sure that each empty cell and each clue cell has a "
-"counterpart at it's 180 degree rotated position.\n"
-msgstr ""
-"Krzyżówka nie zachowuje symetrii przy obrocie o 10 stopni.\n"
-"Aby osiągnąć symetrię upewnij się, że każda pusta kratka ma swój i każda "
-"kratka określenia ma odpowiednik w pozycji obróconej o 180 stopni.\n"
-
-#: crosswordxmlguiwindow.cpp:1165
-msgid ""
-"The crossword doesn't have 180 degree rotation symmetry.\n"
-"To achieve symmetry make sure that each empty cell has a counterpart at it's "
-"180 degree rotated position.\n"
-msgstr ""
-"Krzyżówka nie zachowuje symetrii przy obrocie o 10 stopni.\n"
-"Aby osiągnąć symetrię upewnij się, że każda pusta kratka ma swój odpowiednik "
-"w pozycji obróconej o 180 stopni.\n"
-
-#: crosswordxmlguiwindow.cpp:1161
-msgid "The crossword has 180 degree rotation symmetry."
-msgstr "Krzyżówka zachowuje symetrię przy obrocie o 180 stopni."
-
-#: crosswordxmlguiwindow.cpp:756
-msgid ""
-"The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
-"\n"
-"Do you want to convert the crossword to another type now?\n"
-"\n"
-"(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")"
-msgstr ""
-"Nie można określić typu krzyżówki, tak więc przyjęto 'Dowolną Krzyżówkę'.\n"
-"\n"
-"Czy chcesz teraz przekształcić krzyżówkę do innego typu?\n"
-"\n"
-"(Zauważ: Możesz ją później przekształcić przy pomocy \"Edycja\" > "
-"\"Właściwości krzyżówki\")"
-
-#: crosswordxmlguiwindow.cpp:707 crosswordxmlguiwindow.cpp:850
-#: krosswordpuzzle.cpp:129
-msgid ""
-"The current crossword has been modified.\n"
-"Would you like to save it?"
-msgstr ""
-"Obecna krzyżówka została zmodyfikowana.\n"
-"Czy chcesz ją zapisać?"
-
-#: krossword.cpp:3048
-msgid "The current crossword type doesn't allow clue cells."
-msgstr "Obecne typ krzyżówki nie pozwala na kratki określeń."
-
-#: krossword.cpp:3061
-msgid "The current crossword type doesn't allow image cells."
-msgstr "Obecny typ krzyżówki nie pozwala na kratki obrazów."
-
-#: krossword.cpp:3050
-msgid "The current crossword type requires a clue cell for each clue."
-msgstr "Obecne typ krzyżówki wymaga kratki określenia dla każdej kratki."
+"Krzyżówka numerowa (znana także jako krzyżówka cyfrowa) jest numeryczną "
+"analogią krzyżówki, w której rozwiązaniami do określeń są numery zamiast "
+"słów. Określenia są zazwyczaj wyrażeniami arytmetycznymi, ale mogą być także "
+"określeniami z wiedzy ogólnej, które wymagają odpowiedzi w postaci numeru "
+"lub roku. Istnieją także krzyżówki wypełnianie numerycznie.\n"
+"Magazyn Daily Mail Weekend miał w zwyczaju przedstawiać krzyżówki numerowe "
+"pod niewłaściwą nazwą Number Word. Ten typ puzzli nie powinien być mylony z "
+"innymi puzzlami, do których Daily Mail odnosi się  jako Cross Number.\n"
+"(wzięto z Wikipedii)"
 
 #: io/krosswordxmlreader.cpp:174 io/krosswordxmlreader.cpp:206
 #, fuzzy
 msgid "The file is not a Krossword version &lt;= 1.1 file."
 msgstr "Plik nie jest plikiem wersji KrossWordPuzzle &lt;= 1.1."
 
-#: library/librarygui.cpp:489
-msgid "The folder already exists in the library."
-msgstr "Katalog już istnieje w bibliotece."
+#: io/krosswordxmlwriter.cpp:52
+msgid "Couldn't open the ZIP archive for writing"
+msgstr "Nie można otworzyć archiwum ZIP do zapisywania"
 
-#: krossword.cpp:3057
-msgid "The image doesn't fit in the grid with the given settings."
-msgstr "Obraz nie mieści się w siatce o podanych ustawieniach."
+#: io/krosswordxmlwriter.cpp:58 io/krosswordxmlwriter.cpp:63
+#: io/krosswordxmlwriter.cpp:68
+msgid "Error writing to the compressed file"
+msgstr "Błąd zapisywania skompresowanego pliku"
 
-#: crosswordxmlguiwindow.cpp:1330
-#, fuzzy
-msgid "The selected letter cell has been solved"
-msgstr "Obecnie wybrana kratka literowa została rozwiązana"
+#: io/krosswordxmlwriter.cpp:73
+msgid "Couldn't close the ZIP archive"
+msgstr "Nie można zamknąć archiwum ZIP"
 
-#: commands.cpp:725
-msgctxt ""
-"Error message to be displayed, when the user tries to convert a letter to a "
-"solution letter, but the position of the new solution letter is already "
-"used. Each solution letter has a position in the solution word of the "
-"crossword and all solution letters of a crossword form it's solution word. "
-"%1 is replaced by the (already used) position."
-msgid "The solution letter position %1 is already assigned."
-msgstr "Pozycja litery rozwiązania %1 jest już przypisana."
+#: krossword.cpp:613
+msgid "%1 clue cell"
+msgid_plural "%1 clue cells"
+msgstr[0] "%1 kratka określenia"
+msgstr[1] "%1 kratki określenia"
+msgstr[2] "%1 kratek określenia"
 
-#: dialogs/cellwidgets/solutionlettercellwidget.cpp:94
-#, fuzzy
+#: krossword.cpp:618
+msgid "%1 double clue cell"
+msgid_plural "%1 double clue cells"
+msgstr[0] "%1 podwójna kratka określenia"
+msgstr[1] "%1 podwójne kratki określenia"
+msgstr[2] "%1 podwójnych kratek określenia"
+
+#: krossword.cpp:623
+msgid "%1 solution letter cell"
+msgid_plural "%1 solution letter cells"
+msgstr[0] "%1 kratka litery rozwiązania"
+msgstr[1] "%1 kratki liter rozwiązania"
+msgstr[2] "%1 kratek liter rozwiązania"
+
+#: krossword.cpp:634
+msgid "The conversion will remove %1 of %2 clues"
+msgstr "Przekształcenie usunie %1 z %2 określeń"
+
+#: krossword.cpp:637
+msgid "The conversion will remove %1 of %2 clues, %3 of %4 images"
+msgstr "Przekształcenie usunie %1 z %2 określeń, %3 z %4 obrazów"
+
+#: krossword.cpp:650
+msgid "Letters can't be converted back correctly after this conversion."
+msgstr "Litery mogą zostać przekształcone z powrotem po tym przekształceniu"
+
+#: krossword.cpp:657
 msgid ""
-"The solution letter position %1 is already assigned.\n"
-"Please change the solution word position of that letter first."
-msgstr "Pozycja litery rozwiązania %1 jest już przypisana."
-
-#: krosswordpuzzle.cpp:313
-msgid "Theme"
-msgstr "Motyw"
-
-#: library/librarygui.cpp:304
-msgid ""
-"There was an error opening the crossword.\n"
-"%1"
+"All clue cells get removed. The initial letter to clue number mapping is "
+"A=1, B=2, ..., Z=26."
 msgstr ""
-"Wystąpił błąd otwierania krzyżówki.\n"
-"%1"
+"Wszystkie kratki określeń zostają usunięte. Początkową literą do mapowania "
+"numeru określenia jest A=1, B=2, ..., Z=26."
 
-#: dialogs/dictionarydialog.cpp:238
-msgid "There was an error while exporting to '%1'"
-msgstr "Wystąpił błąd podczas eksportowania do '%1'"
+#: krossword.cpp:924
+msgid "Error writing crossword: %1"
+msgstr "Błąd zapisywania krzyżówki: %1"
 
-#: dialogs/dictionarydialog.cpp:252
-msgid "There was an error while importing from '%1'"
-msgstr "Wystąpił błąd podczas importowania z '%1'"
+#: krossword.cpp:931
+msgid "Error writing compressed crossword: %1"
+msgstr "Błąd zapisywania skompresowanej krzyżówki: %1"
 
-#: global.cpp:411
-msgctxt "Short description of the crossword type 'Free'"
-msgid "This is a special type that tries to be least restrictive."
-msgstr "Jest to specjalny typ, który usiłuje być najmniej restrykcyjny."
+#: krossword.cpp:942
+msgid "Error writing AcrossLite's .puz-format."
+msgstr "Błąd zapisywania formatu AcrossLite .puz."
 
-#: global.cpp:413
-msgctxt "Long description of the crossword type 'Free'"
-msgid ""
-"This is a special type that tries to be least restrictive. You can use all "
-"available cell types (eg. clue cells, double clue cells, image cells, "
-"solution letter cells). You can mix answers that have a clue cell with "
-"answers that don't. Answers may contain characters as well as numbers."
-msgstr ""
-"Jest to specjalny typ, który usiłuje być najmniej restrykcyjny. Możesz "
-"używać wszystkich dostępnych typów kratek (np. kratki określeń, podwójne "
-"kratki określeń, kratki obrazów, kratki liter rozwiązania). Możesz mieszać "
-"odpowiedzi, które mają kratkę określającą z odpowiedziami, które takiej nie "
-"mają. Odpowiedzi mogą zawierać zarówno znaki jaki i liczby."
+#: krossword.cpp:963
+msgid "Error while downloading from url: %1"
+msgstr "Błąd podczas pobierania z adresu url: %1"
 
-#: crosswordxmlguiwindow.cpp:1329
-msgid "This letter has been solved"
-msgstr "Litera ta został rozwiązana"
+#: krossword.cpp:1018
+msgid "Error reading AcrossLite's .puz-format."
+msgstr "Błąd odczytywania formatu AcrossLite .puz."
 
-#: crosswordxmlguiwindow.cpp:1242
-msgid ""
-"This will cause all answers to be shown and editable.\n"
-"If you want to solve the crossword you should cancel."
-msgstr ""
-"Spowoduje to, że wszystkie odpowiedzi zostaną pokazane i staną się "
-"edytowalne.\n"
-"Jeżeli chcesz rozwiązać krzyżówkę, to należy anulować."
-
-#: library/librarygui.cpp:453
-msgid ""
-"This will permanently delete the selected crossword from the library.\n"
-"The operation can't be undone!"
-msgstr ""
-"Usunie to trwale wybraną krzyżówkę z biblioteki.\n"
-"Operacji tej nie można cofnąć!"
-
-#: library/librarygui.cpp:441
-msgid ""
-"This will permanently delete the selected directory and all contained "
-"crosswords from the library. The operation can't be undone!"
-msgstr ""
-"Usunie to trwale wybrany katalog i wszystkie zawarte krzyżówki z biblioteki. "
-"Operacji tej nie można cofnąć!"
-
-#: commands.cpp:1268
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Title"
-msgstr "Tytuł"
-
-#: dialogs/statisticsdialog.cpp:49
-msgid "Total Cell Count:"
-msgstr "Całkowita liczba kratek:"
-
-#: dialogs/statisticsdialog.cpp:74
-msgid "Uncrossed:"
-msgstr "Nieskrzyżowane:"
-
-#: krossword.cpp:2950
-msgctxt "Description"
-msgid ""
-"Used as header label for the column containing the descriptions in the "
-"crossword type model."
-msgstr ""
-"Wykorzystywane jako etykieta nagłówka dla kolumny zawierającej opisy w "
-"modelu typu krzyżówki."
-
-#: krossword.cpp:2947
+#: krossword.cpp:2948
 msgctxt "Name"
 msgid ""
 "Used as header label for the column containing the names in the crossword "
@@ -2094,67 +1738,385 @@ msgstr ""
 "Wykorzystywane jako etykieta nagłówka dla kolumny zawierającej nazwy w "
 "modelu typu krzyżówki."
 
-#: global.cpp:424
-msgid "User Defined Crossword"
-msgstr "Krzyżówka zdefiniowana przez użytkownika"
+#: krossword.cpp:2951
+msgctxt "Description"
+msgid ""
+"Used as header label for the column containing the descriptions in the "
+"crossword type model."
+msgstr ""
+"Wykorzystywane jako etykieta nagłówka dla kolumny zawierającej opisy w "
+"modelu typu krzyżówki."
 
-#: global.cpp:52
-msgid "User cell type"
-msgstr "Typ kratki użytkownika"
+#: krossword.cpp:3034
+msgid "No error."
+msgstr "Bez błędu."
 
-#: library/librarygui.cpp:369
-msgid "Wall Street Journal by Mike Shenk (fridays)"
-msgstr "Wall Street Journal stworzone przez Mike Shenk (piątki)"
+#: krossword.cpp:3037
+msgid "The clue doesn't fit in the grid with the given settings."
+msgstr "Określenie nie mieści się w siatce o podanych ustawieniach."
+
+#: krossword.cpp:3039
+msgid "The cell for the new clue isn't empty."
+msgstr "Kratka dla nowego określenia nie jest pusta."
+
+#: krossword.cpp:3041
+msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
+msgstr "Odpowiedź zawiera niepoprawne znaki. Dozwolone są A-Z i/lub 0-9."
+
+#: krossword.cpp:3043
+msgid "The answer produces mismatching letter cells at the same positions."
+msgstr "Odpowiedź tworzy niezgodne kratki liter na pewnych pozycjach."
+
+#: krossword.cpp:3045
+msgid ""
+"The answer overwrites the answer to another clue with the same orientation."
+msgstr ""
+"Odpowiedź zastępuje odpowiedź na inne określenie o tej samej orientacji."
+
+#: krossword.cpp:3047
+msgid "The answer's letter cells cross a clue cell."
+msgstr "Kratki liter odpowiedzi przekraczają kratkę określenia."
+
+#: krossword.cpp:3049
+msgid "The current crossword type doesn't allow clue cells."
+msgstr "Obecne typ krzyżówki nie pozwala na kratki określeń."
+
+#: krossword.cpp:3051
+msgid "The current crossword type requires a clue cell for each clue."
+msgstr "Obecne typ krzyżówki wymaga kratki określenia dla każdej kratki."
+
+#: krossword.cpp:3053
+msgid "The answer is too short for the current crossword type."
+msgstr "Odpowiedź jest zbyt krótka dla obecnego typu krzyżówki."
+
+#: krossword.cpp:3055
+msgid "The answer overwrites the clue cell."
+msgstr "Odpowiedź zastępuje kratkę określenia."
+
+#: krossword.cpp:3058
+msgid "The image doesn't fit in the grid with the given settings."
+msgstr "Obraz nie mieści się w siatce o podanych ustawieniach."
+
+#: krossword.cpp:3060
+msgid "The cells for the new image aren't empty."
+msgstr "Określenia dla nowego obrazu nie są puste."
+
+#: krossword.cpp:3062
+msgid "The current crossword type doesn't allow image cells."
+msgstr "Obecny typ krzyżówki nie pozwala na kratki obrazów."
+
+#: krossworddocument.cpp:86
+msgctxt "Title for the clue list when printing"
+msgid "Clue list"
+msgstr "Lista określeń"
+
+#: krossworddocument.cpp:87
+msgctxt "Title for the list of down/vertical clues when printing"
+msgid "Down clues"
+msgstr "Określenia pionowe"
+
+#: krossworddocument.cpp:88
+msgctxt "Title for the list of across/horizontal clues when printing"
+msgid "Across clues"
+msgstr "Określenia poziome"
 
 #: krosswordpuzzle.cpp:85
 #, fuzzy
 msgid "Would you like to add the crossword into the library?"
 msgstr "Utwórz nową krzyżówkę w bibliotece."
 
-#: crosswordxmlguiwindow.cpp:913
-msgid "Wrote crossword to file '%1'"
-msgstr "Zapisano krzyżówkę do pliku '%1'"
+#: krosswordpuzzle.cpp:86
+#, fuzzy
+msgid "Save crossword"
+msgstr "Nowa krzyżówka"
 
-#: rc.cpp:2
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "lukasz.wojnilowicz@gmail.com"
+#: krosswordpuzzle.cpp:94
+msgid "Could not open resource at "
+msgstr ""
 
-#: rc.cpp:1
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Łukasz Wojniłowicz"
+#: krosswordpuzzle.cpp:95
+msgid "Resource unavailable"
+msgstr ""
 
-#: crosswordxmlguiwindow.cpp:295
-msgid "Zoom: %1%"
-msgstr "Przybliżenie: %1%"
+#: krosswordpuzzle.cpp:180 library/librarygui.cpp:231
+msgid "Loading..."
+msgstr "Wczytywanie..."
 
-#: dialogs/movecellsdialog.cpp:71
+#: krosswordpuzzle.cpp:183
+msgid "Loading the crossword, please wait..."
+msgstr "Wczytywanie krzyżówki, proszę czekać..."
+
+#: krosswordpuzzle.cpp:240 krosswordpuzzle.cpp:429 library/librarygui.cpp:404
+msgid "Library"
+msgstr "Biblioteka"
+
+#: krosswordpuzzle.cpp:244
+msgid "Templates"
+msgstr "Szablony"
+
+#: krosswordpuzzle.cpp:261
+msgid "&Restore"
+msgstr "P&rzywróć"
+
+#: krosswordpuzzle.cpp:261
+msgid ""
+"Restore the automatically saved version of an edited crossword before the "
+"crash"
+msgstr ""
+"Przywróć automatycznie zapisane wersje edytowanych krzyżówek przed awarią"
+
+#: krosswordpuzzle.cpp:262
+msgid ""
+"An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
+" Do you want to restore the crossword?"
+msgstr ""
+"Znaleziono niezapisane krzyżówki. Najprawdopodobniej gra uległa awarii, "
+"przepraszamy!\n"
+" Czy chcesz przywrócić krzyżówkę?"
+
+#: krosswordpuzzle.cpp:283
+#, fuzzy
 msgctxt ""
-"How many images are removed when moving all cells of the crossword. This "
-"string gets combined with a plural string indicating how many clue cells "
-"will be removed when moving the cells."
-msgid "and %1 image"
-msgid_plural "and %1 images"
-msgstr[0] "i %1 obraz"
-msgstr[1] "i %1 obrazy"
-msgstr[2] "i %1 obrazów"
+"This string is used to replace the library path for crossword files that are "
+"in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
+"apps/krossword/library/crossword.kwpz with Library/crossword.kwpz"
+msgid "Library"
+msgstr "Biblioteka"
 
-#: dialogs/crosswordpropertiesdialog.cpp:257
-msgctxt ""
-"How many images are removed when resizing the crossword. This string gets "
-"combined with a plural string indicating how many clue cells will be removed "
-"when resizing."
-msgid "and %1 image"
-msgid_plural "and %1 images"
-msgstr[0] "i %1 obraz"
-msgstr[1] "i %1 obrazy"
-msgstr[2] "i %1 obrazów"
+#: krosswordpuzzle.cpp:308
+msgid "Animations"
+msgstr "Animacje"
 
-#: dialogs/createnewcrossworddialog.cpp:109
-msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
-msgid "© %1, by %2"
-msgstr "© %1, przez %2"
+#: krosswordpuzzle.cpp:313
+msgid "Theme"
+msgstr "Motyw"
+
+#: krosswordpuzzle.cpp:466
+#, fuzzy
+msgid "Error loading file '%1'"
+msgstr "Błąd wczytywania pliku '%1'"
+
+#: krosswordpuzzleview.cpp:106
+msgid "Settings changed"
+msgstr "Zmieniono ustawienia"
+
+#: library/librarygui.cpp:136
+#, fuzzy
+msgid "The crossword couldn't be imported to the library."
+msgstr ""
+"Nie można importować krzyżówki do biblioteki.\n"
+"%1"
+
+#: library/librarygui.cpp:138
+#, fuzzy
+msgid "The crossword couldn't be written to the library folder."
+msgstr ""
+"Nie można zapisać krzyżówki do katalogu biblioteki.\n"
+"%1"
+
+#: library/librarygui.cpp:161
+#, fuzzy
+msgid "Failed"
+msgstr "Kafelki"
+
+#: library/librarygui.cpp:188
+#, fuzzy
+msgid "The Cross Nerd current crossword"
+msgstr "Zamknij obecną krzyżówkę."
+
+#: library/librarygui.cpp:199 library/librarygui.cpp:204
+#: library/librarygui.cpp:212
+#, fuzzy
+msgid "Crossword %1"
+msgstr "Krzyżówka"
+
+#: library/librarygui.cpp:290
+msgid "Can't export whole directories. Please select a crossword."
+msgstr "Nie można eksportować całych katalogów. Proszę wybrać krzyżówkę."
+
+#: library/librarygui.cpp:296
+msgid ""
+"There was an error opening the crossword.\n"
+"%1"
+msgstr ""
+"Wystąpił błąd otwierania krzyżówki.\n"
+"%1"
+
+#: library/librarygui.cpp:306
+msgid "Export"
+msgstr "Eksport"
+
+#: library/librarygui.cpp:324
+msgid "Export Settings"
+msgstr "Ustawienia eksportu"
+
+#: library/librarygui.cpp:340
+msgid "Couldn't export the image to the specified file."
+msgstr "Nie można eksportować obrazu do podanego pliku."
+
+#: library/librarygui.cpp:349
+msgid "Download Crossword To Library"
+msgstr "Pobieranie krzyżówki do biblioteki"
+
+#: library/librarygui.cpp:357
+msgid "Matt Jones (thursdays)"
+msgstr "Matt Jones (czwartki)"
+
+#: library/librarygui.cpp:361
+msgid "Wall Street Journal by Mike Shenk (fridays)"
+msgstr "Wall Street Journal stworzone przez Mike Shenk (piątki)"
+
+#: library/librarygui.cpp:365
+msgid "The Chronicle of Higher Education (fridays)"
+msgstr ""
+
+#: library/librarygui.cpp:369
+msgid "The Cross Nerd (tuesdays)"
+msgstr ""
+
+#: library/librarygui.cpp:373
+msgid "I Swear Crossword by Victor Fleming (fridays)"
+msgstr ""
+
+#: library/librarygui.cpp:377
+msgid "ChrisWords.com"
+msgstr ""
+
+#: library/librarygui.cpp:381
+msgid "Mots-croisés.ch free French crosswords"
+msgstr ""
+
+#: library/librarygui.cpp:433
+msgid ""
+"This will permanently delete the selected directory and all contained "
+"crosswords from the library. The operation can't be undone!"
+msgstr ""
+"Usunie to trwale wybrany katalog i wszystkie zawarte krzyżówki z biblioteki. "
+"Operacji tej nie można cofnąć!"
+
+#: library/librarygui.cpp:441
+msgid ""
+"Couldn't remove the directory from the library.\n"
+"You need root privileges to remove directories which belong to the global "
+"library."
+msgstr ""
+"Nie można usunąć katalogu z biblioteki\n"
+"Musisz mieć uprawnienia administratora, aby usuwać katalogi, które należą do "
+"globalnej biblioteki."
+
+#: library/librarygui.cpp:445
+msgid ""
+"This will permanently delete the selected crossword from the library.\n"
+"The operation can't be undone!"
+msgstr ""
+"Usunie to trwale wybraną krzyżówkę z biblioteki.\n"
+"Operacji tej nie można cofnąć!"
+
+#: library/librarygui.cpp:452
+#, fuzzy
+msgid "Couldn't remove the crossword from the library."
+msgstr ""
+"Nie można usunąć krzyżówki z biblioteki.\n"
+"%1"
+
+#: library/librarygui.cpp:473
+msgid "New Library Folder"
+msgstr "Nowy katalog biblioteki"
+
+#: library/librarygui.cpp:481
+msgid "The folder already exists in the library."
+msgstr "Katalog już istnieje w bibliotece."
+
+#: library/librarygui.cpp:516
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Create Crossword..."
+msgstr "Wy&czyść krzyżówkę"
+
+#: library/librarygui.cpp:517
+#, fuzzy
+msgid "Create a new crossword"
+msgstr "Utwórz nową krzyżówkę"
+
+#: library/librarygui.cpp:521
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "New &Folder..."
+msgstr "Nowy &katalog"
+
+#: library/librarygui.cpp:522
+#, fuzzy
+msgid "Create a new folder in the library"
+msgstr "Utwórz nowy katalog w bibliotece."
+
+#: library/librarygui.cpp:526
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Download..."
+msgstr "&Pobierz"
+
+#: library/librarygui.cpp:527
+#, fuzzy
+msgid "Download a crossword and add it to the library"
+msgstr "Pobierz krzyżówkę i dodaj ją do biblioteki."
+
+#: library/librarygui.cpp:531
+msgctxt "@action:intoolbar"
+msgid "&Add..."
+msgstr ""
+
+#: library/librarygui.cpp:532
+#, fuzzy
+msgid "Add a crossword to the library"
+msgstr "Importuj krzyżówkę do biblioteki."
+
+#: library/librarygui.cpp:536
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Delete..."
+msgstr "&Usuń"
+
+#: library/librarygui.cpp:537
+#, fuzzy
+msgid "Delete the selected crossword from the library"
+msgstr "Usuń wybraną krzyżówkę z biblioteki."
+
+#: library/librarygui.cpp:541
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Export..."
+msgstr "&Eksportuj"
+
+#: library/librarygui.cpp:542
+#, fuzzy
+msgid "Export the selected crossword from the library"
+msgstr "Eksportuj wybraną krzyżówkę z biblioteki."
+
+#: library/librarygui.cpp:553
+msgid "%1"
+msgstr ""
+
+#: library/librarymanager.cpp:71
+msgctxt "The title for sizes of crosswords in the library tree view"
+msgid "Size:"
+msgstr "Rozmiar:"
+
+#: library/librarymanager.cpp:74
+msgctxt "The title for authors of crosswords in the library tree view"
+msgid "Author(s):"
+msgstr "Autor(zy):"
+
+#: main.cpp:27
+#, fuzzy
+msgid ""
+"A crossword puzzle game and editor for KDE.\n"
+"Based on KrossWordPuzzle."
+msgstr "Krzyżówki i ich edytor dla KDE 4"
+
+#: main.cpp:33
+#, fuzzy
+msgid "Krossword"
+msgstr "Krzyżówka"
 
 #: main.cpp:35
 msgid ""
@@ -2162,6 +2124,56 @@ msgid ""
 "© 2014 Giacomo Barazzetti\n"
 "© 2009 Friedrich Pülz"
 msgstr ""
+
+#: main.cpp:37
+msgid "Andrea Barazzetti"
+msgstr ""
+
+#: main.cpp:37 main.cpp:38
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:38
+msgid "Giacomo Barazzetti"
+msgstr ""
+
+#: main.cpp:39
+msgid "Friedrich Pülz"
+msgstr "Friedrich Pülz"
+
+#: main.cpp:39
+msgid "Previous developer"
+msgstr ""
+
+#: main.cpp:44
+msgid "Document to open"
+msgstr "Dokument do otwarcia"
+
+#: rc.cpp:1
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Łukasz Wojniłowicz"
+
+#: rc.cpp:2
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "lukasz.wojnilowicz@gmail.com"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar"
+#~ msgid "&Import..."
+#~ msgstr "&Importuj"
+
+#~ msgid "Create a new crossword in the library."
+#~ msgstr "Utwórz nową krzyżówkę w bibliotece."
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar"
+#~ msgid "New &Crossword..."
+#~ msgstr "Nowa &krzyżówka"
+
+#~ msgid "Open the selected crossword."
+#~ msgstr "Otwórz wybraną krzyżówkę."
 
 #~ msgid " columns"
 #~ msgstr " kolumn"
