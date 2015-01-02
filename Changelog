@@ -1,5 +1,10 @@
 == Krossword ==
 
+Version 0.18.1 alpha 3 - 2 January 15:
+    - Czech translation 100% updated thanks to Pavel Fric!
+    - Some changes to the library actions (now they should be more clear).
+    - And other minor changes and fixes.
+
 Version 0.18 alpha 3 - 25 December 14:
     - Added language support (with KrossWordPuzzle old translations. Thank you KDE translators!).
     - Added a French provider (mots-croises.ch, just the free crosswords).
