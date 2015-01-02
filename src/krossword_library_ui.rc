@@ -4,14 +4,13 @@
 <!-- Toolbars -->
 <ToolBar name="libraryToolBar">
     <text>Library</text>
-    <Action name="library_new_crossword" />
-    <Separator />
-    <Action name="library_open" />
-    <Action name="library_delete" />
+    <Action name="library_create_crossword" />
     <Separator />
     <Action name="library_download" />
-    <Action name="library_import" />
-    <Action name="library_export" />   
+    <Action name="library_add" />
+    <Action name="library_delete" />
+    <Separator />
+    <Action name="library_export" />  
 </ToolBar>
 
 </kpartgui>

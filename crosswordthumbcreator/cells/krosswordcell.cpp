@@ -24,7 +24,6 @@
 #include <QGraphicsSceneMouseEvent>
 #include <qevent.h>
 #include <QDebug>
-#include <kdeversion.h>
 
 Offset operator *(const Offset &offset, int factor)
 {

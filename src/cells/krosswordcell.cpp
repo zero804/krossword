@@ -31,7 +31,6 @@
 #include <qevent.h>
 
 #include <QDebug>
-#include <kdeversion.h>
 
 #include <QPropertyAnimation>
 #include <QGraphicsEffect>

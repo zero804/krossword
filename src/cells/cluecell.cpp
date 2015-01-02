@@ -32,7 +32,6 @@
 #include <qmath.h>
 
 #include <kglobalsettings.h>
-#include <kdeversion.h>
 
 #include "animator.h"
 #include <QPropertyAnimation>

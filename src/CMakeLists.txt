@@ -17,9 +17,8 @@ set( krossword_SRCS
    htmldelegate.cpp
    dictionary.cpp
    extendedsqltablemodel.cpp
-   onelinelistview.cpp
    clueexpanderitem.cpp
-   subfilesystemproxymodel.cpp
+   templatemodel.cpp
  )
 
 INCLUDE ( io/Sources.cmake )

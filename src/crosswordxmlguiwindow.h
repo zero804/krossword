@@ -31,7 +31,6 @@
 #include <QPrinter>
 #include <KXmlGuiWindow>
 #include <KUrl>
-#include <QTreeView>
 
 #define MIN_SECS_BETWEEN_AUTOSAVES 30
 

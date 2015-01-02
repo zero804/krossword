@@ -26,7 +26,7 @@
 #include <QStandardItemModel>
 #include <QFileSystemModel>
 #include <KStandardDirs>
-#include <subfilesystemproxymodel.h>
+#include <templatemodel.h>
 #include <io/krosswordxmlreader.h>
 #include <QTimer>
 
@@ -119,7 +119,7 @@ void CreateNewCrosswordDialog::setup()
     QStringList templateDirs = KGlobal::dirs()->findDirs("appdata", "templates");
     ui_create_new.templateLocation->addItems(templateDirs);
 
-    m_templateModel = new SubFileSystemProxyModel;
+    m_templateModel = new TemplateModel;
     m_templateModel->setRootPath(templateDirs.first());
     ui_create_new.templates->setModel(m_templateModel);
 
