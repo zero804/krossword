@@ -1010,8 +1010,13 @@ void CrossWordXmlGuiWindow::printPreviewSlot()
     setupPrinter(printer);
     KPrintPreview preview(&printer);
 
-    KrossWordDocument document(krossWord(), &printer);
+    PdfFormatPolicy policy(printer);
+
+    KrossWord &kr = *krossWord();
+    Document document(kr, policy, DocumentSettings());
     document.print();
+    //KrossWordDocument document(krossWord(), &printer);
+    //document.print();
 
     preview.exec();
 }

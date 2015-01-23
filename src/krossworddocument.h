@@ -27,7 +27,10 @@ class KrossWordPuzzleView;
 #include <QPointF>
 #include <QTextDocument>
 
+#include <QPainter>
 #include <type_traits>
+
+#include "krossword.h"
 
 namespace Crossword
 {
@@ -36,42 +39,64 @@ namespace Crossword
 using namespace Crossword;
 
 class QPrinter;
-class QPainter;
-
 
 
 struct DocumentSettings
 {
-    bool showNotes     = true;
-    bool showTitle     = true;
-    bool showCopyright = true;
+    bool showNotes         = true;
+    bool showTitle         = true;
+    bool showCopyright     = true;
+
+    bool showCrosswordOnly = false;
+    bool showCluesOnly     = false;
+
+    bool showSolutions     = false;
 };
 
 class AbstractFormatPolicy
 {
 public:
-    AbstractFormatPolicy()
-    { }
+    AbstractFormatPolicy();
+    virtual ~AbstractFormatPolicy();
 
-    virtual void drawLetterCell() = 0;
-    virtual void drawCellNumber() = 0;
-    virtual void drawImageCell()  = 0;
+    virtual QString getTitle(const QString& title);
+    virtual QString getCopyright(const QString& authors, const QString& copyright);
+    virtual QString getNotes(const QString& notes);
+    virtual QString getCrossword(const KrossWordCellList& cells, uint width, uint height);
+
+    virtual void print(const QString& content) = 0;
+
+    virtual QString drawBlackCell(KrossWordCell& cell) = 0;
+    virtual QString drawClueCell(KrossWordCell& cell) = 0;
+    virtual QString drawDoubleClueCell(KrossWordCell& cell) = 0;
+    virtual QString drawLetterCell(KrossWordCell& cell) = 0;
+    virtual QString drawCellNumber(KrossWordCell& cell) = 0;
+    virtual QString drawImageCell(KrossWordCell& cell)  = 0;
 };
 
 class PdfFormatPolicy : public AbstractFormatPolicy
 {
 public:
-    PdfFormatPolicy(QPrinter& printer, const PolicySettings& settings)
-        : m_printer(printer),
-          AbstractFormatPolicy(settings)
-    { }
+    PdfFormatPolicy(QPrinter& printer);
 
-    void drawLetterCell() override;
-    void drawCellNumber() override;
-    void drawImageCell()  override;
+    void print(const QString& content) override;
+
+    QString drawBlackCell(KrossWordCell& cell) override;
+    QString drawClueCell(KrossWordCell& cell) override;
+    QString drawDoubleClueCell(KrossWordCell& cell) override;
+    QString drawLetterCell(KrossWordCell& cell) override;
+    QString drawCellNumber(KrossWordCell& cell) override;
+    QString drawImageCell(KrossWordCell& cell)  override;
+
+    const QPrinter& getPrinter() const;
+
+    QString getCrossword(const KrossWordCellList &cells, uint width, uint height);
 
 private:
     QPrinter& m_printer;
+    QPainter m_painter;
+    const QSize m_size;
+    QImage m_image;
 };
 
 
@@ -82,69 +107,22 @@ class HtmlFormatPolicy : public AbstractFormatPolicy
 class Document
 {
 public:
-    Document(KrossWord& crossword, AbstractFormatPolicy& policy, const DocumentSettings& settings)
-        : m_crossword(crossword),
-          m_policy(policy),
-          m_settings(settings),
-          m_content()
-    {
-        setup();
-    }
+    Document(KrossWord& crossword, AbstractFormatPolicy& policy, const DocumentSettings& settings);
 
-    void print() {
-        printHeader();
-    }
+    void print();
 
 private:
-    void setup() {
-        m_content = QString("<html><body>") + m_headerTag + m_cluesTag + QString("</body></html>");
+    void setup();
 
-        makeHeader();
-        makeCrossword();
-        makeClues(horizontalClues, verticalClues);
-    }
+    void makeHeader(bool show);
+    void makeTitle(bool add);
+    void makeCopyright(bool add);
+    void makeNotes(bool add);
+    void makeCrossword(bool show);
 
-    void makeHeader() {
-        m_content.replace(m_headerTag, m_titleTag + m_notesTag + m_copyrightTag);
-
-        makeTitle(m_settings.showTitle);
-        makeCopyright(m_settings.showCopyright);
-        makeNotes(m_settings.showNotes);
-    }
-
-    void makeTitle(bool add) {
-        if (add)
-            m_content.replace(m_titleTag, "<h1>" + m_crossword.title() + "</h1>");
-        else
-            m_content.replace(m_titleTag, "");
-    }
-
-    void makeCopyright(bool add) {
-        if (add)
-            m_content.replace(m_copyrightTag, "<table width='100%'><tr><td>" +
-                                              m_crossword.authors() + "</td><td align='right'>" +
-                                              m_crossword.copyright() + "</td></tr></table>");
-        else
-            m_content.replace(m_copyrightTag, "");
-    }
-
-    void makeNotes(bool add) {
-        if (add)
-            m_content.replace(m_notesTag, m_crossword.notes());
-        else
-            m_content.replace(m_notesTag, "");
-    }
-
-    void makeCrossword() {
-
-    }
-
-    void makeClues() {
-        m_content.replace(m_cluesTag, "TODO");
-
-        ClueCellList horizontalClues, verticalClues;
-        m_crossword.clues(&horizontalClues, &verticalClues);
-    }
+    void makeClues(bool show);
+    void makeCluesTitle();
+    void makeCluesList(const ClueCellList& horizontal, const ClueCellList& vertical);
 
 private:
     KrossWord& m_crossword;
@@ -152,15 +130,20 @@ private:
     DocumentSettings m_settings;
     QString m_content;
 
-    const QString m_headerTag    = "<crosswordHeader />";
-    const QString m_cluesTag     = "<crosswordClues />";
+    const QString m_headerTag     = "<crosswordHeader />";
+    const QString m_crosswordTag  = "<crossword />";
+    const QString m_cluesTag      = "<crosswordClues />";
 
-    const QString m_titleTag     = "<crosswordTitle />";
-    const QString m_copyrightTag = "<crosswordCopyright />";
-    const QString m_notesTag     = "<crosswordNotes />";
+    const QString m_titleTag      = "<crosswordTitle />";
+    const QString m_copyrightTag  = "<crosswordCopyright />";
+    const QString m_notesTag      = "<crosswordNotes />";
+
+    const QString m_cluesTitleTag      = "<crosswordCluesTitle />";
+    const QString m_horizontalCluesTag = "<crosswordCluesHor />";
+    const QString m_verticalCluesTag   = "<crosswordCluesVer />";
 };
 
-/*
+
 class DocumentLayout
 {
 public:
@@ -191,7 +174,6 @@ private:
     float m_titleHeight;
     QPointF m_translation;
 };
-*/
 
 
 class KrossWordDocument

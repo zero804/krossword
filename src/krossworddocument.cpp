@@ -34,6 +34,284 @@
 #include <cmath>
 
 
+AbstractFormatPolicy::AbstractFormatPolicy()
+{ }
+
+AbstractFormatPolicy::~AbstractFormatPolicy()
+{ }
+
+QString AbstractFormatPolicy::getTitle(const QString &title) {
+    return "<h1>" + title + "</h1>";
+}
+
+QString AbstractFormatPolicy::getCopyright(const QString &authors, const QString &copyright) {
+    return "<table width='100%'><tr><td>" + authors +
+            "</td><td align='right'>" + copyright + "</td></tr></table>";
+}
+
+QString AbstractFormatPolicy::getNotes(const QString &notes) {
+    return notes;
+}
+
+QString AbstractFormatPolicy::getCrossword(const KrossWordCellList &cells, uint width, uint height) {
+    QString htmlcells;
+    foreach(KrossWordCell* cell, cells) {
+
+        switch(cell->cellType()) {
+        case Crossword::CellType::EmptyCellType:          //Black cells
+            htmlcells += drawBlackCell(*cell);
+            break;
+        case Crossword::CellType::ClueCellType:           //Cell with one clue inside
+            htmlcells += drawClueCell(*cell);
+            break;
+        case Crossword::CellType::DoubleClueCellType:     //Cell with two clues inside
+            htmlcells += drawDoubleClueCell(*cell);
+            break;
+        case Crossword::CellType::LetterCellType:         //Standard letter cell
+            htmlcells += drawLetterCell(*cell);
+            break;
+        case Crossword::CellType::SolutionLetterCellType: //Solution cell?
+            //htmlcells += drawSolutionCell(*cell);
+            break;
+        case Crossword::CellType::ImageCellType:          //Image cells
+            htmlcells += drawImageCell(*cell);
+            break;
+        default:
+            break;
+        }
+    }
+
+    return htmlcells;
+}
+
+//===============
+
+PdfFormatPolicy::PdfFormatPolicy(QPrinter &printer)
+    : AbstractFormatPolicy(),
+      m_printer(printer),
+      m_painter(),
+      m_size(m_printer.pageRect().width(), m_printer.pageRect().width()),
+      m_image(m_size, QImage::Format_RGB888)
+{ }
+
+void PdfFormatPolicy::print(const QString &content)
+{
+    QTextDocument doc;
+    doc.setHtml(content);
+
+    QPainter painter;
+    painter.begin(&m_printer);
+
+    painter.drawImage(0, 0, m_image);
+
+    doc.drawContents(&painter);
+
+    painter.end();
+}
+
+QString PdfFormatPolicy::getCrossword(const KrossWordCellList &cells, uint width, uint height) {
+    m_painter.begin(&m_image);
+    m_painter.fillRect(QRectF(0, 0, m_size.width(), m_size.height()), Qt::white);
+
+    float cellSize = m_size.width()/width;
+
+    foreach(KrossWordCell* cell, cells) {
+        Coord cellCoord = cell->coord();
+        //m_painter.translate(cellCoord.first * cellSize, cellCoord.second * cellSize);
+
+        switch(cell->cellType()) {
+        case Crossword::CellType::EmptyCellType:          //Black cells
+            drawBlackCell(*cell);
+            m_painter.drawRect(cellCoord.first * cellSize,
+                               cellCoord.second * cellSize,
+                               cellSize,
+                               cellSize);
+
+            break;
+        case Crossword::CellType::ClueCellType:           //Cell with one clue inside
+            drawClueCell(*cell);
+            break;
+        case Crossword::CellType::DoubleClueCellType:     //Cell with two clues inside
+            drawDoubleClueCell(*cell);
+            break;
+        case Crossword::CellType::LetterCellType:         //Standard letter cell
+            drawLetterCell(*cell);
+            break;
+        case Crossword::CellType::SolutionLetterCellType: //Solution cell?
+            //htmlcells += drawSolutionCell(*cell);
+            break;
+        case Crossword::CellType::ImageCellType:          //Image cells
+            drawImageCell(*cell);
+            break;
+        default:
+            break;
+        }
+
+        //m_painter.translate(-cellCoord.first * cellSize, -cellCoord.second * cellSize);
+    }
+
+    m_painter.end();
+
+    return "";
+}
+
+QString PdfFormatPolicy::drawBlackCell(KrossWordCell &cell)
+{
+    m_painter.setPen(Qt::black);
+    m_painter.setBrush(QBrush(Qt::black, Qt::SolidPattern));
+
+    return "";
+}
+
+QString PdfFormatPolicy::drawClueCell(KrossWordCell &cell)
+{
+    return "";
+}
+
+QString PdfFormatPolicy::drawDoubleClueCell(KrossWordCell& cell)
+{
+    return "";
+}
+
+QString PdfFormatPolicy::drawLetterCell(KrossWordCell &cell)
+{
+    return "";
+}
+
+QString PdfFormatPolicy::drawCellNumber(KrossWordCell &cell)
+{
+    return "";
+}
+
+QString PdfFormatPolicy::drawImageCell(KrossWordCell& cell)
+{
+    return "";
+}
+
+const QPrinter &PdfFormatPolicy::getPrinter() const
+{
+    return m_printer;
+}
+
+//======================
+
+Document::Document(KrossWord &crossword, AbstractFormatPolicy &policy, const DocumentSettings &settings)
+    : m_crossword(crossword),
+      m_policy(policy),
+      m_settings(settings),
+      m_content()
+{
+    setup();
+}
+
+void Document::print() {
+    m_policy.print(m_content);
+}
+
+void Document::setup() {
+    m_content = QString("<html><body>") + m_headerTag + m_crosswordTag + m_cluesTag + QString("</body></html>");
+
+
+    bool show_crossword = m_settings.showCrosswordOnly;
+    bool show_clues     = m_settings.showCluesOnly;
+
+    if (!show_crossword && !show_clues) {
+        show_crossword = true;
+        show_clues = true;
+    }
+
+    makeHeader(show_crossword);
+    makeCrossword(show_crossword);
+    makeClues(show_clues);
+}
+
+void Document::makeHeader(bool show) {
+    if (show) {
+        m_content.replace(m_headerTag, m_titleTag + m_notesTag + m_copyrightTag);
+
+        makeTitle(m_settings.showTitle);
+        makeCopyright(m_settings.showCopyright);
+        makeNotes(m_settings.showNotes);
+    } else {
+        m_content.replace(m_headerTag, "");
+    }
+}
+
+void Document::makeTitle(bool add) {
+    if (add)
+        m_content.replace(m_titleTag, m_policy.getTitle(m_crossword.title()));
+    else
+        m_content.replace(m_titleTag, "");
+}
+
+void Document::makeCopyright(bool add) {
+    if (add)
+        m_content.replace(m_copyrightTag, m_policy.getCopyright(m_crossword.authors(), m_crossword.copyright()));
+    else
+        m_content.replace(m_copyrightTag, "");
+}
+
+void Document::makeNotes(bool add) {
+    if (add)
+        m_content.replace(m_notesTag, m_policy.getNotes(m_crossword.notes()));
+    else
+        m_content.replace(m_notesTag, "");
+}
+
+void Document::makeCrossword(bool show)
+{
+    if (show) {
+        m_content.replace(m_crosswordTag, m_policy.getCrossword(m_crossword.cells(), m_crossword.width(), m_crossword.height()));
+    } else {
+        m_content.replace(m_crosswordTag, "");
+    }
+}
+
+void Document::makeClues(bool show) {
+    if (show) {
+        ClueCellList horizontalClues, verticalClues;
+        m_crossword.clues(&horizontalClues, &verticalClues);
+
+        m_content.replace(m_cluesTag, m_cluesTitleTag + m_horizontalCluesTag + m_verticalCluesTag);
+
+        makeCluesTitle();
+        makeCluesList(horizontalClues, verticalClues);
+
+    } else {
+        m_content.replace(m_cluesTag, "");
+    }
+}
+
+void Document::makeCluesTitle()
+{
+    m_content.replace(m_cluesTitleTag, "<center><h1>" + i18nc("Title for the clue list when printing", "Clue list") + "</h1></center><br>");
+}
+
+void Document::makeCluesList(const ClueCellList& horizontal, const ClueCellList& vertical)
+{
+    QString clueTableHorizontal = "<table cellspacing='10'>";
+    foreach(ClueCell * clue, horizontal) {
+        clueTableHorizontal += QString("<tr><td>%1</td></tr>").arg(clue->clueWithNumber());
+    }
+
+    QString clueTableVertical = "<table cellspacing='10'>";
+    foreach(ClueCell * clue, vertical) {
+        clueTableVertical += QString("<tr><td>%1</td></tr>").arg(clue->clueWithNumber());
+    }
+
+    m_content.replace(m_horizontalCluesTag, QString("<table><tr><td>"
+                                                    "<h2>%1</h2>"
+                                                    "%2</td>"
+                                                    "<td><h2>%3</h2>"
+                                                    "%4</div>"
+                                                    "</td></tr></table>").arg(i18nc("Title for the list of across/horizontal clues when printing", "Across clues"),
+                                                                              clueTableHorizontal,
+                                                                              i18nc("Title for the list of down/vertical clues when printing", "Down clues"),
+                                                                              clueTableVertical));
+}
+
+//================================================================
+
 
 DocumentLayout::DocumentLayout(KrossWord &crossword)
     : m_crosswordPage(),
@@ -44,7 +322,7 @@ DocumentLayout::DocumentLayout(KrossWord &crossword)
     makeCrosswordPage();
     makeCluesPage();
 
-    computeCellSize();
+    computeRelativeCellSize();
 }
 
 void DocumentLayout::drawCrosswordPage(QPainter *painter)
