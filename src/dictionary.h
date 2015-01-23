@@ -72,8 +72,6 @@ private:
     QDialog *createProgressDialog(QWidget *parent, const QString &text, QProgressBar *progressBar);
     bool makeStandardConnection();
     bool askForRootConnection(QWidget *dlgParent);
-    bool checkDatabase();
-    QSqlDatabase getDatabaseConnection(bool *ok) const;
 
 private:
     Ui::database_connection ui_database_connection;
