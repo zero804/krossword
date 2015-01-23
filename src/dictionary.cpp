@@ -28,7 +28,6 @@
 #include <QRegExp>
 #include <QMetaType>
 #include <QListWidget>
-#include <QApplication>
 #include <QStandardItemModel>
 #include <QSqlDatabase>
 #include <QVBoxLayout>

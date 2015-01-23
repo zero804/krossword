@@ -17,19 +17,29 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ONELINELISTVIEW_H
-#define ONELINELISTVIEW_H
+#ifndef TEMPLATEMODEL_H
+#define TEMPLATEMODEL_H
 
-#include <QListView>
+#include <QSortFilterProxyModel>
+#include <QDir>
 
-class OneLineListView : public QListView
+class QFileSystemModel;
+class TemplateModel : public QSortFilterProxyModel
 {
 public:
-    OneLineListView(QWidget* parent = 0);
+    TemplateModel(QObject* parent = 0);
+    virtual ~TemplateModel();
 
-    virtual QRect visualRect(const QModelIndex& index) const;
-    virtual void resizeEvent(QResizeEvent* e);
+    void setRootPath(const QString &rootPath);
+    QString filePath(const QModelIndex &index) const;
+    void setFilter(QDir::Filter filter);
+    QModelIndex indexForPath(const QString &path, int column = 0) const;
 
+    virtual QModelIndex mapFromSource(const QModelIndex& sourceIndex) const;
+    virtual QModelIndex mapToSource(const QModelIndex& proxyIndex) const;
+
+private:
+    QFileSystemModel *m_fileSystemModel;
 };
 
-#endif // ONELINELISTVIEW_H
+#endif // TEMPLATEMODEL_H

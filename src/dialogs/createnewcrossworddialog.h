@@ -25,7 +25,7 @@
 
 #include <QDialog>
 
-class SubFileSystemProxyModel;
+class TemplateModel;
 
 using namespace Crossword;
 
@@ -78,7 +78,7 @@ private:
     bool m_changedUserDefinedSettings;
     CrosswordTypeInfo m_typeInfo;
     int m_previousConvertToTypeIndex;
-    SubFileSystemProxyModel *m_templateModel;
+    TemplateModel *m_templateModel;
 };
 
 #endif // CREATENEWCROSSWORDDIALOG_H

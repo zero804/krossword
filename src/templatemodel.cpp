@@ -17,12 +17,12 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "subfilesystemproxymodel.h"
+#include "templatemodel.h"
 
 #include <QFileSystemModel>
 #include <QDebug>
 
-SubFileSystemProxyModel::SubFileSystemProxyModel(QObject* parent)
+TemplateModel::TemplateModel(QObject* parent)
     : QSortFilterProxyModel(parent)
 {
     m_fileSystemModel = new QFileSystemModel;
@@ -31,33 +31,33 @@ SubFileSystemProxyModel::SubFileSystemProxyModel(QObject* parent)
     setSourceModel(m_fileSystemModel);
 }
 
-SubFileSystemProxyModel::~SubFileSystemProxyModel()
+TemplateModel::~TemplateModel()
 {
     delete m_fileSystemModel;
 }
 
-void SubFileSystemProxyModel::setRootPath(const QString& rootPath)
+void TemplateModel::setRootPath(const QString& rootPath)
 {
     m_fileSystemModel->setRootPath(rootPath);
 }
 
-QString SubFileSystemProxyModel::filePath(const QModelIndex& index) const
+QString TemplateModel::filePath(const QModelIndex& index) const
 {
     return m_fileSystemModel->filePath(mapToSource(index));
 }
 
-void SubFileSystemProxyModel::setFilter(QDir::Filter filter)
+void TemplateModel::setFilter(QDir::Filter filter)
 {
     m_fileSystemModel->setFilter(filter);
 }
 
-QModelIndex SubFileSystemProxyModel::indexForPath(const QString& path,
+QModelIndex TemplateModel::indexForPath(const QString& path,
         int column) const
 {
     return mapFromSource(m_fileSystemModel->index(path, column));
 }
 
-QModelIndex SubFileSystemProxyModel::mapFromSource(
+QModelIndex TemplateModel::mapFromSource(
     const QModelIndex& sourceIndex) const
 {
     QModelIndex rootIndex = m_fileSystemModel->index(m_fileSystemModel->rootPath());
@@ -67,7 +67,7 @@ QModelIndex SubFileSystemProxyModel::mapFromSource(
         return QSortFilterProxyModel::mapFromSource(sourceIndex);
 }
 
-QModelIndex SubFileSystemProxyModel::mapToSource(
+QModelIndex TemplateModel::mapToSource(
     const QModelIndex& proxyIndex) const
 {
     QModelIndex rootIndex = m_fileSystemModel->index(m_fileSystemModel->rootPath());

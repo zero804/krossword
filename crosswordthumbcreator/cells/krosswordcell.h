@@ -28,7 +28,6 @@
 #include <qstyleoption.h>
 
 #include <QDebug>
-#include <kdeversion.h>
 
 #include <QGraphicsObject>
 

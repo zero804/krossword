@@ -428,15 +428,15 @@ void KrossWordPuzzle::currentTabChanged(int index)
     } else { // tabLibrary
         setCaption(i18n("Library"));
 
-        libraryGameList << m_mainLibrary->action("library_new_crossword");
+        libraryGameList << m_mainLibrary->action("library_create_crossword");
         libraryGameList << m_mainLibrary->action("library_new_folder");
         libraryGameList << separator;
-        libraryGameList << m_mainLibrary->action("library_open");
+        libraryGameList << m_mainLibrary->action("library_download");
+        libraryGameList << m_mainLibrary->action("library_add");
         libraryGameList << m_mainLibrary->action("library_delete");
         libraryGameList << separator2;
-        libraryGameList << m_mainLibrary->action("library_download");
-        libraryGameList << m_mainLibrary->action("library_import");
         libraryGameList << m_mainLibrary->action("library_export");
+
 
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::Options_Dictionaries));
         optionsList << separator;

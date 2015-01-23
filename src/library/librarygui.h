@@ -44,13 +44,12 @@ class LibraryGui : public KXmlGuiWindow
 
 public:
     enum Action {
-        Library_Open,
-        Library_Import,
-        Library_Export,
-        Library_Download,
+        Library_CreateCrossword,
+        Library_Add,
         Library_Delete,
         Library_NewFolder,
-        Library_NewCrossword
+        Library_Export,
+        Library_Download
     };
 
     enum DownloadProvider {
@@ -86,13 +85,12 @@ protected slots:
     void libraryItemDoubleClicked(const QModelIndex &index);
     void libraryCurrentChanged(const QModelIndex &current, const QModelIndex &previous);
 
-    void libraryOpenSlot();
-    void libraryImportSlot();
-    void libraryExportSlot();
-    void libraryDownloadSlot();
+    void libraryCreateCrosswordSlot();
+    void libraryAddSlot();
     void libraryDeleteSlot();
     void libraryNewFolderSlot();
-    void libraryNewCrosswordSlot();
+    void libraryExportSlot();
+    void libraryDownloadSlot();
 
 private:
     Ui::create_new ui_create_new;

@@ -36,40 +36,12 @@
 #include "dialogs/dictionarydialog.h"
 #include "dialogs/currentcellwidget.h"
 
-#include <QTreeView>
-#include <QScrollBar>
-#include <QDockWidget>
-#include <QUndoView>
-#include <QStandardItemModel>
-#include <QHeaderView>
-#include <QGraphicsGridLayout>
-#include <QGraphicsItemAnimation>
-#include <QTimeLine>
-#include <QMenu>
-#include <QCheckBox>
-#include <QGraphicsWidget>
-#include <QProgressBar>
-#include <QGraphicsProxyWidget>
-#include <QToolTip>
-#include <QPrintDialog>
-#include <QTimer>
-#include <QStringListModel>
-
-#include <QToolButton>
-
-#include <QParallelAnimationGroup>
-#include <QPropertyAnimation>
-
-#include <KAction>
 #include <KToggleAction>
 #include <KStandardGameAction>
-#include <KRecentFilesAction>
 #include <KActionCollection>
-#include <KActionMenu>
 
 #include <KToolBar>
 #include <KMenuBar>
-#include <KMenu>
 #include <KUrl>
 #include <KLocalizedString>
 #include <KStandardGuiItem>

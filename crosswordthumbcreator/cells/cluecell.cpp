@@ -23,7 +23,6 @@
 
 #include <QGraphicsSceneMouseEvent>
 #include <QFocusEvent>
-#include <kdeversion.h>
 #include <kglobalsettings.h>
 
 DoubleClueCell::DoubleClueCell(KrossWord* krossWord, const Coord& coord,

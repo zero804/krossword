@@ -92,10 +92,8 @@ QTreeView* LibraryGui::libraryTree() const
 const char* LibraryGui::actionName(LibraryGui::Action actionEnum) const
 {
     switch (actionEnum) {
-    case Library_Open:
-        return "library_open";
-    case Library_Import:
-        return "library_import";
+    case Library_Add:
+        return "library_add";
     case Library_Export:
         return "library_export";
     case Library_Download:
@@ -104,8 +102,8 @@ const char* LibraryGui::actionName(LibraryGui::Action actionEnum) const
         return "library_delete";
     case Library_NewFolder:
         return "library_new_folder";
-    case Library_NewCrossword:
-        return "library_new_crossword";
+    case Library_CreateCrossword:
+        return "library_create_crossword";
 
     default:
         qWarning() << "Action enumerable not handled in switch" << actionEnum;
@@ -258,23 +256,17 @@ void LibraryGui::libraryOpenItem(const QModelIndex& index)
         m_mainWindow->loadFile(KUrl(index.data(QFileSystemModel::FilePathRole).toString()));
 }
 
-void LibraryGui::libraryOpenSlot()
-{
-    libraryOpenItem(m_libraryTree->currentIndex());
-}
-
 void LibraryGui::libraryCurrentChanged(const QModelIndex& current, const QModelIndex& previous)
 {
     Q_UNUSED(previous);
 
     bool isCrosswordSelected = !(m_libraryModel->isDir(current));
-    action(actionName(Library_Open))->setEnabled(isCrosswordSelected);
     action(actionName(Library_Export))->setEnabled(isCrosswordSelected);
 
     action(actionName(Library_Delete))->setEnabled(current.isValid());
 }
 
-void LibraryGui::libraryImportSlot()
+void LibraryGui::libraryAddSlot()
 {
     KUrl url = KFileDialog::getOpenUrl(KUrl("kfiledialog:///importCrossword"),
                                        "application/x-krosswordpuzzle "
@@ -494,7 +486,7 @@ void LibraryGui::libraryNewFolderSlot()
     delete dlg;
 }
 
-void LibraryGui::libraryNewCrosswordSlot()
+void LibraryGui::libraryCreateCrosswordSlot()
 {
     QPointer<CreateNewCrosswordDialog> dialog = new CreateNewCrosswordDialog(this);
 
@@ -521,40 +513,35 @@ void LibraryGui::libraryNewCrosswordSlot()
 void LibraryGui::setupActions()
 {
     // Library actions
-    KAction *libraryOpenAction = new KAction(KIcon("document-open"), i18nc("@action:intoolbar", "&Open..."), this);
-    libraryOpenAction->setToolTip(i18n("Open the selected crossword."));
-    actionCollection()->addAction(actionName(Library_Open), libraryOpenAction);
-    connect(libraryOpenAction, SIGNAL(triggered()), this, SLOT(libraryOpenSlot()));
-
-    KAction *libraryImportAction = new KAction(KIcon("document-import"), i18nc("@action:intoolbar", "&Import..."), this);
-    libraryImportAction->setToolTip(i18n("Import a crossword to the library."));
-    actionCollection()->addAction(actionName(Library_Import), libraryImportAction);
-    connect(libraryImportAction, SIGNAL(triggered()), this, SLOT(libraryImportSlot()));
-
-    KAction *libraryExportAction = new KAction(KIcon("document-export"), i18nc("@action:intoolbar", "&Export..."), this);
-    libraryExportAction->setToolTip(i18n("Export the selected crossword from the library."));
-    actionCollection()->addAction(actionName(Library_Export), libraryExportAction);
-    connect(libraryExportAction, SIGNAL(triggered()), this, SLOT(libraryExportSlot()));
-
-    KAction *libraryDownloadAction = new KAction(KIcon("download"), i18nc("@action:intoolbar", "&Download..."), this);
-    libraryDownloadAction->setToolTip(i18n("Download a crossword and add it to the library."));
-    actionCollection()->addAction(actionName(Library_Download), libraryDownloadAction);
-    connect(libraryDownloadAction, SIGNAL(triggered()), this, SLOT(libraryDownloadSlot()));
-
-    KAction *libraryDeleteAction = new KAction(KIcon("edit-delete"), i18nc("@action:intoolbar", "&Delete..."), this);
-    libraryDeleteAction->setToolTip(i18n("Delete the selected crossword from the library."));
-    actionCollection()->addAction(actionName(Library_Delete), libraryDeleteAction);
-    connect(libraryDeleteAction, SIGNAL(triggered()), this, SLOT(libraryDeleteSlot()));
+    KAction *libraryCreateCrosswordAction = new KAction(KIcon("document-new"), i18nc("@action:intoolbar", "&Create Crossword..."), this);
+    libraryCreateCrosswordAction->setToolTip(i18n("Create a new crossword"));
+    actionCollection()->addAction(actionName(Library_CreateCrossword), libraryCreateCrosswordAction);
+    connect(libraryCreateCrosswordAction, SIGNAL(triggered()), this, SLOT(libraryCreateCrosswordSlot()));
 
     KAction *libraryNewFolderAction = new KAction(KIcon("folder-new"), i18nc("@action:intoolbar", "New &Folder..."), this);
-    libraryNewFolderAction->setToolTip(i18n("Create a new folder in the library."));
+    libraryNewFolderAction->setToolTip(i18n("Create a new folder in the library"));
     actionCollection()->addAction(actionName(Library_NewFolder), libraryNewFolderAction);
     connect(libraryNewFolderAction, SIGNAL(triggered()), this, SLOT(libraryNewFolderSlot()));
 
-    KAction *libraryNewCrosswordAction = new KAction(KIcon("document-new"), i18nc("@action:intoolbar", "New &Crossword..."), this);
-    libraryNewCrosswordAction->setToolTip(i18n("Create a new crossword in the library."));
-    actionCollection()->addAction(actionName(Library_NewCrossword), libraryNewCrosswordAction);
-    connect(libraryNewCrosswordAction, SIGNAL(triggered()), this, SLOT(libraryNewCrosswordSlot()));
+    KAction *libraryDownloadAction = new KAction(KIcon("download"), i18nc("@action:intoolbar", "&Download..."), this);
+    libraryDownloadAction->setToolTip(i18n("Download a crossword and add it to the library"));
+    actionCollection()->addAction(actionName(Library_Download), libraryDownloadAction);
+    connect(libraryDownloadAction, SIGNAL(triggered()), this, SLOT(libraryDownloadSlot()));
+
+    KAction *libraryAddAction = new KAction(KIcon("list-add"), i18nc("@action:intoolbar", "&Add..."), this);
+    libraryAddAction->setToolTip(i18n("Add a crossword to the library"));
+    actionCollection()->addAction(actionName(Library_Add), libraryAddAction);
+    connect(libraryAddAction, SIGNAL(triggered()), this, SLOT(libraryAddSlot()));
+
+    KAction *libraryDeleteAction = new KAction(KIcon("edit-delete"), i18nc("@action:intoolbar", "&Delete..."), this);
+    libraryDeleteAction->setToolTip(i18n("Delete the selected crossword from the library"));
+    actionCollection()->addAction(actionName(Library_Delete), libraryDeleteAction);
+    connect(libraryDeleteAction, SIGNAL(triggered()), this, SLOT(libraryDeleteSlot()));
+
+    KAction *libraryExportAction = new KAction(KIcon("document-export"), i18nc("@action:intoolbar", "&Export..."), this);
+    libraryExportAction->setToolTip(i18n("Export the selected crossword from the library"));
+    actionCollection()->addAction(actionName(Library_Export), libraryExportAction);
+    connect(libraryExportAction, SIGNAL(triggered()), this, SLOT(libraryExportSlot()));
 }
 
 void LibraryGui::getDownloadCrosswordItems(const QString& rawUrl, const QDate& startDate, const QDate& endDate, int dayOffset)
