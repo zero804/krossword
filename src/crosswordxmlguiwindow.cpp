@@ -2892,7 +2892,7 @@ void CrossWordXmlGuiWindow::optionsDictionarySlot()
     QPointer<DictionaryDialog> dialog = new DictionaryDialog(m_dictionary, this);
     dialog->exec();
     dialog->databaseTable()->submitAll();
-    m_dictionary->closeDatabase();
+    //m_dictionary->closeDatabase();
     delete dialog;
 }
 
