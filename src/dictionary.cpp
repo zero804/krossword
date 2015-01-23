@@ -71,13 +71,13 @@ bool KrosswordDictionary::makeStandardConnection()
 
     m_db = QSqlDatabase::addDatabase("QMYSQL", CONNECTION_NAME);
     m_db.setHostName("localhost");
-    m_db.setDatabaseName("krosswordpuzzle");
     m_db.setUserName("krosswordpuzzle");
     m_db.setPassword("krosswordpuzzle");
 
     // Probably no user krosswordpuzzle
     if (!m_db.open()) {
         success = false;
+        QSqlDatabase::removeDatabase(CONNECTION_NAME);
     }
 
     return success;
@@ -160,6 +160,7 @@ bool KrosswordDictionary::openDatabase(QWidget *dlgParent)
         success = true;
     } else {
         success = false;
+        qDebug() << "Couldn't open database even with right setup";
     }
 
     qDebug() << "Database opened:" << success;
@@ -194,8 +195,8 @@ bool KrosswordDictionary::askForRootConnection(QWidget *dlgParent)
             QSqlQuery rootQuery(dbRoot);
 
             // This workaround should solve a bug in sql when creating user (error 1396)
-            //rootQuery.exec("DROP USER krosswordpuzzle@localhost;");
-            //rootQuery.exec("FLUSH PRIVILEGES;");
+            rootQuery.exec("DROP USER krosswordpuzzle@localhost;");
+            rootQuery.exec("FLUSH PRIVILEGES;");
             bool user_created = rootQuery.exec("CREATE USER krosswordpuzzle@localhost IDENTIFIED BY 'krosswordpuzzle'");
             if (!user_created)
                 qDebug() << "Error creating the db user" << rootQuery.lastError();
@@ -204,14 +205,14 @@ bool KrosswordDictionary::askForRootConnection(QWidget *dlgParent)
                 if (!granted)
                     qDebug() << "Error granting privileges to the database krosswordpuzzle" << rootQuery.lastError();
             }
-            dbRoot.close();
             success = true;
 
         } else {
             success = false;
+            qDebug() << "Error opening root connection";
         }
 
-        QSqlDatabase::removeDatabase("root_connection");
+        dbRoot.close();
     }
 
     delete dialog;
