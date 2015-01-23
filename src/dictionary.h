@@ -37,10 +37,9 @@ class KrosswordDictionary : public QObject
     Q_OBJECT
 
 public:
-    KrosswordDictionary(QObject* parent = 0);
+    KrosswordDictionary(QObject* parent = nullptr);
     virtual ~KrosswordDictionary();
 
-    static const int MAX_WORD_LENGTH = 256;
     bool openDatabase(QWidget *dlgParent);
     void closeDatabase();
     bool createTables();
@@ -71,12 +70,17 @@ signals:
 
 private:
     QDialog *createProgressDialog(QWidget *parent, const QString &text, QProgressBar *progressBar);
-    bool checkDatabase();
-    QSqlDatabase getDatabaseConnection(bool *ok) const;
+    bool makeStandardConnection();
+    bool askForRootConnection(QWidget *dlgParent);
 
+private:
     Ui::database_connection ui_database_connection;
-    bool m_cancel;
+    QSqlDatabase m_db;
+    bool m_cancel;  //Cancel action clicked (yeah really!!)
     bool m_databaseOk;
+    bool m_hasConnection;
+    static const int MAX_WORD_LENGTH = 256;
+    static const QString CONNECTION_NAME;
 };
 
 #endif // DICTIONARY_H
