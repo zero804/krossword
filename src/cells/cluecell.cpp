@@ -243,7 +243,7 @@ ClueCell::ClueCell(KrossWord* krossWord, Coord coord,
         setVisible(false);
 
     setCursor(Qt::ArrowCursor);
-    setToolTip(clueWithoutHyphens());
+    setToolTip(m_clue);
 
     connect(this, SIGNAL(currentAnswerChanged(ClueCell*, const QString&)),
             krossWord, SLOT(answerChangedSlot(ClueCell*, const QString&)));
@@ -866,44 +866,19 @@ void ClueCell::findLetters(Qt::Orientation newOrientation,
     }
 }
 
-QVariant ClueCell::itemChange(QGraphicsItem::GraphicsItemChange change,
-                              const QVariant& value)
+QVariant ClueCell::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value)
 {
-//     if ( change == ItemSelectedHasChanged ) {
-//  bool selected = value.toBool();
-//  LetterCellList letterList = letters();
-//  foreach( LetterCell *letterCell, letterList ) {
-//      letterCell->setSelected( selected );
-//  }
-//     }
-
     return KrossWordCell::itemChange(change, value);
-}
-
-
-QString ClueCell::clueWithoutHyphens() const
-{
-    if (m_clue.isEmpty())
-        return i18nc("Display text for empty clue texts", "<placeholder>empty</placeholder>");
-
-    QString clueText = m_clue;
-    //     QRegExp rx( "[a-z?äöü]-[a-z?äöü]" );
-    QRegExp rx("\\w-\\w");   // TODO: TEST
-    int pos = 0;
-    while ((pos = rx.indexIn(clueText, pos)) != -1) {
-        clueText.remove(++pos, 1);   // Remove the hyphen
-    }
-
-    return clueText;
 }
 
 QString ClueCell::clueWithNumber(QString format) const
 {
-    if (krossWord()->crosswordTypeInfo().clueMapping == CluesReferToSetsOfCells
-            && clueNumber() != -1) {
-        return QString(format).arg(clueNumber() + 1).arg(clueWithoutHyphens());
+    // if not a number puzzle
+    if (krossWord()->crosswordTypeInfo().clueMapping == CluesReferToSetsOfCells  && clueNumber() != -1) {
+        // build the base string for item in clue list
+        return QString(format).arg(clueNumber() + 1).arg(m_clue);
     } else
-        return clueWithoutHyphens();
+        return m_clue;
 }
 
 void ClueCell::wrapClueText()

@@ -107,7 +107,7 @@ public:
     };
     /** Sets the clue string of the clue cell. */
     void setClue(const QString &clue);
-    QString clueWithoutHyphens() const;
+    /** Sets the string for the item in clue list */
     QString clueWithNumber(QString format = "%1. %2") const;
     /** Gets the correct answer. */
     QString correctAnswer() const {
