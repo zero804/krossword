@@ -67,11 +67,15 @@ signals:
 private:
     QDialog *createProgressDialog(QWidget *parent, const QString &text, QProgressBar *progressBar);
     bool makeStandardConnection();
-    bool askForRootConnection(QWidget *dlgParent);
+    bool setupDatabase(QWidget *dlgParent);
+    bool createUser(QSqlQuery &query);
+    bool createKrosswordDatabase(QSqlQuery &query);
+
+    QSqlDatabase getDatabase() const;
 
 private:
     Ui::database_connection ui_database_connection;
-    QSqlDatabase m_db;
+
     bool m_cancel;  //Cancel action clicked (yeah really!!)
     bool m_hasConnection;
     static const int MAX_WORD_LENGTH = 256;

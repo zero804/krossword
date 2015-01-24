@@ -287,7 +287,7 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
       m_clueSelectionModel(nullptr),
       m_winItems(nullptr),
       m_popupMenuCell(nullptr),
-      m_dictionary(nullptr),
+      m_dictionary(new KrosswordDictionary),
       m_animation(nullptr)
 {
     m_lastSavedUndoIndex = -1;
@@ -342,8 +342,6 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
 
     setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krossword/krossword_crossword_ui.rc");
     menuBar()->hide(); // because it will be exposed as needed in the mainwindow
-
-    m_dictionary = new KrosswordDictionary;
 }
 
 CrossWordXmlGuiWindow::~CrossWordXmlGuiWindow()
