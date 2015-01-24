@@ -72,8 +72,6 @@ ClueListView::ClueListView(QWidget* parent) : QTreeView(parent), m_scrollAnimati
     setVerticalScrollMode(ScrollPerPixel);
     setContextMenuPolicy(Qt::CustomContextMenu);
 
-    header()->setResizeMode(QHeaderView::Stretch);
-
     setItemDelegate(new HtmlDelegate(this));
 }
 
@@ -744,6 +742,7 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
 
         adjustGuiToCrosswordType();
         emit loadingFileComplete(m_curFileName);
+        m_clueTree->resizeColumnToContents(0); // we have to call it here because the clue list is created (empty) at game startup (way before the contents is loaded)
 
         fitToPageSlot();
         selectFirstClueSlot();

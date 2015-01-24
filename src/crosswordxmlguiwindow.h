@@ -274,7 +274,7 @@ signals:
     void fileSaved(const QString &fileName, const QString &oldFileName);
     void modificationTypesChanged(CrossWordXmlGuiWindow::ModificationTypes modificationTypes);
     void currentFileChanged(const QString &fileName, const QString &previousFileName);
-    void loadingFileComplete(const QString &fileName);
+    void loadingFileComplete(const QString &fileName); // not used
     void tempAutoSaveFileChanged(const QString &tmpFileName);
     void errorLoadingFile(const QString &fileName);
 
