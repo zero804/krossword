@@ -42,9 +42,7 @@ public:
     void closeDatabase();
     bool createTables();
 
-    bool isDatabaseOk() const {
-        return m_hasConnection;
-    }
+    bool hasConnection() const;
 
     bool isEmpty();
     int entryCount();

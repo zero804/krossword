@@ -210,6 +210,10 @@ bool KrosswordDictionary::createTables()
     return ok;
 }
 
+bool KrosswordDictionary::hasConnection() const {
+    return m_hasConnection;
+}
+
 ExtendedSqlTableModel* KrosswordDictionary::createModel()
 {
     QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
