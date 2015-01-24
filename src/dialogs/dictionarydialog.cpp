@@ -233,7 +233,7 @@ void DictionaryDialog::exportToCsvClicked()
         return;
 
     bool result = m_dictionary->exportToCsv(fileName);
-    if (result)
+    if (!result)
         showInfoMessage(i18n("There was an error while exporting to '%1'", fileName));
     else
         showInfoMessage(i18n("Export to '%1' was successful", fileName));
