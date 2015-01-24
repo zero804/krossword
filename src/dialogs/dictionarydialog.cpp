@@ -48,7 +48,6 @@ DictionaryDialog::DictionaryDialog(KrosswordDictionary* dictionary, QWidget* par
     ui_dictionaries.importFromCSV->setIcon(KIcon("document-import"));
     ui_dictionaries.exportToCSV->setIcon(KIcon("document-export"));
 
-    QSqlDatabase db = QSqlDatabase::database();
     m_dbTable = m_dictionary->createModel();
     m_dbTable->select();
 

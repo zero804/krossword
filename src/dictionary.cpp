@@ -50,7 +50,6 @@ const QString KrosswordDictionary::CONNECTION_NAME = "krosswordpuzzle";
 KrosswordDictionary::KrosswordDictionary(QObject* parent)
     : QObject(parent),
       m_cancel(false),
-      m_databaseOk(false),
       m_hasConnection(false)
 {
     m_hasConnection = makeStandardConnection();
@@ -68,7 +67,9 @@ bool KrosswordDictionary::makeStandardConnection()
 {
     bool success = true;
 
-    m_db = QSqlDatabase::addDatabase("QMYSQL", CONNECTION_NAME);
+    if (!QSqlDatabase::contains(CONNECTION_NAME))
+        m_db = QSqlDatabase::addDatabase("QMYSQL", CONNECTION_NAME);
+
     m_db.setHostName("localhost");
     m_db.setUserName("krosswordpuzzle");
     m_db.setPassword("krosswordpuzzle");
@@ -76,7 +77,6 @@ bool KrosswordDictionary::makeStandardConnection()
     // Probably no user krosswordpuzzle
     if (!m_db.open()) {
         success = false;
-        QSqlDatabase::removeDatabase(CONNECTION_NAME);
     }
 
     return success;
@@ -144,44 +144,46 @@ bool KrosswordDictionary::askForRootConnection(QWidget *dlgParent)
                                            i18n("No Database Connection")) == KMessageBox::Cancel)
     {
         success = false;
-    }
+    } else {
 
-    QPointer<QDialog> dialog = new QDialog(dlgParent);
-    dialog->setWindowTitle(i18n("Connect Database"));
-    ui_database_connection.setupUi(dialog);
-    dialog->setModal(true);
+        QPointer<QDialog> dialog = new QDialog(dlgParent);
+        dialog->setWindowTitle(i18n("Connect Database"));
+        ui_database_connection.setupUi(dialog);
+        dialog->setModal(true);
 
-    if (dialog->exec() == QDialog::Accepted) {
-        QSqlDatabase dbRoot = QSqlDatabase::addDatabase("QMYSQL", "root_connection");
-        dbRoot.setHostName(ui_database_connection.host->text());
-        dbRoot.setUserName(ui_database_connection.user->text());
-        dbRoot.setPassword(ui_database_connection.password->text());
+        if (dialog->exec() == QDialog::Accepted) {
+            QSqlDatabase dbRoot = QSqlDatabase::addDatabase("QMYSQL", "root_connection");
+            dbRoot.setHostName(ui_database_connection.host->text());
+            dbRoot.setUserName(ui_database_connection.user->text());
+            dbRoot.setPassword(ui_database_connection.password->text());
 
-        if (dbRoot.open()) {
-            QSqlQuery rootQuery(dbRoot);
+            if (dbRoot.open()) {
+                QSqlQuery rootQuery(dbRoot);
 
-            // This workaround should solve a bug in sql when creating user (error 1396)
-            rootQuery.exec("DROP USER krosswordpuzzle@localhost;");
-            rootQuery.exec("FLUSH PRIVILEGES;");
-            bool user_created = rootQuery.exec("CREATE USER krosswordpuzzle@localhost IDENTIFIED BY 'krosswordpuzzle'");
-            if (!user_created)
-                qDebug() << "Error creating the db user" << rootQuery.lastError();
-            else { // User yet exists; grant to user privs
-                bool granted = rootQuery.exec("GRANT ALL ON krosswordpuzzle.* TO 'krosswordpuzzle'@'localhost';");
-                if (!granted)
-                    qDebug() << "Error granting privileges to the database krosswordpuzzle" << rootQuery.lastError();
+                // This workaround should solve a bug in sql when creating user (error 1396)
+                //rootQuery.exec("DROP USER krosswordpuzzle@localhost;");
+                //rootQuery.exec("FLUSH PRIVILEGES;");
+                bool user_created = rootQuery.exec("CREATE USER krosswordpuzzle@localhost IDENTIFIED BY 'krosswordpuzzle'");
+                if (!user_created)
+                    qDebug() << "Error creating the db user" << rootQuery.lastError();
+                else { // User yet exists; grant to user privs
+                    bool granted = rootQuery.exec("GRANT ALL ON krosswordpuzzle.* TO 'krosswordpuzzle'@'localhost';");
+                    if (!granted)
+                        qDebug() << "Error granting privileges to the database krosswordpuzzle" << rootQuery.lastError();
+                }
+                success = true;
+
+            } else {
+                success = false;
+                qDebug() << "Error opening root connection";
             }
-            success = true;
 
-        } else {
-            success = false;
-            qDebug() << "Error opening root connection";
+            dbRoot.close();
         }
 
-        dbRoot.close();
+        delete dialog;
     }
 
-    delete dialog;
     return success;
 }
 
@@ -210,7 +212,9 @@ bool KrosswordDictionary::createTables()
 
 ExtendedSqlTableModel* KrosswordDictionary::createModel()
 {
-    ExtendedSqlTableModel *dbTable = new ExtendedSqlTableModel(this, m_db);
+    QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
+
+    ExtendedSqlTableModel *dbTable = new ExtendedSqlTableModel(this, db);
     dbTable->setTable("dictionary");
     dbTable->setEditStrategy(QSqlTableModel::OnManualSubmit);
     dbTable->setHeaderData(1, Qt::Horizontal,
@@ -488,18 +492,19 @@ bool KrosswordDictionary::isEmpty()
 
 int KrosswordDictionary::entryCount()
 {
-    if (!m_db.isValid())
+    QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
+
+    if (!db.isValid())
         return 0;
 
-    QSqlQuery query = m_db.exec("SELECT COUNT(*) FROM dictionary");
+    QSqlQuery query = db.exec("SELECT COUNT(*) FROM dictionary");
     if (query.next())
         return query.value(0).toInt();
     else
         return 0;
 }
 
-int KrosswordDictionary::addEntriesFromCrosswords(
-    const QStringList& fileNames, QWidget *parent)
+int KrosswordDictionary::addEntriesFromCrosswords(const QStringList& fileNames, QWidget *parent)
 {
     if (!m_db.isValid())
         return 0;

@@ -43,7 +43,7 @@ public:
     bool createTables();
 
     bool isDatabaseOk() const {
-        return m_databaseOk;
+        return m_hasConnection;
     }
 
     bool isEmpty();
@@ -75,7 +75,6 @@ private:
     Ui::database_connection ui_database_connection;
     QSqlDatabase m_db;
     bool m_cancel;  //Cancel action clicked (yeah really!!)
-    bool m_databaseOk;
     bool m_hasConnection;
     static const int MAX_WORD_LENGTH = 256;
     static const QString CONNECTION_NAME;

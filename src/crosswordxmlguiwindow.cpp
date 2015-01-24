@@ -2856,7 +2856,7 @@ void CrossWordXmlGuiWindow::propertiesConversionRequested(
 
 void CrossWordXmlGuiWindow::optionsDictionarySlot()
 {
-    if (!m_dictionary->isDatabaseOk() && !m_dictionary->openDatabase(this)) {
+    if (!m_dictionary->openDatabase(this)) {
         KMessageBox::error(this, i18n("Couldn't connect to the database."));
         return;
     }
