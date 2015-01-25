@@ -283,7 +283,6 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
       m_solutionProgress(nullptr),
       m_clueModel(nullptr),
       m_clueSelectionModel(nullptr),
-      m_winItems(nullptr),
       m_popupMenuCell(nullptr),
       m_dictionary(nullptr),
       m_animation(nullptr)
@@ -509,8 +508,6 @@ void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
         m_animation->stop();
         m_animation = NULL;
 
-        m_view->scene()->removeItem(m_winItems);
-//      m_winItems->deleteLater();
         m_view->scene()->update();
 
         stateChanged("showing_congratulations", StateReverse);
@@ -2047,47 +2044,6 @@ void CrossWordXmlGuiWindow::hideCongratulations()
 
 void CrossWordXmlGuiWindow::showCongratulationsItems()
 {
-    /*
-    // Add text item
-    QFont font = KGlobalSettings::largeFont();
-    //font.setPixelSize(30);
-    font.setBold(true);
-    QLabel *label = new QLabel("<span style='color:darkred;'><center>Congratulations!<br>You solved the crossword perfectly.</center></span>");
-    label->setFont(font);
-    label->setWordWrap(true);
-    QGraphicsProxyWidget *labelItem = m_view->scene()->addWidget(label);
-
-    QFont font2(font);
-    font.setPixelSize(20);
-    QPushButton *btnContinue = new QPushButton;
-    //KGuiItem::assign(btnContinue,KStandardGuiItem::cont()); //added by convert-kpushbutton.pl << reactivate with kf5
-    btnContinue->setIconSize(QSize(32, 32));
-    btnContinue->setFont(font2);
-    QGraphicsProxyWidget *btnContinueItem = m_view->scene()->addWidget(btnContinue);
-    btnContinueItem->setZValue(1001);
-    connect(btnContinue, SIGNAL(clicked()), this, SLOT(hideCongratulations()));
-
-    // Create a layout
-    QGraphicsGridLayout *layout = new QGraphicsGridLayout;
-    layout->addItem(labelItem, 0, 0);
-    layout->addItem(btnContinueItem, 1, 0, Qt::AlignCenter);
-
-    QFrame *frame = new QFrame;
-    frame->setFrameShape(QFrame::Panel);
-
-    if (m_winItems) {
-        m_winItems->setWidget(frame);
-        m_view->scene()->addItem(m_winItems);
-    } else {
-        m_winItems = m_view->scene()->addWidget(frame);
-    }
-    m_winItems->setLayout(layout);
-    m_winItems->setZValue(1000);   // On top of all other items in the scene
-
-    layout->activate();
-    m_view->fitInView(layout->contentsRect().adjusted(-150, -150, 150, 150), Qt::KeepAspectRatio);
-    */
-
     // Animate using QtKinetic
     m_animation = new QParallelAnimationGroup(this);
     m_animation->setLoopCount(-1);

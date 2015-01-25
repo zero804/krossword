@@ -455,7 +455,6 @@ private:
     QTreeView *m_clueTree;                      // Owned
     ClueModel *m_clueModel;                     // Owned
     QItemSelectionModel *m_clueSelectionModel;  // Owned
-    QGraphicsProxyWidget *m_winItems;           // Owned
 
     KrossWordCell *m_popupMenuCell;             // Not Owned
 
