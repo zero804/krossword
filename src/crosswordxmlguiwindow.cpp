@@ -59,6 +59,8 @@
 
 #include <KgThemeProvider>
 
+#include <algorithm>
+
 ClueListView::ClueListView(QWidget* parent) : QTreeView(parent), m_scrollAnimation(0)
 {
     setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
@@ -2093,7 +2095,76 @@ void CrossWordXmlGuiWindow::showCongratulationsItems()
     m_animation = new QParallelAnimationGroup(this);
     m_animation->setLoopCount(-1);
 
+
     KrossWordCellList cellList = krossWord()->cells();
+    std::random_shuffle(cellList.begin(), cellList.end());
+
+    for (unsigned int i = 0; i < cellList.size(); i += 2) {
+        if (i != cellList.size() - 1) {
+            KrossWordCell * cell1 = cellList.at(i);
+            KrossWordCell * cell2 = cellList.at(i + 1);
+
+            QPropertyAnimation *cellAnimPos1 = new QPropertyAnimation(cell1, "pos");
+            QPropertyAnimation *cellAnimPos2 = new QPropertyAnimation(cell2, "pos");
+
+            cellAnimPos1->setDuration(10000);
+            cellAnimPos1->setStartValue(cell1->pos());
+
+            cellAnimPos2->setDuration(10000);
+            cellAnimPos2->setStartValue(cell2->pos());
+
+
+            cellAnimPos1->setKeyValueAt(0.4, cell2->pos());
+            cellAnimPos2->setKeyValueAt(0.4, cell1->pos());
+
+
+            cellAnimPos1->setKeyValueAt(0.6, cell2->pos());
+            cellAnimPos2->setKeyValueAt(0.6, cell1->pos());
+
+
+            cellAnimPos1->setEndValue(cell1->pos());
+            cellAnimPos1->setEasingCurve(QEasingCurve::InOutQuad);
+
+            cellAnimPos2->setEndValue(cell2->pos());
+            cellAnimPos2->setEasingCurve(QEasingCurve::InOutQuad);
+
+            m_animation->addAnimation(cellAnimPos1);
+            m_animation->addAnimation(cellAnimPos2);
+
+            float r1 = (float)KRandom::random() / (float)RAND_MAX - 0.5f;
+            float r2 = (float)KRandom::random() / (float)RAND_MAX - 0.5f;
+            float r3 = (float)KRandom::random() / (float)RAND_MAX - 0.5f;
+            float r4 = (float)KRandom::random() / (float)RAND_MAX - 0.5f;
+
+            QPropertyAnimation *cellAnimRot1 = new QPropertyAnimation(cell1, "rotation");
+            QPropertyAnimation *cellAnimRot2 = new QPropertyAnimation(cell2, "rotation");
+
+            cellAnimRot1->setDuration(10000);
+            cellAnimRot1->setStartValue(cell1->rotation());
+            cellAnimRot1->setEndValue(cell1->rotation());
+            cellAnimRot1->setEasingCurve(QEasingCurve::InOutQuad);
+
+            cellAnimRot1->setKeyValueAt(0.2, cell1->rotation() + r1 * 50);
+            cellAnimRot2->setKeyValueAt(0.2, cell2->rotation() + r1 * 50);
+
+            cellAnimRot1->setKeyValueAt(0.4, cell1->rotation());
+            cellAnimRot2->setKeyValueAt(0.4, cell2->rotation());
+            cellAnimRot1->setKeyValueAt(0.6, cell1->rotation());
+            cellAnimRot2->setKeyValueAt(0.6, cell2->rotation());
+
+            cellAnimRot1->setKeyValueAt(0.8, cell1->rotation() + r1 * 50);
+            cellAnimRot2->setKeyValueAt(0.8, cell2->rotation() + r1 * 50);
+
+            cellAnimRot2->setDuration(10000);
+            cellAnimRot2->setStartValue(cell2->rotation());
+            cellAnimRot2->setEndValue(cell2->rotation());
+            cellAnimRot2->setEasingCurve(QEasingCurve::InOutQuad);
+
+            m_animation->addAnimation(cellAnimRot1);
+            m_animation->addAnimation(cellAnimRot2);
+        }
+    }
+/*
     foreach(KrossWordCell * cell, cellList) {
         if (cell->isType(EmptyCellType))
             continue;
@@ -2120,6 +2191,7 @@ void CrossWordXmlGuiWindow::showCongratulationsItems()
         cellAnimRot->setEasingCurve(QEasingCurve::InOutQuad);
         m_animation->addAnimation(cellAnimRot);
     }
+*/
 
     m_animation->start(QAbstractAnimation::DeleteWhenStopped);
 
