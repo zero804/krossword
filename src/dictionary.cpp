@@ -545,13 +545,15 @@ int KrosswordDictionary::addEntriesFromCrosswords(const QStringList& fileNames, 
     int entryCountBefore = entryCount();
 
     // Read each file
-    KrossWord krossWord;
     QString errorString;
     QString beginSqlQuery = "INSERT INTO dictionary (word, clue) VALUES ";
     QStringList sqlInserts;
     int counter = 0, currentFileNr = 0;
     foreach(const QString & fileName, fileNames) {
         ++currentFileNr;
+
+        KrossWord krossWord;
+        qDebug() << "Reading crossword" << fileName;
         if (!krossWord.read(KUrl(fileName), &errorString)) {
             qDebug() << "Error reading" << fileName << errorString;
             emit errorExtractedEntriesFromCrossword(fileName, errorString);
@@ -571,7 +573,12 @@ int KrosswordDictionary::addEntriesFromCrosswords(const QStringList& fileNames, 
             if (counter > 1000) {
                 counter = 0;
 
-                QSqlQuery query = db.exec(beginSqlQuery + sqlInserts.join(", "));
+                db.transaction();
+                foreach(QString s, sqlInserts) {
+                    QSqlQuery query = db.exec(beginSqlQuery + s);
+                }
+                db.commit();
+
                 sqlInserts.clear();
 
                 QApplication::processEvents();
@@ -584,8 +591,13 @@ int KrosswordDictionary::addEntriesFromCrosswords(const QStringList& fileNames, 
     }
 
     // Insert the remaining entries (< 1000)
-    if (!sqlInserts.isEmpty())
-        QSqlQuery query = db.exec(beginSqlQuery + sqlInserts.join(", "));
+    if (!sqlInserts.isEmpty()) {
+        db.transaction();
+        foreach(QString s, sqlInserts) {
+            QSqlQuery query = db.exec(beginSqlQuery + s);
+        }
+        db.commit();
+    }
 
     dlgProgress->close();
     return entryCount() - entryCountBefore;
