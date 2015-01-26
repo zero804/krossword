@@ -2164,34 +2164,6 @@ void CrossWordXmlGuiWindow::showCongratulationsItems()
             m_animation->addAnimation(cellAnimRot2);
         }
     }
-/*
-    foreach(KrossWordCell * cell, cellList) {
-        if (cell->isType(EmptyCellType))
-            continue;
-
-        float r1 = (float)KRandom::random() / (float)RAND_MAX - 0.5f;
-        float r2 = (float)KRandom::random() / (float)RAND_MAX - 0.5f;
-        float r3 = (float)KRandom::random() / (float)RAND_MAX - 0.5f;
-        float r4 = (float)KRandom::random() / (float)RAND_MAX - 0.5f;
-
-        QPropertyAnimation *cellAnimPos = new QPropertyAnimation(cell, "pos");
-        cellAnimPos->setDuration(5000);
-        cellAnimPos->setStartValue(cell->pos());
-        cellAnimPos->setKeyValueAt(0.33, QPointF(cell->x() + r1 * 50, cell->y() + r2 * 50));
-        cellAnimPos->setKeyValueAt(0.66, QPointF(cell->x() + r3 * 50, cell->y() + r4 * 50));
-        cellAnimPos->setEndValue(cell->pos());
-        cellAnimPos->setEasingCurve(QEasingCurve::InOutQuad);
-        m_animation->addAnimation(cellAnimPos);
-
-        QPropertyAnimation *cellAnimRot = new QPropertyAnimation(cell, "rotation");
-        cellAnimRot->setDuration(5000);
-        cellAnimRot->setStartValue(cell->rotation());
-        cellAnimRot->setKeyValueAt(0.5, cell->rotation() + r1 * 50);
-        cellAnimRot->setEndValue(cell->rotation());
-        cellAnimRot->setEasingCurve(QEasingCurve::InOutQuad);
-        m_animation->addAnimation(cellAnimRot);
-    }
-*/
 
     m_animation->start(QAbstractAnimation::DeleteWhenStopped);
 
