@@ -737,7 +737,9 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
 
         adjustGuiToCrosswordType();
         emit loadingFileComplete(m_curFileName);
+
         m_clueTree->resizeColumnToContents(0); // we have to call it here because the clue list is created (empty) at game startup (way before the contents is loaded)
+        m_clueTree->resizeColumnToContents(1);
 
         fitToPageSlot();
         selectFirstClueSlot();
@@ -1659,9 +1661,12 @@ QDockWidget *CrossWordXmlGuiWindow::createClueDock()
     m_clueDock = new QDockWidget(i18n("Clue List"), this);
     m_clueDock->setObjectName("clueDock");
 
-    QVBoxLayout *layout = new QVBoxLayout(m_clueDock);
+    QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(m_clueTree);
+    m_clueDock->setLayout(layout);
+
     m_clueDock->setWidget(m_clueTree);
+
 
     updateClueDock();
 
