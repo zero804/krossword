@@ -150,6 +150,8 @@ bool KrosswordDictionary::setupDatabase(QWidget *dlgParent)
             }
 
             dbRoot.close();
+        } else { // QDialog::Rejected
+            success = false;
         }
 
         delete dialog;
