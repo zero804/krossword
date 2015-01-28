@@ -284,7 +284,7 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
       m_clueModel(nullptr),
       m_clueSelectionModel(nullptr),
       m_popupMenuCell(nullptr),
-      m_dictionary(nullptr),
+      m_dictionary(new KrosswordDictionary),
       m_animation(nullptr)
 {
     m_lastSavedUndoIndex = -1;
@@ -339,8 +339,6 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
 
     setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krossword/krossword_crossword_ui.rc");
     menuBar()->hide(); // because it will be exposed as needed in the mainwindow
-
-    m_dictionary = new KrosswordDictionary;
 }
 
 CrossWordXmlGuiWindow::~CrossWordXmlGuiWindow()
@@ -2811,7 +2809,7 @@ void CrossWordXmlGuiWindow::propertiesConversionRequested(
 
 void CrossWordXmlGuiWindow::optionsDictionarySlot()
 {
-    if (!m_dictionary->isDatabaseOk() && !m_dictionary->openDatabase(this)) {
+    if (!m_dictionary->openDatabase(this)) {
         KMessageBox::error(this, i18n("Couldn't connect to the database."));
         return;
     }

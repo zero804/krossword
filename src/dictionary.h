@@ -42,9 +42,7 @@ public:
     void closeDatabase();
     bool createTables();
 
-    bool isDatabaseOk() const {
-        return m_databaseOk;
-    }
+    bool hasConnection() const;
 
     bool isEmpty();
     int entryCount();
@@ -69,13 +67,16 @@ signals:
 private:
     QDialog *createProgressDialog(QWidget *parent, const QString &text, QProgressBar *progressBar);
     bool makeStandardConnection();
-    bool askForRootConnection(QWidget *dlgParent);
+    bool setupDatabase(QWidget *dlgParent);
+    bool createUser(QSqlQuery &query);
+    bool createKrosswordDatabase(QSqlQuery &query);
+
+    QSqlDatabase getDatabase() const;
 
 private:
     Ui::database_connection ui_database_connection;
-    QSqlDatabase m_db;
+
     bool m_cancel;  //Cancel action clicked (yeah really!!)
-    bool m_databaseOk;
     bool m_hasConnection;
     static const int MAX_WORD_LENGTH = 256;
     static const QString CONNECTION_NAME;
