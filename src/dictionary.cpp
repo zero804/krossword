@@ -484,7 +484,7 @@ int KrosswordDictionary::addEntriesFromDictionary(const QString& fileName, QWidg
         CrosswordAnswerValidator::fix(word);
         if (word.length() > 1) {
 
-            //progressBar->setValue(100 * file.pos() / file.size());
+            progressBar->setValue(100 * file.pos() / file.size());
             ++counter;
 
             entry << QPair<QString, int>(word, score);
@@ -500,9 +500,7 @@ int KrosswordDictionary::addEntriesFromDictionary(const QString& fileName, QWidg
                    q.prepare("INSERT INTO dictionary(word, score) VALUES (?, ?)");
                    q.bindValue(0, e.first);
                    q.bindValue(1, e.second);
-                   if (!q.exec()) {
-                       qDebug() << q.lastError();
-                   }
+                   q.exec();
                 }
                 db.commit();
 
