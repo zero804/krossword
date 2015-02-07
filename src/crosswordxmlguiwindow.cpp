@@ -72,8 +72,6 @@ ClueListView::ClueListView(QWidget* parent) : QTreeView(parent), m_scrollAnimati
     setVerticalScrollMode(ScrollPerPixel);
     setContextMenuPolicy(Qt::CustomContextMenu);
 
-    header()->setResizeMode(QHeaderView::Stretch);
-
     setItemDelegate(new HtmlDelegate(this));
 }
 
@@ -285,9 +283,8 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
       m_solutionProgress(nullptr),
       m_clueModel(nullptr),
       m_clueSelectionModel(nullptr),
-      m_winItems(nullptr),
       m_popupMenuCell(nullptr),
-      m_dictionary(nullptr),
+      m_dictionary(new KrosswordDictionary),
       m_animation(nullptr)
 {
     m_lastSavedUndoIndex = -1;
@@ -342,8 +339,6 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
 
     setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krossword/krossword_crossword_ui.rc");
     menuBar()->hide(); // because it will be exposed as needed in the mainwindow
-
-    m_dictionary = new KrosswordDictionary;
 }
 
 CrossWordXmlGuiWindow::~CrossWordXmlGuiWindow()
@@ -511,8 +506,6 @@ void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
         m_animation->stop();
         m_animation = NULL;
 
-        m_view->scene()->removeItem(m_winItems);
-//      m_winItems->deleteLater();
         m_view->scene()->update();
 
         stateChanged("showing_congratulations", StateReverse);
@@ -744,6 +737,9 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
 
         adjustGuiToCrosswordType();
         emit loadingFileComplete(m_curFileName);
+
+        m_clueTree->resizeColumnToContents(0); // we have to call it here because the clue list is created (empty) at game startup (way before the contents is loaded)
+        m_clueTree->resizeColumnToContents(1);
 
         fitToPageSlot();
         selectFirstClueSlot();
@@ -1665,9 +1661,12 @@ QDockWidget *CrossWordXmlGuiWindow::createClueDock()
     m_clueDock = new QDockWidget(i18n("Clue List"), this);
     m_clueDock->setObjectName("clueDock");
 
-    QVBoxLayout *layout = new QVBoxLayout(m_clueDock);
+    QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(m_clueTree);
+    m_clueDock->setLayout(layout);
+
     m_clueDock->setWidget(m_clueTree);
+
 
     updateClueDock();
 
@@ -2048,47 +2047,6 @@ void CrossWordXmlGuiWindow::hideCongratulations()
 
 void CrossWordXmlGuiWindow::showCongratulationsItems()
 {
-    /*
-    // Add text item
-    QFont font = KGlobalSettings::largeFont();
-    //font.setPixelSize(30);
-    font.setBold(true);
-    QLabel *label = new QLabel("<span style='color:darkred;'><center>Congratulations!<br>You solved the crossword perfectly.</center></span>");
-    label->setFont(font);
-    label->setWordWrap(true);
-    QGraphicsProxyWidget *labelItem = m_view->scene()->addWidget(label);
-
-    QFont font2(font);
-    font.setPixelSize(20);
-    QPushButton *btnContinue = new QPushButton;
-    //KGuiItem::assign(btnContinue,KStandardGuiItem::cont()); //added by convert-kpushbutton.pl << reactivate with kf5
-    btnContinue->setIconSize(QSize(32, 32));
-    btnContinue->setFont(font2);
-    QGraphicsProxyWidget *btnContinueItem = m_view->scene()->addWidget(btnContinue);
-    btnContinueItem->setZValue(1001);
-    connect(btnContinue, SIGNAL(clicked()), this, SLOT(hideCongratulations()));
-
-    // Create a layout
-    QGraphicsGridLayout *layout = new QGraphicsGridLayout;
-    layout->addItem(labelItem, 0, 0);
-    layout->addItem(btnContinueItem, 1, 0, Qt::AlignCenter);
-
-    QFrame *frame = new QFrame;
-    frame->setFrameShape(QFrame::Panel);
-
-    if (m_winItems) {
-        m_winItems->setWidget(frame);
-        m_view->scene()->addItem(m_winItems);
-    } else {
-        m_winItems = m_view->scene()->addWidget(frame);
-    }
-    m_winItems->setLayout(layout);
-    m_winItems->setZValue(1000);   // On top of all other items in the scene
-
-    layout->activate();
-    m_view->fitInView(layout->contentsRect().adjusted(-150, -150, 150, 150), Qt::KeepAspectRatio);
-    */
-
     // Animate using QtKinetic
     m_animation = new QParallelAnimationGroup(this);
     m_animation->setLoopCount(-1);
@@ -2856,7 +2814,7 @@ void CrossWordXmlGuiWindow::propertiesConversionRequested(
 
 void CrossWordXmlGuiWindow::optionsDictionarySlot()
 {
-    if (!m_dictionary->isDatabaseOk() && !m_dictionary->openDatabase(this)) {
+    if (!m_dictionary->openDatabase(this)) {
         KMessageBox::error(this, i18n("Couldn't connect to the database."));
         return;
     }
@@ -2864,7 +2822,7 @@ void CrossWordXmlGuiWindow::optionsDictionarySlot()
     QPointer<DictionaryDialog> dialog = new DictionaryDialog(m_dictionary, this);
     dialog->exec();
     dialog->databaseTable()->submitAll();
-    m_dictionary->closeDatabase();
+    //m_dictionary->closeDatabase();
     delete dialog;
 }
 

@@ -48,7 +48,6 @@ DictionaryDialog::DictionaryDialog(KrosswordDictionary* dictionary, QWidget* par
     ui_dictionaries.importFromCSV->setIcon(KIcon("document-import"));
     ui_dictionaries.exportToCSV->setIcon(KIcon("document-export"));
 
-    QSqlDatabase db = QSqlDatabase::database();
     m_dbTable = m_dictionary->createModel();
     m_dbTable->select();
 
@@ -97,7 +96,7 @@ void DictionaryDialog::addEntryClicked()
     if (m_dbTable->insertRecord(row, m_dbTable->record())) {
         QModelIndex index = m_dbTable->index(row, 0);
         ui_dictionaries.tableDictionary->setCurrentIndex(index);
-        ui_dictionaries.tableDictionary->scrollTo(index);
+        ui_dictionaries.tableDictionary->scrollToBottom();
     }
 }
 
@@ -234,7 +233,7 @@ void DictionaryDialog::exportToCsvClicked()
         return;
 
     bool result = m_dictionary->exportToCsv(fileName);
-    if (result)
+    if (!result)
         showInfoMessage(i18n("There was an error while exporting to '%1'", fileName));
     else
         showInfoMessage(i18n("Export to '%1' was successful", fileName));

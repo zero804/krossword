@@ -1,5 +1,10 @@
 == Krossword ==
 
+Version 0.18.2 alpha 3 - 7 February 15:
+    - Various fixes to the dictionary feature (still not reliable).
+    - Fixed an issue with hyphen in the clues list.
+    - And other minor changes and fixes.
+
 Version 0.18.1 alpha 3 - 2 January 15:
     - Czech translation 100% updated thanks to Pavel Fric!
     - Some changes to the library actions (now they should be more clear).
