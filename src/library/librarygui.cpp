@@ -200,7 +200,7 @@ void LibraryGui::downloadProviderChanged(int index)
             item->setData(Qt::UserRole, QString("https://dl.dropboxusercontent.com/u/91385912/PUZ00%1.puz").arg(i));
             ui_download.crosswords->addItem(item);
         }
-        for (int i = 6; i <= 14; ++i) {
+        for (int i = 6; i <= 18; ++i) {
             item = new QListWidgetItem(QString(i18n("Crossword %1")).arg(i));
             item->setData(Qt::UserRole, QString("https://dl.dropboxusercontent.com/u/91385912/PUZ0%1/PUZ0%1.puz").arg(i, 2, 10, QChar('0')));
             ui_download.crosswords->addItem(item);
