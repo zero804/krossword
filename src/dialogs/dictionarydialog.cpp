@@ -96,7 +96,7 @@ void DictionaryDialog::addEntryClicked()
     if (m_dbTable->insertRecord(row, m_dbTable->record())) {
         QModelIndex index = m_dbTable->index(row, 0);
         ui_dictionaries.tableDictionary->setCurrentIndex(index);
-        ui_dictionaries.tableDictionary->scrollTo(index);
+        ui_dictionaries.tableDictionary->scrollToBottom();
     }
 }
 

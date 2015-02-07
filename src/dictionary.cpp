@@ -446,67 +446,92 @@ void KrosswordDictionary::cancelCurrentActionClicked()
 int KrosswordDictionary::addEntriesFromDictionary(const QString& fileName, QWidget *parent)
 {
     QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
-    QFile file(fileName);
-    if (!file.open(QIODevice::ReadOnly))
-        return 0;
 
     if (!db.isValid())
         return 0;
 
-    // Setup a dialog to indicate progress
+    int entryCountBefore = entryCount();
+
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly))
+        return 0;
+
+    //--- Progress bar ---
     QProgressBar *progressBar = new QProgressBar;
     QDialog *dlgProgress = createProgressDialog(parent,
                            i18n("Adding words from the dictionary '%1' to the database.\nPlease wait.",
                                 fileName), progressBar);
     dlgProgress->show();
+    //--------------------
 
-    // Get entry count before inserting to calculate how many entries
-    // have been added at the end
-    int entryCountBefore = entryCount();
-
-    // Read line per line from the dictionary file (each line contains one word)
-    int counter = 0;
     QTextStream textStream(&file);
-    QString beginSqlQuery = "INSERT INTO dictionary (word, score) VALUES ";
-    QStringList sqlInserts;
+    QList<QPair<QString, int>> entry;
+    int counter = 0;
+
+    QVariantList wordsValues;
+
     while (!textStream.atEnd()) {
         QString word = textStream.readLine(MAX_WORD_LENGTH);
-        float score;
+
+        int score = 0;
 
         // Extract score if it's contained in the dictionary (eg. "word +10" scores the word with +10)
         QRegExp rx("((?:\\+|-)\\d+\\.?\\d*)$");
-        int posScore;
-        if ((posScore = rx.indexIn(word)) != -1) {
-            score = rx.cap().toFloat();
+        int posScore = rx.indexIn(word);
+        if (posScore != -1) {
+            score = rx.cap().toInt();
             word = word.left(posScore);
-        } else
-            score = 0.0f;
+        }
 
         CrosswordAnswerValidator::fix(word);
-        if (word.length() > 1)
-            sqlInserts << QString("('%1', %2)").arg(word).arg((int)score);
+        if (word.length() > 1) {
 
-        // Insert chunks of 1000 entries into the database
-        ++counter;
-        if (counter > 1000) {
-            counter = 0;
             progressBar->setValue(100 * file.pos() / file.size());
+            ++counter;
 
-            QSqlQuery query = db.exec(beginSqlQuery + sqlInserts.join(", "));
-            sqlInserts.clear();
+            entry << QPair<QString, int>(word, score);
 
-            QApplication::processEvents();
-            if (m_cancel)
-                break;
+            wordsValues << word;
+
+            if (counter > 1000) {
+                counter = 0;
+
+                db.transaction();
+                foreach (auto e, entry) {
+                   QSqlQuery q(db);
+                   q.prepare("INSERT INTO dictionary(word, score) VALUES (?, ?)");
+                   q.bindValue(0, e.first);
+                   q.bindValue(1, e.second);
+                   q.exec();
+                }
+                db.commit();
+
+                entry.clear();
+            }
+        }
+        QApplication::processEvents();
+        if (m_cancel) { // FIXME, cancel doesn't work
+            break;
         }
     }
     file.close();
 
-    // Insert the remaining entries (< 1000)
-    if (!sqlInserts.isEmpty())
-        QSqlQuery query = db.exec(beginSqlQuery + sqlInserts.join(", "));
+    if (counter > 0) {
+        db.transaction();
+        foreach (auto e, entry) {
+            QSqlQuery q(db);
+            q.prepare("INSERT INTO dictionary(word, score) VALUES (?, ?)");
+            q.bindValue(0, e.first);
+            q.bindValue(1, e.second);
+            if (!q.exec()) {
+                qDebug() << q.lastError();
+            }
+        }
+        db.commit();
+    }
 
     dlgProgress->close();
+
     return entryCount() - entryCountBefore;
 }
 
