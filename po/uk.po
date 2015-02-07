@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krossword\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-02 13:44+0100\n"
+"POT-Creation-Date: 2015-02-07 20:21+0100\n"
 "PO-Revision-Date: 2012-08-24 15:10+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -20,248 +20,93 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: library/librarygui.cpp:553
-msgid "%1"
-msgstr ""
+#: cells/imagecell.cpp:68
+msgid "Edit image properties to set an image"
+msgstr "Щоб додати зображення змініть властивості зображення"
 
-#: krossword.cpp:613
-msgid "%1 clue cell"
-msgid_plural "%1 clue cells"
-msgstr[0] "%1 клітинка питання"
-msgstr[1] "%1 клітинки питання"
-msgstr[2] "%1 клітинок питання"
-msgstr[3] "%1 клітинка питання"
+#: cluemodel.cpp:60
+msgid "Clue"
+msgstr "Питання"
 
-#: krossword.cpp:618
-msgid "%1 double clue cell"
-msgid_plural "%1 double clue cells"
-msgstr[0] "%1 клітинка з двома питаннями"
-msgstr[1] "%1 клітинки з двома питаннями"
-msgstr[2] "%1 клітинок з двома питаннями"
-msgstr[3] "%1 клітинка з двома питаннями"
-
-#: dialogs/dictionarydialog.cpp:175 dialogs/dictionarydialog.cpp:190
-msgid "%1 entries added from %2 crosswords"
-msgstr "З %2 кросвордів додано %1 записів"
-
-#: dialogs/dictionarydialog.cpp:165
-msgid "%1 entries added from this dictionary: '%2'"
-msgstr "%1 записів додано зі словника: «%2»"
-
-#: dialogs/dictionarydialog.cpp:255
-msgid "%1 entry imported from '%2'"
-msgid_plural "%1 entries imported from '%2'"
-msgstr[0] "З «%2» імпортовано %1 запис"
-msgstr[1] "З «%2» імпортовано %1 записи"
-msgstr[2] "З «%2» імпортовано %1 записів"
-msgstr[3] "З «%2» імпортовано %1 запис"
-
-#: dialogs/dictionarydialog.cpp:209
-msgid "%1 entry removed"
-msgid_plural "%1 entries removed"
-msgstr[0] "Вилучено %1 запис"
-msgstr[1] "Вилучено %1 записи"
-msgstr[2] "Вилучено %1 записів"
-msgstr[3] "Вилучено %1 запис"
-
-#: dialogs/currentcellwidget.cpp:145
-msgid "%1 selected at (%2, %3)."
-msgstr "Позначено %1 у позиції (%2, %3)."
-
-#: krossword.cpp:623
-msgid "%1 solution letter cell"
-msgid_plural "%1 solution letter cells"
-msgstr[0] "%1 клітинка слова-розв’язку"
-msgstr[1] "%1 клітинки слова-розв’язку"
-msgstr[2] "%1 клітинок слова-розв’язку"
-msgstr[3] "%1 клітинка слова-розв’язку"
-
-#: crosswordxmlguiwindow.cpp:323
-#, no-c-format
-msgctxt "%p is replaced by the percentage of solved letter cells"
-msgid "%p% solved"
-msgstr "Розв’язано %p%"
-
-#: crosswordxmlguiwindow.cpp:1425
-msgid "&Add Clue"
-msgstr "&Додати питання"
-
-#: crosswordxmlguiwindow.cpp:1448
-msgid "&Add Image"
-msgstr "&Додати зображення"
-
-#: library/librarygui.cpp:531
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Add..."
-msgstr "&Додати питання..."
-
-#: crosswordxmlguiwindow.cpp:1511
-msgid "&Check"
-msgstr "&Перевірити"
-
-#: crosswordxmlguiwindow.cpp:1464
-msgid "&Check for rotation symmetry..."
-msgstr "П&еревірити на обертову симетрію..."
-
-#: crosswordxmlguiwindow.cpp:1516
-msgid "&Clear Answers"
-msgstr "&Спорожнити відповіді"
-
-#: crosswordxmlguiwindow.cpp:1454
-#, fuzzy
-msgid "&Clear Crossword..."
-msgstr "С&порожнити кросворд"
-
-#: dialogs/crosswordpropertiesdialog.cpp:46
-msgid "&Convert..."
-msgstr "Пе&ретворити…"
-
-#: library/librarygui.cpp:516
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Create Crossword..."
-msgstr "С&порожнити кросворд"
-
-#: crosswordxmlguiwindow.cpp:1459
-msgid "&Crossword Properties..."
-msgstr "Властивості &кросворда..."
-
-#: library/librarygui.cpp:536
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Delete..."
-msgstr "В&илучити"
-
-#: crosswordxmlguiwindow.cpp:1283
-msgid "&Dictionary..."
-msgstr "&Словник..."
-
-#: library/librarygui.cpp:526
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Download..."
-msgstr "&Звантажити"
-
-#: crosswordxmlguiwindow.cpp:1521
-msgid "&Eraser"
-msgstr "&Гумка"
-
-#: library/librarygui.cpp:541
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Export..."
-msgstr "&Експортувати"
-
-#: crosswordxmlguiwindow.cpp:1372
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&First Letter"
-msgstr "Позначити п&ершу літеру"
-
-#: crosswordxmlguiwindow.cpp:1377
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Last Letter"
-msgstr "Позначити &останню літеру"
-
-#: crosswordxmlguiwindow.cpp:1387
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Next Clue"
-msgstr "Позначити &наступне питання"
-
-#: crosswordxmlguiwindow.cpp:1392
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Previous Clue"
-msgstr "Позначити &попереднє питання"
-
-#: crosswordxmlguiwindow.cpp:1431 crosswordxmlguiwindow.cpp:1861
-msgid "&Remove"
-msgstr "В&илучити"
-
-#: crosswordxmlguiwindow.cpp:1857
-msgid "&Remove Clue"
-msgstr "&Вилучити питання"
-
-#: crosswordxmlguiwindow.cpp:1859
-msgid "&Remove Image"
-msgstr "Ви&лучити зображення"
-
-#: krosswordpuzzle.cpp:261
-msgid "&Restore"
-msgstr "&Відновити"
-
-#: dialogs/crosswordtypewidget.cpp:226
-msgid "&Rules..."
-msgstr "Пр&авила…"
-
-#: crosswordxmlguiwindow.cpp:1469
-msgid "&Statistics..."
-msgstr "&Статистика..."
-
-#: cells/cluecell.cpp:887
-msgctxt "Display text for empty clue texts"
-msgid "<placeholder>empty</placeholder>"
-msgstr "<placeholder>порожньо</placeholder>"
-
-#: commands.cpp:993
-msgctxt ""
-"Used for the text of the change clue undo command, when the clue text is "
-"empty."
-msgid "<placeholder>empty</placeholder>"
-msgstr "<placeholder>порожнє</placeholder>"
-
-#: crosswordxmlguiwindow.cpp:1509
-msgid ""
-"<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
-"solution will be displayed.</p><p>If you filled in all letters and do not "
-"want to give up, choose \"Done!\".</p></qt>"
-msgstr ""
-"<qt><p>Оберіть «<b>Розв’язати</b>», якщо ви здаєтеся у поточній грі. В "
-"результаті ви побачите розв’язок.</p><p>Якщо ви заповнили всі клітинки і не "
-"бажаєте здаватися, оберіть «Готово!».</p></qt>"
-
-#: global.cpp:508
-msgctxt "Long description of the crossword type 'Crossnumber'"
-msgid ""
-"A crossnumber (also known as a cross-figure) is the numerical analogy of a "
-"crossword, in which the solutions to the clues are numbers instead of words. "
-"Clues are usually arithmetical expressions, but can also be general "
-"knowledge clues to which the answer is a number or year. There are also "
-"numerical fill-in crosswords.\n"
-"The Daily Mail Weekend magazine used to feature crossnumbers under the "
-"misnomer Number Word. This kind of puzzle should not be confused with a "
-"different puzzle that the Daily Mail refers to as Cross Number.\n"
-"(text taken from wikipedia)"
-msgstr ""
-"Числовий кросворд є числовим аналогом звичайного кросворда, у якому "
-"відповідями на питання є не слова, а числа. Питаннями є деякі арифметичні "
-"вирази, але можна використовувати і питання з інших галузей знання, зокрема "
-"питання щодо року, коли сталася певна подія. Існують також числові "
-"кросворди, які заповнюються згідно з певними правилами.\n"
-"У журналі «Дейлі Мейл Вікенд» числові кросворди названо "
-"«числовордами» (Number Word). Подібний тип кросвордів не слід плутати з "
-"іншими типом головоломок, які у «Дейлі Мейл» називаються «перехрещеннями "
-"чисел» (Cross Number).\n"
-"(текст запозичено з Вікіпедії)"
-
-#: main.cpp:27
-#, fuzzy
-msgid ""
-"A crossword puzzle game and editor for KDE.\n"
-"Based on KrossWordPuzzle."
-msgstr "Програма для розв’язання та створення кросвордів у KDE 4"
+#: cluemodel.cpp:60
+msgid "Answer"
+msgstr "Відповідь"
 
 #: cluemodel.cpp:63
 msgid "Across clues"
 msgstr "Питання по горизонталі"
 
-#: krossworddocument.cpp:88
-msgctxt "Title for the list of across/horizontal clues when printing"
-msgid "Across clues"
-msgstr "Питання по горизонталі"
+#: cluemodel.cpp:64
+msgid "Down clues"
+msgstr "Питання по вертикалі"
+
+#: commands.cpp:334
+msgid "Remove Clue Without Text"
+msgstr "Вилучити питання без тексту"
+
+#: commands.cpp:336
+msgid "Remove Clue '%1'"
+msgstr "Вилучити питання «%1»"
+
+#: commands.cpp:343 commands.cpp:552 commands.cpp:662 commands.cpp:697
+msgid "No cell at the given coordinates (%1, %2)"
+msgstr "За вказаними координатами (%1, %2) клітинки не знайдено"
+
+#: commands.cpp:352
+msgctxt ""
+"%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
+msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
+msgstr ""
+"За вказаними координатами (%1, %2) не знайдено клітинки з питанням: «%3»"
+
+#: commands.cpp:423
+msgid "Add Clue Without Text"
+msgstr "Додати питання без тексту"
+
+#: commands.cpp:425
+msgid "Add Clue '%1'"
+msgstr "Додати питання «%1»"
+
+#: commands.cpp:544
+msgid "Remove Image '%1'"
+msgstr "Вилучити зображення «%1»"
+
+#: commands.cpp:559
+msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
+msgstr ""
+"За вказаними координатами (%1, %2) не знайдено клітинки з зображенням: «%3»"
+
+#: commands.cpp:612
+msgid "Add Image '%1'"
+msgstr "Додати зображення «%1»"
+
+#: commands.cpp:626
+msgid "Convert Letter at (%1, %2) to Solution Letter"
+msgstr "Перетворити літеру з координатами (%1, %2) на літеру розв’язку"
+
+#: commands.cpp:654
+msgctxt "%1 contains the position of the solution letter in the solution word."
+msgid "Convert Solution Letter %1 to Letter"
+msgstr "Перетворення літери слова-розв’язку %1 на звичайну літеру"
+
+#: commands.cpp:669
+msgid "Solution letter cell not found at the given coordinates (%1, %2)"
+msgstr ""
+"За вказаними координатами (%1, %2) клітинки з літерою розв’язку не знайдено"
+
+#: commands.cpp:704 commands.cpp:1172
+msgid "Letter cell not found at the given coordinates (%1, %2)"
+msgstr "За вказаними координатами (%1, %2) клітинки з літерою не знайдено"
+
+#: commands.cpp:725
+msgctxt ""
+"Error message to be displayed, when the user tries to convert a letter to a "
+"solution letter, but the position of the new solution letter is already "
+"used. Each solution letter has a position in the solution word of the "
+"crossword and all solution letters of a crossword form it's solution word. "
+"%1 is replaced by the (already used) position."
+msgid "The solution letter position %1 is already assigned."
+msgstr "Позицію літери слова-розв’язку %1 вже призначено."
 
 #: commands.cpp:774
 msgid "Add %1 letter"
@@ -271,37 +116,1296 @@ msgstr[1] "Додати %1 літери"
 msgstr[2] "Додати %1 літер"
 msgstr[3] "Додати %1 літеру"
 
-#: commands.cpp:425
-msgid "Add Clue '%1'"
-msgstr "Додати питання «%1»"
+#: commands.cpp:776
+msgid "Remove %1 letter"
+msgid_plural "Remove %1 letters"
+msgstr[0] "Вилучити %1 літеру"
+msgstr[1] "Вилучити %1 літери"
+msgstr[2] "Вилучити %1 літер"
+msgstr[3] "Вилучити %1 літеру"
 
-#: commands.cpp:423
-msgid "Add Clue Without Text"
-msgstr "Додати питання без тексту"
+#: commands.cpp:778
+msgctxt "This string shouldn't happen to be used"
+msgid "Remove no letters"
+msgstr "Вилучити клітинки без літер"
 
-#: commands.cpp:612
-msgid "Add Image '%1'"
-msgstr "Додати зображення «%1»"
+#: commands.cpp:813 commands.cpp:1006 commands.cpp:1100
+msgid "No clue cell given"
+msgstr "Не вказано клітинки питання"
 
-#: library/librarygui.cpp:532
+#: commands.cpp:993
+msgctxt ""
+"Used for the text of the change clue undo command, when the clue text is "
+"empty."
+msgid "<placeholder>empty</placeholder>"
+msgstr "<placeholder>порожнє</placeholder>"
+
+#: commands.cpp:991
+msgid "Change Clue '%1'"
+msgstr "Змінити питання «%1»"
+
+#: commands.cpp:1092
+msgid "Clear Correct Answer of Clue at (%1, %2)"
+msgstr "Витерти правильну відповідь на питання у клітинці (%1, %2)"
+
+#: commands.cpp:1144
+msgid "Clear Correct Letter at (%1, %2), was %3"
+msgstr "Витерти літеру у клітинці (%1, %2), було вказано %3"
+
+#: commands.cpp:1147
+msgid "Set Correct Letter at (%1, %2) to %3"
+msgstr "Встановити правильну літеру у клітинці з координатами (%1, %2): %3"
+
+#: commands.cpp:1150
+msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
+msgstr "Виправити літеру у клітинці (%1, %2) з %3 на %4"
+
+#: commands.cpp:1154
+msgid "Clear Letter at (%1, %2), was %3"
+msgstr "Витерти літеру у клітинці (%1, %2), було вказано %3"
+
+#: commands.cpp:1157
+msgid "Set Letter at (%1, %2) to %3"
+msgstr "Встановити літеру у клітинці (%1, %2): %3"
+
+#: commands.cpp:1160
+msgid "Edit Letter at (%1, %2) From %3 to %4"
+msgstr "Змінити літеру у клітинці (%1, %2) з %3 на %4"
+
+#: commands.cpp:1222
+msgid "Clear Crossword"
+msgstr "Спорожнити кросворд"
+
+#: commands.cpp:1268
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Title"
+msgstr "Заголовок"
+
+#: commands.cpp:1271
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Authors"
+msgstr "Автори"
+
+#: commands.cpp:1274
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Copyright"
+msgstr "Авторські права"
+
+#: commands.cpp:1277
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Notes"
+msgstr "Примітки"
+
+#: commands.cpp:1284
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Size"
+msgstr "Розміри"
+
+#: commands.cpp:1292
+msgid "Changed Crossword Properties (%1)"
+msgstr "Змінено властивості кросворда (%1)"
+
+#: commands.cpp:1297
+msgctxt ""
+"%1 may be a list of changes separated by ',' if the list of changes contains "
+"more than 2 items. %2 is the last item"
+msgid "Changed Crossword Properties (%1 and %2)"
+msgstr "Змінено властивості кросворда (%1 і %2)"
+
+#: commands.cpp:1299
+msgid "No Action"
+msgstr "Без дії"
+
+#: commands.cpp:1346
+msgid "Hide Clue Cell"
+msgstr "Приховати клітинку питання"
+
+#: commands.cpp:1410
+msgid "Make Clue Cell Visible"
+msgstr "Зробити клітинку питання видимою"
+
+#: commands.cpp:1481
+msgid "Set Default Number Puzzle Mapping"
+msgstr "Встановити типову відповідність номерів питань"
+
+#: commands.cpp:1483
+msgid "Change Number Puzzle Mapping"
+msgstr "Змінити відповідність номерів питань"
+
+#: commands.cpp:1506
+msgid "Setup Same Letter Synchronization"
+msgstr "Налаштувати синхронізацію однакових літер"
+
+#: commands.cpp:1529
+msgid "Remove Same Letter Synchronization"
+msgstr "Вилучити синхронізацію однакових літер"
+
+#: commands.cpp:1777
+msgid "Convert Crossword From '%1' to '%2'"
+msgstr "Перетворити кросворд з формату «%1» на «%2»"
+
+#: commands.cpp:1894
+msgid "Resize Crossword From %1x%2 to %3x%4"
+msgstr "Змінити розміри кросворда з %1x%2 на %3x%4"
+
+#: commands.cpp:1972
+msgid "Move All Cells By %1, %2"
+msgstr "Пересунути всі клітинки на %1, %2"
+
+#: crosswordxmlguiwindow.cpp:265
+msgid "Zoom: %1%"
+msgstr "Масштаб: %1%"
+
+#: crosswordxmlguiwindow.cpp:320
+#, no-c-format
+msgctxt "%p is replaced by the percentage of solved letter cells"
+msgid "%p% solved"
+msgstr "Розв’язано %p%"
+
+#: crosswordxmlguiwindow.cpp:321
 #, fuzzy
-msgid "Add a crossword to the library"
-msgstr "Імпортувати кросворд до бібліотеки."
+msgid "Shows the percentage of solved letter cells"
+msgstr "Показує кількість розв’язаних літер у відсотках."
 
-#: crosswordxmlguiwindow.cpp:1284
+#: crosswordxmlguiwindow.cpp:552
+msgid "Congratulations! You solved the crossword perfectly."
+msgstr "Вітаємо! Ви чудово розв’язали цей кросворд."
+
+#: crosswordxmlguiwindow.cpp:618 crosswordxmlguiwindow.cpp:651
+msgid "New crossword"
+msgstr "Створити кросворд"
+
+#: crosswordxmlguiwindow.cpp:672 crosswordxmlguiwindow.cpp:818
+#: krosswordpuzzle.cpp:129
+msgid ""
+"The current crossword has been modified.\n"
+"Would you like to save it?"
+msgstr ""
+"Поточний кросворд було змінено.\n"
+"Бажаєте зберегти його?"
+
+#: crosswordxmlguiwindow.cpp:673 crosswordxmlguiwindow.cpp:820
+#: krosswordpuzzle.cpp:131
+msgid "Close Document"
+msgstr "Закрити документ"
+
+#: crosswordxmlguiwindow.cpp:706
+msgid "Loaded crossword from file '%1'"
+msgstr "Кросворд завантажено з файла «%1»"
+
+#: crosswordxmlguiwindow.cpp:721
+msgid ""
+"The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
+"\n"
+"Do you want to convert the crossword to another type now?\n"
+"\n"
+"(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")"
+msgstr ""
+"Не вдалося визначити тип кросворда, зроблено припущення, що кросворд "
+"належить до «Довільних кросвордів».\n"
+"\n"
+"Бажаєте, щоб програма здійснила перетворення кросворда на інший тип?\n"
+"\n"
+"(Зауваження: здійснити перетворення можна пізніше за допомогою пункту меню "
+"«Зміни > Властивості кросворда»)"
+
+#: crosswordxmlguiwindow.cpp:750
+msgid "Error while loading file '%1': %2"
+msgstr "Під час спроби завантаження файла «%1» сталася помилка: %2"
+
+#: crosswordxmlguiwindow.cpp:776
+msgid "Save &Edit History"
+msgstr "Зберегти журнал &редагування"
+
+#: crosswordxmlguiwindow.cpp:779
+msgid "Save As &Template"
+msgstr "Зберегти як &шаблон"
+
+#: crosswordxmlguiwindow.cpp:781
+msgid "Save without correct answers, clue texts, images"
+msgstr "Зберегти без правильних відповідей, тексту питань, зображень"
+
+#: crosswordxmlguiwindow.cpp:847
+#, fuzzy
+msgid ""
+"Can't store confidence values in *.puz files!\n"
+"If you want confidence values to be stored please use a Krossword file "
+"format (*.kwp or *.kwpz)."
+msgstr ""
+"Зберегти дані щодо точності відповіді у файлах *.puz неможливо!\n"
+"Якщо ви бажаєте зберегти дані щодо точності відповіді, будь ласка, "
+"скористайтеся форматом файлів KrossWordPuzzle (*.kwp або *.kwpz).матом "
+"файлів KrossWordPuzzle (*.kwp або *.kwpz)."
+
+#: crosswordxmlguiwindow.cpp:858
+#, fuzzy
+msgid ""
+"Can't store image cells in *.puz files!\n"
+"If you want image cells to be stored please use a Krossword file format (*."
+"kwp or *.kwpz)."
+msgstr ""
+"Зберегти дані щодо клітинок з зображеннями у файлах *.puz неможливо!\n"
+"Якщо ви бажаєте зберегти дані щодо клітинок з зображеннями, будь ласка, "
+"скористайтеся форматом файлів KrossWordPuzzle (*.kwp або *.kwpz).ка, "
+"скористайтеся форматом файлів KrossWordPuzzle (*.kwp або *.kwpz)."
+
+#: crosswordxmlguiwindow.cpp:881
+msgid "Wrote crossword to file '%1'"
+msgstr "Кросворд записано до файла «%1»"
+
+#: crosswordxmlguiwindow.cpp:896
+msgid "Error while writing file: %1"
+msgstr "Помилка під час спроби запису до файла: %1"
+
+#: crosswordxmlguiwindow.cpp:1008
+msgid "Can't add clues on crossed letter cells"
+msgstr "Не можна додавати питання на клітинці, що належить двом словам одразу"
+
+#: crosswordxmlguiwindow.cpp:1017
+msgid "Can't add clue at the current cell"
+msgstr "Не вдалося додати питання до поточної клітинки"
+
+#: crosswordxmlguiwindow.cpp:1038
+msgctxt "%1 contains the reason why the clue couldn't be added"
+msgid "Can't add clue. %1"
+msgstr "Не вдалося додати питання. %1"
+
+#: crosswordxmlguiwindow.cpp:1052
+msgid "Clue added ('%1')"
+msgstr "Додано питання («%1»)"
+
+#: crosswordxmlguiwindow.cpp:1069
+msgctxt "%1 contains the reason why the image couldn't be added"
+msgid "Can't add image. %1"
+msgstr "Не вдалося додати зображення. %1"
+
+#: crosswordxmlguiwindow.cpp:1082
+msgctxt "%1 contains the reason why the clue couldn't be removed"
+msgid "Can't remove clue. %1"
+msgstr "Не вдалося вилучити питання. %1"
+
+#: crosswordxmlguiwindow.cpp:1087
+msgctxt "%1 contains the reason why the image couldn't be removed"
+msgid "Can't remove image. %1"
+msgstr "Не вдалося вилучити зображення. %1"
+
+#: crosswordxmlguiwindow.cpp:1090
+msgid "No removable cell selected."
+msgstr "Позначено клітинку, яку не можна вилучати."
+
+#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
+#, fuzzy
+msgid "Do you really want to clear the crossword?"
+msgstr "Вилучити з кросворда всі питання."
+
+#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
+msgid "Clear"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1100
+msgctxt "%1 contains the reason why the crossword couldn't be cleared"
+msgid "Can't clear crossword. %1"
+msgstr "Не вдалося спорожнити кросворд. %1"
+
+#: crosswordxmlguiwindow.cpp:1117
+msgctxt ""
+"%1 contains the reason why the crossword properties couldn't be changed"
+msgid "Can't change crossword properties. %1"
+msgstr "Не вдалося змінити властивості кросворда. %1"
+
+#: crosswordxmlguiwindow.cpp:1129
+msgid "The crossword has 180 degree rotation symmetry."
+msgstr "Кросворд має дзеркальну симетрію."
+
+#: crosswordxmlguiwindow.cpp:1133
+msgid ""
+"The crossword doesn't have 180 degree rotation symmetry.\n"
+"To achieve symmetry make sure that each empty cell has a counterpart at it's "
+"180 degree rotated position.\n"
+msgstr ""
+"Кросворд не має дзеркальної симетрії.\n"
+"Щоб досягти симетрії, ви маєте створити для кожної порожньої клітинки її "
+"відповідник у кросворді, повернутому на 180 градусів.\n"
+
+#: crosswordxmlguiwindow.cpp:1137
+msgid ""
+"The crossword doesn't have 180 degree rotation symmetry.\n"
+"To achieve symmetry make sure that each empty cell and each clue cell has a "
+"counterpart at it's 180 degree rotated position.\n"
+msgstr ""
+"Кросворд не має дзеркальної симетрії.\n"
+"Щоб досягти симетрії, ви маєте створити для кожної порожньої клітинки і "
+"кожної клітинки питання її відповідник у кросворді, повернутому на 180 "
+"градусів.\n"
+
+#: crosswordxmlguiwindow.cpp:1143
+msgid ""
+"Quality crosswords of the current crossword type (%1) are usually symmetric."
+msgstr ""
+"Якісні кросворди поточного типу кросвордів (%1) зазвичай є симетричними."
+
+#: crosswordxmlguiwindow.cpp:1162
+msgid "Clue Number Mapping"
+msgstr "Відповідність номерів"
+
+#: crosswordxmlguiwindow.cpp:1187
+msgctxt ""
+"%1 contains the reason why the new clue number mapping couldn't be applied"
+msgid "Can't apply clue number mapping. %1"
+msgstr "Не вдалося застосувати відповідність номерів. %1"
+
+#: crosswordxmlguiwindow.cpp:1200
+msgctxt "%1 contains the reason why the cells couldn't be moved"
+msgid "Can't move cells. %1"
+msgstr "Не вдалося пересунути клітинки. %1"
+
+#: crosswordxmlguiwindow.cpp:1210
+msgid ""
+"This will cause all answers to be shown and editable.\n"
+"If you want to solve the crossword you should cancel."
+msgstr ""
+"Програма покаже відповіді на питання і ви зможете їх змінити.\n"
+"Якщо ви бажаєте розв’язати кросворд самостійно, вам слід скасувати дію."
+
+#: crosswordxmlguiwindow.cpp:1257
+#, fuzzy
+msgid "Close the current crossword"
+msgstr "Закрити поточний кросворд."
+
+#: crosswordxmlguiwindow.cpp:1262
+msgid "Save the crossword with solved letters"
+msgstr "Зберегти поточний стан розв’язання кросворда"
+
+#: crosswordxmlguiwindow.cpp:1266
+msgid "Choose a filename to save the crossword with solved letters"
+msgstr ""
+"Оберіть назву файла для збереження поточного стану розв’язання кросворда"
+
+#: crosswordxmlguiwindow.cpp:1271
+msgid "Print the crossword"
+msgstr "Надрукувати кросворд"
+
+#: crosswordxmlguiwindow.cpp:1275
+msgid "Show a print preview"
+msgstr "Показати попередній перегляд друку"
+
+#: crosswordxmlguiwindow.cpp:1279
+msgid "&Dictionary..."
+msgstr "&Словник..."
+
+#: crosswordxmlguiwindow.cpp:1280
 #, fuzzy
 msgid "Add or remove crossword dictionaries"
 msgstr "Додати або вилучити словники кросвордів."
 
-#: dictionary.cpp:571
+#: crosswordxmlguiwindow.cpp:1286
+msgid "Fit the whole crossword into the window"
+msgstr "Вмістити кросворд у вікні"
+
+#: crosswordxmlguiwindow.cpp:1289
+msgid "Pan"
+msgstr "Панорамування"
+
+#: crosswordxmlguiwindow.cpp:1290
 msgid ""
-"Adding words from %1 crossword files to the database.\n"
+"Pan the view. Note that you can also pan while pressing the control key."
+msgstr ""
+"Панорамувати перегляд. Зауважте, що панорамування можна виконувати і за "
+"допомогою натискання клавіші Ctrl."
+
+#: crosswordxmlguiwindow.cpp:1294
+#, fuzzy
+msgid "Solve the selected letter or a random one if none is selected"
+msgstr ""
+"Показати літеру у поточній клітинці або у випадковій клітинці, якщо нічого "
+"не позначено"
+
+#: crosswordxmlguiwindow.cpp:1297
+msgid "This letter has been solved"
+msgstr "Цю літеру вже вгадано"
+
+#: crosswordxmlguiwindow.cpp:1298
+#, fuzzy
+msgid "The selected letter cell has been solved"
+msgstr "Поточну позначену літеру вже заповнено"
+
+#: crosswordxmlguiwindow.cpp:1303
+msgid "Mark as confident"
+msgstr "Позначити як точну"
+
+#: crosswordxmlguiwindow.cpp:1304
+#, fuzzy
+msgid "Mark the selected letter cell's confidence as confident"
+msgstr "Позначити поточну літеру у клітинці як точну"
+
+#: crosswordxmlguiwindow.cpp:1309
+msgid "Mark as unsure"
+msgstr "Позначити як неточну"
+
+#: crosswordxmlguiwindow.cpp:1310
+#, fuzzy
+msgid "Mark the selected letter cell's confidence as unsure"
+msgstr "Позначити поточну літеру у клітинці як неточну"
+
+#: crosswordxmlguiwindow.cpp:1315
+msgid "Clear This Cell"
+msgstr "Витерти цю клітинку"
+
+#: crosswordxmlguiwindow.cpp:1316
+#, fuzzy
+msgid "Clears the selected letter cell"
+msgstr "Витерти вміст поточної позначеної клітинки"
+
+#: crosswordxmlguiwindow.cpp:1321
+msgid "Clear This Answer"
+msgstr "Витерти цю відповідь"
+
+#: crosswordxmlguiwindow.cpp:1322
+msgid "Clears the answer to the current clue"
+msgstr "Витерти відповідь на поточне питання"
+
+#: crosswordxmlguiwindow.cpp:1327
+msgid "Clear Across Answer"
+msgstr "Витерти відповідь по горизонталі"
+
+#: crosswordxmlguiwindow.cpp:1328
+msgid "Clears the answer to the current across clue"
+msgstr "Витерти відповідь на поточне питання по горизонталі"
+
+#: crosswordxmlguiwindow.cpp:1333
+msgid "Clear Down Answer"
+msgstr "Спорожнити клітинки відповіді"
+
+#: crosswordxmlguiwindow.cpp:1334
+msgid "Clears the answer to the current down clue"
+msgstr "Витерти відповідь на поточне питання по вертикалі"
+
+#: crosswordxmlguiwindow.cpp:1339
+msgid "Hint For This Cell"
+msgstr "Підказка для цієї клітинки"
+
+#: crosswordxmlguiwindow.cpp:1340
+#, fuzzy
+msgid "Solve the selected letter cell"
+msgstr "Показати літеру у поточній клітинці"
+
+#: crosswordxmlguiwindow.cpp:1345
+msgid "Solve Clue"
+msgstr "Показати відповідь"
+
+#: crosswordxmlguiwindow.cpp:1346
+msgid "Solve the current clue"
+msgstr "Показати відповідь на поточне питання"
+
+#: crosswordxmlguiwindow.cpp:1351
+msgid "Solve Across Clue"
+msgstr "Показати відповідь по горизонталі"
+
+#: crosswordxmlguiwindow.cpp:1352
+msgid "Solve the current across clue"
+msgstr "Показати відповідь на поточне питання по горизонталі"
+
+#: crosswordxmlguiwindow.cpp:1357
+msgid "Solve Down Clue"
+msgstr "Показати відповідь по вертикалі"
+
+#: crosswordxmlguiwindow.cpp:1358
+msgid "Solve the current down clue"
+msgstr "Показати відповідь на поточне питання по вертикалі"
+
+#: crosswordxmlguiwindow.cpp:1363
+#, fuzzy
+msgid "Clue With Switched Orientation"
+msgstr "Позначити питання з перпендикулярною орієнтацією"
+
+#: crosswordxmlguiwindow.cpp:1364
+msgid "Select clue with switched orientation to the currently selected clue"
+msgstr ""
+"Позначити питання з перпендикулярним розташуванням відповіді відносно "
+"відповіді на поточне питання"
+
+#: crosswordxmlguiwindow.cpp:1368
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&First Letter"
+msgstr "Позначити п&ершу літеру"
+
+#: crosswordxmlguiwindow.cpp:1369
+msgid "Select the first letter of the current clue"
+msgstr "Позначити першу літеру поточного питання"
+
+#: crosswordxmlguiwindow.cpp:1373
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Last Letter"
+msgstr "Позначити &останню літеру"
+
+#: crosswordxmlguiwindow.cpp:1374
+msgid "Select the last letter of the current clue"
+msgstr "Позначити останню літеру поточного питання"
+
+#: crosswordxmlguiwindow.cpp:1378
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "First Clue"
+msgstr "Позначити перше питання"
+
+#: crosswordxmlguiwindow.cpp:1379
+msgid "Select the first clue"
+msgstr "Позначити перше питання"
+
+#: crosswordxmlguiwindow.cpp:1383
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Next Clue"
+msgstr "Позначити &наступне питання"
+
+#: crosswordxmlguiwindow.cpp:1384
+msgid "Select the next clue"
+msgstr "Позначити наступне питання"
+
+#: crosswordxmlguiwindow.cpp:1388
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Previous Clue"
+msgstr "Позначити &попереднє питання"
+
+#: crosswordxmlguiwindow.cpp:1389
+msgid "Select the previous clue"
+msgstr "Позначити попереднє питання"
+
+#: crosswordxmlguiwindow.cpp:1393
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "Last Clue"
+msgstr "Позначити останнє питання"
+
+#: crosswordxmlguiwindow.cpp:1394
+msgid "Select the last clue"
+msgstr "Позначити останнє питання"
+
+#: crosswordxmlguiwindow.cpp:1402
+msgid "Show Clue Dock"
+msgstr "Показати панель питань"
+
+#: crosswordxmlguiwindow.cpp:1407
+msgid "Show Edit History Dock"
+msgstr "Показати панель журналу редагування"
+
+#: crosswordxmlguiwindow.cpp:1412
+msgid "Show Current Cell Dock"
+msgstr "Показати панель поточної клітинки"
+
+#: crosswordxmlguiwindow.cpp:1416
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "Edit Mode"
+msgstr "Режим редагування"
+
+#: crosswordxmlguiwindow.cpp:1417
+msgid "Enables/disables the edit mode"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1421
+msgid "&Add Clue"
+msgstr "&Додати питання"
+
+#: crosswordxmlguiwindow.cpp:1422
+#, fuzzy
+msgid "Adds a new clue at the current cell"
+msgstr "Додати нове питання до поточної клітинки."
+
+#: crosswordxmlguiwindow.cpp:1427 crosswordxmlguiwindow.cpp:1860
+msgid "&Remove"
+msgstr "В&илучити"
+
+#: crosswordxmlguiwindow.cpp:1428
+#, fuzzy
+msgid "Removes the highlighted clue or image"
+msgstr "Вилучити позначене питання або зображення."
+
+#: crosswordxmlguiwindow.cpp:1432
+msgid "Remove &Across Clue"
+msgstr "Вил&учити відповідь по горизонталі"
+
+#: crosswordxmlguiwindow.cpp:1433
+#, fuzzy
+msgid "Removes the highlighted across clue"
+msgstr "Вилучити позначену відповідь по горизонталі."
+
+#: crosswordxmlguiwindow.cpp:1438
+msgid "Remove &Down Clue"
+msgstr "Ви&лучити відповідь по вертикалі"
+
+#: crosswordxmlguiwindow.cpp:1439
+#, fuzzy
+msgid "Removes the highlighted down clue"
+msgstr "Вилучити позначену відповідь по вертикалі."
+
+#: crosswordxmlguiwindow.cpp:1444
+msgid "&Add Image"
+msgstr "&Додати зображення"
+
+#: crosswordxmlguiwindow.cpp:1445
+#, fuzzy
+msgid "Adds a new image at the current cell"
+msgstr "Додати до поточної клітинки нове зображення."
+
+#: crosswordxmlguiwindow.cpp:1450
+#, fuzzy
+msgid "&Clear Crossword..."
+msgstr "С&порожнити кросворд"
+
+#: crosswordxmlguiwindow.cpp:1451
+#, fuzzy
+msgid "Removes all clues from the crossword"
+msgstr "Вилучити з кросворда всі питання."
+
+#: crosswordxmlguiwindow.cpp:1455
+msgid "&Crossword Properties..."
+msgstr "Властивості &кросворда..."
+
+#: crosswordxmlguiwindow.cpp:1456
+msgid "Change the size of the crossword or it's title, author, copyright..."
+msgstr "Змінити розміри кросворда, його назву, автора, ліцензію..."
+
+#: crosswordxmlguiwindow.cpp:1460
+msgid "&Check for rotation symmetry..."
+msgstr "П&еревірити на обертову симетрію..."
+
+#: crosswordxmlguiwindow.cpp:1461
+#, fuzzy
+msgid "Checks if the crossword has 180 degree rotation symmetry"
+msgstr "Перевірити, чи має кросворд дзеркальну симетрію."
+
+#: crosswordxmlguiwindow.cpp:1465
+msgid "&Statistics..."
+msgstr "&Статистика..."
+
+#: crosswordxmlguiwindow.cpp:1466
+#, fuzzy
+msgid "Shows statistics about the crossword"
+msgstr "Показати статистичні дані щодо кросворда."
+
+#: crosswordxmlguiwindow.cpp:1470
+msgid "Clue Number &Mapping..."
+msgstr "В&ідповідність номерів..."
+
+#: crosswordxmlguiwindow.cpp:1471
+#, fuzzy
+msgid "Changes the mapping of clue numbers to letters"
+msgstr "Змінити відповідність між номерами і літерами."
+
+#: crosswordxmlguiwindow.cpp:1475
+msgid "Move All Cells..."
+msgstr "Пересунути всі клітинки..."
+
+#: crosswordxmlguiwindow.cpp:1476
+#, fuzzy
+msgid "Moves all cells of the crossword"
+msgstr "Пересунути всі клітинки кросворда."
+
+#: crosswordxmlguiwindow.cpp:1494
+msgid "Insert special character:"
+msgstr "Вставити спеціальний символ:"
+
+#: crosswordxmlguiwindow.cpp:1498
+#, fuzzy
+msgid "Let you select a special character to paste"
+msgstr "Надає вам змогу вибрати спеціальний символ для вставлення."
+
+#: crosswordxmlguiwindow.cpp:1504
+#, fuzzy
+msgid "Fills all letter cells with the correct letters"
+msgstr "Заповнити всі клітинки відповідними літерами."
+
+#: crosswordxmlguiwindow.cpp:1505
+msgid ""
+"<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
+"solution will be displayed.</p><p>If you filled in all letters and do not "
+"want to give up, choose \"Done!\".</p></qt>"
+msgstr ""
+"<qt><p>Оберіть «<b>Розв’язати</b>», якщо ви здаєтеся у поточній грі. В "
+"результаті ви побачите розв’язок.</p><p>Якщо ви заповнили всі клітинки і не "
+"бажаєте здаватися, оберіть «Готово!».</p></qt>"
+
+#: crosswordxmlguiwindow.cpp:1507
+msgid "&Check"
+msgstr "&Перевірити"
+
+#: crosswordxmlguiwindow.cpp:1508
+#, fuzzy
+msgid "Checks if all letters are correct"
+msgstr "Перевіряє, чи правильно вказано всі літери."
+
+#: crosswordxmlguiwindow.cpp:1512
+msgid "&Clear Answers"
+msgstr "&Спорожнити відповіді"
+
+#: crosswordxmlguiwindow.cpp:1513
+#, fuzzy
+msgid "Clears all letter cells"
+msgstr "Спорожнити всі клітинки."
+
+#: crosswordxmlguiwindow.cpp:1517
+msgid "&Eraser"
+msgstr "&Гумка"
+
+#: crosswordxmlguiwindow.cpp:1518
+#, fuzzy
+msgid "Enables the eraser, to clear letter cells/answers"
+msgstr "Увімкнути ґумку, щоб витерти вміст клітинок літер або відповіді."
+
+#: crosswordxmlguiwindow.cpp:1628 krossword.h:554
+msgid "Solution"
+msgstr "Розв’язок"
+
+#: crosswordxmlguiwindow.cpp:1661
+msgid "Clue List"
+msgstr "Список питань"
+
+#: crosswordxmlguiwindow.cpp:1679
+msgid "Edit History"
+msgstr "Журнал редагування"
+
+#: crosswordxmlguiwindow.cpp:1689
+msgid "Current Cell"
+msgstr "Поточна клітинка"
+
+#: crosswordxmlguiwindow.cpp:1731
+msgctxt "%1 contains the reason why the answer offset couldn't be changed"
+msgid "Can't change answer offset. %1"
+msgstr "Не вдалося змінити відступ відповіді. %1"
+
+#: crosswordxmlguiwindow.cpp:1744
+msgctxt "%1 contains the reason why the orientation couldn't be changed"
+msgid "Can't change orientation. %1"
+msgstr "Не вдалося змінити орієнтацію. %1"
+
+#: crosswordxmlguiwindow.cpp:1756
+msgctxt "%1 contains the reason why the clue text couldn't be changed"
+msgid "Can't change clue text. %1"
+msgstr "Не вдалося змінити текст питання. %1"
+
+#: crosswordxmlguiwindow.cpp:1769
+msgctxt "%1 contains the reason why the correct answer couldn't be changed"
+msgid "Can't change correct answer. %1"
+msgstr "Не вдалося змінити правильну відповідь. %1"
+
+#: crosswordxmlguiwindow.cpp:1789
+msgctxt ""
+"%1 contains the reason why the solution letter couldn't be converted to a "
+"letter"
+msgid "Can't convert solution letter. %1"
+msgstr "Не вдалося перетворити літеру слова-розв’язку. %1"
+
+#: crosswordxmlguiwindow.cpp:1808
+msgctxt ""
+"%1 contains the reason why the letter couldn't be converted to a solution "
+"letter"
+msgid "Can't convert letter. %1"
+msgstr "Не вдалося перетворити літеру. %1"
+
+#: crosswordxmlguiwindow.cpp:1856
+msgid "&Remove Clue"
+msgstr "&Вилучити питання"
+
+#: crosswordxmlguiwindow.cpp:1858
+msgid "&Remove Image"
+msgstr "Ви&лучити зображення"
+
+#: crosswordxmlguiwindow.cpp:2086
+#, fuzzy
+msgid ""
+"Congratulations!\n"
+"You solved the crossword perfectly."
+msgstr "Вітаємо! Ви чудово розв’язали цей кросворд."
+
+#: crosswordxmlguiwindow.cpp:2108
+msgid "Do you really want to solve the crossword?"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:2108
+#, fuzzy
+msgid "Solve"
+msgstr "Показати відповідь"
+
+#: crosswordxmlguiwindow.cpp:2193 crosswordxmlguiwindow.cpp:2693
+msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
+msgid "Can't clear letter cell. %1"
+msgstr "Не вдалося витерти вміст клітинки. %1"
+
+#: crosswordxmlguiwindow.cpp:2216 crosswordxmlguiwindow.cpp:2240
+#: crosswordxmlguiwindow.cpp:2265 crosswordxmlguiwindow.cpp:2699
+msgctxt "%1 contains the reason why the answer couldn't be cleared"
+msgid "Can't clear answer. %1"
+msgstr "Не вдалося витерти відповідь. %1"
+
+#: crosswordxmlguiwindow.cpp:2477 crosswordxmlguiwindow.cpp:2505
+msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
+msgstr "Питання (по горизонталі): «%1», %2 літер, поточна відповідь: «%3»"
+
+#: crosswordxmlguiwindow.cpp:2482 crosswordxmlguiwindow.cpp:2509
+msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
+msgstr "Питання (по вертикалі): «%1», %2 літер, поточна відповідь: «%3»"
+
+#: crosswordxmlguiwindow.cpp:2555 global.cpp:36
+msgid "Empty cell"
+msgstr "Порожня клітинка"
+
+#: crosswordxmlguiwindow.cpp:2557
+msgid "Image '%1'"
+msgstr "Зображення «%1»"
+
+#: crosswordxmlguiwindow.cpp:2758
+msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
+msgid "Can't add letter cells. %1"
+msgstr "Не вдалося додати клітинки літер. %1"
+
+#: crosswordxmlguiwindow.cpp:2760
+msgctxt ""
+"%1 contains the reason why the letters couldn't be removed to the clue"
+msgid "Can't remove letter cells. %1"
+msgstr "Не вдалося вилучити клітинки літер. %1"
+
+#: crosswordxmlguiwindow.cpp:2771
+msgctxt "%1 contains the reason why the letter cell couldn't be edited"
+msgid "Can't edit letter cell. %1"
+msgstr "Не вдалося змінити вміст клітинки. %1"
+
+#: crosswordxmlguiwindow.cpp:2806
+msgctxt "%1 contains the reason why the crossword couldn't be converted"
+msgid "Can't convert crossword. %1"
+msgstr "Не вдалося перетворити кросворд. %1"
+
+#: crosswordxmlguiwindow.cpp:2818
+msgid "Couldn't connect to the database."
+msgstr "Не вдалося встановити з’єднання з базою даних."
+
+#: dialogs/answerwidget.cpp:28 dialogs/answerwidget.cpp:38
+msgid ""
+"The correct answer to the clue. For each letter a letter cell is created"
+msgstr ""
+"Правильна відповідь на питання. Програма створити по одній клітинці на кожну "
+"літеру відповіді."
+
+#: dialogs/answerwidget.cpp:30 dialogs/answerwidget.cpp:40
+msgid "The answer to the clue"
+msgstr "Відповідь на питання"
+
+#: dialogs/cellwidgets/cluecellwidget.cpp:112
+#, fuzzy
+msgid "Show Only Answers With Current Answer &Length"
+msgstr "Показувати лише відповіді з &питаннями"
+
+#: dialogs/cellwidgets/cluecellwidget.cpp:121
+msgid "Show Only Answers With &Clue"
+msgstr "Показувати лише відповіді з &питаннями"
+
+#: dialogs/cellwidgets/cluecellwidget.cpp:128
+#, fuzzy
+msgid "Show Only the &First 100 Answers"
+msgstr "Показати лише п&ерші 100 відповідей"
+
+#: dialogs/cellwidgets/solutionlettercellwidget.cpp:94
+#, fuzzy
+msgid ""
+"The solution letter position %1 is already assigned.\n"
+"Please change the solution word position of that letter first."
+msgstr ""
+"Для вказаної позиції слова розв’язку вже вказано літеру слова розв’язку.\n"
+"Будь ласка, змініть спочатку позицію літери у слові-розв’язку."
+
+#: dialogs/convertcrossworddialog.cpp:29
+msgid "Convert Crossword Type To"
+msgstr "Остаточний тип кросворда"
+
+#: dialogs/convertcrossworddialog.cpp:33
+msgid "Convert From: %1"
+msgstr "Перетворити з: %1"
+
+#: dialogs/convertcrossworddialog.cpp:81
+#: dialogs/createnewcrossworddialog.cpp:231
+msgid ""
+"Changing the crossword type will discard user defined crossword type "
+"settings."
+msgstr ""
+"Зміна типу кросворда призведе до відкидання визначених користувачем "
+"параметрів кросворда."
+
+#: dialogs/convertcrossworddialog.cpp:105
+msgid "Convert To: %1"
+msgstr "Перетворити на: %1"
+
+#: dialogs/createnewcrossworddialog.cpp:35
+msgid "Create New Crossword"
+msgstr "Створити кросворд"
+
+#: dialogs/createnewcrossworddialog.cpp:109
+msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
+msgid "© %1, by %2"
+msgstr "© %1, автор — %2"
+
+#: dialogs/createnewcrossworddialog.cpp:111
+#, fuzzy
+msgctxt "Default notes value for new crosswords"
+msgid "Created with Krossword"
+msgstr "Створити кросворд"
+
+#: dialogs/createnewcrossworddialog.cpp:191
+msgid "Crossword Type"
+msgstr "Тип кросворда"
+
+#: dialogs/createnewcrossworddialog.cpp:192
+msgid "Size"
+msgstr "Розміри"
+
+#: dialogs/createnewcrossworddialog.cpp:193
+msgid "Notes"
+msgstr "Нотатки"
+
+#: dialogs/crosswordpreviewwidget.cpp:46
+msgid "Loading preview..."
+msgstr "Завантаження перегляду..."
+
+#: dialogs/crosswordpreviewwidget.cpp:55
+msgid "Preview failed"
+msgstr "Не вдалося створити попередній перегляд!"
+
+#: dialogs/crosswordpropertiesdialog.cpp:36
+msgid "Properties"
+msgstr "Властивості"
+
+#: dialogs/crosswordpropertiesdialog.cpp:43
+#: dialogs/crosswordpropertiesdialog.cpp:277
+msgid "Crossword Type: %1"
+msgstr "Тип кросворда: %1"
+
+#: dialogs/crosswordpropertiesdialog.cpp:46
+msgid "&Convert..."
+msgstr "Пе&ретворити…"
+
+#: dialogs/crosswordpropertiesdialog.cpp:245
+msgctxt "No changes to the crossword grid size."
+msgid "No change"
+msgstr "Без змін"
+
+#: dialogs/crosswordpropertiesdialog.cpp:257
+msgctxt ""
+"How many images are removed when resizing the crossword. This string gets "
+"combined with a plural string indicating how many clue cells will be removed "
+"when resizing."
+msgid "and %1 image"
+msgid_plural "and %1 images"
+msgstr[0] "і %1 зображення"
+msgstr[1] "і %1 зображення"
+msgstr[2] "і %1 зображень"
+msgstr[3] "і одне зображення"
+
+#: dialogs/crosswordpropertiesdialog.cpp:251
+msgctxt ""
+"How many clues are removed when resizing the crossword. %2 is replaced by a "
+"plural indicating how many images will be removed when resizing."
+msgid "Resizing from %3x%4 will remove %1 clue %2"
+msgid_plural "Resizing from %3x%4 will remove %1 clues %2"
+msgstr[0] "Зміна розмірів на розміри %3x%4 призведе до вилучення %1 питання %2"
+msgstr[1] "Зміна розмірів на розміри %3x%4 призведе до вилучення %1 питань %2"
+msgstr[2] "Зміна розмірів на розміри %3x%4 призведе до вилучення %1 питань %2"
+msgstr[3] ""
+"Зміна розмірів на розміри %3x%4 призведе до вилучення одного питання %2"
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
+msgid "Detailed Configuration"
+msgstr "Докладне налаштування"
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
+msgid "New Crossword Type"
+msgstr "Тип нового кросворда"
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
+msgid "Describe your crossword type here."
+msgstr "Тут ви можете описати тип вашого кросворда."
+
+#: dialogs/crosswordtypewidget.cpp:204
+msgid "Show Details"
+msgstr "Показати подробиці"
+
+#: dialogs/crosswordtypewidget.cpp:226
+msgid "&Rules..."
+msgstr "Пр&авила…"
+
+#: dialogs/currentcellwidget.cpp:114
+msgid "No cell selected."
+msgstr "Не позначено жодної клітинки."
+
+#: dialogs/currentcellwidget.cpp:145
+msgid "%1 selected at (%2, %3)."
+msgstr "Позначено %1 у позиції (%2, %3)."
+
+#: dialogs/currentcellwidget.cpp:154
+msgid "Clue:"
+msgstr "Питання:"
+
+#: dialogs/currentcellwidget.cpp:155
+msgid "Current Answer:"
+msgstr "Поточна відповідь:"
+
+#: dialogs/currentcellwidget.cpp:439
+msgid "Convert &Letter %1 to Solution Letter"
+msgstr "Перетворити &літеру %1 на літеру розв’язку"
+
+#: dialogs/dictionarydialog.cpp:37
+msgid "Dictionary"
+msgstr "Словник"
+
+#: dialogs/dictionarydialog.cpp:164
+msgid "%1 entries added from this dictionary: '%2'"
+msgstr "%1 записів додано зі словника: «%2»"
+
+#: dialogs/dictionarydialog.cpp:174 dialogs/dictionarydialog.cpp:189
+msgid "%1 entries added from %2 crosswords"
+msgstr "З %2 кросвордів додано %1 записів"
+
+#: dialogs/dictionarydialog.cpp:205
+msgid "Couldn't submit removed entries to the database: %1"
+msgstr "Не вдалося надіслати команду щодо вилучення записів до бази даних: %1"
+
+#: dialogs/dictionarydialog.cpp:208
+msgid "%1 entry removed"
+msgid_plural "%1 entries removed"
+msgstr[0] "Вилучено %1 запис"
+msgstr[1] "Вилучено %1 записи"
+msgstr[2] "Вилучено %1 записів"
+msgstr[3] "Вилучено %1 запис"
+
+#: dialogs/dictionarydialog.cpp:217
+msgid "Dictionary cleared"
+msgstr "Словник спорожнено"
+
+#: dialogs/dictionarydialog.cpp:224
+msgid "Export To CSV"
+msgstr "Експорт до CSV"
+
+#: dialogs/dictionarydialog.cpp:237
+msgid "There was an error while exporting to '%1'"
+msgstr "Під час спроби експортування до «%1» сталася помилка."
+
+#: dialogs/dictionarydialog.cpp:239
+msgid "Export to '%1' was successful"
+msgstr "Успішне експортування до «%1»"
+
+#: dialogs/dictionarydialog.cpp:245
+msgid "Import From CSV"
+msgstr "Імпортувати з CSV"
+
+#: dialogs/dictionarydialog.cpp:251
+msgid "There was an error while importing from '%1'"
+msgstr "Під час спроби імпортування з «%1» сталася помилка."
+
+#: dialogs/dictionarydialog.cpp:254
+msgid "%1 entry imported from '%2'"
+msgid_plural "%1 entries imported from '%2'"
+msgstr[0] "З «%2» імпортовано %1 запис"
+msgstr[1] "З «%2» імпортовано %1 записи"
+msgstr[2] "З «%2» імпортовано %1 записів"
+msgstr[3] "З «%2» імпортовано %1 запис"
+
+#: dialogs/movecellsdialog.cpp:28
+msgid "Move Cells"
+msgstr "Пересування клітинок"
+
+#: dialogs/movecellsdialog.cpp:71
+msgctxt ""
+"How many images are removed when moving all cells of the crossword. This "
+"string gets combined with a plural string indicating how many clue cells "
+"will be removed when moving the cells."
+msgid "and %1 image"
+msgid_plural "and %1 images"
+msgstr[0] "і %1 зображення"
+msgstr[1] "і %1 зображення"
+msgstr[2] "і %1 зображень"
+msgstr[3] "і одне зображення"
+
+#: dialogs/movecellsdialog.cpp:65
+msgctxt ""
+"How many clues are removed when moving all cells of the crossword. %2 is "
+"replaced by a plural indicating how many images will be removed when moving "
+"the cells."
+msgid "Moving all cells will remove %1 clue %2"
+msgid_plural "Moving all cells will remove %1 clues %2"
+msgstr[0] "Пересування призведе до вилучення %1 питання %2"
+msgstr[1] "Пересування призведе до вилучення %1 питань %2"
+msgstr[2] "Пересування призведе до вилучення %1 питань %2"
+msgstr[3] "Пересування призведе до вилучення одного питання %2"
+
+#: dialogs/statisticsdialog.cpp:34
+msgid "Statistics"
+msgstr "Статистика"
+
+#: dialogs/statisticsdialog.cpp:49
+msgid "Total Cell Count:"
+msgstr "Загалом клітинок:"
+
+#: dialogs/statisticsdialog.cpp:57
+msgid "Empty Cells:"
+msgstr "Порожніх клітинок:"
+
+#: dialogs/statisticsdialog.cpp:59
+msgid "Number of empty cells, percentage of total cell count in braces"
+msgstr ""
+"Кількість порожніх клітинок, відсоткове значення від загальної кількості "
+"клітинок у фігурних дужках"
+
+#: dialogs/statisticsdialog.cpp:60
+msgid "Letter Cells:"
+msgstr "Клітинок з літерами:"
+
+#: dialogs/statisticsdialog.cpp:62
+msgid "Number of letter cells, percentage of total cell count in braces"
+msgstr ""
+"Кількість клітинок з літерами, відсоткове значення від загальної кількості "
+"клітинок у фігурних дужках"
+
+#: dialogs/statisticsdialog.cpp:70
+msgid "Crossed:"
+msgstr "На перетинах:"
+
+#: dialogs/statisticsdialog.cpp:72
+msgid ""
+"Number of crossed letter cells, percentage of total letter cell count in "
+"braces"
+msgstr ""
+"Кількість клітинок з літерами, що належать різним відповідями, відсоткове "
+"значення від загальної кількості клітинок з літерами у фігурних дужках"
+
+#: dialogs/statisticsdialog.cpp:74
+msgid "Uncrossed:"
+msgstr "Не на перетині:"
+
+#: dialogs/statisticsdialog.cpp:76
+msgid ""
+"Number of uncrossed letter cells, percentage of total letter cell count in "
+"braces"
+msgstr ""
+"Кількість клітинок з літерами, що не належать різним відповідями, відсоткове "
+"значення від загальної кількості клітинок з літерами у фігурних дужках"
+
+#: dialogs/statisticsdialog.cpp:85
+msgid "Clues:"
+msgstr "Питання:"
+
+#: dialogs/statisticsdialog.cpp:88
+msgctxt "Horizontal:"
+msgid "Label for the number  of horizontal clues"
+msgstr "Мітка кількості питань по горизонталі"
+
+#: dialogs/statisticsdialog.cpp:90
+msgid "Number of horizontal clues, percentage of total clue count in braces"
+msgstr ""
+"Кількість питань по горизонталі, відсоткове значення від загальної кількості "
+"питань у фігурних дужках"
+
+#: dialogs/statisticsdialog.cpp:92
+msgctxt "Vertical:"
+msgid "Label for the number  of vertical clues"
+msgstr "Мітка кількості питань по вертикалі"
+
+#: dialogs/statisticsdialog.cpp:94
+msgid "Number of vertical clues, percentage of total clue count in braces"
+msgstr ""
+"Кількість питань по вертикалі, відсоткове значення від загальної кількості "
+"питань у фігурних дужках"
+
+#: dialogs/statisticsdialog.cpp:98
+msgid "Min. Answer Length:"
+msgstr "Мін. довжина відповіді:"
+
+#: dialogs/statisticsdialog.cpp:101
+msgid "Max. Answer Length:"
+msgstr "Макс. довжина відповіді:"
+
+#: dialogs/statisticsdialog.cpp:104
+msgid "Avg. Answer Length:"
+msgstr "Сер. довжина відповіді:"
+
+#: dialogs/statisticsdialog.cpp:115
+msgid "Occurrences Of Letters:"
+msgstr "Відсоткова частка літер:"
+
+#: dialogs/statisticsdialog.cpp:121
+msgid ""
+"Number of letter cells containing '%1', percentage of total letter cell "
+"count in braces"
+msgstr ""
+"Кількість клітинок, що містять «%1», відсоткове значення від загальної "
+"кількості клітинок з літерами у фігурних дужках"
+
+#: dictionary.cpp:122
+msgid ""
+"No Connection to the database! Please make sure the MySQL server is running. "
+"Afterwards click \"Continue\" to retry connecting to the database."
+msgstr ""
+"Не вдалося встановити з’єднання з базою даних. Будь ласка, перевірте, чи "
+"запущено сервер MySQL. Після його запуску натисніть кнопку «Продовжити», щоб "
+"наказати програмі повторити спробу з’єднання з базою даних."
+
+#: dictionary.cpp:125
+msgid "No Database Connection"
+msgstr "Немає з’єднання з базою даних"
+
+#: dictionary.cpp:131
+msgid "Connect Database"
+msgstr "З’єднатися з базою даних"
+
+#: dictionary.cpp:243
+msgctxt "The header title for answers in the dictionary database"
+msgid "Answer"
+msgstr "Відповідь"
+
+#: dictionary.cpp:245
+msgctxt ""
+"The header title for clues associated with answer words in the dictionary "
+"database"
+msgid "Clue"
+msgstr "Питання"
+
+#: dictionary.cpp:247
+msgctxt ""
+"The header title for scores/difficulties of clue/answer pairs in the "
+"dictionary database"
+msgid "Score"
+msgstr "Оцінка"
+
+#: dictionary.cpp:249
+msgctxt ""
+"The header title for languages of clue/answer pairs in the dictionary "
+"database"
+msgid "Language"
+msgstr "Мова"
+
+#: dictionary.cpp:292
+msgid "Importing Dictionary"
+msgstr "Імпортування словника"
+
+#: dictionary.cpp:330
+msgid ""
+"Importing word clue pairs from '%1' to the database.\n"
 "Please wait."
 msgstr ""
-"Додавання слів з %1 файлів кросвордів до бази даних.\n"
+"Імпортування пар питання-відповідь з «%1» до бази даних.\n"
 "Будь ласка, зачекайте."
 
-#: dictionary.cpp:489
+#: dictionary.cpp:462
 msgid ""
 "Adding words from the dictionary '%1' to the database.\n"
 "Please wait."
@@ -309,27 +1413,159 @@ msgstr ""
 "Додавання слів зі словника «%1» до бази даних.\n"
 "Будь ласка, зачекайте."
 
-#: crosswordxmlguiwindow.cpp:1426
-#, fuzzy
-msgid "Adds a new clue at the current cell"
-msgstr "Додати нове питання до поточної клітинки."
+#: dictionary.cpp:566
+msgid ""
+"Adding words from %1 crossword files to the database.\n"
+"Please wait."
+msgstr ""
+"Додавання слів з %1 файлів кросвордів до бази даних.\n"
+"Будь ласка, зачекайте."
 
-#: crosswordxmlguiwindow.cpp:1449
-#, fuzzy
-msgid "Adds a new image at the current cell"
-msgstr "Додати до поточної клітинки нове зображення."
+#: global.cpp:38
+msgid "Clue cell"
+msgstr "Клітинка питання"
+
+#: global.cpp:40
+msgid "Double clue cell"
+msgstr "Клітинка з двома питаннями"
+
+#: global.cpp:42
+msgid "Letter cell"
+msgstr "Клітинка літери"
+
+#: global.cpp:44
+msgid "Solution letter cell"
+msgstr "Клітинка слова-розв’язку"
+
+#: global.cpp:46
+msgid "Image cell"
+msgstr "Клітинка зображення"
 
 #: global.cpp:48
 msgid "All cells"
 msgstr "Всі клітинки"
 
-#: krossword.cpp:657
+#: global.cpp:50
+msgid "Interactive cells"
+msgstr "Інтерактивні клітинки"
+
+#: global.cpp:52
+msgid "User cell type"
+msgstr "Тип клітинок користувача"
+
+#: global.cpp:260
+msgid "Clue cells are allowed"
+msgstr "Клітинки питань дозволено"
+
+#: global.cpp:262
+msgid "Clue cells are disallowed"
+msgstr "Клітинки питань заборонено"
+
+#: global.cpp:264
+msgid "Clue cells are required"
+msgstr "Використання клітинок питань обов’язкове"
+
+#: global.cpp:275
+msgid "Clues refer to sets of cells"
+msgstr "Питання, що відповідають декільком наборам клітинок"
+
+#: global.cpp:277
+msgid "Clues refer to cells"
+msgstr "Відповідність питань клітинкам"
+
+#: global.cpp:287
+msgid "String clues"
+msgstr "Рядки питань"
+
+#: global.cpp:289
+msgid "Number clues (1 to 26)"
+msgstr "Кількість питань (від 1 до 26)"
+
+#: global.cpp:300
+msgid "Characters"
+msgstr "Літери"
+
+#: global.cpp:302
+msgid "Digits"
+msgstr "Цифри"
+
+#: global.cpp:304
+msgid "Characters or digits"
+msgstr "Літери або цифри"
+
+#: global.cpp:409
+msgid "Free Crossword"
+msgstr "Довільний кросворд"
+
+#: global.cpp:411
+msgctxt "Short description of the crossword type 'Free'"
+msgid "This is a special type that tries to be least restrictive."
+msgstr "Особливий тип з найменшими обмеженнями."
+
+#: global.cpp:413
+msgctxt "Long description of the crossword type 'Free'"
 msgid ""
-"All clue cells get removed. The initial letter to clue number mapping is "
-"A=1, B=2, ..., Z=26."
+"This is a special type that tries to be least restrictive. You can use all "
+"available cell types (eg. clue cells, double clue cells, image cells, "
+"solution letter cells). You can mix answers that have a clue cell with "
+"answers that don't. Answers may contain characters as well as numbers."
 msgstr ""
-"Всі клітинки питань вилучено. Початкова відповідність номерів є такою: A=1, "
-"B=2, ..., Z=26."
+"Це особливий тип з найменшими обмеженнями. Ви можете використовувати "
+"клітинки всіх можливих типів (клітинки з питаннями, клітинки з парами "
+"питань, клітинки з зображеннями, клітинки слова-розв’язку). Можна "
+"використовувати відповіді з клітинками питань, і можна використовувати "
+"окремий список питань поза ґраткою. Відповіді можуть складатися з літер і "
+"цифр."
+
+#: global.cpp:424
+msgid "User Defined Crossword"
+msgstr "Нетиповий кросворд"
+
+#: global.cpp:426
+msgctxt "Short description of the crossword type 'User Defined'"
+msgid "Lets you specify your own rules."
+msgstr "Надає вам змогу вказати власні правила."
+
+#: global.cpp:434
+msgid "Swedish Crossword"
+msgstr "Шведський кросворд"
+
+#: global.cpp:436
+msgctxt "Short description of the crossword type 'Swedish'"
+msgid ""
+"Swedish crosswords contain clue cells which contain the clue text in it and "
+"an arrow to indicate in which direction the clues have to be answered."
+msgstr ""
+"У шведських кросвордах питання записують у окремих клітинках, а напрям "
+"запису відповіді позначають стрілочкою."
+
+#: global.cpp:439
+msgctxt "Long description of the crossword type 'Swedish'"
+msgid ""
+"The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
+"the cells which would normally be black in other countries. Arrows indicate "
+"in which direction the clues have to be answered, vertical or horizontal. "
+"This style of grid is used in several countries other than Sweden, usually "
+"in magazines with pages of A4 or similar size. The grid often has a photo of "
+"a pop or movie star replacing a block of squares, as a clue to one answer. "
+"These puzzles usually have no symmetry in the grid.\n"
+"Crosswords with clue cells inside the crossword grid are also called "
+"\"Arrowwords\", \"Pointers\" or \"Tipwords\" in English, \"Autodefinidos\" "
+"in Spanish, \"Mots Fléchés\" in French, etc.\n"
+"(text taken from wikipedia)"
+msgstr ""
+"У ґратці шведського кросворда немає нумерації питань: питання містяться у "
+"окремих клітинках кросворда, які у інших типах кросвордів просто "
+"зафарбовуються чорним. Напрям запису відповідей на питання позначається "
+"стрілочкою, вертикальною або горизонтальною. Подібний тип ґратки "
+"використовується і у інших країнах, зазвичай, у ілюстрованих журналах з "
+"форматом сторінки A4. У ґратці, зазвичай, наведено знімки відомих виконавців "
+"або кінозірок. Ці знімки замінюють блок клітинок і є питаннями, відповіді на "
+"які слід вписати до клітинок кросворда.\n"
+"Кросворди, у яких клітинки питань розташовано у самій ґратці кросворда також "
+"називаються «Arrowwords», «Pointers» або «Tipwords» у англійській, "
+"«Autodefinidos» у іспанській, «Mots Fléchés» у французькій тощо\n"
+"(текст запозичено з Вікіпедії)"
 
 #: global.cpp:457
 msgid "American Crossword"
@@ -344,553 +1580,6 @@ msgstr ""
 "У американських кросвордах питання пронумеровано, список цих питань "
 "наводиться збоку від сітки кросворда. Зазвичай, такі кросворди мають "
 "дзеркальну симетрію."
-
-#: krosswordpuzzle.cpp:262
-msgid ""
-"An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
-" Do you want to restore the crossword?"
-msgstr ""
-"Було виявлено незбережений кросворд. Ймовірно, гра аварійно завершила "
-"роботу, вибачте!\n"
-" Бажаєте відновити кросворд?"
-
-#: main.cpp:37
-msgid "Andrea Barazzetti"
-msgstr ""
-
-#: krosswordpuzzle.cpp:308
-msgid "Animations"
-msgstr "Анімація"
-
-#: cluemodel.cpp:60
-msgid "Answer"
-msgstr "Відповідь"
-
-#: dictionary.cpp:272
-msgctxt "The header title for answers in the dictionary database"
-msgid "Answer"
-msgstr "Відповідь"
-
-#: library/librarymanager.cpp:74
-msgctxt "The title for authors of crosswords in the library tree view"
-msgid "Author(s):"
-msgstr "Автори:"
-
-#: commands.cpp:1271
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Authors"
-msgstr "Автори"
-
-#: dialogs/statisticsdialog.cpp:104
-msgid "Avg. Answer Length:"
-msgstr "Сер. довжина відповіді:"
-
-#: crosswordxmlguiwindow.cpp:1021
-msgid "Can't add clue at the current cell"
-msgstr "Не вдалося додати питання до поточної клітинки"
-
-#: crosswordxmlguiwindow.cpp:1042
-msgctxt "%1 contains the reason why the clue couldn't be added"
-msgid "Can't add clue. %1"
-msgstr "Не вдалося додати питання. %1"
-
-#: crosswordxmlguiwindow.cpp:1012
-msgid "Can't add clues on crossed letter cells"
-msgstr "Не можна додавати питання на клітинці, що належить двом словам одразу"
-
-#: crosswordxmlguiwindow.cpp:1073
-msgctxt "%1 contains the reason why the image couldn't be added"
-msgid "Can't add image. %1"
-msgstr "Не вдалося додати зображення. %1"
-
-#: crosswordxmlguiwindow.cpp:2800
-msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
-msgid "Can't add letter cells. %1"
-msgstr "Не вдалося додати клітинки літер. %1"
-
-#: crosswordxmlguiwindow.cpp:1191
-msgctxt ""
-"%1 contains the reason why the new clue number mapping couldn't be applied"
-msgid "Can't apply clue number mapping. %1"
-msgstr "Не вдалося застосувати відповідність номерів. %1"
-
-#: crosswordxmlguiwindow.cpp:1732
-msgctxt "%1 contains the reason why the answer offset couldn't be changed"
-msgid "Can't change answer offset. %1"
-msgstr "Не вдалося змінити відступ відповіді. %1"
-
-#: crosswordxmlguiwindow.cpp:1757
-msgctxt "%1 contains the reason why the clue text couldn't be changed"
-msgid "Can't change clue text. %1"
-msgstr "Не вдалося змінити текст питання. %1"
-
-#: crosswordxmlguiwindow.cpp:1770
-msgctxt "%1 contains the reason why the correct answer couldn't be changed"
-msgid "Can't change correct answer. %1"
-msgstr "Не вдалося змінити правильну відповідь. %1"
-
-#: crosswordxmlguiwindow.cpp:1121
-msgctxt ""
-"%1 contains the reason why the crossword properties couldn't be changed"
-msgid "Can't change crossword properties. %1"
-msgstr "Не вдалося змінити властивості кросворда. %1"
-
-#: crosswordxmlguiwindow.cpp:1745
-msgctxt "%1 contains the reason why the orientation couldn't be changed"
-msgid "Can't change orientation. %1"
-msgstr "Не вдалося змінити орієнтацію. %1"
-
-#: crosswordxmlguiwindow.cpp:2258 crosswordxmlguiwindow.cpp:2282
-#: crosswordxmlguiwindow.cpp:2307 crosswordxmlguiwindow.cpp:2741
-msgctxt "%1 contains the reason why the answer couldn't be cleared"
-msgid "Can't clear answer. %1"
-msgstr "Не вдалося витерти відповідь. %1"
-
-#: crosswordxmlguiwindow.cpp:1104
-msgctxt "%1 contains the reason why the crossword couldn't be cleared"
-msgid "Can't clear crossword. %1"
-msgstr "Не вдалося спорожнити кросворд. %1"
-
-#: crosswordxmlguiwindow.cpp:2235 crosswordxmlguiwindow.cpp:2735
-msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
-msgid "Can't clear letter cell. %1"
-msgstr "Не вдалося витерти вміст клітинки. %1"
-
-#: crosswordxmlguiwindow.cpp:2848
-msgctxt "%1 contains the reason why the crossword couldn't be converted"
-msgid "Can't convert crossword. %1"
-msgstr "Не вдалося перетворити кросворд. %1"
-
-#: crosswordxmlguiwindow.cpp:1809
-msgctxt ""
-"%1 contains the reason why the letter couldn't be converted to a solution "
-"letter"
-msgid "Can't convert letter. %1"
-msgstr "Не вдалося перетворити літеру. %1"
-
-#: crosswordxmlguiwindow.cpp:1790
-msgctxt ""
-"%1 contains the reason why the solution letter couldn't be converted to a "
-"letter"
-msgid "Can't convert solution letter. %1"
-msgstr "Не вдалося перетворити літеру слова-розв’язку. %1"
-
-#: crosswordxmlguiwindow.cpp:2813
-msgctxt "%1 contains the reason why the letter cell couldn't be edited"
-msgid "Can't edit letter cell. %1"
-msgstr "Не вдалося змінити вміст клітинки. %1"
-
-#: library/librarygui.cpp:290
-msgid "Can't export whole directories. Please select a crossword."
-msgstr ""
-"Експортувати цілі каталоги не можна. Будь ласка, вкажіть окремий кросворд."
-
-#: crosswordxmlguiwindow.cpp:1204
-msgctxt "%1 contains the reason why the cells couldn't be moved"
-msgid "Can't move cells. %1"
-msgstr "Не вдалося пересунути клітинки. %1"
-
-#: crosswordxmlguiwindow.cpp:1086
-msgctxt "%1 contains the reason why the clue couldn't be removed"
-msgid "Can't remove clue. %1"
-msgstr "Не вдалося вилучити питання. %1"
-
-#: crosswordxmlguiwindow.cpp:1091
-msgctxt "%1 contains the reason why the image couldn't be removed"
-msgid "Can't remove image. %1"
-msgstr "Не вдалося вилучити зображення. %1"
-
-#: crosswordxmlguiwindow.cpp:2802
-msgctxt ""
-"%1 contains the reason why the letters couldn't be removed to the clue"
-msgid "Can't remove letter cells. %1"
-msgstr "Не вдалося вилучити клітинки літер. %1"
-
-#: crosswordxmlguiwindow.cpp:851
-#, fuzzy
-msgid ""
-"Can't store confidence values in *.puz files!\n"
-"If you want confidence values to be stored please use a Krossword file "
-"format (*.kwp or *.kwpz)."
-msgstr ""
-"Зберегти дані щодо точності відповіді у файлах *.puz неможливо!\n"
-"Якщо ви бажаєте зберегти дані щодо точності відповіді, будь ласка, "
-"скористайтеся форматом файлів KrossWordPuzzle (*.kwp або *.kwpz).матом "
-"файлів KrossWordPuzzle (*.kwp або *.kwpz)."
-
-#: crosswordxmlguiwindow.cpp:862
-#, fuzzy
-msgid ""
-"Can't store image cells in *.puz files!\n"
-"If you want image cells to be stored please use a Krossword file format (*."
-"kwp or *.kwpz)."
-msgstr ""
-"Зберегти дані щодо клітинок з зображеннями у файлах *.puz неможливо!\n"
-"Якщо ви бажаєте зберегти дані щодо клітинок з зображеннями, будь ласка, "
-"скористайтеся форматом файлів KrossWordPuzzle (*.kwp або *.kwpz).ка, "
-"скористайтеся форматом файлів KrossWordPuzzle (*.kwp або *.kwpz)."
-
-#: commands.cpp:991
-msgid "Change Clue '%1'"
-msgstr "Змінити питання «%1»"
-
-#: commands.cpp:1483
-msgid "Change Number Puzzle Mapping"
-msgstr "Змінити відповідність номерів питань"
-
-#: crosswordxmlguiwindow.cpp:1460
-msgid "Change the size of the crossword or it's title, author, copyright..."
-msgstr "Змінити розміри кросворда, його назву, автора, ліцензію..."
-
-#: commands.cpp:1297
-msgctxt ""
-"%1 may be a list of changes separated by ',' if the list of changes contains "
-"more than 2 items. %2 is the last item"
-msgid "Changed Crossword Properties (%1 and %2)"
-msgstr "Змінено властивості кросворда (%1 і %2)"
-
-#: commands.cpp:1292
-msgid "Changed Crossword Properties (%1)"
-msgstr "Змінено властивості кросворда (%1)"
-
-#: crosswordxmlguiwindow.cpp:1475
-#, fuzzy
-msgid "Changes the mapping of clue numbers to letters"
-msgstr "Змінити відповідність між номерами і літерами."
-
-#: dialogs/convertcrossworddialog.cpp:81
-#: dialogs/createnewcrossworddialog.cpp:231
-msgid ""
-"Changing the crossword type will discard user defined crossword type "
-"settings."
-msgstr ""
-"Зміна типу кросворда призведе до відкидання визначених користувачем "
-"параметрів кросворда."
-
-#: global.cpp:300
-msgid "Characters"
-msgstr "Літери"
-
-#: global.cpp:304
-msgid "Characters or digits"
-msgstr "Літери або цифри"
-
-#: crosswordxmlguiwindow.cpp:1512
-#, fuzzy
-msgid "Checks if all letters are correct"
-msgstr "Перевіряє, чи правильно вказано всі літери."
-
-#: crosswordxmlguiwindow.cpp:1465
-#, fuzzy
-msgid "Checks if the crossword has 180 degree rotation symmetry"
-msgstr "Перевірити, чи має кросворд дзеркальну симетрію."
-
-#: crosswordxmlguiwindow.cpp:1270
-msgid "Choose a filename to save the crossword with solved letters"
-msgstr ""
-"Оберіть назву файла для збереження поточного стану розв’язання кросворда"
-
-#: library/librarygui.cpp:377
-msgid "ChrisWords.com"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1099 crosswordxmlguiwindow.cpp:2453
-msgid "Clear"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1331
-msgid "Clear Across Answer"
-msgstr "Витерти відповідь по горизонталі"
-
-#: commands.cpp:1092
-msgid "Clear Correct Answer of Clue at (%1, %2)"
-msgstr "Витерти правильну відповідь на питання у клітинці (%1, %2)"
-
-#: commands.cpp:1144
-msgid "Clear Correct Letter at (%1, %2), was %3"
-msgstr "Витерти літеру у клітинці (%1, %2), було вказано %3"
-
-#: commands.cpp:1222
-msgid "Clear Crossword"
-msgstr "Спорожнити кросворд"
-
-#: crosswordxmlguiwindow.cpp:1337
-msgid "Clear Down Answer"
-msgstr "Спорожнити клітинки відповіді"
-
-#: commands.cpp:1154
-msgid "Clear Letter at (%1, %2), was %3"
-msgstr "Витерти літеру у клітинці (%1, %2), було вказано %3"
-
-#: crosswordxmlguiwindow.cpp:1325
-msgid "Clear This Answer"
-msgstr "Витерти цю відповідь"
-
-#: crosswordxmlguiwindow.cpp:1319
-msgid "Clear This Cell"
-msgstr "Витерти цю клітинку"
-
-#: crosswordxmlguiwindow.cpp:1517
-#, fuzzy
-msgid "Clears all letter cells"
-msgstr "Спорожнити всі клітинки."
-
-#: crosswordxmlguiwindow.cpp:1332
-msgid "Clears the answer to the current across clue"
-msgstr "Витерти відповідь на поточне питання по горизонталі"
-
-#: crosswordxmlguiwindow.cpp:1326
-msgid "Clears the answer to the current clue"
-msgstr "Витерти відповідь на поточне питання"
-
-#: crosswordxmlguiwindow.cpp:1338
-msgid "Clears the answer to the current down clue"
-msgstr "Витерти відповідь на поточне питання по вертикалі"
-
-#: crosswordxmlguiwindow.cpp:1320
-#, fuzzy
-msgid "Clears the selected letter cell"
-msgstr "Витерти вміст поточної позначеної клітинки"
-
-#: crosswordxmlguiwindow.cpp:680 crosswordxmlguiwindow.cpp:824
-#: krosswordpuzzle.cpp:131
-msgid "Close Document"
-msgstr "Закрити документ"
-
-#: crosswordxmlguiwindow.cpp:1261
-#, fuzzy
-msgid "Close the current crossword"
-msgstr "Закрити поточний кросворд."
-
-#: cluemodel.cpp:60
-msgid "Clue"
-msgstr "Питання"
-
-#: dictionary.cpp:274
-msgctxt ""
-"The header title for clues associated with answer words in the dictionary "
-"database"
-msgid "Clue"
-msgstr "Питання"
-
-#: crosswordxmlguiwindow.cpp:2519 crosswordxmlguiwindow.cpp:2547
-msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
-msgstr "Питання (по горизонталі): «%1», %2 літер, поточна відповідь: «%3»"
-
-#: crosswordxmlguiwindow.cpp:2524 crosswordxmlguiwindow.cpp:2551
-msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
-msgstr "Питання (по вертикалі): «%1», %2 літер, поточна відповідь: «%3»"
-
-#: crosswordxmlguiwindow.cpp:1665
-msgid "Clue List"
-msgstr "Список питань"
-
-#: crosswordxmlguiwindow.cpp:1474
-msgid "Clue Number &Mapping..."
-msgstr "В&ідповідність номерів..."
-
-#: crosswordxmlguiwindow.cpp:1166
-msgid "Clue Number Mapping"
-msgstr "Відповідність номерів"
-
-#: crosswordxmlguiwindow.cpp:1367
-#, fuzzy
-msgid "Clue With Switched Orientation"
-msgstr "Позначити питання з перпендикулярною орієнтацією"
-
-#: crosswordxmlguiwindow.cpp:1056
-msgid "Clue added ('%1')"
-msgstr "Додано питання («%1»)"
-
-#: global.cpp:38
-msgid "Clue cell"
-msgstr "Клітинка питання"
-
-#: commands.cpp:352
-msgctxt ""
-"%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
-msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
-msgstr ""
-"За вказаними координатами (%1, %2) не знайдено клітинки з питанням: «%3»"
-
-#: global.cpp:260
-msgid "Clue cells are allowed"
-msgstr "Клітинки питань дозволено"
-
-#: global.cpp:262
-msgid "Clue cells are disallowed"
-msgstr "Клітинки питань заборонено"
-
-#: global.cpp:264
-msgid "Clue cells are required"
-msgstr "Використання клітинок питань обов’язкове"
-
-#: krossworddocument.cpp:86
-msgctxt "Title for the clue list when printing"
-msgid "Clue list"
-msgstr "Список питань"
-
-#: dialogs/currentcellwidget.cpp:154
-msgid "Clue:"
-msgstr "Питання:"
-
-#: global.cpp:277
-msgid "Clues refer to cells"
-msgstr "Відповідність питань клітинкам"
-
-#: global.cpp:275
-msgid "Clues refer to sets of cells"
-msgstr "Питання, що відповідають декільком наборам клітинок"
-
-#: dialogs/statisticsdialog.cpp:85
-msgid "Clues:"
-msgstr "Питання:"
-
-#: crosswordxmlguiwindow.cpp:2128
-#, fuzzy
-msgid ""
-"Congratulations!\n"
-"You solved the crossword perfectly."
-msgstr "Вітаємо! Ви чудово розв’язали цей кросворд."
-
-#: crosswordxmlguiwindow.cpp:559
-msgid "Congratulations! You solved the crossword perfectly."
-msgstr "Вітаємо! Ви чудово розв’язали цей кросворд."
-
-#: dictionary.cpp:180
-msgid "Connect Database"
-msgstr "З’єднатися з базою даних"
-
-#: dialogs/currentcellwidget.cpp:439
-msgid "Convert &Letter %1 to Solution Letter"
-msgstr "Перетворити &літеру %1 на літеру розв’язку"
-
-#: commands.cpp:1777
-msgid "Convert Crossword From '%1' to '%2'"
-msgstr "Перетворити кросворд з формату «%1» на «%2»"
-
-#: dialogs/convertcrossworddialog.cpp:29
-msgid "Convert Crossword Type To"
-msgstr "Остаточний тип кросворда"
-
-#: dialogs/convertcrossworddialog.cpp:33
-msgid "Convert From: %1"
-msgstr "Перетворити з: %1"
-
-#: commands.cpp:626
-msgid "Convert Letter at (%1, %2) to Solution Letter"
-msgstr "Перетворити літеру з координатами (%1, %2) на літеру розв’язку"
-
-#: commands.cpp:654
-msgctxt "%1 contains the position of the solution letter in the solution word."
-msgid "Convert Solution Letter %1 to Letter"
-msgstr "Перетворення літери слова-розв’язку %1 на звичайну літеру"
-
-#: dialogs/convertcrossworddialog.cpp:105
-msgid "Convert To: %1"
-msgstr "Перетворити на: %1"
-
-#: commands.cpp:1274
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Copyright"
-msgstr "Авторські права"
-
-#: krosswordpuzzle.cpp:94
-msgid "Could not open resource at "
-msgstr ""
-
-#: io/krosswordxmlwriter.cpp:73
-msgid "Couldn't close the ZIP archive"
-msgstr "Не вдалося закрити архів ZIP"
-
-#: crosswordxmlguiwindow.cpp:2860
-msgid "Couldn't connect to the database."
-msgstr "Не вдалося встановити з’єднання з базою даних."
-
-#: library/librarygui.cpp:340
-msgid "Couldn't export the image to the specified file."
-msgstr "Не вдалося експортувати зображення до вказаного файла."
-
-#: io/krosswordxmlwriter.cpp:52
-msgid "Couldn't open the ZIP archive for writing"
-msgstr "Не вдалося відкрити архів ZIP для запису"
-
-#: library/librarygui.cpp:452
-#, fuzzy
-msgid "Couldn't remove the crossword from the library."
-msgstr ""
-"Не вдалося вилучити кросворд з бібліотеки.\n"
-"%1"
-
-#: library/librarygui.cpp:441
-msgid ""
-"Couldn't remove the directory from the library.\n"
-"You need root privileges to remove directories which belong to the global "
-"library."
-msgstr ""
-"Не вдалося вилучити каталог з бібліотеки.\n"
-"Для вилучення каталогів з загальної бібліотеки вам потрібні права доступу "
-"адміністратора.."
-
-#: dialogs/dictionarydialog.cpp:206
-msgid "Couldn't submit removed entries to the database: %1"
-msgstr "Не вдалося надіслати команду щодо вилучення записів до бази даних: %1"
-
-#: dialogs/createnewcrossworddialog.cpp:35
-msgid "Create New Crossword"
-msgstr "Створити кросворд"
-
-#: library/librarygui.cpp:517
-#, fuzzy
-msgid "Create a new crossword"
-msgstr "Створити кросворд"
-
-#: library/librarygui.cpp:522
-#, fuzzy
-msgid "Create a new folder in the library"
-msgstr "Створити у бібліотеці нову теку."
-
-#: dialogs/createnewcrossworddialog.cpp:111
-#, fuzzy
-msgctxt "Default notes value for new crosswords"
-msgid "Created with Krossword"
-msgstr "Створити кросворд"
-
-#: dialogs/statisticsdialog.cpp:70
-msgid "Crossed:"
-msgstr "На перетинах:"
-
-#: global.cpp:503
-msgid "Crossnumber"
-msgstr "Числовий кросворд"
-
-#: global.cpp:505
-msgctxt "Short description of the crossword type 'Crossnumber'"
-msgid ""
-"Crossnumbers are the numerical analogy of a crossword, in which the "
-"solutions to the clues are numbers instead of words."
-msgstr ""
-"Числові кросворди є числовим аналогом звичайних кросвордів. Відповідями у "
-"таких кросвордах є не слова, а числа."
-
-#: library/librarygui.cpp:199 library/librarygui.cpp:204
-#: library/librarygui.cpp:212
-#, fuzzy
-msgid "Crossword %1"
-msgstr "Кросворд"
-
-#: dialogs/createnewcrossworddialog.cpp:191
-msgid "Crossword Type"
-msgstr "Тип кросворда"
-
-#: dialogs/crosswordpropertiesdialog.cpp:43
-#: dialogs/crosswordpropertiesdialog.cpp:277
-msgid "Crossword Type: %1"
-msgstr "Тип кросворда: %1"
 
 #: global.cpp:462
 msgctxt "Long description of the crossword type 'American'"
@@ -930,533 +1619,9 @@ msgstr ""
 "переходити з однієї клітинки до іншої лише через бічні сторони клітинок).\n"
 "(текст запозичено з Вікіпедії)"
 
-#: dialogs/currentcellwidget.cpp:155
-msgid "Current Answer:"
-msgstr "Поточна відповідь:"
-
-#: crosswordxmlguiwindow.cpp:1690
-msgid "Current Cell"
-msgstr "Поточна клітинка"
-
-#: library/librarygui.cpp:537
-#, fuzzy
-msgid "Delete the selected crossword from the library"
-msgstr "Вилучити позначений кросворд з бібліотеки."
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
-msgid "Describe your crossword type here."
-msgstr "Тут ви можете описати тип вашого кросворда."
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
-msgid "Detailed Configuration"
-msgstr "Докладне налаштування"
-
-#: main.cpp:37 main.cpp:38
-msgid "Developer"
-msgstr ""
-
-#: dialogs/dictionarydialog.cpp:37
-msgid "Dictionary"
-msgstr "Словник"
-
-#: dialogs/dictionarydialog.cpp:218
-msgid "Dictionary cleared"
-msgstr "Словник спорожнено"
-
-#: global.cpp:302
-msgid "Digits"
-msgstr "Цифри"
-
-#: crosswordxmlguiwindow.cpp:1099 crosswordxmlguiwindow.cpp:2453
-#, fuzzy
-msgid "Do you really want to clear the crossword?"
-msgstr "Вилучити з кросворда всі питання."
-
-#: crosswordxmlguiwindow.cpp:2150
-msgid "Do you really want to solve the crossword?"
-msgstr ""
-
-#: main.cpp:44
-msgid "Document to open"
-msgstr "Документ, який слід відкрити"
-
-#: global.cpp:40
-msgid "Double clue cell"
-msgstr "Клітинка з двома питаннями"
-
-#: cluemodel.cpp:64
-msgid "Down clues"
-msgstr "Питання по вертикалі"
-
-#: krossworddocument.cpp:87
-msgctxt "Title for the list of down/vertical clues when printing"
-msgid "Down clues"
-msgstr "Питання по вертикалі"
-
-#: library/librarygui.cpp:349
-msgid "Download Crossword To Library"
-msgstr "Звантажити кросворд до бібліотеки"
-
-#: library/librarygui.cpp:527
-#, fuzzy
-msgid "Download a crossword and add it to the library"
-msgstr "Звантажити кросворд і додати його до бібліотеки."
-
-#: commands.cpp:1150
-msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
-msgstr "Виправити літеру у клітинці (%1, %2) з %3 на %4"
-
-#: crosswordxmlguiwindow.cpp:1680
-msgid "Edit History"
-msgstr "Журнал редагування"
-
-#: commands.cpp:1160
-msgid "Edit Letter at (%1, %2) From %3 to %4"
-msgstr "Змінити літеру у клітинці (%1, %2) з %3 на %4"
-
-#: crosswordxmlguiwindow.cpp:1420
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "Edit Mode"
-msgstr "Режим редагування"
-
-#: cells/imagecell.cpp:68
-msgid "Edit image properties to set an image"
-msgstr "Щоб додати зображення змініть властивості зображення"
-
-#: dialogs/statisticsdialog.cpp:57
-msgid "Empty Cells:"
-msgstr "Порожніх клітинок:"
-
-#: crosswordxmlguiwindow.cpp:2597 global.cpp:36
-msgid "Empty cell"
-msgstr "Порожня клітинка"
-
-#: crosswordxmlguiwindow.cpp:1522
-#, fuzzy
-msgid "Enables the eraser, to clear letter cells/answers"
-msgstr "Увімкнути ґумку, щоб витерти вміст клітинок літер або відповіді."
-
-#: crosswordxmlguiwindow.cpp:1421
-msgid "Enables/disables the edit mode"
-msgstr ""
-
-#: krosswordpuzzle.cpp:466
-#, fuzzy
-msgid "Error loading file '%1'"
-msgstr "Помилка під час завантаження файла «%1»"
-
-#: krossword.cpp:1018
-msgid "Error reading AcrossLite's .puz-format."
-msgstr "Помилка під час читання даних у форматі .puz AcrossLite."
-
-#: krossword.cpp:963
-msgid "Error while downloading from url: %1"
-msgstr "Помилка під час звантаження даних з адреси: %1"
-
-#: crosswordxmlguiwindow.cpp:754
-msgid "Error while loading file '%1': %2"
-msgstr "Під час спроби завантаження файла «%1» сталася помилка: %2"
-
-#: crosswordxmlguiwindow.cpp:900
-msgid "Error while writing file: %1"
-msgstr "Помилка під час спроби запису до файла: %1"
-
-#: krossword.cpp:942
-msgid "Error writing AcrossLite's .puz-format."
-msgstr "Помилка під час запису даних у форматі .puz AcrossLite."
-
-#: krossword.cpp:931
-msgid "Error writing compressed crossword: %1"
-msgstr "Помилка під час спроби запису стиснутого кросворда: %1"
-
-#: krossword.cpp:924
-msgid "Error writing crossword: %1"
-msgstr "Помилка під час запису даних кросворда: %1"
-
-#: io/krosswordxmlwriter.cpp:58 io/krosswordxmlwriter.cpp:63
-#: io/krosswordxmlwriter.cpp:68
-msgid "Error writing to the compressed file"
-msgstr "Помилка під час спроби запису стиснутого файла"
-
-#: library/librarygui.cpp:306
-msgid "Export"
-msgstr "Експортувати"
-
-#: library/librarygui.cpp:324
-msgid "Export Settings"
-msgstr "Параметри експорту"
-
-#: dialogs/dictionarydialog.cpp:225
-msgid "Export To CSV"
-msgstr "Експорт до CSV"
-
-#: library/librarygui.cpp:542
-#, fuzzy
-msgid "Export the selected crossword from the library"
-msgstr "Експортувати позначений кросворд з бібліотеки."
-
-#: dialogs/dictionarydialog.cpp:240
-msgid "Export to '%1' was successful"
-msgstr "Успішне експортування до «%1»"
-
-#: library/librarygui.cpp:161
-#, fuzzy
-msgid "Failed"
-msgstr "Мозаїка"
-
-#: crosswordxmlguiwindow.cpp:1508
-#, fuzzy
-msgid "Fills all letter cells with the correct letters"
-msgstr "Заповнити всі клітинки відповідними літерами."
-
-#: crosswordxmlguiwindow.cpp:1382
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "First Clue"
-msgstr "Позначити перше питання"
-
-#: crosswordxmlguiwindow.cpp:1290
-msgid "Fit the whole crossword into the window"
-msgstr "Вмістити кросворд у вікні"
-
-#: global.cpp:409
-msgid "Free Crossword"
-msgstr "Довільний кросворд"
-
-#: main.cpp:39
-msgid "Friedrich Pülz"
-msgstr "Friedrich Pülz"
-
-#: main.cpp:38
-msgid "Giacomo Barazzetti"
-msgstr ""
-
-#: commands.cpp:1346
-msgid "Hide Clue Cell"
-msgstr "Приховати клітинку питання"
-
-#: crosswordxmlguiwindow.cpp:1343
-msgid "Hint For This Cell"
-msgstr "Підказка для цієї клітинки"
-
-#: library/librarygui.cpp:373
-msgid "I Swear Crossword by Victor Fleming (fridays)"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:2599
-msgid "Image '%1'"
-msgstr "Зображення «%1»"
-
-#: global.cpp:46
-msgid "Image cell"
-msgstr "Клітинка зображення"
-
-#: commands.cpp:559
-msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
-msgstr ""
-"За вказаними координатами (%1, %2) не знайдено клітинки з зображенням: «%3»"
-
-#: dialogs/dictionarydialog.cpp:246
-msgid "Import From CSV"
-msgstr "Імпортувати з CSV"
-
-#: dictionary.cpp:321
-msgid "Importing Dictionary"
-msgstr "Імпортування словника"
-
-#: dictionary.cpp:359
-msgid ""
-"Importing word clue pairs from '%1' to the database.\n"
-"Please wait."
-msgstr ""
-"Імпортування пар питання-відповідь з «%1» до бази даних.\n"
-"Будь ласка, зачекайте."
-
-#: crosswordxmlguiwindow.cpp:1498
-msgid "Insert special character:"
-msgstr "Вставити спеціальний символ:"
-
-#: global.cpp:50
-msgid "Interactive cells"
-msgstr "Інтерактивні клітинки"
-
-#: main.cpp:33
-#, fuzzy
-msgid "Krossword"
-msgstr "Кросворд"
-
-#: dialogs/statisticsdialog.cpp:88
-msgctxt "Horizontal:"
-msgid "Label for the number  of horizontal clues"
-msgstr "Мітка кількості питань по горизонталі"
-
-#: dialogs/statisticsdialog.cpp:92
-msgctxt "Vertical:"
-msgid "Label for the number  of vertical clues"
-msgstr "Мітка кількості питань по вертикалі"
-
-#: dictionary.cpp:278
-msgctxt ""
-"The header title for languages of clue/answer pairs in the dictionary "
-"database"
-msgid "Language"
-msgstr "Мова"
-
-#: crosswordxmlguiwindow.cpp:1397
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "Last Clue"
-msgstr "Позначити останнє питання"
-
-#: crosswordxmlguiwindow.cpp:1502
-#, fuzzy
-msgid "Let you select a special character to paste"
-msgstr "Надає вам змогу вибрати спеціальний символ для вставлення."
-
-#: global.cpp:426
-msgctxt "Short description of the crossword type 'User Defined'"
-msgid "Lets you specify your own rules."
-msgstr "Надає вам змогу вказати власні правила."
-
-#: dialogs/statisticsdialog.cpp:60
-msgid "Letter Cells:"
-msgstr "Клітинок з літерами:"
-
-#: global.cpp:42
-msgid "Letter cell"
-msgstr "Клітинка літери"
-
-#: commands.cpp:704 commands.cpp:1172
-msgid "Letter cell not found at the given coordinates (%1, %2)"
-msgstr "За вказаними координатами (%1, %2) клітинки з літерою не знайдено"
-
-#: krossword.cpp:650
-msgid "Letters can't be converted back correctly after this conversion."
-msgstr "Правильне зворотне перетворення літер стане неможливим."
-
-#: krosswordpuzzle.cpp:240 krosswordpuzzle.cpp:429 library/librarygui.cpp:404
-msgid "Library"
-msgstr "Бібліотека"
-
-#: krosswordpuzzle.cpp:283
-#, fuzzy
-msgctxt ""
-"This string is used to replace the library path for crossword files that are "
-"in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
-"apps/krossword/library/crossword.kwpz with Library/crossword.kwpz"
-msgid "Library"
-msgstr "Бібліотека"
-
-#: crosswordxmlguiwindow.cpp:713
-msgid "Loaded crossword from file '%1'"
-msgstr "Кросворд завантажено з файла «%1»"
-
-#: dialogs/crosswordpreviewwidget.cpp:46
-msgid "Loading preview..."
-msgstr "Завантаження перегляду..."
-
-#: krosswordpuzzle.cpp:183
-msgid "Loading the crossword, please wait..."
-msgstr "Завантаження кросворда, будь ласка, зачекайте..."
-
-#: krosswordpuzzle.cpp:180 library/librarygui.cpp:231
-msgid "Loading..."
-msgstr "Завантаження..."
-
-#: commands.cpp:1410
-msgid "Make Clue Cell Visible"
-msgstr "Зробити клітинку питання видимою"
-
-#: crosswordxmlguiwindow.cpp:1307
-msgid "Mark as confident"
-msgstr "Позначити як точну"
-
-#: crosswordxmlguiwindow.cpp:1313
-msgid "Mark as unsure"
-msgstr "Позначити як неточну"
-
-#: crosswordxmlguiwindow.cpp:1308
-#, fuzzy
-msgid "Mark the selected letter cell's confidence as confident"
-msgstr "Позначити поточну літеру у клітинці як точну"
-
-#: crosswordxmlguiwindow.cpp:1314
-#, fuzzy
-msgid "Mark the selected letter cell's confidence as unsure"
-msgstr "Позначити поточну літеру у клітинці як неточну"
-
-#: library/librarygui.cpp:357
-msgid "Matt Jones (thursdays)"
-msgstr "Кросворди від Метта Джонса (четвер)"
-
-#: dialogs/statisticsdialog.cpp:101
-msgid "Max. Answer Length:"
-msgstr "Макс. довжина відповіді:"
-
-#: dialogs/statisticsdialog.cpp:98
-msgid "Min. Answer Length:"
-msgstr "Мін. довжина відповіді:"
-
-#: library/librarygui.cpp:381
-msgid "Mots-croisés.ch free French crosswords"
-msgstr ""
-
-#: commands.cpp:1972
-msgid "Move All Cells By %1, %2"
-msgstr "Пересунути всі клітинки на %1, %2"
-
-#: crosswordxmlguiwindow.cpp:1479
-msgid "Move All Cells..."
-msgstr "Пересунути всі клітинки..."
-
-#: dialogs/movecellsdialog.cpp:28
-msgid "Move Cells"
-msgstr "Пересування клітинок"
-
-#: crosswordxmlguiwindow.cpp:1480
-#, fuzzy
-msgid "Moves all cells of the crossword"
-msgstr "Пересунути всі клітинки кросворда."
-
-#: dialogs/movecellsdialog.cpp:65
-msgctxt ""
-"How many clues are removed when moving all cells of the crossword. %2 is "
-"replaced by a plural indicating how many images will be removed when moving "
-"the cells."
-msgid "Moving all cells will remove %1 clue %2"
-msgid_plural "Moving all cells will remove %1 clues %2"
-msgstr[0] "Пересування призведе до вилучення %1 питання %2"
-msgstr[1] "Пересування призведе до вилучення %1 питань %2"
-msgstr[2] "Пересування призведе до вилучення %1 питань %2"
-msgstr[3] "Пересування призведе до вилучення одного питання %2"
-
-#: library/librarygui.cpp:521
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "New &Folder..."
-msgstr "Створити &теку"
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
-msgid "New Crossword Type"
-msgstr "Тип нового кросворда"
-
-#: library/librarygui.cpp:473
-msgid "New Library Folder"
-msgstr "Створити теку у бібліотеці"
-
-#: crosswordxmlguiwindow.cpp:625 crosswordxmlguiwindow.cpp:658
-msgid "New crossword"
-msgstr "Створити кросворд"
-
-#: commands.cpp:1299
-msgid "No Action"
-msgstr "Без дії"
-
-#: dictionary.cpp:173
-msgid ""
-"No Connection to the database! Please make sure the MySQL server is running. "
-"Afterwards click \"Continue\" to retry connecting to the database."
-msgstr ""
-"Не вдалося встановити з’єднання з базою даних. Будь ласка, перевірте, чи "
-"запущено сервер MySQL. Після його запуску натисніть кнопку «Продовжити», щоб "
-"наказати програмі повторити спробу з’єднання з базою даних."
-
-#: dictionary.cpp:176
-msgid "No Database Connection"
-msgstr "Немає з’єднання з базою даних"
-
-#: commands.cpp:343 commands.cpp:552 commands.cpp:662 commands.cpp:697
-msgid "No cell at the given coordinates (%1, %2)"
-msgstr "За вказаними координатами (%1, %2) клітинки не знайдено"
-
-#: dialogs/currentcellwidget.cpp:114
-msgid "No cell selected."
-msgstr "Не позначено жодної клітинки."
-
-#: dialogs/crosswordpropertiesdialog.cpp:245
-msgctxt "No changes to the crossword grid size."
-msgid "No change"
-msgstr "Без змін"
-
-#: commands.cpp:813 commands.cpp:1006 commands.cpp:1100
-msgid "No clue cell given"
-msgstr "Не вказано клітинки питання"
-
-#: krossword.cpp:3034
-msgid "No error."
-msgstr "Без помилок."
-
-#: crosswordxmlguiwindow.cpp:1094
-msgid "No removable cell selected."
-msgstr "Позначено клітинку, яку не можна вилучати."
-
-#: dialogs/createnewcrossworddialog.cpp:193
-msgid "Notes"
-msgstr "Нотатки"
-
-#: commands.cpp:1277
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Notes"
-msgstr "Примітки"
-
 #: global.cpp:488
 msgid "Number Puzzle"
 msgstr "Числова головоломка"
-
-#: global.cpp:289
-msgid "Number clues (1 to 26)"
-msgstr "Кількість питань (від 1 до 26)"
-
-#: dialogs/statisticsdialog.cpp:72
-msgid ""
-"Number of crossed letter cells, percentage of total letter cell count in "
-"braces"
-msgstr ""
-"Кількість клітинок з літерами, що належать різним відповідями, відсоткове "
-"значення від загальної кількості клітинок з літерами у фігурних дужках"
-
-#: dialogs/statisticsdialog.cpp:59
-msgid "Number of empty cells, percentage of total cell count in braces"
-msgstr ""
-"Кількість порожніх клітинок, відсоткове значення від загальної кількості "
-"клітинок у фігурних дужках"
-
-#: dialogs/statisticsdialog.cpp:90
-msgid "Number of horizontal clues, percentage of total clue count in braces"
-msgstr ""
-"Кількість питань по горизонталі, відсоткове значення від загальної кількості "
-"питань у фігурних дужках"
-
-#: dialogs/statisticsdialog.cpp:121
-msgid ""
-"Number of letter cells containing '%1', percentage of total letter cell "
-"count in braces"
-msgstr ""
-"Кількість клітинок, що містять «%1», відсоткове значення від загальної "
-"кількості клітинок з літерами у фігурних дужках"
-
-#: dialogs/statisticsdialog.cpp:62
-msgid "Number of letter cells, percentage of total cell count in braces"
-msgstr ""
-"Кількість клітинок з літерами, відсоткове значення від загальної кількості "
-"клітинок у фігурних дужках"
-
-#: dialogs/statisticsdialog.cpp:76
-msgid ""
-"Number of uncrossed letter cells, percentage of total letter cell count in "
-"braces"
-msgstr ""
-"Кількість клітинок з літерами, що не належать різним відповідями, відсоткове "
-"значення від загальної кількості клітинок з літерами у фігурних дужках"
-
-#: dialogs/statisticsdialog.cpp:94
-msgid "Number of vertical clues, percentage of total clue count in braces"
-msgstr ""
-"Кількість питань по вертикалі, відсоткове значення від загальної кількості "
-"питань у фігурних дужках"
 
 #: global.cpp:490
 msgctxt "Short description of the crossword type 'Number Puzzle'"
@@ -1469,429 +1634,84 @@ msgstr ""
 "записано ціле число від 1 до 26. Вам слід встановити відповідність між "
 "літерами абетки і числами."
 
-#: dialogs/statisticsdialog.cpp:115
-msgid "Occurrences Of Letters:"
-msgstr "Відсоткова частка літер:"
+#: global.cpp:503
+msgid "Crossnumber"
+msgstr "Числовий кросворд"
 
-#: crosswordxmlguiwindow.cpp:1293
-msgid "Pan"
-msgstr "Панорамування"
-
-#: crosswordxmlguiwindow.cpp:1294
+#: global.cpp:505
+msgctxt "Short description of the crossword type 'Crossnumber'"
 msgid ""
-"Pan the view. Note that you can also pan while pressing the control key."
+"Crossnumbers are the numerical analogy of a crossword, in which the "
+"solutions to the clues are numbers instead of words."
 msgstr ""
-"Панорамувати перегляд. Зауважте, що панорамування можна виконувати і за "
-"допомогою натискання клавіші Ctrl."
+"Числові кросворди є числовим аналогом звичайних кросвордів. Відповідями у "
+"таких кросвордах є не слова, а числа."
 
-#: dialogs/crosswordpreviewwidget.cpp:55
-msgid "Preview failed"
-msgstr "Не вдалося створити попередній перегляд!"
-
-#: main.cpp:39
-msgid "Previous developer"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1275
-msgid "Print the crossword"
-msgstr "Надрукувати кросворд"
-
-#: dialogs/crosswordpropertiesdialog.cpp:36
-msgid "Properties"
-msgstr "Властивості"
-
-#: crosswordxmlguiwindow.cpp:1147
+#: global.cpp:508
+msgctxt "Long description of the crossword type 'Crossnumber'"
 msgid ""
-"Quality crosswords of the current crossword type (%1) are usually symmetric."
-msgstr ""
-"Якісні кросворди поточного типу кросвордів (%1) зазвичай є симетричними."
-
-#: commands.cpp:776
-msgid "Remove %1 letter"
-msgid_plural "Remove %1 letters"
-msgstr[0] "Вилучити %1 літеру"
-msgstr[1] "Вилучити %1 літери"
-msgstr[2] "Вилучити %1 літер"
-msgstr[3] "Вилучити %1 літеру"
-
-#: crosswordxmlguiwindow.cpp:1436
-msgid "Remove &Across Clue"
-msgstr "Вил&учити відповідь по горизонталі"
-
-#: crosswordxmlguiwindow.cpp:1442
-msgid "Remove &Down Clue"
-msgstr "Ви&лучити відповідь по вертикалі"
-
-#: commands.cpp:336
-msgid "Remove Clue '%1'"
-msgstr "Вилучити питання «%1»"
-
-#: commands.cpp:334
-msgid "Remove Clue Without Text"
-msgstr "Вилучити питання без тексту"
-
-#: commands.cpp:544
-msgid "Remove Image '%1'"
-msgstr "Вилучити зображення «%1»"
-
-#: commands.cpp:1529
-msgid "Remove Same Letter Synchronization"
-msgstr "Вилучити синхронізацію однакових літер"
-
-#: commands.cpp:778
-msgctxt "This string shouldn't happen to be used"
-msgid "Remove no letters"
-msgstr "Вилучити клітинки без літер"
-
-#: crosswordxmlguiwindow.cpp:1455
-#, fuzzy
-msgid "Removes all clues from the crossword"
-msgstr "Вилучити з кросворда всі питання."
-
-#: crosswordxmlguiwindow.cpp:1437
-#, fuzzy
-msgid "Removes the highlighted across clue"
-msgstr "Вилучити позначену відповідь по горизонталі."
-
-#: crosswordxmlguiwindow.cpp:1432
-#, fuzzy
-msgid "Removes the highlighted clue or image"
-msgstr "Вилучити позначене питання або зображення."
-
-#: crosswordxmlguiwindow.cpp:1443
-#, fuzzy
-msgid "Removes the highlighted down clue"
-msgstr "Вилучити позначену відповідь по вертикалі."
-
-#: commands.cpp:1894
-msgid "Resize Crossword From %1x%2 to %3x%4"
-msgstr "Змінити розміри кросворда з %1x%2 на %3x%4"
-
-#: dialogs/crosswordpropertiesdialog.cpp:251
-msgctxt ""
-"How many clues are removed when resizing the crossword. %2 is replaced by a "
-"plural indicating how many images will be removed when resizing."
-msgid "Resizing from %3x%4 will remove %1 clue %2"
-msgid_plural "Resizing from %3x%4 will remove %1 clues %2"
-msgstr[0] "Зміна розмірів на розміри %3x%4 призведе до вилучення %1 питання %2"
-msgstr[1] "Зміна розмірів на розміри %3x%4 призведе до вилучення %1 питань %2"
-msgstr[2] "Зміна розмірів на розміри %3x%4 призведе до вилучення %1 питань %2"
-msgstr[3] ""
-"Зміна розмірів на розміри %3x%4 призведе до вилучення одного питання %2"
-
-#: krosswordpuzzle.cpp:95
-msgid "Resource unavailable"
-msgstr ""
-
-#: krosswordpuzzle.cpp:261
-msgid ""
-"Restore the automatically saved version of an edited crossword before the "
-"crash"
-msgstr ""
-"Відновити автоматично збережену версію редагованого на час аварійного "
-"завершення роботи кросворда"
-
-#: crosswordxmlguiwindow.cpp:780
-msgid "Save &Edit History"
-msgstr "Зберегти журнал &редагування"
-
-#: crosswordxmlguiwindow.cpp:783
-msgid "Save As &Template"
-msgstr "Зберегти як &шаблон"
-
-#: krosswordpuzzle.cpp:86
-#, fuzzy
-msgid "Save crossword"
-msgstr "Створити кросворд"
-
-#: crosswordxmlguiwindow.cpp:1266
-msgid "Save the crossword with solved letters"
-msgstr "Зберегти поточний стан розв’язання кросворда"
-
-#: crosswordxmlguiwindow.cpp:785
-msgid "Save without correct answers, clue texts, images"
-msgstr "Зберегти без правильних відповідей, тексту питань, зображень"
-
-#: dictionary.cpp:276
-msgctxt ""
-"The header title for scores/difficulties of clue/answer pairs in the "
-"dictionary database"
-msgid "Score"
-msgstr "Оцінка"
-
-#: crosswordxmlguiwindow.cpp:1368
-msgid "Select clue with switched orientation to the currently selected clue"
-msgstr ""
-"Позначити питання з перпендикулярним розташуванням відповіді відносно "
-"відповіді на поточне питання"
-
-#: crosswordxmlguiwindow.cpp:1383
-msgid "Select the first clue"
-msgstr "Позначити перше питання"
-
-#: crosswordxmlguiwindow.cpp:1373
-msgid "Select the first letter of the current clue"
-msgstr "Позначити першу літеру поточного питання"
-
-#: crosswordxmlguiwindow.cpp:1398
-msgid "Select the last clue"
-msgstr "Позначити останнє питання"
-
-#: crosswordxmlguiwindow.cpp:1378
-msgid "Select the last letter of the current clue"
-msgstr "Позначити останню літеру поточного питання"
-
-#: crosswordxmlguiwindow.cpp:1388
-msgid "Select the next clue"
-msgstr "Позначити наступне питання"
-
-#: crosswordxmlguiwindow.cpp:1393
-msgid "Select the previous clue"
-msgstr "Позначити попереднє питання"
-
-#: commands.cpp:1147
-msgid "Set Correct Letter at (%1, %2) to %3"
-msgstr "Встановити правильну літеру у клітинці з координатами (%1, %2): %3"
-
-#: commands.cpp:1481
-msgid "Set Default Number Puzzle Mapping"
-msgstr "Встановити типову відповідність номерів питань"
-
-#: commands.cpp:1157
-msgid "Set Letter at (%1, %2) to %3"
-msgstr "Встановити літеру у клітинці (%1, %2): %3"
-
-#: krosswordpuzzleview.cpp:106
-msgid "Settings changed"
-msgstr "Параметри змінено"
-
-#: commands.cpp:1506
-msgid "Setup Same Letter Synchronization"
-msgstr "Налаштувати синхронізацію однакових літер"
-
-#: crosswordxmlguiwindow.cpp:1406
-msgid "Show Clue Dock"
-msgstr "Показати панель питань"
-
-#: crosswordxmlguiwindow.cpp:1416
-msgid "Show Current Cell Dock"
-msgstr "Показати панель поточної клітинки"
-
-#: dialogs/crosswordtypewidget.cpp:204
-msgid "Show Details"
-msgstr "Показати подробиці"
-
-#: crosswordxmlguiwindow.cpp:1411
-msgid "Show Edit History Dock"
-msgstr "Показати панель журналу редагування"
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:121
-msgid "Show Only Answers With &Clue"
-msgstr "Показувати лише відповіді з &питаннями"
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:112
-#, fuzzy
-msgid "Show Only Answers With Current Answer &Length"
-msgstr "Показувати лише відповіді з &питаннями"
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:128
-#, fuzzy
-msgid "Show Only the &First 100 Answers"
-msgstr "Показати лише п&ерші 100 відповідей"
-
-#: crosswordxmlguiwindow.cpp:1279
-msgid "Show a print preview"
-msgstr "Показати попередній перегляд друку"
-
-#: crosswordxmlguiwindow.cpp:1470
-#, fuzzy
-msgid "Shows statistics about the crossword"
-msgstr "Показати статистичні дані щодо кросворда."
-
-#: crosswordxmlguiwindow.cpp:324
-#, fuzzy
-msgid "Shows the percentage of solved letter cells"
-msgstr "Показує кількість розв’язаних літер у відсотках."
-
-#: dialogs/createnewcrossworddialog.cpp:192
-msgid "Size"
-msgstr "Розміри"
-
-#: commands.cpp:1284
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Size"
-msgstr "Розміри"
-
-#: library/librarymanager.cpp:71
-msgctxt "The title for sizes of crosswords in the library tree view"
-msgid "Size:"
-msgstr "Розміри:"
-
-#: crosswordxmlguiwindow.cpp:1632 krossword.h:554
-msgid "Solution"
-msgstr "Розв’язок"
-
-#: global.cpp:44
-msgid "Solution letter cell"
-msgstr "Клітинка слова-розв’язку"
-
-#: commands.cpp:669
-msgid "Solution letter cell not found at the given coordinates (%1, %2)"
-msgstr ""
-"За вказаними координатами (%1, %2) клітинки з літерою розв’язку не знайдено"
-
-#: crosswordxmlguiwindow.cpp:2150
-#, fuzzy
-msgid "Solve"
-msgstr "Показати відповідь"
-
-#: crosswordxmlguiwindow.cpp:1355
-msgid "Solve Across Clue"
-msgstr "Показати відповідь по горизонталі"
-
-#: crosswordxmlguiwindow.cpp:1349
-msgid "Solve Clue"
-msgstr "Показати відповідь"
-
-#: crosswordxmlguiwindow.cpp:1361
-msgid "Solve Down Clue"
-msgstr "Показати відповідь по вертикалі"
-
-#: crosswordxmlguiwindow.cpp:1356
-msgid "Solve the current across clue"
-msgstr "Показати відповідь на поточне питання по горизонталі"
-
-#: crosswordxmlguiwindow.cpp:1350
-msgid "Solve the current clue"
-msgstr "Показати відповідь на поточне питання"
-
-#: crosswordxmlguiwindow.cpp:1362
-msgid "Solve the current down clue"
-msgstr "Показати відповідь на поточне питання по вертикалі"
-
-#: crosswordxmlguiwindow.cpp:1344
-#, fuzzy
-msgid "Solve the selected letter cell"
-msgstr "Показати літеру у поточній клітинці"
-
-#: crosswordxmlguiwindow.cpp:1298
-#, fuzzy
-msgid "Solve the selected letter or a random one if none is selected"
-msgstr ""
-"Показати літеру у поточній клітинці або у випадковій клітинці, якщо нічого "
-"не позначено"
-
-#: dialogs/statisticsdialog.cpp:34
-msgid "Statistics"
-msgstr "Статистика"
-
-#: global.cpp:287
-msgid "String clues"
-msgstr "Рядки питань"
-
-#: global.cpp:434
-msgid "Swedish Crossword"
-msgstr "Шведський кросворд"
-
-#: global.cpp:436
-msgctxt "Short description of the crossword type 'Swedish'"
-msgid ""
-"Swedish crosswords contain clue cells which contain the clue text in it and "
-"an arrow to indicate in which direction the clues have to be answered."
-msgstr ""
-"У шведських кросвордах питання записують у окремих клітинках, а напрям "
-"запису відповіді позначають стрілочкою."
-
-#: krosswordpuzzle.cpp:244
-msgid "Templates"
-msgstr "Шаблони"
-
-#: global.cpp:439
-msgctxt "Long description of the crossword type 'Swedish'"
-msgid ""
-"The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
-"the cells which would normally be black in other countries. Arrows indicate "
-"in which direction the clues have to be answered, vertical or horizontal. "
-"This style of grid is used in several countries other than Sweden, usually "
-"in magazines with pages of A4 or similar size. The grid often has a photo of "
-"a pop or movie star replacing a block of squares, as a clue to one answer. "
-"These puzzles usually have no symmetry in the grid.\n"
-"Crosswords with clue cells inside the crossword grid are also called "
-"\"Arrowwords\", \"Pointers\" or \"Tipwords\" in English, \"Autodefinidos\" "
-"in Spanish, \"Mots Fléchés\" in French, etc.\n"
+"A crossnumber (also known as a cross-figure) is the numerical analogy of a "
+"crossword, in which the solutions to the clues are numbers instead of words. "
+"Clues are usually arithmetical expressions, but can also be general "
+"knowledge clues to which the answer is a number or year. There are also "
+"numerical fill-in crosswords.\n"
+"The Daily Mail Weekend magazine used to feature crossnumbers under the "
+"misnomer Number Word. This kind of puzzle should not be confused with a "
+"different puzzle that the Daily Mail refers to as Cross Number.\n"
 "(text taken from wikipedia)"
 msgstr ""
-"У ґратці шведського кросворда немає нумерації питань: питання містяться у "
-"окремих клітинках кросворда, які у інших типах кросвордів просто "
-"зафарбовуються чорним. Напрям запису відповідей на питання позначається "
-"стрілочкою, вертикальною або горизонтальною. Подібний тип ґратки "
-"використовується і у інших країнах, зазвичай, у ілюстрованих журналах з "
-"форматом сторінки A4. У ґратці, зазвичай, наведено знімки відомих виконавців "
-"або кінозірок. Ці знімки замінюють блок клітинок і є питаннями, відповіді на "
-"які слід вписати до клітинок кросворда.\n"
-"Кросворди, у яких клітинки питань розташовано у самій ґратці кросворда також "
-"називаються «Arrowwords», «Pointers» або «Tipwords» у англійській, "
-"«Autodefinidos» у іспанській, «Mots Fléchés» у французькій тощо\n"
+"Числовий кросворд є числовим аналогом звичайного кросворда, у якому "
+"відповідями на питання є не слова, а числа. Питаннями є деякі арифметичні "
+"вирази, але можна використовувати і питання з інших галузей знання, зокрема "
+"питання щодо року, коли сталася певна подія. Існують також числові "
+"кросворди, які заповнюються згідно з певними правилами.\n"
+"У журналі «Дейлі Мейл Вікенд» числові кросворди названо "
+"«числовордами» (Number Word). Подібний тип кросвордів не слід плутати з "
+"іншими типом головоломок, які у «Дейлі Мейл» називаються «перехрещеннями "
+"чисел» (Cross Number).\n"
 "(текст запозичено з Вікіпедії)"
 
-#: library/librarygui.cpp:365
-msgid "The Chronicle of Higher Education (fridays)"
-msgstr ""
-
-#: library/librarygui.cpp:369
-msgid "The Cross Nerd (tuesdays)"
-msgstr ""
-
-#: library/librarygui.cpp:188
+#: io/krosswordxmlreader.cpp:174 io/krosswordxmlreader.cpp:206
 #, fuzzy
-msgid "The Cross Nerd current crossword"
-msgstr "Закрити поточний кросворд."
+msgid "The file is not a Krossword version &lt;= 1.1 file."
+msgstr "Файл не є файлом KrossWordPuzzle версії &lt;= 1.1."
 
-#: krossword.cpp:3041
-msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
-msgstr ""
-"У відповіді містяться некоректні символи. Можна використовувати лише символи "
-"A-Z і/або цифри 0-9."
+#: io/krosswordxmlwriter.cpp:52
+msgid "Couldn't open the ZIP archive for writing"
+msgstr "Не вдалося відкрити архів ZIP для запису"
 
-#: krossword.cpp:3053
-msgid "The answer is too short for the current crossword type."
-msgstr "Відповідь є закороткою для поточного типу кросворда."
+#: io/krosswordxmlwriter.cpp:58 io/krosswordxmlwriter.cpp:63
+#: io/krosswordxmlwriter.cpp:68
+msgid "Error writing to the compressed file"
+msgstr "Помилка під час спроби запису стиснутого файла"
 
-#: krossword.cpp:3045
-msgid ""
-"The answer overwrites the answer to another clue with the same orientation."
-msgstr ""
-"Відповідь перезаписує відповідь на інше питання у тому самому напрямку."
+#: io/krosswordxmlwriter.cpp:73
+msgid "Couldn't close the ZIP archive"
+msgstr "Не вдалося закрити архів ZIP"
 
-#: krossword.cpp:3055
-msgid "The answer overwrites the clue cell."
-msgstr "Відповідь перезаписує клітинку питання."
+#: krossword.cpp:613
+msgid "%1 clue cell"
+msgid_plural "%1 clue cells"
+msgstr[0] "%1 клітинка питання"
+msgstr[1] "%1 клітинки питання"
+msgstr[2] "%1 клітинок питання"
+msgstr[3] "%1 клітинка питання"
 
-#: krossword.cpp:3043
-msgid "The answer produces mismatching letter cells at the same positions."
-msgstr "Відповідь не збігається з вже заповненими клітинками."
+#: krossword.cpp:618
+msgid "%1 double clue cell"
+msgid_plural "%1 double clue cells"
+msgstr[0] "%1 клітинка з двома питаннями"
+msgstr[1] "%1 клітинки з двома питаннями"
+msgstr[2] "%1 клітинок з двома питаннями"
+msgstr[3] "%1 клітинка з двома питаннями"
 
-#: dialogs/answerwidget.cpp:30 dialogs/answerwidget.cpp:40
-msgid "The answer to the clue"
-msgstr "Відповідь на питання"
-
-#: krossword.cpp:3047
-msgid "The answer's letter cells cross a clue cell."
-msgstr "Клітинка літери відповіді накладається на клітинку питання."
-
-#: krossword.cpp:3039
-msgid "The cell for the new clue isn't empty."
-msgstr "Клітинку для нового питання вже зайнято.о."
-
-#: krossword.cpp:3060
-msgid "The cells for the new image aren't empty."
-msgstr "Клітинки нового зображення не є порожніми."
-
-#: krossword.cpp:3037
-msgid "The clue doesn't fit in the grid with the given settings."
-msgstr "Питання не вкладається у сітку з вказаними параметрами."
+#: krossword.cpp:623
+msgid "%1 solution letter cell"
+msgid_plural "%1 solution letter cells"
+msgstr[0] "%1 клітинка слова-розв’язку"
+msgstr[1] "%1 клітинки слова-розв’язку"
+msgstr[2] "%1 клітинок слова-розв’язку"
+msgstr[3] "%1 клітинка слова-розв’язку"
 
 #: krossword.cpp:634
 msgid "The conversion will remove %1 of %2 clues"
@@ -1901,12 +1721,209 @@ msgstr "Перетворення призведе до вилучення %1 з 
 msgid "The conversion will remove %1 of %2 clues, %3 of %4 images"
 msgstr "Перетворення призведе до вилучення %1 з %2 питань, %3 з %4 зображень"
 
-#: dialogs/answerwidget.cpp:28 dialogs/answerwidget.cpp:38
+#: krossword.cpp:650
+msgid "Letters can't be converted back correctly after this conversion."
+msgstr "Правильне зворотне перетворення літер стане неможливим."
+
+#: krossword.cpp:657
 msgid ""
-"The correct answer to the clue. For each letter a letter cell is created"
+"All clue cells get removed. The initial letter to clue number mapping is "
+"A=1, B=2, ..., Z=26."
 msgstr ""
-"Правильна відповідь на питання. Програма створити по одній клітинці на кожну "
-"літеру відповіді."
+"Всі клітинки питань вилучено. Початкова відповідність номерів є такою: A=1, "
+"B=2, ..., Z=26."
+
+#: krossword.cpp:924
+msgid "Error writing crossword: %1"
+msgstr "Помилка під час запису даних кросворда: %1"
+
+#: krossword.cpp:931
+msgid "Error writing compressed crossword: %1"
+msgstr "Помилка під час спроби запису стиснутого кросворда: %1"
+
+#: krossword.cpp:942
+msgid "Error writing AcrossLite's .puz-format."
+msgstr "Помилка під час запису даних у форматі .puz AcrossLite."
+
+#: krossword.cpp:963
+msgid "Error while downloading from url: %1"
+msgstr "Помилка під час звантаження даних з адреси: %1"
+
+#: krossword.cpp:1018
+msgid "Error reading AcrossLite's .puz-format."
+msgstr "Помилка під час читання даних у форматі .puz AcrossLite."
+
+#: krossword.cpp:2948
+msgctxt "Name"
+msgid ""
+"Used as header label for the column containing the names in the crossword "
+"type model."
+msgstr "Назва"
+
+#: krossword.cpp:2951
+msgctxt "Description"
+msgid ""
+"Used as header label for the column containing the descriptions in the "
+"crossword type model."
+msgstr "Опис"
+
+#: krossword.cpp:3034
+msgid "No error."
+msgstr "Без помилок."
+
+#: krossword.cpp:3037
+msgid "The clue doesn't fit in the grid with the given settings."
+msgstr "Питання не вкладається у сітку з вказаними параметрами."
+
+#: krossword.cpp:3039
+msgid "The cell for the new clue isn't empty."
+msgstr "Клітинку для нового питання вже зайнято.о."
+
+#: krossword.cpp:3041
+msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
+msgstr ""
+"У відповіді містяться некоректні символи. Можна використовувати лише символи "
+"A-Z і/або цифри 0-9."
+
+#: krossword.cpp:3043
+msgid "The answer produces mismatching letter cells at the same positions."
+msgstr "Відповідь не збігається з вже заповненими клітинками."
+
+#: krossword.cpp:3045
+msgid ""
+"The answer overwrites the answer to another clue with the same orientation."
+msgstr ""
+"Відповідь перезаписує відповідь на інше питання у тому самому напрямку."
+
+#: krossword.cpp:3047
+msgid "The answer's letter cells cross a clue cell."
+msgstr "Клітинка літери відповіді накладається на клітинку питання."
+
+#: krossword.cpp:3049
+msgid "The current crossword type doesn't allow clue cells."
+msgstr "У поточному типі кросворда не передбачено клітинок питань."
+
+#: krossword.cpp:3051
+msgid "The current crossword type requires a clue cell for each clue."
+msgstr ""
+"У поточному типі кросворда для кожного питання слід додавати клітинку "
+"питання."
+
+#: krossword.cpp:3053
+msgid "The answer is too short for the current crossword type."
+msgstr "Відповідь є закороткою для поточного типу кросворда."
+
+#: krossword.cpp:3055
+msgid "The answer overwrites the clue cell."
+msgstr "Відповідь перезаписує клітинку питання."
+
+#: krossword.cpp:3058
+msgid "The image doesn't fit in the grid with the given settings."
+msgstr "Зображення не вкладається у сітку з вказаними параметрами."
+
+#: krossword.cpp:3060
+msgid "The cells for the new image aren't empty."
+msgstr "Клітинки нового зображення не є порожніми."
+
+#: krossword.cpp:3062
+msgid "The current crossword type doesn't allow image cells."
+msgstr "У поточному типі кросворда не передбачено клітинок зображень."
+
+#: krossworddocument.cpp:86
+msgctxt "Title for the clue list when printing"
+msgid "Clue list"
+msgstr "Список питань"
+
+#: krossworddocument.cpp:87
+msgctxt "Title for the list of down/vertical clues when printing"
+msgid "Down clues"
+msgstr "Питання по вертикалі"
+
+#: krossworddocument.cpp:88
+msgctxt "Title for the list of across/horizontal clues when printing"
+msgid "Across clues"
+msgstr "Питання по горизонталі"
+
+#: krosswordpuzzle.cpp:85
+#, fuzzy
+msgid "Would you like to add the crossword into the library?"
+msgstr "Створити кросворд у бібліотеці."
+
+#: krosswordpuzzle.cpp:86
+#, fuzzy
+msgid "Save crossword"
+msgstr "Створити кросворд"
+
+#: krosswordpuzzle.cpp:94
+msgid "Could not open resource at "
+msgstr ""
+
+#: krosswordpuzzle.cpp:95
+msgid "Resource unavailable"
+msgstr ""
+
+#: krosswordpuzzle.cpp:180 library/librarygui.cpp:231
+msgid "Loading..."
+msgstr "Завантаження..."
+
+#: krosswordpuzzle.cpp:183
+msgid "Loading the crossword, please wait..."
+msgstr "Завантаження кросворда, будь ласка, зачекайте..."
+
+#: krosswordpuzzle.cpp:240 krosswordpuzzle.cpp:429 library/librarygui.cpp:404
+msgid "Library"
+msgstr "Бібліотека"
+
+#: krosswordpuzzle.cpp:244
+msgid "Templates"
+msgstr "Шаблони"
+
+#: krosswordpuzzle.cpp:261
+msgid "&Restore"
+msgstr "&Відновити"
+
+#: krosswordpuzzle.cpp:261
+msgid ""
+"Restore the automatically saved version of an edited crossword before the "
+"crash"
+msgstr ""
+"Відновити автоматично збережену версію редагованого на час аварійного "
+"завершення роботи кросворда"
+
+#: krosswordpuzzle.cpp:262
+msgid ""
+"An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
+" Do you want to restore the crossword?"
+msgstr ""
+"Було виявлено незбережений кросворд. Ймовірно, гра аварійно завершила "
+"роботу, вибачте!\n"
+" Бажаєте відновити кросворд?"
+
+#: krosswordpuzzle.cpp:283
+#, fuzzy
+msgctxt ""
+"This string is used to replace the library path for crossword files that are "
+"in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
+"apps/krossword/library/crossword.kwpz with Library/crossword.kwpz"
+msgid "Library"
+msgstr "Бібліотека"
+
+#: krosswordpuzzle.cpp:308
+msgid "Animations"
+msgstr "Анімація"
+
+#: krosswordpuzzle.cpp:313
+msgid "Theme"
+msgstr "Тема"
+
+#: krosswordpuzzle.cpp:466
+#, fuzzy
+msgid "Error loading file '%1'"
+msgstr "Помилка під час завантаження файла «%1»"
+
+#: krosswordpuzzleview.cpp:106
+msgid "Settings changed"
+msgstr "Параметри змінено"
 
 #: library/librarygui.cpp:136
 #, fuzzy
@@ -1922,110 +1939,26 @@ msgstr ""
 "Не вдалося записати кросворд до теки бібліотеки.\n"
 "%1"
 
-#: crosswordxmlguiwindow.cpp:1141
-msgid ""
-"The crossword doesn't have 180 degree rotation symmetry.\n"
-"To achieve symmetry make sure that each empty cell and each clue cell has a "
-"counterpart at it's 180 degree rotated position.\n"
-msgstr ""
-"Кросворд не має дзеркальної симетрії.\n"
-"Щоб досягти симетрії, ви маєте створити для кожної порожньої клітинки і "
-"кожної клітинки питання її відповідник у кросворді, повернутому на 180 "
-"градусів.\n"
-
-#: crosswordxmlguiwindow.cpp:1137
-msgid ""
-"The crossword doesn't have 180 degree rotation symmetry.\n"
-"To achieve symmetry make sure that each empty cell has a counterpart at it's "
-"180 degree rotated position.\n"
-msgstr ""
-"Кросворд не має дзеркальної симетрії.\n"
-"Щоб досягти симетрії, ви маєте створити для кожної порожньої клітинки її "
-"відповідник у кросворді, повернутому на 180 градусів.\n"
-
-#: crosswordxmlguiwindow.cpp:1133
-msgid "The crossword has 180 degree rotation symmetry."
-msgstr "Кросворд має дзеркальну симетрію."
-
-#: crosswordxmlguiwindow.cpp:728
-msgid ""
-"The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
-"\n"
-"Do you want to convert the crossword to another type now?\n"
-"\n"
-"(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")"
-msgstr ""
-"Не вдалося визначити тип кросворда, зроблено припущення, що кросворд "
-"належить до «Довільних кросвордів».\n"
-"\n"
-"Бажаєте, щоб програма здійснила перетворення кросворда на інший тип?\n"
-"\n"
-"(Зауваження: здійснити перетворення можна пізніше за допомогою пункту меню "
-"«Зміни > Властивості кросворда»)"
-
-#: crosswordxmlguiwindow.cpp:679 crosswordxmlguiwindow.cpp:822
-#: krosswordpuzzle.cpp:129
-msgid ""
-"The current crossword has been modified.\n"
-"Would you like to save it?"
-msgstr ""
-"Поточний кросворд було змінено.\n"
-"Бажаєте зберегти його?"
-
-#: krossword.cpp:3049
-msgid "The current crossword type doesn't allow clue cells."
-msgstr "У поточному типі кросворда не передбачено клітинок питань."
-
-#: krossword.cpp:3062
-msgid "The current crossword type doesn't allow image cells."
-msgstr "У поточному типі кросворда не передбачено клітинок зображень."
-
-#: krossword.cpp:3051
-msgid "The current crossword type requires a clue cell for each clue."
-msgstr ""
-"У поточному типі кросворда для кожного питання слід додавати клітинку "
-"питання."
-
-#: io/krosswordxmlreader.cpp:174 io/krosswordxmlreader.cpp:206
+#: library/librarygui.cpp:161
 #, fuzzy
-msgid "The file is not a Krossword version &lt;= 1.1 file."
-msgstr "Файл не є файлом KrossWordPuzzle версії &lt;= 1.1."
+msgid "Failed"
+msgstr "Мозаїка"
 
-#: library/librarygui.cpp:481
-msgid "The folder already exists in the library."
-msgstr "Тека з такою назвою вже існує у бібліотеці."
-
-#: krossword.cpp:3058
-msgid "The image doesn't fit in the grid with the given settings."
-msgstr "Зображення не вкладається у сітку з вказаними параметрами."
-
-#: crosswordxmlguiwindow.cpp:1302
+#: library/librarygui.cpp:188
 #, fuzzy
-msgid "The selected letter cell has been solved"
-msgstr "Поточну позначену літеру вже заповнено"
+msgid "The Cross Nerd current crossword"
+msgstr "Закрити поточний кросворд."
 
-#: commands.cpp:725
-msgctxt ""
-"Error message to be displayed, when the user tries to convert a letter to a "
-"solution letter, but the position of the new solution letter is already "
-"used. Each solution letter has a position in the solution word of the "
-"crossword and all solution letters of a crossword form it's solution word. "
-"%1 is replaced by the (already used) position."
-msgid "The solution letter position %1 is already assigned."
-msgstr "Позицію літери слова-розв’язку %1 вже призначено."
-
-#: dialogs/cellwidgets/solutionlettercellwidget.cpp:94
+#: library/librarygui.cpp:199 library/librarygui.cpp:204
+#: library/librarygui.cpp:212
 #, fuzzy
-msgid ""
-"The solution letter position %1 is already assigned.\n"
-"Please change the solution word position of that letter first."
+msgid "Crossword %1"
+msgstr "Кросворд"
+
+#: library/librarygui.cpp:290
+msgid "Can't export whole directories. Please select a crossword."
 msgstr ""
-"Для вказаної позиції слова розв’язку вже вказано літеру слова розв’язку.\n"
-"Будь ласка, змініть спочатку позицію літери у слові-розв’язку."
-
-#: krosswordpuzzle.cpp:313
-msgid "Theme"
-msgstr "Тема"
+"Експортувати цілі каталоги не можна. Будь ласка, вкажіть окремий кросворд."
 
 #: library/librarygui.cpp:296
 msgid ""
@@ -2035,54 +1968,49 @@ msgstr ""
 "Під час спроби відкриття кросворда сталася помилка.\n"
 "%1"
 
-#: dialogs/dictionarydialog.cpp:238
-msgid "There was an error while exporting to '%1'"
-msgstr "Під час спроби експортування до «%1» сталася помилка."
+#: library/librarygui.cpp:306
+msgid "Export"
+msgstr "Експортувати"
 
-#: dialogs/dictionarydialog.cpp:252
-msgid "There was an error while importing from '%1'"
-msgstr "Під час спроби імпортування з «%1» сталася помилка."
+#: library/librarygui.cpp:324
+msgid "Export Settings"
+msgstr "Параметри експорту"
 
-#: global.cpp:411
-msgctxt "Short description of the crossword type 'Free'"
-msgid "This is a special type that tries to be least restrictive."
-msgstr "Особливий тип з найменшими обмеженнями."
+#: library/librarygui.cpp:340
+msgid "Couldn't export the image to the specified file."
+msgstr "Не вдалося експортувати зображення до вказаного файла."
 
-#: global.cpp:413
-msgctxt "Long description of the crossword type 'Free'"
-msgid ""
-"This is a special type that tries to be least restrictive. You can use all "
-"available cell types (eg. clue cells, double clue cells, image cells, "
-"solution letter cells). You can mix answers that have a clue cell with "
-"answers that don't. Answers may contain characters as well as numbers."
+#: library/librarygui.cpp:349
+msgid "Download Crossword To Library"
+msgstr "Звантажити кросворд до бібліотеки"
+
+#: library/librarygui.cpp:357
+msgid "Matt Jones (thursdays)"
+msgstr "Кросворди від Метта Джонса (четвер)"
+
+#: library/librarygui.cpp:361
+msgid "Wall Street Journal by Mike Shenk (fridays)"
+msgstr "Кросворди з «Волл-стріт Джорнел» від Майка Шенка (п’ятниця)"
+
+#: library/librarygui.cpp:365
+msgid "The Chronicle of Higher Education (fridays)"
 msgstr ""
-"Це особливий тип з найменшими обмеженнями. Ви можете використовувати "
-"клітинки всіх можливих типів (клітинки з питаннями, клітинки з парами "
-"питань, клітинки з зображеннями, клітинки слова-розв’язку). Можна "
-"використовувати відповіді з клітинками питань, і можна використовувати "
-"окремий список питань поза ґраткою. Відповіді можуть складатися з літер і "
-"цифр."
 
-#: crosswordxmlguiwindow.cpp:1301
-msgid "This letter has been solved"
-msgstr "Цю літеру вже вгадано"
-
-#: crosswordxmlguiwindow.cpp:1214
-msgid ""
-"This will cause all answers to be shown and editable.\n"
-"If you want to solve the crossword you should cancel."
+#: library/librarygui.cpp:369
+msgid "The Cross Nerd (tuesdays)"
 msgstr ""
-"Програма покаже відповіді на питання і ви зможете їх змінити.\n"
-"Якщо ви бажаєте розв’язати кросворд самостійно, вам слід скасувати дію."
 
-#: library/librarygui.cpp:445
-msgid ""
-"This will permanently delete the selected crossword from the library.\n"
-"The operation can't be undone!"
+#: library/librarygui.cpp:373
+msgid "I Swear Crossword by Victor Fleming (fridays)"
 msgstr ""
-"Виконання цієї дії призведе до остаточного вилучення вказаного кросворда з "
-"бібліотеки.\n"
-"Наслідки дії є незворотними."
+
+#: library/librarygui.cpp:377
+msgid "ChrisWords.com"
+msgstr ""
+
+#: library/librarygui.cpp:381
+msgid "Mots-croisés.ch free French crosswords"
+msgstr ""
 
 #: library/librarygui.cpp:433
 msgid ""
@@ -2093,98 +2021,131 @@ msgstr ""
 "всіх кросвордів, що у ньому містяться з бібліотеки. Наслідки дії є "
 "незворотними."
 
-#: commands.cpp:1268
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Title"
-msgstr "Заголовок"
-
-#: dialogs/statisticsdialog.cpp:49
-msgid "Total Cell Count:"
-msgstr "Загалом клітинок:"
-
-#: dialogs/statisticsdialog.cpp:74
-msgid "Uncrossed:"
-msgstr "Не на перетині:"
-
-#: krossword.cpp:2951
-msgctxt "Description"
+#: library/librarygui.cpp:441
 msgid ""
-"Used as header label for the column containing the descriptions in the "
-"crossword type model."
-msgstr "Опис"
+"Couldn't remove the directory from the library.\n"
+"You need root privileges to remove directories which belong to the global "
+"library."
+msgstr ""
+"Не вдалося вилучити каталог з бібліотеки.\n"
+"Для вилучення каталогів з загальної бібліотеки вам потрібні права доступу "
+"адміністратора.."
 
-#: krossword.cpp:2948
-msgctxt "Name"
+#: library/librarygui.cpp:445
 msgid ""
-"Used as header label for the column containing the names in the crossword "
-"type model."
-msgstr "Назва"
+"This will permanently delete the selected crossword from the library.\n"
+"The operation can't be undone!"
+msgstr ""
+"Виконання цієї дії призведе до остаточного вилучення вказаного кросворда з "
+"бібліотеки.\n"
+"Наслідки дії є незворотними."
 
-#: global.cpp:424
-msgid "User Defined Crossword"
-msgstr "Нетиповий кросворд"
-
-#: global.cpp:52
-msgid "User cell type"
-msgstr "Тип клітинок користувача"
-
-#: library/librarygui.cpp:361
-msgid "Wall Street Journal by Mike Shenk (fridays)"
-msgstr "Кросворди з «Волл-стріт Джорнел» від Майка Шенка (п’ятниця)"
-
-#: krosswordpuzzle.cpp:85
+#: library/librarygui.cpp:452
 #, fuzzy
-msgid "Would you like to add the crossword into the library?"
-msgstr "Створити кросворд у бібліотеці."
+msgid "Couldn't remove the crossword from the library."
+msgstr ""
+"Не вдалося вилучити кросворд з бібліотеки.\n"
+"%1"
 
-#: crosswordxmlguiwindow.cpp:885
-msgid "Wrote crossword to file '%1'"
-msgstr "Кросворд записано до файла «%1»"
+#: library/librarygui.cpp:473
+msgid "New Library Folder"
+msgstr "Створити теку у бібліотеці"
 
-#: rc.cpp:2
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "yurchor@ukr.net"
+#: library/librarygui.cpp:481
+msgid "The folder already exists in the library."
+msgstr "Тека з такою назвою вже існує у бібліотеці."
 
-#: rc.cpp:1
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Юрій Чорноіван"
+#: library/librarygui.cpp:516
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Create Crossword..."
+msgstr "С&порожнити кросворд"
 
-#: crosswordxmlguiwindow.cpp:267
-msgid "Zoom: %1%"
-msgstr "Масштаб: %1%"
+#: library/librarygui.cpp:517
+#, fuzzy
+msgid "Create a new crossword"
+msgstr "Створити кросворд"
 
-#: dialogs/movecellsdialog.cpp:71
-msgctxt ""
-"How many images are removed when moving all cells of the crossword. This "
-"string gets combined with a plural string indicating how many clue cells "
-"will be removed when moving the cells."
-msgid "and %1 image"
-msgid_plural "and %1 images"
-msgstr[0] "і %1 зображення"
-msgstr[1] "і %1 зображення"
-msgstr[2] "і %1 зображень"
-msgstr[3] "і одне зображення"
+#: library/librarygui.cpp:521
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "New &Folder..."
+msgstr "Створити &теку"
 
-#: dialogs/crosswordpropertiesdialog.cpp:257
-msgctxt ""
-"How many images are removed when resizing the crossword. This string gets "
-"combined with a plural string indicating how many clue cells will be removed "
-"when resizing."
-msgid "and %1 image"
-msgid_plural "and %1 images"
-msgstr[0] "і %1 зображення"
-msgstr[1] "і %1 зображення"
-msgstr[2] "і %1 зображень"
-msgstr[3] "і одне зображення"
+#: library/librarygui.cpp:522
+#, fuzzy
+msgid "Create a new folder in the library"
+msgstr "Створити у бібліотеці нову теку."
 
-#: dialogs/createnewcrossworddialog.cpp:109
-msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
-msgid "© %1, by %2"
-msgstr "© %1, автор — %2"
+#: library/librarygui.cpp:526
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Download..."
+msgstr "&Звантажити"
+
+#: library/librarygui.cpp:527
+#, fuzzy
+msgid "Download a crossword and add it to the library"
+msgstr "Звантажити кросворд і додати його до бібліотеки."
+
+#: library/librarygui.cpp:531
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Add..."
+msgstr "&Додати питання..."
+
+#: library/librarygui.cpp:532
+#, fuzzy
+msgid "Add a crossword to the library"
+msgstr "Імпортувати кросворд до бібліотеки."
+
+#: library/librarygui.cpp:536
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Delete..."
+msgstr "В&илучити"
+
+#: library/librarygui.cpp:537
+#, fuzzy
+msgid "Delete the selected crossword from the library"
+msgstr "Вилучити позначений кросворд з бібліотеки."
+
+#: library/librarygui.cpp:541
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Export..."
+msgstr "&Експортувати"
+
+#: library/librarygui.cpp:542
+#, fuzzy
+msgid "Export the selected crossword from the library"
+msgstr "Експортувати позначений кросворд з бібліотеки."
+
+#: library/librarygui.cpp:553
+msgid "%1"
+msgstr ""
+
+#: library/librarymanager.cpp:71
+msgctxt "The title for sizes of crosswords in the library tree view"
+msgid "Size:"
+msgstr "Розміри:"
+
+#: library/librarymanager.cpp:74
+msgctxt "The title for authors of crosswords in the library tree view"
+msgid "Author(s):"
+msgstr "Автори:"
+
+#: main.cpp:27
+#, fuzzy
+msgid ""
+"A crossword puzzle game and editor for KDE.\n"
+"Based on KrossWordPuzzle."
+msgstr "Програма для розв’язання та створення кросвордів у KDE 4"
+
+#: main.cpp:33
+#, fuzzy
+msgid "Krossword"
+msgstr "Кросворд"
 
 #: main.cpp:35
 msgid ""
@@ -2192,6 +2153,44 @@ msgid ""
 "© 2014 Giacomo Barazzetti\n"
 "© 2009 Friedrich Pülz"
 msgstr ""
+
+#: main.cpp:37
+msgid "Andrea Barazzetti"
+msgstr ""
+
+#: main.cpp:37 main.cpp:38
+msgid "Developer"
+msgstr ""
+
+#: main.cpp:38
+msgid "Giacomo Barazzetti"
+msgstr ""
+
+#: main.cpp:39
+msgid "Friedrich Pülz"
+msgstr "Friedrich Pülz"
+
+#: main.cpp:39
+msgid "Previous developer"
+msgstr ""
+
+#: main.cpp:44
+msgid "Document to open"
+msgstr "Документ, який слід відкрити"
+
+#: rc.cpp:1
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Юрій Чорноіван"
+
+#: rc.cpp:2
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "yurchor@ukr.net"
+
+#~ msgctxt "Display text for empty clue texts"
+#~ msgid "<placeholder>empty</placeholder>"
+#~ msgstr "<placeholder>порожньо</placeholder>"
 
 #~ msgid " "
 #~ msgstr " "
