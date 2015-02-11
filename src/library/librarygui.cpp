@@ -58,6 +58,9 @@ LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::Wind
     m_libraryTree->setModel(m_libraryModel);
     m_libraryTree->setRootIndex(m_libraryModel->index(libraryDir));
 
+    m_libraryTree->setSortingEnabled(true);
+    m_libraryTree->sortByColumn(0, Qt::AscendingOrder);
+
     m_libraryTree->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_libraryTree->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_libraryTree->setDragDropMode(QAbstractItemView::InternalMove);
