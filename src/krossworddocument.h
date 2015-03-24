@@ -23,38 +23,104 @@
 class KrossWordPuzzleScene;
 class KrossWordPuzzleView;
 
+#include <QPair>
+#include <QPointF>
+#include <QTextDocument>
+
+#include <QPainter>
+#include <type_traits>
+
+#include "krossword.h"
+
 namespace Crossword
 {
-class KrossWord;
+    class KrossWord;
 }
+
 using namespace Crossword;
 
-class QTextDocument;
 class QPrinter;
-class QPainter;
 
-class KrossWordDocument
+
+class DocumentLayout
 {
 public:
-    KrossWordDocument(KrossWord *krossWord, QPrinter *printer);
-    ~KrossWordDocument();
+    DocumentLayout(KrossWord& crossword);
 
-    void print(int fromPage = 1, int toPage = -1);
+    void drawCrosswordPage(QPainter* painter);
+    void drawCluesPage(QPainter* painter);
+
+    int getCluesPagesCount() const;
+
+    float getRelativeCellSize() const;
+
+    QTextDocument& getCrosswordPage();
+    QTextDocument& getCluesPage();
+
+private:
+    void makeCrosswordPage();
+    void makeCluesPage();
+
+    void computeRelativeCellSize();
+
+private:
+    QTextDocument m_crosswordPage;
+    QTextDocument m_cluesPage;
+    KrossWord&    m_crossword;
+
+    float m_titleHeight;
+    QPointF m_translation;
+};
+
+class AbstractKrossWordDocument
+{
+public:
+    AbstractKrossWordDocument(KrossWord *krossWord);
+    virtual ~AbstractKrossWordDocument() = default;
+
+    KrossWord *getCrossword() const;
+    virtual void print(int fromPage = 1, int toPage = -1) = 0;
+    virtual int pages() const = 0;
+
+private:
+     KrossWord *m_krossWord;
+};
+
+class PdfDocument : public AbstractKrossWordDocument
+{
+public:
+    PdfDocument(KrossWord *krossWord, QPrinter *printer);
+
+    void print(int fromPage = 1, int toPage = -1) override;
+    int pages() const override;
     void renderPage(QPainter *painter, int page);
-    int pages() const;
 
-    QPrinter *printer() const {
-        return m_printer;
-    };
+    QPrinter *getPrinter() const;
     void setPrinter(QPrinter *printer);
 
 private:
-    KrossWord *m_krossWord;
-    KrossWordPuzzleScene *m_krossWordScene;
-    KrossWordPuzzleView *m_krossWordView;
-    QTextDocument *m_titleDoc;
-    QTextDocument *m_clueListDoc;
+    void computeTitleHeight();
+    void computeTranslationPoint();
+    void computeCellSize();
+    int computeCanvasSize() const;
+    void drawCell(QPainter *painter, QPair<int, int> p) const;
+    void drawCellNumbers(QPainter *painter, QPair<int, int> p, int number) const;
+
+    void drawEmptyCell(QPainter *painter, Coord cellCoord);
+    void drawClueCell(QPainter *painter, Coord cellCoord);
+    void drawDoubleClueCell(QPainter *painter, Coord cellCoord);
+    void drawLetterCell(QPainter *painter, KrossWordCell& cell);
+    void drawSolutionLetterCell(QPainter *painter, Coord cellCoord);
+    void drawImageCellCell(QPainter *painter, Coord cellCoord);
+
+
+private:
+    DocumentLayout m_docLayout;
     QPrinter *m_printer;
+
+    float m_cellSize;
+    float m_titleHeight;
+    QPointF m_translation;
 };
 
 #endif // KROSSWORDDOCUMENT_H

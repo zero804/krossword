@@ -958,7 +958,7 @@ void CrossWordXmlGuiWindow::printSlot()
     ui_print_crossword.emptyCellColor->setColor(Qt::black);
 
     QPrintDialog *dlg = KdePrint::createPrintDialog(&printer, QList<QWidget*>() << printCrossWord, this);
-    KrossWordDocument document(krossWord(), &printer);
+    PdfDocument document(krossWord(), &printer);
     dlg->setMinMax(1, document.pages());
     dlg->setFromTo(1, document.pages());
 
@@ -978,7 +978,7 @@ void CrossWordXmlGuiWindow::printPreviewSlot()
     setupPrinter(printer);
     KPrintPreview preview(&printer);
 
-    KrossWordDocument document(krossWord(), &printer);
+    PdfDocument document(krossWord(), &printer);
     document.print();
 
     preview.exec();

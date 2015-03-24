@@ -318,7 +318,7 @@ void LibraryGui::libraryExportSlot()
             printer.setDocName(fileName);   // TODO: set krossword title if available
 
             printer.setOutputFileName(fileName);
-            KrossWordDocument document(&krossWord, &printer);
+            PdfDocument document(&krossWord, &printer);
             document.print();
         } else if (fileSuffix.compare("png", Qt::CaseInsensitive) == 0
                    || fileSuffix.compare("jpeg", Qt::CaseInsensitive) == 0

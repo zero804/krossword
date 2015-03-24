@@ -97,9 +97,12 @@ void KrosswordRenderer::renderElement(QPainter* p, const QString& elementid, con
     }
     */
 
+
     pix = m_renderer->spritePixmap(elementid, r.size().toSize());
-    
+
     p->setRenderHints(QPainter::HighQualityAntialiasing | QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing);
+    //p->drawPixmap(static_cast<int>(r.x()), static_cast<int>(r.y()), pix);
+
     p->drawPixmap(static_cast<int>(r.x()), static_cast<int>(r.y()), pix);
 }
 
