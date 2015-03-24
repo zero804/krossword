@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krossword\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-02 13:44+0100\n"
+"POT-Creation-Date: 2015-02-07 20:21+0100\n"
 "PO-Revision-Date: 2011-11-03 19:17+0100\n"
 "Last-Translator: Stefan Asserhall <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -17,11 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-
-#: cells/cluecell.cpp:887
-msgctxt "Display text for empty clue texts"
-msgid "<placeholder>empty</placeholder>"
-msgstr "<placeholder>tom</placeholder>"
 
 #: cells/imagecell.cpp:68
 msgid "Edit image properties to set an image"
@@ -258,30 +253,30 @@ msgstr "Ändra korsordets storlek från %1 x %2 till %3 x %4"
 msgid "Move All Cells By %1, %2"
 msgstr "Flytta alla rutor med %1, %2"
 
-#: crosswordxmlguiwindow.cpp:267
+#: crosswordxmlguiwindow.cpp:265
 msgid "Zoom: %1%"
 msgstr "Zooma: %1 %"
 
-#: crosswordxmlguiwindow.cpp:323
+#: crosswordxmlguiwindow.cpp:320
 #, no-c-format
 msgctxt "%p is replaced by the percentage of solved letter cells"
 msgid "%p% solved"
 msgstr "%p % löst"
 
-#: crosswordxmlguiwindow.cpp:324
+#: crosswordxmlguiwindow.cpp:321
 #, fuzzy
 msgid "Shows the percentage of solved letter cells"
 msgstr "Visar procent lösta bokstavsrutor"
 
-#: crosswordxmlguiwindow.cpp:559
+#: crosswordxmlguiwindow.cpp:552
 msgid "Congratulations! You solved the crossword perfectly."
 msgstr "Gratulerar! Du har löst korsordet helt riktigt."
 
-#: crosswordxmlguiwindow.cpp:625 crosswordxmlguiwindow.cpp:658
+#: crosswordxmlguiwindow.cpp:618 crosswordxmlguiwindow.cpp:651
 msgid "New crossword"
 msgstr "Nytt korsord"
 
-#: crosswordxmlguiwindow.cpp:679 crosswordxmlguiwindow.cpp:822
+#: crosswordxmlguiwindow.cpp:672 crosswordxmlguiwindow.cpp:818
 #: krosswordpuzzle.cpp:129
 msgid ""
 "The current crossword has been modified.\n"
@@ -290,16 +285,16 @@ msgstr ""
 "Det nuvarande korsordet har ändrats.\n"
 "Vill du spara det?"
 
-#: crosswordxmlguiwindow.cpp:680 crosswordxmlguiwindow.cpp:824
+#: crosswordxmlguiwindow.cpp:673 crosswordxmlguiwindow.cpp:820
 #: krosswordpuzzle.cpp:131
 msgid "Close Document"
 msgstr "Stäng dokument"
 
-#: crosswordxmlguiwindow.cpp:713
+#: crosswordxmlguiwindow.cpp:706
 msgid "Loaded crossword from file '%1'"
 msgstr "Läste in korsord från filen '%1'"
 
-#: crosswordxmlguiwindow.cpp:728
+#: crosswordxmlguiwindow.cpp:721
 msgid ""
 "The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
 "\n"
@@ -314,23 +309,23 @@ msgstr ""
 "(Observera: Du kan konvertera det senare med \"Redigera\" -> "
 "\"Korsordsegenskaper\")"
 
-#: crosswordxmlguiwindow.cpp:754
+#: crosswordxmlguiwindow.cpp:750
 msgid "Error while loading file '%1': %2"
 msgstr "Fel när filen '%1' skulle läsas in: %2"
 
-#: crosswordxmlguiwindow.cpp:780
+#: crosswordxmlguiwindow.cpp:776
 msgid "Save &Edit History"
 msgstr "Spara r&edigeringshistorik"
 
-#: crosswordxmlguiwindow.cpp:783
+#: crosswordxmlguiwindow.cpp:779
 msgid "Save As &Template"
 msgstr "Spara som &mall"
 
-#: crosswordxmlguiwindow.cpp:785
+#: crosswordxmlguiwindow.cpp:781
 msgid "Save without correct answers, clue texts, images"
 msgstr "Spara utan rätta svar, nyckeltexter, bilder"
 
-#: crosswordxmlguiwindow.cpp:851
+#: crosswordxmlguiwindow.cpp:847
 #, fuzzy
 msgid ""
 "Can't store confidence values in *.puz files!\n"
@@ -341,7 +336,7 @@ msgstr ""
 "Om du vill att sannolikhetsvärden ska lagras, använd korsordsfilformat (*."
 "kwp eller *.kwpz)."
 
-#: crosswordxmlguiwindow.cpp:862
+#: crosswordxmlguiwindow.cpp:858
 #, fuzzy
 msgid ""
 "Can't store image cells in *.puz files!\n"
@@ -352,76 +347,76 @@ msgstr ""
 "Om du vill att bildrutor ska lagras, använd korsordsfilformat (*.kwp eller *."
 "kwpz)."
 
-#: crosswordxmlguiwindow.cpp:885
+#: crosswordxmlguiwindow.cpp:881
 msgid "Wrote crossword to file '%1'"
 msgstr "Skrev korsordet i filen '%1'"
 
-#: crosswordxmlguiwindow.cpp:900
+#: crosswordxmlguiwindow.cpp:896
 msgid "Error while writing file: %1"
 msgstr "Fel vid skrivning av filen: %1"
 
-#: crosswordxmlguiwindow.cpp:1012
+#: crosswordxmlguiwindow.cpp:1008
 msgid "Can't add clues on crossed letter cells"
 msgstr "Kan inte lägga till nycklar i korsade bokstavsruta"
 
-#: crosswordxmlguiwindow.cpp:1021
+#: crosswordxmlguiwindow.cpp:1017
 msgid "Can't add clue at the current cell"
 msgstr "Kan inte lägga till nyckel i nuvarande ruta"
 
-#: crosswordxmlguiwindow.cpp:1042
+#: crosswordxmlguiwindow.cpp:1038
 msgctxt "%1 contains the reason why the clue couldn't be added"
 msgid "Can't add clue. %1"
 msgstr "Kan inte lägga till nyckel: %1"
 
-#: crosswordxmlguiwindow.cpp:1056
+#: crosswordxmlguiwindow.cpp:1052
 msgid "Clue added ('%1')"
 msgstr "Nyckel tillagd ('%1')"
 
-#: crosswordxmlguiwindow.cpp:1073
+#: crosswordxmlguiwindow.cpp:1069
 msgctxt "%1 contains the reason why the image couldn't be added"
 msgid "Can't add image. %1"
 msgstr "Kan inte lägga till bild. %1"
 
-#: crosswordxmlguiwindow.cpp:1086
+#: crosswordxmlguiwindow.cpp:1082
 msgctxt "%1 contains the reason why the clue couldn't be removed"
 msgid "Can't remove clue. %1"
 msgstr "Kan inte ta bort nyckel: %1"
 
-#: crosswordxmlguiwindow.cpp:1091
+#: crosswordxmlguiwindow.cpp:1087
 msgctxt "%1 contains the reason why the image couldn't be removed"
 msgid "Can't remove image. %1"
 msgstr "Kan inte ta bort bild. %1"
 
-#: crosswordxmlguiwindow.cpp:1094
+#: crosswordxmlguiwindow.cpp:1090
 msgid "No removable cell selected."
 msgstr "Ingen borttagningsbar ruta markerad."
 
-#: crosswordxmlguiwindow.cpp:1099 crosswordxmlguiwindow.cpp:2453
+#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
 #, fuzzy
 msgid "Do you really want to clear the crossword?"
 msgstr "Tar bort alla nycklar från korsordet."
 
-#: crosswordxmlguiwindow.cpp:1099 crosswordxmlguiwindow.cpp:2453
+#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
 #, fuzzy
 msgid "Clear"
 msgstr "&Rensa nyckel"
 
-#: crosswordxmlguiwindow.cpp:1104
+#: crosswordxmlguiwindow.cpp:1100
 msgctxt "%1 contains the reason why the crossword couldn't be cleared"
 msgid "Can't clear crossword. %1"
 msgstr "Kan inte rensa korsord. %1"
 
-#: crosswordxmlguiwindow.cpp:1121
+#: crosswordxmlguiwindow.cpp:1117
 msgctxt ""
 "%1 contains the reason why the crossword properties couldn't be changed"
 msgid "Can't change crossword properties. %1"
 msgstr "Kan inte ändra korsordets egenskaper: %1"
 
-#: crosswordxmlguiwindow.cpp:1133
+#: crosswordxmlguiwindow.cpp:1129
 msgid "The crossword has 180 degree rotation symmetry."
 msgstr "Korsordet har 180 graders rotationssymmetri."
 
-#: crosswordxmlguiwindow.cpp:1137
+#: crosswordxmlguiwindow.cpp:1133
 msgid ""
 "The crossword doesn't have 180 degree rotation symmetry.\n"
 "To achieve symmetry make sure that each empty cell has a counterpart at it's "
@@ -431,7 +426,7 @@ msgstr ""
 "För att åstadkomma symmetri, försäkra dig om att varje tom ruta har en "
 "motsvarighet på samma position roterad 180 grader.\n"
 
-#: crosswordxmlguiwindow.cpp:1141
+#: crosswordxmlguiwindow.cpp:1137
 msgid ""
 "The crossword doesn't have 180 degree rotation symmetry.\n"
 "To achieve symmetry make sure that each empty cell and each clue cell has a "
@@ -441,28 +436,28 @@ msgstr ""
 "För att åstadkomma symmetri, försäkra dig om att varje tom ruta och varje "
 "nyckelruta har en motsvarighet på samma position roterad 180 grader.\n"
 
-#: crosswordxmlguiwindow.cpp:1147
+#: crosswordxmlguiwindow.cpp:1143
 msgid ""
 "Quality crosswords of the current crossword type (%1) are usually symmetric."
 msgstr ""
 "Högkvalitativa korsord av nuvarande korsordstyp (%1) är oftast symmetriska."
 
-#: crosswordxmlguiwindow.cpp:1166
+#: crosswordxmlguiwindow.cpp:1162
 msgid "Clue Number Mapping"
 msgstr "Koppling av ledtrådstal"
 
-#: crosswordxmlguiwindow.cpp:1191
+#: crosswordxmlguiwindow.cpp:1187
 msgctxt ""
 "%1 contains the reason why the new clue number mapping couldn't be applied"
 msgid "Can't apply clue number mapping. %1"
 msgstr "Kan inte verkställa koppling av ledtrådstal. %1"
 
-#: crosswordxmlguiwindow.cpp:1204
+#: crosswordxmlguiwindow.cpp:1200
 msgctxt "%1 contains the reason why the cells couldn't be moved"
 msgid "Can't move cells. %1"
 msgstr "Kan inte flytta celler: %1"
 
-#: crosswordxmlguiwindow.cpp:1214
+#: crosswordxmlguiwindow.cpp:1210
 msgid ""
 "This will cause all answers to be shown and editable.\n"
 "If you want to solve the crossword you should cancel."
@@ -470,356 +465,356 @@ msgstr ""
 "Det här gör att alla svar visas och blir redigeringsbara.\n"
 "Om du vill lösa korsordet bör du avbryta."
 
-#: crosswordxmlguiwindow.cpp:1261
+#: crosswordxmlguiwindow.cpp:1257
 #, fuzzy
 msgid "Close the current crossword"
 msgstr "Stäng nuvarande korsord"
 
-#: crosswordxmlguiwindow.cpp:1266
+#: crosswordxmlguiwindow.cpp:1262
 msgid "Save the crossword with solved letters"
 msgstr "Spara korsordet med lösta bokstäver"
 
-#: crosswordxmlguiwindow.cpp:1270
+#: crosswordxmlguiwindow.cpp:1266
 msgid "Choose a filename to save the crossword with solved letters"
 msgstr "Välj ett filnamn att spara korsordet i med lösta bokstäver"
 
-#: crosswordxmlguiwindow.cpp:1275
+#: crosswordxmlguiwindow.cpp:1271
 msgid "Print the crossword"
 msgstr "Skriv ut korsordet"
 
-#: crosswordxmlguiwindow.cpp:1279
+#: crosswordxmlguiwindow.cpp:1275
 msgid "Show a print preview"
 msgstr "Visa en förhandsgranskning av utskriften"
 
-#: crosswordxmlguiwindow.cpp:1283
+#: crosswordxmlguiwindow.cpp:1279
 msgid "&Dictionary..."
 msgstr "&Lexikon..."
 
-#: crosswordxmlguiwindow.cpp:1284
+#: crosswordxmlguiwindow.cpp:1280
 #, fuzzy
 msgid "Add or remove crossword dictionaries"
 msgstr "Lägg till eller ta bort korsordslexikon."
 
-#: crosswordxmlguiwindow.cpp:1290
+#: crosswordxmlguiwindow.cpp:1286
 msgid "Fit the whole crossword into the window"
 msgstr "Passa in hela korsordet i fönstret"
 
-#: crosswordxmlguiwindow.cpp:1293
+#: crosswordxmlguiwindow.cpp:1289
 msgid "Pan"
 msgstr "Panorera"
 
-#: crosswordxmlguiwindow.cpp:1294
+#: crosswordxmlguiwindow.cpp:1290
 msgid ""
 "Pan the view. Note that you can also pan while pressing the control key."
 msgstr ""
 "Panorera vyn. Observera att du också kan panorera med Ctrl-tangenten "
 "nertryckt."
 
-#: crosswordxmlguiwindow.cpp:1298
+#: crosswordxmlguiwindow.cpp:1294
 #, fuzzy
 msgid "Solve the selected letter or a random one if none is selected"
 msgstr ""
 "Lös bokstaven som för närvarande är markerad, eller en slumpmässig om ingen "
 "är markerad"
 
-#: crosswordxmlguiwindow.cpp:1301
+#: crosswordxmlguiwindow.cpp:1297
 msgid "This letter has been solved"
 msgstr "Bokstaven har lösts"
 
-#: crosswordxmlguiwindow.cpp:1302
+#: crosswordxmlguiwindow.cpp:1298
 #, fuzzy
 msgid "The selected letter cell has been solved"
 msgstr "Bokstavsrutan som för närvarande är markerad har lösts"
 
-#: crosswordxmlguiwindow.cpp:1307
+#: crosswordxmlguiwindow.cpp:1303
 msgid "Mark as confident"
 msgstr "Ange som säker"
 
-#: crosswordxmlguiwindow.cpp:1308
+#: crosswordxmlguiwindow.cpp:1304
 #, fuzzy
 msgid "Mark the selected letter cell's confidence as confident"
 msgstr "Ange bokstavsrutan som för närvarande är markerad som säker"
 
-#: crosswordxmlguiwindow.cpp:1313
+#: crosswordxmlguiwindow.cpp:1309
 msgid "Mark as unsure"
 msgstr "Ange som osäker"
 
-#: crosswordxmlguiwindow.cpp:1314
+#: crosswordxmlguiwindow.cpp:1310
 #, fuzzy
 msgid "Mark the selected letter cell's confidence as unsure"
 msgstr "Ange bokstavsrutan som för närvarande är markerad som osäker"
 
-#: crosswordxmlguiwindow.cpp:1319
+#: crosswordxmlguiwindow.cpp:1315
 msgid "Clear This Cell"
 msgstr "Rensa rutan"
 
-#: crosswordxmlguiwindow.cpp:1320
+#: crosswordxmlguiwindow.cpp:1316
 #, fuzzy
 msgid "Clears the selected letter cell"
 msgstr "Rensar bokstavsrutan som för närvarande är markerad"
 
-#: crosswordxmlguiwindow.cpp:1325
+#: crosswordxmlguiwindow.cpp:1321
 msgid "Clear This Answer"
 msgstr "Rensa svaret"
 
-#: crosswordxmlguiwindow.cpp:1326
+#: crosswordxmlguiwindow.cpp:1322
 msgid "Clears the answer to the current clue"
 msgstr "Rensar svaret på nuvarande nyckel"
 
-#: crosswordxmlguiwindow.cpp:1331
+#: crosswordxmlguiwindow.cpp:1327
 msgid "Clear Across Answer"
 msgstr "Rensa vågrätt svar"
 
-#: crosswordxmlguiwindow.cpp:1332
+#: crosswordxmlguiwindow.cpp:1328
 msgid "Clears the answer to the current across clue"
 msgstr "Rensar svaret på nuvarande vågräta nyckel"
 
-#: crosswordxmlguiwindow.cpp:1337
+#: crosswordxmlguiwindow.cpp:1333
 msgid "Clear Down Answer"
 msgstr "Rensa lodrätt svar"
 
-#: crosswordxmlguiwindow.cpp:1338
+#: crosswordxmlguiwindow.cpp:1334
 msgid "Clears the answer to the current down clue"
 msgstr "Rensar svaret på nuvarande lodräta nyckel"
 
-#: crosswordxmlguiwindow.cpp:1343
+#: crosswordxmlguiwindow.cpp:1339
 msgid "Hint For This Cell"
 msgstr "Tips för den här rutan"
 
-#: crosswordxmlguiwindow.cpp:1344
+#: crosswordxmlguiwindow.cpp:1340
 #, fuzzy
 msgid "Solve the selected letter cell"
 msgstr "Lös bokstavsrutan som för närvarande är markerad"
 
-#: crosswordxmlguiwindow.cpp:1349
+#: crosswordxmlguiwindow.cpp:1345
 msgid "Solve Clue"
 msgstr "Lös nyckel"
 
-#: crosswordxmlguiwindow.cpp:1350
+#: crosswordxmlguiwindow.cpp:1346
 msgid "Solve the current clue"
 msgstr "Lös nuvarande nyckel"
 
-#: crosswordxmlguiwindow.cpp:1355
+#: crosswordxmlguiwindow.cpp:1351
 msgid "Solve Across Clue"
 msgstr "Lös vågrät nyckel"
 
-#: crosswordxmlguiwindow.cpp:1356
+#: crosswordxmlguiwindow.cpp:1352
 msgid "Solve the current across clue"
 msgstr "Lös nuvarande vågräta nyckel"
 
-#: crosswordxmlguiwindow.cpp:1361
+#: crosswordxmlguiwindow.cpp:1357
 msgid "Solve Down Clue"
 msgstr "Lös lodrät nyckel"
 
-#: crosswordxmlguiwindow.cpp:1362
+#: crosswordxmlguiwindow.cpp:1358
 msgid "Solve the current down clue"
 msgstr "Lös nuvarande lodräta nyckel"
 
-#: crosswordxmlguiwindow.cpp:1367
+#: crosswordxmlguiwindow.cpp:1363
 #, fuzzy
 msgid "Clue With Switched Orientation"
 msgstr "Välj nyckel med ändrad orientering"
 
-#: crosswordxmlguiwindow.cpp:1368
+#: crosswordxmlguiwindow.cpp:1364
 msgid "Select clue with switched orientation to the currently selected clue"
 msgstr "Välj nyckel med ändrad orientering jämfört med markerad nyckel"
 
-#: crosswordxmlguiwindow.cpp:1372
+#: crosswordxmlguiwindow.cpp:1368
 #, fuzzy
 msgctxt "@action:intoolbar"
 msgid "&First Letter"
 msgstr "Välj &första bokstaven"
 
-#: crosswordxmlguiwindow.cpp:1373
+#: crosswordxmlguiwindow.cpp:1369
 msgid "Select the first letter of the current clue"
 msgstr "Välj första bokstaven i nuvarande nyckel"
 
-#: crosswordxmlguiwindow.cpp:1377
+#: crosswordxmlguiwindow.cpp:1373
 #, fuzzy
 msgctxt "@action:intoolbar"
 msgid "&Last Letter"
 msgstr "Välj &sista bokstaven"
 
-#: crosswordxmlguiwindow.cpp:1378
+#: crosswordxmlguiwindow.cpp:1374
 msgid "Select the last letter of the current clue"
 msgstr "Välj sista bokstaven i nuvarande nyckel"
 
-#: crosswordxmlguiwindow.cpp:1382
+#: crosswordxmlguiwindow.cpp:1378
 #, fuzzy
 msgctxt "@action:intoolbar"
 msgid "First Clue"
 msgstr "Välj första nyckel"
 
-#: crosswordxmlguiwindow.cpp:1383
+#: crosswordxmlguiwindow.cpp:1379
 msgid "Select the first clue"
 msgstr "Välj den första nyckeln"
 
-#: crosswordxmlguiwindow.cpp:1387
+#: crosswordxmlguiwindow.cpp:1383
 #, fuzzy
 msgctxt "@action:intoolbar"
 msgid "&Next Clue"
 msgstr "Välj &nästa nyckel"
 
-#: crosswordxmlguiwindow.cpp:1388
+#: crosswordxmlguiwindow.cpp:1384
 msgid "Select the next clue"
 msgstr "Välj nästa nyckel"
 
-#: crosswordxmlguiwindow.cpp:1392
+#: crosswordxmlguiwindow.cpp:1388
 #, fuzzy
 msgctxt "@action:intoolbar"
 msgid "&Previous Clue"
 msgstr "Välj &föregående nyckel"
 
-#: crosswordxmlguiwindow.cpp:1393
+#: crosswordxmlguiwindow.cpp:1389
 msgid "Select the previous clue"
 msgstr "Välj den föregående nyckeln"
 
-#: crosswordxmlguiwindow.cpp:1397
+#: crosswordxmlguiwindow.cpp:1393
 #, fuzzy
 msgctxt "@action:intoolbar"
 msgid "Last Clue"
 msgstr "Välj sista nyckeln"
 
-#: crosswordxmlguiwindow.cpp:1398
+#: crosswordxmlguiwindow.cpp:1394
 msgid "Select the last clue"
 msgstr "Välj den sista nyckeln"
 
-#: crosswordxmlguiwindow.cpp:1406
+#: crosswordxmlguiwindow.cpp:1402
 msgid "Show Clue Dock"
 msgstr "Visa nyckelpanel"
 
-#: crosswordxmlguiwindow.cpp:1411
+#: crosswordxmlguiwindow.cpp:1407
 msgid "Show Edit History Dock"
 msgstr "Visa panel med redigeringshistorik"
 
-#: crosswordxmlguiwindow.cpp:1416
+#: crosswordxmlguiwindow.cpp:1412
 msgid "Show Current Cell Dock"
 msgstr "Visa panel för nuvarande ruta"
 
-#: crosswordxmlguiwindow.cpp:1420
+#: crosswordxmlguiwindow.cpp:1416
 #, fuzzy
 msgctxt "@action:intoolbar"
 msgid "Edit Mode"
 msgstr "Redigeringsläge"
 
-#: crosswordxmlguiwindow.cpp:1421
+#: crosswordxmlguiwindow.cpp:1417
 msgid "Enables/disables the edit mode"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1425
+#: crosswordxmlguiwindow.cpp:1421
 msgid "&Add Clue"
 msgstr "&Lägg till nyckel"
 
-#: crosswordxmlguiwindow.cpp:1426
+#: crosswordxmlguiwindow.cpp:1422
 #, fuzzy
 msgid "Adds a new clue at the current cell"
 msgstr "Lägger till en ny nyckel i nuvarande ruta."
 
-#: crosswordxmlguiwindow.cpp:1431 crosswordxmlguiwindow.cpp:1861
+#: crosswordxmlguiwindow.cpp:1427 crosswordxmlguiwindow.cpp:1860
 msgid "&Remove"
 msgstr "&Ta bort"
 
-#: crosswordxmlguiwindow.cpp:1432
+#: crosswordxmlguiwindow.cpp:1428
 #, fuzzy
 msgid "Removes the highlighted clue or image"
 msgstr "Tar bort den markerade nyckeln eller bilden."
 
-#: crosswordxmlguiwindow.cpp:1436
+#: crosswordxmlguiwindow.cpp:1432
 msgid "Remove &Across Clue"
 msgstr "Ta bort &vågrät nyckel"
 
-#: crosswordxmlguiwindow.cpp:1437
+#: crosswordxmlguiwindow.cpp:1433
 #, fuzzy
 msgid "Removes the highlighted across clue"
 msgstr "Tar bort den markerade vågräta nyckeln."
 
-#: crosswordxmlguiwindow.cpp:1442
+#: crosswordxmlguiwindow.cpp:1438
 msgid "Remove &Down Clue"
 msgstr "Ta bort &lodrät nyckel"
 
-#: crosswordxmlguiwindow.cpp:1443
+#: crosswordxmlguiwindow.cpp:1439
 #, fuzzy
 msgid "Removes the highlighted down clue"
 msgstr "Tar bort den markerade lodräta nyckeln."
 
-#: crosswordxmlguiwindow.cpp:1448
+#: crosswordxmlguiwindow.cpp:1444
 msgid "&Add Image"
 msgstr "&Lägg till bild"
 
-#: crosswordxmlguiwindow.cpp:1449
+#: crosswordxmlguiwindow.cpp:1445
 #, fuzzy
 msgid "Adds a new image at the current cell"
 msgstr "Lägger till en ny bild i nuvarande ruta."
 
-#: crosswordxmlguiwindow.cpp:1454
+#: crosswordxmlguiwindow.cpp:1450
 #, fuzzy
 msgid "&Clear Crossword..."
 msgstr "&Rensa korsord"
 
-#: crosswordxmlguiwindow.cpp:1455
+#: crosswordxmlguiwindow.cpp:1451
 #, fuzzy
 msgid "Removes all clues from the crossword"
 msgstr "Tar bort alla nycklar från korsordet."
 
-#: crosswordxmlguiwindow.cpp:1459
+#: crosswordxmlguiwindow.cpp:1455
 msgid "&Crossword Properties..."
 msgstr "&Kordordsegenskaper..."
 
-#: crosswordxmlguiwindow.cpp:1460
+#: crosswordxmlguiwindow.cpp:1456
 msgid "Change the size of the crossword or it's title, author, copyright..."
 msgstr "Ändra korsordets storlek, eller dess namn, författare, copyright ..."
 
-#: crosswordxmlguiwindow.cpp:1464
+#: crosswordxmlguiwindow.cpp:1460
 msgid "&Check for rotation symmetry..."
 msgstr "&Kontrollera rotationssymmetri..."
 
-#: crosswordxmlguiwindow.cpp:1465
+#: crosswordxmlguiwindow.cpp:1461
 #, fuzzy
 msgid "Checks if the crossword has 180 degree rotation symmetry"
 msgstr "Kontrollerar om korsordet har 180 graders rotationssymmetri."
 
-#: crosswordxmlguiwindow.cpp:1469
+#: crosswordxmlguiwindow.cpp:1465
 msgid "&Statistics..."
 msgstr "&Statistik..."
 
-#: crosswordxmlguiwindow.cpp:1470
+#: crosswordxmlguiwindow.cpp:1466
 #, fuzzy
 msgid "Shows statistics about the crossword"
 msgstr "Visar statistik om korsordet."
 
-#: crosswordxmlguiwindow.cpp:1474
+#: crosswordxmlguiwindow.cpp:1470
 msgid "Clue Number &Mapping..."
 msgstr "&Koppling av ledtrådstal..."
 
-#: crosswordxmlguiwindow.cpp:1475
+#: crosswordxmlguiwindow.cpp:1471
 #, fuzzy
 msgid "Changes the mapping of clue numbers to letters"
 msgstr "Ändrar kopplingen mellan ledtrådstal och bokstäver."
 
-#: crosswordxmlguiwindow.cpp:1479
+#: crosswordxmlguiwindow.cpp:1475
 msgid "Move All Cells..."
 msgstr "Flytta alla rutor..."
 
-#: crosswordxmlguiwindow.cpp:1480
+#: crosswordxmlguiwindow.cpp:1476
 #, fuzzy
 msgid "Moves all cells of the crossword"
 msgstr "Flyttar alla rutor i korsordet."
 
-#: crosswordxmlguiwindow.cpp:1498
+#: crosswordxmlguiwindow.cpp:1494
 msgid "Insert special character:"
 msgstr "Infoga specialtecken:"
 
-#: crosswordxmlguiwindow.cpp:1502
+#: crosswordxmlguiwindow.cpp:1498
 #, fuzzy
 msgid "Let you select a special character to paste"
 msgstr "Låter dig välja ett specialtecken att klistra in."
 
-#: crosswordxmlguiwindow.cpp:1508
+#: crosswordxmlguiwindow.cpp:1504
 #, fuzzy
 msgid "Fills all letter cells with the correct letters"
 msgstr "Fyller i alla bokstavsrutor med rätt bokstäver."
 
-#: crosswordxmlguiwindow.cpp:1509
+#: crosswordxmlguiwindow.cpp:1505
 msgid ""
 "<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
 "solution will be displayed.</p><p>If you filled in all letters and do not "
@@ -829,156 +824,156 @@ msgstr ""
 "visas då.</p><p>Om du fyllt i alla bokstäver, och inte vill ge upp, välj då "
 "\"Klar!\".</p></qt>"
 
-#: crosswordxmlguiwindow.cpp:1511
+#: crosswordxmlguiwindow.cpp:1507
 msgid "&Check"
 msgstr "&Kontrollera"
 
-#: crosswordxmlguiwindow.cpp:1512
+#: crosswordxmlguiwindow.cpp:1508
 #, fuzzy
 msgid "Checks if all letters are correct"
 msgstr "Kontrollerar om alla bokstäver är riktiga."
 
-#: crosswordxmlguiwindow.cpp:1516
+#: crosswordxmlguiwindow.cpp:1512
 msgid "&Clear Answers"
 msgstr "&Rensa svar"
 
-#: crosswordxmlguiwindow.cpp:1517
+#: crosswordxmlguiwindow.cpp:1513
 #, fuzzy
 msgid "Clears all letter cells"
 msgstr "Rensar alla bokstavsrutor."
 
-#: crosswordxmlguiwindow.cpp:1521
+#: crosswordxmlguiwindow.cpp:1517
 msgid "&Eraser"
 msgstr "Rad&era"
 
-#: crosswordxmlguiwindow.cpp:1522
+#: crosswordxmlguiwindow.cpp:1518
 #, fuzzy
 msgid "Enables the eraser, to clear letter cells/answers"
 msgstr "Aktivera radergummit, för att sudda bokstavsceller eller svar."
 
-#: crosswordxmlguiwindow.cpp:1632 krossword.h:554
+#: crosswordxmlguiwindow.cpp:1628 krossword.h:554
 msgid "Solution"
 msgstr "Lösning"
 
-#: crosswordxmlguiwindow.cpp:1665
+#: crosswordxmlguiwindow.cpp:1661
 msgid "Clue List"
 msgstr "Nyckellista"
 
-#: crosswordxmlguiwindow.cpp:1680
+#: crosswordxmlguiwindow.cpp:1679
 msgid "Edit History"
 msgstr "Redigeringshistorik"
 
-#: crosswordxmlguiwindow.cpp:1690
+#: crosswordxmlguiwindow.cpp:1689
 msgid "Current Cell"
 msgstr "Nuvarande ruta"
 
-#: crosswordxmlguiwindow.cpp:1732
+#: crosswordxmlguiwindow.cpp:1731
 msgctxt "%1 contains the reason why the answer offset couldn't be changed"
 msgid "Can't change answer offset. %1"
 msgstr "Kan inte ändra svarets position. %1"
 
-#: crosswordxmlguiwindow.cpp:1745
+#: crosswordxmlguiwindow.cpp:1744
 msgctxt "%1 contains the reason why the orientation couldn't be changed"
 msgid "Can't change orientation. %1"
 msgstr "Kan inte ändra orientering. %1"
 
-#: crosswordxmlguiwindow.cpp:1757
+#: crosswordxmlguiwindow.cpp:1756
 msgctxt "%1 contains the reason why the clue text couldn't be changed"
 msgid "Can't change clue text. %1"
 msgstr "Kan inte ändra nyckeltext. %1"
 
-#: crosswordxmlguiwindow.cpp:1770
+#: crosswordxmlguiwindow.cpp:1769
 msgctxt "%1 contains the reason why the correct answer couldn't be changed"
 msgid "Can't change correct answer. %1"
 msgstr "Kan inte ändra rätt svar. %1"
 
-#: crosswordxmlguiwindow.cpp:1790
+#: crosswordxmlguiwindow.cpp:1789
 msgctxt ""
 "%1 contains the reason why the solution letter couldn't be converted to a "
 "letter"
 msgid "Can't convert solution letter. %1"
 msgstr "Kan inte konvertera lösningsbokstav. %1"
 
-#: crosswordxmlguiwindow.cpp:1809
+#: crosswordxmlguiwindow.cpp:1808
 msgctxt ""
 "%1 contains the reason why the letter couldn't be converted to a solution "
 "letter"
 msgid "Can't convert letter. %1"
 msgstr "Kan inte konvertera bokstav. %1"
 
-#: crosswordxmlguiwindow.cpp:1857
+#: crosswordxmlguiwindow.cpp:1856
 msgid "&Remove Clue"
 msgstr "&Ta bort nyckel"
 
-#: crosswordxmlguiwindow.cpp:1859
+#: crosswordxmlguiwindow.cpp:1858
 msgid "&Remove Image"
 msgstr "&Ta bort bild"
 
-#: crosswordxmlguiwindow.cpp:2128
+#: crosswordxmlguiwindow.cpp:2086
 #, fuzzy
 msgid ""
 "Congratulations!\n"
 "You solved the crossword perfectly."
 msgstr "Gratulerar! Du har löst korsordet helt riktigt."
 
-#: crosswordxmlguiwindow.cpp:2150
+#: crosswordxmlguiwindow.cpp:2108
 msgid "Do you really want to solve the crossword?"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:2150
+#: crosswordxmlguiwindow.cpp:2108
 #, fuzzy
 msgid "Solve"
 msgstr "Lös nyckel"
 
-#: crosswordxmlguiwindow.cpp:2235 crosswordxmlguiwindow.cpp:2735
+#: crosswordxmlguiwindow.cpp:2193 crosswordxmlguiwindow.cpp:2693
 msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
 msgid "Can't clear letter cell. %1"
 msgstr "Kan inte rensa bokstavsruta. %1"
 
-#: crosswordxmlguiwindow.cpp:2258 crosswordxmlguiwindow.cpp:2282
-#: crosswordxmlguiwindow.cpp:2307 crosswordxmlguiwindow.cpp:2741
+#: crosswordxmlguiwindow.cpp:2216 crosswordxmlguiwindow.cpp:2240
+#: crosswordxmlguiwindow.cpp:2265 crosswordxmlguiwindow.cpp:2699
 msgctxt "%1 contains the reason why the answer couldn't be cleared"
 msgid "Can't clear answer. %1"
 msgstr "Kan inte rensa svaret. %1"
 
-#: crosswordxmlguiwindow.cpp:2519 crosswordxmlguiwindow.cpp:2547
+#: crosswordxmlguiwindow.cpp:2477 crosswordxmlguiwindow.cpp:2505
 msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
 msgstr "Nyckel (vågrätt): \"%1\", %2 bokstäver, nuvarande svar: \"%3\""
 
-#: crosswordxmlguiwindow.cpp:2524 crosswordxmlguiwindow.cpp:2551
+#: crosswordxmlguiwindow.cpp:2482 crosswordxmlguiwindow.cpp:2509
 msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
 msgstr "Nyckel (lodrätt): \"%1\", %2 bokstäver, nuvarande svar: \"%3\""
 
-#: crosswordxmlguiwindow.cpp:2597 global.cpp:36
+#: crosswordxmlguiwindow.cpp:2555 global.cpp:36
 msgid "Empty cell"
 msgstr "Tom ruta"
 
-#: crosswordxmlguiwindow.cpp:2599
+#: crosswordxmlguiwindow.cpp:2557
 msgid "Image '%1'"
 msgstr "Bild '%1'"
 
-#: crosswordxmlguiwindow.cpp:2800
+#: crosswordxmlguiwindow.cpp:2758
 msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
 msgid "Can't add letter cells. %1"
 msgstr "Kan inte lägga till bokstavsrutor: %1"
 
-#: crosswordxmlguiwindow.cpp:2802
+#: crosswordxmlguiwindow.cpp:2760
 msgctxt ""
 "%1 contains the reason why the letters couldn't be removed to the clue"
 msgid "Can't remove letter cells. %1"
 msgstr "Kan inte ta bort bokstavsrutor. %1"
 
-#: crosswordxmlguiwindow.cpp:2813
+#: crosswordxmlguiwindow.cpp:2771
 msgctxt "%1 contains the reason why the letter cell couldn't be edited"
 msgid "Can't edit letter cell. %1"
 msgstr "Kan inte redigera bokstavsruta: %1"
 
-#: crosswordxmlguiwindow.cpp:2848
+#: crosswordxmlguiwindow.cpp:2806
 msgctxt "%1 contains the reason why the crossword couldn't be converted"
 msgid "Can't convert crossword. %1"
 msgstr "Kan inte konvertera korsord. %1"
 
-#: crosswordxmlguiwindow.cpp:2860
+#: crosswordxmlguiwindow.cpp:2818
 msgid "Couldn't connect to the database."
 msgstr "Kunde inte ansluta till databasen."
 
@@ -1151,49 +1146,49 @@ msgstr "Konvertera &bokstav %1 till lösningsbokstav"
 msgid "Dictionary"
 msgstr "Lexikon"
 
-#: dialogs/dictionarydialog.cpp:165
+#: dialogs/dictionarydialog.cpp:164
 msgid "%1 entries added from this dictionary: '%2'"
 msgstr "%1 poster tillagda från det här lexikonet: '%2'"
 
-#: dialogs/dictionarydialog.cpp:175 dialogs/dictionarydialog.cpp:190
+#: dialogs/dictionarydialog.cpp:174 dialogs/dictionarydialog.cpp:189
 msgid "%1 entries added from %2 crosswords"
 msgstr "%1 poster tillagda från %2 korsord"
 
-#: dialogs/dictionarydialog.cpp:206
+#: dialogs/dictionarydialog.cpp:205
 msgid "Couldn't submit removed entries to the database: %1"
 msgstr "Kunde inte skicka borttagna poster till databasen: %1"
 
-#: dialogs/dictionarydialog.cpp:209
+#: dialogs/dictionarydialog.cpp:208
 msgid "%1 entry removed"
 msgid_plural "%1 entries removed"
 msgstr[0] "%1 post borttagen"
 msgstr[1] "%1 poster borttagna"
 
-#: dialogs/dictionarydialog.cpp:218
+#: dialogs/dictionarydialog.cpp:217
 msgid "Dictionary cleared"
 msgstr "Lexikon rensat"
 
-#: dialogs/dictionarydialog.cpp:225
+#: dialogs/dictionarydialog.cpp:224
 msgid "Export To CSV"
 msgstr "Exportera till CSV"
 
-#: dialogs/dictionarydialog.cpp:238
+#: dialogs/dictionarydialog.cpp:237
 msgid "There was an error while exporting to '%1'"
 msgstr "Ett fel uppstod vid export till '%1'"
 
-#: dialogs/dictionarydialog.cpp:240
+#: dialogs/dictionarydialog.cpp:239
 msgid "Export to '%1' was successful"
 msgstr "Export till '%1' lyckades"
 
-#: dialogs/dictionarydialog.cpp:246
+#: dialogs/dictionarydialog.cpp:245
 msgid "Import From CSV"
 msgstr "Import från CSV"
 
-#: dialogs/dictionarydialog.cpp:252
+#: dialogs/dictionarydialog.cpp:251
 msgid "There was an error while importing from '%1'"
 msgstr "Ett fel uppstod vid import från '%1'"
 
-#: dialogs/dictionarydialog.cpp:255
+#: dialogs/dictionarydialog.cpp:254
 msgid "%1 entry imported from '%2'"
 msgid_plural "%1 entries imported from '%2'"
 msgstr[0] "%1 post importerad från '%2'"
@@ -1320,7 +1315,7 @@ msgstr ""
 "Antal bokstavsrutor som innehåller '%1', procent av totalt antal celler inom "
 "krullparenteser"
 
-#: dictionary.cpp:173
+#: dictionary.cpp:122
 msgid ""
 "No Connection to the database! Please make sure the MySQL server is running. "
 "Afterwards click \"Continue\" to retry connecting to the database."
@@ -1328,45 +1323,45 @@ msgstr ""
 "Ingen anslutning till databasen. Försäkra dig om att MySQL-servern kör. "
 "Klicka därefter på \"Fortsätt\" för att försöka ansluta till databasen igen."
 
-#: dictionary.cpp:176
+#: dictionary.cpp:125
 msgid "No Database Connection"
 msgstr "Ingen databasanslutning"
 
-#: dictionary.cpp:180
+#: dictionary.cpp:131
 msgid "Connect Database"
 msgstr "Anslut till databas"
 
-#: dictionary.cpp:272
+#: dictionary.cpp:243
 msgctxt "The header title for answers in the dictionary database"
 msgid "Answer"
 msgstr "Svar"
 
-#: dictionary.cpp:274
+#: dictionary.cpp:245
 msgctxt ""
 "The header title for clues associated with answer words in the dictionary "
 "database"
 msgid "Clue"
 msgstr "Nyckel"
 
-#: dictionary.cpp:276
+#: dictionary.cpp:247
 msgctxt ""
 "The header title for scores/difficulties of clue/answer pairs in the "
 "dictionary database"
 msgid "Score"
 msgstr "Poäng"
 
-#: dictionary.cpp:278
+#: dictionary.cpp:249
 msgctxt ""
 "The header title for languages of clue/answer pairs in the dictionary "
 "database"
 msgid "Language"
 msgstr "Språk"
 
-#: dictionary.cpp:321
+#: dictionary.cpp:292
 msgid "Importing Dictionary"
 msgstr "Importerar lexikon"
 
-#: dictionary.cpp:359
+#: dictionary.cpp:330
 msgid ""
 "Importing word clue pairs from '%1' to the database.\n"
 "Please wait."
@@ -1374,7 +1369,7 @@ msgstr ""
 "Importerar ord- och lösenordspar från '%1' till databasen.\n"
 "Vänta."
 
-#: dictionary.cpp:489
+#: dictionary.cpp:462
 msgid ""
 "Adding words from the dictionary '%1' to the database.\n"
 "Please wait."
@@ -1382,7 +1377,7 @@ msgstr ""
 "Lägger till ord från lexikonet '%1' till databasen.\n"
 "Vänta."
 
-#: dictionary.cpp:571
+#: dictionary.cpp:566
 msgid ""
 "Adding words from %1 crossword files to the database.\n"
 "Please wait."
@@ -2138,26 +2133,9 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "stefan.asserhall@bredband.net"
 
-#, fuzzy
-#~ msgctxt "@action:intoolbar"
-#~ msgid "&Import..."
-#~ msgstr "&Importera"
-
-#, fuzzy
-#~ msgctxt "@action:intoolbar"
-#~ msgid "&Open..."
-#~ msgstr "Ö&ppna"
-
-#~ msgid "Create a new crossword in the library."
-#~ msgstr "Skapa ett nytt korsord i biblioteket."
-
-#, fuzzy
-#~ msgctxt "@action:intoolbar"
-#~ msgid "New &Crossword..."
-#~ msgstr "Nytt &korsord"
-
-#~ msgid "Open the selected crossword."
-#~ msgstr "Öppna det markerade korsordet."
+#~ msgctxt "Display text for empty clue texts"
+#~ msgid "<placeholder>empty</placeholder>"
+#~ msgstr "<placeholder>tom</placeholder>"
 
 #~ msgid " "
 #~ msgstr " "
@@ -2301,6 +2279,11 @@ msgstr "stefan.asserhall@bredband.net"
 #~ msgid "&Import (CSV)..."
 #~ msgstr "&Importera (CSV)..."
 
+#, fuzzy
+#~ msgctxt "@action:intoolbar"
+#~ msgid "&Import..."
+#~ msgstr "&Importera"
+
 #~ msgid "&Language:"
 #~ msgstr "&Språk:"
 
@@ -2342,6 +2325,11 @@ msgstr "stefan.asserhall@bredband.net"
 
 #~ msgid "&Open this Crossword"
 #~ msgstr "Ö&ppna korsordet"
+
+#, fuzzy
+#~ msgctxt "@action:intoolbar"
+#~ msgid "&Open..."
+#~ msgstr "Ö&ppna"
 
 #~ msgid "&Orientation:"
 #~ msgstr "&Orientering"
@@ -3116,6 +3104,9 @@ msgstr "stefan.asserhall@bredband.net"
 #~ msgid "Create Database"
 #~ msgstr "Skapa databas"
 
+#~ msgid "Create a new crossword in the library."
+#~ msgstr "Skapa ett nytt korsord i biblioteket."
+
 #~ msgctxt "Default notes value for new crosswords"
 #~ msgid ""
 #~ "Created with KrossWordPuzzle, see http://kde-apps.org/content/show.php?"
@@ -3465,6 +3456,11 @@ msgstr "stefan.asserhall@bredband.net"
 #~ "Varken det senast använda temat '%1' eller standardtemat kan hittas.\n"
 #~ "Kontrollera installationen."
 
+#, fuzzy
+#~ msgctxt "@action:intoolbar"
+#~ msgid "New &Crossword..."
+#~ msgstr "Nytt &korsord"
+
 #~ msgid "New Size:"
 #~ msgstr "Ny storlek:"
 
@@ -3499,6 +3495,9 @@ msgstr "stefan.asserhall@bredband.net"
 #~ msgctxt "&Open"
 #~ msgid "Open a crossword file"
 #~ msgstr "Öppna en korsordsfil"
+
+#~ msgid "Open the selected crossword."
+#~ msgstr "Öppna det markerade korsordet."
 
 #~ msgid "P"
 #~ msgstr "P"
