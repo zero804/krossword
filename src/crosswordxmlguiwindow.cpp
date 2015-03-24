@@ -912,6 +912,7 @@ QString CrossWordXmlGuiWindow::currentFileName() const
 
 void CrossWordXmlGuiWindow::keyPressEvent(QKeyEvent *ev)
 {
+    // CTRL + SHIFT + D --> print debug info
     if (ev->modifiers().testFlag(Qt::ControlModifier)
             && ev->modifiers().testFlag(Qt::ShiftModifier)
             && ev->key() == Qt::Key_D) {

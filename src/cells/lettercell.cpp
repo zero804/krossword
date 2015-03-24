@@ -471,6 +471,25 @@ void LetterCell::keyPressEvent(QKeyEvent* event)
 //   if ( krossWord()->highlightedClue() )
 //       krossWord()->highlightedClue()->lastLetter()->setFocus();
 //   break;
+        case Qt::Key_Delete:
+            event->accept();
+            switch (krossWord()->letterEditMode()) {
+            case AutomaticKeyboardEditing:
+                if (krossWord()->isEditable())
+                    setCorrectLetter(ClueCell::EmptyCorrectCharacter);
+                else
+                    setCurrentLetter(' ');
+                break;
+            case EmitEditRequestsOnKeyboardEdit:
+                if ((!krossWord()->isEditable() && !isEmpty())
+                        || (krossWord()->isEditable() && correctLetter() != ' '))
+                    krossWord()->emitLetterEditRequest(this, currentLetter(), ' ');
+                break;
+
+            case NoEditing:
+                break; // Do nothing
+            }
+            break;
         default:
             event->ignore();
         }
