@@ -94,14 +94,14 @@ void KrossWordHeaderItem::updateGraphicsEffect(KrossWord* krossWord,
         return;
     }
 
+
     if (krossWord->theme()->hasDarkBackground()) {
         effect->setBlurRadius(4);
         effect->setOffset(0, 0);
         effect->setColor(QColor(255, 255, 255, 180));
     } else {
-        effect->setBlurRadius(3);
-        effect->setOffset(2, 2);
-        effect->setColor(QColor(63, 63, 63, 180));
+        // This branch cannot be removed: glitches appear... just making the effect invisible seems reasonable to me...
+        effect->setColor(QColor(0, 0, 0, 0));
     }
 }
 
