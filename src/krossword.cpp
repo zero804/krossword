@@ -2260,7 +2260,7 @@ void KrossWord::setEditable(bool editable)
     foreach(EmptyCell * cell, cells) {
         cell->setFlag(QGraphicsItem::ItemIsFocusable, editable);
         cell->setFlag(QGraphicsItem::ItemIsSelectable, editable);
-        cell->setFlag(QGraphicsItem::ItemHasNoContents, !editable);
+
         if ((editable && isAnimationTypeEnabled(AnimateAppear))
                 || (!editable && isAnimationTypeEnabled(AnimateDisappear))) {
             animator()->animate(editable ? Animator::AnimateFadeIn

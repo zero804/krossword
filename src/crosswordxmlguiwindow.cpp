@@ -574,8 +574,9 @@ void CrossWordXmlGuiWindow::setEditMode(EditMode editMode)
     m_editMode = editMode;
 
     bool inEditMode = isInEditMode();
-    if (m_view)
+    if (m_view) {
         krossWord()->setEditable(inEditMode);
+    }
 
     if (action(actionName(Edit_EnableEditMode))->isChecked() != inEditMode)
         action(actionName(Edit_EnableEditMode))->setChecked(inEditMode);

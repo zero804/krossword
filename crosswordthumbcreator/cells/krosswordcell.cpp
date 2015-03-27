@@ -97,9 +97,9 @@ QRectF KrossWordCell::boundingRect() const
 }
 
 
-EmptyCell::EmptyCell(KrossWord* krossWord, Coord coord) : KrossWordCell(krossWord, EmptyCellType, coord)
-{
-}
+EmptyCell::EmptyCell(KrossWord* krossWord, Coord coord)
+    : KrossWordCell(krossWord, EmptyCellType, coord)
+{ }
 
 void EmptyCell::drawBackgroundForPrinting(QPainter* p, const QStyleOptionGraphicsItem* option)
 {

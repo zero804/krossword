@@ -50,7 +50,11 @@ void GlowEffect::draw(QPainter* painter)
 }
 
 KrossWordCell::KrossWordCell(KrossWord* krossWord, CellType cellType, const Coord& coord)
-    : QGraphicsObject(krossWord), m_blockCacheClearing(false), m_cache(0), m_blurAnim(0)
+    : QGraphicsObject(krossWord),
+      m_blockCacheClearing(false),
+      m_cache(0),
+      m_redraw(true),
+      m_blurAnim(0)
 {
 
     m_krossWord = krossWord;
