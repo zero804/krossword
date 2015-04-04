@@ -15,6 +15,11 @@
       <label>Name of the current theme.</label>
       <default>default</default>
     </entry>
+    
+    <entry name="LastCrossword" type="String">
+      <label>Url of the last opened crossword.</label>
+      <default></default>
+    </entry>
 
     <entry name="animate" type="Bool">
       <label>Enable Animations</label>

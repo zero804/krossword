@@ -19,6 +19,8 @@
 #ifndef LIBRARYMANAGER_H
 #define LIBRARYMANAGER_H
 
+#include <functional>
+
 #include <QFileSystemModel>
 
 #include <KIO/PreviewJob>
@@ -97,16 +99,29 @@ public:
      */
     QFileInfoList getFoldersPath() const;
 
+    /**
+     * @brief set custom callback for directoryLoaded signal
+     */
+    void setOnDirectoryLoadedFunction(const std::function<void(void)> &func);
+
+    /**
+     * @brief clear custom callback for directoryLoaded signal
+     */
+    void clearOnDirectoryLoadedFunction();
+
 private:
     QHash<QString, QIcon> m_thumbs;
     QHash<QString, QByteArray> m_crosswordsHash;
     KIO::PreviewJob *m_previewJob;
 
-protected slots:
-    void loadThumbnailsSlot(QString path);
+    std::function<void(void)> m_function;
+
+private slots:
+    void loadThumbnailsSlot(const QString &path);
     void previewJobGotPreview(const KFileItem &fi, const QPixmap &pix);
     void previewJobFailed(const KFileItem &fi);
-    void computeCrosswordsHashSlot(const QString& path);
+    void computeCrosswordsHashSlot(const QString &path);
+    void onDirectoryLoaded(const QString &path);
 
 };
 

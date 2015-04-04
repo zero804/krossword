@@ -58,7 +58,7 @@ LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::Wind
     m_libraryTree->setModel(m_libraryModel);
     m_libraryTree->setRootIndex(m_libraryModel->index(libraryDir));
 
-    m_libraryTree->setSortingEnabled(true);
+    m_libraryTree->setSortingEnabled(false);
     m_libraryTree->sortByColumn(0, Qt::AscendingOrder);
 
     m_libraryTree->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -67,11 +67,11 @@ LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::Wind
     m_libraryTree->setAlternatingRowColors(true);
     m_libraryTree->setIconSize(QSize(64, 64));
     m_libraryTree->setAnimated(true);
+    m_libraryTree->setAutoScroll(true);
     m_libraryTree->setAllColumnsShowFocus(true);
 
     m_libraryTree->header()->hideSection(1); //hide size column
     m_libraryTree->header()->hideSection(2); //hide type
-
     m_libraryTree->header()->setResizeMode(QHeaderView::Stretch);
 
     setObjectName("library");
@@ -85,6 +85,15 @@ LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::Wind
 
     connect(m_libraryTree, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(libraryItemDoubleClicked(QModelIndex)));
     connect(m_libraryTree->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(libraryCurrentChanged(QModelIndex, QModelIndex))); // to keep updated the available actions
+
+    // select last opened crossword
+    QString lastCrossword = Settings::lastCrossword();
+    m_libraryModel->setOnDirectoryLoadedFunction([this, lastCrossword]() {
+        this->m_libraryTree->setSortingEnabled(true);
+        this->m_libraryTree->setCurrentIndex(this->m_libraryModel->index(lastCrossword));
+
+        m_libraryModel->clearOnDirectoryLoadedFunction();
+    });
 }
 
 QTreeView* LibraryGui::libraryTree() const

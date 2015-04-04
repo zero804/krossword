@@ -678,7 +678,7 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
 
     QString errorString;
 
-    KUrl resultUrl;
+    QUrl resultUrl;
     if (url.isEmpty()) {
         resultUrl = KFileDialog::getOpenUrl(KUrl("kfiledialog:///loadCrossword"),
                                             "application/x-krosswordpuzzle "
@@ -692,11 +692,12 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
     setCurrentFileName(QString());
 
     // Read the file
-    QString fileName = resultUrl.fileName();
+    QFileInfo fileInfo(resultUrl.toLocalFile()); // Qt5: just resultUrl.fileName()
+    QString fileName = fileInfo.fileName();
     updateClueDock();
 
     QByteArray undoData;
-    bool readOk = krossWord()->read(resultUrl, &errorString, this, fileFormat, &undoData);
+    bool readOk = krossWord()->read(KUrl(resultUrl), &errorString, this, fileFormat, &undoData);
 
     if (readOk) {
         setState(ShowingCrossword);
@@ -723,7 +724,7 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
                                            "be determined, so 'Free Crossword' is assumed.\n\n"
                                            "Do you want to convert the crossword to another type now?\n\n"
                                            "(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")")) == KMessageBox::Yes) {
-                //  Open conversion dialog
+                // Open conversion dialog
                 QPointer<ConvertCrosswordDialog> dialog = new ConvertCrosswordDialog(krossWord(), this);
                 if (dialog->exec() == QDialog::Accepted) {
                     krossWord()->convertToType(dialog->crosswordTypeInfo());
@@ -744,6 +745,11 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
 
         fitToPageSlot();
         selectFirstClueSlot();
+
+        // save the url of the last opened crossword
+        Settings::setLastCrossword(resultUrl.toLocalFile());
+        Settings::self()->writeConfig();
+
         return true;
     } else {
         setState(ShowingNothing);

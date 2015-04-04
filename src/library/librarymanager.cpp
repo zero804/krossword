@@ -46,6 +46,7 @@ LibraryManager::LibraryManager(QObject *parent) : QFileSystemModel(parent)
     setReadOnly(false); // so the files (crosswords) can be moved...
     setNameFilters(QStringList() << "*.kwpz");
     setNameFilterDisables(false); //hidden (not just disable) the unwanted files
+
     connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(loadThumbnailsSlot(QString)));
     connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(computeCrosswordsHashSlot(QString)));
 }
@@ -94,7 +95,32 @@ QVariant LibraryManager::data(const QModelIndex &index, int role) const
     return QFileSystemModel::data(index, role);
 }
 
-void LibraryManager::loadThumbnailsSlot(QString path)
+void LibraryManager::onDirectoryLoaded(const QString &path)
+{
+    Q_UNUSED(path);
+
+    m_function();
+}
+
+void LibraryManager::setOnDirectoryLoadedFunction(const std::function<void(void)> &func)
+{
+    if (m_function) {
+        clearOnDirectoryLoadedFunction();
+    }
+
+    m_function = func;
+
+    connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(onDirectoryLoaded(QString)));
+}
+
+void LibraryManager::clearOnDirectoryLoadedFunction()
+{
+    m_function = nullptr;
+
+    disconnect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(onDirectoryLoaded(QString)));
+}
+
+void LibraryManager::loadThumbnailsSlot(const QString &path)
 {
     QModelIndexList fileIndexList = match(index(path), QFileSystemModel::FileNameRole, "*.kwpz", -1, Qt::MatchWildcard | Qt::MatchRecursive);
 
