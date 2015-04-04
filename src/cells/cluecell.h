@@ -119,8 +119,7 @@ public:
     * @param pad This character is inserted for each empty letter
     * (@ref LetterCell::isEmpty()). */
     QString currentAnswer(const QChar &pad = '-') const;
-    void setCurrentAnswer(const QString &answer,
-                          Confidence confidence = Confident);
+    void setCurrentAnswer(const QString &answer, Confidence confidence = Confident);
     /** Returns true if no letter cell of this clue is empty.
     * @see LetterCell::isEmpty() */
     bool isAnswerComplete() const;

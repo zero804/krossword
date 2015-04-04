@@ -741,7 +741,6 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
         emit loadingFileComplete(m_curFileName);
 
         m_clueTree->resizeColumnToContents(0); // we have to call it here because the clue list is created (empty) at game startup (way before the contents is loaded)
-        m_clueTree->resizeColumnToContents(1);
 
         fitToPageSlot();
         selectFirstClueSlot();
@@ -2510,18 +2509,11 @@ void CrossWordXmlGuiWindow::answerChanged(ClueCell* clue, const QString &current
     if (statusbar) {
         if (clue->isHorizontal()) {
             statusBar()->showMessage(i18n("Clue (across): \"%1\", %2 letters, current answer: \"%3\"",
-                     clue->clueWithNumber(), clue->correctAnswer().length(),
-                     currentAnswer));
+                     clue->clueWithNumber(), clue->correctAnswer().length(), currentAnswer));
         } else {
             statusBar()->showMessage(i18n("Clue (down): \"%1\", %2 letters, current answer: \"%3\"",
-                     clue->clueWithNumber(), clue->correctAnswer().length(),
-                     currentAnswer));
+                     clue->clueWithNumber(), clue->correctAnswer().length(), currentAnswer));
         }
-    }
-
-    QStandardItem *itemAnswer = m_clueModel->answerItem(clue);
-    if (itemAnswer) {
-        itemAnswer->setText(currentAnswer);
     }
 }
 

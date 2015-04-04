@@ -54,10 +54,9 @@ void ClueItem::setData(const QVariant& value, int role)
 }
 
 
-ClueModel::ClueModel(QObject* parent)
-    : QStandardItemModel(0, 2, parent)
+ClueModel::ClueModel(QObject* parent) : QStandardItemModel(0, 1, parent)
 {
-    setHorizontalHeaderLabels(QStringList() << i18n("Clue") << i18n("Answer"));
+    setHorizontalHeaderLabels(QStringList() << i18n("Clue"));
     setSortRole(Qt::UserRole + 1);
 
     m_itemHorizontal = new QStandardItem("<b><h3>" + i18n("Across clues") + "</h3></b>");
@@ -88,14 +87,11 @@ void ClueModel::addClue(ClueCell* clueCell)
 {
     QStandardItem *item = clueCell->isHorizontal() ? m_itemHorizontal : m_itemVertical;
 
-    QStandardItem *currentAnswerItem = new QStandardItem(clueCell->currentAnswer());
-    currentAnswerItem->setEditable(false);
-
     ClueItem *clueItem = new ClueItem(clueCell);
     connect(clueItem, SIGNAL(changeClueTextRequest(ClueCell*, QString)),
             this, SLOT(changeClueTextRequested(ClueCell*, QString)));
 
-    item->appendRow(QList<QStandardItem*>() << clueItem << currentAnswerItem);
+    item->appendRow(QList<QStandardItem*>() << clueItem);
 
     connect(clueCell, SIGNAL(orientationChanged(ClueCell*, Qt::Orientation)),
             this, SLOT(updateClueOrientation(ClueCell*, Qt::Orientation)));
@@ -168,18 +164,6 @@ ClueItem* ClueModel::clueItemFromIndex(const QModelIndex& index) const
     QModelIndex clueItemIndex = index.parent().child(index.row(), 0);
     return dynamic_cast<ClueItem*>(itemFromIndex(clueItemIndex));
 }
-
-QStandardItem* ClueModel::answerItem(ClueCell* clueCell) const
-{
-    ClueItem *_item = clueItem(clueCell);
-    if (!_item)
-        return NULL;
-
-    return _item->parent()->child(_item->row(), 1);
-}
-
-
-
 
 
 

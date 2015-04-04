@@ -68,7 +68,6 @@ public:
     };
 
     ClueItem *clueItem(ClueCell *clueCell) const;
-    QStandardItem *answerItem(ClueCell *clueCell) const;
     ClueItem *clueItemFromIndex(const QModelIndex &index) const;
 
     void addClue(ClueCell *clueCell);
