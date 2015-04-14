@@ -17,29 +17,30 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef DICTIONARYDIALOG_H
-#define DICTIONARYDIALOG_H
+#ifndef DICTIONARYGUI_H
+#define DICTIONARYGUI_H
 
 #include "ui_dictionaries.h"
 #include <QDialog>
 
-class ExtendedSqlTableModel;
-class KrosswordDictionary;
+class DictionaryModel;
+class DictionaryManager;
 
-class DictionaryDialog : public QDialog
+class DictionaryGui : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit DictionaryDialog(KrosswordDictionary *dictionary, QWidget* parent = 0);
+    explicit DictionaryGui(DictionaryManager *dictionary, QWidget* parent = 0);
 
-    ExtendedSqlTableModel *databaseTable() const {
-        return m_dbTable;
+    /*
+    DictionaryModel *databaseTable() const {
+        return m_dictionaryModel;
     };
+    */
 
 protected slots:
-    void tableSelectionChanged(const QItemSelection &selected,
-                               const QItemSelection &deselected);
+    void tableSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
     void addDictionaryFromCrosswordsClicked();
     void addDictionaryFromLibraryClicked();
     void getWordsFromDictionaryClicked();
@@ -54,10 +55,12 @@ protected slots:
 private:
     void showInfoMessage(const QString &infoMessage);
 
-    Ui::dictionaries ui_dictionaries;
-    KrosswordDictionary *m_dictionary;
-    ExtendedSqlTableModel *m_dbTable;
+    Ui::dictionaries ui_dictionarygui;
+
+    DictionaryManager *m_dictionaryManager;
+    DictionaryModel *m_dictionaryModel;
+
     QLabel *m_infoMessage;
 };
 
-#endif // DICTIONARYDIALOG_H
+#endif // DICTIONARYGUI_H

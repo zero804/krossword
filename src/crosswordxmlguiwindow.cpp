@@ -24,8 +24,11 @@
 #include "cluemodel.h"
 #include "cells/imagecell.h"
 #include "krosswordrenderer.h"
-#include "dictionary.h"
-#include "extendedsqltablemodel.h"
+
+#include "dictionary/dictionarymanager.h"
+#include "dictionary/dictionarymodel.h"
+#include "dictionary/dictionarygui.h"
+
 #include "settings.h"
 #include "htmldelegate.h"
 #include "dialogs/crosswordtypeconfiguredetailsdialog.h"
@@ -33,7 +36,6 @@
 #include "dialogs/crosswordpropertiesdialog.h"
 #include "dialogs/convertcrossworddialog.h"
 #include "dialogs/statisticsdialog.h"
-#include "dialogs/dictionarydialog.h"
 #include "dialogs/currentcellwidget.h"
 
 #include <KToggleAction>
@@ -284,7 +286,7 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
       m_clueModel(nullptr),
       m_clueSelectionModel(nullptr),
       m_popupMenuCell(nullptr),
-      m_dictionary(new KrosswordDictionary),
+      m_dictionaryManager(new DictionaryManager),
       m_animation(nullptr)
 {
     m_lastSavedUndoIndex = -1;
@@ -343,7 +345,7 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
 
 CrossWordXmlGuiWindow::~CrossWordXmlGuiWindow()
 {
-    delete m_dictionary;
+    delete m_dictionaryManager;
 }
 
 const char *CrossWordXmlGuiWindow::actionName(CrossWordXmlGuiWindow::Action actionEnum) const
@@ -1691,7 +1693,7 @@ QDockWidget *CrossWordXmlGuiWindow::createUndoViewDock()
 
 QDockWidget* CrossWordXmlGuiWindow::createCurrentCellDock()
 {
-    m_currentCellWidget = new CurrentCellWidget(krossWord(), m_dictionary);
+    m_currentCellWidget = new CurrentCellWidget(krossWord(), m_dictionaryManager);
     m_currentCellDock = new QDockWidget(i18n("Current Cell"), this);
     m_currentCellDock->setObjectName("currentCellDock");
     m_currentCellDock->setWidget(m_currentCellWidget);
@@ -2813,15 +2815,16 @@ void CrossWordXmlGuiWindow::propertiesConversionRequested(
 
 void CrossWordXmlGuiWindow::optionsDictionarySlot()
 {
-    if (!m_dictionary->openDatabase(this)) {
-        KMessageBox::error(this, i18n("Couldn't connect to the database."));
+    if (!m_dictionaryManager->isReady()) {
+        //KMessageBox::error(this, i18n("Couldn't connect to the database."));
+        if (!m_dictionaryManager->setupDatabase(this)) {
         return;
+        }
     }
 
-    QPointer<DictionaryDialog> dialog = new DictionaryDialog(m_dictionary, this);
+    QPointer<DictionaryGui> dialog = new DictionaryGui(m_dictionaryManager, this);
     dialog->exec();
-    dialog->databaseTable()->submitAll();
-    //m_dictionary->closeDatabase();
+    //dialog->databaseTable()->submitAll();
     delete dialog;
 }
 

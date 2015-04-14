@@ -15,8 +15,6 @@ set( krossword_SRCS
    krossworddocument.cpp
    cluemodel.cpp
    htmldelegate.cpp
-   dictionary.cpp
-   extendedsqltablemodel.cpp
    clueexpanderitem.cpp
    templatemodel.cpp
  )
@@ -26,6 +24,7 @@ INCLUDE ( cells/Sources.cmake )
 INCLUDE ( dialogs/Sources.cmake )
 INCLUDE ( dialogs/cellwidgets/Sources.cmake )
 INCLUDE ( library/Sources.cmake )
+INCLUDE ( dictionary/Sources.cmake )
 
 kde4_add_ui_files( krossword_SRCS
     settings.ui
@@ -36,8 +35,6 @@ kde4_add_ui_files( krossword_SRCS
     solution_letter_properties.ui
     print_crossword.ui
     export_to_image.ui
-    dictionaries.ui
-    database_connection.ui
     convert_crossword_type.ui
     clue_number_mapping.ui
     download.ui
@@ -49,7 +46,7 @@ kde4_add_kcfg_files( krossword_SRCS settings.kcfgc )
 kde4_add_executable( krossword ${krossword_SRCS} )
 
 target_link_libraries( krossword ${KDE4_KDEUI_LIBS} ${KDE4_KUTILS_LIBS}
-    ${KDE4_KFILE_LIBRARY} ${KDEGAMES_LIBRARY} ${KDE4_KNEWSTUFF2_LIBS} ${QT_QTSQL_LIBRARY} ) # QtOpenGL ) #ksysguard  )
+    ${KDE4_KFILE_LIBRARY} ${KDEGAMES_LIBRARY} ${KDE4_KNEWSTUFF2_LIBS} ${QT_QTSQL_LIBRARY} )
 
 install( TARGETS krossword ${INSTALL_TARGETS_DEFAULT_ARGS} )
 

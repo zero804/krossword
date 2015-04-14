@@ -26,7 +26,7 @@
 
 #include "krossword.h"
 #include "krosswordtheme.h"
-#include "dictionary.h"
+#include "dictionary/dictionarymanager.h"
 
 #include <QPrinter>
 #include <KXmlGuiWindow>
@@ -38,7 +38,7 @@
 using namespace Crossword;
 
 class CurrentCellWidget;
-class KrosswordDictionary;
+class DictionaryManager;
 class KrossWordPuzzleView;
 class UndoStackExt;
 class ClueModel;
@@ -458,7 +458,7 @@ private:
 
     KrossWordCell *m_popupMenuCell;             // Not Owned
 
-    KrosswordDictionary *m_dictionary;          // Owned
+    DictionaryManager *m_dictionaryManager;          // Owned
 
     QDateTime m_lastAutoSave;
     bool m_undoStackLoaded;

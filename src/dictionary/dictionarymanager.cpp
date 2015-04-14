@@ -17,18 +17,16 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "dictionary.h"
+#include "dictionarymanager.h"
+#include "dictionarymodel.h"
+
 #include "krossword.h"
 #include "cells/cluecell.h"
-#include "extendedsqltablemodel.h"
 #include "htmldelegate.h"
 
 #include <QFile>
 #include <QTextStream>
 #include <QRegExp>
-#include <QMetaType>
-#include <QListWidget>
-#include <QStandardItemModel>
 #include <QSqlDatabase>
 #include <QVBoxLayout>
 #include <QProgressBar>
@@ -45,88 +43,78 @@
 
 using namespace Crossword;
 
-const QString KrosswordDictionary::CONNECTION_NAME = "krosswordpuzzle";
+const QString DictionaryManager::CONNECTION_NAME = "krosswordpuzzle";
 
-KrosswordDictionary::KrosswordDictionary(QObject* parent)
-    : QObject(parent),
-      m_cancel(false),
-      m_hasConnection(makeStandardConnection())
+DictionaryManager::DictionaryManager(QObject* parent)
+    : QObject(parent)
 {
+    m_hasConnection = createConnection();
+
     if (m_hasConnection) {
         qDebug() << "Database ready";
+        createModel();
     } else {
-        qDebug() << "Database has not been setted up yet";
+        qDebug() << "Database has not been set up yet";
     }
 }
 
-KrosswordDictionary::~KrosswordDictionary()
+DictionaryManager::~DictionaryManager()
 {
     qDebug() << "Closing and removing database connection...";
     closeDatabase();
+    qDebug() << "Done";
 }
 
-bool KrosswordDictionary::makeStandardConnection()
+bool DictionaryManager::createConnection()
 {
-    QSqlDatabase db = getDatabase();
-
-    db.setHostName("localhost");
-    db.setUserName("krosswordpuzzle");
-    db.setDatabaseName("krosswordpuzzle");
-    db.setPassword("krosswordpuzzle");
-
-    return db.open();
-}
-
-QSqlDatabase KrosswordDictionary::getDatabase() const
-{
-    QSqlDatabase db;
-    if (!QSqlDatabase::contains(CONNECTION_NAME))
-        db = QSqlDatabase::addDatabase("QMYSQL", CONNECTION_NAME);
-    else
-        db = QSqlDatabase::database(CONNECTION_NAME);
-
-    return db;
-}
-
-void KrosswordDictionary::closeDatabase()
-{
-    if (QSqlDatabase::contains(CONNECTION_NAME)) {
-        QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
-        if (db.isValid())
-            db.close();
+    if (!QSqlDatabase::contains(CONNECTION_NAME)) {
+        m_database = QSqlDatabase::addDatabase("QMYSQL", CONNECTION_NAME);
+    } else {
+        m_database = QSqlDatabase::database(CONNECTION_NAME);
     }
+
+    m_database.setHostName("localhost");
+    m_database.setUserName("krosswordpuzzle");
+    m_database.setDatabaseName("krosswordpuzzle");
+    m_database.setPassword("krosswordpuzzle");
+
+    return m_database.open();
 }
 
-bool KrosswordDictionary::openDatabase(QWidget *dlgParent)
+void DictionaryManager::createModel()
+{
+    m_model = new DictionaryModel(this, m_database);
+    m_model->setTable("dictionary");
+    m_model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    m_model->setHeaderData(1, Qt::Horizontal,
+                           i18nc("The header title for answers in the dictionary database", "Answer"), Qt::DisplayRole);
+    m_model->setHeaderData(2, Qt::Horizontal,
+                           i18nc("The header title for clues associated with answer words in the dictionary database", "Clue"), Qt::DisplayRole);
+    m_model->setHeaderData(3, Qt::Horizontal,
+                           i18nc("The header title for scores/difficulties of clue/answer pairs in the dictionary database", "Score"), Qt::DisplayRole);
+    m_model->setHeaderData(4, Qt::Horizontal,
+                           i18nc("The header title for languages of clue/answer pairs in the dictionary database", "Language"), Qt::DisplayRole);
+}
+
+DictionaryModel *DictionaryManager::getModel()
+{
+    m_model->sort(1, Qt::AscendingOrder);   // Sort by word, it does a select() too
+    return m_model;
+}
+
+bool DictionaryManager::isReady() const {
+    return m_hasConnection;
+}
+
+bool DictionaryManager::setupDatabase(QWidget *dlgParent)
 {
     bool success = true;
 
-    if (!m_hasConnection) {
-
-         if (setupDatabase(dlgParent)) {
-            m_hasConnection = makeStandardConnection();
-            qDebug() << "Database opened";
-         } else {
-            success = false;
-            qDebug() << "Unable to open database";
-         }
-    }
-    return success;
-}
-
-bool KrosswordDictionary::setupDatabase(QWidget *dlgParent)
-{
-    bool success = true;
-
-    if (KMessageBox::warningContinueCancel(dlgParent,
-                                           i18n("No Connection to the database! Please make sure the "
-                                                   "MySQL server is running. Afterwards click \"Continue\" "
-                                                   "to retry connecting to the database."),
-                                           i18n("No Database Connection")) == KMessageBox::Cancel)
-    {
+    if (KMessageBox::warningContinueCancel(dlgParent, i18n("No Connection to the database! Please make sure the "
+                    "MySQL server is running. Afterwards click \"Continue\" to retry connecting to the database."),
+                    i18n("No Database Connection")) == KMessageBox::Cancel) {
         success = false;
     } else {
-
         QPointer<QDialog> dialog = new QDialog(dlgParent);
         dialog->setWindowTitle(i18n("Connect Database"));
         ui_database_connection.setupUi(dialog);
@@ -142,7 +130,7 @@ bool KrosswordDictionary::setupDatabase(QWidget *dlgParent)
                 QSqlQuery rootQuery(dbRoot);
 
                 success = createUser(rootQuery);
-                success = createKrosswordDatabase(rootQuery);
+                success = createDatabase(rootQuery);
 
             } else {
                 success = false;
@@ -160,7 +148,7 @@ bool KrosswordDictionary::setupDatabase(QWidget *dlgParent)
     return success;
 }
 
-bool KrosswordDictionary::createUser(QSqlQuery &query)
+bool DictionaryManager::createUser(QSqlQuery &query)
 {
     bool success = true;
 
@@ -179,7 +167,7 @@ bool KrosswordDictionary::createUser(QSqlQuery &query)
     return success;
 }
 
-bool KrosswordDictionary::createKrosswordDatabase(QSqlQuery &query)
+bool DictionaryManager::createDatabase(QSqlQuery &query)
 {
     bool success = true;
 
@@ -190,7 +178,7 @@ bool KrosswordDictionary::createKrosswordDatabase(QSqlQuery &query)
             if (query.exec(QLatin1String("USE krosswordpuzzle"))) {
                 qDebug() << "Database created, now creating the tables";
 
-                success = createTables();
+                success = createTable();
             } else {
                 qDebug() << "Database created but \"USE [DATABASE]\" failed" << query.lastError();
                 success = false;
@@ -204,16 +192,15 @@ bool KrosswordDictionary::createKrosswordDatabase(QSqlQuery &query)
     return success;
 }
 
-bool KrosswordDictionary::createTables()
+bool DictionaryManager::createTable()
 {
     bool ok = true;
-    QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
-    if (!db.isOpen()) {
+    if (!m_database.isOpen()) {
         qDebug() << "Database isn't opened";
         return false;
     }
 
-    QSqlQuery query(db);
+    QSqlQuery query(m_database);
     ok = query.exec("CREATE TABLE dictionary ( " \
                     "id INTEGER NOT NULL AUTO_INCREMENT, " \
                     "word VARCHAR (255) NOT NULL, " \
@@ -228,33 +215,18 @@ bool KrosswordDictionary::createTables()
     return ok;
 }
 
-bool KrosswordDictionary::hasConnection() const {
-    return m_hasConnection;
+
+
+void DictionaryManager::closeDatabase()
+{
+    if (m_database.isValid()) {
+        m_database.close();
+    }
 }
 
-ExtendedSqlTableModel* KrosswordDictionary::createModel()
+bool DictionaryManager::exportToCsv(const QString& fileName)
 {
-    QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
-
-    ExtendedSqlTableModel *dbTable = new ExtendedSqlTableModel(this, db);
-    dbTable->setTable("dictionary");
-    dbTable->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    dbTable->setHeaderData(1, Qt::Horizontal,
-                           i18nc("The header title for answers in the dictionary database", "Answer"), Qt::DisplayRole);
-    dbTable->setHeaderData(2, Qt::Horizontal,
-                           i18nc("The header title for clues associated with answer words in the dictionary database", "Clue"), Qt::DisplayRole);
-    dbTable->setHeaderData(3, Qt::Horizontal,
-                           i18nc("The header title for scores/difficulties of clue/answer pairs in the dictionary database", "Score"), Qt::DisplayRole);
-    dbTable->setHeaderData(4, Qt::Horizontal,
-                           i18nc("The header title for languages of clue/answer pairs in the dictionary database", "Language"), Qt::DisplayRole);
-    dbTable->setSort(1, Qt::AscendingOrder);   // Sort by word
-    return dbTable;
-}
-
-bool KrosswordDictionary::exportToCsv(const QString& fileName)
-{
-    QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
-    if (!db.isValid())
+    if (!m_database.isValid())
         return false;
 
     QFile file(fileName);
@@ -262,7 +234,7 @@ bool KrosswordDictionary::exportToCsv(const QString& fileName)
         return false;
 
     QTextStream stream(&file);
-    QSqlQuery query = db.exec("SELECT * FROM dictionary");
+    QSqlQuery query = m_database.exec("SELECT * FROM dictionary");
     QSqlRecord rec = query.record();
 
     // Write field titles
@@ -284,7 +256,7 @@ bool KrosswordDictionary::exportToCsv(const QString& fileName)
     return true;
 }
 
-QDialog* KrosswordDictionary::createProgressDialog(QWidget *parent, const QString& text, QProgressBar *progressBar)
+QDialog* DictionaryManager::createProgressDialog(QWidget *parent, const QString& text, QProgressBar *progressBar)
 {
     QDialog *dlgProgress = new QDialog(parent);
     dlgProgress->setAttribute(Qt::WA_DeleteOnClose);
@@ -295,25 +267,22 @@ QDialog* KrosswordDictionary::createProgressDialog(QWidget *parent, const QStrin
     QVBoxLayout *layout = new QVBoxLayout;
     QLabel *label = new QLabel(text);
     label->setWordWrap(true);
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Cancel);
-    connect(buttonBox, SIGNAL(rejected()), dlgProgress, SLOT(reject()));
+
+    //QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Cancel);
+    //connect(buttonBox, SIGNAL(rejected()), dlgProgress, SLOT(reject()));
 
     layout->addWidget(label);
     layout->addWidget(progressBar);
-    layout->addWidget(buttonBox);
+    //layout->addWidget(buttonBox);
 
     dlgProgress->setLayout(layout);
-
-    m_cancel = false;
-    connect(dlgProgress, SIGNAL(cancelClicked()), this, SLOT(cancelCurrentActionClicked()));
 
     return dlgProgress;
 }
 
-int KrosswordDictionary::importFromCsv(const QString& fileName, QWidget *parent)
+int DictionaryManager::importFromCsv(const QString& fileName, QWidget *parent)
 {
-    QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
-    if (!db.isValid()) {
+    if (!m_database.isValid()) {
         qDebug() << "Database not open";
         return -1;
     }
@@ -333,7 +302,7 @@ int KrosswordDictionary::importFromCsv(const QString& fileName, QWidget *parent)
 
     // Get entry count before inserting to calculate how many entries
     // have been added at the end
-    int entryCountBefore = entryCount();
+    int entryCountBefore = itemsCount();
 
     QTextStream stream(&file);
 
@@ -417,40 +386,32 @@ int KrosswordDictionary::importFromCsv(const QString& fileName, QWidget *parent)
         if (counter > 1000) {
             counter = 0;
 
-            QSqlQuery query = db.exec(beginSqlQuery + sqlInserts.join(", "));
+            QSqlQuery query = m_database.exec(beginSqlQuery + sqlInserts.join(", "));
             sqlInserts.clear();
 
-            QApplication::processEvents();
-            if (m_cancel)
-                break;
+            //QApplication::processEvents();
         }
     }
     file.close();
 
     // Insert the remaining entries (< 1000)
     if (!sqlInserts.isEmpty()) {
-        QSqlQuery query = db.exec(beginSqlQuery + sqlInserts.join(", "));
+        QSqlQuery query = m_database.exec(beginSqlQuery + sqlInserts.join(", "));
         if (query.lastError().isValid())
             qDebug() << query.lastError();
     }
 
     dlgProgress->close();
-    return entryCount() - entryCountBefore;
+
+    return itemsCount() - entryCountBefore;
 }
 
-void KrosswordDictionary::cancelCurrentActionClicked()
+int DictionaryManager::importFromDictionary(const QString& fileName, QWidget *parent)
 {
-    m_cancel = true;
-}
-
-int KrosswordDictionary::addEntriesFromDictionary(const QString& fileName, QWidget *parent)
-{
-    QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
-
-    if (!db.isValid())
+    if (!m_database.isValid())
         return 0;
 
-    int entryCountBefore = entryCount();
+    int entryCountBefore = itemsCount();
 
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly))
@@ -496,30 +457,27 @@ int KrosswordDictionary::addEntriesFromDictionary(const QString& fileName, QWidg
             if (counter > 1000) {
                 counter = 0;
 
-                db.transaction();
+                m_database.transaction();
                 foreach (auto e, entry) {
-                   QSqlQuery q(db);
+                   QSqlQuery q(m_database);
                    q.prepare("INSERT INTO dictionary(word, score) VALUES (?, ?)");
                    q.bindValue(0, e.first);
                    q.bindValue(1, e.second);
                    q.exec();
                 }
-                db.commit();
+                m_database.commit();
 
                 entry.clear();
             }
         }
-        QApplication::processEvents();
-        if (m_cancel) { // FIXME, cancel doesn't work
-            break;
-        }
+        //QApplication::processEvents();
     }
     file.close();
 
     if (counter > 0) {
-        db.transaction();
+        m_database.transaction();
         foreach (auto e, entry) {
-            QSqlQuery q(db);
+            QSqlQuery q(m_database);
             q.prepare("INSERT INTO dictionary(word, score) VALUES (?, ?)");
             q.bindValue(0, e.first);
             q.bindValue(1, e.second);
@@ -527,37 +485,36 @@ int KrosswordDictionary::addEntriesFromDictionary(const QString& fileName, QWidg
                 qDebug() << q.lastError();
             }
         }
-        db.commit();
+        m_database.commit();
     }
+
+    m_model->sort(1, Qt::AscendingOrder);   // Sort by word, it does a select() too
 
     dlgProgress->close();
 
-    return entryCount() - entryCountBefore;
+    return itemsCount() - entryCountBefore;
 }
 
-bool KrosswordDictionary::isEmpty()
+bool DictionaryManager::isEmpty()
 {
-    return entryCount() == 0;
+    return itemsCount() == 0;
 }
 
-int KrosswordDictionary::entryCount()
+int DictionaryManager::itemsCount()
 {
-    QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
-
-    if (!db.isValid())
+    if (!m_database.isValid())
         return 0;
 
-    QSqlQuery query = db.exec("SELECT COUNT(*) FROM dictionary");
+    QSqlQuery query = m_database.exec("SELECT COUNT(*) FROM dictionary");
     if (query.next())
         return query.value(0).toInt();
     else
         return 0;
 }
 
-int KrosswordDictionary::addEntriesFromCrosswords(const QStringList& fileNames, QWidget *parent)
+int DictionaryManager::importFromCrosswords(const QStringList& fileNames, QWidget *parent)
 {
-    QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
-    if (!db.isValid())
+    if (!m_database.isValid())
         return 0;
 
     // Setup a dialog to indicate progress
@@ -569,7 +526,7 @@ int KrosswordDictionary::addEntriesFromCrosswords(const QStringList& fileNames, 
 
     // Get entry count before inserting to calculate how many entries
     // have been added at the end
-    int entryCountBefore = entryCount();
+    int entryCountBefore = itemsCount();
 
     // Read each file
     QString errorString;
@@ -600,42 +557,47 @@ int KrosswordDictionary::addEntriesFromCrosswords(const QStringList& fileNames, 
             if (counter > 1000) {
                 counter = 0;
 
-                db.transaction();
+                m_database.transaction();
                 foreach(QString s, sqlInserts) {
-                    QSqlQuery query = db.exec(beginSqlQuery + s);
+                    QSqlQuery query = m_database.exec(beginSqlQuery + s);
                 }
-                db.commit();
+                m_database.commit();
 
                 sqlInserts.clear();
 
-                QApplication::processEvents();
+                //QApplication::processEvents();
             }
 
             emit extractedEntriesFromCrossword(fileName, addedEntries);
-            if (m_cancel)
-                break;
         }
     }
 
     // Insert the remaining entries (< 1000)
     if (!sqlInserts.isEmpty()) {
-        db.transaction();
+        m_database.transaction();
         foreach(QString s, sqlInserts) {
-            QSqlQuery query = db.exec(beginSqlQuery + s);
+            QSqlQuery query = m_database.exec(beginSqlQuery + s);
         }
-        db.commit();
+        m_database.commit();
     }
 
+    m_model->sort(1, Qt::AscendingOrder);   // Sort by word, it does a select() too
+
     dlgProgress->close();
-    return entryCount() - entryCountBefore;
+
+    return itemsCount() - entryCountBefore;
 }
 
-bool KrosswordDictionary::clearDatabase()
+bool DictionaryManager::clearDatabase()
 {
-    QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
-    if (!db.isValid())
+    if (!m_database.isValid())
         return false;
 
-    QSqlQuery query = db.exec("DELETE FROM dictionary");
+    // delete and recreate the table is faster then delete items
+    QSqlQuery query = m_database.exec("DROP TABLE dictionary");
+    createTable();
+
+    m_model->select();
+
     return true;
 }

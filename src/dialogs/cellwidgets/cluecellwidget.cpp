@@ -20,8 +20,10 @@
 #include "cluecellwidget.h"
 #include "../../cells/cluecell.h"
 #include "../../krossword.h"
-#include "../../dictionary.h"
-#include "../../extendedsqltablemodel.h"
+
+#include "dictionary/dictionarymanager.h"
+#include "dictionary/dictionarymodel.h"
+
 #include "../../htmldelegate.h"
 
 #include <QWidgetAction>
@@ -31,7 +33,7 @@
 #include <KCharSelect>
 
 ClueCellWidget::ClueCellWidget(ClueCell* clueCell,
-                               KrosswordDictionary *dictionary, QWidget* parent)
+                               DictionaryManager *dictionary, QWidget* parent)
     : QWidget(parent), m_clueCell(0)
 {
     Q_ASSERT(clueCell);
@@ -97,7 +99,7 @@ ClueCellWidget::ClueCellWidget(ClueCell* clueCell,
     if (dictionary->isEmpty()) {
         ui_clue_properties_dock.grpDictionary->setVisible(false);
     } else {
-        ExtendedSqlTableModel *model = dictionary->createModel();
+        DictionaryModel *model = dictionary->getModel();
         if (!model->select())
             qDebug() << "Select failed" << model->lastError();
         else {
@@ -517,7 +519,7 @@ void ClueCellWidget::fillDictionaryAnswers()
 void ClueCellWidget::dictionaryFilterString(const QString& wildcardPattern,
         int maxLength)
 {
-    ExtendedSqlTableModel *model = qobject_cast< ExtendedSqlTableModel* >(
+    DictionaryModel *model = qobject_cast< DictionaryModel* >(
                                        ui_clue_properties_dock.dictionaryAnswers->model());
     if (model) {
         QString mysqlPattern = wildcardPattern;

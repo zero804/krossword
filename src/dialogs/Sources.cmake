@@ -9,5 +9,4 @@ set( krossword_SRCS ${krossword_SRCS}
    dialogs/convertcrossworddialog.cpp
    dialogs/currentcellwidget.cpp
    dialogs/statisticsdialog.cpp
-   dialogs/dictionarydialog.cpp
 )

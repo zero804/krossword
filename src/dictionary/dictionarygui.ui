@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>606</width>
-    <height>437</height>
+    <width>604</width>
+    <height>435</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -63,7 +63,7 @@
           <x>0</x>
           <y>0</y>
           <width>220</width>
-          <height>294</height>
+          <height>292</height>
          </rect>
         </property>
         <attribute name="label">
@@ -125,7 +125,7 @@ This does the same as &quot;Extract From Crosswords...&quot; with all crossword 
 This does the same as &quot;Extract From Library&quot;, but you can select from which files words should be extracted.</string>
            </property>
            <property name="text">
-            <string>&amp;Extract From Crosswords...</string>
+            <string>&amp;Extract From Crossword...</string>
            </property>
            <property name="icon">
             <iconset>
@@ -202,7 +202,7 @@ p, li { white-space: pre-wrap; }
           <x>0</x>
           <y>0</y>
           <width>207</width>
-          <height>294</height>
+          <height>292</height>
          </rect>
         </property>
         <attribute name="label">
@@ -321,7 +321,7 @@ p, li { white-space: pre-wrap; }
           <x>0</x>
           <y>0</y>
           <width>207</width>
-          <height>294</height>
+          <height>292</height>
          </rect>
         </property>
         <attribute name="label">

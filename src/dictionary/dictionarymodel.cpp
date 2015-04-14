@@ -17,27 +17,27 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "extendedsqltablemodel.h"
+#include "dictionarymodel.h"
 
-ExtendedSqlTableModel::ExtendedSqlTableModel(QObject* parent, QSqlDatabase db)
+DictionaryModel::DictionaryModel(QObject* parent, QSqlDatabase db)
     : QSqlTableModel(parent, db)
 {
     m_lowerLimit = -1;
     m_upperLimit = -1;
 }
 
-void ExtendedSqlTableModel::setLimit(int lowerLimit, int upperLimit)
+void DictionaryModel::setLimit(int lowerLimit, int upperLimit)
 {
     m_lowerLimit = lowerLimit;
     m_upperLimit = upperLimit;
 }
 
-void ExtendedSqlTableModel::removeLimit()
+void DictionaryModel::removeLimit()
 {
     setLimit(-1, -1);
 }
 
-QString ExtendedSqlTableModel::selectStatement() const
+QString DictionaryModel::selectStatement() const
 {
     QString sql = QSqlTableModel::selectStatement();
 

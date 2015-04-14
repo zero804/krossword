@@ -24,7 +24,7 @@
 #include "ui_clue_properties_dock.h"
 #include <global.h>
 
-class KrosswordDictionary;
+class DictionaryManager;
 namespace Crossword
 {
 class ClueCell;
@@ -36,7 +36,7 @@ class ClueCellWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit ClueCellWidget(ClueCell *clueCell, KrosswordDictionary *dictionary = NULL,
+    explicit ClueCellWidget(ClueCell *clueCell, DictionaryManager *dictionary = NULL,
                             QWidget* parent = 0);
 
     void setClue(ClueCell *clueCell);

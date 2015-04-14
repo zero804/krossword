@@ -30,10 +30,10 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-CurrentCellWidget::CurrentCellWidget(KrossWord *krossWord,
-                                     KrosswordDictionary *dictionary,
-                                     QWidget* parent)
-    : QWidget(parent), m_krossWord(0), m_dictionary(dictionary),
+CurrentCellWidget::CurrentCellWidget(KrossWord *krossWord, DictionaryManager *dictionary, QWidget* parent)
+    : QWidget(parent),
+      m_krossWord(0),
+      m_dictionaryManager(dictionary),
       m_currentCell(0)
 {
     m_convertToSolutionLetter = NULL;
@@ -241,7 +241,7 @@ void CurrentCellWidget::setupClueCell(ClueCell* clue, LetterCell *letter)
 
         ClueCellWidgetWithConvertButton *w;
         if (!m_widgets.contains(ClueCellType)) {
-            w = new ClueCellWidgetWithConvertButton(clue, m_dictionary, letter);
+            w = new ClueCellWidgetWithConvertButton(clue, m_dictionaryManager, letter);
             connect(w->clueCellWidget(),
                     SIGNAL(changeAnswerOffsetRequest(ClueCell*, AnswerOffset)),
                     this, SLOT(changeAnswerOffsetRequested(ClueCell*, AnswerOffset)));
@@ -408,7 +408,7 @@ void CurrentCellWidget::clearLayout()
 
 
 ClueCellWidgetWithConvertButton::ClueCellWidgetWithConvertButton(
-    ClueCell* clue, KrosswordDictionary *dictionary,
+    ClueCell* clue, DictionaryManager *dictionary,
     LetterCell* letter, QWidget* parent)
     : QWidget(parent), m_letterCell(0),
       m_convertToSolLetterButton(0), m_hLine(0)

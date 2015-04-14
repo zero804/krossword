@@ -17,10 +17,11 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "dictionarydialog.h"
-#include "extendedsqltablemodel.h"
+#include "dictionarygui.h"
+#include "dictionarymodel.h"
+#include "dictionarymanager.h"
+
 #include "htmldelegate.h"
-#include "dictionary.h"
 
 #include <QPropertyAnimation>
 
@@ -31,76 +32,76 @@
 #include <KFileDialog>
 
 
-DictionaryDialog::DictionaryDialog(KrosswordDictionary* dictionary, QWidget* parent)
-    : QDialog(parent), m_dictionary(dictionary), m_infoMessage(0)
+DictionaryGui::DictionaryGui(DictionaryManager* dictionary, QWidget* parent)
+    : QDialog(parent),
+      m_dictionaryManager(dictionary),
+      m_infoMessage(0)
 {
     setWindowTitle(i18n("Dictionary"));
-    ui_dictionaries.setupUi(this);;
+    ui_dictionarygui.setupUi(this);;
     setWindowIcon(KIcon("crossword-dictionary"));
     setModal(true);
 
-    ui_dictionaries.extractFromLibrary->setIcon(KIcon("extract-from-library"));
-    ui_dictionaries.extractFromCrosswords->setIcon(KIcon("extract-from-crosswords"));
-    ui_dictionaries.addWordsFromDictionary->setIcon(KIcon("list-add"));
-    ui_dictionaries.addEntry->setIcon(KIcon("list-add"));
-    ui_dictionaries.removeEntries->setIcon(KIcon("list-remove"));
-    ui_dictionaries.clear->setIcon(KIcon("edit-clear"));
-    ui_dictionaries.importFromCSV->setIcon(KIcon("document-import"));
-    ui_dictionaries.exportToCSV->setIcon(KIcon("document-export"));
+    ui_dictionarygui.extractFromLibrary->setIcon(KIcon("extract-from-library"));
+    ui_dictionarygui.extractFromCrosswords->setIcon(KIcon("extract-from-crosswords"));
+    ui_dictionarygui.addWordsFromDictionary->setIcon(KIcon("list-add"));
+    ui_dictionarygui.addEntry->setIcon(KIcon("list-add"));
+    ui_dictionarygui.removeEntries->setIcon(KIcon("list-remove"));
+    ui_dictionarygui.clear->setIcon(KIcon("edit-clear"));
+    ui_dictionarygui.importFromCSV->setIcon(KIcon("document-import"));
+    ui_dictionarygui.exportToCSV->setIcon(KIcon("document-export"));
 
-    m_dbTable = m_dictionary->createModel();
-    m_dbTable->select();
+    m_dictionaryModel = m_dictionaryManager->getModel();
 
-    ui_dictionaries.tableDictionary->setModel(m_dbTable);
-    ui_dictionaries.tableDictionary->hideColumn(0);   // Hide id
-    ui_dictionaries.tableDictionary->hideColumn(3);   // Hide score
-    ui_dictionaries.tableDictionary->hideColumn(4);   // Hide language
-    ui_dictionaries.tableDictionary->setItemDelegateForColumn(1, new CrosswordAnswerDelegate);  // Set delegate for column 'answer'
-    ui_dictionaries.removeEntries->setDisabled(true);
+    ui_dictionarygui.tableDictionary->setModel(m_dictionaryModel);
+    ui_dictionarygui.tableDictionary->hideColumn(0);   // Hide id
+    ui_dictionarygui.tableDictionary->hideColumn(3);   // Hide score
+    ui_dictionarygui.tableDictionary->hideColumn(4);   // Hide language
+    ui_dictionarygui.tableDictionary->setItemDelegateForColumn(1, new CrosswordAnswerDelegate);  // Set delegate for column 'answer'
+    ui_dictionarygui.removeEntries->setDisabled(true);
 
-    connect(ui_dictionaries.addEntry, SIGNAL(clicked()),
+    connect(ui_dictionarygui.addEntry, SIGNAL(clicked()),
             this, SLOT(addEntryClicked()));
-    connect(ui_dictionaries.extractFromCrosswords, SIGNAL(clicked()),
+    connect(ui_dictionarygui.extractFromCrosswords, SIGNAL(clicked()),
             this, SLOT(addDictionaryFromCrosswordsClicked()));
-    connect(ui_dictionaries.extractFromLibrary, SIGNAL(clicked()),
+    connect(ui_dictionarygui.extractFromLibrary, SIGNAL(clicked()),
             this, SLOT(addDictionaryFromLibraryClicked()));
-    connect(ui_dictionaries.addWordsFromDictionary, SIGNAL(clicked()),
+    connect(ui_dictionarygui.addWordsFromDictionary, SIGNAL(clicked()),
             this, SLOT(getWordsFromDictionaryClicked()));
-    connect(ui_dictionaries.removeEntries, SIGNAL(clicked()),
+    connect(ui_dictionarygui.removeEntries, SIGNAL(clicked()),
             this, SLOT(removeEntriesClicked()));
-    connect(ui_dictionaries.clear, SIGNAL(clicked()),
+    connect(ui_dictionarygui.clear, SIGNAL(clicked()),
             this, SLOT(clearClicked()));
-    connect(ui_dictionaries.importFromCSV, SIGNAL(clicked()),
+    connect(ui_dictionarygui.importFromCSV, SIGNAL(clicked()),
             this, SLOT(importFromCsvClicked()));
-    connect(ui_dictionaries.exportToCSV, SIGNAL(clicked()),
+    connect(ui_dictionarygui.exportToCSV, SIGNAL(clicked()),
             this, SLOT(exportToCsvClicked()));
-    connect(ui_dictionaries.filter, SIGNAL(textChanged(QString)),
+    connect(ui_dictionarygui.filter, SIGNAL(textChanged(QString)),
             this, SLOT(filterChanged(QString)));
-    connect(ui_dictionaries.tableDictionary->selectionModel(),
+    connect(ui_dictionarygui.tableDictionary->selectionModel(),
             SIGNAL(selectionChanged(QItemSelection, QItemSelection)),
             this, SLOT(tableSelectionChanged(QItemSelection, QItemSelection)));
 }
 
-void DictionaryDialog::tableSelectionChanged(const QItemSelection& selected,
-        const QItemSelection& deselected)
+void DictionaryGui::tableSelectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
 {
     Q_UNUSED(selected);
     Q_UNUSED(deselected);
-    ui_dictionaries.removeEntries->setEnabled(
-        !ui_dictionaries.tableDictionary->selectionModel()->selectedIndexes().isEmpty());
+    ui_dictionarygui.removeEntries->setEnabled(
+        !ui_dictionarygui.tableDictionary->selectionModel()->selectedIndexes().isEmpty());
 }
 
-void DictionaryDialog::addEntryClicked()
+void DictionaryGui::addEntryClicked()
 {
-    int row = m_dbTable->rowCount();
-    if (m_dbTable->insertRecord(row, m_dbTable->record())) {
-        QModelIndex index = m_dbTable->index(row, 0);
-        ui_dictionaries.tableDictionary->setCurrentIndex(index);
-        ui_dictionaries.tableDictionary->scrollToBottom();
+    int row = m_dictionaryModel->rowCount();
+    if (m_dictionaryModel->insertRecord(row, m_dictionaryModel->record())) {
+        QModelIndex index = m_dictionaryModel->index(row, 0);
+        ui_dictionarygui.tableDictionary->setCurrentIndex(index);
+        ui_dictionarygui.tableDictionary->scrollToBottom();
     }
 }
 
-void DictionaryDialog::showInfoMessage(const QString& infoMessage)
+void DictionaryGui::showInfoMessage(const QString& infoMessage)
 {
     if (m_infoMessage)
         m_infoMessage->close();
@@ -113,11 +114,11 @@ void DictionaryDialog::showInfoMessage(const QString& infoMessage)
     m_infoMessage->setBackgroundRole(QPalette::ToolTipBase);
     m_infoMessage->setForegroundRole(QPalette::ToolTipText);
     m_infoMessage->setWordWrap(true);
-    m_infoMessage->setMaximumWidth(ui_dictionaries.tableDictionary->width() - 10);
+    m_infoMessage->setMaximumWidth(ui_dictionarygui.tableDictionary->width() - 10);
 
     QSize size = m_infoMessage->sizeHint();
-    QRect rect = QRect(ui_dictionaries.tableDictionary->mapToGlobal(
-                           ui_dictionaries.tableDictionary->rect().bottomLeft() + QPoint(5, -size.height() - 5)), size);
+    QRect rect = QRect(ui_dictionarygui.tableDictionary->mapToGlobal(
+                           ui_dictionarygui.tableDictionary->rect().bottomLeft() + QPoint(5, -size.height() - 5)), size);
 
     QRect rectStart = rect.adjusted(0, rect.height(), 0, 0);
     m_infoMessage->setGeometry(rectStart);
@@ -131,7 +132,7 @@ void DictionaryDialog::showInfoMessage(const QString& infoMessage)
     QTimer::singleShot(3000, this, SLOT(hideInfoMessage()));
 }
 
-void DictionaryDialog::hideInfoMessage()
+void DictionaryGui::hideInfoMessage()
 {
     if (!m_infoMessage)
         return;
@@ -147,7 +148,7 @@ void DictionaryDialog::hideInfoMessage()
     m_infoMessage = NULL;
 }
 
-void DictionaryDialog::getWordsFromDictionaryClicked()
+void DictionaryGui::getWordsFromDictionaryClicked()
 {
     KUrl startDir;
     if (QDir("/usr/share/dict").exists())
@@ -157,26 +158,23 @@ void DictionaryDialog::getWordsFromDictionaryClicked()
     else
         startDir = KUrl("kfiledialog:///addDictionary");
     QString fileName = KFileDialog::getOpenFileName(startDir, QString(), this);
-    if (fileName.isEmpty())
+    if (fileName.isEmpty()) {
         return;
+    }
 
-    int i = m_dictionary->addEntriesFromDictionary(fileName, this);
+    int i = m_dictionaryManager->importFromDictionary(fileName, this);
     showInfoMessage(i18n("%1 entries added from this dictionary: '%2'", i, fileName));
-
-    m_dbTable->select();
 }
 
-void DictionaryDialog::addDictionaryFromLibraryClicked()
+void DictionaryGui::addDictionaryFromLibraryClicked()
 {
     QStringList libraryFiles = KGlobal::dirs()->findAllResources("appdata", "library/*.kwp?",
                                KStandardDirs::NoDuplicates | KStandardDirs::Recursive);
-    int i = m_dictionary->addEntriesFromCrosswords(libraryFiles, this);
+    int i = m_dictionaryManager->importFromCrosswords(libraryFiles, this);
     showInfoMessage(i18n("%1 entries added from %2 crosswords", i, libraryFiles.count()));
-
-    m_dbTable->select();
 }
 
-void DictionaryDialog::addDictionaryFromCrosswordsClicked()
+void DictionaryGui::addDictionaryFromCrosswordsClicked()
 {
     QStringList fileNames = KFileDialog::getOpenFileNames(KUrl(),
                             "application/x-krosswordpuzzle "
@@ -185,39 +183,37 @@ void DictionaryDialog::addDictionaryFromCrosswordsClicked()
     if (fileNames.isEmpty())
         return;
 
-    int i = m_dictionary->addEntriesFromCrosswords(fileNames, this);
+    int i = m_dictionaryManager->importFromCrosswords(fileNames, this);
     showInfoMessage(i18n("%1 entries added from %2 crosswords", i, fileNames.count()));
-
-    m_dbTable->select();
 }
 
-void DictionaryDialog::removeEntriesClicked()
+void DictionaryGui::removeEntriesClicked()
 {
-    QItemSelectionModel *selModel = ui_dictionaries.tableDictionary->selectionModel();
+    QItemSelectionModel *selModel = ui_dictionarygui.tableDictionary->selectionModel();
     QModelIndexList selectedRows = selModel->selectedRows();
-    if (selectedRows.isEmpty())
+    if (selectedRows.isEmpty()) {
         return;
+    }
 
-    foreach(const QModelIndex & index, selectedRows)
-    m_dbTable->removeRow(index.row());
+    foreach(const QModelIndex & index, selectedRows) {
+        m_dictionaryModel->removeRow(index.row());
+    }
 
-    if (!m_dbTable->submitAll())
-        showInfoMessage(i18n("Couldn't submit removed entries to the database: %1",
-                             m_dbTable->lastError().text()));
-    else
-        showInfoMessage(i18np("%1 entry removed", "%1 entries removed",
-                              selectedRows.count()));
+    if (!m_dictionaryModel->submitAll()) {
+        showInfoMessage(i18n("Couldn't submit removed entries to the database: %1", m_dictionaryModel->lastError().text()));
+    } else {
+        showInfoMessage(i18np("%1 entry removed", "%1 entries removed", selectedRows.count()));
+    }
 }
 
-void DictionaryDialog::clearClicked()
+void DictionaryGui::clearClicked()
 {
-    m_dictionary->clearDatabase();
-    m_dbTable->select();
+    m_dictionaryManager->clearDatabase();
 
     showInfoMessage(i18n("Dictionary cleared"));
 }
 
-void DictionaryDialog::exportToCsvClicked()
+void DictionaryGui::exportToCsvClicked()
 {
     QString fileName;
     QPointer<KFileDialog> fileDlg = new KFileDialog(KUrl(), QString(), this);
@@ -232,34 +228,32 @@ void DictionaryDialog::exportToCsvClicked()
     if (fileName.isEmpty())
         return;
 
-    bool result = m_dictionary->exportToCsv(fileName);
+    bool result = m_dictionaryManager->exportToCsv(fileName);
     if (!result)
         showInfoMessage(i18n("There was an error while exporting to '%1'", fileName));
     else
         showInfoMessage(i18n("Export to '%1' was successful", fileName));
 }
 
-void DictionaryDialog::importFromCsvClicked()
+void DictionaryGui::importFromCsvClicked()
 {
     QString fileName = KFileDialog::getOpenFileName(KUrl(), QString(),
                        this, i18n("Import From CSV"));
     if (fileName.isEmpty())
         return;
 
-    int i = m_dictionary->importFromCsv(fileName, this);
+    int i = m_dictionaryManager->importFromCsv(fileName, this);
     if (i == -1)
         showInfoMessage(i18n("There was an error while importing from '%1'", fileName));
     else {
-        m_dbTable->select();
+        m_dictionaryModel->select();
         showInfoMessage(i18np("%1 entry imported from '%2'",
                               "%1 entries imported from '%2'", i, fileName));
     }
 }
 
-void DictionaryDialog::filterChanged(const QString& filter)
+void DictionaryGui::filterChanged(const QString& filter)
 {
-    m_dbTable->submitAll(); // submit possible changes
-    m_dbTable->setFilter(QString("word LIKE '%%1%'").arg(filter));
+    m_dictionaryModel->submitAll(); // submit possible changes
+    m_dictionaryModel->setFilter(QString("word LIKE '%%1%'").arg(filter));
 }
-
-

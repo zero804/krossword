@@ -17,17 +17,27 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef LIBRARYMODEL_H
-#define LIBRARYMODEL_H
+#ifndef DICTIONARYMODEL_H
+#define DICTIONARYMODEL_H
 
-#include <QStandardItemModel>
-#include <QDebug>
+#include <QSqlTableModel>
 
-// TODO
-class LibraryModel : public QStandardItemModel
+class DictionaryModel : public QSqlTableModel
 {
+    Q_OBJECT
+
 public:
-    LibraryModel(QObject* parent = 0);
+    explicit DictionaryModel(QObject* parent = 0, QSqlDatabase db = QSqlDatabase());
+
+    void setLimit(int lowerLimit, int upperLimit);
+    void removeLimit();
+
+protected:
+    virtual QString selectStatement() const;
+
+private:
+    int m_lowerLimit;
+    int m_upperLimit;
 };
 
-#endif // LIBRARYMODEL_H
+#endif // DICTIONARYMODEL_H
