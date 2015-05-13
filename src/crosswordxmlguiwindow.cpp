@@ -511,7 +511,8 @@ void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
     case ShowingCongratulations:
         m_animation->setCurrentTime(0);
         m_animation->stop();
-        m_animation = NULL;
+        disconnect(m_animation, SIGNAL(finished()), this, SLOT(addAnimation()));
+        m_animation = nullptr;
 
         m_view->scene()->removeItem(m_winItems);
 //      m_winItems->deleteLater();
@@ -546,6 +547,8 @@ void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
         m_zoomWidget->setEnabled(true);
         m_solutionProgress->setEnabled(true);
         m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
+
+        m_animationCellList = krossWord()->cells();
 
         setDefaultCursor();
         action(actionName(Move_Eraser))->setChecked(false);
@@ -2050,126 +2053,56 @@ void CrossWordXmlGuiWindow::hideCongratulations()
 
 void CrossWordXmlGuiWindow::showCongratulationsItems()
 {
-    /*
-    // Add text item
-    QFont font = KGlobalSettings::largeFont();
-    //font.setPixelSize(30);
-    font.setBold(true);
-    QLabel *label = new QLabel("<span style='color:darkred;'><center>Congratulations!<br>You solved the crossword perfectly.</center></span>");
-    label->setFont(font);
-    label->setWordWrap(true);
-    QGraphicsProxyWidget *labelItem = m_view->scene()->addWidget(label);
-
-    QFont font2(font);
-    font.setPixelSize(20);
-    QPushButton *btnContinue = new QPushButton;
-    //KGuiItem::assign(btnContinue,KStandardGuiItem::cont()); //added by convert-kpushbutton.pl << reactivate with kf5
-    btnContinue->setIconSize(QSize(32, 32));
-    btnContinue->setFont(font2);
-    QGraphicsProxyWidget *btnContinueItem = m_view->scene()->addWidget(btnContinue);
-    btnContinueItem->setZValue(1001);
-    connect(btnContinue, SIGNAL(clicked()), this, SLOT(hideCongratulations()));
-
-    // Create a layout
-    QGraphicsGridLayout *layout = new QGraphicsGridLayout;
-    layout->addItem(labelItem, 0, 0);
-    layout->addItem(btnContinueItem, 1, 0, Qt::AlignCenter);
-
-    QFrame *frame = new QFrame;
-    frame->setFrameShape(QFrame::Panel);
-
-    if (m_winItems) {
-        m_winItems->setWidget(frame);
-        m_view->scene()->addItem(m_winItems);
-    } else {
-        m_winItems = m_view->scene()->addWidget(frame);
-    }
-    m_winItems->setLayout(layout);
-    m_winItems->setZValue(1000);   // On top of all other items in the scene
-
-    layout->activate();
-    m_view->fitInView(layout->contentsRect().adjusted(-150, -150, 150, 150), Qt::KeepAspectRatio);
-    */
-
     // Animate using QtKinetic
     m_animation = new QParallelAnimationGroup(this);
-    m_animation->setLoopCount(-1);
+    m_animation->setLoopCount(1);
 
-
-    KrossWordCellList cellList = krossWord()->cells();
-    std::random_shuffle(cellList.begin(), cellList.end());
-
-    for (unsigned int i = 0; i < cellList.size(); i += 2) {
-        if (i != cellList.size() - 1) {
-            KrossWordCell * cell1 = cellList.at(i);
-            KrossWordCell * cell2 = cellList.at(i + 1);
-
-            QPropertyAnimation *cellAnimPos1 = new QPropertyAnimation(cell1, "pos");
-            QPropertyAnimation *cellAnimPos2 = new QPropertyAnimation(cell2, "pos");
-
-            cellAnimPos1->setDuration(10000);
-            cellAnimPos1->setStartValue(cell1->pos());
-
-            cellAnimPos2->setDuration(10000);
-            cellAnimPos2->setStartValue(cell2->pos());
-
-
-            cellAnimPos1->setKeyValueAt(0.4, cell2->pos());
-            cellAnimPos2->setKeyValueAt(0.4, cell1->pos());
-
-
-            cellAnimPos1->setKeyValueAt(0.6, cell2->pos());
-            cellAnimPos2->setKeyValueAt(0.6, cell1->pos());
-
-
-            cellAnimPos1->setEndValue(cell1->pos());
-            cellAnimPos1->setEasingCurve(QEasingCurve::InOutQuad);
-
-            cellAnimPos2->setEndValue(cell2->pos());
-            cellAnimPos2->setEasingCurve(QEasingCurve::InOutQuad);
-
-            m_animation->addAnimation(cellAnimPos1);
-            m_animation->addAnimation(cellAnimPos2);
-
-            float r1 = (float)KRandom::random() / (float)RAND_MAX - 0.5f;
-            float r2 = (float)KRandom::random() / (float)RAND_MAX - 0.5f;
-            float r3 = (float)KRandom::random() / (float)RAND_MAX - 0.5f;
-            float r4 = (float)KRandom::random() / (float)RAND_MAX - 0.5f;
-
-            QPropertyAnimation *cellAnimRot1 = new QPropertyAnimation(cell1, "rotation");
-            QPropertyAnimation *cellAnimRot2 = new QPropertyAnimation(cell2, "rotation");
-
-            cellAnimRot1->setDuration(10000);
-            cellAnimRot1->setStartValue(cell1->rotation());
-            cellAnimRot1->setEndValue(cell1->rotation());
-            cellAnimRot1->setEasingCurve(QEasingCurve::InOutQuad);
-
-            cellAnimRot1->setKeyValueAt(0.2, cell1->rotation() + r1 * 50);
-            cellAnimRot2->setKeyValueAt(0.2, cell2->rotation() + r1 * 50);
-
-            cellAnimRot1->setKeyValueAt(0.4, cell1->rotation());
-            cellAnimRot2->setKeyValueAt(0.4, cell2->rotation());
-            cellAnimRot1->setKeyValueAt(0.6, cell1->rotation());
-            cellAnimRot2->setKeyValueAt(0.6, cell2->rotation());
-
-            cellAnimRot1->setKeyValueAt(0.8, cell1->rotation() + r1 * 50);
-            cellAnimRot2->setKeyValueAt(0.8, cell2->rotation() + r1 * 50);
-
-            cellAnimRot2->setDuration(10000);
-            cellAnimRot2->setStartValue(cell2->rotation());
-            cellAnimRot2->setEndValue(cell2->rotation());
-            cellAnimRot2->setEasingCurve(QEasingCurve::InOutQuad);
-
-            m_animation->addAnimation(cellAnimRot1);
-            m_animation->addAnimation(cellAnimRot2);
-        }
-    }
-
-    m_animation->start(QAbstractAnimation::DeleteWhenStopped);
+    connect(m_animation, SIGNAL(finished()), this, SLOT(addAnimation()));
+    addAnimation();
 
     // show the congratulations...
     // MESSAGEBOX WILL BE REPLACED WITH SOMETHING BETTER
     KMessageBox::information(this, i18n("Congratulations!\nYou solved the crossword perfectly."));
+}
+
+QList<QPropertyAnimation *> CrossWordXmlGuiWindow::makeAnimation()
+{
+    std::random_shuffle(m_animationCellList.begin(), m_animationCellList.end());
+
+    QList<QPropertyAnimation*> ret_list;
+
+    for (int i = 0; i < m_animationCellList.size(); i += 2) {
+        if (i != m_animationCellList.size() - 1) {
+            KrossWordCell* cell1 = m_animationCellList.at(i);
+            KrossWordCell* cell2 = m_animationCellList.at(i + 1);
+
+            QPropertyAnimation *cellAnimPos1 = new QPropertyAnimation(cell1, "pos");
+            QPropertyAnimation *cellAnimPos2 = new QPropertyAnimation(cell2, "pos");
+
+            cellAnimPos1->setDuration(5000);
+            cellAnimPos1->setStartValue(cell1->pos());
+
+            cellAnimPos2->setDuration(5000);
+            cellAnimPos2->setStartValue(cell2->pos());
+
+            cellAnimPos1->setKeyValueAt(0.75, cell2->pos());
+            cellAnimPos2->setKeyValueAt(0.75, cell1->pos());
+
+            cellAnimPos1->setEndValue(cell2->pos());
+            cellAnimPos1->setEasingCurve(QEasingCurve::InOutQuad);
+
+            cellAnimPos2->setEndValue(cell1->pos());
+            cellAnimPos2->setEasingCurve(QEasingCurve::InOutQuad);
+
+            ret_list.append(cellAnimPos1);
+            ret_list.append(cellAnimPos2);
+
+            auto old_pos = cell1->pos();
+            cell1->setPos(cell2->pos());
+            cell2->setPos(old_pos);
+        }
+    }
+    return ret_list;
 }
 
 void CrossWordXmlGuiWindow::fitToPageSlot()
@@ -2860,6 +2793,17 @@ void CrossWordXmlGuiWindow::letterEditRequest(LetterCell* letter, const QChar &c
         letter->setCurrentLetter(newLetter);
         setModificationType(ModifiedState);
     }
+}
+
+void CrossWordXmlGuiWindow::addAnimation()
+{
+    m_animation->clear();
+    auto list = makeAnimation();
+    for (int j = 0; j < list.size(); ++j) {
+        m_animation->addAnimation(list.at(j));
+    }
+
+    m_animation->start(QAbstractAnimation::KeepWhenStopped);
 }
 
 void CrossWordXmlGuiWindow::clueMappingCurrentLetterChanged(
