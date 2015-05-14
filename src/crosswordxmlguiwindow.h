@@ -391,8 +391,10 @@ protected slots:
     void solutionWordLetterAdded(SolutionLetterCell *solutionLetter);
     void solutionWordLetterAboutToBeRemoved(SolutionLetterCell *solutionLetter);
 
-    void letterEditRequest(LetterCell* letter,
-                           const QChar &currentLetter, const QChar &newLetter);
+    void letterEditRequest(LetterCell* letter, const QChar &currentLetter, const QChar &newLetter);
+
+private slots:
+    void addAnimation();
 
 private:
     KrossWordPuzzleView *createKrossWordPuzzleView();
@@ -416,6 +418,7 @@ private:
     void setCurrentFileName(const QString &fileName = QString());
 
     void showCongratulationsItems();
+    QList<QPropertyAnimation*> makeAnimation();
 
     QMenu *popupMenuCrosswordLetterCell();
     QMenu *popupMenuCrosswordClueCell();
@@ -464,6 +467,8 @@ private:
     bool m_undoStackLoaded;
 
     QParallelAnimationGroup *m_animation;       // Owned
+
+    KrossWordCellList m_animationCellList;
 };
 
 #endif // CROSSWORDXMLGUIWINDOW_H
