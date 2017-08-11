@@ -48,7 +48,7 @@ kconfig_add_kcfg_files(krossword_SRCS settings.kcfgc)
 
 add_executable(krossword ${krossword_SRCS})
 
-target_link_libraries(krossword Qt5::Widgets Qt5::Sql)
+target_link_libraries(krossword Qt5::Widgets Qt5::Sql KF5::XmlGui KF5::I18n)
 
 install(TARGETS krossword ${INSTALL_TARGETS_DEFAULT_ARGS})
 
