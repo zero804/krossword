@@ -20,7 +20,6 @@
 #include "answerwidget.h"
 #include <KLocalizedString>
 #include <QFocusEvent>
-#include <QDebug>
 
 AnswerWidget::AnswerWidget(QWidget* parent)
     : KLineEdit(parent)

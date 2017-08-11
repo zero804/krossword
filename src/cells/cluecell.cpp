@@ -27,7 +27,6 @@
 #include <QFocusEvent>
 #include <QStyleOption>
 #include <QGraphicsScene>
-#include <QTextLayout>
 #include <QPainter>
 #include <qmath.h>
 

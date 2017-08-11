@@ -28,13 +28,11 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
 #include <QApplication>
-#include <QTimer>
 #include <QStyleOption>
 #include <QPainter>
 
 #include <QPropertyAnimation>
 #include <kglobalsettings.h>
-#include <KAction>
 
 namespace Crossword
 {

@@ -22,7 +22,6 @@
 
 #include <QPixmap>
 
-#include <QDebug>
 
 class KgTheme;
 class KGameRenderer;

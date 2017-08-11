@@ -21,8 +21,6 @@
 #define HTMLDELEGATE_H
 
 #include <QStyledItemDelegate>
-#include <QItemDelegate>
-#include <QDebug>
 #include "krossword.h"
 
 

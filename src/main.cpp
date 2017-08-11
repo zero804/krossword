@@ -19,7 +19,7 @@
 
 #include "krosswordpuzzle.h"
 #include <kapplication.h>
-#include <kaboutdata.h>
+#include <K4AboutData>
 #include <kcmdlineargs.h>
 #include <KDE/KLocale>
 
@@ -29,8 +29,8 @@ static const char description[] =
 static const char version[] = "0.18.2 alpha 3";
 
 int main(int argc, char **argv){
-    KAboutData about("krossword", 0, ki18n("Krossword"), version,
-                     ki18n(description), KAboutData::License_GPL_V2,
+    K4AboutData about("krossword", 0, ki18n("Krossword"), version,
+                     ki18n(description), K4AboutData::License_GPL_V2,
                      ki18n("© 2014 Andrea Barazzetti\n© 2014 Giacomo Barazzetti\n© 2009 Friedrich Pülz"), KLocalizedString(), 0, "http://kde-apps.org/content/show.php/Krossword?content=166281");
 
     about.addAuthor(ki18n("Andrea Barazzetti"), ki18n("Developer"), "andreadevsrv@gmail.com");

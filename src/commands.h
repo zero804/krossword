@@ -28,7 +28,6 @@
 #include <KUrl>
 #include "krossword.h"
 #include <QtCore/QString>
-#include <QBuffer>
 
 namespace Crossword
 {

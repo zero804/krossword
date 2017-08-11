@@ -25,7 +25,6 @@
 #include <QPropertyAnimation>
 #include <QGraphicsScene>
 #include <QPainter>
-#include <QDateTime>
 #include <QParallelAnimationGroup>
 
 namespace Crossword

@@ -21,7 +21,6 @@
 #define LIBRARYMODEL_H
 
 #include <QStandardItemModel>
-#include <QDebug>
 
 // TODO
 class LibraryModel : public QStandardItemModel

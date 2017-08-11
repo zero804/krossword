@@ -26,7 +26,6 @@
 
 #include <QWidgetAction>
 #include <QMenu>
-#include <QSqlError>
 
 #include <KCharSelect>
 

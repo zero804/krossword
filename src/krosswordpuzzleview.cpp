@@ -20,7 +20,6 @@
 #include "krosswordpuzzleview.h"
 #include "settings.h"
 #include "krosswordrenderer.h"
-#include <QDebug>
 
 
 KrossWordPuzzleView::KrossWordPuzzleView(KrossWordPuzzleScene *scene, QWidget *parent)

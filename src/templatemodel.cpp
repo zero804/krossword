@@ -20,7 +20,6 @@
 #include "templatemodel.h"
 
 #include <QFileSystemModel>
-#include <QDebug>
 
 TemplateModel::TemplateModel(QObject* parent)
     : QSortFilterProxyModel(parent)

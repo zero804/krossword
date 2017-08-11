@@ -26,7 +26,6 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
-#include <QBitmap>
 #include <QStyleOption>
 #include <qevent.h>
 

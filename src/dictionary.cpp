@@ -26,20 +26,15 @@
 #include <QFile>
 #include <QTextStream>
 #include <QRegExp>
-#include <QMetaType>
-#include <QListWidget>
-#include <QStandardItemModel>
 #include <QSqlDatabase>
 #include <QVBoxLayout>
 #include <QProgressBar>
 #include <QLabel>
-#include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlRecord>
 
 #include <QDebug>
 #include <KUrl>
-#include <KStandardGuiItem>
 #include <KMessageBox>
 #include <QDialog>
 

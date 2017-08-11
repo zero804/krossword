@@ -24,7 +24,6 @@
 #include <KMessageBox>
 
 #include <QStandardItemModel>
-#include <QFileSystemModel>
 #include <KStandardDirs>
 #include <templatemodel.h>
 #include <io/krosswordxmlreader.h>

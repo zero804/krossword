@@ -32,9 +32,7 @@
 
 #include <KMessageBox>
 #include <KFileDialog>
-#include <KActionMenu>
 #include <KIO/CopyJob>
-#include <KMenuBar>
 #include <KActionCollection>
 #include <KIO/PreviewJob>
 #include <KStandardDirs>

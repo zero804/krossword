@@ -20,12 +20,10 @@
 #ifndef ANIMATOR_H
 #define ANIMATOR_H
 
-#include <QList>
 #include <QGraphicsPixmapItem>
 #include <QVariantAnimation>
 #include <QParallelAnimationGroup>
 
-#include <QDebug>
 
 namespace Crossword
 {

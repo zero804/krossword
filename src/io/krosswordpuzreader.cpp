@@ -25,7 +25,6 @@
 #include "cells/lettercell.h"
 
 #include <QIODevice>
-#include <QStringList>
 #include <qtextcodec.h>
 #include <qbuffer.h>
 

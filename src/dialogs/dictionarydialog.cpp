@@ -25,8 +25,6 @@
 #include <QPropertyAnimation>
 
 #include <QTimer>
-#include <QSqlRecord>
-#include <QSqlError>
 #include <KStandardDirs>
 #include <KFileDialog>
 

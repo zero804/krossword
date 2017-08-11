@@ -25,7 +25,6 @@
 #include <KConfigDialog>
 #include <KMessageBox>
 #include <KStatusBar>
-#include <KMenuBar>
 #include <QStackedWidget>
 #include <KgThemeSelector>
 #include <KShortcutsDialog>

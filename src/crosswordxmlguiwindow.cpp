@@ -41,7 +41,6 @@
 #include <KActionCollection>
 
 #include <KToolBar>
-#include <KMenuBar>
 #include <KUrl>
 #include <KLocalizedString>
 #include <KStandardGuiItem>
