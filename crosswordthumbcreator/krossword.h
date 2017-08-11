@@ -27,7 +27,7 @@
 #include "cells/cluecell.h"
 #include <KLocalizedString>
 
-#include <KUrl>
+#include <QUrl>
 
 #include <QGraphicsObject>
 
@@ -128,7 +128,7 @@ public:
     * @param url The URL to the file to read.
     * @param errorString Contains a string describing the error, if false was returned.
     * @return False, if there was an error. */
-    bool read(const KUrl &url, QString *errorString = NULL,
+    bool read(const QUrl &url, QString *errorString = NULL,
               FileFormat fileFormat = DetermineByFileName);
 
     static FileFormat fileFormatFromFileName(const QString &fileName);
@@ -172,7 +172,7 @@ public:
                             SpannedCell* excludedSpannedCell = NULL) const;
 
     ErrorType insertImage(const KGrid2D::Coord &coord,
-                          int horizontalCellSpan, int verticalCellSpan, KUrl url,
+                          int horizontalCellSpan, int verticalCellSpan, QUrl url,
                           ErrorTypes correctnessesToIgnore = DontIgnoreErrors,
                           ImageCell **insertedImage = NULL);
 

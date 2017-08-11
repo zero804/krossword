@@ -60,7 +60,7 @@ QVariant LibraryManager::data(const QModelIndex &index, int role) const
 
         if(fi.isFile()) {
             QString errorString;
-            KrossWordXmlReader::KrossWordInfo info = KrossWordXmlReader::readInfo(KUrl(libraryItem), &errorString);
+            KrossWordXmlReader::KrossWordInfo info = KrossWordXmlReader::readInfo(QUrl::fromLocalFile(libraryItem), &errorString);
             if (!info.isValid()) {
                 qDebug() << "Error reading crossword info from library file" << errorString;
             }
@@ -130,7 +130,7 @@ void LibraryManager::loadThumbnailsSlot(const QString &path)
         if(fileIndex.data(QFileSystemModel::FilePathRole).toString().startsWith(path + "/")) {
             QUrl url = fileIndex.data(QFileSystemModel::FilePathRole).toUrl();
             url.setScheme("file");
-            fileItemList.append(KFileItem(KFileItem::Unknown, KFileItem::Unknown, KUrl(url), true));
+            fileItemList.append(KFileItem(KFileItem::Unknown, KFileItem::Unknown, QUrl::fromLocalFile(url), true));
         }
     }
 
@@ -210,7 +210,7 @@ LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QStri
     Crossword::KrossWord krossWord;
     QString errorString;
 
-    if (!krossWord.read(KUrl(url), &errorString/*, this*/)) {
+    if (!krossWord.read(QUrl::fromLocalFile(url), &errorString/*, this*/)) {
         qDebug() << "addCrossword() reading error:" << errorString;
         outAddedCrosswordFilename = QString();
         return E_ERROR_TYPE::ReadError;
@@ -238,7 +238,7 @@ LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QStri
             return E_ERROR_TYPE::WriteError;
         } else {
             outAddedCrosswordFilename = saveFileName;
-            m_crosswordsHash.insert(QUrl(saveFileName).path(), calculate_file_hash(saveFileName));
+            m_crosswordsHash.insert(QUrl::fromLocalFile(saveFileName).path(), calculate_file_hash(saveFileName));
             return E_ERROR_TYPE::Succeeded;
         }
     }

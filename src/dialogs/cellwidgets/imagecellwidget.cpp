@@ -58,7 +58,7 @@ void ImageCellWidget::setImageCell(ImageCell* imageCell)
 
 void ImageCellWidget::browseClicked()
 {
-    KUrl imageUrl = KFileDialog::getOpenUrl(KUrl("kfiledialog:///openImage"),
+    QUrl imageUrl = KFileDialog::getOpenUrl(QUrl::fromLocalFile("kfiledialog:///openImage"),
                                             "image/gif image/x-xpm image/x-xbm image/jpeg image/x-bmp image/png "
                                             "image/x-ico image/x-portable-bitmap image/x-portable-pixmap "
                                             "image/x-portable-greymap image/tiff image/jp2", this);

@@ -31,7 +31,7 @@ class PreviewJob;
 }
 
 class LibraryGui;
-class KUrl;
+class QUrl;
 class QStackedWidget;
 
 /**
@@ -52,7 +52,7 @@ public:
 
     QSize sizeHint() const;
 
-    void loadFile(const KUrl &url, Crossword::KrossWord::FileFormat fileFormat = Crossword::KrossWord::DetermineByFileName, bool loadCrashedFile = false);
+    void loadFile(const QUrl &url, Crossword::KrossWord::FileFormat fileFormat = Crossword::KrossWord::DetermineByFileName, bool loadCrashedFile = false);
 
     bool createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize,
                             const QString &title, const QString &authors, const QString &copyright, const QString &notes);
@@ -66,7 +66,7 @@ protected:
     virtual void dragEnterEvent(QDragEnterEvent* event);
 
 public slots:
-    void loadSlot(const KUrl &url = KUrl());
+    void loadSlot(const QUrl &url = QUrl::fromLocalFile());
     //void loadFile(const QString &fileName);
 
     // Settings actions

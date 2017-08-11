@@ -34,7 +34,7 @@
 #include <QSqlRecord>
 
 #include <QDebug>
-#include <KUrl>
+#include <QUrl>
 #include <KMessageBox>
 #include <QDialog>
 
@@ -576,7 +576,7 @@ int KrosswordDictionary::addEntriesFromCrosswords(const QStringList& fileNames, 
 
         KrossWord krossWord;
         qDebug() << "Reading crossword" << fileName;
-        if (!krossWord.read(KUrl(fileName), &errorString)) {
+        if (!krossWord.read(QUrl::fromLocalFile(fileName), &errorString)) {
             qDebug() << "Error reading" << fileName << errorString;
             emit errorExtractedEntriesFromCrossword(fileName, errorString);
         } else {

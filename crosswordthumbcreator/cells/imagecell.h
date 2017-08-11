@@ -21,13 +21,13 @@
 #define IMAGECELL_H
 
 #include "spannedcell.h"
-#include <KUrl>
+#include <QUrl>
 
 class ImageCell : public SpannedCell
 {
 public:
     ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
-              int horizontalCellSpan, int verticalCellSpan, const KUrl &url/*,
+              int horizontalCellSpan, int verticalCellSpan, const QUrl &url/*,
      QGraphicsScene* scene*/);
 
     /** For qgraphicsitem_cast. */
@@ -39,12 +39,12 @@ public:
     virtual void drawBackgroundForPrinting(
         QPainter *p, const QStyleOptionGraphicsItem *options);
 
-    KUrl url() const {
+    QUrl url() const {
         return m_url;
     };
 
 private:
-    KUrl m_url;
+    QUrl m_url;
     QImage m_image;
 };
 

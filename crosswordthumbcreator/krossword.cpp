@@ -26,7 +26,7 @@
 #include <QGraphicsScene>
 #include <QFile>
 
-#include <KUrl>
+#include <QUrl>
 #include <KMimeType>
 #include <qfileinfo.h>
 #include <QDebug>
@@ -78,7 +78,7 @@ void KrossWord::resizeTo(const QSizeF& size)
 }
 
 KrossWord::ErrorType KrossWord::insertImage(const KGrid2D::Coord &coord,
-        int horizontalCellSpan, int verticalCellSpan, KUrl url,
+        int horizontalCellSpan, int verticalCellSpan, QUrl url,
         ErrorTypes errorTypesToIgnore, ImageCell **insertedImage)
 {
     ErrorType errorType = canInsertImage(coord, horizontalCellSpan,
@@ -159,7 +159,7 @@ KrossWord::FileFormat KrossWord::fileFormatFromFileName(const QString& fileName)
         return DetermineByFileName; // couldn't determine file format
 }
 
-bool KrossWord::read(const KUrl& url, QString *errorString, FileFormat fileFormat)
+bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileFormat)
 {
     // Variable not used
     // bool removeTempFile;

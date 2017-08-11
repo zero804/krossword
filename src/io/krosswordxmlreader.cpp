@@ -28,14 +28,14 @@
 #include <QFileInfo>
 
 #include <KZip>
-#include <KUrl>
+#include <QUrl>
 
 KrossWordXmlReader::KrossWordXmlReader()
 {
 }
 
 KrossWordXmlReader::KrossWordInfo KrossWordXmlReader::readInfo(
-    const KUrl& url, QString* errorString)
+    const QUrl &url, QString* errorString)
 {
     // TODO download crossword if url isn't local
     Q_ASSERT(url.isLocalFile());
@@ -522,7 +522,7 @@ void KrossWordXmlReader::readImage(KrossWord* krossWord)
 
         int horizontalCellSpan = attributes().value("horizontalCellSpan").toString().toInt();
         int verticalCellSpan = attributes().value("verticalCellSpan").toString().toInt();
-        KUrl url(attributes().value("url").toString());
+        QUrl url(attributes().value("url").toString());
 
         ImageCell *imageCell;
         ErrorType errorType = krossWord->insertImage(

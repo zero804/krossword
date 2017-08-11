@@ -147,13 +147,13 @@ void DictionaryDialog::hideInfoMessage()
 
 void DictionaryDialog::getWordsFromDictionaryClicked()
 {
-    KUrl startDir;
+    QUrl startDir;
     if (QDir("/usr/share/dict").exists())
-        startDir = KUrl("/usr/share/dict");
+        startDir = QUrl::fromLocalFile("/usr/share/dict");
     else if (QDir("/usr/dict").exists())
-        startDir = KUrl("/usr/dict");
+        startDir = QUrl::fromLocalFile("/usr/dict");
     else
-        startDir = KUrl("kfiledialog:///addDictionary");
+        startDir = QUrl::fromLocalFile("kfiledialog:///addDictionary");
     QString fileName = KFileDialog::getOpenFileName(startDir, QString(), this);
     if (fileName.isEmpty())
         return;
@@ -176,7 +176,7 @@ void DictionaryDialog::addDictionaryFromLibraryClicked()
 
 void DictionaryDialog::addDictionaryFromCrosswordsClicked()
 {
-    QStringList fileNames = KFileDialog::getOpenFileNames(KUrl(),
+    QStringList fileNames = KFileDialog::getOpenFileNames(QUrl::fromLocalFile(),
                             "application/x-krosswordpuzzle "
                             "application/x-krosswordpuzzle-compressed "
                             "application/x-acrosslite-puz", this);
@@ -218,7 +218,7 @@ void DictionaryDialog::clearClicked()
 void DictionaryDialog::exportToCsvClicked()
 {
     QString fileName;
-    QPointer<KFileDialog> fileDlg = new KFileDialog(KUrl(), QString(), this);
+    QPointer<KFileDialog> fileDlg = new KFileDialog(QUrl::fromLocalFile(), QString(), this);
     fileDlg->setWindowTitle(i18n("Export To CSV"));
     fileDlg->setMode(KFile::File);
     fileDlg->setOperationMode(KFileDialog::Saving);
@@ -239,7 +239,7 @@ void DictionaryDialog::exportToCsvClicked()
 
 void DictionaryDialog::importFromCsvClicked()
 {
-    QString fileName = KFileDialog::getOpenFileName(KUrl(), QString(),
+    QString fileName = KFileDialog::getOpenFileName(QUrl::fromLocalFile(), QString(),
                        this, i18n("Import From CSV"));
     if (fileName.isEmpty())
         return;

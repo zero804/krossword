@@ -509,7 +509,7 @@ void AddClueCommand::undoMaybe()
 RemoveImageCommand::RemoveImageCommand(KrossWord* krossWord,
                                        const Coord& coord,
                                        int horizontalCellSpan, int verticalCellSpan,
-                                       KUrl url, UndoCommandExt* parent)
+                                       QUrl url, UndoCommandExt* parent)
     : UndoCommandExt(parent)
 {
     Q_ASSERT(krossWord);
@@ -599,7 +599,7 @@ void RemoveImageCommand::undoMaybe()
 }
 
 AddImageCommand::AddImageCommand(KrossWord* krossWord, const Coord& coord,
-                                 int horizontalCellSpan, int verticalCellSpan, KUrl url,
+                                 int horizontalCellSpan, int verticalCellSpan, QUrl url,
                                  UndoCommandExt* parent)
     : RemoveImageCommand(krossWord, coord,
                          horizontalCellSpan, verticalCellSpan, url, parent)
@@ -2091,7 +2091,7 @@ RemoveImageCommand::RemoveImageCommand(KrossWord* krossWord,
 
     QString url;
     *stream >> url;
-    m_url = KUrl(url);
+    m_url = QUrl::fromLocalFile(url);
 
     setupText();
 }

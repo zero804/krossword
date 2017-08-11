@@ -241,7 +241,7 @@ void LibraryGui::downloadCurrentCrosswordChanged(QListWidgetItem* current, QList
     ui_download.preview->setText(i18n("Loading..."));
 
     QString url = current->data(Qt::UserRole).toString();
-    KFileItem crossword(KUrl(url), "application/x-acrosslite-puz", KFileItem::Unknown);
+    KFileItem crossword(QUrl::fromLocalFile(url), "application/x-acrosslite-puz", KFileItem::Unknown);
 
     m_downloadPreviewJob = new KIO::PreviewJob(KFileItemList() << crossword, 256, 256, 0, 1, false, true, 0);
     m_downloadPreviewJob->setAutoDelete(true);
@@ -263,7 +263,7 @@ void LibraryGui::libraryOpenItem(const QModelIndex& index)
         return;
 
     if (!m_libraryModel->isDir(index))
-        m_mainWindow->loadFile(KUrl(index.data(QFileSystemModel::FilePathRole).toString()));
+        m_mainWindow->loadFile(QUrl::fromLocalFile(index.data(QFileSystemModel::FilePathRole).toString()));
 }
 
 void LibraryGui::libraryCurrentChanged(const QModelIndex& current, const QModelIndex& previous)
@@ -278,7 +278,7 @@ void LibraryGui::libraryCurrentChanged(const QModelIndex& current, const QModelI
 
 void LibraryGui::libraryAddSlot()
 {
-    KUrl url = KFileDialog::getOpenUrl(KUrl("kfiledialog:///importCrossword"),
+    QUrl url = KFileDialog::getOpenUrl(QUrl::fromLocalFile("kfiledialog:///importCrossword"),
                                        "application/x-krosswordpuzzle "
                                        "application/x-krosswordpuzzle-compressed "
                                        "application/x-acrosslite-puz", this);
@@ -302,7 +302,7 @@ void LibraryGui::libraryExportSlot()
     Crossword::KrossWord krossWord;
     QString errorString;
     QString filePath = index.data(QFileSystemModel::FilePathRole).toString();
-    if (!krossWord.read(KUrl(filePath), &errorString)) {
+    if (!krossWord.read(QUrl::fromLocalFile(filePath), &errorString)) {
         KMessageBox::error(this, i18n("There was an error opening the crossword.\n%1", errorString));
     } else {
         QString fileName = KFileDialog::getSaveFileName(
@@ -425,7 +425,7 @@ void LibraryGui::libraryDownloadSlot()
             QString url = item.data(Qt::UserRole).toString();
             if (!url.isEmpty()) {
                 QString downloadDir = directoriesIndex.value(ui_download.targetDirectory->currentIndex());
-                libraryAddCrossword(QUrl(url), downloadDir);
+                libraryAddCrossword(QUrl::fromLocalFile(url), downloadDir);
             }
         }
     }

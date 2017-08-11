@@ -25,7 +25,7 @@
 #include "krosswordpuzzlescene.h"
 
 class QPainter;
-class KUrl;
+class QUrl;
 
 /**
  * This is the main view class for KrossWordPuzzle.

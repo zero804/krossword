@@ -20,13 +20,13 @@
 #include "crosswordthumbnail.h"
 #include "krossword.h"
 
-#include <KUrl>
+#include <QUrl>
 
 bool CrosswordThumbCreator::create(const QString& path, int width, int height, QImage& img)
 {
     KrossWord krossWord;
     QString errorString;
-    if (!krossWord.read(KUrl(path), &errorString)) {
+    if (!krossWord.read(QUrl::fromLocalFile(path), &errorString)) {
         qDebug() << errorString;
         return false;
     }

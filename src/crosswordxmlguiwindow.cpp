@@ -41,7 +41,7 @@
 #include <KActionCollection>
 
 #include <KToolBar>
-#include <KUrl>
+#include <QUrl>
 #include <KLocalizedString>
 #include <KStandardGuiItem>
 #include <KMessageBox>
@@ -668,10 +668,10 @@ bool CrossWordXmlGuiWindow::createNewCrossWordFromTemplate(const QString& templa
 
 inline bool CrossWordXmlGuiWindow::loadFile(const QString& fileName)
 {
-    return loadFile(KUrl(fileName));
+    return loadFile(QUrl::fromLocalFile(fileName));
 }
 
-bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat fileFormat, bool loadCrashedFile)
+bool CrossWordXmlGuiWindow::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool loadCrashedFile)
 {
     if (isModified()) {
         QString msg = i18n("The current crossword has been modified.\nWould you like to save it?");
@@ -684,7 +684,7 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
 
     QUrl resultUrl;
     if (url.isEmpty()) {
-        resultUrl = KFileDialog::getOpenUrl(KUrl("kfiledialog:///loadCrossword"),
+        resultUrl = KFileDialog::getOpenUrl(QUrl::fromLocalFile("kfiledialog:///loadCrossword"),
                                             "application/x-krosswordpuzzle "
                                             "application/x-krosswordpuzzle-compressed "
                                             "application/x-acrosslite-puz", this);
@@ -701,7 +701,7 @@ bool CrossWordXmlGuiWindow::loadFile(const KUrl &url, KrossWord::FileFormat file
     updateClueDock();
 
     QByteArray undoData;
-    bool readOk = krossWord()->read(KUrl(resultUrl), &errorString, this, fileFormat, &undoData);
+    bool readOk = krossWord()->read(QUrl::fromLocalFile(resultUrl), &errorString, this, fileFormat, &undoData);
 
     if (readOk) {
         setState(ShowingCrossword);
@@ -776,12 +776,12 @@ bool CrossWordXmlGuiWindow::save()
 
 bool CrossWordXmlGuiWindow::saveAs()
 {
-    KUrl startDir;
+    QUrl startDir;
     if (m_curDocumentOrigin == DocumentDownloaded
             || m_curDocumentOrigin == DocumentRestoredAfterCrash)
         startDir = KGlobalSettings::documentPath();
     else
-        startDir = KUrl(m_curFileName).path();
+        startDir = QUrl::fromLocalFile(m_curFileName).path();
 
     QCheckBox *chkSaveUndoStack = new QCheckBox(i18n("Save &Edit History"));
     chkSaveUndoStack->setChecked(m_undoStackLoaded);
@@ -898,7 +898,7 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
         emit fileSaved(m_curFileName, oldFileName);
 
 //  QString fileWithoutPath = QFileInfo( m_curFileName ).fileName();
-//  m_recentFilesAction->addUrl( KUrl(m_curFileName),
+//  m_recentFilesAction->addUrl( QUrl(m_curFileName),
 //      isFileInLibrary(m_curFileName) ? "Library: " + fileWithoutPath : fileWithoutPath );
 //  m_recentFilesAction->saveEntries( Settings::self()->config()->group("") );
         return true;
@@ -1073,7 +1073,7 @@ void CrossWordXmlGuiWindow::addImageSlot()
     Coord coord = krossWord()->currentCell()->coord();
     int horizontalCellSpan = 1;
     int verticalCellSpan = 1;
-    KUrl url;
+    QUrl url;
 
     QString errorMessage;
     if (!m_undoStack->tryPush(new AddImageCommand(krossWord(), coord, horizontalCellSpan, verticalCellSpan, url), &errorMessage)) {

@@ -69,7 +69,7 @@ QSize KrossWordPuzzle::sizeHint() const
     return KXmlGuiWindow::sizeHint().expandedTo(QSize(1024, 768));
 }
 
-void KrossWordPuzzle::loadFile(const KUrl &url, Crossword::KrossWord::FileFormat fileFormat, bool loadCrashedFile)
+void KrossWordPuzzle::loadFile(const QUrl &url, Crossword::KrossWord::FileFormat fileFormat, bool loadCrashedFile)
 {
     m_loadProgressDialog = createLoadProgressDialog();
     m_loadProgressDialog->show();
@@ -231,16 +231,16 @@ void KrossWordPuzzle::setupMainTabWidget()
 
 void KrossWordPuzzle::setupPlaces()
 {
-    KUrl libraryUrl   = KUrl(KGlobal::dirs()->saveLocation("appdata", "library"));
-    KUrl templatesUrl = KUrl(KGlobal::dirs()->saveLocation("appdata", "templates"));
+    QUrl libraryUrl = QUrl::fromLocalFile(KGlobal::dirs()->saveLocation("appdata", "library"));
+    QUrl templatesUrl = QUrl::fromLocalFile(KGlobal::dirs()->saveLocation("appdata", "templates"));
 
     KFilePlacesModel *placesModel = new KFilePlacesModel();
     if (placesModel->url(placesModel->closestItem(libraryUrl)) != libraryUrl) {
-        placesModel->addPlace(i18n("Library"), KUrl(libraryUrl), "favorites", KApplication::applicationName());
+        placesModel->addPlace(i18n("Library"), QUrl::fromLocalFile(libraryUrl), "favorites", KApplication::applicationName());
     }
 
     if (placesModel->url(placesModel->closestItem(templatesUrl)) != templatesUrl) {
-        placesModel->addPlace(i18n("Templates"), KUrl(templatesUrl), "krossword", KApplication::applicationName());
+        placesModel->addPlace(i18n("Templates"), QUrl::fromLocalFile(templatesUrl), "krossword", KApplication::applicationName());
     }
 
     delete placesModel;
@@ -288,7 +288,7 @@ QString KrossWordPuzzle::displayFileName(const QString &fileName)
 
 //=====================================================================================
 
-void KrossWordPuzzle::loadSlot(const KUrl &url)
+void KrossWordPuzzle::loadSlot(const QUrl &url)
 {
     loadFile(url);
 }

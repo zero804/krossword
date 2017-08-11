@@ -21,7 +21,7 @@
 #define KROSSWORDXMLREADER_HEADER
 
 #include <QXmlStreamReader>
-#include <KUrl>
+#include <QUrl>
 
 namespace Crossword
 {
@@ -58,7 +58,7 @@ public:
     * the given @p url. Use KrossWordInfo::isValid() to check for errors.
     * If isValid() returns false @p errorString will be set to a string
     * explaining the error (if @p errorString isn't NULL). */
-    static KrossWordInfo readInfo(const KUrl &url, QString *errorString = NULL);
+    static KrossWordInfo readInfo(const QUrl &url, QString *errorString = NULL);
 
     bool readCompressed(QIODevice *device, KrossWord *krossWord,
                         QByteArray *undoData = NULL);

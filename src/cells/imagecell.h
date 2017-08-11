@@ -21,7 +21,7 @@
 #define IMAGECELL_H
 
 #include "spannedcell.h"
-#include <KUrl>
+#include <QUrl>
 
 namespace Crossword
 {
@@ -30,7 +30,7 @@ class ImageCell : public SpannedCell
 {
 public:
     ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
-              int horizontalCellSpan, int verticalCellSpan, const KUrl &url);
+              int horizontalCellSpan, int verticalCellSpan, const QUrl &url);
 
     /** For qgraphicsitem_cast. */
     enum { Type = UserType + 8 };
@@ -43,17 +43,17 @@ public:
     virtual void drawBackgroundForPrinting(
         QPainter *p, const QStyleOptionGraphicsItem *options);
 
-    KUrl url() const {
+    QUrl url() const {
         return m_url;
     };
-    void setUrl(const KUrl &url);
+    void setUrl(const QUrl &url);
 
 protected:
     virtual void focusInEvent(QFocusEvent* event);
     virtual void focusOutEvent(QFocusEvent* event);
 
 private:
-    KUrl m_url;
+    QUrl m_url;
     QImage m_image;
 };
 

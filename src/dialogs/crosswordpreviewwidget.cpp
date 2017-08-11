@@ -32,7 +32,7 @@ CrosswordPreviewWidget::CrosswordPreviewWidget(QWidget* parent)
 void CrosswordPreviewWidget::showPreview(const QString& fileName,
         const QString& mimeType)
 {
-    KFileItem crossword(KUrl(fileName), mimeType, KFileItem::Unknown);
+    KFileItem crossword(QUrl::fromLocalFile(fileName), mimeType, KFileItem::Unknown);
     m_previewJob = new KIO::PreviewJob(KFileItemList() << crossword,
                                        m_previewSize.width(), m_previewSize.height(),
                                        0, 1, false, true, 0);

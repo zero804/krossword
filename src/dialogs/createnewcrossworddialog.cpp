@@ -175,7 +175,7 @@ void CreateNewCrosswordDialog::currentTemplateChanged(
 
     QString errorString;
     KrossWordXmlReader::KrossWordInfo info =
-        KrossWordXmlReader::readInfo(KUrl(filePath), &errorString);
+        KrossWordXmlReader::readInfo(QUrl::fromLocalFile(filePath), &errorString);
     if (!info.isValid()) {
         qDebug() << "Error reading crossword info from library file"
                  << errorString;

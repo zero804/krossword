@@ -22,7 +22,7 @@
 
 #include <QBuffer>
 #include <KZip>
-#include <KUrl>
+#include <QUrl>
 
 KrossWordXmlReader::KrossWordXmlReader()
 {
@@ -431,7 +431,7 @@ void KrossWordXmlReader::readImage(KrossWord* krossWord)
 
         int horizontalCellSpan = attributes().value("horizontalCellSpan").toString().toInt();
         int verticalCellSpan = attributes().value("verticalCellSpan").toString().toInt();
-        KUrl url(attributes().value("url").toString());
+        QUrl url(attributes().value("url").toString());
 
         ImageCell *imageCell;
         KrossWord::ErrorType correctness =

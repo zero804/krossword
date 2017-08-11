@@ -23,7 +23,7 @@
 #include <QSizeF>
 
 #include <KLocalizedString>
-#include <KUrl>
+#include <QUrl>
 #include <QDebug>
 
 #include <QGraphicsObject>
@@ -323,7 +323,7 @@ public:
     * @param url The URL to the file to read.
     * @param errorString Contains a string describing the error, if false was returned.
     * @return False, if there was an error. */
-    bool read(const KUrl &url, QString *errorString = NULL,
+    bool read(const QUrl &url, QString *errorString = NULL,
               QWidget *mainWindow = NULL, FileFormat fileFormat = DetermineByFileName,
               QByteArray *undoData = NULL);
 
@@ -410,7 +410,7 @@ public:
     * the image.
     * @see canInsertClue() */
     ErrorType insertImage(const KGrid2D::Coord &coord,
-                          int horizontalCellSpan, int verticalCellSpan, KUrl url,
+                          int horizontalCellSpan, int verticalCellSpan, QUrl url,
                           ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
                           ImageCell **insertedImage = NULL);
 

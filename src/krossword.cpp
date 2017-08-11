@@ -32,7 +32,7 @@
 #include <QStandardItemModel>
 #include <qfileinfo.h>
 
-#include <KUrl>
+#include <QUrl>
 #include <KMimeType>
 #include <KIO/NetAccess>
 #include <KIcon>
@@ -788,7 +788,7 @@ QSize KrossWord::emptyCellSpan(const Coord& coordTopLeft, SpannedCell *excludedC
 }
 
 ErrorType KrossWord::insertImage(const KGrid2D::Coord &coord,
-                                 int horizontalCellSpan, int verticalCellSpan, KUrl url,
+                                 int horizontalCellSpan, int verticalCellSpan, QUrl url,
                                  ErrorTypes errorTypesToIgnore, ImageCell **insertedImage)
 {
     ErrorType errorType = canInsertImage(coord, horizontalCellSpan,
@@ -948,7 +948,7 @@ bool KrossWord::write(const QString& fileName, QString* errorString,
     return true;
 }
 
-bool KrossWord::read(const KUrl& url, QString *errorString, QWidget *mainWindow,
+bool KrossWord::read(const QUrl &url, QString *errorString, QWidget *mainWindow,
                      FileFormat fileFormat, QByteArray *undoData)
 {
     bool removeTempFile;

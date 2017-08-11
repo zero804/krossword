@@ -25,7 +25,7 @@
 
 
 ImageCell::ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
-                     int horizontalCellSpan, int verticalCellSpan, const KUrl &url)
+                     int horizontalCellSpan, int verticalCellSpan, const QUrl &url)
     : SpannedCell(krossWord, KrossWordCell::ImageCellType, coordTopLeft,
                   horizontalCellSpan, verticalCellSpan)
 {

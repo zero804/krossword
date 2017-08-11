@@ -25,7 +25,7 @@
 
 #include <QUndoCommand>
 #include <KUndoStack>
-#include <KUrl>
+#include <QUrl>
 #include "krossword.h"
 #include <QtCore/QString>
 
@@ -371,7 +371,7 @@ public:
     RemoveImageCommand(KrossWord *krossWord, ImageCell *image,
                        UndoCommandExt* parent = 0);
     RemoveImageCommand(KrossWord *krossWord, const Coord &coord,
-                       int horizontalCellSpan, int verticalCellSpan, KUrl url,
+                       int horizontalCellSpan, int verticalCellSpan, QUrl url,
                        UndoCommandExt* parent = 0);
 
     virtual void redoMaybe();
@@ -402,7 +402,7 @@ public:
     int verticalCellSpan() const {
         return m_verticalCellSpan;
     }
-    KUrl url() const {
+    QUrl url() const {
         return m_url;
     }
 
@@ -415,14 +415,14 @@ protected:
     Coord m_coord;
     int m_horizontalCellSpan;
     int m_verticalCellSpan;
-    KUrl m_url;
+    QUrl m_url;
 };
 
 class AddImageCommand : public RemoveImageCommand
 {
 public:
     AddImageCommand(KrossWord* krossWord, const Coord &coord,
-                    int horizontalCellSpan, int verticalCellSpan, KUrl url,
+                    int horizontalCellSpan, int verticalCellSpan, QUrl url,
                     UndoCommandExt* parent = 0);
 
     virtual void redoMaybe() {

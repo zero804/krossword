@@ -30,7 +30,7 @@
 
 #include <QPrinter>
 #include <KXmlGuiWindow>
-#include <KUrl>
+#include <QUrl>
 
 #define MIN_SECS_BETWEEN_AUTOSAVES 30
 
@@ -258,7 +258,7 @@ public:
                                         const QString& copyright, const QString& notes);
 
     inline bool loadFile(const QString& fileName);
-    bool loadFile(const KUrl &url, KrossWord::FileFormat fileFormat = KrossWord::DetermineByFileName, bool loadCrashedFile = false);
+    bool loadFile(const QUrl &url, KrossWord::FileFormat fileFormat = KrossWord::DetermineByFileName, bool loadCrashedFile = false);
     bool save();
     bool saveAs();
     bool closeFile();

@@ -31,7 +31,7 @@ namespace Crossword
 {
 
 ImageCell::ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
-                     int horizontalCellSpan, int verticalCellSpan, const KUrl &url)
+                     int horizontalCellSpan, int verticalCellSpan, const QUrl &url)
     : SpannedCell(krossWord, ImageCellType, coordTopLeft,
                   horizontalCellSpan, verticalCellSpan)
 {
@@ -41,7 +41,7 @@ ImageCell::ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
     setFlag(QGraphicsItem::ItemIsSelectable, krossWord->isEditable());
 }
 
-void ImageCell::setUrl(const KUrl& url)
+void ImageCell::setUrl(const QUrl &url)
 {
     if (!url.isLocalFile()) {
         QString fileName;
