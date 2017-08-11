@@ -148,11 +148,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
    <class>CrosswordTypeWidget</class>
    <extends>QWidget</extends>
    <header>dialogs/crosswordtypewidget.h</header>
