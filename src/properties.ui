@@ -67,14 +67,14 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="KLineEdit" name="title">
+        <widget class="QLineEdit" name="title">
          <property name="enabled">
           <bool>true</bool>
          </property>
-         <property name="clickMessage">
+         <property name="placeholderText">
           <string>The title of the crossword</string>
          </property>
-         <property name="showClearButton" stdset="0">
+         <property name="clearButtonEnabled" stdset="0">
           <bool>true</bool>
          </property>
         </widget>
@@ -99,11 +99,11 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="KLineEdit" name="author">
-         <property name="clickMessage">
+        <widget class="QLineEdit" name="author">
+         <property name="placeholderText">
           <string>The author(s) of the crossword</string>
          </property>
-         <property name="showClearButton" stdset="0">
+         <property name="clearButtonEnabled" stdset="0">
           <bool>true</bool>
          </property>
         </widget>
@@ -128,11 +128,11 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="KLineEdit" name="copyright">
-         <property name="clickMessage">
+        <widget class="QLineEdit" name="copyright">
+         <property name="placeholderText">
           <string>Copyright information about the crossword</string>
          </property>
-         <property name="showClearButton" stdset="0">
+         <property name="clearButtonEnabled" stdset="0">
           <bool>true</bool>
          </property>
         </widget>
@@ -157,11 +157,11 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="KLineEdit" name="notes">
-         <property name="clickMessage">
+        <widget class="QLineEdit" name="notes">
+         <property name="placeholderText">
           <string>Notes about the crossword</string>
          </property>
-         <property name="showClearButton" stdset="0">
+         <property name="clearButtonEnabled" stdset="0">
           <bool>true</bool>
          </property>
         </widget>
@@ -687,11 +687,6 @@
    <extends>QGroupBox</extends>
    <header>kbuttongroup.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
   </customwidget>
   <customwidget>
    <class>CrosswordTypeWidget</class>

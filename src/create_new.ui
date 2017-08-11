@@ -83,17 +83,17 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="1" colspan="5">
-           <widget class="KLineEdit" name="title">
+           <widget class="QLineEdit" name="title">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="clickMessage">
+            <property name="placeholderText">
              <string>The title of the crossword</string>
             </property>
-            <property name="showClearButton" stdset="0">
+            <property name="clearButtonEnabled" stdset="0">
              <bool>true</bool>
             </property>
            </widget>
@@ -112,17 +112,17 @@
            </widget>
           </item>
           <item row="1" column="1" colspan="5">
-           <widget class="KLineEdit" name="author">
+           <widget class="QLineEdit" name="author">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="clickMessage">
+            <property name="placeholderText">
              <string>The author(s) of the crossword</string>
             </property>
-            <property name="showClearButton" stdset="0">
+            <property name="clearButtonEnabled" stdset="0">
              <bool>true</bool>
             </property>
            </widget>
@@ -177,33 +177,33 @@
            </widget>
           </item>
           <item row="2" column="1" colspan="5">
-           <widget class="KLineEdit" name="copyright">
+           <widget class="QLineEdit" name="copyright">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="clickMessage">
+            <property name="placeholderText">
              <string>Copyright information about the crossword</string>
             </property>
-            <property name="showClearButton" stdset="0">
+            <property name="clearButtonEnabled" stdset="0">
              <bool>true</bool>
             </property>
            </widget>
           </item>
           <item row="3" column="1" colspan="5">
-           <widget class="KLineEdit" name="notes">
+           <widget class="QLineEdit" name="notes">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="clickMessage">
+            <property name="placeholderText">
              <string>Notes about the crossword</string>
             </property>
-            <property name="showClearButton" stdset="0">
+            <property name="clearButtonEnabled" stdset="0">
              <bool>true</bool>
             </property>
            </widget>
@@ -562,11 +562,6 @@
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
   </customwidget>
   <customwidget>
    <class>CrosswordTypeWidget</class>

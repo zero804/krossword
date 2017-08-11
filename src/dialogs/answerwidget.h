@@ -20,9 +20,9 @@
 #ifndef ANSWERWIDGET_H
 #define ANSWERWIDGET_H
 
-#include <KLineEdit>
+#include <QLineEdit>
 
-class AnswerWidget : public KLineEdit
+class AnswerWidget : public QLineEdit
 {
 public:
     AnswerWidget(QWidget *parent = 0);

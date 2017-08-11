@@ -48,7 +48,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="KLineEdit" name="fileName">
+      <widget class="QLineEdit" name="fileName">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -58,7 +58,7 @@
        <property name="readOnly">
         <bool>true</bool>
        </property>
-       <property name="showClearButton" stdset="0">
+       <property name="clearButtonEnabled" stdset="0">
         <bool>true</bool>
        </property>
       </widget>
@@ -194,11 +194,6 @@
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

@@ -22,28 +22,28 @@
 #include <QFocusEvent>
 
 AnswerWidget::AnswerWidget(QWidget* parent)
-    : KLineEdit(parent)
+    : QLineEdit(parent)
 {
     setToolTip(i18n("The correct answer to the clue. For each letter a letter "
                     "cell is created"));
-    setClickMessage(i18n("The answer to the clue"));
-    setClearButtonShown(true);
+    setPlaceholderText(i18n("The answer to the clue"));
+    setClearButtonEnabled(true);
     m_justGotFocusByMouse = false;
 }
 
 AnswerWidget::AnswerWidget(const QString &text, QWidget *parent)
-    : KLineEdit(text, parent)
+    : QLineEdit(text, parent)
 {
     setToolTip(i18n("The correct answer to the clue. For each letter a letter "
                     "cell is created"));
-    setClickMessage(i18n("The answer to the clue"));
-    setClearButtonShown(true);
+    setPlaceholderText(i18n("The answer to the clue"));
+    setClearButtonEnabled(true);
     m_justGotFocusByMouse = false;
 }
 
 void AnswerWidget::focusInEvent(QFocusEvent* ev)
 {
-    KLineEdit::focusInEvent(ev);
+    QLineEdit::focusInEvent(ev);
 
     if (ev->reason() == Qt::MouseFocusReason)
         m_justGotFocusByMouse = true;
@@ -56,7 +56,7 @@ void AnswerWidget::mousePressEvent(QMouseEvent* ev)
         if (cursorPositionAt(ev->pos()) > text().length())
             home(false);
         else
-            KLineEdit::mousePressEvent(ev);
+            QLineEdit::mousePressEvent(ev);
     } else
-        KLineEdit::mousePressEvent(ev);
+        QLineEdit::mousePressEvent(ev);
 }

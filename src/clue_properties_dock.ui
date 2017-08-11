@@ -54,7 +54,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="KLineEdit" name="clue">
+      <widget class="QLineEdit" name="clue">
        <property name="minimumSize">
         <size>
          <width>186</width>
@@ -64,10 +64,10 @@
        <property name="toolTip">
         <string>The clue to the answer.</string>
        </property>
-       <property name="clickMessage">
+       <property name="placeholderText">
         <string>The clue text</string>
        </property>
-       <property name="showClearButton" stdset="0">
+       <property name="clearButtonEnabled" stdset="0">
         <bool>true</bool>
        </property>
       </widget>
@@ -479,7 +479,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="KLineEdit" name="pattern">
+       <widget class="QLineEdit" name="pattern">
         <property name="toolTip">
          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -516,10 +516,10 @@ p, li { white-space: pre-wrap; }
         <property name="squeezedTextEnabled">
          <bool>false</bool>
         </property>
-        <property name="clickMessage">
+        <property name="placeholderText">
          <string>Wildcard pattern to search for answers</string>
         </property>
-        <property name="showClearButton" stdset="0">
+        <property name="clearButtonEnabled" stdset="0">
          <bool>true</bool>
         </property>
        </widget>
@@ -569,11 +569,6 @@ p, li { white-space: pre-wrap; }
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>pattern</tabstop>

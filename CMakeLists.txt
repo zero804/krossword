@@ -9,7 +9,7 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_S
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Widgets PrintSupport Sql)
 find_package(KF5 REQUIRED Config CoreAddons KIO XmlGui I18n)
 
-#find_package(KDEGames REQUIRED)
+find_package(KF5KDEGames 4.9.0 REQUIRED)
 
 set(SHARED_MIME_INFO_MINIMUM_VERSION "0.30")
 find_package(SharedMimeInfo)

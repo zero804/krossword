@@ -65,11 +65,11 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="1" column="1" colspan="2">
-        <widget class="KLineEdit" name="name">
-         <property name="clickMessage">
+        <widget class="QLineEdit" name="name">
+         <property name="placeholderText">
           <string>The name of the crossword type</string>
          </property>
-         <property name="showClearButton" stdset="0">
+         <property name="clearButtonEnabled" stdset="0">
           <bool>false</bool>
          </property>
         </widget>
@@ -335,11 +335,6 @@ p, li { white-space: pre-wrap; }
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
   </customwidget>
   <customwidget>
    <class>KTextEdit</class>

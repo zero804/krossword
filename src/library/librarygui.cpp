@@ -467,9 +467,9 @@ void LibraryGui::libraryDeleteSlot()
 void LibraryGui::libraryNewFolderSlot()
 {
     QPointer<QDialog> dlg = new QDialog(this);
-    KLineEdit *newFolderName = new KLineEdit(dlg);
-    newFolderName->setClearButtonShown(true);
-    newFolderName->setClickMessage("Insert the name of the new library folder");
+    QLineEdit *newFolderName = new QLineEdit(dlg);
+    newFolderName->setClearButtonEnabled(true);
+    newFolderName->setPlaceholderText("Insert the name of the new library folder");
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dlg);
     connect(buttonBox, SIGNAL(accepted()), dlg, SLOT(accept()));

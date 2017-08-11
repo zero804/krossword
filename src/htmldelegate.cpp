@@ -22,7 +22,7 @@
 #include <QTextDocument>
 #include <QPainter>
 
-#include <klineedit.h>
+#include <QLineEdit>
 
 HtmlDelegate::HtmlDelegate(QObject *parent) : QStyledItemDelegate(parent)
 {
@@ -89,7 +89,7 @@ QWidget* CrosswordAnswerDelegate::createEditor(QWidget* parent, const QStyleOpti
     Q_UNUSED(option);
 
 //     return QStyledItemDelegate::createEditor( parent, option, index );
-    KLineEdit *lineEdit = new KLineEdit(index.data().toString(), parent);
+    QLineEdit *lineEdit = new QLineEdit(index.data().toString(), parent);
     lineEdit->setFrame(false);
     lineEdit->setValidator(new CrosswordAnswerValidator);
     return lineEdit;
