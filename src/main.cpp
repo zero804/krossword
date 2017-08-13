@@ -17,8 +17,9 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <QApplication>
 #include "krosswordpuzzle.h"
-#include <kapplication.h>
+//#include <kapplication.h>
 #include <K4AboutData>
 #include <kcmdlineargs.h>
 #include <KDE/KLocale>
@@ -42,7 +43,10 @@ int main(int argc, char **argv){
     KCmdLineOptions options;
     options.add("+[URL]", ki18n("Document to open"));
     KCmdLineArgs::addCmdLineOptions(options);
-    KApplication app;
+
+    QApplication app;
+    KAboutData::setApplicationData(about);
+
     KGlobal::locale()->insertCatalog("libkdegames");
 
     KrossWordPuzzle *widget = new KrossWordPuzzle;

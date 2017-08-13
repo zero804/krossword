@@ -37,8 +37,9 @@
 // Other KDE includes
 
 
-#include <kapplication.h>
-#include <kfileplacesmodel.h>
+//#include <kapplication.h>
+//#include <kfileplacesmodel.h>
+#include <KFilePlacesModel>
 #include <QStandardPaths>
 
 KrossWordPuzzle::KrossWordPuzzle() : KXmlGuiWindow(),
@@ -237,11 +238,11 @@ void KrossWordPuzzle::setupPlaces()
 
     KFilePlacesModel *placesModel = new KFilePlacesModel();
     if (placesModel->url(placesModel->closestItem(libraryUrl)) != libraryUrl) {
-        placesModel->addPlace(i18n("Library"), QUrl::fromLocalFile(libraryUrl), "favorites", KApplication::applicationName());
+        placesModel->addPlace(i18n("Library"), QUrl::fromLocalFile(libraryUrl), "favorites", QApplication::applicationName());
     }
 
     if (placesModel->url(placesModel->closestItem(templatesUrl)) != templatesUrl) {
-        placesModel->addPlace(i18n("Templates"), QUrl::fromLocalFile(templatesUrl), "krossword", KApplication::applicationName());
+        placesModel->addPlace(i18n("Templates"), QUrl::fromLocalFile(templatesUrl), "krossword", QApplication::applicationName());
     }
 
     delete placesModel;
