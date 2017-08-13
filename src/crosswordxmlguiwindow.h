@@ -53,7 +53,7 @@ class QUndoView;
 class QDockWidget;
 class QItemSelectionModel;
 
-class KAction;
+class QAction;
 class KRecentFilesAction;
 
 class QPropertyAnimation;

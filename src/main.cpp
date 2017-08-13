@@ -21,8 +21,10 @@
 #include "krosswordpuzzle.h"
 //#include <kapplication.h>
 #include <K4AboutData>
+#include <KAboutData>
 #include <kcmdlineargs.h>
 #include <KDE/KLocale>
+#include <KGlobal>
 
 static const char description[] =
     I18N_NOOP("A crossword puzzle game and editor for KDE.\nBased on KrossWordPuzzle.");
@@ -44,7 +46,7 @@ int main(int argc, char **argv){
     options.add("+[URL]", ki18n("Document to open"));
     KCmdLineArgs::addCmdLineOptions(options);
 
-    QApplication app;
+    QApplication app(argc, argv);
     KAboutData::setApplicationData(about);
 
     KGlobal::locale()->insertCatalog("libkdegames");
@@ -67,7 +69,7 @@ int main(int argc, char **argv){
         } else {
             // Load just one crossword at once
             widget->show();;
-            widget->loadSlot(args->arg(0));
+            widget->loadSlot(QUrl::fromLocalFile(args->arg(0)));
         }
 
         args->clear();

@@ -60,6 +60,17 @@
 
 #include <algorithm>
 
+#include <QScrollBar>
+#include <QToolTip>
+#include <QProgressBar>
+#include <QMenuBar>
+#include <QDockWidget>
+#include <QCheckBox>
+#include <QGridLayout>
+#include <QPrintDialog>
+#include <QUndoView>
+#include <QDesktopWidget>
+
 ClueListView::ClueListView(QWidget* parent) : QTreeView(parent), m_scrollAnimation(0)
 {
     setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
@@ -701,7 +712,7 @@ bool CrossWordXmlGuiWindow::loadFile(const QUrl &url, KrossWord::FileFormat file
     updateClueDock();
 
     QByteArray undoData;
-    bool readOk = krossWord()->read(QUrl::fromLocalFile(resultUrl), &errorString, this, fileFormat, &undoData);
+    bool readOk = krossWord()->read(resultUrl, &errorString, this, fileFormat, &undoData);
 
     if (readOk) {
         setState(ShowingCrossword);
@@ -779,9 +790,9 @@ bool CrossWordXmlGuiWindow::saveAs()
     QUrl startDir;
     if (m_curDocumentOrigin == DocumentDownloaded
             || m_curDocumentOrigin == DocumentRestoredAfterCrash)
-        startDir = KGlobalSettings::documentPath();
+        startDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
     else
-        startDir = QUrl::fromLocalFile(m_curFileName).path();
+        startDir = QUrl::fromLocalFile(m_curFileName);
 
     QCheckBox *chkSaveUndoStack = new QCheckBox(i18n("Save &Edit History"));
     chkSaveUndoStack->setChecked(m_undoStackLoaded);
@@ -1264,40 +1275,40 @@ void CrossWordXmlGuiWindow::setupActions()
     m_undoStack->createUndoAction(ac, actionName(Edit_Undo));
     m_undoStack->createRedoAction(ac, actionName(Edit_Redo));
 
-    KAction *closeAction = KStandardAction::close(this, SLOT(closeSlot()), ac);
+    QAction *closeAction = KStandardAction::close(this, SLOT(closeSlot()), ac);
     closeAction->setToolTip(i18n("Close the current crossword"));
     ac->addAction("game_close", closeAction);
 
     // Save
-    KAction *saveAction = KStandardAction::save(this, SLOT(saveSlot()), ac);
+    QAction *saveAction = KStandardAction::save(this, SLOT(saveSlot()), ac);
     saveAction->setToolTip(i18n("Save the crossword with solved letters"));
     ac->addAction("game_save", saveAction);
 
-    KAction *saveAsAction = KStandardAction::saveAs(this, SLOT(saveAsSlot()), ac);
+    QAction *saveAsAction = KStandardAction::saveAs(this, SLOT(saveAsSlot()), ac);
     saveAsAction->setToolTip(i18n("Choose a filename to save the crossword with solved letters"));
     ac->addAction("game_save_as", saveAsAction);
 
     // Print and print preview
-    KAction *printAction = KStandardAction::print(this, SLOT(printSlot()), 0);
+    QAction *printAction = KStandardAction::print(this, SLOT(printSlot()), 0);
     printAction->setToolTip(i18n("Print the crossword"));
     ac->addAction("game_print", printAction);
 
-    KAction *printPreviewAction = KStandardAction::printPreview(this, SLOT(printPreviewSlot()), 0);
+    QAction *printPreviewAction = KStandardAction::printPreview(this, SLOT(printPreviewSlot()), 0);
     printPreviewAction->setToolTip(i18n("Show a print preview"));
     ac->addAction(actionName(Game_PrintPreview), printPreviewAction);
 
     // Settings
-    KAction *dictionariesAction = new KAction(QIcon::fromTheme(QStringLiteral("crossword-dictionary")), i18n("&Dictionary..."), this);
+    QAction *dictionariesAction = new QAction(QIcon::fromTheme(QStringLiteral("crossword-dictionary")), i18n("&Dictionary..."), this);
     dictionariesAction->setToolTip(i18n("Add or remove crossword dictionaries"));
     actionCollection()->addAction(actionName(Options_Dictionaries), dictionariesAction);
     connect(dictionariesAction, SIGNAL(triggered()), this, SLOT(optionsDictionarySlot()));
 
     // View
-    KAction *fitToPageAction = KStandardAction::fitToPage(this, SLOT(fitToPageSlot()), ac);
+    QAction *fitToPageAction = KStandardAction::fitToPage(this, SLOT(fitToPageSlot()), ac);
     fitToPageAction->setToolTip(i18n("Fit the whole crossword into the window"));
     fitToPageAction->setIcon(QIcon::fromTheme(QStringLiteral("zoom-fit-best")));
 
-    KAction *viewPanAction = new KToggleAction(QIcon::fromTheme(QStringLiteral("transform-move")), i18n("Pan"), ac);
+    QAction *viewPanAction = new KToggleAction(QIcon::fromTheme(QStringLiteral("transform-move")), i18n("Pan"), ac);
     viewPanAction->setToolTip(i18n("Pan the view. Note that you can also pan while pressing the control key."));
     ac->addAction(actionName(View_Pan), viewPanAction);
     connect(viewPanAction, SIGNAL(toggled(bool)), this, SLOT(viewPanSlot(bool)));
@@ -1305,103 +1316,103 @@ void CrossWordXmlGuiWindow::setupActions()
     KStandardGameAction::hint(this, SLOT(hintSlot()), ac)->setToolTip(i18n("Solve the selected letter or a random one if none is selected"));
 
     // Popup menu actions:
-    KAction *infoConfidenceIsSolved = new KAction(QIcon::fromTheme(QStringLiteral("games-solve")), i18n("This letter has been solved"), ac);
+    QAction *infoConfidenceIsSolved = new QAction(QIcon::fromTheme(QStringLiteral("games-solve")), i18n("This letter has been solved"), ac);
     infoConfidenceIsSolved->setToolTip(i18n("The selected letter cell has been solved"));
     infoConfidenceIsSolved->setEnabled(false);   // Always disabled, this action serves only as info item
     ac->addAction(actionName(Info_ConfidenceIsSolved), infoConfidenceIsSolved);
     connect(infoConfidenceIsSolved, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *moveSetConfidenceConfident = new KToggleAction(QIcon::fromTheme(QStringLiteral("flag-green")), i18n("Mark as confident"), ac);
+    QAction *moveSetConfidenceConfident = new KToggleAction(QIcon::fromTheme(QStringLiteral("flag-green")), i18n("Mark as confident"), ac);
     moveSetConfidenceConfident->setToolTip(i18n("Mark the selected letter cell's confidence as confident"));
     ac->addAction(actionName(Move_SetConfidenceConfident), moveSetConfidenceConfident);
     connect(moveSetConfidenceConfident, SIGNAL(triggered()), this, SLOT(moveSetConfidenceConfidentSlot()));
     connect(moveSetConfidenceConfident, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *moveSetConfidenceUnsure = new KToggleAction(QIcon::fromTheme(QStringLiteral("flag-red")), i18n("Mark as unsure"), ac);
+    QAction *moveSetConfidenceUnsure = new KToggleAction(QIcon::fromTheme(QStringLiteral("flag-red")), i18n("Mark as unsure"), ac);
     moveSetConfidenceUnsure->setToolTip(i18n("Mark the selected letter cell's confidence as unsure"));
     ac->addAction(actionName(Move_SetConfidenceUnsure), moveSetConfidenceUnsure);
     connect(moveSetConfidenceUnsure, SIGNAL(triggered()), this, SLOT(moveSetConfidenceUnsureSlot()));
     connect(moveSetConfidenceUnsure, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *clearCell = new KAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("Clear This Cell"), ac);
+    QAction *clearCell = new QAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("Clear This Cell"), ac);
     clearCell->setToolTip(i18n("Clears the selected letter cell"));
     ac->addAction(actionName(Move_ClearCurrentCell), clearCell);
     connect(clearCell, SIGNAL(triggered()), this, SLOT(clearCellSlot()));
     connect(clearCell, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *clearClue = new KAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("Clear This Answer"), ac);
+    QAction *clearClue = new QAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("Clear This Answer"), ac);
     clearClue->setToolTip(i18n("Clears the answer to the current clue"));
     ac->addAction(actionName(Move_ClearClue), clearClue);
     connect(clearClue, SIGNAL(triggered()), this, SLOT(clearClueSlot()));
     connect(clearClue, SIGNAL(hovered()), this, SLOT(highlightClueForPopup()));
 
-    KAction *clearHorizontalClue = new KAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("Clear Across Answer"), this);
+    QAction *clearHorizontalClue = new QAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("Clear Across Answer"), this);
     clearHorizontalClue->setToolTip(i18n("Clears the answer to the current across clue"));
     ac->addAction(actionName(Move_ClearHorizontalClue), clearHorizontalClue);
     connect(clearHorizontalClue, SIGNAL(triggered()), this, SLOT(clearHorizontalClueSlot()));
     connect(clearHorizontalClue, SIGNAL(hovered()), this, SLOT(highlightHorizontalClueForPopup()));
 
-    KAction *clearVerticalClue = new KAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("Clear Down Answer"), ac);
+    QAction *clearVerticalClue = new QAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("Clear Down Answer"), ac);
     clearVerticalClue->setToolTip(i18n("Clears the answer to the current down clue"));
     ac->addAction(actionName(Move_ClearVerticalClue), clearVerticalClue);
     connect(clearVerticalClue, SIGNAL(triggered()), this, SLOT(clearVerticalClueSlot()));
     connect(clearVerticalClue, SIGNAL(hovered()), this, SLOT(highlightVerticalClueForPopup()));
 
-    KAction *hintCell = new KAction(QIcon::fromTheme(QStringLiteral("games-hint")), i18n("Hint For This Cell"), ac);
+    QAction *hintCell = new QAction(QIcon::fromTheme(QStringLiteral("games-hint")), i18n("Hint For This Cell"), ac);
     hintCell->setToolTip(i18n("Solve the selected letter cell"));
     ac->addAction(actionName(Move_HintCurrentCell), hintCell);
     connect(hintCell, SIGNAL(triggered()), this, SLOT(hintCellSlot()));
     connect(hintCell, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *hintClue = new KAction(QIcon::fromTheme(QStringLiteral("clue-solve")), i18n("Solve Clue"), ac);
+    QAction *hintClue = new QAction(QIcon::fromTheme(QStringLiteral("clue-solve")), i18n("Solve Clue"), ac);
     hintClue->setToolTip(i18n("Solve the current clue"));
     ac->addAction(actionName(Move_HintClue), hintClue);
     connect(hintClue, SIGNAL(triggered()), this, SLOT(hintClueSlot()));
     connect(hintClue, SIGNAL(hovered()), this, SLOT(highlightClueForPopup()));
 
-    KAction *hintHorizontalClue = new KAction(QIcon::fromTheme(QStringLiteral("clue-solve")), i18n("Solve Across Clue"), ac);
+    QAction *hintHorizontalClue = new QAction(QIcon::fromTheme(QStringLiteral("clue-solve")), i18n("Solve Across Clue"), ac);
     hintHorizontalClue->setToolTip(i18n("Solve the current across clue"));
     ac->addAction(actionName(Move_HintHorizontalClue), hintHorizontalClue);
     connect(hintHorizontalClue, SIGNAL(triggered()), this, SLOT(hintHorizontalClueSlot()));
     connect(hintHorizontalClue, SIGNAL(hovered()), this, SLOT(highlightHorizontalClueForPopup()));
 
-    KAction *hintVerticalClue = new KAction(QIcon::fromTheme(QStringLiteral("clue-solve-vertical")), i18n("Solve Down Clue"), ac);
+    QAction *hintVerticalClue = new QAction(QIcon::fromTheme(QStringLiteral("clue-solve-vertical")), i18n("Solve Down Clue"), ac);
     hintVerticalClue->setToolTip(i18n("Solve the current down clue"));
     ac->addAction(actionName(Move_HintVerticalClue), hintVerticalClue);
     connect(hintVerticalClue, SIGNAL(triggered()), this, SLOT(hintVerticalClueSlot()));
     connect(hintVerticalClue, SIGNAL(hovered()), this, SLOT(highlightVerticalClueForPopup()));
 
-    KAction *selectClueWithSwitchedOrientationAction = new KAction(QIcon::fromTheme(QStringLiteral("select-clue-with-switched-orientation")), i18n("Clue With Switched Orientation"), ac);
+    QAction *selectClueWithSwitchedOrientationAction = new QAction(QIcon::fromTheme(QStringLiteral("select-clue-with-switched-orientation")), i18n("Clue With Switched Orientation"), ac);
     selectClueWithSwitchedOrientationAction->setToolTip(i18n("Select clue with switched orientation to the currently selected clue"));
     ac->addAction(actionName(Move_SelectClueWithSwitchedOrientation), selectClueWithSwitchedOrientationAction);
     connect(selectClueWithSwitchedOrientationAction, SIGNAL(triggered()), this, SLOT(selectClueWithSwitchedOrientationSlot()));
 
-    KAction *selectFirstLetterOfClueAction = new KAction(QIcon::fromTheme(QStringLiteral("clue-go-first-letter")), i18nc("@action:intoolbar", "&First Letter"), ac);
+    QAction *selectFirstLetterOfClueAction = new QAction(QIcon::fromTheme(QStringLiteral("clue-go-first-letter")), i18nc("@action:intoolbar", "&First Letter"), ac);
     selectFirstLetterOfClueAction->setToolTip(i18n("Select the first letter of the current clue"));
     ac->addAction(actionName(Move_SelectFirstLetterOfClue), selectFirstLetterOfClueAction);
     connect(selectFirstLetterOfClueAction, SIGNAL(triggered()), this, SLOT(selectFirstLetterOfClueSlot()));
 
-    KAction *selectLastLetterOfClueAction = new KAction(QIcon::fromTheme(QStringLiteral("clue-go-last-letter")), i18nc("@action:intoolbar", "&Last Letter"), ac);
+    QAction *selectLastLetterOfClueAction = new QAction(QIcon::fromTheme(QStringLiteral("clue-go-last-letter")), i18nc("@action:intoolbar", "&Last Letter"), ac);
     selectLastLetterOfClueAction->setToolTip(i18n("Select the last letter of the current clue"));
     ac->addAction(actionName(Move_SelectLastLetterOfClue), selectLastLetterOfClueAction);
     connect(selectLastLetterOfClueAction, SIGNAL(triggered()), this, SLOT(selectLastLetterOfClueSlot()));
 
-    KAction *selectFirstClueAction = new KAction(QIcon::fromTheme(QStringLiteral("go-first")), i18nc("@action:intoolbar", "First Clue"), ac);
+    QAction *selectFirstClueAction = new QAction(QIcon::fromTheme(QStringLiteral("go-first")), i18nc("@action:intoolbar", "First Clue"), ac);
     selectFirstClueAction->setToolTip(i18n("Select the first clue"));
     ac->addAction(actionName(Move_SelectFirstClue), selectFirstClueAction);
     connect(selectFirstClueAction, SIGNAL(triggered()), this, SLOT(selectFirstClueSlot()));
 
-    KAction *selectNextClueAction = new KAction(QIcon::fromTheme(QStringLiteral("go-next")), i18nc("@action:intoolbar", "&Next Clue"), ac);
+    QAction *selectNextClueAction = new QAction(QIcon::fromTheme(QStringLiteral("go-next")), i18nc("@action:intoolbar", "&Next Clue"), ac);
     selectNextClueAction->setToolTip(i18n("Select the next clue"));
     ac->addAction(actionName(Move_SelectNextClue), selectNextClueAction);
     connect(selectNextClueAction, SIGNAL(triggered()), this, SLOT(selectNextClueSlot()));
 
-    KAction *selectPreviousClueAction = new KAction(QIcon::fromTheme(QStringLiteral("go-previous")), i18nc("@action:intoolbar", "&Previous Clue"), ac);
+    QAction *selectPreviousClueAction = new QAction(QIcon::fromTheme(QStringLiteral("go-previous")), i18nc("@action:intoolbar", "&Previous Clue"), ac);
     selectPreviousClueAction->setToolTip(i18n("Select the previous clue"));
     ac->addAction(actionName(Move_SelectPreviousClue), selectPreviousClueAction);
     connect(selectPreviousClueAction, SIGNAL(triggered()), this, SLOT(selectPreviousClueSlot()));
 
-    KAction *selectLastClueAction = new KAction(QIcon::fromTheme(QStringLiteral("go-last")), i18nc("@action:intoolbar", "Last Clue"), ac);
+    QAction *selectLastClueAction = new QAction(QIcon::fromTheme(QStringLiteral("go-last")), i18nc("@action:intoolbar", "Last Clue"), ac);
     selectLastClueAction->setToolTip(i18n("Select the last clue"));
     ac->addAction(actionName(Move_SelectLastClue), selectLastClueAction);
     connect(selectLastClueAction, SIGNAL(triggered()), this, SLOT(selectLastClueSlot()));
@@ -1429,66 +1440,66 @@ void CrossWordXmlGuiWindow::setupActions()
     ac->addAction(actionName(Edit_EnableEditMode), enableEditModeAction);
     connect(enableEditModeAction, SIGNAL(toggled(bool)), this, SLOT(enableEditModeSlot(bool)));
 
-    KAction *addClueAction = new KAction(QIcon::fromTheme(QStringLiteral("clue-add")), i18n("&Add Clue"), this);
+    QAction *addClueAction = new QAction(QIcon::fromTheme(QStringLiteral("clue-add")), i18n("&Add Clue"), this);
     addClueAction->setToolTip(i18n("Adds a new clue at the current cell"));
     ac->addAction(actionName(Edit_AddClue), addClueAction);
     connect(addClueAction, SIGNAL(triggered()), this, SLOT(addClueSlot()));
     connect(addClueAction, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *removeAction = new KAction(QIcon::fromTheme(QStringLiteral("clue-delete")), i18n("&Remove"), this);
+    QAction *removeAction = new QAction(QIcon::fromTheme(QStringLiteral("clue-delete")), i18n("&Remove"), this);
     removeAction->setToolTip(i18n("Removes the highlighted clue or image"));
     ac->addAction(actionName(Edit_Remove), removeAction);
     connect(removeAction, SIGNAL(triggered()), this, SLOT(removeSlot()));
 
-    KAction *removeHorizontalClueAction = new KAction(QIcon::fromTheme(QStringLiteral("clue-delete")), i18n("Remove &Across Clue"), this);
+    QAction *removeHorizontalClueAction = new QAction(QIcon::fromTheme(QStringLiteral("clue-delete")), i18n("Remove &Across Clue"), this);
     removeHorizontalClueAction->setToolTip(i18n("Removes the highlighted across clue"));
     ac->addAction(actionName(Edit_RemoveHorizontalClue), removeHorizontalClueAction);
     connect(removeHorizontalClueAction, SIGNAL(triggered()), this, SLOT(removeHorizontalClueSlot()));
     connect(removeHorizontalClueAction, SIGNAL(hovered()), this, SLOT(highlightHorizontalClueForPopup()));
 
-    KAction *removeVerticalClueAction = new KAction(QIcon::fromTheme(QStringLiteral("clue-delete-vertical")), i18n("Remove &Down Clue"), this);
+    QAction *removeVerticalClueAction = new QAction(QIcon::fromTheme(QStringLiteral("clue-delete-vertical")), i18n("Remove &Down Clue"), this);
     removeVerticalClueAction->setToolTip(i18n("Removes the highlighted down clue"));
     ac->addAction(actionName(Edit_RemoveVerticalClue), removeVerticalClueAction);
     connect(removeVerticalClueAction, SIGNAL(triggered()), this, SLOT(removeVerticalClueSlot()));
     connect(removeVerticalClueAction, SIGNAL(hovered()), this, SLOT(highlightVerticalClueForPopup()));
 
-    KAction *addImageAction = new KAction(QIcon::fromTheme(QStringLiteral("insert-image")), i18n("&Add Image"), this);
+    QAction *addImageAction = new QAction(QIcon::fromTheme(QStringLiteral("insert-image")), i18n("&Add Image"), this);
     addImageAction->setToolTip(i18n("Adds a new image at the current cell"));
     ac->addAction(actionName(Edit_AddImage), addImageAction);
     connect(addImageAction, SIGNAL(triggered()), this, SLOT(addImageSlot()));
     connect(addImageAction, SIGNAL(hovered()), this, SLOT(highlightCellForPopup()));
 
-    KAction *clearCrosswordAction = new KAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("&Clear Crossword..."), this);
+    QAction *clearCrosswordAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("&Clear Crossword..."), this);
     clearCrosswordAction->setToolTip(i18n("Removes all clues from the crossword"));
     ac->addAction(actionName(Edit_ClearCrossword), clearCrosswordAction);
     connect(clearCrosswordAction, SIGNAL(triggered()), this, SLOT(clearCrosswordSlot()));
 
-    KAction *propertiesAction = new KAction(QIcon::fromTheme(QStringLiteral("document-properties")), i18n("&Crossword Properties..."), this);
+    QAction *propertiesAction = new QAction(QIcon::fromTheme(QStringLiteral("document-properties")), i18n("&Crossword Properties..."), this);
     propertiesAction->setToolTip(i18n("Change the size of the crossword or it's title, author, copyright..."));
     ac->addAction(actionName(Edit_Properties), propertiesAction);
     connect(propertiesAction, SIGNAL(triggered()), this, SLOT(propertiesSlot()));
 
-    KAction *editCheckRotationSymmetryAction = new KAction(QIcon::fromTheme(QStringLiteral("")), i18n("&Check for rotation symmetry..."), this);
+    QAction *editCheckRotationSymmetryAction = new QAction(QIcon::fromTheme(QStringLiteral("")), i18n("&Check for rotation symmetry..."), this);
     editCheckRotationSymmetryAction->setToolTip(i18n("Checks if the crossword has 180 degree rotation symmetry"));
     ac->addAction(actionName(Edit_CheckRotationSymmetry), editCheckRotationSymmetryAction);
     connect(editCheckRotationSymmetryAction, SIGNAL(triggered()), this, SLOT(editCheckRotationSymmetrySlot()));
 
-    KAction *editStatisticsAction = new KAction(QIcon::fromTheme(QStringLiteral("view-statistics")), i18n("&Statistics..."), this);
+    QAction *editStatisticsAction = new QAction(QIcon::fromTheme(QStringLiteral("view-statistics")), i18n("&Statistics..."), this);
     editStatisticsAction->setToolTip(i18n("Shows statistics about the crossword"));
     ac->addAction(actionName(Edit_Statistics), editStatisticsAction);
     connect(editStatisticsAction, SIGNAL(triggered()), this, SLOT(editStatisticsSlot()));
 
-    KAction *editClueNumberMappingAction = new KAction(QIcon::fromTheme(QStringLiteral("")), i18n("Clue Number &Mapping..."), this);
+    QAction *editClueNumberMappingAction = new QAction(QIcon::fromTheme(QStringLiteral("")), i18n("Clue Number &Mapping..."), this);
     editClueNumberMappingAction->setToolTip(i18n("Changes the mapping of clue numbers to letters"));
     ac->addAction(actionName(Edit_ClueNumberMapping), editClueNumberMappingAction);
     connect(editClueNumberMappingAction, SIGNAL(triggered()), this, SLOT(editClueNumberMappingSlot()));
 
-    KAction *editMoveCellsAction = new KAction(QIcon::fromTheme(QStringLiteral("")), i18n("Move All Cells..."), this);
+    QAction *editMoveCellsAction = new QAction(QIcon::fromTheme(QStringLiteral("")), i18n("Move All Cells..."), this);
     editMoveCellsAction->setToolTip(i18n("Moves all cells of the crossword"));
     ac->addAction(actionName(Edit_MoveCells), editMoveCellsAction);
     connect(editMoveCellsAction, SIGNAL(triggered()), this, SLOT(editMoveCellsSlot()));
 
-    KAction *pasteSpecialCharacter = new KAction(ac);
+    QAction *pasteSpecialCharacter = new QAction(ac);
     QWidget *specialCharacterButtonsWidget = new QWidget(this);
     QHBoxLayout *specialCharacterButtonsLayout = new QHBoxLayout(specialCharacterButtonsWidget);
     specialCharacterButtonsLayout->setContentsMargins(10, 0, 0, 0);
@@ -1507,25 +1518,25 @@ void CrossWordXmlGuiWindow::setupActions()
     specialCharacterLayout->addWidget(specialCharacterButtonsWidget);
 
     pasteSpecialCharacter->setToolTip(i18n("Let you select a special character to paste"));
-    pasteSpecialCharacter->setDefaultWidget(specialCharacterWidget);
+    //pasteSpecialCharacter->setDefaultWidget(specialCharacterWidget);
     ac->addAction(actionName(Edit_PasteSpecialCharacter), pasteSpecialCharacter);
 
     // Move actions
-    KAction *solveAction = KStandardGameAction::solve(this, SLOT(solveSlot()), ac);
+    QAction *solveAction = KStandardGameAction::solve(this, SLOT(solveSlot()), ac);
     solveAction->setToolTip(i18n("Fills all letter cells with the correct letters"));
     solveAction->setWhatsThis(i18n("<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The solution will be displayed.</p><p>If you filled in all letters and do not want to give up, choose \"Done!\".</p></qt>"));
 
-    KAction *checkAction = new KAction(QIcon::fromTheme(QStringLiteral("games-endturn")), i18n("&Check"), this);
+    QAction *checkAction = new QAction(QIcon::fromTheme(QStringLiteral("games-endturn")), i18n("&Check"), this);
     checkAction->setToolTip(i18n("Checks if all letters are correct"));
     ac->addAction(actionName(Move_Check), checkAction);
     connect(checkAction, SIGNAL(triggered()), this, SLOT(checkSlot()));
 
-    KAction *clearAction = new KAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("&Clear Answers"), this);
+    QAction *clearAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("&Clear Answers"), this);
     clearAction->setToolTip(i18n("Clears all letter cells"));
     ac->addAction(actionName(Move_Clear), clearAction);
     connect(clearAction, SIGNAL(triggered()), this, SLOT(clearSlot()));
 
-    KAction *eraseAction = new KToggleAction(QIcon::fromTheme(QStringLiteral("draw-eraser")), i18n("&Eraser"), this);
+    QAction *eraseAction = new KToggleAction(QIcon::fromTheme(QStringLiteral("draw-eraser")), i18n("&Eraser"), this);
     eraseAction->setToolTip(i18n("Enables the eraser, to clear letter cells/answers"));
     ac->addAction(actionName(Move_Eraser), eraseAction);
     connect(eraseAction, SIGNAL(triggered(bool)), this, SLOT(eraseSlot(bool)));

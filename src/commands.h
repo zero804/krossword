@@ -24,7 +24,7 @@
 #include "cells/cluecell.h"
 
 #include <QUndoCommand>
-#include <KUndoStack>
+#include <QUndoStack>
 #include <QUrl>
 #include "krossword.h"
 #include <QtCore/QString>
@@ -37,7 +37,7 @@ class KrossWord;
 using namespace Crossword;
 class UndoCommandExt;
 
-class UndoStackExt : public KUndoStack
+class UndoStackExt : public QUndoStack
 {
     Q_OBJECT
 
@@ -53,7 +53,7 @@ public:
         return m_executingRedo;
     }
     void clear() {
-        KUndoStack::clear();
+        QUndoStack::clear();
         m_data.clear();
         m_dataIndexPos.clear();
         m_dataIndexPos << sizeof(qint16);

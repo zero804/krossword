@@ -22,7 +22,7 @@
 #include "cells/imagecell.h"
 
 UndoStackExt::UndoStackExt(QObject* parent)
-    : KUndoStack(parent)
+    : QUndoStack(parent)
 {
     m_executingRedo = true;
 //   m_lastCommand = NULL;

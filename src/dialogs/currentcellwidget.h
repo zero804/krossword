@@ -20,7 +20,7 @@
 #ifndef CURRENTCELLWIDGET_H
 #define CURRENTCELLWIDGET_H
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 
 #include "global.h"
 

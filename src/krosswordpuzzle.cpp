@@ -40,6 +40,7 @@
 #include <QStandardPaths>
 
 #include <QMenuBar>
+#include <QStatusBar>
 
 KrossWordPuzzle::KrossWordPuzzle() : KXmlGuiWindow(),
       m_mainLibrary(nullptr),
@@ -265,7 +266,7 @@ void KrossWordPuzzle::showRestoreOption(const QString& lastUnsavedFileBeforeCras
                                             restoreButton,
                                             KStandardGuiItem::discard());
     if (result == KMessageBox::Yes) {
-        loadFile(lastUnsavedFileBeforeCrash, Crossword::KrossWord::KrossWordPuzzleCompressedXmlFile, true);
+        loadFile(QUrl::fromLocalFile(lastUnsavedFileBeforeCrash), Crossword::KrossWord::KrossWordPuzzleCompressedXmlFile, true);
     } else {
         m_mainCrossword->removeTempFile(lastUnsavedFileBeforeCrash);
     }
@@ -273,7 +274,7 @@ void KrossWordPuzzle::showRestoreOption(const QString& lastUnsavedFileBeforeCras
 
 QString KrossWordPuzzle::displayFileName(const QString &fileName)
 {
-    QString libraryDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "library");
+    QString libraryDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "library";
     if (fileName.startsWith(libraryDir)) {
         // Cut the library path
         QString libraryFileName = fileName.mid(libraryDir.length());
@@ -500,5 +501,5 @@ void KrossWordPuzzle::crosswordModificationsChanged(CrossWordXmlGuiWindow::Modif
 void KrossWordPuzzle::crosswordAutoSaveFileChanged(const QString &fileName)
 {
     Settings::setLastUnsavedFileBeforeCrash(fileName);
-    Settings::self()->writeConfig();
+    Settings::self()->save();
 }
