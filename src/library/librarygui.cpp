@@ -35,7 +35,8 @@
 #include <KIO/CopyJob>
 #include <KActionCollection>
 #include <KIO/PreviewJob>
-#include <KStandardDirs>
+#include <QStandardPaths>
+
 
 LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
       m_mainWindow(parent),
@@ -45,7 +46,7 @@ LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::Wind
       m_downloadPreviewJob(nullptr),
       m_downloadCrosswordsDlg(nullptr)
 {
-    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
+    QString libraryDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "library");
     m_libraryModel->setRootPath(libraryDir);
 
     if (!m_libraryDelegate) {

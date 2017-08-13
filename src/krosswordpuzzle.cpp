@@ -24,7 +24,7 @@
 
 #include <KConfigDialog>
 #include <KMessageBox>
-#include <KStatusBar>
+//#include <KStatusBar>
 #include <QStackedWidget>
 #include <KgThemeSelector>
 #include <KShortcutsDialog>
@@ -35,10 +35,11 @@
 #include <KActionCollection>
 
 // Other KDE includes
-#include <KStandardDirs>
+
 
 #include <kapplication.h>
 #include <kfileplacesmodel.h>
+#include <QStandardPaths>
 
 KrossWordPuzzle::KrossWordPuzzle() : KXmlGuiWindow(),
       m_mainLibrary(nullptr),
@@ -231,8 +232,8 @@ void KrossWordPuzzle::setupMainTabWidget()
 
 void KrossWordPuzzle::setupPlaces()
 {
-    QUrl libraryUrl = QUrl::fromLocalFile(KGlobal::dirs()->saveLocation("appdata", "library"));
-    QUrl templatesUrl = QUrl::fromLocalFile(KGlobal::dirs()->saveLocation("appdata", "templates"));
+    QUrl libraryUrl = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "library");
+    QUrl templatesUrl = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "templates");
 
     KFilePlacesModel *placesModel = new KFilePlacesModel();
     if (placesModel->url(placesModel->closestItem(libraryUrl)) != libraryUrl) {
@@ -272,7 +273,7 @@ void KrossWordPuzzle::showRestoreOption(const QString& lastUnsavedFileBeforeCras
 
 QString KrossWordPuzzle::displayFileName(const QString &fileName)
 {
-    QString libraryDir = KGlobal::dirs()->saveLocation("appdata", "library");
+    QString libraryDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "library");
     if (fileName.startsWith(libraryDir)) {
         // Cut the library path
         QString libraryFileName = fileName.mid(libraryDir.length());

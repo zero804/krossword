@@ -28,6 +28,7 @@
 #include <templatemodel.h>
 #include <io/krosswordxmlreader.h>
 #include <QTimer>
+#include <QStandardPaths>
 
 CreateNewCrosswordDialog::CreateNewCrosswordDialog(QWidget* parent, Qt::WFlags flags) : QDialog(parent, flags)
 {
@@ -115,7 +116,7 @@ void CreateNewCrosswordDialog::setup()
             SIGNAL(crosswordTypeInfoChanged(CrosswordTypeInfo)),
             this, SLOT(typeInfoChanged(CrosswordTypeInfo)));
 
-    QStringList templateDirs = KGlobal::dirs()->findDirs("appdata", "templates");
+    QStringList templateDirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates");
     ui_create_new.templateLocation->addItems(templateDirs);
 
     m_templateModel = new TemplateModel;
