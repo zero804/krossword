@@ -38,23 +38,23 @@ ClueCellWidget::ClueCellWidget(ClueCell* clueCell,
     ui_clue_properties_dock.setupUi(this);
 
     ui_clue_properties_dock.firstLetterPositionTopLeft->setIcon(
-        KIcon("answer-offset-topleft"));
+        QIcon::fromTheme(QStringLiteral("answer-offset-topleft")));
     ui_clue_properties_dock.firstLetterPositionTop->setIcon(
-        KIcon("answer-offset-top"));
+        QIcon::fromTheme(QStringLiteral("answer-offset-top")));
     ui_clue_properties_dock.firstLetterPositionTopRight->setIcon(
-        KIcon("answer-offset-topright"));
+        QIcon::fromTheme(QStringLiteral("answer-offset-topright")));
     ui_clue_properties_dock.firstLetterPositionLeft->setIcon(
-        KIcon("answer-offset-left"));
+        QIcon::fromTheme(QStringLiteral("answer-offset-left")));
     ui_clue_properties_dock.firstLetterPositionOnClueCell->setIcon(
-        KIcon("answer-offset-oncluecell"));
+        QIcon::fromTheme(QStringLiteral("answer-offset-oncluecell")));
     ui_clue_properties_dock.firstLetterPositionRight->setIcon(
-        KIcon("answer-offset-right"));
+        QIcon::fromTheme(QStringLiteral("answer-offset-right")));
     ui_clue_properties_dock.firstLetterPositionBottomLeft->setIcon(
-        KIcon("answer-offset-bottomleft"));
+        QIcon::fromTheme(QStringLiteral("answer-offset-bottomleft")));
     ui_clue_properties_dock.firstLetterPositionBottom->setIcon(
-        KIcon("answer-offset-bottom"));
+        QIcon::fromTheme(QStringLiteral("answer-offset-bottom")));
     ui_clue_properties_dock.firstLetterPositionBottomRight->setIcon(
-        KIcon("answer-offset-bottomright"));
+        QIcon::fromTheme(QStringLiteral("answer-offset-bottomright")));
 
     m_btnGroupAnswerOffset = new QButtonGroup(this);
     m_btnGroupAnswerOffset->setExclusive(true);
@@ -90,7 +90,7 @@ ClueCellWidget::ClueCellWidget(ClueCell* clueCell,
     m_cluePropertiesCharMenu->addActions(QList< QAction* >() << charSelectAction);
     connect(charSelect, SIGNAL(charSelected(QChar)),
             this, SLOT(charSelected(QChar)));
-    ui_clue_properties_dock.insertChar->setIcon(KIcon("character-set"));
+    ui_clue_properties_dock.insertChar->setIcon(QIcon::fromTheme(QStringLiteral("character-set")));
     ui_clue_properties_dock.insertChar->setMenu(m_cluePropertiesCharMenu);
 
     if (dictionary->isEmpty()) {
@@ -159,7 +159,7 @@ ClueCellWidget::ClueCellWidget(ClueCell* clueCell,
     menu->addActions(menuActions);
     ui_clue_properties_dock.patternSettings->setMenu(menu);
     ui_clue_properties_dock.patternSettings->setPopupMode(QToolButton::InstantPopup);
-    ui_clue_properties_dock.patternSettings->setIcon(KIcon("configure"));
+    ui_clue_properties_dock.patternSettings->setIcon(QIcon::fromTheme(QStringLiteral("configure")));
 
     setClue(clueCell);
 

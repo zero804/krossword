@@ -34,13 +34,12 @@
 #include <KStandardGameAction>
 #include <KActionCollection>
 
-// Other KDE includes
-
-
 //#include <kapplication.h>
 //#include <kfileplacesmodel.h>
 #include <KFilePlacesModel>
 #include <QStandardPaths>
+
+#include <QMenuBar>
 
 KrossWordPuzzle::KrossWordPuzzle() : KXmlGuiWindow(),
       m_mainLibrary(nullptr),
@@ -92,7 +91,7 @@ void KrossWordPuzzle::loadFile(const QUrl &url, Crossword::KrossWord::FileFormat
     }
 
     if(!loaded) {
-        QString msg = i18n("Could not open resource at ") + url.pathOrUrl();
+        QString msg = i18n("Could not open resource at ") + url.url(QUrl::PreferLocalFile);
         KMessageBox::sorry(this, msg, i18n("Resource unavailable"));
     }
 }
@@ -238,11 +237,11 @@ void KrossWordPuzzle::setupPlaces()
 
     KFilePlacesModel *placesModel = new KFilePlacesModel();
     if (placesModel->url(placesModel->closestItem(libraryUrl)) != libraryUrl) {
-        placesModel->addPlace(i18n("Library"), QUrl::fromLocalFile(libraryUrl), "favorites", QApplication::applicationName());
+        placesModel->addPlace(i18n("Library"),libraryUrl, "favorites", QApplication::applicationName());
     }
 
     if (placesModel->url(placesModel->closestItem(templatesUrl)) != templatesUrl) {
-        placesModel->addPlace(i18n("Templates"), QUrl::fromLocalFile(templatesUrl), "krossword", QApplication::applicationName());
+        placesModel->addPlace(i18n("Templates"), templatesUrl, "krossword", QApplication::applicationName());
     }
 
     delete placesModel;
@@ -259,7 +258,7 @@ void KrossWordPuzzle::setupActions()
 
 void KrossWordPuzzle::showRestoreOption(const QString& lastUnsavedFileBeforeCrash)
 {
-    KGuiItem restoreButton(i18n("&Restore"), KIcon("document-open"), i18n("Restore the automatically saved version of an edited crossword before the crash"));
+    KGuiItem restoreButton(i18n("&Restore"), QIcon::fromTheme(QStringLiteral("document-open")), i18n("Restore the automatically saved version of an edited crossword before the crash"));
     int result = KMessageBox::questionYesNo(this, i18n("An unsaved crossword has been found. Most likely the game crashed, sorry!\n "
                                             "Do you want to restore the crossword?"),
                                             QString(),

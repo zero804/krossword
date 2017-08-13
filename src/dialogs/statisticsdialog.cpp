@@ -26,13 +26,13 @@
 #include <QDialogButtonBox>
 
 #include <KLocale>
-#include <KIcon>
+#include <QIcon>
 
 StatisticsDialog::StatisticsDialog(KrossWord* krossWord, QWidget* parent)
     : QDialog(parent), m_krossWord(krossWord)
 {
     setWindowTitle(i18n("Statistics"));
-    setWindowIcon(KIcon("view-statistics"));
+    setWindowIcon(QIcon::fromTheme(QStringLiteral("view-statistics")));
     setMinimumWidth(300);
     setModal(true);
 

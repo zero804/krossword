@@ -27,7 +27,7 @@ ImageCellWidget::ImageCellWidget(ImageCell* imageCell, QWidget* parent)
     : QWidget(parent)
 {
     ui_image_properties_dock.setupUi(this);
-    ui_image_properties_dock.browse->setIcon(KIcon("document-open"));
+    ui_image_properties_dock.browse->setIcon(QIcon::fromTheme(QStringLiteral("document-open")));
     setImageCell(imageCell);
 
     connect(ui_image_properties_dock.browse, SIGNAL(clicked()),

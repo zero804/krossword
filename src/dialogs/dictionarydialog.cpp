@@ -34,17 +34,17 @@ DictionaryDialog::DictionaryDialog(KrosswordDictionary* dictionary, QWidget* par
 {
     setWindowTitle(i18n("Dictionary"));
     ui_dictionaries.setupUi(this);;
-    setWindowIcon(KIcon("crossword-dictionary"));
+    setWindowIcon(QIcon::fromTheme(QStringLiteral("crossword-dictionary")));
     setModal(true);
 
-    ui_dictionaries.extractFromLibrary->setIcon(KIcon("extract-from-library"));
-    ui_dictionaries.extractFromCrosswords->setIcon(KIcon("extract-from-crosswords"));
-    ui_dictionaries.addWordsFromDictionary->setIcon(KIcon("list-add"));
-    ui_dictionaries.addEntry->setIcon(KIcon("list-add"));
-    ui_dictionaries.removeEntries->setIcon(KIcon("list-remove"));
-    ui_dictionaries.clear->setIcon(KIcon("edit-clear"));
-    ui_dictionaries.importFromCSV->setIcon(KIcon("document-import"));
-    ui_dictionaries.exportToCSV->setIcon(KIcon("document-export"));
+    ui_dictionaries.extractFromLibrary->setIcon(QIcon::fromTheme(QStringLiteral("extract-from-library")));
+    ui_dictionaries.extractFromCrosswords->setIcon(QIcon::fromTheme(QStringLiteral("extract-from-crosswords")));
+    ui_dictionaries.addWordsFromDictionary->setIcon(QIcon::fromTheme(QStringLiteral("list-add")));
+    ui_dictionaries.addEntry->setIcon(QIcon::fromTheme(QStringLiteral("list-add")));
+    ui_dictionaries.removeEntries->setIcon(QIcon::fromTheme(QStringLiteral("list-remove")));
+    ui_dictionaries.clear->setIcon(QIcon::fromTheme(QStringLiteral("edit-clear")));
+    ui_dictionaries.importFromCSV->setIcon(QIcon::fromTheme(QStringLiteral("document-import")));
+    ui_dictionaries.exportToCSV->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
 
     m_dbTable = m_dictionary->createModel();
     m_dbTable->select();

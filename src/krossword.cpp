@@ -35,7 +35,7 @@
 #include <QUrl>
 #include <KMimeType>
 #include <KIO/NetAccess>
-#include <KIcon>
+#include <QIcon>
 #include <kglobalsettings.h>
 
 #include "animator.h"
@@ -2962,7 +2962,7 @@ QStandardItemModel* KrossWord::createCrosswordTypeModel(
     // Add a row for each crossword type
     int i = 0;
     foreach(CrosswordTypeInfo info, typeInfoList) {
-        QStandardItem *itemTitle = new QStandardItem(KIcon(info.iconName), info.name);
+        QStandardItem *itemTitle = new QStandardItem(QIcon::fromTheme(info.iconName), info.name);
         QStandardItem *itemDescription = new QStandardItem(info.description);
         itemTitle->setData(static_cast<int>(info.crosswordType), Qt::UserRole + 1);
 

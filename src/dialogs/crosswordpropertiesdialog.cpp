@@ -37,7 +37,7 @@ CrosswordPropertiesDialog::CrosswordPropertiesDialog(KrossWord* krossWord, QWidg
     ui_properties.setupUi(this);
     setModal(true);
 
-    ui_properties.btnReset->setIcon(KIcon("edit-undo"));
+    ui_properties.btnReset->setIcon(QIcon::fromTheme(QStringLiteral("edit-undo")));
     ui_properties.btnReset->setEnabled(false);
 
     ui_properties.toolBox->setItemText(ui_properties.toolBox->indexOf(ui_properties.pageCrosswordType), i18n("Crossword Type: %1",krossWord->crosswordTypeInfo().name));

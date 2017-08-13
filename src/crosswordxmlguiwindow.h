@@ -31,6 +31,7 @@
 #include <QPrinter>
 #include <KXmlGuiWindow>
 #include <QUrl>
+#include <QDateTime>
 
 #define MIN_SECS_BETWEEN_AUTOSAVES 30
 
@@ -381,7 +382,7 @@ protected slots:
 
     // KrossWord slots
     void currentClueChanged(ClueCell *question);
-    void answerChanged(ClueCell*, const QString&, bool statusBar = true); //, const KIcon &icon = KIcon());
+    void answerChanged(ClueCell*, const QString&, bool statusBar = true); //, const KIcon &icon = QIcon());
     void currentCellChanged(KrossWordCell *currentCell, KrossWordCell* previousCell);
     void customContextMenuRequestedForCell(const QPointF &scenePos, KrossWordCell *cell);
     void mousePressedOnCell(const QPointF &scenePos, Qt::MouseButton button, KrossWordCell *cell);

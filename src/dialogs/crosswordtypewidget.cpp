@@ -378,6 +378,6 @@ void CrosswordTypeWidget::setTypeInfo(CrosswordTypeInfo typeInfo)
         m_lblInfo->setText(typeInfo.description);
 
     if (m_icon)
-        m_icon->setPixmap(KIcon(typeInfo.iconName).pixmap(48, 48));
+        m_icon->setPixmap(QIcon::fromTheme(typeInfo.iconName).pixmap(48, 48));
 }
 

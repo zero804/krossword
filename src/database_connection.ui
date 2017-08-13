@@ -107,7 +107,7 @@ p, li { white-space: pre-wrap; }
        <property name="text">
         <string notr="true"/>
        </property>
-       <property name="passwordMode">
+       <property name="passwordMode" stdset="0">
         <bool>true</bool>
        </property>
       </widget>
@@ -123,8 +123,6 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <customwidgets>
- </customwidgets>
  <resources/>
  <connections>
   <connection>
