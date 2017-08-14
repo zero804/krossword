@@ -234,7 +234,7 @@ void KrossWordXmlWriter::writeImage(ImageCell* image,
     writeAttribute("horizontalCellSpan", QString::number(image->horizontalCellSpan()));
     writeAttribute("verticalCellSpan", QString::number(image->verticalCellSpan()));
     if (writeMode == KrossWord::Normal)
-        writeAttribute("url", image->url().pathOrUrl());
+        writeAttribute("url", image->url().url(QUrl::PreferLocalFile));
     else if (writeMode == KrossWord::Template)
         writeAttribute("url", QString());
     else

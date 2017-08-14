@@ -41,6 +41,8 @@
 #include "animator.h"
 #include <QPropertyAnimation>
 #include <QGraphicsEffect>
+#include <QFontDatabase>
+#include <QMimeDatabase>
 
 
 namespace Crossword
@@ -118,7 +120,7 @@ void KrossWordHeaderItem::setContent(KrossWord *krossWord)
             m_titleItem = new QGraphicsTextItem(this);
         }
 
-        QFont font = KGlobalSettings::generalFont();
+        QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
         font.setBold(true);
         font.setPointSize(20);
         m_titleItem->setFont(font);
@@ -140,7 +142,7 @@ void KrossWordHeaderItem::setContent(KrossWord *krossWord)
         if (!m_authorsItem)
             m_authorsItem = new QGraphicsTextItem(this);
 
-        QFont font = KGlobalSettings::generalFont();
+        QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
         font.setPointSize(12);
         m_authorsItem->setFont(font);
         m_authorsItem->setTextWidth(krossWord->boundingRect().width());
@@ -892,7 +894,8 @@ ClueCellList KrossWord::clueCellsFromClueNumber(int clueNumber) const
 
 KrossWord::FileFormat KrossWord::fileFormatFromFileName(const QString& fileName)
 {
-    QString extension = KMimeType::extractKnownExtension(fileName);
+    QMimeDatabase db;
+    QString extension = db.suffixForFileName(fileName);
     if (extension == "xml" || extension == "kwp")
         return KrossWordPuzzleXmlFile;
     else if (extension == "kwpz")

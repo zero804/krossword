@@ -20,7 +20,7 @@
 #ifndef CLUECELLWIDGET_H
 #define CLUECELLWIDGET_H
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include "ui_clue_properties_dock.h"
 #include <global.h>
 

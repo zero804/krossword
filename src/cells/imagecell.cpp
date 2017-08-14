@@ -50,7 +50,7 @@ void ImageCell::setUrl(const QUrl &url)
             KIO::NetAccess::removeTempFile(fileName);
         }
     } else {
-        m_image = QImage(url.pathOrUrl());
+        m_image = QImage(url.url(QUrl::PreferLocalFile));
     }
 
     m_url = url;

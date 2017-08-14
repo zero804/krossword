@@ -165,7 +165,7 @@ bool KrossWordXmlReader::read(QIODevice* device, KrossWord *krossWord,
         readNext();
 
         if (isStartElement()) {
-            if (name().compare("krossWord", Qt::CaseInsensitive) == 0
+            if (name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0
                     && (attributes().value("version") == "1.0"
                         || attributes().value("version") == "1.1")) {
                 readKrossWord(krossWord, undoData);
@@ -197,7 +197,7 @@ bool KrossWordXmlReader::readInfo(QIODevice* device,
         readNext();
 
         if (isStartElement()) {
-            if (name().compare("krossWord", Qt::CaseInsensitive) == 0
+            if (name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0
                     && (attributes().value("version") == "1.0"
                         || attributes().value("version") == "1.1")) {
                 krossWordInfo = readKrossWordInfo();
@@ -214,7 +214,7 @@ bool KrossWordXmlReader::readInfo(QIODevice* device,
 
 KrossWordXmlReader::KrossWordInfo KrossWordXmlReader::readKrossWordInfo()
 {
-    Q_ASSERT(isStartElement() && name().compare("krossWord", Qt::CaseInsensitive) == 0);
+    Q_ASSERT(isStartElement() && name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0);
 
     if (!attributes().hasAttribute("width") || !attributes().hasAttribute("height"))
         raiseError("The <krossWord>-tag need a 'width' and a 'height' attribute.");
@@ -232,17 +232,17 @@ KrossWordXmlReader::KrossWordInfo KrossWordXmlReader::readKrossWordInfo()
 
     while (!atEnd()) {
         readNext();
-        if (isEndElement() && name().compare("krossWord", Qt::CaseInsensitive) == 0)
+        if (isEndElement() && name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0)
             break;
 
         if (isStartElement()) {
-            if (name().compare("title", Qt::CaseInsensitive) == 0)
+            if (name().compare(QLatin1String("title"), Qt::CaseInsensitive) == 0)
                 info.title = readElementText();
-            else if (name().compare("authors", Qt::CaseInsensitive) == 0)
+            else if (name().compare(QLatin1String("authors"), Qt::CaseInsensitive) == 0)
                 info.authors = readElementText();
-            else if (name().compare("copyright", Qt::CaseInsensitive) == 0)
+            else if (name().compare(QLatin1String("copyright"), Qt::CaseInsensitive) == 0)
                 info.copyright = readElementText();
-            else if (name().compare("notes", Qt::CaseInsensitive) == 0)
+            else if (name().compare(QLatin1String("notes"), Qt::CaseInsensitive) == 0)
                 info.notes = readElementText();
             else
                 break;
@@ -270,20 +270,20 @@ void KrossWordXmlReader::readKrossWord(KrossWord *krossWord,
         && krossWord->crosswordTypeInfo().letterCellContent == Crossword::Characters;
 
     while (!atEnd()) {
-        if (isEndElement() && name().compare("krossWord", Qt::CaseInsensitive) == 0)
+        if (isEndElement() && name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0)
             break;
 
         if (isStartElement()) {
-            if (name().compare("clue", Qt::CaseInsensitive) == 0)
+            if (name().compare(QLatin1String("clue"), Qt::CaseInsensitive) == 0)
                 readClue(krossWord);
-            else if (name().compare("image", Qt::CaseInsensitive) == 0)
+            else if (name().compare(QLatin1String("image"), Qt::CaseInsensitive) == 0)
                 readImage(krossWord);
-            else if (name().compare("solutionLetter", Qt::CaseInsensitive) == 0)
+            else if (name().compare(QLatin1String("solutionLetter"), Qt::CaseInsensitive) == 0)
                 readSolutionLetter(krossWord);
-            else if (name().compare("confidence", Qt::CaseInsensitive) == 0
-                     || name().compare("undoData", Qt::CaseInsensitive) == 0)
+            else if (name().compare(QLatin1String("confidence"), Qt::CaseInsensitive) == 0
+                     || name().compare(QLatin1String("undoData"), Qt::CaseInsensitive) == 0)
                 break; // Read confidence and undoData after the crossword has been completely read
-            else if (name().compare("letterContentToClueNumberMapping", Qt::CaseInsensitive) == 0) {
+            else if (name().compare(QLatin1String("letterContentToClueNumberMapping"), Qt::CaseInsensitive) == 0) {
                 if (letterContentToClueNumberMappingUsed) {
                     QString mapString = readElementText();
                     krossWord->setLetterContentToClueNumberMapping(mapString, false);
@@ -292,7 +292,7 @@ void KrossWordXmlReader::readKrossWord(KrossWord *krossWord,
                              "by this type of crossword, ignoring it.";
             } else if (krossWord->crosswordTypeInfo().crosswordType ==
                        UserDefinedCrossword
-                       && name().compare("userDefinedCrosswordSettings", Qt::CaseInsensitive) == 0) {
+                       && name().compare(QLatin1String("userDefinedCrosswordSettings"), Qt::CaseInsensitive) == 0) {
                 readUserDefinedCrosswordSettings(krossWord);
             } else
                 readUnknownElement();
@@ -309,10 +309,10 @@ void KrossWordXmlReader::readKrossWord(KrossWord *krossWord,
         krossWord->setupSameLetterSynchronization();
 
     // Read <confidence>-tag
-    if (isStartElement() && name().compare("confidence", Qt::CaseInsensitive) == 0) {
+    if (isStartElement() && name().compare(QLatin1String("confidence"), Qt::CaseInsensitive) == 0) {
         while (!atEnd()) {
             readNext();
-            if (isEndElement() && name().compare("confidence", Qt::CaseInsensitive) == 0)
+            if (isEndElement() && name().compare(QLatin1String("confidence"), Qt::CaseInsensitive) == 0)
                 break;
 
             QStringList confidenceStrings;
@@ -328,7 +328,7 @@ void KrossWordXmlReader::readKrossWord(KrossWord *krossWord,
                     // Read all <letter>-tags, to set the confidence to [confidence]
                     while (!atEnd()) {
                         readNext();
-                        if (isStartElement() && name().compare("letter", Qt::CaseInsensitive) == 0) {
+                        if (isStartElement() && name().compare(QLatin1String("letter"), Qt::CaseInsensitive) == 0) {
                             if (!attributes().hasAttribute("coord"))
                                 raiseError("<letter>-tags in the <confidence>-tag need a 'coord' attribute with value 'x,y'.");
                             else {
@@ -357,7 +357,7 @@ void KrossWordXmlReader::readKrossWord(KrossWord *krossWord,
 
     // Read <undoData>-tag
     if (undoData && isStartElement()
-            && name().compare("undoData", Qt::CaseInsensitive) == 0) {
+            && name().compare(QLatin1String("undoData"), Qt::CaseInsensitive) == 0) {
         *undoData = QByteArray::fromBase64(readElementText().toAscii());
     }
 
@@ -423,7 +423,7 @@ void KrossWordXmlReader::readClue(KrossWord *krossWord)
         }
 
         bool clueSelected = attributes().hasAttribute("selected")
-                            && attributes().value("selected").compare("true", Qt::CaseInsensitive) == 0;
+                            && attributes().value("selected").compare(QLatin1String("true"), Qt::CaseInsensitive) == 0;
 
         readNext();
         if (atEnd()) {
@@ -443,20 +443,20 @@ void KrossWordXmlReader::readClue(KrossWord *krossWord)
             if (isStartElement()) {
                 ++i;
 
-                if (name().compare("text", Qt::CaseInsensitive) == 0) {
+                if (name().compare(QLatin1String("text"), Qt::CaseInsensitive) == 0) {
                     hasTextTag = true;
                     readNext();
 
                     if (isCharacters() && !isWhitespace()) {
                         clue = text().toString();
                     }
-                } else if (name().compare("answer", Qt::CaseInsensitive) == 0) {
+                } else if (name().compare(QLatin1String("answer"), Qt::CaseInsensitive) == 0) {
                     hasAnswerTag = true;
                     readNext();
                     if (isCharacters() /*&& !isWhitespace()*/) {
                         answer = text().toString();
                     }
-                } else if (name().compare("currentAnswer", Qt::CaseInsensitive) == 0) {
+                } else if (name().compare(QLatin1String("currentAnswer"), Qt::CaseInsensitive) == 0) {
                     readNext();
                     if (isCharacters() /*&& !isWhitespace()*/) {
                         currentAnswer = text().toString().replace('-', ' ');
@@ -543,15 +543,15 @@ void KrossWordXmlReader::readUserDefinedCrosswordSettings(KrossWord* krossWord)
     while (!atEnd()) {
         readNext();
 
-        if (isEndElement() && name().compare("userDefinedCrosswordSettings", Qt::CaseInsensitive) == 0)
+        if (isEndElement() && name().compare(QLatin1String("userDefinedCrosswordSettings"), Qt::CaseInsensitive) == 0)
             break;
 
         if (isStartElement()) {
-            if (name().compare("iconName", Qt::CaseInsensitive) == 0)
+            if (name().compare(QLatin1String("iconName"), Qt::CaseInsensitive) == 0)
                 crosswordTypeInfo.iconName = readElementText();
-            else if (name().compare("description", Qt::CaseInsensitive) == 0)
+            else if (name().compare(QLatin1String("description"), Qt::CaseInsensitive) == 0)
                 crosswordTypeInfo.description = readElementText();
-            else if (name().compare("minAnswerLength", Qt::CaseInsensitive) == 0) {
+            else if (name().compare(QLatin1String("minAnswerLength"), Qt::CaseInsensitive) == 0) {
                 int minAnswerLength = readElementText().toInt();
                 if (minAnswerLength < 1) {
                     qDebug() << "In <userDefinedCrosswordSettings>: <minAnswerLength> "
@@ -559,19 +559,19 @@ void KrossWordXmlReader::readUserDefinedCrosswordSettings(KrossWord* krossWord)
                     minAnswerLength = 1;
                 }
                 crosswordTypeInfo.minAnswerLength = minAnswerLength;
-            } else if (name().compare("clueCellHandling", Qt::CaseInsensitive) == 0) {
+            } else if (name().compare(QLatin1String("clueCellHandling"), Qt::CaseInsensitive) == 0) {
                 crosswordTypeInfo.clueCellHandling =
                     CrosswordTypeInfo::clueCellHandlingFromString(readElementText());
-            } else if (name().compare("clueType", Qt::CaseInsensitive) == 0) {
+            } else if (name().compare(QLatin1String("clueType"), Qt::CaseInsensitive) == 0) {
                 crosswordTypeInfo.clueType =
                     CrosswordTypeInfo::clueTypeFromString(readElementText());
-            } else if (name().compare("letterCellContent", Qt::CaseInsensitive) == 0) {
+            } else if (name().compare(QLatin1String("letterCellContent"), Qt::CaseInsensitive) == 0) {
                 crosswordTypeInfo.letterCellContent =
                     CrosswordTypeInfo::letterCellContentFromString(readElementText());
-            } else if (name().compare("clueMapping", Qt::CaseInsensitive) == 0) {
+            } else if (name().compare(QLatin1String("clueMapping"), Qt::CaseInsensitive) == 0) {
                 crosswordTypeInfo.clueMapping =
                     CrosswordTypeInfo::clueMappingFromString(readElementText());
-            } else if (name().compare("cellTypes", Qt::CaseInsensitive) == 0) {
+            } else if (name().compare(QLatin1String("cellTypes"), Qt::CaseInsensitive) == 0) {
                 crosswordTypeInfo.cellTypes =
                     CrosswordTypeInfo::cellTypesFromStringList(readElementText().split(','));
 

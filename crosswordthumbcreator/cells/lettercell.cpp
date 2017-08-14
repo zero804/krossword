@@ -24,6 +24,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
 #include <kglobalsettings.h>
+#include <QFontDatabase>
 
 LetterCell::LetterCell(KrossWord* krossWord, const Coord& coord,
                        ClueCell* clueHorizontal, ClueCell* clueVertical/*,
@@ -288,7 +289,7 @@ void LetterCell::drawForegroundForPrinting(QPainter* p, const QStyleOptionGraphi
     if (isEmpty())
         return;
 
-    QFont font = KGlobalSettings::generalFont();
+    QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
     font.setPixelSize((float)option->rect.height() * 0.8);
 
     p->setFont(font);

@@ -101,7 +101,7 @@ void KrossWordPuzzleView::renderToPrinter(QPainter* painter, const QRectF& targe
 
 void KrossWordPuzzleView::settingsChanged()
 {
-    Settings::self()->writeConfig();
+    Settings::self()->save();
     emit signalChangeStatusbar(i18n("Settings changed"));
 }
 

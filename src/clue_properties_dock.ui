@@ -20,7 +20,16 @@
    <property name="rowWrapPolicy">
     <enum>QFormLayout::WrapLongRows</enum>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item row="0" column="0">
@@ -67,7 +76,7 @@
        <property name="placeholderText">
         <string>The clue text</string>
        </property>
-       <property name="clearButtonEnabled" stdset="0">
+       <property name="clearButtonEnabled">
         <bool>true</bool>
        </property>
       </widget>
@@ -102,7 +111,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>&amp;Orientation:</string>
+      <string>Or&amp;ientation:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -126,7 +135,7 @@
         <string>Arrange the answer letters horizontally.</string>
        </property>
        <property name="text">
-        <string comment="Orientation of the answer to a clue.">Horizontal</string>
+        <string comment="Orientation of the answer to a clue.">Hori&amp;zontal</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -148,7 +157,7 @@
         <string>Arrange the answer letters vertically.</string>
        </property>
        <property name="text">
-        <string comment="Orientation of the answer to a clue.">Vertical</string>
+        <string comment="Orientation of the answer to a clue.">&amp;Vertical</string>
        </property>
       </widget>
      </item>
@@ -163,7 +172,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Answer &amp;Offset:</string>
+      <string>A&amp;nswer Offset:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -510,17 +519,17 @@ p, li { white-space: pre-wrap; }
         <property name="frame">
          <bool>true</bool>
         </property>
-        <property name="urlDropsEnabled">
-         <bool>false</bool>
-        </property>
-        <property name="squeezedTextEnabled">
-         <bool>false</bool>
-        </property>
         <property name="placeholderText">
          <string>Wildcard pattern to search for answers</string>
         </property>
-        <property name="clearButtonEnabled" stdset="0">
+        <property name="clearButtonEnabled">
          <bool>true</bool>
+        </property>
+        <property name="urlDropsEnabled" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="squeezedTextEnabled" stdset="0">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -568,8 +577,6 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <customwidgets>
- </customwidgets>
  <tabstops>
   <tabstop>pattern</tabstop>
   <tabstop>patternSettings</tabstop>

@@ -34,6 +34,7 @@
 
 #include "animator.h"
 #include <QPropertyAnimation>
+#include <QFontDatabase>
 
 namespace Crossword
 {
@@ -941,7 +942,7 @@ void ClueCell::createLayout(const QRect& rect)
     int maxLines;
     int maxFontSizeQuotient;
     int fontSizeQuotient = 3;
-    QFont font = KGlobalSettings::smallestReadableFont();
+    QFont font = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
     font.setPixelSize(maxHeight / fontSizeQuotient + 1);
     QFontMetrics fontMetrics(font);
 
@@ -1099,7 +1100,7 @@ void ClueCell::drawClueNumber(QPainter *p, const QStyleOptionGraphicsItem *optio
     // Draw clue number if any
     if (m_answerOffset == OnClueCell && m_clueNumber != -1) {
         QString text = QString("%1").arg(m_clueNumber + 1);
-        QFont font = KGlobalSettings::smallestReadableFont();
+        QFont font = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
 
         qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
 

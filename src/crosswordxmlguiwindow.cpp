@@ -47,7 +47,7 @@
 #include <KMessageBox>
 #include <KFileDialog>
 #include <KRandom>
-#include <KTemporaryFile>
+#include <QTemporaryFile>
 #include <KXMLGUIFactory>
 #include <KStatusBar>
 #include <KCharSelect>
@@ -762,7 +762,7 @@ bool CrossWordXmlGuiWindow::loadFile(const QUrl &url, KrossWord::FileFormat file
 
         // save the url of the last opened crossword
         Settings::setLastCrossword(resultUrl.toLocalFile());
-        Settings::self()->writeConfig();
+        Settings::self()->save();
 
         return true;
     } else {
@@ -1243,7 +1243,8 @@ void CrossWordXmlGuiWindow::editPasteSpecialCharacter()
     const QToolButton *button = qobject_cast<QToolButton*>(sender());
     Q_ASSERT(button);
 
-    const QString text = KGlobal::locale()->removeAcceleratorMarker(button->text());
+    //const QString text = KLocale::global()->removeAcceleratorMarker(button->text());
+    const QString text = KLocalizedString::removeAcceleratorMarker(button->text()); //CHECK
     Q_ASSERT(!text.isEmpty());
 
     const QChar character = text.at(0);
@@ -1547,7 +1548,7 @@ void CrossWordXmlGuiWindow::updateTheme()
     /* Should not do it manually */
     QString themeFile = Settings::theme();
     Settings::setTheme(KrosswordRenderer::self()->getCurrentThemeName());
-    Settings::self()->writeConfig();
+    Settings::self()->save();
 
     if (viewSolution())
         viewSolution()->scene()->update();
@@ -1564,12 +1565,12 @@ void CrossWordXmlGuiWindow::setDefaultCursor()
 {
     Q_ASSERT(m_view);
 
-    KCursor cursor(QCursor(Qt::ArrowCursor));
-    cursor.setAutoHideCursor(m_view, true);
+    QCursor cursor(Qt::ArrowCursor);
+    //cursor.setAutoHideCursor(m_view, true); //CHECK
     m_view->setCursor(cursor);
 
-    KCursor cursorLetterCells(QCursor(Qt::IBeamCursor));
-    cursor.setAutoHideCursor(m_view, true);
+    QCursor cursorLetterCells(Qt::IBeamCursor);
+    //cursor.setAutoHideCursor(m_view, true); //CHECK
     KrossWordCellList cellList = krossWord()->cells(InteractiveCellTypes);
     foreach(KrossWordCell * cell, cellList) {
         if (cell->isLetterCell())
@@ -1952,9 +1953,11 @@ void CrossWordXmlGuiWindow::autoSaveToTempFile()
 
     QString errorString, tmpFileName;
     if (m_curTmpFileName.isEmpty()) {
-        KTemporaryFile tmpFile(componentData());
+        //QTemporaryFile tmpFile(componentData());
+        QTemporaryFile tmpFile("krossword"); //CHECK: retrieve name
 
-//  tmpFile.setSuffix( getpid() );
+//code was //  tmpFile.setSuffix( getpid() );
+//Add to constructor and adapt if necessary: QDir::tempPath() + QLatin1String("/myapp_XXXXXX") + QLatin1String( getpid() ) 
         tmpFile.open();
         tmpFileName = tmpFile.fileName();
         tmpFile.close();
@@ -2461,8 +2464,8 @@ void CrossWordXmlGuiWindow::clearSlot()
 void CrossWordXmlGuiWindow::eraseSlot(bool enable)
 {
     if (enable) {
-        KCursor cursor(QCursor(Qt::PointingHandCursor));
-        cursor.setAutoHideCursor(m_view, true);
+        QCursor cursor(Qt::PointingHandCursor);
+        //cursor.setAutoHideCursor(m_view, true); //CHECK
         m_view->setCursor(cursor);
 
         KrossWordCellList cellList = krossWord()->cells(InteractiveCellTypes);
@@ -2582,7 +2585,7 @@ void CrossWordXmlGuiWindow::currentCellChanged(KrossWordCell* currentCell, Kross
     if (currentCell->isType(EmptyCellType) && statusBar()->currentMessage().isEmpty()) {
         statusBar()->showMessage(i18n("Empty cell"));
     } else if (currentCell->isType(ImageCellType)) {
-        statusBar()->showMessage(i18n("Image '%1'", ((ImageCell*)currentCell)->url().pathOrUrl()));
+        statusBar()->showMessage(i18n("Image '%1'", ((ImageCell*)currentCell)->url().url(QUrl::PreferLocalFile)));
     }
 }
 

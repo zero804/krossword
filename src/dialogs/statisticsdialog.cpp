@@ -102,7 +102,7 @@ void StatisticsDialog::setup()
             layout->addWidget(label(QString::number(stats.maxAnswerLength)), row++, 1);
 
             layout->addWidget(label(i18n("Avg. Answer Length:"), true), row, 0);
-            layout->addWidget(label(KGlobal::locale()->formatNumber(
+            layout->addWidget(label(KLocale::global()->formatNumber(
                                         stats.avgAnswerLength, 2)), row++, 1);
         }
 
@@ -148,7 +148,7 @@ void StatisticsDialog::addStatisticsValue(QGridLayout* layout,
 
     QLabel *lblTitle = label(title, true);
     QLabel *lblValue = label(QString("%1 (%2%)").arg(count)
-                             .arg(KGlobal::locale()->formatNumber(percentage, 2)));
+                             .arg(KLocale::global()->formatNumber(percentage, 2)));
 
     if (!toolTip.isEmpty()) {
         lblTitle->setToolTip(toolTip);

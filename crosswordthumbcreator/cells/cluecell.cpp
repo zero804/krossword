@@ -24,6 +24,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QFocusEvent>
 #include <kglobalsettings.h>
+#include <QFontDatabase>
 
 DoubleClueCell::DoubleClueCell(KrossWord* krossWord, const Coord& coord,
                                ClueCell* clue1, ClueCell* clue2)
@@ -275,7 +276,7 @@ void ClueCell::drawForegroundForPrinting(QPainter *p, const QStyleOptionGraphics
     testRect.setHeight(testRect.height() * 10);
 
     QString clueText = m_wrappedClue;
-    QFont font = KGlobalSettings::generalFont();
+    QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
     qreal pointSize = option->rect.height() / 4;
     font.setPointSize(pointSize);
     p->setFont(font);
@@ -307,7 +308,7 @@ void ClueCell::drawClueNumber(QPainter *p, const QStyleOptionGraphicsItem *optio
     if (m_answerOffset == OnClueCell && m_clueNumber != -1) {
         QString text = QString("%1.").arg(m_clueNumber + 1);
 //  QFont font = p->font();
-        QFont font = KGlobalSettings::generalFont();
+        QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
         if ((option->rect.height() / 3) > 6)
             font.setPixelSize(option->rect.height() / 3);
 

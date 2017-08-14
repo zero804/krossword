@@ -31,6 +31,7 @@
 #include <qfileinfo.h>
 #include <QDebug>
 #include <QRgb>
+#include <QMimeDatabase>
 
 
 KrossWord::KrossWord(int width, int height)
@@ -148,7 +149,8 @@ ClueCell* KrossWord::findClueCell(const Coord& coord,
 
 KrossWord::FileFormat KrossWord::fileFormatFromFileName(const QString& fileName)
 {
-    QString extension = KMimeType::extractKnownExtension(fileName);
+    QMimeDatabase db;
+    QString extension = db.suffixForFileName(fileName);
     if (extension == "xml" || extension == "kwp")
         return KrossWordPuzzleXmlFile;
     else if (extension == "kwpz")

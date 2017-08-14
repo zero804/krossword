@@ -29,6 +29,7 @@
 #include <KGlobalSettings>
 #include <QStyleOptionGraphicsItem>
 #include <cmath>
+#include <QFontDatabase>
 
 DocumentLayout::DocumentLayout(KrossWord &crossword)
     : m_crosswordPage(),
@@ -370,7 +371,7 @@ void PdfDocument::drawLetterCell(QPainter *painter, KrossWordCell& cell)
     if (clueNumber != -1) {
         clueNumber += 1;
 
-        QFont font = KGlobalSettings::smallestReadableFont();
+        QFont font = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
         qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(painter->matrix()));
         font.setPointSizeF(7.0 * levelOfDetail);
 

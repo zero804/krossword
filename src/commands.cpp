@@ -541,7 +541,7 @@ RemoveImageCommand::RemoveImageCommand(KrossWord* krossWord,
 
 void RemoveImageCommand::setupText()
 {
-    setText(i18n("Remove Image '%1'", m_url.pathOrUrl()));
+    setText(i18n("Remove Image '%1'", m_url.url(QUrl::PreferLocalFile)));
 }
 
 bool RemoveImageCommand::checkRedo(QString* errorMessage) const
@@ -557,7 +557,7 @@ bool RemoveImageCommand::checkRedo(QString* errorMessage) const
     if (cell->cellType() != ImageCellType) {
         if (errorMessage)
             *errorMessage = i18n("Image cell not found at the given coordinates (%1, %2): '%3'",
-                                 m_coord.first + 1, m_coord.second + 1, m_url.pathOrUrl());
+                                 m_coord.first + 1, m_coord.second + 1, m_url.url(QUrl::PreferLocalFile));
         return false;
     }
 
@@ -609,7 +609,7 @@ AddImageCommand::AddImageCommand(KrossWord* krossWord, const Coord& coord,
 
 void AddImageCommand::setupText()
 {
-    setText(i18n("Add Image '%1'", m_url.pathOrUrl()));
+    setText(i18n("Add Image '%1'", m_url.url(QUrl::PreferLocalFile)));
 }
 
 
@@ -2072,7 +2072,7 @@ void RemoveImageCommand::appendToData(QDataStream *stream) const
 {
     *stream << (qint16)m_coord.first << (qint16)m_coord.second;
     *stream << (qint16)m_horizontalCellSpan << (qint16)m_verticalCellSpan;
-    *stream << m_url.pathOrUrl();
+    *stream << m_url.url(QUrl::PreferLocalFile);
 }
 
 RemoveImageCommand::RemoveImageCommand(KrossWord* krossWord,

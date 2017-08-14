@@ -37,6 +37,8 @@
 #include <QUrl>
 #include <KMessageBox>
 #include <QDialog>
+#include <QPointer>
+#include <QSqlError>
 
 using namespace Crossword;
 

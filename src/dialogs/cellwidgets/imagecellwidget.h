@@ -20,7 +20,7 @@
 #ifndef IMAGECELLWIDGET_H
 #define IMAGECELLWIDGET_H
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include "ui_image_properties_dock.h"
 #include "global.h"
 

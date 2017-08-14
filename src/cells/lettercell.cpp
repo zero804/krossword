@@ -33,6 +33,7 @@
 
 #include <QPropertyAnimation>
 #include <kglobalsettings.h>
+#include <QFontDatabase>
 
 namespace Crossword
 {
@@ -858,7 +859,7 @@ void LetterCell::drawClueForCell(QPainter* p, const QStyleOptionGraphicsItem* op
     } else
         text = clue()->clue();
 
-    QFont font = KGlobalSettings::smallestReadableFont();
+    QFont font = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
 
     qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
 
@@ -1247,7 +1248,7 @@ void SolutionLetterCell::drawForeground(QPainter* p, const QStyleOptionGraphicsI
     // Draw solution letter index
     p->save();
     QString text = QString("(%1)").arg(solutionWordIndex() + 1);
-    QFont font = KGlobalSettings::smallestReadableFont();
+    QFont font = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
 
     qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
 

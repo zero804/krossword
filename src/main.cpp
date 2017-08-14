@@ -49,7 +49,8 @@ int main(int argc, char **argv){
     QApplication app(argc, argv);
     KAboutData::setApplicationData(about);
 
-    KGlobal::locale()->insertCatalog("libkdegames");
+    //KF5 port: remove this line and define TRANSLATION_DOMAIN in CMakeLists.txt instead
+//KLocale::global()->insertCatalog("libkdegames");
 
     KrossWordPuzzle *widget = new KrossWordPuzzle;
 

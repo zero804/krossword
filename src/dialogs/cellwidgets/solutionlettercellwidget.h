@@ -20,7 +20,7 @@
 #ifndef SOLUTIONLETTERCELLWIDGET_HEADER
 #define SOLUTIONLETTERCELLWIDGET_HEADER
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 #include "ui_solution_letter_properties.h"
 #include "global.h"
 

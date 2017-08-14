@@ -307,7 +307,7 @@ void LibraryGui::libraryExportSlot()
         KMessageBox::error(this, i18n("There was an error opening the crossword.\n%1", errorString));
     } else {
         QString fileName = KFileDialog::getSaveFileName(
-                    KGlobalSettings::documentPath(),
+                    QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
                     /*"application/x-krosswordpuzzle "
                     "application/x-krosswordpuzzle-compressed "
                     "application/x-acrosslite-puz "*/
@@ -561,7 +561,7 @@ void LibraryGui::getDownloadCrosswordItems(const QString& rawUrl, const QDate& s
     for (int year = startDate.year(); year <= endDate.year(); ++year) {
         int curMonth = date.month();
         while (date.year() == year && date < endDate) {
-            QListWidgetItem *item = new QListWidgetItem(QString(i18n("%1", QLocale().toString(date)))); //KGlobal::locale()->formatDate(date, KLocale::FancyLongDate))));
+            QListWidgetItem *item = new QListWidgetItem(QString(i18n("%1", QLocale().toString(date)))); //KLocale::global()->formatDate(date, KLocale::FancyLongDate))));
             item->setData(Qt::UserRole, rawUrl.arg(date.toString("yyMMdd")));
             ui_download.crosswords->addItem(item);
 
