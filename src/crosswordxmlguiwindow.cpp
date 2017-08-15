@@ -70,6 +70,8 @@
 #include <QPrintDialog>
 #include <QUndoView>
 #include <QDesktopWidget>
+#include <QStandardPaths>
+#include <QFileDialog>
 
 ClueListView::ClueListView(QWidget* parent) : QTreeView(parent), m_scrollAnimation(0)
 {
@@ -695,10 +697,12 @@ bool CrossWordXmlGuiWindow::loadFile(const QUrl &url, KrossWord::FileFormat file
 
     QUrl resultUrl;
     if (url.isEmpty()) {
-        resultUrl = KFileDialog::getOpenUrl(QUrl::fromLocalFile("kfiledialog:///loadCrossword"),
-                                            "application/x-krosswordpuzzle "
-                                            "application/x-krosswordpuzzle-compressed "
-                                            "application/x-acrosslite-puz", this);
+        resultUrl = QFileDialog::getOpenFileUrl(this,
+                                                QString(),
+                                                QUrl::fromLocalFile("kfiledialog:///loadCrossword"),
+                                                "application/x-krosswordpuzzle "
+                                                "application/x-krosswordpuzzle-compressed "
+                                                "application/x-acrosslite-puz");
         if (resultUrl.isEmpty())
             return false; // No file was chosen
     } else
@@ -1849,10 +1853,8 @@ void CrossWordXmlGuiWindow::enableEditActions(KrossWordCell* currentCell)
     bool editClueCellHighlighted = m_editMode && krossWord()->highlightedClue();
     bool editAddClueEnabled = editCell && krossWord()->canTakeClueCell(cell->coord());
     bool editLetterCellSelected = editCell && cell->isType(LetterCellType);
-    bool editSolutionLetterCellSelected = editCell && cell->isType(
-            SolutionLetterCellType);
-    bool editRemovableCellSelected = editClueCellHighlighted
-                                     || (editCell && cell->isType(ImageCellType));
+    bool editSolutionLetterCellSelected = editCell && cell->isType(SolutionLetterCellType);
+    bool editRemovableCellSelected = editClueCellHighlighted || (editCell && cell->isType(ImageCellType));
 
     action(actionName(Edit_ClueNumberMapping))->setEnabled(m_editMode
             && krossWord()->crosswordTypeInfo().clueType == NumberClues1To26
@@ -1882,8 +1884,9 @@ void CrossWordXmlGuiWindow::enableEditActions(KrossWordCell* currentCell)
     } else
         action(actionName(Edit_Remove))->setText(i18n("&Remove"));
 
-    action(actionName(Edit_Undo))->setEnabled(m_editMode && m_undoStack->canUndo());
-    action(actionName(Edit_Redo))->setEnabled(m_editMode && m_undoStack->canRedo());
+    //CHECK: to reactivate...
+    //action(actionName(Edit_Undo))->setEnabled(m_editMode && m_undoStack->canUndo());
+    //action(actionName(Edit_Redo))->setEnabled(m_editMode && m_undoStack->canRedo());
     m_undoView->setEnabled(m_editMode);
 }
 

@@ -13,7 +13,7 @@ set( crosswordthumbnail_SRCS crosswordthumbnail.cpp
     cells/imagecell.cpp )
 
 add_library(crosswordthumbnail MODULE ${crosswordthumbnail_SRCS} )
-target_link_libraries( crosswordthumbnail KF5::KIOCore )
+target_link_libraries( crosswordthumbnail Qt5::Gui KF5::Archive KF5::KIOCore )
 
 install( TARGETS crosswordthumbnail DESTINATION ${PLUGIN_INSTALL_DIR} )
 install( FILES crosswordthumbnail.desktop DESTINATION ${SERVICES_INSTALL_DIR} )

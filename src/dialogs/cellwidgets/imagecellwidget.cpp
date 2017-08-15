@@ -22,6 +22,7 @@
 #include "../../krossword.h"
 #include "../../cells/imagecell.h"
 #include <KFileDialog>
+#include <QFileDialog>
 
 ImageCellWidget::ImageCellWidget(ImageCell* imageCell, QWidget* parent)
     : QWidget(parent)
@@ -46,7 +47,7 @@ void ImageCellWidget::setImageCell(ImageCell* imageCell)
         return;
 
     m_imageCell = imageCell;
-    ui_image_properties_dock.fileName->setText(imageCell->url().pathOrUrl());
+    ui_image_properties_dock.fileName->setText(imageCell->url().url(QUrl::PreferLocalFile));
     QSize maxSize = imageCell->krossWord()->emptyCellSpan(
                         imageCell->krossWord()->currentCell()->coord(),
                         dynamic_cast<SpannedCell*>(imageCell));
@@ -58,15 +59,15 @@ void ImageCellWidget::setImageCell(ImageCell* imageCell)
 
 void ImageCellWidget::browseClicked()
 {
-    QUrl imageUrl = KFileDialog::getOpenUrl(QUrl::fromLocalFile("kfiledialog:///openImage"),
-                                            "image/gif image/x-xpm image/x-xbm image/jpeg image/x-bmp image/png "
-                                            "image/x-ico image/x-portable-bitmap image/x-portable-pixmap "
-                                            "image/x-portable-greymap image/tiff image/jp2", this);
+    QUrl imageUrl = QFileDialog::getOpenFileUrl(this,
+                                                QString(),
+                                                QUrl(),
+                                                "Images (*.gif *.jpeg *.jpg *.bmp *.bmp)");
 
     if (imageUrl.isEmpty())
         return; // No file was chosen
     else {
-        ui_image_properties_dock.fileName->setText(imageUrl.pathOrUrl());
+        ui_image_properties_dock.fileName->setText(imageUrl.url(QUrl::PreferLocalFile));
         m_imageCell->setUrl(imageUrl);
 //     ui_image_properties_dock.kimagefilepreview->showPreview( imageUrl );
     }

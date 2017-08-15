@@ -30,7 +30,7 @@
 #include <QTimer>
 #include <QStandardPaths>
 
-CreateNewCrosswordDialog::CreateNewCrosswordDialog(QWidget* parent, Qt::WFlags flags) : QDialog(parent, flags)
+CreateNewCrosswordDialog::CreateNewCrosswordDialog(QWidget* parent, Qt::WFlags flags): QDialog(parent, flags)
 {
     setWindowTitle(i18n("Create New Crossword"));
     ui_create_new.setupUi(this);
@@ -116,7 +116,7 @@ void CreateNewCrosswordDialog::setup()
             SIGNAL(crosswordTypeInfoChanged(CrosswordTypeInfo)),
             this, SLOT(typeInfoChanged(CrosswordTypeInfo)));
 
-    QStringList templateDirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates");
+    QStringList templateDirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, "templates", QStandardPaths::LocateDirectory);
     ui_create_new.templateLocation->addItems(templateDirs);
 
     m_templateModel = new TemplateModel;

@@ -130,7 +130,7 @@ void LibraryManager::loadThumbnailsSlot(const QString &path)
         if(fileIndex.data(QFileSystemModel::FilePathRole).toString().startsWith(path + "/")) {
             QUrl url = fileIndex.data(QFileSystemModel::FilePathRole).toUrl();
             url.setScheme("file");
-            fileItemList.append(KFileItem(KFileItem::Unknown, KFileItem::Unknown, QUrl::fromLocalFile(url), true));
+            fileItemList.append(KFileItem(KFileItem::Unknown, KFileItem::Unknown, url, true));
         }
     }
 
@@ -210,7 +210,7 @@ LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QStri
     Crossword::KrossWord krossWord;
     QString errorString;
 
-    if (!krossWord.read(QUrl::fromLocalFile(url), &errorString/*, this*/)) {
+    if (!krossWord.read(url, &errorString/*, this*/)) {
         qDebug() << "addCrossword() reading error:" << errorString;
         outAddedCrosswordFilename = QString();
         return E_ERROR_TYPE::ReadError;

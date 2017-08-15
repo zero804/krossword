@@ -29,6 +29,8 @@
 
 #include <KCharSelect>
 
+#include <QSqlError>
+
 ClueCellWidget::ClueCellWidget(ClueCell* clueCell,
                                KrosswordDictionary *dictionary, QWidget* parent)
     : QWidget(parent), m_clueCell(0)

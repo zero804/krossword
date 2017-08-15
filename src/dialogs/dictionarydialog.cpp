@@ -27,7 +27,11 @@
 #include <QTimer>
 #include <KStandardDirs>
 #include <KFileDialog>
-
+#include <QSqlRecord>
+#include <QSqlError>
+#include <QPointer>
+#include <QStandardPaths>
+#include <QFileDialog>
 
 DictionaryDialog::DictionaryDialog(KrosswordDictionary* dictionary, QWidget* parent)
     : QDialog(parent), m_dictionary(dictionary), m_infoMessage(0)
@@ -154,7 +158,8 @@ void DictionaryDialog::getWordsFromDictionaryClicked()
         startDir = QUrl::fromLocalFile("/usr/dict");
     else
         startDir = QUrl::fromLocalFile("kfiledialog:///addDictionary");
-    QString fileName = KFileDialog::getOpenFileName(startDir, QString(), this);
+
+    QString fileName = QFileDialog::getOpenFileName(this, QString(), startDir.toString());
     if (fileName.isEmpty())
         return;
 
@@ -166,8 +171,17 @@ void DictionaryDialog::getWordsFromDictionaryClicked()
 
 void DictionaryDialog::addDictionaryFromLibraryClicked()
 {
-    QStringList libraryFiles = KGlobal::dirs()->findAllResources("appdata", "library/*.kwp?",
-                               KStandardDirs::NoDuplicates | KStandardDirs::Recursive);
+    //QStringList libraryFiles = KGlobal::dirs()->findAllResources("appdata", "library/*.kwp?", KStandardDirs::NoDuplicates | KStandardDirs::Recursive);
+    //----------CHECK
+    QStringList libraryFiles;
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, "library", QStandardPaths::LocateDirectory);
+    for (const QString &dir : dirs) {
+        const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.kwp?"));
+        for (const QString &file : fileNames) {
+            libraryFiles.append(dir + '/' + file);
+        }
+    }
+    //----------
     int i = m_dictionary->addEntriesFromCrosswords(libraryFiles, this);
     showInfoMessage(i18n("%1 entries added from %2 crosswords", i, libraryFiles.count()));
 
@@ -176,7 +190,7 @@ void DictionaryDialog::addDictionaryFromLibraryClicked()
 
 void DictionaryDialog::addDictionaryFromCrosswordsClicked()
 {
-    QStringList fileNames = KFileDialog::getOpenFileNames(QUrl::fromLocalFile(),
+    QStringList fileNames = KFileDialog::getOpenFileNames(QUrl::fromLocalFile(""),
                             "application/x-krosswordpuzzle "
                             "application/x-krosswordpuzzle-compressed "
                             "application/x-acrosslite-puz", this);
@@ -218,7 +232,7 @@ void DictionaryDialog::clearClicked()
 void DictionaryDialog::exportToCsvClicked()
 {
     QString fileName;
-    QPointer<KFileDialog> fileDlg = new KFileDialog(QUrl::fromLocalFile(), QString(), this);
+    QPointer<KFileDialog> fileDlg = new KFileDialog(QUrl::fromLocalFile(""), QString(), this);
     fileDlg->setWindowTitle(i18n("Export To CSV"));
     fileDlg->setMode(KFile::File);
     fileDlg->setOperationMode(KFileDialog::Saving);
@@ -239,8 +253,8 @@ void DictionaryDialog::exportToCsvClicked()
 
 void DictionaryDialog::importFromCsvClicked()
 {
-    QString fileName = KFileDialog::getOpenFileName(QUrl::fromLocalFile(), QString(),
-                       this, i18n("Import From CSV"));
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    i18n("Import From CSV"));
     if (fileName.isEmpty())
         return;
 

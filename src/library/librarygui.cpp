@@ -36,6 +36,8 @@
 #include <KActionCollection>
 #include <KIO/PreviewJob>
 #include <QStandardPaths>
+#include <QMenuBar>
+#include <QFileDialog>
 
 
 LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
@@ -46,7 +48,7 @@ LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::Wind
       m_downloadPreviewJob(nullptr),
       m_downloadCrosswordsDlg(nullptr)
 {
-    QString libraryDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "library");
+    QString libraryDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "library";
     m_libraryModel->setRootPath(libraryDir);
 
     if (!m_libraryDelegate) {
@@ -166,7 +168,7 @@ void LibraryGui::downloadPreviewJobGotPreview(const KFileItem& fi, const QPixmap
 
 void LibraryGui::downloadPreviewJobFailed(const KFileItem& fi)
 {
-    qDebug() << "Preview job failed:" << fi.url().pathOrUrl();
+    qDebug() << "Preview job failed:" << fi.url().url(QUrl::PreferLocalFile);
 
     if (m_downloadCrosswordsDlg && ui_download.preview) {
         ui_download.preview->setText(i18n("Failed")); // improve the message
@@ -279,10 +281,10 @@ void LibraryGui::libraryCurrentChanged(const QModelIndex& current, const QModelI
 
 void LibraryGui::libraryAddSlot()
 {
-    QUrl url = KFileDialog::getOpenUrl(QUrl::fromLocalFile("kfiledialog:///importCrossword"),
-                                       "application/x-krosswordpuzzle "
-                                       "application/x-krosswordpuzzle-compressed "
-                                       "application/x-acrosslite-puz", this);
+    QUrl url = QFileDialog::getOpenFileUrl(this,
+                                           QString(),
+                                           QUrl(),
+                                           "Crosswords (*.kwp *.kwpz *.puz)");
 
     if (!url.isEmpty())
         libraryAddCrossword(url);
@@ -306,16 +308,12 @@ void LibraryGui::libraryExportSlot()
     if (!krossWord.read(QUrl::fromLocalFile(filePath), &errorString)) {
         KMessageBox::error(this, i18n("There was an error opening the crossword.\n%1", errorString));
     } else {
-        QString fileName = KFileDialog::getSaveFileName(
+        QString fileName = QFileDialog::getSaveFileName(
+                    this,
+                    i18n("Export"),
                     QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
-                    /*"application/x-krosswordpuzzle "
-                    "application/x-krosswordpuzzle-compressed "
-                    "application/x-acrosslite-puz "*/
-                    "application/pdf "
-                    "application/postscript "
-                    "image/png "
-                    "image/jpeg", this, i18n("Export"),
-                    KFileDialog::ConfirmOverwrite);
+                    "Pdf (*.pdf);;Postscript (*.ps);;Images (*.png *.jpg *.jpeg)");
+
         if (fileName.isEmpty())
             return;
 

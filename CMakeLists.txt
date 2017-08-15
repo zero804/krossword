@@ -7,7 +7,7 @@ find_package(ECM 1.0.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Widgets PrintSupport Sql)
-find_package(KF5 REQUIRED COMPONENTS Config CoreAddons KIO XmlGui I18n Completion IconThemes KDELibs4Support)
+find_package(KF5 REQUIRED COMPONENTS Archive Config CoreAddons KIO XmlGui I18n Completion IconThemes KDELibs4Support)
 
 find_package(KF5KDEGames 4.9.0 REQUIRED)
 
@@ -27,7 +27,7 @@ add_subdirectory(src)
 #add_subdirectory(icons)
 add_subdirectory(themes)
 add_subdirectory(templates)
-add_subdirectory(crosswordthumbcreator)
+#add_subdirectory(crosswordthumbcreator)
 
 add_subdirectory(po)
 
