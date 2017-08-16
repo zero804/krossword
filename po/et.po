@@ -17,111 +17,175 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: cells/imagecell.cpp:68
-msgid "Edit image properties to set an image"
-msgstr "Pildi omaduste muutmine pildi määramiseks"
+#: library/librarygui.cpp:553
+msgid "%1"
+msgstr ""
 
-#: cluemodel.cpp:60
-msgid "Clue"
-msgstr "Küsimus"
+#: krossword.cpp:613
+msgid "%1 clue cell"
+msgid_plural "%1 clue cells"
+msgstr[0] "%1 küsimusruut"
+msgstr[1] "%1 küsimusruutu"
 
-#: cluemodel.cpp:60
-msgid "Answer"
-msgstr "Vastus"
+#: krossword.cpp:618
+msgid "%1 double clue cell"
+msgid_plural "%1 double clue cells"
+msgstr[0] "%1 kahe küsimusega ruut"
+msgstr[1] "%1 kahe küsimusega ruutu"
 
-#: cluemodel.cpp:63
-msgid "Across clues"
-msgstr "Küsimused põiksuunas"
+#: dialogs/dictionarydialog.cpp:174 dialogs/dictionarydialog.cpp:189
+msgid "%1 entries added from %2 crosswords"
+msgstr "%2 ristsõnast lisati %1 kirjet"
 
-#: cluemodel.cpp:64
-msgid "Down clues"
-msgstr "Küsimused püstsuunas"
+#: dialogs/dictionarydialog.cpp:164
+msgid "%1 entries added from this dictionary: '%2'"
+msgstr "Sellest sõnaraamatust lisati %1 kirjet: '%2'"
 
-#: commands.cpp:334
-msgid "Remove Clue Without Text"
-msgstr "Eemalda tekstita küsimus"
+#: dialogs/dictionarydialog.cpp:254
+msgid "%1 entry imported from '%2'"
+msgid_plural "%1 entries imported from '%2'"
+msgstr[0] "Failist '%2' imporditi %1 kirje"
+msgstr[1] "Failist '%2' imporditi %1 kirjet"
 
-#: commands.cpp:336
-msgid "Remove Clue '%1'"
-msgstr "Eemalda küsimus '%1'"
+#: dialogs/dictionarydialog.cpp:208
+msgid "%1 entry removed"
+msgid_plural "%1 entries removed"
+msgstr[0] "%1 kirje eemaldatud"
+msgstr[1] "%1 kirjet eemaldatud"
 
-#: commands.cpp:343 commands.cpp:552 commands.cpp:662 commands.cpp:697
-msgid "No cell at the given coordinates (%1, %2)"
-msgstr "Antud koordinaatidel (%1, %2) pole ühtegi ruutu"
+#: dialogs/currentcellwidget.cpp:145
+msgid "%1 selected at (%2, %3)."
+msgstr "%1 valitud asukohas (%2, %3)."
 
-#: commands.cpp:352
-msgctxt ""
-"%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
-msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
-msgstr "Antud koordinaatidel (%1, %2) ei leitud küsimusruutu: '%3'"
+#: krossword.cpp:623
+msgid "%1 solution letter cell"
+msgid_plural "%1 solution letter cells"
+msgstr[0] "%1 lahendustäheruut"
+msgstr[1] "%1 lahendustäheruutu"
 
-#: commands.cpp:423
-msgid "Add Clue Without Text"
-msgstr "Lisa tekstita küsimus"
+#: crosswordxmlguiwindow.cpp:320
+#, no-c-format
+msgctxt "%p is replaced by the percentage of solved letter cells"
+msgid "%p% solved"
+msgstr "%p% lahendatud"
 
-#: commands.cpp:425
-msgid "Add Clue '%1'"
-msgstr "Lisa küsimus '%1'"
+#: crosswordxmlguiwindow.cpp:1421
+msgid "&Add Clue"
+msgstr "Lis&a küsimus"
 
-#: commands.cpp:544
-msgid "Remove Image '%1'"
-msgstr "Eemalda pilt '%1'"
+#: crosswordxmlguiwindow.cpp:1444
+msgid "&Add Image"
+msgstr "Lis&a pilt"
 
-#: commands.cpp:559
-msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
-msgstr "Antud koordinaatidel (%1, %2) ei leitud pildiruutu: '%3'"
+#: library/librarygui.cpp:531
+msgctxt "@action:intoolbar"
+msgid "&Add..."
+msgstr ""
 
-#: commands.cpp:612
-msgid "Add Image '%1'"
-msgstr "Lisa pilt '%1'"
+#: crosswordxmlguiwindow.cpp:1507
+msgid "&Check"
+msgstr "K&ontrolli"
 
-#: commands.cpp:626
-msgid "Convert Letter at (%1, %2) to Solution Letter"
-msgstr "Teisenda täht asukohas (%1, %2) lahendustäheks"
+#: crosswordxmlguiwindow.cpp:1460
+msgid "&Check for rotation symmetry..."
+msgstr "&Kontrolli pööramise sümmeetriat..."
 
-#: commands.cpp:654
-msgctxt "%1 contains the position of the solution letter in the solution word."
-msgid "Convert Solution Letter %1 to Letter"
-msgstr "Teisenda lahendustäht %1 täheks"
+#: crosswordxmlguiwindow.cpp:1512
+msgid "&Clear Answers"
+msgstr "&Puhasta vastused"
 
-#: commands.cpp:669
-msgid "Solution letter cell not found at the given coordinates (%1, %2)"
-msgstr "Antud koordinaatidel (%1, %2) ei leitud lahendustäheruutu"
+#: crosswordxmlguiwindow.cpp:1450
+#, fuzzy
+msgid "&Clear Crossword..."
+msgstr "&Puhasta ristsõna"
 
-#: commands.cpp:704 commands.cpp:1172
-msgid "Letter cell not found at the given coordinates (%1, %2)"
-msgstr "Antud koordinaatidel (%1, %2) ei leitud täheruutu"
+#: dialogs/crosswordpropertiesdialog.cpp:46
+msgid "&Convert..."
+msgstr "&Teisenda..."
 
-#: commands.cpp:725
-msgctxt ""
-"Error message to be displayed, when the user tries to convert a letter to a "
-"solution letter, but the position of the new solution letter is already "
-"used. Each solution letter has a position in the solution word of the "
-"crossword and all solution letters of a crossword form it's solution word. "
-"%1 is replaced by the (already used) position."
-msgid "The solution letter position %1 is already assigned."
-msgstr "Lahendustähe asukoht %1 on juba kasutusel."
+#: library/librarygui.cpp:516
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Create Crossword..."
+msgstr "&Puhasta ristsõna"
 
-#: commands.cpp:774
-msgid "Add %1 letter"
-msgid_plural "Add %1 letters"
-msgstr[0] "Lisa %1 täht"
-msgstr[1] "Lisa %1 tähte"
+#: crosswordxmlguiwindow.cpp:1455
+msgid "&Crossword Properties..."
+msgstr "&Ristsõna omadused..."
 
-#: commands.cpp:776
-msgid "Remove %1 letter"
-msgid_plural "Remove %1 letters"
-msgstr[0] "Eemalda %1 täht"
-msgstr[1] "Eemalda %1 tähte"
+#: library/librarygui.cpp:536
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Delete..."
+msgstr "&Kustuta"
 
-#: commands.cpp:778
-msgctxt "This string shouldn't happen to be used"
-msgid "Remove no letters"
-msgstr "Ära eemalda ühtegi tähte"
+#: crosswordxmlguiwindow.cpp:1279
+msgid "&Dictionary..."
+msgstr "&Sõnaraamat..."
 
-#: commands.cpp:813 commands.cpp:1006 commands.cpp:1100
-msgid "No clue cell given"
-msgstr "Küsimusruutu pole antud"
+#: library/librarygui.cpp:526
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Download..."
+msgstr "Laa&di alla"
+
+#: crosswordxmlguiwindow.cpp:1517
+msgid "&Eraser"
+msgstr "K&ustutaja"
+
+#: library/librarygui.cpp:541
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Export..."
+msgstr "&Ekspordi"
+
+#: crosswordxmlguiwindow.cpp:1368
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&First Letter"
+msgstr "Vali &esimene täht"
+
+#: crosswordxmlguiwindow.cpp:1373
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Last Letter"
+msgstr "Va&li viimane täht"
+
+#: crosswordxmlguiwindow.cpp:1383
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Next Clue"
+msgstr "Vali &järgmine küsimus"
+
+#: crosswordxmlguiwindow.cpp:1388
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "&Previous Clue"
+msgstr "Vali &eelmine küsimus"
+
+#: crosswordxmlguiwindow.cpp:1427 crosswordxmlguiwindow.cpp:1860
+msgid "&Remove"
+msgstr "&Eemalda"
+
+#: crosswordxmlguiwindow.cpp:1856
+msgid "&Remove Clue"
+msgstr "&Eemalda küsimus"
+
+#: crosswordxmlguiwindow.cpp:1858
+msgid "&Remove Image"
+msgstr "&Eemalda pilt"
+
+#: krosswordpuzzle.cpp:261
+msgid "&Restore"
+msgstr "&Taasta"
+
+#: dialogs/crosswordtypewidget.cpp:226
+msgid "&Rules..."
+msgstr "&Reeglid..."
+
+#: crosswordxmlguiwindow.cpp:1465
+msgid "&Statistics..."
+msgstr "&Statistika..."
 
 #: commands.cpp:993
 msgctxt ""
@@ -130,48 +194,161 @@ msgctxt ""
 msgid "<placeholder>empty</placeholder>"
 msgstr "<placeholder>tühi</placeholder>"
 
-#: commands.cpp:991
-msgid "Change Clue '%1'"
-msgstr "Muuda küsimust '%1'"
+#: crosswordxmlguiwindow.cpp:1505
+msgid ""
+"<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
+"solution will be displayed.</p><p>If you filled in all letters and do not "
+"want to give up, choose \"Done!\".</p></qt>"
+msgstr ""
+"<qt><p>Vali \"<b>Lahenda</b>\", kui soovid aktiivsest mängust loobuda. "
+"Seejärel näidatakse lahendust.</p><p>Kui oled asetanud paika kõik tähed ega "
+"soovi loobuda, vali \"Valmis!\"</p></qt>"
 
-#: commands.cpp:1092
-msgid "Clear Correct Answer of Clue at (%1, %2)"
-msgstr "Puhasta küsimuse õige vastus asukohas (%1, %2)"
+#: global.cpp:508
+msgctxt "Long description of the crossword type 'Crossnumber'"
+msgid ""
+"A crossnumber (also known as a cross-figure) is the numerical analogy of a "
+"crossword, in which the solutions to the clues are numbers instead of words. "
+"Clues are usually arithmetical expressions, but can also be general "
+"knowledge clues to which the answer is a number or year. There are also "
+"numerical fill-in crosswords.\n"
+"The Daily Mail Weekend magazine used to feature crossnumbers under the "
+"misnomer Number Word. This kind of puzzle should not be confused with a "
+"different puzzle that the Daily Mail refers to as Cross Number.\n"
+"(text taken from wikipedia)"
+msgstr ""
+"Arvristsõnad on tavalise ristsõna selline vorm, kus vastused küsimustele "
+"tuleb sõnade asemel kirjutada arvudega. Enamasti on küsimusteks "
+"matemaatilised tehted, aga need võivad olla ka niisugused küsimused, mille "
+"vastuseks on aastaarv või mõni arv.\n"
+"Ingliskeelses maailmas võib tekitada segadust asjaolu, et arvristsõnade "
+"kohta kasutatakse väljendeid 'crossnumber' või 'cross-figure', samas "
+"krüptogrammide kohta 'number puzzle'."
 
-#: commands.cpp:1144
-msgid "Clear Correct Letter at (%1, %2), was %3"
-msgstr "Puhasta õige täht asukohas (%1, %2) %3"
+#: main.cpp:27
+#, fuzzy
+msgid ""
+"A crossword puzzle game and editor for KDE.\n"
+"Based on KrossWordPuzzle."
+msgstr "KDE 4 ristsõnade lahendamise ja muutmise rakendus"
 
-#: commands.cpp:1147
-msgid "Set Correct Letter at (%1, %2) to %3"
-msgstr "Määra õigeks täheks asukohas (%1, %2) %3"
+#: cluemodel.cpp:63
+msgid "Across clues"
+msgstr "Küsimused põiksuunas"
 
-#: commands.cpp:1150
-msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
-msgstr "Muuda õigeks täheks asukohas (%1, %2) %3 asemel %4"
+#: krossworddocument.cpp:88
+msgctxt "Title for the list of across/horizontal clues when printing"
+msgid "Across clues"
+msgstr "Küsimused põiksuunas"
 
-#: commands.cpp:1154
-msgid "Clear Letter at (%1, %2), was %3"
-msgstr "Puhasta täht asukohas (%1, %2), oli %3"
+#: commands.cpp:774
+msgid "Add %1 letter"
+msgid_plural "Add %1 letters"
+msgstr[0] "Lisa %1 täht"
+msgstr[1] "Lisa %1 tähte"
 
-#: commands.cpp:1157
-msgid "Set Letter at (%1, %2) to %3"
-msgstr "Määra täheks asukohas (%1, %2) %3"
+#: commands.cpp:425
+msgid "Add Clue '%1'"
+msgstr "Lisa küsimus '%1'"
 
-#: commands.cpp:1160
-msgid "Edit Letter at (%1, %2) From %3 to %4"
-msgstr "Muuda täheks asukohas (%1, %2) %3 asemel %4"
+#: commands.cpp:423
+msgid "Add Clue Without Text"
+msgstr "Lisa tekstita küsimus"
 
-#: commands.cpp:1222
-msgid "Clear Crossword"
-msgstr "Puhasta ristsõna"
+#: commands.cpp:612
+msgid "Add Image '%1'"
+msgstr "Lisa pilt '%1'"
 
-#: commands.cpp:1268
-msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Title"
-msgstr "Nimi"
+#: library/librarygui.cpp:532
+#, fuzzy
+msgid "Add a crossword to the library"
+msgstr "Ristsõna importimine kogusse."
+
+#: crosswordxmlguiwindow.cpp:1280
+#, fuzzy
+msgid "Add or remove crossword dictionaries"
+msgstr "Ristsõna sõnastike lisamine või eemaldamine."
+
+#: dictionary.cpp:566
+msgid ""
+"Adding words from %1 crossword files to the database.\n"
+"Please wait."
+msgstr ""
+"Sõnade lisamine %1 ristsõnafailist andmebaasi.\n"
+"Palun oota."
+
+#: dictionary.cpp:462
+msgid ""
+"Adding words from the dictionary '%1' to the database.\n"
+"Please wait."
+msgstr ""
+"Sõnade lisamine sõnaraamatust '%1' andmebaasi.\n"
+"Palun oota."
+
+#: crosswordxmlguiwindow.cpp:1422
+#, fuzzy
+msgid "Adds a new clue at the current cell"
+msgstr "Aktiivsele ruudule uue küsimuse lisamine"
+
+#: crosswordxmlguiwindow.cpp:1445
+#, fuzzy
+msgid "Adds a new image at the current cell"
+msgstr "Aktiivsele ruudule uue pildi lisamine"
+
+#: global.cpp:48
+msgid "All cells"
+msgstr "Kõik ruudud"
+
+#: krossword.cpp:657
+msgid ""
+"All clue cells get removed. The initial letter to clue number mapping is "
+"A=1, B=2, ..., Z=26."
+msgstr ""
+"Kõik küsimusruudud eemaldati. Küsimusnumbri ja tähtede seosed on A=1, "
+"B=2, ..., Z=26."
+
+#: global.cpp:457
+msgid "American Crossword"
+msgstr "Ameerika ristsõna"
+
+#: global.cpp:459
+msgctxt "Short description of the crossword type 'American'"
+msgid ""
+"American crosswords have numbered clues and a list of clues on the side of "
+"the crossword. They have usually 180 degree rotational symmetry."
+msgstr ""
+"Ameerika ristsõnadel on nummerdatud küsimused, mis esitatakse ristsõna "
+"kõrval. Tavaliselt on nad 180 kraadi all pööramisel sümmeetrilised."
+
+#: krosswordpuzzle.cpp:262
+msgid ""
+"An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
+" Do you want to restore the crossword?"
+msgstr ""
+"Leiti salvestamata ristsõna. Tõenäoliselt tabas mängu krahh. Vabandame!\n"
+" Kas taastada ristsõna?"
+
+#: main.cpp:37
+msgid "Andrea Barazzetti"
+msgstr ""
+
+#: krosswordpuzzle.cpp:308
+msgid "Animations"
+msgstr "Animatsioonid"
+
+#: cluemodel.cpp:60
+msgid "Answer"
+msgstr "Vastus"
+
+#: dictionary.cpp:243
+msgctxt "The header title for answers in the dictionary database"
+msgid "Answer"
+msgstr "Vastus"
+
+#: library/librarymanager.cpp:74
+msgctxt "The title for authors of crosswords in the library tree view"
+msgid "Author(s):"
+msgstr "Autor(id):"
 
 #: commands.cpp:1271
 msgctxt ""
@@ -180,150 +357,129 @@ msgctxt ""
 msgid "Authors"
 msgstr "Autorid"
 
-#: commands.cpp:1274
+#: dialogs/statisticsdialog.cpp:104
+msgid "Avg. Answer Length:"
+msgstr "Vastuse keskm. pikkus:"
+
+#: crosswordxmlguiwindow.cpp:1017
+msgid "Can't add clue at the current cell"
+msgstr "Küsimuse lisamine aktiivsesse ruutu nurjus"
+
+#: crosswordxmlguiwindow.cpp:1038
+msgctxt "%1 contains the reason why the clue couldn't be added"
+msgid "Can't add clue. %1"
+msgstr "Küsimuse lisamine nurjus. %1"
+
+#: crosswordxmlguiwindow.cpp:1008
+msgid "Can't add clues on crossed letter cells"
+msgstr "Küsimuste lisamine ristuvatele täheruutudele nurjus"
+
+#: crosswordxmlguiwindow.cpp:1069
+msgctxt "%1 contains the reason why the image couldn't be added"
+msgid "Can't add image. %1"
+msgstr "Pildi lisamine nurjus. %1"
+
+#: crosswordxmlguiwindow.cpp:2758
+msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
+msgid "Can't add letter cells. %1"
+msgstr "Täheruutude lisamine nurjus. %1"
+
+#: crosswordxmlguiwindow.cpp:1187
 msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Copyright"
-msgstr "Autoriõigus"
+"%1 contains the reason why the new clue number mapping couldn't be applied"
+msgid "Can't apply clue number mapping. %1"
+msgstr "Küsimusenumbri seose rakendamine nurjus. %1"
 
-#: commands.cpp:1277
+#: crosswordxmlguiwindow.cpp:1731
+msgctxt "%1 contains the reason why the answer offset couldn't be changed"
+msgid "Can't change answer offset. %1"
+msgstr "Nihet ei saa muuta: %1"
+
+#: crosswordxmlguiwindow.cpp:1756
+msgctxt "%1 contains the reason why the clue text couldn't be changed"
+msgid "Can't change clue text. %1"
+msgstr "Küsimuse teksti ei saa muuta. %1"
+
+#: crosswordxmlguiwindow.cpp:1769
+msgctxt "%1 contains the reason why the correct answer couldn't be changed"
+msgid "Can't change correct answer. %1"
+msgstr "Õiget vastust ei saa muuta. %1"
+
+#: crosswordxmlguiwindow.cpp:1117
 msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Notes"
-msgstr "Märkused"
+"%1 contains the reason why the crossword properties couldn't be changed"
+msgid "Can't change crossword properties. %1"
+msgstr "Ristsõna omaduste muutmine nurjus. %1"
 
-#: commands.cpp:1284
+#: crosswordxmlguiwindow.cpp:1744
+msgctxt "%1 contains the reason why the orientation couldn't be changed"
+msgid "Can't change orientation. %1"
+msgstr "Orientatsiooni ei saa muuta. %1"
+
+#: crosswordxmlguiwindow.cpp:2216 crosswordxmlguiwindow.cpp:2240
+#: crosswordxmlguiwindow.cpp:2265 crosswordxmlguiwindow.cpp:2699
+msgctxt "%1 contains the reason why the answer couldn't be cleared"
+msgid "Can't clear answer. %1"
+msgstr "Vastuse puhastamine nurjus. %1"
+
+#: crosswordxmlguiwindow.cpp:1100
+msgctxt "%1 contains the reason why the crossword couldn't be cleared"
+msgid "Can't clear crossword. %1"
+msgstr "Ristsõna puhastamine nurjus. %1"
+
+#: crosswordxmlguiwindow.cpp:2193 crosswordxmlguiwindow.cpp:2693
+msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
+msgid "Can't clear letter cell. %1"
+msgstr "Täheruudu puhastamine nurjus. %1"
+
+#: crosswordxmlguiwindow.cpp:2806
+msgctxt "%1 contains the reason why the crossword couldn't be converted"
+msgid "Can't convert crossword. %1"
+msgstr "Ristsõna teisendamine nurjus. %1"
+
+#: crosswordxmlguiwindow.cpp:1808
 msgctxt ""
-"Used for the list of stuff changed by the change crossword properties undo "
-"command"
-msgid "Size"
-msgstr "Suurus"
+"%1 contains the reason why the letter couldn't be converted to a solution "
+"letter"
+msgid "Can't convert letter. %1"
+msgstr "Tähte ei saa teisendada. %1"
 
-#: commands.cpp:1292
-msgid "Changed Crossword Properties (%1)"
-msgstr "Muudetud ristsõna omadused (%1)"
-
-#: commands.cpp:1297
+#: crosswordxmlguiwindow.cpp:1789
 msgctxt ""
-"%1 may be a list of changes separated by ',' if the list of changes contains "
-"more than 2 items. %2 is the last item"
-msgid "Changed Crossword Properties (%1 and %2)"
-msgstr "Muudetud ristsõna omadused (%1 ja %2)"
+"%1 contains the reason why the solution letter couldn't be converted to a "
+"letter"
+msgid "Can't convert solution letter. %1"
+msgstr "Vastusetähte ei saa teisendada. %1"
 
-#: commands.cpp:1299
-msgid "No Action"
-msgstr "Toiming puudub"
+#: crosswordxmlguiwindow.cpp:2771
+msgctxt "%1 contains the reason why the letter cell couldn't be edited"
+msgid "Can't edit letter cell. %1"
+msgstr "Täheruudu muutmine nurjus. %1"
 
-#: commands.cpp:1346
-msgid "Hide Clue Cell"
-msgstr "Peida küsimusruut"
+#: library/librarygui.cpp:290
+msgid "Can't export whole directories. Please select a crossword."
+msgstr "Terveid katalooge ei saa eksportida. Palun vali ristsõna."
 
-#: commands.cpp:1410
-msgid "Make Clue Cell Visible"
-msgstr "Muuda küsimusruut nähtavaks"
+#: crosswordxmlguiwindow.cpp:1200
+msgctxt "%1 contains the reason why the cells couldn't be moved"
+msgid "Can't move cells. %1"
+msgstr "Ruutude liigutamine nurjus. %1"
 
-#: commands.cpp:1481
-msgid "Set Default Number Puzzle Mapping"
-msgstr "Kehtesta vaikimisi krüptogrammi seos"
+#: crosswordxmlguiwindow.cpp:1082
+msgctxt "%1 contains the reason why the clue couldn't be removed"
+msgid "Can't remove clue. %1"
+msgstr "Küsimuse eemaldamine nurjus. %1"
 
-#: commands.cpp:1483
-msgid "Change Number Puzzle Mapping"
-msgstr "Muuda krüptogrammi seost"
+#: crosswordxmlguiwindow.cpp:1087
+msgctxt "%1 contains the reason why the image couldn't be removed"
+msgid "Can't remove image. %1"
+msgstr "Pildi eemaldamine nurjus. %1"
 
-#: commands.cpp:1506
-msgid "Setup Same Letter Synchronization"
-msgstr "Seadista ühesuguste tähtede sünkroonimist"
-
-#: commands.cpp:1529
-msgid "Remove Same Letter Synchronization"
-msgstr "Eemalda ühesuguste tähtede sünkroonimine"
-
-#: commands.cpp:1777
-msgid "Convert Crossword From '%1' to '%2'"
-msgstr "Teisenda ristsõna tüübist '%1' tüüpi '%2'"
-
-#: commands.cpp:1894
-msgid "Resize Crossword From %1x%2 to %3x%4"
-msgstr "Muuda ristsõna suuruseks %1x%2 asemel %3x%4"
-
-#: commands.cpp:1972
-msgid "Move All Cells By %1, %2"
-msgstr "Liiguta  kõiki ruute %1, %2 võrra"
-
-#: crosswordxmlguiwindow.cpp:265
-msgid "Zoom: %1%"
-msgstr "Suurendus: %1%"
-
-#: crosswordxmlguiwindow.cpp:320
-#, no-c-format
-msgctxt "%p is replaced by the percentage of solved letter cells"
-msgid "%p% solved"
-msgstr "%p% lahendatud"
-
-#: crosswordxmlguiwindow.cpp:321
-#, fuzzy
-msgid "Shows the percentage of solved letter cells"
-msgstr "Lahendatud täheruutude protsendi näitamine."
-
-#: crosswordxmlguiwindow.cpp:552
-msgid "Congratulations! You solved the crossword perfectly."
-msgstr "Õnnitlused! Lahendasid ristsõna täiesti õigesti."
-
-#: crosswordxmlguiwindow.cpp:618 crosswordxmlguiwindow.cpp:651
-msgid "New crossword"
-msgstr "Uus ristsõna"
-
-#: crosswordxmlguiwindow.cpp:672 crosswordxmlguiwindow.cpp:818
-#: krosswordpuzzle.cpp:129
-msgid ""
-"The current crossword has been modified.\n"
-"Would you like to save it?"
-msgstr ""
-"Aktiivset ristsõna on muudetud.\n"
-"Kas soovid selle salvestada?"
-
-#: crosswordxmlguiwindow.cpp:673 crosswordxmlguiwindow.cpp:820
-#: krosswordpuzzle.cpp:131
-msgid "Close Document"
-msgstr "Sulge dokument"
-
-#: crosswordxmlguiwindow.cpp:706
-msgid "Loaded crossword from file '%1'"
-msgstr "Laaditi ristsõna failist '%1'"
-
-#: crosswordxmlguiwindow.cpp:721
-msgid ""
-"The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
-"\n"
-"Do you want to convert the crossword to another type now?\n"
-"\n"
-"(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")"
-msgstr ""
-"Ristsõna tüüpi ei õnnestunud määrata, mistõttu eeldatakse, et see on 'vaba "
-"ristsõna'.\n"
-"\n"
-"Kas soovid teisendada ristsõna mõnda muusse tüüpi?\n"
-"\n"
-"(Märkus: teisendada saab ka hiljem \"Redigeerimine\" > \"Ristsõna omadused\" "
-"abil)"
-
-#: crosswordxmlguiwindow.cpp:750
-msgid "Error while loading file '%1': %2"
-msgstr "Tõrge faili '%1' laadimisel: %2"
-
-#: crosswordxmlguiwindow.cpp:776
-msgid "Save &Edit History"
-msgstr "Muudatust&e ajaloo salvestamine"
-
-#: crosswordxmlguiwindow.cpp:779
-msgid "Save As &Template"
-msgstr "Salves&tamine mallina"
-
-#: crosswordxmlguiwindow.cpp:781
-msgid "Save without correct answers, clue texts, images"
-msgstr "Salvestamime ilma õigete vastuste, küsimuste teksti, piltideta"
+#: crosswordxmlguiwindow.cpp:2760
+msgctxt ""
+"%1 contains the reason why the letters couldn't be removed to the clue"
+msgid "Can't remove letter cells. %1"
+msgstr "Täheruutude eemaldamine nurjus. %1"
 
 #: crosswordxmlguiwindow.cpp:847
 #, fuzzy
@@ -347,672 +503,34 @@ msgstr ""
 "Kui soovid pildiruute salvestada, kasuta palun KrossWordPuzzle "
 "failivormingut (*.kwp või *.kwpz)."
 
-#: crosswordxmlguiwindow.cpp:881
-msgid "Wrote crossword to file '%1'"
-msgstr "Ristsõna salvestati failina '%1'"
-
-#: crosswordxmlguiwindow.cpp:896
-msgid "Error while writing file: %1"
-msgstr "Tõrge faili kirjutamisel: %1"
-
-#: crosswordxmlguiwindow.cpp:1008
-msgid "Can't add clues on crossed letter cells"
-msgstr "Küsimuste lisamine ristuvatele täheruutudele nurjus"
-
-#: crosswordxmlguiwindow.cpp:1017
-msgid "Can't add clue at the current cell"
-msgstr "Küsimuse lisamine aktiivsesse ruutu nurjus"
-
-#: crosswordxmlguiwindow.cpp:1038
-msgctxt "%1 contains the reason why the clue couldn't be added"
-msgid "Can't add clue. %1"
-msgstr "Küsimuse lisamine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:1052
-msgid "Clue added ('%1')"
-msgstr "Küsimus on lisatud ('%1')"
-
-#: crosswordxmlguiwindow.cpp:1069
-msgctxt "%1 contains the reason why the image couldn't be added"
-msgid "Can't add image. %1"
-msgstr "Pildi lisamine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:1082
-msgctxt "%1 contains the reason why the clue couldn't be removed"
-msgid "Can't remove clue. %1"
-msgstr "Küsimuse eemaldamine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:1087
-msgctxt "%1 contains the reason why the image couldn't be removed"
-msgid "Can't remove image. %1"
-msgstr "Pildi eemaldamine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:1090
-msgid "No removable cell selected."
-msgstr "Eemaldatavat ruutu pole valitud."
-
-#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
-#, fuzzy
-msgid "Do you really want to clear the crossword?"
-msgstr "Kõigi küsimuste eemaldamine ristsõnast."
-
-#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
-msgid "Clear"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1100
-msgctxt "%1 contains the reason why the crossword couldn't be cleared"
-msgid "Can't clear crossword. %1"
-msgstr "Ristsõna puhastamine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:1117
-msgctxt ""
-"%1 contains the reason why the crossword properties couldn't be changed"
-msgid "Can't change crossword properties. %1"
-msgstr "Ristsõna omaduste muutmine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:1129
-msgid "The crossword has 180 degree rotation symmetry."
-msgstr "Ristsõna vastab 180 kraadi all pööramise sümmeetriale."
-
-#: crosswordxmlguiwindow.cpp:1133
-msgid ""
-"The crossword doesn't have 180 degree rotation symmetry.\n"
-"To achieve symmetry make sure that each empty cell has a counterpart at it's "
-"180 degree rotated position.\n"
-msgstr ""
-"Ristsõna ei vasta 180 kraadi all pööramise sümmeetriale.\n"
-"Sümmeetria saavutamiseks kontrolli, et igal tühjal ruudul oleks vaste 180 "
-"kraadi all pööratud positsioonis.\n"
-
-#: crosswordxmlguiwindow.cpp:1137
-msgid ""
-"The crossword doesn't have 180 degree rotation symmetry.\n"
-"To achieve symmetry make sure that each empty cell and each clue cell has a "
-"counterpart at it's 180 degree rotated position.\n"
-msgstr ""
-"Ristsõna ei vasta 180 kraadi all pööramise sümmeetriale.\n"
-"Sümmeetria saavutamiseks kontrolli, et igal tühjal ruudul ja küsimusruudul "
-"oleks vaste 180 kraadi all pööratud positsioonis.\n"
-
-#: crosswordxmlguiwindow.cpp:1143
-msgid ""
-"Quality crosswords of the current crossword type (%1) are usually symmetric."
-msgstr ""
-"Aktiivse ristsõnatüübi (%1) kvaliteetsed ristsõnad on tavaliselt "
-"sümmeetrilised."
-
-#: crosswordxmlguiwindow.cpp:1162
-msgid "Clue Number Mapping"
-msgstr "Küsimusenumbrite seosed"
-
-#: crosswordxmlguiwindow.cpp:1187
-msgctxt ""
-"%1 contains the reason why the new clue number mapping couldn't be applied"
-msgid "Can't apply clue number mapping. %1"
-msgstr "Küsimusenumbri seose rakendamine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:1200
-msgctxt "%1 contains the reason why the cells couldn't be moved"
-msgid "Can't move cells. %1"
-msgstr "Ruutude liigutamine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:1210
-msgid ""
-"This will cause all answers to be shown and editable.\n"
-"If you want to solve the crossword you should cancel."
-msgstr ""
-"See põhjustab kõigi vastuse näitamise ja nende muutumise muudetavaks.\n"
-"Kui soovid ikka ristsõna lahendada, peaksid loobuma."
-
-#: crosswordxmlguiwindow.cpp:1257
-#, fuzzy
-msgid "Close the current crossword"
-msgstr "Aktiivse ristsõna sulgemine."
-
-#: crosswordxmlguiwindow.cpp:1262
-msgid "Save the crossword with solved letters"
-msgstr "Ristsõna salvestamine koos lahendatud tähtedega"
-
-#: crosswordxmlguiwindow.cpp:1266
-msgid "Choose a filename to save the crossword with solved letters"
-msgstr "Failinime valimine ristsõna salvestamiseks koos lahendatud tähtedega"
-
-#: crosswordxmlguiwindow.cpp:1271
-msgid "Print the crossword"
-msgstr "Ristsõna trükkimine"
-
-#: crosswordxmlguiwindow.cpp:1275
-msgid "Show a print preview"
-msgstr "Trükkimise eelvaatluse näitamine"
-
-#: crosswordxmlguiwindow.cpp:1279
-msgid "&Dictionary..."
-msgstr "&Sõnaraamat..."
-
-#: crosswordxmlguiwindow.cpp:1280
-#, fuzzy
-msgid "Add or remove crossword dictionaries"
-msgstr "Ristsõna sõnastike lisamine või eemaldamine."
-
-#: crosswordxmlguiwindow.cpp:1286
-msgid "Fit the whole crossword into the window"
-msgstr "Kogu ristsõna mahutamine aknasse"
-
-#: crosswordxmlguiwindow.cpp:1289
-msgid "Pan"
-msgstr "Liiguta"
-
-#: crosswordxmlguiwindow.cpp:1290
-msgid ""
-"Pan the view. Note that you can also pan while pressing the control key."
-msgstr ""
-"Vaate liigutamine: Pane tähele, et liigutada saab ka Ctrl-klahvi all hoides."
-
-#: crosswordxmlguiwindow.cpp:1294
-#, fuzzy
-msgid "Solve the selected letter or a random one if none is selected"
-msgstr ""
-"Parajasti valitud või juhusliku tähe vastuse näitamine, kui ühtegi pole "
-"valitud"
-
-#: crosswordxmlguiwindow.cpp:1297
-msgid "This letter has been solved"
-msgstr "Selle tähe vastus on teada"
-
-#: crosswordxmlguiwindow.cpp:1298
-#, fuzzy
-msgid "The selected letter cell has been solved"
-msgstr "Parajasti valitud täheruudu vastus on teada"
-
-#: crosswordxmlguiwindow.cpp:1303
-msgid "Mark as confident"
-msgstr "Märgi kindlaks"
-
-#: crosswordxmlguiwindow.cpp:1304
-#, fuzzy
-msgid "Mark the selected letter cell's confidence as confident"
-msgstr "Parajasti valitud täheruudu usaldusväärsuse märkimine kindlaks"
-
-#: crosswordxmlguiwindow.cpp:1309
-msgid "Mark as unsure"
-msgstr "Märgi kaheldavaks"
-
-#: crosswordxmlguiwindow.cpp:1310
-#, fuzzy
-msgid "Mark the selected letter cell's confidence as unsure"
-msgstr "Parajasti valitud täheruudu usaldusväärsuse märkimine kaheldavaks"
-
-#: crosswordxmlguiwindow.cpp:1315
-msgid "Clear This Cell"
-msgstr "Puhasta ruut"
-
-#: crosswordxmlguiwindow.cpp:1316
-#, fuzzy
-msgid "Clears the selected letter cell"
-msgstr "Parajasti valitud täheruudu puhastamine"
-
-#: crosswordxmlguiwindow.cpp:1321
-msgid "Clear This Answer"
-msgstr "Puhasta vastus"
-
-#: crosswordxmlguiwindow.cpp:1322
-msgid "Clears the answer to the current clue"
-msgstr "Aktiivse küsimuse vastuse puhastamine"
-
-#: crosswordxmlguiwindow.cpp:1327
-msgid "Clear Across Answer"
-msgstr "Puhasta vastus põiksuunas"
-
-#: crosswordxmlguiwindow.cpp:1328
-msgid "Clears the answer to the current across clue"
-msgstr "Aktiivse põiksuunas küsimuse vastuse puhastamine"
-
-#: crosswordxmlguiwindow.cpp:1333
-msgid "Clear Down Answer"
-msgstr "Puhasta vastus alla"
-
-#: crosswordxmlguiwindow.cpp:1334
-msgid "Clears the answer to the current down clue"
-msgstr "Aktiivse püstsuunas küsimuse vastuse puhastamine"
-
-#: crosswordxmlguiwindow.cpp:1339
-msgid "Hint For This Cell"
-msgstr "Ruudu vihje"
-
-#: crosswordxmlguiwindow.cpp:1340
-#, fuzzy
-msgid "Solve the selected letter cell"
-msgstr "Parajasti valitud täheruudu vastuse näitamine"
-
-#: crosswordxmlguiwindow.cpp:1345
-msgid "Solve Clue"
-msgstr "Vasta küsimusele"
-
-#: crosswordxmlguiwindow.cpp:1346
-msgid "Solve the current clue"
-msgstr "Aktiivse küsimuse vastuse näitamine"
-
-#: crosswordxmlguiwindow.cpp:1351
-msgid "Solve Across Clue"
-msgstr "Vasta küsimusele põiksuunas"
-
-#: crosswordxmlguiwindow.cpp:1352
-msgid "Solve the current across clue"
-msgstr "Aktiivse põiksuunas küsimuse vastuse näitamine"
-
-#: crosswordxmlguiwindow.cpp:1357
-msgid "Solve Down Clue"
-msgstr "Vasta küsimusele alla"
-
-#: crosswordxmlguiwindow.cpp:1358
-msgid "Solve the current down clue"
-msgstr "Aktiivse püstsuunas küsimuse vastuse näitamine"
-
-#: crosswordxmlguiwindow.cpp:1363
-#, fuzzy
-msgid "Clue With Switched Orientation"
-msgstr "Vali teise suunaga küsimus"
-
-#: crosswordxmlguiwindow.cpp:1364
-msgid "Select clue with switched orientation to the currently selected clue"
-msgstr "Aktiivsele valitud küsimuse suhtes teise suunaga küsimuse valimine"
-
-#: crosswordxmlguiwindow.cpp:1368
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&First Letter"
-msgstr "Vali &esimene täht"
-
-#: crosswordxmlguiwindow.cpp:1369
-msgid "Select the first letter of the current clue"
-msgstr "Aktiivse küsimuse esimese tähe valimine"
-
-#: crosswordxmlguiwindow.cpp:1373
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Last Letter"
-msgstr "Va&li viimane täht"
-
-#: crosswordxmlguiwindow.cpp:1374
-msgid "Select the last letter of the current clue"
-msgstr "Aktiivse küsimuse viimase tähe valimine"
-
-#: crosswordxmlguiwindow.cpp:1378
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "First Clue"
-msgstr "Vali esimene küsimus"
-
-#: crosswordxmlguiwindow.cpp:1379
-msgid "Select the first clue"
-msgstr "Esimese küsimuse valimine"
-
-#: crosswordxmlguiwindow.cpp:1383
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Next Clue"
-msgstr "Vali &järgmine küsimus"
-
-#: crosswordxmlguiwindow.cpp:1384
-msgid "Select the next clue"
-msgstr "Järgmise küsimuse valimine"
-
-#: crosswordxmlguiwindow.cpp:1388
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Previous Clue"
-msgstr "Vali &eelmine küsimus"
-
-#: crosswordxmlguiwindow.cpp:1389
-msgid "Select the previous clue"
-msgstr "Eelmise küsimuse valimine"
-
-#: crosswordxmlguiwindow.cpp:1393
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "Last Clue"
-msgstr "Vali viimane küsimus"
-
-#: crosswordxmlguiwindow.cpp:1394
-msgid "Select the last clue"
-msgstr "Viimase küsimuse valimine"
-
-#: crosswordxmlguiwindow.cpp:1402
-msgid "Show Clue Dock"
-msgstr "Näita küsimuste dokki"
-
-#: crosswordxmlguiwindow.cpp:1407
-msgid "Show Edit History Dock"
-msgstr "Näita muutmisajaloo dokki"
-
-#: crosswordxmlguiwindow.cpp:1412
-msgid "Show Current Cell Dock"
-msgstr "Aktiivse ruudu doki näitamine"
-
-#: crosswordxmlguiwindow.cpp:1416
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "Edit Mode"
-msgstr "Redigeerimisrežiim"
-
-#: crosswordxmlguiwindow.cpp:1417
-msgid "Enables/disables the edit mode"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1421
-msgid "&Add Clue"
-msgstr "Lis&a küsimus"
-
-#: crosswordxmlguiwindow.cpp:1422
-#, fuzzy
-msgid "Adds a new clue at the current cell"
-msgstr "Aktiivsele ruudule uue küsimuse lisamine"
-
-#: crosswordxmlguiwindow.cpp:1427 crosswordxmlguiwindow.cpp:1860
-msgid "&Remove"
-msgstr "&Eemalda"
-
-#: crosswordxmlguiwindow.cpp:1428
-#, fuzzy
-msgid "Removes the highlighted clue or image"
-msgstr "Esile tõstetud küsimuse või pildi eemaldamine."
-
-#: crosswordxmlguiwindow.cpp:1432
-msgid "Remove &Across Clue"
-msgstr "Ee&malda küsimus põiksuunas"
-
-#: crosswordxmlguiwindow.cpp:1433
-#, fuzzy
-msgid "Removes the highlighted across clue"
-msgstr "Esile tõstetud põiksuunas küsimuse eemaldamine."
-
-#: crosswordxmlguiwindow.cpp:1438
-msgid "Remove &Down Clue"
-msgstr "Eemal&da küsimus alla"
-
-#: crosswordxmlguiwindow.cpp:1439
-#, fuzzy
-msgid "Removes the highlighted down clue"
-msgstr "Esile tõstetud püstsuunas küsimuse eemaldamine."
-
-#: crosswordxmlguiwindow.cpp:1444
-msgid "&Add Image"
-msgstr "Lis&a pilt"
-
-#: crosswordxmlguiwindow.cpp:1445
-#, fuzzy
-msgid "Adds a new image at the current cell"
-msgstr "Aktiivsele ruudule uue pildi lisamine"
-
-#: crosswordxmlguiwindow.cpp:1450
-#, fuzzy
-msgid "&Clear Crossword..."
-msgstr "&Puhasta ristsõna"
-
-#: crosswordxmlguiwindow.cpp:1451
-#, fuzzy
-msgid "Removes all clues from the crossword"
-msgstr "Kõigi küsimuste eemaldamine ristsõnast."
-
-#: crosswordxmlguiwindow.cpp:1455
-msgid "&Crossword Properties..."
-msgstr "&Ristsõna omadused..."
+#: commands.cpp:991
+msgid "Change Clue '%1'"
+msgstr "Muuda küsimust '%1'"
+
+#: commands.cpp:1483
+msgid "Change Number Puzzle Mapping"
+msgstr "Muuda krüptogrammi seost"
 
 #: crosswordxmlguiwindow.cpp:1456
 msgid "Change the size of the crossword or it's title, author, copyright..."
 msgstr ""
 "Ristsõna suuruse või selle nime, autori või autoriõiguse jms. muutmine."
 
-#: crosswordxmlguiwindow.cpp:1460
-msgid "&Check for rotation symmetry..."
-msgstr "&Kontrolli pööramise sümmeetriat..."
+#: commands.cpp:1297
+msgctxt ""
+"%1 may be a list of changes separated by ',' if the list of changes contains "
+"more than 2 items. %2 is the last item"
+msgid "Changed Crossword Properties (%1 and %2)"
+msgstr "Muudetud ristsõna omadused (%1 ja %2)"
 
-#: crosswordxmlguiwindow.cpp:1461
-#, fuzzy
-msgid "Checks if the crossword has 180 degree rotation symmetry"
-msgstr ""
-"Kontrollimine, kas ristsõna vastab 180 kraadi all pööramise sümmeetriale."
-
-#: crosswordxmlguiwindow.cpp:1465
-msgid "&Statistics..."
-msgstr "&Statistika..."
-
-#: crosswordxmlguiwindow.cpp:1466
-#, fuzzy
-msgid "Shows statistics about the crossword"
-msgstr "Ristsõna statistika näitamine."
-
-#: crosswordxmlguiwindow.cpp:1470
-msgid "Clue Number &Mapping..."
-msgstr "Küsi&musenumbrite seosed..."
+#: commands.cpp:1292
+msgid "Changed Crossword Properties (%1)"
+msgstr "Muudetud ristsõna omadused (%1)"
 
 #: crosswordxmlguiwindow.cpp:1471
 #, fuzzy
 msgid "Changes the mapping of clue numbers to letters"
 msgstr "Küsimusenumbrite ja tähtede seoste muutmine."
-
-#: crosswordxmlguiwindow.cpp:1475
-msgid "Move All Cells..."
-msgstr "Liiguta kõiki ruute..."
-
-#: crosswordxmlguiwindow.cpp:1476
-#, fuzzy
-msgid "Moves all cells of the crossword"
-msgstr "Kõigi ristsõna ruutude liigutamine."
-
-#: crosswordxmlguiwindow.cpp:1494
-msgid "Insert special character:"
-msgstr "Erimärgi lisamine:"
-
-#: crosswordxmlguiwindow.cpp:1498
-#, fuzzy
-msgid "Let you select a special character to paste"
-msgstr "Võimaldab valida asetatava erimärgi."
-
-#: crosswordxmlguiwindow.cpp:1504
-#, fuzzy
-msgid "Fills all letter cells with the correct letters"
-msgstr "Kõigi täheruutude täitmine õigete tähtedega."
-
-#: crosswordxmlguiwindow.cpp:1505
-msgid ""
-"<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
-"solution will be displayed.</p><p>If you filled in all letters and do not "
-"want to give up, choose \"Done!\".</p></qt>"
-msgstr ""
-"<qt><p>Vali \"<b>Lahenda</b>\", kui soovid aktiivsest mängust loobuda. "
-"Seejärel näidatakse lahendust.</p><p>Kui oled asetanud paika kõik tähed ega "
-"soovi loobuda, vali \"Valmis!\"</p></qt>"
-
-#: crosswordxmlguiwindow.cpp:1507
-msgid "&Check"
-msgstr "K&ontrolli"
-
-#: crosswordxmlguiwindow.cpp:1508
-#, fuzzy
-msgid "Checks if all letters are correct"
-msgstr "Kontroll, kas kõik tähed on õiged."
-
-#: crosswordxmlguiwindow.cpp:1512
-msgid "&Clear Answers"
-msgstr "&Puhasta vastused"
-
-#: crosswordxmlguiwindow.cpp:1513
-#, fuzzy
-msgid "Clears all letter cells"
-msgstr "Kõigi täheruutude puhastamine."
-
-#: crosswordxmlguiwindow.cpp:1517
-msgid "&Eraser"
-msgstr "K&ustutaja"
-
-#: crosswordxmlguiwindow.cpp:1518
-#, fuzzy
-msgid "Enables the eraser, to clear letter cells/answers"
-msgstr "Kustutaja sisselülitamine täheruutude või vastuste puhastamiseks."
-
-#: crosswordxmlguiwindow.cpp:1628 krossword.h:554
-msgid "Solution"
-msgstr "Lahendus"
-
-#: crosswordxmlguiwindow.cpp:1661
-msgid "Clue List"
-msgstr "Küsimused"
-
-#: crosswordxmlguiwindow.cpp:1679
-msgid "Edit History"
-msgstr "Muudatuste ajalugu"
-
-#: crosswordxmlguiwindow.cpp:1689
-msgid "Current Cell"
-msgstr "Aktiivne ruut"
-
-#: crosswordxmlguiwindow.cpp:1731
-msgctxt "%1 contains the reason why the answer offset couldn't be changed"
-msgid "Can't change answer offset. %1"
-msgstr "Nihet ei saa muuta: %1"
-
-#: crosswordxmlguiwindow.cpp:1744
-msgctxt "%1 contains the reason why the orientation couldn't be changed"
-msgid "Can't change orientation. %1"
-msgstr "Orientatsiooni ei saa muuta. %1"
-
-#: crosswordxmlguiwindow.cpp:1756
-msgctxt "%1 contains the reason why the clue text couldn't be changed"
-msgid "Can't change clue text. %1"
-msgstr "Küsimuse teksti ei saa muuta. %1"
-
-#: crosswordxmlguiwindow.cpp:1769
-msgctxt "%1 contains the reason why the correct answer couldn't be changed"
-msgid "Can't change correct answer. %1"
-msgstr "Õiget vastust ei saa muuta. %1"
-
-#: crosswordxmlguiwindow.cpp:1789
-msgctxt ""
-"%1 contains the reason why the solution letter couldn't be converted to a "
-"letter"
-msgid "Can't convert solution letter. %1"
-msgstr "Vastusetähte ei saa teisendada. %1"
-
-#: crosswordxmlguiwindow.cpp:1808
-msgctxt ""
-"%1 contains the reason why the letter couldn't be converted to a solution "
-"letter"
-msgid "Can't convert letter. %1"
-msgstr "Tähte ei saa teisendada. %1"
-
-#: crosswordxmlguiwindow.cpp:1856
-msgid "&Remove Clue"
-msgstr "&Eemalda küsimus"
-
-#: crosswordxmlguiwindow.cpp:1858
-msgid "&Remove Image"
-msgstr "&Eemalda pilt"
-
-#: crosswordxmlguiwindow.cpp:2086
-#, fuzzy
-msgid ""
-"Congratulations!\n"
-"You solved the crossword perfectly."
-msgstr "Õnnitlused! Lahendasid ristsõna täiesti õigesti."
-
-#: crosswordxmlguiwindow.cpp:2108
-msgid "Do you really want to solve the crossword?"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:2108
-#, fuzzy
-msgid "Solve"
-msgstr "Vasta küsimusele"
-
-#: crosswordxmlguiwindow.cpp:2193 crosswordxmlguiwindow.cpp:2693
-msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
-msgid "Can't clear letter cell. %1"
-msgstr "Täheruudu puhastamine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:2216 crosswordxmlguiwindow.cpp:2240
-#: crosswordxmlguiwindow.cpp:2265 crosswordxmlguiwindow.cpp:2699
-msgctxt "%1 contains the reason why the answer couldn't be cleared"
-msgid "Can't clear answer. %1"
-msgstr "Vastuse puhastamine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:2477 crosswordxmlguiwindow.cpp:2505
-msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
-msgstr "Küsimus (põiki): \"%1\", %2 tähte, praegune vastus: \"%3\""
-
-#: crosswordxmlguiwindow.cpp:2482 crosswordxmlguiwindow.cpp:2509
-msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
-msgstr "Küsimus (alla): \"%1\",  %2 tähte, praegune vastus: \"%3\""
-
-#: crosswordxmlguiwindow.cpp:2555 global.cpp:36
-msgid "Empty cell"
-msgstr "Tühi ruut"
-
-#: crosswordxmlguiwindow.cpp:2557
-msgid "Image '%1'"
-msgstr "Pilt '%1'"
-
-#: crosswordxmlguiwindow.cpp:2758
-msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
-msgid "Can't add letter cells. %1"
-msgstr "Täheruutude lisamine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:2760
-msgctxt ""
-"%1 contains the reason why the letters couldn't be removed to the clue"
-msgid "Can't remove letter cells. %1"
-msgstr "Täheruutude eemaldamine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:2771
-msgctxt "%1 contains the reason why the letter cell couldn't be edited"
-msgid "Can't edit letter cell. %1"
-msgstr "Täheruudu muutmine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:2806
-msgctxt "%1 contains the reason why the crossword couldn't be converted"
-msgid "Can't convert crossword. %1"
-msgstr "Ristsõna teisendamine nurjus. %1"
-
-#: crosswordxmlguiwindow.cpp:2818
-msgid "Couldn't connect to the database."
-msgstr "Andmebaasiga ühendumine nurjus."
-
-#: dialogs/answerwidget.cpp:28 dialogs/answerwidget.cpp:38
-msgid ""
-"The correct answer to the clue. For each letter a letter cell is created"
-msgstr "Küsimuse õige vastus. Igale tähele luuakse täheruut"
-
-#: dialogs/answerwidget.cpp:30 dialogs/answerwidget.cpp:40
-msgid "The answer to the clue"
-msgstr "Küsimuse vastus"
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:112
-msgid "Show Only Answers With Current Answer &Length"
-msgstr ""
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:121
-msgid "Show Only Answers With &Clue"
-msgstr ""
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:128
-msgid "Show Only the &First 100 Answers"
-msgstr ""
-
-#: dialogs/cellwidgets/solutionlettercellwidget.cpp:94
-#, fuzzy
-msgid ""
-"The solution letter position %1 is already assigned.\n"
-"Please change the solution word position of that letter first."
-msgstr "Lahendustähe asukoht %1 on juba kasutusel."
-
-#: dialogs/convertcrossworddialog.cpp:29
-msgid "Convert Crossword Type To"
-msgstr "Ristsõnatüübi teisendamine"
-
-#: dialogs/convertcrossworddialog.cpp:33
-msgid "Convert From: %1"
-msgstr "Algtüüp: %1"
 
 #: dialogs/convertcrossworddialog.cpp:81
 #: dialogs/createnewcrossworddialog.cpp:231
@@ -1022,308 +540,104 @@ msgid ""
 msgstr ""
 "Ristsõnatüübi muutmine tühistab kasutaja määratud ristsõnatüübi seadistused."
 
-#: dialogs/convertcrossworddialog.cpp:105
-msgid "Convert To: %1"
-msgstr "Lõpptüüp: %1"
+#: global.cpp:300
+msgid "Characters"
+msgstr "Tähed"
 
-#: dialogs/createnewcrossworddialog.cpp:35
-msgid "Create New Crossword"
-msgstr "Uue ristsõna loomine"
+#: global.cpp:304
+msgid "Characters or digits"
+msgstr "Tähed või arvud"
 
-#: dialogs/createnewcrossworddialog.cpp:109
-msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
-msgid "© %1, by %2"
-msgstr "© %1, autor %2"
-
-#: dialogs/createnewcrossworddialog.cpp:111
+#: crosswordxmlguiwindow.cpp:1508
 #, fuzzy
-msgctxt "Default notes value for new crosswords"
-msgid "Created with Krossword"
-msgstr "Uue ristsõna loomine"
+msgid "Checks if all letters are correct"
+msgstr "Kontroll, kas kõik tähed on õiged."
 
-#: dialogs/createnewcrossworddialog.cpp:191
-msgid "Crossword Type"
-msgstr "Ristsõna tüüp"
-
-#: dialogs/createnewcrossworddialog.cpp:192
-msgid "Size"
-msgstr "Suurus"
-
-#: dialogs/createnewcrossworddialog.cpp:193
-msgid "Notes"
-msgstr "Märkused"
-
-#: dialogs/crosswordpreviewwidget.cpp:46
-msgid "Loading preview..."
-msgstr "Eelvaatluse laadimine..."
-
-#: dialogs/crosswordpreviewwidget.cpp:55
-msgid "Preview failed"
-msgstr "Eelvaatluse näitamine nurjus"
-
-#: dialogs/crosswordpropertiesdialog.cpp:36
-msgid "Properties"
-msgstr "Omadused"
-
-#: dialogs/crosswordpropertiesdialog.cpp:43
-#: dialogs/crosswordpropertiesdialog.cpp:277
-msgid "Crossword Type: %1"
-msgstr "Ristsõnatüüp: %1"
-
-#: dialogs/crosswordpropertiesdialog.cpp:46
-msgid "&Convert..."
-msgstr "&Teisenda..."
-
-#: dialogs/crosswordpropertiesdialog.cpp:245
-msgctxt "No changes to the crossword grid size."
-msgid "No change"
-msgstr "Muutusteta"
-
-#: dialogs/crosswordpropertiesdialog.cpp:257
-msgctxt ""
-"How many images are removed when resizing the crossword. This string gets "
-"combined with a plural string indicating how many clue cells will be removed "
-"when resizing."
-msgid "and %1 image"
-msgid_plural "and %1 images"
-msgstr[0] "ja %1 pilt"
-msgstr[1] "ja %1 pilti"
-
-#: dialogs/crosswordpropertiesdialog.cpp:251
-msgctxt ""
-"How many clues are removed when resizing the crossword. %2 is replaced by a "
-"plural indicating how many images will be removed when resizing."
-msgid "Resizing from %3x%4 will remove %1 clue %2"
-msgid_plural "Resizing from %3x%4 will remove %1 clues %2"
-msgstr[0] "Suuruse muutmisel %3x%4 pealt eemaldatakse %1 küsimus %2"
-msgstr[1] "Suuruse muutmisel %3x%4 pealt eemaldatakse %1 küsimust %2"
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
-msgid "Detailed Configuration"
-msgstr "Üksikasjalik seadistamine"
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
-msgid "New Crossword Type"
-msgstr "Uus ristsõnatüüp"
-
-#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
-msgid "Describe your crossword type here."
-msgstr "Siia käib ristsõnatüübi kirjeldus."
-
-#: dialogs/crosswordtypewidget.cpp:204
-msgid "Show Details"
-msgstr "Üksikasjade näitamine"
-
-#: dialogs/crosswordtypewidget.cpp:226
-msgid "&Rules..."
-msgstr "&Reeglid..."
-
-#: dialogs/currentcellwidget.cpp:114
-msgid "No cell selected."
-msgstr "Ühtegi ruutu pole valitud."
-
-#: dialogs/currentcellwidget.cpp:145
-msgid "%1 selected at (%2, %3)."
-msgstr "%1 valitud asukohas (%2, %3)."
-
-#: dialogs/currentcellwidget.cpp:154
-msgid "Clue:"
-msgstr "Küsimus:"
-
-#: dialogs/currentcellwidget.cpp:155
-msgid "Current Answer:"
-msgstr "Aktiivne vastus:"
-
-#: dialogs/currentcellwidget.cpp:439
-msgid "Convert &Letter %1 to Solution Letter"
-msgstr "Teise&nda täht %1 lahendustäheks"
-
-#: dialogs/dictionarydialog.cpp:37
-msgid "Dictionary"
-msgstr "Sõnaraamat"
-
-#: dialogs/dictionarydialog.cpp:164
-msgid "%1 entries added from this dictionary: '%2'"
-msgstr "Sellest sõnaraamatust lisati %1 kirjet: '%2'"
-
-#: dialogs/dictionarydialog.cpp:174 dialogs/dictionarydialog.cpp:189
-msgid "%1 entries added from %2 crosswords"
-msgstr "%2 ristsõnast lisati %1 kirjet"
-
-#: dialogs/dictionarydialog.cpp:205
-msgid "Couldn't submit removed entries to the database: %1"
-msgstr "Eemaldatud kirjete saatmine andmebaasi nurjus: %1"
-
-#: dialogs/dictionarydialog.cpp:208
-msgid "%1 entry removed"
-msgid_plural "%1 entries removed"
-msgstr[0] "%1 kirje eemaldatud"
-msgstr[1] "%1 kirjet eemaldatud"
-
-#: dialogs/dictionarydialog.cpp:217
-msgid "Dictionary cleared"
-msgstr "Sõnaraamat on puhastatud"
-
-#: dialogs/dictionarydialog.cpp:224
-msgid "Export To CSV"
-msgstr "Eksport CSV-na"
-
-#: dialogs/dictionarydialog.cpp:237
-msgid "There was an error while exporting to '%1'"
-msgstr "Failina '%1' eksportimisel tekkis tõrge"
-
-#: dialogs/dictionarydialog.cpp:239
-msgid "Export to '%1' was successful"
-msgstr "Eksport failina '%1' õnnestus"
-
-#: dialogs/dictionarydialog.cpp:245
-msgid "Import From CSV"
-msgstr "Import CSV-st"
-
-#: dialogs/dictionarydialog.cpp:251
-msgid "There was an error while importing from '%1'"
-msgstr "Importimisel failist '%1' tekkis tõrge"
-
-#: dialogs/dictionarydialog.cpp:254
-msgid "%1 entry imported from '%2'"
-msgid_plural "%1 entries imported from '%2'"
-msgstr[0] "Failist '%2' imporditi %1 kirje"
-msgstr[1] "Failist '%2' imporditi %1 kirjet"
-
-#: dialogs/movecellsdialog.cpp:28
-msgid "Move Cells"
-msgstr "Ruutude liigutamine"
-
-#: dialogs/movecellsdialog.cpp:71
-msgctxt ""
-"How many images are removed when moving all cells of the crossword. This "
-"string gets combined with a plural string indicating how many clue cells "
-"will be removed when moving the cells."
-msgid "and %1 image"
-msgid_plural "and %1 images"
-msgstr[0] "ja %1 pilt"
-msgstr[1] "ja %1 pilti"
-
-#: dialogs/movecellsdialog.cpp:65
-msgctxt ""
-"How many clues are removed when moving all cells of the crossword. %2 is "
-"replaced by a plural indicating how many images will be removed when moving "
-"the cells."
-msgid "Moving all cells will remove %1 clue %2"
-msgid_plural "Moving all cells will remove %1 clues %2"
-msgstr[0] "Kõigi ruutude liigutamisel eemaldatakse %1 küsimus %2"
-msgstr[1] "Kõigi ruutude liigutamisel eemaldatakse %1 küsimust %2"
-
-#: dialogs/statisticsdialog.cpp:34
-msgid "Statistics"
-msgstr "Statistika"
-
-#: dialogs/statisticsdialog.cpp:49
-msgid "Total Cell Count:"
-msgstr "Ruute kokku:"
-
-#: dialogs/statisticsdialog.cpp:57
-msgid "Empty Cells:"
-msgstr "Tühje ruute:"
-
-#: dialogs/statisticsdialog.cpp:59
-msgid "Number of empty cells, percentage of total cell count in braces"
-msgstr "Tühjade ruutude arv, sulgudes protsent ruutude koguarvust"
-
-#: dialogs/statisticsdialog.cpp:60
-msgid "Letter Cells:"
-msgstr "Täheruute:"
-
-#: dialogs/statisticsdialog.cpp:62
-msgid "Number of letter cells, percentage of total cell count in braces"
-msgstr "Täheruutude arv, sulgudes protsent ruutude koguarvust"
-
-#: dialogs/statisticsdialog.cpp:70
-msgid "Crossed:"
-msgstr "Ristuvaid:"
-
-#: dialogs/statisticsdialog.cpp:72
-msgid ""
-"Number of crossed letter cells, percentage of total letter cell count in "
-"braces"
-msgstr "Ristuvate täheruutude arv, sulgudes protsent täheruutude koguarvust"
-
-#: dialogs/statisticsdialog.cpp:74
-msgid "Uncrossed:"
-msgstr "Mitteristuvaid:"
-
-#: dialogs/statisticsdialog.cpp:76
-msgid ""
-"Number of uncrossed letter cells, percentage of total letter cell count in "
-"braces"
+#: crosswordxmlguiwindow.cpp:1461
+#, fuzzy
+msgid "Checks if the crossword has 180 degree rotation symmetry"
 msgstr ""
-"Mitteristuvate täheruutude arv, sulgudes protsent täheruutude koguarvust"
+"Kontrollimine, kas ristsõna vastab 180 kraadi all pööramise sümmeetriale."
 
-#: dialogs/statisticsdialog.cpp:85
-msgid "Clues:"
-msgstr "Küsimusi:"
+#: crosswordxmlguiwindow.cpp:1266
+msgid "Choose a filename to save the crossword with solved letters"
+msgstr "Failinime valimine ristsõna salvestamiseks koos lahendatud tähtedega"
 
-#: dialogs/statisticsdialog.cpp:88
-msgctxt "Horizontal:"
-msgid "Label for the number  of horizontal clues"
-msgstr "Põiksuunas:"
-
-#: dialogs/statisticsdialog.cpp:90
-msgid "Number of horizontal clues, percentage of total clue count in braces"
-msgstr "Põiksuunas küsimuste arv, sulgudes protsent küsimuste koguarvust"
-
-#: dialogs/statisticsdialog.cpp:92
-msgctxt "Vertical:"
-msgid "Label for the number  of vertical clues"
-msgstr "Püstsuunas:"
-
-#: dialogs/statisticsdialog.cpp:94
-msgid "Number of vertical clues, percentage of total clue count in braces"
-msgstr "Püstsuunas küsimuste arv, sulgudes protsent küsimuste koguarvust"
-
-#: dialogs/statisticsdialog.cpp:98
-msgid "Min. Answer Length:"
-msgstr "Vastuse min. pikkus:"
-
-#: dialogs/statisticsdialog.cpp:101
-msgid "Max. Answer Length:"
-msgstr "Vastuse maks. pikkus:"
-
-#: dialogs/statisticsdialog.cpp:104
-msgid "Avg. Answer Length:"
-msgstr "Vastuse keskm. pikkus:"
-
-#: dialogs/statisticsdialog.cpp:115
-msgid "Occurrences Of Letters:"
-msgstr "Tähtede esinemiskorrad:"
-
-#: dialogs/statisticsdialog.cpp:121
-msgid ""
-"Number of letter cells containing '%1', percentage of total letter cell "
-"count in braces"
+#: library/librarygui.cpp:377
+msgid "ChrisWords.com"
 msgstr ""
-"'%1' sisaldavate täheruutude arv, sulgudes protsent täheruutude koguarvust"
 
-#: dictionary.cpp:122
-msgid ""
-"No Connection to the database! Please make sure the MySQL server is running. "
-"Afterwards click \"Continue\" to retry connecting to the database."
+#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
+msgid "Clear"
 msgstr ""
-"Ühendus andmebaasiga puudub! Palun kontrolli, kas MySQL-i server ikka "
-"töötab. Seejärel klõpsa \"Jätka\", et proovida uuesti andmebaasiga ühenduda."
 
-#: dictionary.cpp:125
-msgid "No Database Connection"
-msgstr "Ühendus andmebaasiga puudub"
+#: crosswordxmlguiwindow.cpp:1327
+msgid "Clear Across Answer"
+msgstr "Puhasta vastus põiksuunas"
 
-#: dictionary.cpp:131
-msgid "Connect Database"
-msgstr "Ühendumine andmebaasiga"
+#: commands.cpp:1092
+msgid "Clear Correct Answer of Clue at (%1, %2)"
+msgstr "Puhasta küsimuse õige vastus asukohas (%1, %2)"
 
-#: dictionary.cpp:243
-msgctxt "The header title for answers in the dictionary database"
-msgid "Answer"
-msgstr "Vastus"
+#: commands.cpp:1144
+msgid "Clear Correct Letter at (%1, %2), was %3"
+msgstr "Puhasta õige täht asukohas (%1, %2) %3"
+
+#: commands.cpp:1222
+msgid "Clear Crossword"
+msgstr "Puhasta ristsõna"
+
+#: crosswordxmlguiwindow.cpp:1333
+msgid "Clear Down Answer"
+msgstr "Puhasta vastus alla"
+
+#: commands.cpp:1154
+msgid "Clear Letter at (%1, %2), was %3"
+msgstr "Puhasta täht asukohas (%1, %2), oli %3"
+
+#: crosswordxmlguiwindow.cpp:1321
+msgid "Clear This Answer"
+msgstr "Puhasta vastus"
+
+#: crosswordxmlguiwindow.cpp:1315
+msgid "Clear This Cell"
+msgstr "Puhasta ruut"
+
+#: crosswordxmlguiwindow.cpp:1513
+#, fuzzy
+msgid "Clears all letter cells"
+msgstr "Kõigi täheruutude puhastamine."
+
+#: crosswordxmlguiwindow.cpp:1328
+msgid "Clears the answer to the current across clue"
+msgstr "Aktiivse põiksuunas küsimuse vastuse puhastamine"
+
+#: crosswordxmlguiwindow.cpp:1322
+msgid "Clears the answer to the current clue"
+msgstr "Aktiivse küsimuse vastuse puhastamine"
+
+#: crosswordxmlguiwindow.cpp:1334
+msgid "Clears the answer to the current down clue"
+msgstr "Aktiivse püstsuunas küsimuse vastuse puhastamine"
+
+#: crosswordxmlguiwindow.cpp:1316
+#, fuzzy
+msgid "Clears the selected letter cell"
+msgstr "Parajasti valitud täheruudu puhastamine"
+
+#: crosswordxmlguiwindow.cpp:673 crosswordxmlguiwindow.cpp:820
+#: krosswordpuzzle.cpp:131
+msgid "Close Document"
+msgstr "Sulge dokument"
+
+#: crosswordxmlguiwindow.cpp:1257
+#, fuzzy
+msgid "Close the current crossword"
+msgstr "Aktiivse ristsõna sulgemine."
+
+#: cluemodel.cpp:60
+msgid "Clue"
+msgstr "Küsimus"
 
 #: dictionary.cpp:245
 msgctxt ""
@@ -1332,79 +646,44 @@ msgctxt ""
 msgid "Clue"
 msgstr "Küsimus"
 
-#: dictionary.cpp:247
-msgctxt ""
-"The header title for scores/difficulties of clue/answer pairs in the "
-"dictionary database"
-msgid "Score"
-msgstr "Hinne"
+#: crosswordxmlguiwindow.cpp:2477 crosswordxmlguiwindow.cpp:2505
+msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
+msgstr "Küsimus (põiki): \"%1\", %2 tähte, praegune vastus: \"%3\""
 
-#: dictionary.cpp:249
-msgctxt ""
-"The header title for languages of clue/answer pairs in the dictionary "
-"database"
-msgid "Language"
-msgstr "Keel"
+#: crosswordxmlguiwindow.cpp:2482 crosswordxmlguiwindow.cpp:2509
+msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
+msgstr "Küsimus (alla): \"%1\",  %2 tähte, praegune vastus: \"%3\""
 
-#: dictionary.cpp:292
-msgid "Importing Dictionary"
-msgstr "Sõnaraamatu import"
+#: crosswordxmlguiwindow.cpp:1661
+msgid "Clue List"
+msgstr "Küsimused"
 
-#: dictionary.cpp:330
-msgid ""
-"Importing word clue pairs from '%1' to the database.\n"
-"Please wait."
-msgstr ""
-"Sõna ja küsimuse paaride importimine failist '%1' andmebaasi.\n"
-"Palun oota."
+#: crosswordxmlguiwindow.cpp:1470
+msgid "Clue Number &Mapping..."
+msgstr "Küsi&musenumbrite seosed..."
 
-#: dictionary.cpp:462
-msgid ""
-"Adding words from the dictionary '%1' to the database.\n"
-"Please wait."
-msgstr ""
-"Sõnade lisamine sõnaraamatust '%1' andmebaasi.\n"
-"Palun oota."
+#: crosswordxmlguiwindow.cpp:1162
+msgid "Clue Number Mapping"
+msgstr "Küsimusenumbrite seosed"
 
-#: dictionary.cpp:566
-msgid ""
-"Adding words from %1 crossword files to the database.\n"
-"Please wait."
-msgstr ""
-"Sõnade lisamine %1 ristsõnafailist andmebaasi.\n"
-"Palun oota."
+#: crosswordxmlguiwindow.cpp:1363
+#, fuzzy
+msgid "Clue With Switched Orientation"
+msgstr "Vali teise suunaga küsimus"
+
+#: crosswordxmlguiwindow.cpp:1052
+msgid "Clue added ('%1')"
+msgstr "Küsimus on lisatud ('%1')"
 
 #: global.cpp:38
 msgid "Clue cell"
 msgstr "Küsimusruut"
 
-#: global.cpp:40
-msgid "Double clue cell"
-msgstr "Kahe küsimusega ruut"
-
-#: global.cpp:42
-msgid "Letter cell"
-msgstr "Täheruut"
-
-#: global.cpp:44
-msgid "Solution letter cell"
-msgstr "Lahendustäheruut"
-
-#: global.cpp:46
-msgid "Image cell"
-msgstr "Pildiruut"
-
-#: global.cpp:48
-msgid "All cells"
-msgstr "Kõik ruudud"
-
-#: global.cpp:50
-msgid "Interactive cells"
-msgstr "Interaktiivsed ruudud"
-
-#: global.cpp:52
-msgid "User cell type"
-msgstr "Kasutaja ruudutüüp"
+#: commands.cpp:352
+msgctxt ""
+"%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
+msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
+msgstr "Antud koordinaatidel (%1, %2) ei leitud küsimusruutu: '%3'"
 
 #: global.cpp:260
 msgid "Clue cells are allowed"
@@ -1418,119 +697,170 @@ msgstr "Küsimusruudud on keelatud"
 msgid "Clue cells are required"
 msgstr "Küsimusruudud on nõutavad"
 
-#: global.cpp:275
-msgid "Clues refer to sets of cells"
-msgstr "Küsimused osutavad ruudukogumitele"
+#: krossworddocument.cpp:86
+msgctxt "Title for the clue list when printing"
+msgid "Clue list"
+msgstr "Küsimused"
+
+#: dialogs/currentcellwidget.cpp:154
+msgid "Clue:"
+msgstr "Küsimus:"
 
 #: global.cpp:277
 msgid "Clues refer to cells"
 msgstr "Küsimused osutavad ruutudele"
 
-#: global.cpp:287
-msgid "String clues"
-msgstr "Stringküsimused"
+#: global.cpp:275
+msgid "Clues refer to sets of cells"
+msgstr "Küsimused osutavad ruudukogumitele"
 
-#: global.cpp:289
-msgid "Number clues (1 to 26)"
-msgstr "Arvküsimused (1 kuni 26)"
+#: dialogs/statisticsdialog.cpp:85
+msgid "Clues:"
+msgstr "Küsimusi:"
 
-#: global.cpp:300
-msgid "Characters"
-msgstr "Tähed"
-
-#: global.cpp:302
-msgid "Digits"
-msgstr "Arvud"
-
-#: global.cpp:304
-msgid "Characters or digits"
-msgstr "Tähed või arvud"
-
-#: global.cpp:409
-msgid "Free Crossword"
-msgstr "Vaba ristsõna"
-
-#: global.cpp:411
-msgctxt "Short description of the crossword type 'Free'"
-msgid "This is a special type that tries to be least restrictive."
-msgstr "See on eritüüp, mis püüab seada kõige vähem piiranguid."
-
-#: global.cpp:413
-msgctxt "Long description of the crossword type 'Free'"
+#: crosswordxmlguiwindow.cpp:2086
+#, fuzzy
 msgid ""
-"This is a special type that tries to be least restrictive. You can use all "
-"available cell types (eg. clue cells, double clue cells, image cells, "
-"solution letter cells). You can mix answers that have a clue cell with "
-"answers that don't. Answers may contain characters as well as numbers."
+"Congratulations!\n"
+"You solved the crossword perfectly."
+msgstr "Õnnitlused! Lahendasid ristsõna täiesti õigesti."
+
+#: crosswordxmlguiwindow.cpp:552
+msgid "Congratulations! You solved the crossword perfectly."
+msgstr "Õnnitlused! Lahendasid ristsõna täiesti õigesti."
+
+#: dictionary.cpp:131
+msgid "Connect Database"
+msgstr "Ühendumine andmebaasiga"
+
+#: dialogs/currentcellwidget.cpp:439
+msgid "Convert &Letter %1 to Solution Letter"
+msgstr "Teise&nda täht %1 lahendustäheks"
+
+#: commands.cpp:1777
+msgid "Convert Crossword From '%1' to '%2'"
+msgstr "Teisenda ristsõna tüübist '%1' tüüpi '%2'"
+
+#: dialogs/convertcrossworddialog.cpp:29
+msgid "Convert Crossword Type To"
+msgstr "Ristsõnatüübi teisendamine"
+
+#: dialogs/convertcrossworddialog.cpp:33
+msgid "Convert From: %1"
+msgstr "Algtüüp: %1"
+
+#: commands.cpp:626
+msgid "Convert Letter at (%1, %2) to Solution Letter"
+msgstr "Teisenda täht asukohas (%1, %2) lahendustäheks"
+
+#: commands.cpp:654
+msgctxt "%1 contains the position of the solution letter in the solution word."
+msgid "Convert Solution Letter %1 to Letter"
+msgstr "Teisenda lahendustäht %1 täheks"
+
+#: dialogs/convertcrossworddialog.cpp:105
+msgid "Convert To: %1"
+msgstr "Lõpptüüp: %1"
+
+#: commands.cpp:1274
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Copyright"
+msgstr "Autoriõigus"
+
+#: krosswordpuzzle.cpp:94
+msgid "Could not open resource at "
 msgstr ""
-"See on eritüüp, mis püüab seada kõige vähem piiranguid. Sa võid kasutada "
-"kõiki saadaolevaid ruudutüüpe (nt. küsimusruudud, kahe küsimusega ruudud, "
-"pildiruudud, lahendustäheruudud). Sa võid kasutada korraga nii vastuseid, "
-"millel on küsimusruut, kui ka vastuseid, millel seda ei ole. Vastused võivad "
-"sisaldada nii tähti kui ka arve."
 
-#: global.cpp:424
-msgid "User Defined Crossword"
-msgstr "Kasutaja määratud ristsõna"
+#: io/krosswordxmlwriter.cpp:73
+msgid "Couldn't close the ZIP archive"
+msgstr "ZIP-arhiivi sulgemine nurjus"
 
-#: global.cpp:426
-msgctxt "Short description of the crossword type 'User Defined'"
-msgid "Lets you specify your own rules."
-msgstr "Võimaldab kindlaks määrata omaenda reeglid."
+#: crosswordxmlguiwindow.cpp:2818
+msgid "Couldn't connect to the database."
+msgstr "Andmebaasiga ühendumine nurjus."
 
-#: global.cpp:434
-msgid "Swedish Crossword"
-msgstr "Rootsi ristsõna"
+#: library/librarygui.cpp:340
+msgid "Couldn't export the image to the specified file."
+msgstr "Pildi eksportimine määratud failina nurjus."
 
-#: global.cpp:436
-msgctxt "Short description of the crossword type 'Swedish'"
+#: io/krosswordxmlwriter.cpp:52
+msgid "Couldn't open the ZIP archive for writing"
+msgstr "ZIP-arhiivi avamine kirjutamiseks nurjus"
+
+#: library/librarygui.cpp:452
+#, fuzzy
+msgid "Couldn't remove the crossword from the library."
+msgstr ""
+"Ristsõna eemaldamine kogust nurjus.\n"
+"%1"
+
+#: library/librarygui.cpp:441
 msgid ""
-"Swedish crosswords contain clue cells which contain the clue text in it and "
-"an arrow to indicate in which direction the clues have to be answered."
+"Couldn't remove the directory from the library.\n"
+"You need root privileges to remove directories which belong to the global "
+"library."
 msgstr ""
-"Rootsi ristsõna sisaldab küsimusruute, mis sisaldavad endas küsimuse teksti "
-"ja noolt, mis osutab, millises suunas tuleb küsimusele vastata."
+"Kataloogi eemaldamine kogust nurjus.\n"
+"Kataloogi eemaldamiseks, mis kuulub globaalsesse kogusse, läheb tarvis "
+"administraatori õigusi."
 
-#: global.cpp:439
-msgctxt "Long description of the crossword type 'Swedish'"
+#: dialogs/dictionarydialog.cpp:205
+msgid "Couldn't submit removed entries to the database: %1"
+msgstr "Eemaldatud kirjete saatmine andmebaasi nurjus: %1"
+
+#: dialogs/createnewcrossworddialog.cpp:35
+msgid "Create New Crossword"
+msgstr "Uue ristsõna loomine"
+
+#: library/librarygui.cpp:517
+#, fuzzy
+msgid "Create a new crossword"
+msgstr "Uue ristsõna loomine"
+
+#: library/librarygui.cpp:522
+#, fuzzy
+msgid "Create a new folder in the library"
+msgstr "Uue kataloogi loomine kogus."
+
+#: dialogs/createnewcrossworddialog.cpp:111
+#, fuzzy
+msgctxt "Default notes value for new crosswords"
+msgid "Created with Krossword"
+msgstr "Uue ristsõna loomine"
+
+#: dialogs/statisticsdialog.cpp:70
+msgid "Crossed:"
+msgstr "Ristuvaid:"
+
+#: global.cpp:503
+msgid "Crossnumber"
+msgstr "Arvristsõna"
+
+#: global.cpp:505
+msgctxt "Short description of the crossword type 'Crossnumber'"
 msgid ""
-"The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
-"the cells which would normally be black in other countries. Arrows indicate "
-"in which direction the clues have to be answered, vertical or horizontal. "
-"This style of grid is used in several countries other than Sweden, usually "
-"in magazines with pages of A4 or similar size. The grid often has a photo of "
-"a pop or movie star replacing a block of squares, as a clue to one answer. "
-"These puzzles usually have no symmetry in the grid.\n"
-"Crosswords with clue cells inside the crossword grid are also called "
-"\"Arrowwords\", \"Pointers\" or \"Tipwords\" in English, \"Autodefinidos\" "
-"in Spanish, \"Mots Fléchés\" in French, etc.\n"
-"(text taken from wikipedia)"
+"Crossnumbers are the numerical analogy of a crossword, in which the "
+"solutions to the clues are numbers instead of words."
 msgstr ""
-"Rootsi stiilis ruudustiku korral ei kasutata küsimustenumbreid: küsimused "
-"sisalduvad ruutudes, mida teistes maades näidatakse tavaliselt mustade "
-"ruutudena. Nooled osutavad, millises suunas tuleb küsimusele vastata (põiki- "
-"või püstsuunas). Sellist ruudustikku kasutatakse ka mitmel teisel maal peale "
-"Rootsi, tavaliselt A4 või sarnase suurusega ajakirjades. Sageli on "
-"ruudustikus mõne pop- või filmitähe foto, mis võtab enda alla terve ruutude "
-"ploki ja on omaette küsimus. Tavaliselt ei valitse neis ristsõnades "
-"sümmeetriat.\n"
-"Wikipedia väitel kannavad sellised ristsõnad inglise keeles veel nimetusi "
-"\"Arrowwords\", \"Pointers\" või \"Tipwords\", hispaania keeles "
-"\"Audofefinidos\", prantsuse keeles \"Mots Fléchés\" jne. Eesti keeles "
-"nimetatakse neid tavaliselt skandinaavia tüüpi ristsõnadeks."
+"Arvristsõnad on tavalise ristsõna selline vorm, kus vastused küsimustele "
+"tuleb sõnade asemel kirjutada arvudega."
 
-#: global.cpp:457
-msgid "American Crossword"
-msgstr "Ameerika ristsõna"
+#: library/librarygui.cpp:199 library/librarygui.cpp:204
+#: library/librarygui.cpp:212
+#, fuzzy
+msgid "Crossword %1"
+msgstr "Ristsõna"
 
-#: global.cpp:459
-msgctxt "Short description of the crossword type 'American'"
-msgid ""
-"American crosswords have numbered clues and a list of clues on the side of "
-"the crossword. They have usually 180 degree rotational symmetry."
-msgstr ""
-"Ameerika ristsõnadel on nummerdatud küsimused, mis esitatakse ristsõna "
-"kõrval. Tavaliselt on nad 180 kraadi all pööramisel sümmeetrilised."
+#: dialogs/createnewcrossworddialog.cpp:191
+msgid "Crossword Type"
+msgstr "Ristsõna tüüp"
+
+#: dialogs/crosswordpropertiesdialog.cpp:43
+#: dialogs/crosswordpropertiesdialog.cpp:277
+msgid "Crossword Type: %1"
+msgstr "Ristsõnatüüp: %1"
 
 #: global.cpp:462
 msgctxt "Long description of the crossword type 'American'"
@@ -1565,9 +895,518 @@ msgstr ""
 "peale keeramisel jääb muster samaks. Tihtipeale on nõutav seegi, et valged "
 "ruudud oleksid katkematult ühendatud."
 
+#: dialogs/currentcellwidget.cpp:155
+msgid "Current Answer:"
+msgstr "Aktiivne vastus:"
+
+#: crosswordxmlguiwindow.cpp:1689
+msgid "Current Cell"
+msgstr "Aktiivne ruut"
+
+#: library/librarygui.cpp:537
+#, fuzzy
+msgid "Delete the selected crossword from the library"
+msgstr "Valitud ristsõna kustutamine kogust."
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
+msgid "Describe your crossword type here."
+msgstr "Siia käib ristsõnatüübi kirjeldus."
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
+msgid "Detailed Configuration"
+msgstr "Üksikasjalik seadistamine"
+
+#: main.cpp:37 main.cpp:38
+msgid "Developer"
+msgstr ""
+
+#: dialogs/dictionarydialog.cpp:37
+msgid "Dictionary"
+msgstr "Sõnaraamat"
+
+#: dialogs/dictionarydialog.cpp:217
+msgid "Dictionary cleared"
+msgstr "Sõnaraamat on puhastatud"
+
+#: global.cpp:302
+msgid "Digits"
+msgstr "Arvud"
+
+#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
+#, fuzzy
+msgid "Do you really want to clear the crossword?"
+msgstr "Kõigi küsimuste eemaldamine ristsõnast."
+
+#: crosswordxmlguiwindow.cpp:2108
+msgid "Do you really want to solve the crossword?"
+msgstr ""
+
+#: main.cpp:44
+msgid "Document to open"
+msgstr "Avatav dokument"
+
+#: global.cpp:40
+msgid "Double clue cell"
+msgstr "Kahe küsimusega ruut"
+
+#: cluemodel.cpp:64
+msgid "Down clues"
+msgstr "Küsimused püstsuunas"
+
+#: krossworddocument.cpp:87
+msgctxt "Title for the list of down/vertical clues when printing"
+msgid "Down clues"
+msgstr "Küsimused püstsuunas"
+
+#: library/librarygui.cpp:349
+msgid "Download Crossword To Library"
+msgstr "Ristsõna allalaadimine kogusse"
+
+#: library/librarygui.cpp:527
+#, fuzzy
+msgid "Download a crossword and add it to the library"
+msgstr "Ristsõna allalaadimine ja lisamine kogusse."
+
+#: commands.cpp:1150
+msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
+msgstr "Muuda õigeks täheks asukohas (%1, %2) %3 asemel %4"
+
+#: crosswordxmlguiwindow.cpp:1679
+msgid "Edit History"
+msgstr "Muudatuste ajalugu"
+
+#: commands.cpp:1160
+msgid "Edit Letter at (%1, %2) From %3 to %4"
+msgstr "Muuda täheks asukohas (%1, %2) %3 asemel %4"
+
+#: crosswordxmlguiwindow.cpp:1416
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "Edit Mode"
+msgstr "Redigeerimisrežiim"
+
+#: cells/imagecell.cpp:68
+msgid "Edit image properties to set an image"
+msgstr "Pildi omaduste muutmine pildi määramiseks"
+
+#: dialogs/statisticsdialog.cpp:57
+msgid "Empty Cells:"
+msgstr "Tühje ruute:"
+
+#: crosswordxmlguiwindow.cpp:2555 global.cpp:36
+msgid "Empty cell"
+msgstr "Tühi ruut"
+
+#: crosswordxmlguiwindow.cpp:1518
+#, fuzzy
+msgid "Enables the eraser, to clear letter cells/answers"
+msgstr "Kustutaja sisselülitamine täheruutude või vastuste puhastamiseks."
+
+#: crosswordxmlguiwindow.cpp:1417
+msgid "Enables/disables the edit mode"
+msgstr ""
+
+#: krosswordpuzzle.cpp:466
+#, fuzzy
+msgid "Error loading file '%1'"
+msgstr "Tõrge faili \"%1\" laadimisel"
+
+#: krossword.cpp:1018
+msgid "Error reading AcrossLite's .puz-format."
+msgstr "Tõrge AcrossLite'i puz-vormingu lugemisel."
+
+#: krossword.cpp:963
+msgid "Error while downloading from url: %1"
+msgstr "Tõrge allalaadimisel URL-ilt: %1"
+
+#: crosswordxmlguiwindow.cpp:750
+msgid "Error while loading file '%1': %2"
+msgstr "Tõrge faili '%1' laadimisel: %2"
+
+#: crosswordxmlguiwindow.cpp:896
+msgid "Error while writing file: %1"
+msgstr "Tõrge faili kirjutamisel: %1"
+
+#: krossword.cpp:942
+msgid "Error writing AcrossLite's .puz-format."
+msgstr "Tõrge AcrossLite'i puz-vormingu kirjutamisel."
+
+#: krossword.cpp:931
+msgid "Error writing compressed crossword: %1"
+msgstr "Tõrge tihendatud ristsõna kirjutamisel: %1"
+
+#: krossword.cpp:924
+msgid "Error writing crossword: %1"
+msgstr "Tõrge ristsõna kirjutamisel: %1"
+
+#: io/krosswordxmlwriter.cpp:58 io/krosswordxmlwriter.cpp:63
+#: io/krosswordxmlwriter.cpp:68
+msgid "Error writing to the compressed file"
+msgstr "Tõrge kirjutamisel tihendatud faili"
+
+#: library/librarygui.cpp:306
+msgid "Export"
+msgstr "Eksport"
+
+#: library/librarygui.cpp:324
+msgid "Export Settings"
+msgstr "Ekspordiseadistused"
+
+#: dialogs/dictionarydialog.cpp:224
+msgid "Export To CSV"
+msgstr "Eksport CSV-na"
+
+#: library/librarygui.cpp:542
+#, fuzzy
+msgid "Export the selected crossword from the library"
+msgstr "Valitud ristsõna eksportimine kogust."
+
+#: dialogs/dictionarydialog.cpp:239
+msgid "Export to '%1' was successful"
+msgstr "Eksport failina '%1' õnnestus"
+
+#: library/librarygui.cpp:161
+#, fuzzy
+msgid "Failed"
+msgstr "Paanidena"
+
+#: crosswordxmlguiwindow.cpp:1504
+#, fuzzy
+msgid "Fills all letter cells with the correct letters"
+msgstr "Kõigi täheruutude täitmine õigete tähtedega."
+
+#: crosswordxmlguiwindow.cpp:1378
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "First Clue"
+msgstr "Vali esimene küsimus"
+
+#: crosswordxmlguiwindow.cpp:1286
+msgid "Fit the whole crossword into the window"
+msgstr "Kogu ristsõna mahutamine aknasse"
+
+#: global.cpp:409
+msgid "Free Crossword"
+msgstr "Vaba ristsõna"
+
+#: main.cpp:39
+msgid "Friedrich Pülz"
+msgstr "Friedrich Pülz"
+
+#: main.cpp:38
+msgid "Giacomo Barazzetti"
+msgstr ""
+
+#: commands.cpp:1346
+msgid "Hide Clue Cell"
+msgstr "Peida küsimusruut"
+
+#: crosswordxmlguiwindow.cpp:1339
+msgid "Hint For This Cell"
+msgstr "Ruudu vihje"
+
+#: library/librarygui.cpp:373
+msgid "I Swear Crossword by Victor Fleming (fridays)"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:2557
+msgid "Image '%1'"
+msgstr "Pilt '%1'"
+
+#: global.cpp:46
+msgid "Image cell"
+msgstr "Pildiruut"
+
+#: commands.cpp:559
+msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
+msgstr "Antud koordinaatidel (%1, %2) ei leitud pildiruutu: '%3'"
+
+#: dialogs/dictionarydialog.cpp:245
+msgid "Import From CSV"
+msgstr "Import CSV-st"
+
+#: dictionary.cpp:292
+msgid "Importing Dictionary"
+msgstr "Sõnaraamatu import"
+
+#: dictionary.cpp:330
+msgid ""
+"Importing word clue pairs from '%1' to the database.\n"
+"Please wait."
+msgstr ""
+"Sõna ja küsimuse paaride importimine failist '%1' andmebaasi.\n"
+"Palun oota."
+
+#: crosswordxmlguiwindow.cpp:1494
+msgid "Insert special character:"
+msgstr "Erimärgi lisamine:"
+
+#: global.cpp:50
+msgid "Interactive cells"
+msgstr "Interaktiivsed ruudud"
+
+#: main.cpp:33
+#, fuzzy
+msgid "Krossword"
+msgstr "Ristsõna"
+
+#: dialogs/statisticsdialog.cpp:88
+msgctxt "Horizontal:"
+msgid "Label for the number  of horizontal clues"
+msgstr "Põiksuunas:"
+
+#: dialogs/statisticsdialog.cpp:92
+msgctxt "Vertical:"
+msgid "Label for the number  of vertical clues"
+msgstr "Püstsuunas:"
+
+#: dictionary.cpp:249
+msgctxt ""
+"The header title for languages of clue/answer pairs in the dictionary "
+"database"
+msgid "Language"
+msgstr "Keel"
+
+#: crosswordxmlguiwindow.cpp:1393
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "Last Clue"
+msgstr "Vali viimane küsimus"
+
+#: crosswordxmlguiwindow.cpp:1498
+#, fuzzy
+msgid "Let you select a special character to paste"
+msgstr "Võimaldab valida asetatava erimärgi."
+
+#: global.cpp:426
+msgctxt "Short description of the crossword type 'User Defined'"
+msgid "Lets you specify your own rules."
+msgstr "Võimaldab kindlaks määrata omaenda reeglid."
+
+#: dialogs/statisticsdialog.cpp:60
+msgid "Letter Cells:"
+msgstr "Täheruute:"
+
+#: global.cpp:42
+msgid "Letter cell"
+msgstr "Täheruut"
+
+#: commands.cpp:704 commands.cpp:1172
+msgid "Letter cell not found at the given coordinates (%1, %2)"
+msgstr "Antud koordinaatidel (%1, %2) ei leitud täheruutu"
+
+#: krossword.cpp:650
+msgid "Letters can't be converted back correctly after this conversion."
+msgstr ""
+"Pärast seda teisendamist ei saa tähti enam korrektselt tagasi teisendada."
+
+#: krosswordpuzzle.cpp:240 krosswordpuzzle.cpp:429 library/librarygui.cpp:404
+msgid "Library"
+msgstr "Kogu"
+
+#: krosswordpuzzle.cpp:283
+#, fuzzy
+msgctxt ""
+"This string is used to replace the library path for crossword files that are "
+"in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
+"apps/krossword/library/crossword.kwpz with Library/crossword.kwpz"
+msgid "Library"
+msgstr "Kogu"
+
+#: crosswordxmlguiwindow.cpp:706
+msgid "Loaded crossword from file '%1'"
+msgstr "Laaditi ristsõna failist '%1'"
+
+#: dialogs/crosswordpreviewwidget.cpp:46
+msgid "Loading preview..."
+msgstr "Eelvaatluse laadimine..."
+
+#: krosswordpuzzle.cpp:183
+msgid "Loading the crossword, please wait..."
+msgstr "Ristsõna laadimine, palun oota..."
+
+#: krosswordpuzzle.cpp:180 library/librarygui.cpp:231
+msgid "Loading..."
+msgstr "Laadimine..."
+
+#: commands.cpp:1410
+msgid "Make Clue Cell Visible"
+msgstr "Muuda küsimusruut nähtavaks"
+
+#: crosswordxmlguiwindow.cpp:1303
+msgid "Mark as confident"
+msgstr "Märgi kindlaks"
+
+#: crosswordxmlguiwindow.cpp:1309
+msgid "Mark as unsure"
+msgstr "Märgi kaheldavaks"
+
+#: crosswordxmlguiwindow.cpp:1304
+#, fuzzy
+msgid "Mark the selected letter cell's confidence as confident"
+msgstr "Parajasti valitud täheruudu usaldusväärsuse märkimine kindlaks"
+
+#: crosswordxmlguiwindow.cpp:1310
+#, fuzzy
+msgid "Mark the selected letter cell's confidence as unsure"
+msgstr "Parajasti valitud täheruudu usaldusväärsuse märkimine kaheldavaks"
+
+#: library/librarygui.cpp:357
+msgid "Matt Jones (thursdays)"
+msgstr "Matt Jones (neljapäeviti)"
+
+#: dialogs/statisticsdialog.cpp:101
+msgid "Max. Answer Length:"
+msgstr "Vastuse maks. pikkus:"
+
+#: dialogs/statisticsdialog.cpp:98
+msgid "Min. Answer Length:"
+msgstr "Vastuse min. pikkus:"
+
+#: library/librarygui.cpp:381
+msgid "Mots-croisés.ch free French crosswords"
+msgstr ""
+
+#: commands.cpp:1972
+msgid "Move All Cells By %1, %2"
+msgstr "Liiguta  kõiki ruute %1, %2 võrra"
+
+#: crosswordxmlguiwindow.cpp:1475
+msgid "Move All Cells..."
+msgstr "Liiguta kõiki ruute..."
+
+#: dialogs/movecellsdialog.cpp:28
+msgid "Move Cells"
+msgstr "Ruutude liigutamine"
+
+#: crosswordxmlguiwindow.cpp:1476
+#, fuzzy
+msgid "Moves all cells of the crossword"
+msgstr "Kõigi ristsõna ruutude liigutamine."
+
+#: dialogs/movecellsdialog.cpp:65
+msgctxt ""
+"How many clues are removed when moving all cells of the crossword. %2 is "
+"replaced by a plural indicating how many images will be removed when moving "
+"the cells."
+msgid "Moving all cells will remove %1 clue %2"
+msgid_plural "Moving all cells will remove %1 clues %2"
+msgstr[0] "Kõigi ruutude liigutamisel eemaldatakse %1 küsimus %2"
+msgstr[1] "Kõigi ruutude liigutamisel eemaldatakse %1 küsimust %2"
+
+#: library/librarygui.cpp:521
+#, fuzzy
+msgctxt "@action:intoolbar"
+msgid "New &Folder..."
+msgstr "Uus kataloo&g"
+
+#: dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
+msgid "New Crossword Type"
+msgstr "Uus ristsõnatüüp"
+
+#: library/librarygui.cpp:473
+msgid "New Library Folder"
+msgstr "Kogu uus kataloog"
+
+#: crosswordxmlguiwindow.cpp:618 crosswordxmlguiwindow.cpp:651
+msgid "New crossword"
+msgstr "Uus ristsõna"
+
+#: commands.cpp:1299
+msgid "No Action"
+msgstr "Toiming puudub"
+
+#: dictionary.cpp:122
+msgid ""
+"No Connection to the database! Please make sure the MySQL server is running. "
+"Afterwards click \"Continue\" to retry connecting to the database."
+msgstr ""
+"Ühendus andmebaasiga puudub! Palun kontrolli, kas MySQL-i server ikka "
+"töötab. Seejärel klõpsa \"Jätka\", et proovida uuesti andmebaasiga ühenduda."
+
+#: dictionary.cpp:125
+msgid "No Database Connection"
+msgstr "Ühendus andmebaasiga puudub"
+
+#: commands.cpp:343 commands.cpp:552 commands.cpp:662 commands.cpp:697
+msgid "No cell at the given coordinates (%1, %2)"
+msgstr "Antud koordinaatidel (%1, %2) pole ühtegi ruutu"
+
+#: dialogs/currentcellwidget.cpp:114
+msgid "No cell selected."
+msgstr "Ühtegi ruutu pole valitud."
+
+#: dialogs/crosswordpropertiesdialog.cpp:245
+msgctxt "No changes to the crossword grid size."
+msgid "No change"
+msgstr "Muutusteta"
+
+#: commands.cpp:813 commands.cpp:1006 commands.cpp:1100
+msgid "No clue cell given"
+msgstr "Küsimusruutu pole antud"
+
+#: krossword.cpp:3034
+msgid "No error."
+msgstr "Tõrkeid pole."
+
+#: crosswordxmlguiwindow.cpp:1090
+msgid "No removable cell selected."
+msgstr "Eemaldatavat ruutu pole valitud."
+
+#: dialogs/createnewcrossworddialog.cpp:193
+msgid "Notes"
+msgstr "Märkused"
+
+#: commands.cpp:1277
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Notes"
+msgstr "Märkused"
+
 #: global.cpp:488
 msgid "Number Puzzle"
 msgstr "Krüptogramm"
+
+#: global.cpp:289
+msgid "Number clues (1 to 26)"
+msgstr "Arvküsimused (1 kuni 26)"
+
+#: dialogs/statisticsdialog.cpp:72
+msgid ""
+"Number of crossed letter cells, percentage of total letter cell count in "
+"braces"
+msgstr "Ristuvate täheruutude arv, sulgudes protsent täheruutude koguarvust"
+
+#: dialogs/statisticsdialog.cpp:59
+msgid "Number of empty cells, percentage of total cell count in braces"
+msgstr "Tühjade ruutude arv, sulgudes protsent ruutude koguarvust"
+
+#: dialogs/statisticsdialog.cpp:90
+msgid "Number of horizontal clues, percentage of total clue count in braces"
+msgstr "Põiksuunas küsimuste arv, sulgudes protsent küsimuste koguarvust"
+
+#: dialogs/statisticsdialog.cpp:121
+msgid ""
+"Number of letter cells containing '%1', percentage of total letter cell "
+"count in braces"
+msgstr ""
+"'%1' sisaldavate täheruutude arv, sulgudes protsent täheruutude koguarvust"
+
+#: dialogs/statisticsdialog.cpp:62
+msgid "Number of letter cells, percentage of total cell count in braces"
+msgstr "Täheruutude arv, sulgudes protsent ruutude koguarvust"
+
+#: dialogs/statisticsdialog.cpp:76
+msgid ""
+"Number of uncrossed letter cells, percentage of total letter cell count in "
+"braces"
+msgstr ""
+"Mitteristuvate täheruutude arv, sulgudes protsent täheruutude koguarvust"
+
+#: dialogs/statisticsdialog.cpp:94
+msgid "Number of vertical clues, percentage of total clue count in braces"
+msgstr "Püstsuunas küsimuste arv, sulgudes protsent küsimuste koguarvust"
 
 #: global.cpp:490
 msgctxt "Short description of the crossword type 'Number Puzzle'"
@@ -1579,245 +1418,114 @@ msgstr ""
 "Krüptogrammid on ristsõnade variant, kus igas ruudus esineb arv vahemikus 1 "
 "kuni 26. Lahendaja peab leidma, millisele tähele iga arv vastab."
 
-#: global.cpp:503
-msgid "Crossnumber"
-msgstr "Arvristsõna"
+#: dialogs/statisticsdialog.cpp:115
+msgid "Occurrences Of Letters:"
+msgstr "Tähtede esinemiskorrad:"
 
-#: global.cpp:505
-msgctxt "Short description of the crossword type 'Crossnumber'"
+#: crosswordxmlguiwindow.cpp:1289
+msgid "Pan"
+msgstr "Liiguta"
+
+#: crosswordxmlguiwindow.cpp:1290
 msgid ""
-"Crossnumbers are the numerical analogy of a crossword, in which the "
-"solutions to the clues are numbers instead of words."
+"Pan the view. Note that you can also pan while pressing the control key."
 msgstr ""
-"Arvristsõnad on tavalise ristsõna selline vorm, kus vastused küsimustele "
-"tuleb sõnade asemel kirjutada arvudega."
+"Vaate liigutamine: Pane tähele, et liigutada saab ka Ctrl-klahvi all hoides."
 
-#: global.cpp:508
-msgctxt "Long description of the crossword type 'Crossnumber'"
+#: dialogs/crosswordpreviewwidget.cpp:55
+msgid "Preview failed"
+msgstr "Eelvaatluse näitamine nurjus"
+
+#: main.cpp:39
+msgid "Previous developer"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1271
+msgid "Print the crossword"
+msgstr "Ristsõna trükkimine"
+
+#: dialogs/crosswordpropertiesdialog.cpp:36
+msgid "Properties"
+msgstr "Omadused"
+
+#: crosswordxmlguiwindow.cpp:1143
 msgid ""
-"A crossnumber (also known as a cross-figure) is the numerical analogy of a "
-"crossword, in which the solutions to the clues are numbers instead of words. "
-"Clues are usually arithmetical expressions, but can also be general "
-"knowledge clues to which the answer is a number or year. There are also "
-"numerical fill-in crosswords.\n"
-"The Daily Mail Weekend magazine used to feature crossnumbers under the "
-"misnomer Number Word. This kind of puzzle should not be confused with a "
-"different puzzle that the Daily Mail refers to as Cross Number.\n"
-"(text taken from wikipedia)"
+"Quality crosswords of the current crossword type (%1) are usually symmetric."
 msgstr ""
-"Arvristsõnad on tavalise ristsõna selline vorm, kus vastused küsimustele "
-"tuleb sõnade asemel kirjutada arvudega. Enamasti on küsimusteks "
-"matemaatilised tehted, aga need võivad olla ka niisugused küsimused, mille "
-"vastuseks on aastaarv või mõni arv.\n"
-"Ingliskeelses maailmas võib tekitada segadust asjaolu, et arvristsõnade "
-"kohta kasutatakse väljendeid 'crossnumber' või 'cross-figure', samas "
-"krüptogrammide kohta 'number puzzle'."
+"Aktiivse ristsõnatüübi (%1) kvaliteetsed ristsõnad on tavaliselt "
+"sümmeetrilised."
 
-#: io/krosswordxmlreader.cpp:174 io/krosswordxmlreader.cpp:206
+#: commands.cpp:776
+msgid "Remove %1 letter"
+msgid_plural "Remove %1 letters"
+msgstr[0] "Eemalda %1 täht"
+msgstr[1] "Eemalda %1 tähte"
+
+#: crosswordxmlguiwindow.cpp:1432
+msgid "Remove &Across Clue"
+msgstr "Ee&malda küsimus põiksuunas"
+
+#: crosswordxmlguiwindow.cpp:1438
+msgid "Remove &Down Clue"
+msgstr "Eemal&da küsimus alla"
+
+#: commands.cpp:336
+msgid "Remove Clue '%1'"
+msgstr "Eemalda küsimus '%1'"
+
+#: commands.cpp:334
+msgid "Remove Clue Without Text"
+msgstr "Eemalda tekstita küsimus"
+
+#: commands.cpp:544
+msgid "Remove Image '%1'"
+msgstr "Eemalda pilt '%1'"
+
+#: commands.cpp:1529
+msgid "Remove Same Letter Synchronization"
+msgstr "Eemalda ühesuguste tähtede sünkroonimine"
+
+#: commands.cpp:778
+msgctxt "This string shouldn't happen to be used"
+msgid "Remove no letters"
+msgstr "Ära eemalda ühtegi tähte"
+
+#: crosswordxmlguiwindow.cpp:1451
 #, fuzzy
-msgid "The file is not a Krossword version &lt;= 1.1 file."
-msgstr "See ei ole KrossWordPuzzle'i versiooni &lt;= 1.1 fail."
+msgid "Removes all clues from the crossword"
+msgstr "Kõigi küsimuste eemaldamine ristsõnast."
 
-#: io/krosswordxmlwriter.cpp:52
-msgid "Couldn't open the ZIP archive for writing"
-msgstr "ZIP-arhiivi avamine kirjutamiseks nurjus"
-
-#: io/krosswordxmlwriter.cpp:58 io/krosswordxmlwriter.cpp:63
-#: io/krosswordxmlwriter.cpp:68
-msgid "Error writing to the compressed file"
-msgstr "Tõrge kirjutamisel tihendatud faili"
-
-#: io/krosswordxmlwriter.cpp:73
-msgid "Couldn't close the ZIP archive"
-msgstr "ZIP-arhiivi sulgemine nurjus"
-
-#: krossword.cpp:613
-msgid "%1 clue cell"
-msgid_plural "%1 clue cells"
-msgstr[0] "%1 küsimusruut"
-msgstr[1] "%1 küsimusruutu"
-
-#: krossword.cpp:618
-msgid "%1 double clue cell"
-msgid_plural "%1 double clue cells"
-msgstr[0] "%1 kahe küsimusega ruut"
-msgstr[1] "%1 kahe küsimusega ruutu"
-
-#: krossword.cpp:623
-msgid "%1 solution letter cell"
-msgid_plural "%1 solution letter cells"
-msgstr[0] "%1 lahendustäheruut"
-msgstr[1] "%1 lahendustäheruutu"
-
-#: krossword.cpp:634
-msgid "The conversion will remove %1 of %2 clues"
-msgstr "Teisendamine eemaldab %2 küsimusest %1"
-
-#: krossword.cpp:637
-msgid "The conversion will remove %1 of %2 clues, %3 of %4 images"
-msgstr "Teisendamine eemaldab %2 küsimusest %1, %4 pildist %3"
-
-#: krossword.cpp:650
-msgid "Letters can't be converted back correctly after this conversion."
-msgstr ""
-"Pärast seda teisendamist ei saa tähti enam korrektselt tagasi teisendada."
-
-#: krossword.cpp:657
-msgid ""
-"All clue cells get removed. The initial letter to clue number mapping is "
-"A=1, B=2, ..., Z=26."
-msgstr ""
-"Kõik küsimusruudud eemaldati. Küsimusnumbri ja tähtede seosed on A=1, "
-"B=2, ..., Z=26."
-
-#: krossword.cpp:924
-msgid "Error writing crossword: %1"
-msgstr "Tõrge ristsõna kirjutamisel: %1"
-
-#: krossword.cpp:931
-msgid "Error writing compressed crossword: %1"
-msgstr "Tõrge tihendatud ristsõna kirjutamisel: %1"
-
-#: krossword.cpp:942
-msgid "Error writing AcrossLite's .puz-format."
-msgstr "Tõrge AcrossLite'i puz-vormingu kirjutamisel."
-
-#: krossword.cpp:963
-msgid "Error while downloading from url: %1"
-msgstr "Tõrge allalaadimisel URL-ilt: %1"
-
-#: krossword.cpp:1018
-msgid "Error reading AcrossLite's .puz-format."
-msgstr "Tõrge AcrossLite'i puz-vormingu lugemisel."
-
-#: krossword.cpp:2948
-msgctxt "Name"
-msgid ""
-"Used as header label for the column containing the names in the crossword "
-"type model."
-msgstr ""
-"Kasutatakse selle veeru päisena, mis sisaldab ristsõna tüübi mudeli nimesid."
-
-#: krossword.cpp:2951
-msgctxt "Description"
-msgid ""
-"Used as header label for the column containing the descriptions in the "
-"crossword type model."
-msgstr ""
-"Kasutatakse selle veeru päisena, mis sisaldab ristsõna tüübi mudeli "
-"kirjeldusi."
-
-#: krossword.cpp:3034
-msgid "No error."
-msgstr "Tõrkeid pole."
-
-#: krossword.cpp:3037
-msgid "The clue doesn't fit in the grid with the given settings."
-msgstr "Küsimus ei mahu määratud seadistuste korral ruudustikku."
-
-#: krossword.cpp:3039
-msgid "The cell for the new clue isn't empty."
-msgstr "Uue küsimuse ruut ei ole tühi."
-
-#: krossword.cpp:3041
-msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
-msgstr ""
-"Vastus sisaldab lubamatuid märke. Lubatud on A-Z (inglise tähestik) ja/või "
-"0-9."
-
-#: krossword.cpp:3043
-msgid "The answer produces mismatching letter cells at the same positions."
-msgstr "Vastus toob kaasa kokkusobimatud täheruudud samas asukohas."
-
-#: krossword.cpp:3045
-msgid ""
-"The answer overwrites the answer to another clue with the same orientation."
-msgstr "Vastus kirjutab üle teise samasuunalise küsimuse vastuse."
-
-#: krossword.cpp:3047
-msgid "The answer's letter cells cross a clue cell."
-msgstr "Vastuse täheruudud ristuvad küsimusruuduga."
-
-#: krossword.cpp:3049
-msgid "The current crossword type doesn't allow clue cells."
-msgstr "Aktiivne ristsõnatüüp ei luba küsimusruute."
-
-#: krossword.cpp:3051
-msgid "The current crossword type requires a clue cell for each clue."
-msgstr "Aktiivne ristsõnatüüp nõuab igale küsimusele küsimusruutu."
-
-#: krossword.cpp:3053
-msgid "The answer is too short for the current crossword type."
-msgstr "Vastus on aktiivse ristsõnatüübi jaoks liiga lühike."
-
-#: krossword.cpp:3055
-msgid "The answer overwrites the clue cell."
-msgstr "Vastus kirjutab üle küsimusruudu."
-
-#: krossword.cpp:3058
-msgid "The image doesn't fit in the grid with the given settings."
-msgstr "Pilt ei mahu määratud seadistuste korral ruudustikku."
-
-#: krossword.cpp:3060
-msgid "The cells for the new image aren't empty."
-msgstr "Uuele pildile ette nähtud ruudud pole tühjad."
-
-#: krossword.cpp:3062
-msgid "The current crossword type doesn't allow image cells."
-msgstr "Aktiivne ristsõnatüüp ei luba pildiruute."
-
-#: krossworddocument.cpp:86
-msgctxt "Title for the clue list when printing"
-msgid "Clue list"
-msgstr "Küsimused"
-
-#: krossworddocument.cpp:87
-msgctxt "Title for the list of down/vertical clues when printing"
-msgid "Down clues"
-msgstr "Küsimused püstsuunas"
-
-#: krossworddocument.cpp:88
-msgctxt "Title for the list of across/horizontal clues when printing"
-msgid "Across clues"
-msgstr "Küsimused põiksuunas"
-
-#: krosswordpuzzle.cpp:85
+#: crosswordxmlguiwindow.cpp:1433
 #, fuzzy
-msgid "Would you like to add the crossword into the library?"
-msgstr "Uue ristsõna loomine kogus."
+msgid "Removes the highlighted across clue"
+msgstr "Esile tõstetud põiksuunas küsimuse eemaldamine."
 
-#: krosswordpuzzle.cpp:86
+#: crosswordxmlguiwindow.cpp:1428
 #, fuzzy
-msgid "Save crossword"
-msgstr "Uus ristsõna"
+msgid "Removes the highlighted clue or image"
+msgstr "Esile tõstetud küsimuse või pildi eemaldamine."
 
-#: krosswordpuzzle.cpp:94
-msgid "Could not open resource at "
-msgstr ""
+#: crosswordxmlguiwindow.cpp:1439
+#, fuzzy
+msgid "Removes the highlighted down clue"
+msgstr "Esile tõstetud püstsuunas küsimuse eemaldamine."
+
+#: commands.cpp:1894
+msgid "Resize Crossword From %1x%2 to %3x%4"
+msgstr "Muuda ristsõna suuruseks %1x%2 asemel %3x%4"
+
+#: dialogs/crosswordpropertiesdialog.cpp:251
+msgctxt ""
+"How many clues are removed when resizing the crossword. %2 is replaced by a "
+"plural indicating how many images will be removed when resizing."
+msgid "Resizing from %3x%4 will remove %1 clue %2"
+msgid_plural "Resizing from %3x%4 will remove %1 clues %2"
+msgstr[0] "Suuruse muutmisel %3x%4 pealt eemaldatakse %1 küsimus %2"
+msgstr[1] "Suuruse muutmisel %3x%4 pealt eemaldatakse %1 küsimust %2"
 
 #: krosswordpuzzle.cpp:95
 msgid "Resource unavailable"
 msgstr ""
-
-#: krosswordpuzzle.cpp:180 library/librarygui.cpp:231
-msgid "Loading..."
-msgstr "Laadimine..."
-
-#: krosswordpuzzle.cpp:183
-msgid "Loading the crossword, please wait..."
-msgstr "Ristsõna laadimine, palun oota..."
-
-#: krosswordpuzzle.cpp:240 krosswordpuzzle.cpp:429 library/librarygui.cpp:404
-msgid "Library"
-msgstr "Kogu"
-
-#: krosswordpuzzle.cpp:244
-msgid "Templates"
-msgstr "Mallid"
-
-#: krosswordpuzzle.cpp:261
-msgid "&Restore"
-msgstr "&Taasta"
 
 #: krosswordpuzzle.cpp:261
 msgid ""
@@ -1827,39 +1535,314 @@ msgstr ""
 "Redigeeritud ristsõna enne krahhi automaatselt salvestatud versiooni "
 "taastamine"
 
-#: krosswordpuzzle.cpp:262
-msgid ""
-"An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
-" Do you want to restore the crossword?"
-msgstr ""
-"Leiti salvestamata ristsõna. Tõenäoliselt tabas mängu krahh. Vabandame!\n"
-" Kas taastada ristsõna?"
+#: crosswordxmlguiwindow.cpp:776
+msgid "Save &Edit History"
+msgstr "Muudatust&e ajaloo salvestamine"
 
-#: krosswordpuzzle.cpp:283
+#: crosswordxmlguiwindow.cpp:779
+msgid "Save As &Template"
+msgstr "Salves&tamine mallina"
+
+#: krosswordpuzzle.cpp:86
 #, fuzzy
+msgid "Save crossword"
+msgstr "Uus ristsõna"
+
+#: crosswordxmlguiwindow.cpp:1262
+msgid "Save the crossword with solved letters"
+msgstr "Ristsõna salvestamine koos lahendatud tähtedega"
+
+#: crosswordxmlguiwindow.cpp:781
+msgid "Save without correct answers, clue texts, images"
+msgstr "Salvestamime ilma õigete vastuste, küsimuste teksti, piltideta"
+
+#: dictionary.cpp:247
 msgctxt ""
-"This string is used to replace the library path for crossword files that are "
-"in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
-"apps/krossword/library/crossword.kwpz with Library/crossword.kwpz"
-msgid "Library"
-msgstr "Kogu"
+"The header title for scores/difficulties of clue/answer pairs in the "
+"dictionary database"
+msgid "Score"
+msgstr "Hinne"
 
-#: krosswordpuzzle.cpp:308
-msgid "Animations"
-msgstr "Animatsioonid"
+#: crosswordxmlguiwindow.cpp:1364
+msgid "Select clue with switched orientation to the currently selected clue"
+msgstr "Aktiivsele valitud küsimuse suhtes teise suunaga küsimuse valimine"
 
-#: krosswordpuzzle.cpp:313
-msgid "Theme"
-msgstr "Teema"
+#: crosswordxmlguiwindow.cpp:1379
+msgid "Select the first clue"
+msgstr "Esimese küsimuse valimine"
 
-#: krosswordpuzzle.cpp:466
-#, fuzzy
-msgid "Error loading file '%1'"
-msgstr "Tõrge faili \"%1\" laadimisel"
+#: crosswordxmlguiwindow.cpp:1369
+msgid "Select the first letter of the current clue"
+msgstr "Aktiivse küsimuse esimese tähe valimine"
+
+#: crosswordxmlguiwindow.cpp:1394
+msgid "Select the last clue"
+msgstr "Viimase küsimuse valimine"
+
+#: crosswordxmlguiwindow.cpp:1374
+msgid "Select the last letter of the current clue"
+msgstr "Aktiivse küsimuse viimase tähe valimine"
+
+#: crosswordxmlguiwindow.cpp:1384
+msgid "Select the next clue"
+msgstr "Järgmise küsimuse valimine"
+
+#: crosswordxmlguiwindow.cpp:1389
+msgid "Select the previous clue"
+msgstr "Eelmise küsimuse valimine"
+
+#: commands.cpp:1147
+msgid "Set Correct Letter at (%1, %2) to %3"
+msgstr "Määra õigeks täheks asukohas (%1, %2) %3"
+
+#: commands.cpp:1481
+msgid "Set Default Number Puzzle Mapping"
+msgstr "Kehtesta vaikimisi krüptogrammi seos"
+
+#: commands.cpp:1157
+msgid "Set Letter at (%1, %2) to %3"
+msgstr "Määra täheks asukohas (%1, %2) %3"
 
 #: krosswordpuzzleview.cpp:106
 msgid "Settings changed"
 msgstr "Seadistused on muudetud"
+
+#: commands.cpp:1506
+msgid "Setup Same Letter Synchronization"
+msgstr "Seadista ühesuguste tähtede sünkroonimist"
+
+#: crosswordxmlguiwindow.cpp:1402
+msgid "Show Clue Dock"
+msgstr "Näita küsimuste dokki"
+
+#: crosswordxmlguiwindow.cpp:1412
+msgid "Show Current Cell Dock"
+msgstr "Aktiivse ruudu doki näitamine"
+
+#: dialogs/crosswordtypewidget.cpp:204
+msgid "Show Details"
+msgstr "Üksikasjade näitamine"
+
+#: crosswordxmlguiwindow.cpp:1407
+msgid "Show Edit History Dock"
+msgstr "Näita muutmisajaloo dokki"
+
+#: dialogs/cellwidgets/cluecellwidget.cpp:121
+msgid "Show Only Answers With &Clue"
+msgstr ""
+
+#: dialogs/cellwidgets/cluecellwidget.cpp:112
+msgid "Show Only Answers With Current Answer &Length"
+msgstr ""
+
+#: dialogs/cellwidgets/cluecellwidget.cpp:128
+msgid "Show Only the &First 100 Answers"
+msgstr ""
+
+#: crosswordxmlguiwindow.cpp:1275
+msgid "Show a print preview"
+msgstr "Trükkimise eelvaatluse näitamine"
+
+#: crosswordxmlguiwindow.cpp:1466
+#, fuzzy
+msgid "Shows statistics about the crossword"
+msgstr "Ristsõna statistika näitamine."
+
+#: crosswordxmlguiwindow.cpp:321
+#, fuzzy
+msgid "Shows the percentage of solved letter cells"
+msgstr "Lahendatud täheruutude protsendi näitamine."
+
+#: dialogs/createnewcrossworddialog.cpp:192
+msgid "Size"
+msgstr "Suurus"
+
+#: commands.cpp:1284
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Size"
+msgstr "Suurus"
+
+#: library/librarymanager.cpp:71
+msgctxt "The title for sizes of crosswords in the library tree view"
+msgid "Size:"
+msgstr "Suurus:"
+
+#: crosswordxmlguiwindow.cpp:1628 krossword.h:554
+msgid "Solution"
+msgstr "Lahendus"
+
+#: global.cpp:44
+msgid "Solution letter cell"
+msgstr "Lahendustäheruut"
+
+#: commands.cpp:669
+msgid "Solution letter cell not found at the given coordinates (%1, %2)"
+msgstr "Antud koordinaatidel (%1, %2) ei leitud lahendustäheruutu"
+
+#: crosswordxmlguiwindow.cpp:2108
+#, fuzzy
+msgid "Solve"
+msgstr "Vasta küsimusele"
+
+#: crosswordxmlguiwindow.cpp:1351
+msgid "Solve Across Clue"
+msgstr "Vasta küsimusele põiksuunas"
+
+#: crosswordxmlguiwindow.cpp:1345
+msgid "Solve Clue"
+msgstr "Vasta küsimusele"
+
+#: crosswordxmlguiwindow.cpp:1357
+msgid "Solve Down Clue"
+msgstr "Vasta küsimusele alla"
+
+#: crosswordxmlguiwindow.cpp:1352
+msgid "Solve the current across clue"
+msgstr "Aktiivse põiksuunas küsimuse vastuse näitamine"
+
+#: crosswordxmlguiwindow.cpp:1346
+msgid "Solve the current clue"
+msgstr "Aktiivse küsimuse vastuse näitamine"
+
+#: crosswordxmlguiwindow.cpp:1358
+msgid "Solve the current down clue"
+msgstr "Aktiivse püstsuunas küsimuse vastuse näitamine"
+
+#: crosswordxmlguiwindow.cpp:1340
+#, fuzzy
+msgid "Solve the selected letter cell"
+msgstr "Parajasti valitud täheruudu vastuse näitamine"
+
+#: crosswordxmlguiwindow.cpp:1294
+#, fuzzy
+msgid "Solve the selected letter or a random one if none is selected"
+msgstr ""
+"Parajasti valitud või juhusliku tähe vastuse näitamine, kui ühtegi pole "
+"valitud"
+
+#: dialogs/statisticsdialog.cpp:34
+msgid "Statistics"
+msgstr "Statistika"
+
+#: global.cpp:287
+msgid "String clues"
+msgstr "Stringküsimused"
+
+#: global.cpp:434
+msgid "Swedish Crossword"
+msgstr "Rootsi ristsõna"
+
+#: global.cpp:436
+msgctxt "Short description of the crossword type 'Swedish'"
+msgid ""
+"Swedish crosswords contain clue cells which contain the clue text in it and "
+"an arrow to indicate in which direction the clues have to be answered."
+msgstr ""
+"Rootsi ristsõna sisaldab küsimusruute, mis sisaldavad endas küsimuse teksti "
+"ja noolt, mis osutab, millises suunas tuleb küsimusele vastata."
+
+#: krosswordpuzzle.cpp:244
+msgid "Templates"
+msgstr "Mallid"
+
+#: global.cpp:439
+msgctxt "Long description of the crossword type 'Swedish'"
+msgid ""
+"The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
+"the cells which would normally be black in other countries. Arrows indicate "
+"in which direction the clues have to be answered, vertical or horizontal. "
+"This style of grid is used in several countries other than Sweden, usually "
+"in magazines with pages of A4 or similar size. The grid often has a photo of "
+"a pop or movie star replacing a block of squares, as a clue to one answer. "
+"These puzzles usually have no symmetry in the grid.\n"
+"Crosswords with clue cells inside the crossword grid are also called "
+"\"Arrowwords\", \"Pointers\" or \"Tipwords\" in English, \"Autodefinidos\" "
+"in Spanish, \"Mots Fléchés\" in French, etc.\n"
+"(text taken from wikipedia)"
+msgstr ""
+"Rootsi stiilis ruudustiku korral ei kasutata küsimustenumbreid: küsimused "
+"sisalduvad ruutudes, mida teistes maades näidatakse tavaliselt mustade "
+"ruutudena. Nooled osutavad, millises suunas tuleb küsimusele vastata (põiki- "
+"või püstsuunas). Sellist ruudustikku kasutatakse ka mitmel teisel maal peale "
+"Rootsi, tavaliselt A4 või sarnase suurusega ajakirjades. Sageli on "
+"ruudustikus mõne pop- või filmitähe foto, mis võtab enda alla terve ruutude "
+"ploki ja on omaette küsimus. Tavaliselt ei valitse neis ristsõnades "
+"sümmeetriat.\n"
+"Wikipedia väitel kannavad sellised ristsõnad inglise keeles veel nimetusi "
+"\"Arrowwords\", \"Pointers\" või \"Tipwords\", hispaania keeles "
+"\"Audofefinidos\", prantsuse keeles \"Mots Fléchés\" jne. Eesti keeles "
+"nimetatakse neid tavaliselt skandinaavia tüüpi ristsõnadeks."
+
+#: library/librarygui.cpp:365
+msgid "The Chronicle of Higher Education (fridays)"
+msgstr ""
+
+#: library/librarygui.cpp:369
+msgid "The Cross Nerd (tuesdays)"
+msgstr ""
+
+#: library/librarygui.cpp:188
+#, fuzzy
+msgid "The Cross Nerd current crossword"
+msgstr "Aktiivse ristsõna sulgemine."
+
+#: krossword.cpp:3041
+msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
+msgstr ""
+"Vastus sisaldab lubamatuid märke. Lubatud on A-Z (inglise tähestik) ja/või "
+"0-9."
+
+#: krossword.cpp:3053
+msgid "The answer is too short for the current crossword type."
+msgstr "Vastus on aktiivse ristsõnatüübi jaoks liiga lühike."
+
+#: krossword.cpp:3045
+msgid ""
+"The answer overwrites the answer to another clue with the same orientation."
+msgstr "Vastus kirjutab üle teise samasuunalise küsimuse vastuse."
+
+#: krossword.cpp:3055
+msgid "The answer overwrites the clue cell."
+msgstr "Vastus kirjutab üle küsimusruudu."
+
+#: krossword.cpp:3043
+msgid "The answer produces mismatching letter cells at the same positions."
+msgstr "Vastus toob kaasa kokkusobimatud täheruudud samas asukohas."
+
+#: dialogs/answerwidget.cpp:30 dialogs/answerwidget.cpp:40
+msgid "The answer to the clue"
+msgstr "Küsimuse vastus"
+
+#: krossword.cpp:3047
+msgid "The answer's letter cells cross a clue cell."
+msgstr "Vastuse täheruudud ristuvad küsimusruuduga."
+
+#: krossword.cpp:3039
+msgid "The cell for the new clue isn't empty."
+msgstr "Uue küsimuse ruut ei ole tühi."
+
+#: krossword.cpp:3060
+msgid "The cells for the new image aren't empty."
+msgstr "Uuele pildile ette nähtud ruudud pole tühjad."
+
+#: krossword.cpp:3037
+msgid "The clue doesn't fit in the grid with the given settings."
+msgstr "Küsimus ei mahu määratud seadistuste korral ruudustikku."
+
+#: krossword.cpp:634
+msgid "The conversion will remove %1 of %2 clues"
+msgstr "Teisendamine eemaldab %2 küsimusest %1"
+
+#: krossword.cpp:637
+msgid "The conversion will remove %1 of %2 clues, %3 of %4 images"
+msgstr "Teisendamine eemaldab %2 küsimusest %1, %4 pildist %3"
+
+#: dialogs/answerwidget.cpp:28 dialogs/answerwidget.cpp:38
+msgid ""
+"The correct answer to the clue. For each letter a letter cell is created"
+msgstr "Küsimuse õige vastus. Igale tähele luuakse täheruut"
 
 #: library/librarygui.cpp:136
 #, fuzzy
@@ -1875,25 +1858,105 @@ msgstr ""
 "Ristsõna ei saa kogu kataloogi salvestada.\n"
 "%1"
 
-#: library/librarygui.cpp:161
-#, fuzzy
-msgid "Failed"
-msgstr "Paanidena"
+#: crosswordxmlguiwindow.cpp:1137
+msgid ""
+"The crossword doesn't have 180 degree rotation symmetry.\n"
+"To achieve symmetry make sure that each empty cell and each clue cell has a "
+"counterpart at it's 180 degree rotated position.\n"
+msgstr ""
+"Ristsõna ei vasta 180 kraadi all pööramise sümmeetriale.\n"
+"Sümmeetria saavutamiseks kontrolli, et igal tühjal ruudul ja küsimusruudul "
+"oleks vaste 180 kraadi all pööratud positsioonis.\n"
 
-#: library/librarygui.cpp:188
-#, fuzzy
-msgid "The Cross Nerd current crossword"
-msgstr "Aktiivse ristsõna sulgemine."
+#: crosswordxmlguiwindow.cpp:1133
+msgid ""
+"The crossword doesn't have 180 degree rotation symmetry.\n"
+"To achieve symmetry make sure that each empty cell has a counterpart at it's "
+"180 degree rotated position.\n"
+msgstr ""
+"Ristsõna ei vasta 180 kraadi all pööramise sümmeetriale.\n"
+"Sümmeetria saavutamiseks kontrolli, et igal tühjal ruudul oleks vaste 180 "
+"kraadi all pööratud positsioonis.\n"
 
-#: library/librarygui.cpp:199 library/librarygui.cpp:204
-#: library/librarygui.cpp:212
-#, fuzzy
-msgid "Crossword %1"
-msgstr "Ristsõna"
+#: crosswordxmlguiwindow.cpp:1129
+msgid "The crossword has 180 degree rotation symmetry."
+msgstr "Ristsõna vastab 180 kraadi all pööramise sümmeetriale."
 
-#: library/librarygui.cpp:290
-msgid "Can't export whole directories. Please select a crossword."
-msgstr "Terveid katalooge ei saa eksportida. Palun vali ristsõna."
+#: crosswordxmlguiwindow.cpp:721
+msgid ""
+"The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
+"\n"
+"Do you want to convert the crossword to another type now?\n"
+"\n"
+"(Note: You can convert it later in \"Edit\" > \"Crossword Properties\")"
+msgstr ""
+"Ristsõna tüüpi ei õnnestunud määrata, mistõttu eeldatakse, et see on 'vaba "
+"ristsõna'.\n"
+"\n"
+"Kas soovid teisendada ristsõna mõnda muusse tüüpi?\n"
+"\n"
+"(Märkus: teisendada saab ka hiljem \"Redigeerimine\" > \"Ristsõna omadused\" "
+"abil)"
+
+#: crosswordxmlguiwindow.cpp:672 crosswordxmlguiwindow.cpp:818
+#: krosswordpuzzle.cpp:129
+msgid ""
+"The current crossword has been modified.\n"
+"Would you like to save it?"
+msgstr ""
+"Aktiivset ristsõna on muudetud.\n"
+"Kas soovid selle salvestada?"
+
+#: krossword.cpp:3049
+msgid "The current crossword type doesn't allow clue cells."
+msgstr "Aktiivne ristsõnatüüp ei luba küsimusruute."
+
+#: krossword.cpp:3062
+msgid "The current crossword type doesn't allow image cells."
+msgstr "Aktiivne ristsõnatüüp ei luba pildiruute."
+
+#: krossword.cpp:3051
+msgid "The current crossword type requires a clue cell for each clue."
+msgstr "Aktiivne ristsõnatüüp nõuab igale küsimusele küsimusruutu."
+
+#: io/krosswordxmlreader.cpp:174 io/krosswordxmlreader.cpp:206
+#, fuzzy
+msgid "The file is not a Krossword version &lt;= 1.1 file."
+msgstr "See ei ole KrossWordPuzzle'i versiooni &lt;= 1.1 fail."
+
+#: library/librarygui.cpp:481
+msgid "The folder already exists in the library."
+msgstr "Kataloog on kogus juba olemas."
+
+#: krossword.cpp:3058
+msgid "The image doesn't fit in the grid with the given settings."
+msgstr "Pilt ei mahu määratud seadistuste korral ruudustikku."
+
+#: crosswordxmlguiwindow.cpp:1298
+#, fuzzy
+msgid "The selected letter cell has been solved"
+msgstr "Parajasti valitud täheruudu vastus on teada"
+
+#: commands.cpp:725
+msgctxt ""
+"Error message to be displayed, when the user tries to convert a letter to a "
+"solution letter, but the position of the new solution letter is already "
+"used. Each solution letter has a position in the solution word of the "
+"crossword and all solution letters of a crossword form it's solution word. "
+"%1 is replaced by the (already used) position."
+msgid "The solution letter position %1 is already assigned."
+msgstr "Lahendustähe asukoht %1 on juba kasutusel."
+
+#: dialogs/cellwidgets/solutionlettercellwidget.cpp:94
+#, fuzzy
+msgid ""
+"The solution letter position %1 is already assigned.\n"
+"Please change the solution word position of that letter first."
+msgstr "Lahendustähe asukoht %1 on juba kasutusel."
+
+#: krosswordpuzzle.cpp:313
+msgid "Theme"
+msgstr "Teema"
 
 #: library/librarygui.cpp:296
 msgid ""
@@ -1903,67 +1966,44 @@ msgstr ""
 "Ristsõna avamisel tekkis tõrge.\n"
 "%1"
 
-#: library/librarygui.cpp:306
-msgid "Export"
-msgstr "Eksport"
+#: dialogs/dictionarydialog.cpp:237
+msgid "There was an error while exporting to '%1'"
+msgstr "Failina '%1' eksportimisel tekkis tõrge"
 
-#: library/librarygui.cpp:324
-msgid "Export Settings"
-msgstr "Ekspordiseadistused"
+#: dialogs/dictionarydialog.cpp:251
+msgid "There was an error while importing from '%1'"
+msgstr "Importimisel failist '%1' tekkis tõrge"
 
-#: library/librarygui.cpp:340
-msgid "Couldn't export the image to the specified file."
-msgstr "Pildi eksportimine määratud failina nurjus."
+#: global.cpp:411
+msgctxt "Short description of the crossword type 'Free'"
+msgid "This is a special type that tries to be least restrictive."
+msgstr "See on eritüüp, mis püüab seada kõige vähem piiranguid."
 
-#: library/librarygui.cpp:349
-msgid "Download Crossword To Library"
-msgstr "Ristsõna allalaadimine kogusse"
-
-#: library/librarygui.cpp:357
-msgid "Matt Jones (thursdays)"
-msgstr "Matt Jones (neljapäeviti)"
-
-#: library/librarygui.cpp:361
-msgid "Wall Street Journal by Mike Shenk (fridays)"
-msgstr "Wall Street Journali ristsõna Mike Shenkilt (reedeti)"
-
-#: library/librarygui.cpp:365
-msgid "The Chronicle of Higher Education (fridays)"
-msgstr ""
-
-#: library/librarygui.cpp:369
-msgid "The Cross Nerd (tuesdays)"
-msgstr ""
-
-#: library/librarygui.cpp:373
-msgid "I Swear Crossword by Victor Fleming (fridays)"
-msgstr ""
-
-#: library/librarygui.cpp:377
-msgid "ChrisWords.com"
-msgstr ""
-
-#: library/librarygui.cpp:381
-msgid "Mots-croisés.ch free French crosswords"
-msgstr ""
-
-#: library/librarygui.cpp:433
+#: global.cpp:413
+msgctxt "Long description of the crossword type 'Free'"
 msgid ""
-"This will permanently delete the selected directory and all contained "
-"crosswords from the library. The operation can't be undone!"
+"This is a special type that tries to be least restrictive. You can use all "
+"available cell types (eg. clue cells, double clue cells, image cells, "
+"solution letter cells). You can mix answers that have a clue cell with "
+"answers that don't. Answers may contain characters as well as numbers."
 msgstr ""
-"See kustutab valitud kataloogi ja kõik selles leiduvad ristsõnad jäädavalt "
-"kogust. Seda toimingut ei saa tagasi võtta!"
+"See on eritüüp, mis püüab seada kõige vähem piiranguid. Sa võid kasutada "
+"kõiki saadaolevaid ruudutüüpe (nt. küsimusruudud, kahe küsimusega ruudud, "
+"pildiruudud, lahendustäheruudud). Sa võid kasutada korraga nii vastuseid, "
+"millel on küsimusruut, kui ka vastuseid, millel seda ei ole. Vastused võivad "
+"sisaldada nii tähti kui ka arve."
 
-#: library/librarygui.cpp:441
+#: crosswordxmlguiwindow.cpp:1297
+msgid "This letter has been solved"
+msgstr "Selle tähe vastus on teada"
+
+#: crosswordxmlguiwindow.cpp:1210
 msgid ""
-"Couldn't remove the directory from the library.\n"
-"You need root privileges to remove directories which belong to the global "
-"library."
+"This will cause all answers to be shown and editable.\n"
+"If you want to solve the crossword you should cancel."
 msgstr ""
-"Kataloogi eemaldamine kogust nurjus.\n"
-"Kataloogi eemaldamiseks, mis kuulub globaalsesse kogusse, läheb tarvis "
-"administraatori õigusi."
+"See põhjustab kõigi vastuse näitamise ja nende muutumise muudetavaks.\n"
+"Kui soovid ikka ristsõna lahendada, peaksid loobuma."
 
 #: library/librarygui.cpp:445
 msgid ""
@@ -1973,111 +2013,105 @@ msgstr ""
 "See kustutab valitud ristsõna jäädavalt kogust.\n"
 "Seda toimingut ei saa tagasi võtta!"
 
-#: library/librarygui.cpp:452
-#, fuzzy
-msgid "Couldn't remove the crossword from the library."
-msgstr ""
-"Ristsõna eemaldamine kogust nurjus.\n"
-"%1"
-
-#: library/librarygui.cpp:473
-msgid "New Library Folder"
-msgstr "Kogu uus kataloog"
-
-#: library/librarygui.cpp:481
-msgid "The folder already exists in the library."
-msgstr "Kataloog on kogus juba olemas."
-
-#: library/librarygui.cpp:516
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Create Crossword..."
-msgstr "&Puhasta ristsõna"
-
-#: library/librarygui.cpp:517
-#, fuzzy
-msgid "Create a new crossword"
-msgstr "Uue ristsõna loomine"
-
-#: library/librarygui.cpp:521
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "New &Folder..."
-msgstr "Uus kataloo&g"
-
-#: library/librarygui.cpp:522
-#, fuzzy
-msgid "Create a new folder in the library"
-msgstr "Uue kataloogi loomine kogus."
-
-#: library/librarygui.cpp:526
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Download..."
-msgstr "Laa&di alla"
-
-#: library/librarygui.cpp:527
-#, fuzzy
-msgid "Download a crossword and add it to the library"
-msgstr "Ristsõna allalaadimine ja lisamine kogusse."
-
-#: library/librarygui.cpp:531
-msgctxt "@action:intoolbar"
-msgid "&Add..."
-msgstr ""
-
-#: library/librarygui.cpp:532
-#, fuzzy
-msgid "Add a crossword to the library"
-msgstr "Ristsõna importimine kogusse."
-
-#: library/librarygui.cpp:536
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Delete..."
-msgstr "&Kustuta"
-
-#: library/librarygui.cpp:537
-#, fuzzy
-msgid "Delete the selected crossword from the library"
-msgstr "Valitud ristsõna kustutamine kogust."
-
-#: library/librarygui.cpp:541
-#, fuzzy
-msgctxt "@action:intoolbar"
-msgid "&Export..."
-msgstr "&Ekspordi"
-
-#: library/librarygui.cpp:542
-#, fuzzy
-msgid "Export the selected crossword from the library"
-msgstr "Valitud ristsõna eksportimine kogust."
-
-#: library/librarygui.cpp:553
-msgid "%1"
-msgstr ""
-
-#: library/librarymanager.cpp:71
-msgctxt "The title for sizes of crosswords in the library tree view"
-msgid "Size:"
-msgstr "Suurus:"
-
-#: library/librarymanager.cpp:74
-msgctxt "The title for authors of crosswords in the library tree view"
-msgid "Author(s):"
-msgstr "Autor(id):"
-
-#: main.cpp:27
-#, fuzzy
+#: library/librarygui.cpp:433
 msgid ""
-"A crossword puzzle game and editor for KDE.\n"
-"Based on KrossWordPuzzle."
-msgstr "KDE 4 ristsõnade lahendamise ja muutmise rakendus"
+"This will permanently delete the selected directory and all contained "
+"crosswords from the library. The operation can't be undone!"
+msgstr ""
+"See kustutab valitud kataloogi ja kõik selles leiduvad ristsõnad jäädavalt "
+"kogust. Seda toimingut ei saa tagasi võtta!"
 
-#: main.cpp:33
+#: commands.cpp:1268
+msgctxt ""
+"Used for the list of stuff changed by the change crossword properties undo "
+"command"
+msgid "Title"
+msgstr "Nimi"
+
+#: dialogs/statisticsdialog.cpp:49
+msgid "Total Cell Count:"
+msgstr "Ruute kokku:"
+
+#: dialogs/statisticsdialog.cpp:74
+msgid "Uncrossed:"
+msgstr "Mitteristuvaid:"
+
+#: krossword.cpp:2951
+msgctxt "Description"
+msgid ""
+"Used as header label for the column containing the descriptions in the "
+"crossword type model."
+msgstr ""
+"Kasutatakse selle veeru päisena, mis sisaldab ristsõna tüübi mudeli "
+"kirjeldusi."
+
+#: krossword.cpp:2948
+msgctxt "Name"
+msgid ""
+"Used as header label for the column containing the names in the crossword "
+"type model."
+msgstr ""
+"Kasutatakse selle veeru päisena, mis sisaldab ristsõna tüübi mudeli nimesid."
+
+#: global.cpp:424
+msgid "User Defined Crossword"
+msgstr "Kasutaja määratud ristsõna"
+
+#: global.cpp:52
+msgid "User cell type"
+msgstr "Kasutaja ruudutüüp"
+
+#: library/librarygui.cpp:361
+msgid "Wall Street Journal by Mike Shenk (fridays)"
+msgstr "Wall Street Journali ristsõna Mike Shenkilt (reedeti)"
+
+#: krosswordpuzzle.cpp:85
 #, fuzzy
-msgid "Krossword"
-msgstr "Ristsõna"
+msgid "Would you like to add the crossword into the library?"
+msgstr "Uue ristsõna loomine kogus."
+
+#: crosswordxmlguiwindow.cpp:881
+msgid "Wrote crossword to file '%1'"
+msgstr "Ristsõna salvestati failina '%1'"
+
+#: rc.cpp:2
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "bald@smail.ee"
+
+#: rc.cpp:1
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Marek Laane"
+
+#: crosswordxmlguiwindow.cpp:265
+msgid "Zoom: %1%"
+msgstr "Suurendus: %1%"
+
+#: dialogs/movecellsdialog.cpp:71
+msgctxt ""
+"How many images are removed when moving all cells of the crossword. This "
+"string gets combined with a plural string indicating how many clue cells "
+"will be removed when moving the cells."
+msgid "and %1 image"
+msgid_plural "and %1 images"
+msgstr[0] "ja %1 pilt"
+msgstr[1] "ja %1 pilti"
+
+#: dialogs/crosswordpropertiesdialog.cpp:257
+msgctxt ""
+"How many images are removed when resizing the crossword. This string gets "
+"combined with a plural string indicating how many clue cells will be removed "
+"when resizing."
+msgid "and %1 image"
+msgid_plural "and %1 images"
+msgstr[0] "ja %1 pilt"
+msgstr[1] "ja %1 pilti"
+
+#: dialogs/createnewcrossworddialog.cpp:109
+msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
+msgid "© %1, by %2"
+msgstr "© %1, autor %2"
 
 #: main.cpp:35
 msgid ""
@@ -2085,44 +2119,6 @@ msgid ""
 "© 2014 Giacomo Barazzetti\n"
 "© 2009 Friedrich Pülz"
 msgstr ""
-
-#: main.cpp:37
-msgid "Andrea Barazzetti"
-msgstr ""
-
-#: main.cpp:37 main.cpp:38
-msgid "Developer"
-msgstr ""
-
-#: main.cpp:38
-msgid "Giacomo Barazzetti"
-msgstr ""
-
-#: main.cpp:39
-msgid "Friedrich Pülz"
-msgstr "Friedrich Pülz"
-
-#: main.cpp:39
-msgid "Previous developer"
-msgstr ""
-
-#: main.cpp:44
-msgid "Document to open"
-msgstr "Avatav dokument"
-
-#: rc.cpp:1
-msgctxt "NAME OF TRANSLATORS"
-msgid "Your names"
-msgstr "Marek Laane"
-
-#: rc.cpp:2
-msgctxt "EMAIL OF TRANSLATORS"
-msgid "Your emails"
-msgstr "bald@smail.ee"
-
-#~ msgctxt "Display text for empty clue texts"
-#~ msgid "<placeholder>empty</placeholder>"
-#~ msgstr "<placeholder>tühi</placeholder>"
 
 #~ msgid " columns"
 #~ msgstr " veergu"
@@ -2736,6 +2732,10 @@ msgstr "bald@smail.ee"
 #~ "weight:600;\">Märkus:</span> kui muuda küsimuse seadistusi. luuakse "
 #~ "muster automaatselt nende tähtede põhjal, mis on juba ristsõnas küsimuse "
 #~ "asukohtades.</p></body></html>"
+
+#~ msgctxt "Display text for empty clue texts"
+#~ msgid "<placeholder>empty</placeholder>"
+#~ msgstr "<placeholder>tühi</placeholder>"
 
 #~ msgid "Add &Words From Dictionary..."
 #~ msgstr "Lisa &sõnad sõnaraamatust..."
