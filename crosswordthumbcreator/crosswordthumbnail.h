@@ -20,7 +20,7 @@
 #ifndef CROSSWORDTHUMBNAIL_HEADER
 #define CROSSWORDTHUMBNAIL_HEADER
 
-#include <ThumbCreator>
+#include <kio/thumbcreator.h>
 
 class CrosswordThumbCreator : public ThumbCreator
 {
@@ -28,4 +28,4 @@ public:
     virtual bool create(const QString& path, int width, int height, QImage& img);
 };
 
-#endif // Multiple inclusion guard
+#endif

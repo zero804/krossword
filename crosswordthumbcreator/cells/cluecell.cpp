@@ -21,7 +21,7 @@
 
 #include "krossword.h"
 
-#include <QGraphicsSceneMouseEvent>
+#include <QtWidgets/QGraphicsSceneMouseEvent>
 #include <QFocusEvent>
 #include <kglobalsettings.h>
 #include <QFontDatabase>

@@ -50,7 +50,7 @@ int main(int argc, char **argv){
     KAboutData::setApplicationData(about);
 
     //KF5 port: remove this line and define TRANSLATION_DOMAIN in CMakeLists.txt instead
-//KLocale::global()->insertCatalog("libkdegames");
+    //KLocale::global()->insertCatalog("libkdegames");
 
     KrossWordPuzzle *widget = new KrossWordPuzzle;
 

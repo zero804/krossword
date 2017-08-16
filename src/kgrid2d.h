@@ -27,6 +27,8 @@
 //Added by qt3to4:
 #include <QtCore/QTextStream>
 
+#include <QtCore/QDataStream>
+
 //#include <kglobal.h> //PORTING: to reactivate?
 
 

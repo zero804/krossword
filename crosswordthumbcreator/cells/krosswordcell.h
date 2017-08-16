@@ -25,11 +25,11 @@
 #include <QPair>
 #include <QPainter>
 #include "kgrid2d.h"
-#include <qstyleoption.h>
+#include <QtWidgets/QStyleOption>
 
 #include <QDebug>
 
-#include <QGraphicsObject>
+#include <QtWidgets/QGraphicsObject>
 
 class KrossWord;
 typedef KGrid2D::Coord Coord;

@@ -133,7 +133,7 @@ bool KrossWordXmlReader::read(QIODevice* device, KrossWord *krossWord)
         readNext();
 
         if (isStartElement()) {
-            if (name().compare("krossWord", Qt::CaseInsensitive) == 0
+            if (name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0
                     && (attributes().value("version") == "1.0" || attributes().value("version") == "1.1")) {
                 readKrossWord(krossWord);
                 readEnd = true;
@@ -163,7 +163,7 @@ bool KrossWordXmlReader::readInfo(QIODevice* device,
         readNext();
 
         if (isStartElement()) {
-            if (name().compare("krossWord", Qt::CaseInsensitive) == 0
+            if (name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0
                     && (attributes().value("version") == "1.0" || attributes().value("version") == "1.1")) {
                 krossWordInfo = readKrossWordInfo();
                 readEnd = true;
@@ -179,7 +179,7 @@ bool KrossWordXmlReader::readInfo(QIODevice* device,
 
 KrossWordXmlReader::KrossWordInfo KrossWordXmlReader::readKrossWordInfo()
 {
-    Q_ASSERT(isStartElement() && name().compare("krossWord", Qt::CaseInsensitive) == 0);
+    Q_ASSERT(isStartElement() && name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0);
 
     if (!attributes().hasAttribute("width") || !attributes().hasAttribute("height"))
         raiseError("The <krossWord>-tag need a 'width' and a 'height' attribute.");
@@ -190,17 +190,17 @@ KrossWordXmlReader::KrossWordInfo KrossWordXmlReader::readKrossWordInfo()
 
     while (!atEnd()) {
         readNext();
-        if (isEndElement() && name().compare("krossWord", Qt::CaseInsensitive) == 0)
+        if (isEndElement() && name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0)
             break;
 
         if (isStartElement()) {
-            if (name().compare("title", Qt::CaseInsensitive) == 0)
+            if (name().compare(QLatin1String("title"), Qt::CaseInsensitive) == 0)
                 info.title = readElementText();
-            else if (name().compare("authors", Qt::CaseInsensitive) == 0)
+            else if (name().compare(QLatin1String("authors"), Qt::CaseInsensitive) == 0)
                 info.authors = readElementText();
-            else if (name().compare("copyright", Qt::CaseInsensitive) == 0)
+            else if (name().compare(QLatin1String("copyright"), Qt::CaseInsensitive) == 0)
                 info.copyright = readElementText();
-            else if (name().compare("notes", Qt::CaseInsensitive) == 0)
+            else if (name().compare(QLatin1String("notes"), Qt::CaseInsensitive) == 0)
                 info.notes = readElementText();
             else
                 break;
@@ -221,17 +221,17 @@ void KrossWordXmlReader::readKrossWord(KrossWord *krossWord)
     krossWord->setNotes(info.notes);
 
     while (!atEnd()) {
-        if (isEndElement() && name().compare("krossWord", Qt::CaseInsensitive) == 0)
+        if (isEndElement() && name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0)
             break;
 
         if (isStartElement()) {
-            if (name().compare("clue", Qt::CaseInsensitive) == 0)
+            if (name().compare(QLatin1String("clue"), Qt::CaseInsensitive) == 0)
                 readClue(krossWord);
-            else if (name().compare("image", Qt::CaseInsensitive) == 0)
+            else if (name().compare(QLatin1String("image"), Qt::CaseInsensitive) == 0)
                 readImage(krossWord);
-            else if (name().compare("solutionLetter", Qt::CaseInsensitive) == 0)
+            else if (name().compare(QLatin1String("solutionLetter"), Qt::CaseInsensitive) == 0)
                 readSolutionLetter(krossWord);
-            else if (name().compare("confidence", Qt::CaseInsensitive) == 0)
+            else if (name().compare(QLatin1String("confidence"), Qt::CaseInsensitive) == 0)
                 break; // Read confidence after the crossword has been completely read
             else
                 readUnknownElement();
@@ -245,10 +245,10 @@ void KrossWordXmlReader::readKrossWord(KrossWord *krossWord)
     krossWord->assignClueNumbers();
 
     // Read <confidence>-tag
-    if (isStartElement() && name().compare("confidence", Qt::CaseInsensitive) == 0) {
+    if (isStartElement() && name().compare(QLatin1String("confidence"), Qt::CaseInsensitive) == 0) {
         while (!atEnd()) {
             readNext();
-            if (isEndElement() && name().compare("confidence", Qt::CaseInsensitive) == 0)
+            if (isEndElement() && name().compare(QLatin1String("confidence"), Qt::CaseInsensitive) == 0)
                 break;
 
             QStringList confidenceStrings;
@@ -264,7 +264,7 @@ void KrossWordXmlReader::readKrossWord(KrossWord *krossWord)
                     // Read all <letter>-tags, to set the confidence to [confidence]
                     while (!atEnd()) {
                         readNext();
-                        if (isStartElement() && name().compare("letter", Qt::CaseInsensitive) == 0) {
+                        if (isStartElement() && name().compare(QLatin1String("letter"), Qt::CaseInsensitive) == 0) {
                             if (!attributes().hasAttribute("coord"))
                                 raiseError("<letter>-tags in the <confidence>-tag need a 'coord' attribute with value 'x,y'.");
                             else {
@@ -358,20 +358,20 @@ void KrossWordXmlReader::readClue(KrossWord *krossWord)
             if (isStartElement()) {
                 ++i;
 
-                if (name().compare("text", Qt::CaseInsensitive) == 0) {
+                if (name().compare(QLatin1String("text"), Qt::CaseInsensitive) == 0) {
                     hasTextTag = true;
                     readNext();
 
                     if (isCharacters() && !isWhitespace()) {
                         clue = text().toString();
                     }
-                } else if (name().compare("answer", Qt::CaseInsensitive) == 0) {
+                } else if (name().compare(QLatin1String("answer"), Qt::CaseInsensitive) == 0) {
                     hasAnswerTag = true;
                     readNext();
                     if (isCharacters() /*&& !isWhitespace()*/) {
                         answer = text().toString();
                     }
-                } else if (name().compare("currentAnswer", Qt::CaseInsensitive) == 0) {
+                } else if (name().compare(QLatin1String("currentAnswer"), Qt::CaseInsensitive) == 0) {
                     readNext();
                     if (isCharacters() && !isWhitespace()) {
                         currentAnswer = text().toString();

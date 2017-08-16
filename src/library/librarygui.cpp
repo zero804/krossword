@@ -48,7 +48,9 @@ LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::Wind
       m_downloadPreviewJob(nullptr),
       m_downloadCrosswordsDlg(nullptr)
 {
-    QString libraryDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "library";
+    QString libraryDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QLatin1Char('/') + "library";
+    QDir dir;
+    dir.mkpath(libraryDir);
     m_libraryModel->setRootPath(libraryDir);
 
     if (!m_libraryDelegate) {

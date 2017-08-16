@@ -20,8 +20,8 @@
 #include "krosswordcell.h"
 #include "krossword.h"
 
-#include <QGraphicsScene>
-#include <QGraphicsSceneMouseEvent>
+#include <QtWidgets/QGraphicsScene>
+#include <QtWidgets/QGraphicsSceneMouseEvent>
 #include <qevent.h>
 #include <QDebug>
 

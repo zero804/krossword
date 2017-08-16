@@ -20,7 +20,7 @@
 #include "imagecell.h"
 #include "krossword.h"
 
-#include <QGraphicsScene>
+#include <QtWidgets/QGraphicsScene>
 #include <KIO/NetAccess>
 
 
@@ -36,7 +36,7 @@ ImageCell::ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
             KIO::NetAccess::removeTempFile(fileName);
         }
     } else {
-        m_image = QImage(url.pathOrUrl());
+        m_image = QImage(url.url(QUrl::PreferLocalFile));
     }
 
     m_url = url;

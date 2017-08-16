@@ -23,11 +23,11 @@
 #include "krosswordpuzreader.h"
 #include "krosswordxmlreader.h"
 
-#include <QGraphicsScene>
+#include <QtWidgets/QGraphicsScene>
 #include <QFile>
 
 #include <QUrl>
-#include <KMimeType>
+//#include <QMimeType>
 #include <qfileinfo.h>
 #include <QDebug>
 #include <QRgb>

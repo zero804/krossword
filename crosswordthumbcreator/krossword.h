@@ -25,11 +25,11 @@
 
 #include "cells/krosswordcell.h"
 #include "cells/cluecell.h"
-#include <KLocalizedString>
+#include <KI18n/KLocalizedString>
 
 #include <QUrl>
 
-#include <QGraphicsObject>
+#include <QtWidgets/QGraphicsObject>
 
 class SpannedCell;
 class ImageCell;

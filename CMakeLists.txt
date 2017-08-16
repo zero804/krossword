@@ -27,7 +27,7 @@ add_subdirectory(src)
 #add_subdirectory(icons)
 add_subdirectory(themes)
 add_subdirectory(templates)
-#add_subdirectory(crosswordthumbcreator)
+add_subdirectory(crosswordthumbcreator)
 
 add_subdirectory(po)
 
