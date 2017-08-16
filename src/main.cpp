@@ -17,12 +17,13 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <QApplication>
 #include "krosswordpuzzle.h"
-//#include <kapplication.h>
-#include <K4AboutData>
+
+#include <QApplication>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
+
 #include <KAboutData>
-#include <kcmdlineargs.h>
 #include <KDE/KLocale>
 #include <KGlobal>
 
@@ -32,25 +33,27 @@ static const char description[] =
 static const char version[] = "0.18.2 alpha 3";
 
 int main(int argc, char **argv){
-    K4AboutData about("krossword", 0, ki18n("Krossword"), version,
-                     ki18n(description), K4AboutData::License_GPL_V2,
-                     ki18n("© 2014 Andrea Barazzetti\n© 2014 Giacomo Barazzetti\n© 2009 Friedrich Pülz"), KLocalizedString(), 0, "http://kde-apps.org/content/show.php/Krossword?content=166281");
-
-    about.addAuthor(ki18n("Andrea Barazzetti"), ki18n("Developer"), "andreadevsrv@gmail.com");
-    about.addAuthor(ki18n("Giacomo Barazzetti"), ki18n("Developer"), "giacomosrv@gmail.com");
-    about.addAuthor(ki18n("Friedrich Pülz"), ki18n("Previous developer"), "");
-
-    KCmdLineArgs::init(argc, argv, &about);
-
-    KCmdLineOptions options;
-    options.add("+[URL]", ki18n("Document to open"));
-    KCmdLineArgs::addCmdLineOptions(options);
-
     QApplication app(argc, argv);
-    KAboutData::setApplicationData(about);
 
-    //KF5 port: remove this line and define TRANSLATION_DOMAIN in CMakeLists.txt instead
-    //KLocale::global()->insertCatalog("libkdegames");
+    KLocalizedString::setApplicationDomain("krossword");
+
+    KAboutData aboutData(QStringLiteral("krossword"), i18n("Krossword"),
+                         version, i18n(description), KAboutLicense::GPL_V2,
+                         i18n("(c) 2014, Andrea Barazzetti\n(c) 2014, Giacomo Barazzetti\n(c) 2009, Friedrich Pülz"));
+    aboutData.setHomepage(QStringLiteral("https://store.kde.org/p/1109436"));
+    aboutData.addAuthor(i18n("Andrea Barazzetti"), i18n("Developer"), QStringLiteral("andreadevsrv@gmail.com"));
+    aboutData.addAuthor(i18n("Giacomo Barazzetti"), i18n("Developer"), QStringLiteral("giacomosrv@gmail.com"));
+    aboutData.addAuthor(i18n("Friedrich Pülz"), i18n("Previous developer"), QStringLiteral(""));
+
+    QCommandLineParser parser;
+    KAboutData::setApplicationData(aboutData);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    aboutData.setupCommandLine(&parser);
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
+
+    parser.addPositionalArgument(QLatin1String("[URL]"), i18n("Document to open"));
 
     KrossWordPuzzle *widget = new KrossWordPuzzle;
 
@@ -58,22 +61,16 @@ int main(int argc, char **argv){
     if (app.isSessionRestored()) {
         RESTORE(KrossWordPuzzle);
     } else {
-        //## Return applicationPid, but is not saved anywhere...
-        QCoreApplication::applicationPid();
+        QCoreApplication::applicationPid(); //## Return applicationPid, but is not saved anywhere...
         
         // no session.. just start up normally
-        KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-
-        if (args->count() == 0) {
-            //krosswordpuzzle *widget = new krosswordpuzzle;
+        if (parser.positionalArguments().count() == 0) {
             widget->show();
         } else {
             // Load just one crossword at once
             widget->show();;
-            widget->loadSlot(QUrl::fromLocalFile(args->arg(0)));
+            widget->loadSlot(QUrl::fromLocalFile(parser.positionalArguments().at(0)));
         }
-
-        args->clear();
     }
 
     return app.exec();
