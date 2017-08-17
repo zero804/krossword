@@ -32,11 +32,9 @@ CrosswordPreviewWidget::CrosswordPreviewWidget(QWidget* parent)
 void CrosswordPreviewWidget::showPreview(const QString& fileName,
         const QString& mimeType)
 {
-    KFileItem crossword(QUrl::fromLocalFile(fileName), mimeType, KFileItem::Unknown);
-    m_previewJob = new KIO::PreviewJob(KFileItemList() << crossword,
-                                       m_previewSize.width(), m_previewSize.height(),
-                                       0, 1, false, true, 0);
-    m_previewJob->setAutoDelete(true);
+    KFileItem crossword(QUrl::fromLocalFile(fileName), mimeType);
+    QStringList plugin("crosswordthumbnail");
+    m_previewJob = new KIO::PreviewJob(KFileItemList() << crossword, QSize(m_previewSize.width(), m_previewSize.height()), &plugin);
     connect(m_previewJob, SIGNAL(gotPreview(KFileItem, QPixmap)),
             this, SLOT(previewJobGotPreview(KFileItem, QPixmap)));
     connect(m_previewJob, SIGNAL(failed(KFileItem)),

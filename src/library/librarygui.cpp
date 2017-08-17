@@ -170,7 +170,7 @@ void LibraryGui::downloadPreviewJobGotPreview(const KFileItem& fi, const QPixmap
 
 void LibraryGui::downloadPreviewJobFailed(const KFileItem& fi)
 {
-    qDebug() << "Preview job failed:" << fi.url().url(QUrl::PreferLocalFile);
+    qDebug() << "Preview job failed for file" << fi.url().url(QUrl::PreferLocalFile);
 
     if (m_downloadCrosswordsDlg && ui_download.preview) {
         ui_download.preview->setText(i18n("Failed")); // improve the message
@@ -245,11 +245,10 @@ void LibraryGui::downloadCurrentCrosswordChanged(QListWidgetItem* current, QList
     ui_download.preview->setEnabled(false);
     ui_download.preview->setText(i18n("Loading..."));
 
-    QString url = current->data(Qt::UserRole).toString();
-    KFileItem crossword(QUrl::fromLocalFile(url), "application/x-acrosslite-puz", KFileItem::Unknown);
+    KFileItem crossword(current->data(Qt::UserRole).toUrl(), "application/x-acrosslite-puz");
 
-    m_downloadPreviewJob = new KIO::PreviewJob(KFileItemList() << crossword, 256, 256, 0, 1, false, true, 0);
-    m_downloadPreviewJob->setAutoDelete(true);
+    QStringList plugin("crosswordthumbnail");
+    m_downloadPreviewJob = new KIO::PreviewJob(KFileItemList() << crossword, QSize(256, 256), &plugin);
 
     connect(m_downloadPreviewJob, SIGNAL(gotPreview(KFileItem, QPixmap)), this, SLOT(downloadPreviewJobGotPreview(KFileItem, QPixmap)));
     connect(m_downloadPreviewJob, SIGNAL(failed(KFileItem)), this, SLOT(downloadPreviewJobFailed(KFileItem)));

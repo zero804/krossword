@@ -130,13 +130,13 @@ void LibraryManager::loadThumbnailsSlot(const QString &path)
         if(fileIndex.data(QFileSystemModel::FilePathRole).toString().startsWith(path + "/")) {
             QUrl url = fileIndex.data(QFileSystemModel::FilePathRole).toUrl();
             url.setScheme("file");
-            fileItemList.append(KFileItem(KFileItem::Unknown, KFileItem::Unknown, url, true));
+            fileItemList.append(KFileItem(url)); //fileItemList.append(KFileItem(KFileItem::Unknown, KFileItem::Unknown, url, true));
         }
     }
 
-    if(fileItemList.count() != 0) {
-        m_previewJob = new KIO::PreviewJob(fileItemList, 64, 64, 0, 1, false, true, 0);
-        m_previewJob->setAutoDelete(true);
+    if (fileItemList.count() != 0) {
+        QStringList plugin("crosswordthumbnail");
+        m_previewJob = new KIO::PreviewJob(fileItemList, QSize(64, 64), &plugin);
         connect(m_previewJob, SIGNAL(gotPreview(KFileItem, QPixmap)), this, SLOT(previewJobGotPreview(KFileItem, QPixmap)));
         connect(m_previewJob, SIGNAL(failed(KFileItem)), this, SLOT(previewJobFailed(KFileItem)));
         m_previewJob->start();
@@ -172,7 +172,7 @@ void LibraryManager::previewJobGotPreview(const KFileItem &fi, const QPixmap &pi
 
 void LibraryManager::previewJobFailed(const KFileItem &fi)
 {
-    qDebug() << "Preview job failed for file" << fi.url();
+    qDebug() << "Preview job failed for file" << fi.url().url(QUrl::PreferLocalFile);
 }
 
 bool LibraryManager::isInLibrary(const QString &path) const
