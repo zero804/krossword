@@ -74,7 +74,7 @@ public:
      * @param folder the subfolder name where to copy it
      * @return E_ERROR_TYPE::Succeeded (all good), E_ERROR_TYPE::ReadError (bad resource), E_ERROR_TYPE::WriteError(cannot write there)
      */
-    E_ERROR_TYPE addCrossword(const QUrl &url, QString &outAddedCrosswordFilename, const QString &folder = QString());
+    E_ERROR_TYPE addCrossword(const QUrl &url, QString &outCrosswordUrl, const QString &folder = QString());
 
     /**
      * @brief Removes crosswords and folders

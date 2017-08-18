@@ -26,7 +26,7 @@
 
 #include <klocalizedstring.h> // temporary for i18nc
 
-QByteArray calculate_file_hash(const QString& url)
+QByteArray computeFileHash(const QString& url)
 {
     QCryptographicHash function(QCryptographicHash::Md5);
     QFile f(url);
@@ -98,7 +98,6 @@ QVariant LibraryManager::data(const QModelIndex &index, int role) const
 void LibraryManager::onDirectoryLoaded(const QString &path)
 {
     Q_UNUSED(path);
-
     m_function();
 }
 
@@ -109,14 +108,12 @@ void LibraryManager::setOnDirectoryLoadedFunction(const std::function<void(void)
     }
 
     m_function = func;
-
     connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(onDirectoryLoaded(QString)));
 }
 
 void LibraryManager::clearOnDirectoryLoadedFunction()
 {
     m_function = nullptr;
-
     disconnect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(onDirectoryLoaded(QString)));
 }
 
@@ -127,15 +124,15 @@ void LibraryManager::loadThumbnailsSlot(const QString &path)
     QModelIndex fileIndex;
     KFileItemList fileItemList;
     foreach (fileIndex, fileIndexList) {
-        if(fileIndex.data(QFileSystemModel::FilePathRole).toString().startsWith(path + "/")) {
+        if (fileIndex.data(QFileSystemModel::FilePathRole).toString().startsWith(path + "/")) {
             QUrl url = fileIndex.data(QFileSystemModel::FilePathRole).toUrl();
             url.setScheme("file");
-            fileItemList.append(KFileItem(url)); //fileItemList.append(KFileItem(KFileItem::Unknown, KFileItem::Unknown, url, true));
+            fileItemList.append(KFileItem(url));
         }
     }
 
-    if (fileItemList.count() != 0) {
-        QStringList plugin("crosswordthumbnail");
+    if (!fileItemList.empty()) {
+        QStringList plugin("crosswordthumbnail");     
         m_previewJob = new KIO::PreviewJob(fileItemList, QSize(64, 64), &plugin);
         connect(m_previewJob, SIGNAL(gotPreview(KFileItem, QPixmap)), this, SLOT(previewJobGotPreview(KFileItem, QPixmap)));
         connect(m_previewJob, SIGNAL(failed(KFileItem)), this, SLOT(previewJobFailed(KFileItem)));
@@ -150,7 +147,7 @@ void LibraryManager::computeCrosswordsHashSlot(const QString& path)
     QFileInfoList crosswordsPath = getCrosswordsFilePath();
 
     foreach(QFileInfo path, crosswordsPath) {
-        QByteArray hash = calculate_file_hash(path.filePath());
+        QByteArray hash = computeFileHash(path.filePath());
 
         m_crosswordsHash.insert(path.fileName(), hash);
     }
@@ -177,14 +174,7 @@ void LibraryManager::previewJobFailed(const KFileItem &fi)
 
 bool LibraryManager::isInLibrary(const QString &path) const
 {
-    bool found = false;
-
-    QByteArray fileHash = calculate_file_hash(path);
-
-    if(m_crosswordsHash.values().contains(fileHash))
-        found = true;
-
-    return found;
+    return m_crosswordsHash.values().contains(computeFileHash(path));
 }
 
 bool LibraryManager::newFolder(const QString &folderName)
@@ -198,13 +188,17 @@ bool LibraryManager::newFolder(const QString &folderName)
     }
 }
 
-LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QString &outAddedCrosswordFilename, const QString &folder)
+LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QString &outCrosswordUrl, const QString &folder)
 {
-    QString libraryDir;
+    QString filePath;
     if (folder.isEmpty() || !folder.startsWith(rootDirectory().path())) {
-        libraryDir = rootDirectory().path();
+        filePath = rootDirectory().path();
     } else {
-        libraryDir = folder;
+        filePath = folder;
+    }
+
+    if (!filePath.endsWith(QDir::separator())) {
+        filePath.append(QDir::separator());
     }
 
     Crossword::KrossWord krossWord;
@@ -212,33 +206,32 @@ LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QStri
 
     if (!krossWord.read(url, &errorString/*, this*/)) {
         qDebug() << "addCrossword() reading error:" << errorString;
-        outAddedCrosswordFilename = QString();
+        outCrosswordUrl = QString();
         return E_ERROR_TYPE::ReadError;
     } else {
-        QString name = krossWord.title().trimmed();
-        if (name.isEmpty())
-            name = "untitled";
+        QString fileName = krossWord.title().trimmed();
+        if (fileName.isEmpty()) {
+            fileName = "untitled";
+        }
 
-        if (!libraryDir.endsWith(QDir::separator()))
-            libraryDir.append(QDir::separator());
+        fileName.remove("#");
+        fileName.remove("?");
 
-        name.remove("#");
-        name.prepend(libraryDir);
-
-        QString tmpFileName = name;
+        QString tmpFileName = fileName;
         int i = 1;
-        while (QFile::exists(tmpFileName + ".kwpz"))
-            tmpFileName = name + '_' + QString::number(i++);
+        while (QFile::exists(filePath + tmpFileName + ".kwpz")) {
+            tmpFileName = fileName + '_' + QString::number(i++);
+        }
 
-        QString saveFileName = tmpFileName + ".kwpz";
+        const QString fileUrl = filePath + tmpFileName + ".kwpz";
 
-        if (!krossWord.write(saveFileName, &errorString, Crossword::KrossWord::Normal, Crossword::KrossWord::KrossWordPuzzleCompressedXmlFile)) {
+        if (!krossWord.write(fileUrl, &errorString, Crossword::KrossWord::Normal, Crossword::KrossWord::KrossWordPuzzleCompressedXmlFile)) {
             qDebug() << "addCrossword() writing error:" << errorString;
-            outAddedCrosswordFilename = QString();
+            outCrosswordUrl = QString();
             return E_ERROR_TYPE::WriteError;
         } else {
-            outAddedCrosswordFilename = saveFileName;
-            m_crosswordsHash.insert(QUrl::fromLocalFile(saveFileName).path(), calculate_file_hash(saveFileName));
+            outCrosswordUrl = fileUrl;
+            m_crosswordsHash.insert(QUrl::fromLocalFile(fileUrl).path(), computeFileHash(fileUrl));
             return E_ERROR_TYPE::Succeeded;
         }
     }

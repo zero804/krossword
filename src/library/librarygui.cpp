@@ -135,13 +135,12 @@ LibraryManager* LibraryGui::libraryManager() const
 
 void LibraryGui::libraryAddCrossword(const QUrl &url, const QString &folder)
 {
-    QUrl crossword = url;
-    QString addedCrosswordFileName;
-    LibraryManager::E_ERROR_TYPE errorCode = m_libraryModel->addCrossword(crossword, addedCrosswordFileName, folder);
+    QString crosswordUrl;
+    LibraryManager::E_ERROR_TYPE errorCode = m_libraryModel->addCrossword(url, crosswordUrl, folder);
 
     if (errorCode == LibraryManager::E_ERROR_TYPE::Succeeded) {
         // Select new crossword in the tree view
-        QModelIndex index = m_libraryModel->index(addedCrosswordFileName);
+        QModelIndex index = m_libraryModel->index(crosswordUrl);
         if (index.isValid()) {
             m_libraryTree->setCurrentIndex(index);
             m_libraryTree->scrollTo(index);
@@ -425,7 +424,7 @@ void LibraryGui::libraryDownloadSlot()
             QString url = item.data(Qt::UserRole).toString();
             if (!url.isEmpty()) {
                 QString downloadDir = directoriesIndex.value(ui_download.targetDirectory->currentIndex());
-                libraryAddCrossword(QUrl::fromLocalFile(url), downloadDir);
+                libraryAddCrossword(QUrl(url), downloadDir);
             }
         }
     }
