@@ -81,9 +81,12 @@ void KrossWordHeaderItem::paint(QPainter* painter,
 void KrossWordHeaderItem::updateTheme(KrossWord* krossWord)
 {
     if (m_titleItem) {
+        //m_titleItem->update();
         updateGraphicsEffect(krossWord, static_cast< QGraphicsDropShadowEffect* >(m_titleItem->graphicsEffect()));
     }
+
     if (m_authorsItem) {
+        //m_authorsItem->update();
         updateGraphicsEffect(krossWord, static_cast< QGraphicsDropShadowEffect* >(m_authorsItem->graphicsEffect()));
     }
 }
@@ -124,6 +127,7 @@ void KrossWordHeaderItem::setContent(KrossWord *krossWord)
         font.setBold(true);
         font.setPointSize(20);
         m_titleItem->setFont(font);
+        //m_titleItem->setDefaultTextColor(krossWord->theme()->fontColor());
         m_titleItem->setTextWidth(krossWord->boundingRect().width());
 
         m_titleItem->setPlainText(krossWord->title());

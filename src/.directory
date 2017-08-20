@@ -1,7 +1,5 @@
 [Dolphin]
 AdditionalInfo=35
-GroupedSorting=true
-SortFoldersFirst=false
 SortRole=type
-Timestamp=2014,3,13,19,56,52
-Version=3
+Timestamp=2017,8,20,16,53,23
+Version=4
