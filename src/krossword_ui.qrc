@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/kxmlgui5/krossword">
+        <file>krossword_crossword_ui.rc</file>
+        <file>krossword_library_ui.rc</file>
+        <file>krosswordui.rc</file>
+    </qresource>
+    <qresource prefix="/kconfig">
+        <file>krossword.knsrc</file>
+    </qresource>
+</RCC>

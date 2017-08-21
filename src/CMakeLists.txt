@@ -46,6 +46,8 @@ ki18n_wrap_ui(krossword_SRCS
 
 kconfig_add_kcfg_files(krossword_SRCS settings.kcfgc)
 
+qt5_add_resources(krossword_SRCS krossword_ui.qrc)
+
 add_executable(krossword ${krossword_SRCS})
 
 target_link_libraries(krossword
@@ -60,8 +62,3 @@ install(TARGETS krossword ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES krossword.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES krossword.kcfg  DESTINATION  ${KCFG_INSTALL_DIR})
-install(FILES krosswordui.rc
-               krossword_library_ui.rc
-               krossword_crossword_ui.rc
-         DESTINATION ${DATA_INSTALL_DIR}/krossword)
-install(FILES krossword.knsrc DESTINATION ${CONFIG_INSTALL_DIR})

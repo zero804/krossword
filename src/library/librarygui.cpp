@@ -83,7 +83,7 @@ LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::Wind
     setCentralWidget(m_libraryTree);
 
     setupActions();
-    setupGUI(ToolBar | /*Keys | */Save | Create, "krossword/krossword_library_ui.rc");
+    setupGUI(ToolBar | /*Keys | */Save | Create, "krossword_library_ui.rc");
     menuBar()->hide(); // because it will be exposed as needed in the mainwindow
 
     connect(m_libraryTree, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(libraryItemDoubleClicked(QModelIndex)));
