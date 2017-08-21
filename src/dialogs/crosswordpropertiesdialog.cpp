@@ -292,7 +292,7 @@ int CrosswordPropertiesDialog::rows() const
 }
 
 KrossWord::ResizeAnchor CrosswordPropertiesDialog::anchor() const {
-    return m_anchorIdToAnchor[ui_properties.buttonGroupAnchor->selected()];
+    return m_anchorIdToAnchor[ui_properties.buttonGroup->checkedId()];
 }
 
 QString CrosswordPropertiesDialog::title() const {
