@@ -31,7 +31,6 @@
 #include <QDebug>
 
 #include <KMessageBox>
-#include <KFileDialog>
 #include <KIO/CopyJob>
 #include <KActionCollection>
 #include <KIO/PreviewJob>

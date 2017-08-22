@@ -157,7 +157,7 @@ void DictionaryDialog::getWordsFromDictionaryClicked()
     else if (QDir("/usr/dict").exists())
         startDir = QUrl::fromLocalFile("/usr/dict");
     else
-        startDir = QUrl::fromLocalFile("kfiledialog:///addDictionary");
+        startDir = QUrl();
 
     QString fileName = QFileDialog::getOpenFileName(this, QString(), startDir.toString());
     if (fileName.isEmpty())

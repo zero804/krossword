@@ -699,7 +699,7 @@ bool CrossWordXmlGuiWindow::loadFile(const QUrl &url, KrossWord::FileFormat file
     if (url.isEmpty()) {
         resultUrl = QFileDialog::getOpenFileUrl(this,
                                                 QString(),
-                                                QUrl::fromLocalFile("kfiledialog:///loadCrossword"),
+                                                QUrl(),
                                                 "application/x-krosswordpuzzle "
                                                 "application/x-krosswordpuzzle-compressed "
                                                 "application/x-acrosslite-puz");

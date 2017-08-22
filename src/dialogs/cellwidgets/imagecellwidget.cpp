@@ -21,7 +21,6 @@
 
 #include "../../krossword.h"
 #include "../../cells/imagecell.h"
-#include <KFileDialog>
 #include <QFileDialog>
 
 ImageCellWidget::ImageCellWidget(ImageCell* imageCell, QWidget* parent)
