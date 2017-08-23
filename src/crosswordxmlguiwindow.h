@@ -261,7 +261,7 @@ public:
     inline bool loadFile(const QString& fileName);
     bool loadFile(const QUrl &url, KrossWord::FileFormat fileFormat = KrossWord::DetermineByFileName, bool loadCrashedFile = false);
     bool save();
-    bool saveAs();
+    bool saveAs(const Crossword::KrossWord::WriteMode writeMode);
     bool closeFile();
     bool writeTo(const QString &fileName, KrossWord::WriteMode writeMode = KrossWord::Normal, bool saveUndoStack = false);
     bool isModified() const;
@@ -283,6 +283,7 @@ public slots:
     // Game actions
     void saveSlot();
     void saveAsSlot();
+    void saveAsTemplateSlot();
     void printSlot();
     void printPreviewSlot();
     void closeSlot();

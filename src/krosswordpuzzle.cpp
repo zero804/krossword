@@ -413,6 +413,7 @@ void KrossWordPuzzle::currentTabChanged(int index)
 
         crosswordGameList << m_mainCrossword->action("game_save");
         crosswordGameList << m_mainCrossword->action("game_save_as");
+        crosswordGameList << m_mainCrossword->action("game_save_template_as");
         crosswordGameList << separator;
         crosswordGameList << m_mainCrossword->action("game_print");
         crosswordGameList << m_mainCrossword->action("game_print_preview");

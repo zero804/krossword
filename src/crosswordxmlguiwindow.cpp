@@ -784,57 +784,32 @@ bool CrossWordXmlGuiWindow::save()
     if (m_curFileName.isEmpty() || !QFile::exists(m_curFileName)
             || m_curDocumentOrigin == DocumentDownloaded
             || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
-        return saveAs();
-    } else
+        return saveAs(KrossWord::Normal);
+    } else {
         return writeTo(m_curFileName, KrossWord::Normal, m_undoStackLoaded);
+    }
 }
 
-bool CrossWordXmlGuiWindow::saveAs()
+bool CrossWordXmlGuiWindow::saveAs(const KrossWord::WriteMode writeMode)
 {
     QUrl startDir;
-    if (m_curDocumentOrigin == DocumentDownloaded
-            || m_curDocumentOrigin == DocumentRestoredAfterCrash)
+    if (m_curDocumentOrigin == DocumentDownloaded || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
         startDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
-    else
+    } else {
         startDir = QUrl::fromLocalFile(m_curFileName);
+    }
 
-    QCheckBox *chkSaveUndoStack = new QCheckBox(i18n("Save &Edit History"));
-    chkSaveUndoStack->setChecked(m_undoStackLoaded);
-
-    QCheckBox *chkSaveAsTemplate = new QCheckBox(i18n("Save As &Template"));
-    chkSaveAsTemplate->setChecked(false);
-    chkSaveAsTemplate->setToolTip(i18n("Save without correct answers, clue texts, images"));
-
-    // Custom widgets for the save as file dialog
-    QWidget *w = new QWidget;
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(chkSaveUndoStack);
-    layout->addWidget(chkSaveAsTemplate);
-    w->setLayout(layout);
-
-    QString fileName;
-    QPointer<KFileDialog> fileDlg = new KFileDialog(startDir,
-            "application/x-krosswordpuzzle "
-            "application/x-krosswordpuzzle-compressed "
-            "application/x-acrosslite-puz", this, w);
-    fileDlg->setMode(KFile::File);
-    fileDlg->setOperationMode(KFileDialog::Saving);
-    fileDlg->setConfirmOverwrite(true);
-
-    if (fileDlg->exec() == KFileDialog::Accepted)
-        fileName = fileDlg->selectedFile();
-    bool save_as_template = chkSaveAsTemplate->isChecked();
-    bool save_undo_stack = chkSaveUndoStack->isChecked();
-    delete fileDlg;
+    QString fileName = QFileDialog::getSaveFileName(this, QString(), startDir.path(), i18n("Crosswords (*.kwp *.kwpz *.puz)"));
 
     if (!fileName.isEmpty()) {
         // Add default extension if non was selected
-        if (fileName.indexOf(QRegExp("\\.(kwp|kwpz|puz)$", Qt::CaseInsensitive)) == -1)
+        if (fileName.indexOf(QRegExp("\\.(kwp|kwpz|puz)$", Qt::CaseInsensitive)) == -1) {
             fileName += ".kwpz";
+        }
+        return writeTo(fileName, writeMode, true/*save_undo_stack*/); //CHECK: an option to choose if save_undo_stack?
+    }
 
-        return writeTo(fileName, save_as_template ? KrossWord::Template : KrossWord::Normal, save_undo_stack);
-    } else
-        return false;
+    return false;
 }
 
 bool CrossWordXmlGuiWindow::closeFile()
@@ -969,7 +944,12 @@ void CrossWordXmlGuiWindow::saveSlot()
 
 void CrossWordXmlGuiWindow::saveAsSlot()
 {
-    saveAs();
+    saveAs(KrossWord::Normal);
+}
+
+void CrossWordXmlGuiWindow::saveAsTemplateSlot()
+{
+    saveAs(KrossWord::Template);
 }
 
 void CrossWordXmlGuiWindow::printSlot()
@@ -1292,6 +1272,17 @@ void CrossWordXmlGuiWindow::setupActions()
     QAction *saveAsAction = KStandardAction::saveAs(this, SLOT(saveAsSlot()), ac);
     saveAsAction->setToolTip(i18n("Choose a filename to save the crossword with solved letters"));
     ac->addAction("game_save_as", saveAsAction);
+
+    /*
+    QAction *saveAsTemplateAction = KStandardAction::saveAs(this, SLOT(saveAsTemplateSlot()), ac);
+    saveAsTemplateAction->setToolTip(i18n("Choose a filename to save the crossword as a template"));
+    ac->addAction("game_save_template_as", saveAsTemplateAction);
+    */
+
+    QAction *saveAsTemplateAction = new QAction(QIcon::fromTheme(QStringLiteral("document-save-as")), i18n("Save as &template..."), ac);
+    saveAsTemplateAction->setToolTip(i18n("Choose a filename to save the crossword as a template"));
+    ac->addAction("game_save_template_as", saveAsTemplateAction);
+    connect(saveAsTemplateAction, SIGNAL(triggered()), this, SLOT(saveAsTemplateSlot()));
 
     // Print and print preview
     QAction *printAction = KStandardAction::print(this, SLOT(printSlot()), 0);
