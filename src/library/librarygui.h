@@ -28,6 +28,7 @@
 
 #include "library/librarymanager.h"
 
+#include <QTemporaryFile>
 #include <KXmlGuiWindow>
 
 namespace KIO
@@ -81,6 +82,8 @@ protected slots:
     void downloadProviderChanged(int index);
     void downloadCurrentCrosswordChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
+    void downloadCrosswordResult(KJob *job);
+
     void libraryOpenItem(const QModelIndex &index);
     void libraryItemDoubleClicked(const QModelIndex &index);
     void libraryCurrentChanged(const QModelIndex &current, const QModelIndex &previous);
@@ -104,8 +107,8 @@ private:
     LibraryManager *m_libraryModel;
     QModelIndex m_libraryPopupIndex;
 
+    QScopedPointer<QTemporaryFile> m_downloadedCrossword;
     KIO::PreviewJob *m_downloadPreviewJob;
-
     QDialog *m_downloadCrosswordsDlg;
 
     void setupActions();

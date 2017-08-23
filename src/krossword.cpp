@@ -958,26 +958,12 @@ bool KrossWord::write(const QString& fileName, QString* errorString,
 bool KrossWord::read(const QUrl &url, QString *errorString, QWidget *mainWindow,
                      FileFormat fileFormat, QByteArray *undoData)
 {
-    bool removeTempFile;
-    QString fileName;
-
-    if (url.isLocalFile()) {
-        fileName = url.path();
-        removeTempFile = false;
-    } else if (KIO::NetAccess::download(url, fileName, mainWindow)) {
-        removeTempFile = true;
-    } else {
-        *errorString = i18n("Error while downloading from url: %1", KIO::NetAccess::lastErrorString());
-        return false;
-    }
-
-    QFile file(fileName);
+    QFile file(url.path());
     if (!file.open(QIODevice::ReadOnly)) {
-        if (errorString != NULL)
+        if (errorString != NULL) {
             *errorString = file.errorString();
+        }
         qWarning() << file.errorString();
-        if (removeTempFile)
-            KIO::NetAccess::removeTempFile(fileName);
         return false;
     }
 
@@ -987,7 +973,7 @@ bool KrossWord::read(const QUrl &url, QString *errorString, QWidget *mainWindow,
 
     bool readOk = false, fileFormatDeterminationFailed = false;
     if (fileFormat == DetermineByFileName) {
-        QString extension = QFileInfo(fileName).suffix();
+        QString extension = QFileInfo(url.path()).suffix();
         if (extension == "puz")
             fileFormat = AcrossLitePuzFile;
         else if (extension == "xml" || extension == "kwp")
@@ -1039,8 +1025,6 @@ bool KrossWord::read(const QUrl &url, QString *errorString, QWidget *mainWindow,
     blockSignals(wasBlocking);
     emit cluesAdded(clues());   // All clues are new
 
-    if (removeTempFile)
-        KIO::NetAccess::removeTempFile(fileName);
     return readOk;
 }
 
