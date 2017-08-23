@@ -26,7 +26,6 @@
 
 #include <QTimer>
 #include <KStandardDirs>
-#include <KFileDialog>
 #include <QSqlRecord>
 #include <QSqlError>
 #include <QPointer>
@@ -190,12 +189,10 @@ void DictionaryDialog::addDictionaryFromLibraryClicked()
 
 void DictionaryDialog::addDictionaryFromCrosswordsClicked()
 {
-    QStringList fileNames = KFileDialog::getOpenFileNames(QUrl::fromLocalFile(""),
-                            "application/x-krosswordpuzzle "
-                            "application/x-krosswordpuzzle-compressed "
-                            "application/x-acrosslite-puz", this);
-    if (fileNames.isEmpty())
+    QStringList fileNames = QFileDialog::getOpenFileNames(this, "", "", i18n("Crosswords (*.kwp *.kwpz *.puz)")); //CHECK: to test
+    if (fileNames.isEmpty()) {
         return;
+    }
 
     int i = m_dictionary->addEntriesFromCrosswords(fileNames, this);
     showInfoMessage(i18n("%1 entries added from %2 crosswords", i, fileNames.count()));
@@ -231,24 +228,17 @@ void DictionaryDialog::clearClicked()
 
 void DictionaryDialog::exportToCsvClicked()
 {
-    QString fileName;
-    QPointer<KFileDialog> fileDlg = new KFileDialog(QUrl::fromLocalFile(""), QString(), this);
-    fileDlg->setWindowTitle(i18n("Export To CSV"));
-    fileDlg->setMode(KFile::File);
-    fileDlg->setOperationMode(KFileDialog::Saving);
-    fileDlg->setConfirmOverwrite(true);
-    if (fileDlg->exec() == KFileDialog::Accepted)
-        fileName = fileDlg->selectedFile();
-    delete fileDlg;
+    QString fileName = QFileDialog::getSaveFileName(this, i18n("Export To CSV"), ""); //CHECK: to test
 
     if (fileName.isEmpty())
         return;
 
     bool result = m_dictionary->exportToCsv(fileName);
-    if (!result)
+    if (!result) {
         showInfoMessage(i18n("There was an error while exporting to '%1'", fileName));
-    else
+    } else {
         showInfoMessage(i18n("Export to '%1' was successful", fileName));
+    }
 }
 
 void DictionaryDialog::importFromCsvClicked()

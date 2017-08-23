@@ -45,7 +45,6 @@
 #include <KLocalizedString>
 #include <KStandardGuiItem>
 #include <KMessageBox>
-#include <KFileDialog>
 #include <KRandom>
 #include <QTemporaryFile>
 #include <KXMLGUIFactory>
