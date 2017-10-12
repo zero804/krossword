@@ -42,7 +42,8 @@ ki18n_wrap_ui(krossword_SRCS
     clue_number_mapping.ui
     download.ui
     configure_details.ui
-    move_cells.ui)
+    move_cells.ui
+    dialogs/printpreviewdialog.ui)
 
 kconfig_add_kcfg_files(krossword_SRCS settings.kcfgc)
 
@@ -52,7 +53,9 @@ add_executable(krossword ${krossword_SRCS})
 
 target_link_libraries(krossword
     Qt5::Widgets Qt5::Sql Qt5::PrintSupport
-    KF5::Archive KF5::XmlGui KF5::I18n KF5::Completion KF5::KIOCore KF5::KIOWidgets KF5::KIOFileWidgets KF5::JobWidgets KF5::KIONTLM KF5::IconThemes KF5::KDELibs4Support
+    KF5::Archive KF5::XmlGui KF5::I18n KF5::Completion KF5::KIOCore
+    KF5::KIOWidgets KF5::KIOFileWidgets KF5::JobWidgets KF5::KIONTLM
+    KF5::IconThemes KF5::TextWidgets KF5::KDELibs4Support
     KF5KDEGames)
 
 install(TARGETS krossword ${INSTALL_TARGETS_DEFAULT_ARGS})

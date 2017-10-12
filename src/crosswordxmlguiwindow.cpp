@@ -35,6 +35,7 @@
 #include "dialogs/statisticsdialog.h"
 #include "dialogs/dictionarydialog.h"
 #include "dialogs/currentcellwidget.h"
+//CHECK: #include "dialogs/printpreviewdialog.h"
 
 #include <KToggleAction>
 #include <KStandardGameAction>
@@ -48,12 +49,10 @@
 #include <KRandom>
 #include <QTemporaryFile>
 #include <KXMLGUIFactory>
-#include <KStatusBar>
 #include <KCharSelect>
 
 #include <KCursor>
-#include <KPrintPreview>
-#include <kdeprintdialog.h>
+#include <QPrintPreviewDialog> //CHECK: use #include <QPrintPreviewWidget>
 
 #include <KgThemeProvider>
 
@@ -71,6 +70,7 @@
 #include <QDesktopWidget>
 #include <QStandardPaths>
 #include <QFileDialog>
+#include <QStatusBar>
 
 ClueListView::ClueListView(QWidget* parent) : QTreeView(parent), m_scrollAnimation(0)
 {
@@ -958,35 +958,43 @@ void CrossWordXmlGuiWindow::printSlot()
     QPrinter printer;
     setupPrinter(printer);
 
+    QPrintDialog *printDialog = new QPrintDialog(&printer, this);
+
     QWidget *printCrossWord = new QWidget;
     ui_print_crossword.setupUi(printCrossWord);
     ui_print_crossword.emptyCellColor->setColor(Qt::black);
+    printDialog->setOptionTabs(QList<QWidget*>() << printCrossWord);
 
-    QPrintDialog *dlg = KdePrint::createPrintDialog(&printer, QList<QWidget*>() << printCrossWord, this);
     PdfDocument document(krossWord(), &printer);
-    dlg->setMinMax(1, document.pages());
-    dlg->setFromTo(1, document.pages());
+    printDialog->setMinMax(1, document.pages());
+    printDialog->setFromTo(1, document.pages());
 
-    if (dlg->exec()) {
+    if (printDialog->exec()) {
         krossWord()->setEmptyCellColorForPrinting(ui_print_crossword.emptyCellColor->color());
-        document.print(dlg->fromPage(), dlg->toPage());
+        //document.print(dlg->fromPage(), dlg->toPage());
+        doPrintSlot(&printer);
     }
 
-    delete dlg;
+    delete printDialog;
 }
 
 void CrossWordXmlGuiWindow::printPreviewSlot()
 {
     Q_ASSERT(m_view);
 
-    QPrinter printer;
-    setupPrinter(printer);
-    KPrintPreview preview(&printer);
+    QPrintPreviewDialog dialog(this);
+    connect(&dialog, SIGNAL(paintRequested(QPrinter *)), SLOT(doPrintSlot(QPrinter *)));
+    dialog.exec();
 
-    PdfDocument document(krossWord(), &printer);
+    //CHECK: use a customized dialog...
+    //PrintPreviewDialog *dialog = new PrintPreviewDialog(this);
+    //dialog->setVisible(true);
+}
+
+void CrossWordXmlGuiWindow::doPrintSlot(QPrinter *printer)
+{
+    PdfDocument document(krossWord(), printer);
     document.print();
-
-    preview.exec();
 }
 
 void CrossWordXmlGuiWindow::closeSlot()
@@ -1226,7 +1234,7 @@ void CrossWordXmlGuiWindow::editPasteSpecialCharacter()
     const QToolButton *button = qobject_cast<QToolButton*>(sender());
     Q_ASSERT(button);
 
-    //const QString text = KLocale::global()->removeAcceleratorMarker(button->text());
+    //const QString text = KLocalizedString::removeAcceleratorMarker(button->text());
     const QString text = KLocalizedString::removeAcceleratorMarker(button->text()); //CHECK
     Q_ASSERT(!text.isEmpty());
 

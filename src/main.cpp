@@ -25,7 +25,7 @@
 
 #include <KAboutData>
 #include <KDE/KLocale>
-#include <KGlobal>
+//#include <KGlobal>
 
 static const char description[] =
     I18N_NOOP("A crossword puzzle game and editor for KDE.\nBased on KrossWordPuzzle.");

@@ -398,6 +398,8 @@ protected slots:
 private slots:
     void addAnimation();
 
+    void doPrintSlot(QPrinter *printer); //CHECK: better name
+
 private:
     KrossWordPuzzleView *createKrossWordPuzzleView();
     void setActionVisibility();

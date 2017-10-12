@@ -10,4 +10,5 @@ set( krossword_SRCS ${krossword_SRCS}
    dialogs/currentcellwidget.cpp
    dialogs/statisticsdialog.cpp
    dialogs/dictionarydialog.cpp
+   dialogs/printpreviewdialog.cpp
 )
