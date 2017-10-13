@@ -1,4 +1,7 @@
 == Krossword ==
+Version 0.? - ? October 17:
+    - Qt5/KF5 porting.
+    - ?
 
 Version 0.18.2 alpha 3 - 7 February 15:
     - Various fixes to the dictionary feature (still not reliable).
