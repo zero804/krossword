@@ -36,7 +36,7 @@ class CreateNewCrosswordDialog : public QDialog
 
 public:
     /** Constructs a new dialog. */
-    explicit CreateNewCrosswordDialog(QWidget* parent = 0, Qt::WFlags flags = 0);
+    explicit CreateNewCrosswordDialog(QWidget* parent = 0, Qt::WindowFlags flags = 0);
     ~CreateNewCrosswordDialog();
 
     /** Returns the current crossword type info. */

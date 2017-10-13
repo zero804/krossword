@@ -20,7 +20,7 @@
 #include "crosswordtypeconfiguredetailsdialog.h"
 #include "cells/krosswordcell.h"
 
-CrosswordTypeConfigureDetailsDialog::CrosswordTypeConfigureDetailsDialog(QWidget* parent, CrosswordTypeInfo crosswordTypeInfo, Qt::WFlags flags)
+CrosswordTypeConfigureDetailsDialog::CrosswordTypeConfigureDetailsDialog(QWidget* parent, CrosswordTypeInfo crosswordTypeInfo, Qt::WindowFlags flags)
     :QDialog(parent, flags)
 {
     setWindowTitle(i18n("Detailed Configuration"));

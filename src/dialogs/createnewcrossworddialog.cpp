@@ -24,13 +24,13 @@
 #include <KMessageBox>
 
 #include <QStandardItemModel>
-#include <KStandardDirs>
+//#include <KStandardDirs>
 #include <templatemodel.h>
 #include <io/krosswordxmlreader.h>
 #include <QTimer>
 #include <QStandardPaths>
 
-CreateNewCrosswordDialog::CreateNewCrosswordDialog(QWidget* parent, Qt::WFlags flags): QDialog(parent, flags)
+CreateNewCrosswordDialog::CreateNewCrosswordDialog(QWidget* parent, Qt::WindowFlags flags): QDialog(parent, flags)
 {
     setWindowTitle(i18n("Create New Crossword"));
     ui_create_new.setupUi(this);

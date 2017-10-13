@@ -23,7 +23,7 @@
 #include <KColorScheme>
 
 
-ConvertCrosswordDialog::ConvertCrosswordDialog(KrossWord* krossWord, QWidget* parent, Qt::WFlags flags)
+ConvertCrosswordDialog::ConvertCrosswordDialog(KrossWord* krossWord, QWidget* parent, Qt::WindowFlags flags)
     : QDialog(parent, flags), m_krossWord(krossWord)
 {
     setWindowTitle(i18n("Convert Crossword Type To"));

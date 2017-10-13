@@ -25,7 +25,7 @@
 #include <QTextOption>
 #include <QStyleOption>
 #include <QPainter>
-#include <KIO/NetAccess>
+//#include <KIO/NetAccess>
 
 namespace Crossword
 {
@@ -43,6 +43,8 @@ ImageCell::ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
 
 void ImageCell::setUrl(const QUrl &url)
 {
+    //CHECK: external url really needed?
+    /*
     if (!url.isLocalFile()) {
         QString fileName;
         if (KIO::NetAccess::download(url, fileName, 0)) {
@@ -52,7 +54,9 @@ void ImageCell::setUrl(const QUrl &url)
     } else {
         m_image = QImage(url.url(QUrl::PreferLocalFile));
     }
+    */
 
+    m_image = QImage(url.url(QUrl::PreferLocalFile));
     m_url = url;
 
     clearCache();

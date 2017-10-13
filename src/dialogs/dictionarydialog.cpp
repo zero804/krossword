@@ -25,7 +25,7 @@
 #include <QPropertyAnimation>
 
 #include <QTimer>
-#include <KStandardDirs>
+//#include <KStandardDirs>
 #include <QSqlRecord>
 #include <QSqlError>
 #include <QPointer>

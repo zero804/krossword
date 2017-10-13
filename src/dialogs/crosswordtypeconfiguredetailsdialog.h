@@ -43,7 +43,7 @@ public:
     };
 
     /** Constructs a dialog with the given @p crosswordTypeInfo. */
-    CrosswordTypeConfigureDetailsDialog(QWidget* parent, CrosswordTypeInfo crosswordTypeInfo, Qt::WFlags flags = 0);
+    CrosswordTypeConfigureDetailsDialog(QWidget* parent, CrosswordTypeInfo crosswordTypeInfo, Qt::WindowFlags flags = 0);
 
     /** Returns the current crossword type info. */
     CrosswordTypeInfo crosswordTypeInfo() const {

@@ -68,6 +68,7 @@ void KrossWord::paint(QPainter* painter,
     painter->fillRect(option->rect, Qt::white);
 }
 
+/*
 void KrossWord::resizeTo(const QSizeF& size)
 {
     // TODO When called twice with the same parameter, it will scale twice...
@@ -77,6 +78,7 @@ void KrossWord::resizeTo(const QSizeF& size)
     float zoom = zoomH < zoomV ? zoomH : zoomV;
     scale(zoom, zoom);
 }
+*/
 
 KrossWord::ErrorType KrossWord::insertImage(const KGrid2D::Coord &coord,
         int horizontalCellSpan, int verticalCellSpan, QUrl url,

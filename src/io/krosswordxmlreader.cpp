@@ -358,7 +358,7 @@ void KrossWordXmlReader::readKrossWord(KrossWord *krossWord,
     // Read <undoData>-tag
     if (undoData && isStartElement()
             && name().compare(QLatin1String("undoData"), Qt::CaseInsensitive) == 0) {
-        *undoData = QByteArray::fromBase64(readElementText().toAscii());
+        *undoData = QByteArray::fromBase64(readElementText().toLatin1());
     }
 
     qDebug() << "END";

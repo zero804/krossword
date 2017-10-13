@@ -30,7 +30,7 @@ class CrosswordPropertiesDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit CrosswordPropertiesDialog(KrossWord *krossWord, QWidget* parent = 0, Qt::WFlags flags = 0);
+    explicit CrosswordPropertiesDialog(KrossWord *krossWord, QWidget* parent = 0, Qt::WindowFlags flags = 0);
 
     int columns() const;
     int rows() const;

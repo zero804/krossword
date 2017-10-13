@@ -31,7 +31,7 @@ const QList< QChar > CrosswordPropertiesDialog::ArrowChars = QList<QChar>()
         << QChar(0x2190) << QChar(0x2022) << QChar(0x2192)
         << QChar(0x2199) << QChar(0x2193) << QChar(0x2198);
 
-CrosswordPropertiesDialog::CrosswordPropertiesDialog(KrossWord* krossWord, QWidget* parent, Qt::WFlags flags) : QDialog(parent, flags), m_krossWord(krossWord)
+CrosswordPropertiesDialog::CrosswordPropertiesDialog(KrossWord* krossWord, QWidget* parent, Qt::WindowFlags flags) : QDialog(parent, flags), m_krossWord(krossWord)
 {
     setWindowTitle(i18n("Properties"));
     ui_properties.setupUi(this);

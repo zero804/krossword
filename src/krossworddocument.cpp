@@ -26,7 +26,7 @@
 #include <QPrinter>
 
 #include <QDebug>
-#include <KGlobalSettings>
+//#include <KGlobalSettings>
 #include <QStyleOptionGraphicsItem>
 #include <cmath>
 #include <QFontDatabase>

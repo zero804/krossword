@@ -25,7 +25,7 @@
 #include <QLabel>
 #include <QDialogButtonBox>
 
-#include <KLocale>
+//#include <KLocale>
 #include <QIcon>
 
 StatisticsDialog::StatisticsDialog(KrossWord* krossWord, QWidget* parent)
@@ -102,8 +102,8 @@ void StatisticsDialog::setup()
             layout->addWidget(label(QString::number(stats.maxAnswerLength)), row++, 1);
 
             layout->addWidget(label(i18n("Avg. Answer Length:"), true), row, 0);
-            layout->addWidget(label(KLocale::global()->formatNumber(
-                                        stats.avgAnswerLength, 2)), row++, 1);
+            //layout->addWidget(label(KLocale::global()->formatNumber(stats.avgAnswerLength, 2)), row++, 1);
+            layout->addWidget(label(QLocale().toString(stats.avgAnswerLength, 'g', 2)), row++, 1);
         }
 
         if (stats.letterCellCount > 0) {
@@ -147,8 +147,8 @@ void StatisticsDialog::addStatisticsValue(QGridLayout* layout,
     float percentage = 100.0f * (float)count / (float)totalCount;
 
     QLabel *lblTitle = label(title, true);
-    QLabel *lblValue = label(QString("%1 (%2%)").arg(count)
-                             .arg(KLocale::global()->formatNumber(percentage, 2)));
+    //QLabel *lblValue = label(QString("%1 (%2%)").arg(count).arg(KLocale::global()->formatNumber(percentage, 2)));
+    QLabel *lblValue = label(QString("%1 (%2%)").arg(count).arg(QLocale().toString(percentage, 'g', 2)));
 
     if (!toolTip.isEmpty()) {
         lblTitle->setToolTip(toolTip);

@@ -33,8 +33,8 @@
 #include <qfileinfo.h>
 
 #include <QUrl>
-#include <KMimeType>
-#include <KIO/NetAccess>
+//#include <KMimeType>
+//#include <KIO/NetAccess>
 #include <QIcon>
 #include <kglobalsettings.h>
 
@@ -481,10 +481,10 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
             // Shift from numbers to characters in ASCII table
             if (!letter->correctLetter().isSpace() && !letter->correctLetter().isLetter())
                 conversionInfo.letterEditCorrect.insert(letter,
-                                                        QChar::fromAscii(letter->correctLetter().toAscii() + 17));
+                                                        QChar::fromLatin1(letter->correctLetter().toLatin1() + 17));
             if (!letter->currentLetter().isSpace() && !letter->currentLetter().isLetter())
                 conversionInfo.letterEditCurrent.insert(letter,
-                                                        QChar::fromAscii(letter->currentLetter().toAscii() + 17));
+                                                        QChar::fromLatin1(letter->currentLetter().toLatin1() + 17));
         }
     } else if (m_crosswordTypeInfo.letterCellContent != Digits
                && newInfo.letterCellContent == Digits) {
@@ -504,11 +504,11 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
             // Shift from characters to numbers in ASCII table
             if (!letter->correctLetter().isSpace() && !letter->correctLetter().isDigit())
                 conversionInfo.letterEditCorrect.insert(letter,
-                                                        QChar::fromAscii((letter->correctLetter().toAscii() - 65) % 10 + 48));
+                                                        QChar::fromLatin1((letter->correctLetter().toLatin1() - 65) % 10 + 48));
 
             if (!letter->currentLetter().isSpace() && !letter->currentLetter().isDigit())
                 conversionInfo.letterEditCurrent.insert(letter,
-                                                        QChar::fromAscii((letter->currentLetter().toAscii() - 65) % 10 + 48));
+                                                        QChar::fromLatin1((letter->currentLetter().toLatin1() - 65) % 10 + 48));
         }
     }
 

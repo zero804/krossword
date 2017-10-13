@@ -37,11 +37,10 @@ TransitionAnimation::TransitionAnimation(KrossWordCell *cell)
     m_pixmapObject->setTransformationMode(Qt::SmoothTransformation);
     m_pixmapObject->setObjectName("transitionItem");
     m_pixmapObject->setZValue(1000);
-//   m_pixmapObject->setTransform( cell->transform() );
-    m_pixmapObject->setPos(cell->pos() + cell->boundingRect().topLeft()
-                           + QPointF(0.5, 0.5));
+    //m_pixmapObject->setTransform( cell->transform() );
+    m_pixmapObject->setPos(cell->pos() + cell->boundingRect().topLeft() + QPointF(0.5, 0.5));
     qreal scale = cell->boundingRect().width() / m_pixmapObject->pixmap().width();
-    m_pixmapObject->scale(scale, scale);
+    m_pixmapObject->setScale(scale);
 
     m_pixmapObject->setTransformOriginPoint(cell->boundingRect().center());
 

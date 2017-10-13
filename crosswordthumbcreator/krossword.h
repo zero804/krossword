@@ -134,7 +134,7 @@ public:
     static FileFormat fileFormatFromFileName(const QString &fileName);
 
     QImage toImage(const QSize &size = QSize(64, 64));
-    void resizeTo(const QSizeF &size);
+    //void resizeTo(const QSizeF &size);
     void assignClueNumbers();
 
     /** Gets the clue cell at the coordinates @p coord with the given @p orientation.

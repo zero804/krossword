@@ -30,7 +30,7 @@ HtmlDelegate::HtmlDelegate(QObject *parent) : QStyledItemDelegate(parent)
 
 void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem & option, const QModelIndex &index) const
 {
-    QStyleOptionViewItemV4 options = option;
+    QStyleOptionViewItem options = option;
     initStyleOption(&options, index);
 
     painter->save();
@@ -66,7 +66,7 @@ void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem & option,
 
 QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex & index) const
 {
-    QStyleOptionViewItemV4 options = option;
+    QStyleOptionViewItem options = option;
     initStyleOption(&options, index);
 
     QRect rcDeco;

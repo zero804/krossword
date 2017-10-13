@@ -21,7 +21,7 @@
 #include "krossword.h"
 
 #include <QtWidgets/QGraphicsScene>
-#include <KIO/NetAccess>
+//#include <KIO/NetAccess>
 
 
 ImageCell::ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
@@ -29,6 +29,8 @@ ImageCell::ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
     : SpannedCell(krossWord, KrossWordCell::ImageCellType, coordTopLeft,
                   horizontalCellSpan, verticalCellSpan)
 {
+    //CHECK
+    /*
     if (!url.isLocalFile()) {
         QString fileName;
         if (KIO::NetAccess::download(url, fileName, 0)) {
@@ -38,7 +40,9 @@ ImageCell::ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
     } else {
         m_image = QImage(url.url(QUrl::PreferLocalFile));
     }
+    */
 
+    m_image = QImage(url.url(QUrl::PreferLocalFile));
     m_url = url;
 }
 

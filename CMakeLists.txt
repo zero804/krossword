@@ -7,7 +7,7 @@ find_package(ECM 1.0.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Widgets PrintSupport Sql)
-find_package(KF5 REQUIRED COMPONENTS Archive Config CoreAddons KIO JobWidgets XmlGui I18n Completion IconThemes TextWidgets KDELibs4Support)
+find_package(KF5 REQUIRED COMPONENTS Archive Config CoreAddons KIO JobWidgets XmlGui I18n Completion IconThemes TextWidgets)
 
 find_package(KF5KDEGames 4.9.0 REQUIRED)
 
@@ -21,7 +21,7 @@ include(KDECMakeSettings)
 include(KDECompilerSettings)
 include(ECMInstallIcons)
 
-add_definitions(-DQT_NO_URL_CAST_FROM_STRING) #for kurl porting
+#add_definitions(-DQT_NO_URL_CAST_FROM_STRING) #for kurl porting
 
 add_subdirectory(src)
 add_subdirectory(icons)
