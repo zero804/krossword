@@ -92,6 +92,7 @@ public:
 
 
 class KrossWord;
+
 class KrossWordHeaderItem : public QGraphicsObject
 {
     Q_OBJECT
@@ -102,13 +103,6 @@ public:
 
     void setContent(KrossWord *krossWord);
     void updateTheme(KrossWord *krossWord);
-
-    QGraphicsTextItem *titleItem() const {
-        return m_titleItem;
-    }
-    QGraphicsTextItem *authorsItem() const {
-        return m_authorsItem;
-    }
 
     virtual QRectF boundingRect() const;
     virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
@@ -946,7 +940,7 @@ private:
                                             SpannedCell* excludedSpannedCell) const;
 
     void setTopLeftCellOffset(const QPointF &topLeftCellOffset);
-    void updateTitleItem();
+    void updateHeaderItem();
 
     Animator *m_animator;
 
@@ -984,7 +978,7 @@ private:
     float m_animationDurationFactor;
 
     FocusItem *m_focusItem;
-    KrossWordHeaderItem *m_titleItem;
+    KrossWordHeaderItem *m_headerItem;
     QPointF m_topLeftCellOffset;
 
     const KrosswordTheme *m_theme;

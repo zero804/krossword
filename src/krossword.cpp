@@ -80,13 +80,14 @@ void KrossWordHeaderItem::paint(QPainter* painter,
 
 void KrossWordHeaderItem::updateTheme(KrossWord* krossWord)
 {
+    QColor color = krossWord->theme()->fontColor();
     if (m_titleItem) {
-        //m_titleItem->update();
+        m_titleItem->setDefaultTextColor(color);
         updateGraphicsEffect(krossWord, static_cast< QGraphicsDropShadowEffect* >(m_titleItem->graphicsEffect()));
     }
 
     if (m_authorsItem) {
-        //m_authorsItem->update();
+        m_authorsItem->setDefaultTextColor(color);
         updateGraphicsEffect(krossWord, static_cast< QGraphicsDropShadowEffect* >(m_authorsItem->graphicsEffect()));
     }
 }
@@ -120,18 +121,19 @@ void KrossWordHeaderItem::setContent(KrossWord *krossWord)
         }
     } else {
         if (!m_titleItem) {
-            m_titleItem = new QGraphicsTextItem(this);
+            m_titleItem = new QGraphicsTextItem(this); //CHECK
         }
 
         QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
         font.setBold(true);
         font.setPointSize(20);
         m_titleItem->setFont(font);
-        //m_titleItem->setDefaultTextColor(krossWord->theme()->fontColor());
-        m_titleItem->setTextWidth(krossWord->boundingRect().width());
+        m_titleItem->setDefaultTextColor(krossWord->theme()->fontColor());
+        m_titleItem->setTextWidth(krossWord->boundingRect().width()); // max width
 
         m_titleItem->setPlainText(krossWord->title());
-        QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
+
+        QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
         updateGraphicsEffect(krossWord, effect);
         m_titleItem->setGraphicsEffect(effect);
     }
@@ -143,25 +145,28 @@ void KrossWordHeaderItem::setContent(KrossWord *krossWord)
             m_authorsItem = NULL;
         }
     } else {
-        if (!m_authorsItem)
-            m_authorsItem = new QGraphicsTextItem(this);
+        if (!m_authorsItem) {
+            m_authorsItem = new QGraphicsTextItem(this); //CHECK
+        }
 
         QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
         font.setPointSize(12);
         m_authorsItem->setFont(font);
+        m_authorsItem->setDefaultTextColor(krossWord->theme()->fontColor());
         m_authorsItem->setTextWidth(krossWord->boundingRect().width());
 
-        if (krossWord->copyright().isEmpty())
+        if (krossWord->copyright().isEmpty()) {
             m_authorsItem->setPlainText(krossWord->authors());
-        else
+        } else {
             m_authorsItem->setHtml(QString("<p style=\"text-align:right;\">%1<br>%2</p>").arg(krossWord->authors()).arg(krossWord->copyright()));
+        }
 
-        QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
+        QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
         updateGraphicsEffect(krossWord, effect);
         m_authorsItem->setGraphicsEffect(effect);
     }
-    prepareGeometryChange();
 
+    //prepareGeometryChange();
     crosswordResized(krossWord, krossWord->width(), krossWord->height());
 }
 
@@ -183,13 +188,13 @@ void KrossWordHeaderItem::crosswordResized(KrossWord *krossWord, int columns, in
     }
 }
 
-
+//-------------------------------------------------------------------------------------------------------------
 
 KrossWord::KrossWord(const KrosswordTheme *theme, int width, int height)
     : QGraphicsObject(0), m_animator(new Animator()),
     m_currentCell(0), m_previousCell(0),
     m_highlightedClue(0), m_previousHighlightedClue(0),
-    m_focusItem(0), m_titleItem(0),
+    m_focusItem(0), m_headerItem(0),
     m_theme(theme)
 {
     init(width, height);
@@ -310,17 +315,17 @@ void KrossWord::removeSameLetterSynchronization()
 QRectF KrossWord::boundingRectCrossword() const
 {
     QRectF rect = QRectF(0, 0, cellSize().width() * width(), cellSize().height() * height());
-    if (m_titleItem) {
-        rect.translate(0, m_titleItem->boundingRect().bottom());
+    if (m_headerItem) {
+        rect.translate(0, m_headerItem->boundingRect().bottom());
     }
     return rect;
 }
 
 QRectF KrossWord::boundingRect() const
 {
-    if (m_titleItem) {
+    if (m_headerItem) {
         QRectF rect = boundingRectCrossword();
-        return rect.united(m_titleItem->boundingRect());
+        return rect.united(m_headerItem->boundingRect());
     } else {
         return boundingRectCrossword();
     }
@@ -1124,20 +1129,20 @@ void KrossWord::removeSolutionSynchronizationTo(KrossWord* solutionKrossWord)
 void KrossWord::setTitle(const QString& title)
 {
     m_title = title;
-    updateTitleItem();
+    updateHeaderItem();
 }
 
 void KrossWord::setAuthors(const QString& authors)
 {
     m_authors = authors;
 //   m_authors = m_authors.remove( QRegExp("^by", Qt::CaseInsensitive) ).trimmed();
-    updateTitleItem();
+    updateHeaderItem();
 }
 
 void KrossWord::setCopyright(const QString& copyright)
 {
     m_copyright = copyright;
-    updateTitleItem();
+    updateHeaderItem();
 }
 
 void KrossWord::setNotes(const QString& notes)
@@ -1145,25 +1150,25 @@ void KrossWord::setNotes(const QString& notes)
     m_notes = notes;
 }
 
-void KrossWord::updateTitleItem()
+void KrossWord::updateHeaderItem()
 {
     if (m_title.isEmpty()) {
-        if (m_titleItem) {
-            scene()->removeItem(m_titleItem);
-            delete m_titleItem;
-            m_titleItem = NULL;
+        if (m_headerItem) {
+            scene()->removeItem(m_headerItem);
+            delete m_headerItem;
+            m_headerItem = NULL;
         }
 
         setTopLeftCellOffset(QPointF(0, 0));
     } else {
-        if (!m_titleItem) {
-            m_titleItem = new KrossWordHeaderItem(this);
-            connect(this, SIGNAL(resized(KrossWord*, int, int)), m_titleItem, SLOT(crosswordResized(KrossWord*, int, int)));
+        if (!m_headerItem) {
+            m_headerItem = new KrossWordHeaderItem(this);
+            connect(this, SIGNAL(resized(KrossWord*, int, int)), m_headerItem, SLOT(crosswordResized(KrossWord*, int, int)));
         }
-        m_titleItem->setContent(this);
+        m_headerItem->setContent(this);
         prepareGeometryChange();
 
-        setTopLeftCellOffset(m_titleItem->boundingRect().bottomLeft());
+        setTopLeftCellOffset(m_headerItem->boundingRect().bottomLeft());
     }
 }
 
@@ -2349,8 +2354,9 @@ void KrossWord::clearCache()
         cell->update();
     }
 
-    if (m_titleItem)
-        m_titleItem->updateTheme(this);
+    if (m_headerItem) {
+        m_headerItem->updateTheme(this);
+    }
 
     m_animator->endEnqueueAnimations();
 }
