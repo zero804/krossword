@@ -2916,7 +2916,7 @@ void CrossWordXmlGuiWindow::draw_background(KrossWordPuzzleView *view) const
 
 
     if (preferred_size.isValid() && preferred_size != QSize(0, 0)) {
-            preferred_size_cond = true;
+        preferred_size_cond = true;
         brush = QBrush(KrosswordRenderer::self()->background(preferred_size));
     } else { // Default behavior
         QDesktopWidget *mydesk = QApplication::desktop();
@@ -2938,4 +2938,4 @@ void CrossWordXmlGuiWindow::draw_background(KrossWordPuzzleView *view) const
     view->setBackgroundBrush(brush);
 }
 
-#include "crosswordxmlguiwindow.moc"
+//#include "crosswordxmlguiwindow.moc"

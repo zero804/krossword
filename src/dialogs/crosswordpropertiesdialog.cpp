@@ -53,6 +53,16 @@ CrosswordPropertiesDialog::CrosswordPropertiesDialog(KrossWord* krossWord, QWidg
 
     ui_properties.anchorCenter->setChecked(true);
 
+    ui_properties.buttonGroup->setId(ui_properties.anchorTopLeft, 0);
+    ui_properties.buttonGroup->setId(ui_properties.anchorTop, 1);
+    ui_properties.buttonGroup->setId(ui_properties.anchorTopRight, 2);
+    ui_properties.buttonGroup->setId(ui_properties.anchorLeft, 3);
+    ui_properties.buttonGroup->setId(ui_properties.anchorCenter, 4);
+    ui_properties.buttonGroup->setId(ui_properties.anchorRight, 5);
+    ui_properties.buttonGroup->setId(ui_properties.anchorBottomLeft, 6);
+    ui_properties.buttonGroup->setId(ui_properties.anchorBottom, 7);
+    ui_properties.buttonGroup->setId(ui_properties.anchorBottomRight, 8);
+
     m_anchorIdToAnchor.insert(0, KrossWord::AnchorTopLeft);
     m_anchorIdToAnchor.insert(1, KrossWord::AnchorTop);
     m_anchorIdToAnchor.insert(2, KrossWord::AnchorTopRight);

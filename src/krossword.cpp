@@ -2589,8 +2589,7 @@ KrossWordCellList KrossWord::moveCells(int dx, int dy, bool simulate)
     return uniqueRemovedCells;
 }
 
-KrossWordCellList KrossWord::resizeGrid(uint width, uint height,
-                                        ResizeAnchor anchor, bool simulate)
+KrossWordCellList KrossWord::resizeGrid(uint width, uint height, ResizeAnchor anchor, bool simulate)
 {
     KrossWordCellList removedCells;
     uint prevWidth = this->width();
@@ -2698,16 +2697,15 @@ KrossWordCellList KrossWord::resizeGrid(uint width, uint height,
         delete m_krossWordGrid;
         m_krossWordGrid = krossWordGrid;
 
-//     qDebug() << "filling with empty cells";
         fillWithEmptyCells();
     } else
         delete krossWordGrid;
 
     KrossWordCellList uniqueRemovedCells;
-    for (KrossWordCellList::iterator it = removedCells.begin();
-            it != removedCells.end(); ++it) {
-        if (!uniqueRemovedCells.contains(*it))
+    for (KrossWordCellList::iterator it = removedCells.begin(); it != removedCells.end(); ++it) {
+        if (!uniqueRemovedCells.contains(*it)) {
             uniqueRemovedCells << *it;
+        }
     }
 
     emit resized(this, width, height);
@@ -3110,6 +3108,6 @@ QString KrossWord::answerOffsetToString(AnswerOffset answerOffset)
     }
 }
 
-}; // namespace Crossword
+} // namespace Crossword
 
-#include "krossword.moc"
+//#include "krossword.moc"

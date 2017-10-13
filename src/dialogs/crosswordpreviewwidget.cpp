@@ -64,4 +64,3 @@ void CrosswordPreviewWidget::previewJobGotPreview(const KFileItem& fileItem,
     setPixmap(pixmap);
     setEnabled(true);
 }
-
