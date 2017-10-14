@@ -170,7 +170,7 @@ void LibraryGui::downloadProviderChanged(int index)
         break;
 
     case WallStreetJournal:
-        getDownloadCrosswordItems("http://mazerlm.home.comcast.net/wsj%1.puz", QDate(2009, 1, 2), QDate(2012, 12, 28), 7);
+        //getDownloadCrosswordItems("http://mazerlm.home.comcast.net/wsj%1.puz", QDate(2009, 1, 2), QDate(2012, 12, 28), 7); //CHECK it's down
         getDownloadCrosswordItems("http://herbach.dnsalias.com/wsj/wsj%1.puz", QDate(2013, 1, 4), QDate::currentDate(), 7);
         break;
 
@@ -184,10 +184,13 @@ void LibraryGui::downloadProviderChanged(int index)
         ui_download.crosswords->addItem(item);
         break;
 
+    /*
     case SwearCrossword:
         getDownloadCrosswordItems("http://wij.theworld.com/puzzles/dailyrecord/DR%1.puz", QDate(2011, 1, 7), QDate(2013, 12, 27), 7);
         break;
+    */
 
+    /*
     case ChrisWords:
         for (int i = 1; i <= 5; ++i) {
             item = new QListWidgetItem(QString(i18n("Crossword %1")).arg(i));
@@ -200,6 +203,7 @@ void LibraryGui::downloadProviderChanged(int index)
             ui_download.crosswords->addItem(item);
         }
         break;
+    */
 
     case Motscroisesch:
         for (int i = 1; i <= 18; ++i) {
@@ -396,13 +400,17 @@ void LibraryGui::libraryDownloadSlot()
             ui_download.providers->addItem(i18n("The Cross Nerd (tuesdays)"), static_cast<int>(provider));
             break;
 
+        /*
         case SwearCrossword:
             ui_download.providers->addItem(i18n("I Swear Crossword by Victor Fleming (fridays)"), static_cast<int>(provider));
             break;
+        */
 
+        /*
         case ChrisWords:
             ui_download.providers->addItem(i18n("ChrisWords.com"), static_cast<int>(provider));
             break;
+        */
 
         case Motscroisesch:
             ui_download.providers->addItem(i18n("Mots-croisés.ch free French crosswords"), static_cast<int>(provider));
@@ -587,5 +595,5 @@ void LibraryGui::getDownloadCrosswordItems(const QString& rawUrl, const QDate& s
 
 QList<LibraryGui::DownloadProvider> LibraryGui::allDownloadProviders()
 {
-    return QList<DownloadProvider>() << JonesinCrosswords << WallStreetJournal << ChronicleHigherEducation << CrossNerd << SwearCrossword << ChrisWords << Motscroisesch;
+    return QList<DownloadProvider>() << JonesinCrosswords << WallStreetJournal << ChronicleHigherEducation << CrossNerd << /*SwearCrossword << ChrisWords <<*/ Motscroisesch;
 }
