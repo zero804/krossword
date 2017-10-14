@@ -65,9 +65,6 @@ Description[uk]=Типова тема для Krossword.
 Description[x-test]=xxDefault theme for Krossword.xx
 Preview=default.png
 
-# Wheather or not the background is dark (affects shadows)
-HasDarkBackground=false
-
 # The glow color of highlighted cells (64,64,255)
 GlowColor=#4040FF
 # The glow color of focused cells (255,64,64)

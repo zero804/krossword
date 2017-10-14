@@ -52,9 +52,6 @@ Description[uk]=Тема «Шкрябанина» для Krossword.
 Description[x-test]=xxScribble theme for Krossword.xx
 Preview=scribble.png
 
-# Wheather or not the background is dark (affects shadows)
-HasDarkBackground=false
-
 # The glow color of highlighted cells
 GlowColor=#4040FF
 # The glow color of focused cells

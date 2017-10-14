@@ -46,9 +46,6 @@ public:
     QMargins marginsClueCell() const;
     QMargins marginsClueCell(qreal levelOfDetail) const;
 
-    /** Wheather or not the background is dark (affects shadows). */
-    bool hasDarkBackground() const;
-
     /** The glow color of highlighted cells. */
     QColor glowColor() const;
 
@@ -88,7 +85,6 @@ private:
     QMargins m_marginsLetterCell, m_marginsClueCell;
     QColor m_glowColor, m_glowFocusColor, m_selectionColor, m_emptyCellColor, m_fontColor;
     QSize m_preferredRenderSize;
-    bool m_hasDarkBackground;
     //ItemPosition m_numberPuzzleCluePos, m_clueNumberPos, m_solutionLetterIndexPos;
 };
 

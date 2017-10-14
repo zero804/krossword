@@ -33,14 +33,11 @@
 #include <qfileinfo.h>
 
 #include <QUrl>
-//#include <KMimeType>
-//#include <KIO/NetAccess>
 #include <QIcon>
 #include <kglobalsettings.h>
 
 #include "animator.h"
 #include <QPropertyAnimation>
-#include <QGraphicsEffect>
 #include <QFontDatabase>
 #include <QMimeDatabase>
 
@@ -81,33 +78,13 @@ void KrossWordHeaderItem::paint(QPainter* painter,
 void KrossWordHeaderItem::updateTheme(KrossWord* krossWord)
 {
     QColor color = krossWord->theme()->fontColor();
+
     if (m_titleItem) {
         m_titleItem->setDefaultTextColor(color);
-        updateGraphicsEffect(krossWord, static_cast< QGraphicsDropShadowEffect* >(m_titleItem->graphicsEffect()));
     }
 
     if (m_authorsItem) {
         m_authorsItem->setDefaultTextColor(color);
-        updateGraphicsEffect(krossWord, static_cast< QGraphicsDropShadowEffect* >(m_authorsItem->graphicsEffect()));
-    }
-}
-
-void KrossWordHeaderItem::updateGraphicsEffect(KrossWord* krossWord,
-        QGraphicsDropShadowEffect* effect)
-{
-    if (!effect) {
-        qDebug() << "No drop shadow effect found for title item";
-        return;
-    }
-
-
-    if (krossWord->theme()->hasDarkBackground()) {
-        effect->setBlurRadius(4);
-        effect->setOffset(0, 0);
-        effect->setColor(QColor(255, 255, 255, 180));
-    } else {
-        // This branch cannot be removed: glitches appear... just making the effect invisible seems reasonable to me...
-        effect->setColor(QColor(0, 0, 0, 0));
     }
 }
 
@@ -132,10 +109,6 @@ void KrossWordHeaderItem::setContent(KrossWord *krossWord)
         m_titleItem->setTextWidth(krossWord->boundingRect().width()); // max width
 
         m_titleItem->setPlainText(krossWord->title());
-
-        QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
-        updateGraphicsEffect(krossWord, effect);
-        m_titleItem->setGraphicsEffect(effect);
     }
 
     if (krossWord->authors().isEmpty()) {
@@ -160,10 +133,6 @@ void KrossWordHeaderItem::setContent(KrossWord *krossWord)
         } else {
             m_authorsItem->setHtml(QString("<p style=\"text-align:right;\">%1<br>%2</p>").arg(krossWord->authors()).arg(krossWord->copyright()));
         }
-
-        QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
-        updateGraphicsEffect(krossWord, effect);
-        m_authorsItem->setGraphicsEffect(effect);
     }
 
     //prepareGeometryChange();

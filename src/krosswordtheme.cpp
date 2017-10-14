@@ -43,8 +43,6 @@ bool KrosswordTheme::readFromDesktopFile(const QString& file)
     m_marginsLetterCell = QMargins(letterCellMargins.at(0).toInt(), letterCellMargins.at(1).toInt(), letterCellMargins.at(2).toInt(), letterCellMargins.at(3).toInt());
     m_marginsClueCell = QMargins(clueCellMargins.at(0).toInt(), clueCellMargins.at(1).toInt(), clueCellMargins.at(2).toInt(), clueCellMargins.at(3).toInt());
 
-
-    m_hasDarkBackground = (customData("HasDarkBackground", "false") == "false") ? false : true;
     m_glowColor = QColor(customData("GlowColor", "64, 64, 255"));
 
     m_glowFocusColor = QColor(customData("FocusGlowColor", "255, 64, 64"));
@@ -72,7 +70,6 @@ KrosswordTheme* KrosswordTheme::defaultValues()
     theme->m_marginsLetterCell = QMargins(6,6,6,6);
     theme->m_marginsClueCell = QMargins(6,6,6,6);
 
-    theme->m_hasDarkBackground = false;
     theme->m_glowColor = QColor(64, 64, 255);
     theme->m_glowFocusColor = QColor(255, 64, 64);
     theme->m_selectionColor = QColor(255, 100, 100, 128);
@@ -149,10 +146,6 @@ QMargins KrosswordTheme::marginsClueCell(qreal levelOfDetail) const {
     ret.setRight(ret.right() * levelOfDetail);
     ret.setBottom(ret.bottom() * levelOfDetail);
     return ret;
-}
-
-bool KrosswordTheme::hasDarkBackground() const {
-    return m_hasDarkBackground;
 }
 
 QColor KrosswordTheme::glowColor() const {

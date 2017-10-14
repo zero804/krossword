@@ -111,8 +111,6 @@ public slots:
     void crosswordResized(KrossWord *krossWord, int columns, int rows);
 
 private:
-    void updateGraphicsEffect(KrossWord *krossWord, QGraphicsDropShadowEffect *effect);
-
     QGraphicsTextItem *m_titleItem;
     QGraphicsTextItem *m_authorsItem;
 };

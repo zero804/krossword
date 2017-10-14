@@ -10,9 +10,6 @@ Description[en_GB]=Ink theme for Krossword.
 Description[it]=Tema inchiostro per Krossword.
 Preview=ink.png
 
-# Wheather or not the background is dark (affects shadows)
-HasDarkBackground=false
-
 # The glow color of highlighted cells
 GlowColor=#B5B5B5
 # The glow color of focused cells

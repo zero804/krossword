@@ -52,9 +52,6 @@ Description[uk]=Krossword, єгипетський стиль.
 Description[x-test]=xxKrossword, Egyptian style.xx
 Preview=egyptian.png
 
-# Wheather or not the background is dark (affects shadows)
-HasDarkBackground=true
-
 # The glow color of highlighted cells (255,220,40)
 GlowColor=#FFDC28
 # The glow color of focused cells (255,40,20)
