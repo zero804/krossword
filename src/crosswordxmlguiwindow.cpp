@@ -1502,6 +1502,8 @@ void CrossWordXmlGuiWindow::setupActions()
     ac->addAction(actionName(Edit_MoveCells), editMoveCellsAction);
     connect(editMoveCellsAction, SIGNAL(triggered()), this, SLOT(editMoveCellsSlot()));
 
+    //CHECK: rethink feature, currently it causes graphical glitches with Breeze style
+    /*
     QAction *pasteSpecialCharacter = new QAction(ac);
     QWidget *specialCharacterButtonsWidget = new QWidget(this);
     QHBoxLayout *specialCharacterButtonsLayout = new QHBoxLayout(specialCharacterButtonsWidget);
@@ -1523,6 +1525,7 @@ void CrossWordXmlGuiWindow::setupActions()
     pasteSpecialCharacter->setToolTip(i18n("Let you select a special character to paste"));
     //pasteSpecialCharacter->setDefaultWidget(specialCharacterWidget);
     ac->addAction(actionName(Edit_PasteSpecialCharacter), pasteSpecialCharacter);
+    */
 
     // Move actions
     QAction *solveAction = KStandardGameAction::solve(this, SLOT(solveSlot()), ac);
