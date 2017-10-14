@@ -547,7 +547,7 @@ void LibraryGui::setupActions()
     actionCollection()->addAction(actionName(Library_NewFolder), libraryNewFolderAction);
     connect(libraryNewFolderAction, SIGNAL(triggered()), this, SLOT(libraryNewFolderSlot()));
 
-    QAction *libraryDownloadAction = new QAction(QIcon::fromTheme(QStringLiteral("download")), i18nc("@action:intoolbar", "&Download..."), this);
+    QAction *libraryDownloadAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-download")), i18nc("@action:intoolbar", "&Download..."), this);
     libraryDownloadAction->setToolTip(i18n("Download a crossword and add it to the library"));
     actionCollection()->addAction(actionName(Library_Download), libraryDownloadAction);
     connect(libraryDownloadAction, SIGNAL(triggered()), this, SLOT(libraryDownloadSlot()));
