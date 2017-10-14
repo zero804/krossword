@@ -30,7 +30,7 @@
 static const char description[] =
     I18N_NOOP("A crossword puzzle game and editor for KDE.\nBased on KrossWordPuzzle.");
 
-static const char version[] = "0.18.2 alpha 3";
+static const char version[] = "0.18.3 alpha 4";
 
 int main(int argc, char **argv){
     QApplication app(argc, argv);
@@ -39,9 +39,9 @@ int main(int argc, char **argv){
 
     KAboutData aboutData(QStringLiteral("krossword"), i18n("Krossword"),
                          version, i18n(description), KAboutLicense::GPL_V2,
-                         i18n("(c) 2014, Andrea Barazzetti\n(c) 2014, Giacomo Barazzetti\n(c) 2009, Friedrich Pülz"));
+                         i18n("(c) 2014-2017, Andrea Barazzetti\n(c) 2014-2017, Giacomo Barazzetti\n(c) 2009, Friedrich Pülz"));
     aboutData.setHomepage(QStringLiteral("https://store.kde.org/p/1109436"));
-    aboutData.addAuthor(i18n("Andrea Barazzetti"), i18n("Developer"), QStringLiteral("andreadevsrv@gmail.com"));
+    aboutData.addAuthor(i18n("Andrea Barazzetti"), i18n("Developer"));
     aboutData.addAuthor(i18n("Giacomo Barazzetti"), i18n("Developer"), QStringLiteral("giacomosrv@gmail.com"));
     aboutData.addAuthor(i18n("Friedrich Pülz"), i18n("Previous developer"), QStringLiteral(""));
 
