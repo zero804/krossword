@@ -21,18 +21,16 @@
 
 #include <QApplication>
 #include <QCommandLineParser>
-#include <QCommandLineOption>
 
 #include <KAboutData>
 #include <KDE/KLocale>
-//#include <KGlobal>
 
 static const char description[] =
     I18N_NOOP("A crossword puzzle game and editor for KDE.\nBased on KrossWordPuzzle.");
 
 static const char version[] = "0.18.3 alpha 4";
 
-int main(int argc, char **argv){
+int main(int argc, char *argv[]){
     QApplication app(argc, argv);
 
     KLocalizedString::setApplicationDomain("krossword");
@@ -44,16 +42,15 @@ int main(int argc, char **argv){
     aboutData.addAuthor(i18n("Andrea Barazzetti"), i18n("Developer"));
     aboutData.addAuthor(i18n("Giacomo Barazzetti"), i18n("Developer"), QStringLiteral("giacomosrv@gmail.com"));
     aboutData.addAuthor(i18n("Friedrich Pülz"), i18n("Previous developer"), QStringLiteral(""));
+    KAboutData::setApplicationData(aboutData);
 
     QCommandLineParser parser;
-    KAboutData::setApplicationData(aboutData);
     parser.addVersionOption();
     parser.addHelpOption();
+    parser.addPositionalArgument(QLatin1String("filename"), i18n("Crossword to open"));
     aboutData.setupCommandLine(&parser);
     parser.process(app);
     aboutData.processCommandLine(&parser);
-
-    parser.addPositionalArgument(QLatin1String("[URL]"), i18n("Document to open"));
 
     KrossWordPuzzle *widget = new KrossWordPuzzle;
 
