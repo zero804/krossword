@@ -47,11 +47,12 @@ bool KrosswordRenderer::setTheme(const QString& themeName)
         return true;
     }
 
-    auto found = std::find_if(m_provider->themes().begin(), m_provider->themes().end(), [&themeName](const KgTheme* theme) {
+    QList<const KgTheme*> themeList = m_provider->themes();
+    auto found = std::find_if(themeList.begin(), themeList.end(), [&themeName](const KgTheme* theme) {
         return theme->name() == themeName;
     });
 
-    if (found != m_provider->themes().end()) {
+    if (found != themeList.end()) {
         m_provider->setCurrentTheme(*found);
         return true;
     }
