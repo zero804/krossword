@@ -598,10 +598,8 @@ void EmptyCell::drawBackground(QPainter* p, const QStyleOptionGraphicsItem* opti
             p->drawRect(option->rect.adjusted(0, 0, -1, -1));
         }
     } else { // and in game mode
-        const KrosswordRenderer *renderer = KrosswordRenderer::self();
-        const QColor alpha = QColor(128, 128, 128);
-        if (renderer->hasElement("empty_cell")) {
-            renderer->renderElement(p, "empty_cell", option->rect, alpha);
+        if (KrosswordRenderer::self()->hasElement("empty_cell")) {
+            KrosswordRenderer::self()->renderElement(p, "empty_cell", option->rect);
         } else {
             // The empty cell isn't themed in the current theme
             p->fillRect(option->rect, Qt::black);

@@ -36,84 +36,54 @@ KrosswordRenderer* KrosswordRenderer::self()
 
 KrosswordRenderer::KrosswordRenderer()
     : m_provider(new KgThemeProvider(QByteArray("Theme"))),
-      m_renderer(new KGameRenderer(m_provider))
+      m_renderer(m_provider)
 {
     m_provider->discoverThemes("appdata", QLatin1String("themes"), QLatin1String("default"), &KrosswordTheme::staticMetaObject);
 }
 
 bool KrosswordRenderer::setTheme(const QString& themeName)
 {
-    if (m_themeName == themeName)
+    if (getCurrentTheme()->name() == themeName) {
         return true;
-
-    QList<const KgTheme*> themeList = m_provider->themes();
-
-    int index  = 0;
-    bool found = false;
-    while(!found && index < themeList.size()) {
-        const KgTheme *currTheme = themeList.at(index);
-
-        if(currTheme->name() == themeName) {
-            m_provider->setCurrentTheme(currTheme);
-            m_themeName = themeName;
-            found = true;
-        }
-        ++index;
     }
 
-    return found;
+    auto found = std::find_if(m_provider->themes().begin(), m_provider->themes().end(), [&themeName](const KgTheme* theme) {
+        return theme->name() == themeName;
+    });
+
+    if (found != m_provider->themes().end()) {
+        m_provider->setCurrentTheme(*found);
+        return true;
+    }
+
+    return false;
 }
 
 QPixmap KrosswordRenderer::background(const QSize &size) const
 {
-    QPixmap pix;
-    pix = m_renderer->spritePixmap("background", size);
-
-    return pix;
+    return m_renderer.spritePixmap("background", size);
 }
 
-bool KrosswordRenderer::hasElement(const QString& elementid) const
+bool KrosswordRenderer::hasElement(const QString& id) const
 {
-    return m_renderer->spriteExists(elementid);
+    return m_renderer.spriteExists(id);
 }
 
-void KrosswordRenderer::renderBackground(QPainter* p, const QRectF& r) const
+void KrosswordRenderer::renderBackground(QPainter* painter, const QRectF& rect) const
 {
-    renderElement(p, "background", r);
+    renderElement(painter, "background", rect);
 }
 
-void KrosswordRenderer::renderElement(QPainter* p, const QString& elementid, const QRectF& r, const QColor &alpha) const
+void KrosswordRenderer::renderElement(QPainter* painter, const QString& id, const QRectF& rect) const
 {
-    //! NOTE: Suppress warning, but you should remove it when you are sure it's not important
-    Q_UNUSED(alpha);
-
-    QPixmap pix;
-
-    /*
-    if (alpha != Qt::black) {
-        QPixmap pixAlpha = QPixmap(r.size().toSize());
-        pixAlpha.fill(alpha);
-        pix.setAlphaChannel(pixAlpha);
-    }
-    */
-
-
-    pix = m_renderer->spritePixmap(elementid, r.size().toSize());
-
-    p->setRenderHints(QPainter::HighQualityAntialiasing | QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing);
-    //p->drawPixmap(static_cast<int>(r.x()), static_cast<int>(r.y()), pix);
-
-    p->drawPixmap(static_cast<int>(r.x()), static_cast<int>(r.y()), pix);
+    QPixmap pix = m_renderer.spritePixmap(id, rect.size().toSize());
+    painter->setRenderHints(QPainter::HighQualityAntialiasing | QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing);
+    painter->drawPixmap(static_cast<int>(rect.x()), static_cast<int>(rect.y()), pix);
 }
 
 KgThemeProvider* KrosswordRenderer::getThemeProvider() const
 {
     return m_provider;
-}
-
-QString KrosswordRenderer::getCurrentThemeName() const
-{
-    return m_provider->currentThemeName();
 }
 
 const KrosswordTheme *KrosswordRenderer::getCurrentTheme() const

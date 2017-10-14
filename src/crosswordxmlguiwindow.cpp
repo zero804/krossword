@@ -1549,7 +1549,7 @@ void CrossWordXmlGuiWindow::updateTheme()
 {
     /* Should not do it manually */
     QString themeFile = Settings::theme();
-    Settings::setTheme(KrosswordRenderer::self()->getCurrentThemeName());
+    Settings::setTheme(KrosswordRenderer::self()->getCurrentTheme()->name());
     Settings::self()->save();
 
     if (viewSolution())

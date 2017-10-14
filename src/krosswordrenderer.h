@@ -21,10 +21,8 @@
 #define KROSSWORD_RENDERER_H
 
 #include <QPixmap>
+#include <KGameRenderer>
 
-
-class KgTheme;
-class KGameRenderer;
 class KgThemeProvider;
 class KrosswordTheme;
 
@@ -33,14 +31,14 @@ class KrosswordRenderer
 public:
     static KrosswordRenderer* self();
 
-    bool hasElement(const QString &elementid) const;
+    bool hasElement(const QString &id) const;
 
-    void renderBackground(QPainter *p, const QRectF& r) const;
+    void renderBackground(QPainter *painter, const QRectF& rect) const;
     QPixmap background(const QSize &size) const;
-    void renderElement(QPainter *p, const QString& elementid, const QRectF& r, const QColor &alpha = Qt::black) const;
+    void renderElement(QPainter *painter, const QString& id, const QRectF& rect) const;
+
     bool setTheme(const QString &themeName);
     KgThemeProvider* getThemeProvider() const;
-    QString getCurrentThemeName() const;
     const KrosswordTheme *getCurrentTheme() const;
 
 private:
@@ -49,11 +47,8 @@ private:
     KrosswordRenderer(const KrosswordRenderer&);
     KrosswordRenderer& operator=(const KrosswordRenderer&);
 
-
     KgThemeProvider *m_provider;
-    QScopedPointer<KGameRenderer> m_renderer;
-
-    QString m_themeName;
+    KGameRenderer m_renderer;
 };
 
 #endif // KROSSWORD_RENDERER_H
