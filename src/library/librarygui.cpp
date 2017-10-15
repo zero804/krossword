@@ -27,6 +27,7 @@
 #include "htmldelegate.h"
 #include "settings.h"
 #include "dialogs/createnewcrossworddialog.h"
+#include "SortedListWidgetItem.h"
 
 #include <QDebug>
 
@@ -179,8 +180,9 @@ void LibraryGui::downloadProviderChanged(int index)
         break;
 
     case CrossNerd:
-        item = new QListWidgetItem(QString(i18n("The Cross Nerd current crossword")));
+        item = new SortedListWidgetItem(QString(i18n("The Cross Nerd current crossword")));
         item->setData(Qt::UserRole, "http://crossexamination.info/CN_current.puz");
+        item->setData(Qt::UserRole + 1, 0);
         ui_download.crosswords->addItem(item);
         break;
 
@@ -207,12 +209,16 @@ void LibraryGui::downloadProviderChanged(int index)
 
     case Motscroisesch:
         for (int i = 1; i <= 18; ++i) {
-            item = new QListWidgetItem(QString(i18n("Crossword %1")).arg(i));
+            item = new SortedListWidgetItem(QString(i18n("Crossword %1")).arg(i));
             item->setData(Qt::UserRole, QString("http://www.mots-croises.ch/Grilles/HC/HC-00%1.puz").arg(i, 2, 10, QChar('0')));
+            item->setData(Qt::UserRole + 1, i);
             ui_download.crosswords->addItem(item);
         }
         break;
     }
+
+    ui_download.crosswords->setSortingEnabled(true);
+    ui_download.crosswords->sortItems(Qt::DescendingOrder);
 }
 
 void LibraryGui::downloadCurrentCrosswordChanged(QListWidgetItem* current, QListWidgetItem* previous)
@@ -581,8 +587,9 @@ void LibraryGui::getDownloadCrosswordItems(const QString& rawUrl, const QDate& s
     for (int year = startDate.year(); year <= endDate.year(); ++year) {
         int curMonth = date.month();
         while (date.year() == year && date < endDate) {
-            QListWidgetItem *item = new QListWidgetItem(QString(i18n("%1", QLocale().toString(date)))); //KLocale::global()->formatDate(date, KLocale::FancyLongDate))));
+            QListWidgetItem *item = new SortedListWidgetItem(QString(i18n("%1", QLocale().toString(date)))); //KLocale::global()->formatDate(date, KLocale::FancyLongDate))));
             item->setData(Qt::UserRole, rawUrl.arg(date.toString("yyMMdd")));
+            item->setData(Qt::UserRole + 1, date.toJulianDay());
             ui_download.crosswords->addItem(item);
 
             date = date.addDays(dayOffset);
