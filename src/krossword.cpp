@@ -2016,6 +2016,7 @@ void KrossWord::replaceCell(const Coord& coord,
         if (isAnimationTypeEnabled(AnimateAppear))
             animator()->animate(Animator::AnimateFadeIn, newCell);
         else
+            newCell->show();
             newCell->setOpacity(1);
 
         newCell->setCoord(coord, false);
@@ -2230,6 +2231,8 @@ void KrossWord::setEditable(bool editable)
                 || (!editable && isAnimationTypeEnabled(AnimateDisappear))) {
             animator()->animate(editable ? Animator::AnimateFadeIn
                                 : Animator::AnimateFadeOut, cell);
+        } else {
+            cell->setOpacity(1);
         }
         cell->clearCache();
         cell->update();
@@ -2812,8 +2815,10 @@ void KrossWord::fillWithEmptyCells(const Coord& coordTopLeft,
                 (*m_krossWordGrid)[ coord ] = newEmptyCell;
                 if (isAnimationTypeEnabled(AnimateAppear))
                     animator()->animate(Animator::AnimateFadeIn, newEmptyCell);
-                else
+                else {
                     newEmptyCell->show();
+                    newEmptyCell->setOpacity(1);
+                }
             }
         }
     }
