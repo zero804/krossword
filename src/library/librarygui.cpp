@@ -363,10 +363,9 @@ void LibraryGui::libraryExportSlot()
             }
 
             QPixmap pix = krossWord.toPixmap(QSize(ui_export_to_image.width->value(), ui_export_to_image.height->value()));
-            int quality = ui_export_to_image.quality->value();
             delete exportToImageDlg;
 
-            if (!pix.save(fileName, 0, quality)) {
+            if (!pix.save(fileName, 0, 0/*0 means max compression for png fileformat*/)) {
                 qDebug() << "Export failed:" << fileName;
                 KMessageBox::error(this, i18n("Couldn't export the image to the specified file."));
             }

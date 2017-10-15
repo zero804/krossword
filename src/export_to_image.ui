@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>535</width>
-    <height>196</height>
+    <width>283</width>
+    <height>154</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -47,7 +47,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&amp;Size:</string>
+        <string>Size</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -74,7 +74,7 @@
           <number>20000</number>
          </property>
          <property name="value">
-          <number>512</number>
+          <number>1024</number>
          </property>
         </widget>
        </item>
@@ -112,49 +112,11 @@
           <number>20000</number>
          </property>
          <property name="value">
-          <number>512</number>
+          <number>1024</number>
          </property>
         </widget>
        </item>
       </layout>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>&amp;Quality:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QSlider" name="quality">
-       <property name="minimum">
-        <number>-1</number>
-       </property>
-       <property name="maximum">
-        <number>100</number>
-       </property>
-       <property name="value">
-        <number>-1</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TicksBothSides</enum>
-       </property>
-       <property name="tickInterval">
-        <number>10</number>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>
