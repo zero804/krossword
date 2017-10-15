@@ -46,8 +46,9 @@ bool KrossWordPuzStream::read(QIODevice *device,
     Q_ASSERT(krossWordData);
 
     bool closeAfterRead;
-    if ((closeAfterRead = !device->isOpen()) && !device->open(QIODevice::ReadOnly))
+    if ((closeAfterRead = !device->isOpen()) && !device->open(QIODevice::ReadOnly)) {
         return false;
+    }
     setDevice(device);
     setByteOrder(LittleEndian);
 
@@ -154,14 +155,16 @@ bool KrossWordPuzStream::read(QIODevice *device,
     }
 
     // Read clues
-    for (qint16 i = 0; i < clueNumber; ++i)
+    for (qint16 i = 0; i < clueNumber; ++i) {
         krossWordData->clues << readZeroTerminatedString();
+    }
 
     // Read notes
     krossWordData->notes = readZeroTerminatedString();
 
-    if (closeAfterRead)
+    if (closeAfterRead) {
         device->close();
+    }
 
     return true;
 }
@@ -173,14 +176,16 @@ bool KrossWordPuzStream::read(QIODevice* device, KrossWord* krossWord)
     // Read from device
     PuzChecksums checksums;
     KrossWordData krossWordData;
-    if (!read(device, &krossWordData, &checksums))
+    if (!read(device, &krossWordData, &checksums)) {
         return false;
+    }
 
     PuzChecksums generatedChecksums = generateChecksums(device, krossWordData);
     qDebug() << "main" << checksums.main << "=?=" << generatedChecksums.main;
     qDebug() << "cib" << checksums.cib << "=?=" << generatedChecksums.cib;
-    for (int i = 0; i < 8; ++i)
+    for (int i = 0; i < 8; ++i) {
         qDebug() << "masked" << i << checksums.masked[i] << "=?=" << generatedChecksums.masked[i];
+    }
 
     QList<ClueInfo> acrossClues, downClues;
     bool mappingCluesOk = mapClues(krossWordData, acrossClues, downClues);
@@ -200,9 +205,9 @@ bool KrossWordPuzStream::read(QIODevice* device, KrossWord* krossWord)
         for (int x = coords.first; x < krossWordData.width; ++x) {
             uint index = coordsToIndex(x, coords.second, krossWordData.width);
             char ch = krossWordData.solution[ index ];
-            if (ch == '.')
+            if (ch == '.') {
                 break;
-            else {
+            } else {
                 answer += ch;
 
                 char chState = krossWordData.state[ index ];
@@ -217,8 +222,9 @@ bool KrossWordPuzStream::read(QIODevice* device, KrossWord* krossWord)
                 } else if (!krossWord->crosswordTypeInfo().isCharacterLegal(chState)) {
                     qDebug() << "The state string contains a not allowed letter" << chState;
                     currentAnswer += ' ';
-                } else
+                } else {
                     currentAnswer += chState;
+                }
             }
         }
 
@@ -237,6 +243,8 @@ bool KrossWordPuzStream::read(QIODevice* device, KrossWord* krossWord)
             clue->setCurrentAnswer(currentAnswer, Unknown);
         }
     }
+
+    //-------------------------------------
 
     foreach(ClueInfo clueInfo, downClues) {
         QPair<uint, uint> coords = indexToCoords(clueInfo.gridIndex, krossWordData.width);
@@ -275,10 +283,10 @@ bool KrossWordPuzStream::read(QIODevice* device, KrossWord* krossWord)
         }
     }
 
-    krossWord->setTitle(krossWordData.title);
-    krossWord->setAuthors(krossWordData.authors);
-    krossWord->setCopyright(krossWordData.copyright);
-    krossWord->setNotes(krossWordData.notes);
+    krossWord->setTitle(QString::fromLatin1(krossWordData.title));
+    krossWord->setAuthors(QString::fromLatin1(krossWordData.authors));
+    krossWord->setCopyright(QString::fromLatin1(krossWordData.copyright));
+    krossWord->setNotes(QString::fromLatin1(krossWordData.notes));
 
     krossWord->animator()->setEnabled(true);
     krossWord->blockSignals(wasBlockingSignals);
@@ -543,8 +551,9 @@ bool KrossWordPuzStream::mapClues(const KrossWordData &krossWordData,
     //  Iterate through all cells
     for (qint8 y = 0; y < krossWordData.height; ++y) {
         for (qint8 x = 0; x < krossWordData.width; ++x) {
-            if (krossWordData.solution[coordsToIndex(x, y, krossWordData.width)] == '.')
+            if (krossWordData.solution[coordsToIndex(x, y, krossWordData.width)] == '.') {
                 continue;
+            }
 
             bool assignedNumber = false;
             if (cellNeedsAcrossNumber(x, y, krossWordData.width, krossWordData.solution)) {
@@ -555,9 +564,10 @@ bool KrossWordPuzStream::mapClues(const KrossWordData &krossWordData,
                     return false;
                 }
                 acrossClues.append(ClueInfo(coordsToIndex(x, y, krossWordData.width),
-                                            curClueNumber, krossWordData.clues[curClueIndex++]));
+                                            curClueNumber, QString::fromLatin1(krossWordData.clues[curClueIndex++])));
                 assignedNumber = true;
             }
+
             if (cellNeedsDownNumber(x, y, krossWordData.width, krossWordData.solution)) {
                 if (curClueIndex >= (uint)krossWordData.clues.count()) {
                     qDebug() << "Error in reading PUZ from device" << device();
@@ -566,7 +576,7 @@ bool KrossWordPuzStream::mapClues(const KrossWordData &krossWordData,
                     return false;
                 }
                 downClues.append(ClueInfo(coordsToIndex(x, y, krossWordData.width),
-                                          curClueNumber, krossWordData.clues[curClueIndex++]));
+                                          curClueNumber, QString::fromLatin1(krossWordData.clues[curClueIndex++])));
                 assignedNumber = true;
             }
 
