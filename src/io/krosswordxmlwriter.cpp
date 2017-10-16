@@ -115,14 +115,14 @@ void KrossWordXmlWriter::writeKrossWord(KrossWord* krossWord,
     writeAttribute("height", QString::number(krossWord->height()));
     writeAttribute("type", krossWord->crosswordTypeInfo().typeString());
 
-    if (!krossWord->title().isEmpty() && writeMode != KrossWord::Template)
-        writeTextElement("title", krossWord->title());
-    if (!krossWord->authors().isEmpty())
-        writeTextElement("authors", krossWord->authors());
-    if (!krossWord->copyright().isEmpty())
-        writeTextElement("copyright", krossWord->copyright());
-    if (!krossWord->notes().isEmpty())
-        writeTextElement("notes", krossWord->notes());
+    if (!krossWord->getTitle().isEmpty() && writeMode != KrossWord::Template)
+        writeTextElement("title", krossWord->getTitle());
+    if (!krossWord->getAuthors().isEmpty())
+        writeTextElement("authors", krossWord->getAuthors());
+    if (!krossWord->getCopyright().isEmpty())
+        writeTextElement("copyright", krossWord->getCopyright());
+    if (!krossWord->getNotes().isEmpty())
+        writeTextElement("notes", krossWord->getNotes());
 
     if (krossWord->crosswordTypeInfo().crosswordType == UserDefinedCrossword) {
         CrosswordTypeInfo info = krossWord->crosswordTypeInfo();

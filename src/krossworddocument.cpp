@@ -66,8 +66,9 @@ QTextDocument& DocumentLayout::getCluesPage() {
 void DocumentLayout::makeCrosswordPage()
 {
     QString notes;
-    if (!m_crossword.notes().isEmpty())
-        notes = QString("<h5>%1</h5>").arg(m_crossword.notes());
+    if (!m_crossword.getNotes().isEmpty()) {
+        notes = QString("<h5>%1</h5>").arg(m_crossword.getNotes());
+    }
 
     m_crosswordPage.setHtml(QString("<html><body>"
                                     "<h1><crosswordTitle /></h1>"
@@ -77,9 +78,9 @@ void DocumentLayout::makeCrosswordPage()
                                     "<td align='right'><crosswordCopyright /></td>"
                                     "</tr></table></body>")
                             .replace("<crosswordNotes />",     notes)
-                            .replace("<crosswordTitle />",     m_crossword.title())
-                            .replace("<crosswordAuthors />",   m_crossword.authors())
-                            .replace("<crosswordCopyright />", m_crossword.copyright()));
+                            .replace("<crosswordTitle />",     m_crossword.getTitle())
+                            .replace("<crosswordAuthors />",   m_crossword.getAuthors())
+                            .replace("<crosswordCopyright />", m_crossword.getCopyright()));
 }
 
 void DocumentLayout::makeCluesPage()

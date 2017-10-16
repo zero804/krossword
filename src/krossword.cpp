@@ -90,7 +90,7 @@ void KrossWordHeaderItem::updateTheme(KrossWord* krossWord)
 
 void KrossWordHeaderItem::setContent(KrossWord *krossWord)
 {
-    if (krossWord->title().isEmpty()) {
+    if (krossWord->getTitle().isEmpty()) {
         if (m_titleItem) {
             scene()->removeItem(m_titleItem);
             delete m_titleItem;
@@ -108,10 +108,10 @@ void KrossWordHeaderItem::setContent(KrossWord *krossWord)
         m_titleItem->setDefaultTextColor(krossWord->theme()->fontColor());
         m_titleItem->setTextWidth(krossWord->boundingRect().width()); // max width
 
-        m_titleItem->setPlainText(krossWord->title());
+        m_titleItem->setPlainText(krossWord->getTitle());
     }
 
-    if (krossWord->authors().isEmpty()) {
+    if (krossWord->getAuthors().isEmpty()) {
         if (m_authorsItem) {
             scene()->removeItem(m_authorsItem);
             delete m_authorsItem;
@@ -128,10 +128,10 @@ void KrossWordHeaderItem::setContent(KrossWord *krossWord)
         m_authorsItem->setDefaultTextColor(krossWord->theme()->fontColor());
         m_authorsItem->setTextWidth(krossWord->boundingRect().width());
 
-        if (krossWord->copyright().isEmpty()) {
-            m_authorsItem->setPlainText(krossWord->authors());
+        if (krossWord->getCopyright().isEmpty()) {
+            m_authorsItem->setPlainText(krossWord->getAuthors());
         } else {
-            m_authorsItem->setHtml(QString("<p style=\"text-align:right;\">%1<br>%2</p>").arg(krossWord->authors()).arg(krossWord->copyright()));
+            m_authorsItem->setHtml(QString("<p style=\"text-align:right;\">%1<br>%2</p>").arg(krossWord->getAuthors()).arg(krossWord->getCopyright()));
         }
     }
 

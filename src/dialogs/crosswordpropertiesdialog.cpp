@@ -46,10 +46,10 @@ CrosswordPropertiesDialog::CrosswordPropertiesDialog(KrossWord* krossWord, QWidg
     ui_properties.typeInfoWidget->addUserButtonElement(i18n("&Convert..."), this, SLOT(convertClicked()));
     ui_properties.typeInfoWidget->setTypeInfo(krossWord->crosswordTypeInfo());
 
-    ui_properties.title->setText(krossWord->title());
-    ui_properties.author->setText(krossWord->authors());
-    ui_properties.copyright->setText(krossWord->copyright());
-    ui_properties.notes->setText(krossWord->notes());
+    ui_properties.title->setText(krossWord->getTitle());
+    ui_properties.author->setText(krossWord->getAuthors());
+    ui_properties.copyright->setText(krossWord->getCopyright());
+    ui_properties.notes->setText(krossWord->getNotes());
 
     ui_properties.anchorCenter->setChecked(true);
 

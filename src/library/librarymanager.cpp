@@ -209,7 +209,7 @@ LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QStri
         outCrosswordUrl = QString();
         return E_ERROR_TYPE::ReadError;
     } else {
-        QString fileName = krossWord.title().trimmed();
+        QString fileName = krossWord.getTitle().trimmed();
         if (fileName.isEmpty()) {
             fileName = "untitled";
         }

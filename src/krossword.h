@@ -164,10 +164,10 @@ class KrossWord : public QGraphicsObject
     friend class SpannedCell; // To call replaceCell()
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
-    Q_PROPERTY(QString title READ title WRITE setTitle)
-    Q_PROPERTY(QString authors READ authors WRITE setAuthors)
-    Q_PROPERTY(QString copyright READ copyright WRITE setCopyright)
-    Q_PROPERTY(QString notes READ notes WRITE setNotes)
+    Q_PROPERTY(QString title READ getTitle WRITE setTitle)
+    Q_PROPERTY(QString authors READ getAuthors WRITE setAuthors)
+    Q_PROPERTY(QString copyright READ getCopyright WRITE setCopyright)
+    Q_PROPERTY(QString notes READ getNotes WRITE setNotes)
     Q_PROPERTY(bool editable READ isEditable WRITE setEditable)
     Q_PROPERTY(bool interactive READ isInteractive WRITE setInteractive)
 
@@ -345,28 +345,28 @@ public:
     }
 
     /** The title of the crossword. */
-    QString title() const {
+    QString getTitle() const {
         return m_title;
     }
     /** Sets the title of the crossword to @p title. */
     void setTitle(const QString &title);
 
     /** The authors of the crossword. */
-    QString authors() const {
+    QString getAuthors() const {
         return m_authors;
     }
     /** Sets the authors string to @p authors. */
     void setAuthors(const QString &authors);
 
     /** The copyright information string of the crossword. */
-    QString copyright() const {
+    QString getCopyright() const {
         return m_copyright;
     }
     /** Sets the copyright information string to @p copyright. */
     void setCopyright(const QString &copyright);
 
     /** Notes of the crossword. */
-    QString notes() const {
+    QString getNotes() const {
         return m_notes;
     }
     /** Sets the notes of the crossword to @p notes. */

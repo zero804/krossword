@@ -301,10 +301,10 @@ KrossWordPuzStream::KrossWordData::KrossWordData(KrossWord* krossWord,
 
     width = krossWord->width();
     height = krossWord->height();
-    title = krossWord->title().toLatin1();
-    authors = krossWord->authors().toLatin1();
-    copyright = krossWord->copyright().toLatin1();
-    notes = krossWord->notes().toLatin1();
+    title = krossWord->getTitle().toLatin1();
+    authors = krossWord->getAuthors().toLatin1();
+    copyright = krossWord->getCopyright().toLatin1();
+    notes = krossWord->getNotes().toLatin1();
 
     // Get crossword solution and state strings
     int gridStringLength = width * height;

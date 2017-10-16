@@ -265,7 +265,7 @@ void LibraryGui::downloadCrosswordResult(KJob *job)
         Crossword::KrossWord krossWord;
         if (krossWord.read(QUrl::fromLocalFile(m_downloadedCrossword->fileName()))) {
             if (m_downloadCrosswordsDlg) {
-                ui_download.labelTitleValue->setText(krossWord.title());
+                ui_download.labelTitleValue->setText(krossWord.getTitle());
                 ui_download.labelSizeValue->setText(QString::number(krossWord.width()) + 'x' + QString::number(krossWord.height()));
             }
         }

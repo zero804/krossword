@@ -1234,16 +1234,16 @@ ChangeCrosswordPropertiesCommand::ChangeCrosswordPropertiesCommand(
     UndoCommandExt* parent)
     : CrosswordCompoundUndoCommand(krossWord, parent)
 {
-    m_oldTitle = krossWord->title();
+    m_oldTitle = krossWord->getTitle();
     m_newTitle = newTitle;
 
-    m_oldAuthors = krossWord->authors();
+    m_oldAuthors = krossWord->getAuthors();
     m_newAuthors = newAuthors;
 
-    m_oldCopyright = krossWord->copyright();
+    m_oldCopyright = krossWord->getCopyright();
     m_newCopyright = newCopyright;
 
-    m_oldNotes = krossWord->notes();
+    m_oldNotes = krossWord->getNotes();
     m_newNotes = newNotes;
 
     if (newWidth == -1)

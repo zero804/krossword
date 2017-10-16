@@ -1928,9 +1928,9 @@ void CrossWordXmlGuiWindow::adjustGuiToCrosswordType()
         action(actionName(ShowClueDock))->setDisabled(true);
     } else {
         action(actionName(ShowClueDock))->setEnabled(true);
-        if (krossWord()->crosswordTypeInfo().clueCellHandling
-                == ClueCellsDisallowed)
+        if (krossWord()->crosswordTypeInfo().clueCellHandling == ClueCellsDisallowed) {
             m_clueDock->show();
+        }
     }
     setActionVisibility();
 }
@@ -1943,8 +1943,9 @@ void CrossWordXmlGuiWindow::unlockAndCallAutoSave()
 
 void CrossWordXmlGuiWindow::autoSaveToTempFile()
 {
-    if (!m_view || m_lastAutoSave.isNull())
+    if (!m_view || m_lastAutoSave.isNull()) {
         return;
+    }
 
     int secsSinceLastAutoSave = m_lastAutoSave.secsTo(QDateTime::currentDateTime());
     if (secsSinceLastAutoSave < MIN_SECS_BETWEEN_AUTOSAVES) {
@@ -1965,17 +1966,18 @@ void CrossWordXmlGuiWindow::autoSaveToTempFile()
         tmpFile.open();
         tmpFileName = tmpFile.fileName();
         tmpFile.close();
-    } else
+    } else {
         tmpFileName = m_curTmpFileName;
+    }
 
     bool writeOk = krossWord()->write(tmpFileName, &errorString,
                                       KrossWord::Normal,
                                       KrossWord::KrossWordPuzzleCompressedXmlFile,
                                       m_undoStack->data());
 
-    if (!writeOk)
+    if (!writeOk) {
         qDebug() << "Error while automatically saving temporary file:" << errorString;
-    else {
+    } else {
         qDebug() << "Saved crossword to temporary file.";
         m_lastAutoSave = QDateTime::currentDateTime();
 
@@ -1988,10 +1990,15 @@ void CrossWordXmlGuiWindow::autoSaveToTempFile()
 
 void CrossWordXmlGuiWindow::removeTempFile(const QString &fileName)
 {
-    if (!fileName.isEmpty())
+    if (!fileName.isEmpty()) {
         m_curTmpFileName = fileName;
-    if (m_curTmpFileName.isEmpty())
+
+    }
+
+    if (m_curTmpFileName.isEmpty()) {
         return;
+    }
+
     qDebug() << "remove temp file";
 
     QFile::remove(m_curTmpFileName);
@@ -2012,8 +2019,9 @@ void CrossWordXmlGuiWindow::setCurrentFileName(const QString& fileName)
         m_undoViewDock->setEnabled(false);
         m_currentCellDock->setEnabled(false);
         m_undoStack->clear(); // This causes the modification flag to be set
-        if (m_clueModel)
+        if (m_clueModel) {
             m_clueModel->clear();
+        }
         updateClueDock();
         setModificationType(NoModification);
 

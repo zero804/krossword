@@ -484,10 +484,10 @@ void KrossWordPuzzle::crosswordCurrentChanged(const QString& fileName, const QSt
     } else {
         stateChanged("no_file_opened", StateReverse);
 
-        if (m_mainCrossword->krossWord()->title().isEmpty())
+        if (m_mainCrossword->krossWord()->getTitle().isEmpty())
             m_caption = displayFileName(fileName);
         else
-            m_caption = m_mainCrossword->krossWord()->title();
+            m_caption = m_mainCrossword->krossWord()->getTitle();
     }
 
     setCaption(m_caption, m_mainCrossword->isModified());
