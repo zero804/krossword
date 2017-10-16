@@ -364,8 +364,6 @@ protected slots:
     void removeHorizontalClueSlot();
     void removeVerticalClueSlot();
 
-    void solutionViewResized(const QSize &oldSize, const QSize &newSize);
-
     void clueMappingCurrentLetterChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
     void clueMappingSetMappingClicked();
 
@@ -389,9 +387,6 @@ protected slots:
     void mousePressedOnCell(const QPointF &scenePos, Qt::MouseButton button, KrossWordCell *cell);
     void cluesAdded(ClueCellList clues);
     void cluesAboutToBeRemoved(ClueCellList clues);
-
-    void solutionWordLetterAdded(SolutionLetterCell *solutionLetter);
-    void solutionWordLetterAboutToBeRemoved(SolutionLetterCell *solutionLetter);
 
     void letterEditRequest(LetterCell* letter, const QChar &currentLetter, const QChar &newLetter);
 
@@ -432,7 +427,7 @@ private:
     QMenu *popupMenuEditCrosswordEmptyCell();
     QMenu *popupMenuEditCrosswordImageCell();
 
-    void draw_background(KrossWordPuzzleView *view) const;
+    void drawBackground(KrossWordPuzzleView *view) const;
 
     Ui::print_crossword ui_print_crossword;
     Ui::export_to_image ui_export_to_image;
@@ -446,7 +441,6 @@ private:
     int m_lastSavedUndoIndex;
 
     KrossWordPuzzleView *m_view;                // Owned
-    KrossWordPuzzleView *m_viewSolution;        // Owned
 
     ZoomWidget *m_zoomWidget;                   // Owned
     ViewZoomController *m_zoomController;       // Owned

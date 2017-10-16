@@ -290,7 +290,6 @@ void ViewZoomController::changeZoomSliderSlot(int zoomValue)
 
 CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
       m_view(nullptr),
-      m_viewSolution(nullptr),
       m_zoomWidget(nullptr),
       m_zoomController(nullptr),
       m_solutionProgress(nullptr),
@@ -487,19 +486,9 @@ KrossWordPuzzleView *CrossWordXmlGuiWindow::view() const
     return m_view;
 }
 
-KrossWordPuzzleView *CrossWordXmlGuiWindow::viewSolution() const
-{
-    return m_viewSolution;
-}
-
 KrossWord* CrossWordXmlGuiWindow::krossWord() const
 {
     return m_view ? m_view->krossWord() : NULL;
-}
-
-KrossWord* CrossWordXmlGuiWindow::solutionKrossWord() const
-{
-    return m_viewSolution ? m_viewSolution->krossWord() : NULL;
 }
 
 void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
@@ -640,7 +629,8 @@ bool CrossWordXmlGuiWindow::createNewCrossWord(const CrosswordTypeInfo &crosswor
     setState(ShowingCrossword);
     setEditMode();
     fitToPageSlot();
-    draw_background(m_view);
+
+    drawBackground(m_view);
 
     return true;
 }
@@ -673,7 +663,7 @@ bool CrossWordXmlGuiWindow::createNewCrossWordFromTemplate(const QString& templa
     setState(ShowingCrossword);
     setEditMode();
     fitToPageSlot();
-    draw_background(m_view);
+    drawBackground(m_view);
 
     return true;
 }
@@ -734,7 +724,6 @@ bool CrossWordXmlGuiWindow::loadFile(const QUrl &url, KrossWord::FileFormat file
         setCurrentFileName(resultUrl.path());
         m_lastSavedUndoIndex = m_undoStack->index();
 
-        updateSolutionInToolBar();
         m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
 
         if (krossWord()->crosswordTypeInfo().crosswordType == UnknownCrosswordType) {
@@ -1555,11 +1544,8 @@ void CrossWordXmlGuiWindow::updateTheme()
     Settings::setTheme(KrosswordRenderer::self()->getCurrentTheme()->name());
     Settings::self()->save();
 
-    if (viewSolution())
-        viewSolution()->scene()->update();
-
     // Add background
-    draw_background(view());
+    drawBackground(view());
 
     krossWord()->setTheme(KrosswordRenderer::self()->getCurrentTheme());
     krossWord()->clearCache();
@@ -1634,49 +1620,6 @@ void CrossWordXmlGuiWindow::updateClueDock()
     connect(m_clueSelectionModel, SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
             this, SLOT(currentClueInDockChanged(QModelIndex, QModelIndex)));
 
-}
-
-void CrossWordXmlGuiWindow::updateSolutionInToolBar()
-{
-    KToolBar *solutionToolBar = toolBar("solutionToolBar");
-
-    if (m_viewSolution) {
-        qDebug() << "Delete old solution view and remove all cells";
-//     m_viewSolution->krossWord()->removeAllCells();
-        delete m_viewSolution->scene();
-        delete m_viewSolution;
-        m_viewSolution = NULL;
-        solutionToolBar->clear();
-    }
-
-    solutionToolBar->setVisible(krossWord()->hasSolutionWord());
-    // TODO: enable/disable toggle solution toolbar action
-
-    KrossWord *separateSolutionCrossword =
-        krossWord()->createSeparateSolutionKrossWord(i18n("Solution"),
-                Qt::Horizontal, SyncContent | SyncSelection);
-    if (!separateSolutionCrossword) {
-        if (krossWord()->hasSolutionWord())
-            qDebug() << "Couldn't create a separate solution crossword.";
-        return;
-    }
-
-    KrossWordPuzzleScene *scene = new KrossWordPuzzleScene(separateSolutionCrossword);
-    scene->setStickyFocus(true);
-
-    m_viewSolution = new KrossWordPuzzleView(scene, this);
-    m_viewSolution->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    m_viewSolution->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    m_viewSolution->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
-    solutionToolBar->addWidget(m_viewSolution);
-    connect(m_viewSolution, SIGNAL(resized(QSize, QSize)), this, SLOT(solutionViewResized(QSize, QSize)));
-}
-
-void CrossWordXmlGuiWindow::solutionViewResized(const QSize &oldSize, const QSize &newSize)
-{
-    Q_UNUSED(oldSize);
-    Q_UNUSED(newSize);
-    m_viewSolution->fitInView(m_viewSolution->krossWord()->boundingRect(), Qt::KeepAspectRatio);
 }
 
 QDockWidget *CrossWordXmlGuiWindow::createClueDock()
@@ -1803,7 +1746,6 @@ void CrossWordXmlGuiWindow::setSolutionWordIndexRequested(
 {
     // TODO: Undo command
     solutionLetterCell->setSolutionWordIndex(newSolutionLetterIndex);
-    updateSolutionInToolBar();
 }
 
 void CrossWordXmlGuiWindow::convertToLetterCellRequested(
@@ -2050,8 +1992,6 @@ KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
     connect(view, SIGNAL(signalChangeStatusbar(const QString&)), this, SLOT(signalChangeStatusbar(const QString&)));
     connect(view->krossWord(), SIGNAL(cluesAdded(ClueCellList)), this, SLOT(cluesAdded(ClueCellList)));
     connect(view->krossWord(), SIGNAL(cluesAboutToBeRemoved(ClueCellList)), this, SLOT(cluesAboutToBeRemoved(ClueCellList)));
-    connect(view->krossWord(), SIGNAL(solutionWordLetterAdded(SolutionLetterCell*)), this, SLOT(solutionWordLetterAdded(SolutionLetterCell*)));
-    connect(view->krossWord(), SIGNAL(solutionWordLetterRemoved(SolutionLetterCell*)), this, SLOT(solutionWordLetterAboutToBeRemoved(SolutionLetterCell*)));
     connect(view->krossWord(), SIGNAL(currentClueChanged(ClueCell*)), this, SLOT(currentClueChanged(ClueCell*)));
     connect(view->krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));      // TODO: No slot?
     connect(view->krossWord(), SIGNAL(currentCellChanged(KrossWordCell*, KrossWordCell*)), this, SLOT(currentCellChanged(KrossWordCell*, KrossWordCell*)));
@@ -2760,7 +2700,7 @@ void CrossWordXmlGuiWindow::cluesAdded(ClueCellList clues)
     m_clueModel->addClue(clue);
 
     m_clueModel->sort(0);
-    draw_background(view());
+    drawBackground(view());
 }
 
 void CrossWordXmlGuiWindow::cluesAboutToBeRemoved(ClueCellList clues)
@@ -2773,18 +2713,6 @@ void CrossWordXmlGuiWindow::cluesAboutToBeRemoved(ClueCellList clues)
         foreach(ClueCell * clue, clues)
         m_clueModel->removeClue(clue);
     }
-}
-
-void CrossWordXmlGuiWindow::solutionWordLetterAboutToBeRemoved(SolutionLetterCell* solutionLetter)
-{
-    Q_UNUSED(solutionLetter);
-    updateSolutionInToolBar();
-}
-
-void CrossWordXmlGuiWindow::solutionWordLetterAdded(SolutionLetterCell* solutionLetter)
-{
-    Q_UNUSED(solutionLetter);
-    updateSolutionInToolBar();
 }
 
 void CrossWordXmlGuiWindow::popupMenuCellDestroyed(QObject *)
@@ -2915,7 +2843,7 @@ QMenu* CrossWordXmlGuiWindow::popupMenuEditCrosswordImageCell()
     return static_cast<QMenu*>(factory()->container("edit_crossword_image_cell_popup", this));
 }
 
-void CrossWordXmlGuiWindow::draw_background(KrossWordPuzzleView *view) const
+void CrossWordXmlGuiWindow::drawBackground(KrossWordPuzzleView *view) const
 {
     // Add background
     QBrush brush;
