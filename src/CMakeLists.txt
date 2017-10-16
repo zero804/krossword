@@ -13,6 +13,7 @@ set(krossword_SRCS
    krossword.cpp
    krosswordrenderer.cpp
    krossworddocument.cpp
+   krosswordheaderitem.cpp
    cluemodel.cpp
    htmldelegate.cpp
    dictionary.cpp
