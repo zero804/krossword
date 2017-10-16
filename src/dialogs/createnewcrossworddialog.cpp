@@ -40,8 +40,9 @@ CreateNewCrosswordDialog::CreateNewCrosswordDialog(QWidget* parent, Qt::WindowFl
 
     int previousIndex = ui_create_new.crosswordType->currentIndex();
     setCrosswordType(CrosswordTypeInfo::american());
-    if (previousIndex == ui_create_new.crosswordType->currentIndex())
+    if (previousIndex == ui_create_new.crosswordType->currentIndex()) {
         crosswordTypeChanged(ui_create_new.crosswordType->currentIndex());
+    }
 }
 
 CreateNewCrosswordDialog::~CreateNewCrosswordDialog()
@@ -84,11 +85,11 @@ void CreateNewCrosswordDialog::setCrosswordType(
                                   ui_create_new.crosswordType->model()->index(0, 0),
                                   Qt::UserRole + 1, static_cast<int>(crosswordTypeInfo.crosswordType));
 
-    if (indices.isEmpty())
+    if (indices.isEmpty()) {
         qDebug() << "Couldn't find the given crossword type in the model"
                  << crosswordTypeInfo.name
                  << CrosswordTypeInfo::stringFromType(crosswordTypeInfo.crosswordType);
-    else {
+    } else {
         m_typeInfo = crosswordTypeInfo;
         ui_create_new.crosswordType->setCurrentIndex(indices.first().row());
     }
@@ -223,8 +224,9 @@ void CreateNewCrosswordDialog::crosswordTypeChanged(int index)
     }
 
     m_previousConvertToTypeIndex = index;
-    if (!current.isValid())
+    if (!current.isValid()) {
         return;
+    }
 
     // Warn when trashing user defined crossword type settings
     if (m_changedUserDefinedSettings) {
@@ -238,24 +240,21 @@ void CreateNewCrosswordDialog::crosswordTypeChanged(int index)
         }
     }
 
-    CrosswordType crosswordType =
-        static_cast<CrosswordType>(current.data(Qt::UserRole + 1).toInt());
+    CrosswordType crosswordType = static_cast<CrosswordType>(current.data(Qt::UserRole + 1).toInt());
     if (crosswordType == UserDefinedCrossword) {
-        CrosswordTypeInfo userDefinedTypeInfo =
-            CrosswordTypeInfo::infoFromType(crosswordType);
+        CrosswordTypeInfo userDefinedTypeInfo = CrosswordTypeInfo::infoFromType(crosswordType);
         m_typeInfo.crosswordType = UserDefinedCrossword;
         m_typeInfo.name = userDefinedTypeInfo.name;
         m_typeInfo.description = userDefinedTypeInfo.description;
         m_typeInfo.longDescription = userDefinedTypeInfo.longDescription;
         m_typeInfo.iconName = userDefinedTypeInfo.iconName;
-    } else
+    } else {
         m_typeInfo = CrosswordTypeInfo::infoFromType(crosswordType);
+    }
+
     m_changedUserDefinedSettings = false;
 
-    ui_create_new.grpInfo->setTitle(m_typeInfo.name);
-
-    ui_create_new.typeInfoWidget->setDetailsElement(
-        !m_typeInfo.longDescription.isEmpty());
+    ui_create_new.typeInfoWidget->setDetailsElement(!m_typeInfo.longDescription.isEmpty());
     ui_create_new.typeInfoWidget->setRulesElement(true);
     ui_create_new.typeInfoWidget->setTypeInfo(m_typeInfo);
 }

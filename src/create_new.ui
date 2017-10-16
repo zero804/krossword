@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>599</width>
-    <height>584</height>
+    <height>488</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -312,9 +312,6 @@
          </property>
          <property name="text">
           <string>&amp;Location:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
          <property name="buddy">
           <cstring>templateLocation</cstring>
