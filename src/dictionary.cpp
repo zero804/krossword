@@ -218,7 +218,7 @@ bool KrosswordDictionary::createTables()
                     "score INTEGER DEFAULT 0, " \
                     "language VARCHAR (3) DEFAULT 'en', " \
                     "PRIMARY KEY(id), " \
-                    "UNIQUE (word) );");
+                    "UNIQUE (word)) ENGINE = InnoDB DEFAULT CHARSET = utf8;");
     if (!ok)
         qDebug() << "Couldn't create table" << query.lastError();
 
