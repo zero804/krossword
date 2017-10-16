@@ -1902,9 +1902,10 @@ void KrossWord::replaceCell(const Coord& coord,
         // top left cell.
         if (isAnimationTypeEnabled(AnimateAppear))
             animator()->animate(Animator::AnimateFadeIn, newCell);
-        else
+        else {
             newCell->show();
             newCell->setOpacity(1);
+        }
 
         newCell->setCoord(coord, false);
         newCellMoving = newCell->setPositionFromCoordinates();

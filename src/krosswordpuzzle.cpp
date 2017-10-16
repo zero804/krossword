@@ -325,8 +325,6 @@ void KrossWordPuzzle::settingsChanged()
     m_mainCrossword->updateTheme();
 
     m_mainCrossword->krossWord()->setAnimationTypes(animationTypesFromSettings());
-    if (m_mainCrossword->solutionKrossWord())
-        m_mainCrossword->solutionKrossWord()->setAnimationTypes(animationTypesFromSettings());
 }
 
 AnimationTypes KrossWordPuzzle::animationTypesFromSettings()
