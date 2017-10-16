@@ -253,12 +253,22 @@ void LibraryGui::downloadCrosswordResult(KJob *job)
             m_downloadedCrossword->close();
         }
 
-        KFileItem crossword(QUrl::fromLocalFile(m_downloadedCrossword->fileName()), "application/x-acrosslite-puz");
+        //generating preview...
+        KFileItem crossword(QUrl::fromLocalFile(m_downloadedCrossword->fileName()), "application/x-acrosslite-puz"); //currently we have just .puz providers
         QStringList plugin("crosswordthumbnail");
         m_downloadPreviewJob = new KIO::PreviewJob(KFileItemList() << crossword, QSize(256, 256), &plugin);
         connect(m_downloadPreviewJob, SIGNAL(gotPreview(KFileItem, QPixmap)), this, SLOT(downloadPreviewJobGotPreview(KFileItem, QPixmap)));
         connect(m_downloadPreviewJob, SIGNAL(failed(KFileItem)), this, SLOT(downloadPreviewJobFailed(KFileItem)));
         m_downloadPreviewJob->start();
+
+        //extracting metadata...
+        Crossword::KrossWord krossWord;
+        if (krossWord.read(QUrl::fromLocalFile(m_downloadedCrossword->fileName()))) {
+            if (m_downloadCrosswordsDlg) {
+                ui_download.labelTitleValue->setText(krossWord.title());
+                ui_download.labelSizeValue->setText(QString::number(krossWord.width()) + 'x' + QString::number(krossWord.height()));
+            }
+        }
     }
 }
 
