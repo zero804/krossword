@@ -24,7 +24,6 @@
 #include <KMessageBox>
 
 #include <QStandardItemModel>
-//#include <KStandardDirs>
 #include <templatemodel.h>
 #include <io/krosswordxmlreader.h>
 #include <QTimer>
@@ -105,9 +104,12 @@ void CreateNewCrosswordDialog::setup()
 
     // TODO: Setup default sizes toolbutton menu on crosswordTypes->selectionModel() => currentChanged
 
-    ui_create_new.author->setText(KUser().fullName());
-    ui_create_new.copyright->setText(i18nc("Default copyright value for new crosswords, 'YEAR, by USER'", "© %1, by %2",
-                                           QDate::currentDate().toString("yyyy"), KUser().fullName()));
+    KUser user;
+    QString userName = user.property(KUser::FullName).toString();
+
+    ui_create_new.author->setText(userName);
+    ui_create_new.copyright->setText(i18nc("Default copyright value for new crosswords, 'YEAR, by USER'", "© %1 %2",
+                                           QDate::currentDate().toString("yyyy"), userName));
     ui_create_new.notes->setText(i18nc("Default notes value for new crosswords", "Created with Krossword"));
 
     connect(ui_create_new.crosswordType, SIGNAL(currentIndexChanged(int)),
