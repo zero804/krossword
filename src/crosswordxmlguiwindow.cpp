@@ -2390,10 +2390,12 @@ void CrossWordXmlGuiWindow::removeVerticalClueSlot()
 
 void CrossWordXmlGuiWindow::checkSlot()
 {
-    if (krossWord()->check())
+    if (krossWord()->check()) {
         setState(ShowingCongratulations);
-    else
-        statusBar()->showMessage("There are missing / wrong letters, sorry.");
+    } else {
+        statusBar()->showMessage(i18n("There are missing / wrong letters, sorry."));
+        KMessageBox::information(this, i18n("There are missing / wrong letters, sorry."), i18n("Check"));
+    }
 }
 
 void CrossWordXmlGuiWindow::clearSlot()
