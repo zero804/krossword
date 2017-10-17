@@ -589,20 +589,19 @@ void EmptyCell::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
 void EmptyCell::drawBackground(QPainter* p, const QStyleOptionGraphicsItem* option)
 {
+    if (KrosswordRenderer::self()->hasElement("empty_cell")) {
+        KrosswordRenderer::self()->renderElement(p, "empty_cell", option->rect);
+    } else {
+        // The empty cell isn't themed in the current theme
+        p->fillRect(option->rect, Qt::black);
+        p->drawRect(option->rect.adjusted(0, 0, -1, -1));
+    }
+
     if (krossWord()->isEditable()) { // in editor mode
         if (isHighlighted()) {
-            p->fillRect(option->rect, krossWord()->theme()->selectionColor());
-            p->drawRect(option->rect.adjusted(0, 0, -1, -1));
-        } else {   
-            p->fillRect(option->rect, krossWord()->theme()->emptyCellColor());
-            p->drawRect(option->rect.adjusted(0, 0, -1, -1));
-        }
-    } else { // and in game mode
-        if (KrosswordRenderer::self()->hasElement("empty_cell")) {
-            KrosswordRenderer::self()->renderElement(p, "empty_cell", option->rect);
-        } else {
-            // The empty cell isn't themed in the current theme
-            p->fillRect(option->rect, Qt::black);
+            QColor selColor = krossWord()->theme()->selectionColor();
+            selColor.setAlpha(128);
+            p->fillRect(option->rect, selColor);
             p->drawRect(option->rect.adjusted(0, 0, -1, -1));
         }
     }
