@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>444</width>
-    <height>323</height>
+    <height>337</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -106,6 +106,9 @@ p, li { white-space: pre-wrap; }
       <widget class="QLineEdit" name="password">
        <property name="text">
         <string notr="true"/>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
        </property>
        <property name="passwordMode" stdset="0">
         <bool>true</bool>
