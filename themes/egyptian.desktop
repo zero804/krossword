@@ -64,7 +64,7 @@ SelectionColor=#FF6464
 FontColor=#F7CF42
 
 # Margins of cell contents: Left, Top, Right, Bottom
-LetterCellMargins=10,10,8,5
+LetterCellMargins=8,10,8,6
 ClueCellMargins=7,6,7,6
 
 #Size for the background element

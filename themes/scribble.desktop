@@ -64,7 +64,7 @@ SelectionColor=#FF6464
 FontColor=#396FB3
 
 # Margins of cell contents: Left, Top, Right, Bottom
-LetterCellMargins=4,10,4,2
+LetterCellMargins=3,8,3,2
 ClueCellMargins=3,3,3,3
 
 #Size for the background element (image from http://subtlepatterns.com/paper-fibers - CC BY-SA 3.0)
