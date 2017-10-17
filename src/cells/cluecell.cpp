@@ -873,7 +873,7 @@ QVariant ClueCell::itemChange(QGraphicsItem::GraphicsItemChange change, const QV
 
 QString ClueCell::clueWithNumber(QString format) const
 {
-    // if not a number puzzle
+    // if not a coded puzzle
     if (krossWord()->crosswordTypeInfo().clueMapping == CluesReferToSetsOfCells  && clueNumber() != -1) {
         // build the base string for item in clue list
         return QString(format).arg(clueNumber() + 1).arg(m_clue);

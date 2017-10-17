@@ -1185,7 +1185,7 @@ void CrossWordXmlGuiWindow::editClueNumberMappingSlot()
         }
 
         QString errorMessage;
-        if (!m_undoStack->tryPush(new SetNumberPuzzleMappingCommand(krossWord(), clueMapping), &errorMessage)) {
+        if (!m_undoStack->tryPush(new SetCodedPuzzleMappingCommand(krossWord(), clueMapping), &errorMessage)) {
             statusBar()->showMessage(i18nc("%1 contains the reason why the new clue number mapping couldn't be applied", "Can't apply clue number mapping. %1", errorMessage));
         }
     }

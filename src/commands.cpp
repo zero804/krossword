@@ -193,8 +193,8 @@ QDebug& operator<<(QDebug debug, UndoCommandExt::Command command)
         return debug << "CommandSetClueHidden";
     case UndoCommandExt::CommandMakeClueCellVisible:
         return debug << "CommandMakeClueCellVisible";
-    case UndoCommandExt::CommandSetNumberPuzzleMapping:
-        return debug << "CommandSetNumberPuzzleMapping";
+    case UndoCommandExt::CommandSetCodedPuzzleMapping:
+        return debug << "CommandSetCodedPuzzleMapping";
     case UndoCommandExt::CommandSetupSameLetterSynchronization:
         return debug << "CommandSetupSameLetterSynchronization";
     case UndoCommandExt::CommandRemoveSameLetterSynchronization:
@@ -252,8 +252,8 @@ UndoCommandExt* UndoCommandExt::fromData(KrossWord* krossWord,
         return SetClueHiddenCommand::fromData(krossWord, stream, parent);
     case CommandMakeClueCellVisible:
         return MakeClueCellVisibleCommand::fromData(krossWord, stream, parent);
-    case CommandSetNumberPuzzleMapping:
-        return SetNumberPuzzleMappingCommand::fromData(krossWord, stream, parent);
+    case CommandSetCodedPuzzleMapping:
+        return SetCodedPuzzleMappingCommand::fromData(krossWord, stream, parent);
     case CommandSetupSameLetterSynchronization:
         return SetupSameLetterSynchronizationCommand::fromData(krossWord, stream, parent);
     case CommandRemoveSameLetterSynchronization:
@@ -1464,33 +1464,33 @@ void MakeClueCellVisibleCommand::undoMaybe()
 }
 
 
-SetNumberPuzzleMappingCommand::SetNumberPuzzleMappingCommand(
-    KrossWord* krossWord, const QString &newNumberPuzzleMapping,
+SetCodedPuzzleMappingCommand::SetCodedPuzzleMappingCommand(
+    KrossWord* krossWord, const QString &newCodedPuzzleMapping,
     UndoCommandExt* parent)
     : UndoCommandExt(parent), m_krossWord(krossWord)
 {
-    m_oldNumberPuzzleMapping = krossWord->letterContentToClueNumberMapping();
-    m_newNumberPuzzleMapping = newNumberPuzzleMapping.isEmpty()
-                               ? KrossWord::defaultNumberPuzzleMapping() : newNumberPuzzleMapping;
+    m_oldCodedPuzzleMapping = krossWord->letterContentToClueNumberMapping();
+    m_newCodedPuzzleMapping = newCodedPuzzleMapping.isEmpty()
+                               ? KrossWord::defaultCodedPuzzleMapping() : newCodedPuzzleMapping;
     setupText();
 }
 
-void SetNumberPuzzleMappingCommand::setupText()
+void SetCodedPuzzleMappingCommand::setupText()
 {
-    if (m_newNumberPuzzleMapping == KrossWord::defaultNumberPuzzleMapping())
-        setText(i18n("Set Default Number Puzzle Mapping"));
+    if (m_newCodedPuzzleMapping == KrossWord::defaultCodedPuzzleMapping())
+        setText(i18n("Set Default Coded Puzzle Mapping"));
     else
-        setText(i18n("Change Number Puzzle Mapping"));
+        setText(i18n("Change Coded Puzzle Mapping"));
 }
 
-void SetNumberPuzzleMappingCommand::redoMaybe()
+void SetCodedPuzzleMappingCommand::redoMaybe()
 {
-    m_krossWord->setLetterContentToClueNumberMapping(m_newNumberPuzzleMapping);
+    m_krossWord->setLetterContentToClueNumberMapping(m_newCodedPuzzleMapping);
 }
 
-void SetNumberPuzzleMappingCommand::undoMaybe()
+void SetCodedPuzzleMappingCommand::undoMaybe()
 {
-    m_krossWord->setLetterContentToClueNumberMapping(m_oldNumberPuzzleMapping);
+    m_krossWord->setLetterContentToClueNumberMapping(m_oldCodedPuzzleMapping);
 }
 
 
@@ -1643,17 +1643,16 @@ addConvertToSolutionLetterCommand(LetterCell* letter,
             solutionWordIndex, this);
 }
 
-SetNumberPuzzleMappingCommand*
-CrosswordCompoundUndoCommand::addSetDefaultNumberPuzzleMappingCommand()
+SetCodedPuzzleMappingCommand*
+CrosswordCompoundUndoCommand::addSetDefaultCodedPuzzleMappingCommand()
 {
-    return new SetNumberPuzzleMappingCommand(m_krossWord, QString(), this);
+    return new SetCodedPuzzleMappingCommand(m_krossWord, QString(), this);
 }
 
-SetNumberPuzzleMappingCommand*
-CrosswordCompoundUndoCommand::addSetNumberPuzzleMappingCommand(
-    const QString& numberPuzzleMapping)
+SetCodedPuzzleMappingCommand*
+CrosswordCompoundUndoCommand::addSetCodedPuzzleMappingCommand(const QString& codedPuzzleMapping)
 {
-    return new SetNumberPuzzleMappingCommand(m_krossWord, numberPuzzleMapping, this);
+    return new SetCodedPuzzleMappingCommand(m_krossWord, codedPuzzleMapping, this);
 }
 
 SetupSameLetterSynchronizationCommand*
@@ -1755,11 +1754,11 @@ ConvertCrosswordCommand::ConvertCrosswordCommand(KrossWord* krossWord,
         addLetterEditCommand(true, it.key()->coord(), it.key()->correctLetter(), it.value());
     }
 
-    if (conversionInfo.conversionCommands.testFlag(KrossWord::SetDefaultNumberPuzzleMapping))
-        addSetDefaultNumberPuzzleMappingCommand();
-//     new SetDefaultNumberPuzzleMappingCommand( m_krossWord, this );
-//     qDebug() << "TODO: SetDefaultNumberPuzzleMappingCommand";
-//     m_numberPuzzleMapping = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    if (conversionInfo.conversionCommands.testFlag(KrossWord::SetDefaultCodedPuzzleMapping))
+        addSetDefaultCodedPuzzleMappingCommand();
+//     new SetDefaultCodedPuzzleMappingCommand( m_krossWord, this );
+//     qDebug() << "TODO: SetDefaultCodedPuzzleMappingCommand";
+//     m_codedPuzzleMapping = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     if (conversionInfo.conversionCommands.testFlag(KrossWord::SetupSameLetterSynchronization))
         addSetupSameLetterSynchronizationCommand();
@@ -2365,15 +2364,15 @@ SetClueHiddenCommand::SetClueHiddenCommand(KrossWord* krossWord,
     setupText();
 }
 
-void SetNumberPuzzleMappingCommand::appendToData(QDataStream *stream) const
+void SetCodedPuzzleMappingCommand::appendToData(QDataStream *stream) const
 {
-    *stream << m_oldNumberPuzzleMapping << m_newNumberPuzzleMapping;
+    *stream << m_oldCodedPuzzleMapping << m_newCodedPuzzleMapping;
 }
 
-SetNumberPuzzleMappingCommand::SetNumberPuzzleMappingCommand(
+SetCodedPuzzleMappingCommand::SetCodedPuzzleMappingCommand(
     KrossWord* krossWord, QDataStream* stream, UndoCommandExt* parent)
     : UndoCommandExt(parent), m_krossWord(krossWord)
 {
-    *stream >> m_oldNumberPuzzleMapping >> m_newNumberPuzzleMapping;
+    *stream >> m_oldCodedPuzzleMapping >> m_newCodedPuzzleMapping;
     setupText();
 }

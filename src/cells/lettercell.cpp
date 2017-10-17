@@ -871,7 +871,7 @@ void LetterCell::drawClueForCell(QPainter* p, const QStyleOptionGraphicsItem* op
     QRect rect = fontMetrics.boundingRect(text);
     rect.setWidth(fontMetrics.width(text));
     QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect, krossWord()->theme()->marginsLetterCell(levelOfDetail));
-    p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect, TopRight /*krossWord()->theme()->numberPuzzleCluePos()*/), text);
+    p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect, TopRight /*krossWord()->theme()->codedPuzzleCluePos()*/), text);
     p->restore();
 }
 

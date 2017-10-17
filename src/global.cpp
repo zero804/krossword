@@ -341,8 +341,8 @@ CrosswordType CrosswordTypeInfo::typeFromString(const QString& crosswordType)
         return Swedish;
     else if (type == "crossnumber")
         return CrossNumber;
-    else if (type == "numberpuzzle")
-        return NumberPuzzle;
+    else if (type == "codedpuzzle")
+        return CodedPuzzle;
     else if (type == "free")
         return FreeCrossword;
     else if (type == "unknown")
@@ -365,8 +365,8 @@ const QString CrosswordTypeInfo::stringFromType(CrosswordType crosswordType)
         return "swedish";
     case CrossNumber:
         return "crossNumber";
-    case NumberPuzzle:
-        return "numberPuzzle";
+    case CodedPuzzle:
+        return "codedPuzzle";
     case FreeCrossword:
         return "free";
     case UnknownCrosswordType:
@@ -394,8 +394,8 @@ const CrosswordTypeInfo CrosswordTypeInfo::infoFromType(
         return swedish();
     case CrossNumber:
         return crossNumber();
-    case NumberPuzzle:
-        return numberPuzzle();
+    case CodedPuzzle:
+        return codedPuzzle();
     case FreeCrossword:
         return free();
     default:
@@ -483,15 +483,15 @@ const CrosswordTypeInfo CrosswordTypeInfo::american()
                              QList<QSize>() << QSize(15, 15) << QSize(21, 21) << QSize(23, 23) << QSize(25, 25));
 }
 
-const CrosswordTypeInfo CrosswordTypeInfo::numberPuzzle()
+const CrosswordTypeInfo CrosswordTypeInfo::codedPuzzle()
 {
-    return CrosswordTypeInfo(NumberPuzzle, i18n("Number Puzzle"),
-                             i18nc("Short description of the crossword type 'Number Puzzle'",
-                                   "Number puzzles are a variant of crosswords in which each cell has a "
+    return CrosswordTypeInfo(CodedPuzzle, i18n("Coded Puzzle"),
+                             i18nc("Short description of the crossword type 'Coded Puzzle'",
+                                   "Coded puzzles are a variant of crosswords in which each cell has a "
                                    "number between 1 and 26. The solver has to find out for which letter of "
                                    "the alphabet a number stands."),
                              QString(),
-                             "crossword-numberpuzzle",
+                             "crossword-codedpuzzle",
                              ClueCellsDisallowed, false, 1, Characters,
                              CluesReferToCells, NumberClues1To26,
                              EmptyCellType

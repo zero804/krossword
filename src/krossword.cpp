@@ -115,9 +115,9 @@ void KrossWord::createNew(
     if (m_crosswordTypeInfo.clueType == NumberClues1To26
             && m_crosswordTypeInfo.clueMapping == CluesReferToCells
             && m_crosswordTypeInfo.letterCellContent == Characters) {
-        m_numberPuzzleMapping = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        m_codedPuzzleMapping = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     } else
-        m_numberPuzzleMapping.clear();
+        m_codedPuzzleMapping.clear();
 }
 
 bool KrossWord::has180DegreeRotationSymmetry() const
@@ -286,7 +286,7 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
 
         if (newInfo.clueMapping == CluesReferToCells
                 && newInfo.letterCellContent == Characters) {
-            qDebug() << "Convert to number puzzle clue mapping";
+            qDebug() << "Convert to coded puzzle clue mapping";
 
             // Mark all clue cells to get removed from the crossword grid
             for (int i = clueList.count() - 1; i >= 0; --i) {
@@ -296,7 +296,7 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
                     conversionInfo.cellsToRemove << clueList.takeAt(i);
             }
 
-            conversionInfo.conversionCommands |= SetDefaultNumberPuzzleMapping;
+            conversionInfo.conversionCommands |= SetDefaultCodedPuzzleMapping;
             conversionInfo.conversionCommands |= SetupSameLetterSynchronization;
         } else {
             qDebug() << "Can't convert, removing all clues";
@@ -420,8 +420,8 @@ void KrossWord::executeConversionInfo(KrossWord::ConversionInfo conversionInfo)
         it.key()->setCorrectLetter(it.value());
     }
 
-    if (conversionInfo.conversionCommands.testFlag(SetDefaultNumberPuzzleMapping))
-        m_numberPuzzleMapping = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    if (conversionInfo.conversionCommands.testFlag(SetDefaultCodedPuzzleMapping))
+        m_codedPuzzleMapping = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     if (conversionInfo.conversionCommands.testFlag(SetupSameLetterSynchronization))
         setupSameLetterSynchronization();
@@ -533,24 +533,24 @@ QString KrossWord::conversionInfoToString(
 }
 
 void KrossWord::setLetterContentToClueNumberMapping(
-    const QString &numberPuzzleMapping, bool apply)
+    const QString &codedPuzzleMapping, bool apply)
 {
     if (apply)
-        applyLetterContentToClueNumberMapping(numberPuzzleMapping);
+        applyLetterContentToClueNumberMapping(codedPuzzleMapping);
     else {
-        if (m_numberPuzzleMapping == numberPuzzleMapping.toUpper())
+        if (m_codedPuzzleMapping == codedPuzzleMapping.toUpper())
             return;
-        m_numberPuzzleMapping = numberPuzzleMapping.toUpper();
+        m_codedPuzzleMapping = codedPuzzleMapping.toUpper();
     }
 }
 
 void KrossWord::applyLetterContentToClueNumberMapping(
-    const QString &numberPuzzleMapping)
+    const QString &codedPuzzleMapping)
 {
-    if (m_numberPuzzleMapping == numberPuzzleMapping.toUpper())
+    if (m_codedPuzzleMapping == codedPuzzleMapping.toUpper())
         return;
 
-    m_numberPuzzleMapping = numberPuzzleMapping.toUpper();
+    m_codedPuzzleMapping = codedPuzzleMapping.toUpper();
     clearCache();
 }
 

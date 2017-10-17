@@ -64,8 +64,8 @@ public:
     /** The background preferred render size */
     QSize preferredRenderSize() const;
 
-    /** The position of number clues inside letter cells for number puzzles. */
-    //ItemPosition numberPuzzleCluePos() const;
+    /** The position of number clues inside letter cells for coded puzzles. */
+    //ItemPosition codedPuzzleCluePos() const;
 
     /** The position of clue numbers for american crosswords. */
     //ItemPosition clueNumberPos() const;
@@ -85,7 +85,7 @@ private:
     QMargins m_marginsLetterCell, m_marginsClueCell;
     QColor m_glowColor, m_glowFocusColor, m_selectionColor, m_emptyCellColor, m_fontColor;
     QSize m_preferredRenderSize;
-    //ItemPosition m_numberPuzzleCluePos, m_clueNumberPos, m_solutionLetterIndexPos;
+    //ItemPosition m_codedPuzzleCluePos, m_clueNumberPos, m_solutionLetterIndexPos;
 };
 
 #endif // KROSSWORDTHEME_H

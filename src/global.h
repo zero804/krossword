@@ -243,7 +243,7 @@ enum CrosswordType {
             * in it and an arrow to indicate in which direction the clues have to be answered. */
     CrossNumber, /**< Crossnumbers are the numerical analogy of a crossword, in
             * which the solutions to the clues are numbers instead of words. */
-    NumberPuzzle /**< Number puzzles are a variant of crosswords in which each cell
+    CodedPuzzle /**< Coded puzzles are a variant of crosswords in which each cell
             * has a number between 1 and 26. The solver has to find out for which letter
             * of the alphabet a number stands. */
 };
@@ -267,14 +267,14 @@ enum ClueCellHandling {
             * cell are disallowed. */
     ClueCellsDisallowed /**< Clue cells are disallowed. Clues with a visible clue
             * cell are disallowed. */
-    //NoClues /** The crossword has no clues, eg. for number puzzles. */
+    //NoClues /** The crossword has no clues, eg. for coded puzzles. */
 };
 
 /** The type of clues used by the crossword. */
 enum ClueType {
     StringClues, /**< Clues are strings. */
     NumberClues1To26 /**< Clues are numbers between 1 and 26, eg. used by
-            * number puzzles. */
+            * coded puzzles. */
 };
 
 /** The type of clue mapping used by the crossword. */
@@ -282,7 +282,7 @@ enum ClueMapping {
     CluesReferToSetsOfCells, /**< Each clue refers to a set of cells, eg. a set of letter cells, ie. answers. */
     CluesReferToCells /**< Each clue refers to a single letter.
             * The crossword has a fixed set of clues, eg. numbers. This is used by
-            * number puzzles. */
+            * coded puzzles. */
 };
 
 struct CrosswordTypeInfo {
@@ -313,7 +313,7 @@ public:
 
     static const QList< CrosswordType > typeList() {
         return QList< CrosswordType >()
-               << American << Swedish << CrossNumber << NumberPuzzle
+               << American << Swedish << CrossNumber << CodedPuzzle
                << FreeCrossword << UserDefinedCrossword;
     };
 
@@ -350,7 +350,7 @@ public:
     static const CrosswordTypeInfo defaultUserDefined();
     static const CrosswordTypeInfo swedish();
     static const CrosswordTypeInfo american();
-    static const CrosswordTypeInfo numberPuzzle();
+    static const CrosswordTypeInfo codedPuzzle();
     static const CrosswordTypeInfo crossNumber();
 
     QString typeString() const {

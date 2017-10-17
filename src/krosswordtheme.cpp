@@ -57,7 +57,7 @@ bool KrosswordTheme::readFromDesktopFile(const QString& file)
 
     // (original) TODO only use "free" positions as default values
     //m_clueNumberPos = positionFromString(customData("ClueNumberPos", ""), BottomRight);
-    //m_numberPuzzleCluePos = positionFromString(customData("NumberPuzzleCluePos", ""), TopRight);
+    //m_codedPuzzleCluePos = positionFromString(customData("CodedPuzzleCluePos", ""), TopRight);
     //m_solutionLetterIndexPos = positionFromString(customData("SolutionLetterIndexPos", ""), BottomLeft);
 
     return true;
@@ -78,7 +78,7 @@ KrosswordTheme* KrosswordTheme::defaultValues()
     theme->m_preferredRenderSize = QSize(0, 0);
 
     //theme->m_clueNumberPos = BottomRight;
-    //theme->m_numberPuzzleCluePos = TopRight;
+    //theme->m_codedPuzzleCluePos = TopRight;
     //theme->m_solutionLetterIndexPos = BottomLeft;
 
     return theme;
@@ -173,8 +173,8 @@ QSize KrosswordTheme::preferredRenderSize() const {
 }
 
 /*
-ItemPosition KrosswordTheme::numberPuzzleCluePos() const {
-    return m_numberPuzzleCluePos;
+ItemPosition KrosswordTheme::codedPuzzleCluePos() const {
+    return m_codedPuzzleCluePos;
 }
 */
 

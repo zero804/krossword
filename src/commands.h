@@ -91,7 +91,7 @@ public:
         CommandChangeCrosswordProperties = 12,
         CommandSetClueHidden = 13,
         CommandMakeClueCellVisible = 14,
-        CommandSetNumberPuzzleMapping = 15,
+        CommandSetCodedPuzzleMapping = 15,
         CommandSetupSameLetterSynchronization = 16,
         CommandRemoveSameLetterSynchronization = 17,
         CommandConvertCrossword = 18,
@@ -203,7 +203,7 @@ class AddClueCommand;
 // typedef ReverseUndoCommand<RemoveClueCommand> AddClueCommand;
 class ResizeCrosswordCommand;
 class LetterEditCommand;
-class SetNumberPuzzleMappingCommand;
+class SetCodedPuzzleMappingCommand;
 class SetupSameLetterSynchronizationCommand;
 class RemoveSameLetterSynchronizationCommand;
 class MakeClueCellVisibleCommand;
@@ -252,9 +252,8 @@ public:
         SolutionLetterCell *solutionLetter);
     ConvertToSolutionLetterCommand *addConvertToSolutionLetterCommand(
         LetterCell *letter, int solutionWordIndex);
-    SetNumberPuzzleMappingCommand *addSetDefaultNumberPuzzleMappingCommand();
-    SetNumberPuzzleMappingCommand *addSetNumberPuzzleMappingCommand(
-        const QString &numberPuzzleMapping);
+    SetCodedPuzzleMappingCommand *addSetDefaultCodedPuzzleMappingCommand();
+    SetCodedPuzzleMappingCommand *addSetCodedPuzzleMappingCommand(const QString &codedPuzzleMapping);
     SetupSameLetterSynchronizationCommand *addSetupSameLetterSynchronizationCommand();
     RemoveSameLetterSynchronizationCommand *addRemoveSameLetterSynchronizationCommand();
     MakeClueCellVisibleCommand *addMakeClueCellVisibleCommand(ClueCell *clue);
@@ -881,35 +880,33 @@ private:
     Coord m_firstLetterCoord;
 };
 
-class SetNumberPuzzleMappingCommand : public UndoCommandExt
+class SetCodedPuzzleMappingCommand : public UndoCommandExt
 {
 public:
-    SetNumberPuzzleMappingCommand(KrossWord *krossWord,
-                                  const QString &newNumberPuzzleMapping,
-                                  UndoCommandExt* parent = 0);
+    SetCodedPuzzleMappingCommand(KrossWord *krossWord, const QString &newCodedPuzzleMapping, UndoCommandExt* parent = 0);
 
     virtual void redoMaybe();
     virtual void undoMaybe();
 
     virtual Command type() const {
-        return CommandSetNumberPuzzleMapping;
+        return CommandSetCodedPuzzleMapping;
     }
     virtual void appendToData(QDataStream *stream) const;
-    static SetNumberPuzzleMappingCommand *fromData(KrossWord *krossWord,
+    static SetCodedPuzzleMappingCommand *fromData(KrossWord *krossWord,
             QDataStream *stream, UndoCommandExt *parent = NULL) {
-        return new SetNumberPuzzleMappingCommand(krossWord, stream, parent);
+        return new SetCodedPuzzleMappingCommand(krossWord, stream, parent);
     }
 
 protected:
-    SetNumberPuzzleMappingCommand(KrossWord *krossWord, QDataStream *stream,
+    SetCodedPuzzleMappingCommand(KrossWord *krossWord, QDataStream *stream,
                                   UndoCommandExt *parent = NULL);
 
 private:
     void setupText();
 
     KrossWord *m_krossWord;
-    QString m_oldNumberPuzzleMapping;
-    QString m_newNumberPuzzleMapping;
+    QString m_oldCodedPuzzleMapping;
+    QString m_newCodedPuzzleMapping;
 };
 
 class SetupSameLetterSynchronizationCommand : public UndoCommandExt

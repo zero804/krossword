@@ -171,7 +171,7 @@ public:
         NoCommand = 0x00,
 
         SetupSameLetterSynchronization = 0x01,
-        SetDefaultNumberPuzzleMapping = 0x02
+        SetDefaultCodedPuzzleMapping = 0x02
     };
     Q_DECLARE_FLAGS(ConversionCommands, ConversionCommand)
 
@@ -633,13 +633,12 @@ public:
     * @see highlightedClue */
     void setHighlightedClue(ClueCell *clue);
 
-    void applyLetterContentToClueNumberMapping(const QString &numberPuzzleMapping);
-    void setLetterContentToClueNumberMapping(const QString &numberPuzzleMapping,
-            bool apply = true);
+    void applyLetterContentToClueNumberMapping(const QString &codedPuzzleMapping);
+    void setLetterContentToClueNumberMapping(const QString &codedPuzzleMapping, bool apply = true);
     QString letterContentToClueNumberMapping() const {
-        return m_numberPuzzleMapping;
+        return m_codedPuzzleMapping;
     }
-    static const QString defaultNumberPuzzleMapping() {
+    static const QString defaultCodedPuzzleMapping() {
         return "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
 
@@ -943,11 +942,11 @@ private:
 
     CrosswordTypeInfo m_crosswordTypeInfo; // Stores information about the crossword type
 
-    // Only used if crosswordType is NumberPuzzle:
+    // Only used if crosswordType is CodedPuzzle:
     // Stores how characters are mapped to (number) clues. Each character in the
     // string is mapped to the clue with the number n = i + 1, where i is the index
     // of that character in the string. Note: 1 <= n <= 26.
-    QString m_numberPuzzleMapping;
+    QString m_codedPuzzleMapping;
 
     AnimationTypes m_animationTypes;
     float m_animationDurationFactor;
@@ -974,8 +973,8 @@ inline QDebug &operator <<(QDebug debug,
         return debug << "No command";
     case KrossWord::SetupSameLetterSynchronization:
         return debug << "SetupSameLetterSynchronization";
-    case KrossWord::SetDefaultNumberPuzzleMapping:
-        return debug << "SetDefaultNumberPuzzleMapping";
+    case KrossWord::SetDefaultCodedPuzzleMapping:
+        return debug << "SetDefaultCodedPuzzleMapping";
     default:
         return debug << "ConversionCommand unknown" << conversionCommand;
     }
