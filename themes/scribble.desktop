@@ -59,8 +59,6 @@ FocusGlowColor=#FF4040
 
 # The color for selected cells in edit mode
 SelectionColor=#FF6464
-# The color for empty cells in edit mode
-EmptyCellColor=#646464
 
 # The font color
 FontColor=#396FB3

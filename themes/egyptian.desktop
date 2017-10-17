@@ -59,8 +59,6 @@ FocusGlowColor=#FF2814
 
 # The color for selected cells in edit mode (255,100,100,128) TODO: fix transparency
 SelectionColor=#FF6464
-# The color for empty cells in edit mode (70,70,70,128)
-EmptyCellColor=#464646
 
 # The font color (245,177,17)
 FontColor=#F7CF42

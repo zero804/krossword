@@ -47,7 +47,6 @@ bool KrosswordTheme::readFromDesktopFile(const QString& file)
 
     m_glowFocusColor = QColor(customData("FocusGlowColor", "255, 64, 64"));
     m_selectionColor = QColor(customData("SelectionColor", "255, 100, 100, 128"));
-    m_emptyCellColor = QColor(customData("EmptyCellColor", "100, 100, 100, 128"));
     m_fontColor = QColor(customData("FontColor", "#000000"));
 
     QStringList preferredRenderSize = (customData("PreferredRenderSize", "0,0")).split(",", QString::SkipEmptyParts);
@@ -73,7 +72,6 @@ KrosswordTheme* KrosswordTheme::defaultValues()
     theme->m_glowColor = QColor(64, 64, 255);
     theme->m_glowFocusColor = QColor(255, 64, 64);
     theme->m_selectionColor = QColor(255, 100, 100, 128);
-    theme->m_emptyCellColor = QColor(100, 100, 100, 128);
     theme->m_fontColor = QColor(0, 0, 0);
     theme->m_preferredRenderSize = QSize(0, 0);
 
@@ -158,10 +156,6 @@ QColor KrosswordTheme::glowFocusColor() const {
 
 QColor KrosswordTheme::selectionColor() const {
     return m_selectionColor;
-}
-
-QColor KrosswordTheme::emptyCellColor() const {
-    return m_emptyCellColor;
 }
 
 QColor KrosswordTheme::fontColor() const {
