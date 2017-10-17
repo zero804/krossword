@@ -895,55 +895,57 @@ void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* opt
             y = option->rect.height() * 0.35f;
         }
 
-        switch (clueHorizontal()->answerOffset()) {
-        case OnClueCell:
-        case OffsetRight:
-            KrosswordRenderer::self()->renderElement(p,
-                    "arrow_right",
-                    QRect(option->rect.left() + 1, option->rect.top() + y, arrowLength, arrowWidth));
-            break;
-        case OffsetTop:
-            KrosswordRenderer::self()->renderElement(p,
-                    "arrow_bottom_right",
-                    QRect(option->rect.left() + x, option->rect.top() + krossWord()->cellSize().height() - 1 - arrowWidth,
-                          arrowLength, arrowWidth));
-            break;
-        case OffsetBottom:
-            KrosswordRenderer::self()->renderElement(p,
-                    "arrow_top_right",
-                    QRect(option->rect.left() + x, option->rect.top() + 1,
-                          arrowLength, arrowWidth));
-            break;
-        case OffsetTopRight:
-            KrosswordRenderer::self()->renderElement(p,
-                    "arrow_bottomleft_right",
-                    QRect(option->rect.left() + 1, option->rect.top() +
-                          krossWord()->cellSize().height() - 1 - arrowWidth,
-                          arrowLength, arrowWidth));
-            break;
-        case OffsetBottomRight:
-            KrosswordRenderer::self()->renderElement(p,
-                    "arrow_topleft_right",
-                    QRect(option->rect.left() + 1, option->rect.top() + 1,
-                          arrowLength, arrowWidth));
-            break;
-        case OffsetTopLeft:
-            KrosswordRenderer::self()->renderElement(p,
-                    "arrow_bottomright_right",
-                    QRect(option->rect.left() + option->rect.width() - 1 - arrowLength,
-                          option->rect.top() + krossWord()->cellSize().height() - 1 - arrowWidth,
-                          arrowLength, arrowWidth));
-            break;
-        case OffsetBottomLeft:
-            KrosswordRenderer::self()->renderElement(p,
-                    "arrow_topright_right",
-                    QRect(option->rect.left() + option->rect.width() - 1 - arrowLength,
-                          option->rect.top() + 1, arrowLength, arrowWidth));
-            break;
-        default:
-            qDebug() << "Can't draw clue arrow for letterPosition"
-                     << clueHorizontal()->answerOffset()
-                     << "and orientation horizontal";
+        if(krossWord()->crosswordTypeInfo().crosswordType != CrosswordType::American) {
+            switch (clueHorizontal()->answerOffset()) {
+            case OnClueCell:
+            case OffsetRight:
+                KrosswordRenderer::self()->renderElement(p,
+                        "arrow_right",
+                        QRect(option->rect.left() + 1, option->rect.top() + y, arrowLength, arrowWidth));
+                break;
+            case OffsetTop:
+                KrosswordRenderer::self()->renderElement(p,
+                        "arrow_bottom_right",
+                        QRect(option->rect.left() + x, option->rect.top() + krossWord()->cellSize().height() - 1 - arrowWidth,
+                              arrowLength, arrowWidth));
+                break;
+            case OffsetBottom:
+                KrosswordRenderer::self()->renderElement(p,
+                        "arrow_top_right",
+                        QRect(option->rect.left() + x, option->rect.top() + 1,
+                              arrowLength, arrowWidth));
+                break;
+            case OffsetTopRight:
+                KrosswordRenderer::self()->renderElement(p,
+                        "arrow_bottomleft_right",
+                        QRect(option->rect.left() + 1, option->rect.top() +
+                              krossWord()->cellSize().height() - 1 - arrowWidth,
+                              arrowLength, arrowWidth));
+                break;
+            case OffsetBottomRight:
+                KrosswordRenderer::self()->renderElement(p,
+                        "arrow_topleft_right",
+                        QRect(option->rect.left() + 1, option->rect.top() + 1,
+                              arrowLength, arrowWidth));
+                break;
+            case OffsetTopLeft:
+                KrosswordRenderer::self()->renderElement(p,
+                        "arrow_bottomright_right",
+                        QRect(option->rect.left() + option->rect.width() - 1 - arrowLength,
+                              option->rect.top() + krossWord()->cellSize().height() - 1 - arrowWidth,
+                              arrowLength, arrowWidth));
+                break;
+            case OffsetBottomLeft:
+                KrosswordRenderer::self()->renderElement(p,
+                        "arrow_topright_right",
+                        QRect(option->rect.left() + option->rect.width() - 1 - arrowLength,
+                              option->rect.top() + 1, arrowLength, arrowWidth));
+                break;
+            default:
+                qDebug() << "Can't draw clue arrow for letterPosition"
+                         << clueHorizontal()->answerOffset()
+                         << "and orientation horizontal";
+            }
         }
 
         if (clueHorizontal()->answerOffset() == OnClueCell)
@@ -958,55 +960,57 @@ void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* opt
             y = option->rect.height() * 0.35f;
         }
 
-        switch (clueVertical()->answerOffset()) {
-        case OnClueCell:
-        case OffsetBottom:
-            KrosswordRenderer::self()->renderElement(p, "arrow_down",
-                    QRect(option->rect.left() + x, option->rect.top() + 1,
-                          arrowLength, arrowWidth));
-            break;
-        case OffsetRight:
-            KrosswordRenderer::self()->renderElement(p,
-                    "arrow_left_down",
-                    QRect(option->rect.left() + 1, option->rect.top() + y,
-                          arrowLength, arrowWidth));
-            break;
-        case OffsetLeft:
-            KrosswordRenderer::self()->renderElement(p,
-                    "arrow_right_down",
-                    QRect(option->rect.left() + krossWord()->cellSize().width() -
-                          1 - arrowLength, option->rect.top() + y, arrowLength, arrowWidth));
-            break;
-        case OffsetBottomRight:
-            KrosswordRenderer::self()->renderElement(p,
-                    "arrow_topleft_down",
-                    QRect(option->rect.left() + 1, option->rect.top() + 1,
-                          arrowLength, arrowWidth));
-            break;
-        case OffsetBottomLeft:
-            KrosswordRenderer::self()->renderElement(p,
-                    "arrow_topright_down",
-                    QRect(option->rect.left() + krossWord()->cellSize().width() -
-                          1 - arrowLength, option->rect.top() + 1, arrowLength, arrowWidth));
-            break;
-        case OffsetTopLeft:
-            KrosswordRenderer::self()->renderElement(p,
-                    "arrow_bottomright_down",
-                    QRect(option->rect.left() + option->rect.width() - 1 - arrowLength,
-                          option->rect.top() + krossWord()->cellSize().height() - 1 - arrowWidth,
-                          arrowLength, arrowWidth));
-            break;
-        case OffsetTopRight:
-            KrosswordRenderer::self()->renderElement(p,
-                    "arrow_bottomleft_down",
-                    QRect(option->rect.left() + 1, option->rect.top() +
-                          krossWord()->cellSize().height() - 1 - arrowWidth,
-                          arrowLength, arrowWidth));
-            break;
-        default:
-            qDebug() << "Can't draw clue arrow for letterPosition"
-                     << clueVertical()->answerOffset()
-                     << "and orientation Vertical";
+        if(krossWord()->crosswordTypeInfo().crosswordType != CrosswordType::American) {
+            switch (clueVertical()->answerOffset()) {
+            case OnClueCell:
+            case OffsetBottom:
+                KrosswordRenderer::self()->renderElement(p, "arrow_down",
+                        QRect(option->rect.left() + x, option->rect.top() + 1,
+                              arrowLength, arrowWidth));
+                break;
+            case OffsetRight:
+                KrosswordRenderer::self()->renderElement(p,
+                        "arrow_left_down",
+                        QRect(option->rect.left() + 1, option->rect.top() + y,
+                              arrowLength, arrowWidth));
+                break;
+            case OffsetLeft:
+                KrosswordRenderer::self()->renderElement(p,
+                        "arrow_right_down",
+                        QRect(option->rect.left() + krossWord()->cellSize().width() -
+                              1 - arrowLength, option->rect.top() + y, arrowLength, arrowWidth));
+                break;
+            case OffsetBottomRight:
+                KrosswordRenderer::self()->renderElement(p,
+                        "arrow_topleft_down",
+                        QRect(option->rect.left() + 1, option->rect.top() + 1,
+                              arrowLength, arrowWidth));
+                break;
+            case OffsetBottomLeft:
+                KrosswordRenderer::self()->renderElement(p,
+                        "arrow_topright_down",
+                        QRect(option->rect.left() + krossWord()->cellSize().width() -
+                              1 - arrowLength, option->rect.top() + 1, arrowLength, arrowWidth));
+                break;
+            case OffsetTopLeft:
+                KrosswordRenderer::self()->renderElement(p,
+                        "arrow_bottomright_down",
+                        QRect(option->rect.left() + option->rect.width() - 1 - arrowLength,
+                              option->rect.top() + krossWord()->cellSize().height() - 1 - arrowWidth,
+                              arrowLength, arrowWidth));
+                break;
+            case OffsetTopRight:
+                KrosswordRenderer::self()->renderElement(p,
+                        "arrow_bottomleft_down",
+                        QRect(option->rect.left() + 1, option->rect.top() +
+                              krossWord()->cellSize().height() - 1 - arrowWidth,
+                              arrowLength, arrowWidth));
+                break;
+            default:
+                qDebug() << "Can't draw clue arrow for letterPosition"
+                         << clueVertical()->answerOffset()
+                         << "and orientation Vertical";
+            }
         }
 
         if (clueVertical()->answerOffset() == OnClueCell)
