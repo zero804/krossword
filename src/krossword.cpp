@@ -59,15 +59,16 @@ KrossWord::KrossWord(const KrosswordTheme *theme, int width, int height)
 
 void KrossWord::init(uint width, uint height)
 {
-    if (!m_theme)
+    if (!m_theme) {
         m_theme = KrosswordTheme::defaultValues();
+    }
 
     m_topLeftCellOffset = QPointF(0, 0);
     m_krossWordGrid = new KrosswordGrid(width, height);
     m_editable = false;
     m_interactive = true;
     m_drawForPrinting = false;
-    m_animationTypes = AllAnimations;
+    m_hasAnimation = true;
     m_keyboardNavigation = DefaultKeyboardNavigation;
     m_emptyCellColorForPrinting = Qt::black;
     m_cellSize = QSizeF(50, 50);
@@ -575,18 +576,20 @@ void KrossWord::setCurrentCell(KrossWordCell* cell)
     if (m_currentCell) {
         m_focusItem->setRect(QRectF(m_currentCell->pos() + m_currentCell->boundingRect().topLeft(),
                                     m_currentCell->boundingRect().size()));
-        if (isAnimationTypeEnabled(AnimateFocusIn)) {
+        if (isAnimationEnabled()) {
             QPropertyAnimation *anim = new QPropertyAnimation(m_focusItem, "opacity");
             anim->setStartValue(m_focusItem->opacity());
             anim->setEndValue(1);
             animator()->startOrEnqueue(anim, Animator::Slowest);
-        } else
+        } else {
             m_focusItem->show();
+        }
     }
 
     if (cell) {
-        if (cell->isType(ImageCellType))
+        if (cell->isType(ImageCellType)) {
             setHighlightedClue(NULL);
+        }
         connect(m_currentCell, SIGNAL(destroyed(QObject*)),
                 this, SLOT(currentCellDestroyed(QObject*)));
     }
@@ -1427,8 +1430,9 @@ ErrorType KrossWord::changeClueProperties(ClueCell* clue,
     ErrorType errorType = canChangeClueProperties(clue,
                           newOrientation, offset, newCorrectAnswer,
                           errorTypesToIgnore, allowDoubleClueCells);
-    if (errorType != ErrorNone)
+    if (errorType != ErrorNone) {
         return errorType; // Can't change clue properties
+    }
 
     clue->setCorrectAnswer(newCorrectAnswer);
 
@@ -1450,18 +1454,21 @@ ErrorType KrossWord::changeClueProperties(ClueCell* clue,
     // double clue cell
     Coord coord = clue->coord();
     if (newAnswerOffset != OnClueCell && clue->answerOffset() == OnClueCell) {
-        if (!clue->scene())
+        if (!clue->scene()) {
             scene()->addItem(clue);
+        }
 
         KrossWordCell *cellAtCoord = at(coord);
         if (cellAtCoord->isType(ClueCellType)) {
             DoubleClueCell *doubleClueCell = new DoubleClueCell(
                 this, coord, qgraphicsitem_cast<ClueCell*>(cellAtCoord), clue);
             (*m_krossWordGrid)[ coord ] = doubleClueCell;
-        } else
+        } else {
             replaceCell(coord, clue);
-    } else if (newAnswerOffset == OnClueCell && clue->scene())
+        }
+    } else if (newAnswerOffset == OnClueCell && clue->scene()) {
         clue->scene()->removeItem(clue);
+    }
 
     // Insert/attach/move letter cells for the answer
     QString answerUpper = newCorrectAnswer.toUpper();
@@ -1494,7 +1501,7 @@ ErrorType KrossWord::changeClueProperties(ClueCell* clue,
                         }
                     }
 
-                    if (isAnimationTypeEnabled(AnimatePosChange)) {
+                    if (isAnimationEnabled()) {
                         QAbstractAnimation *anim = animator()->animate(
                                                        Animator::AnimatePositionChange, oldLetter, targetCell->pos(),
                                                        Animator::VerySlow, Animator::AnimateDontStart);
@@ -1503,8 +1510,9 @@ ErrorType KrossWord::changeClueProperties(ClueCell* clue,
                         connect(anim, SIGNAL(finished()), oldLetter,
                                 SLOT(deleteAndRemoveFromSceneLater()));
                         animator()->startOrEnqueue(anim);
-                    } else
+                    } else {
                         delete oldLetter;
+                    }
                 }
             } else {
                 // Letter cell was crossed, so create a new one
@@ -1537,8 +1545,9 @@ ErrorType KrossWord::changeClueProperties(ClueCell* clue,
         LetterCell *letter = letterList[ i ];
 
         // Remove cell from scene
-        if (letter->scene())
+        if (letter->scene()) {
             letter->scene()->removeItem(letter);
+        }
 
         // Delete old cell
         letter->setFlag(ItemIsFocusable, false);
@@ -1556,12 +1565,14 @@ ErrorType KrossWord::changeClueProperties(ClueCell* clue,
 
     SolutionLetterCellList solLettersAfter = solutionWordLetters(); // TODO
     foreach(SolutionLetterCell * solLetterCell, solLettersBefore) {
-        if (!solLettersAfter.contains(solLetterCell))
+        if (!solLettersAfter.contains(solLetterCell)) {
             emit solutionWordLetterRemoved(solLetterCell);
+        }
     }
     foreach(SolutionLetterCell * solLetterCell, solLettersAfter) {
-        if (!solLettersBefore.contains(solLetterCell))
+        if (!solLettersBefore.contains(solLetterCell)) {
             emit solutionWordLetterAdded(solLetterCell);
+        }
     }
 
     return ErrorNone;
@@ -1871,18 +1882,20 @@ void KrossWord::replaceCell(const Coord& coord,
                     EmptyCell *emptyCell = new EmptyCell(this, Coord(x, y));
                     (*m_krossWordGrid)[ Coord(x, y)] = emptyCell;
 
-                    if (isAnimationTypeEnabled(AnimateAppear))
+                    if (isAnimationEnabled()) {
                         animator()->animate(Animator::AnimateFadeIn, emptyCell);
-                    else
+                    } else {
                         emptyCell->setOpacity(1);
+                    }
                 }
             }
         }
         // Remove highlight from highlighted clues to be removed
         // and remove clue expander from all clues to be removed
     } else if ((clueCell = qgraphicsitem_cast<ClueCell*>(oldCell))) {
-        if (clueCell == m_highlightedClue)
+        if (clueCell == m_highlightedClue) {
             m_highlightedClue = NULL;
+        }
 
         ClueExpanderItem *clueExpander = m_clueExpanderItems[ clueCell ];
         if (clueExpander) {
@@ -1900,9 +1913,9 @@ void KrossWord::replaceCell(const Coord& coord,
         // wrongly move spanned cells when adding spanned cells because they
         // are referenced by all contained cells with m_coord pointing to the
         // top left cell.
-        if (isAnimationTypeEnabled(AnimateAppear))
+        if (isAnimationEnabled()) {
             animator()->animate(Animator::AnimateFadeIn, newCell);
-        else {
+        } else {
             newCell->show();
             newCell->setOpacity(1);
         }
@@ -1918,9 +1931,7 @@ void KrossWord::replaceCell(const Coord& coord,
         emit solutionWordLetterAdded((SolutionLetterCell*)newCell);
     }
 
-    if (isAnimationTypeEnabled(AnimateDisappear)
-            && !(dynamic_cast<SpannedCell*>(oldCell))) {
-
+    if (isAnimationEnabled() && !(dynamic_cast<SpannedCell*>(oldCell))) {
         QAbstractAnimation *anim = animator()->animate(Animator::AnimateFadeOut, oldCell,
                                    newCellMoving ? Animator::VerySlow : Animator::DefaultDuration,
                                    Animator::AnimateDontStart);
@@ -1928,24 +1939,29 @@ void KrossWord::replaceCell(const Coord& coord,
         if (newCellMoving) {
             oldCell->setZValue(-100);    // Set to back so that the new cell moves over the old one
             QVariantAnimation *varAnim = dynamic_cast< QVariantAnimation* >(anim);
-            if (varAnim)
+            if (varAnim) {
                 varAnim->setEasingCurve(QEasingCurve(QEasingCurve::InQuart));
-        } else
+            }
+        } else {
             oldCell->setZValue(100);   // Set on top when fading out
+        }
 
-        if (anim)
+        if (anim) {
             animator()->startOrEnqueue(anim);
+        }
 
         if (deleteOldCell) {
             if (anim) {   // Delete old cell after the animation
                 oldCell->setFlag(ItemIsFocusable, false);
                 connect(anim, SIGNAL(finished()), oldCell, SLOT(deleteAndRemoveFromSceneLater()));
-            } else
+            } else {
                 oldCell->deleteAndRemoveFromSceneLater();
+            }
         }
     } else {
-        if (deleteOldCell)
+        if (deleteOldCell) {
             oldCell->deleteAndRemoveFromSceneLater();
+        }
     }
 }
 
@@ -2103,8 +2119,10 @@ KrossWordCellList KrossWord::invalidateCellRegion(const Coord& coordTopLeft,
 
 void KrossWord::setEditable(bool editable)
 {
-    if (m_editable == editable)
+    if (m_editable == editable) {
         return;
+    }
+
     m_editable = editable;
 
     EmptyCellList cells = emptyCells();
@@ -2115,10 +2133,8 @@ void KrossWord::setEditable(bool editable)
         cell->setFlag(QGraphicsItem::ItemIsFocusable, editable);
         cell->setFlag(QGraphicsItem::ItemIsSelectable, editable);
 
-        if ((editable && isAnimationTypeEnabled(AnimateAppear))
-                || (!editable && isAnimationTypeEnabled(AnimateDisappear))) {
-            animator()->animate(editable ? Animator::AnimateFadeIn
-                                : Animator::AnimateFadeOut, cell);
+        if ((editable && isAnimationEnabled()) || (!editable && isAnimationEnabled())) {
+            animator()->animate(editable ? Animator::AnimateFadeIn : Animator::AnimateFadeOut, cell);
         } else {
             cell->setOpacity(1);
         }
@@ -2221,71 +2237,20 @@ void KrossWord::clearCache()
     m_animator->endEnqueueAnimations();
 }
 
-KrossWord* KrossWord::createSeparateSolutionKrossWord(
-    const QString& solutionClue, Qt::Orientation clueOrientation,
-    SyncMethods solutionLetterSynchronization) const
-{
-    SolutionLetterCellList solutionLetters = solutionWordLetters();
-    if (solutionLetters.isEmpty())
-        return NULL;
-
-    KrossWord *solutionKrossWord;
-    AnswerOffset answerOffset;
-    if (clueOrientation == Qt::Horizontal) {
-        // + 1 for the clue cell
-        solutionKrossWord = new KrossWord(theme(), solutionWord().length() + 1, 1);
-        answerOffset = OffsetRight;
-    } else {
-        // + 1 for the clue cell
-        solutionKrossWord = new KrossWord(theme(), 1, solutionWord().length() + 1);
-        answerOffset = OffsetBottom;
-    }
-    solutionKrossWord->setAnimationTypes(m_animationTypes);
-
-    ClueCell *clue;
-    QString answer = solutionWord();
-    ErrorType errorType = solutionKrossWord->insertClue(
-                              KGrid2D::Coord(0, 0), clueOrientation, answerOffset,
-                              solutionClue, answer, SolutionLetterCellType,
-                              DontIgnoreErrors, true, &clue);
-    if (errorType != ErrorNone) {
-        qDebug() << "Couldn't create separate solution crossword:"
-                 << KrossWord::errorMessageFromErrorType(errorType);
-        return NULL;
-    }
-
-    LetterCellList separateSolutionLetters = clue->letters();
-    foreach(SolutionLetterCell * solutionLetter, solutionLetters) {
-        LetterCell *separateSolutionLetter
-            = separateSolutionLetters[ solutionLetter->solutionWordIndex()];
-        solutionLetter->synchronizeWith(separateSolutionLetter,
-                                        solutionLetterSynchronization,
-                                        SolutionLetterSynchronization);
-    }
-
-    // Disable solution word letters that have no associated letter cell in the crossword
-    answer = solutionWord('_');
-    for (int i = 0; i < answer.length(); ++i) {
-        if (answer[i] == '_')
-            separateSolutionLetters[i]->setEnabled(false);
-    }
-
-    return solutionKrossWord;
-}
-
 int KrossWord::maxAnswerLengthAt(const Coord& coord, Qt::Orientation orientation,
                                  ClueCell *excludedClue)
 {
-    if (!inside(coord) || !canTakeClueLetterCell(coord, orientation, excludedClue))
+    if (!inside(coord) || !canTakeClueLetterCell(coord, orientation, excludedClue)) {
         return 0;
+    }
 
     int length = 1;
-    const Offset offset = orientation == Qt::Horizontal
-                          ? Offset(1, 0) : Offset(0, 1);
+    const Offset offset = orientation == Qt::Horizontal ? Offset(1, 0) : Offset(0, 1);
     Coord curCoord = coord + offset;
     while ((uint)curCoord.first < width() && (uint)curCoord.second < height()) {
-        if (!canTakeClueLetterCell(curCoord, orientation, excludedClue))
+        if (!canTakeClueLetterCell(curCoord, orientation, excludedClue)) {
             break;
+        }
         ++length;
 
         curCoord += offset;
@@ -2299,12 +2264,12 @@ bool KrossWord::correctLettersAt(const Coord& coord, Qt::Orientation orientation
 {
     Q_ASSERT(correctLetters);
 
-    if (!inside(coord))
+    if (!inside(coord)) {
         return false;
+    }
 
     correctLetters->clear();
-    const Offset offset = orientation == Qt::Horizontal
-                          ? Offset(1, 0) : Offset(0, 1);
+    const Offset offset = orientation == Qt::Horizontal ? Offset(1, 0) : Offset(0, 1);
     Coord curCoord = coord;
     while ((uint)curCoord.first < width() && (uint)curCoord.second < height()
             && letterCount-- > 0) {
@@ -2701,9 +2666,9 @@ void KrossWord::fillWithEmptyCells(const Coord& coordTopLeft,
             if (!(*m_krossWordGrid)[coord]) {
                 EmptyCell *newEmptyCell = new EmptyCell(this, coord);
                 (*m_krossWordGrid)[ coord ] = newEmptyCell;
-                if (isAnimationTypeEnabled(AnimateAppear))
+                if (isAnimationEnabled()) {
                     animator()->animate(Animator::AnimateFadeIn, newEmptyCell);
-                else {
+                } else {
                     newEmptyCell->show();
                     newEmptyCell->setOpacity(1);
                 }

@@ -213,24 +213,6 @@ enum ErrorType {
 };
 Q_DECLARE_FLAGS(ErrorTypes, ErrorType);
 
-/** Types of animations. */
-enum AnimationType {
-    NoAnimation = 0x000, /**< No animation. */
-
-    AnimatePosChange = 0x001, /**< Animate changes to items positions. */
-    AnimateSizeChange = 0x002, /**< Animate changes to items sizes. */
-    AnimateAppear = 0x004, /**< Animate appearance of items. */
-    AnimateDisappear = 0x008, /**< Animate disappearance of items. */
-    AnimateFocusIn = 0x010, /**< Animate items when getting focus. */
-    AnimateChangeLetter = 0x020, /**< Animate letter cells when changing their letter. */
-    AnimateTransition = 0x040, /**< Animate changes to items appearance. */
-
-    AllAnimations = AnimatePosChange | AnimateSizeChange | AnimateAppear
-                    | AnimateDisappear | AnimateFocusIn | AnimateChangeLetter
-                    | AnimateTransition /**< All animations. */
-};
-Q_DECLARE_FLAGS(AnimationTypes, AnimationType);
-
 /** Types of crosswords. */
 enum CrosswordType {
     UnknownCrosswordType, /**< For crosswords that are read from files without information
@@ -463,7 +445,6 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::CellTypes)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::SyncMethods)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::SyncCategories)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::ErrorTypes)
-Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::AnimationTypes)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::KeyboardNavigation)
 // Q_DECLARE_METATYPE( Crossword::ErrorTypes )
 

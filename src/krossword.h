@@ -116,7 +116,7 @@ class KrossWordHeaderItem;
  * word use @ref hasSolutionWord() and @ref solutionWord() to get the solution
  * word.
  * To create a new KrossWord object that only contains one clue, which answer
- * is the solution word use @ref createSeparateSolutionKrossWord. This solution
+ * is the solution word use @ref createSeparateSolutionKrossWord (REMOVED). This solution
  * crossword can be displayed in a toolbar or dock widget, for example. By default
  * the selection and the content of the solution letter cells is synchronized
  * between the solution crossword and the actual crossword. You can change this
@@ -241,21 +241,12 @@ public:
         return m_animator;
     }
 
-    AnimationTypes animationTypes() const {
-        return m_animationTypes;
+    void setAnimationEnabled(bool animationEnabled) {
+        m_hasAnimation = animationEnabled;
     }
-    void setAnimationTypes(AnimationTypes animationTypes) {
-        m_animationTypes = animationTypes;
-    }
-    inline void disableAnimations() {
-        setAnimationTypes(NoAnimation);
-    }
-    void enableAnimationType(AnimationType animationType, bool enable = true) {
-        if (enable) m_animationTypes |= animationType;
-        else m_animationTypes &= ~animationType;
-    }
-    inline bool isAnimationTypeEnabled(AnimationType animationType) {
-        return m_animationTypes.testFlag(animationType);
+
+    inline bool isAnimationEnabled() {
+        return m_hasAnimation;
     }
 
     void createNew(CrosswordType crosswordType, const QSize &crosswordSize);
@@ -503,27 +494,6 @@ public:
     /** Removes the given image from the crossword.
     * @param clue The image to be removed. */
     void removeImage(ImageCell* image);
-
-    /** Creates a new KrossWord object containing only one clue. The answer
-    * to the clue is constructed from all solution letter cells of this crossword.
-    * @Note When there are no cells of type SolutionLetterCell this method
-    * returns NULL.
-    * @param solutionClue The clue that's answer is the solution word.
-    * @param clueOrientation The orientation of the solution word.
-    * @param solutionLetterSynchronization The synchronization method used
-    * between solution letter cells in this crossword and the returned separate
-    * solution crossword.
-    * @returns NULL, if there are no cells of type SolutionLetterCell in this
-    * crossword. You can check for solution letter cells by using
-    * hasSolutionWord().
-    * @returns The newly created separate solution crossword.
-    * @see hasSolutionWord()
-    * @see KrossWordCell::SyncMethods */
-    KrossWord *createSeparateSolutionKrossWord(
-        const QString &solutionClue = i18n("Solution"),
-        Qt::Orientation clueOrientation = Qt::Horizontal,
-        SyncMethods solutionLetterSynchronization
-        = SyncAll) const;
 
     /** Gets the maximal space for a new answer starting at @p coord in
     * direction @p orientation, but excluding @p excludedClue from the
@@ -948,8 +918,7 @@ private:
     // of that character in the string. Note: 1 <= n <= 26.
     QString m_codedPuzzleMapping;
 
-    AnimationTypes m_animationTypes;
-    float m_animationDurationFactor;
+    bool m_hasAnimation;
 
     FocusItem *m_focusItem;
     KrossWordHeaderItem *m_headerItem;

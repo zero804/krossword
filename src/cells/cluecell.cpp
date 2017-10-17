@@ -139,11 +139,11 @@ void DoubleClueCell::removeClueCell(ClueCell* clueCell)
         QPointF targetPos = newPos + QPointF(0, -quartHeight);
         krossWord()->animator()->animate(Crossword::Animator::AnimatePositionChange,
                                          otherClueCell, targetPos, Crossword::Animator::VeryFast);
-    } else
+    } else {
         otherClueCell->setPos(newPos);
+    }
 
-    QPropertyAnimation *sizeAnim = new QPropertyAnimation(
-        otherClueCell, "transitionHeightFactor");
+    QPropertyAnimation *sizeAnim = new QPropertyAnimation(otherClueCell, "transitionHeightFactor");
     sizeAnim->setStartValue(0.5);
     sizeAnim->setEndValue(1.0);
     sizeAnim->setEasingCurve(QEasingCurve(QEasingCurve::InOutBack));
@@ -419,17 +419,16 @@ ErrorType ClueCell::setProperties(Qt::Orientation newOrientation,
             newAnswerOffset, newCorrectAnswer);
 }
 
-void ClueCell::setProperties(Qt::Orientation newOrientation,
-                             AnswerOffset newAnswerOffset)
+void ClueCell::setProperties(Qt::Orientation newOrientation, AnswerOffset newAnswerOffset)
 {
     bool changed = false;
     if (newAnswerOffset != m_answerOffset) {
-        if (newAnswerOffset != OnClueCell
-                && m_answerOffset == OnClueCell) {
+        if (newAnswerOffset != OnClueCell && m_answerOffset == OnClueCell) {
             setVisible(true);
 
-            if (krossWord()->isAnimationTypeEnabled(AnimateAppear))
+            if (krossWord()->isAnimationEnabled()) {
                 krossWord()->animator()->animate(Animator::AnimateFadeIn, this);
+            }
         }
         m_answerOffset = newAnswerOffset;
 

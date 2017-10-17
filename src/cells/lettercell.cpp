@@ -580,7 +580,7 @@ void LetterCell::setCorrectLetter(const QChar& correctLetter)
             m_clueHorizontal->correctAnswer().replace(letterOffset, 1, correctLetter));
     }
 
-    if (krossWord()->isAnimationTypeEnabled(AnimateChangeLetter)) {
+    if (krossWord()->isAnimationEnabled()) {
         if (m_changeAnim) {
             if (!m_blockCacheClearing) {   // changeAnimValueChanged() already disconnected
                 connect(m_changeAnim, SIGNAL(valueChanged(QVariant)),
@@ -642,7 +642,7 @@ void LetterCell::setCurrentLetter(const QChar& currentLetter,
     m_currentLetter = newCurrentLetter;
     m_confidence = confidence;
 
-    if (krossWord()->isAnimationTypeEnabled(AnimateChangeLetter)) {
+    if (krossWord()->isAnimationEnabled()) {
         if (m_changeAnim) {
             if (!m_blockCacheClearing) {   // changeAnimValueChanged() already disconnected
                 connect(m_changeAnim, SIGNAL(valueChanged(QVariant)),

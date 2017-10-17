@@ -72,7 +72,7 @@ public slots:
     // Settings actions
     void optionsPreferencesSlot();
     void settingsChanged();
-    AnimationTypes animationTypesFromSettings();
+    bool hasAnimationFromSettings();
 
     void showStatusbarGlobal(bool show);
     int  configureShortcutsGlobal();

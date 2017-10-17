@@ -128,10 +128,8 @@ bool KrossWordCell::setPositionFromCoordinates(bool animate)
                    (coord().second + 0.5) * krossWord()->cellSize().height());
     newPos += krossWord()->topLeftCellOffset();
 
-    if (animate && krossWord()->isAnimationTypeEnabled(AnimatePosChange)) {
-        /*QAbstractAnimation *anim =*/
-        krossWord()->m_animator->animate(
-            Animator::AnimatePositionChange, this, newPos, Animator::VerySlow);
+    if (animate && krossWord()->isAnimationEnabled()) {
+        krossWord()->m_animator->animate(Animator::AnimatePositionChange, this, newPos, Animator::VerySlow);
 //       connect( anim, SIGNAL(finished()), this, SLOT(updateTransformOriginPoint()) );
     } else {
         setPos(newPos);
@@ -149,14 +147,15 @@ bool KrossWordCell::setPositionFromCoordinates(bool animate)
 
 void KrossWordCell::clearCache(Animator::Duration duration)
 {
-    if (m_blockCacheClearing)   // Only used with Qt 4.6 to wait for animations
+    if (m_blockCacheClearing) {   // Only used with Qt 4.6 to wait for animations
         return;
+    }
 
     if (m_cache && !m_redraw) {
         emit appearanceAboutToChange();
-        if (duration != Animator::Instant
-                && krossWord()->isAnimationTypeEnabled(AnimateTransition))
+        if (duration != Animator::Instant && krossWord()->isAnimationEnabled()) {
             krossWord()->m_animator->animateTransition(this, duration);
+        }
     }
 
     m_redraw = true;
@@ -381,7 +380,7 @@ void KrossWordCell::focusInEvent(QFocusEvent* event)
     if (effect) {
 //       qDebug() << "Enable Glow Effect for" << coord();
         effect->setEnabled(true);
-        if (krossWord()->isAnimationTypeEnabled(AnimateTransition)) {
+        if (krossWord()->isAnimationEnabled()) {
             if (m_blurAnim) {
                 disconnect(m_blurAnim, SIGNAL(finished()), 0, 0);
                 connect(m_blurAnim, SIGNAL(finished()),
@@ -414,9 +413,9 @@ void KrossWordCell::focusInEvent(QFocusEvent* event)
         setZValue(5);
     }
 
-    if (krossWord()->isAnimationTypeEnabled(AnimateFocusIn))
-        krossWord()->animator()->animate(Animator::AnimateBounce, this,
-                                         Crossword::Animator::Slow);
+    if (krossWord()->isAnimationEnabled()) {
+        krossWord()->animator()->animate(Animator::AnimateBounce, this, Crossword::Animator::Slow);
+    }
 }
 
 void KrossWordCell::blurAnimationInFinished()
@@ -446,7 +445,7 @@ void KrossWordCell::focusOutEvent(QFocusEvent* event)
     if (effect) {
 //       qDebug() << "Disable Glow Effect for" << coord();
 
-        if (krossWord()->isAnimationTypeEnabled(AnimateTransition)) {
+        if (krossWord()->isAnimationEnabled()) {
             if (m_blurAnim) {
                 disconnect(m_blurAnim, SIGNAL(finished()), 0, 0);
                 connect(m_blurAnim, SIGNAL(finished()),
@@ -472,8 +471,9 @@ void KrossWordCell::focusOutEvent(QFocusEvent* event)
 //  fadeColorAnim->setStartValue( effect->color() );
 //  fadeColorAnim->setEndValue( krossWord()->theme()->glowColor() );
 //  fadeColorAnim->start( QAbstractAnimation::DeleteWhenStopped );
-        } else
+        } else {
             effect->setEnabled(false);
+        }
 //  effect->setColor( krossWord()->theme()->glowColor() );
         setZValue(0);
 

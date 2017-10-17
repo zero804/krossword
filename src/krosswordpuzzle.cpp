@@ -196,7 +196,7 @@ void KrossWordPuzzle::setupMainTabWidget()
     m_mainCrossword    = new CrossWordXmlGuiWindow(this);
     m_mainStackedBar->addWidget(m_mainCrossword);
 
-    m_mainCrossword->krossWord()->setAnimationTypes(animationTypesFromSettings());
+    m_mainCrossword->krossWord()->setAnimationEnabled(hasAnimationFromSettings());
 
     connect(m_mainCrossword, SIGNAL(loadingFileComplete(QString)),
             this,            SLOT(crosswordLoadingComplete(QString)));
@@ -324,31 +324,16 @@ void KrossWordPuzzle::settingsChanged()
 {
     m_mainCrossword->updateTheme();
 
-    m_mainCrossword->krossWord()->setAnimationTypes(animationTypesFromSettings());
+    m_mainCrossword->krossWord()->setAnimationEnabled(hasAnimationFromSettings());
 }
 
-AnimationTypes KrossWordPuzzle::animationTypesFromSettings()
+bool KrossWordPuzzle::hasAnimationFromSettings()
 {
-    if (!Settings::animate())
-        return NoAnimation;
+    if (!Settings::animate()) {
+        return false;
+    }
 
-    AnimationTypes anim = NoAnimation;
-    if (Settings::animateSizeChange())
-        anim |= AnimateSizeChange;
-    if (Settings::animatePosChange())
-        anim |= AnimatePosChange;
-    if (Settings::animateAppear())
-        anim |= AnimateAppear;
-    if (Settings::animateDisappear())
-        anim |= AnimateDisappear;
-    if (Settings::animateChangeLetter())
-        anim |= AnimateChangeLetter;
-    if (Settings::animateFocusIn())
-        anim |= AnimateFocusIn;
-    if (Settings::animateTransition())
-        anim |= AnimateTransition;
-
-    return anim;
+    return true;
 }
 
 void KrossWordPuzzle::showStatusbarGlobal(bool show)

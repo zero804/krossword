@@ -72,7 +72,7 @@ void SpannedCell::setCellSpan(int horizontalCellSpan, int verticalCellSpan)
 {
     QList< Coord > coordsBefore = spannedCoords();
 
-    if (krossWord()->isAnimationTypeEnabled(AnimateSizeChange)) {
+    if (krossWord()->isAnimationEnabled()) {
         QPropertyAnimation *transitionSizeAnim = new QPropertyAnimation(this, "transitionSize");
         transitionSizeAnim->setDuration(krossWord()->animator()->defaultDuration());
         transitionSizeAnim->setStartValue(boundingRect().size());
@@ -82,8 +82,9 @@ void SpannedCell::setCellSpan(int horizontalCellSpan, int verticalCellSpan)
         connect(transitionSizeAnim, SIGNAL(finished()),
                 this, SLOT(endSizeTransizionAnim()));
         transitionSizeAnim->start(QAbstractAnimation::DeleteWhenStopped);
-    } else
+    } else {
         prepareGeometryChange();
+    }
 
     m_horizontalCellSpan = horizontalCellSpan;
     m_verticalCellSpan = verticalCellSpan;
@@ -92,8 +93,9 @@ void SpannedCell::setCellSpan(int horizontalCellSpan, int verticalCellSpan)
 
     // Set image cell into the crossword grid at all new coords.
     foreach(const Coord & coord, coordsAfter) {
-        if (!coordsBefore.contains(coord))
+        if (!coordsBefore.contains(coord)) {
             krossWord()->replaceCell(coord, this);
+        }
     }
 
     // Set new empty cells into the crossword grid at all old coords.
