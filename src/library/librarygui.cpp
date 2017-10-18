@@ -333,12 +333,14 @@ void LibraryGui::libraryExportSlot()
 {
     QModelIndex index = m_libraryTree->currentIndex();
 
-    if (!index.isValid())
+    if (!index.isValid()) {
         return;
+    }
 
     // should not be the case because of libraryCurrentChanged filtering actions
-    if (m_libraryModel->isDir(index))
+    if (m_libraryModel->isDir(index)) {
         KMessageBox::information(this, i18n("Can't export whole directories. Please select a crossword."));
+    }
 
     Crossword::KrossWord krossWord;
     QString errorString;
@@ -350,13 +352,14 @@ void LibraryGui::libraryExportSlot()
                     this,
                     i18n("Export"),
                     QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
-                    "Pdf (*.pdf);;Postscript (*.ps);;Images (*.png *.jpg *.jpeg)");
+                    "PDF document (*.pdf);;PNG image (*.png)");
 
-        if (fileName.isEmpty())
+        if (fileName.isEmpty()) {
             return;
+        }
 
         QString fileSuffix = QFileInfo(fileName).suffix();
-        if (fileSuffix.compare("pdf", Qt::CaseInsensitive) == 0 || fileSuffix.compare("ps", Qt::CaseInsensitive) == 0) {
+        if (fileSuffix.compare("pdf", Qt::CaseInsensitive) == 0) {
             QPrinter printer;
             printer.setCreator("Krossword");
             printer.setDocName(fileName);   // TODO: set krossword title if available
@@ -364,9 +367,7 @@ void LibraryGui::libraryExportSlot()
             printer.setOutputFileName(fileName);
             PdfDocument document(&krossWord, &printer);
             document.print();
-        } else if (fileSuffix.compare("png", Qt::CaseInsensitive) == 0
-                   || fileSuffix.compare("jpeg", Qt::CaseInsensitive) == 0
-                   || fileSuffix.compare("jpg", Qt::CaseInsensitive) == 0) {
+        } else if (fileSuffix.compare("png", Qt::CaseInsensitive) == 0) {
             QPointer<QDialog> exportToImageDlg = new QDialog(this);
             exportToImageDlg->setWindowTitle(i18n("Export Settings"));
             exportToImageDlg->setModal(true);
