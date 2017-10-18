@@ -317,8 +317,9 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
     // Load theme
     /* Should not do it manually */
     QString savedThemeName = Settings::theme();
-    if(savedThemeName != "")
+    if (savedThemeName != "") {
         KrosswordRenderer::self()->setTheme(savedThemeName);
+    }
 
     // Create main view
     m_view = createKrossWordPuzzleView();
@@ -502,7 +503,6 @@ void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
     case ShowingNothing:
     case ShowingCrossword:
         break;
-
     case ShowingCongratulations:
         m_animation->setCurrentTime(0);
         m_animation->stop();
@@ -532,7 +532,6 @@ void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
         m_zoomWidget->setEnabled(false);
         m_solutionProgress->setEnabled(false);
         break;
-
     case ShowingCrossword:
         qDebug() << "New state: ShowingCrossword";
 
@@ -547,7 +546,6 @@ void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
         action(actionName(Move_Eraser))->setChecked(false);
         enableEditActions();
         break;
-
     case ShowingCongratulations:
         qDebug() << "New state: ShowingCongratulations";
         if (m_state != ShowingCrossword) {
@@ -583,8 +581,9 @@ void CrossWordXmlGuiWindow::setEditMode(EditMode editMode)
         krossWord()->setEditable(inEditMode);
     }
 
-    if (action(actionName(Edit_EnableEditMode))->isChecked() != inEditMode)
+    if (action(actionName(Edit_EnableEditMode))->isChecked() != inEditMode) {
         action(actionName(Edit_EnableEditMode))->setChecked(inEditMode);
+    }
     enableEditActions();
 
     if (inEditMode) {
@@ -607,8 +606,9 @@ bool CrossWordXmlGuiWindow::createNewCrossWord(const CrosswordTypeInfo &crosswor
                                                const QString& title, const QString& authors,
                                                const QString& copyright, const QString& notes)
 {
-    if (!closeFile())
+    if (!closeFile()) {
         return false;
+    }
 
     m_curDocumentOrigin = DocumentNewlyCreated;
 
@@ -639,12 +639,14 @@ bool CrossWordXmlGuiWindow::createNewCrossWordFromTemplate(const QString& templa
                                                            const QString& authors, const QString& copyright,
                                                            const QString& notes)
 {
-    if (!closeFile())
+    if (!closeFile()) {
         return false;
+    }
 
 
-    if (!loadFile(templateFilePath))
+    if (!loadFile(templateFilePath)) {
         return false;
+    }
 
     m_curDocumentOrigin = DocumentNewlyCreated;
     krossWord()->setTitle(title);
@@ -692,10 +694,12 @@ bool CrossWordXmlGuiWindow::loadFile(const QUrl &url, KrossWord::FileFormat file
                                                 "application/x-krosswordpuzzle "
                                                 "application/x-krosswordpuzzle-compressed "
                                                 "application/x-acrosslite-puz");
-        if (resultUrl.isEmpty())
+        if (resultUrl.isEmpty()) {
             return false; // No file was chosen
-    } else
+        }
+    } else {
         resultUrl = url;
+    }
 
     setCurrentFileName(QString());
 
@@ -741,8 +745,9 @@ bool CrossWordXmlGuiWindow::loadFile(const QUrl &url, KrossWord::FileFormat file
             }
         }
 
-        if (krossWord()->isEmpty())
+        if (krossWord()->isEmpty()) {
             setEditMode();
+        }
 
         adjustGuiToCrosswordType();
         emit loadingFileComplete(m_curFileName);
@@ -836,8 +841,9 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
                               "values to be stored please use a Krossword file format (*.kwp or *.kwpz)."),
                          QString(), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
                          "dont_show_cant_write_confidences_to_puz_confirmation");
-            if (result == KMessageBox::Cancel)
+            if (result == KMessageBox::Cancel) {
                 return false;
+            }
         }
 
         KrossWordCellList imageList = krossWord()->cells(ImageCellType);
@@ -847,8 +853,9 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
                               "cells to be stored please use a Krossword file format (*.kwp or *.kwpz)."),
                          QString(), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
                          "dont_show_cant_write_images_to_puz_confirmation");
-            if (result == KMessageBox::Cancel)
+            if (result == KMessageBox::Cancel) {
                 return false;
+            }
         }
     }
 
@@ -858,8 +865,9 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
         writeOk = krossWord()->write(fileName, &errorString, writeMode,
                                      KrossWord::DetermineByFileName,
                                      m_undoStack->data());
-    } else
+    } else {
         writeOk = krossWord()->write(fileName, &errorString, writeMode);
+    }
 
     if (writeOk) {
         QString oldFileName = m_curFileName;
@@ -867,8 +875,7 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
         setModificationType(NoModification);
         setCurrentFileName(fileName);
         statusBar()->showMessage(i18n("Wrote crossword to file '%1'", m_curFileName), 5000);
-        if (m_curDocumentOrigin == DocumentDownloaded
-                || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
+        if (m_curDocumentOrigin == DocumentDownloaded || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
             m_curDocumentOrigin = DocumentOpenedLocally;
         }
 
@@ -908,16 +915,18 @@ void CrossWordXmlGuiWindow::keyPressEvent(QKeyEvent *ev)
         qDebug() << krossWord();
 
         KrossWordCell *cell = krossWord()->currentCell();
-        if (cell->isLetterCell())
+        if (cell->isLetterCell()) {
             qDebug() << (LetterCell*)cell;
-        else if (cell->isType(ClueCellType)) {
+        } else if (cell->isType(ClueCellType)) {
             qDebug() << (ClueCell*)cell;
 
             int i = 1;
-            foreach(LetterCell * letter, ((ClueCell*)cell)->letters())
-            qDebug() << "Letter" << i++ << letter;
-        } else
+            foreach(LetterCell * letter, ((ClueCell*)cell)->letters()) {
+                qDebug() << "Letter" << i++ << letter;
+            }
+        } else {
             qDebug() << cell;
+        }
     }
 
     QWidget::keyPressEvent(ev);
@@ -993,8 +1002,9 @@ void CrossWordXmlGuiWindow::closeSlot()
 
 void CrossWordXmlGuiWindow::addClueSlot()
 {
-    if (m_popupMenuCell && m_popupMenuCell->cellType() == ClueCellType)
+    if (m_popupMenuCell && m_popupMenuCell->cellType() == ClueCellType) {
         krossWord()->setCurrentCell(m_popupMenuCell);
+    }
 
     QString answer;
     answer.fill(' ', krossWord()->crosswordTypeInfo().minAnswerLength);

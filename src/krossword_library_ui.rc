@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="krosswordpuzzle_library" version="1">
+<kpartgui name="krossword_library" version="1">
 
 <!-- Toolbars -->
 <ToolBar name="libraryToolBar">

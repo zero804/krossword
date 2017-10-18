@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="krosswordpuzzle" version="4">
+<kpartgui name="krossword-mainwindow" version="4">
 
 <!-- Menu bar -->
 <MenuBar>

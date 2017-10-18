@@ -17,7 +17,7 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "krosswordpuzzle.h"
+#include "mainwindow.h"
 
 #include <QApplication>
 #include <QCommandLineParser>
@@ -52,11 +52,11 @@ int main(int argc, char *argv[]){
     parser.process(app);
     aboutData.processCommandLine(&parser);
 
-    KrossWordPuzzle *widget = new KrossWordPuzzle;
+    MainWindow *widget = new MainWindow;
 
     // see if we are starting with session management
     if (app.isSessionRestored()) {
-        RESTORE(KrossWordPuzzle);
+        RESTORE(MainWindow);
     } else {
         QCoreApplication::applicationPid(); //## Return applicationPid, but is not saved anywhere...
         

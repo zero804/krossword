@@ -1,8 +1,8 @@
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}) # kgrid2d.h
 
 set(krossword_SRCS
-   krosswordpuzzle.cpp
    main.cpp
+   mainwindow.cpp
    global.cpp
    crosswordxmlguiwindow.cpp
    animator.cpp

@@ -21,7 +21,7 @@
 
 #include "librarygui.h"
 
-#include "krosswordpuzzle.h"
+#include "mainwindow.h"
 #include "krossworddocument.h"
 #include "io/krosswordxmlreader.h"
 #include "htmldelegate.h"
@@ -42,7 +42,7 @@
 #include <QFileDialog>
 
 
-LibraryGui::LibraryGui(KrossWordPuzzle* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
+LibraryGui::LibraryGui(MainWindow* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
       m_mainWindow(parent),
       m_libraryTree(new QTreeView()),
       m_libraryDelegate(nullptr),

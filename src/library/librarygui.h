@@ -37,7 +37,7 @@ class PreviewJob;
 }
 
 class HtmlDelegate;
-class KrossWordPuzzle;
+class MainWindow;
 
 class LibraryGui : public KXmlGuiWindow
 {
@@ -63,7 +63,7 @@ public:
         ChrisWords*/
     };
 
-    LibraryGui(KrossWordPuzzle* parent = 0);
+    LibraryGui(MainWindow* parent = 0);
     virtual ~LibraryGui() { }
 
     QTreeView* libraryTree() const;
@@ -100,7 +100,7 @@ private:
     Ui::export_to_image ui_export_to_image;
     Ui::download ui_download;
 
-    KrossWordPuzzle *m_mainWindow;
+    MainWindow *m_mainWindow;
 
     QTreeView *m_libraryTree;
     HtmlDelegate *m_libraryDelegate;

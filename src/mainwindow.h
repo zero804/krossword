@@ -17,8 +17,8 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef KROSSWORDPUZZLE_H
-#define KROSSWORDPUZZLE_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <kxmlguiwindow.h>
 
@@ -42,13 +42,13 @@ class QStackedWidget;
  * @author Friedrich P?lz <fpuelz@gmx.de>
  * @version %{VERSION}
  */
-class KrossWordPuzzle : public KXmlGuiWindow
+class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
 
 public:
-    KrossWordPuzzle();
-    virtual ~KrossWordPuzzle() {}
+    MainWindow();
+    virtual ~MainWindow() {}
 
     QSize sizeHint() const;
 
@@ -106,4 +106,4 @@ private:
     QStackedWidget        *m_mainStackedBar;        //Owned
 };
 
-#endif // _KROSSWORDPUZZLE_H_
+#endif // _MAINWINDOW_H_

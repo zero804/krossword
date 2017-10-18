@@ -17,7 +17,7 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "krosswordpuzzle.h"
+#include "mainwindow.h"
 #include "krosswordrenderer.h"
 #include "settings.h"
 #include "library/librarygui.h"
@@ -42,14 +42,14 @@
 #include <QMenuBar>
 #include <QStatusBar>
 
-KrossWordPuzzle::KrossWordPuzzle() : KXmlGuiWindow(),
+MainWindow::MainWindow() : KXmlGuiWindow(),
       m_mainLibrary(nullptr),
       m_mainCrossword(nullptr),
       m_loadProgressDialog(nullptr),
       m_mainStackedBar(new QStackedWidget(this))
 {
     setAcceptDrops(true);
-    setObjectName("mainKrossWordPuzzle");
+    setObjectName("mainWindow");
     setupPlaces();
 
     setupActions();
@@ -64,14 +64,14 @@ KrossWordPuzzle::KrossWordPuzzle() : KXmlGuiWindow(),
     }
 }
 
-QSize KrossWordPuzzle::sizeHint() const
+QSize MainWindow::sizeHint() const
 {
     // expand a bit the window ("The size of top-level widgets are constrained to 2/3 of the desktop's height and width")
     // to define the default size for the first run
     return KXmlGuiWindow::sizeHint().expandedTo(QSize(1024, 768));
 }
 
-void KrossWordPuzzle::loadFile(const QUrl &url, Crossword::KrossWord::FileFormat fileFormat, bool loadCrashedFile)
+void MainWindow::loadFile(const QUrl &url, Crossword::KrossWord::FileFormat fileFormat, bool loadCrashedFile)
 {
     m_loadProgressDialog = createLoadProgressDialog();
     m_loadProgressDialog->show();
@@ -97,7 +97,7 @@ void KrossWordPuzzle::loadFile(const QUrl &url, Crossword::KrossWord::FileFormat
     }
 }
 
-bool KrossWordPuzzle::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo,
+bool MainWindow::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo,
                                          const QSize &crosswordSize, const QString& title,
                                          const QString& authors, const QString& copyright,
                                          const QString& notes)
@@ -111,7 +111,7 @@ bool KrossWordPuzzle::createNewCrossWord(const Crossword::CrosswordTypeInfo &cro
     }
 }
 
-bool KrossWordPuzzle::createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title, const QString& authors, const QString& copyright, const QString& notes)
+bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title, const QString& authors, const QString& copyright, const QString& notes)
 {
     if (m_mainCrossword->createNewCrossWordFromTemplate(templateFilePath, title, authors, copyright, notes)) {
         int indexCrossword = m_mainStackedBar->indexOf(m_mainCrossword);
@@ -124,7 +124,7 @@ bool KrossWordPuzzle::createNewCrossWordFromTemplate(const QString& templateFile
 
 //=====================================================================================
 
-void KrossWordPuzzle::closeEvent(QCloseEvent* event)
+void MainWindow::closeEvent(QCloseEvent* event)
 {
     if (m_mainCrossword->isModified()) {
         QString msg = i18n("The current crossword has been modified.\nWould you like to save it?");
@@ -146,13 +146,13 @@ void KrossWordPuzzle::closeEvent(QCloseEvent* event)
     }
 }
 
-void KrossWordPuzzle::dragEnterEvent(QDragEnterEvent *event)
+void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 {
     if (event->mimeData()->hasUrls())
         event->accept();
 }
 
-void KrossWordPuzzle::dropEvent(QDropEvent *event)
+void MainWindow::dropEvent(QDropEvent *event)
 {
     if (event->mimeData()->hasUrls()) {
         QPoint pt         = m_mainLibrary->libraryTree()->mapFrom(this, event->pos());
@@ -173,7 +173,7 @@ void KrossWordPuzzle::dropEvent(QDropEvent *event)
 
 //=====================================================================================
 
-QDialog* KrossWordPuzzle::createLoadProgressDialog()
+QDialog* MainWindow::createLoadProgressDialog()
 {
     QDialog *dialog = new QDialog(this);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
@@ -189,7 +189,7 @@ QDialog* KrossWordPuzzle::createLoadProgressDialog()
     return dialog;
 }
 
-void KrossWordPuzzle::setupMainTabWidget()
+void MainWindow::setupMainTabWidget()
 {
     m_mainLibrary      = new LibraryGui(this);
     int indexLibrary   = m_mainStackedBar->addWidget(m_mainLibrary);
@@ -231,7 +231,7 @@ void KrossWordPuzzle::setupMainTabWidget()
     currentTabChanged(indexLibrary);
 }
 
-void KrossWordPuzzle::setupPlaces()
+void MainWindow::setupPlaces()
 {
     QUrl libraryUrl = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "library");
     QUrl templatesUrl = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "templates");
@@ -248,7 +248,7 @@ void KrossWordPuzzle::setupPlaces()
     delete placesModel;
 }
 
-void KrossWordPuzzle::setupActions()
+void MainWindow::setupActions()
 {
     KStandardAction::showStatusbar(this, SLOT(showStatusbarGlobal(bool)), actionCollection());
     KStandardAction::keyBindings(this, SLOT(configureShortcutsGlobal()), actionCollection());
@@ -257,7 +257,7 @@ void KrossWordPuzzle::setupActions()
     KStandardGameAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
 }
 
-void KrossWordPuzzle::showRestoreOption(const QString& lastUnsavedFileBeforeCrash)
+void MainWindow::showRestoreOption(const QString& lastUnsavedFileBeforeCrash)
 {
     KGuiItem restoreButton(i18n("&Restore"), QIcon::fromTheme(QStringLiteral("document-open")), i18n("Restore the automatically saved version of an edited crossword before the crash"));
     int result = KMessageBox::questionYesNo(this, i18n("An unsaved crossword has been found. Most likely the game crashed, sorry!\n "
@@ -272,7 +272,7 @@ void KrossWordPuzzle::showRestoreOption(const QString& lastUnsavedFileBeforeCras
     }
 }
 
-QString KrossWordPuzzle::displayFileName(const QString &fileName)
+QString MainWindow::displayFileName(const QString &fileName)
 {
     QString libraryDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "library";
     if (fileName.startsWith(libraryDir)) {
@@ -290,12 +290,12 @@ QString KrossWordPuzzle::displayFileName(const QString &fileName)
 
 //=====================================================================================
 
-void KrossWordPuzzle::loadSlot(const QUrl &url)
+void MainWindow::loadSlot(const QUrl &url)
 {
     loadFile(url);
 }
 
-void KrossWordPuzzle::optionsPreferencesSlot()
+void MainWindow::optionsPreferencesSlot()
 {
     // Avoid to have 2 dialogs shown
     if (KConfigDialog::showDialog("settings")) {
@@ -320,14 +320,14 @@ void KrossWordPuzzle::optionsPreferencesSlot()
     dialog->show();
 }
 
-void KrossWordPuzzle::settingsChanged()
+void MainWindow::settingsChanged()
 {
     m_mainCrossword->updateTheme();
 
     m_mainCrossword->krossWord()->setAnimationEnabled(Settings::animate());
 }
 
-void KrossWordPuzzle::showStatusbarGlobal(bool show)
+void MainWindow::showStatusbarGlobal(bool show)
 {
     if (m_mainStackedBar->currentWidget() == m_mainCrossword) {
         m_mainCrossword->statusBar()->setVisible(show);
@@ -336,7 +336,7 @@ void KrossWordPuzzle::showStatusbarGlobal(bool show)
     }
 }
 
-int KrossWordPuzzle::configureShortcutsGlobal()
+int MainWindow::configureShortcutsGlobal()
 {
     KShortcutsDialog dlg(KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcutsAllowed, this);
     if (m_mainStackedBar->currentWidget() == m_mainCrossword) {
@@ -348,7 +348,7 @@ int KrossWordPuzzle::configureShortcutsGlobal()
     return dlg.configure(true);
 }
 
-void KrossWordPuzzle::configureToolbarsGlobal()
+void MainWindow::configureToolbarsGlobal()
 {
     if (m_mainStackedBar->currentWidget() == m_mainCrossword) {
         m_mainCrossword->configureToolbars();
@@ -357,7 +357,7 @@ void KrossWordPuzzle::configureToolbarsGlobal()
     }
 }
 
-void KrossWordPuzzle::currentTabChanged(int index)
+void MainWindow::currentTabChanged(int index)
 {
     bool crosswordTabShown = index == m_mainStackedBar->indexOf(m_mainCrossword);
 
@@ -425,7 +425,7 @@ void KrossWordPuzzle::currentTabChanged(int index)
     plugActionList("options_list", optionsList);
 }
 
-void KrossWordPuzzle::crosswordLoadingComplete(const QString& fileName)
+void MainWindow::crosswordLoadingComplete(const QString& fileName)
 {
     Q_UNUSED(fileName);
 
@@ -436,20 +436,20 @@ void KrossWordPuzzle::crosswordLoadingComplete(const QString& fileName)
     m_mainStackedBar->setCurrentIndex(indexCrossword);
 }
 
-void KrossWordPuzzle::crosswordErrorLoading(const QString& fileName)
+void MainWindow::crosswordErrorLoading(const QString& fileName)
 {
     m_loadProgressDialog->close();
     KMessageBox::error(this, i18n("Error loading file '%1'", fileName));
 }
 
-void KrossWordPuzzle::crosswordClosed(const QString& fileName)
+void MainWindow::crosswordClosed(const QString& fileName)
 {
     Q_UNUSED(fileName);
 
     m_mainStackedBar->setCurrentWidget(m_mainLibrary);
 }
 
-void KrossWordPuzzle::crosswordCurrentChanged(const QString& fileName, const QString& oldFileName)
+void MainWindow::crosswordCurrentChanged(const QString& fileName, const QString& oldFileName)
 {
     Q_UNUSED(oldFileName);
 
@@ -467,13 +467,13 @@ void KrossWordPuzzle::crosswordCurrentChanged(const QString& fileName, const QSt
     setCaption(m_caption, m_mainCrossword->isModified());
 }
 
-void KrossWordPuzzle::crosswordModificationsChanged(CrossWordXmlGuiWindow::ModificationTypes modificationTypes)
+void MainWindow::crosswordModificationsChanged(CrossWordXmlGuiWindow::ModificationTypes modificationTypes)
 {
     Q_UNUSED(modificationTypes);
     crosswordCurrentChanged(m_mainCrossword->currentFileName(), m_mainCrossword->currentFileName());
 }
 
-void KrossWordPuzzle::crosswordAutoSaveFileChanged(const QString &fileName)
+void MainWindow::crosswordAutoSaveFileChanged(const QString &fileName)
 {
     Settings::setLastUnsavedFileBeforeCrash(fileName);
     Settings::self()->save();

@@ -28,7 +28,7 @@ class QPainter;
 class QUrl;
 
 /**
- * This is the main view class for KrossWordPuzzle.
+ * This is the main view class for Krossword.
  *
  * @short Main view
  * @author Friedrich Pülz <fpuelz@gmx.de>
