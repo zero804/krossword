@@ -68,7 +68,7 @@ void KrossWord::init(uint width, uint height)
     m_editable = false;
     m_interactive = true;
     m_drawForPrinting = false;
-    m_hasAnimation = true;
+    m_animationEnabled = true;
     m_keyboardNavigation = DefaultKeyboardNavigation;
     m_emptyCellColorForPrinting = Qt::black;
     m_cellSize = QSizeF(50, 50);

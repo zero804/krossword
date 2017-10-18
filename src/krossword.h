@@ -242,11 +242,11 @@ public:
     }
 
     void setAnimationEnabled(bool animationEnabled) {
-        m_hasAnimation = animationEnabled;
+        m_animationEnabled = animationEnabled;
     }
 
     inline bool isAnimationEnabled() {
-        return m_hasAnimation;
+        return m_animationEnabled;
     }
 
     void createNew(CrosswordType crosswordType, const QSize &crosswordSize);
@@ -918,7 +918,7 @@ private:
     // of that character in the string. Note: 1 <= n <= 26.
     QString m_codedPuzzleMapping;
 
-    bool m_hasAnimation;
+    bool m_animationEnabled;
 
     FocusItem *m_focusItem;
     KrossWordHeaderItem *m_headerItem;

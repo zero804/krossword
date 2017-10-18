@@ -196,7 +196,7 @@ void KrossWordPuzzle::setupMainTabWidget()
     m_mainCrossword    = new CrossWordXmlGuiWindow(this);
     m_mainStackedBar->addWidget(m_mainCrossword);
 
-    m_mainCrossword->krossWord()->setAnimationEnabled(hasAnimationFromSettings());
+    m_mainCrossword->krossWord()->setAnimationEnabled(Settings::animate());
 
     connect(m_mainCrossword, SIGNAL(loadingFileComplete(QString)),
             this,            SLOT(crosswordLoadingComplete(QString)));
@@ -324,16 +324,7 @@ void KrossWordPuzzle::settingsChanged()
 {
     m_mainCrossword->updateTheme();
 
-    m_mainCrossword->krossWord()->setAnimationEnabled(hasAnimationFromSettings());
-}
-
-bool KrossWordPuzzle::hasAnimationFromSettings()
-{
-    if (!Settings::animate()) {
-        return false;
-    }
-
-    return true;
+    m_mainCrossword->krossWord()->setAnimationEnabled(Settings::animate());
 }
 
 void KrossWordPuzzle::showStatusbarGlobal(bool show)
