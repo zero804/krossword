@@ -1,0 +1,29 @@
+[KGameTheme]
+Name=Light wood
+Name[en_GB]=Light wood
+Name[it]=Legno chiaro
+FileName=wood.svgz
+Author=Friedrich Pülz
+AuthorEmail=fpuelz@gmx.de
+Description=The old original theme of KrossWordPuzzle.
+Description[en_GB]=The old original theme of KrossWordPuzzle.
+Description[it]=Il vecchio tema originale di KrossWordPuzzle.
+Preview=wood.png
+
+# The glow color of highlighted cells (64,64,255)
+GlowColor=#4040FF
+# The glow color of focused cells (255,64,64)
+FocusGlowColor=#FF4040
+
+# The color for selected cells in edit mode (255,100,100,128) TODO must fix transparency value
+SelectionColor=#FF6464
+
+# The font color (0,0,0)
+FontColor=#000000
+
+# Margins of cell contents: Left, Top, Right, Bottom
+LetterCellMargins=8,8,8,4
+ClueCellMargins=4,4,4,4
+
+#Size for the background element
+PreferredRenderSize=305,267

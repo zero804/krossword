@@ -303,7 +303,7 @@ void MainWindow::optionsPreferencesSlot()
 
     QWidget *animationSettingsDlg = new QWidget;
     ui_settings.setupUi(animationSettingsDlg);
-    dialog->addPage(animationSettingsDlg, i18n("Animations"), "package_settings");
+    dialog->addPage(animationSettingsDlg, i18n("Animations"), "package_settings"); //CHECK: to rename in General
 
     QWidget *themeSelectorDlg = new QWidget;
 

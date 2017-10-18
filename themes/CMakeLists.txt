@@ -1,7 +1,7 @@
 set( krossword_THEME_SRCS
-    default.desktop
-    default.svgz
-    default.png
+    wood.desktop
+    wood.svgz
+    wood.png
 
     scribble.desktop
     scribble.svgz

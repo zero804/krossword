@@ -25,5 +25,5 @@ FontColor=#1F1F1F
 LetterCellMargins=4,8,4,4
 ClueCellMargins=3,3,3,3
 
-#Size for the background element (image from http://subtlepatterns.com/paper-1/ - CC BY-SA 3.0)
+#Size for the background element
 PreferredRenderSize=400,400

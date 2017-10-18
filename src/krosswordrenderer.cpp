@@ -38,7 +38,7 @@ KrosswordRenderer::KrosswordRenderer()
     : m_provider(new KgThemeProvider(QByteArray("Theme"))),
       m_renderer(m_provider)
 {
-    m_provider->discoverThemes("appdata", QLatin1String("themes"), QLatin1String("default"), &KrosswordTheme::staticMetaObject);
+    m_provider->discoverThemes("appdata", QLatin1String("themes"), QLatin1String("ink"), &KrosswordTheme::staticMetaObject);
 }
 
 bool KrosswordRenderer::setTheme(const QString& themeName)
