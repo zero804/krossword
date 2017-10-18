@@ -776,9 +776,12 @@ void LetterCell::drawForeground(QPainter* p, const QStyleOptionGraphicsItem* opt
     QFont letterFont = p->font();
     letterFont.setPixelSize(rect.height());
     letterFont.setBold(true);
+
     p->setPen(QPen(krossWord()->theme()->fontColor()));
     p->setFont(letterFont);
-    p->drawText(rect, Qt::AlignCenter, letter);
+
+    QFontMetrics fontmetrics(letterFont); //to adjust the rect in case of font with descender (portion under baseline)
+    p->drawText(fontmetrics.boundingRect(rect, Qt::AlignCenter, letter), Qt::AlignCenter, letter);
 }
 
 bool LetterCell::needsEndBar(Qt::Orientation orientation) const

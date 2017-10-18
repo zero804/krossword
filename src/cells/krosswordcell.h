@@ -20,18 +20,14 @@
 #ifndef KROSSWORDCELL_H
 #define KROSSWORDCELL_H
 
-
-#include "global.h"
-
-#include <QString>
-// #include <qstyleoption.h>
-#include <qnamespace.h>
-
-#include <QDebug>
-
-#include "animator.h"
 #include <QGraphicsObject>
 #include <QGraphicsEffect>
+#include <QString>
+#include <QDebug>
+
+#include "global.h"
+#include "animator.h"
+
 class QPropertyAnimation;
 
 class QPainter;

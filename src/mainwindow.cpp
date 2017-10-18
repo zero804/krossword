@@ -24,7 +24,6 @@
 
 #include <KConfigDialog>
 #include <KMessageBox>
-//#include <KStatusBar>
 #include <QStackedWidget>
 #include <KgThemeSelector>
 #include <KShortcutsDialog>
@@ -34,8 +33,6 @@
 #include <KStandardGameAction>
 #include <KActionCollection>
 
-//#include <kapplication.h>
-//#include <kfileplacesmodel.h>
 #include <KFilePlacesModel>
 #include <QStandardPaths>
 
