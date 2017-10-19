@@ -1,4 +1,4 @@
-#include "krosswordheaderitem.h"
+#include "headeritem.h"
 #include "krossword.h"
 #include "krosswordtheme.h"
 
@@ -8,28 +8,27 @@
 namespace Crossword
 {
 
-KrossWordHeaderItem::KrossWordHeaderItem(QGraphicsItem* parent)
+HeaderItem::HeaderItem(QGraphicsItem* parent)
     : QGraphicsObject(parent),
     m_titleItem(0), m_copyrightItem(0)
 {
     this->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
 }
 
-QRectF KrossWordHeaderItem::boundingRect() const
+QRectF HeaderItem::boundingRect() const
 {
-    if (!m_titleItem)
+    if (!m_titleItem) {
         return QRectF(0, 0, 0, 0);
-    else if (m_copyrightItem) {
-        return QRectF(0, 0, qMax(m_titleItem->boundingRect().width(),
-                                 m_copyrightItem->boundingRect().width()),
-                      m_titleItem->boundingRect().height() +
-                      m_copyrightItem->boundingRect().height() + 10);
+    } else if (m_copyrightItem) {
+        return QRectF(0, 0,
+                      qMax(m_titleItem->boundingRect().width(), m_copyrightItem->boundingRect().width()),
+                      m_titleItem->boundingRect().height() + m_copyrightItem->boundingRect().height() + 10);
     } else {
         return QRectF(0, 0, m_titleItem->boundingRect().width(), m_titleItem->boundingRect().height() + 10);
     }
 }
 
-void KrossWordHeaderItem::paint(QPainter* painter,
+void HeaderItem::paint(QPainter* painter,
                                const QStyleOptionGraphicsItem* option,
                                QWidget* widget)
 {
@@ -38,7 +37,7 @@ void KrossWordHeaderItem::paint(QPainter* painter,
     Q_UNUSED(widget);
 }
 
-void KrossWordHeaderItem::updateTheme(KrossWord* krossWord)
+void HeaderItem::updateTheme(KrossWord* krossWord)
 {
     QColor color = krossWord->theme()->fontColor();
 
@@ -51,7 +50,7 @@ void KrossWordHeaderItem::updateTheme(KrossWord* krossWord)
     }
 }
 
-void KrossWordHeaderItem::setContent(KrossWord *krossWord)
+void HeaderItem::setContent(KrossWord *krossWord)
 {
     if (krossWord->getTitle().isEmpty()) {
         if (m_titleItem) {
@@ -65,7 +64,7 @@ void KrossWordHeaderItem::setContent(KrossWord *krossWord)
         }
 
         QFont font = QFontDatabase::systemFont(QFontDatabase::TitleFont);
-        font.setPointSize(12);
+        font.setPointSize(10);
         m_titleItem->setFont(font);
         m_titleItem->setDefaultTextColor(krossWord->theme()->fontColor());
         m_titleItem->setTextWidth(krossWord->boundingRect().width()); // max width
@@ -96,7 +95,7 @@ void KrossWordHeaderItem::setContent(KrossWord *krossWord)
     setContentPos(krossWord, krossWord->width(), krossWord->height());
 }
 
-void KrossWordHeaderItem::setContentPos(KrossWord *krossWord, int columns, int rows)
+void HeaderItem::setContentPos(KrossWord *krossWord, int columns, int rows)
 {
     Q_UNUSED(columns);
     Q_UNUSED(rows);

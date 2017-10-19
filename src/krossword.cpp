@@ -19,7 +19,7 @@
 
 #include "krossword.h"
 #include "krosswordtheme.h"
-#include "krosswordheaderitem.h"
+#include "headeritem.h"
 #include "clueexpanderitem.h"
 #include "cells/krosswordcell.h"
 #include "cells/imagecell.h"
@@ -1021,7 +1021,7 @@ void KrossWord::updateHeaderItem()
         setTopLeftCellOffset(QPointF(0, 0));
     } else {
         if (!m_headerItem) {
-            m_headerItem = new KrossWordHeaderItem(this);
+            m_headerItem = new HeaderItem(this);
             connect(this, SIGNAL(gridResized(KrossWord*, int, int)), m_headerItem, SLOT(setContentPos(KrossWord*, int, int)));
         }
         m_headerItem->setContent(this);

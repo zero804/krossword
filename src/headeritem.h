@@ -1,5 +1,5 @@
-#ifndef KROSSWORDHEADERITEM_H
-#define KROSSWORDHEADERITEM_H
+#ifndef HEADERITEM_H
+#define HEADERITEM_H
 
 #include <QGraphicsObject>
 
@@ -8,13 +8,13 @@ namespace Crossword
 
 class KrossWord;
 
-class KrossWordHeaderItem : public QGraphicsObject
+class HeaderItem : public QGraphicsObject
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
 
 public:
-    KrossWordHeaderItem(QGraphicsItem *parent = 0);
+    HeaderItem(QGraphicsItem *parent = 0);
 
     void setContent(KrossWord *krossWord);
     void updateTheme(KrossWord *krossWord);
@@ -32,4 +32,4 @@ private:
 
 }
 
-#endif // KROSSWORDHEADERITEM_H
+#endif // HEADERITEM_H

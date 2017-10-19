@@ -90,7 +90,7 @@ public:
 
 };
 
-class KrossWordHeaderItem;
+class HeaderItem;
 
 /** @class KrossWord krossword.h <Crossword>
  *
@@ -920,7 +920,7 @@ private:
     bool m_animationEnabled;
 
     FocusItem *m_focusItem;
-    KrossWordHeaderItem *m_headerItem;
+    HeaderItem *m_headerItem;
     QPointF m_topLeftCellOffset;
 
     const KrosswordTheme *m_theme;
