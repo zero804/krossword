@@ -143,7 +143,7 @@ void CurrentCellWidget::setupNoPropertiesCell(KrossWordCell *cell)
 //   if ( !m_widgets.contains(AllCellTypes) ) {
     QGridLayout *layout = new QGridLayout;
     QString text = i18n("%1 selected at (%2, %3).",
-                        displayStringFromCellType(cell->cellType()),
+                        displayStringFromCellType(cell->getCellType()),
                         cell->coord().first + 1, cell->coord().second + 1);
     QLabel *label = new QLabel(text);
     label->setWordWrap(true);
@@ -213,7 +213,7 @@ void CurrentCellWidget::setupClueCell(ClueCell* clue, LetterCell *letter)
     if (!letter)
         letter = clue->firstLetter();
 
-    if (letter->cellType() == SolutionLetterCellType) {
+    if (letter->getCellType() == SolutionLetterCellType) {
         setupSolutionLetterCell(qgraphicsitem_cast<SolutionLetterCell*>(letter));
         return;
     };
@@ -364,7 +364,7 @@ void CurrentCellWidget::currentCellChanged(KrossWordCell* currentCell,
 
     m_currentCell = currentCell;
     if (currentCell) {
-        switch (currentCell->cellType()) {
+        switch (currentCell->getCellType()) {
         case SolutionLetterCellType:
             setupSolutionLetterCell(qgraphicsitem_cast<SolutionLetterCell*>(currentCell));
             break;

@@ -509,7 +509,7 @@ bool ClueCell::setUnhidden(AnswerOffset newAnswerOffset)
         krossWord()->replaceCell(newClueCellCoord, this);
     } else {
         qDebug() << "Cannot unhide clue cell to the coordinates, because there "
-                 "already is a cell of type " << stringFromCellType(cell->cellType());
+                 "already is a cell of type " << stringFromCellType(cell->getCellType());
         return false;
     }
 
@@ -551,7 +551,7 @@ AnswerOffset ClueCell::tryToMakeVisible(bool simulate,
         }
 
         KrossWordCell *cell = krossWord()->at(testNewClueCellCoord);
-        CellType cellType = cell->cellType();
+        CellType cellType = cell->getCellType();
         if (cellType == EmptyCellType) {
             newAnswerOffset = offset;
             newClueCellCoord = testNewClueCellCoord;

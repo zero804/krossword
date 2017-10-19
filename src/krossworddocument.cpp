@@ -185,7 +185,7 @@ void PdfDocument::renderPage(QPainter *painter, int page)
         m_docLayout.drawCrosswordPage(painter);
 
         foreach(KrossWordCell* cell, getCrossword()->cells()) {
-            switch (cell->cellType()) {
+            switch (cell->getCellType()) {
             case Crossword::CellType::EmptyCellType:            // Black cell
                 drawEmptyCell(painter, cell->coord());
                 break;

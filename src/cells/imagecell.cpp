@@ -23,9 +23,8 @@
 
 #include <QGraphicsScene>
 #include <QTextOption>
-#include <QStyleOption>
+#include <QStyleOptionGraphicsItem>
 #include <QPainter>
-//#include <KIO/NetAccess>
 
 namespace Crossword
 {
@@ -43,19 +42,6 @@ ImageCell::ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
 
 void ImageCell::setUrl(const QUrl &url)
 {
-    //CHECK: external url really needed?
-    /*
-    if (!url.isLocalFile()) {
-        QString fileName;
-        if (KIO::NetAccess::download(url, fileName, 0)) {
-            m_image = QImage(fileName);
-            KIO::NetAccess::removeTempFile(fileName);
-        }
-    } else {
-        m_image = QImage(url.url(QUrl::PreferLocalFile));
-    }
-    */
-
     m_image = QImage(url.url(QUrl::PreferLocalFile));
     m_url = url;
 
@@ -63,14 +49,12 @@ void ImageCell::setUrl(const QUrl &url)
     update();
 }
 
-void ImageCell::drawBackground(QPainter *p,
-                               const QStyleOptionGraphicsItem *options)
+void ImageCell::drawBackground(QPainter *p, const QStyleOptionGraphicsItem *options)
 {
     if (m_image.isNull()) {
         QTextOption textOption(Qt::AlignCenter);
         textOption.setWrapMode(QTextOption::WordWrap);
-        p->drawText(options->rect, i18n("Edit image properties to set an image"),
-                    textOption);
+        p->drawText(options->rect, i18n("Edit image properties to set an image"), textOption);
     } else {
         p->drawImage(options->rect, m_image);
     }
@@ -85,8 +69,7 @@ void ImageCell::drawBackground(QPainter *p,
     }
 }
 
-void ImageCell::drawBackgroundForPrinting(QPainter *p,
-        const QStyleOptionGraphicsItem *options)
+void ImageCell::drawBackgroundForPrinting(QPainter *p, const QStyleOptionGraphicsItem *options)
 {
     drawBackground(p, options);
 }
@@ -94,17 +77,19 @@ void ImageCell::drawBackgroundForPrinting(QPainter *p,
 void ImageCell::focusInEvent(QFocusEvent* event)
 {
     krossWord()->setHighlightedClue(NULL);
-    if (krossWord()->isEditable())
+    if (krossWord()->isEditable()) {
         setHighlight();
+    }
     KrossWordCell::focusInEvent(event);
 }
 
 void ImageCell::focusOutEvent(QFocusEvent* event)
 {
     // Only remove highlight if the scene still has focus
-    if (scene() && scene()->hasFocus())
+    if (scene() && scene()->hasFocus()) {
         setHighlight(false);
+    }
     KrossWordCell::focusOutEvent(event);
 }
 
-}; // namespace Crossword
+} // namespace Crossword

@@ -554,7 +554,7 @@ bool RemoveImageCommand::checkRedo(QString* errorMessage) const
         return false;
     }
 
-    if (cell->cellType() != ImageCellType) {
+    if (cell->getCellType() != ImageCellType) {
         if (errorMessage)
             *errorMessage = i18n("Image cell not found at the given coordinates (%1, %2): '%3'",
                                  m_coord.first + 1, m_coord.second + 1, m_url.url(QUrl::PreferLocalFile));
@@ -664,7 +664,7 @@ bool ConvertToLetterCommand::checkRedo(QString* errorMessage) const
         return false;
     }
 
-    if (cell->cellType() != SolutionLetterCellType) {
+    if (cell->getCellType() != SolutionLetterCellType) {
         if (errorMessage)
             *errorMessage = i18n("Solution letter cell not found at the given "
                                  "coordinates (%1, %2)",
@@ -699,7 +699,7 @@ bool ConvertToLetterCommand::checkUndo(QString* errorMessage) const
         return false;
     }
 
-    if (cell->cellType() != LetterCellType) {
+    if (cell->getCellType() != LetterCellType) {
         if (errorMessage)
             *errorMessage = i18n("Letter cell not found at the given coordinates (%1, %2)",
                                  m_coord.first + 1, m_coord.second + 1);
@@ -1725,7 +1725,7 @@ ConvertCrosswordCommand::ConvertCrosswordCommand(KrossWord* krossWord,
             addConvertToLetterCommand(solutionLetter);
         else
             qDebug() << "TODO?: RemoveCellCommand for"
-                     << stringFromCellType(cell->cellType());
+                     << stringFromCellType(cell->getCellType());
         //       new RemoveCellCommand( krossWord, cell, this );
         //       removeCell( cell );
     }
@@ -1879,7 +1879,7 @@ ResizeCrosswordCommand::ResizeCrosswordCommand(KrossWord *krossWord,
             addRemoveImageCommand(image);
         } else if (!cell->isType(EmptyCellType)) {
             qDebug() << "No undo command to remove cells of type"
-                     << stringFromCellType(cell->cellType());
+                     << stringFromCellType(cell->getCellType());
         }
     }
 
@@ -1960,7 +1960,7 @@ MoveCellsCommand::MoveCellsCommand(KrossWord* krossWord, int dx, int dy,
             addRemoveImageCommand(image);
         else
             qDebug() << "No undo command to remove cells of type"
-                     << stringFromCellType(cell->cellType());
+                     << stringFromCellType(cell->getCellType());
     }
 
     setupText();

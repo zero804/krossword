@@ -26,7 +26,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
-#include <QStyleOption>
+#include <QStyleOptionGraphicsItem>
 #include <qevent.h>
 
 #include <QDebug>
@@ -81,8 +81,9 @@ KrossWordCell::KrossWordCell(KrossWord* krossWord, CellType cellType, const Coor
 
 KrossWordCell::~KrossWordCell()
 {
-    if (scene())
+    if (scene()) {
         scene()->removeItem(this);
+    }
 
     removeSynchronization();
     delete m_cache;
@@ -108,27 +109,25 @@ void KrossWordCell::setCoord(Coord newCoord, bool updateInCrosswordGrid)
         // For clue cells (and maybe others): Only remove from the old position
         // if this cell is at that position (don't remove letter cells when the clue
         // cell is hidden).
-        if (krossWord()->at(coord()) == this)
+        if (krossWord()->at(coord()) == this) {
             krossWord()->removeCell(coord(), false);
+        }
 
         krossWord()->replaceCell(newCoord, this);
-    } else
+    } else {
         m_coord = newCoord;
+    }
 
     emit cellMoved(newCoord);
 }
 
 bool KrossWordCell::setPositionFromCoordinates(bool animate)
 {
-#if QT_VERSION < 0x040600
-    Q_UNUSED(animate);
-#endif
-
     QPointF newPos((coord().first + 0.5) * krossWord()->getCellSize().width(),
                    (coord().second + 0.5) * krossWord()->getCellSize().height());
     newPos += krossWord()->getTopLeftCellOffset();
 
-    if (animate && krossWord()->isAnimationEnabled()) {
+    if (animate && krossWord()->isAnimationEnabled() && this->getCellType() != ImageCellType) {
         krossWord()->m_animator->animate(Animator::AnimatePositionChange, this, newPos, Animator::VerySlow);
 //       connect( anim, SIGNAL(finished()), this, SLOT(updateTransformOriginPoint()) );
     } else {
@@ -153,7 +152,7 @@ void KrossWordCell::clearCache(Animator::Duration duration)
 
     if (m_cache && !m_redraw) {
         emit appearanceAboutToChange();
-        if (duration != Animator::Instant && krossWord()->isAnimationEnabled()) {
+        if (duration != Animator::Instant && krossWord()->isAnimationEnabled() && this->getCellType() != ImageCellType) {
             krossWord()->m_animator->animateTransition(this, duration);
         }
     }
@@ -166,8 +165,9 @@ void KrossWordCell::synchronizeWith(const KrossWordCellList &cellList,
                                     SyncMethods syncMethods,
                                     SyncCategory syncCategory)
 {
-    foreach(KrossWordCell * cell, cellList)
-    synchronizeWith(cell, syncMethods, syncCategory);
+    foreach(KrossWordCell * cell, cellList) {
+        synchronizeWith(cell, syncMethods, syncCategory);
+    }
 }
 
 void KrossWordCell::synchronizeWith(KrossWordCell* cell,
@@ -175,15 +175,17 @@ void KrossWordCell::synchronizeWith(KrossWordCell* cell,
                                     SyncCategory syncCategory)
 {
     Q_ASSERT(cell);
-    if (cell == this)
+    if (cell == this) {
         return; // Don't sync cell to itself
+    }
 
     bool syncContent = syncMethods.testFlag(SyncContent);
     bool syncSelection = syncMethods.testFlag(SyncSelection);
     bool contentSynced = isSynchronizedWith(cell, SyncContent);
     bool selectionSynced = isSynchronizedWith(cell, SyncSelection);
-    if ((contentSynced || !syncContent) && (selectionSynced || !syncSelection))
+    if ((contentSynced || !syncContent) && (selectionSynced || !syncSelection)) {
         return;
+    }
 
 //     qDebug() << "Synchronize" << coord() << "with" << cell->coord()
 //  << "syncMethods =" << syncMethods << "syncCategory =" << syncCategory;
@@ -222,11 +224,13 @@ bool KrossWordCell::isSynchronizedWith(KrossWordCell* cell,
 {
     QList< SyncCategory > cats = allSynchronizationCategories();
     foreach(const SyncCategory & cat, cats) {
-        if (!syncCategories.testFlag(cat))
+        if (!syncCategories.testFlag(cat)) {
             continue;
+        }
 
-        if (isSynchronizedWith(cell, cat, syncMethods))
+        if (isSynchronizedWith(cell, cat, syncMethods)) {
             return true;
+        }
     }
 
     return false;
@@ -236,9 +240,6 @@ bool KrossWordCell::removeSynchronizationWith(KrossWordCell* cell,
         SyncMethods syncMethods,
         SyncCategories syncCategories)
 {
-//     if ( !m_synchronizedCells.contains(cell) )
-//  return false;
-//     Q_ASSERT( cell->m_synchronizedCells.contains(this) );
     if (!isSynchronizedWith(cell)) {
         qDebug() << "Not Synchronized";
         return false;
@@ -294,8 +295,9 @@ void KrossWordCell::removeSynchronization(SyncMethods syncMethods,
 {
     QList< SyncCategory > cats = allSynchronizationCategories();
     foreach(const SyncCategory & cat, cats) {
-        if (!syncCategories.testFlag(cat))
+        if (!syncCategories.testFlag(cat)) {
             continue;
+        }
 
         for (int i = m_synchronizedCells[cat].count() - 1; i >= 0; --i) {
             KrossWordCell *cell = m_synchronizedCells[cat].keys()[ i ];
@@ -313,8 +315,9 @@ void KrossWordCell::setFocusSlot(KrossWordCell* cell)
 
 void KrossWordCell::deleteAndRemoveFromSceneLater()
 {
-    if (scene())
+    if (scene()) {
         scene()->removeItem(this);
+    }
     setFlag(ItemIsFocusable, false);
     deleteLater();
 }
@@ -328,8 +331,9 @@ QRectF KrossWordCell::boundingRect() const
 
 QVariant KrossWordCell::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value)
 {
-    if (change == ItemSelectedChange)
+    if (change == ItemSelectedChange) {
         update();
+    }
     return value;
 }
 
@@ -348,7 +352,7 @@ void KrossWordCell::mousePressEvent(QGraphicsSceneMouseEvent* event)
     krossWord()->emitMousePressed(event->scenePos(), event->button(), this);
 
     if (event->button() == Qt::RightButton) {
-        if (isLetterCell() || cellType() == EmptyCellType) {
+        if (isLetterCell() || getCellType() == EmptyCellType) {
             krossWord()->setHighlightedClue(NULL);
             setHighlight();
         }
@@ -367,20 +371,17 @@ void KrossWordCell::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 
 void KrossWordCell::focusInEvent(QFocusEvent* event)
 {
-//     qDebug() << "KROSSWORDCELL IN AND EMITTING gotFocus()" << this->coord();
     QGraphicsItem::focusInEvent(event);
 
     krossWord()->setCurrentCell(this);
-    emit gotFocus(this);   // Used for focus synchronization with letter cells
-    // in a separate solution word KrossWord.
+    emit gotFocus(this);   // Used for focus synchronization with letter cells in a separate solution word KrossWord.
 
     clearCache();
 
     GlowEffect *effect = static_cast< GlowEffect* >(graphicsEffect());
     if (effect) {
-//       qDebug() << "Enable Glow Effect for" << coord();
         effect->setEnabled(true);
-        if (krossWord()->isAnimationEnabled()) {
+        if (krossWord()->isAnimationEnabled() && this->getCellType() != ImageCellType) {
             if (m_blurAnim) {
                 disconnect(m_blurAnim, SIGNAL(finished()), 0, 0);
                 connect(m_blurAnim, SIGNAL(finished()),
@@ -398,13 +399,7 @@ void KrossWordCell::focusInEvent(QFocusEvent* event)
                         this, SLOT(blurAnimationInFinished()));
                 m_blurAnim->start();
             }
-            /*
-            QPropertyAnimation *fadeColorAnim = new QPropertyAnimation( effect, "color" );
-            fadeColorAnim->setDuration( krossWord()->animationDuration() );
-            fadeColorAnim->setStartValue( effect->color() );
-            fadeColorAnim->setEndValue( krossWord()->theme()->glowFocusColor() );
-            //    fadeColorAnim->start( QAbstractAnimation::DeleteWhenStopped );
-            animGroup->addAnimation( fadeColorAnim );*/
+
             effect->setColor(krossWord()->theme()->glowFocusColor());
         } else {
             effect->setColor(krossWord()->theme()->glowFocusColor());
@@ -413,7 +408,7 @@ void KrossWordCell::focusInEvent(QFocusEvent* event)
         setZValue(5);
     }
 
-    if (krossWord()->isAnimationEnabled()) {
+    if (krossWord()->isAnimationEnabled() && this->getCellType() != ImageCellType) {
         krossWord()->animator()->animate(Animator::AnimateBounce, this, Crossword::Animator::Slow);
     }
 }
@@ -430,22 +425,16 @@ void KrossWordCell::blurAnimationOutFinished()
     m_blurAnim = NULL;
 
     GlowEffect *effect = static_cast< GlowEffect* >(graphicsEffect());
-    if (effect)
+    if (effect) {
         effect->setEnabled(false);
+    }
 }
 
 void KrossWordCell::focusOutEvent(QFocusEvent* event)
 {
-//     if ( scene() && scene()->hasFocus() )
-    // scene still has focus
-//     else
-    // focus not any longer in the scene or no scene
-
     GlowEffect *effect = static_cast< GlowEffect* >(graphicsEffect());
     if (effect) {
-//       qDebug() << "Disable Glow Effect for" << coord();
-
-        if (krossWord()->isAnimationEnabled()) {
+        if (krossWord()->isAnimationEnabled() && this->getCellType() != ImageCellType) {
             if (m_blurAnim) {
                 disconnect(m_blurAnim, SIGNAL(finished()), 0, 0);
                 connect(m_blurAnim, SIGNAL(finished()),
@@ -463,24 +452,12 @@ void KrossWordCell::focusOutEvent(QFocusEvent* event)
                         this, SLOT(blurAnimationOutFinished()));
                 m_blurAnim->start();
             }
-
-//  connect( blurAnim, SIGNAL(finished()), effect, SLOT(setEnabled(bool)) );
-
-//  QPropertyAnimation *fadeColorAnim = new QPropertyAnimation( effect, "color" );
-//  fadeColorAnim->setDuration( krossWord()->animationDuration() );
-//  fadeColorAnim->setStartValue( effect->color() );
-//  fadeColorAnim->setEndValue( krossWord()->theme()->glowColor() );
-//  fadeColorAnim->start( QAbstractAnimation::DeleteWhenStopped );
         } else {
             effect->setEnabled(false);
         }
-//  effect->setColor( krossWord()->theme()->glowColor() );
         setZValue(0);
-
     }
 
-//     m_highlight = false;
-//     qDebug() << "KROSSWORDCELL OUT" << this->coord();
     clearCache();
     update();
     QGraphicsItem::focusOutEvent(event);
@@ -509,10 +486,11 @@ void KrossWordCell::setHighlight(bool enable)
 
     m_highlight = enable;
 
-    if (enable)
+    if (enable) {
         clearCache(Animator::Instant);   // No animation when getting highlight
-    else
+    } else {
         clearCache(Animator::VerySlow);   // Longer animation when loosing highlight
+    }
 
     update();
 }
@@ -552,8 +530,9 @@ void EmptyCell::focusInEvent(QFocusEvent* event)
 void EmptyCell::focusOutEvent(QFocusEvent* event)
 {
     // Only remove highlight if the scene still has focus
-    if (scene() && scene()->hasFocus())
+    if (scene() && scene()->hasFocus()) {
         setHighlight(false);
+    }
     KrossWordCell::focusOutEvent(event);
 }
 
@@ -581,8 +560,9 @@ void EmptyCell::mousePressEvent(QGraphicsSceneMouseEvent* event)
     if (event->button() == Qt::LeftButton) {
         setHighlight();
         event->accept();
-    } else
+    } else {
         event->ignore();
+    }
 
     KrossWordCell::mousePressEvent(event);
 }
@@ -670,12 +650,12 @@ bool KrossWordCell::isHighlighted() const
 // Sorting functions:
 bool lessThanCellType(const KrossWordCell* cell1, const KrossWordCell* cell2)
 {
-    return cell1->cellType() < cell2->cellType();
+    return cell1->getCellType() < cell2->getCellType();
 }
 
 bool greaterThanCellType(const KrossWordCell* cell1, const KrossWordCell* cell2)
 {
-    return cell1->cellType() > cell2->cellType();
+    return cell1->getCellType() > cell2->getCellType();
 }
 
 }

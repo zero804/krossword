@@ -452,7 +452,7 @@ QString KrossWord::conversionInfoToString(
     KrossWordCellList otherCellList;
 
     foreach(KrossWordCell * cell, conversionInfo.cellsToRemove) {
-        switch (cell->cellType()) {
+        switch (cell->getCellType()) {
 //  case KrossWordCell::ClueCellType:
 //       ++clueCells;
 //    break;
@@ -470,7 +470,7 @@ QString KrossWord::conversionInfoToString(
 
     QHash< CellType, int > countPerType;
     foreach(KrossWordCell * cell, otherCellList)
-    ++countPerType[ cell->cellType()];
+    ++countPerType[ cell->getCellType()];
 
     QStringList otherInfos;
     for (QHash<CellType, int>::const_iterator it = countPerType.constBegin();
@@ -627,7 +627,7 @@ float KrossWord::solutionProgress() const
 QSize KrossWord::emptyCellSpan(const Coord& coordTopLeft, SpannedCell *excludedCell)
 {
     KrossWordCell *cell = at(coordTopLeft);
-    if (cell->cellType() != EmptyCellType && cell != excludedCell)
+    if (cell->getCellType() != EmptyCellType && cell != excludedCell)
         return QSize(0, 0);
 
     int maxWidth = width() - coordTopLeft.first;
@@ -637,7 +637,7 @@ QSize KrossWord::emptyCellSpan(const Coord& coordTopLeft, SpannedCell *excludedC
     for (int x = 0; x < maxWidth - 1; ++x) {
         for (int y = 0; y < maxHeight - 1; ++y) {
             KrossWordCell *cell = at(coordTopLeft + Coord(x, y));
-            if (cell->cellType() != EmptyCellType && cell != excludedCell) {
+            if (cell->getCellType() != EmptyCellType && cell != excludedCell) {
                 if (y != 0)
                     maxHeight = y;
                 break;
@@ -647,7 +647,7 @@ QSize KrossWord::emptyCellSpan(const Coord& coordTopLeft, SpannedCell *excludedC
     for (int y = 0; y < maxHeight - 1; ++y) {
         for (int x = 0; x < maxWidth - 1; ++x) {
             KrossWordCell *cell = at(coordTopLeft + Coord(x, y));
-            if (cell->cellType() != EmptyCellType && cell != excludedCell) {
+            if (cell->getCellType() != EmptyCellType && cell != excludedCell) {
                 maxWidth = x;
                 break;
             }
@@ -1047,11 +1047,13 @@ KrossWordCellList KrossWord::cells(CellTypes cellTypes) const
     KrossWordCellList list;
     for (uint i = 0; i < m_krossWordGrid->size(); ++i) {
         KrossWordCell *cell = m_krossWordGrid->at(i);
-        if (!cell)
+        if (!cell) {
             continue;
+        }
 
-        if (cellTypes.testFlag(cell->cellType()) && !list.contains(cell))
+        if (cellTypes.testFlag(cell->getCellType()) && !list.contains(cell)) {
             list << cell;
+        }
     }
     return list;
 }
@@ -1222,7 +1224,7 @@ QList< AnswerOffset > KrossWord::legalAnswerOffsets(
             }
 
 //       qDebug() << "    " << offsets[i] << n << cellAtPos;
-            if (cellAtPos->cellType() != EmptyCellType
+            if (cellAtPos->getCellType() != EmptyCellType
                     && !cellAtPos->isLetterCell()) {
                 if (cellAtPos != excludedClue) {   // TEST
                     // Only allow empty or letter cells as cells for the first answer cell
@@ -1287,7 +1289,7 @@ bool KrossWord::canTakeSpannedCell(const Coord& coord,
     for (int x = coord.first; x <= bottomRight.first; ++x) {
         for (int y = coord.second; y <= bottomRight.second; ++y) {
             Coord curCoord = Coord(x, y);
-            if (at(curCoord)->cellType() != EmptyCellType &&
+            if (at(curCoord)->getCellType() != EmptyCellType &&
                     !isCellEmptyIfSpannedCellIsExcluded(curCoord, excludedSpannedCell))
                 return false;
         }
@@ -1316,7 +1318,7 @@ bool KrossWord::canTakeClueCell(const Coord& coord,
     // or if it is a ClueCell and double clue cells are allowed
     bool cellIsEmptyIfClueIsExcluded = isCellEmptyIfClueIsExcluded(coord, excludedClue);
     KrossWordCell *cellAtCoord = at(coord);
-    switch (cellAtCoord->cellType()) {
+    switch (cellAtCoord->getCellType()) {
     case EmptyCellType:
         // Clue can be added here
         return true;
@@ -2574,7 +2576,7 @@ QString KrossWord::contentString() const
 
                     line += '\t';
                 } else
-                    line += "| " + stringFromCellType(cell->cellType()).left(7) + '\t';
+                    line += "| " + stringFromCellType(cell->getCellType()).left(7) + '\t';
             } else
                 line += "| NULL\t";
         }

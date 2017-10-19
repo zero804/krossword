@@ -1002,7 +1002,7 @@ void CrossWordXmlGuiWindow::closeSlot()
 
 void CrossWordXmlGuiWindow::addClueSlot()
 {
-    if (m_popupMenuCell && m_popupMenuCell->cellType() == ClueCellType) {
+    if (m_popupMenuCell && m_popupMenuCell->getCellType() == ClueCellType) {
         krossWord()->setCurrentCell(m_popupMenuCell);
     }
 
@@ -2034,7 +2034,6 @@ void CrossWordXmlGuiWindow::hideCongratulations()
 
 void CrossWordXmlGuiWindow::showCongratulationsItems()
 {
-    // Animate using QtKinetic
     m_animation = new QParallelAnimationGroup(this);
     m_animation->setLoopCount(1);
 
@@ -2563,7 +2562,7 @@ void CrossWordXmlGuiWindow::customContextMenuRequestedForCell(const QPointF &sce
     LetterCell *letter;
     bool hasHorizontalClue, hasVerticalClue, horizontalClueIsEmpty, verticalClueIsEmpty;
     QAction *infoIsSolved, *moveSetConfident, *moveSetUnsure;
-    switch (cell->cellType()) {
+    switch (cell->getCellType()) {
     case LetterCellType:
     case SolutionLetterCellType:
         letter = (LetterCell*)cell;
@@ -2666,7 +2665,7 @@ void CrossWordXmlGuiWindow::customContextMenuRequestedForCell(const QPointF &sce
 
     default:
         qDebug() << "No popup menu defined for cell type"
-                 << displayStringFromCellType(cell->cellType());
+                 << displayStringFromCellType(cell->getCellType());
     }
 
     if (menu)

@@ -12,7 +12,7 @@ KrossWordHeaderItem::KrossWordHeaderItem(QGraphicsItem* parent)
     : QGraphicsObject(parent),
     m_titleItem(0), m_copyrightItem(0)
 {
-    //this->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
+    this->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
 }
 
 QRectF KrossWordHeaderItem::boundingRect() const

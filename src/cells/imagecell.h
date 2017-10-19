@@ -57,6 +57,6 @@ private:
     QImage m_image;
 };
 
-}; // namespace Crossword
+} // namespace Crossword
 
 #endif // IMAGECELL_H

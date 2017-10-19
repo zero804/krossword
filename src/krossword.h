@@ -517,8 +517,7 @@ public:
 
     /** Returns a list of all cells of the crossword.
     * @see KrossWordCell::cellType() */
-    KrossWordCellList cells(CellTypes cellTypes =
-                                AllCellTypes) const;
+    KrossWordCellList cells(CellTypes cellTypes = AllCellTypes) const;
     /** Returns a list of cells beginning with the cell at @p coord and going
     * in direction @p orientation.
     * @param coord The coordinates of the first cell in the returned list.

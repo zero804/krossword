@@ -48,7 +48,7 @@ class ImageCell;
 class GlowEffect : public QGraphicsDropShadowEffect
 {
 public:
-    GlowEffect(QObject* parent = 0) : QGraphicsDropShadowEffect(parent) {};
+    GlowEffect(QObject* parent = 0) : QGraphicsDropShadowEffect(parent) {}
 
 protected:
     virtual void draw(QPainter* painter);
@@ -66,47 +66,48 @@ class KrossWordCell : public QGraphicsObject
 {
     friend class KrossWord;
     friend class DoubleClueCell; // To be able to set m_coord of the child clue cells in the constructor
+
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
     Q_PROPERTY(qreal scaleX READ scaleX WRITE setScaleX)
 
 public:
-    KrossWordCell(KrossWord *krossWord, CellType cellType,
-                  const Coord &coord);
+    KrossWordCell(KrossWord *krossWord, CellType cellType, const Coord &coord);
     virtual ~KrossWordCell();
 
     /** For qgraphicsitem_cast. */
     enum { Type = UserType + 1 };
     virtual int type() const {
         return Type;
-    };
+    }
 
     /** The cell type of this cell. @see CellType. */
-    CellType cellType() const {
+    CellType getCellType() const {
         return m_cellType;
-    };
+    }
 
     bool isType(CellType cellType) const {
         return m_cellType == cellType;
-    };
+    }
+
     virtual bool isLetterCell() const {
         return false;
-    };
+    }
 
     /** Returns the KrossWord object, to which this cell belongs. */
     inline KrossWord *krossWord() const {
         return m_krossWord;
-    };
+    }
 
     /** The coordinates of this cell in the crossword grid. */
     Coord coord() const {
         return m_coord;
-    };
+    }
 
     /** Returns a copy of the current cache pixmap. */
     QPixmap pixmap() const {
         return *m_cache;
-    };
+    }
 
     qreal scaleX() const;
     void setScaleX(qreal scaleX);
@@ -116,12 +117,13 @@ public:
         return QList< SyncCategory >() << OtherSynchronization
                << SolutionLetterSynchronization
                << SameCharacterLetterSynchronization;
-    };
+    }
 
     const QHash< SyncCategory, QHash< KrossWordCell*, SyncMethods > >&
     synchronizationByCategory() const {
         return m_synchronizedCells;
-    };
+    }
+
     QString syncInfoString() const;
 
     /** Checks if this cell is synced by one of @p syncMethods with
@@ -186,7 +188,7 @@ protected slots:
     void clearCacheAndUpdate() {
         clearCache(Crossword::Animator::Instant);
         update();
-    };
+    }
 
 protected:
     virtual bool setPositionFromCoordinates(bool animate = true);
@@ -254,21 +256,22 @@ protected:
 inline QDebug &operator <<(QDebug debug, CellType cellType)
 {
     return debug << stringFromCellType(cellType);
-};
+}
 
 inline QDebug &operator <<(QDebug debug, KrossWordCell *cell)
 {
-    if (!cell)
+    if (!cell) {
         return debug << "NULL ";
+    }
 
-    debug << cell->cellType() << "at" << cell->coord();
+    debug << cell->getCellType() << "at" << cell->coord();
     return debug.space();
-};
+}
 
 // Sorting functions
 bool lessThanCellType(const KrossWordCell *cell1, const KrossWordCell *cell2);
 bool greaterThanCellType(const KrossWordCell *cell1, const KrossWordCell *cell2);
 
-}; // namespace Crossword
+} // namespace Crossword
 
 #endif // KROSSWORDCELL_H
