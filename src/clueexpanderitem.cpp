@@ -111,13 +111,13 @@ void ClueExpanderItem::setPosAfterCell(LetterCell* letter)
     if (m_clue->isHorizontal()) {
         setCursor(QCursor(Qt::SizeHorCursor));
         m_homePos = letter->pos() +
-                    QPointF((m_krossWord->cellSize().width() - EXPANDER_WIDTH) / 2,
-                            -m_krossWord->cellSize().height() / 2);
+                    QPointF((m_krossWord->getCellSize().width() - EXPANDER_WIDTH) / 2,
+                            -m_krossWord->getCellSize().height() / 2);
     } else {
         setCursor(QCursor(Qt::SizeVerCursor));
         m_homePos = letter->pos() +
-                    QPointF(-m_krossWord->cellSize().width() / 2,
-                            (m_krossWord->cellSize().height() - EXPANDER_WIDTH) / 2);
+                    QPointF(-m_krossWord->getCellSize().width() / 2,
+                            (m_krossWord->getCellSize().height() - EXPANDER_WIDTH) / 2);
     }
 
     prepareGeometryChange();
@@ -127,9 +127,9 @@ void ClueExpanderItem::setPosAfterCell(LetterCell* letter)
 QRectF ClueExpanderItem::boundingRect() const
 {
     if (m_clue->isHorizontal())
-        return QRectF(0, 0, EXPANDER_WIDTH, m_krossWord->cellSize().height());
+        return QRectF(0, 0, EXPANDER_WIDTH, m_krossWord->getCellSize().height());
     else
-        return QRectF(0, 0, m_krossWord->cellSize().height(), EXPANDER_WIDTH);
+        return QRectF(0, 0, m_krossWord->getCellSize().height(), EXPANDER_WIDTH);
 }
 
 void ClueExpanderItem::paint(QPainter* painter,
@@ -201,13 +201,13 @@ void ClueExpanderItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
             qreal x = event->scenePos().x();
             dragPos = QPointF(x, m_homePos.y());
 
-            length = m_krossWord->cellSize().width();
+            length = m_krossWord->getCellSize().width();
             diff = (x - letter->x()) / length - 1;
         } else {
             qreal y = event->scenePos().y();
             dragPos = QPointF(m_homePos.x(), y);
 
-            length = m_krossWord->cellSize().height();
+            length = m_krossWord->getCellSize().height();
             diff = (y - letter->y()) / length - 1;
         }
 

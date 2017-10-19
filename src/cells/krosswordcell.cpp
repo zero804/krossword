@@ -124,9 +124,9 @@ bool KrossWordCell::setPositionFromCoordinates(bool animate)
     Q_UNUSED(animate);
 #endif
 
-    QPointF newPos((coord().first + 0.5) * krossWord()->cellSize().width(),
-                   (coord().second + 0.5) * krossWord()->cellSize().height());
-    newPos += krossWord()->topLeftCellOffset();
+    QPointF newPos((coord().first + 0.5) * krossWord()->getCellSize().width(),
+                   (coord().second + 0.5) * krossWord()->getCellSize().height());
+    newPos += krossWord()->getTopLeftCellOffset();
 
     if (animate && krossWord()->isAnimationEnabled()) {
         krossWord()->m_animator->animate(Animator::AnimatePositionChange, this, newPos, Animator::VerySlow);
@@ -321,8 +321,8 @@ void KrossWordCell::deleteAndRemoveFromSceneLater()
 
 QRectF KrossWordCell::boundingRect() const
 {
-    qreal width = krossWord()->cellSize().width();
-    qreal height = krossWord()->cellSize().height();
+    qreal width = krossWord()->getCellSize().width();
+    qreal height = krossWord()->getCellSize().height();
     return QRectF(-width / 2 - 0.5, -height / 2 - 0.5, width + 1, height + 1);
 }
 

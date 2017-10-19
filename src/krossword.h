@@ -573,7 +573,7 @@ public:
     * @see resizeGrid() */
     void removeAllCells();
     /** Returns the size of one crossword cell. */
-    QSizeF cellSize() const {
+    QSizeF getCellSize() const {
         return m_cellSize;
     }
     /** Checks if this crossword has a solution word. It checks if there are any
@@ -796,7 +796,7 @@ protected:
 
     /** Returns the offset of the top left cell. When the crossword title is
     * displayed the offset is set below that title. */
-    QPointF topLeftCellOffset() const {
+    QPointF getTopLeftCellOffset() const {
         return m_topLeftCellOffset;
     };
 
@@ -843,7 +843,7 @@ signals:
 
     void editModeChanged(bool editable);
 
-    void resized(KrossWord *krossWord, int columns, int rows);
+    void gridResized(KrossWord *krossWord, int columns, int rows);
 
 public slots:
     void setCurrentCell(KrossWordCell *cell);

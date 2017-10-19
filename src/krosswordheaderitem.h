@@ -23,11 +23,11 @@ public:
     virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
 public slots:
-    void crosswordResized(KrossWord *krossWord, int columns, int rows);
+    void setContentPos(KrossWord *krossWord, int columns, int rows);
 
 private:
     QGraphicsTextItem *m_titleItem;
-    QGraphicsTextItem *m_authorsItem;
+    QGraphicsTextItem *m_copyrightItem;
 };
 
 }

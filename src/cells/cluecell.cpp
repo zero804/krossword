@@ -84,7 +84,7 @@ DoubleClueCell::DoubleClueCell(KrossWord* krossWord, const Coord& coord,
     else
         firstClueAboveSecond = clue1->isHorizontal();
 
-    qreal quartHeight = krossWord->cellSize().height() / 4;
+    qreal quartHeight = krossWord->getCellSize().height() / 4;
     QPointF ptAbove(0, -quartHeight);
     QPointF ptBelow(0,  quartHeight);
     if (firstClueAboveSecond) {
@@ -120,7 +120,7 @@ void DoubleClueCell::removeClueCell(ClueCell* clueCell)
 {
     ClueCell *otherClueCell = m_clue1 == clueCell ? m_clue2 : m_clue1;
 
-    qreal quartHeight = krossWord()->cellSize().height() / 4;
+    qreal quartHeight = krossWord()->getCellSize().height() / 4;
     QPointF newPos = krossWord()->mapFromItem(this, otherClueCell->pos())
                      + QPointF(0, quartHeight);
     clueCell->setParentItem(krossWord());
@@ -188,8 +188,8 @@ QRectF ClueCell::boundingRect() const
 //      firstClueAboveSecond = doubleClueCell->clue1()->isHorizontal();
 //
 //  bool isAbove = doubleClueCell->clue1() == this ? firstClueAboveSecond : !firstClueAboveSecond;
-        qreal halfWidth = krossWord()->cellSize().width() / 2;
-        qreal halfHeight = krossWord()->cellSize().height() / 2;
+        qreal halfWidth = krossWord()->getCellSize().width() / 2;
+        qreal halfHeight = krossWord()->getCellSize().height() / 2;
 //  qDebug() << "BOUNDING RECT IN 2CLUE"
 //    << QRectF( -halfWidth - 0.5, -halfHeight / 2 - 0.5,
 //       krossWord()->cellSize().width() + 1, halfHeight + 1 );
@@ -197,7 +197,7 @@ QRectF ClueCell::boundingRect() const
 //    << pos() << isVisible() << coord();
 //  qDebug() << "   2Clue-Cell's boundingRect:" << doubleClueCell->boundingRect();
         return QRectF(-halfWidth - 0.5, -halfHeight / 2,
-                      krossWord()->cellSize().width() + 1, halfHeight + 1);
+                      krossWord()->getCellSize().width() + 1, halfHeight + 1);
 //
 // //  qDebug() << "For double clue cell with clue1 =" << doubleClueCell->clue1()->clue();
 // //  qDebug() << "For double clue cell with clue2 =" << doubleClueCell->clue2()->clue();

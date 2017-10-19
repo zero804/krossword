@@ -171,7 +171,7 @@ void KrossWord::removeSameLetterSynchronization()
 
 QRectF KrossWord::boundingRectCrossword() const
 {
-    QRectF rect = QRectF(0, 0, cellSize().width() * width(), cellSize().height() * height());
+    QRectF rect = QRectF(0, 0, getCellSize().width() * width(), getCellSize().height() * height());
     if (m_headerItem) {
         rect.translate(0, m_headerItem->boundingRect().bottom());
     }
@@ -1022,7 +1022,7 @@ void KrossWord::updateHeaderItem()
     } else {
         if (!m_headerItem) {
             m_headerItem = new KrossWordHeaderItem(this);
-            connect(this, SIGNAL(resized(KrossWord*, int, int)), m_headerItem, SLOT(crosswordResized(KrossWord*, int, int)));
+            connect(this, SIGNAL(gridResized(KrossWord*, int, int)), m_headerItem, SLOT(setContentPos(KrossWord*, int, int)));
         }
         m_headerItem->setContent(this);
         prepareGeometryChange();
@@ -2539,7 +2539,7 @@ KrossWordCellList KrossWord::resizeGrid(uint width, uint height, ResizeAnchor an
         }
     }
 
-    emit resized(this, width, height);
+    emit gridResized(this, width, height);
     return uniqueRemovedCells;
 }
 

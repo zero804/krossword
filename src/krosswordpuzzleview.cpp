@@ -44,7 +44,7 @@ KrossWordPuzzleView::~KrossWordPuzzleView()
 QSize KrossWordPuzzleView::sizeHint() const
 {
     if (krossWord()) {
-        QSize sz = krossWord()->cellSize().toSize() * 0.8;
+        QSize sz = krossWord()->getCellSize().toSize() * 0.8;
         return QSize(krossWord()->width() * sz.width() + 4, krossWord()->height() * sz.height());
     } else
         return QGraphicsView::sizeHint();

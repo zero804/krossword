@@ -10,20 +10,20 @@ namespace Crossword
 
 KrossWordHeaderItem::KrossWordHeaderItem(QGraphicsItem* parent)
     : QGraphicsObject(parent),
-    m_titleItem(0), m_authorsItem(0)
+    m_titleItem(0), m_copyrightItem(0)
 {
-
+    //this->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
 }
 
 QRectF KrossWordHeaderItem::boundingRect() const
 {
     if (!m_titleItem)
         return QRectF(0, 0, 0, 0);
-    else if (m_authorsItem) {
+    else if (m_copyrightItem) {
         return QRectF(0, 0, qMax(m_titleItem->boundingRect().width(),
-                                 m_authorsItem->boundingRect().width()),
+                                 m_copyrightItem->boundingRect().width()),
                       m_titleItem->boundingRect().height() +
-                      m_authorsItem->boundingRect().height() + 10);
+                      m_copyrightItem->boundingRect().height() + 10);
     } else {
         return QRectF(0, 0, m_titleItem->boundingRect().width(), m_titleItem->boundingRect().height() + 10);
     }
@@ -46,8 +46,8 @@ void KrossWordHeaderItem::updateTheme(KrossWord* krossWord)
         m_titleItem->setDefaultTextColor(color);
     }
 
-    if (m_authorsItem) {
-        m_authorsItem->setDefaultTextColor(color);
+    if (m_copyrightItem) {
+        m_copyrightItem->setDefaultTextColor(color);
     }
 }
 
@@ -64,45 +64,39 @@ void KrossWordHeaderItem::setContent(KrossWord *krossWord)
             m_titleItem = new QGraphicsTextItem(this); //CHECK
         }
 
-        QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
-        font.setBold(true);
-        font.setPointSize(20);
+        QFont font = QFontDatabase::systemFont(QFontDatabase::TitleFont);
+        font.setPointSize(12);
         m_titleItem->setFont(font);
         m_titleItem->setDefaultTextColor(krossWord->theme()->fontColor());
         m_titleItem->setTextWidth(krossWord->boundingRect().width()); // max width
 
-        m_titleItem->setPlainText(krossWord->getTitle());
+        m_titleItem->setHtml(QString(i18n("<strong>%1</strong> by %2")).arg(krossWord->getTitle()).arg(krossWord->getAuthors()));
     }
 
-    if (krossWord->getAuthors().isEmpty()) {
-        if (m_authorsItem) {
-            scene()->removeItem(m_authorsItem);
-            delete m_authorsItem;
-            m_authorsItem = NULL;
+    if (krossWord->getCopyright().isEmpty()) {
+        if (m_copyrightItem) {
+            scene()->removeItem(m_copyrightItem);
+            delete m_copyrightItem;
+            m_copyrightItem = NULL;
         }
     } else {
-        if (!m_authorsItem) {
-            m_authorsItem = new QGraphicsTextItem(this); //CHECK
+        if (!m_copyrightItem) {
+            m_copyrightItem = new QGraphicsTextItem(this); //CHECK
         }
 
-        QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
-        font.setPointSize(12);
-        m_authorsItem->setFont(font);
-        m_authorsItem->setDefaultTextColor(krossWord->theme()->fontColor());
-        m_authorsItem->setTextWidth(krossWord->boundingRect().width());
+        QFont font = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
+        m_copyrightItem->setFont(font);
+        m_copyrightItem->setDefaultTextColor(krossWord->theme()->fontColor());
+        m_copyrightItem->setTextWidth(krossWord->boundingRect().width());
 
-        if (krossWord->getCopyright().isEmpty()) {
-            m_authorsItem->setPlainText(krossWord->getAuthors());
-        } else {
-            m_authorsItem->setHtml(QString("<p style=\"text-align:right;\">%1<br>%2</p>").arg(krossWord->getAuthors()).arg(krossWord->getCopyright()));
-        }
+        m_copyrightItem->setPlainText(krossWord->getCopyright());
     }
 
     //prepareGeometryChange();
-    crosswordResized(krossWord, krossWord->width(), krossWord->height());
+    setContentPos(krossWord, krossWord->width(), krossWord->height());
 }
 
-void KrossWordHeaderItem::crosswordResized(KrossWord *krossWord, int columns, int rows)
+void KrossWordHeaderItem::setContentPos(KrossWord *krossWord, int columns, int rows)
 {
     Q_UNUSED(columns);
     Q_UNUSED(rows);
@@ -114,9 +108,9 @@ void KrossWordHeaderItem::crosswordResized(KrossWord *krossWord, int columns, in
         y = m_titleItem->boundingRect().height();
     }
 
-    if (m_authorsItem) {
+    if (m_copyrightItem) {
         //m_authorsItem->setPos(krossWord->boundingRect().width() - m_authorsItem->boundingRect().width(), y);
-        m_authorsItem->setPos(m_titleItem->boundingRect().left(), y);
+        m_copyrightItem->setPos(m_titleItem->boundingRect().left(), y);
     }
 }
 

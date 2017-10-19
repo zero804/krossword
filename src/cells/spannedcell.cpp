@@ -41,14 +41,14 @@ SpannedCell::SpannedCell(KrossWord* krossWord, CellType cellType,
 QRectF SpannedCell::boundingRect() const
 {
     if (m_transitionSize.isValid()) {
-        return QRectF(QPointF(-krossWord()->cellSize().width() / 2 - 0.5,
-                              -krossWord()->cellSize().height() / 2 - 0.5),
+        return QRectF(QPointF(-krossWord()->getCellSize().width() / 2 - 0.5,
+                              -krossWord()->getCellSize().height() / 2 - 0.5),
                       m_transitionSize);
     } else {
-        return QRectF(-krossWord()->cellSize().width() / 2 - 0.5,
-                      -krossWord()->cellSize().height() / 2 - 0.5,
-                      krossWord()->cellSize().width() * m_horizontalCellSpan + 1,
-                      krossWord()->cellSize().height() * m_verticalCellSpan + 1);
+        return QRectF(-krossWord()->getCellSize().width() / 2 - 0.5,
+                      -krossWord()->getCellSize().height() / 2 - 0.5,
+                      krossWord()->getCellSize().width() * m_horizontalCellSpan + 1,
+                      krossWord()->getCellSize().height() * m_verticalCellSpan + 1);
     }
 }
 
@@ -77,8 +77,8 @@ void SpannedCell::setCellSpan(int horizontalCellSpan, int verticalCellSpan)
         transitionSizeAnim->setDuration(krossWord()->animator()->defaultDuration());
         transitionSizeAnim->setStartValue(boundingRect().size());
         transitionSizeAnim->setEndValue(QSizeF(
-                                            krossWord()->cellSize().width() * horizontalCellSpan,
-                                            krossWord()->cellSize().width() * verticalCellSpan));
+                                            krossWord()->getCellSize().width() * horizontalCellSpan,
+                                            krossWord()->getCellSize().width() * verticalCellSpan));
         connect(transitionSizeAnim, SIGNAL(finished()),
                 this, SLOT(endSizeTransizionAnim()));
         transitionSizeAnim->start(QAbstractAnimation::DeleteWhenStopped);
