@@ -62,7 +62,7 @@ KrossWord::KrossWord(const KrosswordTheme *theme, int width, int height)
     font.setPointSize(qBound(10.0, m_cellSize.height()/3, 13.0));
     m_headerItem->setFont(font);
     m_headerItem->setDefaultTextColor(m_theme->fontColor());
-    m_headerItem->setHtml("<strong>title</strong> by author<br>copyright"); //placeholder to update boundingrect
+    m_headerItem->setHtml("<strong>title</strong> by author<br><small>copyright</small>"); //placeholder just to update boundingrect
     m_headerItem->setPos(boundingRect().topLeft() - m_headerItem->boundingRect().bottomLeft());
 }
 
@@ -72,7 +72,6 @@ void KrossWord::init(uint width, uint height)
         m_theme = KrosswordTheme::defaultValues();
     }
 
-    m_topLeftCellOffset = QPointF(0, 0);
     m_krossWordGrid = new KrosswordGrid(width, height);
     m_editable = false;
     m_interactive = true;
@@ -106,15 +105,12 @@ void KrossWord::setTheme(const KrosswordTheme* theme)
     clearCache();
 }
 
-void KrossWord::createNew(CrosswordType crosswordType,
-                          const QSize& crosswordSize)
+void KrossWord::createNew(CrosswordType crosswordType, const QSize& crosswordSize)
 {
     createNew(CrosswordTypeInfo::infoFromType(crosswordType), crosswordSize);
 }
 
-void KrossWord::createNew(
-    const CrosswordTypeInfo &crosswordTypeInfo,
-    const QSize &crosswordSize)
+void KrossWord::createNew(const CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize)
 {
     removeAllCells();
     resizeGrid(crosswordSize.width(), crosswordSize.height());
@@ -178,25 +174,14 @@ void KrossWord::removeSameLetterSynchronization()
     removeSynchronization(SyncContent, SameCharacterLetterSynchronization);
 }
 
-QRectF KrossWord::boundingRectCrossword() const
-{
-    QRectF rect = QRectF(0, 0, getCellSize().width() * width(), getCellSize().height() * height());
-    /*
-    if (m_headerItem) {
-        rect.translate(0, m_headerItem->boundingRect().bottom());
-    }
-    */
-    return rect;
-}
-
 QRectF KrossWord::boundingRect() const
 {
-    QRectF rect = boundingRectCrossword();
-    if (!m_headerItem->isVisible()) {
-        return rect;
-    } else {
+    QRectF rect = QRectF(0, 0, getCellSize().width() * width(), getCellSize().height() * height());
+    if (m_headerItem->isVisible()) {
         return rect.united(m_headerItem->boundingRect());
     }
+
+    return rect;
 }
 
 void KrossWord::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -1023,33 +1008,16 @@ void KrossWord::updateHeaderItem()
 {
     if (m_title.isEmpty()) {
         m_headerItem->setVisible(false);
-        //setTopLeftCellOffset(QPointF(0, 0));
     } else {
         m_headerItem->setTextWidth(boundingRect().width()); // max width
         m_headerItem->setDefaultTextColor(m_theme->fontColor());
-        m_headerItem->setHtml(QString(i18n("<strong>%1</strong> by %2<br>%3"))
+        m_headerItem->setHtml(QString(i18n("<strong>%1</strong> by %2<br><small>%3</small>"))
                               .arg(getTitle())
                               .arg(getAuthors())
                               .arg(getCopyright()));
         m_headerItem->setVisible(true);
-        //prepareGeometryChange();
-        //setTopLeftCellOffset(m_headerItem->boundingRect().bottomLeft());
     }
 }
-
-/*
-void KrossWord::setTopLeftCellOffset(const QPointF& topLeftCellOffset)
-{
-    if (m_topLeftCellOffset == topLeftCellOffset)
-        return;
-    m_topLeftCellOffset = topLeftCellOffset;
-
-    KrossWordCellList cellList = cells();
-    foreach(KrossWordCell * cell, cellList) {
-        cell->setPositionFromCoordinates();
-    }
-}
-*/
 
 KrossWordCellList KrossWord::cells(CellTypes cellTypes) const
 {
@@ -1307,11 +1275,11 @@ bool KrossWord::canTakeSpannedCell(const Coord& coord,
     return true;
 }
 
-bool KrossWord::isCellEmptyIfClueIsExcluded(const Coord& coord,
-        ClueCell* excludedClue) const
+bool KrossWord::isCellEmptyIfClueIsExcluded(const Coord& coord, ClueCell* excludedClue) const
 {
-    if (!excludedClue)
+    if (!excludedClue) {
         return false;
+    }
 
     KrossWordCell *oldCell = at(coord);
     return oldCell == excludedClue
@@ -1372,8 +1340,9 @@ ErrorType KrossWord::canInsertImage(const KGrid2D::Coord& coord,
                                     int horizontalCellSpan, int verticalCellSpan,
                                     ErrorTypes errorTypesToIgnore, ImageCell* excludedImage)
 {
-    if (!m_crosswordTypeInfo.cellTypes.testFlag(ImageCellType))
+    if (!m_crosswordTypeInfo.cellTypes.testFlag(ImageCellType)) {
         return ErrorImageCellsDisallowed;
+    }
 
     // Check if the image will fit into the grid
     if (!errorTypesToIgnore.testFlag(ErrorImageDoesntFit)
@@ -1384,8 +1353,9 @@ ErrorType KrossWord::canInsertImage(const KGrid2D::Coord& coord,
     }
 
     // Check if the cells for the new image are empty
-    if (!canTakeSpannedCell(coord, horizontalCellSpan, verticalCellSpan, excludedImage))
+    if (!canTakeSpannedCell(coord, horizontalCellSpan, verticalCellSpan, excludedImage)) {
         return ErrorImageCellsArentEmpty;
+    }
 
     return ErrorNone;
 }
@@ -1594,15 +1564,15 @@ ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
                                    const QString& answer, ErrorTypes errorTypesToIgnore,
                                    bool allowDoubleClueCells, ClueCell *excludedClue)
 {
-    if (m_crosswordTypeInfo.clueCellHandling == ClueCellsDisallowed
-            && answerOffset != Offset(0, 0))
+    if (m_crosswordTypeInfo.clueCellHandling == ClueCellsDisallowed && answerOffset != Offset(0, 0)) {
         return ErrorClueCellsDisallowed;
-    else if (m_crosswordTypeInfo.clueCellHandling == ClueCellsRequired
-             && answerOffset == Offset(0, 0))
+    } else if (m_crosswordTypeInfo.clueCellHandling == ClueCellsRequired && answerOffset == Offset(0, 0)) {
         return ErrorClueCellsRequired;
+    }
 
-    if (answer.length() < m_crosswordTypeInfo.minAnswerLength)
+    if (answer.length() < m_crosswordTypeInfo.minAnswerLength) {
         return ErrorAnswerIsTooShort;
+    }
 
     // Check if the clue and the answer will fit into the grid
     if (!errorTypesToIgnore.testFlag(ErrorClueDoesntFit)

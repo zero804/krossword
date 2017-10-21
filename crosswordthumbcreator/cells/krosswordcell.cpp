@@ -81,21 +81,16 @@ QString KrossWordCell::displayStringFromCellType(KrossWordCell::CellType cellTyp
 
 void KrossWordCell::setPositionFromCoordinates()
 {
-    // "1 +" for spacing
-    setPos(coord().first * (/* 1 +*/ krossWord()->cellSize().width() / 2),
-           coord().second * (/* 1 +*/ krossWord()->cellSize().height() / 2));
+    setPos(coord().first * (krossWord()->cellSize().width() / 2),
+           coord().second * (krossWord()->cellSize().height() / 2));
 }
 
 QRectF KrossWordCell::boundingRect() const
 {
-//     qDebug() << "bounding size =" << krossWord()->cellSize();
-//     qreal penWidth = 1;
-//     return QRectF( pos().x() - penWidth / 2, pos().y() - penWidth / 2,
-//      krossWord()->cellSize().width() + penWidth,
-//      krossWord()->cellSize().height() + penWidth );
     return QRectF(pos(), krossWord()->cellSize());
 }
 
+//-----------------------------------------------------
 
 EmptyCell::EmptyCell(KrossWord* krossWord, Coord coord)
     : KrossWordCell(krossWord, EmptyCellType, coord)

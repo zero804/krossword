@@ -125,7 +125,6 @@ bool KrossWordCell::setPositionFromCoordinates(bool animate)
 {
     QPointF newPos((coord().first + 0.5) * krossWord()->getCellSize().width(),
                    (coord().second + 0.5) * krossWord()->getCellSize().height());
-    newPos += krossWord()->getTopLeftCellOffset();
 
     if (animate && krossWord()->isAnimationEnabled() && this->getCellType() != ImageCellType) {
         krossWord()->m_animator->animate(Animator::AnimatePositionChange, this, newPos, Animator::VerySlow);

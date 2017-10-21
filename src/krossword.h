@@ -730,7 +730,6 @@ public:
 //     bool isSignalAnswerChangedEnabled() const { return m_signalAnswerChanged; };
 
     virtual QRectF boundingRect() const;
-    QRectF boundingRectCrossword() const;
 
     const KrosswordTheme *theme() const {
         return m_theme;
@@ -793,12 +792,6 @@ protected:
     void emitMousePressed(const QPointF &pos, Qt::MouseButton button,
                           KrossWordCell *cell) {
         emit mousePressed(pos, button, cell);
-    };
-
-    /** Returns the offset of the top left cell. When the crossword title is
-    * displayed the offset is set below that title. */
-    QPointF getTopLeftCellOffset() const {
-        return m_topLeftCellOffset;
     };
 
     virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
@@ -923,7 +916,6 @@ private:
 
     FocusItem *m_focusItem;
     QGraphicsTextItem *m_headerItem;
-    QPointF m_topLeftCellOffset;
 
     const KrosswordTheme *m_theme;
 }; // class KrossWord
