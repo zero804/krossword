@@ -27,6 +27,8 @@
 #include <QDebug>
 
 #include <QGraphicsObject>
+#include <QGraphicsTextItem>
+
 class QGraphicsDropShadowEffect;
 
 #include "global.h"
@@ -882,7 +884,7 @@ private:
     bool isCellEmptyIfSpannedCellIsExcluded(const Coord &coord,
                                             SpannedCell* excludedSpannedCell) const;
 
-    void setTopLeftCellOffset(const QPointF &topLeftCellOffset);
+    //void setTopLeftCellOffset(const QPointF &topLeftCellOffset);
     void updateHeaderItem();
 
     Animator *m_animator;
@@ -920,7 +922,7 @@ private:
     bool m_animationEnabled;
 
     FocusItem *m_focusItem;
-    HeaderItem *m_headerItem;
+    QGraphicsTextItem *m_headerItem;
     QPointF m_topLeftCellOffset;
 
     const KrosswordTheme *m_theme;

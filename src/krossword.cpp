@@ -19,7 +19,6 @@
 
 #include "krossword.h"
 #include "krosswordtheme.h"
-#include "headeritem.h"
 #include "clueexpanderitem.h"
 #include "cells/krosswordcell.h"
 #include "cells/imagecell.h"
@@ -55,6 +54,16 @@ KrossWord::KrossWord(const KrosswordTheme *theme, int width, int height)
 {
     init(width, height);
     fillWithEmptyCells();
+
+    m_headerItem = new QGraphicsTextItem(this);
+    m_headerItem->setVisible(false);
+    //m_headerItem->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
+    QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
+    font.setPointSize(qBound(10.0, m_cellSize.height()/3, 13.0));
+    m_headerItem->setFont(font);
+    m_headerItem->setDefaultTextColor(m_theme->fontColor());
+    m_headerItem->setHtml("<strong>title</strong> by author<br>copyright"); //placeholder to update boundingrect
+    m_headerItem->setPos(boundingRect().topLeft() - m_headerItem->boundingRect().bottomLeft());
 }
 
 void KrossWord::init(uint width, uint height)
@@ -172,19 +181,21 @@ void KrossWord::removeSameLetterSynchronization()
 QRectF KrossWord::boundingRectCrossword() const
 {
     QRectF rect = QRectF(0, 0, getCellSize().width() * width(), getCellSize().height() * height());
+    /*
     if (m_headerItem) {
         rect.translate(0, m_headerItem->boundingRect().bottom());
     }
+    */
     return rect;
 }
 
 QRectF KrossWord::boundingRect() const
 {
-    if (m_headerItem) {
-        QRectF rect = boundingRectCrossword();
-        return rect.united(m_headerItem->boundingRect());
+    QRectF rect = boundingRectCrossword();
+    if (!m_headerItem->isVisible()) {
+        return rect;
     } else {
-        return boundingRectCrossword();
+        return rect.united(m_headerItem->boundingRect());
     }
 }
 
@@ -994,7 +1005,6 @@ void KrossWord::setTitle(const QString& title)
 void KrossWord::setAuthors(const QString& authors)
 {
     m_authors = authors;
-//   m_authors = m_authors.remove( QRegExp("^by", Qt::CaseInsensitive) ).trimmed();
     updateHeaderItem();
 }
 
@@ -1012,25 +1022,22 @@ void KrossWord::setNotes(const QString& notes)
 void KrossWord::updateHeaderItem()
 {
     if (m_title.isEmpty()) {
-        if (m_headerItem) {
-            scene()->removeItem(m_headerItem);
-            delete m_headerItem;
-            m_headerItem = NULL;
-        }
-
-        setTopLeftCellOffset(QPointF(0, 0));
+        m_headerItem->setVisible(false);
+        //setTopLeftCellOffset(QPointF(0, 0));
     } else {
-        if (!m_headerItem) {
-            m_headerItem = new HeaderItem(this);
-            connect(this, SIGNAL(gridResized(KrossWord*, int, int)), m_headerItem, SLOT(setContentPos(KrossWord*, int, int)));
-        }
-        m_headerItem->setContent(this);
-        prepareGeometryChange();
-
-        setTopLeftCellOffset(m_headerItem->boundingRect().bottomLeft());
+        m_headerItem->setTextWidth(boundingRect().width()); // max width
+        m_headerItem->setDefaultTextColor(m_theme->fontColor());
+        m_headerItem->setHtml(QString(i18n("<strong>%1</strong> by %2<br>%3"))
+                              .arg(getTitle())
+                              .arg(getAuthors())
+                              .arg(getCopyright()));
+        m_headerItem->setVisible(true);
+        //prepareGeometryChange();
+        //setTopLeftCellOffset(m_headerItem->boundingRect().bottomLeft());
     }
 }
 
+/*
 void KrossWord::setTopLeftCellOffset(const QPointF& topLeftCellOffset)
 {
     if (m_topLeftCellOffset == topLeftCellOffset)
@@ -1038,9 +1045,11 @@ void KrossWord::setTopLeftCellOffset(const QPointF& topLeftCellOffset)
     m_topLeftCellOffset = topLeftCellOffset;
 
     KrossWordCellList cellList = cells();
-    foreach(KrossWordCell * cell, cellList)
-    cell->setPositionFromCoordinates();
+    foreach(KrossWordCell * cell, cellList) {
+        cell->setPositionFromCoordinates();
+    }
 }
+*/
 
 KrossWordCellList KrossWord::cells(CellTypes cellTypes) const
 {
@@ -2232,9 +2241,7 @@ void KrossWord::clearCache()
         cell->update();
     }
 
-    if (m_headerItem) {
-        m_headerItem->updateTheme(this);
-    }
+    updateHeaderItem();
 
     m_animator->endEnqueueAnimations();
 }
