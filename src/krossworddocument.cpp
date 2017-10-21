@@ -70,13 +70,18 @@ void DocumentLayout::makeCrosswordPage()
         notes = QString("<h5>%1</h5>").arg(m_crossword.getNotes());
     }
 
-    m_crosswordPage.setHtml(QString("<html><body>"
+    m_crosswordPage.setDefaultStyleSheet("h1 {color: black;}"
+                                         "h5 {color: black;}"
+                                         "p {color: black;}");
+
+    m_crosswordPage.setHtml(QString("<!DOCTYPE html>"
+                                    "<html>"
+                                    "<body>"
                                     "<h1><crosswordTitle /></h1>"
                                     "<crosswordNotes />"
-                                    "<table width='100%'><tr>"
-                                    "<td><crosswordAuthors /></td>"
-                                    "<td align='right'><crosswordCopyright /></td>"
-                                    "</tr></table></body>")
+                                    "<p><crosswordAuthors /> <crosswordCopyright /></p>"
+                                    "</body>"
+                                    "</html>")
                             .replace("<crosswordNotes />",     notes)
                             .replace("<crosswordTitle />",     m_crossword.getTitle())
                             .replace("<crosswordAuthors />",   m_crossword.getAuthors())
@@ -149,13 +154,15 @@ PdfDocument::PdfDocument(KrossWord *krossWord, QPrinter *printer)
 void PdfDocument::print(int fromPage, int toPage)
 {
     int pageCount = pages();
-    if (toPage < 1)
+    if (toPage < 1) {
         toPage = pageCount;
+    }
 
     fromPage = qBound<int>(1, fromPage, pageCount);
     toPage = qBound<int>(1, toPage, pageCount);
-    if (toPage < fromPage)
+    if (toPage < fromPage) {
         toPage = fromPage;
+    }
 
     QPainter painter;
     painter.begin(m_printer);
@@ -163,14 +170,16 @@ void PdfDocument::print(int fromPage, int toPage)
     if (m_printer->pageOrder() == QPrinter::FirstPageFirst) {
         for (int page = fromPage; page <= toPage; ++page) {
             renderPage(&painter, page);
-            if (page < toPage)
+            if (page < toPage) {
                 m_printer->newPage();
+            }
         }
     } else {
         for (int page = toPage; page >= fromPage; --page) {
             renderPage(&painter, page);
-            if (page > fromPage)
+            if (page > fromPage) {
                 m_printer->newPage();
+            }
         }
     }
 
