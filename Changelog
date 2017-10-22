@@ -1,7 +1,7 @@
 == Krossword ==
-Version 0.18.3 alpha 4 - ? October 17:
+Version 0.18.3 alpha 4 "Piccola fenice" - 22 October 17:
     - Ported to Qt5/KF5.
-    - ?
+    - Various minor changes and fixes.
 
 Version 0.18.2 alpha 3 - 7 February 15:
     - Various fixes to the dictionary feature (still not reliable).

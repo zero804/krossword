@@ -1,12 +1,13 @@
 Krossword
 ====================
-A crossword puzzle game and editor for KDE.
-It's based on [KrossWordPuzzle][1] by Friedrich Pülz. The development has stopped since many years and the original author is unreacheable (various attempts to contact him).
+A crossword puzzle game and editor.
+It's based on [KrossWordPuzzle][1] by Friedrich Pülz because the development had stopped and the original author was unreacheable.
+
+Since version 0.18.3 alpha 4 it's ported to Qt5/KF5, but consider it as a preview requiring still a lot of work.
 
 General aims of the project:
-
- - maintain and simplify the codebase
- - improve the user experience
+ - maintain and simplify the codebase;
+ - improve the user experience.
 
 See the Changelog for more details.
 
