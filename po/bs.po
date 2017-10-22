@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: krossword\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-07 20:21+0100\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2017-10-22 15:49+0200\n"
 "PO-Revision-Date: 2014-01-10 11:13+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian\n"
@@ -20,40 +20,66 @@ msgstr ""
 "X-Generator: Launchpad (build 16890)\n"
 "X-Launchpad-Export-Date: 2014-01-11 06:22+0000\n"
 
-#: library/librarygui.cpp:553
+#. i18n: ectx: property (suffix), widget (QSpinBox, columns)
+#: create_new.ui:252 properties.ui:220
+#, kde-format
+msgid " columns"
+msgstr " kolone"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, width)
+#. i18n: ectx: property (suffix), widget (QSpinBox, height)
+#: export_to_image.ui:68 export_to_image.ui:106
+#, kde-format
+msgid " pixel"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, rows)
+#: create_new.ui:220 properties.ui:255
+#, kde-format
+msgid " rows"
+msgstr " redovi"
+
+#: library/librarygui.cpp:601
+#, kde-format
 msgid "%1"
 msgstr ""
 
-#: krossword.cpp:613
+#: krossword.cpp:477
+#, kde-format
 msgid "%1 clue cell"
 msgid_plural "%1 clue cells"
 msgstr[0] "%1 ćelija traga"
 msgstr[1] "%1 ćelije traga"
 msgstr[2] "%1 ćelija traga"
 
-#: krossword.cpp:618
+#: krossword.cpp:482
+#, kde-format
 msgid "%1 double clue cell"
 msgid_plural "%1 double clue cells"
 msgstr[0] "%1 dupla ćelija traga"
 msgstr[1] "%1 duple ćelije traga"
 msgstr[2] "%1 duplih ćelija traga"
 
-#: dialogs/dictionarydialog.cpp:174 dialogs/dictionarydialog.cpp:189
+#: dialogs/dictionarydialog.cpp:185 dialogs/dictionarydialog.cpp:198
+#, kde-format
 msgid "%1 entries added from %2 crosswords"
 msgstr "%1 ulazi dodani iz %2 križaljki"
 
-#: dialogs/dictionarydialog.cpp:164
+#: dialogs/dictionarydialog.cpp:166
+#, kde-format
 msgid "%1 entries added from this dictionary: '%2'"
 msgstr "%1 ulazi dodani iz ovog rječnika: '%2'"
 
-#: dialogs/dictionarydialog.cpp:254
+#: dialogs/dictionarydialog.cpp:256
+#, kde-format
 msgid "%1 entry imported from '%2'"
 msgid_plural "%1 entries imported from '%2'"
 msgstr[0] "%1 ulaz uvezen iz '%2'"
 msgstr[1] "%1 ulaza uvezena iz '%2'"
 msgstr[2] "%1 ulaza uvezeno iz '%2'"
 
-#: dialogs/dictionarydialog.cpp:208
+#: dialogs/dictionarydialog.cpp:217
+#, kde-format
 msgid "%1 entry removed"
 msgid_plural "%1 entries removed"
 msgstr[0] "%1 ulaz uklonjen"
@@ -61,148 +87,889 @@ msgstr[1] "%1 ulaza uklonjena"
 msgstr[2] "%1 ulaza uklonjeno"
 
 #: dialogs/currentcellwidget.cpp:145
+#, kde-format
 msgid "%1 selected at (%2, %3)."
 msgstr "%1 odabrano na (%2, %3)."
 
-#: krossword.cpp:623
+#: krossword.cpp:487
+#, kde-format
 msgid "%1 solution letter cell"
 msgid_plural "%1 solution letter cells"
 msgstr[0] "%1 ćelija slova rješenja"
 msgstr[1] "%1 ćelije slova rješenja"
 msgstr[2] "%1 ćelija slova rješenja"
 
-#: crosswordxmlguiwindow.cpp:320
-#, no-c-format
+#: crosswordxmlguiwindow.cpp:333
+#, no-c-format, kde-format
 msgctxt "%p is replaced by the percentage of solved letter cells"
 msgid "%p% solved"
 msgstr "%p% rješeno"
 
-#: crosswordxmlguiwindow.cpp:1421
+#: crosswordxmlguiwindow.cpp:1445
+#, kde-format
 msgid "&Add Clue"
 msgstr "&Dodaj trag"
 
-#: crosswordxmlguiwindow.cpp:1444
+#. i18n: ectx: property (text), widget (QToolButton, addEntry)
+#: dictionaries.ui:224
+#, kde-format
+msgid "&Add Entry"
+msgstr "&Dodaj ulaz"
+
+#: crosswordxmlguiwindow.cpp:1468
+#, kde-format
 msgid "&Add Image"
 msgstr "&Dodaj sliku"
 
-#: library/librarygui.cpp:531
+#: library/librarygui.cpp:579
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Add..."
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1507
+#. i18n: ectx: property (text), widget (QLabel, lblDictionaryAnswers)
+#: clue_properties_dock.ui:539
+#, kde-format
+msgid "&Answers:"
+msgstr "&Odgovori"
+
+#. i18n: ectx: property (text), widget (QPushButton, apply)
+#: solution_letter_properties.ui:71
+#, kde-format
+msgid "&Apply"
+msgstr "&Primijeni"
+
+#. i18n: ectx: property (text), widget (QLabel, lblAuthor)
+#: properties.ui:91
+#, kde-format
+msgid "&Author:"
+msgstr "&Pisac:"
+
+#: crosswordxmlguiwindow.cpp:1534
+#, kde-format
 msgid "&Check"
 msgstr "&Provjeri"
 
-#: crosswordxmlguiwindow.cpp:1460
+#: crosswordxmlguiwindow.cpp:1484
+#, kde-format
 msgid "&Check for rotation symmetry..."
 msgstr "&Provjeri da li ima rotaciona simetrija..."
 
-#: crosswordxmlguiwindow.cpp:1512
+#: crosswordxmlguiwindow.cpp:1539
+#, kde-format
 msgid "&Clear Answers"
 msgstr "&Čisti odgovore"
 
-#: crosswordxmlguiwindow.cpp:1450
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1474
+#, fuzzy, kde-format
 msgid "&Clear Crossword..."
 msgstr "&Očisti križaljku"
 
+#. i18n: ectx: property (text), widget (QToolButton, clear)
+#: dictionaries.ui:287
+#, kde-format
+msgid "&Clear Dictionary"
+msgstr "&Čisti rječnik"
+
+#. i18n: ectx: property (text), widget (QLabel, lblClue)
+#: clue_properties_dock.ui:44
+#, kde-format
+msgid "&Clue:"
+msgstr "&Trag:"
+
+#. i18n: ectx: property (text), widget (QPushButton, convertToLetterCell)
+#: solution_letter_properties.ui:100
+#, fuzzy, kde-format
+msgid "&Convert to Letter Cell"
+msgstr "Pretvori slovo rješenja %1 u slovo"
+
 #: dialogs/crosswordpropertiesdialog.cpp:46
+#, kde-format
 msgid "&Convert..."
 msgstr "&Pretvori..."
 
-#: library/librarygui.cpp:516
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
+#: properties.ui:120
+#, kde-format
+msgid "&Copyright:"
+msgstr "&Autorska prava:"
+
+#: library/librarygui.cpp:564
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Create Crossword..."
 msgstr "&Očisti križaljku"
 
-#: crosswordxmlguiwindow.cpp:1455
+#: crosswordxmlguiwindow.cpp:1479
+#, kde-format
 msgid "&Crossword Properties..."
 msgstr "Postavke &križaljke..."
 
-#: library/librarygui.cpp:536
-#, fuzzy
+#: library/librarygui.cpp:584
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Delete..."
 msgstr "&Obriši"
 
-#: crosswordxmlguiwindow.cpp:1279
+#. i18n: ectx: property (text), widget (QLabel, lblDescription)
+#: configure_details.ui:80
+#, kde-format
+msgid "&Description:"
+msgstr "&Opis:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpDictionary)
+#: clue_properties_dock.ui:474
+#, kde-format
+msgid "&Dictionary"
+msgstr "&Leksikon"
+
+#: crosswordxmlguiwindow.cpp:1303
+#, kde-format
 msgid "&Dictionary..."
 msgstr "&Rječnik..."
 
-#: library/librarygui.cpp:526
-#, fuzzy
+#: library/librarygui.cpp:574
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Download..."
 msgstr "&Preuzimanje"
 
-#: crosswordxmlguiwindow.cpp:1517
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_animate)
+#: settings.ui:20
+#, fuzzy, kde-format
+msgid "&Enable Animations"
+msgstr "Omogući animacije"
+
+#: crosswordxmlguiwindow.cpp:1544
+#, kde-format
 msgid "&Eraser"
 msgstr "&Brisač"
 
-#: library/librarygui.cpp:541
-#, fuzzy
+#. i18n: ectx: property (text), widget (QToolButton, exportToCSV)
+#: dictionaries.ui:388
+#, kde-format
+msgid "&Export (CSV)..."
+msgstr "&Izvoz (CSV)..."
+
+#: library/librarygui.cpp:589
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Export..."
 msgstr "&Izvezi"
 
-#: crosswordxmlguiwindow.cpp:1368
-#, fuzzy
+#. i18n: ectx: property (text), widget (QToolButton, extractFromCrosswords)
+#: dictionaries.ui:128
+#, kde-format
+msgid "&Extract From Crosswords..."
+msgstr "&Izvezi iz križaljke..."
+
+#. i18n: ectx: property (text), widget (QLabel, lblFilter)
+#: dictionaries.ui:435
+#, kde-format
+msgid "&Filter:"
+msgstr "&Filter:"
+
+#: crosswordxmlguiwindow.cpp:1392
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&First Letter"
 msgstr "Odaberi &prvo slovo"
 
-#: crosswordxmlguiwindow.cpp:1373
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, lblHorizontalCellSpan)
+#: image_properties_dock.ui:135
+#, kde-format
+msgid "&Horizontal Cells:"
+msgstr "&Horizontalne ćelije:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblHost)
+#: database_connection.ui:52
+#, kde-format
+msgid "&Host:"
+msgstr "&Domaćin:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblName_2)
+#: configure_details.ui:100
+#, kde-format
+msgid "&Icon:"
+msgstr "&Ikona:"
+
+#. i18n: ectx: property (text), widget (QToolButton, importFromCSV)
+#: dictionaries.ui:351
+#, kde-format
+msgid "&Import (CSV)..."
+msgstr "&Uvoz CSV)..."
+
+#: crosswordxmlguiwindow.cpp:1397
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Last Letter"
 msgstr "Odaberi &posljednje slovo"
 
-#: crosswordxmlguiwindow.cpp:1383
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, lblLetterCellContent)
+#: configure_details.ui:197
+#, fuzzy, kde-format
+msgid "&Letter Cell Content:"
+msgstr "&Sadržaj ćelije slova"
+
+#. i18n: ectx: property (text), widget (QLabel, lblTemplateLocation)
+#: create_new.ui:314
+#, kde-format
+msgid "&Location:"
+msgstr "&Lokacija:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblLongDescription)
+#: configure_details.ui:136
+#, kde-format
+msgid "&Long Description:"
+msgstr "&Dugi opis"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: clue_number_mapping.ui:261
+#, kde-format
+msgid "&Mapped Clue Number:"
+msgstr "&Mapiran trag broj:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblMinAnswerLength)
+#: configure_details.ui:289
+#, kde-format
+msgid "&Minimum Answer Length:"
+msgstr "&Minimalna dužina odgovora"
+
+#. i18n: ectx: property (text), widget (QLabel, lblName)
+#: configure_details.ui:57
+#, kde-format
+msgid "&Name:"
+msgstr "&Ime:"
+
+#: crosswordxmlguiwindow.cpp:1407
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Next Clue"
 msgstr "Odaberi &sljedeći trag"
 
-#: crosswordxmlguiwindow.cpp:1388
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, lblNotes)
+#. i18n: ectx: property (text), widget (QLabel, lblTemplateNotes)
+#: create_new.ui:169 create_new.ui:462 properties.ui:149
+#, kde-format
+msgid "&Notes:"
+msgstr "&Bilješke"
+
+#. i18n: ectx: property (text), widget (QLabel, lblPassword)
+#: database_connection.ui:95
+#, kde-format
+msgid "&Password:"
+msgstr "&Lozinka:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblPattern)
+#: clue_properties_dock.ui:480
+#, kde-format
+msgid "&Pattern:"
+msgstr "&Uzorak:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblSolutionWordPosition)
+#: solution_letter_properties.ui:41
+#, kde-format
+msgid "&Position in the solution word:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, lblAspectRatio)
+#: image_properties_dock.ui:84
+#, kde-format
+msgid "&Positioning:"
+msgstr "&Pozicioniranje:"
+
+#: crosswordxmlguiwindow.cpp:1412
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Previous Clue"
 msgstr "Odaberi &prethodni trag"
 
-#: crosswordxmlguiwindow.cpp:1427 crosswordxmlguiwindow.cpp:1860
+#. i18n: ectx: property (text), widget (QLabel, lblProviders)
+#: download.ui:20
+#, kde-format
+msgid "&Provider:"
+msgstr "&Provajder:"
+
+#: crosswordxmlguiwindow.cpp:1451 crosswordxmlguiwindow.cpp:1838
+#, kde-format
 msgid "&Remove"
 msgstr "Uk&loni"
 
-#: crosswordxmlguiwindow.cpp:1856
+#: crosswordxmlguiwindow.cpp:1834
+#, kde-format
 msgid "&Remove Clue"
 msgstr "&Ukloni trag"
 
-#: crosswordxmlguiwindow.cpp:1858
+#: crosswordxmlguiwindow.cpp:1836
+#, kde-format
 msgid "&Remove Image"
 msgstr "&Ukloni sliku"
 
-#: krosswordpuzzle.cpp:261
+#. i18n: ectx: property (text), widget (QToolButton, removeEntries)
+#: dictionaries.ui:252
+#, kde-format
+msgid "&Remove Selected"
+msgstr "&Ukloni odabrano"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnReset)
+#: properties.ui:312
+#, kde-format
+msgid "&Reset"
+msgstr "&Resetuj"
+
+#: mainwindow.cpp:259
+#, kde-format
 msgid "&Restore"
 msgstr "&Obnovi"
 
 #: dialogs/crosswordtypewidget.cpp:226
+#, kde-format
 msgid "&Rules..."
 msgstr "&Pravila..."
 
-#: crosswordxmlguiwindow.cpp:1465
+#. i18n: ectx: property (text), widget (QPushButton, setMapping)
+#: clue_number_mapping.ui:293
+#, kde-format
+msgid "&Set Mapping"
+msgstr "&Postavi mapiranje"
+
+#: crosswordxmlguiwindow.cpp:1489
+#, kde-format
 msgid "&Statistics..."
 msgstr "&Statistike..."
 
+#. i18n: ectx: property (text), widget (QLabel, lblTitle)
+#. i18n: ectx: property (text), widget (QLabel, lblTitle_2)
+#: create_new.ui:146 properties.ui:59
+#, kde-format
+msgid "&Title:"
+msgstr "&Naslov:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblUseTemplate)
+#: create_new.ui:534
+#, kde-format
+msgid "&Use Template:"
+msgstr "&Upotrijebi šablon:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblUser)
+#: database_connection.ui:75
+#, kde-format
+msgid "&User:"
+msgstr "K&orisnik:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, vertical)
+#: clue_properties_dock.ui:160
+#, fuzzy, kde-format
+msgctxt "Orientation of the answer to a clue."
+msgid "&Vertical"
+msgstr "Vertikalan"
+
+#. i18n: ectx: property (text), widget (QLabel, lblVerticalCellSpan)
+#: image_properties_dock.ui:151
+#, kde-format
+msgid "&Vertical Cells:"
+msgstr "&Vertikalne ćelije:"
+
+#: main.cpp:40
+#, kde-format
+msgid ""
+"(c) 2014-2017, Andrea Barazzetti\n"
+"(c) 2014-2017, Giacomo Barazzetti\n"
+"(c) 2009, Friedrich Pülz"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelTitleValue)
+#. i18n: ectx: property (text), widget (QLabel, labelSizeValue)
+#: download.ui:159 download.ui:182
+#, kde-format
+msgid "-"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, lblReadOnlyInfo)
+#: configure_details.ui:24
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> To change these values please first select \"User "
+"Defined\" as the crossword type.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> Da promijenite ove vrijednosti, molimo prvo "
+"odaverite \"User Defined\" kao crossord tip.</p></body></html>"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, pattern)
+#: clue_properties_dock.ui:497
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Enter a pattern with "
+"letters, <span style=\" font-weight:600;\">? </span>for one arbitrary letter "
+"and <span style=\" font-weight:600;\">*</span> for any number of arbitrary "
+"letters.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Unesite uzorak sa slovima, "
+"<span style=\" font-weight:600;\">? </span>za jedno proizvoljno pismo <span "
+"style=\" font-weight:600;\">*</span> za bilo koji broj proizvoljnog pisma.</"
+"p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, exportToCSV)
+#: dictionaries.ui:385
+#, fuzzy, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Exports the whole "
+"dictionary to a comma separated text file.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can use that to create "
+"a <span style=\" font-weight:600;\">backup</span> of your dictionary or to "
+"<span style=\" font-weight:600;\">share</span> your dictionary with others.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">It is also possible to "
+"open that file in a spread sheet application.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">U \"Number Puzzle\"svako "
+"pismo odgovora je mapirano tragu broja. Rješavač treba da sazna koji trag "
+"broj pripada kojem pismu.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Da promijenite mapiranje "
+"pisma odgovora odaberite ga u listi, unesite njegov trag broja i pritisnite "
+"\"Set Mapping\".</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> Preslikavanja koja se sukobljavaju će automatski "
+"biti rješena.</p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, importFromCSV)
+#: dictionaries.ui:348
+#, fuzzy, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Imports entries from a "
+"comma separated text file.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can use that to <span "
+"style=\" font-weight:600;\">restore</span> a previously created backup of "
+"your dictionary or to import dictionaries from others.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Unesite uzorak sa slovima, "
+"<span style=\" font-weight:600;\">? </span>za jedno proizvoljno pismo <span "
+"style=\" font-weight:600;\">*</span> za bilo koji broj proizvoljnog pisma.</"
+"p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addWordsFromDictionary)
+#: dictionaries.ui:165
+#, fuzzy, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Imports words from a plain "
+"text dictionary (eg. in /usr/dict/ or /usr/share/dict/). A dictionary for "
+"crosswords is available from <a href=\"http://www.quinapalus.com/xwfaq.html"
+"\"><span style=\" text-decoration: underline; color:#0057ae;\">http://www."
+"quinapalus.com/xwfaq.html</span></a> (UKACD).</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">The dictionary file must "
+"be a plain text file with one word per line.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Unesite uzorak sa slovima, "
+"<span style=\" font-weight:600;\">? </span>za jedno proizvoljno pismo <span "
+"style=\" font-weight:600;\">*</span> za bilo koji broj proizvoljnog pisma.</"
+"p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QListWidget, cellTypes)
+#: configure_details.ui:223
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Only the checked cell "
+"types can be added into the crossword grid.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Empty Cells</span> are also called \"Shaded Cells\", \"Blanks"
+"\", \"Darks\", \"Blocks\", \"Black Squares\" or \"Shaded Squares\". You "
+"cannot disallow empty cells.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Letter Cells</span> are also called \"White Cells\" or \"Lights"
+"\". They contain one letter (or digit) of one or two answers / entries. A "
+"letter cell that is part of two answers (both Across and Down) is called "
+"<span style=\" font-style:italic;\">checked</span>, <span style=\" font-"
+"style:italic;\">keyed</span> or <span style=\" font-style:italic;\">crossed</"
+"span>. A letter cell that is part of only one answer is called <span style="
+"\" font-style:italic;\">unchecked</span>, <span style=\" font-style:italic;"
+"\">unkeyed</span> or <span style=\" font-style:italic;\">uncrossed</span>.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Clue Cells</span> contain the clue text in small print inside "
+"and act as empty cells. Each clue cell has a little arrow indicating in "
+"which direction from its initial cell the answer is to be written.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Double Clue Cells</span> contain two clue cells inside, one "
+"above the other.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Solution Letter Cells</span> are letter cells that are part of "
+"a solution word for the whole crossword.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Image Cells</span> contain images and can be stretched over a "
+"block of multiple cells.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Samo odabrani tipovi "
+"ćelije mogu biti dodani u rešetku križaljke.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Prazne ćelije</span> se takođe zovu \"Shaded Cells\", \"Blanks"
+"\", \"Darks\", \"Blocks\", \"Black Squares\" ili \"Shaded Squares\". Ne "
+"možete opovrgnuti prazne ćelije.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Ćelije slova</span> se takođe zovu \"White Cells\" ili \"Lights"
+"\". Sadrže jedno slovo (ili cifru) od jednog od dva odgovora / ulaza. Čelija "
+"slova je dio od dva odgovora (oba preko i dole) je nazvana <span style=\" "
+"font-style:italic;\">checked</span>, <span style=\" font-style:italic;"
+"\">keyed</span> or <span style=\" font-style:italic;\">crossed</span>. "
+"Ćelija slova koja je dio samo jednog odogovora <span style=\" font-style:"
+"italic;\">unchecked</span>, <span style=\" font-style:italic;\">unkeyed</"
+"span> ili <span style=\" font-style:italic;\">uncrossed</span>.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Ćelije traga</span> sadržetrag teksta u malim otiscima unutar "
+"i ponašaju se kao prazne ćelije. Svaka ćelija traga ima malu strelicu koja "
+"pokazuje u kom pravcu od njene početne ćelije odgovor treba biti zapisan.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Duple ćelije traga</span>sadrže dvije ćelije traga unutar, "
+"jednu iznad druge.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Ćelije rješenja slova</span> su ćelije slova koje su dio rječi "
+"rješenja za cijelu križaljku.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Ćelije slike </span> sadrže slike i mogu biti istegnute preko "
+"bloka više ćelija.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QLabel, lblInfo)
+#: database_connection.ui:40
+#, fuzzy, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">The MySQL root password is "
+"needed to automatically setup the database:</p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-"
+"right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-"
+"bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
+"indent:0px;\">Add a new user to the MySQL server (username and password: "
+"krosswordpuzzle)</li>\n"
+"<li style=\" font-weight:600;\" style=\" margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+"\"><span style=\" font-weight:400;\">Give privileges for a new database "
+"(named krosswordpuzzle) to that user</span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note: </span>You can also do these steps yourself by using a "
+"MySQL administrator tool.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">U \"Number Puzzle\"svako "
+"pismo odgovora je mapirano tragu broja. Rješavač treba da sazna koji trag "
+"broj pripada kojem pismu.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Da promijenite mapiranje "
+"pisma odgovora odaberite ga u listi, unesite njegov trag broja i pritisnite "
+"\"Set Mapping\".</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> Preslikavanja koja se sukobljavaju će automatski "
+"biti rješena.</p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QTableView, tableDictionary)
+#: dictionaries.ui:482
+#, fuzzy, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">This view contains all "
+"entries in the dictionary. </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can <span style=\" "
+"font-weight:600;\">edit</span> each entry.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">To <span style=\" font-"
+"weight:600;\">find entries</span> in the possibly huge list you can enter a "
+"substring of the answer word into the edit line above.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">U \"Number Puzzle\"svako "
+"pismo odgovora je mapirano tragu broja. Rješavač treba da sazna koji trag "
+"broj pripada kojem pismu.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Da promijenite mapiranje "
+"pisma odgovora odaberite ga u listi, unesite njegov trag broja i pritisnite "
+"\"Set Mapping\".</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> Preslikavanja koja se sukobljavaju će automatski "
+"biti rješena.</p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QLineEdit, pattern)
+#: clue_properties_dock.ui:508
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can enter wildcard "
+"patterns to search the dictionary for answers.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">The pattern can contain "
+"letters, <span style=\" font-weight:600;\">? </span>for one arbitrary letter "
+"and <span style=\" font-weight:600;\">*</span> for any number of arbitrary "
+"letters.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">For example \"HO??E\" "
+"matches all answers starting with \"HO\", ending with \"E\" and having two "
+"arbitrary letters in between. \"HOUSE\" would be matched by that pattern.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Answers are searched while "
+"typing the pattern.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> When you change the settings of the clue, a "
+"pattern is automatically constructed, based on the letters that are already "
+"in the crossword at the positions of the clue.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Možete unijeti zamjenske "
+"obrasce da pretražite rječnik za odgovore.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Obrazac može sadržavati "
+"slova, <span style=\" font-weight:600;\">? </span>za jedno proizvoljno slovo "
+"<span style=\" font-weight:600;\">*</span> za bilo koji broj proizvoljnih "
+"slova.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Za primjer \"HO??E\" "
+"uklapa sve odgovore koji počinju sa \"HO\", završavaju sa \"E\"i dva "
+"proizvoljna slova između. \"HOUSE\" bi se poklapalo sa tim obrascem.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Odgovori se traže dok se "
+"ukucava obrazac.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span>Kada promjenite postavke traga, obrazac je "
+"automatski konstruiran, bazirano da slovima koji su već u ukrštenim riječima "
+"na pozicijama traga.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QLabel, lblInfo)
+#: clue_number_mapping.ui:27
+#, fuzzy, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Noto Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'FreeSans'; font-size:10pt;\">In a \"Coded Puzzle\" each answer "
+"letter is mapped to a clue number. The solver has to find out which clue "
+"number belongs to which letter.</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'FreeSans'; font-size:10pt;\">To change the mapping of an answer "
+"letter select it in the list, enter it's new clue number and click \"Set "
+"Mapping\".</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'FreeSans'; font-size:10pt;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'FreeSans'; font-size:10pt; font-weight:600;\">Note:</span><span "
+"style=\" font-family:'FreeSans'; font-size:10pt;\"> Conflicting mappings are "
+"resolved automatically.</span></p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">U \"Number Puzzle\"svako "
+"pismo odgovora je mapirano tragu broja. Rješavač treba da sazna koji trag "
+"broj pripada kojem pismu.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Da promijenite mapiranje "
+"pisma odgovora odaberite ga u listi, unesite njegov trag broja i pritisnite "
+"\"Set Mapping\".</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> Preslikavanja koja se sukobljavaju će automatski "
+"biti rješena.</p></body></html>"
+
 #: commands.cpp:993
+#, kde-format
 msgctxt ""
 "Used for the text of the change clue undo command, when the clue text is "
 "empty."
 msgid "<placeholder>empty</placeholder>"
 msgstr "<placeholder>prazno</placeholder>"
 
-#: crosswordxmlguiwindow.cpp:1505
+#: crosswordxmlguiwindow.cpp:1532
+#, kde-format
 msgid ""
 "<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
 "solution will be displayed.</p><p>If you filled in all letters and do not "
@@ -212,7 +979,13 @@ msgstr ""
 "Rješenje će biti prikazano.</p><p>Ako ste popunili sva slova i ne želite da "
 "odustanete, izaberite \"Done!\".</p></qt>"
 
+#: krossword.cpp:1014
+#, kde-format
+msgid "<strong>%1</strong> by %2<br><small>%3</small>"
+msgstr ""
+
 #: global.cpp:508
+#, kde-format
 msgctxt "Long description of the crossword type 'Crossnumber'"
 msgid ""
 "A crossnumber (also known as a cross-figure) is the numerical analogy of a "
@@ -226,51 +999,77 @@ msgid ""
 "(text taken from wikipedia)"
 msgstr ""
 
-#: main.cpp:27
+#: main.cpp:29
+#, kde-format
 msgid ""
 "A crossword puzzle game and editor for KDE.\n"
 "Based on KrossWordPuzzle."
 msgstr ""
 
-#: cluemodel.cpp:63
+#. i18n: ectx: property (text), widget (QLabel, lblAnswerOffset)
+#: clue_properties_dock.ui:175
+#, fuzzy, kde-format
+msgid "A&nswer Offset:"
+msgstr "Odgovor &Ofset"
+
+#. i18n: ectx: property (text), widget (QLabel, lblAuthor)
+#: create_new.ui:104
+#, fuzzy, kde-format
+msgid "A&uthor:"
+msgstr "&Pisac:"
+
+#: cluemodel.cpp:62
+#, kde-format
 msgid "Across clues"
 msgstr "Preko tragova"
 
-#: krossworddocument.cpp:88
+#: krossworddocument.cpp:121
+#, kde-format
 msgctxt "Title for the list of across/horizontal clues when printing"
 msgid "Across clues"
 msgstr "Preko tragova"
 
 #: commands.cpp:774
+#, kde-format
 msgid "Add %1 letter"
 msgid_plural "Add %1 letters"
 msgstr[0] "Dodaj %1 slovo"
 msgstr[1] "Dodaj %1 slova"
 msgstr[2] "Dodaj %1 slova"
 
+#. i18n: ectx: property (text), widget (QToolButton, addWordsFromDictionary)
+#: dictionaries.ui:168
+#, kde-format
+msgid "Add &Words From Dictionary..."
+msgstr "Dodaj &riječi iz rječnika..."
+
 #: commands.cpp:425
+#, kde-format
 msgid "Add Clue '%1'"
 msgstr "Dodaj trag '%1'"
 
 #: commands.cpp:423
+#, kde-format
 msgid "Add Clue Without Text"
 msgstr "Dodaj trag bez teksta"
 
 #: commands.cpp:612
+#, kde-format
 msgid "Add Image '%1'"
 msgstr "Dodaj sliku '%1'"
 
-#: library/librarygui.cpp:532
-#, fuzzy
+#: library/librarygui.cpp:580
+#, fuzzy, kde-format
 msgid "Add a crossword to the library"
 msgstr "Ne moeže izvesti križaljku u posebnu slikovnu datoteku."
 
-#: crosswordxmlguiwindow.cpp:1280
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1304
+#, fuzzy, kde-format
 msgid "Add or remove crossword dictionaries"
 msgstr "Dodaj ili ukloni rječnike križaljke."
 
-#: dictionary.cpp:566
+#: dictionary.cpp:563
+#, kde-format
 msgid ""
 "Adding words from %1 crossword files to the database.\n"
 "Please wait."
@@ -278,7 +1077,8 @@ msgstr ""
 "Dodaje riječi iz %1 datoteka križaljke u bazu podataka.\n"
 "Molimo sačekajte."
 
-#: dictionary.cpp:462
+#: dictionary.cpp:459
+#, kde-format
 msgid ""
 "Adding words from the dictionary '%1' to the database.\n"
 "Please wait."
@@ -286,21 +1086,29 @@ msgstr ""
 "Dodaje riječi iz rječnika '%1' u bazu podataka.\n"
 "Molimo sačekajte."
 
-#: crosswordxmlguiwindow.cpp:1422
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1446
+#, fuzzy, kde-format
 msgid "Adds a new clue at the current cell"
 msgstr "Dodaje novi trag u trenutačnu ćeliju."
 
-#: crosswordxmlguiwindow.cpp:1445
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1469
+#, fuzzy, kde-format
 msgid "Adds a new image at the current cell"
 msgstr "Dodaje novu sliku trenutačnoj ćeliji."
 
+#. i18n: ectx: property (toolTip), widget (QToolButton, addEntry)
+#: dictionaries.ui:221
+#, kde-format
+msgid "Adds an entry to the dictionary"
+msgstr "Dodaje unos u rječnik"
+
 #: global.cpp:48
+#, kde-format
 msgid "All cells"
 msgstr "Sve ćelije"
 
-#: krossword.cpp:657
+#: krossword.cpp:521
+#, kde-format
 msgid ""
 "All clue cells get removed. The initial letter to clue number mapping is "
 "A=1, B=2, ..., Z=26."
@@ -308,11 +1116,19 @@ msgstr ""
 "Sve ćelije traga su uklonjene. Početno slovo mapiranja traga broja je A=1, "
 "B=2, ..., Z=26."
 
+#. i18n: ectx: property (text), widget (QLabel, lblCellTypes)
+#: configure_details.ui:230
+#, kde-format
+msgid "Allowed Cell T&ypes:"
+msgstr "T&ipovi dozvoljene ćelije"
+
 #: global.cpp:457
+#, kde-format
 msgid "American Crossword"
 msgstr "Američka križaljka"
 
 #: global.cpp:459
+#, kde-format
 msgctxt "Short description of the crossword type 'American'"
 msgid ""
 "American crosswords have numbered clues and a list of clues on the side of "
@@ -321,167 +1137,224 @@ msgstr ""
 "Američka križaljka ima numeričke tragove i listu tragova sa strane "
 "križaljke. One obično imaju 180 stepeni racionalnu simetriju."
 
-#: krosswordpuzzle.cpp:262
+#: mainwindow.cpp:260
+#, kde-format
 msgid ""
 "An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
 " Do you want to restore the crossword?"
 msgstr ""
 
-#: main.cpp:37
+#. i18n: ectx: property (text), widget (QLabel, lblAnchor)
+#: properties.ui:276
+#, kde-format
+msgid "Anchor:"
+msgstr "Sidro:"
+
+#: main.cpp:42
+#, kde-format
 msgid "Andrea Barazzetti"
 msgstr ""
 
-#: krosswordpuzzle.cpp:308
-msgid "Animations"
-msgstr "Animacije"
-
-#: cluemodel.cpp:60
-msgid "Answer"
-msgstr "Odgovoriti"
-
-#: dictionary.cpp:243
+#: dictionary.cpp:240
+#, kde-format
 msgctxt "The header title for answers in the dictionary database"
 msgid "Answer"
 msgstr ""
 
-#: library/librarymanager.cpp:74
+#. i18n: ectx: property (toolTip), widget (QRadioButton, horizontal)
+#: clue_properties_dock.ui:135
+#, kde-format
+msgid "Arrange the answer letters horizontally."
+msgstr "Raporedi pisma odgovora horizontalno."
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, vertical)
+#: clue_properties_dock.ui:157
+#, kde-format
+msgid "Arrange the answer letters vertically."
+msgstr "Raporedi pisma odgovora uspravno."
+
+#: library/librarymanager.cpp:75
+#, kde-format
 msgctxt "The title for authors of crosswords in the library tree view"
 msgid "Author(s):"
 msgstr ""
 
 #: commands.cpp:1271
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Authors"
 msgstr "Pisci"
 
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: download.ui:81
+#, fuzzy, kde-format
+msgid "Available crosswords"
+msgstr "Nova križaljka"
+
 #: dialogs/statisticsdialog.cpp:104
+#, kde-format
 msgid "Avg. Answer Length:"
 msgstr "Pro. dužina odgovora:"
 
-#: crosswordxmlguiwindow.cpp:1017
+#. i18n: ectx: attribute (label), widget (QWidget, page_2)
+#: dictionaries.ui:328
+#, kde-format
+msgid "Backup"
+msgstr "Rezerva"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: configure_details.ui:51
+#, kde-format
+msgid "Basic Settings"
+msgstr "Postavke osnova"
+
+#: crosswordxmlguiwindow.cpp:1029
+#, kde-format
 msgid "Can't add clue at the current cell"
 msgstr "Ne može dodati trag na trenutačnu ćeliju"
 
-#: crosswordxmlguiwindow.cpp:1038
+#: crosswordxmlguiwindow.cpp:1050
+#, kde-format
 msgctxt "%1 contains the reason why the clue couldn't be added"
 msgid "Can't add clue. %1"
 msgstr "Ne može dodati trag. %1"
 
-#: crosswordxmlguiwindow.cpp:1008
+#: crosswordxmlguiwindow.cpp:1020
+#, kde-format
 msgid "Can't add clues on crossed letter cells"
 msgstr "Ne može dodati tragove na ukrštene ćelije slova"
 
-#: crosswordxmlguiwindow.cpp:1069
+#: crosswordxmlguiwindow.cpp:1081
+#, kde-format
 msgctxt "%1 contains the reason why the image couldn't be added"
 msgid "Can't add image. %1"
 msgstr "Ne može dodati sliku. %1"
 
-#: crosswordxmlguiwindow.cpp:2758
+#: crosswordxmlguiwindow.cpp:2740
+#, kde-format
 msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
 msgid "Can't add letter cells. %1"
 msgstr "Ne može dodati ćeliju slova. %1"
 
-#: crosswordxmlguiwindow.cpp:1187
+#: crosswordxmlguiwindow.cpp:1199
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the new clue number mapping couldn't be applied"
 msgid "Can't apply clue number mapping. %1"
 msgstr "Ne može primjeniti mapiranje broja. %1"
 
-#: crosswordxmlguiwindow.cpp:1731
+#: crosswordxmlguiwindow.cpp:1712
+#, kde-format
 msgctxt "%1 contains the reason why the answer offset couldn't be changed"
 msgid "Can't change answer offset. %1"
 msgstr "Ne može promijeniti ofset odgovora. %1"
 
-#: crosswordxmlguiwindow.cpp:1756
+#: crosswordxmlguiwindow.cpp:1737
+#, kde-format
 msgctxt "%1 contains the reason why the clue text couldn't be changed"
 msgid "Can't change clue text. %1"
 msgstr "Ne može promijeniti trag tekst. %1"
 
-#: crosswordxmlguiwindow.cpp:1769
+#: crosswordxmlguiwindow.cpp:1750
+#, kde-format
 msgctxt "%1 contains the reason why the correct answer couldn't be changed"
 msgid "Can't change correct answer. %1"
 msgstr "Ne može promijeniti tačan odgovor. %1"
 
-#: crosswordxmlguiwindow.cpp:1117
+#: crosswordxmlguiwindow.cpp:1129
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the crossword properties couldn't be changed"
 msgid "Can't change crossword properties. %1"
 msgstr "Ne može promijeniti postavke križaljke. %1"
 
-#: crosswordxmlguiwindow.cpp:1744
+#: crosswordxmlguiwindow.cpp:1725
+#, kde-format
 msgctxt "%1 contains the reason why the orientation couldn't be changed"
 msgid "Can't change orientation. %1"
 msgstr "Ne može promijeniti orijentaciju. %1"
 
-#: crosswordxmlguiwindow.cpp:2216 crosswordxmlguiwindow.cpp:2240
-#: crosswordxmlguiwindow.cpp:2265 crosswordxmlguiwindow.cpp:2699
+#: crosswordxmlguiwindow.cpp:2215 crosswordxmlguiwindow.cpp:2239
+#: crosswordxmlguiwindow.cpp:2264 crosswordxmlguiwindow.cpp:2693
+#, kde-format
 msgctxt "%1 contains the reason why the answer couldn't be cleared"
 msgid "Can't clear answer. %1"
 msgstr "Ne može očistiti odgovor. %1"
 
-#: crosswordxmlguiwindow.cpp:1100
+#: crosswordxmlguiwindow.cpp:1112
+#, kde-format
 msgctxt "%1 contains the reason why the crossword couldn't be cleared"
 msgid "Can't clear crossword. %1"
 msgstr "Ne može očistiti križaljku. %1"
 
-#: crosswordxmlguiwindow.cpp:2193 crosswordxmlguiwindow.cpp:2693
+#: crosswordxmlguiwindow.cpp:2192 crosswordxmlguiwindow.cpp:2687
+#, kde-format
 msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
 msgid "Can't clear letter cell. %1"
 msgstr "Ne može očistiti ćeliju slova. %1"
 
-#: crosswordxmlguiwindow.cpp:2806
+#: crosswordxmlguiwindow.cpp:2799
+#, kde-format
 msgctxt "%1 contains the reason why the crossword couldn't be converted"
 msgid "Can't convert crossword. %1"
 msgstr "Ne može pretvoriti križaljku. %1"
 
-#: crosswordxmlguiwindow.cpp:1808
+#: crosswordxmlguiwindow.cpp:1788
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the letter couldn't be converted to a solution "
 "letter"
 msgid "Can't convert letter. %1"
 msgstr "Ne može pretvoriti slovo. %1"
 
-#: crosswordxmlguiwindow.cpp:1789
+#: crosswordxmlguiwindow.cpp:1769
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the solution letter couldn't be converted to a "
 "letter"
 msgid "Can't convert solution letter. %1"
 msgstr "Ne može pretvoriti slovo rješenja. %1"
 
-#: crosswordxmlguiwindow.cpp:2771
+#: crosswordxmlguiwindow.cpp:2753
+#, kde-format
 msgctxt "%1 contains the reason why the letter cell couldn't be edited"
 msgid "Can't edit letter cell. %1"
 msgstr "Ne može urediti ćeliju slova. %1"
 
-#: library/librarygui.cpp:290
+#: library/librarygui.cpp:342
+#, kde-format
 msgid "Can't export whole directories. Please select a crossword."
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1200
+#: crosswordxmlguiwindow.cpp:1212
+#, kde-format
 msgctxt "%1 contains the reason why the cells couldn't be moved"
 msgid "Can't move cells. %1"
 msgstr "Ne može pomjeriti ćelije. %1"
 
-#: crosswordxmlguiwindow.cpp:1082
+#: crosswordxmlguiwindow.cpp:1094
+#, kde-format
 msgctxt "%1 contains the reason why the clue couldn't be removed"
 msgid "Can't remove clue. %1"
 msgstr "Ne može ukloniti trag. %1"
 
-#: crosswordxmlguiwindow.cpp:1087
+#: crosswordxmlguiwindow.cpp:1099
+#, kde-format
 msgctxt "%1 contains the reason why the image couldn't be removed"
 msgid "Can't remove image. %1"
 msgstr "Ne može ukloniti sliku. %1"
 
-#: crosswordxmlguiwindow.cpp:2760
+#: crosswordxmlguiwindow.cpp:2742
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the letters couldn't be removed to the clue"
 msgid "Can't remove letter cells. %1"
 msgstr "Ne može ukloniti ćeliju slova. %1"
 
-#: crosswordxmlguiwindow.cpp:847
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:840
+#, fuzzy, kde-format
 msgid ""
 "Can't store confidence values in *.puz files!\n"
 "If you want confidence values to be stored please use a Krossword file "
@@ -491,8 +1364,8 @@ msgstr ""
 "Ako želite da pohranite vrijednosti pouzdanosti, molimo koristite "
 "KrossWordPuzzle format datoteke (*.kwp ili *.kwpz)."
 
-#: crosswordxmlguiwindow.cpp:858
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:852
+#, fuzzy, kde-format
 msgid ""
 "Can't store image cells in *.puz files!\n"
 "If you want image cells to be stored please use a Krossword file format (*."
@@ -502,19 +1375,30 @@ msgstr ""
 "Ako želite da pohranite ćelije slika, molimo koristite KrossWordPuzzle "
 "format datoteke (*.kwp ili *.kwpz)."
 
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:116
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Centered"
+msgstr "Centrirano"
+
 #: commands.cpp:991
+#, kde-format
 msgid "Change Clue '%1'"
 msgstr "Promijeni trag '%1'"
 
 #: commands.cpp:1483
-msgid "Change Number Puzzle Mapping"
+#, fuzzy, kde-format
+msgid "Change Coded Puzzle Mapping"
 msgstr "Promijeni broj mapiranja zagonetke"
 
-#: crosswordxmlguiwindow.cpp:1456
+#: crosswordxmlguiwindow.cpp:1480
+#, kde-format
 msgid "Change the size of the crossword or it's title, author, copyright..."
 msgstr "Promijeni veličinu križaljke ili njen naziv, autora, autorska prava..."
 
 #: commands.cpp:1297
+#, kde-format
 msgctxt ""
 "%1 may be a list of changes separated by ',' if the list of changes contains "
 "more than 2 items. %2 is the last item"
@@ -522,16 +1406,18 @@ msgid "Changed Crossword Properties (%1 and %2)"
 msgstr ""
 
 #: commands.cpp:1292
+#, kde-format
 msgid "Changed Crossword Properties (%1)"
 msgstr "Promjenje postavke Crossword-a (%1)"
 
-#: crosswordxmlguiwindow.cpp:1471
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1495
+#, fuzzy, kde-format
 msgid "Changes the mapping of clue numbers to letters"
 msgstr "Mijenja mapiranje traga broja u slova."
 
 #: dialogs/convertcrossworddialog.cpp:81
-#: dialogs/createnewcrossworddialog.cpp:231
+#: dialogs/createnewcrossworddialog.cpp:235
+#, kde-format
 msgid ""
 "Changing the crossword type will discard user defined crossword type "
 "settings."
@@ -540,297 +1426,449 @@ msgstr ""
 "definisao korisnik."
 
 #: global.cpp:300
+#, kde-format
 msgid "Characters"
 msgstr "&Karakteri"
 
 #: global.cpp:304
+#, kde-format
 msgid "Characters or digits"
 msgstr "Znakovi ili cifre"
 
-#: crosswordxmlguiwindow.cpp:1508
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:2406
+#, fuzzy, kde-format
+msgid "Check"
+msgstr "&Provjeri"
+
+#: crosswordxmlguiwindow.cpp:1535
+#, fuzzy, kde-format
 msgid "Checks if all letters are correct"
 msgstr "Provjerava da li su sva slova tačna."
 
-#: crosswordxmlguiwindow.cpp:1461
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1485
+#, fuzzy, kde-format
 msgid "Checks if the crossword has 180 degree rotation symmetry"
 msgstr "Provjeri da li križaljka ima za 180 stepeni rotacionu simetriju."
 
-#: crosswordxmlguiwindow.cpp:1266
+#: crosswordxmlguiwindow.cpp:1289
+#, fuzzy, kde-format
+msgid "Choose a filename to save the crossword as a template"
+msgstr "Izaberite ime dokumenta da spasite križeljku sa riješenim slovima"
+
+#: crosswordxmlguiwindow.cpp:1279
+#, kde-format
 msgid "Choose a filename to save the crossword with solved letters"
 msgstr "Izaberite ime dokumenta da spasite križeljku sa riješenim slovima"
 
-#: library/librarygui.cpp:377
-msgid "ChrisWords.com"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
+#: crosswordxmlguiwindow.cpp:1107 crosswordxmlguiwindow.cpp:2412
+#, kde-format
 msgid "Clear"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1327
+#: crosswordxmlguiwindow.cpp:1351
+#, kde-format
 msgid "Clear Across Answer"
 msgstr "Očisti odgovor preko"
 
 #: commands.cpp:1092
+#, kde-format
 msgid "Clear Correct Answer of Clue at (%1, %2)"
 msgstr "Ukloni tačan odgovor od traga na (%1,%2)"
 
 #: commands.cpp:1144
+#, kde-format
 msgid "Clear Correct Letter at (%1, %2), was %3"
 msgstr "Ukloni tačno slovo na (%1,%2), je bilo %3"
 
 #: commands.cpp:1222
+#, kde-format
 msgid "Clear Crossword"
 msgstr "Očisti Crossword"
 
-#: crosswordxmlguiwindow.cpp:1333
+#: crosswordxmlguiwindow.cpp:1357
+#, kde-format
 msgid "Clear Down Answer"
 msgstr "Čisti donji odgovor"
 
 #: commands.cpp:1154
+#, kde-format
 msgid "Clear Letter at (%1, %2), was %3"
 msgstr "Ukloni slovo na (%1,%2), je bilo %3"
 
-#: crosswordxmlguiwindow.cpp:1321
+#: crosswordxmlguiwindow.cpp:1345
+#, kde-format
 msgid "Clear This Answer"
 msgstr "Čisti ovaj odgovor"
 
-#: crosswordxmlguiwindow.cpp:1315
+#: crosswordxmlguiwindow.cpp:1339
+#, kde-format
 msgid "Clear This Cell"
 msgstr "Ispraznite ovu ćeliju"
 
-#: crosswordxmlguiwindow.cpp:1513
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1540
+#, fuzzy, kde-format
 msgid "Clears all letter cells"
 msgstr "Čisti sve ćelije slova."
 
-#: crosswordxmlguiwindow.cpp:1328
+#: crosswordxmlguiwindow.cpp:1352
+#, kde-format
 msgid "Clears the answer to the current across clue"
 msgstr "Čisti odgovor trenutačnog preko traga"
 
-#: crosswordxmlguiwindow.cpp:1322
+#: crosswordxmlguiwindow.cpp:1346
+#, kde-format
 msgid "Clears the answer to the current clue"
 msgstr "Čisti odgovor trenutačnog traga"
 
-#: crosswordxmlguiwindow.cpp:1334
+#: crosswordxmlguiwindow.cpp:1358
+#, kde-format
 msgid "Clears the answer to the current down clue"
 msgstr "Čisti odgovor trenutnog donjeg traga"
 
-#: crosswordxmlguiwindow.cpp:1316
-#, fuzzy
+#. i18n: ectx: property (toolTip), widget (QToolButton, clear)
+#: dictionaries.ui:284
+#, kde-format
+msgid "Clears the dictionary"
+msgstr "Čisti rječnik"
+
+#: crosswordxmlguiwindow.cpp:1340
+#, fuzzy, kde-format
 msgid "Clears the selected letter cell"
 msgstr "Čisti trenutačno odabranu ćeliju slova"
 
-#: crosswordxmlguiwindow.cpp:673 crosswordxmlguiwindow.cpp:820
-#: krosswordpuzzle.cpp:131
+#. i18n: ectx: property (toolTip), widget (QListView, dictionaryAnswers)
+#: clue_properties_dock.ui:558
+#, kde-format
+msgid ""
+"Click / double click an answer to set it as the correct answer of the clue."
+msgstr "Klik / dupli klik na odgovor da ga postavite kao tačan odgovor traga."
+
+#: crosswordxmlguiwindow.cpp:682 crosswordxmlguiwindow.cpp:813
+#: mainwindow.cpp:129
+#, kde-format
 msgid "Close Document"
 msgstr "Zatvori dokument"
 
-#: crosswordxmlguiwindow.cpp:1257
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1270
+#, fuzzy, kde-format
 msgid "Close the current crossword"
 msgstr "Zatvorite trenutačnu križaljku."
 
-#: cluemodel.cpp:60
+#: cluemodel.cpp:59
+#, kde-format
 msgid "Clue"
 msgstr "Trag"
 
-#: dictionary.cpp:245
+#: dictionary.cpp:242
+#, kde-format
 msgctxt ""
 "The header title for clues associated with answer words in the dictionary "
 "database"
 msgid "Clue"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:2477 crosswordxmlguiwindow.cpp:2505
+#. i18n: ectx: property (text), widget (QLabel, lblClueMapping)
+#: configure_details.ui:243
+#, kde-format
+msgid "Clue &Mapping:"
+msgstr "&Mapiranje traga"
+
+#. i18n: ectx: property (text), widget (QLabel, lblClueType)
+#: configure_details.ui:184
+#, kde-format
+msgid "Clue &Type:"
+msgstr "&Tip traga:"
+
+#: crosswordxmlguiwindow.cpp:2478 crosswordxmlguiwindow.cpp:2506
+#, kde-format
 msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
 msgstr "Trag (preko): \"%1\", %2 slova, trenutačni odgovor: \"%3\""
 
-#: crosswordxmlguiwindow.cpp:2482 crosswordxmlguiwindow.cpp:2509
+#: crosswordxmlguiwindow.cpp:2483 crosswordxmlguiwindow.cpp:2509
+#, kde-format
 msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
 msgstr "Trag (dolje): \"%1\", %2 slova, trenutačni odgovor: \"%3\""
 
-#: crosswordxmlguiwindow.cpp:1661
+#. i18n: ectx: property (text), widget (QLabel, lblClueCellHandling)
+#: configure_details.ui:263
+#, kde-format
+msgid "Clue Cell &Handling:"
+msgstr "&Upravljanje ćelijom traga"
+
+#: crosswordxmlguiwindow.cpp:1642
+#, kde-format
 msgid "Clue List"
 msgstr "Lista tragova"
 
-#: crosswordxmlguiwindow.cpp:1470
+#. i18n: ectx: property (text), widget (QTreeWidget, letterContentList)
+#: clue_number_mapping.ui:61
+#, kde-format
+msgid "Clue Number"
+msgstr "Broj traga"
+
+#: crosswordxmlguiwindow.cpp:1494
+#, kde-format
 msgid "Clue Number &Mapping..."
 msgstr "&Mapiranje traga broja..."
 
-#: crosswordxmlguiwindow.cpp:1162
+#. i18n: ectx: property (windowTitle), widget (QDialog, clue_number_mapping)
+#: clue_number_mapping.ui:14 crosswordxmlguiwindow.cpp:1174
+#, kde-format
 msgid "Clue Number Mapping"
 msgstr "Mapiranje traga broja"
 
-#: crosswordxmlguiwindow.cpp:1363
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1387
+#, fuzzy, kde-format
 msgid "Clue With Switched Orientation"
 msgstr "Odaberi trag sa promijenjenom orijentacijom"
 
-#: crosswordxmlguiwindow.cpp:1052
+#: crosswordxmlguiwindow.cpp:1064
+#, kde-format
 msgid "Clue added ('%1')"
 msgstr "Trag dodan ('%1')"
 
 #: global.cpp:38
+#, kde-format
 msgid "Clue cell"
 msgstr "ćelija traga"
 
 #: commands.cpp:352
+#, kde-format
 msgctxt ""
 "%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
 msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
 msgstr "Trag ćelija nije pronađena na datim koordinatama (%1, %2): '%3'"
 
 #: global.cpp:260
+#, kde-format
 msgid "Clue cells are allowed"
 msgstr "Dozvoljene su ćelije traga"
 
 #: global.cpp:262
+#, kde-format
 msgid "Clue cells are disallowed"
 msgstr "Ćelije traga su poništene"
 
 #: global.cpp:264
+#, kde-format
 msgid "Clue cells are required"
 msgstr "Ćelije traga su obavezne"
 
-#: krossworddocument.cpp:86
+#: krossworddocument.cpp:119
+#, kde-format
 msgctxt "Title for the clue list when printing"
 msgid "Clue list"
 msgstr "Lista tragova"
 
 #: dialogs/currentcellwidget.cpp:154
+#, kde-format
 msgid "Clue:"
 msgstr "Trag:"
 
+#. i18n: ectx: property (toolTip), widget (KComboBox, clueMapping)
+#: configure_details.ui:170
+#, kde-format
+msgid "Clues can be mapped to single cells or sets of cells"
+msgstr "Tragovi mogu biti mapirani slobodnim ćelijama ili setovima ćelija"
+
 #: global.cpp:277
+#, kde-format
 msgid "Clues refer to cells"
 msgstr "Tragovi upućuju na ćelije"
 
 #: global.cpp:275
+#, kde-format
 msgid "Clues refer to sets of cells"
 msgstr "Tragovi upućuju na setove ćelija"
 
 #: dialogs/statisticsdialog.cpp:85
+#, kde-format
 msgid "Clues:"
 msgstr "Tragovi:"
 
-#: crosswordxmlguiwindow.cpp:2086
-#, fuzzy
+#: global.cpp:488
+#, fuzzy, kde-format
+msgid "Coded Puzzle"
+msgstr "Numerička zagonetka"
+
+#: global.cpp:490
+#, fuzzy, kde-format
+msgctxt "Short description of the crossword type 'Coded Puzzle'"
+msgid ""
+"Coded puzzles are a variant of crosswords in which each cell has a number "
+"between 1 and 26. The solver has to find out for which letter of the "
+"alphabet a number stands."
+msgstr ""
+"Numeričke zagonetke su varijante križaljki u kojima svaka ćelija ima broj "
+"između 1 i 26. Rješavač mora saznati za koje slovo abecede važi koji broj."
+
+#: crosswordxmlguiwindow.cpp:2045
+#, fuzzy, kde-format
 msgid ""
 "Congratulations!\n"
 "You solved the crossword perfectly."
 msgstr "Čestitamo! Riješili ste križaljku savršeno."
 
-#: crosswordxmlguiwindow.cpp:552
+#: crosswordxmlguiwindow.cpp:555
+#, kde-format
 msgid "Congratulations! You solved the crossword perfectly."
 msgstr "Čestitamo! Riješili ste križaljku savršeno."
 
-#: dictionary.cpp:131
+#: dictionary.cpp:128
+#, kde-format
 msgid "Connect Database"
 msgstr "Uspostavi konekciju sa bazom podataka"
 
+#. i18n: ectx: property (title), widget (QGroupBox, grpConversionInfo)
+#: convert_crossword_type.ui:109
+#, kde-format
+msgid "Conversion Info"
+msgstr "Info pretvorbe"
+
 #: dialogs/currentcellwidget.cpp:439
+#, kde-format
 msgid "Convert &Letter %1 to Solution Letter"
 msgstr "Pretvori &slovo %1 u slovo rješenja"
 
-#: commands.cpp:1777
+#: commands.cpp:1776
+#, kde-format
 msgid "Convert Crossword From '%1' to '%2'"
 msgstr "Pretvori Crossword od '%1' do '%2'"
 
 #: dialogs/convertcrossworddialog.cpp:29
+#, kde-format
 msgid "Convert Crossword Type To"
 msgstr "Pretvori tip križaljke u"
 
 #: dialogs/convertcrossworddialog.cpp:33
+#, kde-format
 msgid "Convert From: %1"
 msgstr "Pretvori iz: %1"
 
 #: commands.cpp:626
+#, kde-format
 msgid "Convert Letter at (%1, %2) to Solution Letter"
 msgstr "Pretvori slovo na (%1, %2) u slovo rješenja"
 
 #: commands.cpp:654
+#, kde-format
 msgctxt "%1 contains the position of the solution letter in the solution word."
 msgid "Convert Solution Letter %1 to Letter"
 msgstr "Pretvori slovo rješenja %1 u slovo"
 
+#. i18n: ectx: property (windowTitle), widget (QDialog, convert_crossword_type)
+#: convert_crossword_type.ui:20
+#, kde-format
+msgid "Convert To Crossword Type"
+msgstr "Pretvori u tip križaljke"
+
 #: dialogs/convertcrossworddialog.cpp:105
+#, kde-format
 msgid "Convert To: %1"
 msgstr "Pretvori u: %1"
 
+#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
+#: create_new.ui:133
+#, fuzzy, kde-format
+msgid "Cop&yright:"
+msgstr "&Autorska prava:"
+
 #: commands.cpp:1274
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Copyright"
 msgstr "Autorsko pravo"
 
-#: krosswordpuzzle.cpp:94
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, copyright)
+#: create_new.ui:188 properties.ui:133
+#, kde-format
+msgid "Copyright information about the crossword"
+msgstr "Informacije o autorskim pravima u vezi sa križaljkom"
+
+#: mainwindow.cpp:92
+#, kde-format
 msgid "Could not open resource at "
 msgstr ""
 
 #: io/krosswordxmlwriter.cpp:73
+#, kde-format
 msgid "Couldn't close the ZIP archive"
 msgstr "Ne može zatvoriti ZIP arhivu"
 
-#: crosswordxmlguiwindow.cpp:2818
+#: crosswordxmlguiwindow.cpp:2811
+#, kde-format
 msgid "Couldn't connect to the database."
 msgstr "Nije moguće ostvariti konekciju sa bazom podataka."
 
-#: library/librarygui.cpp:340
+#: library/librarygui.cpp:387
+#, kde-format
 msgid "Couldn't export the image to the specified file."
 msgstr ""
 
 #: io/krosswordxmlwriter.cpp:52
+#, kde-format
 msgid "Couldn't open the ZIP archive for writing"
 msgstr "Ne može otvoriti ZIP arhivu za pisanje"
 
-#: library/librarygui.cpp:452
-#, fuzzy
+#: library/librarygui.cpp:500
+#, fuzzy, kde-format
 msgid "Couldn't remove the crossword from the library."
 msgstr "Ne moeže izvesti križaljku u posebnu slikovnu datoteku."
 
-#: library/librarygui.cpp:441
+#: library/librarygui.cpp:489
+#, kde-format
 msgid ""
 "Couldn't remove the directory from the library.\n"
 "You need root privileges to remove directories which belong to the global "
 "library."
 msgstr ""
 
-#: dialogs/dictionarydialog.cpp:205
+#: dialogs/dictionarydialog.cpp:214
+#, kde-format
 msgid "Couldn't submit removed entries to the database: %1"
 msgstr "Ne može proslijediti izbrisane ulaze bazi podataka: %1"
 
-#: dialogs/createnewcrossworddialog.cpp:35
+#. i18n: ectx: property (windowTitle), widget (QDialog, database_connection)
+#: database_connection.ui:20
+#, kde-format
+msgid "Create Database"
+msgstr "Kreiraj bazu podataka"
+
+#: dialogs/createnewcrossworddialog.cpp:34
+#, kde-format
 msgid "Create New Crossword"
 msgstr "Kreiraj novu križaljku"
 
-#: library/librarygui.cpp:517
-#, fuzzy
+#: library/librarygui.cpp:565
+#, fuzzy, kde-format
 msgid "Create a new crossword"
 msgstr "Kreiraj novu križaljku"
 
-#: library/librarygui.cpp:522
+#: library/librarygui.cpp:570
+#, kde-format
 msgid "Create a new folder in the library"
 msgstr ""
 
-#: dialogs/createnewcrossworddialog.cpp:111
-#, fuzzy
+#: dialogs/createnewcrossworddialog.cpp:114
+#, fuzzy, kde-format
 msgctxt "Default notes value for new crosswords"
 msgid "Created with Krossword"
 msgstr "Kreiraj novu križaljku"
 
 #: dialogs/statisticsdialog.cpp:70
+#, kde-format
 msgid "Crossed:"
 msgstr "Ukršteno:"
 
 #: global.cpp:503
+#, kde-format
 msgid "Crossnumber"
 msgstr "Crossnumber"
 
 #: global.cpp:505
+#, kde-format
 msgctxt "Short description of the crossword type 'Crossnumber'"
 msgid ""
 "Crossnumbers are the numerical analogy of a crossword, in which the "
@@ -839,22 +1877,49 @@ msgstr ""
 "Crossnumber-i su numerička analogija križaljke, u kojima su rješenja tragova "
 "brojevi umjesto riječi."
 
-#: library/librarygui.cpp:199 library/librarygui.cpp:204
+#. i18n: ectx: property (windowTitle), widget (QWidget, print_crossword)
+#. i18n: ectx: ToolBar (crosswordToolBar)
+#: krossword_crossword_ui.rc:52 print_crossword.ui:14
+#, fuzzy, kde-format
+msgid "Crossword"
+msgstr "&Križaljka"
+
 #: library/librarygui.cpp:212
-#, fuzzy
+#, fuzzy, kde-format
 msgid "Crossword %1"
 msgstr "&Križaljka *"
 
-#: dialogs/createnewcrossworddialog.cpp:191
+#. i18n: ectx: property (text), widget (QLabel, lblSize)
+#: create_new.ui:159
+#, fuzzy, kde-format
+msgid "Crossword Size:"
+msgstr "&Veličina križaljke"
+
+#: dialogs/createnewcrossworddialog.cpp:194
+#, kde-format
 msgid "Crossword Type"
 msgstr "Tip križaljke"
 
+#. i18n: ectx: property (title), widget (QGroupBox, grpInfo)
+#: create_new.ui:51
+#, kde-format
+msgid "Crossword Type Information"
+msgstr "Informacije za tip križaljke"
+
+#. i18n: ectx: property (text), widget (QLabel, lblTemplateType)
+#: create_new.ui:436
+#, kde-format
+msgid "Crossword Type:"
+msgstr "Tip kkrižaljke:"
+
 #: dialogs/crosswordpropertiesdialog.cpp:43
-#: dialogs/crosswordpropertiesdialog.cpp:277
+#: dialogs/crosswordpropertiesdialog.cpp:287
+#, kde-format
 msgid "Crossword Type: %1"
 msgstr "Tip križaljke: %1"
 
 #: global.cpp:462
+#, kde-format
 msgctxt "Long description of the crossword type 'American'"
 msgid ""
 "Crossword grids such as those appearing in most North American newspapers "
@@ -875,241 +1940,481 @@ msgid ""
 "(text taken from wikipedia)"
 msgstr ""
 
+#: library/librarygui.cpp:292
+#, fuzzy, kde-format
+msgid "Crossword not valid"
+msgstr "&Križaljka *"
+
+#: main.cpp:50
+#, fuzzy, kde-format
+msgid "Crossword to open"
+msgstr "Tip križaljke"
+
+#: crosswordxmlguiwindow.cpp:795 dialogs/dictionarydialog.cpp:192
+#, kde-format
+msgid "Crosswords (*.kwp *.kwpz *.puz)"
+msgstr ""
+
 #: dialogs/currentcellwidget.cpp:155
+#, kde-format
 msgid "Current Answer:"
 msgstr "Trenutačni odgovor:"
 
-#: crosswordxmlguiwindow.cpp:1689
+#: crosswordxmlguiwindow.cpp:1670
+#, kde-format
 msgid "Current Cell"
 msgstr "Trenutačna ćelija"
 
-#: library/librarygui.cpp:537
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, lblCurrentSolutionWord)
+#: solution_letter_properties.ui:51
+#, fuzzy, kde-format
+msgid "Current solution word:"
+msgstr "Trenutačni odgovor:"
+
+#: library/librarygui.cpp:585
+#, fuzzy, kde-format
 msgid "Delete the selected crossword from the library"
 msgstr "Ne moeže izvesti križaljku u posebnu slikovnu datoteku."
 
 #: dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
+#, kde-format
 msgid "Describe your crossword type here."
 msgstr "Opišite svoj tip križaljke ovdje."
 
 #: dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
+#, kde-format
 msgid "Detailed Configuration"
 msgstr "Detaljna konfiguracija"
 
-#: main.cpp:37 main.cpp:38
+#: main.cpp:42 main.cpp:43
+#, kde-format
 msgid "Developer"
 msgstr ""
 
-#: dialogs/dictionarydialog.cpp:37
+#. i18n: ectx: property (windowTitle), widget (QDialog, dictionaries)
+#: dialogs/dictionarydialog.cpp:38 dictionaries.ui:20
+#, kde-format
 msgid "Dictionary"
 msgstr "&Rječnik"
 
-#: dialogs/dictionarydialog.cpp:217
+#: dialogs/dictionarydialog.cpp:226
+#, kde-format
 msgid "Dictionary cleared"
 msgstr "Rječnik očišćen"
 
 #: global.cpp:302
+#, kde-format
 msgid "Digits"
 msgstr "Cifre"
 
-#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1107 crosswordxmlguiwindow.cpp:2412
+#, fuzzy, kde-format
 msgid "Do you really want to clear the crossword?"
 msgstr "Uklanja sve tragove iz križaljke."
 
-#: crosswordxmlguiwindow.cpp:2108
+#: crosswordxmlguiwindow.cpp:2107
+#, kde-format
 msgid "Do you really want to solve the crossword?"
 msgstr ""
 
-#: main.cpp:44
-msgid "Document to open"
-msgstr "Dokument za otvaranje"
+#. i18n: ectx: property (title), widget (QGroupBox, grpDocumentInformation)
+#: create_new.ui:82
+#, kde-format
+msgid "Document &Information"
+msgstr "&Informacije dokumenta"
+
+#. i18n: ectx: attribute (label), widget (QWidget, page_2)
+#: properties.ui:41
+#, kde-format
+msgid "Document Information"
+msgstr "Podaci o dokumentu"
 
 #: global.cpp:40
+#, kde-format
 msgid "Double clue cell"
 msgstr "Dupla ćelija traga"
 
-#: cluemodel.cpp:64
+#: cluemodel.cpp:63
+#, kde-format
 msgid "Down clues"
 msgstr "Donji tragovi"
 
-#: krossworddocument.cpp:87
+#: krossworddocument.cpp:120
+#, kde-format
 msgctxt "Title for the list of down/vertical clues when printing"
 msgid "Down clues"
 msgstr "Donji tragovi"
 
-#: library/librarygui.cpp:349
+#. i18n: ectx: property (text), widget (QLabel, lblTargetDirectory)
+#: download.ui:49
+#, fuzzy, kde-format
+msgid "Download &to:"
+msgstr "Preuzmi &u:"
+
+#: library/librarygui.cpp:396
+#, kde-format
 msgid "Download Crossword To Library"
 msgstr ""
 
-#: library/librarygui.cpp:527
-#, fuzzy
+#. i18n: ectx: property (windowTitle), widget (QDialog, download)
+#: download.ui:14
+#, kde-format
+msgid "Download Crosswords"
+msgstr "Preuzmi križaljke"
+
+#: library/librarygui.cpp:575
+#, fuzzy, kde-format
 msgid "Download a crossword and add it to the library"
 msgstr "Ne moeže izvesti križaljku u posebnu slikovnu datoteku."
 
+#: library/librarygui.cpp:246
+#, fuzzy, kde-format
+msgid "Download error: "
+msgstr "Preuzmi &u:"
+
+#. i18n: ectx: attribute (label), widget (QWidget, page_3)
+#. i18n: ectx: ToolBar (editToolBar)
+#: dictionaries.ui:209 krossword_crossword_ui.rc:71
+#, kde-format
+msgid "Edit"
+msgstr "Uredi"
+
 #: commands.cpp:1150
+#, kde-format
 msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
 msgstr "Uredi tačno slovo na (%1, %2) od %3 do %4"
 
-#: crosswordxmlguiwindow.cpp:1679
+#: crosswordxmlguiwindow.cpp:1660
+#, kde-format
 msgid "Edit History"
 msgstr "Uredi historiju"
 
 #: commands.cpp:1160
+#, kde-format
 msgid "Edit Letter at (%1, %2) From %3 to %4"
 msgstr "Uredi slovo na (%1, %2) od %3 do %4"
 
-#: crosswordxmlguiwindow.cpp:1416
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1440
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "Edit Mode"
 msgstr "Režim za uređivanje"
 
-#: cells/imagecell.cpp:68
+#: cells/imagecell.cpp:57
+#, kde-format
 msgid "Edit image properties to set an image"
 msgstr "Uredi postavke slike da postavite sliku"
 
 #: dialogs/statisticsdialog.cpp:57
+#, kde-format
 msgid "Empty Cells:"
 msgstr "Prazne čelije:"
 
-#: crosswordxmlguiwindow.cpp:2555 global.cpp:36
+#: crosswordxmlguiwindow.cpp:2549 global.cpp:36
+#, kde-format
 msgid "Empty cell"
 msgstr "Prazna ćelija"
 
-#: crosswordxmlguiwindow.cpp:1518
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, lblEmptyCellColor)
+#: print_crossword.ui:20
+#, fuzzy, kde-format
+msgid "Empty cell &color:"
+msgstr "Prazna ćelija"
+
+#. i18n: ectx: label, entry (animate), group (Preferences)
+#: krossword.kcfg:25
+#, kde-format
+msgid "Enable Animations"
+msgstr "Omogući animacije"
+
+#: crosswordxmlguiwindow.cpp:1545
+#, fuzzy, kde-format
 msgid "Enables the eraser, to clear letter cells/answers"
 msgstr "Omogućava brisaču, da očisti sve ćelije slova / odgovore."
 
-#: crosswordxmlguiwindow.cpp:1417
+#: crosswordxmlguiwindow.cpp:1441
+#, kde-format
 msgid "Enables/disables the edit mode"
 msgstr ""
 
-#: krosswordpuzzle.cpp:466
-#, fuzzy
+#: mainwindow.cpp:439
+#, fuzzy, kde-format
 msgid "Error loading file '%1'"
 msgstr "Greška pri otvaranju datoteke '%1'"
 
-#: krossword.cpp:1018
+#: krossword.cpp:871
+#, kde-format
 msgid "Error reading AcrossLite's .puz-format."
 msgstr "Greška pri čitanju AcrossLite -puz formata."
 
-#: krossword.cpp:963
-msgid "Error while downloading from url: %1"
-msgstr "Greška pri preuzimanju sa url-a: %1"
-
-#: crosswordxmlguiwindow.cpp:750
+#: crosswordxmlguiwindow.cpp:768
+#, kde-format
 msgid "Error while loading file '%1': %2"
 msgstr "Greška pri otvaranju datoteke '%1': %2"
 
-#: crosswordxmlguiwindow.cpp:896
+#: crosswordxmlguiwindow.cpp:891
+#, kde-format
 msgid "Error while writing file: %1"
 msgstr "Greška pri zapisivanju datoteke: %1"
 
-#: krossword.cpp:942
+#: krossword.cpp:809
+#, kde-format
 msgid "Error writing AcrossLite's .puz-format."
 msgstr "Greška pri zapisu AcrossLite .puz formata."
 
-#: krossword.cpp:931
+#: krossword.cpp:798
+#, kde-format
 msgid "Error writing compressed crossword: %1"
 msgstr "Greška pri zapisu kompresovanje križaljke: %1"
 
-#: krossword.cpp:924
+#: krossword.cpp:791
+#, kde-format
 msgid "Error writing crossword: %1"
 msgstr "Greška pri zapisu križaljke: %1"
 
 #: io/krosswordxmlwriter.cpp:58 io/krosswordxmlwriter.cpp:63
 #: io/krosswordxmlwriter.cpp:68
+#, kde-format
 msgid "Error writing to the compressed file"
 msgstr "Greška  pri zapisivanju u kompresovanu datoteku"
 
-#: library/librarygui.cpp:306
+#: library/librarygui.cpp:353
+#, kde-format
 msgid "Export"
 msgstr "Izvezi"
 
-#: library/librarygui.cpp:324
+#: library/librarygui.cpp:372
+#, kde-format
 msgid "Export Settings"
 msgstr "Postavke izvoza"
 
-#: dialogs/dictionarydialog.cpp:224
+#: dialogs/dictionarydialog.cpp:231
+#, kde-format
 msgid "Export To CSV"
 msgstr "Izvezi u CSV"
 
-#: library/librarygui.cpp:542
-#, fuzzy
+#: library/librarygui.cpp:590
+#, fuzzy, kde-format
 msgid "Export the selected crossword from the library"
 msgstr "Ne moeže izvesti križaljku u posebnu slikovnu datoteku."
 
-#: dialogs/dictionarydialog.cpp:239
+#: dialogs/dictionarydialog.cpp:240
+#, kde-format
 msgid "Export to '%1' was successful"
 msgstr "Izvoz u '%1' je uspješan"
 
-#: library/librarygui.cpp:161
-#, fuzzy
-msgid "Failed"
-msgstr "tiled"
+#. i18n: ectx: property (toolTip), widget (QToolButton, exportToCSV)
+#: dictionaries.ui:376
+#, kde-format
+msgid "Exports the whole dictionary to a comma separated text file."
+msgstr "Izvozi cijeli rječnik u datoteku sa tekstom odvojenim zarezima."
 
-#: crosswordxmlguiwindow.cpp:1504
-#, fuzzy
+#. i18n: ectx: property (text), widget (QToolButton, extractFromLibrary)
+#: dictionaries.ui:92
+#, kde-format
+msgid "Extract From &Library"
+msgstr "Izvedi iz &biblioteke"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, addWordsFromDictionary)
+#: dictionaries.ui:157
+#, kde-format
+msgid "Extracts words from plain text dictionary files"
+msgstr "Izvozi riječi iz datoteka običnih tekstualnih rječnika"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, extractFromLibrary)
+#: dictionaries.ui:85
+#, kde-format
+msgid "Extracts words with associated clues from crosswords in the library"
+msgstr "Izvodi riječi povezane sa tragovima iz križaljke u biblioteci"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, extractFromLibrary)
+#: dictionaries.ui:89
+#, kde-format
+msgid ""
+"Extracts words with associated clues from crosswords in the library.\n"
+"This does the same as \"Extract From Crosswords...\" with all crossword "
+"files in the library."
+msgstr ""
+"Izvodi riječi povezane sa tragovima iz križaljke u biblioteci.\n"
+"Ovo radi isto kao \"Izvedi iz križaljke...\" sa svim datotekama križaljke u "
+"biblioteci."
+
+#. i18n: ectx: label, entry (lastUnsavedFileBeforeCrash), group (Preferences)
+#: krossword.kcfg:10
+#, kde-format
+msgid ""
+"Filename of the last unsaved file, before a crash or unexpected behaviour, "
+"which caused that an edited crossword wasn't saved without confirmation of "
+"the user."
+msgstr ""
+
+#. i18n: ectx: attribute (label), widget (QWidget, page)
+#: dictionaries.ui:70
+#, kde-format
+msgid "Fill Dictionary"
+msgstr "Popuni rječnik"
+
+#: crosswordxmlguiwindow.cpp:1531
+#, fuzzy, kde-format
 msgid "Fills all letter cells with the correct letters"
 msgstr "Popunjava sve ćelije slova sa tačnim slovima."
 
-#: crosswordxmlguiwindow.cpp:1378
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1402
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "First Clue"
 msgstr "Odaberi prvi trag"
 
-#: crosswordxmlguiwindow.cpp:1286
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionBottomLeft)
+#: clue_properties_dock.ui:329
+#, kde-format
+msgid "First letter cell on the bottom left of the clue cell."
+msgstr "Prva ćelija slova u dnu lijevo od ćelije traga."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionBottom)
+#: clue_properties_dock.ui:422
+#, kde-format
+msgid "First letter cell on the bottom of the clue cell."
+msgstr "Prva ćelija slova na dnu ćelije traga."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionBottomRight)
+#: clue_properties_dock.ui:453
+#, kde-format
+msgid "First letter cell on the bottom right of the clue cell."
+msgstr "Prva ćelija slova u desnom dnu ćelije traga."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionLeft)
+#: clue_properties_dock.ui:298
+#, kde-format
+msgid "First letter cell on the left of the clue cell."
+msgstr "Prva ćelija slova lijevo od ćelije traga."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionRight)
+#: clue_properties_dock.ui:391
+#, kde-format
+msgid "First letter cell on the right of the clue cell."
+msgstr "Prva ćelija slova na desno od ćelije traga."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionTopLeft)
+#: clue_properties_dock.ui:205
+#, kde-format
+msgid "First letter cell on the top left of the clue cell."
+msgstr "Prva ćelija slova na lijevom vrhu od ćelije traga."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionTop)
+#: clue_properties_dock.ui:236
+#, kde-format
+msgid "First letter cell on the top of the clue cell."
+msgstr "Prva ćelija slova na vrhu ćelije traga."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionTopRight)
+#: clue_properties_dock.ui:267
+#, kde-format
+msgid "First letter cell on the top right of the clue cell."
+msgstr "Prva ćelija slova na desnom vrhu ćelije traga."
+
+#: crosswordxmlguiwindow.cpp:1310
+#, kde-format
 msgid "Fit the whole crossword into the window"
 msgstr "Uklopi cijelu križaljku u prozor"
 
 #: global.cpp:409
+#, kde-format
 msgid "Free Crossword"
 msgstr "Slobodna križaljka"
 
-#: main.cpp:39
+#: main.cpp:44
+#, kde-format
 msgid "Friedrich Pülz"
 msgstr ""
 
-#: main.cpp:38
+#: mainwindow.cpp:306
+#, fuzzy, kde-format
+msgid "General"
+msgstr "Općenito"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
+#: create_new.ui:39
+#, fuzzy, kde-format
+msgctxt "General settings for new crosswords."
+msgid "General"
+msgstr "Općenito"
+
+#: main.cpp:43
+#, kde-format
 msgid "Giacomo Barazzetti"
 msgstr ""
 
 #: commands.cpp:1346
+#, kde-format
 msgid "Hide Clue Cell"
 msgstr "Sakrij ćeliju traga"
 
-#: crosswordxmlguiwindow.cpp:1339
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionOnClueCell)
+#: clue_properties_dock.ui:360
+#, kde-format
+msgid ""
+"Hides the clue cell. The first letter cell is placed at the coordinates of "
+"the clue cell."
+msgstr ""
+"Skriva ćeliju traga. Prva ćelija slova je postavljena na koordinatama od "
+"ćelije traga."
+
+#: crosswordxmlguiwindow.cpp:1363
+#, kde-format
 msgid "Hint For This Cell"
 msgstr "Nagovještaj za ovu ćeliju"
 
-#: library/librarygui.cpp:373
-msgid "I Swear Crossword by Victor Fleming (fridays)"
-msgstr ""
+#. i18n: ectx: property (text), widget (QRadioButton, horizontal)
+#: clue_properties_dock.ui:138
+#, fuzzy, kde-format
+msgctxt "Orientation of the answer to a clue."
+msgid "Hori&zontal"
+msgstr "Horizontalan"
 
-#: crosswordxmlguiwindow.cpp:2557
+#. i18n: ectx: property (toolTip), widget (KComboBox, clueCellHandling)
+#: configure_details.ui:177
+#, kde-format
+msgid ""
+"If a clue cell can, can't or has to be inserted into the crossword grid for "
+"each clue"
+msgstr ""
+"Ako ćelija traga može, ne može ili mora biti umetnuta u rešetku križaljke za "
+"svaki trag"
+
+#. i18n: ectx: property (text), widget (QLabel, lblFileName)
+#: image_properties_dock.ui:29
+#, kde-format
+msgid "Image &File:"
+msgstr "Slikovna &datoteka:"
+
+#: crosswordxmlguiwindow.cpp:2551
+#, kde-format
 msgid "Image '%1'"
 msgstr "Slika '%1'"
 
 #: global.cpp:46
+#, kde-format
 msgid "Image cell"
 msgstr "Ćelija slike"
 
 #: commands.cpp:559
+#, kde-format
 msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
 msgstr "Ćelija slike nije pronađena na datim koordinatama (%1, %2): '%3'"
 
-#: dialogs/dictionarydialog.cpp:245
+#: dialogs/dictionarydialog.cpp:247
+#, kde-format
 msgid "Import From CSV"
 msgstr "Uvezi iz CSV"
 
-#: dictionary.cpp:292
+#: dictionary.cpp:289
+#, kde-format
 msgid "Importing Dictionary"
 msgstr "Uvozi rječnik"
 
-#: dictionary.cpp:330
+#: dictionary.cpp:327
+#, kde-format
 msgid ""
 "Importing word clue pairs from '%1' to the database.\n"
 "Please wait."
@@ -1117,74 +2422,118 @@ msgstr ""
 "Uvozi parove traga riječi iz '%1' u bazu podataka.\n"
 "Molimo sačekajte."
 
-#: crosswordxmlguiwindow.cpp:1494
-msgid "Insert special character:"
-msgstr "Ubaci poseban znak:"
+#. i18n: ectx: property (toolTip), widget (QToolButton, importFromCSV)
+#: dictionaries.ui:340
+#, kde-format
+msgid "Imports entries from a comma separated text file."
+msgstr "Uvozi unose iz datoteke sa tekstom odvojenim zarezima."
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, insertChar)
+#: clue_properties_dock.ui:93
+#, kde-format
+msgid "Insert special characters to the clue text"
+msgstr "Unesite posebno slovo u tekst traga"
 
 #: global.cpp:50
+#, kde-format
 msgid "Interactive cells"
 msgstr "Interaktivne ćelije"
 
-#: main.cpp:33
-#, fuzzy
+#: main.cpp:38
+#, fuzzy, kde-format
 msgid "Krossword"
 msgstr "&Križaljka"
 
 #: dialogs/statisticsdialog.cpp:88
+#, kde-format
 msgctxt "Horizontal:"
 msgid "Label for the number  of horizontal clues"
 msgstr "Oznaka za broj horizontalnih tragova"
 
 #: dialogs/statisticsdialog.cpp:92
+#, kde-format
 msgctxt "Vertical:"
 msgid "Label for the number  of vertical clues"
 msgstr "Oznaka za broj vertikalnih tragova"
 
-#: dictionary.cpp:249
+#: dictionary.cpp:246
+#, kde-format
 msgctxt ""
 "The header title for languages of clue/answer pairs in the dictionary "
 "database"
 msgid "Language"
 msgstr "Jezik"
 
-#: crosswordxmlguiwindow.cpp:1393
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1417
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "Last Clue"
 msgstr "Odaberi posljednji trag"
 
-#: crosswordxmlguiwindow.cpp:1498
-#, fuzzy
-msgid "Let you select a special character to paste"
-msgstr "Pušta vas da izaberete poseban znak za zalijepiti."
+#. i18n: ectx: property (toolTip), widget (QToolButton, extractFromCrosswords)
+#: dictionaries.ui:121
+#, kde-format
+msgid ""
+"Lets you choose crossword files to extracts words with associated clues from"
+msgstr ""
+"Pušta da birate datoteke križaljke da izvezete riječi sa povezanim tragovima "
+"iz"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, extractFromCrosswords)
+#: dictionaries.ui:125
+#, kde-format
+msgid ""
+"Lets you choose crossword files to extracts words with associated clues "
+"from.\n"
+"This does the same as \"Extract From Library\", but you can select from "
+"which files words should be extracted."
+msgstr ""
+"Pušta da birate datoteke križaljke da izvezete riječi sa povezanim tragovima "
+"iz.\n"
+"Ovo radi isto kao \"Izvezi iz biblioteke\", ali možete odabrati koje bi "
+"datoteke riječi trebale biti izvezene."
 
 #: global.cpp:426
+#, kde-format
 msgctxt "Short description of the crossword type 'User Defined'"
 msgid "Lets you specify your own rules."
 msgstr "Dopušta da definišete vlastita pravila."
 
+#. i18n: ectx: property (text), widget (QTreeWidget, letterContentList)
+#: clue_number_mapping.ui:56
+#, kde-format
+msgid "Letter"
+msgstr "slovo"
+
 #: dialogs/statisticsdialog.cpp:60
+#, kde-format
 msgid "Letter Cells:"
 msgstr "Ćelije slova:"
 
 #: global.cpp:42
+#, kde-format
 msgid "Letter cell"
 msgstr "ćelija slova"
 
 #: commands.cpp:704 commands.cpp:1172
+#, kde-format
 msgid "Letter cell not found at the given coordinates (%1, %2)"
 msgstr "Ćelija slova nije pronađena na datim koordinatama (%1, %2)"
 
-#: krossword.cpp:650
+#: krossword.cpp:514
+#, kde-format
 msgid "Letters can't be converted back correctly after this conversion."
 msgstr "Slova ne mogu biti konvertovana nazad tačno nakon ove konverzije."
 
-#: krosswordpuzzle.cpp:240 krosswordpuzzle.cpp:429 library/librarygui.cpp:404
+#. i18n: ectx: ToolBar (libraryToolBar)
+#: krossword_library_ui.rc:6 library/librarygui.cpp:455 mainwindow.cpp:238
+#: mainwindow.cpp:402
+#, kde-format
 msgid "Library"
 msgstr "Biblioteka"
 
-#: krosswordpuzzle.cpp:283
-#, fuzzy
+#: mainwindow.cpp:281
+#, fuzzy, kde-format
 msgctxt ""
 "This string is used to replace the library path for crossword files that are "
 "in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
@@ -1192,78 +2541,111 @@ msgctxt ""
 msgid "Library"
 msgstr "Biblioteka"
 
-#: crosswordxmlguiwindow.cpp:706
+#: crosswordxmlguiwindow.cpp:720
+#, kde-format
 msgid "Loaded crossword from file '%1'"
 msgstr "Popunjena križaljka iz datoteke '%1'"
 
-#: dialogs/crosswordpreviewwidget.cpp:46
+#: dialogs/crosswordpreviewwidget.cpp:44
+#, kde-format
 msgid "Loading preview..."
 msgstr "Učitavam prikaz..."
 
-#: krosswordpuzzle.cpp:183
+#: mainwindow.cpp:181
+#, kde-format
 msgid "Loading the crossword, please wait..."
 msgstr "Učitava križaljku, molimo sačekajte..."
 
-#: krosswordpuzzle.cpp:180 library/librarygui.cpp:231
+#: library/librarygui.cpp:235 mainwindow.cpp:178
+#, kde-format
 msgid "Loading..."
 msgstr "Učitavam..."
 
+#. i18n: ectx: property (windowTitle), widget (QMainWindow, PrintPreviewDialog)
+#: dialogs/printpreviewdialog.ui:14
+#, kde-format
+msgid "MainWindow"
+msgstr ""
+
 #: commands.cpp:1410
+#, kde-format
 msgid "Make Clue Cell Visible"
 msgstr "Napravi ćeliju traga vidljivom"
 
-#: crosswordxmlguiwindow.cpp:1303
+#: crosswordxmlguiwindow.cpp:1327
+#, kde-format
 msgid "Mark as confident"
 msgstr "Označite kao sigurno"
 
-#: crosswordxmlguiwindow.cpp:1309
+#: crosswordxmlguiwindow.cpp:1333
+#, kde-format
 msgid "Mark as unsure"
 msgstr "Označite kao nesigurno"
 
-#: crosswordxmlguiwindow.cpp:1304
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1328
+#, fuzzy, kde-format
 msgid "Mark the selected letter cell's confidence as confident"
 msgstr "Označite sigurnost trenutačno odabrane ćelije slova kao sigurno"
 
-#: crosswordxmlguiwindow.cpp:1310
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1334
+#, fuzzy, kde-format
 msgid "Mark the selected letter cell's confidence as unsure"
 msgstr "Označite sigurnost trenutačno odabrane ćelije slova kao nesigurno"
 
-#: library/librarygui.cpp:357
+#: library/librarygui.cpp:404
+#, kde-format
 msgid "Matt Jones (thursdays)"
 msgstr ""
 
 #: dialogs/statisticsdialog.cpp:101
+#, kde-format
 msgid "Max. Answer Length:"
 msgstr "Max. dužina odgovora:"
 
 #: dialogs/statisticsdialog.cpp:98
+#, kde-format
 msgid "Min. Answer Length:"
 msgstr "Min. dužina odgovora:"
 
-#: library/librarygui.cpp:381
+#: library/librarygui.cpp:432
+#, kde-format
 msgid "Mots-croisés.ch free French crosswords"
 msgstr ""
 
-#: commands.cpp:1972
+#: commands.cpp:1971
+#, kde-format
 msgid "Move All Cells By %1, %2"
 msgstr "Premjesti sve ćelija za %1, %2"
 
-#: crosswordxmlguiwindow.cpp:1475
+#: crosswordxmlguiwindow.cpp:1499
+#, kde-format
 msgid "Move All Cells..."
 msgstr "Pomjeri sve ćelije..."
 
 #: dialogs/movecellsdialog.cpp:28
+#, kde-format
 msgid "Move Cells"
 msgstr "Premjesti ćelije"
 
-#: crosswordxmlguiwindow.cpp:1476
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: move_cells.ui:40
+#, fuzzy, kde-format
+msgid "Move Horizontal:"
+msgstr "Horizontalan"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: move_cells.ui:72
+#, fuzzy, kde-format
+msgid "Move Vertical:"
+msgstr "Vertikalan"
+
+#: crosswordxmlguiwindow.cpp:1500
+#, fuzzy, kde-format
 msgid "Moves all cells of the crossword"
 msgstr "Pomjera sve ćelije križaljke."
 
 #: dialogs/movecellsdialog.cpp:65
+#, kde-format
 msgctxt ""
 "How many clues are removed when moving all cells of the crossword. %2 is "
 "replaced by a plural indicating how many images will be removed when moving "
@@ -1274,28 +2656,46 @@ msgstr[0] "Premještanje svih ćelija će ukloniti %1 trag %2"
 msgstr[1] "Premještanje svih ćelija će ukloniti %1 tragove %2"
 msgstr[2] "Premještanje svih ćelija će ukloniti %1 tragove %2"
 
-#: library/librarygui.cpp:521
+#. i18n: ectx: label, entry (Theme), group (Preferences)
+#: krossword.kcfg:15
+#, kde-format
+msgid "Name of the current theme."
+msgstr "Ime trenutačne teme."
+
+#: library/librarygui.cpp:569
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "New &Folder..."
 msgstr ""
 
 #: dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
+#, kde-format
 msgid "New Crossword Type"
 msgstr "Novi tip križaljke"
 
-#: library/librarygui.cpp:473
+#: library/librarygui.cpp:521
+#, kde-format
 msgid "New Library Folder"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:618 crosswordxmlguiwindow.cpp:651
+#. i18n: ectx: property (text), widget (QLabel, lblSize)
+#: properties.ui:196
+#, kde-format
+msgid "New Size:"
+msgstr "Nova veličina"
+
+#: crosswordxmlguiwindow.cpp:624 crosswordxmlguiwindow.cpp:660
+#, kde-format
 msgid "New crossword"
 msgstr "Nova križaljka"
 
 #: commands.cpp:1299
+#, kde-format
 msgid "No Action"
 msgstr "Nema akcije"
 
-#: dictionary.cpp:122
+#: dictionary.cpp:119
+#, kde-format
 msgid ""
 "No Connection to the database! Please make sure the MySQL server is running. "
 "Afterwards click \"Continue\" to retry connecting to the database."
@@ -1304,55 +2704,68 @@ msgstr ""
 "pokrenut MySQL servis. Poslije pritisnite \"Nastavi\" da osvježite "
 "povezivanje sa bazom podataka."
 
-#: dictionary.cpp:125
+#: dictionary.cpp:122
+#, kde-format
 msgid "No Database Connection"
 msgstr "Nije uspostavljena konekcija sa bazom podataka"
 
 #: commands.cpp:343 commands.cpp:552 commands.cpp:662 commands.cpp:697
+#, kde-format
 msgid "No cell at the given coordinates (%1, %2)"
 msgstr "Nema ćelije na datim koordinatama (%1, %2)"
 
 #: dialogs/currentcellwidget.cpp:114
+#, kde-format
 msgid "No cell selected."
 msgstr "Ćelija nije odabrana."
 
-#: dialogs/crosswordpropertiesdialog.cpp:245
+#: dialogs/crosswordpropertiesdialog.cpp:255
+#, kde-format
 msgctxt "No changes to the crossword grid size."
 msgid "No change"
 msgstr "Nema promjene"
 
 #: commands.cpp:813 commands.cpp:1006 commands.cpp:1100
+#, kde-format
 msgid "No clue cell given"
 msgstr "Nije data ćelija traga"
 
-#: krossword.cpp:3034
+#: krossword.cpp:2835
+#, kde-format
 msgid "No error."
 msgstr "Nema greške"
 
-#: crosswordxmlguiwindow.cpp:1090
+#: crosswordxmlguiwindow.cpp:1102
+#, kde-format
 msgid "No removable cell selected."
 msgstr "Nije odabrana prenosna ćelija."
 
-#: dialogs/createnewcrossworddialog.cpp:193
+#: dialogs/createnewcrossworddialog.cpp:196
+#, kde-format
 msgid "Notes"
 msgstr "Zabilješke"
 
 #: commands.cpp:1277
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Notes"
 msgstr "Zabilješke"
 
-#: global.cpp:488
-msgid "Number Puzzle"
-msgstr "Numerička zagonetka"
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, notes)
+#: create_new.ui:204 properties.ui:162
+#, kde-format
+msgid "Notes about the crossword"
+msgstr "Bilješke o križaljci"
 
 #: global.cpp:289
+#, kde-format
 msgid "Number clues (1 to 26)"
 msgstr "Numerički tragovi (1 do 26)"
 
 #: dialogs/statisticsdialog.cpp:72
+#, kde-format
 msgid ""
 "Number of crossed letter cells, percentage of total letter cell count in "
 "braces"
@@ -1360,14 +2773,17 @@ msgstr ""
 "Broj ukrštenih ćelija slova, postotak ukupnog broja ćelija slova u zagradama"
 
 #: dialogs/statisticsdialog.cpp:59
+#, kde-format
 msgid "Number of empty cells, percentage of total cell count in braces"
 msgstr "Broj praznih ćelija, postotak ukupnog broja ćelija."
 
 #: dialogs/statisticsdialog.cpp:90
+#, kde-format
 msgid "Number of horizontal clues, percentage of total clue count in braces"
 msgstr "Broj horizontalnih tragova, postotak ukupnog broja tragova u zagradam"
 
 #: dialogs/statisticsdialog.cpp:121
+#, kde-format
 msgid ""
 "Number of letter cells containing '%1', percentage of total letter cell "
 "count in braces"
@@ -1376,10 +2792,12 @@ msgstr ""
 "zagradama"
 
 #: dialogs/statisticsdialog.cpp:62
+#, kde-format
 msgid "Number of letter cells, percentage of total cell count in braces"
 msgstr "Broj ćelija slova, postotak ukupnog broja čelija u zagradama"
 
 #: dialogs/statisticsdialog.cpp:76
+#, kde-format
 msgid ""
 "Number of uncrossed letter cells, percentage of total letter cell count in "
 "braces"
@@ -1388,117 +2806,163 @@ msgstr ""
 "zagradama"
 
 #: dialogs/statisticsdialog.cpp:94
+#, kde-format
 msgid "Number of vertical clues, percentage of total clue count in braces"
 msgstr "Broj vertikalnih trragova, postotak ukupnog broja tragova u zagradama"
 
-#: global.cpp:490
-msgctxt "Short description of the crossword type 'Number Puzzle'"
-msgid ""
-"Number puzzles are a variant of crosswords in which each cell has a number "
-"between 1 and 26. The solver has to find out for which letter of the "
-"alphabet a number stands."
-msgstr ""
-"Numeričke zagonetke su varijante križaljki u kojima svaka ćelija ima broj "
-"između 1 i 26. Rješavač mora saznati za koje slovo abecede važi koji broj."
-
 #: dialogs/statisticsdialog.cpp:115
+#, kde-format
 msgid "Occurrences Of Letters:"
 msgstr "Pojave slova:"
 
-#: crosswordxmlguiwindow.cpp:1289
+#. i18n: ectx: property (toolTip), widget (QListWidget, cellTypes)
+#: configure_details.ui:210
+#, kde-format
+msgid "Only the checked cell types can be added into the crossword grid"
+msgstr "Samo odabrani tipovi ćelije mogu biti dodani u rešetku križaljke"
+
+#. i18n: ectx: property (text), widget (QLabel, lblOrientation)
+#: clue_properties_dock.ui:114
+#, fuzzy, kde-format
+msgid "Or&ientation:"
+msgstr "&Orijentiranje"
+
+#: crosswordxmlguiwindow.cpp:1313
+#, kde-format
 msgid "Pan"
 msgstr "Paniraj"
 
-#: crosswordxmlguiwindow.cpp:1290
+#: crosswordxmlguiwindow.cpp:1314
+#, kde-format
 msgid ""
 "Pan the view. Note that you can also pan while pressing the control key."
 msgstr ""
 "Paniraj pogled. Imajte na umu da takođe možete panirati dok držite kontrolni "
 "ključ."
 
-#: dialogs/crosswordpreviewwidget.cpp:55
+#: dialogs/crosswordpreviewwidget.cpp:53
+#, kde-format
 msgid "Preview failed"
 msgstr "Prikaz nije moguć"
 
-#: main.cpp:39
+#. i18n: ectx: property (text), widget (QLabel, lblPreview)
+#: create_new.ui:386
+#, kde-format
+msgid "Preview:"
+msgstr "Pregled:"
+
+#: main.cpp:44
+#, kde-format
 msgid "Previous developer"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1271
+#: crosswordxmlguiwindow.cpp:1295
+#, kde-format
 msgid "Print the crossword"
 msgstr "Odštampajte križaljku"
 
-#: dialogs/crosswordpropertiesdialog.cpp:36
+#. i18n: ectx: property (windowTitle), widget (QDialog, properties)
+#: dialogs/crosswordpropertiesdialog.cpp:36 properties.ui:20
+#, kde-format
 msgid "Properties"
 msgstr "&Postavke"
 
-#: crosswordxmlguiwindow.cpp:1143
+#: crosswordxmlguiwindow.cpp:1155
+#, kde-format
 msgid ""
 "Quality crosswords of the current crossword type (%1) are usually symmetric."
 msgstr ""
 "Kvalitetne križaljke trenutačnog tipa križaljke (%1) su obično simetrične."
 
+#. i18n: ectx: property (toolTip), widget (QPushButton, setMapping)
+#: clue_number_mapping.ui:290
+#, kde-format
+msgid "Remap the selected letter to the given clue number."
+msgstr "Premjestite odabrano slovo datom trag broju."
+
 #: commands.cpp:776
+#, kde-format
 msgid "Remove %1 letter"
 msgid_plural "Remove %1 letters"
 msgstr[0] "Ukloni %1 slovo"
 msgstr[1] "Ukloni %1 slova"
 msgstr[2] "Ukloni %1 slova"
 
-#: crosswordxmlguiwindow.cpp:1432
+#: crosswordxmlguiwindow.cpp:1456
+#, kde-format
 msgid "Remove &Across Clue"
 msgstr "Ukloni &preko trag"
 
-#: crosswordxmlguiwindow.cpp:1438
+#: crosswordxmlguiwindow.cpp:1462
+#, kde-format
 msgid "Remove &Down Clue"
 msgstr "Ukloni &donji trag"
 
 #: commands.cpp:336
+#, kde-format
 msgid "Remove Clue '%1'"
 msgstr "Ukloni trag '%1'"
 
 #: commands.cpp:334
+#, kde-format
 msgid "Remove Clue Without Text"
 msgstr "Ukloni trag bez teksta"
 
 #: commands.cpp:544
+#, kde-format
 msgid "Remove Image '%1'"
 msgstr "Ukloni sliku '%1'"
 
 #: commands.cpp:1529
+#, kde-format
 msgid "Remove Same Letter Synchronization"
 msgstr "Ukloni sinhronizaciju istih slova"
 
 #: commands.cpp:778
+#, kde-format
 msgctxt "This string shouldn't happen to be used"
 msgid "Remove no letters"
 msgstr "Uklonite ne slova"
 
-#: crosswordxmlguiwindow.cpp:1451
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1475
+#, fuzzy, kde-format
 msgid "Removes all clues from the crossword"
 msgstr "Uklanja sve tragove iz križaljke."
 
-#: crosswordxmlguiwindow.cpp:1433
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1457
+#, fuzzy, kde-format
 msgid "Removes the highlighted across clue"
 msgstr "Uklanja istaknuti preko trag."
 
-#: crosswordxmlguiwindow.cpp:1428
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1452
+#, fuzzy, kde-format
 msgid "Removes the highlighted clue or image"
 msgstr "Uklanja istaknuti trag ili sliku."
 
-#: crosswordxmlguiwindow.cpp:1439
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1463
+#, fuzzy, kde-format
 msgid "Removes the highlighted down clue"
 msgstr "Uklanja istaknuti donji trag."
 
-#: commands.cpp:1894
+#. i18n: ectx: property (toolTip), widget (QToolButton, removeEntries)
+#: dictionaries.ui:249
+#, kde-format
+msgid "Removes the selected entries from the dictionary"
+msgstr "Uklanja odabrane unose iz rječnika"
+
+#. i18n: ectx: attribute (label), widget (QWidget, page_3)
+#: properties.ui:181
+#, fuzzy, kde-format
+msgid "Resize Crossword"
+msgstr "Slobodna križaljka"
+
+#: commands.cpp:1893
+#, kde-format
 msgid "Resize Crossword From %1x%2 to %3x%4"
 msgstr "Promijeni veličinu Crossword-a od %1x%2 do %3x%4"
 
-#: dialogs/crosswordpropertiesdialog.cpp:251
+#: dialogs/crosswordpropertiesdialog.cpp:261
+#, kde-format
 msgctxt ""
 "How many clues are removed when resizing the crossword. %2 is replaced by a "
 "plural indicating how many images will be removed when resizing."
@@ -1508,215 +2972,289 @@ msgstr[0] "Mjenjanje veličine od %3x%4 će ukloniti %1 trag %2"
 msgstr[1] "Mjenjanje veličine od %3x%4 će ukloniti %1 tragove %2"
 msgstr[2] "Mjenjanje veličine od %3x%4 će ukloniti %1 tragove %2"
 
-#: krosswordpuzzle.cpp:95
+#: mainwindow.cpp:93
+#, kde-format
 msgid "Resource unavailable"
 msgstr ""
 
-#: krosswordpuzzle.cpp:261
+#: mainwindow.cpp:259
+#, kde-format
 msgid ""
 "Restore the automatically saved version of an edited crossword before the "
 "crash"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:776
-msgid "Save &Edit History"
-msgstr "Snimi &uredi historiju"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#: configure_details.ui:157
+#, kde-format
+msgid "Rules"
+msgstr "Pravila"
 
-#: crosswordxmlguiwindow.cpp:779
-msgid "Save As &Template"
+#. i18n("Choose a filename to save the crossword as a template"));
+#. ac->addAction("game_save_template_as", saveAsTemplateAction);
+#.
+#: crosswordxmlguiwindow.cpp:1288
+#, fuzzy, kde-format
+msgid "Save as &template..."
 msgstr "Snimi kao &šablon"
 
-#: krosswordpuzzle.cpp:86
-#, fuzzy
+#: mainwindow.cpp:84
+#, fuzzy, kde-format
 msgid "Save crossword"
 msgstr "Nova križaljka"
 
-#: crosswordxmlguiwindow.cpp:1262
+#: crosswordxmlguiwindow.cpp:1275
+#, kde-format
 msgid "Save the crossword with solved letters"
 msgstr "Spasite križalju sa riješenim slovima"
 
-#: crosswordxmlguiwindow.cpp:781
-msgid "Save without correct answers, clue texts, images"
-msgstr "Snimi bez tačnih odgovora, tragova teksta, slika"
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:106
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Scaled"
+msgstr "Skalirano"
 
-#: dictionary.cpp:247
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:111
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Scaled (Keep Aspect Ratio)"
+msgstr "Skalirano (zadrži omjer)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:101
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Scaled and Cropped"
+msgstr "Skalirano i podrezano"
+
+#: dictionary.cpp:244
+#, kde-format
 msgctxt ""
 "The header title for scores/difficulties of clue/answer pairs in the "
 "dictionary database"
 msgid "Score"
 msgstr "Zbir"
 
-#: crosswordxmlguiwindow.cpp:1364
+#: crosswordxmlguiwindow.cpp:1388
+#, kde-format
 msgid "Select clue with switched orientation to the currently selected clue"
 msgstr "Odaberi trag sa promijenjenom orijentacijom na trenutačno odabran trag"
 
-#: crosswordxmlguiwindow.cpp:1379
+#: crosswordxmlguiwindow.cpp:1403
+#, kde-format
 msgid "Select the first clue"
 msgstr "Odaberi prvi trag"
 
-#: crosswordxmlguiwindow.cpp:1369
+#: crosswordxmlguiwindow.cpp:1393
+#, kde-format
 msgid "Select the first letter of the current clue"
 msgstr "Odaberi prvo slovo trenutačnog traga"
 
-#: crosswordxmlguiwindow.cpp:1394
+#: crosswordxmlguiwindow.cpp:1418
+#, kde-format
 msgid "Select the last clue"
 msgstr "Odaberi posljednji trag"
 
-#: crosswordxmlguiwindow.cpp:1374
+#: crosswordxmlguiwindow.cpp:1398
+#, kde-format
 msgid "Select the last letter of the current clue"
 msgstr "Odaberi posljednje slovo trenutačnog traga"
 
-#: crosswordxmlguiwindow.cpp:1384
+#: crosswordxmlguiwindow.cpp:1408
+#, kde-format
 msgid "Select the next clue"
 msgstr "Odaberi sljedeći trag"
 
-#: crosswordxmlguiwindow.cpp:1389
+#: crosswordxmlguiwindow.cpp:1413
+#, kde-format
 msgid "Select the previous clue"
 msgstr "Odaberi prethodni trag"
 
+#. i18n: ectx: ToolBar (selectionToolBar)
+#: krossword_crossword_ui.rc:63
+#, kde-format
+msgid "Selection"
+msgstr "Izbor"
+
 #: commands.cpp:1147
+#, kde-format
 msgid "Set Correct Letter at (%1, %2) to %3"
 msgstr "Postavi tačno slovo na (%1, %2) do %3"
 
 #: commands.cpp:1481
-msgid "Set Default Number Puzzle Mapping"
+#, fuzzy, kde-format
+msgid "Set Default Coded Puzzle Mapping"
 msgstr "Postavi mapiranje zadanog broja zagonetke"
 
 #: commands.cpp:1157
+#, kde-format
 msgid "Set Letter at (%1, %2) to %3"
 msgstr "Postavi slovo na (%1, %2) do %3"
 
-#: krosswordpuzzleview.cpp:106
+#: krosswordpuzzleview.cpp:105
+#, kde-format
 msgid "Settings changed"
 msgstr ""
 
 #: commands.cpp:1506
+#, kde-format
 msgid "Setup Same Letter Synchronization"
 msgstr "Postavi sinhronizaciju istih slova"
 
-#: crosswordxmlguiwindow.cpp:1402
+#: crosswordxmlguiwindow.cpp:1426
+#, kde-format
 msgid "Show Clue Dock"
 msgstr "Pokaži pristanište traga"
 
-#: crosswordxmlguiwindow.cpp:1412
+#: crosswordxmlguiwindow.cpp:1436
+#, kde-format
 msgid "Show Current Cell Dock"
 msgstr "Pokaži pristanište trenutačne ćelije"
 
 #: dialogs/crosswordtypewidget.cpp:204
+#, kde-format
 msgid "Show Details"
 msgstr "Pokaži detalje"
 
-#: crosswordxmlguiwindow.cpp:1407
+#: crosswordxmlguiwindow.cpp:1431
+#, kde-format
 msgid "Show Edit History Dock"
 msgstr "Pokaži pristanište historije urednika"
 
-#: dialogs/cellwidgets/cluecellwidget.cpp:121
-msgid "Show Only Answers With &Clue"
-msgstr ""
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:112
-msgid "Show Only Answers With Current Answer &Length"
-msgstr ""
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:128
-msgid "Show Only the &First 100 Answers"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1275
+#: crosswordxmlguiwindow.cpp:1299
+#, kde-format
 msgid "Show a print preview"
 msgstr "Prikažite pregled štampanja"
 
-#: crosswordxmlguiwindow.cpp:1466
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1490
+#, fuzzy, kde-format
 msgid "Shows statistics about the crossword"
 msgstr "Pokazuje statistike o križaljci."
 
-#: crosswordxmlguiwindow.cpp:321
-#, fuzzy
+#. i18n: ectx: property (toolTip), widget (QTreeWidget, letterContentList)
+#: clue_number_mapping.ui:37
+#, kde-format
+msgid "Shows the current mapping of answer letters to clue numbers."
+msgstr "Pokazuje trenutačno mapiranje pisma odgovora brojevima traga."
+
+#: crosswordxmlguiwindow.cpp:334
+#, fuzzy, kde-format
 msgid "Shows the percentage of solved letter cells"
 msgstr "Pokazuje procenat rješenih ćelija slova."
 
-#: dialogs/createnewcrossworddialog.cpp:192
+#. i18n: ectx: property (text), widget (QLabel, lblTemplateSize)
+#: create_new.ui:449
+#, kde-format
+msgid "Si&ze:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: dialogs/createnewcrossworddialog.cpp:195 export_to_image.ui:50
+#, kde-format
 msgid "Size"
 msgstr "Veličina"
 
 #: commands.cpp:1284
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Size"
 msgstr "Veličina"
 
-#: library/librarymanager.cpp:71
+#. i18n: ectx: property (text), widget (QLabel, labelSize)
+#: download.ui:169
+#, kde-format
+msgid "Size:"
+msgstr "Veličina:"
+
+#: library/librarymanager.cpp:72
+#, kde-format
 msgctxt "The title for sizes of crosswords in the library tree view"
 msgid "Size:"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1628 krossword.h:554
-msgid "Solution"
-msgstr "&Rješenje"
+#. i18n: ectx: property (windowTitle), widget (QWidget, solution_letter_properties)
+#: solution_letter_properties.ui:20
+#, fuzzy, kde-format
+msgid "Solution Letter"
+msgstr "Ćelija slova rješenja"
 
 #: global.cpp:44
+#, kde-format
 msgid "Solution letter cell"
 msgstr "Ćelija slova rješenja"
 
 #: commands.cpp:669
+#, kde-format
 msgid "Solution letter cell not found at the given coordinates (%1, %2)"
 msgstr "Ćelija slova rješenja nije pronađena na datim koordinatama (%1, %2)"
 
-#: crosswordxmlguiwindow.cpp:2108
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:2107
+#, fuzzy, kde-format
 msgid "Solve"
 msgstr "Riješi trag"
 
-#: crosswordxmlguiwindow.cpp:1351
+#: crosswordxmlguiwindow.cpp:1375
+#, kde-format
 msgid "Solve Across Clue"
 msgstr "Riješi preko trag"
 
-#: crosswordxmlguiwindow.cpp:1345
+#: crosswordxmlguiwindow.cpp:1369
+#, kde-format
 msgid "Solve Clue"
 msgstr "Riješi trag"
 
-#: crosswordxmlguiwindow.cpp:1357
+#: crosswordxmlguiwindow.cpp:1381
+#, kde-format
 msgid "Solve Down Clue"
 msgstr "Riješi donji trag"
 
-#: crosswordxmlguiwindow.cpp:1352
+#: crosswordxmlguiwindow.cpp:1376
+#, kde-format
 msgid "Solve the current across clue"
 msgstr "Riješi trenutačni preko trag"
 
-#: crosswordxmlguiwindow.cpp:1346
+#: crosswordxmlguiwindow.cpp:1370
+#, kde-format
 msgid "Solve the current clue"
 msgstr "Rijesi trenutačni trag"
 
-#: crosswordxmlguiwindow.cpp:1358
+#: crosswordxmlguiwindow.cpp:1382
+#, kde-format
 msgid "Solve the current down clue"
 msgstr "Riješi trenutačni donji trag"
 
-#: crosswordxmlguiwindow.cpp:1340
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1364
+#, fuzzy, kde-format
 msgid "Solve the selected letter cell"
 msgstr "Riješi trenutačno odabranu ćeliju slova"
 
-#: crosswordxmlguiwindow.cpp:1294
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1318
+#, fuzzy, kde-format
 msgid "Solve the selected letter or a random one if none is selected"
 msgstr ""
 "Rješite trenutačno izabrano slovo ili nasumično ako nijedno nije izabrano"
 
 #: dialogs/statisticsdialog.cpp:34
+#, kde-format
 msgid "Statistics"
 msgstr "Statistike"
 
 #: global.cpp:287
+#, kde-format
 msgid "String clues"
 msgstr "Tekstualni tragovi"
 
 #: global.cpp:434
+#, kde-format
 msgid "Swedish Crossword"
 msgstr "Švedska križaljka"
 
 #: global.cpp:436
+#, kde-format
 msgctxt "Short description of the crossword type 'Swedish'"
 msgid ""
 "Swedish crosswords contain clue cells which contain the clue text in it and "
@@ -1725,11 +3263,19 @@ msgstr ""
 "Švedske križaljke sadrže ćelije traga koje sadrže tekst traga u sebi i "
 "strelicu koja pokazuje u kojem pravcu tragovi moraju biti odgovoreni."
 
-#: krosswordpuzzle.cpp:244
+#. i18n: ectx: attribute (title), widget (QWidget, tabTemplate)
+#: create_new.ui:298
+#, kde-format
+msgid "Template"
+msgstr "Obrazac"
+
+#: mainwindow.cpp:242
+#, kde-format
 msgid "Templates"
 msgstr "Šabloni"
 
 #: global.cpp:439
+#, kde-format
 msgctxt "Long description of the crossword type 'Swedish'"
 msgid ""
 "The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
@@ -1745,82 +3291,118 @@ msgid ""
 "(text taken from wikipedia)"
 msgstr ""
 
-#: library/librarygui.cpp:365
+#: library/librarygui.cpp:412
+#, kde-format
 msgid "The Chronicle of Higher Education (fridays)"
 msgstr ""
 
-#: library/librarygui.cpp:369
+#: library/librarygui.cpp:416
+#, kde-format
 msgid "The Cross Nerd (tuesdays)"
 msgstr ""
 
-#: library/librarygui.cpp:188
-#, fuzzy
+#: library/librarygui.cpp:183
+#, fuzzy, kde-format
 msgid "The Cross Nerd current crossword"
 msgstr "Zatvorite trenutačnu križaljku."
 
-#: krossword.cpp:3041
+#: krossword.cpp:2842
+#, kde-format
 msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
 msgstr ""
 
-#: krossword.cpp:3053
+#: krossword.cpp:2854
+#, kde-format
 msgid "The answer is too short for the current crossword type."
 msgstr ""
 
-#: krossword.cpp:3045
+#: krossword.cpp:2846
+#, kde-format
 msgid ""
 "The answer overwrites the answer to another clue with the same orientation."
 msgstr ""
 
-#: krossword.cpp:3055
+#: krossword.cpp:2856
+#, kde-format
 msgid "The answer overwrites the clue cell."
 msgstr ""
 
-#: krossword.cpp:3043
+#: krossword.cpp:2844
+#, kde-format
 msgid "The answer produces mismatching letter cells at the same positions."
 msgstr ""
 
-#: dialogs/answerwidget.cpp:30 dialogs/answerwidget.cpp:40
+#: dialogs/answerwidget.cpp:29 dialogs/answerwidget.cpp:39
+#, kde-format
 msgid "The answer to the clue"
 msgstr "Odgovor na trag"
 
-#: krossword.cpp:3047
+#: krossword.cpp:2848
+#, kde-format
 msgid "The answer's letter cells cross a clue cell."
 msgstr ""
 
-#: krossword.cpp:3039
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, author)
+#: create_new.ui:123 properties.ui:104
+#, kde-format
+msgid "The author(s) of the crossword"
+msgstr "Autor(i) križaljke"
+
+#: krossword.cpp:2840
+#, kde-format
 msgid "The cell for the new clue isn't empty."
 msgstr "Ćelija novog traga nije prazna."
 
-#: krossword.cpp:3060
+#: krossword.cpp:2861
+#, kde-format
 msgid "The cells for the new image aren't empty."
 msgstr ""
 
-#: krossword.cpp:3037
+#: krossword.cpp:2838
+#, kde-format
 msgid "The clue doesn't fit in the grid with the given settings."
 msgstr ""
 
-#: krossword.cpp:634
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, clue)
+#: clue_properties_dock.ui:77
+#, kde-format
+msgid "The clue text"
+msgstr "Tekst traga"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, clue)
+#: clue_properties_dock.ui:74
+#, kde-format
+msgid "The clue to the answer."
+msgstr "Trag ka odgovoru."
+
+#: krossword.cpp:498
+#, kde-format
 msgid "The conversion will remove %1 of %2 clues"
 msgstr "Konverzija će ukloniti %1 od %2 tragova"
 
-#: krossword.cpp:637
+#: krossword.cpp:501
+#, kde-format
 msgid "The conversion will remove %1 of %2 clues, %3 of %4 images"
 msgstr "Konverzija će ukloniti %1 od %2 tragova, %3 od %4 slika"
 
-#: dialogs/answerwidget.cpp:28 dialogs/answerwidget.cpp:38
+#: dialogs/answerwidget.cpp:27 dialogs/answerwidget.cpp:37
+#, kde-format
 msgid ""
 "The correct answer to the clue. For each letter a letter cell is created"
 msgstr "Tačan odgovor na trag. Za svako slovo kreirana je ćelija slova"
 
-#: library/librarygui.cpp:136
+#: library/librarygui.cpp:152
+#, kde-format
 msgid "The crossword couldn't be imported to the library."
 msgstr ""
 
-#: library/librarygui.cpp:138
+#: library/librarygui.cpp:154
+#, kde-format
 msgid "The crossword couldn't be written to the library folder."
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1137
+#: crosswordxmlguiwindow.cpp:1149
+#, kde-format
 msgid ""
 "The crossword doesn't have 180 degree rotation symmetry.\n"
 "To achieve symmetry make sure that each empty cell and each clue cell has a "
@@ -1830,7 +3412,8 @@ msgstr ""
 "Da bi postigli simetriju provjerite da svaka prazna ćelija i svaki trag ima "
 "duplikat na njihovoj 180 stepeni rotacionoj poziciji.\n"
 
-#: crosswordxmlguiwindow.cpp:1133
+#: crosswordxmlguiwindow.cpp:1145
+#, kde-format
 msgid ""
 "The crossword doesn't have 180 degree rotation symmetry.\n"
 "To achieve symmetry make sure that each empty cell has a counterpart at it's "
@@ -1840,11 +3423,13 @@ msgstr ""
 "Da bi postigli simetriju provjerite da svaka prazna ćelija ima duplikat na "
 "njenoj 180 stepeni rotacionoj poziciji.\n"
 
-#: crosswordxmlguiwindow.cpp:1129
+#: crosswordxmlguiwindow.cpp:1141
+#, kde-format
 msgid "The crossword has 180 degree rotation symmetry."
 msgstr "Križaljka ima 180 stepenu rotacionu simetriju."
 
-#: crosswordxmlguiwindow.cpp:721
+#: crosswordxmlguiwindow.cpp:734
+#, kde-format
 msgid ""
 "The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
 "\n"
@@ -1859,8 +3444,9 @@ msgstr ""
 "\n"
 "(Napomena: Možete je kasnije pretvoriti u \"Uredi\" > \"Postavke križaljke\")"
 
-#: crosswordxmlguiwindow.cpp:672 crosswordxmlguiwindow.cpp:818
-#: krosswordpuzzle.cpp:129
+#: crosswordxmlguiwindow.cpp:681 crosswordxmlguiwindow.cpp:811
+#: mainwindow.cpp:127
+#, kde-format
 msgid ""
 "The current crossword has been modified.\n"
 "Would you like to save it?"
@@ -1868,37 +3454,68 @@ msgstr ""
 "Trenutačna križaljka je bila promijenjen.\n"
 "Da li želite ovo da spasite?"
 
-#: krossword.cpp:3049
+#: krossword.cpp:2850
+#, kde-format
 msgid "The current crossword type doesn't allow clue cells."
 msgstr ""
 
-#: krossword.cpp:3062
+#: krossword.cpp:2863
+#, kde-format
 msgid "The current crossword type doesn't allow image cells."
 msgstr ""
 
-#: krossword.cpp:3051
+#: krossword.cpp:2852
+#, kde-format
 msgid "The current crossword type requires a clue cell for each clue."
 msgstr ""
 
 #: io/krosswordxmlreader.cpp:174 io/krosswordxmlreader.cpp:206
-#, fuzzy
+#, fuzzy, kde-format
 msgid "The file is not a Krossword version &lt;= 1.1 file."
 msgstr "Ova datoteka nije verzija KrossWordPuzzle-a &lt;= 1.1 datoteka."
 
-#: library/librarygui.cpp:481
+#: library/librarygui.cpp:529
+#, kde-format
 msgid "The folder already exists in the library."
 msgstr ""
 
-#: krossword.cpp:3058
+#: krossword.cpp:2859
+#, kde-format
 msgid "The image doesn't fit in the grid with the given settings."
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1298
-#, fuzzy
+#. i18n: ectx: property (toolTip), widget (QSpinBox, minAnswerLength)
+#: configure_details.ui:302
+#, kde-format
+msgid "The minimum length of answers to clues"
+msgstr "Minimalna dužina odgovora na tragove"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
+#: configure_details.ui:70
+#, kde-format
+msgid "The name of the crossword type"
+msgstr "Ime crossword tipa"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, mappedClueNumber)
+#: clue_number_mapping.ui:274
+#, kde-format
+msgid "The new clue number for the selected letter."
+msgstr "Novi trag broja za odabrano slovo."
+
+#: crosswordxmlguiwindow.cpp:1322
+#, fuzzy, kde-format
 msgid "The selected letter cell has been solved"
 msgstr "Trenutačno izabrana ćelija slova je bila riješena"
 
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: export_to_image.ui:32
+#, fuzzy, kde-format
+msgid "The size will be shrinked to match the aspect ratio of the crossword"
+msgstr ""
+"(Ova velčina će biti smanjena da odgovara odnosu dužine i širine križaljke)"
+
 #: commands.cpp:725
+#, kde-format
 msgctxt ""
 "Error message to be displayed, when the user tries to convert a letter to a "
 "solution letter, but the position of the new solution letter is already "
@@ -1908,37 +3525,59 @@ msgctxt ""
 msgid "The solution letter position %1 is already assigned."
 msgstr "Pozicija slova rješenja %1 je već dodjeljena."
 
-#: dialogs/cellwidgets/solutionlettercellwidget.cpp:94
-#, fuzzy
-msgid ""
-"The solution letter position %1 is already assigned.\n"
-"Please change the solution word position of that letter first."
-msgstr "Pozicija slova rješenja %1 je već dodjeljena."
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, title)
+#: create_new.ui:94 properties.ui:75
+#, kde-format
+msgid "The title of the crossword"
+msgstr "Naslov križaljke"
 
-#: krosswordpuzzle.cpp:313
+#. i18n: ectx: property (toolTip), widget (KComboBox, clueType)
+#: configure_details.ui:256
+#, kde-format
+msgid "The type of clues (strings or numbers)"
+msgstr "Tipovi tragova (slova ili brojevi)"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, letterCellContent)
+#: configure_details.ui:163
+#, kde-format
+msgid "The type of content of letter cells"
+msgstr "Tip sadržaja ćelija slova"
+
+#: mainwindow.cpp:311
+#, kde-format
 msgid "Theme"
 msgstr "Tema"
 
-#: library/librarygui.cpp:296
+#: crosswordxmlguiwindow.cpp:2405 crosswordxmlguiwindow.cpp:2406
+#, kde-format
+msgid "There are missing / wrong letters, sorry."
+msgstr ""
+
+#: library/librarygui.cpp:349
+#, kde-format
 msgid ""
 "There was an error opening the crossword.\n"
 "%1"
 msgstr ""
 
-#: dialogs/dictionarydialog.cpp:237
+#: dialogs/dictionarydialog.cpp:238
+#, kde-format
 msgid "There was an error while exporting to '%1'"
 msgstr "Postoji greška pri izvozu u '%1'"
 
-#: dialogs/dictionarydialog.cpp:251
+#: dialogs/dictionarydialog.cpp:253
+#, kde-format
 msgid "There was an error while importing from '%1'"
 msgstr "Postoji greška pri uvozu iz '%1'"
 
 #: global.cpp:411
+#, kde-format
 msgctxt "Short description of the crossword type 'Free'"
 msgid "This is a special type that tries to be least restrictive."
 msgstr "Ovo je poseban tip koji pokušava da bude najmanje ograničen."
 
 #: global.cpp:413
+#, kde-format
 msgctxt "Long description of the crossword type 'Free'"
 msgid ""
 "This is a special type that tries to be least restrictive. You can use all "
@@ -1952,11 +3591,13 @@ msgstr ""
 "ćeliju traga sa odgovorima koji nemaju. Odgovori mogu sadržavati znakove, "
 "kao i brojeve."
 
-#: crosswordxmlguiwindow.cpp:1297
+#: crosswordxmlguiwindow.cpp:1321
+#, kde-format
 msgid "This letter has been solved"
 msgstr "Ovo slovo je bilo riješeno"
 
-#: crosswordxmlguiwindow.cpp:1210
+#: crosswordxmlguiwindow.cpp:1222
+#, kde-format
 msgid ""
 "This will cause all answers to be shown and editable.\n"
 "If you want to solve the crossword you should cancel."
@@ -1964,41 +3605,67 @@ msgstr ""
 "Ovo će uzrokovati da svi odgovori budu prikazani i sa mogućnostima izmjene.\n"
 "Ako želite da riješite ovu križaljku, trebali biste otkazati."
 
-#: library/librarygui.cpp:445
+#: library/librarygui.cpp:493
+#, kde-format
 msgid ""
 "This will permanently delete the selected crossword from the library.\n"
 "The operation can't be undone!"
 msgstr ""
 
-#: library/librarygui.cpp:433
+#: library/librarygui.cpp:481
+#, kde-format
 msgid ""
 "This will permanently delete the selected directory and all contained "
 "crosswords from the library. The operation can't be undone!"
 msgstr ""
 
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:121
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Tiled"
+msgstr "tiled"
+
 #: commands.cpp:1268
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Title"
 msgstr "Naslov"
 
+#. i18n: ectx: property (text), widget (QLabel, labelTitle)
+#: download.ui:146
+#, fuzzy, kde-format
+msgid "Title:"
+msgstr "&Naslov:"
+
 #: dialogs/statisticsdialog.cpp:49
+#, kde-format
 msgid "Total Cell Count:"
 msgstr "Ukupni broj ćelija:"
 
 #: dialogs/statisticsdialog.cpp:74
+#, kde-format
 msgid "Uncrossed:"
 msgstr "Neukršteno:"
 
-#: krossword.cpp:2951
+#. i18n: ectx: label, entry (LastCrossword), group (Preferences)
+#: krossword.kcfg:20
+#, fuzzy, kde-format
+msgid "Url of the last opened crossword."
+msgstr "Kreiraj novu križaljku"
+
+#: krossword.cpp:2752
+#, kde-format
 msgctxt "Description"
 msgid ""
 "Used as header label for the column containing the descriptions in the "
 "crossword type model."
 msgstr ""
 
-#: krossword.cpp:2948
+#: krossword.cpp:2749
+#, kde-format
 msgctxt "Name"
 msgid ""
 "Used as header label for the column containing the names in the crossword "
@@ -2008,40 +3675,53 @@ msgstr ""
 "križaljke."
 
 #: global.cpp:424
+#, kde-format
 msgid "User Defined Crossword"
 msgstr "Korisnički definirana križaljka"
 
 #: global.cpp:52
+#, kde-format
 msgid "User cell type"
 msgstr "Korisnikov tip ćelije"
 
-#: library/librarygui.cpp:361
+#: library/librarygui.cpp:408
+#, kde-format
 msgid "Wall Street Journal by Mike Shenk (fridays)"
 msgstr ""
 
-#: krosswordpuzzle.cpp:85
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, pattern)
+#: clue_properties_dock.ui:523
+#, kde-format
+msgid "Wildcard pattern to search for answers"
+msgstr "Zamjenski obrazac za traženje odgovora"
+
+#: mainwindow.cpp:83
+#, kde-format
 msgid "Would you like to add the crossword into the library?"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:881
+#: crosswordxmlguiwindow.cpp:877
+#, kde-format
 msgid "Wrote crossword to file '%1'"
 msgstr "Zapisao križaljku u datoteku '%1'"
 
-#: rc.cpp:2
+#, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "samir.ribic@etf.unsa.ba,acolpa1@etf.unsa.ba"
 
-#: rc.cpp:1
+#, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Samir Ribić,Adna Čolpa"
 
-#: crosswordxmlguiwindow.cpp:265
+#: crosswordxmlguiwindow.cpp:278
+#, kde-format
 msgid "Zoom: %1%"
 msgstr "Povećaj: %1%"
 
 #: dialogs/movecellsdialog.cpp:71
+#, kde-format
 msgctxt ""
 "How many images are removed when moving all cells of the crossword. This "
 "string gets combined with a plural string indicating how many clue cells "
@@ -2052,7 +3732,8 @@ msgstr[0] "i %1 slika"
 msgstr[1] "i %1 slike"
 msgstr[2] "i %1 slika"
 
-#: dialogs/crosswordpropertiesdialog.cpp:257
+#: dialogs/crosswordpropertiesdialog.cpp:267
+#, kde-format
 msgctxt ""
 "How many images are removed when resizing the crossword. This string gets "
 "combined with a plural string indicating how many clue cells will be removed "
@@ -2063,82 +3744,29 @@ msgstr[0] "i %1 slika"
 msgstr[1] "i %1 slike"
 msgstr[2] "i %1 slika"
 
-#: dialogs/createnewcrossworddialog.cpp:109
-msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
-msgid "© %1, by %2"
-msgstr "© %1, po %2"
-
-#: main.cpp:35
-msgid ""
-"© 2014 Andrea Barazzetti\n"
-"© 2014 Giacomo Barazzetti\n"
-"© 2009 Friedrich Pülz"
+#. i18n: ectx: property (windowTitle), widget (QToolBar, toolBar)
+#: dialogs/printpreviewdialog.ui:19
+#, kde-format
+msgid "toolBar"
 msgstr ""
 
-#~ msgid " columns"
-#~ msgstr " kolone"
+#. i18n: ectx: tooltip, entry (animate), group (Preferences)
+#: krossword.kcfg:26
+#, kde-format
+msgid "whether or not animations should be enabled"
+msgstr ""
 
-#~ msgid " rows"
-#~ msgstr " redovi"
+#: dialogs/createnewcrossworddialog.cpp:112
+#, fuzzy, kde-format
+msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
+msgid "© %1 %2"
+msgstr "© %1, po %2"
 
 #~ msgid "%1 letters"
 #~ msgstr "%1 slova"
 
-#~ msgid "&Add Entry"
-#~ msgstr "&Dodaj ulaz"
-
-#~ msgid "&Answers:"
-#~ msgstr "&Odgovori"
-
-#~ msgid "&Apply"
-#~ msgstr "&Primijeni"
-
-#~ msgid "&Author:"
-#~ msgstr "&Pisac:"
-
-#~ msgid "&Clear Dictionary"
-#~ msgstr "&Čisti rječnik"
-
-#~ msgid "&Clue:"
-#~ msgstr "&Trag:"
-
-#~ msgid "&Copyright:"
-#~ msgstr "&Autorska prava:"
-
-#~ msgctxt ""
-#~ "The title for the crossword tab with an unmodified or no crossword opened"
-#~ msgid "&Crossword"
-#~ msgstr "&Križaljka"
-
-#~ msgid "&Description:"
-#~ msgstr "&Opis:"
-
-#~ msgid "&Dictionary"
-#~ msgstr "&Leksikon"
-
 #~ msgid "&Difficulty:"
 #~ msgstr "&Težina:"
-
-#~ msgid "&Export (CSV)..."
-#~ msgstr "&Izvoz (CSV)..."
-
-#~ msgid "&Extract From Crosswords..."
-#~ msgstr "&Izvezi iz križaljke..."
-
-#~ msgid "&Filter:"
-#~ msgstr "&Filter:"
-
-#~ msgid "&Horizontal Cells:"
-#~ msgstr "&Horizontalne ćelije:"
-
-#~ msgid "&Host:"
-#~ msgstr "&Domaćin:"
-
-#~ msgid "&Icon:"
-#~ msgstr "&Ikona:"
-
-#~ msgid "&Import (CSV)..."
-#~ msgstr "&Uvoz CSV)..."
 
 #, fuzzy
 #~ msgctxt "@action:intoolbar"
@@ -2154,391 +3782,24 @@ msgstr ""
 #~ msgid "&Library"
 #~ msgstr "&Biblioteka"
 
-#~ msgid "&Location:"
-#~ msgstr "&Lokacija:"
-
-#~ msgid "&Long Description:"
-#~ msgstr "&Dugi opis"
-
-#~ msgid "&Mapped Clue Number:"
-#~ msgstr "&Mapiran trag broj:"
-
-#~ msgid "&Minimum Answer Length:"
-#~ msgstr "&Minimalna dužina odgovora"
-
-#~ msgid "&Name:"
-#~ msgstr "&Ime:"
-
-#~ msgid "&Notes:"
-#~ msgstr "&Bilješke"
-
-#~ msgid "&Orientation:"
-#~ msgstr "&Orijentiranje"
-
-#~ msgid "&Password:"
-#~ msgstr "&Lozinka:"
-
-#~ msgid "&Pattern:"
-#~ msgstr "&Uzorak:"
-
-#~ msgid "&Positioning:"
-#~ msgstr "&Pozicioniranje:"
-
-#~ msgid "&Provider:"
-#~ msgstr "&Provajder:"
-
 #~ msgid "&Quality:"
 #~ msgstr "&Kvalitet:"
 
 #~ msgid "&Refresh"
 #~ msgstr "&Osvježi"
 
-#~ msgid "&Remove Selected"
-#~ msgstr "&Ukloni odabrano"
-
-#~ msgid "&Reset"
-#~ msgstr "&Resetuj"
-
-#~ msgid "&Set Mapping"
-#~ msgstr "&Postavi mapiranje"
-
 #~ msgid "&Size:"
 #~ msgstr "&veličina:"
-
-#~ msgid "&Title:"
-#~ msgstr "&Naslov:"
-
-#~ msgid "&Use Template:"
-#~ msgstr "&Upotrijebi šablon:"
-
-#~ msgid "&User:"
-#~ msgstr "K&orisnik:"
-
-#~ msgid "&Vertical Cells:"
-#~ msgstr "&Vertikalne ćelije:"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note:</span> To change these values please first select "
-#~ "\"User Defined\" as the crossword type.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note:</span> Da promijenite ove vrijednosti, molimo prvo "
-#~ "odaverite \"User Defined\" kao crossord tip.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Enter a pattern with "
-#~ "letters, <span style=\" font-weight:600;\">? </span>for one arbitrary "
-#~ "letter and <span style=\" font-weight:600;\">*</span> for any number of "
-#~ "arbitrary letters.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Unesite uzorak sa "
-#~ "slovima, <span style=\" font-weight:600;\">? </span>za jedno proizvoljno "
-#~ "pismo <span style=\" font-weight:600;\">*</span> za bilo koji broj "
-#~ "proizvoljnog pisma.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">In a \"Number Puzzle\" "
-#~ "each answer letter is mapped to a clue number. The solver has to find out "
-#~ "which clue number belongs to which letter.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">To change the mapping "
-#~ "of an answer letter select it in the list, enter it's new clue number and "
-#~ "click \"Set Mapping\".</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note:</span> Conflicting mappings are resolved "
-#~ "automatically.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">U \"Number Puzzle"
-#~ "\"svako pismo odgovora je mapirano tragu broja. Rješavač treba da sazna "
-#~ "koji trag broj pripada kojem pismu.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Da promijenite "
-#~ "mapiranje pisma odgovora odaberite ga u listi, unesite njegov trag broja "
-#~ "i pritisnite \"Set Mapping\".</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note:</span> Preslikavanja koja se sukobljavaju će "
-#~ "automatski biti rješena.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Only the checked cell "
-#~ "types can be added into the crossword grid.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Empty Cells</span> are also called \"Shaded Cells\", "
-#~ "\"Blanks\", \"Darks\", \"Blocks\", \"Black Squares\" or \"Shaded Squares"
-#~ "\". You cannot disallow empty cells.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Letter Cells</span> are also called \"White Cells\" or "
-#~ "\"Lights\". They contain one letter (or digit) of one or two answers / "
-#~ "entries. A letter cell that is part of two answers (both Across and Down) "
-#~ "is called <span style=\" font-style:italic;\">checked</span>, <span style="
-#~ "\" font-style:italic;\">keyed</span> or <span style=\" font-style:italic;"
-#~ "\">crossed</span>. A letter cell that is part of only one answer is "
-#~ "called <span style=\" font-style:italic;\">unchecked</span>, <span style="
-#~ "\" font-style:italic;\">unkeyed</span> or <span style=\" font-style:"
-#~ "italic;\">uncrossed</span>.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Clue Cells</span> contain the clue text in small print "
-#~ "inside and act as empty cells. Each clue cell has a little arrow "
-#~ "indicating in which direction from its initial cell the answer is to be "
-#~ "written.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Double Clue Cells</span> contain two clue cells inside, one "
-#~ "above the other.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Solution Letter Cells</span> are letter cells that are part "
-#~ "of a solution word for the whole crossword.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Image Cells</span> contain images and can be stretched over "
-#~ "a block of multiple cells.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Samo odabrani tipovi "
-#~ "ćelije mogu biti dodani u rešetku križaljke.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Prazne ćelije</span> se takođe zovu \"Shaded Cells\", "
-#~ "\"Blanks\", \"Darks\", \"Blocks\", \"Black Squares\" ili \"Shaded Squares"
-#~ "\". Ne možete opovrgnuti prazne ćelije.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Ćelije slova</span> se takođe zovu \"White Cells\" ili "
-#~ "\"Lights\". Sadrže jedno slovo (ili cifru) od jednog od dva odgovora / "
-#~ "ulaza. Čelija slova je dio od dva odgovora (oba preko i dole) je nazvana "
-#~ "<span style=\" font-style:italic;\">checked</span>, <span style=\" font-"
-#~ "style:italic;\">keyed</span> or <span style=\" font-style:italic;"
-#~ "\">crossed</span>. Ćelija slova koja je dio samo jednog odogovora <span "
-#~ "style=\" font-style:italic;\">unchecked</span>, <span style=\" font-style:"
-#~ "italic;\">unkeyed</span> ili <span style=\" font-style:italic;"
-#~ "\">uncrossed</span>.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Ćelije traga</span> sadržetrag teksta u malim otiscima "
-#~ "unutar i ponašaju se kao prazne ćelije. Svaka ćelija traga ima malu "
-#~ "strelicu koja pokazuje u kom pravcu od njene početne ćelije odgovor treba "
-#~ "biti zapisan.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Duple ćelije traga</span>sadrže dvije ćelije traga unutar, "
-#~ "jednu iznad druge.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Ćelije rješenja slova</span> su ćelije slova koje su dio "
-#~ "rječi rješenja za cijelu križaljku.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Ćelije slike </span> sadrže slike i mogu biti istegnute "
-#~ "preko bloka više ćelija.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">You can enter wildcard "
-#~ "patterns to search the dictionary for answers.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The pattern can contain "
-#~ "letters, <span style=\" font-weight:600;\">? </span>for one arbitrary "
-#~ "letter and <span style=\" font-weight:600;\">*</span> for any number of "
-#~ "arbitrary letters.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">For example \"HO??E\" "
-#~ "matches all answers starting with \"HO\", ending with \"E\" and having "
-#~ "two arbitrary letters in between. \"HOUSE\" would be matched by that "
-#~ "pattern.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Answers are searched "
-#~ "while typing the pattern.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note:</span> When you change the settings of the clue, a "
-#~ "pattern is automatically constructed, based on the letters that are "
-#~ "already in the crossword at the positions of the clue.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Možete unijeti "
-#~ "zamjenske obrasce da pretražite rječnik za odgovore.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Obrazac može sadržavati "
-#~ "slova, <span style=\" font-weight:600;\">? </span>za jedno proizvoljno "
-#~ "slovo <span style=\" font-weight:600;\">*</span> za bilo koji broj "
-#~ "proizvoljnih slova.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Za primjer \"HO??E\" "
-#~ "uklapa sve odgovore koji počinju sa \"HO\", završavaju sa \"E\"i dva "
-#~ "proizvoljna slova između. \"HOUSE\" bi se poklapalo sa tim obrascem.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Odgovori se traže dok "
-#~ "se ukucava obrazac.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note:</span>Kada promjenite postavke traga, obrazac je "
-#~ "automatski konstruiran, bazirano da slovima koji su već u ukrštenim "
-#~ "riječima na pozicijama traga.</p></body></html>"
 
 #~ msgctxt "Display text for empty clue texts"
 #~ msgid "<placeholder>empty</placeholder>"
 #~ msgstr "<placeholder>prazno</placeholder>"
 
-#~ msgid "Add &Words From Dictionary..."
-#~ msgstr "Dodaj &riječi iz rječnika..."
+#~ msgid "Animations"
+#~ msgstr "Animacije"
 
-#~ msgid "Adds an entry to the dictionary"
-#~ msgstr "Dodaje unos u rječnik"
-
-#~ msgid "Allowed Cell T&ypes:"
-#~ msgstr "T&ipovi dozvoljene ćelije"
-
-#~ msgid "Anchor:"
-#~ msgstr "Sidro:"
-
-#~ msgid "Answer &Offset:"
-#~ msgstr "Odgovor &Ofset"
-
-#~ msgid "Arrange the answer letters horizontally."
-#~ msgstr "Raporedi pisma odgovora horizontalno."
-
-#~ msgid "Arrange the answer letters vertically."
-#~ msgstr "Raporedi pisma odgovora uspravno."
-
-#, fuzzy
-#~ msgid "Available crosswords"
-#~ msgstr "Nova križaljka"
-
-#~ msgid "Backup"
-#~ msgstr "Rezerva"
-
-#~ msgid "Basic Settings"
-#~ msgstr "Postavke osnova"
-
-#, fuzzy
-#~ msgid "Centered"
-#~ msgstr "Centrirano"
-
-#~ msgid "Clears the dictionary"
-#~ msgstr "Čisti rječnik"
-
-#~ msgid ""
-#~ "Click / double click an answer to set it as the correct answer of the "
-#~ "clue."
-#~ msgstr ""
-#~ "Klik / dupli klik na odgovor da ga postavite kao tačan odgovor traga."
-
-#~ msgid "Clue &Mapping:"
-#~ msgstr "&Mapiranje traga"
-
-#~ msgid "Clue &Type:"
-#~ msgstr "&Tip traga:"
-
-#~ msgid "Clue Cell &Handling:"
-#~ msgstr "&Upravljanje ćelijom traga"
-
-#~ msgid "Clue Number"
-#~ msgstr "Broj traga"
-
-#~ msgid "Clues can be mapped to single cells or sets of cells"
-#~ msgstr "Tragovi mogu biti mapirani slobodnim ćelijama ili setovima ćelija"
-
-#~ msgid "Conversion Info"
-#~ msgstr "Info pretvorbe"
-
-#~ msgid "Convert To Crossword Type"
-#~ msgstr "Pretvori u tip križaljke"
-
-#~ msgid "Copyright information about the crossword"
-#~ msgstr "Informacije o autorskim pravima u vezi sa križaljkom"
-
-#~ msgid "Create Database"
-#~ msgstr "Kreiraj bazu podataka"
+#~ msgid "Answer"
+#~ msgstr "Odgovoriti"
 
 #~ msgctxt "Default notes value for new crosswords"
 #~ msgid ""
@@ -2548,36 +3809,11 @@ msgstr ""
 #~ "Kreirano sa KrossWordPuzzle, pogledaj http://kde-apps.org/content/show."
 #~ "php?content=111726"
 
-#~ msgid "Crossword &Size:"
-#~ msgstr "&Veličina križaljke"
-
-#~ msgid "Crossword Type Information"
-#~ msgstr "Informacije za tip križaljke"
-
-#~ msgid "Crossword Type:"
-#~ msgstr "Tip kkrižaljke:"
-
-#~ msgid "Document &Information"
-#~ msgstr "&Informacije dokumenta"
-
-#~ msgid "Document Information"
-#~ msgstr "Podaci o dokumentu"
-
-#, fuzzy
-#~ msgid "Download &to:"
-#~ msgstr "Preuzmi &u:"
-
-#~ msgid "Download Crosswords"
-#~ msgstr "Preuzmi križaljke"
+#~ msgid "Document to open"
+#~ msgstr "Dokument za otvaranje"
 
 #~ msgid "Downloads"
 #~ msgstr "Preuzimanja"
-
-#~ msgid "Edit"
-#~ msgstr "Uredi"
-
-#~ msgid "Enable Animations"
-#~ msgstr "Omogući animacije"
 
 #~ msgid ""
 #~ "Enables/disables the edit mode. All correct letters are shown in edit "
@@ -2590,111 +3826,22 @@ msgstr ""
 #~ msgid "Error while downloading from url"
 #~ msgstr "Greška pri preuzimanju sa url-a: %1"
 
-#~ msgid "Exports the whole dictionary to a comma separated text file."
-#~ msgstr "Izvozi cijeli rječnik u datoteku sa tekstom odvojenim zarezima."
-
-#~ msgid "Extract From &Library"
-#~ msgstr "Izvedi iz &biblioteke"
-
-#~ msgid "Extracts words from plain text dictionary files"
-#~ msgstr "Izvozi riječi iz datoteka običnih tekstualnih rječnika"
-
-#~ msgid "Extracts words with associated clues from crosswords in the library"
-#~ msgstr "Izvodi riječi povezane sa tragovima iz križaljke u biblioteci"
-
-#~ msgid ""
-#~ "Extracts words with associated clues from crosswords in the library.\n"
-#~ "This does the same as \"Extract From Crosswords...\" with all crossword "
-#~ "files in the library."
-#~ msgstr ""
-#~ "Izvodi riječi povezane sa tragovima iz križaljke u biblioteci.\n"
-#~ "Ovo radi isto kao \"Izvedi iz križaljke...\" sa svim datotekama križaljke "
-#~ "u biblioteci."
-
-#~ msgid "Fill Dictionary"
-#~ msgstr "Popuni rječnik"
-
-#~ msgid "First letter cell on the bottom left of the clue cell."
-#~ msgstr "Prva ćelija slova u dnu lijevo od ćelije traga."
-
-#~ msgid "First letter cell on the bottom of the clue cell."
-#~ msgstr "Prva ćelija slova na dnu ćelije traga."
-
-#~ msgid "First letter cell on the bottom right of the clue cell."
-#~ msgstr "Prva ćelija slova u desnom dnu ćelije traga."
-
-#~ msgid "First letter cell on the left of the clue cell."
-#~ msgstr "Prva ćelija slova lijevo od ćelije traga."
-
-#~ msgid "First letter cell on the right of the clue cell."
-#~ msgstr "Prva ćelija slova na desno od ćelije traga."
-
-#~ msgid "First letter cell on the top left of the clue cell."
-#~ msgstr "Prva ćelija slova na lijevom vrhu od ćelije traga."
-
-#~ msgid "First letter cell on the top of the clue cell."
-#~ msgstr "Prva ćelija slova na vrhu ćelije traga."
-
-#~ msgid "First letter cell on the top right of the clue cell."
-#~ msgstr "Prva ćelija slova na desnom vrhu ćelije traga."
+#~ msgid "Error while downloading from url: %1"
+#~ msgstr "Greška pri preuzimanju sa url-a: %1"
 
 #, fuzzy
-#~ msgid "General"
-#~ msgstr "Općenito"
+#~ msgid "Failed"
+#~ msgstr "tiled"
 
 #~ msgid "Give up the Game"
 #~ msgstr "Predaje igru"
 
-#~ msgid ""
-#~ "Hides the clue cell. The first letter cell is placed at the coordinates "
-#~ "of the clue cell."
-#~ msgstr ""
-#~ "Skriva ćeliju traga. Prva ćelija slova je postavljena na koordinatama od "
-#~ "ćelije traga."
+#~ msgid "Insert special character:"
+#~ msgstr "Ubaci poseban znak:"
 
 #, fuzzy
-#~ msgid "Horizontal"
-#~ msgstr "Horizontalan"
-
-#~ msgid ""
-#~ "If a clue cell can, can't or has to be inserted into the crossword grid "
-#~ "for each clue"
-#~ msgstr ""
-#~ "Ako ćelija traga može, ne može ili mora biti umetnuta u rešetku križaljke "
-#~ "za svaki trag"
-
-#~ msgid "Image &File:"
-#~ msgstr "Slikovna &datoteka:"
-
-#~ msgid "Imports entries from a comma separated text file."
-#~ msgstr "Uvozi unose iz datoteke sa tekstom odvojenim zarezima."
-
-#~ msgid "Insert special characters to the clue text"
-#~ msgstr "Unesite posebno slovo u tekst traga"
-
-#~ msgid ""
-#~ "Lets you choose crossword files to extracts words with associated clues "
-#~ "from"
-#~ msgstr ""
-#~ "Pušta da birate datoteke križaljke da izvezete riječi sa povezanim "
-#~ "tragovima iz"
-
-#~ msgid ""
-#~ "Lets you choose crossword files to extracts words with associated clues "
-#~ "from.\n"
-#~ "This does the same as \"Extract From Library\", but you can select from "
-#~ "which files words should be extracted."
-#~ msgstr ""
-#~ "Pušta da birate datoteke križaljke da izvezete riječi sa povezanim "
-#~ "tragovima iz.\n"
-#~ "Ovo radi isto kao \"Izvezi iz biblioteke\", ali možete odabrati koje bi "
-#~ "datoteke riječi trebale biti izvezene."
-
-#~ msgid "Letter"
-#~ msgstr "slovo"
-
-#~ msgid "Letter Cell &Content:"
-#~ msgstr "&Sadržaj ćelije slova"
+#~ msgid "Let you select a special character to paste"
+#~ msgstr "Pušta vas da izaberete poseban znak za zalijepiti."
 
 #~ msgctxt ""
 #~ "This string is used to replace the library path for crossword files that "
@@ -2712,9 +3859,6 @@ msgstr ""
 
 #~ msgid "Main Toolbar"
 #~ msgstr "Glavna alatna traka"
-
-#~ msgid "Name of the current theme."
-#~ msgstr "Ime trenutačne teme."
 
 #~ msgid ""
 #~ "Neither the chosen theme '%1' nor the default theme could be found.\n"
@@ -2736,114 +3880,36 @@ msgstr ""
 #~ msgid "New &Crossword..."
 #~ msgstr "Nova križaljka"
 
-#~ msgid "New Size:"
-#~ msgstr "Nova veličina"
-
-#~ msgid "Notes about the crossword"
-#~ msgstr "Bilješke o križaljci"
-
 #~ msgid "Notes:"
 #~ msgstr "Zabilješke:"
-
-#~ msgid "Only the checked cell types can be added into the crossword grid"
-#~ msgstr "Samo odabrani tipovi ćelije mogu biti dodani u rešetku križaljke"
-
-#~ msgid "Preview:"
-#~ msgstr "Pregled:"
-
-#~ msgid "Remap the selected letter to the given clue number."
-#~ msgstr "Premjestite odabrano slovo datom trag broju."
-
-#~ msgid "Removes the selected entries from the dictionary"
-#~ msgstr "Uklanja odabrane unose iz rječnika"
-
-#~ msgid "Rules"
-#~ msgstr "Pravila"
 
 #~ msgid "S&earch:"
 #~ msgstr "&Traži:"
 
-#, fuzzy
-#~ msgid "Scaled"
-#~ msgstr "Skalirano"
+#~ msgid "Save &Edit History"
+#~ msgstr "Snimi &uredi historiju"
 
-#, fuzzy
-#~ msgid "Scaled (Keep Aspect Ratio)"
-#~ msgstr "Skalirano (zadrži omjer)"
+#~ msgid "Save without correct answers, clue texts, images"
+#~ msgstr "Snimi bez tačnih odgovora, tragova teksta, slika"
 
-#, fuzzy
-#~ msgid "Scaled and Cropped"
-#~ msgstr "Skalirano i podrezano"
-
-#~ msgid "Selection"
-#~ msgstr "Izbor"
-
-#~ msgid "Shows the current mapping of answer letters to clue numbers."
-#~ msgstr "Pokazuje trenutačno mapiranje pisma odgovora brojevima traga."
-
-#~ msgid "Size:"
-#~ msgstr "Veličina:"
-
-#~ msgid "Template"
-#~ msgstr "Obrazac"
-
-#~ msgid "The author(s) of the crossword"
-#~ msgstr "Autor(i) križaljke"
-
-#~ msgid "The clue text"
-#~ msgstr "Tekst traga"
-
-#~ msgid "The clue to the answer."
-#~ msgstr "Trag ka odgovoru."
+#~ msgid "Solution"
+#~ msgstr "&Rješenje"
 
 #, fuzzy
 #~ msgid "The file is not a Krossword version <= 1.1 file."
 #~ msgstr "Ova datoteka nije verzija KrossWordPuzzle-a &lt;= 1.1 datoteka."
 
-#~ msgid "The minimum length of answers to clues"
-#~ msgstr "Minimalna dužina odgovora na tragove"
-
-#~ msgid "The name of the crossword type"
-#~ msgstr "Ime crossword tipa"
-
-#~ msgid "The new clue number for the selected letter."
-#~ msgstr "Novi trag broja za odabrano slovo."
-
 #, fuzzy
-#~ msgid "The size will be shrinked to match the aspect ratio of the crossword"
-#~ msgstr ""
-#~ "(Ova velčina će biti smanjena da odgovara odnosu dužine i širine "
-#~ "križaljke)"
+#~ msgid ""
+#~ "The solution letter position %1 is already assigned.\n"
+#~ "Please change the solution word position of that letter first."
+#~ msgstr "Pozicija slova rješenja %1 je već dodjeljena."
 
 #~ msgid "The theme '%1' couldn't be found. The default theme is now used."
 #~ msgstr "Tema '%1' ne može biti pronađena. Zadana tema se koristi sada."
 
-#~ msgid "The title of the crossword"
-#~ msgstr "Naslov križaljke"
-
-#~ msgid "The type of clues (strings or numbers)"
-#~ msgstr "Tipovi tragova (slova ili brojevi)"
-
-#~ msgid "The type of content of letter cells"
-#~ msgstr "Tip sadržaja ćelija slova"
-
-#, fuzzy
-#~ msgid "Tiled"
-#~ msgstr "tiled"
-
-#, fuzzy
-#~ msgid "Title:"
-#~ msgstr "&Naslov:"
-
-#, fuzzy
-#~ msgid "Vertical"
-#~ msgstr "Vertikalan"
-
 #~ msgid "Welcome to KrossWordPuzzle!"
 #~ msgstr "Dobro došli u KrossWordPuzzle!"
-
-#~ msgid "Wildcard pattern to search for answers"
-#~ msgstr "Zamjenski obrazac za traženje odgovora"
 
 #~ msgid "Zoom in"
 #~ msgstr "&Uvećaj"

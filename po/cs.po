@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: krossword\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-07 20:21+0100\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2017-10-22 15:49+0200\n"
 "PO-Revision-Date: 2015-01-02 19:30+0100\n"
 "Last-Translator: Pavel Fric <pavelfric@seznam.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -18,40 +18,66 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: library/librarygui.cpp:553
+#. i18n: ectx: property (suffix), widget (QSpinBox, columns)
+#: create_new.ui:252 properties.ui:220
+#, kde-format
+msgid " columns"
+msgstr " Sloupce"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, width)
+#. i18n: ectx: property (suffix), widget (QSpinBox, height)
+#: export_to_image.ui:68 export_to_image.ui:106
+#, kde-format
+msgid " pixel"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, rows)
+#: create_new.ui:220 properties.ui:255
+#, kde-format
+msgid " rows"
+msgstr " Řádky"
+
+#: library/librarygui.cpp:601
+#, kde-format
 msgid "%1"
 msgstr "%1"
 
-#: krossword.cpp:613
+#: krossword.cpp:477
+#, kde-format
 msgid "%1 clue cell"
 msgid_plural "%1 clue cells"
 msgstr[0] "Jedno políčko s nápovědou"
 msgstr[1] "%1 políčka s nápovědou"
 msgstr[2] "%1 políček s nápovědou"
 
-#: krossword.cpp:618
+#: krossword.cpp:482
+#, kde-format
 msgid "%1 double clue cell"
 msgid_plural "%1 double clue cells"
 msgstr[0] "Jedno políčko s dvojitou nápovědou"
 msgstr[1] "%1 políčka s dvojitou nápovědou"
 msgstr[2] "%1 políček s dvojitou nápovědou"
 
-#: dialogs/dictionarydialog.cpp:174 dialogs/dictionarydialog.cpp:189
+#: dialogs/dictionarydialog.cpp:185 dialogs/dictionarydialog.cpp:198
+#, kde-format
 msgid "%1 entries added from %2 crosswords"
 msgstr "%1 záznamů přidáno z %2 křížovek"
 
-#: dialogs/dictionarydialog.cpp:164
+#: dialogs/dictionarydialog.cpp:166
+#, kde-format
 msgid "%1 entries added from this dictionary: '%2'"
 msgstr "%1 záznamů přidáno z tohoto slovníku: '%2'"
 
-#: dialogs/dictionarydialog.cpp:254
+#: dialogs/dictionarydialog.cpp:256
+#, kde-format
 msgid "%1 entry imported from '%2'"
 msgid_plural "%1 entries imported from '%2'"
 msgstr[0] "%1 záznam zaveden z '%2'"
 msgstr[1] "%1 záznamy zavedeny z '%2'"
 msgstr[2] "%1 záznamů zavedeno z '%2'"
 
-#: dialogs/dictionarydialog.cpp:208
+#: dialogs/dictionarydialog.cpp:217
+#, kde-format
 msgid "%1 entry removed"
 msgid_plural "%1 entries removed"
 msgstr[0] "%1 záznam odstraněn"
@@ -59,139 +85,895 @@ msgstr[1] "%1 záznamy odstraněny"
 msgstr[2] "%1 záznamů odstraněno"
 
 #: dialogs/currentcellwidget.cpp:145
+#, kde-format
 msgid "%1 selected at (%2, %3)."
 msgstr "%1 vybráno v (%2, %3)."
 
-#: krossword.cpp:623
+#: krossword.cpp:487
+#, kde-format
 msgid "%1 solution letter cell"
 msgid_plural "%1 solution letter cells"
 msgstr[0] "Jedno políčko s písmenem řešení"
 msgstr[1] "%1 políčka s písmenem řešení"
 msgstr[2] "%1 políček s písmenem řešení"
 
-#: crosswordxmlguiwindow.cpp:320
-#, no-c-format
+#: crosswordxmlguiwindow.cpp:333
+#, no-c-format, kde-format
 msgctxt "%p is replaced by the percentage of solved letter cells"
 msgid "%p% solved"
 msgstr "%p%  vyřešeno"
 
-#: crosswordxmlguiwindow.cpp:1421
+#: crosswordxmlguiwindow.cpp:1445
+#, kde-format
 msgid "&Add Clue"
 msgstr "&Přidat nápovědu"
 
-#: crosswordxmlguiwindow.cpp:1444
+#. i18n: ectx: property (text), widget (QToolButton, addEntry)
+#: dictionaries.ui:224
+#, kde-format
+msgid "&Add Entry"
+msgstr "&Přidat záznam"
+
+#: crosswordxmlguiwindow.cpp:1468
+#, kde-format
 msgid "&Add Image"
 msgstr "&Přidat obrázek"
 
-#: library/librarygui.cpp:531
+#: library/librarygui.cpp:579
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Add..."
 msgstr "&Přidat..."
 
-#: crosswordxmlguiwindow.cpp:1507
+#. i18n: ectx: property (text), widget (QLabel, lblDictionaryAnswers)
+#: clue_properties_dock.ui:539
+#, kde-format
+msgid "&Answers:"
+msgstr "&Odpovědi:"
+
+#. i18n: ectx: property (text), widget (QPushButton, apply)
+#: solution_letter_properties.ui:71
+#, kde-format
+msgid "&Apply"
+msgstr "&Použít"
+
+#. i18n: ectx: property (text), widget (QLabel, lblAuthor)
+#: properties.ui:91
+#, kde-format
+msgid "&Author:"
+msgstr "&Autor:"
+
+#: crosswordxmlguiwindow.cpp:1534
+#, kde-format
 msgid "&Check"
 msgstr "&Prověřit"
 
-#: crosswordxmlguiwindow.cpp:1460
+#: crosswordxmlguiwindow.cpp:1484
+#, kde-format
 msgid "&Check for rotation symmetry..."
 msgstr "&Přezkoušet souměrnost otáčení..."
 
-#: crosswordxmlguiwindow.cpp:1512
+#: crosswordxmlguiwindow.cpp:1539
+#, kde-format
 msgid "&Clear Answers"
 msgstr "&Vyprázdnit odpovědi"
 
-#: crosswordxmlguiwindow.cpp:1450
+#: crosswordxmlguiwindow.cpp:1474
+#, kde-format
 msgid "&Clear Crossword..."
 msgstr "&Vyprázdnit křížovku..."
 
+#. i18n: ectx: property (text), widget (QToolButton, clear)
+#: dictionaries.ui:287
+#, kde-format
+msgid "&Clear Dictionary"
+msgstr "&Vyprázdnit slovník"
+
+#. i18n: ectx: property (text), widget (QLabel, lblClue)
+#: clue_properties_dock.ui:44
+#, kde-format
+msgid "&Clue:"
+msgstr "&Nápověda:"
+
+#. i18n: ectx: property (text), widget (QPushButton, convertToLetterCell)
+#: solution_letter_properties.ui:100
+#, kde-format
+msgid "&Convert to Letter Cell"
+msgstr "&Převést na políčko s písmenem"
+
 #: dialogs/crosswordpropertiesdialog.cpp:46
+#, kde-format
 msgid "&Convert..."
 msgstr "&Převést..."
 
-#: library/librarygui.cpp:516
+#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
+#: properties.ui:120
+#, kde-format
+msgid "&Copyright:"
+msgstr "&Autorské právo:"
+
+#: library/librarygui.cpp:564
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Create Crossword..."
 msgstr "&Vytvořit křížovku..."
 
-#: crosswordxmlguiwindow.cpp:1455
+#: crosswordxmlguiwindow.cpp:1479
+#, kde-format
 msgid "&Crossword Properties..."
 msgstr "&Vlastnosti křížovky..."
 
-#: library/librarygui.cpp:536
+#: library/librarygui.cpp:584
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Delete..."
 msgstr "&Smazat..."
 
-#: crosswordxmlguiwindow.cpp:1279
+#. i18n: ectx: property (text), widget (QLabel, lblDescription)
+#: configure_details.ui:80
+#, kde-format
+msgid "&Description:"
+msgstr "&Popis:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpDictionary)
+#: clue_properties_dock.ui:474
+#, kde-format
+msgid "&Dictionary"
+msgstr "&Slovník"
+
+#: crosswordxmlguiwindow.cpp:1303
+#, kde-format
 msgid "&Dictionary..."
 msgstr "&Slovník..."
 
-#: library/librarygui.cpp:526
+#: library/librarygui.cpp:574
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Download..."
 msgstr "&Stáhnout..."
 
-#: crosswordxmlguiwindow.cpp:1517
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_animate)
+#: settings.ui:20
+#, kde-format
+msgid "&Enable Animations"
+msgstr "&Povolit pohyblivé obrázky"
+
+#: crosswordxmlguiwindow.cpp:1544
+#, kde-format
 msgid "&Eraser"
 msgstr "&Zmizík"
 
-#: library/librarygui.cpp:541
+#. i18n: ectx: property (text), widget (QToolButton, exportToCSV)
+#: dictionaries.ui:388
+#, kde-format
+msgid "&Export (CSV)..."
+msgstr "&Vyvést (CSV)..."
+
+#: library/librarygui.cpp:589
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Export..."
 msgstr "&Vyvést..."
 
-#: crosswordxmlguiwindow.cpp:1368
+#. i18n: ectx: property (text), widget (QToolButton, extractFromCrosswords)
+#: dictionaries.ui:128
+#, kde-format
+msgid "&Extract From Crosswords..."
+msgstr "&Vytáhnout z křížovek..."
+
+#. i18n: ectx: property (text), widget (QLabel, lblFilter)
+#: dictionaries.ui:435
+#, kde-format
+msgid "&Filter:"
+msgstr "&Filtr:"
+
+#: crosswordxmlguiwindow.cpp:1392
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "&First Letter"
 msgstr "&První písmeno"
 
-#: crosswordxmlguiwindow.cpp:1373
+#. i18n: ectx: property (text), widget (QLabel, lblHorizontalCellSpan)
+#: image_properties_dock.ui:135
+#, kde-format
+msgid "&Horizontal Cells:"
+msgstr "&Vodorovná políčka:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblHost)
+#: database_connection.ui:52
+#, kde-format
+msgid "&Host:"
+msgstr "&Hostitelský počítač:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblName_2)
+#: configure_details.ui:100
+#, kde-format
+msgid "&Icon:"
+msgstr "&Ikona:"
+
+#. i18n: ectx: property (text), widget (QToolButton, importFromCSV)
+#: dictionaries.ui:351
+#, kde-format
+msgid "&Import (CSV)..."
+msgstr "&Zavést (CSV)..."
+
+#: crosswordxmlguiwindow.cpp:1397
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Last Letter"
 msgstr "P&oslední písmeno"
 
-#: crosswordxmlguiwindow.cpp:1383
+#. i18n: ectx: property (text), widget (QLabel, lblLetterCellContent)
+#: configure_details.ui:197
+#, fuzzy, kde-format
+msgid "&Letter Cell Content:"
+msgstr "&Obsah políčka s písmenem:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblTemplateLocation)
+#: create_new.ui:314
+#, kde-format
+msgid "&Location:"
+msgstr "&Umístění:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblLongDescription)
+#: configure_details.ui:136
+#, kde-format
+msgid "&Long Description:"
+msgstr "&Dlouhý popis:"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: clue_number_mapping.ui:261
+#, kde-format
+msgid "&Mapped Clue Number:"
+msgstr "&Číslo přiřazené k nápovědě:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblMinAnswerLength)
+#: configure_details.ui:289
+#, kde-format
+msgid "&Minimum Answer Length:"
+msgstr "&Nejmenší délka odpovědi"
+
+#. i18n: ectx: property (text), widget (QLabel, lblName)
+#: configure_details.ui:57
+#, kde-format
+msgid "&Name:"
+msgstr "&Název:"
+
+#: crosswordxmlguiwindow.cpp:1407
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Next Clue"
 msgstr "&Další nápověda"
 
-#: crosswordxmlguiwindow.cpp:1388
+#. i18n: ectx: property (text), widget (QLabel, lblNotes)
+#. i18n: ectx: property (text), widget (QLabel, lblTemplateNotes)
+#: create_new.ui:169 create_new.ui:462 properties.ui:149
+#, kde-format
+msgid "&Notes:"
+msgstr "&Poznámky:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblPassword)
+#: database_connection.ui:95
+#, kde-format
+msgid "&Password:"
+msgstr "&Heslo:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblPattern)
+#: clue_properties_dock.ui:480
+#, kde-format
+msgid "&Pattern:"
+msgstr "&Vzor:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblSolutionWordPosition)
+#: solution_letter_properties.ui:41
+#, kde-format
+msgid "&Position in the solution word:"
+msgstr "&Poloha ve slově řešení:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblAspectRatio)
+#: image_properties_dock.ui:84
+#, kde-format
+msgid "&Positioning:"
+msgstr "&Polohování:"
+
+#: crosswordxmlguiwindow.cpp:1412
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Previous Clue"
 msgstr "&Předchozí nápověda"
 
-#: crosswordxmlguiwindow.cpp:1427 crosswordxmlguiwindow.cpp:1860
+#. i18n: ectx: property (text), widget (QLabel, lblProviders)
+#: download.ui:20
+#, kde-format
+msgid "&Provider:"
+msgstr "&Poskytovatel:"
+
+#: crosswordxmlguiwindow.cpp:1451 crosswordxmlguiwindow.cpp:1838
+#, kde-format
 msgid "&Remove"
 msgstr "&Odstranit"
 
-#: crosswordxmlguiwindow.cpp:1856
+#: crosswordxmlguiwindow.cpp:1834
+#, kde-format
 msgid "&Remove Clue"
 msgstr "&Odstranit nápovědu"
 
-#: crosswordxmlguiwindow.cpp:1858
+#: crosswordxmlguiwindow.cpp:1836
+#, kde-format
 msgid "&Remove Image"
 msgstr "&Odstranit obrázek"
 
-#: krosswordpuzzle.cpp:261
+#. i18n: ectx: property (text), widget (QToolButton, removeEntries)
+#: dictionaries.ui:252
+#, kde-format
+msgid "&Remove Selected"
+msgstr "&Odstranit vybrané"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnReset)
+#: properties.ui:312
+#, kde-format
+msgid "&Reset"
+msgstr "&Nastavit znovu"
+
+#: mainwindow.cpp:259
+#, kde-format
 msgid "&Restore"
 msgstr "&Obnovit"
 
 #: dialogs/crosswordtypewidget.cpp:226
+#, kde-format
 msgid "&Rules..."
 msgstr "&Pravidla..."
 
-#: crosswordxmlguiwindow.cpp:1465
+#. i18n: ectx: property (text), widget (QPushButton, setMapping)
+#: clue_number_mapping.ui:293
+#, kde-format
+msgid "&Set Mapping"
+msgstr "&Nastavit přiřazení"
+
+#: crosswordxmlguiwindow.cpp:1489
+#, kde-format
 msgid "&Statistics..."
 msgstr "&Statistika..."
 
+#. i18n: ectx: property (text), widget (QLabel, lblTitle)
+#. i18n: ectx: property (text), widget (QLabel, lblTitle_2)
+#: create_new.ui:146 properties.ui:59
+#, kde-format
+msgid "&Title:"
+msgstr "&Název:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblUseTemplate)
+#: create_new.ui:534
+#, kde-format
+msgid "&Use Template:"
+msgstr "&Použít předlohu:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblUser)
+#: database_connection.ui:75
+#, kde-format
+msgid "&User:"
+msgstr "&Uživatel:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, vertical)
+#: clue_properties_dock.ui:160
+#, fuzzy, kde-format
+msgctxt "Orientation of the answer to a clue."
+msgid "&Vertical"
+msgstr "Svislé"
+
+#. i18n: ectx: property (text), widget (QLabel, lblVerticalCellSpan)
+#: image_properties_dock.ui:151
+#, kde-format
+msgid "&Vertical Cells:"
+msgstr "&Svislá políčka:"
+
+#: main.cpp:40
+#, fuzzy, kde-format
+msgid ""
+"(c) 2014-2017, Andrea Barazzetti\n"
+"(c) 2014-2017, Giacomo Barazzetti\n"
+"(c) 2009, Friedrich Pülz"
+msgstr ""
+"© 2014 Andrea Barazzetti\n"
+"© 2014 Giacomo Barazzetti\n"
+"© 2009 Friedrich Pülz"
+
+#. i18n: ectx: property (text), widget (QLabel, labelTitleValue)
+#. i18n: ectx: property (text), widget (QLabel, labelSizeValue)
+#: download.ui:159 download.ui:182
+#, kde-format
+msgid "-"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, lblReadOnlyInfo)
+#: configure_details.ui:24
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> To change these values please first select \"User "
+"Defined\" as the crossword type.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Poznámka:</span> Pro změnu těchto hodnot vyberte, prosím, "
+"nejprve \"Uživatelsky stanovená\" jako druh křížovky.</p></body></html>"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, pattern)
+#: clue_properties_dock.ui:497
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Enter a pattern with "
+"letters, <span style=\" font-weight:600;\">? </span>for one arbitrary letter "
+"and <span style=\" font-weight:600;\">*</span> for any number of arbitrary "
+"letters.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Zadejte vzor s písmeny,  "
+"<span style=\" font-weight:600;\">? </span>pro libovolné písmeno a <span "
+"style=\" font-weight:600;\">*</span> pro jakýkoli počet libovolných písmen.</"
+"p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, exportToCSV)
+#: dictionaries.ui:385
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Exports the whole "
+"dictionary to a comma separated text file.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can use that to create "
+"a <span style=\" font-weight:600;\">backup</span> of your dictionary or to "
+"<span style=\" font-weight:600;\">share</span> your dictionary with others.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">It is also possible to "
+"open that file in a spread sheet application.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Vyvede celý slovník do "
+"souboru s textem odděleným čárkou.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Můžete použít na "
+"vytvoření  <span style=\" font-weight:600;\">zálohy</span> svého slovníku "
+"nebo na  <span style=\" font-weight:600;\">sdílení</span> svého slovníku s "
+"ostatními.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Je rovněž možné otevřít "
+"tento soubor v tabulkovém kalkulátoru.</p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, importFromCSV)
+#: dictionaries.ui:348
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Imports entries from a "
+"comma separated text file.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can use that to <span "
+"style=\" font-weight:600;\">restore</span> a previously created backup of "
+"your dictionary or to import dictionaries from others.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Zavede záznamy ze souboru "
+"s textem odděleným čárkou.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Můžete použít na <span "
+"style=\" font-weight:600;\">obnovu</span> předtím vytvořené zálohy svého "
+"slovníku nebo pro zavedení slovníků od ostatních.</p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addWordsFromDictionary)
+#: dictionaries.ui:165
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Imports words from a plain "
+"text dictionary (eg. in /usr/dict/ or /usr/share/dict/). A dictionary for "
+"crosswords is available from <a href=\"http://www.quinapalus.com/xwfaq.html"
+"\"><span style=\" text-decoration: underline; color:#0057ae;\">http://www."
+"quinapalus.com/xwfaq.html</span></a> (UKACD).</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">The dictionary file must "
+"be a plain text file with one word per line.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Zavede slova ze slovníku s "
+"prostým textem (např. in /usr/dict/ or /usr/share/dict/). Slovník pro "
+"křížovky je dostupný přes tento odkaz <a href=\"http://www.quinapalus.com/"
+"xwfaq.html\"><span style=\" text-decoration: underline; color:#0057ae;"
+"\">http://www.quinapalus.com/xwfaq.html</span></a> (UKACD).</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Soubor se slovníkem musí "
+"být soubor s prostým textem s jedním slovem na řádek.</p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QListWidget, cellTypes)
+#: configure_details.ui:223
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Only the checked cell "
+"types can be added into the crossword grid.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Empty Cells</span> are also called \"Shaded Cells\", \"Blanks"
+"\", \"Darks\", \"Blocks\", \"Black Squares\" or \"Shaded Squares\". You "
+"cannot disallow empty cells.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Letter Cells</span> are also called \"White Cells\" or \"Lights"
+"\". They contain one letter (or digit) of one or two answers / entries. A "
+"letter cell that is part of two answers (both Across and Down) is called "
+"<span style=\" font-style:italic;\">checked</span>, <span style=\" font-"
+"style:italic;\">keyed</span> or <span style=\" font-style:italic;\">crossed</"
+"span>. A letter cell that is part of only one answer is called <span style="
+"\" font-style:italic;\">unchecked</span>, <span style=\" font-style:italic;"
+"\">unkeyed</span> or <span style=\" font-style:italic;\">uncrossed</span>.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Clue Cells</span> contain the clue text in small print inside "
+"and act as empty cells. Each clue cell has a little arrow indicating in "
+"which direction from its initial cell the answer is to be written.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Double Clue Cells</span> contain two clue cells inside, one "
+"above the other.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Solution Letter Cells</span> are letter cells that are part of "
+"a solution word for the whole crossword.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Image Cells</span> contain images and can be stretched over a "
+"block of multiple cells.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Pouze zatržené druhy "
+"políček lze přidat do mřížky s křížovkou.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Prázdná políčka</span> se také nazývají \"Stínovaná políčka\", "
+"\"Prázdná\", \"Tmavá\", \"Kostky\", \"Černé čtverečky\" nebo \"Stínované "
+"čtverečky\". You cannot disallow empty cells.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Políčka s písmeny</span> se také nazývají \"Bílá políčka\" "
+"nebo \"Světla\". Obsahují jedno písmeno (nebo číslici) jedné nebo dvou "
+"odpovědí/záznamů. Políčko s písmenem, které je součástí dvou odpovědí (obě "
+"vodorovná a svislá), se nazývá <span style=\" font-style:italic;"
+"\">kostkované</span>, <span style=\" font-style:italic;\">opatřené klíčem</"
+"span> nebo <span style=\" font-style:italic;\">křižované</span>. Políčko s "
+"písmenem, které je součástí pouze jedné odpovědi, se nazývá <span style=\" "
+"font-style:italic;\">nekostkované</span>, <span style=\" font-style:italic;"
+"\">neopatřené klíčem</span> nebo <span style=\" font-style:italic;"
+"\">nekřižované</span>.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Políčka s nápovědami</span> obsahují text nápovědy vyvedený "
+"malým písmem uvnitř a chovají se jako prázdná políčka. Každé políčko s "
+"nápovědou má malou šipku naznačující, kterým směrem od svého počátečního "
+"políčka se má odpověď napsat.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Políčka s dvojitými nápovědami</span> obsahují políčka se "
+"dvěma nápovědami uvnitř, jedna nad druhou.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Políčka s písmenem řešení</span> jsou políčka s písmeny, která "
+"jsou součástí slova řešení pro celou křížovku.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Políčka s obrázky</span> obsahují obrázky a lze je roztáhnout "
+"přes blok složený z více políček.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QLabel, lblInfo)
+#: database_connection.ui:40
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">The MySQL root password is "
+"needed to automatically setup the database:</p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-"
+"right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-"
+"bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
+"indent:0px;\">Add a new user to the MySQL server (username and password: "
+"krosswordpuzzle)</li>\n"
+"<li style=\" font-weight:600;\" style=\" margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+"\"><span style=\" font-weight:400;\">Give privileges for a new database "
+"(named krosswordpuzzle) to that user</span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note: </span>You can also do these steps yourself by using a "
+"MySQL administrator tool.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Pro automatické nastavení "
+"databáze je  potřeba superuživatelské heslo pro MySQL:</p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-"
+"right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-"
+"bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
+"indent:0px;\">Přidat nového uživatele serveru MySQL (uživatelské jméno a "
+"heslo: krosswordpuzzle)</li>\n"
+"<li style=\" font-weight:600;\" style=\" margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+"\"><span style=\" font-weight:400;\">Udělit výhradní práva na novou databázi "
+"(nazvanou krosswordpuzzle) to that user</span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Poznámka: </span>Tyto kroky můžete rovněž provést samostatně  "
+"pomocí nástroje pro správu MySQL.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QTableView, tableDictionary)
+#: dictionaries.ui:482
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">This view contains all "
+"entries in the dictionary. </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can <span style=\" "
+"font-weight:600;\">edit</span> each entry.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">To <span style=\" font-"
+"weight:600;\">find entries</span> in the possibly huge list you can enter a "
+"substring of the answer word into the edit line above.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Tento pohled obsahuje "
+"všechny záznamy ve slovníku. </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Můžete <span style=\" font-"
+"weight:600;\">upravit</span> každý záznam.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Pro <span style=\" font-"
+"weight:600;\">nalezení záznamů</span> v možná velmi dlouhém seznamu můžete "
+"část hledaného slova zadat do zadávacího řádku výše.</p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QLineEdit, pattern)
+#: clue_properties_dock.ui:508
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can enter wildcard "
+"patterns to search the dictionary for answers.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">The pattern can contain "
+"letters, <span style=\" font-weight:600;\">? </span>for one arbitrary letter "
+"and <span style=\" font-weight:600;\">*</span> for any number of arbitrary "
+"letters.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">For example \"HO??E\" "
+"matches all answers starting with \"HO\", ending with \"E\" and having two "
+"arbitrary letters in between. \"HOUSE\" would be matched by that pattern.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Answers are searched while "
+"typing the pattern.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> When you change the settings of the clue, a "
+"pattern is automatically constructed, based on the letters that are already "
+"in the crossword at the positions of the clue.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Můžete zadat vzory pro "
+"zástupné znaky pro hledání odpovědí ve slovníku.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Vzor může obsahovat "
+"písmena, <span style=\" font-weight:600;\">? </span>pro libovolné písmeno a "
+"<span style=\" font-weight:600;\">*</span> pro jakýkoli počet libovolných "
+"písmen</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Například \"SV??LO\" "
+"odpovídá všem odpovědím, které začínají na \"SV\", končí na \"LO\" a mezi "
+"tím mají dvě libovolná písmena. \"SVĚTLO\" by tomuto vzoru odpovídalo.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Odpovědi jsou hledány "
+"během zapisování vzoru.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Poznámka:</span> Změníte-li nastavení nápovědy, je automaticky "
+"sestaven vzor, který je založen na písmenech, jež jsou již v křížovce v "
+"polohách nápověd.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QLabel, lblInfo)
+#: clue_number_mapping.ui:27
+#, fuzzy, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Noto Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'FreeSans'; font-size:10pt;\">In a \"Coded Puzzle\" each answer "
+"letter is mapped to a clue number. The solver has to find out which clue "
+"number belongs to which letter.</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'FreeSans'; font-size:10pt;\">To change the mapping of an answer "
+"letter select it in the list, enter it's new clue number and click \"Set "
+"Mapping\".</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'FreeSans'; font-size:10pt;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'FreeSans'; font-size:10pt; font-weight:600;\">Note:</span><span "
+"style=\" font-family:'FreeSans'; font-size:10pt;\"> Conflicting mappings are "
+"resolved automatically.</span></p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">V \"Číselná hádanka\" je "
+"každé písmeno odpovědi přiřazeno k číslu nápovědy. Řešitel musí přijít na "
+"to, k jakému písmen to které číslo nápovědy patří.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Pro změnu přiřazení "
+"písmene odpovědi je vyberte v seznamu, zadejte nové číslo nápovědy k němu a "
+"klepněte na \"Nastavit přiřazení\".</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Poznámka:</span> Střetávající se přiřazení jsou řešena "
+"automaticky.</p></body></html>"
+
 #: commands.cpp:993
+#, kde-format
 msgctxt ""
 "Used for the text of the change clue undo command, when the clue text is "
 "empty."
 msgid "<placeholder>empty</placeholder>"
 msgstr "<placeholder>prázdné</placeholder>"
 
-#: crosswordxmlguiwindow.cpp:1505
+#: crosswordxmlguiwindow.cpp:1532
+#, kde-format
 msgid ""
 "<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
 "solution will be displayed.</p><p>If you filled in all letters and do not "
@@ -201,7 +983,13 @@ msgstr ""
 "Bude zobrazeno řešení .</p><p>Jestliže jste vyplnil všechna písmena a "
 "nechcete to vzdávat, zvolte \"Hotovo!\".</p></qt>"
 
+#: krossword.cpp:1014
+#, kde-format
+msgid "<strong>%1</strong> by %2<br><small>%3</small>"
+msgstr ""
+
 #: global.cpp:508
+#, kde-format
 msgctxt "Long description of the crossword type 'Crossnumber'"
 msgid ""
 "A crossnumber (also known as a cross-figure) is the numerical analogy of a "
@@ -224,7 +1012,8 @@ msgstr ""
 "jinou hádankou, o které se Daily Mail zmiňuje jako o Číselné křížovce.\n"
 "(text byl převzat z Wikipedie)"
 
-#: main.cpp:27
+#: main.cpp:29
+#, kde-format
 msgid ""
 "A crossword puzzle game and editor for KDE.\n"
 "Based on KrossWordPuzzle."
@@ -232,43 +1021,70 @@ msgstr ""
 "Hra a editor s hádankou v křížovce pro KDE.\n"
 "Založeno na KrossWordPuzzle."
 
-#: cluemodel.cpp:63
+#. i18n: ectx: property (text), widget (QLabel, lblAnswerOffset)
+#: clue_properties_dock.ui:175
+#, fuzzy, kde-format
+msgid "A&nswer Offset:"
+msgstr "&Odsazení odpovědi:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblAuthor)
+#: create_new.ui:104
+#, fuzzy, kde-format
+msgid "A&uthor:"
+msgstr "&Autor:"
+
+#: cluemodel.cpp:62
+#, kde-format
 msgid "Across clues"
 msgstr "Vodorovné nápovědy"
 
-#: krossworddocument.cpp:88
+#: krossworddocument.cpp:121
+#, kde-format
 msgctxt "Title for the list of across/horizontal clues when printing"
 msgid "Across clues"
 msgstr "Vodorovné nápovědy"
 
 #: commands.cpp:774
+#, kde-format
 msgid "Add %1 letter"
 msgid_plural "Add %1 letters"
 msgstr[0] "Přidat jedno písmeno"
 msgstr[1] "Přidat %1 písmena"
 msgstr[2] "Přidat %1 písmen"
 
+#. i18n: ectx: property (text), widget (QToolButton, addWordsFromDictionary)
+#: dictionaries.ui:168
+#, kde-format
+msgid "Add &Words From Dictionary..."
+msgstr "Přidat &slova ze slovníku..."
+
 #: commands.cpp:425
+#, kde-format
 msgid "Add Clue '%1'"
 msgstr "Přidat nápovědu '%1'"
 
 #: commands.cpp:423
+#, kde-format
 msgid "Add Clue Without Text"
 msgstr "Přidat nápovědu bez textu"
 
 #: commands.cpp:612
+#, kde-format
 msgid "Add Image '%1'"
 msgstr "Přidat obrázek '%1'"
 
-#: library/librarygui.cpp:532
+#: library/librarygui.cpp:580
+#, kde-format
 msgid "Add a crossword to the library"
 msgstr "Přidat křížovku do knihovny"
 
-#: crosswordxmlguiwindow.cpp:1280
+#: crosswordxmlguiwindow.cpp:1304
+#, kde-format
 msgid "Add or remove crossword dictionaries"
 msgstr "Přidat nebo odstranit křížovkářské slovníky"
 
-#: dictionary.cpp:566
+#: dictionary.cpp:563
+#, kde-format
 msgid ""
 "Adding words from %1 crossword files to the database.\n"
 "Please wait."
@@ -276,7 +1092,8 @@ msgstr ""
 "Přidávají se slova z '%1' souborů s křížovkami do databáze.\n"
 "Počkejte, prosím."
 
-#: dictionary.cpp:462
+#: dictionary.cpp:459
+#, kde-format
 msgid ""
 "Adding words from the dictionary '%1' to the database.\n"
 "Please wait."
@@ -284,19 +1101,29 @@ msgstr ""
 "Přidávají se slova ze slovníku '%1' do databáze.\n"
 "Počkejte, prosím."
 
-#: crosswordxmlguiwindow.cpp:1422
+#: crosswordxmlguiwindow.cpp:1446
+#, kde-format
 msgid "Adds a new clue at the current cell"
 msgstr "Přidá novou nápovědu k nyní vybranému políčku"
 
-#: crosswordxmlguiwindow.cpp:1445
+#: crosswordxmlguiwindow.cpp:1469
+#, kde-format
 msgid "Adds a new image at the current cell"
 msgstr "Přidá nový obrázek k nyní vybranému políčku"
 
+#. i18n: ectx: property (toolTip), widget (QToolButton, addEntry)
+#: dictionaries.ui:221
+#, kde-format
+msgid "Adds an entry to the dictionary"
+msgstr "Přidá záznam do slovníku"
+
 #: global.cpp:48
+#, kde-format
 msgid "All cells"
 msgstr "Všechna políčka"
 
-#: krossword.cpp:657
+#: krossword.cpp:521
+#, kde-format
 msgid ""
 "All clue cells get removed. The initial letter to clue number mapping is "
 "A=1, B=2, ..., Z=26."
@@ -304,11 +1131,19 @@ msgstr ""
 "Všechna políčka s nápovědami budou odstraněna. Počáteční přiřazení písmen k "
 "číslům nápověd je A=1, B=2, ..., Z=26."
 
+#. i18n: ectx: property (text), widget (QLabel, lblCellTypes)
+#: configure_details.ui:230
+#, kde-format
+msgid "Allowed Cell T&ypes:"
+msgstr "Povolené d&ruhy políček:"
+
 #: global.cpp:457
+#, kde-format
 msgid "American Crossword"
 msgstr "Americké křížovky"
 
 #: global.cpp:459
+#, kde-format
 msgctxt "Short description of the crossword type 'American'"
 msgid ""
 "American crosswords have numbered clues and a list of clues on the side of "
@@ -317,7 +1152,8 @@ msgstr ""
 "Americké křížovky mají číslované nápovědy a seznam s nápovědami po straně "
 "křížovky. Obvykle mají 180 stupňovou souměrnost otáčení."
 
-#: krosswordpuzzle.cpp:262
+#: mainwindow.cpp:260
+#, kde-format
 msgid ""
 "An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
 " Do you want to restore the crossword?"
@@ -326,160 +1162,217 @@ msgstr ""
 "Promiňte!\n"
 " Chcete obnovit tuto křížovku?"
 
-#: main.cpp:37
+#. i18n: ectx: property (text), widget (QLabel, lblAnchor)
+#: properties.ui:276
+#, kde-format
+msgid "Anchor:"
+msgstr "Kotva:"
+
+#: main.cpp:42
+#, kde-format
 msgid "Andrea Barazzetti"
 msgstr "Andrea Barazzetti"
 
-#: krosswordpuzzle.cpp:308
-msgid "Animations"
-msgstr "Animace"
-
-#: cluemodel.cpp:60
-msgid "Answer"
-msgstr "Odpověď"
-
-#: dictionary.cpp:243
+#: dictionary.cpp:240
+#, kde-format
 msgctxt "The header title for answers in the dictionary database"
 msgid "Answer"
 msgstr "Odpověď"
 
-#: library/librarymanager.cpp:74
+#. i18n: ectx: property (toolTip), widget (QRadioButton, horizontal)
+#: clue_properties_dock.ui:135
+#, kde-format
+msgid "Arrange the answer letters horizontally."
+msgstr "Seřadit písmena odpovědi vodorovně."
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, vertical)
+#: clue_properties_dock.ui:157
+#, kde-format
+msgid "Arrange the answer letters vertically."
+msgstr "Seřadit písmena odpovědi svisle."
+
+#: library/librarymanager.cpp:75
+#, kde-format
 msgctxt "The title for authors of crosswords in the library tree view"
 msgid "Author(s):"
 msgstr "Autor nebo autoři:"
 
 #: commands.cpp:1271
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Authors"
 msgstr "Autoři"
 
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: download.ui:81
+#, fuzzy, kde-format
+msgid "Available crosswords"
+msgstr "Vyprázdnit křížovku"
+
 #: dialogs/statisticsdialog.cpp:104
+#, kde-format
 msgid "Avg. Answer Length:"
 msgstr "Průměrná délka odpovědi:"
 
-#: crosswordxmlguiwindow.cpp:1017
+#. i18n: ectx: attribute (label), widget (QWidget, page_2)
+#: dictionaries.ui:328
+#, kde-format
+msgid "Backup"
+msgstr "Záloha"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: configure_details.ui:51
+#, kde-format
+msgid "Basic Settings"
+msgstr "Základní nastavení"
+
+#: crosswordxmlguiwindow.cpp:1029
+#, kde-format
 msgid "Can't add clue at the current cell"
 msgstr "Nelze přidat nápovědu na nynější políčko."
 
-#: crosswordxmlguiwindow.cpp:1038
+#: crosswordxmlguiwindow.cpp:1050
+#, kde-format
 msgctxt "%1 contains the reason why the clue couldn't be added"
 msgid "Can't add clue. %1"
 msgstr "Nelze přidat nápovědu. %1"
 
-#: crosswordxmlguiwindow.cpp:1008
+#: crosswordxmlguiwindow.cpp:1020
+#, fuzzy, kde-format
 msgid "Can't add clues on crossed letter cells"
 msgstr "Nelze přidat nápovědy na křížící se políčka s písmeny. %1"
 
-#: crosswordxmlguiwindow.cpp:1069
+#: crosswordxmlguiwindow.cpp:1081
+#, kde-format
 msgctxt "%1 contains the reason why the image couldn't be added"
 msgid "Can't add image. %1"
 msgstr "Nelze přidat obrázek. %1"
 
-#: crosswordxmlguiwindow.cpp:2758
+#: crosswordxmlguiwindow.cpp:2740
+#, kde-format
 msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
 msgid "Can't add letter cells. %1"
 msgstr "Nelze přidat políčka s písmeny. %1"
 
-#: crosswordxmlguiwindow.cpp:1187
+#: crosswordxmlguiwindow.cpp:1199
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the new clue number mapping couldn't be applied"
 msgid "Can't apply clue number mapping. %1"
 msgstr "Nelze použít přiřazení čísla nápovědy. %1"
 
-#: crosswordxmlguiwindow.cpp:1731
+#: crosswordxmlguiwindow.cpp:1712
+#, kde-format
 msgctxt "%1 contains the reason why the answer offset couldn't be changed"
 msgid "Can't change answer offset. %1"
 msgstr "Nelze změnit odsazení odpovědi. %1"
 
-#: crosswordxmlguiwindow.cpp:1756
+#: crosswordxmlguiwindow.cpp:1737
+#, kde-format
 msgctxt "%1 contains the reason why the clue text couldn't be changed"
 msgid "Can't change clue text. %1"
 msgstr "Nelze změnit text s nápovědou. %1"
 
-#: crosswordxmlguiwindow.cpp:1769
+#: crosswordxmlguiwindow.cpp:1750
+#, kde-format
 msgctxt "%1 contains the reason why the correct answer couldn't be changed"
 msgid "Can't change correct answer. %1"
 msgstr "Nelze změnit správnou nápovědu. %1"
 
-#: crosswordxmlguiwindow.cpp:1117
+#: crosswordxmlguiwindow.cpp:1129
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the crossword properties couldn't be changed"
 msgid "Can't change crossword properties. %1"
 msgstr "Nelze změnit vlastnosti křížovky. %1"
 
-#: crosswordxmlguiwindow.cpp:1744
+#: crosswordxmlguiwindow.cpp:1725
+#, kde-format
 msgctxt "%1 contains the reason why the orientation couldn't be changed"
 msgid "Can't change orientation. %1"
 msgstr "Nelze změnit uspořádání. %1"
 
-#: crosswordxmlguiwindow.cpp:2216 crosswordxmlguiwindow.cpp:2240
-#: crosswordxmlguiwindow.cpp:2265 crosswordxmlguiwindow.cpp:2699
+#: crosswordxmlguiwindow.cpp:2215 crosswordxmlguiwindow.cpp:2239
+#: crosswordxmlguiwindow.cpp:2264 crosswordxmlguiwindow.cpp:2693
+#, kde-format
 msgctxt "%1 contains the reason why the answer couldn't be cleared"
 msgid "Can't clear answer. %1"
 msgstr "Nelze vyprázdnit odpověď. %1"
 
-#: crosswordxmlguiwindow.cpp:1100
+#: crosswordxmlguiwindow.cpp:1112
+#, kde-format
 msgctxt "%1 contains the reason why the crossword couldn't be cleared"
 msgid "Can't clear crossword. %1"
 msgstr "Nelze vyprázdnit křížovku. %1"
 
-#: crosswordxmlguiwindow.cpp:2193 crosswordxmlguiwindow.cpp:2693
+#: crosswordxmlguiwindow.cpp:2192 crosswordxmlguiwindow.cpp:2687
+#, kde-format
 msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
 msgid "Can't clear letter cell. %1"
 msgstr "Nelze vyprázdnit políčko s písmenem. %1"
 
-#: crosswordxmlguiwindow.cpp:2806
+#: crosswordxmlguiwindow.cpp:2799
+#, kde-format
 msgctxt "%1 contains the reason why the crossword couldn't be converted"
 msgid "Can't convert crossword. %1"
 msgstr "Nelze převést křížovku. %1"
 
-#: crosswordxmlguiwindow.cpp:1808
+#: crosswordxmlguiwindow.cpp:1788
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the letter couldn't be converted to a solution "
 "letter"
 msgid "Can't convert letter. %1"
 msgstr "Nelze převést písmeno. %1"
 
-#: crosswordxmlguiwindow.cpp:1789
+#: crosswordxmlguiwindow.cpp:1769
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the solution letter couldn't be converted to a "
 "letter"
 msgid "Can't convert solution letter. %1"
 msgstr "Nelze převést písmeno řešení. %1"
 
-#: crosswordxmlguiwindow.cpp:2771
+#: crosswordxmlguiwindow.cpp:2753
+#, kde-format
 msgctxt "%1 contains the reason why the letter cell couldn't be edited"
 msgid "Can't edit letter cell. %1"
 msgstr "Nelze upravit políčko s písmenem. %1"
 
-#: library/librarygui.cpp:290
+#: library/librarygui.cpp:342
+#, kde-format
 msgid "Can't export whole directories. Please select a crossword."
 msgstr "Celé adresáře nelze vyvést. Vyberte, prosím, křížovku."
 
-#: crosswordxmlguiwindow.cpp:1200
+#: crosswordxmlguiwindow.cpp:1212
+#, kde-format
 msgctxt "%1 contains the reason why the cells couldn't be moved"
 msgid "Can't move cells. %1"
 msgstr "Nelze posunout políčka. %1"
 
-#: crosswordxmlguiwindow.cpp:1082
+#: crosswordxmlguiwindow.cpp:1094
+#, kde-format
 msgctxt "%1 contains the reason why the clue couldn't be removed"
 msgid "Can't remove clue. %1"
 msgstr "Nelze odstranit nápovědu. %1"
 
-#: crosswordxmlguiwindow.cpp:1087
+#: crosswordxmlguiwindow.cpp:1099
+#, kde-format
 msgctxt "%1 contains the reason why the image couldn't be removed"
 msgid "Can't remove image. %1"
 msgstr "Nelze odstranit obrázek. %1"
 
-#: crosswordxmlguiwindow.cpp:2760
+#: crosswordxmlguiwindow.cpp:2742
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the letters couldn't be removed to the clue"
 msgid "Can't remove letter cells. %1"
 msgstr "Nelze odstranit políčka s písmeny. %1"
 
-#: crosswordxmlguiwindow.cpp:847
+#: crosswordxmlguiwindow.cpp:840
+#, kde-format
 msgid ""
 "Can't store confidence values in *.puz files!\n"
 "If you want confidence values to be stored please use a Krossword file "
@@ -489,7 +1382,8 @@ msgstr ""
 "Pokud chcete, aby byly hodnoty přesvědčení ukládány, použijte, prosím, "
 "souborový formát Krossword (*.kwp nebo *.kwpz)."
 
-#: crosswordxmlguiwindow.cpp:858
+#: crosswordxmlguiwindow.cpp:852
+#, kde-format
 msgid ""
 "Can't store image cells in *.puz files!\n"
 "If you want image cells to be stored please use a Krossword file format (*."
@@ -499,19 +1393,30 @@ msgstr ""
 "Pokud chcete, aby byla políčka s obrázky ukládána, použijte, prosím, "
 "souborový formát Krossword (*.kwp nebo *.kwpz)."
 
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:116
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Centered"
+msgstr "Vystředěný"
+
 #: commands.cpp:991
+#, kde-format
 msgid "Change Clue '%1'"
 msgstr "Změnit nápovědu '%1'"
 
 #: commands.cpp:1483
-msgid "Change Number Puzzle Mapping"
+#, fuzzy, kde-format
+msgid "Change Coded Puzzle Mapping"
 msgstr "Změnit přiřazení hádanek s čísly"
 
-#: crosswordxmlguiwindow.cpp:1456
+#: crosswordxmlguiwindow.cpp:1480
+#, kde-format
 msgid "Change the size of the crossword or it's title, author, copyright..."
 msgstr "Změnit velikost křížovky nebo její název, autora, autorské právo..."
 
 #: commands.cpp:1297
+#, kde-format
 msgctxt ""
 "%1 may be a list of changes separated by ',' if the list of changes contains "
 "more than 2 items. %2 is the last item"
@@ -519,15 +1424,18 @@ msgid "Changed Crossword Properties (%1 and %2)"
 msgstr "Změněny vlastnosti křížovky (%1 a %2)"
 
 #: commands.cpp:1292
+#, kde-format
 msgid "Changed Crossword Properties (%1)"
 msgstr "Změněny vlastnosti křížovky (%1)"
 
-#: crosswordxmlguiwindow.cpp:1471
+#: crosswordxmlguiwindow.cpp:1495
+#, kde-format
 msgid "Changes the mapping of clue numbers to letters"
 msgstr "Změní přiřazení čísel nápověd k písmenům"
 
 #: dialogs/convertcrossworddialog.cpp:81
-#: dialogs/createnewcrossworddialog.cpp:231
+#: dialogs/createnewcrossworddialog.cpp:235
+#, kde-format
 msgid ""
 "Changing the crossword type will discard user defined crossword type "
 "settings."
@@ -536,179 +1444,290 @@ msgstr ""
 "křížovky."
 
 #: global.cpp:300
+#, kde-format
 msgid "Characters"
 msgstr "Písmena"
 
 #: global.cpp:304
+#, kde-format
 msgid "Characters or digits"
 msgstr "Písmena nebo číslice"
 
-#: crosswordxmlguiwindow.cpp:1508
+#: crosswordxmlguiwindow.cpp:2406
+#, fuzzy, kde-format
+msgid "Check"
+msgstr "&Prověřit"
+
+#: crosswordxmlguiwindow.cpp:1535
+#, kde-format
 msgid "Checks if all letters are correct"
 msgstr "Ověří, zda jsou všechna písmena správná"
 
-#: crosswordxmlguiwindow.cpp:1461
+#: crosswordxmlguiwindow.cpp:1485
+#, kde-format
 msgid "Checks if the crossword has 180 degree rotation symmetry"
 msgstr "Přezkouší, zda má křížovka 180° souměrnost otáčení"
 
-#: crosswordxmlguiwindow.cpp:1266
+#: crosswordxmlguiwindow.cpp:1289
+#, fuzzy, kde-format
+msgid "Choose a filename to save the crossword as a template"
+msgstr ""
+"Vybrat název pro soubor, pod kterým se má křížovka včetně vyluštěných písmen "
+"uložit"
+
+#: crosswordxmlguiwindow.cpp:1279
+#, kde-format
 msgid "Choose a filename to save the crossword with solved letters"
 msgstr ""
 "Vybrat název pro soubor, pod kterým se má křížovka včetně vyluštěných písmen "
 "uložit"
 
-#: library/librarygui.cpp:377
-msgid "ChrisWords.com"
-msgstr "ChrisWords.com"
-
-#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
+#: crosswordxmlguiwindow.cpp:1107 crosswordxmlguiwindow.cpp:2412
+#, kde-format
 msgid "Clear"
 msgstr "Vyprázdnit"
 
-#: crosswordxmlguiwindow.cpp:1327
+#: crosswordxmlguiwindow.cpp:1351
+#, kde-format
 msgid "Clear Across Answer"
 msgstr "Vyprázdnit vodorovnou odpověď"
 
 #: commands.cpp:1092
+#, kde-format
 msgid "Clear Correct Answer of Clue at (%1, %2)"
 msgstr "Smazat správnou odpověď na nápovědu na (%1, %2)"
 
 #: commands.cpp:1144
+#, kde-format
 msgid "Clear Correct Letter at (%1, %2), was %3"
 msgstr "Smazat správné písmeno %3 na (%1, %2)"
 
 #: commands.cpp:1222
+#, kde-format
 msgid "Clear Crossword"
 msgstr "Vyprázdnit křížovku"
 
-#: crosswordxmlguiwindow.cpp:1333
+#: crosswordxmlguiwindow.cpp:1357
+#, kde-format
 msgid "Clear Down Answer"
 msgstr "Vyprázdnit svislou odpověď"
 
 #: commands.cpp:1154
+#, kde-format
 msgid "Clear Letter at (%1, %2), was %3"
 msgstr "Změnit písmeno %3 na (%1, %2)"
 
-#: crosswordxmlguiwindow.cpp:1321
+#: crosswordxmlguiwindow.cpp:1345
+#, kde-format
 msgid "Clear This Answer"
 msgstr "Vyprázdnit tuto odpověď"
 
-#: crosswordxmlguiwindow.cpp:1315
+#: crosswordxmlguiwindow.cpp:1339
+#, kde-format
 msgid "Clear This Cell"
 msgstr "Vyprázdnit toto políčko"
 
-#: crosswordxmlguiwindow.cpp:1513
+#: crosswordxmlguiwindow.cpp:1540
+#, kde-format
 msgid "Clears all letter cells"
 msgstr "Vyprázdní všechna políčka s písmeny"
 
-#: crosswordxmlguiwindow.cpp:1328
+#: crosswordxmlguiwindow.cpp:1352
+#, kde-format
 msgid "Clears the answer to the current across clue"
 msgstr "Vyprázdní odpověď k nynější vodorovné nápovědě"
 
-#: crosswordxmlguiwindow.cpp:1322
+#: crosswordxmlguiwindow.cpp:1346
+#, kde-format
 msgid "Clears the answer to the current clue"
 msgstr "Vyprázdní odpověď k nynější nápovědě"
 
-#: crosswordxmlguiwindow.cpp:1334
+#: crosswordxmlguiwindow.cpp:1358
+#, kde-format
 msgid "Clears the answer to the current down clue"
 msgstr "Vyprázdní odpověď k nynější svislé nápovědě"
 
-#: crosswordxmlguiwindow.cpp:1316
+#. i18n: ectx: property (toolTip), widget (QToolButton, clear)
+#: dictionaries.ui:284
+#, kde-format
+msgid "Clears the dictionary"
+msgstr "Vyprázdní slovník"
+
+#: crosswordxmlguiwindow.cpp:1340
+#, kde-format
 msgid "Clears the selected letter cell"
 msgstr "Vyprázdní vybrané políčko s písmenem"
 
-#: crosswordxmlguiwindow.cpp:673 crosswordxmlguiwindow.cpp:820
-#: krosswordpuzzle.cpp:131
+#. i18n: ectx: property (toolTip), widget (QListView, dictionaryAnswers)
+#: clue_properties_dock.ui:558
+#, kde-format
+msgid ""
+"Click / double click an answer to set it as the correct answer of the clue."
+msgstr ""
+"Klepnout/Dvakrát klepnout na odpověď, aby se používala jako správná odpověď "
+"na nápovědu."
+
+#: crosswordxmlguiwindow.cpp:682 crosswordxmlguiwindow.cpp:813
+#: mainwindow.cpp:129
+#, kde-format
 msgid "Close Document"
 msgstr "Zavřít dokument"
 
-#: crosswordxmlguiwindow.cpp:1257
+#: crosswordxmlguiwindow.cpp:1270
+#, kde-format
 msgid "Close the current crossword"
 msgstr "Zavřít nynější křížovku"
 
-#: cluemodel.cpp:60
+#: cluemodel.cpp:59
+#, kde-format
 msgid "Clue"
 msgstr "Nápověda"
 
-#: dictionary.cpp:245
+#: dictionary.cpp:242
+#, kde-format
 msgctxt ""
 "The header title for clues associated with answer words in the dictionary "
 "database"
 msgid "Clue"
 msgstr "Nápověda"
 
-#: crosswordxmlguiwindow.cpp:2477 crosswordxmlguiwindow.cpp:2505
+#. i18n: ectx: property (text), widget (QLabel, lblClueMapping)
+#: configure_details.ui:243
+#, kde-format
+msgid "Clue &Mapping:"
+msgstr "&Přiřazení nápovědy:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblClueType)
+#: configure_details.ui:184
+#, kde-format
+msgid "Clue &Type:"
+msgstr "&Druh nápovědy:"
+
+#: crosswordxmlguiwindow.cpp:2478 crosswordxmlguiwindow.cpp:2506
+#, kde-format
 msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
 msgstr "Nápověda (vodorovná): \"%1\", %2 písmen, současná odpověď: \"%3\""
 
-#: crosswordxmlguiwindow.cpp:2482 crosswordxmlguiwindow.cpp:2509
+#: crosswordxmlguiwindow.cpp:2483 crosswordxmlguiwindow.cpp:2509
+#, kde-format
 msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
 msgstr "Nápověda (svislá): \"%1\", %2 písmen, současná odpověď: \"%3\""
 
-#: crosswordxmlguiwindow.cpp:1661
+#. i18n: ectx: property (text), widget (QLabel, lblClueCellHandling)
+#: configure_details.ui:263
+#, kde-format
+msgid "Clue Cell &Handling:"
+msgstr "&Zacházení s políčkem s nápovědou:"
+
+#: crosswordxmlguiwindow.cpp:1642
+#, kde-format
 msgid "Clue List"
 msgstr "Seznam s nápovědami"
 
-#: crosswordxmlguiwindow.cpp:1470
+#. i18n: ectx: property (text), widget (QTreeWidget, letterContentList)
+#: clue_number_mapping.ui:61
+#, kde-format
+msgid "Clue Number"
+msgstr "Číslo nápovědy"
+
+#: crosswordxmlguiwindow.cpp:1494
+#, kde-format
 msgid "Clue Number &Mapping..."
 msgstr "&Přiřazení čísla nápovědy..."
 
-#: crosswordxmlguiwindow.cpp:1162
+#. i18n: ectx: property (windowTitle), widget (QDialog, clue_number_mapping)
+#: clue_number_mapping.ui:14 crosswordxmlguiwindow.cpp:1174
+#, kde-format
 msgid "Clue Number Mapping"
 msgstr "Přiřazení čísla nápovědy"
 
-#: crosswordxmlguiwindow.cpp:1363
+#: crosswordxmlguiwindow.cpp:1387
+#, kde-format
 msgid "Clue With Switched Orientation"
 msgstr "Nápověda s obráceným uspořádáním"
 
-#: crosswordxmlguiwindow.cpp:1052
+#: crosswordxmlguiwindow.cpp:1064
+#, kde-format
 msgid "Clue added ('%1')"
 msgstr "Nápověda přidána ('%1')"
 
 #: global.cpp:38
+#, kde-format
 msgid "Clue cell"
 msgstr "Políčko s nápovědou"
 
 #: commands.cpp:352
+#, kde-format
 msgctxt ""
 "%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
 msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
 msgstr "Políčko s nápovědou na daných souřadnicích nenalezeno (%1, %2): '%3'"
 
 #: global.cpp:260
+#, kde-format
 msgid "Clue cells are allowed"
 msgstr "Políčka s nápovědou jsou povolena"
 
 #: global.cpp:262
+#, kde-format
 msgid "Clue cells are disallowed"
 msgstr "Políčka s nápovědou jsou zakázána"
 
 #: global.cpp:264
+#, kde-format
 msgid "Clue cells are required"
 msgstr "Políčka s nápovědou jsou požadována"
 
-#: krossworddocument.cpp:86
+#: krossworddocument.cpp:119
+#, kde-format
 msgctxt "Title for the clue list when printing"
 msgid "Clue list"
 msgstr "Seznam s nápovědou"
 
 #: dialogs/currentcellwidget.cpp:154
+#, kde-format
 msgid "Clue:"
 msgstr "Nápověda:"
 
+#. i18n: ectx: property (toolTip), widget (KComboBox, clueMapping)
+#: configure_details.ui:170
+#, kde-format
+msgid "Clues can be mapped to single cells or sets of cells"
+msgstr "Nápovědy mohou být přiřazeny k jednotlivým nebo více políčkům"
+
 #: global.cpp:277
+#, kde-format
 msgid "Clues refer to cells"
 msgstr "Nápovědy se vztahují na jednotlivá políčka"
 
 #: global.cpp:275
+#, kde-format
 msgid "Clues refer to sets of cells"
 msgstr "Nápovědy se vztahují na více políček"
 
 #: dialogs/statisticsdialog.cpp:85
+#, kde-format
 msgid "Clues:"
 msgstr "Nápovědy:"
 
-#: crosswordxmlguiwindow.cpp:2086
+#: global.cpp:488
+#, fuzzy, kde-format
+msgid "Coded Puzzle"
+msgstr "Číselná hádanka"
+
+#: global.cpp:490
+#, fuzzy, kde-format
+msgctxt "Short description of the crossword type 'Coded Puzzle'"
+msgid ""
+"Coded puzzles are a variant of crosswords in which each cell has a number "
+"between 1 and 26. The solver has to find out for which letter of the "
+"alphabet a number stands."
+msgstr ""
+"Číselné hádanky jsou obměnou křížovek, ve které má každé políčko číslo mezi "
+"1 a 26. Řešitel musí přijít na to, pro které písmeno abecedy číslo platí."
+
+#: crosswordxmlguiwindow.cpp:2045
+#, kde-format
 msgid ""
 "Congratulations!\n"
 "You solved the crossword perfectly."
@@ -716,75 +1735,116 @@ msgstr ""
 "Blahopřeji!\n"
 "Dokonale jste vyluštil křížovku."
 
-#: crosswordxmlguiwindow.cpp:552
+#: crosswordxmlguiwindow.cpp:555
+#, kde-format
 msgid "Congratulations! You solved the crossword perfectly."
 msgstr "Blahopřeji! Dokonale jste vyluštil křížovku."
 
-#: dictionary.cpp:131
+#: dictionary.cpp:128
+#, kde-format
 msgid "Connect Database"
 msgstr "Připojit se k databázi"
 
+#. i18n: ectx: property (title), widget (QGroupBox, grpConversionInfo)
+#: convert_crossword_type.ui:109
+#, kde-format
+msgid "Conversion Info"
+msgstr "Informace o převodu"
+
 #: dialogs/currentcellwidget.cpp:439
+#, kde-format
 msgid "Convert &Letter %1 to Solution Letter"
 msgstr "Převést &písmeno %1 na písmeno řešení"
 
-#: commands.cpp:1777
+#: commands.cpp:1776
+#, kde-format
 msgid "Convert Crossword From '%1' to '%2'"
 msgstr "Změnit křížovku z '%1' na '%2'"
 
 #: dialogs/convertcrossworddialog.cpp:29
+#, kde-format
 msgid "Convert Crossword Type To"
 msgstr "Převést druh křížovky na"
 
 #: dialogs/convertcrossworddialog.cpp:33
+#, kde-format
 msgid "Convert From: %1"
 msgstr "Převést z: %1"
 
 #: commands.cpp:626
+#, kde-format
 msgid "Convert Letter at (%1, %2) to Solution Letter"
 msgstr "Převést písmeno na (%1, %2) na písmeno řešení"
 
 #: commands.cpp:654
+#, kde-format
 msgctxt "%1 contains the position of the solution letter in the solution word."
 msgid "Convert Solution Letter %1 to Letter"
 msgstr "Převést písmeno řešení %1 na písmeno"
 
+#. i18n: ectx: property (windowTitle), widget (QDialog, convert_crossword_type)
+#: convert_crossword_type.ui:20
+#, kde-format
+msgid "Convert To Crossword Type"
+msgstr "Převést na druh křížovky"
+
 #: dialogs/convertcrossworddialog.cpp:105
+#, kde-format
 msgid "Convert To: %1"
 msgstr "Převést na: %1"
 
+#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
+#: create_new.ui:133
+#, fuzzy, kde-format
+msgid "Cop&yright:"
+msgstr "&Autorské právo:"
+
 #: commands.cpp:1274
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Copyright"
 msgstr "Autorské právo"
 
-#: krosswordpuzzle.cpp:94
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, copyright)
+#: create_new.ui:188 properties.ui:133
+#, kde-format
+msgid "Copyright information about the crossword"
+msgstr "Informace o autorském právu, jež se váže ke křížovce"
+
+#: mainwindow.cpp:92
+#, kde-format
 msgid "Could not open resource at "
 msgstr "Nepodařilo se otevřít zdroj na "
 
 #: io/krosswordxmlwriter.cpp:73
+#, kde-format
 msgid "Couldn't close the ZIP archive"
 msgstr "Nepodařilo se zavřít archiv ZIP"
 
-#: crosswordxmlguiwindow.cpp:2818
+#: crosswordxmlguiwindow.cpp:2811
+#, kde-format
 msgid "Couldn't connect to the database."
 msgstr "Nepodařilo se spojit se s databází."
 
-#: library/librarygui.cpp:340
+#: library/librarygui.cpp:387
+#, kde-format
 msgid "Couldn't export the image to the specified file."
 msgstr "Křížovku se nepodařilo vyvést do zadaného obrázkového souboru."
 
 #: io/krosswordxmlwriter.cpp:52
+#, kde-format
 msgid "Couldn't open the ZIP archive for writing"
 msgstr "Nepodařilo se otevřít archiv ZIP pro zápis"
 
-#: library/librarygui.cpp:452
+#: library/librarygui.cpp:500
+#, kde-format
 msgid "Couldn't remove the crossword from the library."
 msgstr "Nepodařilo se odstranit křížovku z knihovny."
 
-#: library/librarygui.cpp:441
+#: library/librarygui.cpp:489
+#, kde-format
 msgid ""
 "Couldn't remove the directory from the library.\n"
 "You need root privileges to remove directories which belong to the global "
@@ -794,36 +1854,50 @@ msgstr ""
 "Potřebujete výhradní práva superuživatele, abyste mohl odstranit adresáře "
 "náležející k celkové knihovně."
 
-#: dialogs/dictionarydialog.cpp:205
+#: dialogs/dictionarydialog.cpp:214
+#, kde-format
 msgid "Couldn't submit removed entries to the database: %1"
 msgstr "Odstraněné záznamy se nepodařilo odevzdat do databáze: %1"
 
-#: dialogs/createnewcrossworddialog.cpp:35
+#. i18n: ectx: property (windowTitle), widget (QDialog, database_connection)
+#: database_connection.ui:20
+#, kde-format
+msgid "Create Database"
+msgstr "Vytvořit databázi"
+
+#: dialogs/createnewcrossworddialog.cpp:34
+#, kde-format
 msgid "Create New Crossword"
 msgstr "Vytvořit novou křížovku"
 
-#: library/librarygui.cpp:517
+#: library/librarygui.cpp:565
+#, kde-format
 msgid "Create a new crossword"
 msgstr "Vytvořit novou křížovku"
 
-#: library/librarygui.cpp:522
+#: library/librarygui.cpp:570
+#, kde-format
 msgid "Create a new folder in the library"
 msgstr "Vytvořit novou složku v knihovně"
 
-#: dialogs/createnewcrossworddialog.cpp:111
+#: dialogs/createnewcrossworddialog.cpp:114
+#, kde-format
 msgctxt "Default notes value for new crosswords"
 msgid "Created with Krossword"
 msgstr "Vytvořeno programem Krossword"
 
 #: dialogs/statisticsdialog.cpp:70
+#, kde-format
 msgid "Crossed:"
 msgstr "Křižující se:"
 
 #: global.cpp:503
+#, kde-format
 msgid "Crossnumber"
 msgstr "Číselná křížovka"
 
 #: global.cpp:505
+#, kde-format
 msgctxt "Short description of the crossword type 'Crossnumber'"
 msgid ""
 "Crossnumbers are the numerical analogy of a crossword, in which the "
@@ -832,21 +1906,49 @@ msgstr ""
 "Číselné křížovky jsou číselnou obdobou křížovek, v nichž představují řešení "
 "nápověd čísla namísto slov."
 
-#: library/librarygui.cpp:199 library/librarygui.cpp:204
+#. i18n: ectx: property (windowTitle), widget (QWidget, print_crossword)
+#. i18n: ectx: ToolBar (crosswordToolBar)
+#: krossword_crossword_ui.rc:52 print_crossword.ui:14
+#, fuzzy, kde-format
+msgid "Crossword"
+msgstr "&Křížovka"
+
 #: library/librarygui.cpp:212
+#, kde-format
 msgid "Crossword %1"
 msgstr "Křížovka %1"
 
-#: dialogs/createnewcrossworddialog.cpp:191
+#. i18n: ectx: property (text), widget (QLabel, lblSize)
+#: create_new.ui:159
+#, fuzzy, kde-format
+msgid "Crossword Size:"
+msgstr "&Velikost křížovky:"
+
+#: dialogs/createnewcrossworddialog.cpp:194
+#, kde-format
 msgid "Crossword Type"
 msgstr "Druh křížovky"
 
+#. i18n: ectx: property (title), widget (QGroupBox, grpInfo)
+#: create_new.ui:51
+#, kde-format
+msgid "Crossword Type Information"
+msgstr "Informace o druhu křížovky"
+
+#. i18n: ectx: property (text), widget (QLabel, lblTemplateType)
+#: create_new.ui:436
+#, kde-format
+msgid "Crossword Type:"
+msgstr "Druh křížovky:"
+
 #: dialogs/crosswordpropertiesdialog.cpp:43
-#: dialogs/crosswordpropertiesdialog.cpp:277
+#: dialogs/crosswordpropertiesdialog.cpp:287
+#, kde-format
 msgid "Crossword Type: %1"
 msgstr "Druh křížovky: %1"
 
 #: global.cpp:462
+#, kde-format
 msgctxt "Long description of the crossword type 'American'"
 msgid ""
 "Crossword grids such as those appearing in most North American newspapers "
@@ -883,231 +1985,484 @@ msgstr ""
 "spojena v jednu hmotu pomocí sdílených stran).\n"
 "(text byl převzat z Wikipedie)"
 
+#: library/librarygui.cpp:292
+#, fuzzy, kde-format
+msgid "Crossword not valid"
+msgstr "Křížovka %1"
+
+#: main.cpp:50
+#, fuzzy, kde-format
+msgid "Crossword to open"
+msgstr "Druh křížovky"
+
+#: crosswordxmlguiwindow.cpp:795 dialogs/dictionarydialog.cpp:192
+#, kde-format
+msgid "Crosswords (*.kwp *.kwpz *.puz)"
+msgstr ""
+
 #: dialogs/currentcellwidget.cpp:155
+#, kde-format
 msgid "Current Answer:"
 msgstr "Nynější odpověď:"
 
-#: crosswordxmlguiwindow.cpp:1689
+#: crosswordxmlguiwindow.cpp:1670
+#, kde-format
 msgid "Current Cell"
 msgstr "Nynější nápověda"
 
-#: library/librarygui.cpp:537
+#. i18n: ectx: property (text), widget (QLabel, lblCurrentSolutionWord)
+#: solution_letter_properties.ui:51
+#, kde-format
+msgid "Current solution word:"
+msgstr "Nynější slovo řešení:"
+
+#: library/librarygui.cpp:585
+#, kde-format
 msgid "Delete the selected crossword from the library"
 msgstr "Smazat vybranou křížovku z knihovny"
 
 #: dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
+#, kde-format
 msgid "Describe your crossword type here."
 msgstr "Zde popište svůj druh křížovky."
 
 #: dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
+#, kde-format
 msgid "Detailed Configuration"
 msgstr "Podrobné nastavení"
 
-#: main.cpp:37 main.cpp:38
+#: main.cpp:42 main.cpp:43
+#, kde-format
 msgid "Developer"
 msgstr "Vývojář"
 
-#: dialogs/dictionarydialog.cpp:37
+#. i18n: ectx: property (windowTitle), widget (QDialog, dictionaries)
+#: dialogs/dictionarydialog.cpp:38 dictionaries.ui:20
+#, kde-format
 msgid "Dictionary"
 msgstr "Slovník"
 
-#: dialogs/dictionarydialog.cpp:217
+#: dialogs/dictionarydialog.cpp:226
+#, kde-format
 msgid "Dictionary cleared"
 msgstr "Slovník smazán"
 
 #: global.cpp:302
+#, kde-format
 msgid "Digits"
 msgstr "Číslice"
 
-#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
+#: crosswordxmlguiwindow.cpp:1107 crosswordxmlguiwindow.cpp:2412
+#, kde-format
 msgid "Do you really want to clear the crossword?"
 msgstr "Opravdu chcete smazat křížovku?"
 
-#: crosswordxmlguiwindow.cpp:2108
+#: crosswordxmlguiwindow.cpp:2107
+#, kde-format
 msgid "Do you really want to solve the crossword?"
 msgstr "Opravdu chcete vyluštit křížovku?"
 
-#: main.cpp:44
-msgid "Document to open"
-msgstr "Dokument k otevření"
+#. i18n: ectx: property (title), widget (QGroupBox, grpDocumentInformation)
+#: create_new.ui:82
+#, kde-format
+msgid "Document &Information"
+msgstr "Informace o dokumentu"
+
+#. i18n: ectx: attribute (label), widget (QWidget, page_2)
+#: properties.ui:41
+#, kde-format
+msgid "Document Information"
+msgstr "Informace o dokumentu"
 
 #: global.cpp:40
+#, kde-format
 msgid "Double clue cell"
 msgstr "Políčko s dvojitou nápovědou"
 
-#: cluemodel.cpp:64
+#: cluemodel.cpp:63
+#, kde-format
 msgid "Down clues"
 msgstr "Svislé nápovědy"
 
-#: krossworddocument.cpp:87
+#: krossworddocument.cpp:120
+#, kde-format
 msgctxt "Title for the list of down/vertical clues when printing"
 msgid "Down clues"
 msgstr "Svislé nápovědy"
 
-#: library/librarygui.cpp:349
+#. i18n: ectx: property (text), widget (QLabel, lblTargetDirectory)
+#: download.ui:49
+#, fuzzy, kde-format
+msgid "Download &to:"
+msgstr "&Stáhnout do:"
+
+#: library/librarygui.cpp:396
+#, kde-format
 msgid "Download Crossword To Library"
 msgstr "Stáhnout křížovku do knihovny"
 
-#: library/librarygui.cpp:527
+#. i18n: ectx: property (windowTitle), widget (QDialog, download)
+#: download.ui:14
+#, kde-format
+msgid "Download Crosswords"
+msgstr "Stáhnout křížovky"
+
+#: library/librarygui.cpp:575
+#, kde-format
 msgid "Download a crossword and add it to the library"
 msgstr "Stáhnout křížovku a přidat ji do knihovny"
 
+#: library/librarygui.cpp:246
+#, fuzzy, kde-format
+msgid "Download error: "
+msgstr "&Stáhnout do:"
+
+#. i18n: ectx: attribute (label), widget (QWidget, page_3)
+#. i18n: ectx: ToolBar (editToolBar)
+#: dictionaries.ui:209 krossword_crossword_ui.rc:71
+#, kde-format
+msgid "Edit"
+msgstr "Upravit"
+
 #: commands.cpp:1150
+#, kde-format
 msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
 msgstr "Upravit správné písmeno na (%1, %2) z %3 na %4"
 
-#: crosswordxmlguiwindow.cpp:1679
+#: crosswordxmlguiwindow.cpp:1660
+#, kde-format
 msgid "Edit History"
 msgstr "Upravit Průběh úprav"
 
 #: commands.cpp:1160
+#, kde-format
 msgid "Edit Letter at (%1, %2) From %3 to %4"
 msgstr "Upravit písmeno na (%1, %2) z %3 na %4"
 
-#: crosswordxmlguiwindow.cpp:1416
+#: crosswordxmlguiwindow.cpp:1440
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "Edit Mode"
 msgstr "Režim úprav"
 
-#: cells/imagecell.cpp:68
+#: cells/imagecell.cpp:57
+#, kde-format
 msgid "Edit image properties to set an image"
 msgstr "Upravit vlastnosti obrázku pro nastavení obrázku"
 
 #: dialogs/statisticsdialog.cpp:57
+#, kde-format
 msgid "Empty Cells:"
 msgstr "Prázdná políčka:"
 
-#: crosswordxmlguiwindow.cpp:2555 global.cpp:36
+#: crosswordxmlguiwindow.cpp:2549 global.cpp:36
+#, kde-format
 msgid "Empty cell"
 msgstr "Prázdné políčko"
 
-#: crosswordxmlguiwindow.cpp:1518
+#. i18n: ectx: property (text), widget (QLabel, lblEmptyCellColor)
+#: print_crossword.ui:20
+#, kde-format
+msgid "Empty cell &color:"
+msgstr "&Barva prázdného políčka:"
+
+#. i18n: ectx: label, entry (animate), group (Preferences)
+#: krossword.kcfg:25
+#, kde-format
+msgid "Enable Animations"
+msgstr "Povolit pohyblivé obrázky"
+
+#: crosswordxmlguiwindow.cpp:1545
+#, kde-format
 msgid "Enables the eraser, to clear letter cells/answers"
 msgstr "Povolí zmizík pro smazání políček s písmeny/odpovědí"
 
-#: crosswordxmlguiwindow.cpp:1417
+#: crosswordxmlguiwindow.cpp:1441
+#, kde-format
 msgid "Enables/disables the edit mode"
 msgstr "Povolí/Zakáže režim úprav"
 
-#: krosswordpuzzle.cpp:466
+#: mainwindow.cpp:439
+#, kde-format
 msgid "Error loading file '%1'"
 msgstr "Chyba při nahrávání souboru '%1'"
 
-#: krossword.cpp:1018
+#: krossword.cpp:871
+#, kde-format
 msgid "Error reading AcrossLite's .puz-format."
 msgstr "Chyba při čtení formátu AcrossLite's .puz."
 
-#: krossword.cpp:963
-msgid "Error while downloading from url: %1"
-msgstr "Chyba při stahování z adresy: %1"
-
-#: crosswordxmlguiwindow.cpp:750
+#: crosswordxmlguiwindow.cpp:768
+#, kde-format
 msgid "Error while loading file '%1': %2"
 msgstr "Chyba při nahrávání souboru '%1': %2"
 
-#: crosswordxmlguiwindow.cpp:896
+#: crosswordxmlguiwindow.cpp:891
+#, kde-format
 msgid "Error while writing file: %1"
 msgstr "Chyba při zápisu souboru: %1"
 
-#: krossword.cpp:942
+#: krossword.cpp:809
+#, kde-format
 msgid "Error writing AcrossLite's .puz-format."
 msgstr "Chyba při zápisu formátu AcrossLite's .puz."
 
-#: krossword.cpp:931
+#: krossword.cpp:798
+#, kde-format
 msgid "Error writing compressed crossword: %1"
 msgstr "Chyba při zápisu zabalené křížovky: %1"
 
-#: krossword.cpp:924
+#: krossword.cpp:791
+#, kde-format
 msgid "Error writing crossword: %1"
 msgstr "Chyba při zápisu křížovky: %1"
 
 #: io/krosswordxmlwriter.cpp:58 io/krosswordxmlwriter.cpp:63
 #: io/krosswordxmlwriter.cpp:68
+#, kde-format
 msgid "Error writing to the compressed file"
 msgstr "Chyba při zápisu do zabaleného souboru"
 
-#: library/librarygui.cpp:306
+#: library/librarygui.cpp:353
+#, kde-format
 msgid "Export"
 msgstr "Vyvést"
 
-#: library/librarygui.cpp:324
+#: library/librarygui.cpp:372
+#, kde-format
 msgid "Export Settings"
 msgstr "Nastavení vyvedení"
 
-#: dialogs/dictionarydialog.cpp:224
+#: dialogs/dictionarydialog.cpp:231
+#, kde-format
 msgid "Export To CSV"
 msgstr "Vyvést jako CSV"
 
-#: library/librarygui.cpp:542
+#: library/librarygui.cpp:590
+#, kde-format
 msgid "Export the selected crossword from the library"
 msgstr "Vyvést vybranou křížovku z knihovny"
 
-#: dialogs/dictionarydialog.cpp:239
+#: dialogs/dictionarydialog.cpp:240
+#, kde-format
 msgid "Export to '%1' was successful"
 msgstr "Vyvedení do '%1' bylo úspěšné"
 
-#: library/librarygui.cpp:161
-msgid "Failed"
-msgstr "Nepodařilo se"
+#. i18n: ectx: property (toolTip), widget (QToolButton, exportToCSV)
+#: dictionaries.ui:376
+#, kde-format
+msgid "Exports the whole dictionary to a comma separated text file."
+msgstr "Vyvede celý slovník do souboru s textem odděleným čárkou."
 
-#: crosswordxmlguiwindow.cpp:1504
+#. i18n: ectx: property (text), widget (QToolButton, extractFromLibrary)
+#: dictionaries.ui:92
+#, kde-format
+msgid "Extract From &Library"
+msgstr "Vytáhnout z &knihovny"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, addWordsFromDictionary)
+#: dictionaries.ui:157
+#, kde-format
+msgid "Extracts words from plain text dictionary files"
+msgstr "Vytáhne slova ze souborů se slovníky s prostým textem"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, extractFromLibrary)
+#: dictionaries.ui:85
+#, kde-format
+msgid "Extracts words with associated clues from crosswords in the library"
+msgstr "Vytáhne slova s k nim přidruženými nápovědami z křížovek v knihovně"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, extractFromLibrary)
+#: dictionaries.ui:89
+#, kde-format
+msgid ""
+"Extracts words with associated clues from crosswords in the library.\n"
+"This does the same as \"Extract From Crosswords...\" with all crossword "
+"files in the library."
+msgstr ""
+"Vytáhne slova s k nim přidruženými nápovědami z křížovek v knihovně.\n"
+"Téhož lze dosíci pomocí \"Vytáhnout z křížovek...\" se všemi soubory "
+"křížovek v knihovně."
+
+#. i18n: ectx: label, entry (lastUnsavedFileBeforeCrash), group (Preferences)
+#: krossword.kcfg:10
+#, kde-format
+msgid ""
+"Filename of the last unsaved file, before a crash or unexpected behaviour, "
+"which caused that an edited crossword wasn't saved without confirmation of "
+"the user."
+msgstr ""
+"Název souboru posledního neuloženého souboru předtím, než došlo ke spadnutí "
+"nebo neočekávanému chování, které mělo za následek, že upravovaná křížovka "
+"nebyla uložena bez potvrzení uživatelem."
+
+#. i18n: ectx: attribute (label), widget (QWidget, page)
+#: dictionaries.ui:70
+#, kde-format
+msgid "Fill Dictionary"
+msgstr "Naplnit slovník"
+
+#: crosswordxmlguiwindow.cpp:1531
+#, kde-format
 msgid "Fills all letter cells with the correct letters"
 msgstr "Naplní všechna políčka s písmeny správnými písmeny"
 
-#: crosswordxmlguiwindow.cpp:1378
+#: crosswordxmlguiwindow.cpp:1402
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "First Clue"
 msgstr "První nápověda"
 
-#: crosswordxmlguiwindow.cpp:1286
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionBottomLeft)
+#: clue_properties_dock.ui:329
+#, kde-format
+msgid "First letter cell on the bottom left of the clue cell."
+msgstr "První políčko s písmenem dole nalevo od políčka s nápovědou."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionBottom)
+#: clue_properties_dock.ui:422
+#, kde-format
+msgid "First letter cell on the bottom of the clue cell."
+msgstr "První políčko s písmenem pod políčkem s nápovědou."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionBottomRight)
+#: clue_properties_dock.ui:453
+#, kde-format
+msgid "First letter cell on the bottom right of the clue cell."
+msgstr "První políčko s písmenem dole napravo od políčka s nápovědou."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionLeft)
+#: clue_properties_dock.ui:298
+#, kde-format
+msgid "First letter cell on the left of the clue cell."
+msgstr "První políčko s písmenem nalevo od políčka s nápovědou."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionRight)
+#: clue_properties_dock.ui:391
+#, kde-format
+msgid "First letter cell on the right of the clue cell."
+msgstr "První políčko s písmenem napravo od políčka s nápovědou."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionTopLeft)
+#: clue_properties_dock.ui:205
+#, kde-format
+msgid "First letter cell on the top left of the clue cell."
+msgstr "První políčko s písmenem nahoře nalevo od políčka s nápovědou."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionTop)
+#: clue_properties_dock.ui:236
+#, kde-format
+msgid "First letter cell on the top of the clue cell."
+msgstr "První políčko s písmenem nahoře od políčka s nápovědou."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionTopRight)
+#: clue_properties_dock.ui:267
+#, kde-format
+msgid "First letter cell on the top right of the clue cell."
+msgstr "První políčko s písmenem nahoře napravo od políčka s nápovědou."
+
+#: crosswordxmlguiwindow.cpp:1310
+#, kde-format
 msgid "Fit the whole crossword into the window"
 msgstr "Umístit celou křížovku do okna"
 
 #: global.cpp:409
+#, kde-format
 msgid "Free Crossword"
 msgstr "Volná křížovka"
 
-#: main.cpp:39
+#: main.cpp:44
+#, kde-format
 msgid "Friedrich Pülz"
 msgstr "Friedrich Pülz"
 
-#: main.cpp:38
+#: mainwindow.cpp:306
+#, fuzzy, kde-format
+msgid "General"
+msgstr "Obecné"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
+#: create_new.ui:39
+#, fuzzy, kde-format
+msgctxt "General settings for new crosswords."
+msgid "General"
+msgstr "Obecné"
+
+#: main.cpp:43
+#, kde-format
 msgid "Giacomo Barazzetti"
 msgstr "Giacomo Barazzetti"
 
 #: commands.cpp:1346
+#, kde-format
 msgid "Hide Clue Cell"
 msgstr "Skrýt políčko s nápovědou"
 
-#: crosswordxmlguiwindow.cpp:1339
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionOnClueCell)
+#: clue_properties_dock.ui:360
+#, kde-format
+msgid ""
+"Hides the clue cell. The first letter cell is placed at the coordinates of "
+"the clue cell."
+msgstr ""
+"Skryje políčko s nápovědou. První políčko s písmenem je umístěno na "
+"souřadnicích políčka s nápovědou."
+
+#: crosswordxmlguiwindow.cpp:1363
+#, kde-format
 msgid "Hint For This Cell"
 msgstr "Rada pro toto políčko"
 
-#: library/librarygui.cpp:373
-msgid "I Swear Crossword by Victor Fleming (fridays)"
-msgstr "I Swear Crossword (Přísaha na křížovku) od Viktora Fleminga (pátky)"
+#. i18n: ectx: property (text), widget (QRadioButton, horizontal)
+#: clue_properties_dock.ui:138
+#, fuzzy, kde-format
+msgctxt "Orientation of the answer to a clue."
+msgid "Hori&zontal"
+msgstr "Vodorovné"
 
-#: crosswordxmlguiwindow.cpp:2557
+#. i18n: ectx: property (toolTip), widget (KComboBox, clueCellHandling)
+#: configure_details.ui:177
+#, kde-format
+msgid ""
+"If a clue cell can, can't or has to be inserted into the crossword grid for "
+"each clue"
+msgstr ""
+"Zda políčko s nápovědou může, nemůže nebo musí být vloženo do mřížky s "
+"křížovkou u každé nápovědy"
+
+#. i18n: ectx: property (text), widget (QLabel, lblFileName)
+#: image_properties_dock.ui:29
+#, kde-format
+msgid "Image &File:"
+msgstr "&Soubor s obrázkem:"
+
+#: crosswordxmlguiwindow.cpp:2551
+#, kde-format
 msgid "Image '%1'"
 msgstr "Obrázek '%1'"
 
 #: global.cpp:46
+#, kde-format
 msgid "Image cell"
 msgstr "Políčko s obrázkem"
 
 #: commands.cpp:559
+#, kde-format
 msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
 msgstr "Políčko s obrázkem na daných souřadnicích nenalezeno (%1, %2): '%3'"
 
-#: dialogs/dictionarydialog.cpp:245
+#: dialogs/dictionarydialog.cpp:247
+#, kde-format
 msgid "Import From CSV"
 msgstr "Zavést z CSV"
 
-#: dictionary.cpp:292
+#: dictionary.cpp:289
+#, kde-format
 msgid "Importing Dictionary"
 msgstr "Zavádí se slovník"
 
-#: dictionary.cpp:330
+#: dictionary.cpp:327
+#, kde-format
 msgid ""
 "Importing word clue pairs from '%1' to the database.\n"
 "Please wait."
@@ -1115,70 +2470,118 @@ msgstr ""
 "Zavádí se dvojice slovo nápověda z '%1' do databáze.\n"
 "Počkejte, prosím."
 
-#: crosswordxmlguiwindow.cpp:1494
-msgid "Insert special character:"
-msgstr "Vložit zvláštní znak:"
+#. i18n: ectx: property (toolTip), widget (QToolButton, importFromCSV)
+#: dictionaries.ui:340
+#, kde-format
+msgid "Imports entries from a comma separated text file."
+msgstr "Zavede záznamy ze souboru s textem odděleným čárkou."
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, insertChar)
+#: clue_properties_dock.ui:93
+#, kde-format
+msgid "Insert special characters to the clue text"
+msgstr "Vložit zvláštní znaky do textu nápovědy"
 
 #: global.cpp:50
+#, kde-format
 msgid "Interactive cells"
 msgstr "Interaktivní políčka"
 
-#: main.cpp:33
+#: main.cpp:38
+#, kde-format
 msgid "Krossword"
 msgstr "Křížovka"
 
 #: dialogs/statisticsdialog.cpp:88
+#, kde-format
 msgctxt "Horizontal:"
 msgid "Label for the number  of horizontal clues"
 msgstr "Štítek pro počet vodorovných nápověd"
 
 #: dialogs/statisticsdialog.cpp:92
+#, kde-format
 msgctxt "Vertical:"
 msgid "Label for the number  of vertical clues"
 msgstr "Štítek pro počet svislých nápověd"
 
-#: dictionary.cpp:249
+#: dictionary.cpp:246
+#, kde-format
 msgctxt ""
 "The header title for languages of clue/answer pairs in the dictionary "
 "database"
 msgid "Language"
 msgstr "Jazyk"
 
-#: crosswordxmlguiwindow.cpp:1393
+#: crosswordxmlguiwindow.cpp:1417
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "Last Clue"
 msgstr "Poslední nápověda"
 
-#: crosswordxmlguiwindow.cpp:1498
-msgid "Let you select a special character to paste"
-msgstr "Nechá vás vybrat zvláštní znak k vložení"
+#. i18n: ectx: property (toolTip), widget (QToolButton, extractFromCrosswords)
+#: dictionaries.ui:121
+#, kde-format
+msgid ""
+"Lets you choose crossword files to extracts words with associated clues from"
+msgstr ""
+"Nechá vás vybrat soubory s křížovkami, z nichž se budou vytahovat slova s k "
+"nim přidruženými nápovědami"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, extractFromCrosswords)
+#: dictionaries.ui:125
+#, kde-format
+msgid ""
+"Lets you choose crossword files to extracts words with associated clues "
+"from.\n"
+"This does the same as \"Extract From Library\", but you can select from "
+"which files words should be extracted."
+msgstr ""
+"Nechá vás vybrat soubory s křížovkami, z nichž se budou vytahovat slova s k "
+"nim přidruženými nápovědami.\n"
+"Téhož lze dosíci pomocí \"Vytáhnout z knihovny\", ale můžete si vybrat "
+"soubory křížovek, ze kterých se slova budou vytahovat."
 
 #: global.cpp:426
+#, kde-format
 msgctxt "Short description of the crossword type 'User Defined'"
 msgid "Lets you specify your own rules."
 msgstr "Nechá vás určit vaše vlastní pravidla."
 
+#. i18n: ectx: property (text), widget (QTreeWidget, letterContentList)
+#: clue_number_mapping.ui:56
+#, kde-format
+msgid "Letter"
+msgstr "Písmeno"
+
 #: dialogs/statisticsdialog.cpp:60
+#, kde-format
 msgid "Letter Cells:"
 msgstr "Políčka s písmeny:"
 
 #: global.cpp:42
+#, kde-format
 msgid "Letter cell"
 msgstr "Políčko s písmenem"
 
 #: commands.cpp:704 commands.cpp:1172
+#, kde-format
 msgid "Letter cell not found at the given coordinates (%1, %2)"
 msgstr "Políčko s písmenem nenalezeno na daných souřadnicích (%1, %2)"
 
-#: krossword.cpp:650
+#: krossword.cpp:514
+#, kde-format
 msgid "Letters can't be converted back correctly after this conversion."
 msgstr "Po tomto převodu nelze písmena převést zpět správně"
 
-#: krosswordpuzzle.cpp:240 krosswordpuzzle.cpp:429 library/librarygui.cpp:404
+#. i18n: ectx: ToolBar (libraryToolBar)
+#: krossword_library_ui.rc:6 library/librarygui.cpp:455 mainwindow.cpp:238
+#: mainwindow.cpp:402
+#, kde-format
 msgid "Library"
 msgstr "Knihovna"
 
-#: krosswordpuzzle.cpp:283
+#: mainwindow.cpp:281
+#, kde-format
 msgctxt ""
 "This string is used to replace the library path for crossword files that are "
 "in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
@@ -1186,75 +2589,111 @@ msgctxt ""
 msgid "Library"
 msgstr "Knihovna"
 
-#: crosswordxmlguiwindow.cpp:706
+#: crosswordxmlguiwindow.cpp:720
+#, kde-format
 msgid "Loaded crossword from file '%1'"
 msgstr "Křížovka nahraná ze souboru '%1'"
 
-#: dialogs/crosswordpreviewwidget.cpp:46
+#: dialogs/crosswordpreviewwidget.cpp:44
+#, kde-format
 msgid "Loading preview..."
 msgstr "Nahrává se náhled..."
 
-#: krosswordpuzzle.cpp:183
+#: mainwindow.cpp:181
+#, kde-format
 msgid "Loading the crossword, please wait..."
 msgstr "Nahrává se křížovka. Počkejte, prosím,..."
 
-#: krosswordpuzzle.cpp:180 library/librarygui.cpp:231
+#: library/librarygui.cpp:235 mainwindow.cpp:178
+#, kde-format
 msgid "Loading..."
 msgstr "Nahrává se..."
 
+#. i18n: ectx: property (windowTitle), widget (QMainWindow, PrintPreviewDialog)
+#: dialogs/printpreviewdialog.ui:14
+#, kde-format
+msgid "MainWindow"
+msgstr ""
+
 #: commands.cpp:1410
+#, kde-format
 msgid "Make Clue Cell Visible"
 msgstr "Zviditelnit políčko s nápovědou"
 
-#: crosswordxmlguiwindow.cpp:1303
+#: crosswordxmlguiwindow.cpp:1327
+#, kde-format
 msgid "Mark as confident"
 msgstr "Označit jako jisté"
 
-#: crosswordxmlguiwindow.cpp:1309
+#: crosswordxmlguiwindow.cpp:1333
+#, kde-format
 msgid "Mark as unsure"
 msgstr "Označit jako nejisté"
 
-#: crosswordxmlguiwindow.cpp:1304
+#: crosswordxmlguiwindow.cpp:1328
+#, kde-format
 msgid "Mark the selected letter cell's confidence as confident"
 msgstr "Označit stupeň důvěry ve vybrané písmeno jako jistý"
 
-#: crosswordxmlguiwindow.cpp:1310
+#: crosswordxmlguiwindow.cpp:1334
+#, kde-format
 msgid "Mark the selected letter cell's confidence as unsure"
 msgstr "Označit stupeň důvěry ve vybrané písmeno jako nejistý"
 
-#: library/librarygui.cpp:357
+#: library/librarygui.cpp:404
+#, kde-format
 msgid "Matt Jones (thursdays)"
 msgstr "Matt Jones (každý čtvrtek)"
 
 #: dialogs/statisticsdialog.cpp:101
+#, kde-format
 msgid "Max. Answer Length:"
 msgstr "Největší délka odpovědi:"
 
 #: dialogs/statisticsdialog.cpp:98
+#, kde-format
 msgid "Min. Answer Length:"
 msgstr "Nejmenší délka odpovědi:"
 
-#: library/librarygui.cpp:381
+#: library/librarygui.cpp:432
+#, kde-format
 msgid "Mots-croisés.ch free French crosswords"
 msgstr "Mots-croisés.ch francouzské křížovky zdarma"
 
-#: commands.cpp:1972
+#: commands.cpp:1971
+#, kde-format
 msgid "Move All Cells By %1, %2"
 msgstr "Posunout všechna políčka o %1, %2"
 
-#: crosswordxmlguiwindow.cpp:1475
+#: crosswordxmlguiwindow.cpp:1499
+#, kde-format
 msgid "Move All Cells..."
 msgstr "Posunout všechna políčka..."
 
 #: dialogs/movecellsdialog.cpp:28
+#, kde-format
 msgid "Move Cells"
 msgstr "Posunout políčka"
 
-#: crosswordxmlguiwindow.cpp:1476
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: move_cells.ui:40
+#, kde-format
+msgid "Move Horizontal:"
+msgstr "Posunout vodorovně"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: move_cells.ui:72
+#, kde-format
+msgid "Move Vertical:"
+msgstr "Posunout svisle"
+
+#: crosswordxmlguiwindow.cpp:1500
+#, kde-format
 msgid "Moves all cells of the crossword"
 msgstr "Posune všechna políčka v křížovce"
 
 #: dialogs/movecellsdialog.cpp:65
+#, kde-format
 msgctxt ""
 "How many clues are removed when moving all cells of the crossword. %2 is "
 "replaced by a plural indicating how many images will be removed when moving "
@@ -1265,28 +2704,46 @@ msgstr[0] "Posunutí všech políček odstraní %1 nápovědu %2"
 msgstr[1] "Posunutí všech políček odstraní %1 nápovědy %2"
 msgstr[2] "Posunutí všech políček odstraní %1 nápověd %2"
 
-#: library/librarygui.cpp:521
+#. i18n: ectx: label, entry (Theme), group (Preferences)
+#: krossword.kcfg:15
+#, kde-format
+msgid "Name of the current theme."
+msgstr "Název současné vnější úpravy."
+
+#: library/librarygui.cpp:569
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "New &Folder..."
 msgstr "Nová &složka..."
 
 #: dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
+#, kde-format
 msgid "New Crossword Type"
 msgstr "Nový druh křížovky"
 
-#: library/librarygui.cpp:473
+#: library/librarygui.cpp:521
+#, kde-format
 msgid "New Library Folder"
 msgstr "Nová složka v knihovně"
 
-#: crosswordxmlguiwindow.cpp:618 crosswordxmlguiwindow.cpp:651
+#. i18n: ectx: property (text), widget (QLabel, lblSize)
+#: properties.ui:196
+#, kde-format
+msgid "New Size:"
+msgstr "Nová velikost:"
+
+#: crosswordxmlguiwindow.cpp:624 crosswordxmlguiwindow.cpp:660
+#, kde-format
 msgid "New crossword"
 msgstr "Nová křížovka"
 
 #: commands.cpp:1299
+#, kde-format
 msgid "No Action"
 msgstr "Žádná činnost"
 
-#: dictionary.cpp:122
+#: dictionary.cpp:119
+#, kde-format
 msgid ""
 "No Connection to the database! Please make sure the MySQL server is running. "
 "Afterwards click \"Continue\" to retry connecting to the database."
@@ -1295,55 +2752,68 @@ msgstr ""
 "Následně klepněte na \"Pokračovat\" kvůli ještě jednomu pokusu o připojení "
 "se k databázi."
 
-#: dictionary.cpp:125
+#: dictionary.cpp:122
+#, kde-format
 msgid "No Database Connection"
 msgstr "Žádné spojení s databází"
 
 #: commands.cpp:343 commands.cpp:552 commands.cpp:662 commands.cpp:697
+#, kde-format
 msgid "No cell at the given coordinates (%1, %2)"
 msgstr "Žádné políčko na daných souřadnicích (%1, %2)"
 
 #: dialogs/currentcellwidget.cpp:114
+#, kde-format
 msgid "No cell selected."
 msgstr "Nebylo vybráno žádné políčko"
 
-#: dialogs/crosswordpropertiesdialog.cpp:245
+#: dialogs/crosswordpropertiesdialog.cpp:255
+#, kde-format
 msgctxt "No changes to the crossword grid size."
 msgid "No change"
 msgstr "Žádná změna"
 
 #: commands.cpp:813 commands.cpp:1006 commands.cpp:1100
+#, kde-format
 msgid "No clue cell given"
 msgstr "Políčko s nápovědou nezadáno"
 
-#: krossword.cpp:3034
+#: krossword.cpp:2835
+#, kde-format
 msgid "No error."
 msgstr "Žádná chyba."
 
-#: crosswordxmlguiwindow.cpp:1090
+#: crosswordxmlguiwindow.cpp:1102
+#, kde-format
 msgid "No removable cell selected."
 msgstr "Nebylo vybráno žádné odstranitelné políčko."
 
-#: dialogs/createnewcrossworddialog.cpp:193
+#: dialogs/createnewcrossworddialog.cpp:196
+#, kde-format
 msgid "Notes"
 msgstr "Poznámky"
 
 #: commands.cpp:1277
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Notes"
 msgstr "Poznámky"
 
-#: global.cpp:488
-msgid "Number Puzzle"
-msgstr "Číselná hádanka"
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, notes)
+#: create_new.ui:204 properties.ui:162
+#, kde-format
+msgid "Notes about the crossword"
+msgstr "Poznámky ke křížovce"
 
 #: global.cpp:289
+#, kde-format
 msgid "Number clues (1 to 26)"
 msgstr "Číslované nápovědy (1 až 26)"
 
 #: dialogs/statisticsdialog.cpp:72
+#, kde-format
 msgid ""
 "Number of crossed letter cells, percentage of total letter cell count in "
 "braces"
@@ -1352,15 +2822,18 @@ msgstr ""
 "s písmeny v závorkách"
 
 #: dialogs/statisticsdialog.cpp:59
+#, kde-format
 msgid "Number of empty cells, percentage of total cell count in braces"
 msgstr "Počet prázdných políček, procento celkového počtu políček v závorkách"
 
 #: dialogs/statisticsdialog.cpp:90
+#, kde-format
 msgid "Number of horizontal clues, percentage of total clue count in braces"
 msgstr ""
 "Počet vodorovných nápověd, procento celkového počtu nápověd v závorkách"
 
 #: dialogs/statisticsdialog.cpp:121
+#, kde-format
 msgid ""
 "Number of letter cells containing '%1', percentage of total letter cell "
 "count in braces"
@@ -1369,10 +2842,12 @@ msgstr ""
 "s písmeny v závorkách"
 
 #: dialogs/statisticsdialog.cpp:62
+#, kde-format
 msgid "Number of letter cells, percentage of total cell count in braces"
 msgstr "Počet písmenných políček, procento celkového počtu políček v závorkách"
 
 #: dialogs/statisticsdialog.cpp:76
+#, kde-format
 msgid ""
 "Number of uncrossed letter cells, percentage of total letter cell count in "
 "braces"
@@ -1381,113 +2856,163 @@ msgstr ""
 "políček s písmeny v závorkách"
 
 #: dialogs/statisticsdialog.cpp:94
+#, kde-format
 msgid "Number of vertical clues, percentage of total clue count in braces"
 msgstr "Počet svislých nápověd, procento celkového počtu nápověd v závorkách"
 
-#: global.cpp:490
-msgctxt "Short description of the crossword type 'Number Puzzle'"
-msgid ""
-"Number puzzles are a variant of crosswords in which each cell has a number "
-"between 1 and 26. The solver has to find out for which letter of the "
-"alphabet a number stands."
-msgstr ""
-"Číselné hádanky jsou obměnou křížovek, ve které má každé políčko číslo mezi "
-"1 a 26. Řešitel musí přijít na to, pro které písmeno abecedy číslo platí."
-
 #: dialogs/statisticsdialog.cpp:115
+#, kde-format
 msgid "Occurrences Of Letters:"
 msgstr "Výskyty písmen:"
 
-#: crosswordxmlguiwindow.cpp:1289
+#. i18n: ectx: property (toolTip), widget (QListWidget, cellTypes)
+#: configure_details.ui:210
+#, kde-format
+msgid "Only the checked cell types can be added into the crossword grid"
+msgstr "Pouze zatržené druhy políček mohou být přidány do mřížky s křížovkou"
+
+#. i18n: ectx: property (text), widget (QLabel, lblOrientation)
+#: clue_properties_dock.ui:114
+#, fuzzy, kde-format
+msgid "Or&ientation:"
+msgstr "&Uspořádání:"
+
+#: crosswordxmlguiwindow.cpp:1313
+#, kde-format
 msgid "Pan"
 msgstr "Najet na"
 
-#: crosswordxmlguiwindow.cpp:1290
+#: crosswordxmlguiwindow.cpp:1314
+#, kde-format
 msgid ""
 "Pan the view. Note that you can also pan while pressing the control key."
 msgstr ""
 "Pohybovat pohledem pomocí myši. Pohledem můžete pohybovat pomocí myši i "
 "tehdy, když přitom držíte stisknutou klávesu Ctrl."
 
-#: dialogs/crosswordpreviewwidget.cpp:55
+#: dialogs/crosswordpreviewwidget.cpp:53
+#, kde-format
 msgid "Preview failed"
 msgstr "Náhled se nezdařil"
 
-#: main.cpp:39
+#. i18n: ectx: property (text), widget (QLabel, lblPreview)
+#: create_new.ui:386
+#, kde-format
+msgid "Preview:"
+msgstr "Náhled:"
+
+#: main.cpp:44
+#, kde-format
 msgid "Previous developer"
 msgstr "Předchozí vývojář"
 
-#: crosswordxmlguiwindow.cpp:1271
+#: crosswordxmlguiwindow.cpp:1295
+#, kde-format
 msgid "Print the crossword"
 msgstr "Tisk křížovky"
 
-#: dialogs/crosswordpropertiesdialog.cpp:36
+#. i18n: ectx: property (windowTitle), widget (QDialog, properties)
+#: dialogs/crosswordpropertiesdialog.cpp:36 properties.ui:20
+#, kde-format
 msgid "Properties"
 msgstr "Vlastnosti"
 
-#: crosswordxmlguiwindow.cpp:1143
+#: crosswordxmlguiwindow.cpp:1155
+#, kde-format
 msgid ""
 "Quality crosswords of the current crossword type (%1) are usually symmetric."
 msgstr ""
 "Prvotřídní křížovky současného druhu křížovek (%1) jsou obvykle souměrné."
 
+#. i18n: ectx: property (toolTip), widget (QPushButton, setMapping)
+#: clue_number_mapping.ui:290
+#, kde-format
+msgid "Remap the selected letter to the given clue number."
+msgstr "Přiřadit vybrané písmeno k zadanému číslu nápovědy."
+
 #: commands.cpp:776
+#, kde-format
 msgid "Remove %1 letter"
 msgid_plural "Remove %1 letters"
 msgstr[0] "Odstranit jedno písmeno"
 msgstr[1] "Odstranit %1 písmena"
 msgstr[2] "Odstranit %1 písmen"
 
-#: crosswordxmlguiwindow.cpp:1432
+#: crosswordxmlguiwindow.cpp:1456
+#, kde-format
 msgid "Remove &Across Clue"
 msgstr "Odstranit &vodorovnou nápovědu"
 
-#: crosswordxmlguiwindow.cpp:1438
+#: crosswordxmlguiwindow.cpp:1462
+#, kde-format
 msgid "Remove &Down Clue"
 msgstr "Odstranit &svislou nápovědu"
 
 #: commands.cpp:336
+#, kde-format
 msgid "Remove Clue '%1'"
 msgstr "Odstranit nápovědu '%1'"
 
 #: commands.cpp:334
+#, kde-format
 msgid "Remove Clue Without Text"
 msgstr "Odstranit nápovědu bez textu"
 
 #: commands.cpp:544
+#, kde-format
 msgid "Remove Image '%1'"
 msgstr "Odstranit obrázek '%1'"
 
 #: commands.cpp:1529
+#, kde-format
 msgid "Remove Same Letter Synchronization"
 msgstr "Odstranit sladění stejných písmen"
 
 #: commands.cpp:778
+#, kde-format
 msgctxt "This string shouldn't happen to be used"
 msgid "Remove no letters"
 msgstr "Neodstranit žádné písmeno"
 
-#: crosswordxmlguiwindow.cpp:1451
+#: crosswordxmlguiwindow.cpp:1475
+#, kde-format
 msgid "Removes all clues from the crossword"
 msgstr "Odstraní všechny nápovědy z křížovky"
 
-#: crosswordxmlguiwindow.cpp:1433
+#: crosswordxmlguiwindow.cpp:1457
+#, kde-format
 msgid "Removes the highlighted across clue"
 msgstr "Odstraní zvýrazněnou vodorovnou nápovědu"
 
-#: crosswordxmlguiwindow.cpp:1428
+#: crosswordxmlguiwindow.cpp:1452
+#, kde-format
 msgid "Removes the highlighted clue or image"
 msgstr "Odstraní zvýrazněnou nápovědu nebo obrázek"
 
-#: crosswordxmlguiwindow.cpp:1439
+#: crosswordxmlguiwindow.cpp:1463
+#, kde-format
 msgid "Removes the highlighted down clue"
 msgstr "Odstraní zvýrazněnou svislou nápovědu"
 
-#: commands.cpp:1894
+#. i18n: ectx: property (toolTip), widget (QToolButton, removeEntries)
+#: dictionaries.ui:249
+#, kde-format
+msgid "Removes the selected entries from the dictionary"
+msgstr "Odstraní vybrané záznamy ze slovníku"
+
+#. i18n: ectx: attribute (label), widget (QWidget, page_3)
+#: properties.ui:181
+#, kde-format
+msgid "Resize Crossword"
+msgstr "Změnit velikost křížovky"
+
+#: commands.cpp:1893
+#, kde-format
 msgid "Resize Crossword From %1x%2 to %3x%4"
 msgstr "Změnit velikost křížovky z %1x%2 na %3x%4"
 
-#: dialogs/crosswordpropertiesdialog.cpp:251
+#: dialogs/crosswordpropertiesdialog.cpp:261
+#, kde-format
 msgctxt ""
 "How many clues are removed when resizing the crossword. %2 is replaced by a "
 "plural indicating how many images will be removed when resizing."
@@ -1497,208 +3022,288 @@ msgstr[0] "Změna velikosti z %3x%4 odstraní %1 nápovědu %2"
 msgstr[1] "Změna velikosti z %3x%4 odstraní %1 nápovědy %2"
 msgstr[2] "Změna velikosti z %3x%4 odstraní %1 nápověd %2"
 
-#: krosswordpuzzle.cpp:95
+#: mainwindow.cpp:93
+#, kde-format
 msgid "Resource unavailable"
 msgstr "Zdroj nedostupný"
 
-#: krosswordpuzzle.cpp:261
+#: mainwindow.cpp:259
+#, kde-format
 msgid ""
 "Restore the automatically saved version of an edited crossword before the "
 "crash"
 msgstr "Obnovit před pádem automaticky uloženou verzi upravované křížovky"
 
-#: crosswordxmlguiwindow.cpp:776
-msgid "Save &Edit History"
-msgstr "Uložit &Upravit historii"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#: configure_details.ui:157
+#, kde-format
+msgid "Rules"
+msgstr "Pravidla"
 
-#: crosswordxmlguiwindow.cpp:779
-msgid "Save As &Template"
+#. i18n("Choose a filename to save the crossword as a template"));
+#. ac->addAction("game_save_template_as", saveAsTemplateAction);
+#.
+#: crosswordxmlguiwindow.cpp:1288
+#, fuzzy, kde-format
+msgid "Save as &template..."
 msgstr "Uložit jako &předlohu"
 
-#: krosswordpuzzle.cpp:86
+#: mainwindow.cpp:84
+#, kde-format
 msgid "Save crossword"
 msgstr "Uložit křížovku"
 
-#: crosswordxmlguiwindow.cpp:1262
+#: crosswordxmlguiwindow.cpp:1275
+#, kde-format
 msgid "Save the crossword with solved letters"
 msgstr "Uložit křížovku včetně vyluštěných písmen"
 
-#: crosswordxmlguiwindow.cpp:781
-msgid "Save without correct answers, clue texts, images"
-msgstr "Uložit bez správných odpovědí, textů s nápovědami, bez obrázků"
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:106
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Scaled"
+msgstr "Úměrný"
 
-#: dictionary.cpp:247
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:111
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Scaled (Keep Aspect Ratio)"
+msgstr "Úměrný (Zachovat poměr stran)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:101
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Scaled and Cropped"
+msgstr "Úměrný a ořezaný"
+
+#: dictionary.cpp:244
+#, kde-format
 msgctxt ""
 "The header title for scores/difficulties of clue/answer pairs in the "
 "dictionary database"
 msgid "Score"
 msgstr "Výsledek"
 
-#: crosswordxmlguiwindow.cpp:1364
+#: crosswordxmlguiwindow.cpp:1388
+#, kde-format
 msgid "Select clue with switched orientation to the currently selected clue"
 msgstr "Vybrat nápovědu s k nyní vybrané nápovědě obráceným uspořádáním"
 
-#: crosswordxmlguiwindow.cpp:1379
+#: crosswordxmlguiwindow.cpp:1403
+#, kde-format
 msgid "Select the first clue"
 msgstr "Vybrat první nápovědu"
 
-#: crosswordxmlguiwindow.cpp:1369
+#: crosswordxmlguiwindow.cpp:1393
+#, kde-format
 msgid "Select the first letter of the current clue"
 msgstr "Vybrat první písmeno nynější nápovědy"
 
-#: crosswordxmlguiwindow.cpp:1394
+#: crosswordxmlguiwindow.cpp:1418
+#, kde-format
 msgid "Select the last clue"
 msgstr "Vybrat poslední nápovědu"
 
-#: crosswordxmlguiwindow.cpp:1374
+#: crosswordxmlguiwindow.cpp:1398
+#, kde-format
 msgid "Select the last letter of the current clue"
 msgstr "Vybrat poslední písmeno nynější nápovědy"
 
-#: crosswordxmlguiwindow.cpp:1384
+#: crosswordxmlguiwindow.cpp:1408
+#, kde-format
 msgid "Select the next clue"
 msgstr "Vybrat další nápovědu"
 
-#: crosswordxmlguiwindow.cpp:1389
+#: crosswordxmlguiwindow.cpp:1413
+#, kde-format
 msgid "Select the previous clue"
 msgstr "Vybrat předchozí nápovědu"
 
+#. i18n: ectx: ToolBar (selectionToolBar)
+#: krossword_crossword_ui.rc:63
+#, kde-format
+msgid "Selection"
+msgstr "Výběr"
+
 #: commands.cpp:1147
+#, kde-format
 msgid "Set Correct Letter at (%1, %2) to %3"
 msgstr "Změnit správné písmeno na (%1, %2) na %3"
 
 #: commands.cpp:1481
-msgid "Set Default Number Puzzle Mapping"
+#, fuzzy, kde-format
+msgid "Set Default Coded Puzzle Mapping"
 msgstr "Používat běžné přiřazení hádanek s čísly"
 
 #: commands.cpp:1157
+#, kde-format
 msgid "Set Letter at (%1, %2) to %3"
 msgstr "Změnit písmeno na (%1, %2) na %3"
 
-#: krosswordpuzzleview.cpp:106
+#: krosswordpuzzleview.cpp:105
+#, kde-format
 msgid "Settings changed"
 msgstr "Nastavení změněna"
 
 #: commands.cpp:1506
+#, kde-format
 msgid "Setup Same Letter Synchronization"
 msgstr "Nastavit sladění stejných písmen"
 
-#: crosswordxmlguiwindow.cpp:1402
+#: crosswordxmlguiwindow.cpp:1426
+#, kde-format
 msgid "Show Clue Dock"
 msgstr "Ukázat postranní panel s nápovědou"
 
-#: crosswordxmlguiwindow.cpp:1412
+#: crosswordxmlguiwindow.cpp:1436
+#, kde-format
 msgid "Show Current Cell Dock"
 msgstr "Ukázat postranní panel Nynější políčko"
 
 #: dialogs/crosswordtypewidget.cpp:204
+#, kde-format
 msgid "Show Details"
 msgstr "Ukázat podrobnosti"
 
-#: crosswordxmlguiwindow.cpp:1407
+#: crosswordxmlguiwindow.cpp:1431
+#, kde-format
 msgid "Show Edit History Dock"
 msgstr "Ukázat postranní panel Průběh úprav"
 
-#: dialogs/cellwidgets/cluecellwidget.cpp:121
-msgid "Show Only Answers With &Clue"
-msgstr "Ukázat pouze odpovědi s &nápovědou"
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:112
-msgid "Show Only Answers With Current Answer &Length"
-msgstr "Ukázat pouze odpovědi s &délkou nynější nápovědy"
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:128
-msgid "Show Only the &First 100 Answers"
-msgstr "Ukázat pouze &prvních sto odpovědí"
-
-#: crosswordxmlguiwindow.cpp:1275
+#: crosswordxmlguiwindow.cpp:1299
+#, kde-format
 msgid "Show a print preview"
 msgstr "Ukázat náhled před tiskem"
 
-#: crosswordxmlguiwindow.cpp:1466
+#: crosswordxmlguiwindow.cpp:1490
+#, kde-format
 msgid "Shows statistics about the crossword"
 msgstr "Ukáže statistiku týkající se křížovky"
 
-#: crosswordxmlguiwindow.cpp:321
+#. i18n: ectx: property (toolTip), widget (QTreeWidget, letterContentList)
+#: clue_number_mapping.ui:37
+#, kde-format
+msgid "Shows the current mapping of answer letters to clue numbers."
+msgstr "Ukáže nynější přiřazení písmen odpovědí k číslům nápověd."
+
+#: crosswordxmlguiwindow.cpp:334
+#, kde-format
 msgid "Shows the percentage of solved letter cells"
 msgstr "Ukazuje procentní podíl vyluštěných políček s písmeny"
 
-#: dialogs/createnewcrossworddialog.cpp:192
+#. i18n: ectx: property (text), widget (QLabel, lblTemplateSize)
+#: create_new.ui:449
+#, kde-format
+msgid "Si&ze:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: dialogs/createnewcrossworddialog.cpp:195 export_to_image.ui:50
+#, kde-format
 msgid "Size"
 msgstr "Velikost"
 
 #: commands.cpp:1284
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Size"
 msgstr "Velikost"
 
-#: library/librarymanager.cpp:71
+#. i18n: ectx: property (text), widget (QLabel, labelSize)
+#: download.ui:169
+#, kde-format
+msgid "Size:"
+msgstr "Velikost:"
+
+#: library/librarymanager.cpp:72
+#, kde-format
 msgctxt "The title for sizes of crosswords in the library tree view"
 msgid "Size:"
 msgstr "Velikost:"
 
-#: crosswordxmlguiwindow.cpp:1628 krossword.h:554
-msgid "Solution"
-msgstr "Řešení"
+#. i18n: ectx: property (windowTitle), widget (QWidget, solution_letter_properties)
+#: solution_letter_properties.ui:20
+#, kde-format
+msgid "Solution Letter"
+msgstr "Slovo řešení"
 
 #: global.cpp:44
+#, kde-format
 msgid "Solution letter cell"
 msgstr "Políčko s písmenem řešení"
 
 #: commands.cpp:669
+#, kde-format
 msgid "Solution letter cell not found at the given coordinates (%1, %2)"
 msgstr "Políčko s písmenem řešení na daných souřadnicích nenalezeno (%1, %2)"
 
-#: crosswordxmlguiwindow.cpp:2108
+#: crosswordxmlguiwindow.cpp:2107
+#, kde-format
 msgid "Solve"
 msgstr "Vyluštit"
 
-#: crosswordxmlguiwindow.cpp:1351
+#: crosswordxmlguiwindow.cpp:1375
+#, kde-format
 msgid "Solve Across Clue"
 msgstr "Vyluštit vodorovnou nápovědu"
 
-#: crosswordxmlguiwindow.cpp:1345
+#: crosswordxmlguiwindow.cpp:1369
+#, kde-format
 msgid "Solve Clue"
 msgstr "Vyluštit nápovědu"
 
-#: crosswordxmlguiwindow.cpp:1357
+#: crosswordxmlguiwindow.cpp:1381
+#, kde-format
 msgid "Solve Down Clue"
 msgstr "Vyluštit svislou nápovědu"
 
-#: crosswordxmlguiwindow.cpp:1352
+#: crosswordxmlguiwindow.cpp:1376
+#, kde-format
 msgid "Solve the current across clue"
 msgstr "Vyluštit nynější vodorovnou nápovědu"
 
-#: crosswordxmlguiwindow.cpp:1346
+#: crosswordxmlguiwindow.cpp:1370
+#, kde-format
 msgid "Solve the current clue"
 msgstr "Vyluštit nynější nápovědu"
 
-#: crosswordxmlguiwindow.cpp:1358
+#: crosswordxmlguiwindow.cpp:1382
+#, kde-format
 msgid "Solve the current down clue"
 msgstr "Vyluštit nynější svislou nápovědu"
 
-#: crosswordxmlguiwindow.cpp:1340
+#: crosswordxmlguiwindow.cpp:1364
+#, kde-format
 msgid "Solve the selected letter cell"
 msgstr "Vyluštit vybrané políčko s písmenem"
 
-#: crosswordxmlguiwindow.cpp:1294
+#: crosswordxmlguiwindow.cpp:1318
+#, kde-format
 msgid "Solve the selected letter or a random one if none is selected"
 msgstr "Vyluštit vybrané písmeno nebo náhodné, pokud není žádné vybráno"
 
 #: dialogs/statisticsdialog.cpp:34
+#, kde-format
 msgid "Statistics"
 msgstr "Statistika"
 
 #: global.cpp:287
+#, kde-format
 msgid "String clues"
 msgstr "Textové nápovědy"
 
 #: global.cpp:434
+#, kde-format
 msgid "Swedish Crossword"
 msgstr "Švédská křížovka"
 
 #: global.cpp:436
+#, kde-format
 msgctxt "Short description of the crossword type 'Swedish'"
 msgid ""
 "Swedish crosswords contain clue cells which contain the clue text in it and "
@@ -1708,11 +3313,19 @@ msgstr ""
 "nápovědy, a šipku, která naznačuje, ve kterém směru se mají nápovědy "
 "zodpovědět."
 
-#: krosswordpuzzle.cpp:244
+#. i18n: ectx: attribute (title), widget (QWidget, tabTemplate)
+#: create_new.ui:298
+#, kde-format
+msgid "Template"
+msgstr "Předloha"
+
+#: mainwindow.cpp:242
+#, kde-format
 msgid "Templates"
 msgstr "Předlohy"
 
 #: global.cpp:439
+#, kde-format
 msgctxt "Long description of the crossword type 'Swedish'"
 msgid ""
 "The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
@@ -1741,84 +3354,121 @@ msgstr ""
 "vyznačující směr \"Mots Fléchés\" ve francouzštině\", atd.\n"
 "(text byl převzat z Wikipedie)"
 
-#: library/librarygui.cpp:365
+#: library/librarygui.cpp:412
+#, kde-format
 msgid "The Chronicle of Higher Education (fridays)"
 msgstr "The Chronicle of Higher Education (pátky)"
 
-#: library/librarygui.cpp:369
+#: library/librarygui.cpp:416
+#, kde-format
 msgid "The Cross Nerd (tuesdays)"
 msgstr "The Cross Nerd (úterky)"
 
-#: library/librarygui.cpp:188
+#: library/librarygui.cpp:183
+#, kde-format
 msgid "The Cross Nerd current crossword"
 msgstr "Nynější křížovka Cross Nerd"
 
-#: krossword.cpp:3041
+#: krossword.cpp:2842
+#, kde-format
 msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
 msgstr "Odpověď obsahuje nedovolené znaky. Povoleny jsou A-Z a/nebo 0-9."
 
-#: krossword.cpp:3053
+#: krossword.cpp:2854
+#, kde-format
 msgid "The answer is too short for the current crossword type."
 msgstr "Odpověď je pro nynější druh křížovky příliš krátká."
 
-#: krossword.cpp:3045
+#: krossword.cpp:2846
+#, kde-format
 msgid ""
 "The answer overwrites the answer to another clue with the same orientation."
 msgstr "Odpověď přepíše odpověď k jiné nápovědě se stejným uspořádáním."
 
-#: krossword.cpp:3055
+#: krossword.cpp:2856
+#, kde-format
 msgid "The answer overwrites the clue cell."
 msgstr "Odpověď přepíše políčko s nápovědou."
 
-#: krossword.cpp:3043
+#: krossword.cpp:2844
+#, kde-format
 msgid "The answer produces mismatching letter cells at the same positions."
 msgstr ""
 "Odpověď dává políčka s neodpovídajícími si dvojicemi písmen v těchže "
 "polohách."
 
-#: dialogs/answerwidget.cpp:30 dialogs/answerwidget.cpp:40
+#: dialogs/answerwidget.cpp:29 dialogs/answerwidget.cpp:39
+#, kde-format
 msgid "The answer to the clue"
 msgstr "Odpověď k nápovědě"
 
-#: krossword.cpp:3047
+#: krossword.cpp:2848
+#, kde-format
 msgid "The answer's letter cells cross a clue cell."
 msgstr "Políčka s písmeny odpovědi se kříží s políčkem nápovědy."
 
-#: krossword.cpp:3039
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, author)
+#: create_new.ui:123 properties.ui:104
+#, kde-format
+msgid "The author(s) of the crossword"
+msgstr "Autor nebo autoři křížovky"
+
+#: krossword.cpp:2840
+#, kde-format
 msgid "The cell for the new clue isn't empty."
 msgstr "Políčko pro novou nápovědu není prázdné."
 
-#: krossword.cpp:3060
+#: krossword.cpp:2861
+#, kde-format
 msgid "The cells for the new image aren't empty."
 msgstr "Políčka pro nový obrázek nejsou prázdná."
 
-#: krossword.cpp:3037
+#: krossword.cpp:2838
+#, kde-format
 msgid "The clue doesn't fit in the grid with the given settings."
 msgstr "Nápověda nezapadá do mřížky s daným nastavením."
 
-#: krossword.cpp:634
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, clue)
+#: clue_properties_dock.ui:77
+#, kde-format
+msgid "The clue text"
+msgstr "Text nápovědy"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, clue)
+#: clue_properties_dock.ui:74
+#, kde-format
+msgid "The clue to the answer."
+msgstr "Nápověda k odpovědi."
+
+#: krossword.cpp:498
+#, kde-format
 msgid "The conversion will remove %1 of %2 clues"
 msgstr "Převod odstraní %1 z(e) %2 nápověd"
 
-#: krossword.cpp:637
+#: krossword.cpp:501
+#, kde-format
 msgid "The conversion will remove %1 of %2 clues, %3 of %4 images"
 msgstr "Převod odstraní %1 z(e) %2 nápověd, %3 z(e) %4 obrázků"
 
-#: dialogs/answerwidget.cpp:28 dialogs/answerwidget.cpp:38
+#: dialogs/answerwidget.cpp:27 dialogs/answerwidget.cpp:37
+#, kde-format
 msgid ""
 "The correct answer to the clue. For each letter a letter cell is created"
 msgstr ""
 "Správná odpověď k nápovědě. Pro každé písmeno je vytvořeno písmenné políčko"
 
-#: library/librarygui.cpp:136
+#: library/librarygui.cpp:152
+#, kde-format
 msgid "The crossword couldn't be imported to the library."
 msgstr "Křížovku se nepodařilo zavést do knihovny."
 
-#: library/librarygui.cpp:138
+#: library/librarygui.cpp:154
+#, kde-format
 msgid "The crossword couldn't be written to the library folder."
 msgstr "Křížovku se nepodařilo zapsat do složky knihovny."
 
-#: crosswordxmlguiwindow.cpp:1137
+#: crosswordxmlguiwindow.cpp:1149
+#, kde-format
 msgid ""
 "The crossword doesn't have 180 degree rotation symmetry.\n"
 "To achieve symmetry make sure that each empty cell and each clue cell has a "
@@ -1829,7 +3479,8 @@ msgstr ""
 "políčko s nápovědou má svůj protějšek, další prázdné políčko, další políčko "
 "s nápovědou, ve své o 180 stupňů otočené poloze.\n"
 
-#: crosswordxmlguiwindow.cpp:1133
+#: crosswordxmlguiwindow.cpp:1145
+#, kde-format
 msgid ""
 "The crossword doesn't have 180 degree rotation symmetry.\n"
 "To achieve symmetry make sure that each empty cell has a counterpart at it's "
@@ -1839,11 +3490,13 @@ msgstr ""
 "Pro dosažení souměrnosti se ujistěte, že každé prázdné políčko má svůj "
 "protějšek, další prázdné políčko, ve své o 180 stupňů otočené poloze.\n"
 
-#: crosswordxmlguiwindow.cpp:1129
+#: crosswordxmlguiwindow.cpp:1141
+#, kde-format
 msgid "The crossword has 180 degree rotation symmetry."
 msgstr "Křížovka má 180° souměrnost otáčení."
 
-#: crosswordxmlguiwindow.cpp:721
+#: crosswordxmlguiwindow.cpp:734
+#, kde-format
 msgid ""
 "The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
 "\n"
@@ -1859,8 +3512,9 @@ msgstr ""
 "(Poznámka: Můžete ji převést později pomocí nabídky \"Úpravy\" > "
 "\"Vlastnosti křížovky\")"
 
-#: crosswordxmlguiwindow.cpp:672 crosswordxmlguiwindow.cpp:818
-#: krosswordpuzzle.cpp:129
+#: crosswordxmlguiwindow.cpp:681 crosswordxmlguiwindow.cpp:811
+#: mainwindow.cpp:127
+#, kde-format
 msgid ""
 "The current crossword has been modified.\n"
 "Would you like to save it?"
@@ -1868,36 +3522,68 @@ msgstr ""
 "Nynější křížovka byla změněna.\n"
 "Chtěl byste ji uložit?"
 
-#: krossword.cpp:3049
+#: krossword.cpp:2850
+#, kde-format
 msgid "The current crossword type doesn't allow clue cells."
 msgstr "Nynější druh křížovky nepovoluje políčka s nápovědami."
 
-#: krossword.cpp:3062
+#: krossword.cpp:2863
+#, kde-format
 msgid "The current crossword type doesn't allow image cells."
 msgstr "Nynější druh křížovky nepovoluje políčka s obrázky."
 
-#: krossword.cpp:3051
+#: krossword.cpp:2852
+#, kde-format
 msgid "The current crossword type requires a clue cell for each clue."
 msgstr ""
 "Nynější druh křížovky vyžaduje políčko s nápovědou pro každou nápovědu."
 
 #: io/krosswordxmlreader.cpp:174 io/krosswordxmlreader.cpp:206
+#, kde-format
 msgid "The file is not a Krossword version &lt;= 1.1 file."
 msgstr "Soubor není souborem Krossword ve verzi &lt;= 1.1."
 
-#: library/librarygui.cpp:481
+#: library/librarygui.cpp:529
+#, kde-format
 msgid "The folder already exists in the library."
 msgstr "Složka již v knihovně existuje."
 
-#: krossword.cpp:3058
+#: krossword.cpp:2859
+#, kde-format
 msgid "The image doesn't fit in the grid with the given settings."
 msgstr "Obrázek se nevejde do mřížky s daným nastavením."
 
-#: crosswordxmlguiwindow.cpp:1298
+#. i18n: ectx: property (toolTip), widget (QSpinBox, minAnswerLength)
+#: configure_details.ui:302
+#, kde-format
+msgid "The minimum length of answers to clues"
+msgstr "Nejmenší délka odpovědí k nápovědám"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
+#: configure_details.ui:70
+#, kde-format
+msgid "The name of the crossword type"
+msgstr "Název druhu křížovky"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, mappedClueNumber)
+#: clue_number_mapping.ui:274
+#, kde-format
+msgid "The new clue number for the selected letter."
+msgstr "Nové číslo nápovědy pro vybrané písmeno."
+
+#: crosswordxmlguiwindow.cpp:1322
+#, kde-format
 msgid "The selected letter cell has been solved"
 msgstr "Vybrané políčko s písmenem bylo vyluštěno"
 
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: export_to_image.ui:32
+#, fuzzy, kde-format
+msgid "The size will be shrinked to match the aspect ratio of the crossword"
+msgstr "(Velikost bude zmenšena, aby odpovídala poměru stran křížovky)"
+
 #: commands.cpp:725
+#, kde-format
 msgctxt ""
 "Error message to be displayed, when the user tries to convert a letter to a "
 "solution letter, but the position of the new solution letter is already "
@@ -1907,19 +3593,36 @@ msgctxt ""
 msgid "The solution letter position %1 is already assigned."
 msgstr "Poloha písmene řešení %1 je již přiřazena."
 
-#: dialogs/cellwidgets/solutionlettercellwidget.cpp:94
-msgid ""
-"The solution letter position %1 is already assigned.\n"
-"Please change the solution word position of that letter first."
-msgstr ""
-"Poloha písmene řešení %1 je již přiřazena.\n"
-"Nejprve, prosím, změňte polohu slova řešení toho písmene."
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, title)
+#: create_new.ui:94 properties.ui:75
+#, kde-format
+msgid "The title of the crossword"
+msgstr "Název křížovky"
 
-#: krosswordpuzzle.cpp:313
+#. i18n: ectx: property (toolTip), widget (KComboBox, clueType)
+#: configure_details.ui:256
+#, kde-format
+msgid "The type of clues (strings or numbers)"
+msgstr "Druh nápověd (text nebo čísla)"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, letterCellContent)
+#: configure_details.ui:163
+#, kde-format
+msgid "The type of content of letter cells"
+msgstr "Druh obsahu políček s písmeny"
+
+#: mainwindow.cpp:311
+#, kde-format
 msgid "Theme"
 msgstr "Vnější úprava"
 
-#: library/librarygui.cpp:296
+#: crosswordxmlguiwindow.cpp:2405 crosswordxmlguiwindow.cpp:2406
+#, kde-format
+msgid "There are missing / wrong letters, sorry."
+msgstr ""
+
+#: library/librarygui.cpp:349
+#, kde-format
 msgid ""
 "There was an error opening the crossword.\n"
 "%1"
@@ -1927,20 +3630,24 @@ msgstr ""
 "Při otevírání křížovky se vyskytla chyba.\n"
 "%1"
 
-#: dialogs/dictionarydialog.cpp:237
+#: dialogs/dictionarydialog.cpp:238
+#, kde-format
 msgid "There was an error while exporting to '%1'"
 msgstr "Při vyvádění do '%1' se vyskytla chyba"
 
-#: dialogs/dictionarydialog.cpp:251
+#: dialogs/dictionarydialog.cpp:253
+#, kde-format
 msgid "There was an error while importing from '%1'"
 msgstr "Při zavádění z '%1' se vyskytla chyba"
 
 #: global.cpp:411
+#, kde-format
 msgctxt "Short description of the crossword type 'Free'"
 msgid "This is a special type that tries to be least restrictive."
 msgstr "Toto je zvláštní druh, který se pokouší být co nejméně omezující."
 
 #: global.cpp:413
+#, kde-format
 msgctxt "Long description of the crossword type 'Free'"
 msgid ""
 "This is a special type that tries to be least restrictive. You can use all "
@@ -1954,11 +3661,13 @@ msgstr ""
 "smíchat odpovědi, které mají políčko s nápovědou s odpověďmi, které nemají. "
 "Odpovědi mohou obsahovat písmena, jakož i číslice."
 
-#: crosswordxmlguiwindow.cpp:1297
+#: crosswordxmlguiwindow.cpp:1321
+#, kde-format
 msgid "This letter has been solved"
 msgstr "Toto písmeno bylo vyluštěno"
 
-#: crosswordxmlguiwindow.cpp:1210
+#: crosswordxmlguiwindow.cpp:1222
+#, kde-format
 msgid ""
 "This will cause all answers to be shown and editable.\n"
 "If you want to solve the crossword you should cancel."
@@ -1966,7 +3675,8 @@ msgstr ""
 "Tímto budou všechny odpovědi ukázány a upravovatelné.\n"
 "Pokud chcete křížovku vyluštit, měl byste dát \"zrušit\"."
 
-#: library/librarygui.cpp:445
+#: library/librarygui.cpp:493
+#, kde-format
 msgid ""
 "This will permanently delete the selected crossword from the library.\n"
 "The operation can't be undone!"
@@ -1974,7 +3684,8 @@ msgstr ""
 "Tímto se trvale smaže vybranou křížovku z knihovny. Tento úkon nelze vrátit "
 "zpět."
 
-#: library/librarygui.cpp:433
+#: library/librarygui.cpp:481
+#, kde-format
 msgid ""
 "This will permanently delete the selected directory and all contained "
 "crosswords from the library. The operation can't be undone!"
@@ -1982,22 +3693,45 @@ msgstr ""
 "Tímto se trvale smaže vybraný adresář a všechny obsažené křížovky z "
 "knihovny. Tento úkon nelze vrátit zpět."
 
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:121
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Tiled"
+msgstr "Vydlážděný"
+
 #: commands.cpp:1268
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Title"
 msgstr "Název"
 
+#. i18n: ectx: property (text), widget (QLabel, labelTitle)
+#: download.ui:146
+#, fuzzy, kde-format
+msgid "Title:"
+msgstr "&Název:"
+
 #: dialogs/statisticsdialog.cpp:49
+#, kde-format
 msgid "Total Cell Count:"
 msgstr "Celkový počet políček:"
 
 #: dialogs/statisticsdialog.cpp:74
+#, kde-format
 msgid "Uncrossed:"
 msgstr "Nekřižující se:"
 
-#: krossword.cpp:2951
+#. i18n: ectx: label, entry (LastCrossword), group (Preferences)
+#: krossword.kcfg:20
+#, fuzzy, kde-format
+msgid "Url of the last opened crossword."
+msgstr "Otevřít vybranou křížovku."
+
+#: krossword.cpp:2752
+#, kde-format
 msgctxt "Description"
 msgid ""
 "Used as header label for the column containing the descriptions in the "
@@ -2006,7 +3740,8 @@ msgstr ""
 "Použito jako popisek záhlaví pro sloupec obsahující popisy v modelu typu "
 "křížovky."
 
-#: krossword.cpp:2948
+#: krossword.cpp:2749
+#, kde-format
 msgctxt "Name"
 msgid ""
 "Used as header label for the column containing the names in the crossword "
@@ -2016,40 +3751,53 @@ msgstr ""
 "křížovky."
 
 #: global.cpp:424
+#, kde-format
 msgid "User Defined Crossword"
 msgstr "Uživatelsky stanovená křížovka"
 
 #: global.cpp:52
+#, kde-format
 msgid "User cell type"
 msgstr "Uživatelsky stanovený druh políčka"
 
-#: library/librarygui.cpp:361
+#: library/librarygui.cpp:408
+#, kde-format
 msgid "Wall Street Journal by Mike Shenk (fridays)"
 msgstr "Křížovky z Wall Street Journal od Mikea Shenka (každý pátek)"
 
-#: krosswordpuzzle.cpp:85
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, pattern)
+#: clue_properties_dock.ui:523
+#, kde-format
+msgid "Wildcard pattern to search for answers"
+msgstr "Vzor se zástupným znakem pro hledání odpovědí"
+
+#: mainwindow.cpp:83
+#, kde-format
 msgid "Would you like to add the crossword into the library?"
 msgstr "Chcete křížovku přidat do knihovny?"
 
-#: crosswordxmlguiwindow.cpp:881
+#: crosswordxmlguiwindow.cpp:877
+#, kde-format
 msgid "Wrote crossword to file '%1'"
 msgstr "Zapsat křížovku do souboru '%1'"
 
-#: rc.cpp:2
+#, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "fripohled.blogspot.com"
 
-#: rc.cpp:1
+#, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Pavel Fric"
 
-#: crosswordxmlguiwindow.cpp:265
+#: crosswordxmlguiwindow.cpp:278
+#, kde-format
 msgid "Zoom: %1%"
 msgstr "Zvětšení: %1%"
 
 #: dialogs/movecellsdialog.cpp:71
+#, kde-format
 msgctxt ""
 "How many images are removed when moving all cells of the crossword. This "
 "string gets combined with a plural string indicating how many clue cells "
@@ -2060,7 +3808,8 @@ msgstr[0] "a %1 obrázek"
 msgstr[1] "a %1 obrázky"
 msgstr[2] "a %1 obrázků"
 
-#: dialogs/crosswordpropertiesdialog.cpp:257
+#: dialogs/crosswordpropertiesdialog.cpp:267
+#, kde-format
 msgctxt ""
 "How many images are removed when resizing the crossword. This string gets "
 "combined with a plural string indicating how many clue cells will be removed "
@@ -2071,26 +3820,23 @@ msgstr[0] "a %1 obrázek"
 msgstr[1] "a %1 obrázky"
 msgstr[2] "a %1 obrázků"
 
-#: dialogs/createnewcrossworddialog.cpp:109
-msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
-msgid "© %1, by %2"
-msgstr "© %1, od %2"
-
-#: main.cpp:35
-msgid ""
-"© 2014 Andrea Barazzetti\n"
-"© 2014 Giacomo Barazzetti\n"
-"© 2009 Friedrich Pülz"
+#. i18n: ectx: property (windowTitle), widget (QToolBar, toolBar)
+#: dialogs/printpreviewdialog.ui:19
+#, kde-format
+msgid "toolBar"
 msgstr ""
-"© 2014 Andrea Barazzetti\n"
-"© 2014 Giacomo Barazzetti\n"
-"© 2009 Friedrich Pülz"
 
-#~ msgid " columns"
-#~ msgstr " Sloupce"
+#. i18n: ectx: tooltip, entry (animate), group (Preferences)
+#: krossword.kcfg:26
+#, kde-format
+msgid "whether or not animations should be enabled"
+msgstr "Zda se mají povolit pohyblivé obrázky či ne"
 
-#~ msgid " rows"
-#~ msgstr " Řádky"
+#: dialogs/createnewcrossworddialog.cpp:112
+#, fuzzy, kde-format
+msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
+msgid "© %1 %2"
+msgstr "© %1, od %2"
 
 #~ msgctxt ""
 #~ "Text to describe the contents of library folders in the library tree view"
@@ -2106,23 +3852,8 @@ msgstr ""
 #~ msgid "%1, %2"
 #~ msgstr "%1, %2"
 
-#~ msgid "&Add Entry"
-#~ msgstr "&Přidat záznam"
-
-#~ msgid "&Answers:"
-#~ msgstr "&Odpovědi:"
-
-#~ msgid "&Apply"
-#~ msgstr "&Použít"
-
-#~ msgid "&Author:"
-#~ msgstr "&Autor:"
-
 #~ msgid "&Bottom"
 #~ msgstr "&Dole"
-
-#~ msgid "&Clear Dictionary"
-#~ msgstr "&Vyprázdnit slovník"
 
 #~ msgid "&Clear This Cell"
 #~ msgstr "&Vyprázdnit toto políčko"
@@ -2130,20 +3861,8 @@ msgstr ""
 #~ msgid "&Clue"
 #~ msgstr "&Nápověda"
 
-#~ msgid "&Clue:"
-#~ msgstr "&Nápověda:"
-
-#~ msgid "&Convert to Letter Cell"
-#~ msgstr "&Převést na políčko s písmenem"
-
-#~ msgid "&Copyright:"
-#~ msgstr "&Autorské právo:"
-
 #~ msgid "&Create"
 #~ msgstr "&Vytvořit"
-
-#~ msgid "&Crossword"
-#~ msgstr "&Křížovka"
 
 #~ msgctxt ""
 #~ "The title for the crossword tab with an unmodified or no crossword opened"
@@ -2154,38 +3873,8 @@ msgstr ""
 #~ msgid "&Crossword *"
 #~ msgstr "&Křížovka *"
 
-#~ msgid "&Description:"
-#~ msgstr "&Popis:"
-
-#~ msgid "&Dictionary"
-#~ msgstr "&Slovník"
-
 #~ msgid "&Difficulty:"
 #~ msgstr "&Obtížnost:"
-
-#~ msgid "&Enable Animations"
-#~ msgstr "&Povolit pohyblivé obrázky"
-
-#~ msgid "&Export (CSV)..."
-#~ msgstr "&Vyvést (CSV)..."
-
-#~ msgid "&Extract From Crosswords..."
-#~ msgstr "&Vytáhnout z křížovek..."
-
-#~ msgid "&Filter:"
-#~ msgstr "&Filtr:"
-
-#~ msgid "&Horizontal Cells:"
-#~ msgstr "&Vodorovná políčka:"
-
-#~ msgid "&Host:"
-#~ msgstr "&Hostitelský počítač:"
-
-#~ msgid "&Icon:"
-#~ msgstr "&Ikona:"
-
-#~ msgid "&Import (CSV)..."
-#~ msgstr "&Zavést (CSV)..."
 
 #~ msgctxt "@action:intoolbar"
 #~ msgid "&Import..."
@@ -2206,45 +3895,9 @@ msgstr ""
 #~ msgid "&Load"
 #~ msgstr "&Nahrát"
 
-#~ msgid "&Location:"
-#~ msgstr "&Umístění:"
-
-#~ msgid "&Long Description:"
-#~ msgstr "&Dlouhý popis:"
-
-#~ msgid "&Mapped Clue Number:"
-#~ msgstr "&Číslo přiřazené k nápovědě:"
-
-#~ msgid "&Minimum Answer Length:"
-#~ msgstr "&Nejmenší délka odpovědi"
-
-#~ msgid "&Name:"
-#~ msgstr "&Název:"
-
-#~ msgid "&Notes:"
-#~ msgstr "&Poznámky:"
-
 #~ msgctxt "@action:intoolbar"
 #~ msgid "&Open..."
 #~ msgstr "&Otevřít..."
-
-#~ msgid "&Orientation:"
-#~ msgstr "&Uspořádání:"
-
-#~ msgid "&Password:"
-#~ msgstr "&Heslo:"
-
-#~ msgid "&Pattern:"
-#~ msgstr "&Vzor:"
-
-#~ msgid "&Position in the solution word:"
-#~ msgstr "&Poloha ve slově řešení:"
-
-#~ msgid "&Positioning:"
-#~ msgstr "&Polohování:"
-
-#~ msgid "&Provider:"
-#~ msgstr "&Poskytovatel:"
 
 #~ msgid "&Quality:"
 #~ msgstr "&Kvalita:"
@@ -2252,490 +3905,17 @@ msgstr ""
 #~ msgid "&Refresh"
 #~ msgstr "&Obnovit"
 
-#~ msgid "&Remove Selected"
-#~ msgstr "&Odstranit vybrané"
-
-#~ msgid "&Reset"
-#~ msgstr "&Nastavit znovu"
-
 #~ msgid "&Right"
 #~ msgstr "&Vpravo"
-
-#~ msgid "&Set Mapping"
-#~ msgstr "&Nastavit přiřazení"
 
 #~ msgid "&Size:"
 #~ msgstr "&Velikost:"
 
-#~ msgid "&Title:"
-#~ msgstr "&Název:"
-
 #~ msgid "&Top"
 #~ msgstr "&Nahoře"
 
-#~ msgid "&Use Template:"
-#~ msgstr "&Použít předlohu:"
-
-#~ msgid "&User:"
-#~ msgstr "&Uživatel:"
-
-#~ msgid "&Vertical Cells:"
-#~ msgstr "&Svislá políčka:"
-
 #~ msgid "(C) 2009 Friedrich Pülz"
 #~ msgstr "(C) 2009 Friedrich Pülz"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note:</span> To change these values please first select "
-#~ "\"User Defined\" as the crossword type.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Poznámka:</span> Pro změnu těchto hodnot vyberte, prosím, "
-#~ "nejprve \"Uživatelsky stanovená\" jako druh křížovky.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Enter a pattern with "
-#~ "letters, <span style=\" font-weight:600;\">? </span>for one arbitrary "
-#~ "letter and <span style=\" font-weight:600;\">*</span> for any number of "
-#~ "arbitrary letters.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Zadejte vzor s "
-#~ "písmeny,  <span style=\" font-weight:600;\">? </span>pro libovolné "
-#~ "písmeno a <span style=\" font-weight:600;\">*</span> pro jakýkoli počet "
-#~ "libovolných písmen.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Exports the whole "
-#~ "dictionary to a comma separated text file.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">You can use that to "
-#~ "create a <span style=\" font-weight:600;\">backup</span> of your "
-#~ "dictionary or to <span style=\" font-weight:600;\">share</span> your "
-#~ "dictionary with others.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">It is also possible to "
-#~ "open that file in a spread sheet application.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Vyvede celý slovník do "
-#~ "souboru s textem odděleným čárkou.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Můžete použít na "
-#~ "vytvoření  <span style=\" font-weight:600;\">zálohy</span> svého slovníku "
-#~ "nebo na  <span style=\" font-weight:600;\">sdílení</span> svého slovníku "
-#~ "s ostatními.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Je rovněž možné otevřít "
-#~ "tento soubor v tabulkovém kalkulátoru.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Imports entries from a "
-#~ "comma separated text file.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">You can use that to "
-#~ "<span style=\" font-weight:600;\">restore</span> a previously created "
-#~ "backup of your dictionary or to import dictionaries from others.</p></"
-#~ "body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Zavede záznamy ze "
-#~ "souboru s textem odděleným čárkou.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Můžete použít na <span "
-#~ "style=\" font-weight:600;\">obnovu</span> předtím vytvořené zálohy svého "
-#~ "slovníku nebo pro zavedení slovníků od ostatních.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Imports words from a "
-#~ "plain text dictionary (eg. in /usr/dict/ or /usr/share/dict/). A "
-#~ "dictionary for crosswords is available from <a href=\"http://www."
-#~ "quinapalus.com/xwfaq.html\"><span style=\" text-decoration: underline; "
-#~ "color:#0057ae;\">http://www.quinapalus.com/xwfaq.html</span></a> (UKACD)."
-#~ "</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The dictionary file "
-#~ "must be a plain text file with one word per line.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Zavede slova ze "
-#~ "slovníku s prostým textem (např. in /usr/dict/ or /usr/share/dict/). "
-#~ "Slovník pro křížovky je dostupný přes tento odkaz <a href=\"http://www."
-#~ "quinapalus.com/xwfaq.html\"><span style=\" text-decoration: underline; "
-#~ "color:#0057ae;\">http://www.quinapalus.com/xwfaq.html</span></a> (UKACD)."
-#~ "</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Soubor se slovníkem "
-#~ "musí být soubor s prostým textem s jedním slovem na řádek.</p></body></"
-#~ "html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">In a \"Number Puzzle\" "
-#~ "each answer letter is mapped to a clue number. The solver has to find out "
-#~ "which clue number belongs to which letter.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">To change the mapping "
-#~ "of an answer letter select it in the list, enter it's new clue number and "
-#~ "click \"Set Mapping\".</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note:</span> Conflicting mappings are resolved "
-#~ "automatically.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">V \"Číselná hádanka\" "
-#~ "je každé písmeno odpovědi přiřazeno k číslu nápovědy. Řešitel musí přijít "
-#~ "na to, k jakému písmen to které číslo nápovědy patří.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Pro změnu přiřazení "
-#~ "písmene odpovědi je vyberte v seznamu, zadejte nové číslo nápovědy k němu "
-#~ "a klepněte na \"Nastavit přiřazení\".</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Poznámka:</span> Střetávající se přiřazení jsou řešena "
-#~ "automaticky.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Only the checked cell "
-#~ "types can be added into the crossword grid.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Empty Cells</span> are also called \"Shaded Cells\", "
-#~ "\"Blanks\", \"Darks\", \"Blocks\", \"Black Squares\" or \"Shaded Squares"
-#~ "\". You cannot disallow empty cells.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Letter Cells</span> are also called \"White Cells\" or "
-#~ "\"Lights\". They contain one letter (or digit) of one or two answers / "
-#~ "entries. A letter cell that is part of two answers (both Across and Down) "
-#~ "is called <span style=\" font-style:italic;\">checked</span>, <span style="
-#~ "\" font-style:italic;\">keyed</span> or <span style=\" font-style:italic;"
-#~ "\">crossed</span>. A letter cell that is part of only one answer is "
-#~ "called <span style=\" font-style:italic;\">unchecked</span>, <span style="
-#~ "\" font-style:italic;\">unkeyed</span> or <span style=\" font-style:"
-#~ "italic;\">uncrossed</span>.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Clue Cells</span> contain the clue text in small print "
-#~ "inside and act as empty cells. Each clue cell has a little arrow "
-#~ "indicating in which direction from its initial cell the answer is to be "
-#~ "written.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Double Clue Cells</span> contain two clue cells inside, one "
-#~ "above the other.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Solution Letter Cells</span> are letter cells that are part "
-#~ "of a solution word for the whole crossword.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Image Cells</span> contain images and can be stretched over "
-#~ "a block of multiple cells.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Pouze zatržené druhy "
-#~ "políček lze přidat do mřížky s křížovkou.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Prázdná políčka</span> se také nazývají \"Stínovaná políčka"
-#~ "\", \"Prázdná\", \"Tmavá\", \"Kostky\", \"Černé čtverečky\" nebo "
-#~ "\"Stínované čtverečky\". You cannot disallow empty cells.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Políčka s písmeny</span> se také nazývají \"Bílá políčka\" "
-#~ "nebo \"Světla\". Obsahují jedno písmeno (nebo číslici) jedné nebo dvou "
-#~ "odpovědí/záznamů. Políčko s písmenem, které je součástí dvou odpovědí "
-#~ "(obě vodorovná a svislá), se nazývá <span style=\" font-style:italic;"
-#~ "\">kostkované</span>, <span style=\" font-style:italic;\">opatřené "
-#~ "klíčem</span> nebo <span style=\" font-style:italic;\">křižované</span>. "
-#~ "Políčko s písmenem, které je součástí pouze jedné odpovědi, se nazývá "
-#~ "<span style=\" font-style:italic;\">nekostkované</span>, <span style=\" "
-#~ "font-style:italic;\">neopatřené klíčem</span> nebo <span style=\" font-"
-#~ "style:italic;\">nekřižované</span>.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Políčka s nápovědami</span> obsahují text nápovědy vyvedený "
-#~ "malým písmem uvnitř a chovají se jako prázdná políčka. Každé políčko s "
-#~ "nápovědou má malou šipku naznačující, kterým směrem od svého počátečního "
-#~ "políčka se má odpověď napsat.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Políčka s dvojitými nápovědami</span> obsahují políčka se "
-#~ "dvěma nápovědami uvnitř, jedna nad druhou.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Políčka s písmenem řešení</span> jsou políčka s písmeny, "
-#~ "která jsou součástí slova řešení pro celou křížovku.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Políčka s obrázky</span> obsahují obrázky a lze je "
-#~ "roztáhnout přes blok složený z více políček.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The MySQL root password "
-#~ "is needed to automatically setup the database:</p>\n"
-#~ "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-"
-#~ "right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-"
-#~ "bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-#~ "indent:0px;\">Add a new user to the MySQL server (username and password: "
-#~ "krosswordpuzzle)</li>\n"
-#~ "<li style=\" font-weight:600;\" style=\" margin-top:0px; margin-"
-#~ "bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-#~ "indent:0px;\"><span style=\" font-weight:400;\">Give privileges for a new "
-#~ "database (named krosswordpuzzle) to that user</span></li></ul>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note: </span>You can also do these steps yourself by using "
-#~ "a MySQL administrator tool.</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:12px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Pro automatické "
-#~ "nastavení databáze je  potřeba superuživatelské heslo pro MySQL:</p>\n"
-#~ "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-"
-#~ "right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-"
-#~ "bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-#~ "indent:0px;\">Přidat nového uživatele serveru MySQL (uživatelské jméno a "
-#~ "heslo: krosswordpuzzle)</li>\n"
-#~ "<li style=\" font-weight:600;\" style=\" margin-top:0px; margin-"
-#~ "bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-#~ "indent:0px;\"><span style=\" font-weight:400;\">Udělit výhradní práva na "
-#~ "novou databázi (nazvanou krosswordpuzzle) to that user</span></li></ul>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Poznámka: </span>Tyto kroky můžete rovněž provést "
-#~ "samostatně  pomocí nástroje pro správu MySQL.</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:12px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This view contains all "
-#~ "entries in the dictionary. </p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">You can <span style=\" "
-#~ "font-weight:600;\">edit</span> each entry.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">To <span style=\" font-"
-#~ "weight:600;\">find entries</span> in the possibly huge list you can enter "
-#~ "a substring of the answer word into the edit line above.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Tento pohled obsahuje "
-#~ "všechny záznamy ve slovníku. </p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Můžete <span style=\" "
-#~ "font-weight:600;\">upravit</span> každý záznam.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Pro <span style=\" font-"
-#~ "weight:600;\">nalezení záznamů</span> v možná velmi dlouhém seznamu "
-#~ "můžete část hledaného slova zadat do zadávacího řádku výše.</p></body></"
-#~ "html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">You can enter wildcard "
-#~ "patterns to search the dictionary for answers.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The pattern can contain "
-#~ "letters, <span style=\" font-weight:600;\">? </span>for one arbitrary "
-#~ "letter and <span style=\" font-weight:600;\">*</span> for any number of "
-#~ "arbitrary letters.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">For example \"HO??E\" "
-#~ "matches all answers starting with \"HO\", ending with \"E\" and having "
-#~ "two arbitrary letters in between. \"HOUSE\" would be matched by that "
-#~ "pattern.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Answers are searched "
-#~ "while typing the pattern.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note:</span> When you change the settings of the clue, a "
-#~ "pattern is automatically constructed, based on the letters that are "
-#~ "already in the crossword at the positions of the clue.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Můžete zadat vzory pro "
-#~ "zástupné znaky pro hledání odpovědí ve slovníku.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Vzor může obsahovat "
-#~ "písmena, <span style=\" font-weight:600;\">? </span>pro libovolné písmeno "
-#~ "a <span style=\" font-weight:600;\">*</span> pro jakýkoli počet "
-#~ "libovolných písmen</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Například \"SV??LO\" "
-#~ "odpovídá všem odpovědím, které začínají na \"SV\", končí na \"LO\" a mezi "
-#~ "tím mají dvě libovolná písmena. \"SVĚTLO\" by tomuto vzoru odpovídalo.</"
-#~ "p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Odpovědi jsou hledány "
-#~ "během zapisování vzoru.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Poznámka:</span> Změníte-li nastavení nápovědy, je "
-#~ "automaticky sestaven vzor, který je založen na písmenech, jež jsou již v "
-#~ "křížovce v polohách nápověd.</p></body></html>"
 
 #, fuzzy
 #~ msgctxt "Display text for empty clue texts"
@@ -2746,20 +3926,8 @@ msgstr ""
 #~ msgid "<placeholder>empty</placeholder>"
 #~ msgstr "<placeholder>prázdné</placeholder>"
 
-#~ msgid "Add &Words From Dictionary..."
-#~ msgstr "Přidat &slova ze slovníku..."
-
 #~ msgid "Add new Clue"
 #~ msgstr "Přidat novou nápovědu"
-
-#~ msgid "Adds an entry to the dictionary"
-#~ msgstr "Přidá záznam do slovníku"
-
-#~ msgid "Allowed Cell T&ypes:"
-#~ msgstr "Povolené d&ruhy políček:"
-
-#~ msgid "Anchor:"
-#~ msgstr "Kotva:"
 
 #~ msgid "Animate Change Letter"
 #~ msgstr "Oživit pohybem změny písmen"
@@ -2785,28 +3953,15 @@ msgstr ""
 #~ msgid "Animate Size Changes"
 #~ msgstr "Oživit pohybem změny ve velikosti"
 
-#~ msgctxt "The header title for anwers in the dictionary database"
+#~ msgid "Animations"
+#~ msgstr "Animace"
+
 #~ msgid "Answer"
 #~ msgstr "Odpověď"
 
-#~ msgid "Answer &Offset:"
-#~ msgstr "&Odsazení odpovědi:"
-
-#~ msgid "Arrange the answer letters horizontally."
-#~ msgstr "Seřadit písmena odpovědi vodorovně."
-
-#~ msgid "Arrange the answer letters vertically."
-#~ msgstr "Seřadit písmena odpovědi svisle."
-
-#, fuzzy
-#~ msgid "Available crosswords"
-#~ msgstr "Vyprázdnit křížovku"
-
-#~ msgid "Backup"
-#~ msgstr "Záloha"
-
-#~ msgid "Basic Settings"
-#~ msgstr "Základní nastavení"
+#~ msgctxt "The header title for anwers in the dictionary database"
+#~ msgid "Answer"
+#~ msgstr "Odpověď"
 
 #~ msgid "Boston Globe (sundays)"
 #~ msgstr "Boston Globe (každou neděli)"
@@ -2821,9 +3976,8 @@ msgstr ""
 #~ msgid "Can't set correct letter of an answer letter cell. %1"
 #~ msgstr "Nelze nastavit správné písmeno pro políčko s písmenem odpovědi. %1"
 
-#, fuzzy
-#~ msgid "Centered"
-#~ msgstr "Vystředěný"
+#~ msgid "ChrisWords.com"
+#~ msgstr "ChrisWords.com"
 
 #~ msgid "Clear Ac&ross Clue"
 #~ msgstr "Vyprázdnit nápovědu př&es"
@@ -2849,44 +4003,10 @@ msgstr ""
 #~ msgid "Clears the correct answer to the highlighted down clue."
 #~ msgstr "Vyprázdní správnou odpověď k zvýrazněné nápovědě dolů."
 
-#~ msgid "Clears the dictionary"
-#~ msgstr "Vyprázdní slovník"
-
-#~ msgid ""
-#~ "Click / double click an answer to set it as the correct answer of the "
-#~ "clue."
-#~ msgstr ""
-#~ "Klepnout/Dvakrát klepnout na odpověď, aby se používala jako správná "
-#~ "odpověď na nápovědu."
-
-#~ msgid "Clue &Mapping:"
-#~ msgstr "&Přiřazení nápovědy:"
-
-#~ msgid "Clue &Type:"
-#~ msgstr "&Druh nápovědy:"
-
-#~ msgid "Clue Cell &Handling:"
-#~ msgstr "&Zacházení s políčkem s nápovědou:"
-
-#~ msgid "Clue Number"
-#~ msgstr "Číslo nápovědy"
-
-#~ msgid "Clues can be mapped to single cells or sets of cells"
-#~ msgstr "Nápovědy mohou být přiřazeny k jednotlivým nebo více políčkům"
-
 #~ msgctxt ""
 #~ "The title for contents descriptions of folders in the library tree view"
 #~ msgid "Content:"
 #~ msgstr "Obsah:"
-
-#~ msgid "Conversion Info"
-#~ msgstr "Informace o převodu"
-
-#~ msgid "Convert To Crossword Type"
-#~ msgstr "Převést na druh křížovky"
-
-#~ msgid "Copyright information about the crossword"
-#~ msgstr "Informace o autorském právu, jež se váže ke křížovce"
 
 #~ msgid "Correct &Answer"
 #~ msgstr "Správná &odpověď"
@@ -2919,9 +4039,6 @@ msgstr ""
 #~ "Křížovku se nepodařilo zapsat do zadaného souboru.\n"
 #~ "%1"
 
-#~ msgid "Create Database"
-#~ msgstr "Vytvořit databázi"
-
 #~ msgid "Create a new crossword in the library."
 #~ msgstr "Vytvořit novou křížovku v knihovně."
 
@@ -2933,15 +4050,6 @@ msgstr ""
 #~ "Vytvořeno prostřednictvím KrossWordPuzzle, viz http://kde-apps.org/"
 #~ "content/show.php?content=111726"
 
-#~ msgid "Crossword &Size:"
-#~ msgstr "&Velikost křížovky:"
-
-#~ msgid "Crossword Type Information"
-#~ msgstr "Informace o druhu křížovky"
-
-#~ msgid "Crossword Type:"
-#~ msgstr "Druh křížovky:"
-
 #~ msgid ""
 #~ "Crosswords from Boston Globe by Emily Cox, Henry Rathvon and Henry Hook"
 #~ msgstr ""
@@ -2950,39 +4058,17 @@ msgstr ""
 #~ msgid "Current crossword filename: \"%1\""
 #~ msgstr "Název souboru nynější křížovky: '%1'"
 
-#~ msgid "Current solution word:"
-#~ msgstr "Nynější slovo řešení:"
-
 #~ msgid "Daily Crossword From Houston Chronicle"
 #~ msgstr "Každodenní křížovka od Houston Chronicle"
 
 #~ msgid "Description"
 #~ msgstr "Popis"
 
-#~ msgid "Document &Information"
-#~ msgstr "Informace o dokumentu"
-
-#~ msgid "Document Information"
-#~ msgstr "Informace o dokumentu"
-
-#, fuzzy
-#~ msgid "Download &to:"
-#~ msgstr "&Stáhnout do:"
-
-#~ msgid "Download Crosswords"
-#~ msgstr "Stáhnout křížovky"
+#~ msgid "Document to open"
+#~ msgstr "Dokument k otevření"
 
 #~ msgid "Downloads"
 #~ msgstr "Stažení"
-
-#~ msgid "Edit"
-#~ msgstr "Upravit"
-
-#~ msgid "Empty cell &color:"
-#~ msgstr "&Barva prázdného políčka:"
-
-#~ msgid "Enable Animations"
-#~ msgstr "Povolit pohyblivé obrázky"
 
 #~ msgid ""
 #~ "Enables/disables the edit mode. All correct letters are shown in edit "
@@ -2995,105 +4081,29 @@ msgstr ""
 #~ msgid "Error while downloading from url"
 #~ msgstr "Chyba při stahování z adresy: %1"
 
+#~ msgid "Error while downloading from url: %1"
+#~ msgstr "Chyba při stahování z adresy: %1"
+
 #~ msgid "Export the crossword to PDF or postscript"
 #~ msgstr "Vyvést křížovku do PDF nebo postscriptu"
 
-#~ msgid "Exports the whole dictionary to a comma separated text file."
-#~ msgstr "Vyvede celý slovník do souboru s textem odděleným čárkou."
-
-#~ msgid "Extract From &Library"
-#~ msgstr "Vytáhnout z &knihovny"
-
-#~ msgid "Extracts words from plain text dictionary files"
-#~ msgstr "Vytáhne slova ze souborů se slovníky s prostým textem"
-
-#~ msgid "Extracts words with associated clues from crosswords in the library"
-#~ msgstr "Vytáhne slova s k nim přidruženými nápovědami z křížovek v knihovně"
-
-#~ msgid ""
-#~ "Extracts words with associated clues from crosswords in the library.\n"
-#~ "This does the same as \"Extract From Crosswords...\" with all crossword "
-#~ "files in the library."
-#~ msgstr ""
-#~ "Vytáhne slova s k nim přidruženými nápovědami z křížovek v knihovně.\n"
-#~ "Téhož lze dosíci pomocí \"Vytáhnout z křížovek...\" se všemi soubory "
-#~ "křížovek v knihovně."
-
-#~ msgid ""
-#~ "Filename of the last unsaved file, before a crash or unexpected "
-#~ "behaviour, which caused that an edited crossword wasn't saved without "
-#~ "confirmation of the user."
-#~ msgstr ""
-#~ "Název souboru posledního neuloženého souboru předtím, než došlo ke "
-#~ "spadnutí nebo neočekávanému chování, které mělo za následek, že "
-#~ "upravovaná křížovka nebyla uložena bez potvrzení uživatelem."
-
-#~ msgid "Fill Dictionary"
-#~ msgstr "Naplnit slovník"
-
-#~ msgid "First letter cell on the bottom left of the clue cell."
-#~ msgstr "První políčko s písmenem dole nalevo od políčka s nápovědou."
-
-#~ msgid "First letter cell on the bottom of the clue cell."
-#~ msgstr "První políčko s písmenem pod políčkem s nápovědou."
-
-#~ msgid "First letter cell on the bottom right of the clue cell."
-#~ msgstr "První políčko s písmenem dole napravo od políčka s nápovědou."
-
-#~ msgid "First letter cell on the left of the clue cell."
-#~ msgstr "První políčko s písmenem nalevo od políčka s nápovědou."
-
-#~ msgid "First letter cell on the right of the clue cell."
-#~ msgstr "První políčko s písmenem napravo od políčka s nápovědou."
-
-#~ msgid "First letter cell on the top left of the clue cell."
-#~ msgstr "První políčko s písmenem nahoře nalevo od políčka s nápovědou."
-
-#~ msgid "First letter cell on the top of the clue cell."
-#~ msgstr "První políčko s písmenem nahoře od políčka s nápovědou."
-
-#~ msgid "First letter cell on the top right of the clue cell."
-#~ msgstr "První políčko s písmenem nahoře napravo od políčka s nápovědou."
+#~ msgid "Failed"
+#~ msgstr "Nepodařilo se"
 
 #~ msgid "Form"
 #~ msgstr "Druh"
 
-#, fuzzy
-#~ msgid "General"
-#~ msgstr "Obecné"
-
 #~ msgid "Give up the Game"
 #~ msgstr "Zanechat hry"
-
-#~ msgid ""
-#~ "Hides the clue cell. The first letter cell is placed at the coordinates "
-#~ "of the clue cell."
-#~ msgstr ""
-#~ "Skryje políčko s nápovědou. První políčko s písmenem je umístěno na "
-#~ "souřadnicích políčka s nápovědou."
-
-#, fuzzy
-#~ msgid "Horizontal"
-#~ msgstr "Vodorovné"
 
 #~ msgid "Houston Chronicle (daily)"
 #~ msgstr "Houston Chronicle (každý den)"
 
-#~ msgid ""
-#~ "If a clue cell can, can't or has to be inserted into the crossword grid "
-#~ "for each clue"
-#~ msgstr ""
-#~ "Zda políčko s nápovědou může, nemůže nebo musí být vloženo do mřížky s "
-#~ "křížovkou u každé nápovědy"
+#~ msgid "I Swear Crossword by Victor Fleming (fridays)"
+#~ msgstr "I Swear Crossword (Přísaha na křížovku) od Viktora Fleminga (pátky)"
 
-#~ msgid "Image &File:"
-#~ msgstr "&Soubor s obrázkem:"
-
-#~ msgid "Imports entries from a comma separated text file."
-#~ msgstr "Zavede záznamy ze souboru s textem odděleným čárkou."
-
-#~ msgid "Insert special characters to the clue text"
-#~ msgstr "Vložit zvláštní znaky do textu nápovědy"
+#~ msgid "Insert special character:"
+#~ msgstr "Vložit zvláštní znak:"
 
 #~ msgid "KrossWordPuzzle"
 #~ msgstr "KrossWordPuzzle"
@@ -3101,29 +4111,8 @@ msgstr ""
 #~ msgid "Last Modified"
 #~ msgstr "Naposledy změněno"
 
-#~ msgid ""
-#~ "Lets you choose crossword files to extracts words with associated clues "
-#~ "from"
-#~ msgstr ""
-#~ "Nechá vás vybrat soubory s křížovkami, z nichž se budou vytahovat slova s "
-#~ "k nim přidruženými nápovědami"
-
-#~ msgid ""
-#~ "Lets you choose crossword files to extracts words with associated clues "
-#~ "from.\n"
-#~ "This does the same as \"Extract From Library\", but you can select from "
-#~ "which files words should be extracted."
-#~ msgstr ""
-#~ "Nechá vás vybrat soubory s křížovkami, z nichž se budou vytahovat slova s "
-#~ "k nim přidruženými nápovědami.\n"
-#~ "Téhož lze dosíci pomocí \"Vytáhnout z knihovny\", ale můžete si vybrat "
-#~ "soubory křížovek, ze kterých se slova budou vytahovat."
-
-#~ msgid "Letter"
-#~ msgstr "Písmeno"
-
-#~ msgid "Letter Cell &Content:"
-#~ msgstr "&Obsah políčka s písmenem:"
+#~ msgid "Let you select a special character to paste"
+#~ msgstr "Nechá vás vybrat zvláštní znak k vložení"
 
 #~ msgctxt ""
 #~ "This string is used to replace the library path for crossword files that "
@@ -3142,12 +4131,6 @@ msgstr ""
 #~ msgid "Main Toolbar"
 #~ msgstr "Hlavní pruh s nástroji"
 
-#~ msgid "Move Horizontal:"
-#~ msgstr "Posunout vodorovně"
-
-#~ msgid "Move Vertical:"
-#~ msgstr "Posunout svisle"
-
 #~ msgid "Moved crossword \"%1\" from \"%2\" to \"%3\""
 #~ msgstr "Křížovka \"%1\" přesunutá z \"%2\" do \"%3\""
 
@@ -3159,9 +4142,6 @@ msgstr ""
 
 #~ msgid "Name"
 #~ msgstr "Název"
-
-#~ msgid "Name of the current theme."
-#~ msgstr "Název současné vnější úpravy."
 
 #~ msgid ""
 #~ "Name of the subdirectory in the library directory in which new downloads "
@@ -3190,14 +4170,8 @@ msgstr ""
 #~ msgid "New &Crossword..."
 #~ msgstr "Nová &křížovka..."
 
-#~ msgid "New Size:"
-#~ msgstr "Nová velikost:"
-
 #~ msgid "No recent crosswords."
 #~ msgstr "Žádné poslední křížovky."
-
-#~ msgid "Notes about the crossword"
-#~ msgstr "Poznámky ke křížovce"
 
 #~ msgid "Notes:"
 #~ msgstr "Poznámky:"
@@ -3205,22 +4179,12 @@ msgstr ""
 #~ msgid "Onion Crosswords by Ben Tausig (wednesdays)"
 #~ msgstr "Křížovky z Onion Crosswords od Bena Tausiga (každou středu)"
 
-#~ msgid "Only the checked cell types can be added into the crossword grid"
-#~ msgstr ""
-#~ "Pouze zatržené druhy políček mohou být přidány do mřížky s křížovkou"
-
 #~ msgctxt "&Open"
 #~ msgid "Open a crossword file"
 #~ msgstr "Otevřít soubor s křížovkou"
 
-#~ msgid "Open the selected crossword."
-#~ msgstr "Otevřít vybranou křížovku."
-
 #~ msgid "Please reselect the crossword to show a preview..."
 #~ msgstr "Vyberte, prosím, křížovku znovu, aby se ukázal její náhled..."
-
-#~ msgid "Preview:"
-#~ msgstr "Náhled:"
 
 #~ msgid "Quit the game"
 #~ msgstr "Ukončit hru"
@@ -3228,35 +4192,14 @@ msgstr ""
 #~ msgid "Refreshes the library view after changes in the library folder."
 #~ msgstr "Obnoví pohled s knihovnou po změnách ve složce s knihovnou."
 
-#~ msgid "Remap the selected letter to the given clue number."
-#~ msgstr "Přiřadit vybrané písmeno k zadanému číslu nápovědy."
-
-#~ msgid "Removes the selected entries from the dictionary"
-#~ msgstr "Odstraní vybrané záznamy ze slovníku"
-
-#~ msgid "Resize Crossword"
-#~ msgstr "Změnit velikost křížovky"
-
-#~ msgid "Rules"
-#~ msgstr "Pravidla"
-
 #~ msgid "S&earch:"
 #~ msgstr "&Hledat:"
 
-#, fuzzy
-#~ msgid "Scaled"
-#~ msgstr "Úměrný"
+#~ msgid "Save &Edit History"
+#~ msgstr "Uložit &Upravit historii"
 
-#, fuzzy
-#~ msgid "Scaled (Keep Aspect Ratio)"
-#~ msgstr "Úměrný (Zachovat poměr stran)"
-
-#, fuzzy
-#~ msgid "Scaled and Cropped"
-#~ msgstr "Úměrný a ořezaný"
-
-#~ msgid "Selection"
-#~ msgstr "Výběr"
+#~ msgid "Save without correct answers, clue texts, images"
+#~ msgstr "Uložit bez správných odpovědí, textů s nápovědami, bez obrázků"
 
 #~ msgid "Set as Folder For New &Downloads"
 #~ msgstr "Nastavit jako složku pro nová &stažení"
@@ -3264,14 +4207,17 @@ msgstr ""
 #~ msgid "Set the theme"
 #~ msgstr "Nastavit téma"
 
-#~ msgid "Shows the current mapping of answer letters to clue numbers."
-#~ msgstr "Ukáže nynější přiřazení písmen odpovědí k číslům nápověd."
+#~ msgid "Show Only Answers With &Clue"
+#~ msgstr "Ukázat pouze odpovědi s &nápovědou"
 
-#~ msgid "Size:"
-#~ msgstr "Velikost:"
+#~ msgid "Show Only Answers With Current Answer &Length"
+#~ msgstr "Ukázat pouze odpovědi s &délkou nynější nápovědy"
 
-#~ msgid "Solution Letter"
-#~ msgstr "Slovo řešení"
+#~ msgid "Show Only the &First 100 Answers"
+#~ msgstr "Ukázat pouze &prvních sto odpovědí"
+
+#~ msgid "Solution"
+#~ msgstr "Řešení"
 
 #~ msgctxt "Loaded '%1'"
 #~ msgid ""
@@ -3289,9 +4235,6 @@ msgstr ""
 #~ "Text ve stavovém řádku, když se při nahrávání křížovky vyskytla chyba, %1 "
 #~ "je nahrazeno názvem souboru"
 
-#~ msgid "Template"
-#~ msgstr "Předloha"
-
 #, fuzzy
 #~ msgid "The answer contains illegal characters. Allowed are A-Z."
 #~ msgstr "Odpověď obsahuje nedovolené znaky. Povoleny jsou A-Z a/nebo 0-9."
@@ -3301,45 +4244,21 @@ msgstr ""
 #~ "The answer overwrites the answer to another clue in the same orientation"
 #~ msgstr "Odpověď přepíše odpověď k jiné nápovědě se stejným uspořádáním."
 
-#~ msgid "The author(s) of the crossword"
-#~ msgstr "Autor nebo autoři křížovky"
-
-#~ msgid "The clue text"
-#~ msgstr "Text nápovědy"
-
-#~ msgid "The clue to the answer."
-#~ msgstr "Nápověda k odpovědi."
-
 #, fuzzy
 #~ msgid "The file is not a Krossword version <= 1.1 file."
 #~ msgstr "Soubor není souborem KrossWordPuzzle ve verzi &lt;= 1.1."
 
-#~ msgid "The minimum length of answers to clues"
-#~ msgstr "Nejmenší délka odpovědí k nápovědám"
-
-#~ msgid "The name of the crossword type"
-#~ msgstr "Název druhu křížovky"
-
-#~ msgid "The new clue number for the selected letter."
-#~ msgstr "Nové číslo nápovědy pro vybrané písmeno."
-
-#, fuzzy
-#~ msgid "The size will be shrinked to match the aspect ratio of the crossword"
-#~ msgstr "(Velikost bude zmenšena, aby odpovídala poměru stran křížovky)"
+#~ msgid ""
+#~ "The solution letter position %1 is already assigned.\n"
+#~ "Please change the solution word position of that letter first."
+#~ msgstr ""
+#~ "Poloha písmene řešení %1 je již přiřazena.\n"
+#~ "Nejprve, prosím, změňte polohu slova řešení toho písmene."
 
 #~ msgid "The theme '%1' couldn't be found. The default theme is now used."
 #~ msgstr ""
 #~ "Vnější úpravu '%1' se nepodařilo najít, Nyní se používá výchozí vnější "
 #~ "úprava."
-
-#~ msgid "The title of the crossword"
-#~ msgstr "Název křížovky"
-
-#~ msgid "The type of clues (strings or numbers)"
-#~ msgstr "Druh nápověd (text nebo čísla)"
-
-#~ msgid "The type of content of letter cells"
-#~ msgstr "Druh obsahu políček s písmeny"
 
 #~ msgid ""
 #~ "This is the library view.<br/>You can see all crosswords that are inside "
@@ -3347,14 +4266,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Toto je pohled s knihovnou.<br>Můžete vidět všechny křížovky, které se "
 #~ "nacházejí v knihovně."
-
-#, fuzzy
-#~ msgid "Tiled"
-#~ msgstr "Vydlážděný"
-
-#, fuzzy
-#~ msgid "Title:"
-#~ msgstr "&Název:"
 
 #~ msgid "Top Left"
 #~ msgstr "Vlevo nahoře"
@@ -3380,10 +4291,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Použito jako popisek záhlaví pro sloupec obsahující časy, kdy byly "
 #~ "křížovky v modelu knihovny naposledy upravovány."
-
-#, fuzzy
-#~ msgid "Vertical"
-#~ msgstr "Svislé"
 
 #~ msgid ""
 #~ "Warning: Changing the size\n"
@@ -3419,9 +4326,6 @@ msgstr ""
 #~ msgid "Welcome to KrossWordPuzzle!"
 #~ msgstr "Vítejte v programu KrossWordPuzzle"
 
-#~ msgid "Wildcard pattern to search for answers"
-#~ msgstr "Vzor se zástupným znakem pro hledání odpovědí"
-
 #~ msgid ""
 #~ "You can specify multiple solution letters which form a solution word for "
 #~ "the whole crossword."
@@ -3450,9 +4354,6 @@ msgstr ""
 
 #~ msgid "title"
 #~ msgstr "Název"
-
-#~ msgid "whether or not animations should be enabled"
-#~ msgstr "Zda se mají povolit pohyblivé obrázky či ne"
 
 #~ msgid "whether or not changes to an items appearance should be animated."
 #~ msgstr "Zda se mají oživit pohybem změny ve vzhledu prvků či ne."

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: krossword\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-07 20:21+0100\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2017-10-22 15:49+0200\n"
 "PO-Revision-Date: 2011-11-03 10:51+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -24,184 +24,958 @@ msgstr ""
 "X-POFile-SpellExtra: Fléchés Grã\n"
 "X-POFile-IgnoreConsistency: Edit Mode\n"
 
-#: library/librarygui.cpp:553
+#. i18n: ectx: property (suffix), widget (QSpinBox, columns)
+#: create_new.ui:252 properties.ui:220
+#, kde-format
+msgid " columns"
+msgstr " colunas"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, width)
+#. i18n: ectx: property (suffix), widget (QSpinBox, height)
+#: export_to_image.ui:68 export_to_image.ui:106
+#, kde-format
+msgid " pixel"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, rows)
+#: create_new.ui:220 properties.ui:255
+#, kde-format
+msgid " rows"
+msgstr " linhas"
+
+#: library/librarygui.cpp:601
+#, kde-format
 msgid "%1"
 msgstr ""
 
-#: krossword.cpp:613
+#: krossword.cpp:477
+#, kde-format
 msgid "%1 clue cell"
 msgid_plural "%1 clue cells"
 msgstr[0] "%1 célula de pista"
 msgstr[1] "%1 células de pistas"
 
-#: krossword.cpp:618
+#: krossword.cpp:482
+#, kde-format
 msgid "%1 double clue cell"
 msgid_plural "%1 double clue cells"
 msgstr[0] "%1 célula de pista dupla"
 msgstr[1] "%1 células de pista duplas"
 
-#: dialogs/dictionarydialog.cpp:174 dialogs/dictionarydialog.cpp:189
+#: dialogs/dictionarydialog.cpp:185 dialogs/dictionarydialog.cpp:198
+#, kde-format
 msgid "%1 entries added from %2 crosswords"
 msgstr "%1 itens adicionados de %2 palavras cruzadas"
 
-#: dialogs/dictionarydialog.cpp:164
+#: dialogs/dictionarydialog.cpp:166
+#, kde-format
 msgid "%1 entries added from this dictionary: '%2'"
 msgstr "%1 itens adicionados a partir deste dicionário: '%2'"
 
-#: dialogs/dictionarydialog.cpp:254
+#: dialogs/dictionarydialog.cpp:256
+#, kde-format
 msgid "%1 entry imported from '%2'"
 msgid_plural "%1 entries imported from '%2'"
 msgstr[0] "%1 item importado de '%2'"
 msgstr[1] "%1 itens importados de '%2'"
 
-#: dialogs/dictionarydialog.cpp:208
+#: dialogs/dictionarydialog.cpp:217
+#, kde-format
 msgid "%1 entry removed"
 msgid_plural "%1 entries removed"
 msgstr[0] "%1 item removido"
 msgstr[1] "%1 itens removidos"
 
 #: dialogs/currentcellwidget.cpp:145
+#, kde-format
 msgid "%1 selected at (%2, %3)."
 msgstr "%1 seleccionado em (%2, %3)."
 
-#: krossword.cpp:623
+#: krossword.cpp:487
+#, kde-format
 msgid "%1 solution letter cell"
 msgid_plural "%1 solution letter cells"
 msgstr[0] "%1 célula de letra da solução"
 msgstr[1] "%1 células de letras da solução"
 
-#: crosswordxmlguiwindow.cpp:320
-#, no-c-format
+#: crosswordxmlguiwindow.cpp:333
+#, no-c-format, kde-format
 msgctxt "%p is replaced by the percentage of solved letter cells"
 msgid "%p% solved"
 msgstr "%p% resolvido"
 
-#: crosswordxmlguiwindow.cpp:1421
+#: crosswordxmlguiwindow.cpp:1445
+#, kde-format
 msgid "&Add Clue"
 msgstr "&Adicionar uma Pista"
 
-#: crosswordxmlguiwindow.cpp:1444
+#. i18n: ectx: property (text), widget (QToolButton, addEntry)
+#: dictionaries.ui:224
+#, kde-format
+msgid "&Add Entry"
+msgstr "&Adicionar um Item"
+
+#: crosswordxmlguiwindow.cpp:1468
+#, kde-format
 msgid "&Add Image"
 msgstr "&Adicionar uma Imagem"
 
-#: library/librarygui.cpp:531
+#: library/librarygui.cpp:579
+#, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Add..."
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1507
+#. i18n: ectx: property (text), widget (QLabel, lblDictionaryAnswers)
+#: clue_properties_dock.ui:539
+#, kde-format
+msgid "&Answers:"
+msgstr "Respost&as:"
+
+#. i18n: ectx: property (text), widget (QPushButton, apply)
+#: solution_letter_properties.ui:71
+#, kde-format
+msgid "&Apply"
+msgstr "&Aplicar"
+
+#. i18n: ectx: property (text), widget (QLabel, lblAuthor)
+#: properties.ui:91
+#, kde-format
+msgid "&Author:"
+msgstr "&Autor:"
+
+#: crosswordxmlguiwindow.cpp:1534
+#, kde-format
 msgid "&Check"
 msgstr "Verifi&car"
 
-#: crosswordxmlguiwindow.cpp:1460
+#: crosswordxmlguiwindow.cpp:1484
+#, kde-format
 msgid "&Check for rotation symmetry..."
 msgstr "Verifi&car a simetria da rotação..."
 
-#: crosswordxmlguiwindow.cpp:1512
+#: crosswordxmlguiwindow.cpp:1539
+#, kde-format
 msgid "&Clear Answers"
 msgstr "Limpar as &Respostas"
 
-#: crosswordxmlguiwindow.cpp:1450
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1474
+#, fuzzy, kde-format
 msgid "&Clear Crossword..."
 msgstr "&Limpar as Palavras Cruzadas"
 
+#. i18n: ectx: property (text), widget (QToolButton, clear)
+#: dictionaries.ui:287
+#, kde-format
+msgid "&Clear Dictionary"
+msgstr "&Limpar o Dicionário"
+
+#. i18n: ectx: property (text), widget (QLabel, lblClue)
+#: clue_properties_dock.ui:44
+#, kde-format
+msgid "&Clue:"
+msgstr "P&ista:"
+
+#. i18n: ectx: property (text), widget (QPushButton, convertToLetterCell)
+#: solution_letter_properties.ui:100
+#, kde-format
+msgid "&Convert to Letter Cell"
+msgstr "&Converter para uma Célula de Letra"
+
 #: dialogs/crosswordpropertiesdialog.cpp:46
+#, kde-format
 msgid "&Convert..."
 msgstr "&Converter..."
 
-#: library/librarygui.cpp:516
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
+#: properties.ui:120
+#, kde-format
+msgid "&Copyright:"
+msgstr "&Copyright:"
+
+#: library/librarygui.cpp:564
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Create Crossword..."
 msgstr "&Limpar as Palavras Cruzadas"
 
-#: crosswordxmlguiwindow.cpp:1455
+#: crosswordxmlguiwindow.cpp:1479
+#, kde-format
 msgid "&Crossword Properties..."
 msgstr "Propriedades das Palavras &Cruzadas..."
 
-#: library/librarygui.cpp:536
-#, fuzzy
+#: library/librarygui.cpp:584
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Delete..."
 msgstr "&Apagar"
 
-#: crosswordxmlguiwindow.cpp:1279
+#. i18n: ectx: property (text), widget (QLabel, lblDescription)
+#: configure_details.ui:80
+#, kde-format
+msgid "&Description:"
+msgstr "&Descrição:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, grpDictionary)
+#: clue_properties_dock.ui:474
+#, kde-format
+msgid "&Dictionary"
+msgstr "&Dicionário"
+
+#: crosswordxmlguiwindow.cpp:1303
+#, kde-format
 msgid "&Dictionary..."
 msgstr "&Dicionário..."
 
-#: library/librarygui.cpp:526
-#, fuzzy
+#: library/librarygui.cpp:574
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Download..."
 msgstr "O&bter"
 
-#: crosswordxmlguiwindow.cpp:1517
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_animate)
+#: settings.ui:20
+#, kde-format
+msgid "&Enable Animations"
+msgstr "Activar as Animaçõ&es"
+
+#: crosswordxmlguiwindow.cpp:1544
+#, kde-format
 msgid "&Eraser"
 msgstr "&Borracha"
 
-#: library/librarygui.cpp:541
-#, fuzzy
+#. i18n: ectx: property (text), widget (QToolButton, exportToCSV)
+#: dictionaries.ui:388
+#, kde-format
+msgid "&Export (CSV)..."
+msgstr "&Exportar (CSV)..."
+
+#: library/librarygui.cpp:589
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Export..."
 msgstr "&Exportar"
 
-#: crosswordxmlguiwindow.cpp:1368
-#, fuzzy
+#. i18n: ectx: property (text), widget (QToolButton, extractFromCrosswords)
+#: dictionaries.ui:128
+#, kde-format
+msgid "&Extract From Crosswords..."
+msgstr "&Extrair das Palavras Cruzadas..."
+
+#. i18n: ectx: property (text), widget (QLabel, lblFilter)
+#: dictionaries.ui:435
+#, kde-format
+msgid "&Filter:"
+msgstr "&Filtro:"
+
+#: crosswordxmlguiwindow.cpp:1392
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&First Letter"
 msgstr "Seleccionar a &Primeira Letra"
 
-#: crosswordxmlguiwindow.cpp:1373
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, lblHorizontalCellSpan)
+#: image_properties_dock.ui:135
+#, kde-format
+msgid "&Horizontal Cells:"
+msgstr "Células &Horizontais:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblHost)
+#: database_connection.ui:52
+#, kde-format
+msgid "&Host:"
+msgstr "&Máquina:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblName_2)
+#: configure_details.ui:100
+#, kde-format
+msgid "&Icon:"
+msgstr "Í&cone:"
+
+#. i18n: ectx: property (text), widget (QToolButton, importFromCSV)
+#: dictionaries.ui:351
+#, kde-format
+msgid "&Import (CSV)..."
+msgstr "&Importar (CSV)..."
+
+#: crosswordxmlguiwindow.cpp:1397
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Last Letter"
 msgstr "Seleccionar a Ú&ltima Letra"
 
-#: crosswordxmlguiwindow.cpp:1383
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, lblLetterCellContent)
+#: configure_details.ui:197
+#, fuzzy, kde-format
+msgid "&Letter Cell Content:"
+msgstr "&Conteúdo da Célula da Letra:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblTemplateLocation)
+#: create_new.ui:314
+#, kde-format
+msgid "&Location:"
+msgstr "&Localização:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblLongDescription)
+#: configure_details.ui:136
+#, kde-format
+msgid "&Long Description:"
+msgstr "Descrição &Longa:"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: clue_number_mapping.ui:261
+#, kde-format
+msgid "&Mapped Clue Number:"
+msgstr "Número da Pista &Mapeado:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblMinAnswerLength)
+#: configure_details.ui:289
+#, kde-format
+msgid "&Minimum Answer Length:"
+msgstr "Tamanho &Mínimo da Resposta:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblName)
+#: configure_details.ui:57
+#, kde-format
+msgid "&Name:"
+msgstr "&Nome:"
+
+#: crosswordxmlguiwindow.cpp:1407
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Next Clue"
 msgstr "Seleccionar a Pista Segui&nte"
 
-#: crosswordxmlguiwindow.cpp:1388
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, lblNotes)
+#. i18n: ectx: property (text), widget (QLabel, lblTemplateNotes)
+#: create_new.ui:169 create_new.ui:462 properties.ui:149
+#, kde-format
+msgid "&Notes:"
+msgstr "&Notas:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblPassword)
+#: database_connection.ui:95
+#, kde-format
+msgid "&Password:"
+msgstr "&Senha:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblPattern)
+#: clue_properties_dock.ui:480
+#, kde-format
+msgid "&Pattern:"
+msgstr "&Padrão:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblSolutionWordPosition)
+#: solution_letter_properties.ui:41
+#, kde-format
+msgid "&Position in the solution word:"
+msgstr "&Posição na palavra da solução:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblAspectRatio)
+#: image_properties_dock.ui:84
+#, kde-format
+msgid "&Positioning:"
+msgstr "&Posicionamento:"
+
+#: crosswordxmlguiwindow.cpp:1412
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "&Previous Clue"
 msgstr "Seleccionar a &Pista Anterior"
 
-#: crosswordxmlguiwindow.cpp:1427 crosswordxmlguiwindow.cpp:1860
+#. i18n: ectx: property (text), widget (QLabel, lblProviders)
+#: download.ui:20
+#, kde-format
+msgid "&Provider:"
+msgstr "&Fornecedor:"
+
+#: crosswordxmlguiwindow.cpp:1451 crosswordxmlguiwindow.cpp:1838
+#, kde-format
 msgid "&Remove"
 msgstr "&Remover"
 
-#: crosswordxmlguiwindow.cpp:1856
+#: crosswordxmlguiwindow.cpp:1834
+#, kde-format
 msgid "&Remove Clue"
 msgstr "&Remover a Pista"
 
-#: crosswordxmlguiwindow.cpp:1858
+#: crosswordxmlguiwindow.cpp:1836
+#, kde-format
 msgid "&Remove Image"
 msgstr "&Remover a Imagem"
 
-#: krosswordpuzzle.cpp:261
+#. i18n: ectx: property (text), widget (QToolButton, removeEntries)
+#: dictionaries.ui:252
+#, kde-format
+msgid "&Remove Selected"
+msgstr "Apaga&r os Seleccionados"
+
+#. i18n: ectx: property (text), widget (QPushButton, btnReset)
+#: properties.ui:312
+#, kde-format
+msgid "&Reset"
+msgstr "&Reiniciar"
+
+#: mainwindow.cpp:259
+#, kde-format
 msgid "&Restore"
 msgstr "&Repor"
 
 #: dialogs/crosswordtypewidget.cpp:226
+#, kde-format
 msgid "&Rules..."
 msgstr "&Regras..."
 
-#: crosswordxmlguiwindow.cpp:1465
+#. i18n: ectx: property (text), widget (QPushButton, setMapping)
+#: clue_number_mapping.ui:293
+#, kde-format
+msgid "&Set Mapping"
+msgstr "&Definir o Mapeamento"
+
+#: crosswordxmlguiwindow.cpp:1489
+#, kde-format
 msgid "&Statistics..."
 msgstr "E&statísticas..."
 
+#. i18n: ectx: property (text), widget (QLabel, lblTitle)
+#. i18n: ectx: property (text), widget (QLabel, lblTitle_2)
+#: create_new.ui:146 properties.ui:59
+#, kde-format
+msgid "&Title:"
+msgstr "&Título:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblUseTemplate)
+#: create_new.ui:534
+#, kde-format
+msgid "&Use Template:"
+msgstr "&Usar o Modelo:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblUser)
+#: database_connection.ui:75
+#, kde-format
+msgid "&User:"
+msgstr "&Utilizador:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, vertical)
+#: clue_properties_dock.ui:160
+#, fuzzy, kde-format
+msgctxt "Orientation of the answer to a clue."
+msgid "&Vertical"
+msgstr "Vertical"
+
+#. i18n: ectx: property (text), widget (QLabel, lblVerticalCellSpan)
+#: image_properties_dock.ui:151
+#, kde-format
+msgid "&Vertical Cells:"
+msgstr "Células &Verticais:"
+
+#: main.cpp:40
+#, kde-format
+msgid ""
+"(c) 2014-2017, Andrea Barazzetti\n"
+"(c) 2014-2017, Giacomo Barazzetti\n"
+"(c) 2009, Friedrich Pülz"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, labelTitleValue)
+#. i18n: ectx: property (text), widget (QLabel, labelSizeValue)
+#: download.ui:159 download.ui:182
+#, kde-format
+msgid "-"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, lblReadOnlyInfo)
+#: configure_details.ui:24
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> To change these values please first select \"User "
+"Defined\" as the crossword type.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Nota:</span> Para alterar estes valor, seleccione primeiro o "
+"\"Definido pelo Utilizador\" como tipo de palavras cruzadas.</p></body></"
+"html>"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, pattern)
+#: clue_properties_dock.ui:497
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Enter a pattern with "
+"letters, <span style=\" font-weight:600;\">? </span>for one arbitrary letter "
+"and <span style=\" font-weight:600;\">*</span> for any number of arbitrary "
+"letters.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Indique um padrão com as "
+"letras, <span style=\" font-weight:600;\">? </span>para uma letra arbitrária "
+"e <span style=\" font-weight:600;\">*</span> para um número qualquer de "
+"letras arbitrárias.</p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, exportToCSV)
+#: dictionaries.ui:385
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Exports the whole "
+"dictionary to a comma separated text file.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can use that to create "
+"a <span style=\" font-weight:600;\">backup</span> of your dictionary or to "
+"<span style=\" font-weight:600;\">share</span> your dictionary with others.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">It is also possible to "
+"open that file in a spread sheet application.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Exporta o dicionário por "
+"completo para um ficheiro de texto, separado por vírgulas.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Você poderá usar isso para "
+"criar uma <span style=\" font-weight:600;\">cópia de segurança</span> do seu "
+"dicionário ou para <span style=\" font-weight:600;\">partilhar</span> o seu "
+"dicionário com outros.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Também é possível abrir "
+"esse ficheiro numa folha de cálculo.</p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, importFromCSV)
+#: dictionaries.ui:348
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Imports entries from a "
+"comma separated text file.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can use that to <span "
+"style=\" font-weight:600;\">restore</span> a previously created backup of "
+"your dictionary or to import dictionaries from others.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Importa os itens de um "
+"ficheiro de texto separado por vírgulas.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Pode usar isso para <span "
+"style=\" font-weight:600;\">repor</span> uma cópia de segurança anterior do "
+"seu dicionário ou para importar os dicionários de terceiros.</p></body></"
+"html>"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, addWordsFromDictionary)
+#: dictionaries.ui:165
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Imports words from a plain "
+"text dictionary (eg. in /usr/dict/ or /usr/share/dict/). A dictionary for "
+"crosswords is available from <a href=\"http://www.quinapalus.com/xwfaq.html"
+"\"><span style=\" text-decoration: underline; color:#0057ae;\">http://www."
+"quinapalus.com/xwfaq.html</span></a> (UKACD).</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">The dictionary file must "
+"be a plain text file with one word per line.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Poderá usar o dicionário "
+"do seu sistema (em /usr/dict/ ou em /usr/share/dict/) ou transferir um "
+"dicionário a partir da Web. Está disponível um dicionário para as palavras "
+"cruzadas em <a href=\"http://www.quinapalus.com/xwfaq.html\"><span style=\" "
+"text-decoration: underline; color:#0057ae;\">http://www.quinapalus.com/xwfaq."
+"html</span></a>, procurando pela referência a UKACD. Os dicionários deverão "
+"ser ficheiros em texto simples com uma palavra por cada linha.</p></body></"
+"html>"
+
+#. i18n: ectx: property (whatsThis), widget (QListWidget, cellTypes)
+#: configure_details.ui:223
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Only the checked cell "
+"types can be added into the crossword grid.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Empty Cells</span> are also called \"Shaded Cells\", \"Blanks"
+"\", \"Darks\", \"Blocks\", \"Black Squares\" or \"Shaded Squares\". You "
+"cannot disallow empty cells.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Letter Cells</span> are also called \"White Cells\" or \"Lights"
+"\". They contain one letter (or digit) of one or two answers / entries. A "
+"letter cell that is part of two answers (both Across and Down) is called "
+"<span style=\" font-style:italic;\">checked</span>, <span style=\" font-"
+"style:italic;\">keyed</span> or <span style=\" font-style:italic;\">crossed</"
+"span>. A letter cell that is part of only one answer is called <span style="
+"\" font-style:italic;\">unchecked</span>, <span style=\" font-style:italic;"
+"\">unkeyed</span> or <span style=\" font-style:italic;\">uncrossed</span>.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Clue Cells</span> contain the clue text in small print inside "
+"and act as empty cells. Each clue cell has a little arrow indicating in "
+"which direction from its initial cell the answer is to be written.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Double Clue Cells</span> contain two clue cells inside, one "
+"above the other.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Solution Letter Cells</span> are letter cells that are part of "
+"a solution word for the whole crossword.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
+"weight:600;\">Image Cells</span> contain images and can be stretched over a "
+"block of multiple cells.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Só os seguintes tipos de "
+"células poderão ser adicionados à grelha de palavras cruzadas.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- As <span style=\" font-"
+"weight:600;\">Células Vazias</span> também se chamam de \"Células Sombreadas"
+"\", \"Brancas\", \"Escuras\", \"Blocos\", \"Quadrados Pretos\" ou "
+"\"Quadrados Sombreados\". Não poderá proibir as células vazias.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- As <span style=\" font-"
+"weight:600;\">Células de Letras</span> também são chamadas de \"Células "
+"Brancas\" ou \"Claras\". Contêm uma letra (ou algarismo) de uma ou duas "
+"respostas / itens. Uma célula de letra que faz parte de duas respostas "
+"(tanto na Horizontal como na Vertical) chama-se <span style=\" font-style:"
+"italic;\">assinalada</span>, <span style=\" font-style:italic;\">chave</"
+"span> ou <span style=\" font-style:italic;\">cruzada</span>. Uma célula de "
+"letra que só faz parte de uma resposta é chamada de <span style=\" font-"
+"style:italic;\">não-assinalada</span>, <span style=\" font-style:italic;"
+"\">não-chave</span> ou <span style=\" font-style:italic;\">não-cruzada</"
+"span>.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- As <span style=\" font-"
+"weight:600;\">Células de Pistas</span> contêm o texto da pista impresso em "
+"tamanho pequeno e actuam como células vazias. Cada célula da pista tem uma "
+"pequena seta que indica em que direcção, a partir da sua célula inicial, a "
+"resposta deverá ser dada.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- As <span style=\" font-"
+"weight:600;\">Células de Pistas Duplas</span> contêm duas células de pistas "
+"dentro delas, uma sobre a outra.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- As <span style=\" font-"
+"weight:600;\">Células de Letras da Solução</span> são células de letras que "
+"fazem parte de uma palavra da solução, para as palavras cruzadas inteiras.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">- As <span style=\" font-"
+"weight:600;\">Células de Imagens</span> contêm imagens e poderão ser "
+"esticadas de modo a ocupar um bloco de várias células.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QLabel, lblInfo)
+#: database_connection.ui:40
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">The MySQL root password is "
+"needed to automatically setup the database:</p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-"
+"right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-"
+"bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
+"indent:0px;\">Add a new user to the MySQL server (username and password: "
+"krosswordpuzzle)</li>\n"
+"<li style=\" font-weight:600;\" style=\" margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+"\"><span style=\" font-weight:400;\">Give privileges for a new database "
+"(named krosswordpuzzle) to that user</span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note: </span>You can also do these steps yourself by using a "
+"MySQL administrator tool.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">A senha de 'root' do MySQL "
+"é necessária para configurar automaticamente a base de dados:</p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-"
+"right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-"
+"bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
+"indent:0px;\">Adicionar um novo utilizador ao servidor de MySQL (utilizador "
+"e senha: krosswordpuzzle)</li>\n"
+"<li style=\" font-weight:600;\" style=\" margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
+"\"><span style=\" font-weight:400;\">Dar privilégios para uma nova base de "
+"dados (chamada 'krosswordpuzzle') a esse utilizador</span></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Nota: </span>Também poderá fazer você mesmo esses passos, "
+"usando uma ferramenta de administração do MySQL.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:12px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p></body></html>"
+
+#. i18n: ectx: property (whatsThis), widget (QTableView, tableDictionary)
+#: dictionaries.ui:482
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">This view contains all "
+"entries in the dictionary. </p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can <span style=\" "
+"font-weight:600;\">edit</span> each entry.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">To <span style=\" font-"
+"weight:600;\">find entries</span> in the possibly huge list you can enter a "
+"substring of the answer word into the edit line above.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Esta área contém todos os "
+"itens no dicionário.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Você poderá <span style=\" "
+"font-weight:600;\">editar</span> cada um dos itens.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Para <span style=\" font-"
+"weight:600;\">procurar itens</span> nesta lista enorme, poderá indicar uma "
+"sub-sequência da palavra da resposta no campo de texto em cima.</p></body></"
+"html>"
+
+#. i18n: ectx: property (whatsThis), widget (QLineEdit, pattern)
+#: clue_properties_dock.ui:508
+#, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">You can enter wildcard "
+"patterns to search the dictionary for answers.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">The pattern can contain "
+"letters, <span style=\" font-weight:600;\">? </span>for one arbitrary letter "
+"and <span style=\" font-weight:600;\">*</span> for any number of arbitrary "
+"letters.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">For example \"HO??E\" "
+"matches all answers starting with \"HO\", ending with \"E\" and having two "
+"arbitrary letters in between. \"HOUSE\" would be matched by that pattern.</"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Answers are searched while "
+"typing the pattern.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Note:</span> When you change the settings of the clue, a "
+"pattern is automatically constructed, based on the letters that are already "
+"in the crossword at the positions of the clue.</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Poderá indicar padrões de "
+"caracteres especiais para procurar as respostas no dicionário.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">O padrão poderá conter "
+"letras, <span style=\" font-weight:600;\">? </span>para uma letra arbitrária "
+"e <span style=\" font-weight:600;\">*</span> para qualquer conjunto de "
+"letras arbitrário.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Por exemplo \"??TEM\" "
+"corresponde a todas as respostas que terminam em \"TEM\" e duas letras "
+"arbitrárias no início. \"ONTEM\" iria corresponder a esse padrão.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">As respostas serão "
+"pesquisadas enquanto escreve o padrão.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Nota:</span> Quando mudar a configuração da pista, será "
+"construído um padrão automaticamente, com base nas letras que já constam nas "
+"palavras cruzadas, para as posições indicadas para a pista.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QLabel, lblInfo)
+#: clue_number_mapping.ui:27
+#, fuzzy, kde-format
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Noto Sans'; font-size:9pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'FreeSans'; font-size:10pt;\">In a \"Coded Puzzle\" each answer "
+"letter is mapped to a clue number. The solver has to find out which clue "
+"number belongs to which letter.</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'FreeSans'; font-size:10pt;\">To change the mapping of an answer "
+"letter select it in the list, enter it's new clue number and click \"Set "
+"Mapping\".</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'FreeSans'; font-size:10pt;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"family:'FreeSans'; font-size:10pt; font-weight:600;\">Note:</span><span "
+"style=\" font-family:'FreeSans'; font-size:10pt;\"> Conflicting mappings are "
+"resolved automatically.</span></p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
+"REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
+"\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Núm \"Puzzle de Números\", "
+"cada letra da resposta está associado a um número de pistas. A resolução "
+"passa por descobrir que número da pista corresponde a cada letra.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\">Para mudar o mapeamento de "
+"uma letra da resposta, seleccione-o na lista, indique o seu novo número de "
+"pista e carregue em \"Definir o Mapeamento\".</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></"
+"p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
+"right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
+"weight:600;\">Nota:</span> Os mapeamentos em conflito são resolvidos "
+"automaticamente.</p></body></html>"
+
 #: commands.cpp:993
+#, kde-format
 msgctxt ""
 "Used for the text of the change clue undo command, when the clue text is "
 "empty."
 msgid "<placeholder>empty</placeholder>"
 msgstr "<placeholder>vazio</placeholder>"
 
-#: crosswordxmlguiwindow.cpp:1505
+#: crosswordxmlguiwindow.cpp:1532
+#, kde-format
 msgid ""
 "<qt><p>Choose \"<b>Solve</b>\" if you want to give up the current game. The "
 "solution will be displayed.</p><p>If you filled in all letters and do not "
@@ -211,7 +985,13 @@ msgstr ""
 "solução será apresentada.</p><p>Se preencheu todas as letras e não quiser "
 "desistir, escolha \"Pronto!\".</p></qt>"
 
+#: krossword.cpp:1014
+#, kde-format
+msgid "<strong>%1</strong> by %2<br><small>%3</small>"
+msgstr ""
+
 #: global.cpp:508
+#, kde-format
 msgctxt "Long description of the crossword type 'Crossnumber'"
 msgid ""
 "A crossnumber (also known as a cross-figure) is the numerical analogy of a "
@@ -235,51 +1015,76 @@ msgstr ""
 "Cruzados.\n"
 "(texto retirado do Wikipédia)"
 
-#: main.cpp:27
-#, fuzzy
+#: main.cpp:29
+#, fuzzy, kde-format
 msgid ""
 "A crossword puzzle game and editor for KDE.\n"
 "Based on KrossWordPuzzle."
 msgstr "Um jogo e editor de palavras cruzadas para o KDE 4"
 
-#: cluemodel.cpp:63
+#. i18n: ectx: property (text), widget (QLabel, lblAnswerOffset)
+#: clue_properties_dock.ui:175
+#, fuzzy, kde-format
+msgid "A&nswer Offset:"
+msgstr "P&osição da Resposta:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblAuthor)
+#: create_new.ui:104
+#, fuzzy, kde-format
+msgid "A&uthor:"
+msgstr "&Autor:"
+
+#: cluemodel.cpp:62
+#, kde-format
 msgid "Across clues"
 msgstr "Pistas horizontais"
 
-#: krossworddocument.cpp:88
+#: krossworddocument.cpp:121
+#, kde-format
 msgctxt "Title for the list of across/horizontal clues when printing"
 msgid "Across clues"
 msgstr "Pistas horizontais"
 
 #: commands.cpp:774
+#, kde-format
 msgid "Add %1 letter"
 msgid_plural "Add %1 letters"
 msgstr[0] "Adicionar %1 letra"
 msgstr[1] "Adicionar %1 letras"
 
+#. i18n: ectx: property (text), widget (QToolButton, addWordsFromDictionary)
+#: dictionaries.ui:168
+#, kde-format
+msgid "Add &Words From Dictionary..."
+msgstr "Adicionar as &Palavras do Dicionário..."
+
 #: commands.cpp:425
+#, kde-format
 msgid "Add Clue '%1'"
 msgstr "Adicionar uma Pista '%1'"
 
 #: commands.cpp:423
+#, kde-format
 msgid "Add Clue Without Text"
 msgstr "Adicionar uma Pista sem Texto"
 
 #: commands.cpp:612
+#, kde-format
 msgid "Add Image '%1'"
 msgstr "Adicionar a Imagem '%1'"
 
-#: library/librarygui.cpp:532
-#, fuzzy
+#: library/librarygui.cpp:580
+#, fuzzy, kde-format
 msgid "Add a crossword to the library"
 msgstr "Importar palavras cruzadas para a biblioteca."
 
-#: crosswordxmlguiwindow.cpp:1280
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1304
+#, fuzzy, kde-format
 msgid "Add or remove crossword dictionaries"
 msgstr "Adicionar ou remover dicionários de palavras cruzadas."
 
-#: dictionary.cpp:566
+#: dictionary.cpp:563
+#, kde-format
 msgid ""
 "Adding words from %1 crossword files to the database.\n"
 "Please wait."
@@ -288,7 +1093,8 @@ msgstr ""
 "dados.\n"
 "Espere por favor."
 
-#: dictionary.cpp:462
+#: dictionary.cpp:459
+#, kde-format
 msgid ""
 "Adding words from the dictionary '%1' to the database.\n"
 "Please wait."
@@ -296,21 +1102,29 @@ msgstr ""
 "A adicionar as palavras do dicionário '%1' à base de dados.\n"
 "Espere por favor."
 
-#: crosswordxmlguiwindow.cpp:1422
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1446
+#, fuzzy, kde-format
 msgid "Adds a new clue at the current cell"
 msgstr "Adiciona uma pista nova à célula actual."
 
-#: crosswordxmlguiwindow.cpp:1445
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1469
+#, fuzzy, kde-format
 msgid "Adds a new image at the current cell"
 msgstr "Adiciona uma imagem nova à célula actual."
 
+#. i18n: ectx: property (toolTip), widget (QToolButton, addEntry)
+#: dictionaries.ui:221
+#, kde-format
+msgid "Adds an entry to the dictionary"
+msgstr "Adiciona um item ao dicionário"
+
 #: global.cpp:48
+#, kde-format
 msgid "All cells"
 msgstr "Todas as células"
 
-#: krossword.cpp:657
+#: krossword.cpp:521
+#, kde-format
 msgid ""
 "All clue cells get removed. The initial letter to clue number mapping is "
 "A=1, B=2, ..., Z=26."
@@ -318,11 +1132,19 @@ msgstr ""
 "Todas as células de pistas são removidas. O mapeamento de letras para "
 "números de pistas inicial é A=1, B=2, ..., Z=26."
 
+#. i18n: ectx: property (text), widget (QLabel, lblCellTypes)
+#: configure_details.ui:230
+#, kde-format
+msgid "Allowed Cell T&ypes:"
+msgstr "T&ipos de Células Permitidos:"
+
 #: global.cpp:457
+#, kde-format
 msgid "American Crossword"
 msgstr "Palavras Cruzadas Americanas"
 
 #: global.cpp:459
+#, kde-format
 msgctxt "Short description of the crossword type 'American'"
 msgid ""
 "American crosswords have numbered clues and a list of clues on the side of "
@@ -332,7 +1154,8 @@ msgstr ""
 "de lado das palavras cruzadas. Normalmente têm uma simetria de rotação em "
 "180 graus."
 
-#: krosswordpuzzle.cpp:262
+#: mainwindow.cpp:260
+#, kde-format
 msgid ""
 "An unsaved crossword has been found. Most likely the game crashed, sorry!\n"
 " Do you want to restore the crossword?"
@@ -341,163 +1164,219 @@ msgstr ""
 "estoirou, infelizmente.\n"
 "Deseja repor as palavras cruzadas?"
 
-#: main.cpp:37
+#. i18n: ectx: property (text), widget (QLabel, lblAnchor)
+#: properties.ui:276
+#, kde-format
+msgid "Anchor:"
+msgstr "Âncora:"
+
+#: main.cpp:42
+#, kde-format
 msgid "Andrea Barazzetti"
 msgstr ""
 
-#: krosswordpuzzle.cpp:308
-msgid "Animations"
-msgstr "Animações"
-
-#: cluemodel.cpp:60
-msgid "Answer"
-msgstr "Resposta"
-
-#: dictionary.cpp:243
+#: dictionary.cpp:240
+#, kde-format
 msgctxt "The header title for answers in the dictionary database"
 msgid "Answer"
 msgstr "Resposta"
 
-#: library/librarymanager.cpp:74
+#. i18n: ectx: property (toolTip), widget (QRadioButton, horizontal)
+#: clue_properties_dock.ui:135
+#, kde-format
+msgid "Arrange the answer letters horizontally."
+msgstr "Organizar as letras da resposta na horizontal."
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, vertical)
+#: clue_properties_dock.ui:157
+#, kde-format
+msgid "Arrange the answer letters vertically."
+msgstr "Organizar as letras da resposta na vertical."
+
+#: library/librarymanager.cpp:75
+#, kde-format
 msgctxt "The title for authors of crosswords in the library tree view"
 msgid "Author(s):"
 msgstr "Autor(es):"
 
 #: commands.cpp:1271
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Authors"
 msgstr "Autores"
 
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: download.ui:81
+#, fuzzy, kde-format
+msgid "Available crosswords"
+msgstr "Novas palavras cruzadas"
+
 #: dialogs/statisticsdialog.cpp:104
+#, kde-format
 msgid "Avg. Answer Length:"
 msgstr "Tamanho Médio da Resposta:"
 
-#: crosswordxmlguiwindow.cpp:1017
+#. i18n: ectx: attribute (label), widget (QWidget, page_2)
+#: dictionaries.ui:328
+#, kde-format
+msgid "Backup"
+msgstr "Cópia de Segurança"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: configure_details.ui:51
+#, kde-format
+msgid "Basic Settings"
+msgstr "Configuração Básica"
+
+#: crosswordxmlguiwindow.cpp:1029
+#, kde-format
 msgid "Can't add clue at the current cell"
 msgstr "Não é possível adicionar uma pista à célula actual"
 
-#: crosswordxmlguiwindow.cpp:1038
+#: crosswordxmlguiwindow.cpp:1050
+#, kde-format
 msgctxt "%1 contains the reason why the clue couldn't be added"
 msgid "Can't add clue. %1"
 msgstr "Não é possível adicionar a pista. %1"
 
-#: crosswordxmlguiwindow.cpp:1008
+#: crosswordxmlguiwindow.cpp:1020
+#, kde-format
 msgid "Can't add clues on crossed letter cells"
 msgstr "Não é possível adicionar pistas nas células de letras cruzadas"
 
-#: crosswordxmlguiwindow.cpp:1069
+#: crosswordxmlguiwindow.cpp:1081
+#, kde-format
 msgctxt "%1 contains the reason why the image couldn't be added"
 msgid "Can't add image. %1"
 msgstr "Não é possível adicionar a imagem. %1"
 
-#: crosswordxmlguiwindow.cpp:2758
+#: crosswordxmlguiwindow.cpp:2740
+#, kde-format
 msgctxt "%1 contains the reason why the letters couldn't be added to the clue"
 msgid "Can't add letter cells. %1"
 msgstr "Não é possível editar as células de letras. %1"
 
-#: crosswordxmlguiwindow.cpp:1187
+#: crosswordxmlguiwindow.cpp:1199
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the new clue number mapping couldn't be applied"
 msgid "Can't apply clue number mapping. %1"
 msgstr "Não é possível aplicar o mapeamento do número de pistas. %1"
 
-#: crosswordxmlguiwindow.cpp:1731
+#: crosswordxmlguiwindow.cpp:1712
+#, kde-format
 msgctxt "%1 contains the reason why the answer offset couldn't be changed"
 msgid "Can't change answer offset. %1"
 msgstr "Não é possível alterar a posição da resposta: %1"
 
-#: crosswordxmlguiwindow.cpp:1756
+#: crosswordxmlguiwindow.cpp:1737
+#, kde-format
 msgctxt "%1 contains the reason why the clue text couldn't be changed"
 msgid "Can't change clue text. %1"
 msgstr "Não é possível modificar o texto da pista. %1"
 
-#: crosswordxmlguiwindow.cpp:1769
+#: crosswordxmlguiwindow.cpp:1750
+#, kde-format
 msgctxt "%1 contains the reason why the correct answer couldn't be changed"
 msgid "Can't change correct answer. %1"
 msgstr "Não é possível alterar a resposta correcta. %1"
 
-#: crosswordxmlguiwindow.cpp:1117
+#: crosswordxmlguiwindow.cpp:1129
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the crossword properties couldn't be changed"
 msgid "Can't change crossword properties. %1"
 msgstr "Não é possível alterar as propriedades das palavras cruzadas. %1"
 
-#: crosswordxmlguiwindow.cpp:1744
+#: crosswordxmlguiwindow.cpp:1725
+#, kde-format
 msgctxt "%1 contains the reason why the orientation couldn't be changed"
 msgid "Can't change orientation. %1"
 msgstr "Não é possível alterar a orientação. %1"
 
-#: crosswordxmlguiwindow.cpp:2216 crosswordxmlguiwindow.cpp:2240
-#: crosswordxmlguiwindow.cpp:2265 crosswordxmlguiwindow.cpp:2699
+#: crosswordxmlguiwindow.cpp:2215 crosswordxmlguiwindow.cpp:2239
+#: crosswordxmlguiwindow.cpp:2264 crosswordxmlguiwindow.cpp:2693
+#, kde-format
 msgctxt "%1 contains the reason why the answer couldn't be cleared"
 msgid "Can't clear answer. %1"
 msgstr "Não é possível limpar a resposta. %1"
 
-#: crosswordxmlguiwindow.cpp:1100
+#: crosswordxmlguiwindow.cpp:1112
+#, kde-format
 msgctxt "%1 contains the reason why the crossword couldn't be cleared"
 msgid "Can't clear crossword. %1"
 msgstr "Não é possível limpar as palavras cruzadas. %1"
 
-#: crosswordxmlguiwindow.cpp:2193 crosswordxmlguiwindow.cpp:2693
+#: crosswordxmlguiwindow.cpp:2192 crosswordxmlguiwindow.cpp:2687
+#, kde-format
 msgctxt "%1 contains the reason why the letter cell couldn't be cleared"
 msgid "Can't clear letter cell. %1"
 msgstr "Não é possível limpar a célula da letra. %1"
 
-#: crosswordxmlguiwindow.cpp:2806
+#: crosswordxmlguiwindow.cpp:2799
+#, kde-format
 msgctxt "%1 contains the reason why the crossword couldn't be converted"
 msgid "Can't convert crossword. %1"
 msgstr "Não é possível converter as palavras cruzadas. %1"
 
-#: crosswordxmlguiwindow.cpp:1808
+#: crosswordxmlguiwindow.cpp:1788
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the letter couldn't be converted to a solution "
 "letter"
 msgid "Can't convert letter. %1"
 msgstr "Não é possível converter a letra. %1"
 
-#: crosswordxmlguiwindow.cpp:1789
+#: crosswordxmlguiwindow.cpp:1769
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the solution letter couldn't be converted to a "
 "letter"
 msgid "Can't convert solution letter. %1"
 msgstr "Não é possível converter a letra da solução. %1"
 
-#: crosswordxmlguiwindow.cpp:2771
+#: crosswordxmlguiwindow.cpp:2753
+#, kde-format
 msgctxt "%1 contains the reason why the letter cell couldn't be edited"
 msgid "Can't edit letter cell. %1"
 msgstr "Não é possível editar a célula da letra. %1"
 
-#: library/librarygui.cpp:290
+#: library/librarygui.cpp:342
+#, kde-format
 msgid "Can't export whole directories. Please select a crossword."
 msgstr ""
 "Não é possível exportar pastas inteiras. Seleccione por favor palavras "
 "cruzadas individuais."
 
-#: crosswordxmlguiwindow.cpp:1200
+#: crosswordxmlguiwindow.cpp:1212
+#, kde-format
 msgctxt "%1 contains the reason why the cells couldn't be moved"
 msgid "Can't move cells. %1"
 msgstr "Não é possível mover as células. %1"
 
-#: crosswordxmlguiwindow.cpp:1082
+#: crosswordxmlguiwindow.cpp:1094
+#, kde-format
 msgctxt "%1 contains the reason why the clue couldn't be removed"
 msgid "Can't remove clue. %1"
 msgstr "Não é possível remover a pista. %1"
 
-#: crosswordxmlguiwindow.cpp:1087
+#: crosswordxmlguiwindow.cpp:1099
+#, kde-format
 msgctxt "%1 contains the reason why the image couldn't be removed"
 msgid "Can't remove image. %1"
 msgstr "Não é possível remover a imagem. %1"
 
-#: crosswordxmlguiwindow.cpp:2760
+#: crosswordxmlguiwindow.cpp:2742
+#, kde-format
 msgctxt ""
 "%1 contains the reason why the letters couldn't be removed to the clue"
 msgid "Can't remove letter cells. %1"
 msgstr "Não é possível remover as células de letras. %1"
 
-#: crosswordxmlguiwindow.cpp:847
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:840
+#, fuzzy, kde-format
 msgid ""
 "Can't store confidence values in *.puz files!\n"
 "If you want confidence values to be stored please use a Krossword file "
@@ -507,8 +1386,8 @@ msgstr ""
 "Se quiser guardar os valores de confiança, use por favor um formato de "
 "ficheiro do KrossWordPuzzle (*.kwp ou *.kwpz)."
 
-#: crosswordxmlguiwindow.cpp:858
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:852
+#, fuzzy, kde-format
 msgid ""
 "Can't store image cells in *.puz files!\n"
 "If you want image cells to be stored please use a Krossword file format (*."
@@ -518,20 +1397,31 @@ msgstr ""
 "Se quiser guardar as células das imagens, use por favor um formato de "
 "ficheiro do KrossWordPuzzle (*.kwp ou *.kwpz)."
 
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:116
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Centered"
+msgstr "Centrado"
+
 #: commands.cpp:991
+#, kde-format
 msgid "Change Clue '%1'"
 msgstr "Modificar a Pista '%1'"
 
 #: commands.cpp:1483
-msgid "Change Number Puzzle Mapping"
+#, fuzzy, kde-format
+msgid "Change Coded Puzzle Mapping"
 msgstr "Mudar o Mapeamento do 'Puzzle' do Número"
 
-#: crosswordxmlguiwindow.cpp:1456
+#: crosswordxmlguiwindow.cpp:1480
+#, kde-format
 msgid "Change the size of the crossword or it's title, author, copyright..."
 msgstr ""
 "Mudar o tamanho, título, autor, direitos de cópia, das palavras cruzadas..."
 
 #: commands.cpp:1297
+#, kde-format
 msgctxt ""
 "%1 may be a list of changes separated by ',' if the list of changes contains "
 "more than 2 items. %2 is the last item"
@@ -539,16 +1429,18 @@ msgid "Changed Crossword Properties (%1 and %2)"
 msgstr "Foram Modificadas as Propriedades das Palavras Cruzadas (%1 e %2)"
 
 #: commands.cpp:1292
+#, kde-format
 msgid "Changed Crossword Properties (%1)"
 msgstr "Foram Modificadas as Propriedades das Palavras Cruzadas (%1)"
 
-#: crosswordxmlguiwindow.cpp:1471
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1495
+#, fuzzy, kde-format
 msgid "Changes the mapping of clue numbers to letters"
 msgstr "Altera o mapeamento de números de pistas para letras."
 
 #: dialogs/convertcrossworddialog.cpp:81
-#: dialogs/createnewcrossworddialog.cpp:231
+#: dialogs/createnewcrossworddialog.cpp:235
+#, kde-format
 msgid ""
 "Changing the crossword type will discard user defined crossword type "
 "settings."
@@ -557,147 +1449,221 @@ msgstr ""
 "de palavras cruzadas definido."
 
 #: global.cpp:300
+#, kde-format
 msgid "Characters"
 msgstr "Caracteres"
 
 #: global.cpp:304
+#, kde-format
 msgid "Characters or digits"
 msgstr "Caracteres ou algarismos"
 
-#: crosswordxmlguiwindow.cpp:1508
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:2406
+#, fuzzy, kde-format
+msgid "Check"
+msgstr "Verifi&car"
+
+#: crosswordxmlguiwindow.cpp:1535
+#, fuzzy, kde-format
 msgid "Checks if all letters are correct"
 msgstr "Verifica se todas as letras estão correctas."
 
-#: crosswordxmlguiwindow.cpp:1461
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1485
+#, fuzzy, kde-format
 msgid "Checks if the crossword has 180 degree rotation symmetry"
 msgstr ""
 "Verifica se as palavras cruzadas têm uma simetria de rotação em 180 graus."
 
-#: crosswordxmlguiwindow.cpp:1266
+#: crosswordxmlguiwindow.cpp:1289
+#, fuzzy, kde-format
+msgid "Choose a filename to save the crossword as a template"
+msgstr ""
+"Escolher um nome de ficheiro onde guardar as palavras cruzadas com as letras "
+"resolvidas"
+
+#: crosswordxmlguiwindow.cpp:1279
+#, kde-format
 msgid "Choose a filename to save the crossword with solved letters"
 msgstr ""
 "Escolher um nome de ficheiro onde guardar as palavras cruzadas com as letras "
 "resolvidas"
 
-#: library/librarygui.cpp:377
-msgid "ChrisWords.com"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
+#: crosswordxmlguiwindow.cpp:1107 crosswordxmlguiwindow.cpp:2412
+#, kde-format
 msgid "Clear"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1327
+#: crosswordxmlguiwindow.cpp:1351
+#, kde-format
 msgid "Clear Across Answer"
 msgstr "Limpar a Resposta Horizontal"
 
 #: commands.cpp:1092
+#, kde-format
 msgid "Clear Correct Answer of Clue at (%1, %2)"
 msgstr "Limpar a Resposta Correcta da Pista em (%1, %2)"
 
 #: commands.cpp:1144
+#, kde-format
 msgid "Clear Correct Letter at (%1, %2), was %3"
 msgstr "Limpar a Letra Correcta em (%1, %2), era %3"
 
 #: commands.cpp:1222
+#, kde-format
 msgid "Clear Crossword"
 msgstr "Limpar as Palavras Cruzadas"
 
-#: crosswordxmlguiwindow.cpp:1333
+#: crosswordxmlguiwindow.cpp:1357
+#, kde-format
 msgid "Clear Down Answer"
 msgstr "Limpar a Resposta Vertical"
 
 #: commands.cpp:1154
+#, kde-format
 msgid "Clear Letter at (%1, %2), was %3"
 msgstr "Limpar a Letra em (%1, %2), era %3"
 
-#: crosswordxmlguiwindow.cpp:1321
+#: crosswordxmlguiwindow.cpp:1345
+#, kde-format
 msgid "Clear This Answer"
 msgstr "Limpar Esta Resposta"
 
-#: crosswordxmlguiwindow.cpp:1315
+#: crosswordxmlguiwindow.cpp:1339
+#, kde-format
 msgid "Clear This Cell"
 msgstr "Limpar Esta Célula"
 
-#: crosswordxmlguiwindow.cpp:1513
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1540
+#, fuzzy, kde-format
 msgid "Clears all letter cells"
 msgstr "Limpa todas as células de letras."
 
-#: crosswordxmlguiwindow.cpp:1328
+#: crosswordxmlguiwindow.cpp:1352
+#, kde-format
 msgid "Clears the answer to the current across clue"
 msgstr "Limpa a resposta à pista horizontal actual"
 
-#: crosswordxmlguiwindow.cpp:1322
+#: crosswordxmlguiwindow.cpp:1346
+#, kde-format
 msgid "Clears the answer to the current clue"
 msgstr "Limpa a resposta para a pista actual."
 
-#: crosswordxmlguiwindow.cpp:1334
+#: crosswordxmlguiwindow.cpp:1358
+#, kde-format
 msgid "Clears the answer to the current down clue"
 msgstr "Limpa a resposta à pista vertical actual"
 
-#: crosswordxmlguiwindow.cpp:1316
-#, fuzzy
+#. i18n: ectx: property (toolTip), widget (QToolButton, clear)
+#: dictionaries.ui:284
+#, kde-format
+msgid "Clears the dictionary"
+msgstr "Limpa o dicionário"
+
+#: crosswordxmlguiwindow.cpp:1340
+#, fuzzy, kde-format
 msgid "Clears the selected letter cell"
 msgstr "Limpa a célula de letra seleccionada de momento"
 
-#: crosswordxmlguiwindow.cpp:673 crosswordxmlguiwindow.cpp:820
-#: krosswordpuzzle.cpp:131
+#. i18n: ectx: property (toolTip), widget (QListView, dictionaryAnswers)
+#: clue_properties_dock.ui:558
+#, kde-format
+msgid ""
+"Click / double click an answer to set it as the correct answer of the clue."
+msgstr ""
+"Faça um simples/duplo 'click' para o definir como a resposta correcta para a "
+"pista."
+
+#: crosswordxmlguiwindow.cpp:682 crosswordxmlguiwindow.cpp:813
+#: mainwindow.cpp:129
+#, kde-format
 msgid "Close Document"
 msgstr "Fechar o Documento"
 
-#: crosswordxmlguiwindow.cpp:1257
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1270
+#, fuzzy, kde-format
 msgid "Close the current crossword"
 msgstr "Fechar as palavras cruzadas actuais."
 
-#: cluemodel.cpp:60
+#: cluemodel.cpp:59
+#, kde-format
 msgid "Clue"
 msgstr "Pista"
 
-#: dictionary.cpp:245
+#: dictionary.cpp:242
+#, kde-format
 msgctxt ""
 "The header title for clues associated with answer words in the dictionary "
 "database"
 msgid "Clue"
 msgstr "Pista"
 
-#: crosswordxmlguiwindow.cpp:2477 crosswordxmlguiwindow.cpp:2505
+#. i18n: ectx: property (text), widget (QLabel, lblClueMapping)
+#: configure_details.ui:243
+#, kde-format
+msgid "Clue &Mapping:"
+msgstr "&Mapeamento das Pistas:"
+
+#. i18n: ectx: property (text), widget (QLabel, lblClueType)
+#: configure_details.ui:184
+#, kde-format
+msgid "Clue &Type:"
+msgstr "&Tipo de Pista:"
+
+#: crosswordxmlguiwindow.cpp:2478 crosswordxmlguiwindow.cpp:2506
+#, kde-format
 msgid "Clue (across): \"%1\", %2 letters, current answer: \"%3\""
 msgstr "Pista (horizontal): \"%1\", %2 letras, resposta actual: \"%3\""
 
-#: crosswordxmlguiwindow.cpp:2482 crosswordxmlguiwindow.cpp:2509
+#: crosswordxmlguiwindow.cpp:2483 crosswordxmlguiwindow.cpp:2509
+#, kde-format
 msgid "Clue (down): \"%1\", %2 letters, current answer: \"%3\""
 msgstr "Pista (vertical): \"%1\", %2 letras, resposta actual: \"%3\""
 
-#: crosswordxmlguiwindow.cpp:1661
+#. i18n: ectx: property (text), widget (QLabel, lblClueCellHandling)
+#: configure_details.ui:263
+#, kde-format
+msgid "Clue Cell &Handling:"
+msgstr "&Tratamento da Célula da Pista:"
+
+#: crosswordxmlguiwindow.cpp:1642
+#, kde-format
 msgid "Clue List"
 msgstr "Lista de Pistas"
 
-#: crosswordxmlguiwindow.cpp:1470
+#. i18n: ectx: property (text), widget (QTreeWidget, letterContentList)
+#: clue_number_mapping.ui:61
+#, kde-format
+msgid "Clue Number"
+msgstr "Número da Pista"
+
+#: crosswordxmlguiwindow.cpp:1494
+#, kde-format
 msgid "Clue Number &Mapping..."
 msgstr "&Mapeamento do Número da Pista..."
 
-#: crosswordxmlguiwindow.cpp:1162
+#. i18n: ectx: property (windowTitle), widget (QDialog, clue_number_mapping)
+#: clue_number_mapping.ui:14 crosswordxmlguiwindow.cpp:1174
+#, kde-format
 msgid "Clue Number Mapping"
 msgstr "Mapeamento do Número de Pistas"
 
-#: crosswordxmlguiwindow.cpp:1363
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1387
+#, fuzzy, kde-format
 msgid "Clue With Switched Orientation"
 msgstr "Seleccionar a Pista com a Orientação Mudada"
 
-#: crosswordxmlguiwindow.cpp:1052
+#: crosswordxmlguiwindow.cpp:1064
+#, kde-format
 msgid "Clue added ('%1')"
 msgstr "Pista adicionada ('%1')"
 
 #: global.cpp:38
+#, kde-format
 msgid "Clue cell"
 msgstr "Célula de pista"
 
 #: commands.cpp:352
+#, kde-format
 msgctxt ""
 "%1, %2 are the x-/y- coordinates, %3 is the clue text of the searched clue."
 msgid "Clue cell not found at the given coordinates (%1, %2): '%3'"
@@ -706,117 +1672,190 @@ msgstr ""
 "'%3'"
 
 #: global.cpp:260
+#, kde-format
 msgid "Clue cells are allowed"
 msgstr "São permitidas as células de pistas"
 
 #: global.cpp:262
+#, kde-format
 msgid "Clue cells are disallowed"
 msgstr "Não são permitidas as células de pistas"
 
 #: global.cpp:264
+#, kde-format
 msgid "Clue cells are required"
 msgstr "São obrigadas as células de pistas"
 
-#: krossworddocument.cpp:86
+#: krossworddocument.cpp:119
+#, kde-format
 msgctxt "Title for the clue list when printing"
 msgid "Clue list"
 msgstr "Lista de pistas"
 
 #: dialogs/currentcellwidget.cpp:154
+#, kde-format
 msgid "Clue:"
 msgstr "Pista:"
 
+#. i18n: ectx: property (toolTip), widget (KComboBox, clueMapping)
+#: configure_details.ui:170
+#, kde-format
+msgid "Clues can be mapped to single cells or sets of cells"
+msgstr ""
+"As pistas podem ser associadas a células individuais ou a conjuntos de "
+"células"
+
 #: global.cpp:277
+#, kde-format
 msgid "Clues refer to cells"
 msgstr "As pistas referem-se a células"
 
 #: global.cpp:275
+#, kde-format
 msgid "Clues refer to sets of cells"
 msgstr "As pistas referem-se a conjuntos de células"
 
 #: dialogs/statisticsdialog.cpp:85
+#, kde-format
 msgid "Clues:"
 msgstr "Pistas:"
 
-#: crosswordxmlguiwindow.cpp:2086
-#, fuzzy
+#: global.cpp:488
+#, fuzzy, kde-format
+msgid "Coded Puzzle"
+msgstr "'Puzzle' de Números"
+
+#: global.cpp:490
+#, fuzzy, kde-format
+msgctxt "Short description of the crossword type 'Coded Puzzle'"
+msgid ""
+"Coded puzzles are a variant of crosswords in which each cell has a number "
+"between 1 and 26. The solver has to find out for which letter of the "
+"alphabet a number stands."
+msgstr ""
+"Os 'puzzles' de números são uma variante das palavras cruzadas, onde cada "
+"célula temum número entre 1 e 26. A resolução tem de descobrir a que letra "
+"do alfabeto corresponde um dado número."
+
+#: crosswordxmlguiwindow.cpp:2045
+#, fuzzy, kde-format
 msgid ""
 "Congratulations!\n"
 "You solved the crossword perfectly."
 msgstr "Parabéns! Você resolveu perfeitamente as palavras cruzadas."
 
-#: crosswordxmlguiwindow.cpp:552
+#: crosswordxmlguiwindow.cpp:555
+#, kde-format
 msgid "Congratulations! You solved the crossword perfectly."
 msgstr "Parabéns! Você resolveu perfeitamente as palavras cruzadas."
 
-#: dictionary.cpp:131
+#: dictionary.cpp:128
+#, kde-format
 msgid "Connect Database"
 msgstr "Ligar à Base de Dados"
 
+#. i18n: ectx: property (title), widget (QGroupBox, grpConversionInfo)
+#: convert_crossword_type.ui:109
+#, kde-format
+msgid "Conversion Info"
+msgstr "Informação de Conversão"
+
 #: dialogs/currentcellwidget.cpp:439
+#, kde-format
 msgid "Convert &Letter %1 to Solution Letter"
 msgstr "Converter a &Letra %1 para uma Letra da Solução"
 
-#: commands.cpp:1777
+#: commands.cpp:1776
+#, kde-format
 msgid "Convert Crossword From '%1' to '%2'"
 msgstr "Converter as Palavras Cruzadas de '%1' para '%2'"
 
 #: dialogs/convertcrossworddialog.cpp:29
+#, kde-format
 msgid "Convert Crossword Type To"
 msgstr "Converter o Tipo de Palavras Cruzadas Para"
 
 #: dialogs/convertcrossworddialog.cpp:33
+#, kde-format
 msgid "Convert From: %1"
 msgstr "Converter De: %1"
 
 #: commands.cpp:626
+#, kde-format
 msgid "Convert Letter at (%1, %2) to Solution Letter"
 msgstr "Converter a Letra em (%1, %2) para uma Letra da Solução"
 
 #: commands.cpp:654
+#, kde-format
 msgctxt "%1 contains the position of the solution letter in the solution word."
 msgid "Convert Solution Letter %1 to Letter"
 msgstr "Converter a Letra da Solução %1 para uma Letra"
 
+#. i18n: ectx: property (windowTitle), widget (QDialog, convert_crossword_type)
+#: convert_crossword_type.ui:20
+#, kde-format
+msgid "Convert To Crossword Type"
+msgstr "Converter para o Tipo de Palavras Cruzadas"
+
 #: dialogs/convertcrossworddialog.cpp:105
+#, kde-format
 msgid "Convert To: %1"
 msgstr "Converter Para: %1"
 
+#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
+#: create_new.ui:133
+#, fuzzy, kde-format
+msgid "Cop&yright:"
+msgstr "&Copyright:"
+
 #: commands.cpp:1274
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Copyright"
 msgstr "'Copyright'"
 
-#: krosswordpuzzle.cpp:94
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, copyright)
+#: create_new.ui:188 properties.ui:133
+#, kde-format
+msgid "Copyright information about the crossword"
+msgstr "Informação de 'copyright' das palavras cruzadas"
+
+#: mainwindow.cpp:92
+#, kde-format
 msgid "Could not open resource at "
 msgstr ""
 
 #: io/krosswordxmlwriter.cpp:73
+#, kde-format
 msgid "Couldn't close the ZIP archive"
 msgstr "Não foi possível fechar o pacote ZIP"
 
-#: crosswordxmlguiwindow.cpp:2818
+#: crosswordxmlguiwindow.cpp:2811
+#, kde-format
 msgid "Couldn't connect to the database."
 msgstr "Não foi possível contactar a base de dados."
 
-#: library/librarygui.cpp:340
+#: library/librarygui.cpp:387
+#, kde-format
 msgid "Couldn't export the image to the specified file."
 msgstr "Não foi possível exportar a imagem para o ficheiro indicado."
 
 #: io/krosswordxmlwriter.cpp:52
+#, kde-format
 msgid "Couldn't open the ZIP archive for writing"
 msgstr "Não foi possível aceder ao pacote ZIP para escrita"
 
-#: library/librarygui.cpp:452
-#, fuzzy
+#: library/librarygui.cpp:500
+#, fuzzy, kde-format
 msgid "Couldn't remove the crossword from the library."
 msgstr ""
 "Não foi possível remover as palavras cruzadas da biblioteca.\n"
 "%1"
 
-#: library/librarygui.cpp:441
+#: library/librarygui.cpp:489
+#, kde-format
 msgid ""
 "Couldn't remove the directory from the library.\n"
 "You need root privileges to remove directories which belong to the global "
@@ -826,39 +1865,50 @@ msgstr ""
 "São necessários privilégios de 'root' para remover as palavras cruzadas que "
 "pertençam à biblioteca global."
 
-#: dialogs/dictionarydialog.cpp:205
+#: dialogs/dictionarydialog.cpp:214
+#, kde-format
 msgid "Couldn't submit removed entries to the database: %1"
 msgstr "Não foi possível enviar os itens removidos para a base de dados: %1"
 
-#: dialogs/createnewcrossworddialog.cpp:35
+#. i18n: ectx: property (windowTitle), widget (QDialog, database_connection)
+#: database_connection.ui:20
+#, kde-format
+msgid "Create Database"
+msgstr "Criar a Base de Dados"
+
+#: dialogs/createnewcrossworddialog.cpp:34
+#, kde-format
 msgid "Create New Crossword"
 msgstr "Criar Palavras Cruzadas Novas"
 
-#: library/librarygui.cpp:517
-#, fuzzy
+#: library/librarygui.cpp:565
+#, fuzzy, kde-format
 msgid "Create a new crossword"
 msgstr "Criar Palavras Cruzadas Novas"
 
-#: library/librarygui.cpp:522
-#, fuzzy
+#: library/librarygui.cpp:570
+#, fuzzy, kde-format
 msgid "Create a new folder in the library"
 msgstr "Criar uma pasta nova na biblioteca."
 
-#: dialogs/createnewcrossworddialog.cpp:111
-#, fuzzy
+#: dialogs/createnewcrossworddialog.cpp:114
+#, fuzzy, kde-format
 msgctxt "Default notes value for new crosswords"
 msgid "Created with Krossword"
 msgstr "Criar Palavras Cruzadas Novas"
 
 #: dialogs/statisticsdialog.cpp:70
+#, kde-format
 msgid "Crossed:"
 msgstr "Cruzadas:"
 
 #: global.cpp:503
+#, kde-format
 msgid "Crossnumber"
 msgstr "Números Cruzados"
 
 #: global.cpp:505
+#, kde-format
 msgctxt "Short description of the crossword type 'Crossnumber'"
 msgid ""
 "Crossnumbers are the numerical analogy of a crossword, in which the "
@@ -867,22 +1917,49 @@ msgstr ""
 "Os números cruzados são a analogia numérica das palavras cruzadas, onde as "
 "soluções das pistas são números em vez de palavras."
 
-#: library/librarygui.cpp:199 library/librarygui.cpp:204
+#. i18n: ectx: property (windowTitle), widget (QWidget, print_crossword)
+#. i18n: ectx: ToolBar (crosswordToolBar)
+#: krossword_crossword_ui.rc:52 print_crossword.ui:14
+#, fuzzy, kde-format
+msgid "Crossword"
+msgstr "Palavras &Cruzadas"
+
 #: library/librarygui.cpp:212
-#, fuzzy
+#, fuzzy, kde-format
 msgid "Crossword %1"
 msgstr "Palavras Cruzadas"
 
-#: dialogs/createnewcrossworddialog.cpp:191
+#. i18n: ectx: property (text), widget (QLabel, lblSize)
+#: create_new.ui:159
+#, fuzzy, kde-format
+msgid "Crossword Size:"
+msgstr "&Tamanho das Palavras Cruzadas:"
+
+#: dialogs/createnewcrossworddialog.cpp:194
+#, kde-format
 msgid "Crossword Type"
 msgstr "Tipo de Palavras Cruzadas"
 
+#. i18n: ectx: property (title), widget (QGroupBox, grpInfo)
+#: create_new.ui:51
+#, kde-format
+msgid "Crossword Type Information"
+msgstr "Informação do Tipo de Palavras Cruzadas"
+
+#. i18n: ectx: property (text), widget (QLabel, lblTemplateType)
+#: create_new.ui:436
+#, kde-format
+msgid "Crossword Type:"
+msgstr "Tipo de Palavras Cruzadas:"
+
 #: dialogs/crosswordpropertiesdialog.cpp:43
-#: dialogs/crosswordpropertiesdialog.cpp:277
+#: dialogs/crosswordpropertiesdialog.cpp:287
+#, kde-format
 msgid "Crossword Type: %1"
 msgstr "Tipo de Palavras Cruzadas: %1"
 
 #: global.cpp:462
+#, kde-format
 msgctxt "Long description of the crossword type 'American'"
 msgid ""
 "Crossword grids such as those appearing in most North American newspapers "
@@ -921,243 +1998,491 @@ msgstr ""
 "poliminó).\n"
 "(texto retirado da Wikipédia)"
 
+#: library/librarygui.cpp:292
+#, fuzzy, kde-format
+msgid "Crossword not valid"
+msgstr "Palavras Cruzadas"
+
+#: main.cpp:50
+#, fuzzy, kde-format
+msgid "Crossword to open"
+msgstr "Tipo de Palavras Cruzadas"
+
+#: crosswordxmlguiwindow.cpp:795 dialogs/dictionarydialog.cpp:192
+#, kde-format
+msgid "Crosswords (*.kwp *.kwpz *.puz)"
+msgstr ""
+
 #: dialogs/currentcellwidget.cpp:155
+#, kde-format
 msgid "Current Answer:"
 msgstr "Resposta Actual:"
 
-#: crosswordxmlguiwindow.cpp:1689
+#: crosswordxmlguiwindow.cpp:1670
+#, kde-format
 msgid "Current Cell"
 msgstr "Célula Actual"
 
-#: library/librarygui.cpp:537
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, lblCurrentSolutionWord)
+#: solution_letter_properties.ui:51
+#, kde-format
+msgid "Current solution word:"
+msgstr "Palavra da solução actual:"
+
+#: library/librarygui.cpp:585
+#, fuzzy, kde-format
 msgid "Delete the selected crossword from the library"
 msgstr "Apagar as palavras cruzadas seleccionadas da biblioteca."
 
 #: dialogs/crosswordtypeconfiguredetailsdialog.cpp:280
+#, kde-format
 msgid "Describe your crossword type here."
 msgstr "Descreva aqui o seu tipo de palavras cruzadas."
 
 #: dialogs/crosswordtypeconfiguredetailsdialog.cpp:26
+#, kde-format
 msgid "Detailed Configuration"
 msgstr "Configuração Detalhada"
 
-#: main.cpp:37 main.cpp:38
+#: main.cpp:42 main.cpp:43
+#, kde-format
 msgid "Developer"
 msgstr ""
 
-#: dialogs/dictionarydialog.cpp:37
+#. i18n: ectx: property (windowTitle), widget (QDialog, dictionaries)
+#: dialogs/dictionarydialog.cpp:38 dictionaries.ui:20
+#, kde-format
 msgid "Dictionary"
 msgstr "Dicionário"
 
-#: dialogs/dictionarydialog.cpp:217
+#: dialogs/dictionarydialog.cpp:226
+#, kde-format
 msgid "Dictionary cleared"
 msgstr "Dicionário limpo"
 
 #: global.cpp:302
+#, kde-format
 msgid "Digits"
 msgstr "Dígitos"
 
-#: crosswordxmlguiwindow.cpp:1095 crosswordxmlguiwindow.cpp:2411
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1107 crosswordxmlguiwindow.cpp:2412
+#, fuzzy, kde-format
 msgid "Do you really want to clear the crossword?"
 msgstr "Remove todas as pistas das palavras cruzadas."
 
-#: crosswordxmlguiwindow.cpp:2108
+#: crosswordxmlguiwindow.cpp:2107
+#, kde-format
 msgid "Do you really want to solve the crossword?"
 msgstr ""
 
-#: main.cpp:44
-msgid "Document to open"
-msgstr "O documento a abrir"
+#. i18n: ectx: property (title), widget (QGroupBox, grpDocumentInformation)
+#: create_new.ui:82
+#, kde-format
+msgid "Document &Information"
+msgstr "&Informação do Documento"
+
+#. i18n: ectx: attribute (label), widget (QWidget, page_2)
+#: properties.ui:41
+#, kde-format
+msgid "Document Information"
+msgstr "Informação do Documento"
 
 #: global.cpp:40
+#, kde-format
 msgid "Double clue cell"
 msgstr "Célula de pista dupla"
 
-#: cluemodel.cpp:64
+#: cluemodel.cpp:63
+#, kde-format
 msgid "Down clues"
 msgstr "Pistas verticais"
 
-#: krossworddocument.cpp:87
+#: krossworddocument.cpp:120
+#, kde-format
 msgctxt "Title for the list of down/vertical clues when printing"
 msgid "Down clues"
 msgstr "Pistas verticais"
 
-#: library/librarygui.cpp:349
+#. i18n: ectx: property (text), widget (QLabel, lblTargetDirectory)
+#: download.ui:49
+#, fuzzy, kde-format
+msgid "Download &to:"
+msgstr "Transferir &Para:"
+
+#: library/librarygui.cpp:396
+#, kde-format
 msgid "Download Crossword To Library"
 msgstr "Transferir as Palavras Cruzadas para a Biblioteca"
 
-#: library/librarygui.cpp:527
-#, fuzzy
+#. i18n: ectx: property (windowTitle), widget (QDialog, download)
+#: download.ui:14
+#, kde-format
+msgid "Download Crosswords"
+msgstr "Transferir as Palavras Cruzadas"
+
+#: library/librarygui.cpp:575
+#, fuzzy, kde-format
 msgid "Download a crossword and add it to the library"
 msgstr "Obtém umas palavras cruzadas e adiciona-as à biblioteca."
 
+#: library/librarygui.cpp:246
+#, fuzzy, kde-format
+msgid "Download error: "
+msgstr "Transferir &Para:"
+
+#. i18n: ectx: attribute (label), widget (QWidget, page_3)
+#. i18n: ectx: ToolBar (editToolBar)
+#: dictionaries.ui:209 krossword_crossword_ui.rc:71
+#, kde-format
+msgid "Edit"
+msgstr "Editar"
+
 #: commands.cpp:1150
+#, kde-format
 msgid "Edit Correct Letter at (%1, %2) From %3 to %4"
 msgstr "Editar a Letra Correcta em (%1, %2) de %3 para %4"
 
-#: crosswordxmlguiwindow.cpp:1679
+#: crosswordxmlguiwindow.cpp:1660
+#, kde-format
 msgid "Edit History"
 msgstr "Editar o Histórico"
 
 #: commands.cpp:1160
+#, kde-format
 msgid "Edit Letter at (%1, %2) From %3 to %4"
 msgstr "Editar a Letra em (%1, %2) de %3 para %4"
 
-#: crosswordxmlguiwindow.cpp:1416
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1440
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "Edit Mode"
 msgstr "Modo de Edição"
 
-#: cells/imagecell.cpp:68
+#: cells/imagecell.cpp:57
+#, kde-format
 msgid "Edit image properties to set an image"
 msgstr "Editar as propriedades da imagem para configurar uma imagem"
 
 #: dialogs/statisticsdialog.cpp:57
+#, kde-format
 msgid "Empty Cells:"
 msgstr "Células Vazias:"
 
-#: crosswordxmlguiwindow.cpp:2555 global.cpp:36
+#: crosswordxmlguiwindow.cpp:2549 global.cpp:36
+#, kde-format
 msgid "Empty cell"
 msgstr "Célula vazia"
 
-#: crosswordxmlguiwindow.cpp:1518
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, lblEmptyCellColor)
+#: print_crossword.ui:20
+#, kde-format
+msgid "Empty cell &color:"
+msgstr "&Cor das células vazias:"
+
+#. i18n: ectx: label, entry (animate), group (Preferences)
+#: krossword.kcfg:25
+#, kde-format
+msgid "Enable Animations"
+msgstr "Activar as Animações"
+
+#: crosswordxmlguiwindow.cpp:1545
+#, fuzzy, kde-format
 msgid "Enables the eraser, to clear letter cells/answers"
 msgstr "Activa o apagador, para limpar as células de letras / respostas."
 
-#: crosswordxmlguiwindow.cpp:1417
+#: crosswordxmlguiwindow.cpp:1441
+#, kde-format
 msgid "Enables/disables the edit mode"
 msgstr ""
 
-#: krosswordpuzzle.cpp:466
-#, fuzzy
+#: mainwindow.cpp:439
+#, fuzzy, kde-format
 msgid "Error loading file '%1'"
 msgstr "Ocorreu um erro ao carregar o ficheiro '%1'"
 
-#: krossword.cpp:1018
+#: krossword.cpp:871
+#, kde-format
 msgid "Error reading AcrossLite's .puz-format."
 msgstr "Erro ao ler do formato '.puz' do AcrossLite."
 
-#: krossword.cpp:963
-msgid "Error while downloading from url: %1"
-msgstr "Erro ao transferir do URL: %1"
-
-#: crosswordxmlguiwindow.cpp:750
+#: crosswordxmlguiwindow.cpp:768
+#, kde-format
 msgid "Error while loading file '%1': %2"
 msgstr "Ocorreu um erro ao carregar o ficheiro '%1': %2"
 
-#: crosswordxmlguiwindow.cpp:896
+#: crosswordxmlguiwindow.cpp:891
+#, kde-format
 msgid "Error while writing file: %1"
 msgstr "Ocorreu um erro ao escrever o ficheiro: %1"
 
-#: krossword.cpp:942
+#: krossword.cpp:809
+#, kde-format
 msgid "Error writing AcrossLite's .puz-format."
 msgstr "Erro ao escrever no formato '.puz' do AcrossLite."
 
-#: krossword.cpp:931
+#: krossword.cpp:798
+#, kde-format
 msgid "Error writing compressed crossword: %1"
 msgstr "Erro ao escrever as palavras cruzadas comprimidas: %1"
 
-#: krossword.cpp:924
+#: krossword.cpp:791
+#, kde-format
 msgid "Error writing crossword: %1"
 msgstr "Erro ao gravar as palavras cruzadas: %1"
 
 #: io/krosswordxmlwriter.cpp:58 io/krosswordxmlwriter.cpp:63
 #: io/krosswordxmlwriter.cpp:68
+#, kde-format
 msgid "Error writing to the compressed file"
 msgstr "Erro ao escrever no ficheiro comprimido"
 
-#: library/librarygui.cpp:306
+#: library/librarygui.cpp:353
+#, kde-format
 msgid "Export"
 msgstr "Exportar"
 
-#: library/librarygui.cpp:324
+#: library/librarygui.cpp:372
+#, kde-format
 msgid "Export Settings"
 msgstr "Exportar a Configuração"
 
-#: dialogs/dictionarydialog.cpp:224
+#: dialogs/dictionarydialog.cpp:231
+#, kde-format
 msgid "Export To CSV"
 msgstr "Exportar para CSV"
 
-#: library/librarygui.cpp:542
-#, fuzzy
+#: library/librarygui.cpp:590
+#, fuzzy, kde-format
 msgid "Export the selected crossword from the library"
 msgstr "Exportar as palavras cruzadas seleccionadas da biblioteca."
 
-#: dialogs/dictionarydialog.cpp:239
+#: dialogs/dictionarydialog.cpp:240
+#, kde-format
 msgid "Export to '%1' was successful"
 msgstr "A exportação para '%1' foi bem-sucedida"
 
-#: library/librarygui.cpp:161
-#, fuzzy
-msgid "Failed"
-msgstr "Mosaico"
+#. i18n: ectx: property (toolTip), widget (QToolButton, exportToCSV)
+#: dictionaries.ui:376
+#, kde-format
+msgid "Exports the whole dictionary to a comma separated text file."
+msgstr ""
+"Exporta todo o dicionário para um ficheiro de texto separado por vírgulas."
 
-#: crosswordxmlguiwindow.cpp:1504
-#, fuzzy
+#. i18n: ectx: property (text), widget (QToolButton, extractFromLibrary)
+#: dictionaries.ui:92
+#, kde-format
+msgid "Extract From &Library"
+msgstr "Extrair da Bib&lioteca"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, addWordsFromDictionary)
+#: dictionaries.ui:157
+#, kde-format
+msgid "Extracts words from plain text dictionary files"
+msgstr "Extrai as palavras de ficheiros de dicionários em texto simples"
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, extractFromLibrary)
+#: dictionaries.ui:85
+#, kde-format
+msgid "Extracts words with associated clues from crosswords in the library"
+msgstr ""
+"Extrai as palavras das pistas associadas das palavras cruzadas da biblioteca"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, extractFromLibrary)
+#: dictionaries.ui:89
+#, kde-format
+msgid ""
+"Extracts words with associated clues from crosswords in the library.\n"
+"This does the same as \"Extract From Crosswords...\" with all crossword "
+"files in the library."
+msgstr ""
+"Extrai as palavras com pistas associadas das palavras cruzadas na "
+"biblioteca.\n"
+"Isto faz o mesmo que o \"Extrair das Palavras Cruzadas...\" com todos os "
+"ficheiros de palavras cruzadas da biblioteca."
+
+#. i18n: ectx: label, entry (lastUnsavedFileBeforeCrash), group (Preferences)
+#: krossword.kcfg:10
+#, kde-format
+msgid ""
+"Filename of the last unsaved file, before a crash or unexpected behaviour, "
+"which caused that an edited crossword wasn't saved without confirmation of "
+"the user."
+msgstr ""
+"O nome do último ficheiro por gravar, antes de um estoiro ou comportamento "
+"inesperado, o que fez com que algumas palavras cruzadas editadas não "
+"tivessem sido gravadas sem confirmação por parte do utilizador."
+
+#. i18n: ectx: attribute (label), widget (QWidget, page)
+#: dictionaries.ui:70
+#, kde-format
+msgid "Fill Dictionary"
+msgstr "Preencher o Dicionário"
+
+#: crosswordxmlguiwindow.cpp:1531
+#, fuzzy, kde-format
 msgid "Fills all letter cells with the correct letters"
 msgstr "Preenche toda as células de letras com as correctas."
 
-#: crosswordxmlguiwindow.cpp:1378
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1402
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "First Clue"
 msgstr "Seleccionar a Primeira Pista"
 
-#: crosswordxmlguiwindow.cpp:1286
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionBottomLeft)
+#: clue_properties_dock.ui:329
+#, kde-format
+msgid "First letter cell on the bottom left of the clue cell."
+msgstr ""
+"Célula da primeira letra no canto inferior esquerdo da célula da pista."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionBottom)
+#: clue_properties_dock.ui:422
+#, kde-format
+msgid "First letter cell on the bottom of the clue cell."
+msgstr "Célula da primeira letra no fundo da célula da pista."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionBottomRight)
+#: clue_properties_dock.ui:453
+#, kde-format
+msgid "First letter cell on the bottom right of the clue cell."
+msgstr "Célula da primeira letra no canto inferior direito da célula da pista."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionLeft)
+#: clue_properties_dock.ui:298
+#, kde-format
+msgid "First letter cell on the left of the clue cell."
+msgstr "Célula da primeira letra à esquerda da célula da pista."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionRight)
+#: clue_properties_dock.ui:391
+#, kde-format
+msgid "First letter cell on the right of the clue cell."
+msgstr "Célula da primeira letra à direita da célula da pista."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionTopLeft)
+#: clue_properties_dock.ui:205
+#, kde-format
+msgid "First letter cell on the top left of the clue cell."
+msgstr ""
+"Célula da primeira letra no canto superior esquerdo da célula da pista."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionTop)
+#: clue_properties_dock.ui:236
+#, kde-format
+msgid "First letter cell on the top of the clue cell."
+msgstr "Célula da primeira letra no topo da célula da pista."
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionTopRight)
+#: clue_properties_dock.ui:267
+#, kde-format
+msgid "First letter cell on the top right of the clue cell."
+msgstr "Célula da primeira letra no canto superior direito da célula da pista."
+
+#: crosswordxmlguiwindow.cpp:1310
+#, kde-format
 msgid "Fit the whole crossword into the window"
 msgstr "Ajustar as palavras cruzadas inteiras à janela"
 
 #: global.cpp:409
+#, kde-format
 msgid "Free Crossword"
 msgstr "Palavras Cruzadas Livres"
 
-#: main.cpp:39
+#: main.cpp:44
+#, kde-format
 msgid "Friedrich Pülz"
 msgstr "Friedrich Pülz"
 
-#: main.cpp:38
+#: mainwindow.cpp:306
+#, fuzzy, kde-format
+msgid "General"
+msgstr "Geral"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tabGeneral)
+#: create_new.ui:39
+#, fuzzy, kde-format
+msgctxt "General settings for new crosswords."
+msgid "General"
+msgstr "Geral"
+
+#: main.cpp:43
+#, kde-format
 msgid "Giacomo Barazzetti"
 msgstr ""
 
 #: commands.cpp:1346
+#, kde-format
 msgid "Hide Clue Cell"
 msgstr "Esconder a Célula da Pista"
 
-#: crosswordxmlguiwindow.cpp:1339
+#. i18n: ectx: property (toolTip), widget (QPushButton, firstLetterPositionOnClueCell)
+#: clue_properties_dock.ui:360
+#, kde-format
+msgid ""
+"Hides the clue cell. The first letter cell is placed at the coordinates of "
+"the clue cell."
+msgstr ""
+"Esconde a célula da pista. A célula da primeira letra é colocada nas "
+"coordenadas da célula da pista."
+
+#: crosswordxmlguiwindow.cpp:1363
+#, kde-format
 msgid "Hint For This Cell"
 msgstr "Sugestão para Esta Célula"
 
-#: library/librarygui.cpp:373
-msgid "I Swear Crossword by Victor Fleming (fridays)"
-msgstr ""
+#. i18n: ectx: property (text), widget (QRadioButton, horizontal)
+#: clue_properties_dock.ui:138
+#, fuzzy, kde-format
+msgctxt "Orientation of the answer to a clue."
+msgid "Hori&zontal"
+msgstr "Horizontal"
 
-#: crosswordxmlguiwindow.cpp:2557
+#. i18n: ectx: property (toolTip), widget (KComboBox, clueCellHandling)
+#: configure_details.ui:177
+#, kde-format
+msgid ""
+"If a clue cell can, can't or has to be inserted into the crossword grid for "
+"each clue"
+msgstr ""
+"Se uma célula de pista pode, não pode ou tem de ser inserida na grelha das "
+"palavras cruzadas, para cada pista"
+
+#. i18n: ectx: property (text), widget (QLabel, lblFileName)
+#: image_properties_dock.ui:29
+#, kde-format
+msgid "Image &File:"
+msgstr "&Ficheiro de Imagem:"
+
+#: crosswordxmlguiwindow.cpp:2551
+#, kde-format
 msgid "Image '%1'"
 msgstr "Imagem '%1'"
 
 #: global.cpp:46
+#, kde-format
 msgid "Image cell"
 msgstr "Célula de imagem"
 
 #: commands.cpp:559
+#, kde-format
 msgid "Image cell not found at the given coordinates (%1, %2): '%3'"
 msgstr ""
 "A célula da imagem não foi encontrada para as coordenadas indicadas (%1, "
 "%2): '%3'"
 
-#: dialogs/dictionarydialog.cpp:245
+#: dialogs/dictionarydialog.cpp:247
+#, kde-format
 msgid "Import From CSV"
 msgstr "Importar de CSV"
 
-#: dictionary.cpp:292
+#: dictionary.cpp:289
+#, kde-format
 msgid "Importing Dictionary"
 msgstr "A Importar o Dicionário"
 
-#: dictionary.cpp:330
+#: dictionary.cpp:327
+#, kde-format
 msgid ""
 "Importing word clue pairs from '%1' to the database.\n"
 "Please wait."
@@ -1165,77 +2490,121 @@ msgstr ""
 "A importar os pares de pistas de palavras de '%1' para a base de dados.\n"
 "Espere por favor."
 
-#: crosswordxmlguiwindow.cpp:1494
-msgid "Insert special character:"
-msgstr "Inserir um carácter especial:"
+#. i18n: ectx: property (toolTip), widget (QToolButton, importFromCSV)
+#: dictionaries.ui:340
+#, kde-format
+msgid "Imports entries from a comma separated text file."
+msgstr "Importa os itens de um ficheiro de texto separado com vírgulas."
+
+#. i18n: ectx: property (toolTip), widget (QToolButton, insertChar)
+#: clue_properties_dock.ui:93
+#, kde-format
+msgid "Insert special characters to the clue text"
+msgstr "Inserir os caracteres especiais do texto da pista"
 
 #: global.cpp:50
+#, kde-format
 msgid "Interactive cells"
 msgstr "Células interactivas"
 
-#: main.cpp:33
-#, fuzzy
+#: main.cpp:38
+#, fuzzy, kde-format
 msgid "Krossword"
 msgstr "Palavras Cruzadas"
 
 #: dialogs/statisticsdialog.cpp:88
+#, kde-format
 msgctxt "Horizontal:"
 msgid "Label for the number  of horizontal clues"
 msgstr "Legenda do número de pistas horizontais"
 
 #: dialogs/statisticsdialog.cpp:92
+#, kde-format
 msgctxt "Vertical:"
 msgid "Label for the number  of vertical clues"
 msgstr "Legenda do número de pistas verticais"
 
-#: dictionary.cpp:249
+#: dictionary.cpp:246
+#, kde-format
 msgctxt ""
 "The header title for languages of clue/answer pairs in the dictionary "
 "database"
 msgid "Language"
 msgstr "Língua"
 
-#: crosswordxmlguiwindow.cpp:1393
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1417
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "Last Clue"
 msgstr "Seleccionar a Última Pista"
 
-#: crosswordxmlguiwindow.cpp:1498
-#, fuzzy
-msgid "Let you select a special character to paste"
-msgstr "Permite-lhe inserir um carácter especial para colar."
+#. i18n: ectx: property (toolTip), widget (QToolButton, extractFromCrosswords)
+#: dictionaries.ui:121
+#, kde-format
+msgid ""
+"Lets you choose crossword files to extracts words with associated clues from"
+msgstr ""
+"Permite-lhe escolher os ficheiros de palavras cruzadas com as pistas "
+"associadas de"
+
+#. i18n: ectx: property (whatsThis), widget (QToolButton, extractFromCrosswords)
+#: dictionaries.ui:125
+#, kde-format
+msgid ""
+"Lets you choose crossword files to extracts words with associated clues "
+"from.\n"
+"This does the same as \"Extract From Library\", but you can select from "
+"which files words should be extracted."
+msgstr ""
+"Permite-lhe escolher os ficheiros de palavras cruzadas com as pistas "
+"associadas de um dado grupo de ficheiros.\n"
+"Isto faz o mesmo que o \"Extrair da Biblioteca\", mas pode escolher os "
+"ficheiros de onde extrair as palavras."
 
 #: global.cpp:426
+#, kde-format
 msgctxt "Short description of the crossword type 'User Defined'"
 msgid "Lets you specify your own rules."
 msgstr "Permite-lhe indicar as suas próprias regras."
 
+#. i18n: ectx: property (text), widget (QTreeWidget, letterContentList)
+#: clue_number_mapping.ui:56
+#, kde-format
+msgid "Letter"
+msgstr "Carta"
+
 #: dialogs/statisticsdialog.cpp:60
+#, kde-format
 msgid "Letter Cells:"
 msgstr "Células de Letras:"
 
 #: global.cpp:42
+#, kde-format
 msgid "Letter cell"
 msgstr "Célula de letra"
 
 #: commands.cpp:704 commands.cpp:1172
+#, kde-format
 msgid "Letter cell not found at the given coordinates (%1, %2)"
 msgstr ""
 "A célula da letra não foi encontrada para as coordenadas indicadas (%1, %2)"
 
-#: krossword.cpp:650
+#: krossword.cpp:514
+#, kde-format
 msgid "Letters can't be converted back correctly after this conversion."
 msgstr ""
 "As letras não poderão ser convertidas correctamente de volta após esta "
 "conversão."
 
-#: krosswordpuzzle.cpp:240 krosswordpuzzle.cpp:429 library/librarygui.cpp:404
+#. i18n: ectx: ToolBar (libraryToolBar)
+#: krossword_library_ui.rc:6 library/librarygui.cpp:455 mainwindow.cpp:238
+#: mainwindow.cpp:402
+#, kde-format
 msgid "Library"
 msgstr "Biblioteca"
 
-#: krosswordpuzzle.cpp:283
-#, fuzzy
+#: mainwindow.cpp:281
+#, fuzzy, kde-format
 msgctxt ""
 "This string is used to replace the library path for crossword files that are "
 "in the library with a shorter user visible string, e.g. replacing ~/.kde4/"
@@ -1243,80 +2612,113 @@ msgctxt ""
 msgid "Library"
 msgstr "Biblioteca"
 
-#: crosswordxmlguiwindow.cpp:706
+#: crosswordxmlguiwindow.cpp:720
+#, kde-format
 msgid "Loaded crossword from file '%1'"
 msgstr "Carregar as palavras cruzadas do ficheiro '%1'"
 
-#: dialogs/crosswordpreviewwidget.cpp:46
+#: dialogs/crosswordpreviewwidget.cpp:44
+#, kde-format
 msgid "Loading preview..."
 msgstr "A carregar a antevisão..."
 
-#: krosswordpuzzle.cpp:183
+#: mainwindow.cpp:181
+#, kde-format
 msgid "Loading the crossword, please wait..."
 msgstr "A carregar as palavras cruzadas, espere por favor..."
 
-#: krosswordpuzzle.cpp:180 library/librarygui.cpp:231
+#: library/librarygui.cpp:235 mainwindow.cpp:178
+#, kde-format
 msgid "Loading..."
 msgstr "A carregar..."
 
+#. i18n: ectx: property (windowTitle), widget (QMainWindow, PrintPreviewDialog)
+#: dialogs/printpreviewdialog.ui:14
+#, kde-format
+msgid "MainWindow"
+msgstr ""
+
 #: commands.cpp:1410
+#, kde-format
 msgid "Make Clue Cell Visible"
 msgstr "Tornar a Célula da Pista Visível"
 
-#: crosswordxmlguiwindow.cpp:1303
+#: crosswordxmlguiwindow.cpp:1327
+#, kde-format
 msgid "Mark as confident"
 msgstr "Marcar à confiança"
 
-#: crosswordxmlguiwindow.cpp:1309
+#: crosswordxmlguiwindow.cpp:1333
+#, kde-format
 msgid "Mark as unsure"
 msgstr "Marcar como incerto"
 
-#: crosswordxmlguiwindow.cpp:1304
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1328
+#, fuzzy, kde-format
 msgid "Mark the selected letter cell's confidence as confident"
 msgstr ""
 "Marcar a confiança na célula da letra seleccionada de momento como certa"
 
-#: crosswordxmlguiwindow.cpp:1310
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1334
+#, fuzzy, kde-format
 msgid "Mark the selected letter cell's confidence as unsure"
 msgstr ""
 "Marcar a confiança na célula da letra seleccionada de momento como incerta"
 
-#: library/librarygui.cpp:357
+#: library/librarygui.cpp:404
+#, kde-format
 msgid "Matt Jones (thursdays)"
 msgstr "Matt Jones (quintas-feiras)"
 
 #: dialogs/statisticsdialog.cpp:101
+#, kde-format
 msgid "Max. Answer Length:"
 msgstr "Tamanho Máx. da Resposta:"
 
 #: dialogs/statisticsdialog.cpp:98
+#, kde-format
 msgid "Min. Answer Length:"
 msgstr "Tamanho Mín. da Resposta:"
 
-#: library/librarygui.cpp:381
+#: library/librarygui.cpp:432
+#, kde-format
 msgid "Mots-croisés.ch free French crosswords"
 msgstr ""
 
-#: commands.cpp:1972
+#: commands.cpp:1971
+#, kde-format
 msgid "Move All Cells By %1, %2"
 msgstr "Mover Todas as Células em %1, %2"
 
-#: crosswordxmlguiwindow.cpp:1475
+#: crosswordxmlguiwindow.cpp:1499
+#, kde-format
 msgid "Move All Cells..."
 msgstr "Mover Todas as Células..."
 
 #: dialogs/movecellsdialog.cpp:28
+#, kde-format
 msgid "Move Cells"
 msgstr "Mover as Células"
 
-#: crosswordxmlguiwindow.cpp:1476
-#, fuzzy
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: move_cells.ui:40
+#, kde-format
+msgid "Move Horizontal:"
+msgstr "Mover na Horizontal:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: move_cells.ui:72
+#, kde-format
+msgid "Move Vertical:"
+msgstr "Mover na Vertical:"
+
+#: crosswordxmlguiwindow.cpp:1500
+#, fuzzy, kde-format
 msgid "Moves all cells of the crossword"
 msgstr "Move todas as células das palavras cruzadas."
 
 #: dialogs/movecellsdialog.cpp:65
+#, kde-format
 msgctxt ""
 "How many clues are removed when moving all cells of the crossword. %2 is "
 "replaced by a plural indicating how many images will be removed when moving "
@@ -1326,29 +2728,46 @@ msgid_plural "Moving all cells will remove %1 clues %2"
 msgstr[0] "A movimentação de todas as células irá remover %1 pista %2"
 msgstr[1] "A movimentação de todas as células irá remover %1 pistas %2"
 
-#: library/librarygui.cpp:521
-#, fuzzy
+#. i18n: ectx: label, entry (Theme), group (Preferences)
+#: krossword.kcfg:15
+#, kde-format
+msgid "Name of the current theme."
+msgstr "O nome do tema actual."
+
+#: library/librarygui.cpp:569
+#, fuzzy, kde-format
 msgctxt "@action:intoolbar"
 msgid "New &Folder..."
 msgstr "Nova &Pasta"
 
 #: dialogs/crosswordtypeconfiguredetailsdialog.cpp:277
+#, kde-format
 msgid "New Crossword Type"
 msgstr "Novo Tipo de Palavras Cruzadas"
 
-#: library/librarygui.cpp:473
+#: library/librarygui.cpp:521
+#, kde-format
 msgid "New Library Folder"
 msgstr "Nova Pasta da Biblioteca"
 
-#: crosswordxmlguiwindow.cpp:618 crosswordxmlguiwindow.cpp:651
+#. i18n: ectx: property (text), widget (QLabel, lblSize)
+#: properties.ui:196
+#, kde-format
+msgid "New Size:"
+msgstr "Novo Tamanho:"
+
+#: crosswordxmlguiwindow.cpp:624 crosswordxmlguiwindow.cpp:660
+#, kde-format
 msgid "New crossword"
 msgstr "Novas palavras cruzadas"
 
 #: commands.cpp:1299
+#, kde-format
 msgid "No Action"
 msgstr "Nenhuma Acção"
 
-#: dictionary.cpp:122
+#: dictionary.cpp:119
+#, kde-format
 msgid ""
 "No Connection to the database! Please make sure the MySQL server is running. "
 "Afterwards click \"Continue\" to retry connecting to the database."
@@ -1357,55 +2776,68 @@ msgstr ""
 "servidor de MySQL está a correr. Depois disso, carregue em \"Continuar\" "
 "para configurar a base de dados."
 
-#: dictionary.cpp:125
+#: dictionary.cpp:122
+#, kde-format
 msgid "No Database Connection"
 msgstr "Sem Ligação à Base de Dados"
 
 #: commands.cpp:343 commands.cpp:552 commands.cpp:662 commands.cpp:697
+#, kde-format
 msgid "No cell at the given coordinates (%1, %2)"
 msgstr "Não existe nenhuma célula com as coordenadas indicadas (%1, %2)"
 
 #: dialogs/currentcellwidget.cpp:114
+#, kde-format
 msgid "No cell selected."
 msgstr "Não foi seleccionada nenhuma célula."
 
-#: dialogs/crosswordpropertiesdialog.cpp:245
+#: dialogs/crosswordpropertiesdialog.cpp:255
+#, kde-format
 msgctxt "No changes to the crossword grid size."
 msgid "No change"
 msgstr "Sem alterações"
 
 #: commands.cpp:813 commands.cpp:1006 commands.cpp:1100
+#, kde-format
 msgid "No clue cell given"
 msgstr "Não foi indicada nenhuma célula de pista"
 
-#: krossword.cpp:3034
+#: krossword.cpp:2835
+#, kde-format
 msgid "No error."
 msgstr "Sem erros."
 
-#: crosswordxmlguiwindow.cpp:1090
+#: crosswordxmlguiwindow.cpp:1102
+#, kde-format
 msgid "No removable cell selected."
 msgstr "Não foi seleccionada nenhuma célula removível."
 
-#: dialogs/createnewcrossworddialog.cpp:193
+#: dialogs/createnewcrossworddialog.cpp:196
+#, kde-format
 msgid "Notes"
 msgstr "Notas"
 
 #: commands.cpp:1277
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Notes"
 msgstr "Notas"
 
-#: global.cpp:488
-msgid "Number Puzzle"
-msgstr "'Puzzle' de Números"
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, notes)
+#: create_new.ui:204 properties.ui:162
+#, kde-format
+msgid "Notes about the crossword"
+msgstr "Notas acerca das palavras cruzadas"
 
 #: global.cpp:289
+#, kde-format
 msgid "Number clues (1 to 26)"
 msgstr "Pistas de números (1 a 26)"
 
 #: dialogs/statisticsdialog.cpp:72
+#, kde-format
 msgid ""
 "Number of crossed letter cells, percentage of total letter cell count in "
 "braces"
@@ -1414,18 +2846,21 @@ msgstr ""
 "totais entre parêntesis"
 
 #: dialogs/statisticsdialog.cpp:59
+#, kde-format
 msgid "Number of empty cells, percentage of total cell count in braces"
 msgstr ""
 "Número de células vazias; percentagem do número de células totais entre "
 "parêntesis"
 
 #: dialogs/statisticsdialog.cpp:90
+#, kde-format
 msgid "Number of horizontal clues, percentage of total clue count in braces"
 msgstr ""
 "Número de pistas horizontais; percentagem do número de pistas totais entre "
 "parêntesis"
 
 #: dialogs/statisticsdialog.cpp:121
+#, kde-format
 msgid ""
 "Number of letter cells containing '%1', percentage of total letter cell "
 "count in braces"
@@ -1434,12 +2869,14 @@ msgstr ""
 "células de letras totais entre parêntesis"
 
 #: dialogs/statisticsdialog.cpp:62
+#, kde-format
 msgid "Number of letter cells, percentage of total cell count in braces"
 msgstr ""
 "Número de células de letras; percentagem do número de células totais entre "
 "parêntesis"
 
 #: dialogs/statisticsdialog.cpp:76
+#, kde-format
 msgid ""
 "Number of uncrossed letter cells, percentage of total letter cell count in "
 "braces"
@@ -1448,120 +2885,167 @@ msgstr ""
 "totais entre parêntesis"
 
 #: dialogs/statisticsdialog.cpp:94
+#, kde-format
 msgid "Number of vertical clues, percentage of total clue count in braces"
 msgstr ""
 "Número de pistas verticais; percentagem do número de pistas totais entre "
 "parêntesis"
 
-#: global.cpp:490
-msgctxt "Short description of the crossword type 'Number Puzzle'"
-msgid ""
-"Number puzzles are a variant of crosswords in which each cell has a number "
-"between 1 and 26. The solver has to find out for which letter of the "
-"alphabet a number stands."
-msgstr ""
-"Os 'puzzles' de números são uma variante das palavras cruzadas, onde cada "
-"célula temum número entre 1 e 26. A resolução tem de descobrir a que letra "
-"do alfabeto corresponde um dado número."
-
 #: dialogs/statisticsdialog.cpp:115
+#, kde-format
 msgid "Occurrences Of Letters:"
 msgstr "Ocorrências das Letras:"
 
-#: crosswordxmlguiwindow.cpp:1289
+#. i18n: ectx: property (toolTip), widget (QListWidget, cellTypes)
+#: configure_details.ui:210
+#, kde-format
+msgid "Only the checked cell types can be added into the crossword grid"
+msgstr ""
+"Só podem ser adicionados os tipos de células assinalados na grelha de "
+"palavras cruzadas"
+
+#. i18n: ectx: property (text), widget (QLabel, lblOrientation)
+#: clue_properties_dock.ui:114
+#, fuzzy, kde-format
+msgid "Or&ientation:"
+msgstr "&Orientação:"
+
+#: crosswordxmlguiwindow.cpp:1313
+#, kde-format
 msgid "Pan"
 msgstr "Deslocamento"
 
-#: crosswordxmlguiwindow.cpp:1290
+#: crosswordxmlguiwindow.cpp:1314
+#, kde-format
 msgid ""
 "Pan the view. Note that you can also pan while pressing the control key."
 msgstr ""
 "Deslocar a janela. Lembre-se que também se poderá posicionar com a tecla "
 "Control."
 
-#: dialogs/crosswordpreviewwidget.cpp:55
+#: dialogs/crosswordpreviewwidget.cpp:53
+#, kde-format
 msgid "Preview failed"
 msgstr "A antevisão foi mal-sucedida"
 
-#: main.cpp:39
+#. i18n: ectx: property (text), widget (QLabel, lblPreview)
+#: create_new.ui:386
+#, kde-format
+msgid "Preview:"
+msgstr "Antevisão:"
+
+#: main.cpp:44
+#, kde-format
 msgid "Previous developer"
 msgstr ""
 
-#: crosswordxmlguiwindow.cpp:1271
+#: crosswordxmlguiwindow.cpp:1295
+#, kde-format
 msgid "Print the crossword"
 msgstr "Imprimir as palavras cruzadas"
 
-#: dialogs/crosswordpropertiesdialog.cpp:36
+#. i18n: ectx: property (windowTitle), widget (QDialog, properties)
+#: dialogs/crosswordpropertiesdialog.cpp:36 properties.ui:20
+#, kde-format
 msgid "Properties"
 msgstr "Propriedades"
 
-#: crosswordxmlguiwindow.cpp:1143
+#: crosswordxmlguiwindow.cpp:1155
+#, kde-format
 msgid ""
 "Quality crosswords of the current crossword type (%1) are usually symmetric."
 msgstr ""
 "As palavras cruzadas de qualidade do tipo actual (%1) são normalmente "
 "simétricas."
 
+#. i18n: ectx: property (toolTip), widget (QPushButton, setMapping)
+#: clue_number_mapping.ui:290
+#, kde-format
+msgid "Remap the selected letter to the given clue number."
+msgstr "Volta a associar a letra seleccionada ao número de pista indicado."
+
 #: commands.cpp:776
+#, kde-format
 msgid "Remove %1 letter"
 msgid_plural "Remove %1 letters"
 msgstr[0] "Remover %1 letra"
 msgstr[1] "Remover %1 letras"
 
-#: crosswordxmlguiwindow.cpp:1432
+#: crosswordxmlguiwindow.cpp:1456
+#, kde-format
 msgid "Remove &Across Clue"
 msgstr "Remover a Pista &Horizontal"
 
-#: crosswordxmlguiwindow.cpp:1438
+#: crosswordxmlguiwindow.cpp:1462
+#, kde-format
 msgid "Remove &Down Clue"
 msgstr "Remover a Pista &Vertical"
 
 #: commands.cpp:336
+#, kde-format
 msgid "Remove Clue '%1'"
 msgstr "Remover a Pista '%1'"
 
 #: commands.cpp:334
+#, kde-format
 msgid "Remove Clue Without Text"
 msgstr "Remover a Pista sem Texto"
 
 #: commands.cpp:544
+#, kde-format
 msgid "Remove Image '%1'"
 msgstr "Remover a Imagem '%1'"
 
 #: commands.cpp:1529
+#, kde-format
 msgid "Remove Same Letter Synchronization"
 msgstr "Remover a Sincronização da Mesma Letra"
 
 #: commands.cpp:778
+#, kde-format
 msgctxt "This string shouldn't happen to be used"
 msgid "Remove no letters"
 msgstr "Não remover nenhumas letras"
 
-#: crosswordxmlguiwindow.cpp:1451
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1475
+#, fuzzy, kde-format
 msgid "Removes all clues from the crossword"
 msgstr "Remove todas as pistas das palavras cruzadas."
 
-#: crosswordxmlguiwindow.cpp:1433
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1457
+#, fuzzy, kde-format
 msgid "Removes the highlighted across clue"
 msgstr "Remove a pista horizontal seleccionada."
 
-#: crosswordxmlguiwindow.cpp:1428
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1452
+#, fuzzy, kde-format
 msgid "Removes the highlighted clue or image"
 msgstr "Remove a pista ou imagem seleccionada."
 
-#: crosswordxmlguiwindow.cpp:1439
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1463
+#, fuzzy, kde-format
 msgid "Removes the highlighted down clue"
 msgstr "Remove a pista vertical seleccionada."
 
-#: commands.cpp:1894
+#. i18n: ectx: property (toolTip), widget (QToolButton, removeEntries)
+#: dictionaries.ui:249
+#, kde-format
+msgid "Removes the selected entries from the dictionary"
+msgstr "Remover os itens seleccionados do dicionário"
+
+#. i18n: ectx: attribute (label), widget (QWidget, page_3)
+#: properties.ui:181
+#, kde-format
+msgid "Resize Crossword"
+msgstr "Dimensionar as Palavras Cruzadas"
+
+#: commands.cpp:1893
+#, kde-format
 msgid "Resize Crossword From %1x%2 to %3x%4"
 msgstr "Mudar o Tamanho das Palavras Cruzadas de %1x%2 para %3x%4"
 
-#: dialogs/crosswordpropertiesdialog.cpp:251
+#: dialogs/crosswordpropertiesdialog.cpp:261
+#, kde-format
 msgctxt ""
 "How many clues are removed when resizing the crossword. %2 is replaced by a "
 "plural indicating how many images will be removed when resizing."
@@ -1570,11 +3054,13 @@ msgid_plural "Resizing from %3x%4 will remove %1 clues %2"
 msgstr[0] "O dimensionamento de %3x%4 irá remover %1 pista %2"
 msgstr[1] "O dimensionamento de %3x%4 irá remover %1 pistas %2"
 
-#: krosswordpuzzle.cpp:95
+#: mainwindow.cpp:93
+#, kde-format
 msgid "Resource unavailable"
 msgstr ""
 
-#: krosswordpuzzle.cpp:261
+#: mainwindow.cpp:259
+#, kde-format
 msgid ""
 "Restore the automatically saved version of an edited crossword before the "
 "crash"
@@ -1582,210 +3068,284 @@ msgstr ""
 "Repor a versão, gravada automaticamente, das palavras cruzadas editadas "
 "antes do estoiro"
 
-#: crosswordxmlguiwindow.cpp:776
-msgid "Save &Edit History"
-msgstr "Gravar o Histórico da &Edição"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#: configure_details.ui:157
+#, kde-format
+msgid "Rules"
+msgstr "Regras"
 
-#: crosswordxmlguiwindow.cpp:779
-msgid "Save As &Template"
+#. i18n("Choose a filename to save the crossword as a template"));
+#. ac->addAction("game_save_template_as", saveAsTemplateAction);
+#.
+#: crosswordxmlguiwindow.cpp:1288
+#, fuzzy, kde-format
+msgid "Save as &template..."
 msgstr "Gravar como &Modelo"
 
-#: krosswordpuzzle.cpp:86
-#, fuzzy
+#: mainwindow.cpp:84
+#, fuzzy, kde-format
 msgid "Save crossword"
 msgstr "Novas palavras cruzadas"
 
-#: crosswordxmlguiwindow.cpp:1262
+#: crosswordxmlguiwindow.cpp:1275
+#, kde-format
 msgid "Save the crossword with solved letters"
 msgstr "Gravar as palavras cruzadas com o seu estado actual"
 
-#: crosswordxmlguiwindow.cpp:781
-msgid "Save without correct answers, clue texts, images"
-msgstr "Gravar sem as respostas certas, textos de pistas, imagens"
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:106
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Scaled"
+msgstr "Escalado"
 
-#: dictionary.cpp:247
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:111
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Scaled (Keep Aspect Ratio)"
+msgstr "Escalado (Manter as Proporções)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:101
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Scaled and Cropped"
+msgstr "Escalado e Recortado"
+
+#: dictionary.cpp:244
+#, kde-format
 msgctxt ""
 "The header title for scores/difficulties of clue/answer pairs in the "
 "dictionary database"
 msgid "Score"
 msgstr "Pontuação"
 
-#: crosswordxmlguiwindow.cpp:1364
+#: crosswordxmlguiwindow.cpp:1388
+#, kde-format
 msgid "Select clue with switched orientation to the currently selected clue"
 msgstr ""
 "Seleccione a pista com a orientação alterada para a pista seleccionada de "
 "momento"
 
-#: crosswordxmlguiwindow.cpp:1379
+#: crosswordxmlguiwindow.cpp:1403
+#, kde-format
 msgid "Select the first clue"
 msgstr "Seleccione a primeira pista"
 
-#: crosswordxmlguiwindow.cpp:1369
+#: crosswordxmlguiwindow.cpp:1393
+#, kde-format
 msgid "Select the first letter of the current clue"
 msgstr "Seleccionar a primeira letra para a pista actual"
 
-#: crosswordxmlguiwindow.cpp:1394
+#: crosswordxmlguiwindow.cpp:1418
+#, kde-format
 msgid "Select the last clue"
 msgstr "Seleccione a última pista"
 
-#: crosswordxmlguiwindow.cpp:1374
+#: crosswordxmlguiwindow.cpp:1398
+#, kde-format
 msgid "Select the last letter of the current clue"
 msgstr "Seleccione a última letra para a pista actual"
 
-#: crosswordxmlguiwindow.cpp:1384
+#: crosswordxmlguiwindow.cpp:1408
+#, kde-format
 msgid "Select the next clue"
 msgstr "Seleccionar a pista seguinte"
 
-#: crosswordxmlguiwindow.cpp:1389
+#: crosswordxmlguiwindow.cpp:1413
+#, kde-format
 msgid "Select the previous clue"
 msgstr "Seleccionar a pista anterior"
 
+#. i18n: ectx: ToolBar (selectionToolBar)
+#: krossword_crossword_ui.rc:63
+#, kde-format
+msgid "Selection"
+msgstr "Selecção"
+
 #: commands.cpp:1147
+#, kde-format
 msgid "Set Correct Letter at (%1, %2) to %3"
 msgstr "Definir a Letra Correcta em (%1, %2) como %3"
 
 #: commands.cpp:1481
-msgid "Set Default Number Puzzle Mapping"
+#, fuzzy, kde-format
+msgid "Set Default Coded Puzzle Mapping"
 msgstr "Mudar o Mapeamento do 'Puzzle' do Número Predefinido"
 
 #: commands.cpp:1157
+#, kde-format
 msgid "Set Letter at (%1, %2) to %3"
 msgstr "Definir a Letra em (%1, %2) como %3"
 
-#: krosswordpuzzleview.cpp:106
+#: krosswordpuzzleview.cpp:105
+#, kde-format
 msgid "Settings changed"
 msgstr "A configuração mudou"
 
 #: commands.cpp:1506
+#, kde-format
 msgid "Setup Same Letter Synchronization"
 msgstr "Configurar a Sincronização da Mesma Letra"
 
-#: crosswordxmlguiwindow.cpp:1402
+#: crosswordxmlguiwindow.cpp:1426
+#, kde-format
 msgid "Show Clue Dock"
 msgstr "Mostrar a Área das Pistas"
 
-#: crosswordxmlguiwindow.cpp:1412
+#: crosswordxmlguiwindow.cpp:1436
+#, kde-format
 msgid "Show Current Cell Dock"
 msgstr "Mostrar a Área da Célula Actual"
 
 #: dialogs/crosswordtypewidget.cpp:204
+#, kde-format
 msgid "Show Details"
 msgstr "Mostrar os Detalhes"
 
-#: crosswordxmlguiwindow.cpp:1407
+#: crosswordxmlguiwindow.cpp:1431
+#, kde-format
 msgid "Show Edit History Dock"
 msgstr "Mostrar a Área do Histórico de Edição"
 
-#: dialogs/cellwidgets/cluecellwidget.cpp:121
-msgid "Show Only Answers With &Clue"
-msgstr ""
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:112
-msgid "Show Only Answers With Current Answer &Length"
-msgstr ""
-
-#: dialogs/cellwidgets/cluecellwidget.cpp:128
-msgid "Show Only the &First 100 Answers"
-msgstr ""
-
-#: crosswordxmlguiwindow.cpp:1275
+#: crosswordxmlguiwindow.cpp:1299
+#, kde-format
 msgid "Show a print preview"
 msgstr "Mostrar uma antevisão da impressão"
 
-#: crosswordxmlguiwindow.cpp:1466
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1490
+#, fuzzy, kde-format
 msgid "Shows statistics about the crossword"
 msgstr "Mostra estatísticas acerca das palavras cruzadas."
 
-#: crosswordxmlguiwindow.cpp:321
-#, fuzzy
+#. i18n: ectx: property (toolTip), widget (QTreeWidget, letterContentList)
+#: clue_number_mapping.ui:37
+#, kde-format
+msgid "Shows the current mapping of answer letters to clue numbers."
+msgstr ""
+"Mostra o mapeamento actual entre os números das pistas e as letras das "
+"respostas."
+
+#: crosswordxmlguiwindow.cpp:334
+#, fuzzy, kde-format
 msgid "Shows the percentage of solved letter cells"
 msgstr "Mostra a percentagem de células de letras resolvidas."
 
-#: dialogs/createnewcrossworddialog.cpp:192
+#. i18n: ectx: property (text), widget (QLabel, lblTemplateSize)
+#: create_new.ui:449
+#, kde-format
+msgid "Si&ze:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: dialogs/createnewcrossworddialog.cpp:195 export_to_image.ui:50
+#, kde-format
 msgid "Size"
 msgstr "Tamanho"
 
 #: commands.cpp:1284
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Size"
 msgstr "Tamanho"
 
-#: library/librarymanager.cpp:71
+#. i18n: ectx: property (text), widget (QLabel, labelSize)
+#: download.ui:169
+#, kde-format
+msgid "Size:"
+msgstr "Tamanho:"
+
+#: library/librarymanager.cpp:72
+#, kde-format
 msgctxt "The title for sizes of crosswords in the library tree view"
 msgid "Size:"
 msgstr "Tamanho:"
 
-#: crosswordxmlguiwindow.cpp:1628 krossword.h:554
-msgid "Solution"
-msgstr "Solução"
+#. i18n: ectx: property (windowTitle), widget (QWidget, solution_letter_properties)
+#: solution_letter_properties.ui:20
+#, kde-format
+msgid "Solution Letter"
+msgstr "Letra da Solução"
 
 #: global.cpp:44
+#, kde-format
 msgid "Solution letter cell"
 msgstr "Célula de letra da solução"
 
 #: commands.cpp:669
+#, kde-format
 msgid "Solution letter cell not found at the given coordinates (%1, %2)"
 msgstr ""
 "A célula da letra da solução não foi encontrada para as coordenadas "
 "indicadas (%1, %2)"
 
-#: crosswordxmlguiwindow.cpp:2108
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:2107
+#, fuzzy, kde-format
 msgid "Solve"
 msgstr "Resolver a Pista"
 
-#: crosswordxmlguiwindow.cpp:1351
+#: crosswordxmlguiwindow.cpp:1375
+#, kde-format
 msgid "Solve Across Clue"
 msgstr "Resolver a Pista Horizontal"
 
-#: crosswordxmlguiwindow.cpp:1345
+#: crosswordxmlguiwindow.cpp:1369
+#, kde-format
 msgid "Solve Clue"
 msgstr "Resolver a Pista"
 
-#: crosswordxmlguiwindow.cpp:1357
+#: crosswordxmlguiwindow.cpp:1381
+#, kde-format
 msgid "Solve Down Clue"
 msgstr "Resolver a Pista Vertical"
 
-#: crosswordxmlguiwindow.cpp:1352
+#: crosswordxmlguiwindow.cpp:1376
+#, kde-format
 msgid "Solve the current across clue"
 msgstr "Resolver a pista horizontal actual"
 
-#: crosswordxmlguiwindow.cpp:1346
+#: crosswordxmlguiwindow.cpp:1370
+#, kde-format
 msgid "Solve the current clue"
 msgstr "Resolver a pista actual"
 
-#: crosswordxmlguiwindow.cpp:1358
+#: crosswordxmlguiwindow.cpp:1382
+#, kde-format
 msgid "Solve the current down clue"
 msgstr "Resolver a pista vertical actual"
 
-#: crosswordxmlguiwindow.cpp:1340
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1364
+#, fuzzy, kde-format
 msgid "Solve the selected letter cell"
 msgstr "Resolver a célula de letra seleccionada de momento"
 
-#: crosswordxmlguiwindow.cpp:1294
-#, fuzzy
+#: crosswordxmlguiwindow.cpp:1318
+#, fuzzy, kde-format
 msgid "Solve the selected letter or a random one if none is selected"
 msgstr ""
 "Resolver a letra seleccionada actualmente ou uma aleatória, caso não esteja "
 "nenhuma seleccionada"
 
 #: dialogs/statisticsdialog.cpp:34
+#, kde-format
 msgid "Statistics"
 msgstr "Estatísticas"
 
 #: global.cpp:287
+#, kde-format
 msgid "String clues"
 msgstr "Pistas de texto"
 
 #: global.cpp:434
+#, kde-format
 msgid "Swedish Crossword"
 msgstr "Palavras Cruzadas Suecas"
 
 #: global.cpp:436
+#, kde-format
 msgctxt "Short description of the crossword type 'Swedish'"
 msgid ""
 "Swedish crosswords contain clue cells which contain the clue text in it and "
@@ -1795,11 +3355,19 @@ msgstr ""
 "pista nelas, e uma seta para indicar em que direcção as pistas deverão ser "
 "respondidas."
 
-#: krosswordpuzzle.cpp:244
+#. i18n: ectx: attribute (title), widget (QWidget, tabTemplate)
+#: create_new.ui:298
+#, kde-format
+msgid "Template"
+msgstr "Modelo"
+
+#: mainwindow.cpp:242
+#, kde-format
 msgid "Templates"
 msgstr "Modelos"
 
 #: global.cpp:439
+#, kde-format
 msgctxt "Long description of the crossword type 'Swedish'"
 msgid ""
 "The \"Swedish-Style\" grid uses no clue numbers - the clues are contained in "
@@ -1827,92 +3395,126 @@ msgstr ""
 "Espanhol, \"Mots Fléchés\" em Francês, etc.\n"
 "(texto retirado da Wikipédia)"
 
-#: library/librarygui.cpp:365
+#: library/librarygui.cpp:412
+#, kde-format
 msgid "The Chronicle of Higher Education (fridays)"
 msgstr ""
 
-#: library/librarygui.cpp:369
+#: library/librarygui.cpp:416
+#, kde-format
 msgid "The Cross Nerd (tuesdays)"
 msgstr ""
 
-#: library/librarygui.cpp:188
-#, fuzzy
+#: library/librarygui.cpp:183
+#, fuzzy, kde-format
 msgid "The Cross Nerd current crossword"
 msgstr "Fechar as palavras cruzadas actuais."
 
-#: krossword.cpp:3041
+#: krossword.cpp:2842
+#, kde-format
 msgid "The answer contains illegal characters. Allowed are A-Z and/or 0-9."
 msgstr ""
 "A resposta contém caracteres inválidos. Os permitidos são A-Z e/ou 0-9."
 
-#: krossword.cpp:3053
+#: krossword.cpp:2854
+#, kde-format
 msgid "The answer is too short for the current crossword type."
 msgstr ""
 "A resposta é demasiado curta para o tipo de palavras cruzadas indicado."
 
-#: krossword.cpp:3045
+#: krossword.cpp:2846
+#, kde-format
 msgid ""
 "The answer overwrites the answer to another clue with the same orientation."
 msgstr "A resposta sobrepõe-se à resposta de outra pista na mesma direcção."
 
-#: krossword.cpp:3055
+#: krossword.cpp:2856
+#, kde-format
 msgid "The answer overwrites the clue cell."
 msgstr "A resposta cruza-se com a célula de pista."
 
-#: krossword.cpp:3043
+#: krossword.cpp:2844
+#, kde-format
 msgid "The answer produces mismatching letter cells at the same positions."
 msgstr ""
 "A resposta produz células com letras sem correspondência nas mesmas posições."
 
-#: dialogs/answerwidget.cpp:30 dialogs/answerwidget.cpp:40
+#: dialogs/answerwidget.cpp:29 dialogs/answerwidget.cpp:39
+#, kde-format
 msgid "The answer to the clue"
 msgstr "A resposta à pista"
 
-#: krossword.cpp:3047
+#: krossword.cpp:2848
+#, kde-format
 msgid "The answer's letter cells cross a clue cell."
 msgstr "As células das letras da resposta cruzam-se com uma célula de pista."
 
-#: krossword.cpp:3039
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, author)
+#: create_new.ui:123 properties.ui:104
+#, kde-format
+msgid "The author(s) of the crossword"
+msgstr "Os autores das palavras cruzadas"
+
+#: krossword.cpp:2840
+#, kde-format
 msgid "The cell for the new clue isn't empty."
 msgstr "A célula para a nova pista não está em branco."
 
-#: krossword.cpp:3060
+#: krossword.cpp:2861
+#, kde-format
 msgid "The cells for the new image aren't empty."
 msgstr "As células para a nova imagem não estão em branco."
 
-#: krossword.cpp:3037
+#: krossword.cpp:2838
+#, kde-format
 msgid "The clue doesn't fit in the grid with the given settings."
 msgstr "A pista não se ajusta à grelha, dada a configuração indicada."
 
-#: krossword.cpp:634
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, clue)
+#: clue_properties_dock.ui:77
+#, kde-format
+msgid "The clue text"
+msgstr "O texto da pista"
+
+#. i18n: ectx: property (toolTip), widget (QLineEdit, clue)
+#: clue_properties_dock.ui:74
+#, kde-format
+msgid "The clue to the answer."
+msgstr "A pista para a resposta."
+
+#: krossword.cpp:498
+#, kde-format
 msgid "The conversion will remove %1 of %2 clues"
 msgstr "A conversão irá remover %1 de %2 pistas"
 
-#: krossword.cpp:637
+#: krossword.cpp:501
+#, kde-format
 msgid "The conversion will remove %1 of %2 clues, %3 of %4 images"
 msgstr "A conversão irá remover %1 de %2 pistas, %3 de %4 imagens"
 
-#: dialogs/answerwidget.cpp:28 dialogs/answerwidget.cpp:38
+#: dialogs/answerwidget.cpp:27 dialogs/answerwidget.cpp:37
+#, kde-format
 msgid ""
 "The correct answer to the clue. For each letter a letter cell is created"
 msgstr ""
 "A resposta correcta à pista. Para cada letra, é criada uma célula de letras"
 
-#: library/librarygui.cpp:136
-#, fuzzy
+#: library/librarygui.cpp:152
+#, fuzzy, kde-format
 msgid "The crossword couldn't be imported to the library."
 msgstr ""
 "Não foi possível importar as palavras cruzadas para a biblioteca.\n"
 "%1"
 
-#: library/librarygui.cpp:138
-#, fuzzy
+#: library/librarygui.cpp:154
+#, fuzzy, kde-format
 msgid "The crossword couldn't be written to the library folder."
 msgstr ""
 "Não foi possível gravar as palavras cruzadas na pasta da biblioteca.\n"
 "%1"
 
-#: crosswordxmlguiwindow.cpp:1137
+#: crosswordxmlguiwindow.cpp:1149
+#, kde-format
 msgid ""
 "The crossword doesn't have 180 degree rotation symmetry.\n"
 "To achieve symmetry make sure that each empty cell and each clue cell has a "
@@ -1922,7 +3524,8 @@ msgstr ""
 "Para obter uma simetria, certifique-se que cada célula vazia e de pista tem "
 "uma correspondente na sua posição rodada em 180 graus.\n"
 
-#: crosswordxmlguiwindow.cpp:1133
+#: crosswordxmlguiwindow.cpp:1145
+#, kde-format
 msgid ""
 "The crossword doesn't have 180 degree rotation symmetry.\n"
 "To achieve symmetry make sure that each empty cell has a counterpart at it's "
@@ -1932,11 +3535,13 @@ msgstr ""
 "Para obter uma simetria, certifique-se que cada célula vazia tem uma "
 "correspondente na sua posição rodada em 180 graus.\n"
 
-#: crosswordxmlguiwindow.cpp:1129
+#: crosswordxmlguiwindow.cpp:1141
+#, kde-format
 msgid "The crossword has 180 degree rotation symmetry."
 msgstr "As palavras cruzadas têm simetria de rotação em 180 graus."
 
-#: crosswordxmlguiwindow.cpp:721
+#: crosswordxmlguiwindow.cpp:734
+#, kde-format
 msgid ""
 "The crossword type couldn't be determined, so 'Free Crossword' is assumed.\n"
 "\n"
@@ -1952,8 +3557,9 @@ msgstr ""
 "(Nota: Poderá fazer a conversão mais tarde em \"Editar\" > \"Propriedades "
 "das Palavras Cruzadas\")"
 
-#: crosswordxmlguiwindow.cpp:672 crosswordxmlguiwindow.cpp:818
-#: krosswordpuzzle.cpp:129
+#: crosswordxmlguiwindow.cpp:681 crosswordxmlguiwindow.cpp:811
+#: mainwindow.cpp:127
+#, kde-format
 msgid ""
 "The current crossword has been modified.\n"
 "Would you like to save it?"
@@ -1961,39 +3567,71 @@ msgstr ""
 "As palavras cruzadas actuais foram modificadas.\n"
 "Deseja gravá-las?"
 
-#: krossword.cpp:3049
+#: krossword.cpp:2850
+#, kde-format
 msgid "The current crossword type doesn't allow clue cells."
 msgstr "O tipo de palavras cruzadas actual não permite células de pistas."
 
-#: krossword.cpp:3062
+#: krossword.cpp:2863
+#, kde-format
 msgid "The current crossword type doesn't allow image cells."
 msgstr "O tipo de palavras cruzadas actuais não permite células de imagens."
 
-#: krossword.cpp:3051
+#: krossword.cpp:2852
+#, kde-format
 msgid "The current crossword type requires a clue cell for each clue."
 msgstr ""
 "O tipo de palavras cruzadas actual necessita de uma célula de pistas para "
 "cada célula."
 
 #: io/krosswordxmlreader.cpp:174 io/krosswordxmlreader.cpp:206
-#, fuzzy
+#, fuzzy, kde-format
 msgid "The file is not a Krossword version &lt;= 1.1 file."
 msgstr "O ficheiro não é do formato do KrossWordPuzzle versão &lt;= 1.1."
 
-#: library/librarygui.cpp:481
+#: library/librarygui.cpp:529
+#, kde-format
 msgid "The folder already exists in the library."
 msgstr "A pasta já existe na biblioteca."
 
-#: krossword.cpp:3058
+#: krossword.cpp:2859
+#, kde-format
 msgid "The image doesn't fit in the grid with the given settings."
 msgstr "A imagem não se ajusta à grelha, dada a configuração indicada."
 
-#: crosswordxmlguiwindow.cpp:1298
-#, fuzzy
+#. i18n: ectx: property (toolTip), widget (QSpinBox, minAnswerLength)
+#: configure_details.ui:302
+#, kde-format
+msgid "The minimum length of answers to clues"
+msgstr "O tamanho mínimo das respostas às pistas"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, name)
+#: configure_details.ui:70
+#, kde-format
+msgid "The name of the crossword type"
+msgstr "O nome do tipo de palavras cruzadas"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, mappedClueNumber)
+#: clue_number_mapping.ui:274
+#, kde-format
+msgid "The new clue number for the selected letter."
+msgstr "O novo número de pista para as letras seleccionadas."
+
+#: crosswordxmlguiwindow.cpp:1322
+#, fuzzy, kde-format
 msgid "The selected letter cell has been solved"
 msgstr "A célula da letra seleccionada de momento foi resolvida"
 
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: export_to_image.ui:32
+#, fuzzy, kde-format
+msgid "The size will be shrinked to match the aspect ratio of the crossword"
+msgstr ""
+"(O tamanho será reduzido para corresponder às proporções das palavras "
+"cruzadas)"
+
 #: commands.cpp:725
+#, kde-format
 msgctxt ""
 "Error message to be displayed, when the user tries to convert a letter to a "
 "solution letter, but the position of the new solution letter is already "
@@ -2003,18 +3641,36 @@ msgctxt ""
 msgid "The solution letter position %1 is already assigned."
 msgstr "A posição da letra da solução %1 já está atribuída."
 
-#: dialogs/cellwidgets/solutionlettercellwidget.cpp:94
-#, fuzzy
-msgid ""
-"The solution letter position %1 is already assigned.\n"
-"Please change the solution word position of that letter first."
-msgstr "A posição da letra da solução %1 já está atribuída."
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, title)
+#: create_new.ui:94 properties.ui:75
+#, kde-format
+msgid "The title of the crossword"
+msgstr "O título das palavras cruzadas"
 
-#: krosswordpuzzle.cpp:313
+#. i18n: ectx: property (toolTip), widget (KComboBox, clueType)
+#: configure_details.ui:256
+#, kde-format
+msgid "The type of clues (strings or numbers)"
+msgstr "O tipo de pistas (textos ou números)"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, letterCellContent)
+#: configure_details.ui:163
+#, kde-format
+msgid "The type of content of letter cells"
+msgstr "O tipo de conteúdo das células de letras"
+
+#: mainwindow.cpp:311
+#, kde-format
 msgid "Theme"
 msgstr "Tema"
 
-#: library/librarygui.cpp:296
+#: crosswordxmlguiwindow.cpp:2405 crosswordxmlguiwindow.cpp:2406
+#, kde-format
+msgid "There are missing / wrong letters, sorry."
+msgstr ""
+
+#: library/librarygui.cpp:349
+#, kde-format
 msgid ""
 "There was an error opening the crossword.\n"
 "%1"
@@ -2022,20 +3678,24 @@ msgstr ""
 "Ocorreu um erro ao abrir as palavras cruzadas.\n"
 "%1"
 
-#: dialogs/dictionarydialog.cpp:237
+#: dialogs/dictionarydialog.cpp:238
+#, kde-format
 msgid "There was an error while exporting to '%1'"
 msgstr "Ocorreu um erro ao exportar para '%1'"
 
-#: dialogs/dictionarydialog.cpp:251
+#: dialogs/dictionarydialog.cpp:253
+#, kde-format
 msgid "There was an error while importing from '%1'"
 msgstr "Ocorreu um erro ao importar de '%1'"
 
 #: global.cpp:411
+#, kde-format
 msgctxt "Short description of the crossword type 'Free'"
 msgid "This is a special type that tries to be least restrictive."
 msgstr "Este é um tipo especial que tenta ser menos restritivo."
 
 #: global.cpp:413
+#, kde-format
 msgctxt "Long description of the crossword type 'Free'"
 msgid ""
 "This is a special type that tries to be least restrictive. You can use all "
@@ -2049,11 +3709,13 @@ msgstr ""
 "pista com as que não têm. As respostas poderão conter caracteres assim como "
 "números."
 
-#: crosswordxmlguiwindow.cpp:1297
+#: crosswordxmlguiwindow.cpp:1321
+#, kde-format
 msgid "This letter has been solved"
 msgstr "Esta letra foi resolvida"
 
-#: crosswordxmlguiwindow.cpp:1210
+#: crosswordxmlguiwindow.cpp:1222
+#, kde-format
 msgid ""
 "This will cause all answers to be shown and editable.\n"
 "If you want to solve the crossword you should cancel."
@@ -2061,7 +3723,8 @@ msgstr ""
 "Isto fará com que todas as respostas estejam visíveis e editáveis.\n"
 "Se quiser resolver as palavras cruzadas, deverá então cancelar."
 
-#: library/librarygui.cpp:445
+#: library/librarygui.cpp:493
+#, kde-format
 msgid ""
 "This will permanently delete the selected crossword from the library.\n"
 "The operation can't be undone!"
@@ -2070,7 +3733,8 @@ msgstr ""
 "biblioteca.\n"
 "Lembre-se que esta operação não pode ser anulada."
 
-#: library/librarygui.cpp:433
+#: library/librarygui.cpp:481
+#, kde-format
 msgid ""
 "This will permanently delete the selected directory and all contained "
 "crosswords from the library. The operation can't be undone!"
@@ -2079,22 +3743,45 @@ msgstr ""
 "palavras cruzadas nela contidas da biblioteca. Lembre-se que esta operação "
 "não pode ser anulada."
 
+#. i18n: ectx: property (text), item, widget (KComboBox, aspectRatio)
+#: image_properties_dock.ui:121
+#, fuzzy, kde-format
+msgctxt "Positioning of an image in a crossword image cell."
+msgid "Tiled"
+msgstr "Mosaico"
+
 #: commands.cpp:1268
+#, kde-format
 msgctxt ""
 "Used for the list of stuff changed by the change crossword properties undo "
 "command"
 msgid "Title"
 msgstr "Título"
 
+#. i18n: ectx: property (text), widget (QLabel, labelTitle)
+#: download.ui:146
+#, fuzzy, kde-format
+msgid "Title:"
+msgstr "&Título:"
+
 #: dialogs/statisticsdialog.cpp:49
+#, kde-format
 msgid "Total Cell Count:"
 msgstr "Número de Células Totais:"
 
 #: dialogs/statisticsdialog.cpp:74
+#, kde-format
 msgid "Uncrossed:"
 msgstr "Não-Cruzadas:"
 
-#: krossword.cpp:2951
+#. i18n: ectx: label, entry (LastCrossword), group (Preferences)
+#: krossword.kcfg:20
+#, fuzzy, kde-format
+msgid "Url of the last opened crossword."
+msgstr "Abrir as palavras cruzadas seleccionadas."
+
+#: krossword.cpp:2752
+#, kde-format
 msgctxt "Description"
 msgid ""
 "Used as header label for the column containing the descriptions in the "
@@ -2103,7 +3790,8 @@ msgstr ""
 "Usado como legenda do cabeçalho da coluna que contém as descrições no modelo "
 "do tipo das palavras cruzadas."
 
-#: krossword.cpp:2948
+#: krossword.cpp:2749
+#, kde-format
 msgctxt "Name"
 msgid ""
 "Used as header label for the column containing the names in the crossword "
@@ -2113,42 +3801,54 @@ msgstr ""
 "tipo das palavras cruzadas."
 
 #: global.cpp:424
+#, kde-format
 msgid "User Defined Crossword"
 msgstr "Palavras Cruzadas Definidas pelo Utilizador"
 
 #: global.cpp:52
+#, kde-format
 msgid "User cell type"
 msgstr "Tipo de célula do utilizador"
 
-#: library/librarygui.cpp:361
+#: library/librarygui.cpp:408
+#, kde-format
 msgid "Wall Street Journal by Mike Shenk (fridays)"
 msgstr ""
 "Palavras Cruzadas do Wall Street Journal por Mike Shenk (sextas-feiras)"
 
-#: krosswordpuzzle.cpp:85
-#, fuzzy
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, pattern)
+#: clue_properties_dock.ui:523
+#, kde-format
+msgid "Wildcard pattern to search for answers"
+msgstr "Padrão de caracteres especiais a procurar por respostas"
+
+#: mainwindow.cpp:83
+#, fuzzy, kde-format
 msgid "Would you like to add the crossword into the library?"
 msgstr "Criar palavras cruzadas novas na biblioteca."
 
-#: crosswordxmlguiwindow.cpp:881
+#: crosswordxmlguiwindow.cpp:877
+#, kde-format
 msgid "Wrote crossword to file '%1'"
 msgstr "As palavras cruzadas foram guardadas no ficheiro '%1'"
 
-#: rc.cpp:2
+#, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "zepires@gmail.com"
 
-#: rc.cpp:1
+#, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "José Nuno Pires"
 
-#: crosswordxmlguiwindow.cpp:265
+#: crosswordxmlguiwindow.cpp:278
+#, kde-format
 msgid "Zoom: %1%"
 msgstr "Ampliação: %1%"
 
 #: dialogs/movecellsdialog.cpp:71
+#, kde-format
 msgctxt ""
 "How many images are removed when moving all cells of the crossword. This "
 "string gets combined with a plural string indicating how many clue cells "
@@ -2158,7 +3858,8 @@ msgid_plural "and %1 images"
 msgstr[0] "e %1 imagem"
 msgstr[1] "e %1 imagens"
 
-#: dialogs/crosswordpropertiesdialog.cpp:257
+#: dialogs/crosswordpropertiesdialog.cpp:267
+#, kde-format
 msgctxt ""
 "How many images are removed when resizing the crossword. This string gets "
 "combined with a plural string indicating how many clue cells will be removed "
@@ -2168,23 +3869,23 @@ msgid_plural "and %1 images"
 msgstr[0] "e %1 imagem"
 msgstr[1] "e %1 imagens"
 
-#: dialogs/createnewcrossworddialog.cpp:109
-msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
-msgid "© %1, by %2"
-msgstr "© %1, de %2"
-
-#: main.cpp:35
-msgid ""
-"© 2014 Andrea Barazzetti\n"
-"© 2014 Giacomo Barazzetti\n"
-"© 2009 Friedrich Pülz"
+#. i18n: ectx: property (windowTitle), widget (QToolBar, toolBar)
+#: dialogs/printpreviewdialog.ui:19
+#, kde-format
+msgid "toolBar"
 msgstr ""
 
-#~ msgid " columns"
-#~ msgstr " colunas"
+#. i18n: ectx: tooltip, entry (animate), group (Preferences)
+#: krossword.kcfg:26
+#, kde-format
+msgid "whether or not animations should be enabled"
+msgstr "se as animações deverão ou não estar activas"
 
-#~ msgid " rows"
-#~ msgstr " linhas"
+#: dialogs/createnewcrossworddialog.cpp:112
+#, fuzzy, kde-format
+msgctxt "Default copyright value for new crosswords, 'YEAR, by USER'"
+msgid "© %1 %2"
+msgstr "© %1, de %2"
 
 #~ msgctxt ""
 #~ "Text to describe the contents of library folders in the library tree view"
@@ -2196,33 +3897,6 @@ msgstr ""
 #~ msgid "%1 letters"
 #~ msgstr "%1 letras"
 
-#~ msgid "&Add Entry"
-#~ msgstr "&Adicionar um Item"
-
-#~ msgid "&Answers:"
-#~ msgstr "Respost&as:"
-
-#~ msgid "&Apply"
-#~ msgstr "&Aplicar"
-
-#~ msgid "&Author:"
-#~ msgstr "&Autor:"
-
-#~ msgid "&Clear Dictionary"
-#~ msgstr "&Limpar o Dicionário"
-
-#~ msgid "&Clue:"
-#~ msgstr "P&ista:"
-
-#~ msgid "&Convert to Letter Cell"
-#~ msgstr "&Converter para uma Célula de Letra"
-
-#~ msgid "&Copyright:"
-#~ msgstr "&Copyright:"
-
-#~ msgid "&Crossword"
-#~ msgstr "Palavras &Cruzadas"
-
 #~ msgctxt ""
 #~ "The title for the crossword tab with an unmodified or no crossword opened"
 #~ msgid "&Crossword"
@@ -2232,38 +3906,8 @@ msgstr ""
 #~ msgid "&Crossword *"
 #~ msgstr "Palavras &Cruzadas *"
 
-#~ msgid "&Description:"
-#~ msgstr "&Descrição:"
-
-#~ msgid "&Dictionary"
-#~ msgstr "&Dicionário"
-
 #~ msgid "&Difficulty:"
 #~ msgstr "&Dificuldade:"
-
-#~ msgid "&Enable Animations"
-#~ msgstr "Activar as Animaçõ&es"
-
-#~ msgid "&Export (CSV)..."
-#~ msgstr "&Exportar (CSV)..."
-
-#~ msgid "&Extract From Crosswords..."
-#~ msgstr "&Extrair das Palavras Cruzadas..."
-
-#~ msgid "&Filter:"
-#~ msgstr "&Filtro:"
-
-#~ msgid "&Horizontal Cells:"
-#~ msgstr "Células &Horizontais:"
-
-#~ msgid "&Host:"
-#~ msgstr "&Máquina:"
-
-#~ msgid "&Icon:"
-#~ msgstr "Í&cone:"
-
-#~ msgid "&Import (CSV)..."
-#~ msgstr "&Importar (CSV)..."
 
 #, fuzzy
 #~ msgctxt "@action:intoolbar"
@@ -2279,545 +3923,21 @@ msgstr ""
 #~ msgid "&Library"
 #~ msgstr "Bib&lioteca"
 
-#~ msgid "&Location:"
-#~ msgstr "&Localização:"
-
-#~ msgid "&Long Description:"
-#~ msgstr "Descrição &Longa:"
-
-#~ msgid "&Mapped Clue Number:"
-#~ msgstr "Número da Pista &Mapeado:"
-
-#~ msgid "&Minimum Answer Length:"
-#~ msgstr "Tamanho &Mínimo da Resposta:"
-
-#~ msgid "&Name:"
-#~ msgstr "&Nome:"
-
-#~ msgid "&Notes:"
-#~ msgstr "&Notas:"
-
-#~ msgid "&Orientation:"
-#~ msgstr "&Orientação:"
-
-#~ msgid "&Password:"
-#~ msgstr "&Senha:"
-
-#~ msgid "&Pattern:"
-#~ msgstr "&Padrão:"
-
-#~ msgid "&Position in the solution word:"
-#~ msgstr "&Posição na palavra da solução:"
-
-#~ msgid "&Positioning:"
-#~ msgstr "&Posicionamento:"
-
-#~ msgid "&Provider:"
-#~ msgstr "&Fornecedor:"
-
 #~ msgid "&Quality:"
 #~ msgstr "&Qualidade:"
 
 #~ msgid "&Refresh"
 #~ msgstr "Actualiza&r"
 
-#~ msgid "&Remove Selected"
-#~ msgstr "Apaga&r os Seleccionados"
-
-#~ msgid "&Reset"
-#~ msgstr "&Reiniciar"
-
-#~ msgid "&Set Mapping"
-#~ msgstr "&Definir o Mapeamento"
-
 #~ msgid "&Size:"
 #~ msgstr "Dimen&sões:"
-
-#~ msgid "&Title:"
-#~ msgstr "&Título:"
-
-#~ msgid "&Use Template:"
-#~ msgstr "&Usar o Modelo:"
-
-#~ msgid "&User:"
-#~ msgstr "&Utilizador:"
-
-#~ msgid "&Vertical Cells:"
-#~ msgstr "Células &Verticais:"
 
 #~ msgid "(C) 2009 Friedrich Pülz"
 #~ msgstr "(C) 2009 Friedrich Pülz"
 
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note:</span> To change these values please first select "
-#~ "\"User Defined\" as the crossword type.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Nota:</span> Para alterar estes valor, seleccione primeiro "
-#~ "o \"Definido pelo Utilizador\" como tipo de palavras cruzadas.</p></"
-#~ "body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Enter a pattern with "
-#~ "letters, <span style=\" font-weight:600;\">? </span>for one arbitrary "
-#~ "letter and <span style=\" font-weight:600;\">*</span> for any number of "
-#~ "arbitrary letters.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Indique um padrão com "
-#~ "as letras, <span style=\" font-weight:600;\">? </span>para uma letra "
-#~ "arbitrária e <span style=\" font-weight:600;\">*</span> para um número "
-#~ "qualquer de letras arbitrárias.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Exports the whole "
-#~ "dictionary to a comma separated text file.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">You can use that to "
-#~ "create a <span style=\" font-weight:600;\">backup</span> of your "
-#~ "dictionary or to <span style=\" font-weight:600;\">share</span> your "
-#~ "dictionary with others.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">It is also possible to "
-#~ "open that file in a spread sheet application.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Exporta o dicionário "
-#~ "por completo para um ficheiro de texto, separado por vírgulas.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Você poderá usar isso "
-#~ "para criar uma <span style=\" font-weight:600;\">cópia de segurança</"
-#~ "span> do seu dicionário ou para <span style=\" font-weight:600;"
-#~ "\">partilhar</span> o seu dicionário com outros.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Também é possível abrir "
-#~ "esse ficheiro numa folha de cálculo.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Imports entries from a "
-#~ "comma separated text file.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">You can use that to "
-#~ "<span style=\" font-weight:600;\">restore</span> a previously created "
-#~ "backup of your dictionary or to import dictionaries from others.</p></"
-#~ "body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Importa os itens de um "
-#~ "ficheiro de texto separado por vírgulas.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Pode usar isso para "
-#~ "<span style=\" font-weight:600;\">repor</span> uma cópia de segurança "
-#~ "anterior do seu dicionário ou para importar os dicionários de terceiros.</"
-#~ "p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Imports words from a "
-#~ "plain text dictionary (eg. in /usr/dict/ or /usr/share/dict/). A "
-#~ "dictionary for crosswords is available from <a href=\"http://www."
-#~ "quinapalus.com/xwfaq.html\"><span style=\" text-decoration: underline; "
-#~ "color:#0057ae;\">http://www.quinapalus.com/xwfaq.html</span></a> (UKACD)."
-#~ "</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The dictionary file "
-#~ "must be a plain text file with one word per line.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Poderá usar o "
-#~ "dicionário do seu sistema (em /usr/dict/ ou em /usr/share/dict/) ou "
-#~ "transferir um dicionário a partir da Web. Está disponível um dicionário "
-#~ "para as palavras cruzadas em <a href=\"http://www.quinapalus.com/xwfaq."
-#~ "html\"><span style=\" text-decoration: underline; color:#0057ae;\">http://"
-#~ "www.quinapalus.com/xwfaq.html</span></a>, procurando pela referência a "
-#~ "UKACD. Os dicionários deverão ser ficheiros em texto simples com uma "
-#~ "palavra por cada linha.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">In a \"Number Puzzle\" "
-#~ "each answer letter is mapped to a clue number. The solver has to find out "
-#~ "which clue number belongs to which letter.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">To change the mapping "
-#~ "of an answer letter select it in the list, enter it's new clue number and "
-#~ "click \"Set Mapping\".</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note:</span> Conflicting mappings are resolved "
-#~ "automatically.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Núm \"Puzzle de Números"
-#~ "\", cada letra da resposta está associado a um número de pistas. A "
-#~ "resolução passa por descobrir que número da pista corresponde a cada "
-#~ "letra.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Para mudar o mapeamento "
-#~ "de uma letra da resposta, seleccione-o na lista, indique o seu novo "
-#~ "número de pista e carregue em \"Definir o Mapeamento\".</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Nota:</span> Os mapeamentos em conflito são resolvidos "
-#~ "automaticamente.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Only the checked cell "
-#~ "types can be added into the crossword grid.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Empty Cells</span> are also called \"Shaded Cells\", "
-#~ "\"Blanks\", \"Darks\", \"Blocks\", \"Black Squares\" or \"Shaded Squares"
-#~ "\". You cannot disallow empty cells.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Letter Cells</span> are also called \"White Cells\" or "
-#~ "\"Lights\". They contain one letter (or digit) of one or two answers / "
-#~ "entries. A letter cell that is part of two answers (both Across and Down) "
-#~ "is called <span style=\" font-style:italic;\">checked</span>, <span style="
-#~ "\" font-style:italic;\">keyed</span> or <span style=\" font-style:italic;"
-#~ "\">crossed</span>. A letter cell that is part of only one answer is "
-#~ "called <span style=\" font-style:italic;\">unchecked</span>, <span style="
-#~ "\" font-style:italic;\">unkeyed</span> or <span style=\" font-style:"
-#~ "italic;\">uncrossed</span>.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Clue Cells</span> contain the clue text in small print "
-#~ "inside and act as empty cells. Each clue cell has a little arrow "
-#~ "indicating in which direction from its initial cell the answer is to be "
-#~ "written.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Double Clue Cells</span> contain two clue cells inside, one "
-#~ "above the other.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Solution Letter Cells</span> are letter cells that are part "
-#~ "of a solution word for the whole crossword.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- <span style=\" font-"
-#~ "weight:600;\">Image Cells</span> contain images and can be stretched over "
-#~ "a block of multiple cells.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Só os seguintes tipos "
-#~ "de células poderão ser adicionados à grelha de palavras cruzadas.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- As <span style=\" "
-#~ "font-weight:600;\">Células Vazias</span> também se chamam de \"Células "
-#~ "Sombreadas\", \"Brancas\", \"Escuras\", \"Blocos\", \"Quadrados Pretos\" "
-#~ "ou \"Quadrados Sombreados\". Não poderá proibir as células vazias.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- As <span style=\" "
-#~ "font-weight:600;\">Células de Letras</span> também são chamadas de "
-#~ "\"Células Brancas\" ou \"Claras\". Contêm uma letra (ou algarismo) de uma "
-#~ "ou duas respostas / itens. Uma célula de letra que faz parte de duas "
-#~ "respostas (tanto na Horizontal como na Vertical) chama-se <span style=\" "
-#~ "font-style:italic;\">assinalada</span>, <span style=\" font-style:italic;"
-#~ "\">chave</span> ou <span style=\" font-style:italic;\">cruzada</span>. "
-#~ "Uma célula de letra que só faz parte de uma resposta é chamada de <span "
-#~ "style=\" font-style:italic;\">não-assinalada</span>, <span style=\" font-"
-#~ "style:italic;\">não-chave</span> ou <span style=\" font-style:italic;"
-#~ "\">não-cruzada</span>.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- As <span style=\" "
-#~ "font-weight:600;\">Células de Pistas</span> contêm o texto da pista "
-#~ "impresso em tamanho pequeno e actuam como células vazias. Cada célula da "
-#~ "pista tem uma pequena seta que indica em que direcção, a partir da sua "
-#~ "célula inicial, a resposta deverá ser dada.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- As <span style=\" "
-#~ "font-weight:600;\">Células de Pistas Duplas</span> contêm duas células de "
-#~ "pistas dentro delas, uma sobre a outra.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- As <span style=\" "
-#~ "font-weight:600;\">Células de Letras da Solução</span> são células de "
-#~ "letras que fazem parte de uma palavra da solução, para as palavras "
-#~ "cruzadas inteiras.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">- As <span style=\" "
-#~ "font-weight:600;\">Células de Imagens</span> contêm imagens e poderão ser "
-#~ "esticadas de modo a ocupar um bloco de várias células.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The MySQL root password "
-#~ "is needed to automatically setup the database:</p>\n"
-#~ "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-"
-#~ "right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-"
-#~ "bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-#~ "indent:0px;\">Add a new user to the MySQL server (username and password: "
-#~ "krosswordpuzzle)</li>\n"
-#~ "<li style=\" font-weight:600;\" style=\" margin-top:0px; margin-"
-#~ "bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-#~ "indent:0px;\"><span style=\" font-weight:400;\">Give privileges for a new "
-#~ "database (named krosswordpuzzle) to that user</span></li></ul>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note: </span>You can also do these steps yourself by using "
-#~ "a MySQL administrator tool.</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:12px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">A senha de 'root' do "
-#~ "MySQL é necessária para configurar automaticamente a base de dados:</p>\n"
-#~ "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-"
-#~ "right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-"
-#~ "bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-#~ "indent:0px;\">Adicionar um novo utilizador ao servidor de MySQL "
-#~ "(utilizador e senha: krosswordpuzzle)</li>\n"
-#~ "<li style=\" font-weight:600;\" style=\" margin-top:0px; margin-"
-#~ "bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-"
-#~ "indent:0px;\"><span style=\" font-weight:400;\">Dar privilégios para uma "
-#~ "nova base de dados (chamada 'krosswordpuzzle') a esse utilizador</span></"
-#~ "li></ul>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Nota: </span>Também poderá fazer você mesmo esses passos, "
-#~ "usando uma ferramenta de administração do MySQL.</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:12px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">This view contains all "
-#~ "entries in the dictionary. </p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">You can <span style=\" "
-#~ "font-weight:600;\">edit</span> each entry.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">To <span style=\" font-"
-#~ "weight:600;\">find entries</span> in the possibly huge list you can enter "
-#~ "a substring of the answer word into the edit line above.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Esta área contém todos "
-#~ "os itens no dicionário.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Você poderá <span style="
-#~ "\" font-weight:600;\">editar</span> cada um dos itens.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Para <span style=\" "
-#~ "font-weight:600;\">procurar itens</span> nesta lista enorme, poderá "
-#~ "indicar uma sub-sequência da palavra da resposta no campo de texto em "
-#~ "cima.</p></body></html>"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">You can enter wildcard "
-#~ "patterns to search the dictionary for answers.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">The pattern can contain "
-#~ "letters, <span style=\" font-weight:600;\">? </span>for one arbitrary "
-#~ "letter and <span style=\" font-weight:600;\">*</span> for any number of "
-#~ "arbitrary letters.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">For example \"HO??E\" "
-#~ "matches all answers starting with \"HO\", ending with \"E\" and having "
-#~ "two arbitrary letters in between. \"HOUSE\" would be matched by that "
-#~ "pattern.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Answers are searched "
-#~ "while typing the pattern.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Note:</span> When you change the settings of the clue, a "
-#~ "pattern is automatically constructed, based on the letters that are "
-#~ "already in the crossword at the positions of the clue.</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'FreeSans'; font-size:10pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Poderá indicar padrões "
-#~ "de caracteres especiais para procurar as respostas no dicionário.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">O padrão poderá conter "
-#~ "letras, <span style=\" font-weight:600;\">? </span>para uma letra "
-#~ "arbitrária e <span style=\" font-weight:600;\">*</span> para qualquer "
-#~ "conjunto de letras arbitrário.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Por exemplo \"??TEM\" "
-#~ "corresponde a todas as respostas que terminam em \"TEM\" e duas letras "
-#~ "arbitrárias no início. \"ONTEM\" iria corresponder a esse padrão.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">As respostas serão "
-#~ "pesquisadas enquanto escreve o padrão.</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Nota:</span> Quando mudar a configuração da pista, será "
-#~ "construído um padrão automaticamente, com base nas letras que já constam "
-#~ "nas palavras cruzadas, para as posições indicadas para a pista.</p></"
-#~ "body></html>"
-
 #~ msgctxt "Display text for empty clue texts"
 #~ msgid "<placeholder>empty</placeholder>"
 #~ msgstr "<placeholder>vazio</placeholder>"
-
-#~ msgid "Add &Words From Dictionary..."
-#~ msgstr "Adicionar as &Palavras do Dicionário..."
-
-#~ msgid "Adds an entry to the dictionary"
-#~ msgstr "Adiciona um item ao dicionário"
-
-#~ msgid "Allowed Cell T&ypes:"
-#~ msgstr "T&ipos de Células Permitidos:"
-
-#~ msgid "Anchor:"
-#~ msgstr "Âncora:"
 
 #~ msgid "Animate Change Letter"
 #~ msgstr "Animar a Mudança de Letra"
@@ -2843,72 +3963,19 @@ msgstr ""
 #~ msgid "Animate Size Changes"
 #~ msgstr "Animar as Mudanças de Tamanho"
 
-#~ msgid "Answer &Offset:"
-#~ msgstr "P&osição da Resposta:"
+#~ msgid "Animations"
+#~ msgstr "Animações"
 
-#~ msgid "Arrange the answer letters horizontally."
-#~ msgstr "Organizar as letras da resposta na horizontal."
-
-#~ msgid "Arrange the answer letters vertically."
-#~ msgstr "Organizar as letras da resposta na vertical."
-
-#, fuzzy
-#~ msgid "Available crosswords"
-#~ msgstr "Novas palavras cruzadas"
-
-#~ msgid "Backup"
-#~ msgstr "Cópia de Segurança"
-
-#~ msgid "Basic Settings"
-#~ msgstr "Configuração Básica"
+#~ msgid "Answer"
+#~ msgstr "Resposta"
 
 #~ msgid "Boston Globe (sundays)"
 #~ msgstr "Boston Globe (domingos)"
-
-#, fuzzy
-#~ msgid "Centered"
-#~ msgstr "Centrado"
-
-#~ msgid "Clears the dictionary"
-#~ msgstr "Limpa o dicionário"
-
-#~ msgid ""
-#~ "Click / double click an answer to set it as the correct answer of the "
-#~ "clue."
-#~ msgstr ""
-#~ "Faça um simples/duplo 'click' para o definir como a resposta correcta "
-#~ "para a pista."
-
-#~ msgid "Clue &Mapping:"
-#~ msgstr "&Mapeamento das Pistas:"
-
-#~ msgid "Clue &Type:"
-#~ msgstr "&Tipo de Pista:"
-
-#~ msgid "Clue Cell &Handling:"
-#~ msgstr "&Tratamento da Célula da Pista:"
-
-#~ msgid "Clue Number"
-#~ msgstr "Número da Pista"
-
-#~ msgid "Clues can be mapped to single cells or sets of cells"
-#~ msgstr ""
-#~ "As pistas podem ser associadas a células individuais ou a conjuntos de "
-#~ "células"
 
 #~ msgctxt ""
 #~ "The title for contents descriptions of folders in the library tree view"
 #~ msgid "Content:"
 #~ msgstr "Conteúdo:"
-
-#~ msgid "Conversion Info"
-#~ msgstr "Informação de Conversão"
-
-#~ msgid "Convert To Crossword Type"
-#~ msgstr "Converter para o Tipo de Palavras Cruzadas"
-
-#~ msgid "Copyright information about the crossword"
-#~ msgstr "Informação de 'copyright' das palavras cruzadas"
 
 #~ msgid "Couldn't export the crossword to the specified image file."
 #~ msgstr ""
@@ -2941,9 +4008,6 @@ msgstr ""
 #~ "Não foi possível gravar as palavras cruzadas no ficheiro indicado.\n"
 #~ "%1"
 
-#~ msgid "Create Database"
-#~ msgstr "Criar a Base de Dados"
-
 #~ msgid "Create a new crossword in the library."
 #~ msgstr "Criar palavras cruzadas novas na biblioteca."
 
@@ -2955,48 +4019,17 @@ msgstr ""
 #~ "Criado com o KrossWordPuzzle; veja em http://kde-apps.org/content/show."
 #~ "php?content=111726"
 
-#~ msgid "Crossword &Size:"
-#~ msgstr "&Tamanho das Palavras Cruzadas:"
-
-#~ msgid "Crossword Type Information"
-#~ msgstr "Informação do Tipo de Palavras Cruzadas"
-
-#~ msgid "Crossword Type:"
-#~ msgstr "Tipo de Palavras Cruzadas:"
-
 #~ msgid "Current crossword filename: \"%1\""
 #~ msgstr "Ficheiro das palavras cruzadas actuais: \"%1\""
-
-#~ msgid "Current solution word:"
-#~ msgstr "Palavra da solução actual:"
 
 #~ msgid "Daily Crossword From Houston Chronicle"
 #~ msgstr "Palavras Cruzadas Diárias da Houston Chronicle"
 
-#~ msgid "Document &Information"
-#~ msgstr "&Informação do Documento"
-
-#~ msgid "Document Information"
-#~ msgstr "Informação do Documento"
-
-#, fuzzy
-#~ msgid "Download &to:"
-#~ msgstr "Transferir &Para:"
-
-#~ msgid "Download Crosswords"
-#~ msgstr "Transferir as Palavras Cruzadas"
+#~ msgid "Document to open"
+#~ msgstr "O documento a abrir"
 
 #~ msgid "Downloads"
 #~ msgstr "Recepções"
-
-#~ msgid "Edit"
-#~ msgstr "Editar"
-
-#~ msgid "Empty cell &color:"
-#~ msgstr "&Cor das células vazias:"
-
-#~ msgid "Enable Animations"
-#~ msgstr "Activar as Animações"
 
 #~ msgid ""
 #~ "Enables/disables the edit mode. All correct letters are shown in edit "
@@ -3009,108 +4042,21 @@ msgstr ""
 #~ msgid "Error while downloading from url"
 #~ msgstr "Erro ao transferir do URL: %1"
 
-#~ msgid "Exports the whole dictionary to a comma separated text file."
-#~ msgstr ""
-#~ "Exporta todo o dicionário para um ficheiro de texto separado por vírgulas."
-
-#~ msgid "Extract From &Library"
-#~ msgstr "Extrair da Bib&lioteca"
-
-#~ msgid "Extracts words from plain text dictionary files"
-#~ msgstr "Extrai as palavras de ficheiros de dicionários em texto simples"
-
-#~ msgid "Extracts words with associated clues from crosswords in the library"
-#~ msgstr ""
-#~ "Extrai as palavras das pistas associadas das palavras cruzadas da "
-#~ "biblioteca"
-
-#~ msgid ""
-#~ "Extracts words with associated clues from crosswords in the library.\n"
-#~ "This does the same as \"Extract From Crosswords...\" with all crossword "
-#~ "files in the library."
-#~ msgstr ""
-#~ "Extrai as palavras com pistas associadas das palavras cruzadas na "
-#~ "biblioteca.\n"
-#~ "Isto faz o mesmo que o \"Extrair das Palavras Cruzadas...\" com todos os "
-#~ "ficheiros de palavras cruzadas da biblioteca."
-
-#~ msgid ""
-#~ "Filename of the last unsaved file, before a crash or unexpected "
-#~ "behaviour, which caused that an edited crossword wasn't saved without "
-#~ "confirmation of the user."
-#~ msgstr ""
-#~ "O nome do último ficheiro por gravar, antes de um estoiro ou "
-#~ "comportamento inesperado, o que fez com que algumas palavras cruzadas "
-#~ "editadas não tivessem sido gravadas sem confirmação por parte do "
-#~ "utilizador."
-
-#~ msgid "Fill Dictionary"
-#~ msgstr "Preencher o Dicionário"
-
-#~ msgid "First letter cell on the bottom left of the clue cell."
-#~ msgstr ""
-#~ "Célula da primeira letra no canto inferior esquerdo da célula da pista."
-
-#~ msgid "First letter cell on the bottom of the clue cell."
-#~ msgstr "Célula da primeira letra no fundo da célula da pista."
-
-#~ msgid "First letter cell on the bottom right of the clue cell."
-#~ msgstr ""
-#~ "Célula da primeira letra no canto inferior direito da célula da pista."
-
-#~ msgid "First letter cell on the left of the clue cell."
-#~ msgstr "Célula da primeira letra à esquerda da célula da pista."
-
-#~ msgid "First letter cell on the right of the clue cell."
-#~ msgstr "Célula da primeira letra à direita da célula da pista."
-
-#~ msgid "First letter cell on the top left of the clue cell."
-#~ msgstr ""
-#~ "Célula da primeira letra no canto superior esquerdo da célula da pista."
-
-#~ msgid "First letter cell on the top of the clue cell."
-#~ msgstr "Célula da primeira letra no topo da célula da pista."
-
-#~ msgid "First letter cell on the top right of the clue cell."
-#~ msgstr ""
-#~ "Célula da primeira letra no canto superior direito da célula da pista."
+#~ msgid "Error while downloading from url: %1"
+#~ msgstr "Erro ao transferir do URL: %1"
 
 #, fuzzy
-#~ msgid "General"
-#~ msgstr "Geral"
+#~ msgid "Failed"
+#~ msgstr "Mosaico"
 
 #~ msgid "Give up the Game"
 #~ msgstr "Desistir do Jogo"
 
-#~ msgid ""
-#~ "Hides the clue cell. The first letter cell is placed at the coordinates "
-#~ "of the clue cell."
-#~ msgstr ""
-#~ "Esconde a célula da pista. A célula da primeira letra é colocada nas "
-#~ "coordenadas da célula da pista."
-
-#, fuzzy
-#~ msgid "Horizontal"
-#~ msgstr "Horizontal"
-
 #~ msgid "Houston Chronicle (daily)"
 #~ msgstr "Houston Chronicle (diário)"
 
-#~ msgid ""
-#~ "If a clue cell can, can't or has to be inserted into the crossword grid "
-#~ "for each clue"
-#~ msgstr ""
-#~ "Se uma célula de pista pode, não pode ou tem de ser inserida na grelha "
-#~ "das palavras cruzadas, para cada pista"
-
-#~ msgid "Image &File:"
-#~ msgstr "&Ficheiro de Imagem:"
-
-#~ msgid "Imports entries from a comma separated text file."
-#~ msgstr "Importa os itens de um ficheiro de texto separado com vírgulas."
-
-#~ msgid "Insert special characters to the clue text"
-#~ msgstr "Inserir os caracteres especiais do texto da pista"
+#~ msgid "Insert special character:"
+#~ msgstr "Inserir um carácter especial:"
 
 #~ msgid "KrossWordPuzzle"
 #~ msgstr "KrossWordPuzzle"
@@ -3121,29 +4067,9 @@ msgstr ""
 #~ msgid "Last Modified"
 #~ msgstr "Última Modificação"
 
-#~ msgid ""
-#~ "Lets you choose crossword files to extracts words with associated clues "
-#~ "from"
-#~ msgstr ""
-#~ "Permite-lhe escolher os ficheiros de palavras cruzadas com as pistas "
-#~ "associadas de"
-
-#~ msgid ""
-#~ "Lets you choose crossword files to extracts words with associated clues "
-#~ "from.\n"
-#~ "This does the same as \"Extract From Library\", but you can select from "
-#~ "which files words should be extracted."
-#~ msgstr ""
-#~ "Permite-lhe escolher os ficheiros de palavras cruzadas com as pistas "
-#~ "associadas de um dado grupo de ficheiros.\n"
-#~ "Isto faz o mesmo que o \"Extrair da Biblioteca\", mas pode escolher os "
-#~ "ficheiros de onde extrair as palavras."
-
-#~ msgid "Letter"
-#~ msgstr "Carta"
-
-#~ msgid "Letter Cell &Content:"
-#~ msgstr "&Conteúdo da Célula da Letra:"
+#, fuzzy
+#~ msgid "Let you select a special character to paste"
+#~ msgstr "Permite-lhe inserir um carácter especial para colar."
 
 #~ msgctxt ""
 #~ "This string is used to replace the library path for crossword files that "
@@ -3161,12 +4087,6 @@ msgstr ""
 
 #~ msgid "Main Toolbar"
 #~ msgstr "Barra Principal"
-
-#~ msgid "Move Horizontal:"
-#~ msgstr "Mover na Horizontal:"
-
-#~ msgid "Move Vertical:"
-#~ msgstr "Mover na Vertical:"
 
 #~ msgid "Moved crossword \"%1\" from \"%2\" to \"%3\""
 #~ msgstr "Foram movidas as palavras cruzadas \"%1\" de \"%2\" para \"%3\""
@@ -3186,9 +4106,6 @@ msgstr ""
 #~ "in the library model."
 #~ msgid "Name"
 #~ msgstr "Nome"
-
-#~ msgid "Name of the current theme."
-#~ msgstr "O nome do tema actual."
 
 #~ msgid ""
 #~ "Name of the subdirectory in the library directory in which new downloads "
@@ -3216,88 +4133,39 @@ msgstr ""
 #~ msgid "New &Crossword..."
 #~ msgstr "Novas Palavras &Cruzadas"
 
-#~ msgid "New Size:"
-#~ msgstr "Novo Tamanho:"
-
-#~ msgid "Notes about the crossword"
-#~ msgstr "Notas acerca das palavras cruzadas"
-
 #~ msgid "Notes:"
 #~ msgstr "Notas:"
 
 #~ msgid "Onion Crosswords by Ben Tausig (wednesdays)"
 #~ msgstr "Palavras Cruzadas da Onion Crosswords (quartas-feiras)"
 
-#~ msgid "Only the checked cell types can be added into the crossword grid"
-#~ msgstr ""
-#~ "Só podem ser adicionados os tipos de células assinalados na grelha de "
-#~ "palavras cruzadas"
-
 #~ msgctxt "&Open"
 #~ msgid "Open a crossword file"
 #~ msgstr "Abrir um ficheiro de palavras cruzadas"
-
-#~ msgid "Open the selected crossword."
-#~ msgstr "Abrir as palavras cruzadas seleccionadas."
 
 #~ msgid "Please reselect the crossword to show a preview..."
 #~ msgstr ""
 #~ "Por favor, volte a seleccionar as palavras cruzadas para obter uma "
 #~ "antevisão..."
 
-#~ msgid "Preview:"
-#~ msgstr "Antevisão:"
-
 #~ msgid "Refreshes the library view after changes in the library folder."
 #~ msgstr ""
 #~ "Actualiza a área da biblioteca após as alterações na pasta da biblioteca."
 
-#~ msgid "Remap the selected letter to the given clue number."
-#~ msgstr "Volta a associar a letra seleccionada ao número de pista indicado."
-
-#~ msgid "Removes the selected entries from the dictionary"
-#~ msgstr "Remover os itens seleccionados do dicionário"
-
-#~ msgid "Resize Crossword"
-#~ msgstr "Dimensionar as Palavras Cruzadas"
-
-#~ msgid "Rules"
-#~ msgstr "Regras"
-
 #~ msgid "S&earch:"
 #~ msgstr "P&rocurar:"
 
-#, fuzzy
-#~ msgid "Scaled"
-#~ msgstr "Escalado"
+#~ msgid "Save &Edit History"
+#~ msgstr "Gravar o Histórico da &Edição"
 
-#, fuzzy
-#~ msgid "Scaled (Keep Aspect Ratio)"
-#~ msgstr "Escalado (Manter as Proporções)"
-
-#, fuzzy
-#~ msgid "Scaled and Cropped"
-#~ msgstr "Escalado e Recortado"
-
-#~ msgid "Selection"
-#~ msgstr "Selecção"
+#~ msgid "Save without correct answers, clue texts, images"
+#~ msgstr "Gravar sem as respostas certas, textos de pistas, imagens"
 
 #~ msgid "Set as Folder For New &Downloads"
 #~ msgstr "&Definir como Pasta para as Transferências Novas"
 
-#~ msgid "Shows the current mapping of answer letters to clue numbers."
-#~ msgstr ""
-#~ "Mostra o mapeamento actual entre os números das pistas e as letras das "
-#~ "respostas."
-
-#~ msgid "Size:"
-#~ msgstr "Tamanho:"
-
-#~ msgid "Solution Letter"
-#~ msgstr "Letra da Solução"
-
-#~ msgid "Template"
-#~ msgstr "Modelo"
+#~ msgid "Solution"
+#~ msgstr "Solução"
 
 #, fuzzy
 #~ msgid "The answer contains illegal characters. Allowed are A-Z."
@@ -3309,45 +4177,18 @@ msgstr ""
 #~ "The answer overwrites the answer to another clue in the same orientation"
 #~ msgstr "A resposta sobrepõe-se à resposta de outra pista na mesma direcção."
 
-#~ msgid "The author(s) of the crossword"
-#~ msgstr "Os autores das palavras cruzadas"
-
-#~ msgid "The clue text"
-#~ msgstr "O texto da pista"
-
-#~ msgid "The clue to the answer."
-#~ msgstr "A pista para a resposta."
-
 #, fuzzy
 #~ msgid "The file is not a Krossword version <= 1.1 file."
 #~ msgstr "O ficheiro não é do formato do KrossWordPuzzle versão &lt;= 1.1."
 
-#~ msgid "The minimum length of answers to clues"
-#~ msgstr "O tamanho mínimo das respostas às pistas"
-
-#~ msgid "The name of the crossword type"
-#~ msgstr "O nome do tipo de palavras cruzadas"
-
-#~ msgid "The new clue number for the selected letter."
-#~ msgstr "O novo número de pista para as letras seleccionadas."
-
 #, fuzzy
-#~ msgid "The size will be shrinked to match the aspect ratio of the crossword"
-#~ msgstr ""
-#~ "(O tamanho será reduzido para corresponder às proporções das palavras "
-#~ "cruzadas)"
+#~ msgid ""
+#~ "The solution letter position %1 is already assigned.\n"
+#~ "Please change the solution word position of that letter first."
+#~ msgstr "A posição da letra da solução %1 já está atribuída."
 
 #~ msgid "The theme '%1' couldn't be found. The default theme is now used."
 #~ msgstr "O tema '%1' não foi encontrado. O tema usado será o predefinido."
-
-#~ msgid "The title of the crossword"
-#~ msgstr "O título das palavras cruzadas"
-
-#~ msgid "The type of clues (strings or numbers)"
-#~ msgstr "O tipo de pistas (textos ou números)"
-
-#~ msgid "The type of content of letter cells"
-#~ msgstr "O tipo de conteúdo das células de letras"
 
 #~ msgid ""
 #~ "This is the library view.<br/>You can see all crosswords that are inside "
@@ -3355,18 +4196,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Esta é a área da biblioteca.<br/>Poderá ver todas as palavras cruzadas "
 #~ "que constam na biblioteca."
-
-#, fuzzy
-#~ msgid "Tiled"
-#~ msgstr "Mosaico"
-
-#, fuzzy
-#~ msgid "Title:"
-#~ msgstr "&Título:"
-
-#, fuzzy
-#~ msgid "Vertical"
-#~ msgstr "Vertical"
 
 #~ msgid "Washington Post by Fred Piscop (sundays)"
 #~ msgstr "Palavras Cruzadas do Washington Post por Fred Piscop (domingos)"
@@ -3377,9 +4206,6 @@ msgstr ""
 #~ msgid "Welcome to KrossWordPuzzle!"
 #~ msgstr "Bem-vindo ao KrossWordPuzzle!"
 
-#~ msgid "Wildcard pattern to search for answers"
-#~ msgstr "Padrão de caracteres especiais a procurar por respostas"
-
 #~ msgid "Zoom in"
 #~ msgstr "Ampliar"
 
@@ -3389,9 +4215,6 @@ msgstr ""
 #~ msgctxt "Using default image quality settings"
 #~ msgid "default"
 #~ msgstr "por omissão"
-
-#~ msgid "whether or not animations should be enabled"
-#~ msgstr "se as animações deverão ou não estar activas"
 
 #~ msgid "whether or not changes to an items appearance should be animated."
 #~ msgstr "se as mudanças da aparição de um item deverão ser ou não animadas."
