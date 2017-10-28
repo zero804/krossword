@@ -59,7 +59,9 @@ public:
         ChronicleHigherEducation,
         CrossNerd,
         /*SwearCrossword,*/
-        Motscroisesch/*,
+        WashingtonPost,
+        Motscroisesch,
+        TheWeek/*,
         ChrisWords*/
     };
 

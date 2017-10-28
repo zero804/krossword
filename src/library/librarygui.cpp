@@ -215,6 +215,20 @@ void LibraryGui::downloadProviderChanged(int index)
             ui_download.crosswords->addItem(item);
         }
         break;
+
+    case WashingtonPost: // CHECK: test availability over time
+        getDownloadCrosswordItems("http://herbach.dnsalias.com/WaPo/wp%1.puz", QDate(2017, 9, 24), QDate::currentDate(), 7);
+        break;
+
+    case TheWeek: // CHECK: working from 302 to 429 at 28/10/2017
+        int week = (QDate(2009, 6, 12).daysTo(QDate::currentDate())) / 7;
+        for (int i = 1; i <= week; ++i) {
+            item = new SortedListWidgetItem(QString(i18n("Week %1")).arg(i));
+            item->setData(Qt::UserRole, QString("http://api.theweek.com/sites/default/files/crosswords/Week%1.puz").arg(i, 2, 10, QChar('0')));
+            item->setData(Qt::UserRole + 1, i);
+            ui_download.crosswords->addItem(item);
+        }
+        break;
     }
 
     ui_download.crosswords->setSortingEnabled(true);
@@ -431,6 +445,14 @@ void LibraryGui::libraryDownloadSlot()
         case Motscroisesch:
             ui_download.providers->addItem(i18n("Mots-croisés.ch free French crosswords"), static_cast<int>(provider));
             break;
+
+        case WashingtonPost:
+        ui_download.providers->addItem(i18n("Washington Post by Evan Birnholz (sunday)"), static_cast<int>(provider));
+            break;
+
+        case TheWeek:
+            ui_download.providers->addItem(i18n("The Week"), static_cast<int>(provider));
+            break;
         }
     }
 
@@ -612,5 +634,9 @@ void LibraryGui::getDownloadCrosswordItems(const QString& rawUrl, const QDate& s
 
 QList<LibraryGui::DownloadProvider> LibraryGui::allDownloadProviders()
 {
-    return QList<DownloadProvider>() << JonesinCrosswords << WallStreetJournal << ChronicleHigherEducation << CrossNerd << /*SwearCrossword << ChrisWords <<*/ Motscroisesch;
+    return QList<DownloadProvider>() << JonesinCrosswords << WallStreetJournal
+                                     << ChronicleHigherEducation << CrossNerd
+                                     << /*SwearCrossword << ChrisWords
+                                     <<*/ WashingtonPost << Motscroisesch
+                                     << TheWeek;
 }
