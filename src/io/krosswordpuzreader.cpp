@@ -1,5 +1,6 @@
 /*
 *   Copyright 2010 Friedrich Pülz <fpuelz@gmx.de>
+*   Copyright 2017 Giacomo Barazzetti <giacomosrv@gmail.com>
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU Library General Public License as
@@ -19,148 +20,182 @@
 
 #include "krosswordpuzreader.h"
 
-#include "krossword.h"
-#include "animator.h"
-#include "cells/cluecell.h"
-#include "cells/lettercell.h"
-
 #include <QIODevice>
-#include <qtextcodec.h>
-#include <qbuffer.h>
+#include <QDataStream>
+#include <QBuffer>
 
 #include <QDebug>
 
 const char *KrossWordPuzStream::FILE_MAGIC = "ACROSS&DOWN";
 
-KrossWordPuzStream::KrossWordPuzStream()
+QString getStringFromGrid(QList<QByteArray> &grid, int x, int y, Qt::Orientation orientation)
 {
+    QString result;
+    char letter = grid.at(y).at(x);
+    if (orientation == Qt::Horizontal) {
+        int pos = x;
+        while (pos < grid.at(y).length()) {
+            letter = grid.at(y).at(pos);
+            if (letter == '.') {
+                break;
+            }
+            result.append(letter);
+            pos++;
+        }
+    } else if (orientation == Qt::Vertical) {
+        int pos = y;
+        while (pos < grid.length()) {
+            letter = grid.at(pos).at(x);
+            if (letter == '.') {
+                break;
+            }
+            result.append(letter);
+            pos++;
+        }
+    }
 
+    return result;
 }
 
+//----------------------------------------------
 
-bool KrossWordPuzStream::read(QIODevice *device,
-                              KrossWordPuzStream::KrossWordData *krossWordData,
-                              KrossWordPuzStream::PuzChecksums *checksums)
+bool KrossWordPuzStream::readData(QIODevice *device, KrossWordPuzStream::PuzChecksums *checksums)
 {
     Q_ASSERT(device);
-    Q_ASSERT(krossWordData);
 
     bool closeAfterRead;
     if ((closeAfterRead = !device->isOpen()) && !device->open(QIODevice::ReadOnly)) {
         return false;
     }
-    setDevice(device);
-    setByteOrder(LittleEndian);
+
+    QDataStream dataStream;
+    dataStream.setDevice(device);
+    dataStream.setByteOrder(QDataStream::LittleEndian);
 
     int gridStringLength;
     qint16 clueNumber;
     QByteArray fileMagic;
 
-    if (checksums)
-        *this >> checksums->main;
-    else if (!device->seek(OFFSET_FILE_MAGIC)) {
-        if (closeAfterRead) device->close();
+    if (checksums) {
+        dataStream >> checksums->main;
+    } else if (!device->seek(OFFSET_FILE_MAGIC)) {
+        if (closeAfterRead) {
+            device->close();
+        }
         return false;
     }
 
     // Read and check file magic
     fileMagic.reserve(12);
-    if (readRawData(fileMagic.data(), 12) < 12) {
-        if (closeAfterRead) device->close();
+    if (dataStream.readRawData(fileMagic.data(), 12) < 12) {
+        if (closeAfterRead) {
+            device->close();
+        }
         return false;
     }
     if (QString(fileMagic) == (FILE_MAGIC)) {
         qDebug() << QString("Wrong file magic '%1', should be '%2'").arg(fileMagic.data()).arg(FILE_MAGIC);
-        if (closeAfterRead) device->close();
+        if (closeAfterRead) {
+            device->close();
+        }
         return false;
     }
 
     if (checksums) {
-        *this >> checksums->cib;
+        dataStream >> checksums->cib;
 
         qint8 masked;
         for (int i = 0; i < 8; ++i) {
-            *this >> masked;
+            dataStream >> masked;
             checksums->masked << masked;
         }
     } else if (!device->seek(OFFSET_VERSION)) {
-        if (closeAfterRead) device->close();
+        if (closeAfterRead) {
+            device->close();
+        }
         return false;
     }
 
     // Read and check version
     char *version = new char[4];
-    if (readRawData(version, 4) < 4) {
+    if (dataStream.readRawData(version, 4) < 4) {
         delete[] version;
-        if (closeAfterRead) device->close();
+        if (closeAfterRead) {
+            device->close();
+        }
         return false;
     }
     if (!QString(version).startsWith(QLatin1String("1.2"))) {
         qDebug() << "Unsupported PUZ-version:" << version << "Should be 1.2";
-//  delete[] version;
-//  if ( closeAfterRead ) device->close();
-//  return false;
     }
     delete[] version;
 
     // Read crossword grid size
     if (!device->seek(OFFSET_GRID_SIZE)) {
-        if (closeAfterRead) device->close();
+        if (closeAfterRead) {
+            device->close();
+        }
         return false;
     }
-    *this >> krossWordData->width;
-    *this >> krossWordData->height;
+    dataStream >> m_puzData.width;
+    dataStream >> m_puzData.height;
 
     // Read number of clues
-    *this >> clueNumber;
+    dataStream >> clueNumber;
 
     // Read puzzle solution string
     if (!device->seek(OFFSET_SOLUTION)) {
-        if (closeAfterRead) device->close();
+        if (closeAfterRead) {
+            device->close();
+        }
         return false;
     }
-    gridStringLength = krossWordData->width * krossWordData->height;
+    gridStringLength = m_puzData.width * m_puzData.height;
     char *solution = new char[gridStringLength];
-    if (readRawData(solution, gridStringLength) != gridStringLength) {
+    if (dataStream.readRawData(solution, gridStringLength) != gridStringLength) {
         delete[] solution;
-        if (closeAfterRead) device->close();
+        if (closeAfterRead) {
+            device->close();
+        }
         return false;
     }
-    krossWordData->solution = solution;
+    m_puzData.solution = solution;
     delete[] solution;
 
     // Read puzzle state string
     char *state = new char[gridStringLength];
-    if (readRawData(state, gridStringLength) != gridStringLength) {
+    if (dataStream.readRawData(state, gridStringLength) != gridStringLength) {
         delete[]  state;
-        if (closeAfterRead) device->close();
+        if (closeAfterRead) {
+            device->close();
+        }
         return false;
     }
-    krossWordData->state = state;
+    m_puzData.state = state;
     delete[] state;
 
     // Read header information
-    krossWordData->title = readZeroTerminatedString().trimmed();
-    krossWordData->authors = readZeroTerminatedString().trimmed();
-    krossWordData->copyright = readZeroTerminatedString().trimmed();
+    m_puzData.title = readZeroTerminatedString(dataStream).trimmed();
+    m_puzData.authors = readZeroTerminatedString(dataStream).trimmed();
+    m_puzData.copyright = readZeroTerminatedString(dataStream).trimmed();
 
     int pos;
-    if (krossWordData->title.isEmpty() &&
-            (pos = QString(krossWordData->authors).indexOf(QRegExp("by", Qt::CaseInsensitive))) != -1) {
-        krossWordData->title = krossWordData->authors.left(pos).trimmed();
-        krossWordData->authors = krossWordData->authors.mid(pos).trimmed();
+    if (m_puzData.title.isEmpty() && (pos = QString(m_puzData.authors).indexOf(QRegExp("by", Qt::CaseInsensitive))) != -1) {
+        m_puzData.title = m_puzData.authors.left(pos).trimmed();
+        m_puzData.authors = m_puzData.authors.mid(pos).trimmed();
 
-        qDebug() << "Extracted title from author field:" << krossWordData->title
-                 << "author is now" << krossWordData->authors;
+        qDebug() << "Extracted title from author field:" << m_puzData.title
+                 << "author is now" << m_puzData.authors;
     }
 
     // Read clues
     for (qint16 i = 0; i < clueNumber; ++i) {
-        krossWordData->clues << readZeroTerminatedString();
+        m_puzData.clues << readZeroTerminatedString(dataStream);
+
     }
 
     // Read notes
-    krossWordData->notes = readZeroTerminatedString();
+    m_puzData.notes = readZeroTerminatedString(dataStream);
 
     if (closeAfterRead) {
         device->close();
@@ -169,315 +204,179 @@ bool KrossWordPuzStream::read(QIODevice *device,
     return true;
 }
 
-bool KrossWordPuzStream::read(QIODevice* device, KrossWord* krossWord)
+KrossWordPuzStream::KrossWordPuzStream(QIODevice *device)
+    : CrosswordIO(device)
 {
-    Q_ASSERT(krossWord);
 
-    // Read from device
+}
+
+bool KrossWordPuzStream::read(CrosswordData &crossData)
+{
     PuzChecksums checksums;
-    KrossWordData krossWordData;
-    if (!read(device, &krossWordData, &checksums)) {
+    if (!readData(m_device, &checksums)) {
         return false;
     }
 
-    PuzChecksums generatedChecksums = generateChecksums(device, krossWordData);
+    PuzChecksums generatedChecksums = generateChecksums(m_device);
     qDebug() << "main" << checksums.main << "=?=" << generatedChecksums.main;
     qDebug() << "cib" << checksums.cib << "=?=" << generatedChecksums.cib;
     for (int i = 0; i < 8; ++i) {
         qDebug() << "masked" << i << checksums.masked[i] << "=?=" << generatedChecksums.masked[i];
     }
 
-    QList<ClueInfo> acrossClues, downClues;
-    bool mappingCluesOk = mapClues(krossWordData, acrossClues, downClues);
-
-    krossWord->removeAllCells();
-    // Crosswords in *.puz-files are always american style
-    krossWord->createNew(American, QSize(krossWordData.width, krossWordData.height));
-
-    // Don't emit currentAnswerChanged signals
-    bool wasBlockingSignals = krossWord->blockSignals(true);
-    krossWord->animator()->setEnabled(false);
-
-    ClueCell *clue;
-    foreach(ClueInfo clueInfo, acrossClues) {
-        QPair<uint, uint> coords = indexToCoords(clueInfo.gridIndex, krossWordData.width);
-        QString answer, currentAnswer;
-        for (int x = coords.first; x < krossWordData.width; ++x) {
-            uint index = coordsToIndex(x, coords.second, krossWordData.width);
-            char ch = krossWordData.solution[ index ];
-            if (ch == '.') {
-                break;
-            } else {
-                answer += ch;
-
-                char chState = krossWordData.state[ index ];
-                if (chState == '.') {
-                    qDebug() << "The solution and state strings in the PUZ-file aren't compatible.";
-                    qDebug() << "The solution string has no empty cell at"
-                             << QString("(%1, %2)").arg(x).arg(coords.second) << "but the state string has";
-                    currentAnswer += ' ';
-                } else if (chState == '-') {
-                    currentAnswer += ' ';
-//   } else if ( !LetterCell::isLetterAllowed(chState) ) {/*
-                } else if (!krossWord->crosswordTypeInfo().isCharacterLegal(chState)) {
-                    qDebug() << "The state string contains a not allowed letter" << chState;
-                    currentAnswer += ' ';
-                } else {
-                    currentAnswer += chState;
-                }
-            }
-        }
-
-        // Put question cells to empty cells if possible (TODO: half question cells? parted diagonally..)
-//  QPair<uint, uint> coordsLeft( coords.first - 1, coords.second );
-//  bool isPlaceForQuestionCell = /*coords.second == 0 ||*/
-//   coords.first != 0 && puzzleSolution[ coordsToIndex(coordsLeft.first, coordsLeft.second, width) ] == '.';
-
-        krossWord->insertClue(Coord(coords.first, coords.second), Qt::Horizontal,
-                              OnClueCell, clueInfo.clue, answer,
-                              LetterCellType, DontIgnoreErrors, true,
-                              &clue);
-
-        if (clue) {
-            clue->setClueNumber(clueInfo.number);
-            clue->setCurrentAnswer(currentAnswer, Unknown);
-        }
-    }
-
-    //-------------------------------------
-
-    foreach(ClueInfo clueInfo, downClues) {
-        QPair<uint, uint> coords = indexToCoords(clueInfo.gridIndex, krossWordData.width);
-        QString answer, currentAnswer;
-        for (int y = coords.second; y < krossWordData.height; ++y) {
-            uint index = coordsToIndex(coords.first, y, krossWordData.width);
-            char ch = krossWordData.solution[ index ];
-            if (ch == '.')
-                break;
-            else
-                answer += ch;
-
-            char chState = krossWordData.state[ index ];
-            if (chState == '.') {
-                qDebug() << "The solution and state strings in the PUZ-file aren't compatible.";
-                qDebug() << "The solution string has no empty cell at"
-                         << QString("(%1, %2)").arg(coords.first).arg(y) << "but the state string has";
-                currentAnswer += ' ';
-            } else if (chState == '-') {
-                currentAnswer += ' ';
-//   } else if ( !LetterCell::isLetterAllowed(chState) ) {
-            } else if (!krossWord->crosswordTypeInfo().isCharacterLegal(chState)) {
-                qDebug() << "The state string contains a not allowed letter" << chState;
-                currentAnswer += ' ';
-            } else
-                currentAnswer += chState;
-        }
-
-        krossWord->insertClue(Coord(coords.first, coords.second), Qt::Vertical,
-                              OnClueCell, clueInfo.clue/*curClueIndex*/, answer,
-                              LetterCellType, DontIgnoreErrors, true,
-                              &clue);
-        if (clue) {
-            clue->setClueNumber(clueInfo.number);
-            clue->setCurrentAnswer(currentAnswer, Unknown);
-        }
-    }
-
-    krossWord->setTitle(QString::fromLatin1(krossWordData.title));
-    krossWord->setAuthors(QString::fromLatin1(krossWordData.authors));
-    krossWord->setCopyright(QString::fromLatin1(krossWordData.copyright));
-    krossWord->setNotes(QString::fromLatin1(krossWordData.notes));
-
-    krossWord->animator()->setEnabled(true);
-    krossWord->blockSignals(wasBlockingSignals);
-
-    return mappingCluesOk;
+    crossData.width = int(m_puzData.width);
+    crossData.height = int(m_puzData.height);
+    crossData.type = "American"; // PUZ is always American type
+    crossData.title = QString::fromLatin1(m_puzData.title);
+    crossData.authors = QString::fromLatin1(m_puzData.authors);
+    crossData.copyright = QString::fromLatin1(m_puzData.copyright);
+    crossData.notes = QString::fromLatin1(m_puzData.notes);
+    //crossData.images - no support in PUZ
+    //crossData.undoData - no support in PUZ
+    return mapClues(crossData.clues);
 }
 
-KrossWordPuzStream::KrossWordData::KrossWordData(KrossWord* krossWord,
-        KrossWord::WriteMode writeMode)
+bool KrossWordPuzStream::writeDataTo(QDataStream &dataStream, const QByteArray &data, int len) const
 {
-    Q_ASSERT(krossWord);
+    return dataStream.writeRawData(data, len) == len;
+}
 
-    width = krossWord->width();
-    height = krossWord->height();
-    title = krossWord->getTitle().toLatin1();
-    authors = krossWord->getAuthors().toLatin1();
-    copyright = krossWord->getCopyright().toLatin1();
-    notes = krossWord->getNotes().toLatin1();
+bool KrossWordPuzStream::write(const CrosswordData &crossdata)
+{
+    Q_ASSERT(m_device);
 
-    // Get crossword solution and state strings
-    int gridStringLength = width * height;
-    solution.reserve(gridStringLength);
-    state.reserve(gridStringLength);
-    for (uint y = 0; y < krossWord->height(); ++y) {
-        for (uint x = 0; x < krossWord->width(); ++x) {
-            KrossWordCell *cell = krossWord->at(Coord(x, y));
-            if (cell->isLetterCell()) {
-                LetterCell *letter = (LetterCell*)cell;
-
-                if (writeMode == KrossWord::Template)
-                    solution.append('-');
-                else
-                    solution.append(letter->correctLetter().toLatin1());
-
-                if (letter->isEmpty() || writeMode == KrossWord::Template)
-                    state.append('-');
-                else
-                    state.append(letter->currentLetter().toLatin1());
-
-                ClueCell *clueHorz, *clueVert;
-                clueHorz = letter->clue(Qt::Horizontal);
-                clueVert = letter->clue(Qt::Vertical);
-
-                if (writeMode == KrossWord::Template) {
-                    if (clueHorz && clueHorz->firstLetter() == letter)
-                        clues << "";
-                    if (clueVert && clueVert->firstLetter() == letter)
-                        clues << "";
-                } else {
-                    if (clueHorz && clueHorz->firstLetter() == letter)
-                        clues << clueHorz->clue().toLatin1();
-                    if (clueVert && clueVert->firstLetter() == letter)
-                        clues << clueVert->clue().toLatin1();
-                }
-            } else { // No clue or solution letter cells in PUZ format
-                solution.append('.');
-                state.append('.');
-            }
-        }
+    if (crossdata.width > 255 || crossdata.height > 255) {
+        qDebug() << "Maximal size of crosswords to be saved in the PUZ-format version 1.2/1.3 is 255x255.";
+        return false;
     }
-}
 
-bool KrossWordPuzStream::writeDataTo(QDataStream &ds,
-                                     const QByteArray &data, int len) const
-{
-    return ds.writeRawData(data, len) == len;
-}
-
-bool KrossWordPuzStream::write(QIODevice* device, KrossWord* krossWord,
-                               KrossWord::WriteMode writeMode)
-{
-    Q_ASSERT(device);
-    Q_ASSERT(krossWord);
-
-    if (krossWord->width() > 255 || krossWord->height() > 255) {
-        qDebug() << "Maximal size of crosswords to be saved in the PUZ-format "
-                 "version 1.2/1.3 is 255x255.";
+    m_puzData.width = qint8(crossdata.width);
+    m_puzData.height = qint8(crossdata.height);
+    // crossdata.type ignored, PUZ is always American type
+    // CHECK: best to check the input type?
+    m_puzData.title = crossdata.title.toLatin1();
+    m_puzData.authors = crossdata.authors.toLatin1();
+    m_puzData.copyright = crossdata.copyright.toLatin1();
+    m_puzData.notes = crossdata.notes.toLatin1();
+    m_puzData.solution = QByteArray(crossdata.width * crossdata.height, '.'); // initialize filling with black cells
+    m_puzData.state = QByteArray(crossdata.width * crossdata.height, '.'); // initialize filling with black cells
+    if (!prepareDataForWrite(crossdata)) {
         return false;
     }
 
     bool closeAfterWrite;
-    if ((closeAfterWrite = !device->isOpen()) && !device->open(QIODevice::WriteOnly))
+    if ((closeAfterWrite = !m_device->isOpen()) && !m_device->open(QIODevice::WriteOnly)) {
         return false;
-    setDevice(device);
-    setByteOrder(LittleEndian);
+    }
 
-    KrossWordData krossWordData(krossWord, writeMode);
+    QDataStream dataStream;
+    dataStream.setDevice(m_device);
+    dataStream.setByteOrder(QDataStream::LittleEndian);
+
     QBuffer data;
     data.open(QBuffer::ReadWrite);
     QDataStream ds(&data);
-    ds.setByteOrder(LittleEndian);
+    ds.setByteOrder(QDataStream::LittleEndian);
 
     if (!data.seek(OFFSET_FILE_MAGIC)) {     // Skip bytes: Main checksum
-        if (closeAfterWrite) device->close();
+        if (closeAfterWrite) m_device->close();
         return false;
     }
     if (ds.writeRawData("ACROSS&DOWN\0", 12) != 12) {     // Magic string
-        if (closeAfterWrite) device->close();
+        if (closeAfterWrite) m_device->close();
         return false;
     }
 
     if (!data.seek(OFFSET_VERSION)) {     // Skip bytes: CIB checksum, masked checksums
-        if (closeAfterWrite) device->close();
+        if (closeAfterWrite) m_device->close();
         return false;
     }
     if (ds.writeRawData("1.2\0", 4) != 4) {     // Version
-        if (closeAfterWrite) device->close();
+        if (closeAfterWrite) m_device->close();
         return false;
     }
 
     if (!data.seek(OFFSET_GRID_SIZE)) {     // Skip bytes: Masked checksums
-        if (closeAfterWrite) device->close();
+        if (closeAfterWrite) m_device->close();
         return false;
     }
-    ds << (qint8)krossWordData.width;
-    ds << (qint8)krossWordData.height;
-    ds << (qint16)krossWordData.clues.count();
+    ds << (qint8)m_puzData.width;
+    ds << (qint8)m_puzData.height;
+    ds << (qint16)m_puzData.clues.count();
     ds << (qint8)1;
     ds << (qint8)0;
     ds << (qint8)0;
     ds << (qint8)0;
 
     if (!data.seek(OFFSET_SOLUTION)) {
-        if (closeAfterWrite) device->close();
+        if (closeAfterWrite) m_device->close();
         return false;
     }
-    int gridStringLength = krossWord->width() * krossWord->height();
-    if (ds.writeRawData(krossWordData.solution, gridStringLength) != gridStringLength) {
-        if (closeAfterWrite) device->close();
+    int gridStringLength = m_puzData.width * m_puzData.height;
+    if (ds.writeRawData(m_puzData.solution, gridStringLength) != gridStringLength) {
+        if (closeAfterWrite) m_device->close();
         return false;
     }
-    if (ds.writeRawData(krossWordData.state, gridStringLength) != gridStringLength) {
-        if (closeAfterWrite) device->close();
-        return false;
-    }
-
-    if (!writeDataTo(ds, krossWordData.title, krossWordData.title.length() + 1)) {
-        if (closeAfterWrite) device->close();
-        return false;
-    }
-    if (!writeDataTo(ds, krossWordData.authors, krossWordData.authors.length() + 1)) {
-        if (closeAfterWrite) device->close();
-        return false;
-    }
-    if (!writeDataTo(ds, krossWordData.copyright, krossWordData.copyright.length() + 1)) {
-        if (closeAfterWrite) device->close();
+    if (ds.writeRawData(m_puzData.state, gridStringLength) != gridStringLength) {
+        if (closeAfterWrite) m_device->close();
         return false;
     }
 
-    for (qint16 i = 0; i < krossWordData.clues.count(); ++i) {
-        if (!writeDataTo(ds, krossWordData.clues[i], krossWordData.clues[i].length() + 1)) {
-            if (closeAfterWrite) device->close();
+    if (!writeDataTo(ds, m_puzData.title, m_puzData.title.length() + 1)) {
+        if (closeAfterWrite) m_device->close();
+        return false;
+    }
+    if (!writeDataTo(ds, m_puzData.authors, m_puzData.authors.length() + 1)) {
+        if (closeAfterWrite) m_device->close();
+        return false;
+    }
+    if (!writeDataTo(ds, m_puzData.copyright, m_puzData.copyright.length() + 1)) {
+        if (closeAfterWrite) m_device->close();
+        return false;
+    }
+
+    for (qint16 i = 0; i < m_puzData.clues.count(); ++i) {
+        if (!writeDataTo(ds, m_puzData.clues[i], m_puzData.clues[i].length() + 1)) {
+            if (closeAfterWrite) m_device->close();
             return false;
         }
     }
 
-    if (!writeDataTo(ds, krossWordData.notes, krossWordData.notes.length() + 1)) {
-        if (closeAfterWrite) device->close();
+    if (!writeDataTo(ds, m_puzData.notes, m_puzData.notes.length() + 1)) {
+        if (closeAfterWrite) m_device->close();
         return false;
     }
 
     data.close();
 
     // Get checksums
-    PuzChecksums puzChecksums = generateChecksums(&data, krossWordData);
+    PuzChecksums puzChecksums = generateChecksums(&data);
 
     // Write checksums to buffer
     data.open(QIODevice::ReadWrite);
     ds << puzChecksums.main;
     if (!data.seek(0xe)) {     // Skip magic string
-        if (closeAfterWrite) device->close();
+        if (closeAfterWrite) m_device->close();
         return false;
     }
     ds << puzChecksums.cib;
-    foreach(const qint8 & checksumMasked, puzChecksums.masked)
-    ds << checksumMasked;
+    foreach(const qint8 & checksumMasked, puzChecksums.masked) {
+        ds << checksumMasked;
+    }
     data.close();
 
     // Write everything buffered
-    if (!writeRawData(data.buffer(), data.size())) {
-        if (closeAfterWrite) device->close();
+    if (!dataStream.writeRawData(data.buffer(), data.size())) {
+        if (closeAfterWrite) m_device->close();
         return false;
     }
 
     if (closeAfterWrite)
-        device->close();
+        m_device->close();
     return true;
 }
 
-KrossWordPuzStream::PuzChecksums KrossWordPuzStream::generateChecksums(
-    QIODevice* buffer, KrossWordData data) const
+KrossWordPuzStream::PuzChecksums KrossWordPuzStream::generateChecksums(QIODevice* buffer) const
 {
     PuzChecksums checksums;
 
@@ -487,20 +386,20 @@ KrossWordPuzStream::PuzChecksums KrossWordPuzStream::generateChecksums(
     buffer->close();
 
     // TODO: checksum AND checksumPart are wrong... (something to do with \0-termination?)
-    int gridStringLength = data.width * data.height;
-    checksums.main = checkSumRegion(data.solution, gridStringLength, checksums.cib);
-    checksums.main = checkSumRegion(data.state, gridStringLength, checksums.main);
-    checksums.main = checkSumRegion(data.title, data.title.length() + 1, checksums.main);   // zero-terminated
-    checksums.main = checkSumRegion(data.authors, data.authors.length() + 1, checksums.main);   // zero-terminated
-    checksums.main = checkSumRegion(data.copyright, data.copyright.length() + 1, checksums.main);   // zero-terminated
-    quint16 solution = checkSumRegion(data.solution, gridStringLength, 0);
-    quint16 state = checkSumRegion(data.state, gridStringLength, 0);
-    quint16 part = checkSumRegion(data.title, data.title.length() + 1, 0);   // zero-terminated
-    part = checkSumRegion(data.authors, data.authors.length() + 1, part);   // zero-terminated
-    part = checkSumRegion(data.copyright, data.copyright.length() + 1, part);   // zero-terminated
+    int gridStringLength = m_puzData.width * m_puzData.height;
+    checksums.main = checkSumRegion(m_puzData.solution, gridStringLength, checksums.cib);
+    checksums.main = checkSumRegion(m_puzData.state, gridStringLength, checksums.main);
+    checksums.main = checkSumRegion(m_puzData.title, m_puzData.title.length() + 1, checksums.main);   // zero-terminated
+    checksums.main = checkSumRegion(m_puzData.authors, m_puzData.authors.length() + 1, checksums.main);   // zero-terminated
+    checksums.main = checkSumRegion(m_puzData.copyright, m_puzData.copyright.length() + 1, checksums.main);   // zero-terminated
+    quint16 solution = checkSumRegion(m_puzData.solution, gridStringLength, 0);
+    quint16 state = checkSumRegion(m_puzData.state, gridStringLength, 0);
+    quint16 part = checkSumRegion(m_puzData.title, m_puzData.title.length() + 1, 0);   // zero-terminated
+    part = checkSumRegion(m_puzData.authors, m_puzData.authors.length() + 1, part);   // zero-terminated
+    part = checkSumRegion(m_puzData.copyright, m_puzData.copyright.length() + 1, part);   // zero-terminated
     QByteArray test;
-    for (int i = 0; i < data.clues.count(); i++) {
-        QByteArray clue = data.clues[i];
+    for (int i = 0; i < m_puzData.clues.count(); i++) {
+        QByteArray clue = m_puzData.clues[i];
         checksums.main = checkSumRegion(clue, clue.length(), checksums.main);   // NOT zero-terminated
         part = checkSumRegion(clue, clue.length(), part);   // NOT zero-terminated
     }
@@ -522,114 +421,184 @@ KrossWordPuzStream::PuzChecksums KrossWordPuzStream::generateChecksums(
 quint16 KrossWordPuzStream::checkSumRegion(const char *base, int len, quint16 checkSum) const
 {
     for (int i = 0; i < len; i++) {
-        if (checkSum & 0x0001)
+        if (checkSum & 0x0001) {
             checkSum = (checkSum >> 1) + 0x8000;
-        else
+        } else {
             checkSum = checkSum >> 1;
+        }
         checkSum += *(base + i);
     }
 
     return checkSum;
 }
 
-QPair< uint, uint > KrossWordPuzStream::indexToCoords(uint index, uint width) const
+bool KrossWordPuzStream::mapClues(QList<ClueInfo> &clues)
 {
-    return QPair< uint, uint >(index % width, index / width);
-}
+    QList<QByteArray> solutionGrid;
+    for (int row = 0; row < m_puzData.solution.length(); row += m_puzData.width) {
+        solutionGrid.append(m_puzData.solution.mid(row, m_puzData.width));
+    }
 
-uint KrossWordPuzStream::coordsToIndex(uint x, uint y, uint width) const
-{
-    return x + y * width;
-}
+    QList<QByteArray> stateGrid;
+    for (int row = 0; row < m_puzData.state.length(); row += m_puzData.width) {
+        stateGrid.append(m_puzData.state.mid(row, m_puzData.width));
+    }
 
-bool KrossWordPuzStream::mapClues(const KrossWordData &krossWordData,
-                                  QList<ClueInfo> &acrossClues, QList<ClueInfo> &downClues) const
-{
+    // CHECK: assigning clue number can be done in Krossword...
     uint curClueNumber = 0;
     uint curClueIndex = 0;
 
     //  Iterate through all cells
-    for (qint8 y = 0; y < krossWordData.height; ++y) {
-        for (qint8 x = 0; x < krossWordData.width; ++x) {
-            if (krossWordData.solution[coordsToIndex(x, y, krossWordData.width)] == '.') {
+    for (qint8 y = 0; y < m_puzData.height; ++y) {
+        for (qint8 x = 0; x < m_puzData.width; ++x) {
+            const uint index = Coords(x, y).toIndex(m_puzData.width);
+            if (m_puzData.solution[index] == '.') { // black cell
                 continue;
             }
 
             bool assignedNumber = false;
-            if (cellNeedsAcrossNumber(x, y, krossWordData.width, krossWordData.solution)) {
-                if (curClueIndex >= (uint)krossWordData.clues.count()) {
-                    qDebug() << "Error in reading PUZ from device" << device();
-                    qDebug() << "Too few clues:" << krossWordData.clues.count()
-                             << "Tried index" << curClueIndex;
+            if (cellNeedsAcrossNumber(x, y, m_puzData.width, m_puzData.solution)) {
+                if (curClueIndex >= (uint)m_puzData.clues.count()) {
+                    qDebug() << "Error in reading PUZ";
+                    qDebug() << "Too few clues:" << m_puzData.clues.count() << "Tried index" << curClueIndex;
                     return false;
                 }
-                acrossClues.append(ClueInfo(coordsToIndex(x, y, krossWordData.width),
-                                            curClueNumber, QString::fromLatin1(krossWordData.clues[curClueIndex++])));
+                clues.append(ClueInfo(index,
+                                      curClueNumber,
+                                      ClueOrientation::Horizontal,
+                                      AnswerOffset::OnClueCell,
+                                      QString::fromLatin1(m_puzData.clues[curClueIndex++]),
+                                      getStringFromGrid(solutionGrid, x, y, Qt::Horizontal),
+                                      getStringFromGrid(stateGrid, x, y, Qt::Horizontal)));
                 assignedNumber = true;
             }
 
-            if (cellNeedsDownNumber(x, y, krossWordData.width, krossWordData.solution)) {
-                if (curClueIndex >= (uint)krossWordData.clues.count()) {
-                    qDebug() << "Error in reading PUZ from device" << device();
-                    qDebug() << "Too few clues:" << krossWordData.clues.count()
-                             << "Tried index" << curClueIndex;
+            if (cellNeedsDownNumber(x, y, m_puzData.width, m_puzData.solution)) {
+                if (curClueIndex >= (uint)m_puzData.clues.count()) {
+                    qDebug() << "Error in reading PUZ";
+                    qDebug() << "Too few clues:" << m_puzData.clues.count() << "Tried index" << curClueIndex;
                     return false;
                 }
-                downClues.append(ClueInfo(coordsToIndex(x, y, krossWordData.width),
-                                          curClueNumber, QString::fromLatin1(krossWordData.clues[curClueIndex++])));
+                clues.append(ClueInfo(index,
+                                      curClueNumber,
+                                      ClueOrientation::Vertical,
+                                      AnswerOffset::OnClueCell,
+                                      QString::fromLatin1(m_puzData.clues[curClueIndex++]),
+                                      getStringFromGrid(solutionGrid, x, y, Qt::Vertical),
+                                      getStringFromGrid(stateGrid, x, y, Qt::Vertical)));
                 assignedNumber = true;
             }
 
-            if (assignedNumber)
+            if (assignedNumber) {
                 ++curClueNumber;
+            }
         } // for x
     } // for y
 
     return true;
 }
 
+bool KrossWordPuzStream::prepareDataForWrite(const CrosswordData &crossData)
+{
+    /*
+    uint gridIndex = 0;
+    for (int i = 0; i < (m_puzData.width * m_puzData.height); i++) {
+        // across
+        for (int acrossIndex = 0; acrossIndex < crossData.clues.count(); acrossIndex++) {
+            ClueInfo currentClueInfo = crossData.clues.at(acrossIndex);
+            if (currentClueInfo.gridIndex == gridIndex) {
+                m_puzData.clues.append(currentClueInfo.clue.toLatin1());
+
+                m_puzData.solution.replace(i, currentClueInfo.solution.length(), currentClueInfo.solution.toLatin1());
+                m_puzData.state.replace(i, currentClueInfo.answer.length(), currentClueInfo.answer.toLatin1());
+                break;
+            }
+        }
+        // down
+        for (int downIndex = 0; downIndex < crossData.downClues.count(); downIndex++) {
+            ClueInfo currentClueInfo = crossData.downClues.at(downIndex);
+            if (currentClueInfo.gridIndex == gridIndex) {
+                m_puzData.clues.append(currentClueInfo.clue.toLatin1());
+
+                // solution and state(answers) filling has to be done with down clues too because it's possible
+                // to have letters not included in an horizontal clue (and vice versa)
+                int verticalIndex = gridIndex;
+                for (int pos = 0; pos < currentClueInfo.solution.length(); pos++) {
+                    // solution and answer have the same lenght so we can use the same 'for' cicle
+                    m_puzData.solution[verticalIndex] = currentClueInfo.solution.at(pos).toLatin1();
+                    m_puzData.state[verticalIndex] = currentClueInfo.answer.at(pos).toLatin1();
+                    verticalIndex += crossData.width;
+                }
+                break;
+            }
+        }
+        gridIndex++;
+    }
+    */
+
+    for (int i = 0; i < (m_puzData.width * m_puzData.height); i++) {
+        foreach (const ClueInfo &clueInfo, crossData.clues) {
+            if (clueInfo.gridIndex == i) {
+                if (clueInfo.orientation == ClueOrientation::Horizontal) {
+                    m_puzData.clues.append(clueInfo.clue.toLatin1());
+
+                    m_puzData.solution.replace(i, clueInfo.solution.length(), clueInfo.solution.toLatin1());
+                    m_puzData.state.replace(i, clueInfo.answer.length(), clueInfo.answer.toLatin1());
+                } else if (clueInfo.orientation == ClueOrientation::Vertical) {
+                    m_puzData.clues.append(clueInfo.clue.toLatin1());
+
+                    // solution and state(answers) filling has to be done with down clues too because it's possible
+                    // to have letters not included in an horizontal clue (and vice versa)
+                    int verticalIndex = i;
+                    for (int pos = 0; pos < clueInfo.solution.length(); pos++) {
+                        // solution and answer have the same lenght so we can use the same 'for' cicle
+                        m_puzData.solution[verticalIndex] = clueInfo.solution.at(pos).toLatin1();
+                        m_puzData.state[verticalIndex] = clueInfo.answer.at(pos).toLatin1();
+                        verticalIndex += crossData.width;
+                    }
+                }
+            }
+        }
+    }
+
+    return true; //CHECK: currently useless
+}
+
 //  Returns true if the cell at (x, y) gets an "across" clue number.
-bool KrossWordPuzStream::cellNeedsAcrossNumber(qint8 x, qint8 y, qint8 width,
-        const QByteArray &puzzleSolution) const
+bool KrossWordPuzStream::cellNeedsAcrossNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const
 {
     // Check that there is a blank to the left of us
-    if (x == 0 || puzzleSolution[coordsToIndex(x - 1, y, width)] == '.') {
+    if (x == 0 || puzzleSolution[Coords(x - 1, y).toIndex(width)] == '.') {
         // Check that there is space (at least two cells) for a word here
-        if (x + 1 < width && puzzleSolution[coordsToIndex(x + 1, y, width)] != '.')
+        if (x + 1 < width && puzzleSolution[Coords(x + 1, y).toIndex(width)] != '.') {
             return true;
+        }
     }
     return false;
 }
 
 //  Returns true if the cell at (x, y) gets an "down" clue number.
-bool KrossWordPuzStream::cellNeedsDownNumber(qint8 x, qint8 y, qint8 width,
-        const QByteArray &puzzleSolution) const
+bool KrossWordPuzStream::cellNeedsDownNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const
 {
     // Check that there is a blank to the left of us
-    if (y == 0 || puzzleSolution[coordsToIndex(x, y - 1, width)] == '.') {
+    if (y == 0 || puzzleSolution[Coords(x, y - 1).toIndex(width)] == '.') {
         // Check that there is space (at least two cells) for a word here
-        if (y + 1 < width && puzzleSolution[coordsToIndex(x, y + 1, width)] != '.')
+        if (y + 1 < width && puzzleSolution[Coords(x, y + 1).toIndex(width)] != '.') {
             return true;
+        }
     }
     return false;
 }
 
-QByteArray KrossWordPuzStream::readZeroTerminatedString()
+QByteArray KrossWordPuzStream::readZeroTerminatedString(QDataStream &dataStream)
 {
     QByteArray string;
     char *buffer = new char[1];
 
-    while (readRawData(buffer, 1) == 1 && buffer[0] != '\0') {
-//  qDebug() << buffer[0];
+    while (dataStream.readRawData(buffer, 1) == 1 && buffer[0] != '\0') {
         string.append(buffer[0]);
     }
 
     delete [] buffer;
     return string;
 }
-
-
-
-
-
-

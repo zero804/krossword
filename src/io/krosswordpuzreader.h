@@ -1,5 +1,6 @@
 /*
 *   Copyright 2010 Friedrich Pülz <fpuelz@gmx.de>
+*   Copyright 2017 Giacomo Barazzetti <giacomosrv@gmail.com>
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU Library General Public License as
@@ -20,124 +21,69 @@
 #ifndef KROSSWORDPUZREADER_HEADER
 #define KROSSWORDPUZREADER_HEADER
 
-#include <QDataStream>
-#include <QPair>
-#include <krossword.h>
+#include "crosswordio.h"
 
-class QBuffer;
-class QString;
-class QIODevice;
+#include <QDebug>
 
-namespace Crossword
-{
-class KrossWord;
-}
-using namespace Crossword;
+QString getStringFromGrid(QList<QByteArray> &grid, int x, int y, Qt::Orientation orientation);
+
+class QDataStream;
 
 // TODO: Correct checksums generation, there's some error with zero-endings of strings...
 /** This class can read and write AcrossLite's PUZ crossword puzzle files. */
-class KrossWordPuzStream : public QDataStream
+class KrossWordPuzStream : public CrosswordIO
 {
 public:
-    KrossWordPuzStream();
+    KrossWordPuzStream(QIODevice *device);
 
+    bool read(CrosswordData &crossData) override;
+    bool write(const CrosswordData &crossdata) override;
+
+private:
     static const char *FILE_MAGIC;
     static const qint64 OFFSET_FILE_MAGIC = 0x2;
     static const qint64 OFFSET_VERSION = 0x18;
     static const qint64 OFFSET_GRID_SIZE = 0x2c;
     static const qint64 OFFSET_SOLUTION = 0x34;
 
-    struct KrossWordData {
+    // as internal PUZ-oriented representation
+    struct PuzData {
         qint8 width, height;
-        QByteArray solution, state;
         QByteArray title, authors, copyright, notes;
-        QList< QByteArray > clues;
-
-        KrossWordData() {
-        };
-
-        KrossWordData(qint8 width, qint8 height,
-                      const QByteArray &solution, const QByteArray &state,
-                      const QByteArray &title, const QByteArray &authors,
-                      const QByteArray &copyright, const QByteArray &notes,
-                      const QList< QByteArray > &clues) {
-            this->width = width;
-            this->height = height;
-            this->solution = solution;
-            this->state = state;
-            this->title = title;
-            this->authors = authors;
-            this->copyright = copyright;
-            this->notes = notes;
-            this->clues = clues;
-        };
-
-        KrossWordData(KrossWord *krossWord,
-                      KrossWord::WriteMode writeMode = KrossWord::Normal);
+        QList<QByteArray> clues;
+        QByteArray solution, state; // left->right and up->down: letters, '.' for black cells and '-' for missing letters in state(user answers)
     };
+
+    PuzData m_puzData;
 
     struct PuzChecksums {
         quint16 main, cib/*, solution, state, part*/;
         QList< qint8 > masked;
-
-        PuzChecksums(quint16 main, quint16 cib, /*quint16 solution, quint16 state,
-        quint16 part,*/ const QList< qint8 > &masked) {
-            this->main = main;
-            this->cib = cib;
-//      this->solution = solution;
-//      this->state = state;
-//      this->part = part;
-            this->masked = masked;
-        };
-
-        PuzChecksums() {
-        };
     };
 
-    bool read(QIODevice *device, KrossWordData *krossWordData,
-              PuzChecksums *checksums);
-    bool read(QIODevice *device, KrossWord *krossWord);
-    bool write(QIODevice *device, KrossWord *krossWord,
-               KrossWord::WriteMode writeMode = KrossWord::Normal);
-
-private:
-    struct ClueInfo {
-        uint gridIndex;
-        uint number;
-        QString clue;
-
-        ClueInfo(uint gridIndex, uint number, QString clue) {
-            this->gridIndex = gridIndex;
-            this->number = number;
-            this->clue = clue;
-        };
-    };
-
-    PuzChecksums generateChecksums(QIODevice* buffer, KrossWordData data) const;
-    bool writeDataTo(QDataStream &ds, const QByteArray &data, int len) const;
-
-    quint16 checkSumRegion(const char *base, int len, quint16 checkSum) const;
+    bool readData(QIODevice *device, PuzChecksums *checksums);
 
     /** In .puz-files clues are not mapped to specific cells directly. Instead
     * the cells must be derived from the shape of the crossword. That is what
     * this method does.
     * It stores lists of ClueInfo's in @p acrossClues and @p downClues.
-    * @param krossWordData A crossword data object.
-    * @param acrossClues A list of ClueInfo's, one for each across (horizontal)
-    * clue.
-    * @param downClues A list of ClueInfo's, one for each down (vertical) clue.
     * @returns False on error. */
-    bool mapClues(const KrossWordData &krossWordData,
-                  QList<ClueInfo> &acrossClues, QList<ClueInfo> &downClues) const;
-    QPair<uint, uint> indexToCoords(uint index, uint width) const;
-    uint coordsToIndex(uint x, uint y, uint width) const;
-    bool cellNeedsAcrossNumber(qint8 x, qint8 y, qint8 width,
-                               const QByteArray &puzzleSolution) const;
-    bool cellNeedsDownNumber(qint8 x, qint8 y, qint8 width,
-                             const QByteArray &puzzleSolution) const;
-    /** Reads chars until a '\0' is read.
-    * @return All chars that were read. */
-    QByteArray readZeroTerminatedString();
+    bool mapClues(QList<ClueInfo> &clues);
+
+    /** Reads chars until a '\0' is read. @return All chars that were read. */
+    QByteArray readZeroTerminatedString(QDataStream &dataStream);
+
+    PuzChecksums generateChecksums(QIODevice* buffer) const;
+    quint16 checkSumRegion(const char *base, int len, quint16 checkSum) const;
+
+    bool writeDataTo(QDataStream &dataStream, const QByteArray &data, int len) const;
+
+    /** Convert CrossData.acrossClues and CrossData.downClue in
+     * PuzData.clues, PuzData.solution and PuzData.state */
+    bool prepareDataForWrite(const CrosswordData &crossData);
+
+    bool cellNeedsAcrossNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const;
+    bool cellNeedsDownNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const;
 };
 
-#endif // Multiple inclusion guard
+#endif

@@ -1,5 +1,6 @@
 /*
 *   Copyright 2010 Friedrich Pülz <fpuelz@gmx.de>
+*   Copyright 2017 Giacomo Barazzetti <giacomosrv@gmail.com>
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU Library General Public License as
@@ -18,55 +19,98 @@
 */
 
 #include "krosswordxmlreader.h"
-#include "krossword.h"
-#include "animator.h"
-#include "../cells/krosswordcell.h"
-#include "../cells/lettercell.h"
-#include "../cells/cluecell.h"
 
 #include <QBuffer>
 #include <QFileInfo>
+#include <QUrl>
+#include <QDebug>
 
 #include <KZip>
-#include <QUrl>
 
-KrossWordXmlReader::KrossWordXmlReader()
+// CHECK: from krossword.cpp
+AnswerOffset answerOffsetFromString(const QString &s)
 {
-}
-
-KrossWordXmlReader::KrossWordInfo KrossWordXmlReader::readInfo(
-    const QUrl &url, QString* errorString)
-{
-    // TODO download crossword if url isn't local
-    Q_ASSERT(url.isLocalFile());
-
-    QFileInfo fi(url.path());
-    bool isCompressed = fi.suffix() == "kwpz";
-
-    KrossWordXmlReader::KrossWordInfo info;
-    KrossWordXmlReader xmlReader;
-    QFile file(url.path());
-    if ((isCompressed && !xmlReader.readCompressedInfo(&file, info))
-            || (!isCompressed && !xmlReader.readInfo(&file, info))) {
-        qDebug() << "Error reading crossword info from file"
-                 << xmlReader.errorString();
-        if (errorString)
-            *errorString = xmlReader.errorString();
-        info.width = info.height = -1; // Make sure the info is invalid
+    QString sl = s.toLower();
+    if (sl == "cluehidden")
+        return OnClueCell;
+    else if (sl == "right")
+        return OffsetRight;
+    else if (sl == "bottom")
+        return OffsetBottom;
+    else if (sl == "left")
+        return OffsetLeft;
+    else if (sl == "top")
+        return OffsetTop;
+    else if (sl == "topleft")
+        return OffsetTopLeft;
+    else if (sl == "topright")
+        return OffsetTopRight;
+    else if (sl == "bottomleft")
+        return OffsetBottomLeft;
+    else if (sl == "bottomright")
+        return OffsetBottomRight;
+    else {
+        qDebug() << "Couldn't get enumerable for" << s;
+        return OffsetInvalid;
     }
-
-    return info;
 }
 
-bool KrossWordXmlReader::readCompressed(QIODevice *device,
-                                        KrossWord *krossWord,
-                                        QByteArray *undoData)
+// CHECK: from krossword.cpp
+QString answerOffsetToString(AnswerOffset answerOffset)
 {
-    Q_ASSERT(device);
-    Q_ASSERT(krossWord);
+    switch (answerOffset) {
+    case OffsetTop:
+        return "Top";
+    case OffsetRight:
+        return "Right";
+    case OffsetLeft:
+        return "Left";
+    case OffsetBottom:
+        return "Bottom";
+    case OffsetTopLeft:
+        return "TopLeft";
+    case OffsetTopRight:
+        return "TopRight";
+    case OffsetBottomLeft:
+        return "BottomLeft";
+    case OffsetBottomRight:
+        return "BottomRight";
+    case OffsetInvalid: // Shouldn't appear here..
+        qDebug() << "Got an invalid answerOffset";
+        Q_ASSERT(false);
+        break;
+    case OnClueCell:
+    default:
+        return "ClueHidden";
+    }
+}
 
+LetterConfidence letterConfidenceFromString(const QString &s)
+{
+    QString sl = s.toLower();
+    if (sl == "solved") {
+        return Solved;
+    } else if (sl == "confident") {
+        return Confident;
+    } else if (sl == "unsure") {
+        return Unsure;
+    } else {
+        return Unknown;
+    }
+}
+
+//-------------------------------------------------
+
+KrossWordXmlReader::KrossWordXmlReader(QIODevice *device)
+    : CrosswordIO(device)
+{
+}
+
+/*
+bool KrossWordXmlReader::readCompressed(CrosswordData &crossData)
+{
     // Read compressed XML from the given IO device
-    KZip zip(device);
+    KZip zip(m_device);
     zip.setCompression(KZip::DeflateCompression);
     if (!zip.open(QIODevice::ReadOnly)) {
         qDebug() << "Couldn't open the ZIP archive for reading";
@@ -90,54 +134,7 @@ bool KrossWordXmlReader::readCompressed(QIODevice *device,
     QIODevice *crosswordDevice = crosswordFile->createDevice();
 
     // Read the crossword
-    bool readOk = read(crosswordDevice, krossWord, undoData);
-
-    crosswordDevice->close();
-    delete crosswordDevice;
-    if (!zip.close()) {
-        qDebug() << "Couldn't close the ZIP archive";
-        return false;
-    }
-
-    // Read XML to a buffer
-//     QBuffer buffer;
-//     buffer.open( QBuffer::ReadOnly );
-//     read( &buffer, krossWord );
-//     buffer.close();
-    return readOk;
-}
-
-bool KrossWordXmlReader::readCompressedInfo(QIODevice* device,
-        KrossWordXmlReader::KrossWordInfo& krossWordInfo)
-{
-    Q_ASSERT(device);
-
-    // Read compressed XML from the given IO device
-    KZip zip(device);
-    zip.setCompression(KZip::DeflateCompression);
-    if (!zip.open(QIODevice::ReadOnly)) {
-        qDebug() << "Couldn't open the ZIP archive for reading";
-        return false;
-    }
-    const KArchiveDirectory *archive = zip.directory();
-    if (!archive) {
-        qDebug() << "Couldn't get the archive contents";
-        return false;
-    }
-    if (!archive->entries().contains("crossword.kwp")) {
-        qDebug() << "Not a valid *.kwpz-file! The crossword file wasn't found (crossword.kwp).";
-        return false;
-    }
-    const KArchiveEntry *crosswordEntry = archive->entry("crossword.kwp");
-    if (!crosswordEntry->isFile()) {
-        qDebug() << "Not a valid *.kwpz-file! No file 'crossword.kwp' found, it's a directory.";
-        return false;
-    }
-    KArchiveFile *crosswordFile = (KArchiveFile*)crosswordEntry;
-    QIODevice *crosswordDevice = crosswordFile->createDevice();
-
-    // Read the crossword
-    bool readOk = readInfo(crosswordDevice, krossWordInfo);
+    bool readOk = read(crosswordDevice, crossData);
 
     crosswordDevice->close();
     delete crosswordDevice;
@@ -148,204 +145,164 @@ bool KrossWordXmlReader::readCompressedInfo(QIODevice* device,
 
     return readOk;
 }
+*/
 
-bool KrossWordXmlReader::read(QIODevice* device, KrossWord *krossWord,
-                              QByteArray *undoData)
+bool KrossWordXmlReader::read(CrosswordData &crossData)
 {
-    Q_ASSERT(device);
-    Q_ASSERT(krossWord);
+    Q_ASSERT(m_device);
 
     bool closeAfterRead;
-    if ((closeAfterRead = !device->isOpen()) && !device->open(QIODevice::ReadOnly))
+    if ((closeAfterRead = !m_device->isOpen()) && !m_device->open(QIODevice::ReadOnly)) {
         return false;
-    setDevice(device);
+    }
+    m_xmlReader.setDevice(m_device);
 
-    krossWord->animator()->setEnabled(false);
-    while (!atEnd()) {
-        readNext();
+    while (!m_xmlReader.atEnd()) {
+        m_xmlReader.readNext();
 
-        if (isStartElement()) {
-            if (name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0
-                    && (attributes().value("version") == "1.0"
-                        || attributes().value("version") == "1.1")) {
-                readKrossWord(krossWord, undoData);
+        if (m_xmlReader.isStartElement()) {
+            if (m_xmlReader.name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0
+                    && (m_xmlReader.attributes().value("version") == "1.0" || m_xmlReader.attributes().value("version") == "1.1")) {
+                readData(crossData);
                 break;
-            } else
-                raiseError(i18n("The file is not a Krossword version &lt;= 1.1 file."));
-        }
-    }
-    krossWord->animator()->setEnabled(true);
-
-    if (closeAfterRead)
-        device->close();
-    return !error();
-}
-
-bool KrossWordXmlReader::readInfo(QIODevice* device,
-                                  KrossWordXmlReader::KrossWordInfo& krossWordInfo)
-{
-    Q_ASSERT(device);
-
-    bool closeAfterRead;
-    if ((closeAfterRead = !device->isOpen()) && !device->open(QIODevice::ReadOnly))
-        return false;
-    setDevice(device);
-
-//     qDebug() << "Start reading of XML file.";
-    bool readEnd = false;
-    while (!atEnd() && !readEnd) {
-        readNext();
-
-        if (isStartElement()) {
-            if (name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0
-                    && (attributes().value("version") == "1.0"
-                        || attributes().value("version") == "1.1")) {
-                krossWordInfo = readKrossWordInfo();
-                readEnd = true;
-            } else
-                raiseError(i18n("The file is not a Krossword version &lt;= 1.1 file."));
+            } else {
+                m_xmlReader.raiseError("The file is not a Krossword version &lt;= 1.1 file.");
+            }
         }
     }
 
-    if (closeAfterRead)
-        device->close();
-    return !error();
+    if (closeAfterRead) {
+        m_device->close();
+    }
+    return !m_xmlReader.error();
 }
 
-KrossWordXmlReader::KrossWordInfo KrossWordXmlReader::readKrossWordInfo()
+//just the metadata
+void KrossWordXmlReader::readKrossWordInfo(CrosswordData &crossData)
 {
-    Q_ASSERT(isStartElement() && name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0);
+    Q_ASSERT(m_xmlReader.isStartElement() && m_xmlReader.name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0);
 
-    if (!attributes().hasAttribute("width") || !attributes().hasAttribute("height"))
-        raiseError("The <krossWord>-tag need a 'width' and a 'height' attribute.");
+    if (!m_xmlReader.attributes().hasAttribute("width") || !m_xmlReader.attributes().hasAttribute("height")) {
+        m_xmlReader.raiseError("The <krossWord>-tag need a 'width' and a 'height' attribute.");
+    }
 
-    KrossWordInfo info;
-    info.width = attributes().value("width").toString().toInt();
-    info.height = attributes().value("height").toString().toInt();
+    crossData.width = m_xmlReader.attributes().value("width").toString().toInt();
+    crossData.height = m_xmlReader.attributes().value("height").toString().toInt();
 
-    if (attributes().hasAttribute("type")) {
-        info.type = attributes().value("type").toString();
+    if (m_xmlReader.attributes().hasAttribute("type")) {
+        crossData.type = m_xmlReader.attributes().value("type").toString();
     } else {
         qDebug() << "No crossword type saved in the file, using free as type";
-        info.type = CrosswordTypeInfo::stringFromType(UnknownCrosswordType);
+        //CHECK info.type = CrosswordTypeInfo::stringFromType(UnknownCrosswordType);
     }
 
-    while (!atEnd()) {
-        readNext();
-        if (isEndElement() && name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0)
+    while (!m_xmlReader.atEnd()) {
+        m_xmlReader.readNext();
+        if (m_xmlReader.isEndElement() && m_xmlReader.name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0) {
             break;
+        }
 
-        if (isStartElement()) {
-            if (name().compare(QLatin1String("title"), Qt::CaseInsensitive) == 0)
-                info.title = readElementText();
-            else if (name().compare(QLatin1String("authors"), Qt::CaseInsensitive) == 0)
-                info.authors = readElementText();
-            else if (name().compare(QLatin1String("copyright"), Qt::CaseInsensitive) == 0)
-                info.copyright = readElementText();
-            else if (name().compare(QLatin1String("notes"), Qt::CaseInsensitive) == 0)
-                info.notes = readElementText();
-            else
+        if (m_xmlReader.isStartElement()) {
+            if (m_xmlReader.name().compare(QLatin1String("title"), Qt::CaseInsensitive) == 0) {
+                crossData.title = m_xmlReader.readElementText();
+            } else if (m_xmlReader.name().compare(QLatin1String("authors"), Qt::CaseInsensitive) == 0) {
+                crossData.authors = m_xmlReader.readElementText();
+            } else if (m_xmlReader.name().compare(QLatin1String("copyright"), Qt::CaseInsensitive) == 0) {
+                crossData.copyright = m_xmlReader.readElementText();
+            } else if (m_xmlReader.name().compare(QLatin1String("notes"), Qt::CaseInsensitive) == 0) {
+                crossData.notes = m_xmlReader.readElementText();
+            } else {
                 break;
+            }
         }
     }
-
-    return info;
 }
 
-void KrossWordXmlReader::readKrossWord(KrossWord *krossWord,
-                                       QByteArray *undoData)
+void KrossWordXmlReader::readData(CrosswordData &crossData)
 {
-    KrossWordInfo info = readKrossWordInfo();
-    krossWord->removeAllCells();
-    krossWord->createNew(CrosswordTypeInfo::typeFromString(info.type),
-                         QSize(info.width, info.height));
-    krossWord->setTitle(info.title);
-    krossWord->setAuthors(info.authors);
-    krossWord->setCopyright(info.copyright);
-    krossWord->setNotes(info.notes);
+    readKrossWordInfo(crossData);
 
-    bool letterContentToClueNumberMappingUsed =
+    //CHECK: is for Coded Puzzle?
+    bool letterContentToClueNumberMappingUsed = false;/*
         krossWord->crosswordTypeInfo().clueType == NumberClues1To26
         && krossWord->crosswordTypeInfo().clueMapping == CluesReferToCells
         && krossWord->crosswordTypeInfo().letterCellContent == Crossword::Characters;
+        */
 
-    while (!atEnd()) {
-        if (isEndElement() && name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0)
+    while (!m_xmlReader.atEnd()) {
+        if (m_xmlReader.isEndElement() && m_xmlReader.name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0) {
             break;
+        }
 
-        if (isStartElement()) {
-            if (name().compare(QLatin1String("clue"), Qt::CaseInsensitive) == 0)
-                readClue(krossWord);
-            else if (name().compare(QLatin1String("image"), Qt::CaseInsensitive) == 0)
-                readImage(krossWord);
-            else if (name().compare(QLatin1String("solutionLetter"), Qt::CaseInsensitive) == 0)
-                readSolutionLetter(krossWord);
-            else if (name().compare(QLatin1String("confidence"), Qt::CaseInsensitive) == 0
-                     || name().compare(QLatin1String("undoData"), Qt::CaseInsensitive) == 0)
-                break; // Read confidence and undoData after the crossword has been completely read
-            else if (name().compare(QLatin1String("letterContentToClueNumberMapping"), Qt::CaseInsensitive) == 0) {
+        if (m_xmlReader.isStartElement()) {
+            if (m_xmlReader.name().compare(QLatin1String("clue"), Qt::CaseInsensitive) == 0) {
+                readClue(crossData);
+            } else if (m_xmlReader.name().compare(QLatin1String("image"), Qt::CaseInsensitive) == 0) {
+                readImage(crossData);
+            } else if (m_xmlReader.name().compare(QLatin1String("solutionLetter"), Qt::CaseInsensitive) == 0) {
+                readSolutionLetter(crossData);
+            } else if (m_xmlReader.name().compare(QLatin1String("confidence"), Qt::CaseInsensitive) == 0
+                     || m_xmlReader.name().compare(QLatin1String("undoData"), Qt::CaseInsensitive) == 0) {
+                break; // Read confidence and undoData after the crossword has been completely read //CHECK: probably no more needed
+            } else if (m_xmlReader.name().compare(QLatin1String("letterContentToClueNumberMapping"), Qt::CaseInsensitive) == 0) {
                 if (letterContentToClueNumberMappingUsed) {
-                    QString mapString = readElementText();
-                    krossWord->setLetterContentToClueNumberMapping(mapString, false);
-                } else
-                    qDebug() << "'letterContentToClueNumberMapping' not used "
-                             "by this type of crossword, ignoring it.";
-            } else if (krossWord->crosswordTypeInfo().crosswordType ==
-                       UserDefinedCrossword
-                       && name().compare(QLatin1String("userDefinedCrosswordSettings"), Qt::CaseInsensitive) == 0) {
-                readUserDefinedCrosswordSettings(krossWord);
-            } else
+                    QString mapString = m_xmlReader.readElementText();
+                    //CHECK krossWord->setLetterContentToClueNumberMapping(mapString, false);
+                } else {
+                    qDebug() << "'letterContentToClueNumberMapping' not used by this type of crossword, ignoring it.";
+                }
+            } else if (crossData.type == "free" && m_xmlReader.name().compare(QLatin1String("userDefinedCrosswordSettings"), Qt::CaseInsensitive) == 0) {
+                //CHECK readUserDefinedCrosswordSettings(crossData);
+            } else {
                 readUnknownElement();
+            }
         }
 
         // Call this at the end of the loop, because readKrossWordInfo already
         // called this at the end to see the first non-info tag.
-        readNext();
+        m_xmlReader.readNext();
     }
 
-    krossWord->assignClueNumbers();
+    //CHECK krossWord->assignClueNumbers();
 
-    if (letterContentToClueNumberMappingUsed)
-        krossWord->setupSameLetterSynchronization();
+    if (letterContentToClueNumberMappingUsed) {
+        //CHECK krossWord->setupSameLetterSynchronization();
+    }
 
     // Read <confidence>-tag
-    if (isStartElement() && name().compare(QLatin1String("confidence"), Qt::CaseInsensitive) == 0) {
-        while (!atEnd()) {
-            readNext();
-            if (isEndElement() && name().compare(QLatin1String("confidence"), Qt::CaseInsensitive) == 0)
+    if (m_xmlReader.isStartElement() && m_xmlReader.name().compare(QLatin1String("confidence"), Qt::CaseInsensitive) == 0) {
+        while (!m_xmlReader.atEnd()) {
+            m_xmlReader.readNext();
+            if (m_xmlReader.isEndElement() && m_xmlReader.name().compare(QLatin1String("confidence"), Qt::CaseInsensitive) == 0) {
                 break;
+            }
 
             QStringList confidenceStrings;
-            confidenceStrings << LetterCell::confidenceToString(Solved);
-            confidenceStrings << LetterCell::confidenceToString(Unsure);
-            confidenceStrings << LetterCell::confidenceToString(Unknown);
+            confidenceStrings << "Solved"; //CHECK LetterCell::confidenceToString(Solved);
+            confidenceStrings << "Confident";
+            confidenceStrings << "Unsure"; //CHECK LetterCell::confidenceToString(Unsure);
+            //confidenceStrings << "Unknown"; //CHECK LetterCell::confidenceToString(Unknown);
 
             // Read a tag which name is one of confidenceStrings
-            foreach(const QString & confidenceString, confidenceStrings) {
-                if (isStartElement() && name().compare(confidenceString, Qt::CaseInsensitive) == 0) {
-                    Confidence confidence = LetterCell::stringToConfidence(confidenceString);
+            foreach(const QString &confidenceString, confidenceStrings) {
+                if (m_xmlReader.isStartElement() && m_xmlReader.name().compare(confidenceString, Qt::CaseInsensitive) == 0) {
+                    LetterConfidence confidence = letterConfidenceFromString(confidenceString);
 
                     // Read all <letter>-tags, to set the confidence to [confidence]
-                    while (!atEnd()) {
-                        readNext();
-                        if (isStartElement() && name().compare(QLatin1String("letter"), Qt::CaseInsensitive) == 0) {
-                            if (!attributes().hasAttribute("coord"))
-                                raiseError("<letter>-tags in the <confidence>-tag need a 'coord' attribute with value 'x,y'.");
-                            else {
-                                QString sCoord = attributes().value("coord").toString();
+                    while (!m_xmlReader.atEnd()) {
+                        m_xmlReader.readNext();
+                        if (m_xmlReader.isStartElement() && m_xmlReader.name().compare(QLatin1String("letter"), Qt::CaseInsensitive) == 0) {
+                            if (!m_xmlReader.attributes().hasAttribute("coord")) {
+                                m_xmlReader.raiseError("<letter>-tags in the <confidence>-tag need a 'coord' attribute with value 'x,y'.");
+                            } else {
+                                QString sCoord = m_xmlReader.attributes().value("coord").toString();
                                 QRegExp rx("(\\d+)\\w*,\\w*(\\d+)");
                                 if (rx.indexIn(sCoord) == -1) {
-                                    raiseError("Error while parsing the 'coord' attribute. It needs to be in this format: 'x,y', but is '" + sCoord + "'.");
+                                    m_xmlReader.raiseError("Error while parsing the 'coord' attribute. It needs to be in this format: 'x,y', but is '" + sCoord + "'.");
                                     return;
                                 }
-                                Coord coord(rx.cap(1).toInt(), rx.cap(2).toInt());
-                                KrossWordCell *cell = krossWord->at(coord);
-                                if (cell->isLetterCell()) {
-                                    LetterCell *letter = (LetterCell*)cell;
-                                    letter->setConfidence(confidence);
-                                    qDebug() << "Set confidence to" << confidenceString << "at" << sCoord;
-                                } else
-                                    qDebug() << "Letter cell not found to set confidence at" << coord.first << coord.second;
+                                uint index = Coords(rx.cap(1).toInt(), rx.cap(2).toInt()).toIndex(crossData.width);
+                                crossData.lettersConfidence.append(ConfidenceInfo(index, confidence));
                             }
                         } // if [ is at <letter>-tag]
                     }
@@ -354,84 +311,54 @@ void KrossWordXmlReader::readKrossWord(KrossWord *krossWord,
         }
     } // if [is at <confidence>-tag]
 
-
     // Read <undoData>-tag
-    if (undoData && isStartElement()
-            && name().compare(QLatin1String("undoData"), Qt::CaseInsensitive) == 0) {
-        *undoData = QByteArray::fromBase64(readElementText().toLatin1());
-    }
-
-    qDebug() << "END";
-}
-
-void KrossWordXmlReader::readSolutionLetter(KrossWord *krossWord)
-{
-    qDebug() << "Reading <solutionLetter>";
-
-    if (!attributes().hasAttribute("coord"))
-        raiseError("<solutionLetter>-tags need a 'coord' attribute with value 'x,y'.");
-    else if (!attributes().hasAttribute("index"))
-        raiseError("<solutionLetter>-tags need an 'index' attribute (index of the letter in the solution word).");
-    else {
-        QString sCoord = attributes().value("coord").toString();
-        QRegExp rx("(\\d+)\\w*,\\w*(\\d+)");
-        if (rx.indexIn(sCoord) == -1) {
-            raiseError("Error while parsing the 'coord' attribute. It needs to be in this format: 'x,y', but is '" + sCoord + "'.");
-            return;
-        }
-        Coord coord(rx.cap(1).toInt(), rx.cap(2).toInt());
-        int solutionLetterIndex = attributes().value("index").toString().toInt();
-
-        LetterCell *letter = qgraphicsitem_cast< LetterCell* >(krossWord->at(coord));
-        if (letter)
-            letter->toSolutionLetter(solutionLetterIndex);
-        else
-            qDebug() << QString("No letter cell at (%1, %2) to convert to a solution letter")
-                     .arg(coord.first).arg(coord.second);
-//  krossWord->convertToSolutionLetter( coord, solutionLetterIndex );
+    if (m_xmlReader.isStartElement() && m_xmlReader.name().compare(QLatin1String("undoData"), Qt::CaseInsensitive) == 0) {
+        crossData.undoData = QByteArray::fromBase64(m_xmlReader.readElementText().toLatin1());
     }
 }
 
-void KrossWordXmlReader::readClue(KrossWord *krossWord)
+//---------------------------------------------------------------------------
+
+void KrossWordXmlReader::readClue(CrosswordData &crossData)
 {
-    if (!attributes().hasAttribute("coord"))
-        raiseError("<clue>-tags need a 'coord' attribute with value 'x,y'.");
-    else if (!attributes().hasAttribute("orientation"))
-        raiseError("<clue>-tags need an 'orientation' attribute with value 'horizontal' or 'vertical'.");
-    else if (!attributes().hasAttribute("answerOffset")
-             && !attributes().hasAttribute("firstLetterPosition"))
-        raiseError("<clue>-tags need a 'answerOffset' attribute with value "
-                   "'ClueHidden', 'Right', 'Bottom', 'BottomRight', ....");
-    else {
-        QString sCoord = attributes().value("coord").toString();
+    if (!m_xmlReader.attributes().hasAttribute("coord")) {
+        m_xmlReader.raiseError("<clue>-tags need a 'coord' attribute with value 'x,y'.");
+    } else if (!m_xmlReader.attributes().hasAttribute("orientation")) {
+        m_xmlReader.raiseError("<clue>-tags need an 'orientation' attribute with value 'horizontal' or 'vertical'.");
+    } else if (!m_xmlReader.attributes().hasAttribute("answerOffset") && !m_xmlReader.attributes().hasAttribute("firstLetterPosition")) {
+        m_xmlReader.raiseError("<clue>-tags need a 'answerOffset' attribute with value 'ClueHidden', 'Right', 'Bottom', 'BottomRight', ....");
+    } else {
+        QString sCoord = m_xmlReader.attributes().value("coord").toString();
         QRegExp rx("(\\d+)\\w*,\\w*(\\d+)");
         if (rx.indexIn(sCoord) == -1) {
-            raiseError("The 'coord'-attribute needs to be in this format: 'x,y', but is '" + sCoord + "'.");
+            m_xmlReader.raiseError("The 'coord'-attribute needs to be in this format: 'x,y', but is '" + sCoord + "'.");
             return;
         }
-        Coord coord(rx.cap(1).toInt(), rx.cap(2).toInt());
-        Qt::Orientation orientation = attributes().value("orientation").toString().toLower() == "horizontal"
-                                      ? Qt::Horizontal : Qt::Vertical;
-        AnswerOffset answerOffset = attributes().hasAttribute("answerOffset")
-                                    ? KrossWord::answerOffsetFromString(
-                                        attributes().value("answerOffset").toString())
-                                    : KrossWord::answerOffsetFromString(
-                                        attributes().value("firstLetterPosition").toString());
+        uint index = Coords(rx.cap(1).toInt(), rx.cap(2).toInt()).toIndex(crossData.width);
+
+        ClueOrientation orientation = m_xmlReader.attributes().value("orientation").toString().toLower() == "horizontal"
+                                      ? ClueOrientation::Horizontal
+                                      : ClueOrientation::Vertical;
+        AnswerOffset answerOffset = m_xmlReader.attributes().hasAttribute("answerOffset")
+                                    ? answerOffsetFromString(m_xmlReader.attributes().value("answerOffset").toString())
+                                    : answerOffsetFromString(m_xmlReader.attributes().value("firstLetterPosition").toString());
         if (answerOffset == OffsetInvalid) {
-            raiseError("Unknown value of the 'answerOffset'-attribute.");
+            m_xmlReader.raiseError("Unknown value of the 'answerOffset'-attribute.");
             return;
         }
 
-        bool clueSelected = attributes().hasAttribute("selected")
-                            && attributes().value("selected").compare(QLatin1String("true"), Qt::CaseInsensitive) == 0;
+        // CHECK: currently unused, usefull?
+        /*
+        bool clueSelected = m_xmlReader.attributes().hasAttribute("selected")
+                            && m_xmlReader.attributes().value("selected").compare(QLatin1String("true"), Qt::CaseInsensitive) == 0;
+        */
 
-        readNext();
-        if (atEnd()) {
-            raiseError("Error while reading the XML or missing tags in <clue>-tag.");
+        m_xmlReader.readNext();
+        if (m_xmlReader.atEnd()) {
+            m_xmlReader.raiseError("Error while reading the XML or missing tags in <clue>-tag.");
             return;
         }
 
-//  qDebug() << "Trying to read clue, answer and currentAnswer";
         QString clue, answer, currentAnswer;
         // To allow clues with no text (which are useful for editing the clue
         // text later, eg. for templates):
@@ -440,104 +367,101 @@ void KrossWordXmlReader::readClue(KrossWord *krossWord)
         // the answers later, eg. for templates):
         bool hasAnswerTag = false;
         for (int i = 1; i <= 3;) {
-            if (isStartElement()) {
+            if (m_xmlReader.isStartElement()) {
                 ++i;
-
-                if (name().compare(QLatin1String("text"), Qt::CaseInsensitive) == 0) {
+                if (m_xmlReader.name().compare(QLatin1String("text"), Qt::CaseInsensitive) == 0) {
                     hasTextTag = true;
-                    readNext();
+                    m_xmlReader.readNext();
 
-                    if (isCharacters() && !isWhitespace()) {
-                        clue = text().toString();
+                    if (m_xmlReader.isCharacters() && !m_xmlReader.isWhitespace()) {
+                        clue = m_xmlReader.text().toString();
                     }
-                } else if (name().compare(QLatin1String("answer"), Qt::CaseInsensitive) == 0) {
+                } else if (m_xmlReader.name().compare(QLatin1String("answer"), Qt::CaseInsensitive) == 0) {
                     hasAnswerTag = true;
-                    readNext();
-                    if (isCharacters() /*&& !isWhitespace()*/) {
-                        answer = text().toString();
+                    m_xmlReader.readNext();
+                    if (m_xmlReader.isCharacters() /*&& !isWhitespace()*/) {
+                        answer = m_xmlReader.text().toString();
                     }
-                } else if (name().compare(QLatin1String("currentAnswer"), Qt::CaseInsensitive) == 0) {
-                    readNext();
-                    if (isCharacters() /*&& !isWhitespace()*/) {
-                        currentAnswer = text().toString().replace('-', ' ');
+                } else if (m_xmlReader.name().compare(QLatin1String("currentAnswer"), Qt::CaseInsensitive) == 0) {
+                    m_xmlReader.readNext();
+                    if (m_xmlReader.isCharacters() /*&& !isWhitespace()*/) {
+                        currentAnswer = m_xmlReader.text().toString().replace('-', ' ');
                     }
                 } else {
                     readUnknownElement();
                     --i;
                 }
             }
-            readNext();
+            m_xmlReader.readNext();
         }
         if (!hasTextTag || !hasAnswerTag) {
-            raiseError("Missing tags in <clue>-tag: A <text>-tag is needed for the "
+            m_xmlReader.raiseError("Missing tags in <clue>-tag: A <text>-tag is needed for the "
                        "clue and a <answer>-tag for the answer.");
             return;
         }
 
-//  qDebug() << "Finished reading clue:" << clue << answer << coord << "orientation ="
-//   << orientation << "answerOffset =" << answerOffset
-//   << "currentAnswer =" << currentAnswer;;
-
-        ClueCell *clueCell;
-        ErrorType errorType = krossWord->insertClue(
-                                  coord, orientation, answerOffset, clue, answer,
-                                  LetterCellType, DontIgnoreErrors, true, &clueCell);
-        if (errorType == ErrorNone) {
-            if (answer.length() == currentAnswer.length())
-                clueCell->setCurrentAnswer(currentAnswer);
-            else
-                qDebug() << "The length of the current and correct answer "
-                         "doesn't match:"
-                         << answer << "current =" << currentAnswer;
-
-            if (clueSelected)
-                clueCell->setHighlight();
-
-        } else {
-            qDebug() << KrossWord::errorMessageFromErrorType(errorType);
-            //      raiseError( KrossWord::errorMessageFromErrorType(errorType) );
-        }
+        crossData.clues.append(ClueInfo(index, 0, orientation, answerOffset, clue, answer, currentAnswer));
     }
-
 }
 
-void KrossWordXmlReader::readImage(KrossWord* krossWord)
+void KrossWordXmlReader::readImage(CrosswordData &crossData)
 {
-    if (!attributes().hasAttribute("coordTopLeft"))
-        raiseError("<image>-tags need a 'coordTopLeft' attribute with value 'x,y'.");
-    else if (!attributes().hasAttribute("horizontalCellSpan"))
-        raiseError("<image>-tags need an 'horizontalCellSpan' attribute.");
-    else if (!attributes().hasAttribute("verticalCellSpan"))
-        raiseError("<image>-tags need an 'horizontalCellSpan' attribute.");
-    else if (!attributes().hasAttribute("url"))
-        raiseError("<image>-tags need an 'url' attribute.");
+    if (!m_xmlReader.attributes().hasAttribute("coordTopLeft"))
+        m_xmlReader.raiseError("<image>-tags need a 'coordTopLeft' attribute with value 'x,y'.");
+    else if (!m_xmlReader.attributes().hasAttribute("horizontalCellSpan"))
+        m_xmlReader.raiseError("<image>-tags need an 'horizontalCellSpan' attribute.");
+    else if (!m_xmlReader.attributes().hasAttribute("verticalCellSpan"))
+        m_xmlReader.raiseError("<image>-tags need an 'horizontalCellSpan' attribute.");
+    else if (!m_xmlReader.attributes().hasAttribute("url"))
+        m_xmlReader.raiseError("<image>-tags need an 'url' attribute.");
     else {
-        QString sCoord = attributes().value("coordTopLeft").toString();
+        QString sCoord = m_xmlReader.attributes().value("coordTopLeft").toString();
         QRegExp rx("(\\d+)\\w*,\\w*(\\d+)");
         if (rx.indexIn(sCoord) == -1) {
-            raiseError("The 'coordTopLeft'-attribute needs to be in this format: 'x,y', but is '" + sCoord + "'.");
+            m_xmlReader.raiseError("The 'coordTopLeft'-attribute needs to be in this format: 'x,y', but is '" + sCoord + "'.");
             return;
         }
-        Coord coord(rx.cap(1).toInt(), rx.cap(2).toInt());
+        uint index = Coords(rx.cap(1).toInt(), rx.cap(2).toInt()).toIndex(crossData.width);
+        uint width = m_xmlReader.attributes().value("horizontalCellSpan").toString().toInt();
+        uint height = m_xmlReader.attributes().value("verticalCellSpan").toString().toInt();
+        QString url(m_xmlReader.attributes().value("url").toString());
 
-        int horizontalCellSpan = attributes().value("horizontalCellSpan").toString().toInt();
-        int verticalCellSpan = attributes().value("verticalCellSpan").toString().toInt();
-        QUrl url(attributes().value("url").toString());
-
-        ImageCell *imageCell;
-        ErrorType errorType = krossWord->insertImage(
-                                  coord, horizontalCellSpan, verticalCellSpan, url,
-                                  DontIgnoreErrors, &imageCell);
-        if (errorType != ErrorNone) {
-            qDebug() << KrossWord::errorMessageFromErrorType(errorType);
-            //      raiseError( KrossWord::errorMessageFromErrorType(errorType) );
-        }
+        crossData.images.append(ImageInfo(index, width, height, url));
     }
 }
 
-void KrossWordXmlReader::readUserDefinedCrosswordSettings(KrossWord* krossWord)
+// CHECK: indicate some letters - currently not read
+void KrossWordXmlReader::readSolutionLetter(CrosswordData &crossData)
 {
-    CrosswordTypeInfo crosswordTypeInfo = krossWord->crosswordTypeInfo();
+    if (!m_xmlReader.attributes().hasAttribute("coord")) {
+        m_xmlReader.raiseError("<solutionLetter>-tags need a 'coord' attribute with value 'x,y'.");
+    } else if (!m_xmlReader.attributes().hasAttribute("index")) {
+        m_xmlReader.raiseError("<solutionLetter>-tags need an 'index' attribute (index of the letter in the solution word).");
+    } else {
+        QString sCoord = m_xmlReader.attributes().value("coord").toString();
+        QRegExp rx("(\\d+)\\w*,\\w*(\\d+)");
+        if (rx.indexIn(sCoord) == -1) {
+            m_xmlReader.raiseError("Error while parsing the 'coord' attribute. It needs to be in this format: 'x,y', but is '" + sCoord + "'.");
+            return;
+        }
+        /*CHECK
+        Coord coord(rx.cap(1).toInt(), rx.cap(2).toInt());
+        int solutionLetterIndex = attributes().value("index").toString().toInt();
+
+        LetterCell *letter = qgraphicsitem_cast< LetterCell* >(crossData->at(coord));
+        if (letter) {
+            letter->toSolutionLetter(solutionLetterIndex);
+        } else {
+            qDebug() << QString("No letter cell at (%1, %2) to convert to a solution letter")
+                     .arg(coord.first).arg(coord.second);
+        }*/
+    }
+}
+
+/*
+void KrossWordXmlReader::readUserDefinedCrosswordSettings(CrosswordData &crossData)
+{
+    CrosswordTypeInfo crosswordTypeInfo = crossData.type;
     crosswordTypeInfo.name = attributes().value("name").toString();
 
     while (!atEnd()) {
@@ -574,56 +498,249 @@ void KrossWordXmlReader::readUserDefinedCrosswordSettings(KrossWord* krossWord)
             } else if (name().compare(QLatin1String("cellTypes"), Qt::CaseInsensitive) == 0) {
                 crosswordTypeInfo.cellTypes =
                     CrosswordTypeInfo::cellTypesFromStringList(readElementText().split(','));
-
             } else
                 readUnknownElement();
         }
     }
-    krossWord->setCrosswordTypeInfo(crosswordTypeInfo);
+    crossData->setCrosswordTypeInfo(crosswordTypeInfo);
 }
+*/
 
 void KrossWordXmlReader::readUnknownElement()
 {
-    Q_ASSERT(isStartElement());
+    Q_ASSERT(m_xmlReader.isStartElement());
 
-    qDebug() << "KrossWordXmlReader::readUnknownElement" << name();
-    while (!atEnd()) {
-        readNext();
+    qDebug() << "KrossWordXmlReader::readUnknownElement" << m_xmlReader.name();
+    while (!m_xmlReader.atEnd()) {
+        m_xmlReader.readNext();
 
-        if (isEndElement())
+        if (m_xmlReader.isEndElement()) {
             break;
+        }
 
-        if (isStartElement())
+        if (m_xmlReader.isStartElement()) {
             readUnknownElement();
+        }
     }
 }
 
-KrossWordXmlReader::KrossWordInfo::KrossWordInfo(
-    const KrossWordXmlReader::KrossWordInfo& other)
+//---------------------------------------
+
+/*
+bool KrossWordXmlReader::writeCompressed(const CrosswordData &crossdata)
 {
-    this->type = other.type;
-    this->width = other.width;
-    this->height = other.height;
-    this->title = other.title;
-    this->authors = other.authors;
-    this->copyright = other.copyright;
-    this->notes = other.notes;
+    m_errorString.clear();
+
+    // Write XML to a buffer
+    QBuffer buffer;
+    buffer.open(QBuffer::WriteOnly);
+    bool writeOk = write(&buffer, crossdata);
+    buffer.close();
+
+    if (!writeOk) {
+        return false;
+    }
+
+    // Write compressed XML to the given IO device
+    KZip zip(m_device);
+    zip.setCompression(KZip::DeflateCompression);
+    if (!zip.open(QIODevice::WriteOnly)) {
+        qDebug() << "Couldn't open the ZIP archive for writing";
+        m_errorString = i18n("Couldn't open the ZIP archive for writing");
+        return false;
+    }
+    if (!zip.prepareWriting("crossword.kwp", "krosswordpuzzle", "krosswordpuzzle", buffer.size())) {
+        qDebug() << "Error while calling KZip::prepareWriting()";
+        m_errorString = i18n("Error writing to the compressed file");
+        return false;
+    }
+    if (!zip.writeData(buffer.data(), buffer.size())) {
+        qDebug() << "Error while calling KZip::writeData()";
+        m_errorString = i18n("Error writing to the compressed file");
+        return false;
+    }
+    if (!zip.finishWriting(buffer.size())) {
+        qDebug() << "Error while calling KZip::finishWriting()";
+        m_errorString = i18n("Error writing to the compressed file");
+        return false;
+    }
+    if (!zip.close()) {
+        qDebug() << "Couldn't close the ZIP archive";
+        m_errorString = i18n("Couldn't close the ZIP archive");
+        return false;
+    }
+
+    return true;
+}
+*/
+
+bool KrossWordXmlReader::write(const CrosswordData &crossData)
+{
+    Q_ASSERT(m_device);
+
+    m_errorString.clear();
+
+    bool closeAfterWrite;
+    if ((closeAfterWrite = !m_device->isOpen()) && !m_device->open(QIODevice::WriteOnly)) {
+        m_errorString = m_device->errorString();
+        return false;
+    }
+
+    m_xmlWriter.setDevice(m_device);
+    m_xmlWriter.setAutoFormatting(true);
+
+    m_xmlWriter.writeStartDocument("1.0", true);
+    writeData(crossData, false); // CHECK isTemplate true for something like writeTemplate
+    m_xmlWriter.writeEndDocument();
+
+    if (closeAfterWrite) {
+        m_device->close();
+    }
+
+    return true;
 }
 
-KrossWordXmlReader::KrossWordInfo::KrossWordInfo(const QString& type,
-        int width, qint8 height, const QString& title,
-        const QString& authors, const QString& copyright,
-        const QString& notes)
+void KrossWordXmlReader::writeData(const CrosswordData &crossData, bool isTemplate)
 {
-    this->type = type;
-    this->width = width;
-    this->height = height;
-    this->title = title;
-    this->authors = authors;
-    this->copyright = copyright;
-    this->notes = notes;
+    m_xmlWriter.writeStartElement("krossWord");
+    m_xmlWriter.writeAttribute("version", "1.1");
+    m_xmlWriter.writeAttribute("width", QString::number(crossData.width));
+    m_xmlWriter.writeAttribute("height", QString::number(crossData.height));
+    m_xmlWriter.writeAttribute("type", crossData.type);
+
+    if (!crossData.title.isEmpty() && isTemplate == false) {
+        m_xmlWriter.writeTextElement("title", crossData.title);
+    }
+    if (!crossData.authors.isEmpty()) {
+        m_xmlWriter.writeTextElement("authors", crossData.authors);
+    }
+    if (!crossData.copyright.isEmpty()) {
+        m_xmlWriter.writeTextElement("copyright", crossData.copyright);
+    }
+    if (!crossData.notes.isEmpty()) {
+        m_xmlWriter.writeTextElement("notes", crossData.notes);
+    }
+
+    /* CHECK
+    if (crossData->crosswordTypeInfo().crosswordType == UserDefinedCrossword) {
+        CrosswordTypeInfo info = crossData->crosswordTypeInfo();
+        m_xmlWriter.writeStartElement("userDefinedCrosswordSettings");
+        m_xmlWriter.writeAttribute("name", info.name);
+
+        m_xmlWriter.writeTextElement("iconName", info.iconName);
+        m_xmlWriter.writeTextElement("description", info.description);
+        m_xmlWriter.writeTextElement("minAnswerLength", QString::number(info.minAnswerLength));
+        m_xmlWriter.writeTextElement("clueCellHandling", CrosswordTypeInfo::
+                                     stringFromClueCellHandling(info.clueCellHandling));
+        m_xmlWriter.writeTextElement("clueType", CrosswordTypeInfo::
+                                     stringFromClueType(info.clueType));
+        m_xmlWriter.writeTextElement("letterCellContent", CrosswordTypeInfo::
+                                     stringFromLetterCellContent(info.letterCellContent));
+        m_xmlWriter.writeTextElement("clueMapping", CrosswordTypeInfo::
+                                     stringFromClueMapping(info.clueMapping));
+        m_xmlWriter.writeTextElement("cellTypes", CrosswordTypeInfo::
+                                     stringListFromCellTypes(info.cellTypes).join(","));
+        m_xmlWriter.writeEndElement();
+    }
+    */
+
+    /* CHECK
+    if (crossData->crosswordTypeInfo().clueType == NumberClues1To26
+            && crossData->crosswordTypeInfo().clueMapping == CluesReferToCells
+            && crossData->crosswordTypeInfo().letterCellContent == Characters) {
+        m_xmlWriter.writeTextElement("letterContentToClueNumberMapping", crossData->letterContentToClueNumberMapping());
+    }
+    */
+
+    foreach(const ClueInfo &clueInfo, crossData.clues) {
+        writeClue(clueInfo, crossData.width, isTemplate);
+    }
+
+    foreach(const ImageInfo &imageInfo, crossData.images) {
+        writeImage(imageInfo, crossData.width, isTemplate);
+    }
+
+    /* CHECK
+    SolutionLetterCellList solutionLetterList = crossData->solutionWordLetters();
+    foreach(SolutionLetterCell * letter, solutionLetterList) {
+        writeSolutionLetter(letter);
+    }
+    */
+
+    /* CHECK
+    // Writing not confident letters
+    QHash< Confidence, LetterCellList > notConfidentLetterLists;
+    LetterCellList letterList = crossData->letters();
+    foreach(LetterCell * letter, letterList) {
+        if (letter->confidence() != Confident) {
+            notConfidentLetterLists[ letter->confidence()] << letter;
+        }
+    }
+    if (!notConfidentLetterLists.isEmpty()) {
+        m_xmlWriter.writeStartElement("confidence");
+        for (QHash<Confidence, LetterCellList>::const_iterator it = notConfidentLetterLists.constBegin(); it != notConfidentLetterLists.constEnd(); ++it) {
+            m_xmlWriter.writeStartElement(LetterCell::confidenceToString(it.key()));
+            foreach(const LetterCell * letter, notConfidentLetterLists[it.key()]) {
+                m_xmlWriter.writeEmptyElement("letter");
+                m_xmlWriter.writeAttribute("coord", QString("%1,%2").arg(letter->coord().first).arg(letter->coord().second));
+            }
+            m_xmlWriter.writeEndElement();
+        }
+        m_xmlWriter.writeEndElement(); // </confidence>
+    }
+    */
+
+    if (!crossData.undoData.isEmpty()) {
+        m_xmlWriter.writeTextElement("undoData", crossData.undoData.toBase64());
+    }
+
+    m_xmlWriter.writeEndElement(); // </krossWord>
 }
 
+void KrossWordXmlReader::writeClue(const ClueInfo &clueInfo, const uint gridWidth, bool isTemplate)
+{
+    m_xmlWriter.writeStartElement("clue");
+    Coords coords = Coords::fromIndex(clueInfo.gridIndex, gridWidth);
+    m_xmlWriter.writeAttribute("coord", QString("%1,%2").arg(coords.x).arg(coords.y));
+    m_xmlWriter.writeAttribute("orientation", clueInfo.orientation == ClueOrientation::Horizontal ? "horizontal" : "vertical");
+    m_xmlWriter.writeAttribute("answerOffset", answerOffsetToString(clueInfo.answerOffset));
 
+    // CHECK: really needed?
+    /*
+    if (ClueInfo->isHighlighted()) {
+        m_xmlWriter.writeAttribute("selected", "true");
+    }
+    */
 
+    if (isTemplate == false) {
+        m_xmlWriter.writeTextElement("text", clueInfo.clue);
+        m_xmlWriter.writeTextElement("answer", clueInfo.solution); // CHECK: missing characters as '-' or similar?
+        m_xmlWriter.writeTextElement("currentAnswer", clueInfo.answer); // CHECK: missing characters as '-' or similar?
+    } else {
+        m_xmlWriter.writeTextElement("text", QString());
+        m_xmlWriter.writeTextElement("answer", QString(' ', clueInfo.solution.length())); // CHECK: missing characters as '-' or similar?
+        m_xmlWriter.writeTextElement("currentAnswer", QString(' ', clueInfo.solution.length()));// CHECK: missing characters as '-' or similar?
+    }
 
+    m_xmlWriter.writeEndElement();
+}
+
+void KrossWordXmlReader::writeImage(const ImageInfo &imageInfo, const uint gridWidth, bool isTemplate)
+{
+    m_xmlWriter.writeEmptyElement("image");
+    Coords coords = Coords::fromIndex(imageInfo.gridIndex, gridWidth);
+    m_xmlWriter.writeAttribute("coordTopLeft", QString("%1,%2").arg(coords.x).arg(coords.y));
+    m_xmlWriter.writeAttribute("horizontalCellSpan", QString::number(imageInfo.width));
+    m_xmlWriter.writeAttribute("verticalCellSpan", QString::number(imageInfo.height));
+    m_xmlWriter.writeAttribute("url", isTemplate ? QString() : imageInfo.url);
+}
+
+/* CHECK
+void KrossWordXmlReader::writeSolutionLetter(SolutionLetterCell* solutionLetter)
+{
+    m_xmlWriter.writeStartElement("solutionLetter");
+    m_xmlWriter.writeAttribute("coord", QString("%1,%2").arg(solutionLetter->coord().first).arg(solutionLetter->coord().second));
+    m_xmlWriter.writeAttribute("index", QString("%1").arg(solutionLetter->solutionWordIndex()));
+    m_xmlWriter.writeEndElement();
+}
+*/

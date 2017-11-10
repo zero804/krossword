@@ -1,5 +1,6 @@
 /*
 *   Copyright 2010 Friedrich Pülz <fpuelz@gmx.de>
+*   Copyright 2017 Giacomo Barazzetti <giacomosrv@gmail.com>
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU Library General Public License as
@@ -20,62 +21,50 @@
 #ifndef KROSSWORDXMLREADER_HEADER
 #define KROSSWORDXMLREADER_HEADER
 
+#include "crosswordio.h"
+
 #include <QXmlStreamReader>
-#include <QUrl>
+#include <QXmlStreamWriter>
+#include <QString>
 
-namespace Crossword
-{
-class KrossWord;
-}
-using namespace Crossword;
+AnswerOffset answerOffsetFromString(const QString &s);
+QString answerOffsetToString(AnswerOffset answerOffset);
 
-class KrossWordXmlReader : public QXmlStreamReader
+LetterConfidence letterConfidenceFromString(const QString &s);
+
+class KrossWordXmlReader : public CrosswordIO
 {
 public:
-    KrossWordXmlReader();
+    KrossWordXmlReader(QIODevice *device);
 
-    struct KrossWordInfo {
-        int width, height;
-        QString type, title, authors, copyright, notes;
+    //bool readCompressed(CrosswordData &crossData) override;//CHECK: split in class for kwpz
+    //bool writeCompressed(const CrosswordData &crossdata) override; //CHECK: split in class for kwpz
 
-        KrossWordInfo() {
-            this->width = this->height = -1; // make invalid initially
-        };
+    bool read(CrosswordData &crossData) override;
+    bool write(const CrosswordData &crossData) override;
 
-        KrossWordInfo(const KrossWordInfo &other);
-
-        KrossWordInfo(const QString &type, int width, qint8 height,
-                      const QString &title, const QString &authors,
-                      const QString &copyright, const QString &notes);
-
-        bool isValid() const {
-            return this->width > 0 && this->height > 0;
-        };
-    };
-
-    /** Reads information about the crossword at the given @p url.
-    * @returns A KrossWordInfo object with information about the crossword at
-    * the given @p url. Use KrossWordInfo::isValid() to check for errors.
-    * If isValid() returns false @p errorString will be set to a string
-    * explaining the error (if @p errorString isn't NULL). */
-    static KrossWordInfo readInfo(const QUrl &url, QString *errorString = NULL);
-
-    bool readCompressed(QIODevice *device, KrossWord *krossWord,
-                        QByteArray *undoData = NULL);
-    bool readCompressedInfo(QIODevice *device, KrossWordInfo &krossWordInfo);
-
-    bool read(QIODevice *device, KrossWord *krossWord,
-              QByteArray *undoData = NULL);
-    bool readInfo(QIODevice *device, KrossWordInfo &krossWordInfo);
+    QString errorString() const {
+        return m_errorString;
+    }
 
 private:
+    QXmlStreamReader m_xmlReader;
+    QXmlStreamWriter m_xmlWriter;
+
+    void readData(CrosswordData &crossData);
+    void readKrossWordInfo(CrosswordData &crossData);
+    void readClue(CrosswordData &crossData);
+    void readImage(CrosswordData &crossData);
+    void readSolutionLetter(CrosswordData &crossData);
     void readUnknownElement();
-    KrossWordInfo readKrossWordInfo();
-    void readKrossWord(KrossWord *krossWord, QByteArray *undoData = NULL);
-    void readClue(KrossWord *krossWord);
-    void readImage(KrossWord *krossWord);
-    void readSolutionLetter(KrossWord *krossWord);
-    void readUserDefinedCrosswordSettings(KrossWord *krossWord);
+    //void readUserDefinedCrosswordSettings(CrosswordData &crossData);
+
+    void writeData(const CrosswordData &crossData, bool isTemplate);
+    void writeClue(const ClueInfo &clueInfo, const uint gridWidth, bool isTemplate);
+    void writeImage(const ImageInfo &imageInfo, const uint gridWidth, bool isTemplate);
+    //void writeSolutionLetter(SolutionLetterCell *solutionLetter);
+
+    QString m_errorString;
 };
 
-#endif // Multiple inclusion guard
+#endif
