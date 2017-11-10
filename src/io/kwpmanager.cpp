@@ -18,7 +18,7 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "krosswordxmlreader.h"
+#include "kwpmanager.h"
 
 #include <QBuffer>
 #include <QFileInfo>
@@ -101,53 +101,12 @@ LetterConfidence letterConfidenceFromString(const QString &s)
 
 //-------------------------------------------------
 
-KrossWordXmlReader::KrossWordXmlReader(QIODevice *device)
+KwpManager::KwpManager(QIODevice *device)
     : CrosswordIO(device)
 {
 }
 
-/*
-bool KrossWordXmlReader::readCompressed(CrosswordData &crossData)
-{
-    // Read compressed XML from the given IO device
-    KZip zip(m_device);
-    zip.setCompression(KZip::DeflateCompression);
-    if (!zip.open(QIODevice::ReadOnly)) {
-        qDebug() << "Couldn't open the ZIP archive for reading";
-        return false;
-    }
-    const KArchiveDirectory *archive = zip.directory();
-    if (!archive) {
-        qDebug() << "Couldn't get the archive contents";
-        return false;
-    }
-    if (!archive->entries().contains("crossword.kwp")) {
-        qDebug() << "Not a valid *.kwpz-file! The crossword file wasn't found (crossword.kwp).";
-        return false;
-    }
-    const KArchiveEntry *crosswordEntry = archive->entry("crossword.kwp");
-    if (!crosswordEntry->isFile()) {
-        qDebug() << "Not a valid *.kwpz-file! No file 'crossword.kwp' found, it's a directory.";
-        return false;
-    }
-    KArchiveFile *crosswordFile = (KArchiveFile*)crosswordEntry;
-    QIODevice *crosswordDevice = crosswordFile->createDevice();
-
-    // Read the crossword
-    bool readOk = read(crosswordDevice, crossData);
-
-    crosswordDevice->close();
-    delete crosswordDevice;
-    if (!zip.close()) {
-        qDebug() << "Couldn't close the ZIP archive";
-        return false;
-    }
-
-    return readOk;
-}
-*/
-
-bool KrossWordXmlReader::read(CrosswordData &crossData)
+bool KwpManager::read(CrosswordData &crossData)
 {
     Q_ASSERT(m_device);
 
@@ -178,7 +137,7 @@ bool KrossWordXmlReader::read(CrosswordData &crossData)
 }
 
 //just the metadata
-void KrossWordXmlReader::readKrossWordInfo(CrosswordData &crossData)
+void KwpManager::readKrossWordInfo(CrosswordData &crossData)
 {
     Q_ASSERT(m_xmlReader.isStartElement() && m_xmlReader.name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0);
 
@@ -218,7 +177,7 @@ void KrossWordXmlReader::readKrossWordInfo(CrosswordData &crossData)
     }
 }
 
-void KrossWordXmlReader::readData(CrosswordData &crossData)
+void KwpManager::readData(CrosswordData &crossData)
 {
     readKrossWordInfo(crossData);
 
@@ -319,7 +278,7 @@ void KrossWordXmlReader::readData(CrosswordData &crossData)
 
 //---------------------------------------------------------------------------
 
-void KrossWordXmlReader::readClue(CrosswordData &crossData)
+void KwpManager::readClue(CrosswordData &crossData)
 {
     if (!m_xmlReader.attributes().hasAttribute("coord")) {
         m_xmlReader.raiseError("<clue>-tags need a 'coord' attribute with value 'x,y'.");
@@ -404,7 +363,7 @@ void KrossWordXmlReader::readClue(CrosswordData &crossData)
     }
 }
 
-void KrossWordXmlReader::readImage(CrosswordData &crossData)
+void KwpManager::readImage(CrosswordData &crossData)
 {
     if (!m_xmlReader.attributes().hasAttribute("coordTopLeft"))
         m_xmlReader.raiseError("<image>-tags need a 'coordTopLeft' attribute with value 'x,y'.");
@@ -431,7 +390,7 @@ void KrossWordXmlReader::readImage(CrosswordData &crossData)
 }
 
 // CHECK: indicate some letters - currently not read
-void KrossWordXmlReader::readSolutionLetter(CrosswordData &crossData)
+void KwpManager::readSolutionLetter(CrosswordData &crossData)
 {
     if (!m_xmlReader.attributes().hasAttribute("coord")) {
         m_xmlReader.raiseError("<solutionLetter>-tags need a 'coord' attribute with value 'x,y'.");
@@ -506,11 +465,11 @@ void KrossWordXmlReader::readUserDefinedCrosswordSettings(CrosswordData &crossDa
 }
 */
 
-void KrossWordXmlReader::readUnknownElement()
+void KwpManager::readUnknownElement()
 {
     Q_ASSERT(m_xmlReader.isStartElement());
 
-    qDebug() << "KrossWordXmlReader::readUnknownElement" << m_xmlReader.name();
+    qDebug() << "KwpManager::readUnknownElement" << m_xmlReader.name();
     while (!m_xmlReader.atEnd()) {
         m_xmlReader.readNext();
 
@@ -526,55 +485,7 @@ void KrossWordXmlReader::readUnknownElement()
 
 //---------------------------------------
 
-/*
-bool KrossWordXmlReader::writeCompressed(const CrosswordData &crossdata)
-{
-    m_errorString.clear();
-
-    // Write XML to a buffer
-    QBuffer buffer;
-    buffer.open(QBuffer::WriteOnly);
-    bool writeOk = write(&buffer, crossdata);
-    buffer.close();
-
-    if (!writeOk) {
-        return false;
-    }
-
-    // Write compressed XML to the given IO device
-    KZip zip(m_device);
-    zip.setCompression(KZip::DeflateCompression);
-    if (!zip.open(QIODevice::WriteOnly)) {
-        qDebug() << "Couldn't open the ZIP archive for writing";
-        m_errorString = i18n("Couldn't open the ZIP archive for writing");
-        return false;
-    }
-    if (!zip.prepareWriting("crossword.kwp", "krosswordpuzzle", "krosswordpuzzle", buffer.size())) {
-        qDebug() << "Error while calling KZip::prepareWriting()";
-        m_errorString = i18n("Error writing to the compressed file");
-        return false;
-    }
-    if (!zip.writeData(buffer.data(), buffer.size())) {
-        qDebug() << "Error while calling KZip::writeData()";
-        m_errorString = i18n("Error writing to the compressed file");
-        return false;
-    }
-    if (!zip.finishWriting(buffer.size())) {
-        qDebug() << "Error while calling KZip::finishWriting()";
-        m_errorString = i18n("Error writing to the compressed file");
-        return false;
-    }
-    if (!zip.close()) {
-        qDebug() << "Couldn't close the ZIP archive";
-        m_errorString = i18n("Couldn't close the ZIP archive");
-        return false;
-    }
-
-    return true;
-}
-*/
-
-bool KrossWordXmlReader::write(const CrosswordData &crossData)
+bool KwpManager::write(const CrosswordData &crossData)
 {
     Q_ASSERT(m_device);
 
@@ -600,7 +511,7 @@ bool KrossWordXmlReader::write(const CrosswordData &crossData)
     return true;
 }
 
-void KrossWordXmlReader::writeData(const CrosswordData &crossData, bool isTemplate)
+void KwpManager::writeData(const CrosswordData &crossData, bool isTemplate)
 {
     m_xmlWriter.writeStartElement("krossWord");
     m_xmlWriter.writeAttribute("version", "1.1");
@@ -697,7 +608,7 @@ void KrossWordXmlReader::writeData(const CrosswordData &crossData, bool isTempla
     m_xmlWriter.writeEndElement(); // </krossWord>
 }
 
-void KrossWordXmlReader::writeClue(const ClueInfo &clueInfo, const uint gridWidth, bool isTemplate)
+void KwpManager::writeClue(const ClueInfo &clueInfo, const uint gridWidth, bool isTemplate)
 {
     m_xmlWriter.writeStartElement("clue");
     Coords coords = Coords::fromIndex(clueInfo.gridIndex, gridWidth);
@@ -725,7 +636,7 @@ void KrossWordXmlReader::writeClue(const ClueInfo &clueInfo, const uint gridWidt
     m_xmlWriter.writeEndElement();
 }
 
-void KrossWordXmlReader::writeImage(const ImageInfo &imageInfo, const uint gridWidth, bool isTemplate)
+void KwpManager::writeImage(const ImageInfo &imageInfo, const uint gridWidth, bool isTemplate)
 {
     m_xmlWriter.writeEmptyElement("image");
     Coords coords = Coords::fromIndex(imageInfo.gridIndex, gridWidth);

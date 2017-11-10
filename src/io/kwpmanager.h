@@ -18,8 +18,8 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef KROSSWORDXMLREADER_HEADER
-#define KROSSWORDXMLREADER_HEADER
+#ifndef KWPMANAGER_HEADER
+#define KWPMANAGER_HEADER
 
 #include "crosswordio.h"
 
@@ -32,13 +32,10 @@ QString answerOffsetToString(AnswerOffset answerOffset);
 
 LetterConfidence letterConfidenceFromString(const QString &s);
 
-class KrossWordXmlReader : public CrosswordIO
+class KwpManager : public CrosswordIO // CHECK: KrossWordXmlReader & KrossWordXmlWriter
 {
 public:
-    KrossWordXmlReader(QIODevice *device);
-
-    //bool readCompressed(CrosswordData &crossData) override;//CHECK: split in class for kwpz
-    //bool writeCompressed(const CrosswordData &crossdata) override; //CHECK: split in class for kwpz
+    KwpManager(QIODevice *device);
 
     bool read(CrosswordData &crossData) override;
     bool write(const CrosswordData &crossData) override;

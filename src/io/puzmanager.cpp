@@ -18,7 +18,7 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "krosswordpuzreader.h"
+#include "puzmanager.h"
 
 #include <QIODevice>
 #include <QDataStream>
@@ -26,7 +26,7 @@
 
 #include <QDebug>
 
-const char *KrossWordPuzStream::FILE_MAGIC = "ACROSS&DOWN";
+const char *PuzReader::FILE_MAGIC = "ACROSS&DOWN";
 
 QString getStringFromGrid(QList<QByteArray> &grid, int x, int y, Qt::Orientation orientation)
 {
@@ -59,7 +59,7 @@ QString getStringFromGrid(QList<QByteArray> &grid, int x, int y, Qt::Orientation
 
 //----------------------------------------------
 
-bool KrossWordPuzStream::readData(QIODevice *device, KrossWordPuzStream::PuzChecksums *checksums)
+bool PuzReader::readData(QIODevice *device, PuzReader::PuzChecksums *checksums)
 {
     Q_ASSERT(device);
 
@@ -204,13 +204,13 @@ bool KrossWordPuzStream::readData(QIODevice *device, KrossWordPuzStream::PuzChec
     return true;
 }
 
-KrossWordPuzStream::KrossWordPuzStream(QIODevice *device)
+PuzReader::PuzReader(QIODevice *device)
     : CrosswordIO(device)
 {
 
 }
 
-bool KrossWordPuzStream::read(CrosswordData &crossData)
+bool PuzReader::read(CrosswordData &crossData)
 {
     PuzChecksums checksums;
     if (!readData(m_device, &checksums)) {
@@ -236,12 +236,12 @@ bool KrossWordPuzStream::read(CrosswordData &crossData)
     return mapClues(crossData.clues);
 }
 
-bool KrossWordPuzStream::writeDataTo(QDataStream &dataStream, const QByteArray &data, int len) const
+bool PuzReader::writeDataTo(QDataStream &dataStream, const QByteArray &data, int len) const
 {
     return dataStream.writeRawData(data, len) == len;
 }
 
-bool KrossWordPuzStream::write(const CrosswordData &crossdata)
+bool PuzReader::write(const CrosswordData &crossdata)
 {
     Q_ASSERT(m_device);
 
@@ -376,7 +376,7 @@ bool KrossWordPuzStream::write(const CrosswordData &crossdata)
     return true;
 }
 
-KrossWordPuzStream::PuzChecksums KrossWordPuzStream::generateChecksums(QIODevice* buffer) const
+PuzReader::PuzChecksums PuzReader::generateChecksums(QIODevice* buffer) const
 {
     PuzChecksums checksums;
 
@@ -418,7 +418,7 @@ KrossWordPuzStream::PuzChecksums KrossWordPuzStream::generateChecksums(QIODevice
     return checksums;
 }
 
-quint16 KrossWordPuzStream::checkSumRegion(const char *base, int len, quint16 checkSum) const
+quint16 PuzReader::checkSumRegion(const char *base, int len, quint16 checkSum) const
 {
     for (int i = 0; i < len; i++) {
         if (checkSum & 0x0001) {
@@ -432,7 +432,7 @@ quint16 KrossWordPuzStream::checkSumRegion(const char *base, int len, quint16 ch
     return checkSum;
 }
 
-bool KrossWordPuzStream::mapClues(QList<ClueInfo> &clues)
+bool PuzReader::mapClues(QList<ClueInfo> &clues)
 {
     QList<QByteArray> solutionGrid;
     for (int row = 0; row < m_puzData.solution.length(); row += m_puzData.width) {
@@ -498,44 +498,8 @@ bool KrossWordPuzStream::mapClues(QList<ClueInfo> &clues)
     return true;
 }
 
-bool KrossWordPuzStream::prepareDataForWrite(const CrosswordData &crossData)
+bool PuzReader::prepareDataForWrite(const CrosswordData &crossData)
 {
-    /*
-    uint gridIndex = 0;
-    for (int i = 0; i < (m_puzData.width * m_puzData.height); i++) {
-        // across
-        for (int acrossIndex = 0; acrossIndex < crossData.clues.count(); acrossIndex++) {
-            ClueInfo currentClueInfo = crossData.clues.at(acrossIndex);
-            if (currentClueInfo.gridIndex == gridIndex) {
-                m_puzData.clues.append(currentClueInfo.clue.toLatin1());
-
-                m_puzData.solution.replace(i, currentClueInfo.solution.length(), currentClueInfo.solution.toLatin1());
-                m_puzData.state.replace(i, currentClueInfo.answer.length(), currentClueInfo.answer.toLatin1());
-                break;
-            }
-        }
-        // down
-        for (int downIndex = 0; downIndex < crossData.downClues.count(); downIndex++) {
-            ClueInfo currentClueInfo = crossData.downClues.at(downIndex);
-            if (currentClueInfo.gridIndex == gridIndex) {
-                m_puzData.clues.append(currentClueInfo.clue.toLatin1());
-
-                // solution and state(answers) filling has to be done with down clues too because it's possible
-                // to have letters not included in an horizontal clue (and vice versa)
-                int verticalIndex = gridIndex;
-                for (int pos = 0; pos < currentClueInfo.solution.length(); pos++) {
-                    // solution and answer have the same lenght so we can use the same 'for' cicle
-                    m_puzData.solution[verticalIndex] = currentClueInfo.solution.at(pos).toLatin1();
-                    m_puzData.state[verticalIndex] = currentClueInfo.answer.at(pos).toLatin1();
-                    verticalIndex += crossData.width;
-                }
-                break;
-            }
-        }
-        gridIndex++;
-    }
-    */
-
     for (int i = 0; i < (m_puzData.width * m_puzData.height); i++) {
         foreach (const ClueInfo &clueInfo, crossData.clues) {
             if (clueInfo.gridIndex == i) {
@@ -565,7 +529,7 @@ bool KrossWordPuzStream::prepareDataForWrite(const CrosswordData &crossData)
 }
 
 //  Returns true if the cell at (x, y) gets an "across" clue number.
-bool KrossWordPuzStream::cellNeedsAcrossNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const
+bool PuzReader::cellNeedsAcrossNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const
 {
     // Check that there is a blank to the left of us
     if (x == 0 || puzzleSolution[Coords(x - 1, y).toIndex(width)] == '.') {
@@ -578,7 +542,7 @@ bool KrossWordPuzStream::cellNeedsAcrossNumber(qint8 x, qint8 y, qint8 width, co
 }
 
 //  Returns true if the cell at (x, y) gets an "down" clue number.
-bool KrossWordPuzStream::cellNeedsDownNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const
+bool PuzReader::cellNeedsDownNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const
 {
     // Check that there is a blank to the left of us
     if (y == 0 || puzzleSolution[Coords(x, y - 1).toIndex(width)] == '.') {
@@ -590,7 +554,7 @@ bool KrossWordPuzStream::cellNeedsDownNumber(qint8 x, qint8 y, qint8 width, cons
     return false;
 }
 
-QByteArray KrossWordPuzStream::readZeroTerminatedString(QDataStream &dataStream)
+QByteArray PuzReader::readZeroTerminatedString(QDataStream &dataStream)
 {
     QByteArray string;
     char *buffer = new char[1];
