@@ -221,7 +221,7 @@ LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QStri
     Crossword::KrossWord krossWord;
     QString errorString;
 
-    if (!krossWord.read(url, &errorString, Crossword::KrossWord::FileFormat::DetermineByFileName)) {
+    if (!krossWord.read(url, &errorString, Crossword::KrossWord::FileFormat::AcrossLitePuzFile)) { // CHECK: should be DetermineByFileName
         qDebug() << "addCrossword() reading error:" << errorString;
         outCrosswordUrl = QString();
         return E_ERROR_TYPE::ReadError;

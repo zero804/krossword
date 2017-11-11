@@ -704,7 +704,7 @@ bool CrossWordXmlGuiWindow::loadFile(const QUrl &url, KrossWord::FileFormat file
     setCurrentFileName(QString());
 
     // Read the file
-    QFileInfo fileInfo(resultUrl.toLocalFile()); // Qt5: just resultUrl.fileName()
+    QFileInfo fileInfo(resultUrl.toLocalFile()); // CHECK: Qt5: just resultUrl.fileName()
     QString fileName = fileInfo.fileName();
     updateClueDock();
 

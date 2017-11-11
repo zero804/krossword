@@ -770,11 +770,10 @@ KrossWord::FileFormat KrossWord::fileFormatFromFileName(const QString& fileName)
         return DetermineByFileName; // couldn't determine file format
 }
 
-bool KrossWord::write(const QString& fileName, QString* errorString,
-                      WriteMode writeMode, FileFormat fileFormat,
-                      const QByteArray &undoData)
+bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode writeMode, FileFormat fileFormat, const QByteArray &undoData)
 {
     QFile file(fileName);
+    file.open(QIODevice::WriteOnly);
 
     //-------------------------- CHECK: extract as new method
     CrosswordData crosswordData;
@@ -945,22 +944,85 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
             readOk = puzManager.read(crosswordData);
             if (!readOk && errorString) {
                 *errorString = i18n("Error reading AcrossLite's .puz-format.");
+                return false;
             }
         } else if (fileFormat == KrossWordPuzzleXmlFile) {
             KwpManager kwpManager(&file);
             readOk = kwpManager.read(crosswordData);
             if (!readOk && errorString) {
                 *errorString = kwpManager.errorString();
+                return false;
             }
         } else if (fileFormat == KrossWordPuzzleCompressedXmlFile) {
             KwpzManager kwpzManager(&file);
             readOk = kwpzManager.read(crosswordData);
             if (!readOk && errorString) {
                 *errorString = kwpzManager.errorString();
+                return false;
             }
         }
 
-        // CHECK: use crosswordData
+        //-----------------------------------------
+        createNew(CrosswordTypeInfo::typeFromString(crosswordData.type), QSize(crosswordData.width, crosswordData.height));
+        setTitle(crosswordData.title);
+        setAuthors(crosswordData.authors);
+        setCopyright(crosswordData.copyright);
+        setNotes(crosswordData.notes);
+
+        // CHECK: NumberClues1To26
+
+        foreach (ClueInfo clueInfo, crosswordData.clues) {
+            ClueCell *clueCell;
+
+            Coords coords = Coords::fromIndex(clueInfo.gridIndex, crosswordData.width);
+            Coord coord(coords.x, coords.y);
+
+            Qt::Orientation orientation = (clueInfo.orientation == ClueOrientation::Horizontal ? Qt::Horizontal : Qt::Vertical);
+
+            ErrorType errorType = insertClue(coord, orientation, clueInfo.answerOffset, clueInfo.clue, clueInfo.solution,
+                                             LetterCellType, DontIgnoreErrors, true, &clueCell);
+            if (errorType == ErrorNone) {
+                if (clueInfo.solution.length() == clueInfo.answer.length()) {
+                    clueCell->setCurrentAnswer(clueInfo.answer);
+                }
+            }
+        }
+
+        // CHECK: setLetterContentToClueNumberMapping
+        // CHECK: if (krossWord->crosswordTypeInfo().crosswordType == UserDefinedCrossword)
+
+        // CHECK: assignClueNumbers();
+        // CHECK: if... setupSameLetterSynchronization();
+
+        foreach (ImageInfo imageInfo, crosswordData.images) {
+            ImageCell *imageCell;
+
+            Coords coords = Coords::fromIndex(imageInfo.gridIndex, crosswordData.width);
+            Coord coord(coords.x, coords.y);
+
+            ErrorType errorType = insertImage(coord, imageInfo.width, imageInfo.height,
+                                              QUrl::fromLocalFile(imageInfo.url), DontIgnoreErrors, &imageCell);
+            if (errorType != ErrorNone) {
+                qDebug() << KrossWord::errorMessageFromErrorType(errorType);
+            }
+        }
+
+        // CHECK: solutionletter
+
+        foreach (ConfidenceInfo confidenceInfo, crosswordData.lettersConfidence) {
+            Coords coords = Coords::fromIndex(confidenceInfo.gridIndex, crosswordData.width);
+            Coord coord(coords.x, coords.y);
+
+            KrossWordCell *cell = at(coord);
+            if (cell->isLetterCell()) {
+                LetterCell *letter = (LetterCell*)cell;
+                letter->setConfidence(confidenceInfo.confidence);
+            }
+        }
+
+        // CHECK: *undoData = QByteArray::fromBase64(crosswordData.undoData);
+
+        //-----------------------------------------
     }
     file.close();
     blockSignals(wasBlocking);
@@ -1758,14 +1820,12 @@ ErrorType KrossWord::insertClue(const Coord &coord,
     // Delete empty cell and insert new clue cell
     // or combine existing clue cell with the new clue cell to a double clue cell
     QString answerUpper = answer.toUpper();
-    ClueCell *clueCell = new ClueCell(this, coord, orientation,
-                                      answerOffset, clue, answerUpper);
+    ClueCell *clueCell = new ClueCell(this, coord, orientation, answerOffset, clue, answerUpper);
     clueCell->beginAddLetters();
     if (answerOffset != OnClueCell) {
         KrossWordCell *cellAtCoord = at(coord);
         if (cellAtCoord->isType(ClueCellType)) {
-            DoubleClueCell *doubleClueCell = new DoubleClueCell(
-                this, coord, qgraphicsitem_cast<ClueCell*>(cellAtCoord), clueCell);
+            DoubleClueCell *doubleClueCell = new DoubleClueCell(this, coord, qgraphicsitem_cast<ClueCell*>(cellAtCoord), clueCell);
             (*m_krossWordGrid)[ coord ] = doubleClueCell;
         } else
             replaceCell(coord, clueCell);

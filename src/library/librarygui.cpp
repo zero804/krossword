@@ -337,8 +337,9 @@ void LibraryGui::libraryAddSlot()
                                            QUrl(),
                                            "Crosswords (*.kwp *.kwpz *.puz)");
 
-    if (!url.isEmpty())
+    if (!url.isEmpty()) {
         libraryAddCrossword(url);
+    }
 }
 
 // MISSING kwp, kwpz (and puz?) EXPORT
