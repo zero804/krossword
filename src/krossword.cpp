@@ -1020,7 +1020,9 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
             }
         }
 
-        // CHECK: *undoData = QByteArray::fromBase64(crosswordData.undoData);
+        if (undoData) {
+            *undoData = QByteArray::fromBase64(crosswordData.undoData);
+        }
 
         //-----------------------------------------
     }

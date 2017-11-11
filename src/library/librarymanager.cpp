@@ -117,7 +117,6 @@ void LibraryManager::clearOnDirectoryLoadedFunction()
 
 void LibraryManager::extractMetadataSlot(const QString &path)
 {
-    qDebug() << "LOADMETADATASLOT" << path;
     QModelIndexList fileIndexList = match(index(path), QFileSystemModel::FileNameRole, "*.kwpz", -1, Qt::MatchWildcard | Qt::MatchRecursive);
 
     QModelIndex fileIndex;
@@ -159,13 +158,10 @@ void LibraryManager::extractMetadataSlot(const QString &path)
 void LibraryManager::computeCrosswordsHashSlot(const QString& path)
 {
     Q_UNUSED(path);
-    qDebug() << "COMPUTECROSSWORDSHASHSLOT" << path;
 
     QFileInfoList crosswordsPath = getCrosswordsFilePath();
-
     foreach(QFileInfo path, crosswordsPath) {
         QByteArray hash = computeFileHash(path.filePath());
-
         m_crosswordsHash.insert(path.fileName(), hash);
     }
 
