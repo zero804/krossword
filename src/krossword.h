@@ -285,9 +285,7 @@ public:
     * @param url The URL to the file to read.
     * @param errorString Contains a string describing the error, if false was returned.
     * @return False, if there was an error. */
-    bool read(const QUrl &url, QString *errorString = NULL,
-              QWidget *mainWindow = NULL, FileFormat fileFormat = DetermineByFileName,
-              QByteArray *undoData = NULL);
+    bool read(const QUrl &url, QString *errorString = NULL, FileFormat fileFormat = DetermineByFileName, QByteArray *undoData = NULL);
 
     /** Write the crossword into a file.
     * @param fileName The path to the file to write to.

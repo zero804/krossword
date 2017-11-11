@@ -32,25 +32,30 @@ KwpzManager::KwpzManager(QIODevice *device)
 
 bool KwpzManager::read(CrosswordData &crossData)
 {
+    Q_ASSERT(m_device);
+    Q_ASSERT(m_device->isReadable());
+
+    setErrorString(QString());
+
     // Read compressed XML from the given IO device
     KZip zip(m_device);
     zip.setCompression(KZip::DeflateCompression);
     if (!zip.open(QIODevice::ReadOnly)) {
-        qDebug() << "Couldn't open the ZIP archive for reading";
+        setErrorString(i18n("Couldn't open the ZIP archive for reading"));
         return false;
     }
     const KArchiveDirectory *archive = zip.directory();
     if (!archive) {
-        qDebug() << "Couldn't get the archive contents";
+        setErrorString(i18n("Couldn't get the archive contents"));
         return false;
     }
     if (!archive->entries().contains("crossword.kwp")) {
-        qDebug() << "Not a valid *.kwpz-file! The crossword file wasn't found (crossword.kwp).";
+        setErrorString(i18n("Not a valid *.kwpz-file! The crossword file wasn't found (crossword.kwp)."));
         return false;
     }
     const KArchiveEntry *crosswordEntry = archive->entry("crossword.kwp");
     if (!crosswordEntry->isFile()) {
-        qDebug() << "Not a valid *.kwpz-file! No file 'crossword.kwp' found, it's a directory.";
+        setErrorString(i18n("Not a valid *.kwpz-file! No file 'crossword.kwp' found, it's a directory."));
         return false;
     }
     KArchiveFile *crosswordFile = (KArchiveFile*)crosswordEntry;
@@ -59,11 +64,12 @@ bool KwpzManager::read(CrosswordData &crossData)
     // Read the crossword
     KwpManager kwpManager(crosswordDevice);
     bool readOk = kwpManager.read(crossData);
+    setErrorString(kwpManager.errorString());
 
     crosswordDevice->close();
     delete crosswordDevice;
     if (!zip.close()) {
-        qDebug() << "Couldn't close the ZIP archive";
+        setErrorString(i18n("Couldn't close the ZIP archive")); // CHECK: a bit too much?
         return false;
     }
 
@@ -72,6 +78,11 @@ bool KwpzManager::read(CrosswordData &crossData)
 
 bool KwpzManager::write(const CrosswordData &crossdata)
 {
+    Q_ASSERT(m_device);
+    Q_ASSERT(m_device->isWritable());
+
+    setErrorString(QString());
+
     // Write XML to a buffer
     QBuffer buffer;
     buffer.open(QBuffer::WriteOnly);
@@ -80,6 +91,7 @@ bool KwpzManager::write(const CrosswordData &crossdata)
     buffer.close();
 
     if (!writeOk) {
+        setErrorString(kwpManager.errorString());
         return false;
     }
 
@@ -87,28 +99,23 @@ bool KwpzManager::write(const CrosswordData &crossdata)
     KZip zip(m_device);
     zip.setCompression(KZip::DeflateCompression);
     if (!zip.open(QIODevice::WriteOnly)) {
-        qDebug() << "Couldn't open the ZIP archive for writing";
-        m_errorString = i18n("Couldn't open the ZIP archive for writing");
+        setErrorString(i18n("Couldn't open the ZIP archive for writing"));
         return false;
     }
     if (!zip.prepareWriting("crossword.kwp", "krosswordpuzzle", "krosswordpuzzle", buffer.size())) {
-        qDebug() << "Error while calling KZip::prepareWriting()";
-        m_errorString = i18n("Error writing to the compressed file");
+        setErrorString(i18n("Error writing to the compressed file"));
         return false;
     }
     if (!zip.writeData(buffer.data(), buffer.size())) {
-        qDebug() << "Error while calling KZip::writeData()";
-        m_errorString = i18n("Error writing to the compressed file");
+        setErrorString(i18n("Error writing to the compressed file"));
         return false;
     }
     if (!zip.finishWriting(buffer.size())) {
-        qDebug() << "Error while calling KZip::finishWriting()";
-        m_errorString = i18n("Error writing to the compressed file");
+        setErrorString(i18n("Error writing to the compressed file"));
         return false;
     }
     if (!zip.close()) {
-        qDebug() << "Couldn't close the ZIP archive";
-        m_errorString = i18n("Couldn't close the ZIP archive");
+        setErrorString(i18n("Couldn't close the ZIP archive"));
         return false;
     }
 

@@ -709,7 +709,7 @@ bool CrossWordXmlGuiWindow::loadFile(const QUrl &url, KrossWord::FileFormat file
     updateClueDock();
 
     QByteArray undoData;
-    bool readOk = krossWord()->read(resultUrl, &errorString, this, fileFormat, &undoData);
+    bool readOk = krossWord()->read(resultUrl, &errorString, fileFormat, &undoData);
 
     if (readOk) {
         setState(ShowingCrossword);

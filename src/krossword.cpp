@@ -907,8 +907,7 @@ bool KrossWord::write(const QString& fileName, QString* errorString,
     return true;
 }
 
-bool KrossWord::read(const QUrl &url, QString *errorString, QWidget *mainWindow,
-                     FileFormat fileFormat, QByteArray *undoData)
+bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileFormat, QByteArray *undoData)
 {
     QFile file(url.path());
     if (!file.open(QIODevice::ReadOnly)) {

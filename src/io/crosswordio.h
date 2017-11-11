@@ -161,6 +161,18 @@ public:
 
     virtual bool read(CrosswordData &crossData) = 0;
     virtual bool write(const CrosswordData &crossdata) = 0;
+
+    QString errorString() const {
+        return m_errorString;
+    }
+
+    void setErrorString(const QString &error) {
+        m_errorString = error;
+    }
+
+private:
+    QString m_errorString;
+
 };
 
 #endif // CROSSWORDIO_H

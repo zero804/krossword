@@ -29,13 +29,6 @@ public:
 
     bool read(CrosswordData &crossData) override;
     bool write(const CrosswordData &crossData) override;
-
-    QString errorString() const {
-        return m_errorString;
-    }
-
-private:
-    QString m_errorString;
 };
 
 #endif

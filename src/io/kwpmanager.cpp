@@ -104,6 +104,9 @@ KwpManager::KwpManager(QIODevice *device)
 bool KwpManager::read(CrosswordData &crossData)
 {
     Q_ASSERT(m_device);
+    Q_ASSERT(m_device->isReadable());
+
+    setErrorString(QString());
 
     bool closeAfterRead;
     if ((closeAfterRead = !m_device->isOpen()) && !m_device->open(QIODevice::ReadOnly)) {
@@ -124,6 +127,8 @@ bool KwpManager::read(CrosswordData &crossData)
             }
         }
     }
+
+    setErrorString(m_xmlReader.errorString());
 
     if (closeAfterRead) {
         m_device->close();
@@ -483,12 +488,13 @@ void KwpManager::readUnknownElement()
 bool KwpManager::write(const CrosswordData &crossData)
 {
     Q_ASSERT(m_device);
+    Q_ASSERT(m_device->isWritable());
 
-    m_errorString.clear();
+    setErrorString(QString());
 
     bool closeAfterWrite;
     if ((closeAfterWrite = !m_device->isOpen()) && !m_device->open(QIODevice::WriteOnly)) {
-        m_errorString = m_device->errorString();
+        setErrorString(m_device->errorString());
         return false;
     }
 

@@ -40,10 +40,6 @@ public:
     bool read(CrosswordData &crossData) override;
     bool write(const CrosswordData &crossData) override;
 
-    QString errorString() const {
-        return m_errorString;
-    }
-
 private:
     QXmlStreamReader m_xmlReader;
     QXmlStreamWriter m_xmlWriter;
@@ -60,8 +56,6 @@ private:
     void writeClue(const ClueInfo &clueInfo, const uint gridWidth, bool isTemplate);
     void writeImage(const ImageInfo &imageInfo, const uint gridWidth, bool isTemplate);
     //void writeSolutionLetter(SolutionLetterCell *solutionLetter);
-
-    QString m_errorString;
 };
 
 #endif

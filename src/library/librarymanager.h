@@ -19,6 +19,8 @@
 #ifndef LIBRARYMANAGER_H
 #define LIBRARYMANAGER_H
 
+#include "io/crosswordio.h"
+
 #include <functional>
 
 #include <QFileSystemModel>
@@ -110,14 +112,16 @@ public:
     void clearOnDirectoryLoadedFunction();
 
 private:
-    QHash<QString, QIcon> m_thumbs;
+    QHash<QString, QIcon> m_thumbnails;
+    QHash<QString, CrosswordData> m_crosswordsData;
     QHash<QString, QByteArray> m_crosswordsHash;
+
     KIO::PreviewJob *m_previewJob;
 
     std::function<void(void)> m_function;
 
 private slots:
-    void loadThumbnailsSlot(const QString &path);
+    void extractMetadataSlot(const QString &path); // extract CrosswordData & thumbnail
     void previewJobGotPreview(const KFileItem &fi, const QPixmap &pix);
     void previewJobFailed(const KFileItem &fi);
     void computeCrosswordsHashSlot(const QString &path);

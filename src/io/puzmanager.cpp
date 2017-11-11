@@ -212,6 +212,11 @@ PuzManager::PuzManager(QIODevice *device)
 
 bool PuzManager::read(CrosswordData &crossData)
 {
+    Q_ASSERT(m_device);
+    Q_ASSERT(m_device->isReadable());
+
+    setErrorString(QString());
+
     PuzChecksums checksums;
     if (!readData(m_device, &checksums)) {
         return false;
@@ -244,6 +249,9 @@ bool PuzManager::writeDataTo(QDataStream &dataStream, const QByteArray &data, in
 bool PuzManager::write(const CrosswordData &crossdata)
 {
     Q_ASSERT(m_device);
+    Q_ASSERT(m_device->isWritable());
+
+    setErrorString(QString());
 
     if (crossdata.width > 255 || crossdata.height > 255) {
         qDebug() << "Maximal size of crosswords to be saved in the PUZ-format version 1.2/1.3 is 255x255.";

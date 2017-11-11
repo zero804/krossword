@@ -47,29 +47,19 @@ LibraryManager::LibraryManager(QObject *parent) : QFileSystemModel(parent)
     setNameFilters(QStringList() << "*.kwpz");
     setNameFilterDisables(false); //hidden (not just disable) the unwanted files
 
-    connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(loadThumbnailsSlot(QString)));
+    connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(extractMetadataSlot(QString)));
     connect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(computeCrosswordsHashSlot(QString)));
 }
 
 QVariant LibraryManager::data(const QModelIndex &index, int role) const
 {
-    //we need to customize just the files column, not the dates one
+    // we need to customize just the files column, not the dates one
     if (index.column() == 0) {
         QString libraryItem = QFileSystemModel::data(index, QFileSystemModel::FilePathRole).toString();
         QFileInfo fi(libraryItem);
 
-        if (fi.isFile()) {
-            QFile file(libraryItem);
-            file.open(QIODevice::ReadOnly);
-            KwpzManager kwpzManager(&file);
-            CrosswordData crosswordData;
-            bool readOk = kwpzManager.read(crosswordData);
-            file.close();
-
-            if (!readOk) {
-                qDebug() << "Error reading crossword info from library file" << kwpzManager.errorString();
-            }
-
+        if (fi.isFile() && m_crosswordsData.contains(libraryItem)) {
+            CrosswordData crosswordData = m_crosswordsData.value(libraryItem);
             QString title = crosswordData.title.isEmpty()
                     ? fi.fileName().remove(QRegExp("\\." + fi.suffix() + '$', Qt::CaseInsensitive))
                     : crosswordData.title;
@@ -88,8 +78,9 @@ QVariant LibraryManager::data(const QModelIndex &index, int role) const
                 return itemText;
                 break;
             case Qt::DecorationRole:
-                if (m_thumbs.contains(libraryItem))
-                    return m_thumbs.value(libraryItem);
+                if (m_thumbnails.contains(libraryItem)) {
+                    return m_thumbnails.value(libraryItem);
+                }
                 break;
             //case Qt::UserRole: //remember userRole + 1/2/3 are already used by qfilesystemmodel
             //    break;
@@ -124,17 +115,35 @@ void LibraryManager::clearOnDirectoryLoadedFunction()
     disconnect(this, SIGNAL(directoryLoaded(QString)), this, SLOT(onDirectoryLoaded(QString)));
 }
 
-void LibraryManager::loadThumbnailsSlot(const QString &path)
+void LibraryManager::extractMetadataSlot(const QString &path)
 {
+    qDebug() << "LOADMETADATASLOT" << path;
     QModelIndexList fileIndexList = match(index(path), QFileSystemModel::FileNameRole, "*.kwpz", -1, Qt::MatchWildcard | Qt::MatchRecursive);
 
     QModelIndex fileIndex;
     KFileItemList fileItemList;
     foreach (fileIndex, fileIndexList) {
-        if (fileIndex.data(QFileSystemModel::FilePathRole).toString().startsWith(path + "/")) {
+        QString fileName = fileIndex.data(QFileSystemModel::FilePathRole).toString();
+        if (fileName.startsWith(path + "/")) {
+            // add fileName to list for thumbnails generation
             QUrl url = fileIndex.data(QFileSystemModel::FilePathRole).toUrl();
             url.setScheme("file");
             fileItemList.append(KFileItem(url));
+
+            // extract metadata if needed
+            if (!m_crosswordsData.contains(fileName)) {
+                QFile file(fileName);
+                file.open(QIODevice::ReadOnly);
+                KwpzManager kwpzManager(&file);
+                CrosswordData crosswordData;
+                bool readOk = kwpzManager.read(crosswordData);
+                file.close();
+                if (readOk) {
+                    m_crosswordsData.insert(fileName, crosswordData);
+                } else {
+                    qDebug() << "Error reading crossword info from library file" << kwpzManager.errorString();
+                }
+            }
         }
     }
 
@@ -150,6 +159,7 @@ void LibraryManager::loadThumbnailsSlot(const QString &path)
 void LibraryManager::computeCrosswordsHashSlot(const QString& path)
 {
     Q_UNUSED(path);
+    qDebug() << "COMPUTECROSSWORDSHASHSLOT" << path;
 
     QFileInfoList crosswordsPath = getCrosswordsFilePath();
 
@@ -169,7 +179,7 @@ void LibraryManager::previewJobGotPreview(const KFileItem &fi, const QPixmap &pi
     if (!idx.isValid()) {
         qDebug() << "Item for preview image not found";
     } else {
-        m_thumbs.insert(fileName, QIcon(pix));
+        m_thumbnails.insert(fileName, QIcon(pix));
         emit dataChanged(idx, idx); // to trigger the update via LibraryManager::data
     }
 }
@@ -211,7 +221,7 @@ LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QStri
     Crossword::KrossWord krossWord;
     QString errorString;
 
-    if (!krossWord.read(url, &errorString/*, this*/)) {
+    if (!krossWord.read(url, &errorString, Crossword::KrossWord::FileFormat::DetermineByFileName)) {
         qDebug() << "addCrossword() reading error:" << errorString;
         outCrosswordUrl = QString();
         return E_ERROR_TYPE::ReadError;
