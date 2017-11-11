@@ -164,9 +164,9 @@ public:
 
     enum FileFormat {
         DetermineByFileName,
-        KrossWordPuzzleXmlFile,
-        KrossWordPuzzleCompressedXmlFile,
-        AcrossLitePuzFile
+        KwpFormat,
+        KwpzFormat,
+        PuzFormat
     };
 
     enum ConversionCommand {

@@ -761,11 +761,11 @@ KrossWord::FileFormat KrossWord::fileFormatFromFileName(const QString& fileName)
     QMimeDatabase db;
     QString extension = db.suffixForFileName(fileName);
     if (extension == "xml" || extension == "kwp")
-        return KrossWordPuzzleXmlFile;
+        return KwpFormat;
     else if (extension == "kwpz")
-        return KrossWordPuzzleCompressedXmlFile;
+        return KwpzFormat;
     else if (extension == "puz")
-        return AcrossLitePuzFile;
+        return PuzFormat;
     else
         return DetermineByFileName; // couldn't determine file format
 }
@@ -874,21 +874,21 @@ bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode w
         }
     }
 
-    if (fileFormat == KrossWordPuzzleXmlFile) {
+    if (fileFormat == KwpFormat) {
         KwpManager kwpManager(&file);
         bool writeOk = kwpManager.write(crosswordData); // CHECK: missing writeMode
         if (!writeOk) {
             *errorString = i18n("Error writing crossword: %1", kwpManager.errorString());
             return false;
         }
-    } else if (fileFormat == KrossWordPuzzleCompressedXmlFile) {
+    } else if (fileFormat == KwpzFormat) {
         KwpzManager kwpzManager(&file);
         bool writeOk = kwpzManager.write(crosswordData); // CHECK: missing writeMode
         if (!writeOk) {
             *errorString = i18n("Error writing compressed crossword: %1", kwpzManager.errorString());
             return false;
         }
-    } else if (fileFormat == AcrossLitePuzFile) { // CHECK: we don't want to export in puz format...
+    } else if (fileFormat == PuzFormat) { // CHECK: we don't want to export in puz format...
         if (!undoData.isEmpty()) {
             qDebug() << "Can't store undoData to *.puz-files";
         }
@@ -926,11 +926,11 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
     if (fileFormat == DetermineByFileName) {
         QString extension = QFileInfo(url.path()).suffix();
         if (extension == "puz") {
-            fileFormat = AcrossLitePuzFile;
+            fileFormat = PuzFormat;
         } else if (extension == "kwp") {
-            fileFormat = KrossWordPuzzleXmlFile;
+            fileFormat = KwpFormat;
         } else if (extension == "kwpz") {
-            fileFormat = KrossWordPuzzleCompressedXmlFile;
+            fileFormat = KwpzFormat;
         } else {
             fileFormatDeterminationFailed = true;
         }
@@ -939,21 +939,21 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
     if (!fileFormatDeterminationFailed) {
         CrosswordData crosswordData;
 
-        if (fileFormat == AcrossLitePuzFile) {
+        if (fileFormat == PuzFormat) {
             PuzManager puzManager(&file);
             readOk = puzManager.read(crosswordData);
             if (!readOk && errorString) {
                 *errorString = i18n("Error reading AcrossLite's .puz-format.");
                 return false;
             }
-        } else if (fileFormat == KrossWordPuzzleXmlFile) {
+        } else if (fileFormat == KwpFormat) {
             KwpManager kwpManager(&file);
             readOk = kwpManager.read(crosswordData);
             if (!readOk && errorString) {
                 *errorString = kwpManager.errorString();
                 return false;
             }
-        } else if (fileFormat == KrossWordPuzzleCompressedXmlFile) {
+        } else if (fileFormat == KwpzFormat) {
             KwpzManager kwpzManager(&file);
             readOk = kwpzManager.read(crosswordData);
             if (!readOk && errorString) {

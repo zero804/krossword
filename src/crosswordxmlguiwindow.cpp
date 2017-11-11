@@ -825,7 +825,7 @@ bool CrossWordXmlGuiWindow::closeFile()
 bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, bool saveUndoStack)
 {
     KrossWord::FileFormat fileFormat = KrossWord::fileFormatFromFileName(fileName);
-    if (fileFormat == KrossWord::AcrossLitePuzFile) {
+    if (fileFormat == KrossWord::PuzFormat) {
         bool hasConfidencesSet = false;
         LetterCellList letterList = krossWord()->letters();
         foreach(LetterCell * letter, letterList) {
@@ -1924,7 +1924,7 @@ void CrossWordXmlGuiWindow::autoSaveToTempFile()
 
     bool writeOk = krossWord()->write(tmpFileName, &errorString,
                                       KrossWord::Normal,
-                                      KrossWord::KrossWordPuzzleCompressedXmlFile,
+                                      KrossWord::KwpzFormat,
                                       m_undoStack->data());
 
     if (!writeOk) {
