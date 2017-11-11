@@ -22,9 +22,9 @@
 #include "clueexpanderitem.h"
 #include "cells/krosswordcell.h"
 #include "cells/imagecell.h"
-#include "io/krosswordpuzreader.h"
-#include "io/krosswordxmlreader.h"
-#include "io/krosswordxmlwriter.h"
+#include "io/puzmanager.h"
+#include "io/kwpmanager.h"
+#include "io/kwpzmanager.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -776,6 +776,97 @@ bool KrossWord::write(const QString& fileName, QString* errorString,
 {
     QFile file(fileName);
 
+    //-------------------------- CHECK: extract as new method
+    CrosswordData crosswordData;
+    crosswordData.width = width();
+    crosswordData.height = height();
+    crosswordData.type = crosswordTypeInfo().typeString();
+    if (!getTitle().isEmpty() && writeMode != KrossWord::Template) {
+        crosswordData.title = getTitle();
+    }
+    if (!getAuthors().isEmpty()) {
+        crosswordData.authors = getAuthors();
+    }
+    if (!getCopyright().isEmpty()) {
+        crosswordData.copyright = getCopyright();
+    }
+    if (!getNotes().isEmpty()) {
+        crosswordData.notes = getNotes();
+    }
+    // CHECK: UserDefinedCrossword
+    // CHECK: NumberClues1To26
+
+    ClueCellList clueList = clues();
+    foreach(ClueCell *clue, clueList) {
+        ClueInfo clueInfo;
+        clueInfo.gridIndex = Coords(clue->coord().first, clue->coord().second).toIndex(width());
+        clueInfo.number = clue->clueNumber();
+        clueInfo.orientation = (clue->orientation() == Qt::Horizontal ? ClueOrientation::Horizontal : ClueOrientation::Vertical);
+        clueInfo.answerOffset = clue->answerOffset();
+        if (writeMode == KrossWord::Normal) {
+            clueInfo.clue = clue->clue();
+            clueInfo.solution = clue->correctAnswer();
+            clueInfo.answer = clue->currentAnswer();
+        } else if (writeMode == KrossWord::Template) {
+            QString emptyAnswer;
+            emptyAnswer.fill(ClueCell::EmptyCorrectCharacter, clue->correctAnswer().length());
+            clueInfo.clue = QString();
+            clueInfo.solution = emptyAnswer;
+            clueInfo.answer = emptyAnswer;
+        }
+        crosswordData.clues.append(clueInfo);
+    }
+
+    // CHECK: kwp has no support for images (use kwpz)
+    ImageCellList imageList = images();
+    foreach(ImageCell *image, imageList) {
+        ImageInfo imageInfo;
+        imageInfo.gridIndex = Coords(image->coord().first, image->coord().second).toIndex(width());
+        imageInfo.width = image->horizontalCellSpan();
+        imageInfo.height = image->verticalCellSpan();
+        if (writeMode == KrossWord::Normal) {
+            imageInfo.url = image->url().url(QUrl::PreferLocalFile); //CHECK: must be local to the zip
+        } else if (writeMode == KrossWord::Template) {
+            imageInfo.url = QString();
+        }
+        crosswordData.images.append(imageInfo);
+    }
+
+    // CHECK:
+    /*
+    SolutionLetterCellList solutionLetterList = solutionWordLetters();
+    foreach(SolutionLetterCell * letter, solutionLetterList) {
+
+    }
+    */
+
+    // CHECK: refactor? (now it's almost original)
+    // CHECK: write letters for all confidence()?
+    QHash< Confidence, LetterCellList > notConfidentLetterLists;
+    LetterCellList letterList = letters();
+    foreach(LetterCell *letter, letterList) {
+        if (letter->confidence() != Confident)
+            notConfidentLetterLists[letter->confidence()] << letter;
+    }
+    if (!notConfidentLetterLists.isEmpty()) {
+        for (QHash<Confidence, LetterCellList>::const_iterator it = notConfidentLetterLists.constBegin();
+             it != notConfidentLetterLists.constEnd();
+             ++it) {
+            foreach(const LetterCell *letter, notConfidentLetterLists[it.key()]) {
+                ConfidenceInfo confidenceInfo;
+                confidenceInfo.gridIndex = Coords(letter->coord().first, letter->coord().second).toIndex(width());
+                confidenceInfo.confidence = it.key();
+                crosswordData.lettersConfidence.append(confidenceInfo);
+            }
+        }
+    }
+
+    if (!undoData.isEmpty()) {
+        crosswordData.undoData = undoData.toBase64();
+    }
+
+    //--------------------------
+
     if (fileFormat == DetermineByFileName) {
         fileFormat = fileFormatFromFileName(fileName);
         if (fileFormat == DetermineByFileName) {
@@ -785,32 +876,33 @@ bool KrossWord::write(const QString& fileName, QString* errorString,
     }
 
     if (fileFormat == KrossWordPuzzleXmlFile) {
-        KrossWordXmlWriter xmlWriter;
-        bool writeOk = xmlWriter.write(&file, this, writeMode, undoData);
+        KwpManager kwpManager(&file);
+        bool writeOk = kwpManager.write(crosswordData); // CHECK: missing writeMode
         if (!writeOk) {
-            *errorString = i18n("Error writing crossword: %1", xmlWriter.errorString());
+            *errorString = i18n("Error writing crossword: %1", kwpManager.errorString());
             return false;
         }
     } else if (fileFormat == KrossWordPuzzleCompressedXmlFile) {
-        KrossWordXmlWriter xmlWriter;
-        bool writeOk = xmlWriter.writeCompressed(&file, this, writeMode, undoData);
+        KwpzManager kwpzManager(&file);
+        bool writeOk = kwpzManager.write(crosswordData); // CHECK: missing writeMode
         if (!writeOk) {
-            *errorString = i18n("Error writing compressed crossword: %1",
-                                xmlWriter.errorString());
+            *errorString = i18n("Error writing compressed crossword: %1", kwpzManager.errorString());
             return false;
         }
-    } else if (fileFormat == AcrossLitePuzFile) {
-        if (!undoData.isEmpty())
+    } else if (fileFormat == AcrossLitePuzFile) { // CHECK: we don't want to export in puz format...
+        if (!undoData.isEmpty()) {
             qDebug() << "Can't store undoData to *.puz-files";
+        }
 
-        KrossWordPuzStream puzWriter;
-        bool writeOk = puzWriter.write(&file, this, writeMode);
+        PuzManager puzManager(&file);
+        bool writeOk = puzManager.write(crosswordData); // CHECK: missing writeMode
         if (!writeOk && errorString != NULL) {
             *errorString = i18n("Error writing AcrossLite's .puz-format.");
             return false;
         }
-    } else
+    } else {
         return false;
+    }
 
     return true;
 }
@@ -831,55 +923,45 @@ bool KrossWord::read(const QUrl &url, QString *errorString, QWidget *mainWindow,
     removeAllCells();
     bool wasBlocking = blockSignals(true);
 
-    bool readOk = false, fileFormatDeterminationFailed = false;
+    bool readOk = false;
+    bool fileFormatDeterminationFailed = false;
     if (fileFormat == DetermineByFileName) {
         QString extension = QFileInfo(url.path()).suffix();
-        if (extension == "puz")
+        if (extension == "puz") {
             fileFormat = AcrossLitePuzFile;
-        else if (extension == "xml" || extension == "kwp")
+        } else if (extension == "kwp") {
             fileFormat = KrossWordPuzzleXmlFile;
-        else if (extension == "kwpz")
+        } else if (extension == "kwpz") {
             fileFormat = KrossWordPuzzleCompressedXmlFile;
-        else {
+        } else {
             fileFormatDeterminationFailed = true;
-
-            // Cycle through the available readers
-            KrossWordPuzStream puzReader;
-            readOk = puzReader.read(&file, this);
-
-            if (!readOk) {
-                if (file.isOpen()) file.seek(0);
-                KrossWordXmlReader xmlReader;
-                readOk = xmlReader.read(&file, this, undoData);
-
-                if (!readOk) {
-                    if (file.isOpen()) file.seek(0);
-                    readOk = xmlReader.readCompressed(&file, this, undoData);
-                }
-            }
-
-            if (!readOk && errorString)
-                *errorString = "File format unknown";
         }
     }
 
     if (!fileFormatDeterminationFailed) {
+        CrosswordData crosswordData;
+
         if (fileFormat == AcrossLitePuzFile) {
-            KrossWordPuzStream puzReader;
-            readOk = puzReader.read(&file, this);
-            if (!readOk && errorString)
+            PuzManager puzManager(&file);
+            readOk = puzManager.read(crosswordData);
+            if (!readOk && errorString) {
                 *errorString = i18n("Error reading AcrossLite's .puz-format.");
+            }
         } else if (fileFormat == KrossWordPuzzleXmlFile) {
-            KrossWordXmlReader xmlReader;
-            readOk = xmlReader.read(&file, this, undoData);
-            if (!readOk && errorString)
-                *errorString = xmlReader.errorString();
+            KwpManager kwpManager(&file);
+            readOk = kwpManager.read(crosswordData);
+            if (!readOk && errorString) {
+                *errorString = kwpManager.errorString();
+            }
         } else if (fileFormat == KrossWordPuzzleCompressedXmlFile) {
-            KrossWordXmlReader xmlReader;
-            readOk = xmlReader.readCompressed(&file, this, undoData);
-            if (!readOk && errorString)
-                *errorString = xmlReader.errorString();
+            KwpzManager kwpzManager(&file);
+            readOk = kwpzManager.read(crosswordData);
+            if (!readOk && errorString) {
+                *errorString = kwpzManager.errorString();
+            }
         }
+
+        // CHECK: use crosswordData
     }
     file.close();
     blockSignals(wasBlocking);
@@ -2866,6 +2948,8 @@ QString KrossWord::errorMessageFromErrorType(ErrorType errorType)
     return "Unknown error.";
 }
 
+// CHECK: to remove
+/*
 AnswerOffset KrossWord::answerOffsetFromString(const QString &s)
 {
     QString sl = s.toLower();
@@ -2892,7 +2976,10 @@ AnswerOffset KrossWord::answerOffsetFromString(const QString &s)
         return OffsetInvalid;
     }
 }
+*/
 
+// CHECK: to remove
+/*
 QString KrossWord::answerOffsetToString(AnswerOffset answerOffset)
 {
     switch (answerOffset) {
@@ -2919,6 +3006,7 @@ QString KrossWord::answerOffsetToString(AnswerOffset answerOffset)
         return "ClueHidden";
     }
 }
+*/
 
 } // namespace Crossword
 

@@ -20,34 +20,17 @@
 #ifndef CROSSWORDIO_H
 #define CROSSWORDIO_H
 
+#include "global.h"
+
 #include <QString>
 #include <QList>
 #include <QIODevice>
 
-// CHECK: from global.h (temporary)
-enum AnswerOffset { // CHECK: rename to SolutionOffset ?
-    OffsetInvalid,
-    OnClueCell, /**< The clue cell isn't shown and the first letter is placed at the coordinates of the clue. */
-    OffsetTop,
-    OffsetBottom,
-    OffsetLeft,
-    OffsetRight,
-    OffsetBottomLeft,
-    OffsetBottomRight,
-    OffsetTopLeft,
-    OffsetTopRight
-};
+#include <KLocalizedString>
 
 enum ClueOrientation {
     Horizontal,
     Vertical
-};
-
-enum LetterConfidence { // CHECK: add(copy) explanation
-    Solved,
-    Confident,
-    Unsure,
-    Unknown
 };
 
 class ClueInfo
@@ -56,13 +39,18 @@ public:
     uint gridIndex;
     uint number;
     ClueOrientation orientation;
-    AnswerOffset answerOffset;
+    Crossword::AnswerOffset answerOffset;
     QString clue;
     QString solution; // can be incomplete
     QString answer; // can be incomplete
 
+    ClueInfo()
+        : gridIndex(0),
+          number(0)
+    { }
+
     ClueInfo(uint gridIndex, uint number,
-             ClueOrientation orientation, AnswerOffset answerOffset,
+             ClueOrientation orientation, Crossword::AnswerOffset answerOffset,
              const QString& clue, const QString& solution, const QString& answer)
         : gridIndex(gridIndex),
           number(number), // CHECK: it counts from '0'...
@@ -97,9 +85,13 @@ class ConfidenceInfo
 {
 public:
     uint gridIndex;
-    LetterConfidence confidence;
+    Crossword::Confidence confidence;
 
-    ConfidenceInfo(const uint gridIndex, LetterConfidence confidence)
+    ConfidenceInfo()
+        : gridIndex(0)
+    { }
+
+    ConfidenceInfo(const uint gridIndex, Crossword::Confidence confidence)
         : gridIndex(gridIndex),
           confidence(confidence)
     { }

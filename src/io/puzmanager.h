@@ -18,8 +18,8 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef PUZREADER_HEADER
-#define PUZREADER_HEADER
+#ifndef PUZMANAGER_HEADER
+#define PUZMANAGER_HEADER
 
 #include "crosswordio.h"
 
@@ -31,10 +31,10 @@ class QDataStream;
 
 // TODO: Correct checksums generation, there's some error with zero-endings of strings...
 /** This class can read (and write) AcrossLite's PUZ crossword puzzle files. */
-class PuzReader : public CrosswordIO //CHECK: KrossWordPuzStream
+class PuzManager : public CrosswordIO //CHECK: KrossWordPuzStream
 {
 public:
-    PuzReader(QIODevice *device);
+    PuzManager(QIODevice *device);
 
     bool read(CrosswordData &crossData) override;
     bool write(const CrosswordData &crossdata) override;

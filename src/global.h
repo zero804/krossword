@@ -74,7 +74,7 @@ typedef QList<ImageCell*> ImageCellList;
 
 // LETTER CELL
 /** Describes the confidence of the correctness of a letter. */
-enum Confidence {
+enum Confidence { // CHECK: rename to LetterConfidence?
     Solved, /**< The letter is definetly correct, because it was solved. */
     Confident, /**< Confident that the letter is correct. */
     Unsure, /**< Unsure if the letter is correct. */
@@ -120,7 +120,7 @@ Q_DECLARE_FLAGS(SyncCategories, SyncCategory);
 
 /** Where the first letter cell of the answer to a clue is, relative to
  * the clue cell position. */
-enum AnswerOffset {
+enum AnswerOffset { // CHECK: rename to SolutionOffset ?
     OffsetInvalid,
 
     OnClueCell, /**< The clue cell isn't shown and the first letter is

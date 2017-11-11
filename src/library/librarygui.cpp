@@ -23,7 +23,7 @@
 
 #include "mainwindow.h"
 #include "krossworddocument.h"
-#include "io/krosswordxmlreader.h"
+#include "io/kwpzmanager.h"
 #include "htmldelegate.h"
 #include "settings.h"
 #include "dialogs/createnewcrossworddialog.h"
@@ -32,7 +32,6 @@
 #include <QDebug>
 
 #include <KMessageBox>
-//#include <KIO/CopyJob>
 #include <KActionCollection>
 #include <KIO/PreviewJob>
 #include <KJobWidgets>

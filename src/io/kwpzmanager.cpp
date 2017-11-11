@@ -75,7 +75,7 @@ bool KwpzManager::write(const CrosswordData &crossdata)
     // Write XML to a buffer
     QBuffer buffer;
     buffer.open(QBuffer::WriteOnly);
-    KwpManager kwpManager(buffer);
+    KwpManager kwpManager(&buffer);
     bool writeOk = kwpManager.write(crossdata);
     buffer.close();
 

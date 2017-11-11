@@ -18,8 +18,8 @@
 
 #include "librarymanager.h"
 
-#include "io/krosswordxmlreader.h"
-#include "krossword.h" // TO REMOVE FOR A I/O MANAGER
+#include "io/kwpzmanager.h"
+#include "krossword.h" // CHECK: TO REMOVE FOR A I/O MANAGER
 
 #include <QDebug>
 #include <QCryptographicHash>
@@ -54,27 +54,34 @@ LibraryManager::LibraryManager(QObject *parent) : QFileSystemModel(parent)
 QVariant LibraryManager::data(const QModelIndex &index, int role) const
 {
     //we need to customize just the files column, not the dates one
-    if(index.column() == 0) {
+    if (index.column() == 0) {
         QString libraryItem = QFileSystemModel::data(index, QFileSystemModel::FilePathRole).toString();
         QFileInfo fi(libraryItem);
 
-        if(fi.isFile()) {
-            QString errorString;
-            KrossWordXmlReader::KrossWordInfo info = KrossWordXmlReader::readInfo(QUrl::fromLocalFile(libraryItem), &errorString);
-            if (!info.isValid()) {
-                qDebug() << "Error reading crossword info from library file" << errorString;
+        if (fi.isFile()) {
+            QFile file(libraryItem);
+            file.open(QIODevice::ReadOnly);
+            KwpzManager kwpzManager(&file);
+            CrosswordData crosswordData;
+            bool readOk = kwpzManager.read(crosswordData);
+            file.close();
+
+            if (!readOk) {
+                qDebug() << "Error reading crossword info from library file" << kwpzManager.errorString();
             }
 
-            QString title = info.title.isEmpty() ? fi.fileName().remove(QRegExp("\\." + fi.suffix() + '$', Qt::CaseInsensitive)) : info.title;
+            QString title = crosswordData.title.isEmpty()
+                    ? fi.fileName().remove(QRegExp("\\." + fi.suffix() + '$', Qt::CaseInsensitive))
+                    : crosswordData.title;
 
             QString itemText = QString("<b>%1</b><br>%2 %3x%4<br>%5 %6 - %7")
                                .arg(title)
                                .arg(i18nc("The title for sizes of crosswords in the library tree view", "Size:"))
-                               .arg(info.width)
-                               .arg(info.height)
+                               .arg(crosswordData.width)
+                               .arg(crosswordData.height)
                                .arg(i18nc("The title for authors of crosswords in the library tree view", "Author(s):"))
-                               .arg(info.authors)
-                               .arg(info.copyright);
+                               .arg(crosswordData.authors)
+                               .arg(crosswordData.copyright);
 
             switch (role) {
             case Qt::DisplayRole:

@@ -20,82 +20,77 @@
 
 #include "kwpmanager.h"
 
-#include <QBuffer>
 #include <QFileInfo>
 #include <QUrl>
 #include <QDebug>
 
-#include <KZip>
-
-// CHECK: from krossword.cpp
-AnswerOffset answerOffsetFromString(const QString &s)
+Crossword::AnswerOffset answerOffsetFromString(const QString &s)
 {
     QString sl = s.toLower();
     if (sl == "cluehidden")
-        return OnClueCell;
+        return Crossword::OnClueCell;
     else if (sl == "right")
-        return OffsetRight;
+        return Crossword::OffsetRight;
     else if (sl == "bottom")
-        return OffsetBottom;
+        return Crossword::OffsetBottom;
     else if (sl == "left")
-        return OffsetLeft;
+        return Crossword::OffsetLeft;
     else if (sl == "top")
-        return OffsetTop;
+        return Crossword::OffsetTop;
     else if (sl == "topleft")
-        return OffsetTopLeft;
+        return Crossword::OffsetTopLeft;
     else if (sl == "topright")
-        return OffsetTopRight;
+        return Crossword::OffsetTopRight;
     else if (sl == "bottomleft")
-        return OffsetBottomLeft;
+        return Crossword::OffsetBottomLeft;
     else if (sl == "bottomright")
-        return OffsetBottomRight;
+        return Crossword::OffsetBottomRight;
     else {
         qDebug() << "Couldn't get enumerable for" << s;
-        return OffsetInvalid;
+        return Crossword::OffsetInvalid;
     }
 }
 
-// CHECK: from krossword.cpp
-QString answerOffsetToString(AnswerOffset answerOffset)
+QString answerOffsetToString(Crossword::AnswerOffset answerOffset)
 {
     switch (answerOffset) {
-    case OffsetTop:
+    case Crossword::OffsetTop:
         return "Top";
-    case OffsetRight:
+    case Crossword::OffsetRight:
         return "Right";
-    case OffsetLeft:
+    case Crossword::OffsetLeft:
         return "Left";
-    case OffsetBottom:
+    case Crossword::OffsetBottom:
         return "Bottom";
-    case OffsetTopLeft:
+    case Crossword::OffsetTopLeft:
         return "TopLeft";
-    case OffsetTopRight:
+    case Crossword::OffsetTopRight:
         return "TopRight";
-    case OffsetBottomLeft:
+    case Crossword::OffsetBottomLeft:
         return "BottomLeft";
-    case OffsetBottomRight:
+    case Crossword::OffsetBottomRight:
         return "BottomRight";
-    case OffsetInvalid: // Shouldn't appear here..
+    case Crossword::OffsetInvalid: // Shouldn't appear here..
         qDebug() << "Got an invalid answerOffset";
         Q_ASSERT(false);
         break;
-    case OnClueCell:
+    case Crossword::OnClueCell:
     default:
         return "ClueHidden";
     }
 }
 
-LetterConfidence letterConfidenceFromString(const QString &s)
+Crossword::Confidence letterConfidenceFromString(const QString &s)
 {
     QString sl = s.toLower();
     if (sl == "solved") {
-        return Solved;
+        return Crossword::Solved;
     } else if (sl == "confident") {
-        return Confident;
+        return Crossword::Confident;
     } else if (sl == "unsure") {
-        return Unsure;
+        return Crossword::Unsure;
     } else {
-        return Unknown;
+        return Crossword::Unknown;
     }
 }
 
@@ -245,7 +240,7 @@ void KwpManager::readData(CrosswordData &crossData)
             // Read a tag which name is one of confidenceStrings
             foreach(const QString &confidenceString, confidenceStrings) {
                 if (m_xmlReader.isStartElement() && m_xmlReader.name().compare(confidenceString, Qt::CaseInsensitive) == 0) {
-                    LetterConfidence confidence = letterConfidenceFromString(confidenceString);
+                    Crossword::Confidence confidence = letterConfidenceFromString(confidenceString);
 
                     // Read all <letter>-tags, to set the confidence to [confidence]
                     while (!m_xmlReader.atEnd()) {
@@ -298,10 +293,10 @@ void KwpManager::readClue(CrosswordData &crossData)
         ClueOrientation orientation = m_xmlReader.attributes().value("orientation").toString().toLower() == "horizontal"
                                       ? ClueOrientation::Horizontal
                                       : ClueOrientation::Vertical;
-        AnswerOffset answerOffset = m_xmlReader.attributes().hasAttribute("answerOffset")
+        Crossword::AnswerOffset answerOffset = m_xmlReader.attributes().hasAttribute("answerOffset")
                                     ? answerOffsetFromString(m_xmlReader.attributes().value("answerOffset").toString())
                                     : answerOffsetFromString(m_xmlReader.attributes().value("firstLetterPosition").toString());
-        if (answerOffset == OffsetInvalid) {
+        if (answerOffset == Crossword::OffsetInvalid) {
             m_xmlReader.raiseError("Unknown value of the 'answerOffset'-attribute.");
             return;
         }

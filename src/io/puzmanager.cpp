@@ -26,7 +26,7 @@
 
 #include <QDebug>
 
-const char *PuzReader::FILE_MAGIC = "ACROSS&DOWN";
+const char *PuzManager::FILE_MAGIC = "ACROSS&DOWN";
 
 QString getStringFromGrid(QList<QByteArray> &grid, int x, int y, Qt::Orientation orientation)
 {
@@ -59,7 +59,7 @@ QString getStringFromGrid(QList<QByteArray> &grid, int x, int y, Qt::Orientation
 
 //----------------------------------------------
 
-bool PuzReader::readData(QIODevice *device, PuzReader::PuzChecksums *checksums)
+bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums)
 {
     Q_ASSERT(device);
 
@@ -204,13 +204,13 @@ bool PuzReader::readData(QIODevice *device, PuzReader::PuzChecksums *checksums)
     return true;
 }
 
-PuzReader::PuzReader(QIODevice *device)
+PuzManager::PuzManager(QIODevice *device)
     : CrosswordIO(device)
 {
 
 }
 
-bool PuzReader::read(CrosswordData &crossData)
+bool PuzManager::read(CrosswordData &crossData)
 {
     PuzChecksums checksums;
     if (!readData(m_device, &checksums)) {
@@ -236,12 +236,12 @@ bool PuzReader::read(CrosswordData &crossData)
     return mapClues(crossData.clues);
 }
 
-bool PuzReader::writeDataTo(QDataStream &dataStream, const QByteArray &data, int len) const
+bool PuzManager::writeDataTo(QDataStream &dataStream, const QByteArray &data, int len) const
 {
     return dataStream.writeRawData(data, len) == len;
 }
 
-bool PuzReader::write(const CrosswordData &crossdata)
+bool PuzManager::write(const CrosswordData &crossdata)
 {
     Q_ASSERT(m_device);
 
@@ -376,7 +376,7 @@ bool PuzReader::write(const CrosswordData &crossdata)
     return true;
 }
 
-PuzReader::PuzChecksums PuzReader::generateChecksums(QIODevice* buffer) const
+PuzManager::PuzChecksums PuzManager::generateChecksums(QIODevice* buffer) const
 {
     PuzChecksums checksums;
 
@@ -418,7 +418,7 @@ PuzReader::PuzChecksums PuzReader::generateChecksums(QIODevice* buffer) const
     return checksums;
 }
 
-quint16 PuzReader::checkSumRegion(const char *base, int len, quint16 checkSum) const
+quint16 PuzManager::checkSumRegion(const char *base, int len, quint16 checkSum) const
 {
     for (int i = 0; i < len; i++) {
         if (checkSum & 0x0001) {
@@ -432,7 +432,7 @@ quint16 PuzReader::checkSumRegion(const char *base, int len, quint16 checkSum) c
     return checkSum;
 }
 
-bool PuzReader::mapClues(QList<ClueInfo> &clues)
+bool PuzManager::mapClues(QList<ClueInfo> &clues)
 {
     QList<QByteArray> solutionGrid;
     for (int row = 0; row < m_puzData.solution.length(); row += m_puzData.width) {
@@ -466,7 +466,7 @@ bool PuzReader::mapClues(QList<ClueInfo> &clues)
                 clues.append(ClueInfo(index,
                                       curClueNumber,
                                       ClueOrientation::Horizontal,
-                                      AnswerOffset::OnClueCell,
+                                      Crossword::AnswerOffset::OnClueCell,
                                       QString::fromLatin1(m_puzData.clues[curClueIndex++]),
                                       getStringFromGrid(solutionGrid, x, y, Qt::Horizontal),
                                       getStringFromGrid(stateGrid, x, y, Qt::Horizontal)));
@@ -482,7 +482,7 @@ bool PuzReader::mapClues(QList<ClueInfo> &clues)
                 clues.append(ClueInfo(index,
                                       curClueNumber,
                                       ClueOrientation::Vertical,
-                                      AnswerOffset::OnClueCell,
+                                      Crossword::AnswerOffset::OnClueCell,
                                       QString::fromLatin1(m_puzData.clues[curClueIndex++]),
                                       getStringFromGrid(solutionGrid, x, y, Qt::Vertical),
                                       getStringFromGrid(stateGrid, x, y, Qt::Vertical)));
@@ -498,7 +498,7 @@ bool PuzReader::mapClues(QList<ClueInfo> &clues)
     return true;
 }
 
-bool PuzReader::prepareDataForWrite(const CrosswordData &crossData)
+bool PuzManager::prepareDataForWrite(const CrosswordData &crossData)
 {
     for (int i = 0; i < (m_puzData.width * m_puzData.height); i++) {
         foreach (const ClueInfo &clueInfo, crossData.clues) {
@@ -529,7 +529,7 @@ bool PuzReader::prepareDataForWrite(const CrosswordData &crossData)
 }
 
 //  Returns true if the cell at (x, y) gets an "across" clue number.
-bool PuzReader::cellNeedsAcrossNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const
+bool PuzManager::cellNeedsAcrossNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const
 {
     // Check that there is a blank to the left of us
     if (x == 0 || puzzleSolution[Coords(x - 1, y).toIndex(width)] == '.') {
@@ -542,7 +542,7 @@ bool PuzReader::cellNeedsAcrossNumber(qint8 x, qint8 y, qint8 width, const QByte
 }
 
 //  Returns true if the cell at (x, y) gets an "down" clue number.
-bool PuzReader::cellNeedsDownNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const
+bool PuzManager::cellNeedsDownNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const
 {
     // Check that there is a blank to the left of us
     if (y == 0 || puzzleSolution[Coords(x, y - 1).toIndex(width)] == '.') {
@@ -554,7 +554,7 @@ bool PuzReader::cellNeedsDownNumber(qint8 x, qint8 y, qint8 width, const QByteAr
     return false;
 }
 
-QByteArray PuzReader::readZeroTerminatedString(QDataStream &dataStream)
+QByteArray PuzManager::readZeroTerminatedString(QDataStream &dataStream)
 {
     QByteArray string;
     char *buffer = new char[1];

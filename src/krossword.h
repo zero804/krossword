@@ -660,8 +660,9 @@ public:
     * @see canInsertClue()
     * @see canInsertImage() */
     static QString errorMessageFromErrorType(ErrorType errorType);
-    static AnswerOffset answerOffsetFromString(const QString &s);
-    static QString answerOffsetToString(AnswerOffset answerOffset);
+
+    //static AnswerOffset answerOffsetFromString(const QString &s); // CHECK: to remove
+    //static QString answerOffsetToString(AnswerOffset answerOffset); // CHECK: to remove
 
     /** Checks if the crossword is empty, ie. contains no clues. */
     bool isEmpty() const;

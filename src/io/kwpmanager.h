@@ -27,10 +27,10 @@
 #include <QXmlStreamWriter>
 #include <QString>
 
-AnswerOffset answerOffsetFromString(const QString &s);
-QString answerOffsetToString(AnswerOffset answerOffset);
+Crossword::AnswerOffset answerOffsetFromString(const QString &s);
+QString answerOffsetToString(Crossword::AnswerOffset answerOffset);
 
-LetterConfidence letterConfidenceFromString(const QString &s);
+Crossword::Confidence letterConfidenceFromString(const QString &s);
 
 class KwpManager : public CrosswordIO // CHECK: KrossWordXmlReader & KrossWordXmlWriter
 {
