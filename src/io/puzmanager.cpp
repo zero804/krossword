@@ -237,6 +237,8 @@ bool PuzManager::read(CrosswordData &crossData)
     crossData.copyright = QString::fromLatin1(m_puzData.copyright);
     crossData.notes = QString::fromLatin1(m_puzData.notes);
     //crossData.images - no support in PUZ
+    //crossData.lettersConfidence - no support in PUZ
+    //crossData.markedLetters - no support in PUZ
     //crossData.undoData - no support in PUZ
     return mapClues(crossData.clues);
 }

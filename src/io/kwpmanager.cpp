@@ -403,6 +403,11 @@ void KwpManager::readSolutionLetter(CrosswordData &crossData)
             m_xmlReader.raiseError("Error while parsing the 'coord' attribute. It needs to be in this format: 'x,y', but is '" + sCoord + "'.");
             return;
         }
+        uint index = Coords(rx.cap(1).toInt(), rx.cap(2).toInt()).toIndex(crossData.width);
+        uint letterPos = m_xmlReader.attributes().value("index").toString().toInt();
+
+        crossData.markedLetters.append(MarkedLetter(index, letterPos));
+
         /*CHECK
         Coord coord(rx.cap(1).toInt(), rx.cap(2).toInt());
         int solutionLetterIndex = attributes().value("index").toString().toInt();
@@ -572,12 +577,9 @@ void KwpManager::writeData(const CrosswordData &crossData, bool isTemplate)
         writeImage(imageInfo, crossData.width, isTemplate);
     }
 
-    /* CHECK
-    SolutionLetterCellList solutionLetterList = crossData->solutionWordLetters();
-    foreach(SolutionLetterCell * letter, solutionLetterList) {
-        writeSolutionLetter(letter);
+    foreach(const MarkedLetter &markedLetter, crossData.markedLetters) {
+        writeSolutionLetter(markedLetter, crossData.width);
     }
-    */
 
     /* CHECK
     // Writing not confident letters
@@ -647,12 +649,11 @@ void KwpManager::writeImage(const ImageInfo &imageInfo, const uint gridWidth, bo
     m_xmlWriter.writeAttribute("url", isTemplate ? QString() : imageInfo.url);
 }
 
-/* CHECK
-void KrossWordXmlReader::writeSolutionLetter(SolutionLetterCell* solutionLetter)
+void KwpManager::writeSolutionLetter(const MarkedLetter &markedLetter, const uint gridWidth)
 {
     m_xmlWriter.writeStartElement("solutionLetter");
-    m_xmlWriter.writeAttribute("coord", QString("%1,%2").arg(solutionLetter->coord().first).arg(solutionLetter->coord().second));
-    m_xmlWriter.writeAttribute("index", QString("%1").arg(solutionLetter->solutionWordIndex()));
+    Coords coords = Coords::fromIndex(markedLetter.gridIndex, gridWidth);
+    m_xmlWriter.writeAttribute("coord", QString("%1,%2").arg(coords.x).arg(coords.y));
+    m_xmlWriter.writeAttribute("index", QString("%1").arg(markedLetter.letterPos));
     m_xmlWriter.writeEndElement();
 }
-*/

@@ -1131,14 +1131,14 @@ void LetterCell::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
 SolutionLetterCell* LetterCell::toSolutionLetter(int solutionLetterIndex)
 {
-    SolutionLetterCell *solutionLetter =
-        SolutionLetterCell::fromLetterCell(this, solutionLetterIndex);
+    SolutionLetterCell *solutionLetter = SolutionLetterCell::fromLetterCell(this, solutionLetterIndex);
 
     // Calls deleteLater() on this cell
     krossWord()->replaceCell(coord(), solutionLetter);
 
-    foreach(ClueCell * clue, clues())
-    clue->findLetters();
+    foreach(ClueCell * clue, clues()) {
+        clue->findLetters();
+    }
 
     return solutionLetter;
 }

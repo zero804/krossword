@@ -97,6 +97,23 @@ public:
     { }
 };
 
+class MarkedLetter
+{
+public:
+    uint gridIndex;
+    uint letterPos; // the letter position in the "hidden" word
+
+    MarkedLetter()
+        : gridIndex(0),
+          letterPos(0)
+    { }
+
+    MarkedLetter(uint gridIndex, uint letterPos)
+        : gridIndex(gridIndex),
+          letterPos(letterPos)
+    { }
+};
+
 class CrosswordData
 {
 public:
@@ -105,6 +122,7 @@ public:
     QList<ClueInfo> clues;
     QList<ImageInfo> images;
     QList<ConfidenceInfo> lettersConfidence;
+    QList<MarkedLetter> markedLetters;
     QByteArray undoData;
 
     CrosswordData()
@@ -117,10 +135,11 @@ public:
                   const QList<ClueInfo> &clues,
                   const QList<ImageInfo> &images = QList<ImageInfo>(),
                   const QList<ConfidenceInfo> &lettersConfidence = QList<ConfidenceInfo>(),
+                  const QList<MarkedLetter> &markedLetters = QList<MarkedLetter>(),
                   const QByteArray &undoData = QByteArray())
         : width(width), height(height),
           type(type), title(title), authors(authors), copyright(copyright), notes(notes),
-          clues(clues), images(images), lettersConfidence(lettersConfidence),
+          clues(clues), images(images), lettersConfidence(lettersConfidence), markedLetters(markedLetters),
           undoData(undoData)
     { }
 

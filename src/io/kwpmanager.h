@@ -55,7 +55,7 @@ private:
     void writeData(const CrosswordData &crossData, bool isTemplate);
     void writeClue(const ClueInfo &clueInfo, const uint gridWidth, bool isTemplate);
     void writeImage(const ImageInfo &imageInfo, const uint gridWidth, bool isTemplate);
-    //void writeSolutionLetter(SolutionLetterCell *solutionLetter);
+    void writeSolutionLetter(const MarkedLetter &markedLetter, const uint gridWidth);
 };
 
 #endif

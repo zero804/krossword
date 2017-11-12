@@ -831,13 +831,12 @@ bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode w
         crosswordData.images.append(imageInfo);
     }
 
-    // CHECK:
-    /*
     SolutionLetterCellList solutionLetterList = solutionWordLetters();
-    foreach(SolutionLetterCell * letter, solutionLetterList) {
-
+    foreach(SolutionLetterCell *letter, solutionLetterList) {
+        crosswordData.markedLetters.append(MarkedLetter(
+                                            Coords(letter->coord().first, letter->coord().second).toIndex(width()),
+                                            letter->solutionWordIndex()));
     }
-    */
 
     // CHECK: refactor? (now it's almost original)
     // CHECK: write letters for all confidence()?
@@ -892,7 +891,6 @@ bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode w
         if (!undoData.isEmpty()) {
             qDebug() << "Can't store undoData to *.puz-files";
         }
-
         PuzManager puzManager(&file);
         bool writeOk = puzManager.write(crosswordData); // CHECK: missing writeMode
         if (!writeOk && errorString != NULL) {
@@ -975,7 +973,7 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
             ClueCell *clueCell;
 
             Coords coords = Coords::fromIndex(clueInfo.gridIndex, crosswordData.width);
-            Coord coord(coords.x, coords.y);
+            KGrid2D::Coord coord(coords.x, coords.y);
 
             Qt::Orientation orientation = (clueInfo.orientation == ClueOrientation::Horizontal ? Qt::Horizontal : Qt::Vertical);
 
@@ -998,7 +996,7 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
             ImageCell *imageCell;
 
             Coords coords = Coords::fromIndex(imageInfo.gridIndex, crosswordData.width);
-            Coord coord(coords.x, coords.y);
+            KGrid2D::Coord coord(coords.x, coords.y);
 
             ErrorType errorType = insertImage(coord, imageInfo.width, imageInfo.height,
                                               QUrl::fromLocalFile(imageInfo.url), DontIgnoreErrors, &imageCell);
@@ -1007,11 +1005,19 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
             }
         }
 
-        // CHECK: solutionletter
+        foreach (MarkedLetter markedLetter, crosswordData.markedLetters) {
+            Coords coords = Coords::fromIndex(markedLetter.gridIndex, crosswordData.width);
+            KGrid2D::Coord coord(coords.x, coords.y);
+
+            LetterCell *letter = qgraphicsitem_cast< LetterCell* >(at(coord));
+            if (letter) {
+                letter->toSolutionLetter(markedLetter.letterPos);
+            }
+        }
 
         foreach (ConfidenceInfo confidenceInfo, crosswordData.lettersConfidence) {
             Coords coords = Coords::fromIndex(confidenceInfo.gridIndex, crosswordData.width);
-            Coord coord(coords.x, coords.y);
+            KGrid2D::Coord coord(coords.x, coords.y);
 
             KrossWordCell *cell = at(coord);
             if (cell->isLetterCell()) {
