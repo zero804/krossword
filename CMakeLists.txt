@@ -21,8 +21,6 @@ include(KDECMakeSettings)
 include(KDECompilerSettings)
 include(ECMInstallIcons)
 
-#add_definitions(-DQT_NO_URL_CAST_FROM_STRING) #for kurl porting
-
 add_subdirectory(src)
 add_subdirectory(icons)
 add_subdirectory(themes)

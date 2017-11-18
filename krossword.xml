@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
-  <mime-type type="application/x-acrosslite-puz">
+  <mime-type type="application/x-crossword">
     <comment>AcrossLite Crossword</comment>
     <glob pattern="*.puz"/>
+    <magic priority="60">
+        <match type="string" offset="2" value="ACROSS&amp;DOWN"/>
+    </magic>
   </mime-type>
   <mime-type type="application/x-krosswordpuzzle">
     <sub-class-of type="application/xml"/>

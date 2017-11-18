@@ -510,7 +510,7 @@ bool PuzManager::mapClues(QList<ClueInfo> &clues)
 
 bool PuzManager::prepareDataForWrite(const CrosswordData &crossData)
 {
-    for (int i = 0; i < (m_puzData.width * m_puzData.height); i++) {
+    for (uint i = 0; i < (m_puzData.width * m_puzData.height); i++) {
         foreach (const ClueInfo &clueInfo, crossData.clues) {
             if (clueInfo.gridIndex == i) {
                 if (clueInfo.orientation == ClueOrientation::Horizontal) {

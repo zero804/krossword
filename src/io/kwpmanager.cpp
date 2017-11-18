@@ -49,6 +49,8 @@ Crossword::AnswerOffset answerOffsetFromString(const QString &s)
         qDebug() << "Couldn't get enumerable for" << s;
         return Crossword::OffsetInvalid;
     }
+
+    return Crossword::OffsetInvalid;
 }
 
 QString answerOffsetToString(Crossword::AnswerOffset answerOffset)
@@ -78,6 +80,8 @@ QString answerOffsetToString(Crossword::AnswerOffset answerOffset)
     default:
         return "ClueHidden";
     }
+
+    return "ClueHidden";
 }
 
 Crossword::Confidence letterConfidenceFromString(const QString &s)

@@ -30,7 +30,7 @@
 #include <QGraphicsView>
 #include <QFile>
 #include <QStandardItemModel>
-#include <qfileinfo.h>
+//#include <qfileinfo.h>
 
 #include <QUrl>
 #include <QIcon>
@@ -922,12 +922,13 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
     bool readOk = false;
     bool fileFormatDeterminationFailed = false;
     if (fileFormat == DetermineByFileName) {
-        QString extension = QFileInfo(url.path()).suffix();
-        if (extension == "puz") {
+        QMimeDatabase mimeDatabase;
+        QMimeType mimeType = mimeDatabase.mimeTypeForFile(url.path(), QMimeDatabase::MatchDefault);
+        if (mimeType.inherits("application/x-crossword")) {
             fileFormat = PuzFormat;
-        } else if (extension == "kwp") {
+        } else if (mimeType.inherits("application/x-krosswordpuzzle")) {
             fileFormat = KwpFormat;
-        } else if (extension == "kwpz") {
+        } else if (mimeType.inherits("application/x-krosswordpuzzle-compressed")) {
             fileFormat = KwpzFormat;
         } else {
             fileFormatDeterminationFailed = true;
@@ -1812,16 +1813,16 @@ ErrorType KrossWord::insertClue(const Coord &coord,
                                 ErrorTypes errorTypesToIgnore, bool allowDoubleClueCells,
                                 ClueCell **insertedClue)
 {
-    Q_ASSERT(cellType == LetterCellType
-             || cellType == SolutionLetterCellType);
+    Q_ASSERT(cellType == LetterCellType || cellType == SolutionLetterCellType);
 
     Offset offset = ClueCell::answerOffsetToOffset(answerOffset);
     ErrorType errorType = canInsertClue(coord, orientation, offset,
                                         answer, errorTypesToIgnore,
                                         allowDoubleClueCells);
     if (errorType != ErrorNone) {
-        if (insertedClue)
+        if (insertedClue) {
             *insertedClue = NULL;
+        }
         return errorType;
     }
 
@@ -1835,36 +1836,40 @@ ErrorType KrossWord::insertClue(const Coord &coord,
         if (cellAtCoord->isType(ClueCellType)) {
             DoubleClueCell *doubleClueCell = new DoubleClueCell(this, coord, qgraphicsitem_cast<ClueCell*>(cellAtCoord), clueCell);
             (*m_krossWordGrid)[ coord ] = doubleClueCell;
-        } else
+        } else {
             replaceCell(coord, clueCell);
+        }
     }
 
     // Insert letter cells for the answer
     Coord letterCoord = coord + offset;
-    const Offset letterOffset = orientation == Qt::Horizontal
-                                ? Offset(1, 0) : Offset(0, 1);
+    const Offset letterOffset = orientation == Qt::Horizontal ? Offset(1, 0) : Offset(0, 1);
     for (int i = 0; i < answerUpper.length(); ++i) {
         KrossWordCell *oldCell = at(letterCoord);
 
         if (oldCell->isType(EmptyCellType)) {
             // Replace empty cell with new letter cell
             KrossWordCell *newCell = NULL;
-            if (cellType == LetterCellType)
+            if (cellType == LetterCellType) {
                 newCell = new LetterCell(this, letterCoord, clueCell);
-            else if (cellType == SolutionLetterCellType)
+            } else if (cellType == SolutionLetterCellType) {
                 newCell = new SolutionLetterCell(this, letterCoord, clueCell, i);
+            }
 
-            if (newCell)
+            if (newCell) {
                 replaceCell(letterCoord, newCell);
-        } else if (oldCell->isLetterCell())
+            }
+        } else if (oldCell->isLetterCell()) {
             ((LetterCell*)oldCell)->setClue(clueCell);      // Add clue to existing letter cell
+        }
 
         letterCoord = letterCoord + letterOffset;
     }
 
     clueCell->endAddLetters();
-    if (insertedClue)
+    if (insertedClue) {
         *insertedClue = clueCell;
+    }
 
     insertCluePostProcessing(clueCell);
     return ErrorNone;

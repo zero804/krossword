@@ -40,7 +40,6 @@
 #include <QMenuBar>
 #include <QFileDialog>
 
-
 LibraryGui::LibraryGui(MainWindow* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
       m_mainWindow(parent),
       m_libraryTree(new QTreeView()),

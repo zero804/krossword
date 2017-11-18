@@ -1,6 +1,6 @@
 ecm_install_icons(ICONS
     128-apps-krossword.png
-    128-mimetypes-application-x-acrosslite-puz.png
+    128-mimetypes-application-x-crossword.png
     128-mimetypes-application-x-krosswordpuzzle-compressed.png
     128-mimetypes-application-x-krosswordpuzzle.png
     16-actions-clue-add.png
@@ -29,7 +29,7 @@ ecm_install_icons(ICONS
     16-apps-extract-from-crosswords.png
     16-apps-extract-from-library.png
     16-apps-krossword.png
-    16-mimetypes-application-x-acrosslite-puz.png
+    16-mimetypes-application-x-crossword.png
     16-mimetypes-application-x-krosswordpuzzle-compressed.png
     16-mimetypes-application-x-krosswordpuzzle.png
     32-actions-clue-add.png
@@ -49,7 +49,7 @@ ecm_install_icons(ICONS
     32-apps-extract-from-crosswords.png
     32-apps-extract-from-library.png
     32-apps-krossword.png
-    32-mimetypes-application-x-acrosslite-puz.png
+    32-mimetypes-application-x-crossword.png
     32-mimetypes-application-x-krosswordpuzzle-compressed.png
     32-mimetypes-application-x-krosswordpuzzle.png
     48-actions-clue-add.png
@@ -68,12 +68,12 @@ ecm_install_icons(ICONS
     48-apps-extract-from-crosswords.png
     48-apps-extract-from-library.png
     48-apps-krossword.png
-    48-mimetypes-application-x-acrosslite-puz.png
+    48-mimetypes-application-x-crossword.png
     48-mimetypes-application-x-krosswordpuzzle-compressed.png
     48-mimetypes-application-x-krosswordpuzzle.png
     64-actions-crossword-user-defined.png
     64-apps-krossword.png
-    64-mimetypes-application-x-acrosslite-puz.png
+    64-mimetypes-application-x-crossword.png
     64-mimetypes-application-x-krosswordpuzzle-compressed.png
     64-mimetypes-application-x-krosswordpuzzle.png
     DESTINATION ${KDE_INSTALL_ICONDIR}
