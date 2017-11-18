@@ -221,6 +221,7 @@ bool PuzManager::read(CrosswordData &crossData)
     if (!readData(m_device, &checksums)) {
         return false;
     }
+    m_device->close();
 
     PuzChecksums generatedChecksums = generateChecksums(m_device);
     qDebug() << "main" << checksums.main << "=?=" << generatedChecksums.main;
