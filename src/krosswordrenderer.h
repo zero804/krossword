@@ -33,7 +33,6 @@ public:
 
     bool hasElement(const QString &id) const;
 
-    void renderBackground(QPainter *painter, const QRectF& rect) const;
     QPixmap background(const QSize &size) const;
     void renderElement(QPainter *painter, const QString& id, const QRectF& rect) const;
 

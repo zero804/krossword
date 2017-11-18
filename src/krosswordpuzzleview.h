@@ -39,7 +39,7 @@ class KrossWordPuzzleView : public QGraphicsView
     Q_OBJECT
 public:
     explicit KrossWordPuzzleView(KrossWordPuzzleScene *scene, QWidget *parent = 0);
-    virtual ~KrossWordPuzzleView();
+    virtual ~KrossWordPuzzleView() = default;
 
     inline Crossword::KrossWord *krossWord() const {
         return ((KrossWordPuzzleScene*)scene())->krossWord();
@@ -60,6 +60,8 @@ protected:
     virtual void wheelEvent(QWheelEvent* event);
 
     virtual void resizeEvent(QResizeEvent* event);
+
+    void drawBackground(QPainter* painter, const QRectF& rect) override;
 
 private:
     KrossWordPuzzleScene *m_scene;

@@ -36,11 +36,6 @@ KrossWordPuzzleView::KrossWordPuzzleView(KrossWordPuzzleScene *scene, QWidget *p
     setObjectName("krosswordpuzzleview");
 }
 
-KrossWordPuzzleView::~KrossWordPuzzleView()
-{
-
-}
-
 QSize KrossWordPuzzleView::sizeHint() const
 {
     if (krossWord()) {
@@ -87,6 +82,14 @@ void KrossWordPuzzleView::resizeEvent(QResizeEvent* event)
     this->fitInView(this->sceneRect()/*.adjusted(150, 150, -150, -150)*/, Qt::KeepAspectRatio);
     updateZoomMinimumScale();
     emit signalChangeZoom(0);
+}
+
+void KrossWordPuzzleView::drawBackground(QPainter *painter, const QRectF &rect)
+{
+    QBrush brush = this->backgroundBrush();
+    brush.setTransform(QTransform(painter->worldTransform().inverted()));
+    painter->setBrush(brush);
+    painter->drawRect(rect);
 }
 
 void KrossWordPuzzleView::renderToPrinter(QPainter* painter, const QRectF& target, const QRect& source, Qt::AspectRatioMode aspectRatioMode)

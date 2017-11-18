@@ -70,11 +70,6 @@ bool KrosswordRenderer::hasElement(const QString& id) const
     return m_renderer.spriteExists(id);
 }
 
-void KrosswordRenderer::renderBackground(QPainter* painter, const QRectF& rect) const
-{
-    renderElement(painter, "background", rect);
-}
-
 void KrosswordRenderer::renderElement(QPainter* painter, const QString& id, const QRectF& rect) const
 {
     QPixmap pix = m_renderer.spritePixmap(id, rect.size().toSize());

@@ -271,6 +271,7 @@ void ViewZoomController::changeViewZoomSlot(int zoomValue)
     t.setMatrix(zoom,    t.m12(), t.m13(),
                 t.m21(), zoom,    t.m23(),
                 t.m31(), t.m32(), t.m33());
+
     m_view->setTransform(t);
 
     QTimer::singleShot(500, m_view->krossWord(), SLOT(clearCache()));
@@ -2858,12 +2859,8 @@ void CrossWordXmlGuiWindow::drawBackground(KrossWordPuzzleView *view) const
 {
     // Add background
     QBrush brush;
-    QRectF scene_rect = view->scene()->itemsBoundingRect();
     int desktop_height = 0;
-    int desktop_width = 0;
     QSize preferred_size = KrosswordRenderer::self()->getCurrentTheme()->preferredRenderSize();
-    bool preferred_size_cond = false;
-
 
     if (preferred_size.isValid() && preferred_size != QSize(0, 0)) {
         preferred_size_cond = true;
@@ -2871,20 +2868,9 @@ void CrossWordXmlGuiWindow::drawBackground(KrossWordPuzzleView *view) const
     } else { // Default behavior
         QDesktopWidget *mydesk = QApplication::desktop();
         desktop_height = mydesk->screenGeometry().height();
-        desktop_width = mydesk->screenGeometry().width();
         brush = QBrush(KrosswordRenderer::self()->background(QSize(desktop_height, desktop_height)));
     }
 
-    QMatrix m = brush.matrix();
-
-    if (preferred_size_cond) {
-        m.translate(scene_rect.x() - (preferred_size.width() - (scene_rect.x() + scene_rect.width()))/2,
-                    scene_rect.y() - (preferred_size.height() - (scene_rect.y() + scene_rect.height()))/2);
-    } else {
-        m.translate(scene_rect.x() - (desktop_width - (scene_rect.x() + scene_rect.width()))/2,
-                    scene_rect.y() - (desktop_height - (scene_rect.y() + scene_rect.height()))/2);
-    }
-    brush.setMatrix(m);
     view->setBackgroundBrush(brush);
 }
 
