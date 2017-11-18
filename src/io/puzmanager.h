@@ -82,8 +82,8 @@ private:
      * PuzData.clues, PuzData.solution and PuzData.state */
     bool prepareDataForWrite(const CrosswordData &crossData);
 
-    bool cellNeedsAcrossNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const;
-    bool cellNeedsDownNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const;
+    bool cellNeedsAcrossNumber(qint8 x, qint8 y) const;
+    bool cellNeedsDownNumber(qint8 x, qint8 y) const;
 };
 
 #endif

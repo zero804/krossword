@@ -159,7 +159,8 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
         }
         return false;
     }
-    m_puzData.solution = solution;
+    m_puzData.solution.clear();
+    m_puzData.solution.append(solution, gridStringLength);
     delete[] solution;
 
     // Read puzzle state string
@@ -171,7 +172,8 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
         }
         return false;
     }
-    m_puzData.state = state;
+    m_puzData.state.clear();
+    m_puzData.state.append(state, gridStringLength);
     delete[] state;
 
     // Read header information
@@ -468,7 +470,7 @@ bool PuzManager::mapClues(QList<ClueInfo> &clues)
             }
 
             bool assignedNumber = false;
-            if (cellNeedsAcrossNumber(x, y, m_puzData.width, m_puzData.solution)) {
+            if (cellNeedsAcrossNumber(x, y)) {
                 if (curClueIndex >= (uint)m_puzData.clues.count()) {
                     qDebug() << "Error in reading PUZ";
                     qDebug() << "Too few clues:" << m_puzData.clues.count() << "Tried index" << curClueIndex;
@@ -484,7 +486,7 @@ bool PuzManager::mapClues(QList<ClueInfo> &clues)
                 assignedNumber = true;
             }
 
-            if (cellNeedsDownNumber(x, y, m_puzData.width, m_puzData.solution)) {
+            if (cellNeedsDownNumber(x, y)) {
                 if (curClueIndex >= (uint)m_puzData.clues.count()) {
                     qDebug() << "Error in reading PUZ";
                     qDebug() << "Too few clues:" << m_puzData.clues.count() << "Tried index" << curClueIndex;
@@ -511,7 +513,7 @@ bool PuzManager::mapClues(QList<ClueInfo> &clues)
 
 bool PuzManager::prepareDataForWrite(const CrosswordData &crossData)
 {
-    for (uint i = 0; i < (m_puzData.width * m_puzData.height); i++) {
+    for (uint i = 0; i < uint(m_puzData.width * m_puzData.height); i++) {
         foreach (const ClueInfo &clueInfo, crossData.clues) {
             if (clueInfo.gridIndex == i) {
                 if (clueInfo.orientation == ClueOrientation::Horizontal) {
@@ -540,12 +542,12 @@ bool PuzManager::prepareDataForWrite(const CrosswordData &crossData)
 }
 
 //  Returns true if the cell at (x, y) gets an "across" clue number.
-bool PuzManager::cellNeedsAcrossNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const
+bool PuzManager::cellNeedsAcrossNumber(qint8 x, qint8 y) const
 {
     // Check that there is a blank to the left of us
-    if (x == 0 || puzzleSolution[Coords(x - 1, y).toIndex(width)] == '.') {
+    if (x == 0 || m_puzData.solution[Coords(x - 1, y).toIndex(m_puzData.width)] == '.') {
         // Check that there is space (at least two cells) for a word here
-        if (x + 1 < width && puzzleSolution[Coords(x + 1, y).toIndex(width)] != '.') {
+        if (x + 1 < m_puzData.width && m_puzData.solution[Coords(x + 1, y).toIndex(m_puzData.width)] != '.') {
             return true;
         }
     }
@@ -553,12 +555,12 @@ bool PuzManager::cellNeedsAcrossNumber(qint8 x, qint8 y, qint8 width, const QByt
 }
 
 //  Returns true if the cell at (x, y) gets an "down" clue number.
-bool PuzManager::cellNeedsDownNumber(qint8 x, qint8 y, qint8 width, const QByteArray &puzzleSolution) const
+bool PuzManager::cellNeedsDownNumber(qint8 x, qint8 y) const
 {
-    // Check that there is a blank to the left of us
-    if (y == 0 || puzzleSolution[Coords(x, y - 1).toIndex(width)] == '.') {
+    // Check that there is a blank over us
+    if (y == 0 || m_puzData.solution[Coords(x, y - 1).toIndex(m_puzData.width)] == '.') {
         // Check that there is space (at least two cells) for a word here
-        if (y + 1 < width && puzzleSolution[Coords(x, y + 1).toIndex(width)] != '.') {
+        if (y + 1 < m_puzData.height && m_puzData.solution[Coords(x, y + 1).toIndex(m_puzData.width)] != '.') {
             return true;
         }
     }

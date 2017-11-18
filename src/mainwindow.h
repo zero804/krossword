@@ -52,7 +52,7 @@ public:
 
     QSize sizeHint() const;
 
-    void loadFile(const QUrl &url, Crossword::KrossWord::FileFormat fileFormat = Crossword::KrossWord::DetermineByFileName, bool loadCrashedFile = false);
+    void loadFile(const QUrl &url, Crossword::KrossWord::FileFormat fileFormat = Crossword::KrossWord::DetermineByType, bool loadCrashedFile = false);
 
     bool createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize,
                             const QString &title, const QString &authors, const QString &copyright, const QString &notes);

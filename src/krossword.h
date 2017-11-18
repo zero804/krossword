@@ -163,7 +163,7 @@ public:
     };
 
     enum FileFormat {
-        DetermineByFileName,
+        DetermineByType,
         KwpFormat,
         KwpzFormat,
         PuzFormat
@@ -285,7 +285,7 @@ public:
     * @param url The URL to the file to read.
     * @param errorString Contains a string describing the error, if false was returned.
     * @return False, if there was an error. */
-    bool read(const QUrl &url, QString *errorString = NULL, FileFormat fileFormat = DetermineByFileName, QByteArray *undoData = NULL);
+    bool read(const QUrl &url, QString *errorString = NULL, FileFormat fileFormat = DetermineByType, QByteArray *undoData = NULL);
 
     /** Write the crossword into a file.
     * @param fileName The path to the file to write to.
@@ -296,7 +296,7 @@ public:
     * @return False, if there was an error. */
     bool write(const QString &fileName, QString *errorString = NULL,
                WriteMode writeMode = Normal,
-               FileFormat fileFormat = DetermineByFileName,
+               FileFormat fileFormat = DetermineByType,
                const QByteArray &undoData = QByteArray());
 
     /** Gets the clue cell at the coordinates @p coord with the given @p orientation.

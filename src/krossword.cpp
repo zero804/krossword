@@ -30,7 +30,6 @@
 #include <QGraphicsView>
 #include <QFile>
 #include <QStandardItemModel>
-//#include <qfileinfo.h>
 
 #include <QUrl>
 #include <QIcon>
@@ -57,7 +56,6 @@ KrossWord::KrossWord(const KrosswordTheme *theme, int width, int height)
 
     m_headerItem = new QGraphicsTextItem(this);
     m_headerItem->setVisible(false);
-    //m_headerItem->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
     QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
     font.setPointSize(qBound(10.0, m_cellSize.height()/3, 13.0));
     m_headerItem->setFont(font);
@@ -767,7 +765,7 @@ KrossWord::FileFormat KrossWord::fileFormatFromFileName(const QString& fileName)
     else if (extension == "puz")
         return PuzFormat;
     else
-        return DetermineByFileName; // couldn't determine file format
+        return DetermineByType; // couldn't determine file format
 }
 
 bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode writeMode, FileFormat fileFormat, const QByteArray &undoData)
@@ -865,9 +863,9 @@ bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode w
 
     //--------------------------
 
-    if (fileFormat == DetermineByFileName) {
+    if (fileFormat == DetermineByType) {
         fileFormat = fileFormatFromFileName(fileName);
-        if (fileFormat == DetermineByFileName) {
+        if (fileFormat == DetermineByType) {
             qDebug() << QString("File format unknown for file '%1'").arg(fileName);
             return false;
         }
@@ -921,7 +919,7 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
 
     bool readOk = false;
     bool fileFormatDeterminationFailed = false;
-    if (fileFormat == DetermineByFileName) {
+    if (fileFormat == DetermineByType) {
         QMimeDatabase mimeDatabase;
         QMimeType mimeType = mimeDatabase.mimeTypeForFile(url.path(), QMimeDatabase::MatchDefault);
         if (mimeType.inherits("application/x-crossword")) {

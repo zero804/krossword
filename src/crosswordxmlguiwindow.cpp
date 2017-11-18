@@ -862,7 +862,7 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
     QString errorString;
     bool writeOk;
     if (saveUndoStack) {
-        writeOk = krossWord()->write(fileName, &errorString, writeMode, KrossWord::DetermineByFileName, m_undoStack->data());
+        writeOk = krossWord()->write(fileName, &errorString, writeMode, KrossWord::DetermineByType, m_undoStack->data());
     } else {
         writeOk = krossWord()->write(fileName, &errorString, writeMode);
     }
