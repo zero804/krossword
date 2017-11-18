@@ -2863,7 +2863,6 @@ void CrossWordXmlGuiWindow::drawBackground(KrossWordPuzzleView *view) const
     QSize preferred_size = KrosswordRenderer::self()->getCurrentTheme()->preferredRenderSize();
 
     if (preferred_size.isValid() && preferred_size != QSize(0, 0)) {
-        preferred_size_cond = true;
         brush = QBrush(KrosswordRenderer::self()->background(preferred_size));
     } else { // Default behavior
         QDesktopWidget *mydesk = QApplication::desktop();
