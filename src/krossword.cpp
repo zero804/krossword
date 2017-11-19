@@ -767,7 +767,7 @@ KrossWord::FileFormat KrossWord::fileFormatFromFileName(const QString& fileName)
         return DetermineByType; // couldn't determine file format
 }
 
-CrosswordData KrossWord::getCrosswordData(const QByteArray &undoData, WriteMode writeMode)
+CrosswordData KrossWord::getCrosswordData(WriteMode writeMode, const QByteArray &undoData)
 {
     CrosswordData crosswordData;
     crosswordData.width = width();
@@ -868,7 +868,7 @@ bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode w
     QFile file(fileName);
     file.open(QIODevice::WriteOnly);
 
-    CrosswordData crosswordData = getCrosswordData(undoData, writeMode);
+    CrosswordData crosswordData = getCrosswordData(writeMode, undoData);
 
     if (fileFormat == DetermineByType) {
         fileFormat = fileFormatFromFileName(fileName);

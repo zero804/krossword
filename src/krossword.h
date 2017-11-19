@@ -290,7 +290,7 @@ public:
     bool read(const QUrl &url, QString *errorString = NULL, FileFormat fileFormat = DetermineByType, QByteArray *undoData = NULL);
 
     /** Convert the crossword into a data model.*/
-    CrosswordData getCrosswordData(const QByteArray &undoData, WriteMode writeMode); // CHECK: temporary name
+    CrosswordData getCrosswordData(WriteMode writeMode, const QByteArray &undoData = QByteArray()); // CHECK: temporary name
 
     /** Write the crossword into a file.
     * @param fileName The path to the file to write to.
