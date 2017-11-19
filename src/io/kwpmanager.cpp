@@ -155,8 +155,8 @@ void KwpManager::readKrossWordInfo(CrosswordData &crossData)
     if (m_xmlReader.attributes().hasAttribute("type")) {
         crossData.type = m_xmlReader.attributes().value("type").toString();
     } else {
-        qDebug() << "No crossword type saved in the file, using free as type";
-        //CHECK info.type = CrosswordTypeInfo::stringFromType(UnknownCrosswordType);
+        qDebug() << "No crossword type saved in the file";
+        crossData.type = "unknown";
     }
 
     while (!m_xmlReader.atEnd()) {
@@ -185,13 +185,6 @@ void KwpManager::readData(CrosswordData &crossData)
 {
     readKrossWordInfo(crossData);
 
-    //CHECK: is for Coded Puzzle?
-    bool letterContentToClueNumberMappingUsed = false;/*
-        krossWord->crosswordTypeInfo().clueType == NumberClues1To26
-        && krossWord->crosswordTypeInfo().clueMapping == CluesReferToCells
-        && krossWord->crosswordTypeInfo().letterCellContent == Crossword::Characters;
-        */
-
     while (!m_xmlReader.atEnd()) {
         if (m_xmlReader.isEndElement() && m_xmlReader.name().compare(QLatin1String("krossWord"), Qt::CaseInsensitive) == 0) {
             break;
@@ -208,11 +201,8 @@ void KwpManager::readData(CrosswordData &crossData)
                      || m_xmlReader.name().compare(QLatin1String("undoData"), Qt::CaseInsensitive) == 0) {
                 break; // Read confidence and undoData after the crossword has been completely read //CHECK: probably no more needed
             } else if (m_xmlReader.name().compare(QLatin1String("letterContentToClueNumberMapping"), Qt::CaseInsensitive) == 0) {
-                if (letterContentToClueNumberMappingUsed) {
-                    QString mapString = m_xmlReader.readElementText();
-                    //CHECK krossWord->setLetterContentToClueNumberMapping(mapString, false);
-                } else {
-                    qDebug() << "'letterContentToClueNumberMapping' not used by this type of crossword, ignoring it.";
+                if (crossData.type == "codedPuzzle") {
+                    crossData.codedPuzzleMap = m_xmlReader.readElementText();
                 }
             } else if (crossData.type == "free" && m_xmlReader.name().compare(QLatin1String("userDefinedCrosswordSettings"), Qt::CaseInsensitive) == 0) {
                 //CHECK readUserDefinedCrosswordSettings(crossData);
@@ -220,16 +210,9 @@ void KwpManager::readData(CrosswordData &crossData)
                 readUnknownElement();
             }
         }
-
         // Call this at the end of the loop, because readKrossWordInfo already
         // called this at the end to see the first non-info tag.
         m_xmlReader.readNext();
-    }
-
-    //CHECK krossWord->assignClueNumbers();
-
-    if (letterContentToClueNumberMappingUsed) {
-        //CHECK krossWord->setupSameLetterSynchronization();
     }
 
     // Read <confidence>-tag
@@ -241,9 +224,9 @@ void KwpManager::readData(CrosswordData &crossData)
             }
 
             QStringList confidenceStrings;
-            confidenceStrings << "Solved"; //CHECK LetterCell::confidenceToString(Solved);
+            confidenceStrings << "Solved";
             confidenceStrings << "Confident";
-            confidenceStrings << "Unsure"; //CHECK LetterCell::confidenceToString(Unsure);
+            confidenceStrings << "Unsure";
             //confidenceStrings << "Unknown"; //CHECK LetterCell::confidenceToString(Unknown);
 
             // Read a tag which name is one of confidenceStrings
@@ -565,13 +548,14 @@ void KwpManager::writeData(const CrosswordData &crossData, bool isTemplate)
     }
     */
 
-    /* CHECK
+    /* CHECK: old condition
     if (crossData->crosswordTypeInfo().clueType == NumberClues1To26
             && crossData->crosswordTypeInfo().clueMapping == CluesReferToCells
             && crossData->crosswordTypeInfo().letterCellContent == Characters) {
-        m_xmlWriter.writeTextElement("letterContentToClueNumberMapping", crossData->letterContentToClueNumberMapping());
-    }
     */
+    if (crossData.type == "codedPuzzle") { //CHECK: condition is more simple than the previous/original one
+        m_xmlWriter.writeTextElement("letterContentToClueNumberMapping", crossData.codedPuzzleMap);
+    }
 
     foreach(const ClueInfo &clueInfo, crossData.clues) {
         writeClue(clueInfo, crossData.width, isTemplate);

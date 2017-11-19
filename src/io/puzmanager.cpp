@@ -31,7 +31,7 @@ const char *PuzManager::FILE_MAGIC = "ACROSS&DOWN";
 QString getStringFromGrid(QList<QByteArray> &grid, int x, int y, Qt::Orientation orientation)
 {
     QString result;
-    char letter = grid.at(y).at(x);
+    char letter;
     if (orientation == Qt::Horizontal) {
         int pos = x;
         while (pos < grid.at(y).length()) {
@@ -193,7 +193,6 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
     // Read clues
     for (qint16 i = 0; i < clueNumber; ++i) {
         m_puzData.clues << readZeroTerminatedString(dataStream);
-
     }
 
     // Read notes

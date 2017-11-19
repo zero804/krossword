@@ -123,6 +123,7 @@ public:
     QList<ImageInfo> images;
     QList<ConfidenceInfo> lettersConfidence;
     QList<MarkedLetter> markedLetters;
+    QString codedPuzzleMap;
     QByteArray undoData;
 
     CrosswordData()
@@ -136,10 +137,12 @@ public:
                   const QList<ImageInfo> &images = QList<ImageInfo>(),
                   const QList<ConfidenceInfo> &lettersConfidence = QList<ConfidenceInfo>(),
                   const QList<MarkedLetter> &markedLetters = QList<MarkedLetter>(),
+                  const QString codedPuzzleMap = QString(),
                   const QByteArray &undoData = QByteArray())
         : width(width), height(height),
           type(type), title(title), authors(authors), copyright(copyright), notes(notes),
           clues(clues), images(images), lettersConfidence(lettersConfidence), markedLetters(markedLetters),
+          codedPuzzleMap(codedPuzzleMap),
           undoData(undoData)
     { }
 

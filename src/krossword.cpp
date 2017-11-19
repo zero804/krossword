@@ -151,18 +151,17 @@ void KrossWord::setupSameLetterSynchronization()
     LetterCellList letterList = letters();
     foreach(LetterCell * letter, letterList) {
         QChar ch = letter->correctLetter();
-        if (ch.isSpace())
+        if (ch.isSpace()) {
             continue;
+        }
 
         correctCharToLetters[ ch ] << letter;
     }
 
-    for (QHash<QChar, KrossWordCellList>::iterator it = correctCharToLetters.begin();
-            it != correctCharToLetters.end(); ++it) {
+    for (QHash<QChar, KrossWordCellList>::iterator it = correctCharToLetters.begin(); it != correctCharToLetters.end(); ++it) {
         while (!it.value().isEmpty()) {
             KrossWordCell *letter = it.value().takeFirst();
-            letter->synchronizeWith(it.value(), SyncContent,
-                                    SameCharacterLetterSynchronization);
+            letter->synchronizeWith(it.value(), SyncContent, SameCharacterLetterSynchronization);
         }
     }
 }
@@ -527,14 +526,14 @@ QString KrossWord::conversionInfoToString(
     return infoText;
 }
 
-void KrossWord::setLetterContentToClueNumberMapping(
-    const QString &codedPuzzleMapping, bool apply)
+void KrossWord::setLetterContentToClueNumberMapping(const QString &codedPuzzleMapping, bool apply)
 {
-    if (apply)
+    if (apply) {
         applyLetterContentToClueNumberMapping(codedPuzzleMapping);
-    else {
-        if (m_codedPuzzleMapping == codedPuzzleMapping.toUpper())
+    } else {
+        if (m_codedPuzzleMapping == codedPuzzleMapping.toUpper()) {
             return;
+        }
         m_codedPuzzleMapping = codedPuzzleMapping.toUpper();
     }
 }
@@ -778,6 +777,10 @@ bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode w
     crosswordData.width = width();
     crosswordData.height = height();
     crosswordData.type = crosswordTypeInfo().typeString();
+    if (crosswordData.type == "codedPuzzle") {
+        crosswordData.codedPuzzleMap = letterContentToClueNumberMapping();
+    }
+
     if (!getTitle().isEmpty() && writeMode != KrossWord::Template) {
         crosswordData.title = getTitle();
     }
@@ -959,14 +962,12 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
             }
         }
 
-        //-----------------------------------------
+        // CHECK: in a new method or adapt createNew... -----------------------------------------
         createNew(CrosswordTypeInfo::typeFromString(crosswordData.type), QSize(crosswordData.width, crosswordData.height));
         setTitle(crosswordData.title);
         setAuthors(crosswordData.authors);
         setCopyright(crosswordData.copyright);
         setNotes(crosswordData.notes);
-
-        // CHECK: NumberClues1To26
 
         foreach (ClueInfo clueInfo, crosswordData.clues) {
             ClueCell *clueCell;
@@ -985,11 +986,14 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
             }
         }
 
-        // CHECK: setLetterContentToClueNumberMapping
-        // CHECK: if (krossWord->crosswordTypeInfo().crosswordType == UserDefinedCrossword)
+        if (crosswordData.type == "codedPuzzle") {
+            setLetterContentToClueNumberMapping(crosswordData.codedPuzzleMap, false);
+            setupSameLetterSynchronization();
+        } else if (crosswordData.type == "UserDefinedCrossword") {
+            // CHECK: complete...
+        }
 
-        // CHECK: assignClueNumbers();
-        // CHECK: if... setupSameLetterSynchronization();
+        // CHECK: assignClueNumbers(); // really useful?
 
         foreach (ImageInfo imageInfo, crosswordData.images) {
             ImageCell *imageCell;
@@ -1028,7 +1032,6 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
         if (undoData) {
             *undoData = QByteArray::fromBase64(crosswordData.undoData);
         }
-
         //-----------------------------------------
     }
     file.close();
