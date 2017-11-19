@@ -293,7 +293,7 @@ void KwpManager::readClue(CrosswordData &crossData)
             return;
         }
 
-        // CHECK: currently unused, usefull?
+        // CHECK: currently unused, really usefull?
         /*
         bool clueSelected = m_xmlReader.attributes().hasAttribute("selected")
                             && m_xmlReader.attributes().value("selected").compare(QLatin1String("true"), Qt::CaseInsensitive) == 0;
@@ -352,15 +352,15 @@ void KwpManager::readClue(CrosswordData &crossData)
 
 void KwpManager::readImage(CrosswordData &crossData)
 {
-    if (!m_xmlReader.attributes().hasAttribute("coordTopLeft"))
+    if (!m_xmlReader.attributes().hasAttribute("coordTopLeft")) {
         m_xmlReader.raiseError("<image>-tags need a 'coordTopLeft' attribute with value 'x,y'.");
-    else if (!m_xmlReader.attributes().hasAttribute("horizontalCellSpan"))
+    } else if (!m_xmlReader.attributes().hasAttribute("horizontalCellSpan")) {
         m_xmlReader.raiseError("<image>-tags need an 'horizontalCellSpan' attribute.");
-    else if (!m_xmlReader.attributes().hasAttribute("verticalCellSpan"))
+    } else if (!m_xmlReader.attributes().hasAttribute("verticalCellSpan")) {
         m_xmlReader.raiseError("<image>-tags need an 'horizontalCellSpan' attribute.");
-    else if (!m_xmlReader.attributes().hasAttribute("url"))
+    } else if (!m_xmlReader.attributes().hasAttribute("url")) {
         m_xmlReader.raiseError("<image>-tags need an 'url' attribute.");
-    else {
+    } else {
         QString sCoord = m_xmlReader.attributes().value("coordTopLeft").toString();
         QRegExp rx("(\\d+)\\w*,\\w*(\\d+)");
         if (rx.indexIn(sCoord) == -1) {
@@ -376,7 +376,6 @@ void KwpManager::readImage(CrosswordData &crossData)
     }
 }
 
-// CHECK: indicate some letters - currently not read
 void KwpManager::readSolutionLetter(CrosswordData &crossData)
 {
     if (!m_xmlReader.attributes().hasAttribute("coord")) {
@@ -394,18 +393,6 @@ void KwpManager::readSolutionLetter(CrosswordData &crossData)
         uint letterPos = m_xmlReader.attributes().value("index").toString().toInt();
 
         crossData.markedLetters.append(MarkedLetter(index, letterPos));
-
-        /*CHECK
-        Coord coord(rx.cap(1).toInt(), rx.cap(2).toInt());
-        int solutionLetterIndex = attributes().value("index").toString().toInt();
-
-        LetterCell *letter = qgraphicsitem_cast< LetterCell* >(crossData->at(coord));
-        if (letter) {
-            letter->toSolutionLetter(solutionLetterIndex);
-        } else {
-            qDebug() << QString("No letter cell at (%1, %2) to convert to a solution letter")
-                     .arg(coord.first).arg(coord.second);
-        }*/
     }
 }
 

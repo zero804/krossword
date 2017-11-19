@@ -29,6 +29,8 @@
 #include <QGraphicsObject>
 #include <QGraphicsTextItem>
 
+class CrosswordData;
+
 class QGraphicsDropShadowEffect;
 
 #include "global.h"
@@ -286,6 +288,9 @@ public:
     * @param errorString Contains a string describing the error, if false was returned.
     * @return False, if there was an error. */
     bool read(const QUrl &url, QString *errorString = NULL, FileFormat fileFormat = DetermineByType, QByteArray *undoData = NULL);
+
+    /** Convert the crossword into a data model.*/
+    CrosswordData getCrosswordData(const QByteArray &undoData, WriteMode writeMode); // CHECK: temporary name
 
     /** Write the crossword into a file.
     * @param fileName The path to the file to write to.
@@ -734,7 +739,7 @@ public:
         return m_theme;
     }
     void setTheme(const KrosswordTheme *theme);
-
+    
 protected:
     enum RemoveMode {
         DontRemove,

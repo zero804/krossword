@@ -174,8 +174,6 @@ public:
 class CrosswordIO
 {
 public:
-    QIODevice *m_device; // not owned
-
     CrosswordIO(QIODevice *device)
         : m_device(device)
     { }
@@ -191,6 +189,9 @@ public:
     void setErrorString(const QString &error) {
         m_errorString = error;
     }
+
+protected:
+    QIODevice *m_device; // not owned
 
 private:
     QString m_errorString;

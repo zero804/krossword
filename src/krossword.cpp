@@ -767,12 +767,8 @@ KrossWord::FileFormat KrossWord::fileFormatFromFileName(const QString& fileName)
         return DetermineByType; // couldn't determine file format
 }
 
-bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode writeMode, FileFormat fileFormat, const QByteArray &undoData)
+CrosswordData KrossWord::getCrosswordData(const QByteArray &undoData, WriteMode writeMode)
 {
-    QFile file(fileName);
-    file.open(QIODevice::WriteOnly);
-
-    //-------------------------- CHECK: extract as new method
     CrosswordData crosswordData;
     crosswordData.width = width();
     crosswordData.height = height();
@@ -793,8 +789,8 @@ bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode w
     if (!getNotes().isEmpty()) {
         crosswordData.notes = getNotes();
     }
+
     // CHECK: UserDefinedCrossword
-    // CHECK: NumberClues1To26
 
     ClueCellList clueList = clues();
     foreach(ClueCell *clue, clueList) {
@@ -864,7 +860,15 @@ bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode w
         crosswordData.undoData = undoData.toBase64();
     }
 
-    //--------------------------
+    return crosswordData;
+}
+
+bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode writeMode, FileFormat fileFormat, const QByteArray &undoData)
+{
+    QFile file(fileName);
+    file.open(QIODevice::WriteOnly);
+
+    CrosswordData crosswordData = getCrosswordData(undoData, writeMode);
 
     if (fileFormat == DetermineByType) {
         fileFormat = fileFormatFromFileName(fileName);
