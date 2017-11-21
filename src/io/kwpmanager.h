@@ -30,7 +30,8 @@
 Crossword::AnswerOffset answerOffsetFromString(const QString &s);
 QString answerOffsetToString(Crossword::AnswerOffset answerOffset);
 
-Crossword::Confidence letterConfidenceFromString(const QString &s);
+Crossword::Confidence confidenceFromString(const QString &s);
+QString confidenceToString(Crossword::Confidence confidence);
 
 class KwpManager : public CrosswordIO // CHECK: KrossWordXmlReader & KrossWordXmlWriter
 {

@@ -97,38 +97,6 @@ LetterCell::~LetterCell()
 //     detachClues();
 }
 
-QString LetterCell::confidenceToString(Confidence confidence)
-{
-//     Solved, /**< The letter is definetly correct, because it was solved. */
-//      Confident, /**< Confident that the letter is correct. */
-//      NotSure, /**< Unsure if the letter is correct. */
-//      Unknown
-    switch (confidence) {
-    case Solved:
-        return "Solved";
-    case Confident:
-        return "Confident";
-    case Unsure:
-        return "Unsure";
-//  case Unknown:
-    default:
-        return "Unknown";
-    }
-}
-
-Confidence LetterCell::stringToConfidence(const QString& string)
-{
-    QString lower = string.toLower();
-    if (lower == "solved")
-        return Solved;
-    else if (lower == "confident")
-        return Confident;
-    else if (lower == "unsure")
-        return Unsure;
-    else // if ( lower == "unknown" )
-        return Unknown;
-}
-
 void LetterCell::setConfidence(Confidence confidence)
 {
     m_confidence = confidence;

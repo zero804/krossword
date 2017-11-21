@@ -84,7 +84,7 @@ QString answerOffsetToString(Crossword::AnswerOffset answerOffset)
     return "ClueHidden";
 }
 
-Crossword::Confidence letterConfidenceFromString(const QString &s)
+Crossword::Confidence confidenceFromString(const QString &s)
 {
     QString sl = s.toLower();
     if (sl == "solved") {
@@ -95,6 +95,25 @@ Crossword::Confidence letterConfidenceFromString(const QString &s)
         return Crossword::Unsure;
     } else {
         return Crossword::Unknown;
+    }
+}
+
+QString confidenceToString(Crossword::Confidence confidence)
+{
+//     Solved, /**< The letter is definetly correct, because it was solved. */
+//      Confident, /**< Confident that the letter is correct. */
+//      NotSure, /**< Unsure if the letter is correct. */
+//      Unknown
+    switch (confidence) {
+    case Crossword::Confidence::Solved:
+        return "Solved";
+    case Crossword::Confidence::Confident:
+        return "Confident";
+    case Crossword::Confidence::Unsure:
+        return "Unsure";
+//  case Unknown:
+    default:
+        return "Unknown";
     }
 }
 
@@ -232,7 +251,7 @@ void KwpManager::readData(CrosswordData &crossData)
             // Read a tag which name is one of confidenceStrings
             foreach(const QString &confidenceString, confidenceStrings) {
                 if (m_xmlReader.isStartElement() && m_xmlReader.name().compare(confidenceString, Qt::CaseInsensitive) == 0) {
-                    Crossword::Confidence confidence = letterConfidenceFromString(confidenceString);
+                    Crossword::Confidence confidence = confidenceFromString(confidenceString);
 
                     // Read all <letter>-tags, to set the confidence to [confidence]
                     while (!m_xmlReader.atEnd()) {
@@ -556,28 +575,41 @@ void KwpManager::writeData(const CrosswordData &crossData, bool isTemplate)
         writeSolutionLetter(markedLetter, crossData.width);
     }
 
-    /* CHECK
-    // Writing not confident letters
-    QHash< Confidence, LetterCellList > notConfidentLetterLists;
-    LetterCellList letterList = crossData->letters();
-    foreach(LetterCell * letter, letterList) {
-        if (letter->confidence() != Confident) {
-            notConfidentLetterLists[ letter->confidence()] << letter;
+    //CHECK: refactor confidence writing code
+    // Writing confidence letters value
+    m_xmlWriter.writeStartElement("confidence");
+
+    m_xmlWriter.writeStartElement(confidenceToString(Crossword::Confidence::Solved));
+    foreach (const ConfidenceInfo &confidenceInfo, crossData.lettersConfidence) {
+        if (confidenceInfo.confidence == Crossword::Confidence::Solved) {
+            m_xmlWriter.writeEmptyElement("letter");
+            Coords coords = Coords::fromIndex(confidenceInfo.gridIndex, crossData.width);
+            m_xmlWriter.writeAttribute("coord", QString("%1,%2").arg(coords.x).arg(coords.y));
         }
     }
-    if (!notConfidentLetterLists.isEmpty()) {
-        m_xmlWriter.writeStartElement("confidence");
-        for (QHash<Confidence, LetterCellList>::const_iterator it = notConfidentLetterLists.constBegin(); it != notConfidentLetterLists.constEnd(); ++it) {
-            m_xmlWriter.writeStartElement(LetterCell::confidenceToString(it.key()));
-            foreach(const LetterCell * letter, notConfidentLetterLists[it.key()]) {
-                m_xmlWriter.writeEmptyElement("letter");
-                m_xmlWriter.writeAttribute("coord", QString("%1,%2").arg(letter->coord().first).arg(letter->coord().second));
-            }
-            m_xmlWriter.writeEndElement();
+    m_xmlWriter.writeEndElement(); //Crossword::Confidence::Solved
+
+    m_xmlWriter.writeStartElement(confidenceToString(Crossword::Confidence::Confident));
+    foreach (const ConfidenceInfo &confidenceInfo, crossData.lettersConfidence) {
+        if (confidenceInfo.confidence == Crossword::Confidence::Confident) {
+            m_xmlWriter.writeEmptyElement("letter");
+            Coords coords = Coords::fromIndex(confidenceInfo.gridIndex, crossData.width);
+            m_xmlWriter.writeAttribute("coord", QString("%1,%2").arg(coords.x).arg(coords.y));
         }
-        m_xmlWriter.writeEndElement(); // </confidence>
     }
-    */
+    m_xmlWriter.writeEndElement(); //Crossword::Confidence::Confident
+
+    m_xmlWriter.writeStartElement(confidenceToString(Crossword::Confidence::Unsure));
+    foreach (const ConfidenceInfo &confidenceInfo, crossData.lettersConfidence) {
+        if (confidenceInfo.confidence == Crossword::Confidence::Unsure) {
+            m_xmlWriter.writeEmptyElement("letter");
+            Coords coords = Coords::fromIndex(confidenceInfo.gridIndex, crossData.width);
+            m_xmlWriter.writeAttribute("coord", QString("%1,%2").arg(coords.x).arg(coords.y));
+        }
+    }
+    m_xmlWriter.writeEndElement(); //Crossword::Confidence::Unsure
+
+    m_xmlWriter.writeEndElement(); // </confidence>
 
     if (!crossData.undoData.isEmpty()) {
         m_xmlWriter.writeTextElement("undoData", crossData.undoData.toBase64());
