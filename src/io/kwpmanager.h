@@ -33,7 +33,7 @@ QString answerOffsetToString(Crossword::AnswerOffset answerOffset);
 Crossword::Confidence confidenceFromString(const QString &s);
 QString confidenceToString(Crossword::Confidence confidence);
 
-class KwpManager : public CrosswordIO // CHECK: KrossWordXmlReader & KrossWordXmlWriter
+class KwpManager : public CrosswordIO
 {
 public:
     KwpManager(QIODevice *device);
@@ -53,9 +53,9 @@ private:
     void readUnknownElement();
     void readUserDefinedCrosswordSettings(CrosswordData &crossData);
 
-    void writeData(const CrosswordData &crossData, bool isTemplate);
-    void writeClue(const ClueInfo &clueInfo, const uint gridWidth, bool isTemplate);
-    void writeImage(const ImageInfo &imageInfo, const uint gridWidth, bool isTemplate);
+    void writeData(const CrosswordData &crossData);
+    void writeClue(const ClueInfo &clueInfo, const uint gridWidth);
+    void writeImage(const ImageInfo &imageInfo, const uint gridWidth);
     void writeSolutionLetter(const MarkedLetter &markedLetter, const uint gridWidth);
 };
 

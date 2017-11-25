@@ -320,11 +320,9 @@ void KwpManager::readClue(CrosswordData &crossData)
         }
 
         QString clue, answer, currentAnswer;
-        // To allow clues with no text (which are useful for editing the clue
-        // text later, eg. for templates):
+        // To allow clues with no text (which are useful for editing the clue text later, eg. for templates):
         bool hasTextTag = false;
-        // To allow correct answers with no text (which are useful for editing
-        // the answers later, eg. for templates):
+        // To allow correct answers with no text (which are useful for editing the answers later, eg. for templates):
         bool hasAnswerTag = false;
         for (int i = 1; i <= 3;) {
             if (m_xmlReader.isStartElement()) {
@@ -496,7 +494,7 @@ bool KwpManager::write(const CrosswordData &crossData)
     m_xmlWriter.setAutoFormatting(true);
 
     m_xmlWriter.writeStartDocument("1.0", true);
-    writeData(crossData, false); // CHECK isTemplate true for something like writeTemplate
+    writeData(crossData);
     m_xmlWriter.writeEndDocument();
 
     if (closeAfterWrite) {
@@ -506,7 +504,7 @@ bool KwpManager::write(const CrosswordData &crossData)
     return true;
 }
 
-void KwpManager::writeData(const CrosswordData &crossData, bool isTemplate)
+void KwpManager::writeData(const CrosswordData &crossData)
 {
     m_xmlWriter.writeStartElement("krossWord");
     m_xmlWriter.writeAttribute("version", "1.1");
@@ -514,7 +512,7 @@ void KwpManager::writeData(const CrosswordData &crossData, bool isTemplate)
     m_xmlWriter.writeAttribute("height", QString::number(crossData.height));
     m_xmlWriter.writeAttribute("type", Crossword::CrosswordTypeInfo::stringFromType(crossData.type));
 
-    if (!crossData.title.isEmpty() && isTemplate == false) {
+    if (!crossData.title.isEmpty()) {
         m_xmlWriter.writeTextElement("title", crossData.title);
     }
     if (!crossData.authors.isEmpty()) {
@@ -556,11 +554,11 @@ void KwpManager::writeData(const CrosswordData &crossData, bool isTemplate)
     }
 
     foreach(const ClueInfo &clueInfo, crossData.clues) {
-        writeClue(clueInfo, crossData.width, isTemplate);
+        writeClue(clueInfo, crossData.width);
     }
 
     foreach(const ImageInfo &imageInfo, crossData.images) {
-        writeImage(imageInfo, crossData.width, isTemplate);
+        writeImage(imageInfo, crossData.width);
     }
 
     foreach(const MarkedLetter &markedLetter, crossData.markedLetters) {
@@ -608,7 +606,7 @@ void KwpManager::writeData(const CrosswordData &crossData, bool isTemplate)
     m_xmlWriter.writeEndElement(); // </krossWord>
 }
 
-void KwpManager::writeClue(const ClueInfo &clueInfo, const uint gridWidth, bool isTemplate)
+void KwpManager::writeClue(const ClueInfo &clueInfo, const uint gridWidth)
 {
     m_xmlWriter.writeStartElement("clue");
     Coords coords = Coords::fromIndex(clueInfo.gridIndex, gridWidth);
@@ -623,27 +621,21 @@ void KwpManager::writeClue(const ClueInfo &clueInfo, const uint gridWidth, bool 
     }
     */
 
-    if (isTemplate == false) {
-        m_xmlWriter.writeTextElement("text", clueInfo.clue);
-        m_xmlWriter.writeTextElement("answer", clueInfo.solution); // CHECK: missing characters as '-' or similar?
-        m_xmlWriter.writeTextElement("currentAnswer", clueInfo.answer); // CHECK: missing characters as '-' or similar?
-    } else {
-        m_xmlWriter.writeTextElement("text", QString());
-        m_xmlWriter.writeTextElement("answer", QString(' ', clueInfo.solution.length())); // CHECK: missing characters as '-' or similar?
-        m_xmlWriter.writeTextElement("currentAnswer", QString(' ', clueInfo.solution.length()));// CHECK: missing characters as '-' or similar?
-    }
+    m_xmlWriter.writeTextElement("text", clueInfo.clue);
+    m_xmlWriter.writeTextElement("answer", clueInfo.solution); // CHECK: missing characters as '-' or similar?
+    m_xmlWriter.writeTextElement("currentAnswer", clueInfo.answer); // CHECK: missing characters as '-' or similar?
 
     m_xmlWriter.writeEndElement();
 }
 
-void KwpManager::writeImage(const ImageInfo &imageInfo, const uint gridWidth, bool isTemplate)
+void KwpManager::writeImage(const ImageInfo &imageInfo, const uint gridWidth)
 {
     m_xmlWriter.writeEmptyElement("image");
     Coords coords = Coords::fromIndex(imageInfo.gridIndex, gridWidth);
     m_xmlWriter.writeAttribute("coordTopLeft", QString("%1,%2").arg(coords.x).arg(coords.y));
     m_xmlWriter.writeAttribute("horizontalCellSpan", QString::number(imageInfo.width));
     m_xmlWriter.writeAttribute("verticalCellSpan", QString::number(imageInfo.height));
-    m_xmlWriter.writeAttribute("url", isTemplate ? QString() : imageInfo.url);
+    m_xmlWriter.writeAttribute("url", imageInfo.url);
 }
 
 void KwpManager::writeSolutionLetter(const MarkedLetter &markedLetter, const uint gridWidth)
