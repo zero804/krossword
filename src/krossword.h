@@ -253,9 +253,8 @@ public:
         return m_animationEnabled;
     }
 
-    void createNew(CrosswordType crosswordType, const QSize &crosswordSize);
-    void createNew(const CrosswordTypeInfo &crosswordTypeInfo,
-                   const QSize &crosswordSize);
+    void createNew(const CrosswordData &crosswordData, QByteArray *undoData);
+    void createNew(const CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize);
 
     /** This method is provided for convenience. It calls
     * @ref generateConversionInfo and then @ref executeConversionInfo,

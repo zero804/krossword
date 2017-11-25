@@ -80,7 +80,7 @@ private:
 
     /** Convert CrossData.acrossClues and CrossData.downClue in
      * PuzData.clues, PuzData.solution and PuzData.state */
-    bool prepareDataForWrite(const CrosswordData &crossData);
+    void prepareDataForWrite(const CrosswordData &crossData);
 
     bool cellNeedsAcrossNumber(qint8 x, qint8 y) const;
     bool cellNeedsDownNumber(qint8 x, qint8 y) const;

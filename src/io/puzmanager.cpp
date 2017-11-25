@@ -265,16 +265,13 @@ bool PuzManager::write(const CrosswordData &crossdata)
     m_puzData.width = qint8(crossdata.width);
     m_puzData.height = qint8(crossdata.height);
     // crossdata.type ignored, PUZ is always American type
-    // CHECK: best to check the input type?
     m_puzData.title = crossdata.title.toLatin1();
     m_puzData.authors = crossdata.authors.toLatin1();
     m_puzData.copyright = crossdata.copyright.toLatin1();
     m_puzData.notes = crossdata.notes.toLatin1();
     m_puzData.solution = QByteArray(crossdata.width * crossdata.height, '.'); // initialize filling with black cells
     m_puzData.state = QByteArray(crossdata.width * crossdata.height, '.'); // initialize filling with black cells
-    if (!prepareDataForWrite(crossdata)) {
-        return false;
-    }
+    prepareDataForWrite(crossdata);
 
     bool closeAfterWrite;
     if ((closeAfterWrite = !m_device->isOpen()) && !m_device->open(QIODevice::WriteOnly)) {
@@ -510,7 +507,7 @@ bool PuzManager::mapClues(QList<ClueInfo> &clues)
     return true;
 }
 
-bool PuzManager::prepareDataForWrite(const CrosswordData &crossData)
+void PuzManager::prepareDataForWrite(const CrosswordData &crossData)
 {
     for (uint i = 0; i < uint(m_puzData.width * m_puzData.height); i++) {
         foreach (const ClueInfo &clueInfo, crossData.clues) {
@@ -536,8 +533,6 @@ bool PuzManager::prepareDataForWrite(const CrosswordData &crossData)
             }
         }
     }
-
-    return true; //CHECK: currently useless
 }
 
 //  Returns true if the cell at (x, y) gets an "across" clue number.

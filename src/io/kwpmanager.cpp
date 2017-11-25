@@ -20,8 +20,6 @@
 
 #include "kwpmanager.h"
 
-#include <QFileInfo>
-#include <QUrl>
 #include <QDebug>
 
 Crossword::AnswerOffset answerOffsetFromString(const QString &s)

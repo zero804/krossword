@@ -838,7 +838,7 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
         if (hasConfidencesSet) {
             int result = KMessageBox::warningContinueCancel(this,
                          i18n("Can't store confidence values in *.puz files!\nIf you want confidence "
-                              "values to be stored please use a Krossword file format (*.kwp or *.kwpz)."),
+                              "values to be stored please use the Krossword file format (*.kwpz)."),
                          QString(), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
                          "dont_show_cant_write_confidences_to_puz_confirmation");
             if (result == KMessageBox::Cancel) {
@@ -850,7 +850,7 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
         if (!imageList.isEmpty()) {
             int result = KMessageBox::warningContinueCancel(this,
                          i18n("Can't store image cells in *.puz files!\nIf you want image "
-                              "cells to be stored please use a Krossword file format (*.kwp or *.kwpz)."),
+                              "cells to be stored please use the Krossword file format (*.kwpz)."),
                          QString(), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
                          "dont_show_cant_write_images_to_puz_confirmation");
             if (result == KMessageBox::Cancel) {
