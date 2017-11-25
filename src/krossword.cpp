@@ -772,9 +772,11 @@ CrosswordData KrossWord::getCrosswordData(WriteMode writeMode, const QByteArray 
     CrosswordData crosswordData;
     crosswordData.width = width();
     crosswordData.height = height();
-    crosswordData.type = crosswordTypeInfo().typeString();
-    if (crosswordData.type == "codedPuzzle") {
+    crosswordData.type = crosswordTypeInfo().crosswordType;
+    if (crosswordData.type == Crossword::CrosswordType::CodedPuzzle) {
         crosswordData.codedPuzzleMap = letterContentToClueNumberMapping();
+    } else if (crosswordData.type == Crossword::CrosswordType::UserDefinedCrossword) {
+        crosswordData.customCrosswordRules = crosswordTypeInfo();
     }
 
     if (!getTitle().isEmpty() && writeMode != KrossWord::Template) {
@@ -789,8 +791,6 @@ CrosswordData KrossWord::getCrosswordData(WriteMode writeMode, const QByteArray 
     if (!getNotes().isEmpty()) {
         crosswordData.notes = getNotes();
     }
-
-    // CHECK: UserDefinedCrossword
 
     ClueCellList clueList = clues();
     foreach(ClueCell *clue, clueList) {
@@ -967,7 +967,7 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
         }
 
         // CHECK: in a new method or adapt createNew... -----------------------------------------
-        createNew(CrosswordTypeInfo::typeFromString(crosswordData.type), QSize(crosswordData.width, crosswordData.height));
+        createNew(crosswordData.type, QSize(crosswordData.width, crosswordData.height));
         setTitle(crosswordData.title);
         setAuthors(crosswordData.authors);
         setCopyright(crosswordData.copyright);
@@ -990,11 +990,11 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
             }
         }
 
-        if (crosswordData.type == "codedPuzzle") {
+        if (crosswordData.type == Crossword::CrosswordType::CodedPuzzle) {
             setLetterContentToClueNumberMapping(crosswordData.codedPuzzleMap, false);
             setupSameLetterSynchronization();
-        } else if (crosswordData.type == "UserDefinedCrossword") {
-            // CHECK: complete...
+        } else if (crosswordData.type == Crossword::CrosswordType::UserDefinedCrossword) {
+            setCrosswordTypeInfo(crosswordData.customCrosswordRules);
         }
 
         // CHECK: assignClueNumbers(); // really useful?

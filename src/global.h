@@ -271,7 +271,7 @@ struct CrosswordTypeInfo {
 public:
     CrosswordTypeInfo() {
         *this = free();
-    };
+    }
 
     /** Constructs a crossword type information object for user defined
     * crosswords. */
@@ -291,13 +291,13 @@ public:
         init(UserDefinedCrossword, name, description, longDescription, iconName,
              clueCellHandling, rotationSymmetryRequired, minAnswerLength,
              letterCellContent, clueMapping, clueType, cellTypes, defaultSizes);
-    };
+    }
 
     static const QList< CrosswordType > typeList() {
         return QList< CrosswordType >()
                << American << Swedish << CrossNumber << CodedPuzzle
                << FreeCrossword << UserDefinedCrossword;
-    };
+    }
 
     /** Constructs a crossword type information object for the given crossword
     * type. */
@@ -337,12 +337,12 @@ public:
 
     QString typeString() const {
         return stringFromType(crosswordType);
-    };
+    }
 
     QString allowedChars() const;
     bool containsIllegalCharacters(const QString &testString) const {
         return testString.contains(QRegExp(QString("[^%1]").arg(allowedChars())));
-    };
+    }
     bool isCharacterLegal(const QChar &testCharacter) const;
 
     CrosswordType crosswordType; /**< The type of crossword this description belongs to. */
@@ -378,7 +378,7 @@ private:
         init(crosswordType, name, description, longDescription, iconName, clueCellHandling,
              rotationSymmetryRequired, minAnswerLength, letterCellContent,
              clueMapping, clueType, cellTypes, defaultSizes);
-    };
+    }
 
     void init(CrosswordType crosswordType,
               const QString &name,
@@ -406,40 +406,36 @@ private:
         this->clueType = clueType;
         this->cellTypes = cellTypes;
         this->defaultSizes = defaultSizes;
-    };
+    }
 }; // struct CrosswordTypeInformation
 
 QString displayStringFromCellType(CellType cellType);
 QString stringFromCellType(CellType cellType);
 CellType cellTypeFromString(const QString& sCellType);
 
-inline QDebug &operator <<(QDebug debug,
-                           CrosswordType crosswordType)
+inline QDebug &operator <<(QDebug debug, CrosswordType crosswordType)
 {
     return debug << CrosswordTypeInfo::stringFromType(crosswordType);
-};
+}
 
-inline QDebug &operator <<(QDebug debug,
-                           ClueCellHandling clueCellHandling)
+inline QDebug &operator <<(QDebug debug, ClueCellHandling clueCellHandling)
 {
-    return debug << CrosswordTypeInfo::stringFromClueCellHandling(
-               clueCellHandling);
-};
+    return debug << CrosswordTypeInfo::stringFromClueCellHandling(clueCellHandling);
+}
 
 inline QDebug &operator <<(QDebug debug, ClueMapping clueMapping)
 {
-    return debug << CrosswordTypeInfo::stringFromClueMapping(
-               clueMapping);
-};
+    return debug << CrosswordTypeInfo::stringFromClueMapping(clueMapping);
+}
 
 inline QDebug &operator <<(QDebug debug, ClueType clueType)
 {
     return debug << CrosswordTypeInfo::stringFromClueType(clueType);
-};
+}
 
 QDataStream &operator <<(QDataStream &stream, CrosswordTypeInfo typeInfo);
 QDataStream &operator >>(QDataStream &stream, CrosswordTypeInfo &typeInfo);
-}; // namespace Crossword
+} // namespace Crossword
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::CellTypes)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Crossword::SyncMethods)

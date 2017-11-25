@@ -186,7 +186,7 @@ void CreateNewCrosswordDialog::currentTemplateChanged(const QModelIndex& current
     if (!readOk) {
         qDebug() << "Error reading crossword info from library file" << kwpzManager.errorString();
     } else {
-        CrosswordTypeInfo typeInfo = CrosswordTypeInfo::infoFromType(CrosswordTypeInfo::typeFromString(crosswordData.type));
+        CrosswordTypeInfo typeInfo = CrosswordTypeInfo::infoFromType(crosswordData.type);
 
         QString infoText = QString("<b>%1:</b> %2<br>"
                                    "<b>%3:</b> %4x%5<br>"

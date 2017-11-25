@@ -51,7 +51,7 @@ private:
     void readImage(CrosswordData &crossData);
     void readSolutionLetter(CrosswordData &crossData);
     void readUnknownElement();
-    //void readUserDefinedCrosswordSettings(CrosswordData &crossData);
+    void readUserDefinedCrosswordSettings(CrosswordData &crossData);
 
     void writeData(const CrosswordData &crossData, bool isTemplate);
     void writeClue(const ClueInfo &clueInfo, const uint gridWidth, bool isTemplate);

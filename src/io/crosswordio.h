@@ -118,12 +118,14 @@ class CrosswordData
 {
 public:
     uint width, height;
-    QString type, title, authors, copyright, notes;
+    Crossword::CrosswordType type;
+    QString title, authors, copyright, notes;
     QList<ClueInfo> clues;
     QList<ImageInfo> images;
     QList<ConfidenceInfo> lettersConfidence;
     QList<MarkedLetter> markedLetters;
     QString codedPuzzleMap;
+    Crossword::CrosswordTypeInfo customCrosswordRules;
     QByteArray undoData;
 
     CrosswordData()
@@ -132,17 +134,20 @@ public:
     { }
 
     CrosswordData(const uint width, const uint height,
-                  const QString &type, const QString &title, const QString &authors, const QString &copyright, const QString &notes,
+                  const Crossword::CrosswordType type,
+                  const QString &title, const QString &authors, const QString &copyright, const QString &notes,
                   const QList<ClueInfo> &clues,
                   const QList<ImageInfo> &images = QList<ImageInfo>(),
                   const QList<ConfidenceInfo> &lettersConfidence = QList<ConfidenceInfo>(),
                   const QList<MarkedLetter> &markedLetters = QList<MarkedLetter>(),
                   const QString codedPuzzleMap = QString(),
+                  const Crossword::CrosswordTypeInfo customCrosswordRules = Crossword::CrosswordTypeInfo(),
                   const QByteArray &undoData = QByteArray())
         : width(width), height(height),
-          type(type), title(title), authors(authors), copyright(copyright), notes(notes),
+          type(type),
+          title(title), authors(authors), copyright(copyright), notes(notes),
           clues(clues), images(images), lettersConfidence(lettersConfidence), markedLetters(markedLetters),
-          codedPuzzleMap(codedPuzzleMap),
+          codedPuzzleMap(codedPuzzleMap), customCrosswordRules(customCrosswordRules),
           undoData(undoData)
     { }
 

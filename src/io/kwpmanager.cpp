@@ -100,16 +100,12 @@ Crossword::Confidence confidenceFromString(const QString &s)
 
 QString confidenceToString(Crossword::Confidence confidence)
 {
-//     Solved, /**< The letter is definetly correct, because it was solved. */
-//      Confident, /**< Confident that the letter is correct. */
-//      NotSure, /**< Unsure if the letter is correct. */
-//      Unknown
     switch (confidence) {
-    case Crossword::Confidence::Solved:
+    case Crossword::Confidence::Solved: /**< The letter is definetly correct, because it was solved. */
         return "Solved";
-    case Crossword::Confidence::Confident:
+    case Crossword::Confidence::Confident: /**< Confident that the letter is correct. */
         return "Confident";
-    case Crossword::Confidence::Unsure:
+    case Crossword::Confidence::Unsure: /**< Unsure if the letter is correct. */
         return "Unsure";
 //  case Unknown:
     default:
@@ -172,10 +168,10 @@ void KwpManager::readKrossWordInfo(CrosswordData &crossData)
     crossData.height = m_xmlReader.attributes().value("height").toString().toInt();
 
     if (m_xmlReader.attributes().hasAttribute("type")) {
-        crossData.type = m_xmlReader.attributes().value("type").toString();
+        crossData.type = Crossword::CrosswordTypeInfo::typeFromString(m_xmlReader.attributes().value("type").toString());
     } else {
         qDebug() << "No crossword type saved in the file";
-        crossData.type = "unknown";
+        crossData.type = Crossword::CrosswordType::UnknownCrosswordType;
     }
 
     while (!m_xmlReader.atEnd()) {
@@ -220,11 +216,11 @@ void KwpManager::readData(CrosswordData &crossData)
                      || m_xmlReader.name().compare(QLatin1String("undoData"), Qt::CaseInsensitive) == 0) {
                 break; // Read confidence and undoData after the crossword has been completely read //CHECK: probably no more needed
             } else if (m_xmlReader.name().compare(QLatin1String("letterContentToClueNumberMapping"), Qt::CaseInsensitive) == 0) {
-                if (crossData.type == "codedPuzzle") {
+                if (crossData.type == Crossword::CrosswordType::CodedPuzzle) {
                     crossData.codedPuzzleMap = m_xmlReader.readElementText();
                 }
-            } else if (crossData.type == "free" && m_xmlReader.name().compare(QLatin1String("userDefinedCrosswordSettings"), Qt::CaseInsensitive) == 0) {
-                //CHECK readUserDefinedCrosswordSettings(crossData);
+            } else if (crossData.type == Crossword::CrosswordType::UserDefinedCrossword && m_xmlReader.name().compare(QLatin1String("userDefinedCrosswordSettings"), Qt::CaseInsensitive) == 0) {
+                readUserDefinedCrosswordSettings(crossData);
             } else {
                 readUnknownElement();
             }
@@ -246,7 +242,6 @@ void KwpManager::readData(CrosswordData &crossData)
             confidenceStrings << "Solved";
             confidenceStrings << "Confident";
             confidenceStrings << "Unsure";
-            //confidenceStrings << "Unknown"; //CHECK LetterCell::confidenceToString(Unknown);
 
             // Read a tag which name is one of confidenceStrings
             foreach(const QString &confidenceString, confidenceStrings) {
@@ -415,53 +410,54 @@ void KwpManager::readSolutionLetter(CrosswordData &crossData)
     }
 }
 
-/*
-void KrossWordXmlReader::readUserDefinedCrosswordSettings(CrosswordData &crossData)
+void KwpManager::readUserDefinedCrosswordSettings(CrosswordData &crossData)
 {
-    CrosswordTypeInfo crosswordTypeInfo = crossData.type;
-    crosswordTypeInfo.name = attributes().value("name").toString();
+    Crossword::CrosswordTypeInfo crosswordTypeInfo;
+    crosswordTypeInfo.name = m_xmlReader.attributes().value("name").toString();
 
-    while (!atEnd()) {
-        readNext();
+    while (!m_xmlReader.atEnd()) {
+        m_xmlReader.readNext();
 
-        if (isEndElement() && name().compare(QLatin1String("userDefinedCrosswordSettings"), Qt::CaseInsensitive) == 0)
+        if (m_xmlReader.isEndElement() && m_xmlReader.name().compare(QLatin1String("userDefinedCrosswordSettings"), Qt::CaseInsensitive) == 0) {
             break;
+        }
 
-        if (isStartElement()) {
-            if (name().compare(QLatin1String("iconName"), Qt::CaseInsensitive) == 0)
-                crosswordTypeInfo.iconName = readElementText();
-            else if (name().compare(QLatin1String("description"), Qt::CaseInsensitive) == 0)
-                crosswordTypeInfo.description = readElementText();
-            else if (name().compare(QLatin1String("minAnswerLength"), Qt::CaseInsensitive) == 0) {
-                int minAnswerLength = readElementText().toInt();
+        if (m_xmlReader.isStartElement()) {
+            if (m_xmlReader.name().compare(QLatin1String("iconName"), Qt::CaseInsensitive) == 0) {
+                crosswordTypeInfo.iconName = m_xmlReader.readElementText();
+            } else if (m_xmlReader.name().compare(QLatin1String("description"), Qt::CaseInsensitive) == 0) {
+                crosswordTypeInfo.description = m_xmlReader.readElementText();
+            } else if (m_xmlReader.name().compare(QLatin1String("minAnswerLength"), Qt::CaseInsensitive) == 0) {
+                int minAnswerLength = m_xmlReader.readElementText().toInt();
                 if (minAnswerLength < 1) {
                     qDebug() << "In <userDefinedCrosswordSettings>: <minAnswerLength> "
                              "is too small or not a number" << minAnswerLength;
                     minAnswerLength = 1;
                 }
                 crosswordTypeInfo.minAnswerLength = minAnswerLength;
-            } else if (name().compare(QLatin1String("clueCellHandling"), Qt::CaseInsensitive) == 0) {
+            } else if (m_xmlReader.name().compare(QLatin1String("clueCellHandling"), Qt::CaseInsensitive) == 0) {
                 crosswordTypeInfo.clueCellHandling =
-                    CrosswordTypeInfo::clueCellHandlingFromString(readElementText());
-            } else if (name().compare(QLatin1String("clueType"), Qt::CaseInsensitive) == 0) {
+                        Crossword::CrosswordTypeInfo::clueCellHandlingFromString(m_xmlReader.readElementText());
+            } else if (m_xmlReader.name().compare(QLatin1String("clueType"), Qt::CaseInsensitive) == 0) {
                 crosswordTypeInfo.clueType =
-                    CrosswordTypeInfo::clueTypeFromString(readElementText());
-            } else if (name().compare(QLatin1String("letterCellContent"), Qt::CaseInsensitive) == 0) {
+                        Crossword::CrosswordTypeInfo::clueTypeFromString(m_xmlReader.readElementText());
+            } else if (m_xmlReader.name().compare(QLatin1String("letterCellContent"), Qt::CaseInsensitive) == 0) {
                 crosswordTypeInfo.letterCellContent =
-                    CrosswordTypeInfo::letterCellContentFromString(readElementText());
-            } else if (name().compare(QLatin1String("clueMapping"), Qt::CaseInsensitive) == 0) {
+                        Crossword::CrosswordTypeInfo::letterCellContentFromString(m_xmlReader.readElementText());
+            } else if (m_xmlReader.name().compare(QLatin1String("clueMapping"), Qt::CaseInsensitive) == 0) {
                 crosswordTypeInfo.clueMapping =
-                    CrosswordTypeInfo::clueMappingFromString(readElementText());
-            } else if (name().compare(QLatin1String("cellTypes"), Qt::CaseInsensitive) == 0) {
+                        Crossword::CrosswordTypeInfo::clueMappingFromString(m_xmlReader.readElementText());
+            } else if (m_xmlReader.name().compare(QLatin1String("cellTypes"), Qt::CaseInsensitive) == 0) {
                 crosswordTypeInfo.cellTypes =
-                    CrosswordTypeInfo::cellTypesFromStringList(readElementText().split(','));
-            } else
+                        Crossword::CrosswordTypeInfo::cellTypesFromStringList(m_xmlReader.readElementText().split(','));
+            } else {
                 readUnknownElement();
+            }
         }
     }
-    crossData->setCrosswordTypeInfo(crosswordTypeInfo);
+
+    crossData.customCrosswordRules = crosswordTypeInfo;
 }
-*/
 
 void KwpManager::readUnknownElement()
 {
@@ -516,7 +512,7 @@ void KwpManager::writeData(const CrosswordData &crossData, bool isTemplate)
     m_xmlWriter.writeAttribute("version", "1.1");
     m_xmlWriter.writeAttribute("width", QString::number(crossData.width));
     m_xmlWriter.writeAttribute("height", QString::number(crossData.height));
-    m_xmlWriter.writeAttribute("type", crossData.type);
+    m_xmlWriter.writeAttribute("type", Crossword::CrosswordTypeInfo::stringFromType(crossData.type));
 
     if (!crossData.title.isEmpty() && isTemplate == false) {
         m_xmlWriter.writeTextElement("title", crossData.title);
@@ -531,35 +527,31 @@ void KwpManager::writeData(const CrosswordData &crossData, bool isTemplate)
         m_xmlWriter.writeTextElement("notes", crossData.notes);
     }
 
-    /* CHECK
-    if (crossData->crosswordTypeInfo().crosswordType == UserDefinedCrossword) {
-        CrosswordTypeInfo info = crossData->crosswordTypeInfo();
+    if (crossData.type == Crossword::CrosswordType::UserDefinedCrossword) {
         m_xmlWriter.writeStartElement("userDefinedCrosswordSettings");
-        m_xmlWriter.writeAttribute("name", info.name);
+        m_xmlWriter.writeAttribute("name", crossData.customCrosswordRules.name);
 
-        m_xmlWriter.writeTextElement("iconName", info.iconName);
-        m_xmlWriter.writeTextElement("description", info.description);
-        m_xmlWriter.writeTextElement("minAnswerLength", QString::number(info.minAnswerLength));
-        m_xmlWriter.writeTextElement("clueCellHandling", CrosswordTypeInfo::
-                                     stringFromClueCellHandling(info.clueCellHandling));
-        m_xmlWriter.writeTextElement("clueType", CrosswordTypeInfo::
-                                     stringFromClueType(info.clueType));
-        m_xmlWriter.writeTextElement("letterCellContent", CrosswordTypeInfo::
-                                     stringFromLetterCellContent(info.letterCellContent));
-        m_xmlWriter.writeTextElement("clueMapping", CrosswordTypeInfo::
-                                     stringFromClueMapping(info.clueMapping));
-        m_xmlWriter.writeTextElement("cellTypes", CrosswordTypeInfo::
-                                     stringListFromCellTypes(info.cellTypes).join(","));
+        m_xmlWriter.writeTextElement("iconName", crossData.customCrosswordRules.iconName);
+        m_xmlWriter.writeTextElement("description", crossData.customCrosswordRules.description);
+        m_xmlWriter.writeTextElement("minAnswerLength", QString::number(crossData.customCrosswordRules.minAnswerLength));
+        m_xmlWriter.writeTextElement("clueCellHandling",
+                                     Crossword::CrosswordTypeInfo::stringFromClueCellHandling(crossData.customCrosswordRules.clueCellHandling));
+        m_xmlWriter.writeTextElement("clueType",
+                                     Crossword::CrosswordTypeInfo::stringFromClueType(crossData.customCrosswordRules.clueType));
+        m_xmlWriter.writeTextElement("letterCellContent",
+                                     Crossword::CrosswordTypeInfo::stringFromLetterCellContent(crossData.customCrosswordRules.letterCellContent));
+        m_xmlWriter.writeTextElement("clueMapping",
+                                     Crossword::CrosswordTypeInfo::stringFromClueMapping(crossData.customCrosswordRules.clueMapping));
+        m_xmlWriter.writeTextElement("cellTypes",
+                                     Crossword::CrosswordTypeInfo::stringListFromCellTypes(crossData.customCrosswordRules.cellTypes).join(","));
         m_xmlWriter.writeEndElement();
     }
-    */
 
     /* CHECK: old condition
     if (crossData->crosswordTypeInfo().clueType == NumberClues1To26
             && crossData->crosswordTypeInfo().clueMapping == CluesReferToCells
-            && crossData->crosswordTypeInfo().letterCellContent == Characters) {
-    */
-    if (crossData.type == "codedPuzzle") { //CHECK: condition is more simple than the previous/original one
+            && crossData->crosswordTypeInfo().letterCellContent == Characters) {*/
+    if (crossData.type == Crossword::CrosswordType::CodedPuzzle) { //CHECK: condition is more simple than the previous/original one
         m_xmlWriter.writeTextElement("letterContentToClueNumberMapping", crossData.codedPuzzleMap);
     }
 
@@ -578,7 +570,6 @@ void KwpManager::writeData(const CrosswordData &crossData, bool isTemplate)
     //CHECK: refactor confidence writing code
     // Writing confidence letters value
     m_xmlWriter.writeStartElement("confidence");
-
     m_xmlWriter.writeStartElement(confidenceToString(Crossword::Confidence::Solved));
     foreach (const ConfidenceInfo &confidenceInfo, crossData.lettersConfidence) {
         if (confidenceInfo.confidence == Crossword::Confidence::Solved) {
@@ -608,7 +599,6 @@ void KwpManager::writeData(const CrosswordData &crossData, bool isTemplate)
         }
     }
     m_xmlWriter.writeEndElement(); //Crossword::Confidence::Unsure
-
     m_xmlWriter.writeEndElement(); // </confidence>
 
     if (!crossData.undoData.isEmpty()) {
