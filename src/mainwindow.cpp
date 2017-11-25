@@ -263,7 +263,7 @@ void MainWindow::showRestoreOption(const QString& lastUnsavedFileBeforeCrash)
                                             restoreButton,
                                             KStandardGuiItem::discard());
     if (result == KMessageBox::Yes) {
-        loadFile(QUrl::fromLocalFile(lastUnsavedFileBeforeCrash), Crossword::KrossWord::KrossWordPuzzleCompressedXmlFile, true);
+        loadFile(QUrl::fromLocalFile(lastUnsavedFileBeforeCrash), Crossword::KrossWord::KwpzFormat, true);
     } else {
         m_mainCrossword->removeTempFile(lastUnsavedFileBeforeCrash);
     }

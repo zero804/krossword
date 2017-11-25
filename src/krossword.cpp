@@ -22,15 +22,14 @@
 #include "clueexpanderitem.h"
 #include "cells/krosswordcell.h"
 #include "cells/imagecell.h"
-#include "io/krosswordpuzreader.h"
-#include "io/krosswordxmlreader.h"
-#include "io/krosswordxmlwriter.h"
+#include "io/puzmanager.h"
+#include "io/kwpmanager.h"
+#include "io/kwpzmanager.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QFile>
 #include <QStandardItemModel>
-#include <qfileinfo.h>
 
 #include <QUrl>
 #include <QIcon>
@@ -57,7 +56,6 @@ KrossWord::KrossWord(const KrosswordTheme *theme, int width, int height)
 
     m_headerItem = new QGraphicsTextItem(this);
     m_headerItem->setVisible(false);
-    //m_headerItem->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
     QFont font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
     font.setPointSize(qBound(10.0, m_cellSize.height()/3, 13.0));
     m_headerItem->setFont(font);
@@ -93,7 +91,6 @@ void KrossWord::init(uint width, uint height)
 
 KrossWord::~KrossWord()
 {
-//     qDebug() << "Cleaning crossword";
     deleteAllCells(); // Cells are delete'd by QGraphicsScene only if they are in a QGraphicsScene
 }
 
@@ -105,9 +102,78 @@ void KrossWord::setTheme(const KrosswordTheme* theme)
     clearCache();
 }
 
-void KrossWord::createNew(CrosswordType crosswordType, const QSize& crosswordSize)
+void KrossWord::createNew(const CrosswordData &crosswordData, QByteArray *undoData)
 {
-    createNew(CrosswordTypeInfo::infoFromType(crosswordType), crosswordSize);
+    createNew(CrosswordTypeInfo::infoFromType(crosswordData.type), QSize(crosswordData.width, crosswordData.height));
+
+    setTitle(crosswordData.title);
+    setAuthors(crosswordData.authors);
+    setCopyright(crosswordData.copyright);
+    setNotes(crosswordData.notes);
+
+    foreach (ClueInfo clueInfo, crosswordData.clues) {
+        ClueCell *clueCell;
+
+        Coords coords = Coords::fromIndex(clueInfo.gridIndex, crosswordData.width);
+        KGrid2D::Coord coord(coords.x, coords.y);
+
+        Qt::Orientation orientation = (clueInfo.orientation == ClueOrientation::Horizontal ? Qt::Horizontal : Qt::Vertical);
+
+        ErrorType errorType = insertClue(coord, orientation, clueInfo.answerOffset, clueInfo.clue, clueInfo.solution,
+                                         LetterCellType, DontIgnoreErrors, true, &clueCell);
+        if (errorType == ErrorNone) {
+            if (clueInfo.solution.length() == clueInfo.answer.length()) {
+                clueCell->setCurrentAnswer(clueInfo.answer);
+            }
+        }
+    }
+
+    if (crosswordData.type == Crossword::CrosswordType::CodedPuzzle) {
+        setLetterContentToClueNumberMapping(crosswordData.codedPuzzleMap, false);
+        setupSameLetterSynchronization();
+    } else if (crosswordData.type == Crossword::CrosswordType::UserDefinedCrossword) {
+        setCrosswordTypeInfo(crosswordData.customCrosswordRules);
+    }
+
+    // CHECK: assignClueNumbers(); // really useful?
+
+    foreach (ImageInfo imageInfo, crosswordData.images) {
+        ImageCell *imageCell;
+
+        Coords coords = Coords::fromIndex(imageInfo.gridIndex, crosswordData.width);
+        KGrid2D::Coord coord(coords.x, coords.y);
+
+        ErrorType errorType = insertImage(coord, imageInfo.width, imageInfo.height,
+                                          QUrl::fromLocalFile(imageInfo.url), DontIgnoreErrors, &imageCell);
+        if (errorType != ErrorNone) {
+            qDebug() << KrossWord::errorMessageFromErrorType(errorType);
+        }
+    }
+
+    foreach (MarkedLetter markedLetter, crosswordData.markedLetters) {
+        Coords coords = Coords::fromIndex(markedLetter.gridIndex, crosswordData.width);
+        KGrid2D::Coord coord(coords.x, coords.y);
+
+        LetterCell *letter = qgraphicsitem_cast< LetterCell* >(at(coord));
+        if (letter) {
+            letter->toSolutionLetter(markedLetter.letterPos);
+        }
+    }
+
+    foreach (ConfidenceInfo confidenceInfo, crosswordData.lettersConfidence) {
+        Coords coords = Coords::fromIndex(confidenceInfo.gridIndex, crosswordData.width);
+        KGrid2D::Coord coord(coords.x, coords.y);
+
+        KrossWordCell *cell = at(coord);
+        if (cell->isLetterCell()) {
+            LetterCell *letter = (LetterCell*)cell;
+            letter->setConfidence(confidenceInfo.confidence);
+        }
+    }
+
+    if (undoData) {
+        *undoData = QByteArray::fromBase64(crosswordData.undoData);
+    }
 }
 
 void KrossWord::createNew(const CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize)
@@ -115,15 +181,15 @@ void KrossWord::createNew(const CrosswordTypeInfo &crosswordTypeInfo, const QSiz
     removeAllCells();
     resizeGrid(crosswordSize.width(), crosswordSize.height());
 
-//   m_crosswordTypeInfo = CrosswordTypeInformation::infoFromType( crosswordType );
     m_crosswordTypeInfo = crosswordTypeInfo;
 
     if (m_crosswordTypeInfo.clueType == NumberClues1To26
             && m_crosswordTypeInfo.clueMapping == CluesReferToCells
             && m_crosswordTypeInfo.letterCellContent == Characters) {
         m_codedPuzzleMapping = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    } else
+    } else {
         m_codedPuzzleMapping.clear();
+    }
 }
 
 bool KrossWord::has180DegreeRotationSymmetry() const
@@ -153,18 +219,17 @@ void KrossWord::setupSameLetterSynchronization()
     LetterCellList letterList = letters();
     foreach(LetterCell * letter, letterList) {
         QChar ch = letter->correctLetter();
-        if (ch.isSpace())
+        if (ch.isSpace()) {
             continue;
+        }
 
         correctCharToLetters[ ch ] << letter;
     }
 
-    for (QHash<QChar, KrossWordCellList>::iterator it = correctCharToLetters.begin();
-            it != correctCharToLetters.end(); ++it) {
+    for (QHash<QChar, KrossWordCellList>::iterator it = correctCharToLetters.begin(); it != correctCharToLetters.end(); ++it) {
         while (!it.value().isEmpty()) {
             KrossWordCell *letter = it.value().takeFirst();
-            letter->synchronizeWith(it.value(), SyncContent,
-                                    SameCharacterLetterSynchronization);
+            letter->synchronizeWith(it.value(), SyncContent, SameCharacterLetterSynchronization);
         }
     }
 }
@@ -189,12 +254,12 @@ void KrossWord::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    if (isDrawingForPrinting())
+    if (isDrawingForPrinting()) {
         painter->fillRect(boundingRect(), Qt::white);
+    }
 }
 
-KrossWord::ConversionInfo KrossWord::generateConversionInfo(
-    CrosswordTypeInfo newInfo)
+KrossWord::ConversionInfo KrossWord::generateConversionInfo(CrosswordTypeInfo newInfo)
 {
     ConversionInfo conversionInfo;
     conversionInfo.conversionCommands = NoCommand;
@@ -208,23 +273,26 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
 
         for (int i = clueList.count() - 1; i >= 0; --i) {
             ClueCell *clue = clueList[ i ];
-            if (clue->correctAnswer().length() < newInfo.minAnswerLength)
+            if (clue->correctAnswer().length() < newInfo.minAnswerLength) {
                 conversionInfo.cluesToRemove << clueList.takeAt(i);
+            }
         }
     }
 
     // Add newly disallowed cell types to conversion info as "to be removed"
     foreach(CellType cellType, allCellTypes()) {
-        if (!m_crosswordTypeInfo.cellTypes.testFlag(cellType))
+        if (!m_crosswordTypeInfo.cellTypes.testFlag(cellType)) {
             continue;
+        }
 
         if (!newInfo.cellTypes.testFlag(cellType)) {
             // Cell type isn't available in the new crossword type, so remove those cells
             KrossWordCellList cellList = cells(cellType);
             foreach(KrossWordCell * cell, cellList) {
                 if (!conversionInfo.cellsToRemove.contains(cell)
-                        && !conversionInfo.cluesToRemove.contains(qgraphicsitem_cast<ClueCell*>(cell)))
+                        && !conversionInfo.cluesToRemove.contains(qgraphicsitem_cast<ClueCell*>(cell))) {
                     conversionInfo.cellsToRemove << cell;
+                }
             }
         }
     }
@@ -236,29 +304,27 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
         QList<Coord> disallowedCoords, coordsWithNewClueCell;
         for (int i = clueList.count() - 1; i >= 0; --i) {
             ClueCell *clue = clueList[ i ];
-            if (clue->answerOffset() != OnClueCell)
+            if (clue->answerOffset() != OnClueCell) {
                 continue; // Clue is already visible
+            }
 
-//       qDebug() << "DISALLOWED ARE:" << disallowedCoords;
             AnswerOffset offset = clue->tryToMakeVisible(true, disallowedCoords);
             if (offset == OffsetInvalid) {
                 conversionInfo.cluesToRemove << clueList.takeAt(i);
-//  qDebug() << "Added clue to remove list:" << clue->clue();
             } else {
                 Coord newCoord = clue->coord() - ClueCell::answerOffsetToOffset(offset);
                 KrossWordCell *cell = at(newCoord);
-                if (cell->isType(ClueCellType))
+                if (cell->isType(ClueCellType)) {
                     disallowedCoords.append(newCoord);
-                else if (cell->isType(EmptyCellType)) {
-                    if (coordsWithNewClueCell.contains(newCoord))
+                } else if (cell->isType(EmptyCellType)) {
+                    if (coordsWithNewClueCell.contains(newCoord)) {
                         disallowedCoords.append(newCoord);
-                    else
+                    } else {
                         coordsWithNewClueCell.append(newCoord);
+                    }
                 }
 
                 conversionInfo.cluesToMakeVisible.insert(clue, offset);
-//  conversionInfo.cluesToMakeVisible << clue;
-//  qDebug() << "Added clue to make visible list:" << clue->clue();
             }
         }
     } else if (m_crosswordTypeInfo.clueCellHandling != ClueCellsDisallowed
@@ -277,20 +343,19 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
         }
     }
 
-    if (m_crosswordTypeInfo.clueType == StringClues
-            && newInfo.clueType == NumberClues1To26) {
+    if (m_crosswordTypeInfo.clueType == StringClues && newInfo.clueType == NumberClues1To26) {
         qDebug() << "Convert from clueType StringClues to NumberClues1To26";
 
-        if (newInfo.clueMapping == CluesReferToCells
-                && newInfo.letterCellContent == Characters) {
+        if (newInfo.clueMapping == CluesReferToCells && newInfo.letterCellContent == Characters) {
             qDebug() << "Convert to coded puzzle clue mapping";
 
             // Mark all clue cells to get removed from the crossword grid
             for (int i = clueList.count() - 1; i >= 0; --i) {
                 ClueCell *clue = clueList[ i ];
                 if (!conversionInfo.cellsToRemove.contains(clue) &&
-                        !conversionInfo.cluesToRemove.contains(clue))
+                        !conversionInfo.cluesToRemove.contains(clue)) {
                     conversionInfo.cellsToRemove << clueList.takeAt(i);
+                }
             }
 
             conversionInfo.conversionCommands |= SetDefaultCodedPuzzleMapping;
@@ -300,8 +365,9 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
             conversionInfo.cluesToMakeVisible.clear();
             for (int i = clueList.count() - 1; i >= 0; --i) {
                 ClueCell *clue = clueList[ i ];
-                if (!conversionInfo.cluesToRemove.contains(clue))
+                if (!conversionInfo.cluesToRemove.contains(clue)) {
                     conversionInfo.cluesToRemove << clueList.takeAt(i);
+                }
             }
         }
     }
@@ -333,16 +399,19 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
                     break;
                 }
             }
-            if (letterGetsRemoved)
+            if (letterGetsRemoved) {
                 continue;
+            }
 
             // Shift from numbers to characters in ASCII table
-            if (!letter->correctLetter().isSpace() && !letter->correctLetter().isLetter())
+            if (!letter->correctLetter().isSpace() && !letter->correctLetter().isLetter()) {
                 conversionInfo.letterEditCorrect.insert(letter,
                                                         QChar::fromLatin1(letter->correctLetter().toLatin1() + 17));
-            if (!letter->currentLetter().isSpace() && !letter->currentLetter().isLetter())
+            }
+            if (!letter->currentLetter().isSpace() && !letter->currentLetter().isLetter()) {
                 conversionInfo.letterEditCurrent.insert(letter,
                                                         QChar::fromLatin1(letter->currentLetter().toLatin1() + 17));
+            }
         }
     } else if (m_crosswordTypeInfo.letterCellContent != Digits
                && newInfo.letterCellContent == Digits) {
@@ -356,17 +425,20 @@ KrossWord::ConversionInfo KrossWord::generateConversionInfo(
                     break;
                 }
             }
-            if (letterGetsRemoved)
+            if (letterGetsRemoved) {
                 continue;
+            }
 
             // Shift from characters to numbers in ASCII table
-            if (!letter->correctLetter().isSpace() && !letter->correctLetter().isDigit())
+            if (!letter->correctLetter().isSpace() && !letter->correctLetter().isDigit()) {
                 conversionInfo.letterEditCorrect.insert(letter,
                                                         QChar::fromLatin1((letter->correctLetter().toLatin1() - 65) % 10 + 48));
+            }
 
-            if (!letter->currentLetter().isSpace() && !letter->currentLetter().isDigit())
+            if (!letter->currentLetter().isSpace() && !letter->currentLetter().isDigit()) {
                 conversionInfo.letterEditCurrent.insert(letter,
                                                         QChar::fromLatin1((letter->currentLetter().toLatin1() - 65) % 10 + 48));
+            }
         }
     }
 
@@ -380,20 +452,22 @@ void KrossWord::executeConversionInfo(KrossWord::ConversionInfo conversionInfo)
     foreach(KrossWordCell * cell, conversionInfo.cellsToRemove) {
         ClueCell *clue;
         SolutionLetterCell *solutionLetter;
-        if ((clue = qgraphicsitem_cast<ClueCell*>(cell)))
+        if ((clue = qgraphicsitem_cast<ClueCell*>(cell))) {
             clue->setHidden();
-        else if ((solutionLetter = qgraphicsitem_cast<SolutionLetterCell*>(cell)))
+        } else if ((solutionLetter = qgraphicsitem_cast<SolutionLetterCell*>(cell))) {
             solutionLetter->toLetter();
-        else
+        } else {
             removeCell(cell);
+        }
     }
 
     emit cluesAboutToBeRemoved(conversionInfo.cluesToRemove);
     // Don't emit cluesAboutToBeRemoved() in removeClue(), it has just been
     // emitted for all clues to be removed
     bool wasBlocked = blockSignals(true);
-    foreach(ClueCell * clue, conversionInfo.cluesToRemove)
-    removeClue(clue);
+    foreach(ClueCell * clue, conversionInfo.cluesToRemove) {
+        removeClue(clue);
+    }
     blockSignals(wasBlocked);
 
 
@@ -402,8 +476,9 @@ void KrossWord::executeConversionInfo(KrossWord::ConversionInfo conversionInfo)
             it != conversionInfo.cluesToMakeVisible.constEnd(); ++it) {
 //   foreach ( ClueCell *clue, conversionInfo.cluesToMakeVisible.keys() ) {
 //     if ( clue->tryToMakeVisible() == ClueCell::OffsetInvalid )
-        if (!it.key()->setUnhidden(it.value()))
+        if (!it.key()->setUnhidden(it.value())) {
             qDebug() << "Couldn't make clue cell visible" << it.key()->coord() << it.key()->clue();
+        }
     }
 
     QHash<LetterCell*, QChar>::const_iterator it;
@@ -420,27 +495,27 @@ void KrossWord::executeConversionInfo(KrossWord::ConversionInfo conversionInfo)
     if (conversionInfo.conversionCommands.testFlag(SetDefaultCodedPuzzleMapping))
         m_codedPuzzleMapping = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    if (conversionInfo.conversionCommands.testFlag(SetupSameLetterSynchronization))
+    if (conversionInfo.conversionCommands.testFlag(SetupSameLetterSynchronization)) {
         setupSameLetterSynchronization();
-    else
+    } else {
         removeSameLetterSynchronization();
+    }
 
     m_crosswordTypeInfo = conversionInfo.typeInfoTarget;
 }
 
-KrossWord::ConversionInfo KrossWord::convertToType(
-    CrosswordTypeInfo newInfo, bool simulate)
+KrossWord::ConversionInfo KrossWord::convertToType(CrosswordTypeInfo newInfo, bool simulate)
 {
     ConversionInfo conversionInfo = generateConversionInfo(newInfo);
 
-    if (!simulate)
+    if (!simulate) {
         executeConversionInfo(conversionInfo);
+    }
 
     return conversionInfo;
 }
 
-QString KrossWord::conversionInfoToString(
-    KrossWord::ConversionInfo conversionInfo)
+QString KrossWord::conversionInfoToString(KrossWord::ConversionInfo conversionInfo)
 {
     int imageCells = 0;
     int clueCells = conversionInfo.cluesToRemove.count();
@@ -465,8 +540,9 @@ QString KrossWord::conversionInfoToString(
     }
 
     QHash< CellType, int > countPerType;
-    foreach(KrossWordCell * cell, otherCellList)
-    ++countPerType[ cell->getCellType()];
+    foreach(KrossWordCell * cell, otherCellList) {
+        ++countPerType[ cell->getCellType()];
+    }
 
     QStringList otherInfos;
     for (QHash<CellType, int>::const_iterator it = countPerType.constBegin();
@@ -504,10 +580,11 @@ QString KrossWord::conversionInfoToString(
                         imageCells, images().count());
     }
 
-    if (otherInfos.isEmpty())
+    if (otherInfos.isEmpty()) {
         infoText += '.';
-    else
+    } else {
         infoText += ", " + otherInfos.join(", ");
+    }
 
     if (crosswordTypeInfo().letterCellContent != Digits
             && conversionInfo.typeInfoTarget.letterCellContent == Digits) {
@@ -529,14 +606,14 @@ QString KrossWord::conversionInfoToString(
     return infoText;
 }
 
-void KrossWord::setLetterContentToClueNumberMapping(
-    const QString &codedPuzzleMapping, bool apply)
+void KrossWord::setLetterContentToClueNumberMapping(const QString &codedPuzzleMapping, bool apply)
 {
-    if (apply)
+    if (apply) {
         applyLetterContentToClueNumberMapping(codedPuzzleMapping);
-    else {
-        if (m_codedPuzzleMapping == codedPuzzleMapping.toUpper())
+    } else {
+        if (m_codedPuzzleMapping == codedPuzzleMapping.toUpper()) {
             return;
+        }
         m_codedPuzzleMapping = codedPuzzleMapping.toUpper();
     }
 }
@@ -544,8 +621,9 @@ void KrossWord::setLetterContentToClueNumberMapping(
 void KrossWord::applyLetterContentToClueNumberMapping(
     const QString &codedPuzzleMapping)
 {
-    if (m_codedPuzzleMapping == codedPuzzleMapping.toUpper())
+    if (m_codedPuzzleMapping == codedPuzzleMapping.toUpper()) {
         return;
+    }
 
     m_codedPuzzleMapping = codedPuzzleMapping.toUpper();
     clearCache();
@@ -554,8 +632,6 @@ void KrossWord::applyLetterContentToClueNumberMapping(
 void KrossWord::setCurrentCell(KrossWordCell* cell)
 {
     if (m_currentCell == cell) {
-//  qDebug() << "current is equal to new current"
-//      << (cell ? KrossWordCell::cellTypeToString(cell->cellType()) : "NULL" );
         return;
     }
 
@@ -594,27 +670,25 @@ void KrossWord::setCurrentCell(KrossWordCell* cell)
 
 void KrossWord::currentCellDestroyed(QObject*)
 {
-//     if ( m_currentCell )
-//  qDebug() << KrossWordCell::cellTypeToString( m_currentCell->cellType() );
-//     else
-//  qDebug() << "Nothing destroyed?!?";
-
-    if (inside(m_currentCell->coord()) && at(m_currentCell->coord()) != m_currentCell)
+    if (inside(m_currentCell->coord()) && at(m_currentCell->coord()) != m_currentCell) {
         setCurrentCell(at(m_currentCell->coord()));
-    else
+    } else {
         setCurrentCell(NULL);
+    }
 }
 
 float KrossWord::solutionProgress() const
 {
     LetterCellList letterList = letters();
-    if (letterList.isEmpty())
+    if (letterList.isEmpty()) {
         return 0.0f;
+    }
 
     int solved = 0;
     foreach(LetterCell * letter, letterList) {
-        if (!letter->isEmpty())
+        if (!letter->isEmpty()) {
             ++ solved;
+        }
     }
 
     return (float)solved / (float)letterList.count();     // TODO Div/0!
@@ -623,8 +697,9 @@ float KrossWord::solutionProgress() const
 QSize KrossWord::emptyCellSpan(const Coord& coordTopLeft, SpannedCell *excludedCell)
 {
     KrossWordCell *cell = at(coordTopLeft);
-    if (cell->getCellType() != EmptyCellType && cell != excludedCell)
+    if (cell->getCellType() != EmptyCellType && cell != excludedCell) {
         return QSize(0, 0);
+    }
 
     int maxWidth = width() - coordTopLeft.first;
     int maxHeight = height() - coordTopLeft.second;
@@ -657,13 +732,12 @@ ErrorType KrossWord::insertImage(const KGrid2D::Coord &coord,
                                  int horizontalCellSpan, int verticalCellSpan, QUrl url,
                                  ErrorTypes errorTypesToIgnore, ImageCell **insertedImage)
 {
-    ErrorType errorType = canInsertImage(coord, horizontalCellSpan,
-                                         verticalCellSpan, errorTypesToIgnore);
-    if (errorType != ErrorNone)
+    ErrorType errorType = canInsertImage(coord, horizontalCellSpan, verticalCellSpan, errorTypesToIgnore);
+    if (errorType != ErrorNone) {
         return errorType;
+    }
 
-    ImageCell *imageCell = new ImageCell(this, coord,
-                                         horizontalCellSpan, verticalCellSpan, url);
+    ImageCell *imageCell = new ImageCell(this, coord, horizontalCellSpan, verticalCellSpan, url);
 
     for (int x = imageCell->coord().first;
             x < imageCell->coord().first + imageCell->horizontalCellSpan(); ++x) {
@@ -673,8 +747,9 @@ ErrorType KrossWord::insertImage(const KGrid2D::Coord &coord,
         }
     }
 
-    if (insertedImage)
+    if (insertedImage) {
         *insertedImage = imageCell;
+    }
 
     return ErrorNone;
 }
@@ -711,8 +786,9 @@ void KrossWord::assignClueNumbers()
                     assignedNumber = true;
                 }
 
-                if (assignedNumber)
+                if (assignedNumber) {
                     ++curClueNumber;
+                }
             }
         } // for x
     } // for y
@@ -720,9 +796,7 @@ void KrossWord::assignClueNumbers()
     m_maxClueNumber = curClueNumber - 1;
 }
 
-ClueCell* KrossWord::findClueCell(const Coord& coord,
-                                  Qt::Orientation orientation,
-                                  AnswerOffset answerOffset) const
+ClueCell* KrossWord::findClueCell(const Coord& coord, Qt::Orientation orientation, AnswerOffset answerOffset) const
 {
     KrossWordCell *cell = at(coord);
 
@@ -748,8 +822,9 @@ ClueCellList KrossWord::clueCellsFromClueNumber(int clueNumber) const
     foreach(ClueCell * clueCell, clueList) {
         if (clueCell->clueNumber() == clueNumber) {
             ret << clueCell;
-            if (ret.count() == 2)
+            if (ret.count() == 2) {
                 return ret;
+            }
         }
     }
 
@@ -760,63 +835,159 @@ KrossWord::FileFormat KrossWord::fileFormatFromFileName(const QString& fileName)
 {
     QMimeDatabase db;
     QString extension = db.suffixForFileName(fileName);
-    if (extension == "xml" || extension == "kwp")
-        return KrossWordPuzzleXmlFile;
-    else if (extension == "kwpz")
-        return KrossWordPuzzleCompressedXmlFile;
-    else if (extension == "puz")
-        return AcrossLitePuzFile;
-    else
-        return DetermineByFileName; // couldn't determine file format
+    if (extension == "kwp") {
+        return KwpFormat;
+    } else if (extension == "kwpz") {
+        return KwpzFormat;
+    } else if (extension == "puz") {
+        return PuzFormat;
+    } else
+        return DetermineByType; // couldn't determine file format
 }
 
-bool KrossWord::write(const QString& fileName, QString* errorString,
-                      WriteMode writeMode, FileFormat fileFormat,
-                      const QByteArray &undoData)
+CrosswordData KrossWord::getCrosswordData(WriteMode writeMode, const QByteArray &undoData)
+{
+    CrosswordData crosswordData;
+    crosswordData.width = width();
+    crosswordData.height = height();
+    crosswordData.type = crosswordTypeInfo().crosswordType;
+    if (crosswordData.type == Crossword::CrosswordType::CodedPuzzle) {
+        crosswordData.codedPuzzleMap = letterContentToClueNumberMapping();
+    } else if (crosswordData.type == Crossword::CrosswordType::UserDefinedCrossword) {
+        crosswordData.customCrosswordRules = crosswordTypeInfo();
+    }
+
+    if (!getTitle().isEmpty() && writeMode != KrossWord::Template) {
+        crosswordData.title = getTitle();
+    }
+    if (!getAuthors().isEmpty()) {
+        crosswordData.authors = getAuthors();
+    }
+    if (!getCopyright().isEmpty()) {
+        crosswordData.copyright = getCopyright();
+    }
+    if (!getNotes().isEmpty()) {
+        crosswordData.notes = getNotes();
+    }
+
+    ClueCellList clueList = clues();
+    foreach(ClueCell *clue, clueList) {
+        ClueInfo clueInfo;
+        clueInfo.gridIndex = Coords(clue->coord().first, clue->coord().second).toIndex(width());
+        clueInfo.number = clue->clueNumber();
+        clueInfo.orientation = (clue->orientation() == Qt::Horizontal ? ClueOrientation::Horizontal : ClueOrientation::Vertical);
+        clueInfo.answerOffset = clue->answerOffset();
+        if (writeMode == KrossWord::Normal) {
+            clueInfo.clue = clue->clue();
+            clueInfo.solution = clue->correctAnswer();
+            clueInfo.answer = clue->currentAnswer();
+        } else if (writeMode == KrossWord::Template) {
+            QString emptyAnswer;
+            emptyAnswer.fill(ClueCell::EmptyCorrectCharacter, clue->correctAnswer().length());
+            clueInfo.clue = QString();
+            clueInfo.solution = emptyAnswer;
+            clueInfo.answer = emptyAnswer;
+        }
+        crosswordData.clues.append(clueInfo);
+    }
+
+    // CHECK: kwp has no support for images (use kwpz)
+    ImageCellList imageList = images();
+    foreach(ImageCell *image, imageList) {
+        ImageInfo imageInfo;
+        imageInfo.gridIndex = Coords(image->coord().first, image->coord().second).toIndex(width());
+        imageInfo.width = image->horizontalCellSpan();
+        imageInfo.height = image->verticalCellSpan();
+        if (writeMode == KrossWord::Normal) {
+            imageInfo.url = image->url().url(QUrl::PreferLocalFile); //CHECK: must be local to the zip
+        } else if (writeMode == KrossWord::Template) {
+            imageInfo.url = QString();
+        }
+        crosswordData.images.append(imageInfo);
+    }
+
+    SolutionLetterCellList solutionLetterList = solutionWordLetters();
+    foreach(SolutionLetterCell *letter, solutionLetterList) {
+        crosswordData.markedLetters.append(MarkedLetter(
+                                            Coords(letter->coord().first, letter->coord().second).toIndex(width()),
+                                            letter->solutionWordIndex()));
+    }
+
+    // CHECK: refactor? (now it's almost original)
+    // CHECK: write letters for all confidence()?
+    QHash< Confidence, LetterCellList > notConfidentLetterLists;
+    LetterCellList letterList = letters();
+    foreach(LetterCell *letter, letterList) {
+        if (letter->confidence() != Confident)
+            notConfidentLetterLists[letter->confidence()] << letter;
+    }
+    if (!notConfidentLetterLists.isEmpty()) {
+        for (QHash<Confidence, LetterCellList>::const_iterator it = notConfidentLetterLists.constBegin();
+             it != notConfidentLetterLists.constEnd();
+             ++it) {
+            foreach(const LetterCell *letter, notConfidentLetterLists[it.key()]) {
+                ConfidenceInfo confidenceInfo;
+                confidenceInfo.gridIndex = Coords(letter->coord().first, letter->coord().second).toIndex(width());
+                confidenceInfo.confidence = it.key();
+                crosswordData.lettersConfidence.append(confidenceInfo);
+            }
+        }
+    }
+
+    if (!undoData.isEmpty()) {
+        crosswordData.undoData = undoData.toBase64();
+    }
+
+    return crosswordData;
+}
+
+bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode writeMode, FileFormat fileFormat, const QByteArray &undoData)
 {
     QFile file(fileName);
+    file.open(QIODevice::WriteOnly);
 
-    if (fileFormat == DetermineByFileName) {
+    CrosswordData crosswordData = getCrosswordData(writeMode, undoData);
+
+    if (fileFormat == DetermineByType) {
         fileFormat = fileFormatFromFileName(fileName);
-        if (fileFormat == DetermineByFileName) {
+        if (fileFormat == DetermineByType) {
             qDebug() << QString("File format unknown for file '%1'").arg(fileName);
             return false;
         }
     }
 
-    if (fileFormat == KrossWordPuzzleXmlFile) {
-        KrossWordXmlWriter xmlWriter;
-        bool writeOk = xmlWriter.write(&file, this, writeMode, undoData);
+    if (fileFormat == KwpFormat) {
+        KwpManager kwpManager(&file);
+        bool writeOk = kwpManager.write(crosswordData); // CHECK: missing writeMode
         if (!writeOk) {
-            *errorString = i18n("Error writing crossword: %1", xmlWriter.errorString());
+            *errorString = i18n("Error writing crossword: %1", kwpManager.errorString());
             return false;
         }
-    } else if (fileFormat == KrossWordPuzzleCompressedXmlFile) {
-        KrossWordXmlWriter xmlWriter;
-        bool writeOk = xmlWriter.writeCompressed(&file, this, writeMode, undoData);
+    } else if (fileFormat == KwpzFormat) {
+        KwpzManager kwpzManager(&file);
+        bool writeOk = kwpzManager.write(crosswordData); // CHECK: missing writeMode
         if (!writeOk) {
-            *errorString = i18n("Error writing compressed crossword: %1",
-                                xmlWriter.errorString());
+            *errorString = i18n("Error writing compressed crossword: %1", kwpzManager.errorString());
             return false;
         }
-    } else if (fileFormat == AcrossLitePuzFile) {
-        if (!undoData.isEmpty())
+    } else if (fileFormat == PuzFormat) { // CHECK: we don't want to export in puz format...
+        if (!undoData.isEmpty()) {
             qDebug() << "Can't store undoData to *.puz-files";
-
-        KrossWordPuzStream puzWriter;
-        bool writeOk = puzWriter.write(&file, this, writeMode);
+        }
+        PuzManager puzManager(&file);
+        bool writeOk = puzManager.write(crosswordData); // CHECK: missing writeMode
         if (!writeOk && errorString != NULL) {
             *errorString = i18n("Error writing AcrossLite's .puz-format.");
             return false;
         }
-    } else
+    } else {
         return false;
+    }
 
     return true;
 }
 
-bool KrossWord::read(const QUrl &url, QString *errorString, QWidget *mainWindow,
-                     FileFormat fileFormat, QByteArray *undoData)
+bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileFormat, QByteArray *undoData)
 {
     QFile file(url.path());
     if (!file.open(QIODevice::ReadOnly)) {
@@ -828,58 +999,52 @@ bool KrossWord::read(const QUrl &url, QString *errorString, QWidget *mainWindow,
     }
 
     setHighlightedClue(NULL);
-    removeAllCells();
+    //removeAllCells(); //CHECK: done by createNew
     bool wasBlocking = blockSignals(true);
 
-    bool readOk = false, fileFormatDeterminationFailed = false;
-    if (fileFormat == DetermineByFileName) {
-        QString extension = QFileInfo(url.path()).suffix();
-        if (extension == "puz")
-            fileFormat = AcrossLitePuzFile;
-        else if (extension == "xml" || extension == "kwp")
-            fileFormat = KrossWordPuzzleXmlFile;
-        else if (extension == "kwpz")
-            fileFormat = KrossWordPuzzleCompressedXmlFile;
-        else {
+    bool readOk = false;
+    bool fileFormatDeterminationFailed = false;
+    if (fileFormat == DetermineByType) {
+        QMimeDatabase mimeDatabase;
+        QMimeType mimeType = mimeDatabase.mimeTypeForFile(url.path(), QMimeDatabase::MatchDefault);
+        if (mimeType.inherits("application/x-crossword")) {
+            fileFormat = PuzFormat;
+        } else if (mimeType.inherits("application/x-krosswordpuzzle")) {
+            fileFormat = KwpFormat;
+        } else if (mimeType.inherits("application/x-krosswordpuzzle-compressed")) {
+            fileFormat = KwpzFormat;
+        } else {
             fileFormatDeterminationFailed = true;
-
-            // Cycle through the available readers
-            KrossWordPuzStream puzReader;
-            readOk = puzReader.read(&file, this);
-
-            if (!readOk) {
-                if (file.isOpen()) file.seek(0);
-                KrossWordXmlReader xmlReader;
-                readOk = xmlReader.read(&file, this, undoData);
-
-                if (!readOk) {
-                    if (file.isOpen()) file.seek(0);
-                    readOk = xmlReader.readCompressed(&file, this, undoData);
-                }
-            }
-
-            if (!readOk && errorString)
-                *errorString = "File format unknown";
         }
     }
 
     if (!fileFormatDeterminationFailed) {
-        if (fileFormat == AcrossLitePuzFile) {
-            KrossWordPuzStream puzReader;
-            readOk = puzReader.read(&file, this);
-            if (!readOk && errorString)
+        CrosswordData crosswordData;
+
+        if (fileFormat == PuzFormat) {
+            PuzManager puzManager(&file);
+            readOk = puzManager.read(crosswordData);
+            if (!readOk && errorString) {
                 *errorString = i18n("Error reading AcrossLite's .puz-format.");
-        } else if (fileFormat == KrossWordPuzzleXmlFile) {
-            KrossWordXmlReader xmlReader;
-            readOk = xmlReader.read(&file, this, undoData);
-            if (!readOk && errorString)
-                *errorString = xmlReader.errorString();
-        } else if (fileFormat == KrossWordPuzzleCompressedXmlFile) {
-            KrossWordXmlReader xmlReader;
-            readOk = xmlReader.readCompressed(&file, this, undoData);
-            if (!readOk && errorString)
-                *errorString = xmlReader.errorString();
+                return false;
+            }
+        } else if (fileFormat == KwpFormat) {
+            KwpManager kwpManager(&file);
+            readOk = kwpManager.read(crosswordData);
+            if (!readOk && errorString) {
+                *errorString = kwpManager.errorString();
+                return false;
+            }
+        } else if (fileFormat == KwpzFormat) {
+            KwpzManager kwpzManager(&file);
+            readOk = kwpzManager.read(crosswordData);
+            if (!readOk && errorString) {
+                *errorString = kwpzManager.errorString();
+                return false;
+            }
         }
+
+        createNew(crosswordData, undoData);
     }
     file.close();
     blockSignals(wasBlocking);
@@ -1661,61 +1826,63 @@ ErrorType KrossWord::insertClue(const Coord &coord,
                                 ErrorTypes errorTypesToIgnore, bool allowDoubleClueCells,
                                 ClueCell **insertedClue)
 {
-    Q_ASSERT(cellType == LetterCellType
-             || cellType == SolutionLetterCellType);
+    Q_ASSERT(cellType == LetterCellType || cellType == SolutionLetterCellType);
 
     Offset offset = ClueCell::answerOffsetToOffset(answerOffset);
     ErrorType errorType = canInsertClue(coord, orientation, offset,
                                         answer, errorTypesToIgnore,
                                         allowDoubleClueCells);
     if (errorType != ErrorNone) {
-        if (insertedClue)
+        if (insertedClue) {
             *insertedClue = NULL;
+        }
         return errorType;
     }
 
     // Delete empty cell and insert new clue cell
     // or combine existing clue cell with the new clue cell to a double clue cell
     QString answerUpper = answer.toUpper();
-    ClueCell *clueCell = new ClueCell(this, coord, orientation,
-                                      answerOffset, clue, answerUpper);
+    ClueCell *clueCell = new ClueCell(this, coord, orientation, answerOffset, clue, answerUpper);
     clueCell->beginAddLetters();
     if (answerOffset != OnClueCell) {
         KrossWordCell *cellAtCoord = at(coord);
         if (cellAtCoord->isType(ClueCellType)) {
-            DoubleClueCell *doubleClueCell = new DoubleClueCell(
-                this, coord, qgraphicsitem_cast<ClueCell*>(cellAtCoord), clueCell);
+            DoubleClueCell *doubleClueCell = new DoubleClueCell(this, coord, qgraphicsitem_cast<ClueCell*>(cellAtCoord), clueCell);
             (*m_krossWordGrid)[ coord ] = doubleClueCell;
-        } else
+        } else {
             replaceCell(coord, clueCell);
+        }
     }
 
     // Insert letter cells for the answer
     Coord letterCoord = coord + offset;
-    const Offset letterOffset = orientation == Qt::Horizontal
-                                ? Offset(1, 0) : Offset(0, 1);
+    const Offset letterOffset = orientation == Qt::Horizontal ? Offset(1, 0) : Offset(0, 1);
     for (int i = 0; i < answerUpper.length(); ++i) {
         KrossWordCell *oldCell = at(letterCoord);
 
         if (oldCell->isType(EmptyCellType)) {
             // Replace empty cell with new letter cell
             KrossWordCell *newCell = NULL;
-            if (cellType == LetterCellType)
+            if (cellType == LetterCellType) {
                 newCell = new LetterCell(this, letterCoord, clueCell);
-            else if (cellType == SolutionLetterCellType)
+            } else if (cellType == SolutionLetterCellType) {
                 newCell = new SolutionLetterCell(this, letterCoord, clueCell, i);
+            }
 
-            if (newCell)
+            if (newCell) {
                 replaceCell(letterCoord, newCell);
-        } else if (oldCell->isLetterCell())
+            }
+        } else if (oldCell->isLetterCell()) {
             ((LetterCell*)oldCell)->setClue(clueCell);      // Add clue to existing letter cell
+        }
 
         letterCoord = letterCoord + letterOffset;
     }
 
     clueCell->endAddLetters();
-    if (insertedClue)
+    if (insertedClue) {
         *insertedClue = clueCell;
+    }
 
     insertCluePostProcessing(clueCell);
     return ErrorNone;
@@ -2296,8 +2463,9 @@ void KrossWord::removeSynchronization(SyncMethods syncMethods,
                                       SyncCategories syncCategories)
 {
     KrossWordCellList cellList = cells();
-    foreach(KrossWordCell * cell, cellList)
-    cell->removeSynchronization(syncMethods, syncCategories);
+    foreach(KrossWordCell * cell, cellList) {
+        cell->removeSynchronization(syncMethods, syncCategories);
+    }
 }
 
 void KrossWord::focusCellChanged(KrossWordCell* /*currentCell*/)
@@ -2405,12 +2573,9 @@ KrossWordCellList KrossWord::resizeGrid(uint width, uint height, ResizeAnchor an
     uint prevWidth = this->width();
     uint prevHeight = this->height();
 
-    if (prevWidth == width && prevHeight == height)
+    if (prevWidth == width && prevHeight == height) {
         return removedCells;
-//   if ( simulate )
-//     qDebug() << "SIMULATION";
-//   qDebug() << "Resizing from" << QString("%1x%2").arg(prevWidth).arg(prevHeight)
-//     << "to" << QString("%1x%2").arg(width).arg(height);
+    }
 
     QRect sourceRect;
     Offset offset;
@@ -2450,17 +2615,17 @@ KrossWordCellList KrossWord::resizeGrid(uint width, uint height, ResizeAnchor an
     // Move coords of hidden clue cells
     KrosswordGrid *krossWordGrid = new KrosswordGrid(width, height);
     foreach(ClueCell * clue, clues()) {
-        if (clue->answerOffset() != OnClueCell)
+        if (clue->answerOffset() != OnClueCell) {
             continue;
+        }
 
         Coord sourceCoord = clue->coord();
         Coord targetCoord = sourceCoord + offset;
 
         if (krossWordGrid->inside(targetCoord)) {
-            if (simulate)
+            if (simulate) {
                 continue;
-
-//       qDebug() << "inside" << sourceCoord << "=>" << targetCoord;
+            }
             clue->setCoord(targetCoord, false);
         }
     }
@@ -2472,12 +2637,14 @@ KrossWordCellList KrossWord::resizeGrid(uint width, uint height, ResizeAnchor an
             Coord targetCoord = sourceCoord + offset;
 
             if (krossWordGrid->inside(targetCoord)) {
-                if (simulate)
+                if (simulate) {
                     continue;
+                }
 
                 KrossWordCell *cell = m_krossWordGrid->at(sourceCoord);
-                if (!cell)
+                if (!cell) {
                     continue;
+                }
 
                 SpannedCell *spannedCell = dynamic_cast<SpannedCell*>(cell);
                 DoubleClueCell *doubleClueCell;
@@ -2508,8 +2675,9 @@ KrossWordCellList KrossWord::resizeGrid(uint width, uint height, ResizeAnchor an
         m_krossWordGrid = krossWordGrid;
 
         fillWithEmptyCells();
-    } else
+    } else {
         delete krossWordGrid;
+    }
 
     KrossWordCellList uniqueRemovedCells;
     for (KrossWordCellList::iterator it = removedCells.begin(); it != removedCells.end(); ++it) {
@@ -2589,8 +2757,9 @@ void KrossWord::removeAllCells()
 
     setHighlightedClue(NULL);
     KrossWordCellList cellList = cells();
-    foreach(KrossWordCell * cell, cellList)
-    removeCell(cell);
+    foreach(KrossWordCell * cell, cellList) {
+        removeCell(cell);
+    }
 }
 
 void KrossWord::deleteAllCells()
@@ -2630,12 +2799,10 @@ void KrossWord::deleteAllCells()
 
 void KrossWord::fillWithEmptyCells()
 {
-    fillWithEmptyCells(Coord(0, 0),
-                       Coord(width() - 1, height() - 1));
+    fillWithEmptyCells(Coord(0, 0), Coord(width() - 1, height() - 1));
 }
 
-void KrossWord::fillWithEmptyCells(const Coord& coordTopLeft,
-                                   const Coord& coordBottomRight)
+void KrossWord::fillWithEmptyCells(const Coord& coordTopLeft, const Coord& coordBottomRight)
 {
     Coord coord;
     for (coord.first = coordTopLeft.first;
@@ -2866,6 +3033,8 @@ QString KrossWord::errorMessageFromErrorType(ErrorType errorType)
     return "Unknown error.";
 }
 
+// CHECK: to remove
+/*
 AnswerOffset KrossWord::answerOffsetFromString(const QString &s)
 {
     QString sl = s.toLower();
@@ -2892,7 +3061,10 @@ AnswerOffset KrossWord::answerOffsetFromString(const QString &s)
         return OffsetInvalid;
     }
 }
+*/
 
+// CHECK: to remove
+/*
 QString KrossWord::answerOffsetToString(AnswerOffset answerOffset)
 {
     switch (answerOffset) {
@@ -2919,6 +3091,7 @@ QString KrossWord::answerOffsetToString(AnswerOffset answerOffset)
         return "ClueHidden";
     }
 }
+*/
 
 } // namespace Crossword
 

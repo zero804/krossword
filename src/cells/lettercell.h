@@ -148,9 +148,6 @@ public:
 
     SolutionLetterCell *toSolutionLetter(int solutionLetterIndex);
 
-    static Confidence stringToConfidence(const QString &string);
-    static QString confidenceToString(Confidence confidence);
-
 signals:
     /** Emitted when the current letter of this letter cell has changed. */
     void currentLetterChanged(LetterCell *letter, const QChar &currentLetter);

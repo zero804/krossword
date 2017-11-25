@@ -29,6 +29,8 @@
 #include <QGraphicsObject>
 #include <QGraphicsTextItem>
 
+class CrosswordData;
+
 class QGraphicsDropShadowEffect;
 
 #include "global.h"
@@ -163,10 +165,10 @@ public:
     };
 
     enum FileFormat {
-        DetermineByFileName,
-        KrossWordPuzzleXmlFile,
-        KrossWordPuzzleCompressedXmlFile,
-        AcrossLitePuzFile
+        DetermineByType,
+        KwpFormat,
+        KwpzFormat,
+        PuzFormat
     };
 
     enum ConversionCommand {
@@ -251,9 +253,8 @@ public:
         return m_animationEnabled;
     }
 
-    void createNew(CrosswordType crosswordType, const QSize &crosswordSize);
-    void createNew(const CrosswordTypeInfo &crosswordTypeInfo,
-                   const QSize &crosswordSize);
+    void createNew(const CrosswordData &crosswordData, QByteArray *undoData);
+    void createNew(const CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize);
 
     /** This method is provided for convenience. It calls
     * @ref generateConversionInfo and then @ref executeConversionInfo,
@@ -285,9 +286,10 @@ public:
     * @param url The URL to the file to read.
     * @param errorString Contains a string describing the error, if false was returned.
     * @return False, if there was an error. */
-    bool read(const QUrl &url, QString *errorString = NULL,
-              QWidget *mainWindow = NULL, FileFormat fileFormat = DetermineByFileName,
-              QByteArray *undoData = NULL);
+    bool read(const QUrl &url, QString *errorString = NULL, FileFormat fileFormat = DetermineByType, QByteArray *undoData = NULL);
+
+    /** Convert the crossword into a data model.*/
+    CrosswordData getCrosswordData(WriteMode writeMode, const QByteArray &undoData = QByteArray()); // CHECK: temporary name
 
     /** Write the crossword into a file.
     * @param fileName The path to the file to write to.
@@ -298,7 +300,7 @@ public:
     * @return False, if there was an error. */
     bool write(const QString &fileName, QString *errorString = NULL,
                WriteMode writeMode = Normal,
-               FileFormat fileFormat = DetermineByFileName,
+               FileFormat fileFormat = DetermineByType,
                const QByteArray &undoData = QByteArray());
 
     /** Gets the clue cell at the coordinates @p coord with the given @p orientation.
@@ -660,8 +662,9 @@ public:
     * @see canInsertClue()
     * @see canInsertImage() */
     static QString errorMessageFromErrorType(ErrorType errorType);
-    static AnswerOffset answerOffsetFromString(const QString &s);
-    static QString answerOffsetToString(AnswerOffset answerOffset);
+
+    //static AnswerOffset answerOffsetFromString(const QString &s); // CHECK: to remove
+    //static QString answerOffsetToString(AnswerOffset answerOffset); // CHECK: to remove
 
     /** Checks if the crossword is empty, ie. contains no clues. */
     bool isEmpty() const;
@@ -735,7 +738,7 @@ public:
         return m_theme;
     }
     void setTheme(const KrosswordTheme *theme);
-
+    
 protected:
     enum RemoveMode {
         DontRemove,

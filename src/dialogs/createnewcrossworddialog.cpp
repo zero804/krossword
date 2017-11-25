@@ -25,7 +25,7 @@
 
 #include <QStandardItemModel>
 #include <templatemodel.h>
-#include <io/krosswordxmlreader.h>
+#include <io/kwpzmanager.h>
 #include <QTimer>
 #include <QStandardPaths>
 
@@ -169,40 +169,39 @@ void CreateNewCrosswordDialog::templateLocationChanged(const QString& path)
     m_templateModel->setRootPath(path);
 }
 
-void CreateNewCrosswordDialog::currentTemplateChanged(
-    const QModelIndex& current, const QModelIndex& previous)
+void CreateNewCrosswordDialog::currentTemplateChanged(const QModelIndex& current, const QModelIndex& previous)
 {
     Q_UNUSED(previous);
 
     QString filePath = m_templateModel->filePath(current);
     ui_create_new.preview->showPreview(filePath);
 
-    QString errorString;
-    KrossWordXmlReader::KrossWordInfo info =
-        KrossWordXmlReader::readInfo(QUrl::fromLocalFile(filePath), &errorString);
-    if (!info.isValid()) {
-        qDebug() << "Error reading crossword info from library file"
-                 << errorString;
+    QFile file(filePath);
+    file.open(QIODevice::ReadOnly);
+    KwpzManager kwpzManager(&file);
+    CrosswordData crosswordData;
+    bool readOk = kwpzManager.read(crosswordData);
+    file.close();
+
+    if (!readOk) {
+        qDebug() << "Error reading crossword info from library file" << kwpzManager.errorString();
     } else {
-        CrosswordTypeInfo typeInfo =
-            CrosswordTypeInfo::infoFromType(
-                CrosswordTypeInfo::typeFromString(info.type));
+        CrosswordTypeInfo typeInfo = CrosswordTypeInfo::infoFromType(crosswordData.type);
 
         QString infoText = QString("<b>%1:</b> %2<br>"
                                    "<b>%3:</b> %4x%5<br>"
                                    "<b>%6:</b> %7<br>")
                            .arg(i18n("Crossword Type")).arg(typeInfo.name)
-                           .arg(i18n("Size")).arg(info.width).arg(info.height)
-                           .arg(i18n("Notes")).arg(info.notes);
+                           .arg(i18n("Size")).arg(crosswordData.width).arg(crosswordData.height)
+                           .arg(i18n("Notes")).arg(crosswordData.notes);
         ui_create_new.templateType->setText(typeInfo.name);
-        ui_create_new.templateSize->setText(QString("%1x%2")
-                                            .arg(info.width).arg(info.height));
-        ui_create_new.lblTemplateNotes->setVisible(!info.notes.isEmpty());
-        ui_create_new.templateNotes->setVisible(!info.notes.isEmpty());
-        ui_create_new.templateNotes->setText(info.notes);
+        ui_create_new.templateSize->setText(QString("%1x%2").arg(crosswordData.width).arg(crosswordData.height));
+        ui_create_new.lblTemplateNotes->setVisible(!crosswordData.notes.isEmpty());
+        ui_create_new.templateNotes->setVisible(!crosswordData.notes.isEmpty());
+        ui_create_new.templateNotes->setText(crosswordData.notes);
 
-        ui_create_new.columns->setValue(info.width);
-        ui_create_new.rows->setValue(info.height);
+        ui_create_new.columns->setValue(crosswordData.width);
+        ui_create_new.rows->setValue(crosswordData.height);
         setCrosswordType(typeInfo);
     }
 }

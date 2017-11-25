@@ -23,7 +23,7 @@
 
 #include "mainwindow.h"
 #include "krossworddocument.h"
-#include "io/krosswordxmlreader.h"
+#include "io/kwpzmanager.h"
 #include "htmldelegate.h"
 #include "settings.h"
 #include "dialogs/createnewcrossworddialog.h"
@@ -32,7 +32,6 @@
 #include <QDebug>
 
 #include <KMessageBox>
-//#include <KIO/CopyJob>
 #include <KActionCollection>
 #include <KIO/PreviewJob>
 #include <KJobWidgets>
@@ -40,7 +39,6 @@
 #include <QStandardPaths>
 #include <QMenuBar>
 #include <QFileDialog>
-
 
 LibraryGui::LibraryGui(MainWindow* parent) : KXmlGuiWindow(parent, Qt::WindowFlags()),
       m_mainWindow(parent),
@@ -338,8 +336,9 @@ void LibraryGui::libraryAddSlot()
                                            QUrl(),
                                            "Crosswords (*.kwp *.kwpz *.puz)");
 
-    if (!url.isEmpty())
+    if (!url.isEmpty()) {
         libraryAddCrossword(url);
+    }
 }
 
 // MISSING kwp, kwpz (and puz?) EXPORT

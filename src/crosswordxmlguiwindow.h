@@ -259,7 +259,7 @@ public:
                                         const QString& copyright, const QString& notes);
 
     inline bool loadFile(const QString& fileName);
-    bool loadFile(const QUrl &url, KrossWord::FileFormat fileFormat = KrossWord::DetermineByFileName, bool loadCrashedFile = false);
+    bool loadFile(const QUrl &url, KrossWord::FileFormat fileFormat = KrossWord::DetermineByType, bool loadCrashedFile = false);
     bool save();
     bool saveAs(const Crossword::KrossWord::WriteMode writeMode);
     bool closeFile();

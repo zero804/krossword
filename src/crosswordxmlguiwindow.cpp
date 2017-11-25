@@ -705,12 +705,12 @@ bool CrossWordXmlGuiWindow::loadFile(const QUrl &url, KrossWord::FileFormat file
     setCurrentFileName(QString());
 
     // Read the file
-    QFileInfo fileInfo(resultUrl.toLocalFile()); // Qt5: just resultUrl.fileName()
+    QFileInfo fileInfo(resultUrl.toLocalFile());
     QString fileName = fileInfo.fileName();
     updateClueDock();
 
     QByteArray undoData;
-    bool readOk = krossWord()->read(resultUrl, &errorString, this, fileFormat, &undoData);
+    bool readOk = krossWord()->read(resultUrl, &errorString, fileFormat, &undoData);
 
     if (readOk) {
         setState(ShowingCrossword);
@@ -793,14 +793,14 @@ bool CrossWordXmlGuiWindow::saveAs(const KrossWord::WriteMode writeMode)
         startDir = QUrl::fromLocalFile(m_curFileName);
     }
 
-    QString fileName = QFileDialog::getSaveFileName(this, QString(), startDir.path(), i18n("Crosswords (*.kwp *.kwpz *.puz)"));
+    QString fileName = QFileDialog::getSaveFileName(this, QString(), startDir.path(), i18n("Krossword file (*.kwpz)"));
 
     if (!fileName.isEmpty()) {
         // Add default extension if non was selected
         if (fileName.indexOf(QRegExp("\\.(kwp|kwpz|puz)$", Qt::CaseInsensitive)) == -1) {
             fileName += ".kwpz";
         }
-        return writeTo(fileName, writeMode, true/*save_undo_stack*/); //CHECK: an option to choose if save_undo_stack?
+        return writeTo(fileName, writeMode, true/*save_undo_stack*/); // CHECK: an option to choose if save_undo_stack?
     }
 
     return false;
@@ -826,7 +826,7 @@ bool CrossWordXmlGuiWindow::closeFile()
 bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, bool saveUndoStack)
 {
     KrossWord::FileFormat fileFormat = KrossWord::fileFormatFromFileName(fileName);
-    if (fileFormat == KrossWord::AcrossLitePuzFile) {
+    if (fileFormat == KrossWord::PuzFormat) { // CHECK: we don't want to support PUZ exporting...s
         bool hasConfidencesSet = false;
         LetterCellList letterList = krossWord()->letters();
         foreach(LetterCell * letter, letterList) {
@@ -839,7 +839,7 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
         if (hasConfidencesSet) {
             int result = KMessageBox::warningContinueCancel(this,
                          i18n("Can't store confidence values in *.puz files!\nIf you want confidence "
-                              "values to be stored please use a Krossword file format (*.kwp or *.kwpz)."),
+                              "values to be stored please use the Krossword file format (*.kwpz)."),
                          QString(), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
                          "dont_show_cant_write_confidences_to_puz_confirmation");
             if (result == KMessageBox::Cancel) {
@@ -851,7 +851,7 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
         if (!imageList.isEmpty()) {
             int result = KMessageBox::warningContinueCancel(this,
                          i18n("Can't store image cells in *.puz files!\nIf you want image "
-                              "cells to be stored please use a Krossword file format (*.kwp or *.kwpz)."),
+                              "cells to be stored please use the Krossword file format (*.kwpz)."),
                          QString(), KStandardGuiItem::cont(), KStandardGuiItem::cancel(),
                          "dont_show_cant_write_images_to_puz_confirmation");
             if (result == KMessageBox::Cancel) {
@@ -863,9 +863,7 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
     QString errorString;
     bool writeOk;
     if (saveUndoStack) {
-        writeOk = krossWord()->write(fileName, &errorString, writeMode,
-                                     KrossWord::DetermineByFileName,
-                                     m_undoStack->data());
+        writeOk = krossWord()->write(fileName, &errorString, writeMode, KrossWord::DetermineByType, m_undoStack->data());
     } else {
         writeOk = krossWord()->write(fileName, &errorString, writeMode);
     }
@@ -879,17 +877,12 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
         if (m_curDocumentOrigin == DocumentDownloaded || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
             m_curDocumentOrigin = DocumentOpenedLocally;
         }
-
         // TODO connect to signal from main game window
         emit fileSaved(m_curFileName, oldFileName);
 
-//  QString fileWithoutPath = QFileInfo( m_curFileName ).fileName();
-//  m_recentFilesAction->addUrl( QUrl(m_curFileName),
-//      isFileInLibrary(m_curFileName) ? "Library: " + fileWithoutPath : fileWithoutPath );
-//  m_recentFilesAction->saveEntries( Settings::self()->config()->group("") );
         return true;
     } else {
-        statusBar()->showMessage(i18n("Error while writing file: %1", errorString));
+        statusBar()->showMessage(i18n("Error while writing file %1", errorString));
         return false;
     }
 }
@@ -1925,7 +1918,7 @@ void CrossWordXmlGuiWindow::autoSaveToTempFile()
 
     bool writeOk = krossWord()->write(tmpFileName, &errorString,
                                       KrossWord::Normal,
-                                      KrossWord::KrossWordPuzzleCompressedXmlFile,
+                                      KrossWord::KwpzFormat,
                                       m_undoStack->data());
 
     if (!writeOk) {
