@@ -2081,7 +2081,10 @@ QList<QPropertyAnimation *> CrossWordXmlGuiWindow::makeAnimation()
 
 void CrossWordXmlGuiWindow::fitToPageSlot()
 {
+    m_view->scene()->setSceneRect(krossWord()->boundingRect()); // CHECK
+
     m_view->fitInView(m_view->sceneRect()/*.adjusted(150, 150, -150, -150)*/, Qt::KeepAspectRatio);
+    m_view->centerOn(m_view->sceneRect().center()); // CHECK
     m_view->updateZoomMinimumScale();
     m_zoomWidget->setZoom(m_zoomWidget->minimumZoom());
     krossWord()->clearCache();
