@@ -61,7 +61,7 @@ KrossWord::KrossWord(const KrosswordTheme *theme, int width, int height)
     m_headerItem->setFont(font);
     m_headerItem->setDefaultTextColor(m_theme->fontColor());
     m_headerItem->setHtml("<strong>title</strong> by author<br><small>copyright</small>"); //placeholder just to update boundingrect
-    m_headerItem->setPos(boundingRect().topLeft() - m_headerItem->boundingRect().bottomLeft());
+    m_headerItem->setPos(0, - m_headerItem->boundingRect().height());
 }
 
 void KrossWord::init(uint width, uint height)
@@ -243,7 +243,7 @@ QRectF KrossWord::boundingRect() const
 {
     QRectF rect = QRectF(0, 0, getCellSize().width() * width(), getCellSize().height() * height());
     if (m_headerItem->isVisible()) {
-        return rect.united(m_headerItem->boundingRect());
+        return rect.united(m_headerItem->boundingRect().adjusted(0, m_headerItem->pos().y(), 0, m_headerItem->pos().y()));
     }
 
     return rect;
