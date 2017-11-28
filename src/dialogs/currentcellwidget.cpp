@@ -30,9 +30,7 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-CurrentCellWidget::CurrentCellWidget(KrossWord *krossWord,
-                                     KrosswordDictionary *dictionary,
-                                     QWidget* parent)
+CurrentCellWidget::CurrentCellWidget(KrossWord *krossWord, Dictionary *dictionary, QWidget* parent)
     : QWidget(parent), m_krossWord(0), m_dictionary(dictionary),
       m_currentCell(0)
 {
@@ -408,7 +406,7 @@ void CurrentCellWidget::clearLayout()
 
 
 ClueCellWidgetWithConvertButton::ClueCellWidgetWithConvertButton(
-    ClueCell* clue, KrosswordDictionary *dictionary,
+    ClueCell* clue, Dictionary *dictionary,
     LetterCell* letter, QWidget* parent)
     : QWidget(parent), m_letterCell(0),
       m_convertToSolLetterButton(0), m_hLine(0)

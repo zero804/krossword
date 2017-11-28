@@ -38,19 +38,19 @@ using namespace Crossword;
 // class ClueCell;
 // class ImageCell;
 // class KrossWord;
-class KrosswordDictionary;
+class Dictionary;
+
 class CurrentCellWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    CurrentCellWidget(KrossWord *krossWord, KrosswordDictionary *dictionary,
-                      QWidget* parent = 0);
+    CurrentCellWidget(KrossWord *krossWord, Dictionary *dictionary, QWidget* parent = 0);
     ~CurrentCellWidget();
 
     KrossWord *krossWord() const {
         return m_krossWord;
-    };
+    }
     void setKrossWord(KrossWord *krossWord);
     void setWatchForChanges(bool enabled = true);
 
@@ -108,7 +108,7 @@ private:
     void setupSolutionLetterCell(SolutionLetterCell *solutionLetter);
 
     KrossWord *m_krossWord;
-    KrosswordDictionary *m_dictionary;
+    Dictionary *m_dictionary;
     KrossWordCell *m_currentCell;
     ClueCell *m_currentClue;
     bool m_noCell;
@@ -121,7 +121,7 @@ private:
 class ClueCellWidgetWithConvertButton : public QWidget
 {
 public:
-    ClueCellWidgetWithConvertButton(ClueCell* clue, KrosswordDictionary *dictionary,
+    ClueCellWidgetWithConvertButton(ClueCell* clue, Dictionary *dictionary,
                                     LetterCell *letter, QWidget* parent = 0);
 
     void setCells(ClueCell *clue, LetterCell *letter);

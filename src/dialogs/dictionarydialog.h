@@ -24,14 +24,14 @@
 #include <QDialog>
 
 class ExtendedSqlTableModel;
-class KrosswordDictionary;
+class Dictionary;
 
 class DictionaryDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit DictionaryDialog(KrosswordDictionary *dictionary, QWidget* parent = 0);
+    explicit DictionaryDialog(Dictionary *dictionary, QWidget* parent = 0);
 
     ExtendedSqlTableModel *databaseTable() const {
         return m_dbTable;
@@ -55,7 +55,7 @@ private:
     void showInfoMessage(const QString &infoMessage);
 
     Ui::dictionaries ui_dictionaries;
-    KrosswordDictionary *m_dictionary;
+    Dictionary *m_dictionary;
     ExtendedSqlTableModel *m_dbTable;
     QLabel *m_infoMessage;
 };

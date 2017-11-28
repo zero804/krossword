@@ -30,13 +30,13 @@ class QProgressBar;
 class QDialog;
 class ExtendedSqlTableModel;
 
-class KrosswordDictionary : public QObject
+class Dictionary : public QObject
 {
     Q_OBJECT
 
 public:
-    KrosswordDictionary(QObject* parent = nullptr);
-    virtual ~KrosswordDictionary();
+    Dictionary(QObject* parent = nullptr);
+    virtual ~Dictionary();
 
     bool openDatabase(QWidget *dlgParent);
     void closeDatabase();

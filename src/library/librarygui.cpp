@@ -312,11 +312,13 @@ void LibraryGui::libraryItemDoubleClicked(const QModelIndex &index)
 
 void LibraryGui::libraryOpenItem(const QModelIndex& index)
 {
-    if (!index.isValid())
+    if (!index.isValid()) {
         return;
+    }
 
-    if (!m_libraryModel->isDir(index))
+    if (!m_libraryModel->isDir(index)) {
         m_mainWindow->loadFile(QUrl::fromLocalFile(index.data(QFileSystemModel::FilePathRole).toString()));
+    }
 }
 
 void LibraryGui::libraryCurrentChanged(const QModelIndex& current, const QModelIndex& previous)

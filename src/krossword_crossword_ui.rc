@@ -2,7 +2,7 @@
 <kpartgui name="krossword_crossword" version="5">
 
 <!-- Menu bar -->
-<MenuBar> 
+<MenuBar>
     <Menu name="edit">
         <Action name="edit_enable_edit_mode" />
         <Separator />
@@ -45,7 +45,6 @@
         <Action name="view_pan" />
     </Menu>
 </MenuBar>
-
 
 <!-- Toolbars -->
 <ToolBar name="crosswordToolBar">

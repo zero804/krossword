@@ -25,6 +25,8 @@
 #include "ui_settings.h"
 #include "crosswordxmlguiwindow.h"
 
+#include "dictionary.h"
+
 namespace KIO
 {
 class PreviewJob;
@@ -48,7 +50,7 @@ class MainWindow : public KXmlGuiWindow
 
 public:
     MainWindow();
-    virtual ~MainWindow() {}
+    virtual ~MainWindow();
 
     QSize sizeHint() const;
 
@@ -60,6 +62,10 @@ public:
     bool createNewCrossWordFromTemplate(const QString &templateFilePath, const QString &title,
                                         const QString &authors, const QString &copyright, const QString &notes);
 
+    void setupCrosswordxmlgui();
+
+    Dictionary* getDictionary();
+    
 protected:
     virtual void closeEvent(QCloseEvent* event);
     virtual void dropEvent(QDropEvent* event);
@@ -71,6 +77,7 @@ public slots:
 
     // Settings actions
     void optionsPreferencesSlot();
+    void optionsDictionarySlot();
     void settingsChanged();
 
     void showStatusbarGlobal(bool show);
@@ -104,6 +111,8 @@ private:
     QDialog               *m_loadProgressDialog;    //Owned
     QString                m_caption;
     QStackedWidget        *m_mainStackedBar;        //Owned
+
+    Dictionary   *m_dictionary;          // Owned
 };
 
 #endif // _MAINWINDOW_H_

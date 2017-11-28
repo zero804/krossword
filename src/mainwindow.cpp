@@ -21,6 +21,8 @@
 #include "krosswordrenderer.h"
 #include "settings.h"
 #include "library/librarygui.h"
+#include "dialogs/dictionarydialog.h"
+#include "extendedsqltablemodel.h"
 
 #include <KConfigDialog>
 #include <KMessageBox>
@@ -43,7 +45,8 @@ MainWindow::MainWindow() : KXmlGuiWindow(),
       m_mainLibrary(nullptr),
       m_mainCrossword(nullptr),
       m_loadProgressDialog(nullptr),
-      m_mainStackedBar(new QStackedWidget(this))
+      m_mainStackedBar(new QStackedWidget(this)),
+      m_dictionary(new Dictionary)
 {
     setAcceptDrops(true);
     setObjectName("mainWindow");
@@ -61,6 +64,11 @@ MainWindow::MainWindow() : KXmlGuiWindow(),
     }
 }
 
+MainWindow::~MainWindow()
+{
+    delete m_dictionary;
+}
+
 QSize MainWindow::sizeHint() const
 {
     // expand a bit the window ("The size of top-level widgets are constrained to 2/3 of the desktop's height and width")
@@ -73,22 +81,24 @@ void MainWindow::loadFile(const QUrl &url, Crossword::KrossWord::FileFormat file
     m_loadProgressDialog = createLoadProgressDialog();
     m_loadProgressDialog->show();
 
+    setupCrosswordxmlgui();
     bool loaded = m_mainCrossword->loadFile(url, fileFormat, loadCrashedFile);
 
     QString path = url.path();
     bool is_internal_file = m_mainLibrary->libraryManager()->isInLibrary(path);
 
-    if(!is_internal_file) {
+    if (!is_internal_file) {
         if(loaded) {
             QString msg = i18n("Would you like to add the crossword into the library?");
             int result = KMessageBox::questionYesNo(this, msg, i18n("Save crossword"), KStandardGuiItem::yes(), KStandardGuiItem::no());
 
-            if (result == KMessageBox::Yes)
+            if (result == KMessageBox::Yes) {
                 m_mainLibrary->libraryAddCrossword(url);
+            }
         }
     }
 
-    if(!loaded) {
+    if (!loaded) {
         QString msg = i18n("Could not open resource at ") + url.url(QUrl::PreferLocalFile);
         KMessageBox::sorry(this, msg, i18n("Resource unavailable"));
     }
@@ -128,10 +138,11 @@ void MainWindow::closeEvent(QCloseEvent* event)
 
         int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"), KStandardGuiItem::save(), KStandardGuiItem::discard());
 
-        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !m_mainCrossword->save()))
+        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !m_mainCrossword->save())) {
             event->ignore();
-        else
+        } else {
             event->accept();
+        }
     } else {
         event->accept();
     }
@@ -186,11 +197,9 @@ QDialog* MainWindow::createLoadProgressDialog()
     return dialog;
 }
 
-void MainWindow::setupMainTabWidget()
+void MainWindow::setupCrosswordxmlgui()
 {
-    m_mainLibrary      = new LibraryGui(this);
-    int indexLibrary   = m_mainStackedBar->addWidget(m_mainLibrary);
-    m_mainCrossword    = new CrossWordXmlGuiWindow(this);
+    m_mainCrossword = new CrossWordXmlGuiWindow(this);
     m_mainStackedBar->addWidget(m_mainCrossword);
 
     m_mainCrossword->krossWord()->setAnimationEnabled(Settings::animate());
@@ -212,17 +221,17 @@ void MainWindow::setupMainTabWidget()
 
     connect(m_mainCrossword, SIGNAL(tempAutoSaveFileChanged(QString)),
             this,            SLOT(crosswordAutoSaveFileChanged(QString)));
+}
 
-    // Add menus of the embedded crossword window to the menu bar of this (main) window
-    QAction *settingsMenu = this->menuBar()->actions().at(1);
-    foreach(QAction * action, m_mainCrossword->menuBar()->actions()) {                              
-        if (action->menu() && (action->menu()->objectName() == "edit" ||
-                               action->menu()->objectName() == "move" ||
-                               action->menu()->objectName() == "view")) {
-            this->menuBar()->insertMenu(settingsMenu, action->menu());
-        }
-    }
+Dictionary* MainWindow::getDictionary()
+{
+    return m_dictionary;
+}
 
+void MainWindow::setupMainTabWidget()
+{
+    m_mainLibrary      = new LibraryGui(this);
+    int indexLibrary   = m_mainStackedBar->addWidget(m_mainLibrary);
     m_mainStackedBar->setCurrentIndex(indexLibrary);
     connect(m_mainStackedBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
     currentTabChanged(indexLibrary);
@@ -252,6 +261,12 @@ void MainWindow::setupActions()
     KStandardAction::configureToolbars(this, SLOT(configureToolbarsGlobal()), actionCollection());
     KStandardAction::preferences(this, SLOT(optionsPreferencesSlot()), actionCollection());
     KStandardGameAction::quit(qApp, SLOT(closeAllWindows()), actionCollection());
+
+    // Settings
+    QAction *dictionaryAction = new QAction(QIcon::fromTheme(QStringLiteral("crossword-dictionary")), i18n("&Dictionary..."), this);
+    dictionaryAction->setToolTip(i18n("Add or remove crossword dictionaries"));
+    actionCollection()->addAction("options_dictionaries", dictionaryAction);
+    connect(dictionaryAction, SIGNAL(triggered()), this, SLOT(optionsDictionarySlot()));
 }
 
 void MainWindow::showRestoreOption(const QString& lastUnsavedFileBeforeCrash)
@@ -317,6 +332,20 @@ void MainWindow::optionsPreferencesSlot()
     dialog->show();
 }
 
+void MainWindow::optionsDictionarySlot()
+{
+    if (!m_dictionary->openDatabase(this)) {
+        KMessageBox::error(this, i18n("Couldn't connect to the database."));
+        return;
+    }
+
+    QPointer<DictionaryDialog> dialog = new DictionaryDialog(m_dictionary, this);
+    dialog->exec();
+    dialog->databaseTable()->submitAll();
+    //m_dictionary->closeDatabase();
+    delete dialog;
+}
+
 void MainWindow::settingsChanged()
 {
     m_mainCrossword->updateTheme();
@@ -356,16 +385,6 @@ void MainWindow::configureToolbarsGlobal()
 
 void MainWindow::currentTabChanged(int index)
 {
-    bool crosswordTabShown = index == m_mainStackedBar->indexOf(m_mainCrossword);
-
-    foreach(QAction * action, this->menuBar()->actions()) {
-        if (action->menu() && (action->menu()->objectName() == "edit" ||
-                               action->menu()->objectName() == "move" ||
-                               action->menu()->objectName() == "view")) {
-            action->setEnabled(crosswordTabShown);
-        }
-    }
-
     unplugActionList("library_game_list");
     unplugActionList("crossword_game_list");
     unplugActionList("options_list");
@@ -379,8 +398,20 @@ void MainWindow::currentTabChanged(int index)
     separator->setSeparator(true);
     separator2->setSeparator(true);
 
+    bool crosswordTabShown = (index == m_mainStackedBar->indexOf(m_mainCrossword));
+
     if (crosswordTabShown) {
         setCaption(m_caption, m_mainCrossword->isModified());
+
+        // Add menus of the embedded crossword window to the menu bar of this (main) window
+        QAction *settingsMenu = this->menuBar()->actions().at(1);
+        foreach(QAction * action, m_mainCrossword->menuBar()->actions()) {
+            if (action->menu() && (action->menu()->objectName() == "edit" ||
+                                   action->menu()->objectName() == "move" ||
+                                   action->menu()->objectName() == "view")) {
+                this->menuBar()->insertMenu(settingsMenu, action->menu());
+            }
+        }
 
         crosswordGameList << m_mainCrossword->action("game_save");
         crosswordGameList << m_mainCrossword->action("game_save_as");
@@ -391,9 +422,8 @@ void MainWindow::currentTabChanged(int index)
         crosswordGameList << separator2;
         crosswordGameList << m_mainCrossword->action("game_close");
 
-        optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::Options_Dictionaries));
+        optionsList << action("options_dictionaries");
         optionsList << separator;
-
         optionsList << m_mainCrossword->toolBarMenuAction();
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowClueDock));
         optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowUndoViewDock));
@@ -410,10 +440,8 @@ void MainWindow::currentTabChanged(int index)
         libraryGameList << separator2;
         libraryGameList << m_mainLibrary->action("library_export");
 
-
-        optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::Options_Dictionaries));
+        optionsList << action("options_dictionaries");
         optionsList << separator;
-
         optionsList << m_mainLibrary->toolBarMenuAction();
     }
 
@@ -426,8 +454,9 @@ void MainWindow::crosswordLoadingComplete(const QString& fileName)
 {
     Q_UNUSED(fileName);
 
-    if (m_loadProgressDialog) // When loading a template there is no load progress dialog
+    if (m_loadProgressDialog) { // When loading a template there is no load progress dialog
         m_loadProgressDialog->close();
+    }
 
     int indexCrossword = m_mainStackedBar->indexOf(m_mainCrossword);
     m_mainStackedBar->setCurrentIndex(indexCrossword);
@@ -444,6 +473,9 @@ void MainWindow::crosswordClosed(const QString& fileName)
     Q_UNUSED(fileName);
 
     m_mainStackedBar->setCurrentWidget(m_mainLibrary);
+
+    delete m_mainCrossword;
+    m_mainCrossword = nullptr;
 }
 
 void MainWindow::crosswordCurrentChanged(const QString& fileName, const QString& oldFileName)
@@ -455,10 +487,11 @@ void MainWindow::crosswordCurrentChanged(const QString& fileName, const QString&
     } else {
         stateChanged("no_file_opened", StateReverse);
 
-        if (m_mainCrossword->krossWord()->getTitle().isEmpty())
+        if (m_mainCrossword->krossWord()->getTitle().isEmpty()) {
             m_caption = displayFileName(fileName);
-        else
+        } else {
             m_caption = m_mainCrossword->krossWord()->getTitle();
+        }
     }
 
     setCaption(m_caption, m_mainCrossword->isModified());

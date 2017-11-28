@@ -32,7 +32,7 @@
 #include <QSqlError>
 
 ClueCellWidget::ClueCellWidget(ClueCell* clueCell,
-                               KrosswordDictionary *dictionary, QWidget* parent)
+                               Dictionary *dictionary, QWidget* parent)
     : QWidget(parent), m_clueCell(0)
 {
     Q_ASSERT(clueCell);

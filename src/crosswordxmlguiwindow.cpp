@@ -24,8 +24,6 @@
 #include "cluemodel.h"
 #include "cells/imagecell.h"
 #include "krosswordrenderer.h"
-#include "dictionary.h"
-#include "extendedsqltablemodel.h"
 #include "settings.h"
 #include "htmldelegate.h"
 #include "dialogs/crosswordtypeconfiguredetailsdialog.h"
@@ -33,9 +31,9 @@
 #include "dialogs/crosswordpropertiesdialog.h"
 #include "dialogs/convertcrossworddialog.h"
 #include "dialogs/statisticsdialog.h"
-#include "dialogs/dictionarydialog.h"
 #include "dialogs/currentcellwidget.h"
 //CHECK: #include "dialogs/printpreviewdialog.h"
+#include "dictionary.h"
 
 #include <KToggleAction>
 #include <KStandardGameAction>
@@ -297,7 +295,6 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
       m_clueModel(nullptr),
       m_clueSelectionModel(nullptr),
       m_popupMenuCell(nullptr),
-      m_dictionary(new KrosswordDictionary),
       m_animation(nullptr)
 {
     m_lastSavedUndoIndex = -1;
@@ -306,7 +303,7 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
     m_curDocumentOrigin = NoDocument;
     m_modified = NoModification;
 
-    setAttribute(Qt::WA_DeleteOnClose);
+    setAttribute(Qt::WA_DeleteOnClose); // CHECK: "Makes Qt delete this widget when the widget has accepted the close event"
     setObjectName("crossword");
     setHelpMenuEnabled(false);   // The help menu is in the main window of the game
     setAcceptDrops(false);
@@ -315,8 +312,7 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
     m_undoStack = new UndoStackExt(this);
     connect(m_undoStack, SIGNAL(indexChanged(int)), this, SLOT(undoStackIndexChanged(int)));
 
-    // Load theme
-    /* Should not do it manually */
+    // Load theme /* Should not do it manually */
     QString savedThemeName = Settings::theme();
     if (savedThemeName != "") {
         KrosswordRenderer::self()->setTheme(savedThemeName);
@@ -342,7 +338,6 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
     m_zoomController = new ViewZoomController(m_view, m_zoomWidget, this);
 
     statusBar()->addPermanentWidget(m_zoomWidget);
-
     statusBar()->show();
 
     addDockWidget(Qt::RightDockWidgetArea, createClueDock());
@@ -352,12 +347,10 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
     setupActions();
 
     setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krossword_crossword_ui.rc");
-    menuBar()->hide(); // because it will be exposed as needed in the mainwindow
 }
 
 CrossWordXmlGuiWindow::~CrossWordXmlGuiWindow()
 {
-    delete m_dictionary;
 }
 
 const char *CrossWordXmlGuiWindow::actionName(CrossWordXmlGuiWindow::Action actionEnum) const
@@ -460,9 +453,6 @@ const char *CrossWordXmlGuiWindow::actionName(CrossWordXmlGuiWindow::Action acti
         return "move_set_confidence_unsure";
     case Info_ConfidenceIsSolved:
         return "info_confidence_is_solved";
-
-    case Options_Dictionaries:
-        return "options_dictionaries";
 
     case View_Pan:
         return "view_pan";
@@ -1273,12 +1263,6 @@ void CrossWordXmlGuiWindow::setupActions()
     saveAsAction->setToolTip(i18n("Choose a filename to save the crossword with solved letters"));
     ac->addAction("game_save_as", saveAsAction);
 
-    /*
-    QAction *saveAsTemplateAction = KStandardAction::saveAs(this, SLOT(saveAsTemplateSlot()), ac);
-    saveAsTemplateAction->setToolTip(i18n("Choose a filename to save the crossword as a template"));
-    ac->addAction("game_save_template_as", saveAsTemplateAction);
-    */
-
     QAction *saveAsTemplateAction = new QAction(QIcon::fromTheme(QStringLiteral("document-save-as")), i18n("Save as &template..."), ac);
     saveAsTemplateAction->setToolTip(i18n("Choose a filename to save the crossword as a template"));
     ac->addAction("game_save_template_as", saveAsTemplateAction);
@@ -1292,12 +1276,6 @@ void CrossWordXmlGuiWindow::setupActions()
     QAction *printPreviewAction = KStandardAction::printPreview(this, SLOT(printPreviewSlot()), 0);
     printPreviewAction->setToolTip(i18n("Show a print preview"));
     ac->addAction(actionName(Game_PrintPreview), printPreviewAction);
-
-    // Settings
-    QAction *dictionariesAction = new QAction(QIcon::fromTheme(QStringLiteral("crossword-dictionary")), i18n("&Dictionary..."), this);
-    dictionariesAction->setToolTip(i18n("Add or remove crossword dictionaries"));
-    actionCollection()->addAction(actionName(Options_Dictionaries), dictionariesAction);
-    connect(dictionariesAction, SIGNAL(triggered()), this, SLOT(optionsDictionarySlot()));
 
     // View
     QAction *fitToPageAction = KStandardAction::fitToPage(this, SLOT(fitToPageSlot()), ac);
@@ -1660,7 +1638,7 @@ QDockWidget *CrossWordXmlGuiWindow::createUndoViewDock()
 
 QDockWidget* CrossWordXmlGuiWindow::createCurrentCellDock()
 {
-    m_currentCellWidget = new CurrentCellWidget(krossWord(), m_dictionary);
+    m_currentCellWidget = new CurrentCellWidget(krossWord(), new Dictionary); //CHECK: mainwindow getDictionary
     m_currentCellDock = new QDockWidget(i18n("Current Cell"), this);
     m_currentCellDock->setObjectName("currentCellDock");
     m_currentCellDock->setWidget(m_currentCellWidget);
@@ -2802,20 +2780,6 @@ void CrossWordXmlGuiWindow::propertiesConversionRequested(
     enableEditActions();
     adjustGuiToCrosswordType();
     setModificationType(ModifiedCrossword);
-}
-
-void CrossWordXmlGuiWindow::optionsDictionarySlot()
-{
-    if (!m_dictionary->openDatabase(this)) {
-        KMessageBox::error(this, i18n("Couldn't connect to the database."));
-        return;
-    }
-
-    QPointer<DictionaryDialog> dialog = new DictionaryDialog(m_dictionary, this);
-    dialog->exec();
-    dialog->databaseTable()->submitAll();
-    //m_dictionary->closeDatabase();
-    delete dialog;
 }
 
 QMenu* CrossWordXmlGuiWindow::popupMenuEditClueList()

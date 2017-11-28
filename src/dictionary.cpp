@@ -42,9 +42,9 @@
 
 using namespace Crossword;
 
-const QString KrosswordDictionary::CONNECTION_NAME = "krosswordpuzzle";
+const QString Dictionary::CONNECTION_NAME = "krosswordpuzzle";
 
-KrosswordDictionary::KrosswordDictionary(QObject* parent)
+Dictionary::Dictionary(QObject* parent)
     : QObject(parent),
       m_cancel(false),
       m_hasConnection(makeStandardConnection())
@@ -56,13 +56,13 @@ KrosswordDictionary::KrosswordDictionary(QObject* parent)
     }
 }
 
-KrosswordDictionary::~KrosswordDictionary()
+Dictionary::~Dictionary()
 {
     qDebug() << "Closing and removing database connection...";
     closeDatabase();
 }
 
-bool KrosswordDictionary::makeStandardConnection()
+bool Dictionary::makeStandardConnection()
 {
     QSqlDatabase db = getDatabase();
 
@@ -74,7 +74,7 @@ bool KrosswordDictionary::makeStandardConnection()
     return db.open();
 }
 
-QSqlDatabase KrosswordDictionary::getDatabase() const
+QSqlDatabase Dictionary::getDatabase() const
 {
     QSqlDatabase db;
     if (!QSqlDatabase::contains(CONNECTION_NAME))
@@ -85,7 +85,7 @@ QSqlDatabase KrosswordDictionary::getDatabase() const
     return db;
 }
 
-void KrosswordDictionary::closeDatabase()
+void Dictionary::closeDatabase()
 {
     if (QSqlDatabase::contains(CONNECTION_NAME)) {
         QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
@@ -94,7 +94,7 @@ void KrosswordDictionary::closeDatabase()
     }
 }
 
-bool KrosswordDictionary::openDatabase(QWidget *dlgParent)
+bool Dictionary::openDatabase(QWidget *dlgParent)
 {
     bool success = true;
 
@@ -111,7 +111,7 @@ bool KrosswordDictionary::openDatabase(QWidget *dlgParent)
     return success;
 }
 
-bool KrosswordDictionary::setupDatabase(QWidget *dlgParent)
+bool Dictionary::setupDatabase(QWidget *dlgParent)
 {
     bool success = true;
 
@@ -157,7 +157,7 @@ bool KrosswordDictionary::setupDatabase(QWidget *dlgParent)
     return success;
 }
 
-bool KrosswordDictionary::createUser(QSqlQuery &query)
+bool Dictionary::createUser(QSqlQuery &query)
 {
     bool success = true;
 
@@ -176,7 +176,7 @@ bool KrosswordDictionary::createUser(QSqlQuery &query)
     return success;
 }
 
-bool KrosswordDictionary::createKrosswordDatabase(QSqlQuery &query)
+bool Dictionary::createKrosswordDatabase(QSqlQuery &query)
 {
     bool success = true;
 
@@ -201,7 +201,7 @@ bool KrosswordDictionary::createKrosswordDatabase(QSqlQuery &query)
     return success;
 }
 
-bool KrosswordDictionary::createTables()
+bool Dictionary::createTables()
 {
     bool ok = true;
     QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
@@ -225,11 +225,11 @@ bool KrosswordDictionary::createTables()
     return ok;
 }
 
-bool KrosswordDictionary::hasConnection() const {
+bool Dictionary::hasConnection() const {
     return m_hasConnection;
 }
 
-ExtendedSqlTableModel* KrosswordDictionary::createModel()
+ExtendedSqlTableModel* Dictionary::createModel()
 {
     QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
 
@@ -248,7 +248,7 @@ ExtendedSqlTableModel* KrosswordDictionary::createModel()
     return dbTable;
 }
 
-bool KrosswordDictionary::exportToCsv(const QString& fileName)
+bool Dictionary::exportToCsv(const QString& fileName)
 {
     QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
     if (!db.isValid())
@@ -281,7 +281,7 @@ bool KrosswordDictionary::exportToCsv(const QString& fileName)
     return true;
 }
 
-QDialog* KrosswordDictionary::createProgressDialog(QWidget *parent, const QString& text, QProgressBar *progressBar)
+QDialog* Dictionary::createProgressDialog(QWidget *parent, const QString& text, QProgressBar *progressBar)
 {
     QDialog *dlgProgress = new QDialog(parent);
     dlgProgress->setAttribute(Qt::WA_DeleteOnClose);
@@ -307,7 +307,7 @@ QDialog* KrosswordDictionary::createProgressDialog(QWidget *parent, const QStrin
     return dlgProgress;
 }
 
-int KrosswordDictionary::importFromCsv(const QString& fileName, QWidget *parent)
+int Dictionary::importFromCsv(const QString& fileName, QWidget *parent)
 {
     QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
     if (!db.isValid()) {
@@ -435,12 +435,12 @@ int KrosswordDictionary::importFromCsv(const QString& fileName, QWidget *parent)
     return entryCount() - entryCountBefore;
 }
 
-void KrosswordDictionary::cancelCurrentActionClicked()
+void Dictionary::cancelCurrentActionClicked()
 {
     m_cancel = true;
 }
 
-int KrosswordDictionary::addEntriesFromDictionary(const QString& fileName, QWidget *parent)
+int Dictionary::addEntriesFromDictionary(const QString& fileName, QWidget *parent)
 {
     QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
 
@@ -532,12 +532,12 @@ int KrosswordDictionary::addEntriesFromDictionary(const QString& fileName, QWidg
     return entryCount() - entryCountBefore;
 }
 
-bool KrosswordDictionary::isEmpty()
+bool Dictionary::isEmpty()
 {
     return entryCount() == 0;
 }
 
-int KrosswordDictionary::entryCount()
+int Dictionary::entryCount()
 {
     QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
 
@@ -551,7 +551,7 @@ int KrosswordDictionary::entryCount()
         return 0;
 }
 
-int KrosswordDictionary::addEntriesFromCrosswords(const QStringList& fileNames, QWidget *parent)
+int Dictionary::addEntriesFromCrosswords(const QStringList& fileNames, QWidget *parent)
 {
     QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
     if (!db.isValid())
@@ -627,7 +627,7 @@ int KrosswordDictionary::addEntriesFromCrosswords(const QStringList& fileNames, 
     return entryCount() - entryCountBefore;
 }
 
-bool KrosswordDictionary::clearDatabase()
+bool Dictionary::clearDatabase()
 {
     QSqlDatabase db = QSqlDatabase::database(CONNECTION_NAME);
     if (!db.isValid())

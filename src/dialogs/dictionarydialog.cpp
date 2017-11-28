@@ -32,7 +32,7 @@
 #include <QStandardPaths>
 #include <QFileDialog>
 
-DictionaryDialog::DictionaryDialog(KrosswordDictionary* dictionary, QWidget* parent)
+DictionaryDialog::DictionaryDialog(Dictionary* dictionary, QWidget* parent)
     : QDialog(parent), m_dictionary(dictionary), m_infoMessage(0)
 {
     setWindowTitle(i18n("Dictionary"));

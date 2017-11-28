@@ -7,16 +7,10 @@
         <ActionList name="library_game_list" />
         <ActionList name="crossword_game_list" />
     </Menu>
+
     <Menu name="settings">
         <ActionList name="options_list" />
     </Menu>
 </MenuBar>
-
-<!-- Popup menus -->
-<Menu name="recent_files_list_popup">
-    <Action name="recent_files_remove" />
-    <Separator />
-    <Action name="recent_files_clear" />
-</Menu>
 
 </kpartgui>
