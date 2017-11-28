@@ -4,7 +4,7 @@ set(krossword_SRCS
    main.cpp
    mainwindow.cpp
    global.cpp
-   crosswordxmlguiwindow.cpp
+   gamegui.cpp
    animator.cpp
    krosswordtheme.cpp
    commands.cpp

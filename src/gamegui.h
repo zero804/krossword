@@ -130,7 +130,7 @@ private:
     KrossWordPuzzleView* m_view;    // Now owned
 };
 
-class CrossWordXmlGuiWindow : public KXmlGuiWindow
+class GameGui : public KXmlGuiWindow
 {
     Q_OBJECT
 
@@ -236,8 +236,8 @@ public:
         EditingInteractiveAddClue   //Unused
     };
 
-    CrossWordXmlGuiWindow(QWidget* parent = nullptr);
-    virtual ~CrossWordXmlGuiWindow();
+    GameGui(QWidget* parent = nullptr);
+    virtual ~GameGui();
 
     const char *actionName(Action actionEnum) const;
 
@@ -271,7 +271,7 @@ protected:
 signals:
     void fileClosed(const QString &fileName);
     void fileSaved(const QString &fileName, const QString &oldFileName);
-    void modificationTypesChanged(CrossWordXmlGuiWindow::ModificationTypes modificationTypes);
+    void modificationTypesChanged(GameGui::ModificationTypes modificationTypes);
     void currentFileChanged(const QString &fileName, const QString &previousFileName);
     void loadingFileComplete(const QString &fileName); // not used
     void tempAutoSaveFileChanged(const QString &tmpFileName);

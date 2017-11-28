@@ -42,8 +42,8 @@
 #include <QStatusBar>
 
 MainWindow::MainWindow() : KXmlGuiWindow(),
-      m_mainLibrary(nullptr),
-      m_mainCrossword(nullptr),
+      m_libraryGui(nullptr),
+      m_gameGui(nullptr),
       m_loadProgressDialog(nullptr),
       m_mainStackedBar(new QStackedWidget(this)),
       m_dictionary(new Dictionary)
@@ -81,11 +81,11 @@ void MainWindow::loadFile(const QUrl &url, Crossword::KrossWord::FileFormat file
     m_loadProgressDialog = createLoadProgressDialog();
     m_loadProgressDialog->show();
 
-    setupCrosswordxmlgui();
-    bool loaded = m_mainCrossword->loadFile(url, fileFormat, loadCrashedFile);
+    setupGameGui();
+    bool loaded = m_gameGui->loadFile(url, fileFormat, loadCrashedFile);
 
     QString path = url.path();
-    bool is_internal_file = m_mainLibrary->libraryManager()->isInLibrary(path);
+    bool is_internal_file = m_libraryGui->libraryManager()->isInLibrary(path);
 
     if (!is_internal_file) {
         if(loaded) {
@@ -93,7 +93,7 @@ void MainWindow::loadFile(const QUrl &url, Crossword::KrossWord::FileFormat file
             int result = KMessageBox::questionYesNo(this, msg, i18n("Save crossword"), KStandardGuiItem::yes(), KStandardGuiItem::no());
 
             if (result == KMessageBox::Yes) {
-                m_mainLibrary->libraryAddCrossword(url);
+                m_libraryGui->libraryAddCrossword(url);
             }
         }
     }
@@ -109,8 +109,8 @@ bool MainWindow::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswor
                                          const QString& authors, const QString& copyright,
                                          const QString& notes)
 {
-    if (m_mainCrossword->createNewCrossWord(crosswordTypeInfo, crosswordSize, title, authors, copyright, notes)) {
-        int indexCrossword = m_mainStackedBar->indexOf(m_mainCrossword);
+    if (m_gameGui->createNewCrossWord(crosswordTypeInfo, crosswordSize, title, authors, copyright, notes)) {
+        int indexCrossword = m_mainStackedBar->indexOf(m_gameGui);
         m_mainStackedBar->setCurrentIndex(indexCrossword);
         return true;
     } else {
@@ -120,8 +120,8 @@ bool MainWindow::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswor
 
 bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title, const QString& authors, const QString& copyright, const QString& notes)
 {
-    if (m_mainCrossword->createNewCrossWordFromTemplate(templateFilePath, title, authors, copyright, notes)) {
-        int indexCrossword = m_mainStackedBar->indexOf(m_mainCrossword);
+    if (m_gameGui->createNewCrossWordFromTemplate(templateFilePath, title, authors, copyright, notes)) {
+        int indexCrossword = m_mainStackedBar->indexOf(m_gameGui);
         m_mainStackedBar->setCurrentIndex(indexCrossword);
         return true;
     } else {
@@ -133,12 +133,12 @@ bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath,
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
-    if (m_mainCrossword->isModified()) {
+    if (m_gameGui->isModified()) {
         QString msg = i18n("The current crossword has been modified.\nWould you like to save it?");
 
         int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"), KStandardGuiItem::save(), KStandardGuiItem::discard());
 
-        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !m_mainCrossword->save())) {
+        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !m_gameGui->save())) {
             event->ignore();
         } else {
             event->accept();
@@ -149,8 +149,8 @@ void MainWindow::closeEvent(QCloseEvent* event)
 
     if (event->isAccepted()) {
         // Closing not aborted, so the temporary file can be deleted
-        m_mainCrossword->removeTempFile();
-        m_mainCrossword->setState(CrossWordXmlGuiWindow::ShowingNothing); // Cleanup
+        m_gameGui->removeTempFile();
+        m_gameGui->setState(GameGui::ShowingNothing); // Cleanup
     }
 }
 
@@ -163,13 +163,13 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 void MainWindow::dropEvent(QDropEvent *event)
 {
     if (event->mimeData()->hasUrls()) {
-        QPoint pt         = m_mainLibrary->libraryTree()->mapFrom(this, event->pos());
-        QModelIndex index = m_mainLibrary->libraryTree()->indexAt(pt);
+        QPoint pt         = m_libraryGui->libraryTree()->mapFrom(this, event->pos());
+        QModelIndex index = m_libraryGui->libraryTree()->indexAt(pt);
 
         if (index.isValid()) {
-            if (dynamic_cast<LibraryManager*>(m_mainLibrary->libraryTree()->model())->isDir(index)) {
+            if (dynamic_cast<LibraryManager*>(m_libraryGui->libraryTree()->model())->isDir(index)) {
                 QString folder = index.data(QFileSystemModel::FilePathRole).toString();
-                m_mainLibrary->libraryAddCrossword(event->mimeData()->urls().at(0), folder); //TODO: handle more than 1 dropped crossword?
+                m_libraryGui->libraryAddCrossword(event->mimeData()->urls().at(0), folder); //TODO: handle more than 1 dropped crossword?
             }
             //else, if isn't a dir, just load it or add it to the parent folder?
         } else {
@@ -197,29 +197,29 @@ QDialog* MainWindow::createLoadProgressDialog()
     return dialog;
 }
 
-void MainWindow::setupCrosswordxmlgui()
+void MainWindow::setupGameGui()
 {
-    m_mainCrossword = new CrossWordXmlGuiWindow(this);
-    m_mainStackedBar->addWidget(m_mainCrossword);
+    m_gameGui = new GameGui(this);
+    m_mainStackedBar->addWidget(m_gameGui);
 
-    m_mainCrossword->krossWord()->setAnimationEnabled(Settings::animate());
+    m_gameGui->krossWord()->setAnimationEnabled(Settings::animate());
 
-    connect(m_mainCrossword, SIGNAL(loadingFileComplete(QString)),
+    connect(m_gameGui, SIGNAL(loadingFileComplete(QString)),
             this,            SLOT(crosswordLoadingComplete(QString)));
 
-    connect(m_mainCrossword, SIGNAL(errorLoadingFile(QString)),
+    connect(m_gameGui, SIGNAL(errorLoadingFile(QString)),
             this,            SLOT(crosswordErrorLoading(QString)));
 
-    connect(m_mainCrossword, SIGNAL(currentFileChanged(QString, QString)),
+    connect(m_gameGui, SIGNAL(currentFileChanged(QString, QString)),
             this,            SLOT(crosswordCurrentChanged(QString, QString)));
 
-    connect(m_mainCrossword, SIGNAL(fileClosed(QString)),
+    connect(m_gameGui, SIGNAL(fileClosed(QString)),
             this,            SLOT(crosswordClosed(QString)));
 
-    connect(m_mainCrossword, SIGNAL(modificationTypesChanged(CrossWordXmlGuiWindow::ModificationTypes)),
-            this,            SLOT(crosswordModificationsChanged(CrossWordXmlGuiWindow::ModificationTypes)));
+    connect(m_gameGui, SIGNAL(modificationTypesChanged(GameGui::ModificationTypes)),
+            this,            SLOT(crosswordModificationsChanged(GameGui::ModificationTypes)));
 
-    connect(m_mainCrossword, SIGNAL(tempAutoSaveFileChanged(QString)),
+    connect(m_gameGui, SIGNAL(tempAutoSaveFileChanged(QString)),
             this,            SLOT(crosswordAutoSaveFileChanged(QString)));
 }
 
@@ -230,8 +230,8 @@ Dictionary* MainWindow::getDictionary()
 
 void MainWindow::setupMainTabWidget()
 {
-    m_mainLibrary      = new LibraryGui(this);
-    int indexLibrary   = m_mainStackedBar->addWidget(m_mainLibrary);
+    m_libraryGui = new LibraryGui(this);
+    int indexLibrary = m_mainStackedBar->addWidget(m_libraryGui);
     m_mainStackedBar->setCurrentIndex(indexLibrary);
     connect(m_mainStackedBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
     currentTabChanged(indexLibrary);
@@ -280,7 +280,7 @@ void MainWindow::showRestoreOption(const QString& lastUnsavedFileBeforeCrash)
     if (result == KMessageBox::Yes) {
         loadFile(QUrl::fromLocalFile(lastUnsavedFileBeforeCrash), Crossword::KrossWord::KwpzFormat, true);
     } else {
-        m_mainCrossword->removeTempFile(lastUnsavedFileBeforeCrash);
+        m_gameGui->removeTempFile(lastUnsavedFileBeforeCrash);
     }
 }
 
@@ -325,7 +325,7 @@ void MainWindow::optionsPreferencesSlot()
     KgThemeSelector *themeSelector = new KgThemeSelector(KrosswordRenderer::self()->getThemeProvider(), KgThemeSelector::DefaultBehavior, themeSelectorDlg);
     dialog->addPage(themeSelector, i18n("Theme"), "games-config-theme");
 
-    connect(KrosswordRenderer::self()->getThemeProvider(), SIGNAL(currentThemeChanged(const KgTheme*)), m_mainCrossword, SLOT(updateTheme()));
+    connect(KrosswordRenderer::self()->getThemeProvider(), SIGNAL(currentThemeChanged(const KgTheme*)), m_gameGui, SLOT(updateTheme()));
     connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(settingsChanged()));
     dialog->setAttribute(Qt::WA_DeleteOnClose);
 
@@ -348,27 +348,27 @@ void MainWindow::optionsDictionarySlot()
 
 void MainWindow::settingsChanged()
 {
-    m_mainCrossword->updateTheme();
+    m_gameGui->updateTheme();
 
-    m_mainCrossword->krossWord()->setAnimationEnabled(Settings::animate());
+    m_gameGui->krossWord()->setAnimationEnabled(Settings::animate());
 }
 
 void MainWindow::showStatusbarGlobal(bool show)
 {
-    if (m_mainStackedBar->currentWidget() == m_mainCrossword) {
-        m_mainCrossword->statusBar()->setVisible(show);
+    if (m_mainStackedBar->currentWidget() == m_gameGui) {
+        m_gameGui->statusBar()->setVisible(show);
     } else {
-        m_mainLibrary->statusBar()->setVisible(show);
+        m_libraryGui->statusBar()->setVisible(show);
     }
 }
 
 int MainWindow::configureShortcutsGlobal()
 {
     KShortcutsDialog dlg(KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcutsAllowed, this);
-    if (m_mainStackedBar->currentWidget() == m_mainCrossword) {
-        dlg.addCollection(m_mainCrossword->actionCollection());
+    if (m_mainStackedBar->currentWidget() == m_gameGui) {
+        dlg.addCollection(m_gameGui->actionCollection());
     } else {
-        dlg.addCollection(m_mainLibrary->actionCollection());
+        dlg.addCollection(m_libraryGui->actionCollection());
     }
 
     return dlg.configure(true);
@@ -376,10 +376,10 @@ int MainWindow::configureShortcutsGlobal()
 
 void MainWindow::configureToolbarsGlobal()
 {
-    if (m_mainStackedBar->currentWidget() == m_mainCrossword) {
-        m_mainCrossword->configureToolbars();
+    if (m_mainStackedBar->currentWidget() == m_gameGui) {
+        m_gameGui->configureToolbars();
     } else {
-        m_mainLibrary->configureToolbars();
+        m_libraryGui->configureToolbars();
     }
 }
 
@@ -398,14 +398,14 @@ void MainWindow::currentTabChanged(int index)
     separator->setSeparator(true);
     separator2->setSeparator(true);
 
-    bool crosswordTabShown = (index == m_mainStackedBar->indexOf(m_mainCrossword));
+    bool crosswordTabShown = (index == m_mainStackedBar->indexOf(m_gameGui));
 
     if (crosswordTabShown) {
-        setCaption(m_caption, m_mainCrossword->isModified());
+        setCaption(m_caption, m_gameGui->isModified());
 
         // Add menus of the embedded crossword window to the menu bar of this (main) window
         QAction *settingsMenu = this->menuBar()->actions().at(1);
-        foreach(QAction * action, m_mainCrossword->menuBar()->actions()) {
+        foreach(QAction * action, m_gameGui->menuBar()->actions()) {
             if (action->menu() && (action->menu()->objectName() == "edit" ||
                                    action->menu()->objectName() == "move" ||
                                    action->menu()->objectName() == "view")) {
@@ -413,36 +413,36 @@ void MainWindow::currentTabChanged(int index)
             }
         }
 
-        crosswordGameList << m_mainCrossword->action("game_save");
-        crosswordGameList << m_mainCrossword->action("game_save_as");
-        crosswordGameList << m_mainCrossword->action("game_save_template_as");
+        crosswordGameList << m_gameGui->action("game_save");
+        crosswordGameList << m_gameGui->action("game_save_as");
+        crosswordGameList << m_gameGui->action("game_save_template_as");
         crosswordGameList << separator;
-        crosswordGameList << m_mainCrossword->action("game_print");
-        crosswordGameList << m_mainCrossword->action("game_print_preview");
+        crosswordGameList << m_gameGui->action("game_print");
+        crosswordGameList << m_gameGui->action("game_print_preview");
         crosswordGameList << separator2;
-        crosswordGameList << m_mainCrossword->action("game_close");
+        crosswordGameList << m_gameGui->action("game_close");
 
         optionsList << action("options_dictionaries");
         optionsList << separator;
-        optionsList << m_mainCrossword->toolBarMenuAction();
-        optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowClueDock));
-        optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowUndoViewDock));
-        optionsList << m_mainCrossword->action(m_mainCrossword->actionName(CrossWordXmlGuiWindow::ShowCurrentCellDock));
+        optionsList << m_gameGui->toolBarMenuAction();
+        optionsList << m_gameGui->action(m_gameGui->actionName(GameGui::ShowClueDock));
+        optionsList << m_gameGui->action(m_gameGui->actionName(GameGui::ShowUndoViewDock));
+        optionsList << m_gameGui->action(m_gameGui->actionName(GameGui::ShowCurrentCellDock));
     } else { // tabLibrary
         setCaption(i18n("Library"));
 
-        libraryGameList << m_mainLibrary->action("library_create_crossword");
-        libraryGameList << m_mainLibrary->action("library_new_folder");
+        libraryGameList << m_libraryGui->action("library_create_crossword");
+        libraryGameList << m_libraryGui->action("library_new_folder");
         libraryGameList << separator;
-        libraryGameList << m_mainLibrary->action("library_download");
-        libraryGameList << m_mainLibrary->action("library_add");
-        libraryGameList << m_mainLibrary->action("library_delete");
+        libraryGameList << m_libraryGui->action("library_download");
+        libraryGameList << m_libraryGui->action("library_add");
+        libraryGameList << m_libraryGui->action("library_delete");
         libraryGameList << separator2;
-        libraryGameList << m_mainLibrary->action("library_export");
+        libraryGameList << m_libraryGui->action("library_export");
 
         optionsList << action("options_dictionaries");
         optionsList << separator;
-        optionsList << m_mainLibrary->toolBarMenuAction();
+        optionsList << m_libraryGui->toolBarMenuAction();
     }
 
     plugActionList("library_game_list", libraryGameList);
@@ -458,7 +458,7 @@ void MainWindow::crosswordLoadingComplete(const QString& fileName)
         m_loadProgressDialog->close();
     }
 
-    int indexCrossword = m_mainStackedBar->indexOf(m_mainCrossword);
+    int indexCrossword = m_mainStackedBar->indexOf(m_gameGui);
     m_mainStackedBar->setCurrentIndex(indexCrossword);
 }
 
@@ -472,10 +472,10 @@ void MainWindow::crosswordClosed(const QString& fileName)
 {
     Q_UNUSED(fileName);
 
-    m_mainStackedBar->setCurrentWidget(m_mainLibrary);
+    m_mainStackedBar->setCurrentWidget(m_libraryGui);
 
-    delete m_mainCrossword;
-    m_mainCrossword = nullptr;
+    delete m_gameGui;
+    m_gameGui = nullptr;
 }
 
 void MainWindow::crosswordCurrentChanged(const QString& fileName, const QString& oldFileName)
@@ -487,20 +487,20 @@ void MainWindow::crosswordCurrentChanged(const QString& fileName, const QString&
     } else {
         stateChanged("no_file_opened", StateReverse);
 
-        if (m_mainCrossword->krossWord()->getTitle().isEmpty()) {
+        if (m_gameGui->krossWord()->getTitle().isEmpty()) {
             m_caption = displayFileName(fileName);
         } else {
-            m_caption = m_mainCrossword->krossWord()->getTitle();
+            m_caption = m_gameGui->krossWord()->getTitle();
         }
     }
 
-    setCaption(m_caption, m_mainCrossword->isModified());
+    setCaption(m_caption, m_gameGui->isModified());
 }
 
-void MainWindow::crosswordModificationsChanged(CrossWordXmlGuiWindow::ModificationTypes modificationTypes)
+void MainWindow::crosswordModificationsChanged(GameGui::ModificationTypes modificationTypes)
 {
     Q_UNUSED(modificationTypes);
-    crosswordCurrentChanged(m_mainCrossword->currentFileName(), m_mainCrossword->currentFileName());
+    crosswordCurrentChanged(m_gameGui->currentFileName(), m_gameGui->currentFileName());
 }
 
 void MainWindow::crosswordAutoSaveFileChanged(const QString &fileName)

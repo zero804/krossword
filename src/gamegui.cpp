@@ -17,7 +17,7 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "crosswordxmlguiwindow.h"
+#include "gamegui.h"
 #include "krosswordpuzzleview.h"
 #include "krossworddocument.h"
 #include "commands.h"
@@ -287,7 +287,7 @@ void ViewZoomController::changeZoomSliderSlot(int zoomValue)
 //===========================================================
 
 
-CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
+GameGui::GameGui(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
       m_view(nullptr),
       m_zoomWidget(nullptr),
       m_zoomController(nullptr),
@@ -349,11 +349,11 @@ CrossWordXmlGuiWindow::CrossWordXmlGuiWindow(QWidget* parent) : KXmlGuiWindow(pa
     setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krossword_crossword_ui.rc");
 }
 
-CrossWordXmlGuiWindow::~CrossWordXmlGuiWindow()
+GameGui::~GameGui()
 {
 }
 
-const char *CrossWordXmlGuiWindow::actionName(CrossWordXmlGuiWindow::Action actionEnum) const
+const char *GameGui::actionName(GameGui::Action actionEnum) const
 {
     switch (actionEnum) {
     case Game_PrintPreview:
@@ -473,20 +473,21 @@ const char *CrossWordXmlGuiWindow::actionName(CrossWordXmlGuiWindow::Action acti
     }
 }
 
-KrossWordPuzzleView *CrossWordXmlGuiWindow::view() const
+KrossWordPuzzleView *GameGui::view() const
 {
     return m_view;
 }
 
-KrossWord* CrossWordXmlGuiWindow::krossWord() const
+KrossWord* GameGui::krossWord() const
 {
     return m_view ? m_view->krossWord() : NULL;
 }
 
-void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
+void GameGui::setState(GameGui::DisplayState state)
 {
-    if (m_state == state)
+    if (m_state == state) {
         return;
+    }
 
     // Remove old state
     KConfigGroup cg;
@@ -558,12 +559,12 @@ void CrossWordXmlGuiWindow::setState(CrossWordXmlGuiWindow::DisplayState state)
     m_state = state;
 }
 
-bool CrossWordXmlGuiWindow::isInEditMode() const
+bool GameGui::isInEditMode() const
 {
     return m_editMode != NoEditing;
 }
 
-void CrossWordXmlGuiWindow::setEditMode(EditMode editMode)
+void GameGui::setEditMode(EditMode editMode)
 {
     m_editMode = editMode;
 
@@ -593,7 +594,7 @@ void CrossWordXmlGuiWindow::setEditMode(EditMode editMode)
     }
 }
 
-bool CrossWordXmlGuiWindow::createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,const QSize &crosswordSize,
+bool GameGui::createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,const QSize &crosswordSize,
                                                const QString& title, const QString& authors,
                                                const QString& copyright, const QString& notes)
 {
@@ -626,7 +627,7 @@ bool CrossWordXmlGuiWindow::createNewCrossWord(const CrosswordTypeInfo &crosswor
     return true;
 }
 
-bool CrossWordXmlGuiWindow::createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title,
+bool GameGui::createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title,
                                                            const QString& authors, const QString& copyright,
                                                            const QString& notes)
 {
@@ -661,12 +662,12 @@ bool CrossWordXmlGuiWindow::createNewCrossWordFromTemplate(const QString& templa
     return true;
 }
 
-inline bool CrossWordXmlGuiWindow::loadFile(const QString& fileName)
+inline bool GameGui::loadFile(const QString& fileName)
 {
     return loadFile(QUrl::fromLocalFile(fileName));
 }
 
-bool CrossWordXmlGuiWindow::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool loadCrashedFile)
+bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool loadCrashedFile)
 {
     if (isModified()) {
         QString msg = i18n("The current crossword has been modified.\nWould you like to save it?");
@@ -763,7 +764,7 @@ bool CrossWordXmlGuiWindow::loadFile(const QUrl &url, KrossWord::FileFormat file
     }
 }
 
-bool CrossWordXmlGuiWindow::save()
+bool GameGui::save()
 {
     if (m_curFileName.isEmpty() || !QFile::exists(m_curFileName)
             || m_curDocumentOrigin == DocumentDownloaded
@@ -774,7 +775,7 @@ bool CrossWordXmlGuiWindow::save()
     }
 }
 
-bool CrossWordXmlGuiWindow::saveAs(const KrossWord::WriteMode writeMode)
+bool GameGui::saveAs(const KrossWord::WriteMode writeMode)
 {
     QUrl startDir;
     if (m_curDocumentOrigin == DocumentDownloaded || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
@@ -796,15 +797,15 @@ bool CrossWordXmlGuiWindow::saveAs(const KrossWord::WriteMode writeMode)
     return false;
 }
 
-bool CrossWordXmlGuiWindow::closeFile()
+bool GameGui::closeFile()
 {
     if (isModified()) {
-        QString msg = i18n("The current crossword has been modified.\n"
-                           "Would you like to save it?");
+        QString msg = i18n("The current crossword has been modified.\n Would you like to save it?");
         int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"),
                      KStandardGuiItem::save(), KStandardGuiItem::discard());
-        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !save()))
+        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !save())) {
             return false;
+        }
     }
 
     setState(ShowingNothing);
@@ -813,7 +814,7 @@ bool CrossWordXmlGuiWindow::closeFile()
     return true;
 }
 
-bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, bool saveUndoStack)
+bool GameGui::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, bool saveUndoStack)
 {
     KrossWord::FileFormat fileFormat = KrossWord::fileFormatFromFileName(fileName);
     if (fileFormat == KrossWord::PuzFormat) { // CHECK: we don't want to support PUZ exporting...s
@@ -877,19 +878,19 @@ bool CrossWordXmlGuiWindow::writeTo(const QString &fileName, KrossWord::WriteMod
     }
 }
 
-bool CrossWordXmlGuiWindow::isModified() const
+bool GameGui::isModified() const
 {
     return m_modified != NoModification;
 }
 
-QString CrossWordXmlGuiWindow::currentFileName() const
+QString GameGui::currentFileName() const
 {
     return m_curFileName;
 }
 
 //======================================================
 
-void CrossWordXmlGuiWindow::keyPressEvent(QKeyEvent *ev)
+void GameGui::keyPressEvent(QKeyEvent *ev)
 {
     // CTRL + SHIFT + D --> print debug info
     if (ev->modifiers().testFlag(Qt::ControlModifier)
@@ -918,22 +919,22 @@ void CrossWordXmlGuiWindow::keyPressEvent(QKeyEvent *ev)
 
 //======================================================
 
-void CrossWordXmlGuiWindow::saveSlot()
+void GameGui::saveSlot()
 {
     save();
 }
 
-void CrossWordXmlGuiWindow::saveAsSlot()
+void GameGui::saveAsSlot()
 {
     saveAs(KrossWord::Normal);
 }
 
-void CrossWordXmlGuiWindow::saveAsTemplateSlot()
+void GameGui::saveAsTemplateSlot()
 {
     saveAs(KrossWord::Template);
 }
 
-void CrossWordXmlGuiWindow::printSlot()
+void GameGui::printSlot()
 {
     Q_ASSERT(m_view);
 
@@ -960,7 +961,7 @@ void CrossWordXmlGuiWindow::printSlot()
     delete printDialog;
 }
 
-void CrossWordXmlGuiWindow::printPreviewSlot()
+void GameGui::printPreviewSlot()
 {
     Q_ASSERT(m_view);
 
@@ -973,18 +974,18 @@ void CrossWordXmlGuiWindow::printPreviewSlot()
     //dialog->setVisible(true);
 }
 
-void CrossWordXmlGuiWindow::doPrintSlot(QPrinter *printer)
+void GameGui::doPrintSlot(QPrinter *printer)
 {
     PdfDocument document(krossWord(), printer);
     document.print();
 }
 
-void CrossWordXmlGuiWindow::closeSlot()
+void GameGui::closeSlot()
 {
     closeFile();
 }
 
-void CrossWordXmlGuiWindow::addClueSlot()
+void GameGui::addClueSlot()
 {
     if (m_popupMenuCell && m_popupMenuCell->getCellType() == ClueCellType) {
         krossWord()->setCurrentCell(m_popupMenuCell);
@@ -1053,7 +1054,7 @@ void CrossWordXmlGuiWindow::addClueSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::addImageSlot()
+void GameGui::addImageSlot()
 {
     Coord coord = krossWord()->currentCell()->coord();
     int horizontalCellSpan = 1;
@@ -1068,7 +1069,7 @@ void CrossWordXmlGuiWindow::addImageSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::removeSlot()
+void GameGui::removeSlot()
 {
     ClueCell *clue;
     ImageCell *image;
@@ -1086,7 +1087,7 @@ void CrossWordXmlGuiWindow::removeSlot()
         statusBar()->showMessage(i18n("No removable cell selected."));
 }
 
-void CrossWordXmlGuiWindow::clearCrosswordSlot()
+void GameGui::clearCrosswordSlot()
 {
     int result = KMessageBox::questionYesNo(this, i18n("Do you really want to clear the crossword?"), i18n("Clear"), KStandardGuiItem::yes(), KStandardGuiItem::no());
 
@@ -1100,7 +1101,7 @@ void CrossWordXmlGuiWindow::clearCrosswordSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::propertiesSlot()
+void GameGui::propertiesSlot()
 {
     QPointer<CrosswordPropertiesDialog> dialog = new CrosswordPropertiesDialog(krossWord(), this);
     connect(dialog, SIGNAL(conversionRequested(CrosswordTypeInfo)), this, SLOT(propertiesConversionRequested(CrosswordTypeInfo)));
@@ -1117,7 +1118,7 @@ void CrossWordXmlGuiWindow::propertiesSlot()
     delete dialog;
 }
 
-void CrossWordXmlGuiWindow::editCheckRotationSymmetrySlot()
+void GameGui::editCheckRotationSymmetrySlot()
 {
     bool symmetric = krossWord()->has180DegreeRotationSymmetry();
     QString message;
@@ -1145,14 +1146,14 @@ void CrossWordXmlGuiWindow::editCheckRotationSymmetrySlot()
     KMessageBox::information(this, message);
 }
 
-void CrossWordXmlGuiWindow::editStatisticsSlot()
+void GameGui::editStatisticsSlot()
 {
     QDialog *dialog = new StatisticsDialog(krossWord(), this);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     dialog->show();
 }
 
-void CrossWordXmlGuiWindow::editClueNumberMappingSlot()
+void GameGui::editClueNumberMappingSlot()
 {
     QDialog *clueNumberMappingDlg = new QDialog(this);
     clueNumberMappingDlg->setWindowTitle(i18n("Clue Number Mapping"));
@@ -1187,7 +1188,7 @@ void CrossWordXmlGuiWindow::editClueNumberMappingSlot()
     delete clueNumberMappingDlg;
 }
 
-void CrossWordXmlGuiWindow::editMoveCellsSlot()
+void GameGui::editMoveCellsSlot()
 {
     QPointer<MoveCellsDialog> dialog = new MoveCellsDialog(krossWord(), this);
     if (dialog->exec() == QDialog::Accepted) {
@@ -1199,7 +1200,7 @@ void CrossWordXmlGuiWindow::editMoveCellsSlot()
     delete dialog;
 }
 
-void CrossWordXmlGuiWindow::enableEditModeSlot(bool enable)
+void GameGui::enableEditModeSlot(bool enable)
 {
     if (enable) {
         if (m_curDocumentOrigin == DocumentNewlyCreated || krossWord()->isEmpty()
@@ -1212,7 +1213,7 @@ void CrossWordXmlGuiWindow::enableEditModeSlot(bool enable)
         setEditMode(NoEditing);
 }
 
-void CrossWordXmlGuiWindow::editPasteSpecialCharacter()
+void GameGui::editPasteSpecialCharacter()
 {
     const QToolButton *button = qobject_cast<QToolButton*>(sender());
     Q_ASSERT(button);
@@ -1235,7 +1236,7 @@ void CrossWordXmlGuiWindow::editPasteSpecialCharacter()
     }
 }
 
-void CrossWordXmlGuiWindow::moveSetConfidenceConfidentSlot()
+void GameGui::moveSetConfidenceConfidentSlot()
 {
     if (m_popupMenuCell && m_popupMenuCell->isLetterCell())
         ((LetterCell*)m_popupMenuCell)->setConfidence(Confident);
@@ -1243,7 +1244,7 @@ void CrossWordXmlGuiWindow::moveSetConfidenceConfidentSlot()
 
 //======================================================
 
-void CrossWordXmlGuiWindow::setupActions()
+void GameGui::setupActions()
 {
     KActionCollection *ac = actionCollection();
 
@@ -1519,7 +1520,7 @@ void CrossWordXmlGuiWindow::setupActions()
     connect(eraseAction, SIGNAL(triggered(bool)), this, SLOT(eraseSlot(bool)));
 }
 
-void CrossWordXmlGuiWindow::updateTheme()
+void GameGui::updateTheme()
 {
     /* Should not do it manually */
     QString themeFile = Settings::theme();
@@ -1534,7 +1535,7 @@ void CrossWordXmlGuiWindow::updateTheme()
     view()->scene()->update();
 }
 
-void CrossWordXmlGuiWindow::setDefaultCursor()
+void GameGui::setDefaultCursor()
 {
     Q_ASSERT(m_view);
 
@@ -1553,13 +1554,13 @@ void CrossWordXmlGuiWindow::setDefaultCursor()
     }
 }
 
-void CrossWordXmlGuiWindow::undoStackIndexChanged(int index)
+void GameGui::undoStackIndexChanged(int index)
 {
     setModificationType(m_lastSavedUndoIndex == index
                         ? NoModification : ModifiedCrossword);
 }
 
-void CrossWordXmlGuiWindow::clueListContextMenuRequested(const QPoint &pos)
+void GameGui::clueListContextMenuRequested(const QPoint &pos)
 {
     if (!isInEditMode())
         return;
@@ -1573,7 +1574,7 @@ void CrossWordXmlGuiWindow::clueListContextMenuRequested(const QPoint &pos)
     menu->exec(m_clueTree->mapToGlobal(pos));
 }
 
-void CrossWordXmlGuiWindow::updateClueDock()
+void GameGui::updateClueDock()
 {
     // Fill clue model
     if (m_clueModel) {
@@ -1601,10 +1602,9 @@ void CrossWordXmlGuiWindow::updateClueDock()
 
     connect(m_clueSelectionModel, SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
             this, SLOT(currentClueInDockChanged(QModelIndex, QModelIndex)));
-
 }
 
-QDockWidget *CrossWordXmlGuiWindow::createClueDock()
+QDockWidget *GameGui::createClueDock()
 {
     m_clueTree = new ClueListView();
 
@@ -1620,13 +1620,12 @@ QDockWidget *CrossWordXmlGuiWindow::createClueDock()
 
     m_clueDock->setWidget(m_clueTree);
 
-
     updateClueDock();
 
     return m_clueDock;
 }
 
-QDockWidget *CrossWordXmlGuiWindow::createUndoViewDock()
+QDockWidget *GameGui::createUndoViewDock()
 {
     m_undoView = new QUndoView(m_undoStack);
     m_undoViewDock = new QDockWidget(i18n("Edit History"), this);
@@ -1636,7 +1635,7 @@ QDockWidget *CrossWordXmlGuiWindow::createUndoViewDock()
     return m_undoViewDock;
 }
 
-QDockWidget* CrossWordXmlGuiWindow::createCurrentCellDock()
+QDockWidget* GameGui::createCurrentCellDock()
 {
     m_currentCellWidget = new CurrentCellWidget(krossWord(), new Dictionary); //CHECK: mainwindow getDictionary
     m_currentCellDock = new QDockWidget(i18n("Current Cell"), this);
@@ -1667,12 +1666,12 @@ QDockWidget* CrossWordXmlGuiWindow::createCurrentCellDock()
     return m_currentCellDock;
 }
 
-void CrossWordXmlGuiWindow::currentCellDockToggled(bool checked)
+void GameGui::currentCellDockToggled(bool checked)
 {
     m_currentCellWidget->setWatchForChanges(checked);
 }
 
-void CrossWordXmlGuiWindow::changeAnswerOffsetRequested(ClueCell* clueCell,
+void GameGui::changeAnswerOffsetRequested(ClueCell* clueCell,
         AnswerOffset newAnswerOffset)
 {
     QString errorMessage;
@@ -1685,7 +1684,7 @@ void CrossWordXmlGuiWindow::changeAnswerOffsetRequested(ClueCell* clueCell,
     }
 }
 
-void CrossWordXmlGuiWindow::changeOrientationRequested(ClueCell* clueCell,
+void GameGui::changeOrientationRequested(ClueCell* clueCell,
         Qt::Orientation newOrientation)
 {
     QString errorMessage;
@@ -1698,7 +1697,7 @@ void CrossWordXmlGuiWindow::changeOrientationRequested(ClueCell* clueCell,
     }
 }
 
-void CrossWordXmlGuiWindow::changeClueTextRequested(ClueCell* clueCell,
+void GameGui::changeClueTextRequested(ClueCell* clueCell,
         const QString& newClueText)
 {
     QString errorMessage;
@@ -1710,7 +1709,7 @@ void CrossWordXmlGuiWindow::changeClueTextRequested(ClueCell* clueCell,
     }
 }
 
-void CrossWordXmlGuiWindow::changeClueAndCorrectAnswerRequested(ClueCell* clueCell,
+void GameGui::changeClueAndCorrectAnswerRequested(ClueCell* clueCell,
         const QString &newClueText, const QString &newCorrectAnswer)
 {
     QString errorMessage;
@@ -1723,14 +1722,14 @@ void CrossWordXmlGuiWindow::changeClueAndCorrectAnswerRequested(ClueCell* clueCe
     }
 }
 
-void CrossWordXmlGuiWindow::setSolutionWordIndexRequested(
+void GameGui::setSolutionWordIndexRequested(
     SolutionLetterCell* solutionLetterCell, int newSolutionLetterIndex)
 {
     // TODO: Undo command
     solutionLetterCell->setSolutionWordIndex(newSolutionLetterIndex);
 }
 
-void CrossWordXmlGuiWindow::convertToLetterCellRequested(
+void GameGui::convertToLetterCellRequested(
     SolutionLetterCell* solutionLetterCell)
 {
     QString errorMessage;
@@ -1742,7 +1741,7 @@ void CrossWordXmlGuiWindow::convertToLetterCellRequested(
     }
 }
 
-void CrossWordXmlGuiWindow::convertToSolutionLetterCellRequested(
+void GameGui::convertToSolutionLetterCellRequested(
     LetterCell* letterCell)
 {
     Q_ASSERT(letterCell);
@@ -1761,7 +1760,7 @@ void CrossWordXmlGuiWindow::convertToSolutionLetterCellRequested(
     }
 }
 
-void CrossWordXmlGuiWindow::enableActions(KrossWordCell* currentCell)
+void GameGui::enableActions(KrossWordCell* currentCell)
 {
     KrossWordCell *cell = currentCell ? currentCell : krossWord()->currentCell();
 
@@ -1769,7 +1768,7 @@ void CrossWordXmlGuiWindow::enableActions(KrossWordCell* currentCell)
     stateChanged("letter_cell_selected", letterCellSelected ? StateNoReverse : StateReverse);
 }
 
-void CrossWordXmlGuiWindow::enableEditActions(KrossWordCell* currentCell)
+void GameGui::enableEditActions(KrossWordCell* currentCell)
 {
     KrossWordCell *cell = currentCell ? currentCell : krossWord()->currentCell();
 
@@ -1815,8 +1814,7 @@ void CrossWordXmlGuiWindow::enableEditActions(KrossWordCell* currentCell)
     m_undoView->setEnabled(m_editMode);
 }
 
-void CrossWordXmlGuiWindow::setModificationType(
-    CrossWordXmlGuiWindow::ModificationType modificationType, bool set)
+void GameGui::setModificationType(GameGui::ModificationType modificationType, bool set)
 {
     if (modificationType == NoModification) {
         if (!set)
@@ -1825,23 +1823,25 @@ void CrossWordXmlGuiWindow::setModificationType(
     } else if (set) {
         autoSaveToTempFile();
         m_modified |= modificationType;
-    } else
+    } else {
         m_modified ^= modificationType;
+    }
 
-    if (m_modified == NoModification)
+    if (m_modified == NoModification) {
         removeTempFile();
+    }
 
     emit modificationTypesChanged(m_modified);
 }
 
-void CrossWordXmlGuiWindow::setActionVisibility()
+void GameGui::setActionVisibility()
 {
     CellTypes availableCellTypes = krossWord()->crosswordTypeInfo().cellTypes;
 
     action(actionName(Edit_AddImage))->setVisible(availableCellTypes.testFlag(ImageCellType));
 }
 
-void CrossWordXmlGuiWindow::adjustGuiToCrosswordType()
+void GameGui::adjustGuiToCrosswordType()
 {
     bool letterContentToClueNumberMappingUsed =
         krossWord()->crosswordTypeInfo().clueType == NumberClues1To26
@@ -1859,13 +1859,13 @@ void CrossWordXmlGuiWindow::adjustGuiToCrosswordType()
     setActionVisibility();
 }
 
-void CrossWordXmlGuiWindow::unlockAndCallAutoSave()
+void GameGui::unlockAndCallAutoSave()
 {
     m_lastAutoSave = QDateTime::currentDateTime().addSecs(-MIN_SECS_BETWEEN_AUTOSAVES - 1);
     autoSaveToTempFile();
 }
 
-void CrossWordXmlGuiWindow::autoSaveToTempFile()
+void GameGui::autoSaveToTempFile()
 {
     if (!m_view || m_lastAutoSave.isNull()) {
         return;
@@ -1912,7 +1912,7 @@ void CrossWordXmlGuiWindow::autoSaveToTempFile()
     }
 }
 
-void CrossWordXmlGuiWindow::removeTempFile(const QString &fileName)
+void GameGui::removeTempFile(const QString &fileName)
 {
     if (!fileName.isEmpty()) {
         m_curTmpFileName = fileName;
@@ -1931,7 +1931,7 @@ void CrossWordXmlGuiWindow::removeTempFile(const QString &fileName)
     emit tempAutoSaveFileChanged(QString());
 }
 
-void CrossWordXmlGuiWindow::setCurrentFileName(const QString& fileName)
+void GameGui::setCurrentFileName(const QString& fileName)
 {
     QString oldFileName = m_curFileName;
     m_curFileName = fileName;
@@ -1960,7 +1960,7 @@ void CrossWordXmlGuiWindow::setCurrentFileName(const QString& fileName)
     }
 }
 
-KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
+KrossWordPuzzleView *GameGui::createKrossWordPuzzleView()
 {
     KrossWordPuzzleView *view = new KrossWordPuzzleView(
                 new KrossWordPuzzleScene(
@@ -1986,12 +1986,12 @@ KrossWordPuzzleView *CrossWordXmlGuiWindow::createKrossWordPuzzleView()
     return view;
 }
 
-void CrossWordXmlGuiWindow::signalChangeStatusbar(const QString& text)
+void GameGui::signalChangeStatusbar(const QString& text)
 {
     statusBar()->showMessage(text, 5000);
 }
 
-void CrossWordXmlGuiWindow::setupPrinter(QPrinter &printer)
+void GameGui::setupPrinter(QPrinter &printer)
 {   
     printer.setCreator("Krossword");
     printer.setDocName("print.pdf");
@@ -2004,7 +2004,7 @@ void CrossWordXmlGuiWindow::hideCongratulations()
 }
 */
 
-void CrossWordXmlGuiWindow::showCongratulationsItems()
+void GameGui::showCongratulationsItems()
 {
     m_animation = new QParallelAnimationGroup(this);
     m_animation->setLoopCount(1);
@@ -2017,7 +2017,7 @@ void CrossWordXmlGuiWindow::showCongratulationsItems()
     KMessageBox::information(this, i18n("Congratulations!\nYou solved the crossword perfectly."));
 }
 
-QList<QPropertyAnimation *> CrossWordXmlGuiWindow::makeAnimation()
+QList<QPropertyAnimation *> GameGui::makeAnimation()
 {
     std::random_shuffle(m_animationCellList.begin(), m_animationCellList.end());
 
@@ -2057,7 +2057,7 @@ QList<QPropertyAnimation *> CrossWordXmlGuiWindow::makeAnimation()
     return ret_list;
 }
 
-void CrossWordXmlGuiWindow::fitToPageSlot()
+void GameGui::fitToPageSlot()
 {
     m_view->scene()->setSceneRect(krossWord()->boundingRect()); // CHECK
     m_view->setSceneRect(m_view->scene()->sceneRect()); // CHECK
@@ -2070,7 +2070,7 @@ void CrossWordXmlGuiWindow::fitToPageSlot()
     krossWord()->clearCache();
 }
 
-void CrossWordXmlGuiWindow::viewPanSlot(bool enabled)
+void GameGui::viewPanSlot(bool enabled)
 {
     krossWord()->setInteractive(!enabled);
     if (enabled)
@@ -2079,7 +2079,7 @@ void CrossWordXmlGuiWindow::viewPanSlot(bool enabled)
         m_view->setDragMode(QGraphicsView::NoDrag);
 }
 
-void CrossWordXmlGuiWindow::solveSlot()
+void GameGui::solveSlot()
 {
     int result = KMessageBox::questionYesNo(this, i18n("Do you really want to solve the crossword?"), i18n("Solve"), KStandardGuiItem::yes(), KStandardGuiItem::no());
 
@@ -2098,13 +2098,13 @@ void CrossWordXmlGuiWindow::solveSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::moveSetConfidenceUnsureSlot()
+void GameGui::moveSetConfidenceUnsureSlot()
 {
     if (m_popupMenuCell && m_popupMenuCell->isLetterCell())
         ((LetterCell*)m_popupMenuCell)->setConfidence(Unsure);
 }
 
-void CrossWordXmlGuiWindow::hintSlot()
+void GameGui::hintSlot()
 {
     KrossWordCell *cell = krossWord()->currentCell();
     if (cell && cell->isLetterCell()) {
@@ -2118,7 +2118,7 @@ void CrossWordXmlGuiWindow::hintSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::highlightCellForPopup()
+void GameGui::highlightCellForPopup()
 {
     if (m_popupMenuCell) {
         krossWord()->setHighlightedClue(NULL);
@@ -2126,7 +2126,7 @@ void CrossWordXmlGuiWindow::highlightCellForPopup()
     }
 }
 
-void CrossWordXmlGuiWindow::highlightClueForPopup()
+void GameGui::highlightClueForPopup()
 {
     if (m_popupMenuCell && m_popupMenuCell->isType(ClueCellType)) {
         ClueCell *clue = qgraphicsitem_cast<ClueCell*>(m_popupMenuCell);
@@ -2135,7 +2135,7 @@ void CrossWordXmlGuiWindow::highlightClueForPopup()
     }
 }
 
-void CrossWordXmlGuiWindow::highlightHorizontalClueForPopup()
+void GameGui::highlightHorizontalClueForPopup()
 {
     if (m_popupMenuCell && m_popupMenuCell->isLetterCell()) {
         LetterCell *letter = (LetterCell*)m_popupMenuCell;
@@ -2144,7 +2144,7 @@ void CrossWordXmlGuiWindow::highlightHorizontalClueForPopup()
     }
 }
 
-void CrossWordXmlGuiWindow::highlightVerticalClueForPopup()
+void GameGui::highlightVerticalClueForPopup()
 {
     if (m_popupMenuCell && m_popupMenuCell->isLetterCell()) {
         LetterCell *letter = (LetterCell*)m_popupMenuCell;
@@ -2153,13 +2153,13 @@ void CrossWordXmlGuiWindow::highlightVerticalClueForPopup()
     }
 }
 
-void CrossWordXmlGuiWindow::hintCellSlot()
+void GameGui::hintCellSlot()
 {
     if (m_popupMenuCell && m_popupMenuCell->isLetterCell())
         ((LetterCell*)m_popupMenuCell)->solve();
 }
 
-void CrossWordXmlGuiWindow::clearCellSlot()
+void GameGui::clearCellSlot()
 {
     if (m_popupMenuCell && m_popupMenuCell->isLetterCell()) {
         LetterCell *letter = (LetterCell*)m_popupMenuCell;
@@ -2173,7 +2173,7 @@ void CrossWordXmlGuiWindow::clearCellSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::hintClueSlot()
+void GameGui::hintClueSlot()
 {
     if (m_popupMenuCell && m_popupMenuCell->isType(ClueCellType)) {
         ClueCell *clue = qgraphicsitem_cast<ClueCell*>(m_popupMenuCell);
@@ -2182,7 +2182,7 @@ void CrossWordXmlGuiWindow::hintClueSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::clearClueSlot()
+void GameGui::clearClueSlot()
 {
     ClueCell *clue;
     if ((clue = qgraphicsitem_cast<ClueCell*>(m_popupMenuCell)) || (clue = krossWord()->highlightedClue())) {
@@ -2196,7 +2196,7 @@ void CrossWordXmlGuiWindow::clearClueSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::hintHorizontalClueSlot()
+void GameGui::hintHorizontalClueSlot()
 {
     if (m_popupMenuCell && m_popupMenuCell->isLetterCell()) {
         LetterCell *letter = (LetterCell*)m_popupMenuCell;
@@ -2205,7 +2205,7 @@ void CrossWordXmlGuiWindow::hintHorizontalClueSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::clearHorizontalClueSlot()
+void GameGui::clearHorizontalClueSlot()
 {
     if (m_popupMenuCell && m_popupMenuCell->isLetterCell()) {
         LetterCell *letter = (LetterCell*)m_popupMenuCell;
@@ -2221,7 +2221,7 @@ void CrossWordXmlGuiWindow::clearHorizontalClueSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::hintVerticalClueSlot()
+void GameGui::hintVerticalClueSlot()
 {
     if (m_popupMenuCell && m_popupMenuCell->isLetterCell()) {
         LetterCell *letter = (LetterCell*)m_popupMenuCell;
@@ -2230,7 +2230,7 @@ void CrossWordXmlGuiWindow::hintVerticalClueSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::clearVerticalClueSlot()
+void GameGui::clearVerticalClueSlot()
 {
     if (m_popupMenuCell && m_popupMenuCell->isLetterCell()) {
         LetterCell *letter = (LetterCell*)m_popupMenuCell;
@@ -2246,7 +2246,7 @@ void CrossWordXmlGuiWindow::clearVerticalClueSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::selectClueWithSwitchedOrientationSlot()
+void GameGui::selectClueWithSwitchedOrientationSlot()
 {
     if (!krossWord()->highlightedClue())
         return;
@@ -2260,19 +2260,19 @@ void CrossWordXmlGuiWindow::selectClueWithSwitchedOrientationSlot()
         letterCell->switchHighlightedClue();
 }
 
-void CrossWordXmlGuiWindow::selectFirstLetterOfClueSlot()
+void GameGui::selectFirstLetterOfClueSlot()
 {
     if (krossWord()->highlightedClue())
         krossWord()->highlightedClue()->firstLetter()->setFocus();
 }
 
-void CrossWordXmlGuiWindow::selectLastLetterOfClueSlot()
+void GameGui::selectLastLetterOfClueSlot()
 {
     if (krossWord()->highlightedClue())
         krossWord()->highlightedClue()->lastLetter()->setFocus();
 }
 
-void CrossWordXmlGuiWindow::selectFirstClueSlot()
+void GameGui::selectFirstClueSlot()
 {
     ClueCellList clueCells = krossWord()->clueCellsFromClueNumber(0);
     ClueCell *clueCell = NULL;
@@ -2287,7 +2287,7 @@ void CrossWordXmlGuiWindow::selectFirstClueSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::selectNextClueSlot()
+void GameGui::selectNextClueSlot()
 {
     if (!krossWord()->highlightedClue())
         return;
@@ -2314,7 +2314,7 @@ void CrossWordXmlGuiWindow::selectNextClueSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::selectPreviousClueSlot()
+void GameGui::selectPreviousClueSlot()
 {
     if (!krossWord()->highlightedClue())
         return;
@@ -2341,7 +2341,7 @@ void CrossWordXmlGuiWindow::selectPreviousClueSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::selectLastClueSlot()
+void GameGui::selectLastClueSlot()
 {
     ClueCellList clueCells = krossWord()->clueCellsFromClueNumber(krossWord()->maxClueNumber());
     ClueCell *clueCell = NULL;
@@ -2356,7 +2356,7 @@ void CrossWordXmlGuiWindow::selectLastClueSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::removeHorizontalClueSlot()
+void GameGui::removeHorizontalClueSlot()
 {
     if (m_popupMenuCell && m_popupMenuCell->isLetterCell()) {
         LetterCell *letter = (LetterCell*)m_popupMenuCell;
@@ -2365,7 +2365,7 @@ void CrossWordXmlGuiWindow::removeHorizontalClueSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::removeVerticalClueSlot()
+void GameGui::removeVerticalClueSlot()
 {
     if (m_popupMenuCell && m_popupMenuCell->isLetterCell()) {
         LetterCell *letter = (LetterCell*)m_popupMenuCell;
@@ -2374,7 +2374,7 @@ void CrossWordXmlGuiWindow::removeVerticalClueSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::checkSlot()
+void GameGui::checkSlot()
 {
     if (krossWord()->check()) {
         setState(ShowingCongratulations);
@@ -2384,7 +2384,7 @@ void CrossWordXmlGuiWindow::checkSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::clearSlot()
+void GameGui::clearSlot()
 {
     int result = KMessageBox::questionYesNo(this, i18n("Do you really want to clear the crossword?"), i18n("Clear"), KStandardGuiItem::yes(), KStandardGuiItem::no());
 
@@ -2401,7 +2401,7 @@ void CrossWordXmlGuiWindow::clearSlot()
     }
 }
 
-void CrossWordXmlGuiWindow::eraseSlot(bool enable)
+void GameGui::eraseSlot(bool enable)
 {
     if (enable) {
         QCursor cursor(Qt::PointingHandCursor);
@@ -2415,7 +2415,7 @@ void CrossWordXmlGuiWindow::eraseSlot(bool enable)
         setDefaultCursor();
 }
 
-void CrossWordXmlGuiWindow::clickedClueInDock(const QModelIndex &index)
+void GameGui::clickedClueInDock(const QModelIndex &index)
 {
     if (index.parent() == QModelIndex())
         return;
@@ -2428,7 +2428,7 @@ void CrossWordXmlGuiWindow::clickedClueInDock(const QModelIndex &index)
     clue->firstLetter()->setFocus();
 }
 
-void CrossWordXmlGuiWindow::currentClueInDockChanged(const QModelIndex &current, const QModelIndex &previous)
+void GameGui::currentClueInDockChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     if (current.parent() == QModelIndex() || current == previous)
         return;
@@ -2439,7 +2439,7 @@ void CrossWordXmlGuiWindow::currentClueInDockChanged(const QModelIndex &current,
 
 }
 
-void CrossWordXmlGuiWindow::currentClueChanged(ClueCell* clue)
+void GameGui::currentClueChanged(ClueCell* clue)
 {
     if (!clue) {
         if (isInEditMode())
@@ -2469,7 +2469,7 @@ void CrossWordXmlGuiWindow::currentClueChanged(ClueCell* clue)
         qDebug() << "Clue not found in clue tree view:" << clue->clue();
 }
 
-void CrossWordXmlGuiWindow::answerChanged(ClueCell* clue, const QString &currentAnswer, bool statusbar)
+void GameGui::answerChanged(ClueCell* clue, const QString &currentAnswer, bool statusbar)
 {
     m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
 
@@ -2489,7 +2489,7 @@ void CrossWordXmlGuiWindow::answerChanged(ClueCell* clue, const QString &current
     }
 }
 
-void CrossWordXmlGuiWindow::currentCellChanged(KrossWordCell* currentCell, KrossWordCell* previousCell)
+void GameGui::currentCellChanged(KrossWordCell* currentCell, KrossWordCell* previousCell)
 {
     if (!currentCell)
         return;
@@ -2529,7 +2529,7 @@ void CrossWordXmlGuiWindow::currentCellChanged(KrossWordCell* currentCell, Kross
     }
 }
 
-void CrossWordXmlGuiWindow::customContextMenuRequestedForCell(const QPointF &scenePos, KrossWordCell *cell)
+void GameGui::customContextMenuRequestedForCell(const QPointF &scenePos, KrossWordCell *cell)
 {
     QMenu *menu = NULL;
 
@@ -2649,7 +2649,7 @@ void CrossWordXmlGuiWindow::customContextMenuRequestedForCell(const QPointF &sce
         menu->exec(m_view->mapToGlobal(m_view->mapFromScene(scenePos)));
 }
 
-void CrossWordXmlGuiWindow::mousePressedOnCell(const QPointF& scenePos, Qt::MouseButton button, KrossWordCell *cell)
+void GameGui::mousePressedOnCell(const QPointF& scenePos, Qt::MouseButton button, KrossWordCell *cell)
 {
     Q_UNUSED(scenePos);
 
@@ -2680,7 +2680,7 @@ void CrossWordXmlGuiWindow::mousePressedOnCell(const QPointF& scenePos, Qt::Mous
     }
 }
 
-void CrossWordXmlGuiWindow::cluesAdded(ClueCellList clues)
+void GameGui::cluesAdded(ClueCellList clues)
 {
     Q_ASSERT(m_clueModel);
 
@@ -2691,7 +2691,7 @@ void CrossWordXmlGuiWindow::cluesAdded(ClueCellList clues)
     drawBackground(view());
 }
 
-void CrossWordXmlGuiWindow::cluesAboutToBeRemoved(ClueCellList clues)
+void GameGui::cluesAboutToBeRemoved(ClueCellList clues)
 {
     Q_ASSERT(m_clueModel);
 
@@ -2703,13 +2703,13 @@ void CrossWordXmlGuiWindow::cluesAboutToBeRemoved(ClueCellList clues)
     }
 }
 
-void CrossWordXmlGuiWindow::popupMenuCellDestroyed(QObject *)
+void GameGui::popupMenuCellDestroyed(QObject *)
 {
 //     qDebug() << "m_popupMenuCell destroyed";
     m_popupMenuCell = NULL;
 }
 
-void CrossWordXmlGuiWindow::addLettersToClueRequest(ClueCell *clue, int lettersToAdd)
+void GameGui::addLettersToClueRequest(ClueCell *clue, int lettersToAdd)
 {
     QString errorMessage;
     if (!m_undoStack->tryPush(new AddLettersToClueCommand(krossWord(), clue, lettersToAdd), &errorMessage)) {
@@ -2721,7 +2721,7 @@ void CrossWordXmlGuiWindow::addLettersToClueRequest(ClueCell *clue, int lettersT
     }
 }
 
-void CrossWordXmlGuiWindow::letterEditRequest(LetterCell* letter, const QChar &currentLetter, const QChar &newLetter)
+void GameGui::letterEditRequest(LetterCell* letter, const QChar &currentLetter, const QChar &newLetter)
 {
     Q_UNUSED(currentLetter);
     if (krossWord()->isEditable()) {
@@ -2735,7 +2735,7 @@ void CrossWordXmlGuiWindow::letterEditRequest(LetterCell* letter, const QChar &c
     }
 }
 
-void CrossWordXmlGuiWindow::addAnimation()
+void GameGui::addAnimation()
 {
     m_animation->clear();
     auto list = makeAnimation();
@@ -2746,7 +2746,7 @@ void CrossWordXmlGuiWindow::addAnimation()
     m_animation->start(QAbstractAnimation::KeepWhenStopped);
 }
 
-void CrossWordXmlGuiWindow::clueMappingCurrentLetterChanged(
+void GameGui::clueMappingCurrentLetterChanged(
     QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
     Q_UNUSED(previous);
@@ -2756,7 +2756,7 @@ void CrossWordXmlGuiWindow::clueMappingCurrentLetterChanged(
     ui_clue_number_mapping.mappedClueNumber->setValue(clueNumber);
 }
 
-void CrossWordXmlGuiWindow::clueMappingSetMappingClicked()
+void GameGui::clueMappingSetMappingClicked()
 {
     QString sNumber = QString::number(ui_clue_number_mapping.mappedClueNumber->value());
     QTreeWidgetItem *item = ui_clue_number_mapping.letterContentList->currentItem();
@@ -2768,7 +2768,7 @@ void CrossWordXmlGuiWindow::clueMappingSetMappingClicked()
     item->setText(1, sNumber);
 }
 
-void CrossWordXmlGuiWindow::propertiesConversionRequested(
+void GameGui::propertiesConversionRequested(
     const CrosswordTypeInfo &typeInfo)
 {
     QString errorMessage;
@@ -2782,42 +2782,42 @@ void CrossWordXmlGuiWindow::propertiesConversionRequested(
     setModificationType(ModifiedCrossword);
 }
 
-QMenu* CrossWordXmlGuiWindow::popupMenuEditClueList()
+QMenu* GameGui::popupMenuEditClueList()
 {
     return static_cast<QMenu*>(factory()->container("edit_clue_list_popup", this));
 }
 
-QMenu* CrossWordXmlGuiWindow::popupMenuCrosswordLetterCell()
+QMenu* GameGui::popupMenuCrosswordLetterCell()
 {
     return static_cast<QMenu*>(factory()->container("crossword_letter_cell_popup", this));
 }
 
-QMenu* CrossWordXmlGuiWindow::popupMenuCrosswordClueCell()
+QMenu* GameGui::popupMenuCrosswordClueCell()
 {
     return static_cast<QMenu*>(factory()->container("crossword_clue_cell_popup", this));
 }
 
-QMenu* CrossWordXmlGuiWindow::popupMenuEditCrosswordLetterCell()
+QMenu* GameGui::popupMenuEditCrosswordLetterCell()
 {
     return static_cast<QMenu*>(factory()->container("edit_crossword_letter_cell_popup", this));
 }
 
-QMenu* CrossWordXmlGuiWindow::popupMenuEditCrosswordClueCell()
+QMenu* GameGui::popupMenuEditCrosswordClueCell()
 {
     return static_cast<QMenu*>(factory()->container("edit_crossword_clue_cell_popup", this));
 }
 
-QMenu* CrossWordXmlGuiWindow::popupMenuEditCrosswordEmptyCell()
+QMenu* GameGui::popupMenuEditCrosswordEmptyCell()
 {
     return static_cast<QMenu*>(factory()->container("edit_crossword_empty_cell_popup", this));
 }
 
-QMenu* CrossWordXmlGuiWindow::popupMenuEditCrosswordImageCell()
+QMenu* GameGui::popupMenuEditCrosswordImageCell()
 {
     return static_cast<QMenu*>(factory()->container("edit_crossword_image_cell_popup", this));
 }
 
-void CrossWordXmlGuiWindow::drawBackground(KrossWordPuzzleView *view) const
+void GameGui::drawBackground(KrossWordPuzzleView *view) const
 {
     // Add background
     QBrush brush;

@@ -23,7 +23,7 @@
 #include <kxmlguiwindow.h>
 
 #include "ui_settings.h"
-#include "crosswordxmlguiwindow.h"
+#include "gamegui.h"
 
 #include "dictionary.h"
 
@@ -62,7 +62,7 @@ public:
     bool createNewCrossWordFromTemplate(const QString &templateFilePath, const QString &title,
                                         const QString &authors, const QString &copyright, const QString &notes);
 
-    void setupCrosswordxmlgui();
+    void setupGameGui();
 
     Dictionary* getDictionary();
     
@@ -90,7 +90,7 @@ protected slots:
     void crosswordErrorLoading(const QString &fileName);
     void crosswordCurrentChanged(const QString &fileName, const QString &oldFileName);
     void crosswordClosed(const QString &fileName);
-    void crosswordModificationsChanged(CrossWordXmlGuiWindow::ModificationTypes modificationTypes);
+    void crosswordModificationsChanged(GameGui::ModificationTypes modificationTypes);
     void crosswordAutoSaveFileChanged(const QString &fileName);
 
 private:
@@ -105,8 +105,8 @@ private:
 
     Ui::settings           ui_settings;
 
-    LibraryGui            *m_mainLibrary;           //Owned
-    CrossWordXmlGuiWindow *m_mainCrossword;         //Owned
+    LibraryGui            *m_libraryGui;           //Owned
+    GameGui *m_gameGui;         //Owned
 
     QDialog               *m_loadProgressDialog;    //Owned
     QString                m_caption;
