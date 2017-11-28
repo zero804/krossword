@@ -150,7 +150,6 @@
         <Action name="edit_enable_edit_mode" />
 
         <Action name="move_hint" />
-        <Action name="move_solve" />
         <Action name="move_clear" />
         <Action name="move_check" />
         <Action name="move_eraser" />
@@ -172,7 +171,6 @@
 <State name="showing_congratulations" >
     <disable>
         <Action name="move_hint" />
-        <Action name="move_solve" />
         <Action name="move_check" />
         <Action name="move_clear" />
         <Action name="move_eraser" />
@@ -206,7 +204,6 @@
     <disable>
         <Action name="move_hint" />
         <Action name="move_check" />
-        <Action name="move_solve" />
         <Action name="move_clear" />
     </disable>
 </State>

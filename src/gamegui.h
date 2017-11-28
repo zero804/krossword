@@ -200,13 +200,6 @@ public:
         RecentTab_RecentFilesRemove
     };
 
-    /** Different display states of the game. */
-    enum DisplayState {
-        ShowingNothing, /**< The game is currently starting up. */
-        ShowingCrossword, /**< A crossword is currently shown. */
-        ShowingCongratulations /**< A crossword with a congratulations overlay is currently shown. */
-    };
-
     /*
     enum StatusBarItems {
         CoordinatesItem = 0
@@ -245,8 +238,6 @@ public:
     KrossWordPuzzleView *viewSolution() const;
     KrossWord *krossWord() const;
     KrossWord *solutionKrossWord() const;
-
-    void setState(DisplayState state);
 
     bool isInEditMode() const;
     void setEditMode(EditMode editMode = Editing);
@@ -413,7 +404,7 @@ private:
     void setModificationType(ModificationType modificationType, bool set = true);
     void setCurrentFileName(const QString &fileName = QString());
 
-    void showCongratulationsItems();
+    void showCongratulations();
     QList<QPropertyAnimation*> makeAnimation();
 
     QMenu *popupMenuCrosswordLetterCell();
@@ -433,7 +424,6 @@ private:
     ModificationTypes m_modified;
     DocumentOrigin m_curDocumentOrigin;
     EditMode m_editMode;
-    DisplayState m_state;
     QString m_curFileName, m_curTmpFileName;
     int m_lastSavedUndoIndex;
 
@@ -460,8 +450,6 @@ private:
     bool m_undoStackLoaded;
 
     QParallelAnimationGroup *m_animation;       // Owned
-
-    KrossWordCellList m_animationCellList;
 };
 
 #endif // CROSSWORDXMLGUIWINDOW_H

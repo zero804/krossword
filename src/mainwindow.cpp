@@ -150,7 +150,8 @@ void MainWindow::closeEvent(QCloseEvent* event)
     if (event->isAccepted()) {
         // Closing not aborted, so the temporary file can be deleted
         m_gameGui->removeTempFile();
-        m_gameGui->setState(GameGui::ShowingNothing); // Cleanup
+
+        crosswordClosed("");
     }
 }
 
@@ -466,6 +467,7 @@ void MainWindow::crosswordErrorLoading(const QString& fileName)
 {
     m_loadProgressDialog->close();
     KMessageBox::error(this, i18n("Error loading file '%1'", fileName));
+    crosswordClosed(fileName);
 }
 
 void MainWindow::crosswordClosed(const QString& fileName)

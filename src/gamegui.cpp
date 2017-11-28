@@ -299,7 +299,6 @@ GameGui::GameGui(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
 {
     m_lastSavedUndoIndex = -1;
     m_undoStackLoaded = false;
-    m_state = ShowingNothing;
     m_curDocumentOrigin = NoDocument;
     m_modified = NoModification;
 
@@ -483,82 +482,6 @@ KrossWord* GameGui::krossWord() const
     return m_view ? m_view->krossWord() : NULL;
 }
 
-void GameGui::setState(GameGui::DisplayState state)
-{
-    if (m_state == state) {
-        return;
-    }
-
-    // Remove old state
-    KConfigGroup cg;
-    switch (m_state) {
-    case ShowingNothing:
-    case ShowingCrossword:
-        break;
-    case ShowingCongratulations:
-        m_animation->setCurrentTime(0);
-        m_animation->stop();
-        disconnect(m_animation, SIGNAL(finished()), this, SLOT(addAnimation()));
-        m_animation = nullptr;
-
-        m_view->scene()->update();
-
-        stateChanged("showing_congratulations", StateReverse);
-        break;
-    }
-
-    // Set new state
-    switch (state) {
-    case ShowingNothing:
-        qDebug() << "New state: ShowingNothing";
-
-        krossWord()->animator()->setEnabled(false);
-        krossWord()->removeAllCells();
-        krossWord()->resizeGrid(0, 0);
-        krossWord()->animator()->setEnabled(true);
-
-        m_undoStackLoaded = false;
-        setCurrentFileName(QString());
-        setModificationType(NoModification);
-
-        m_zoomWidget->setEnabled(false);
-        m_solutionProgress->setEnabled(false);
-        break;
-    case ShowingCrossword:
-        qDebug() << "New state: ShowingCrossword";
-
-        krossWord()->setInteractive(true);
-        m_zoomWidget->setEnabled(true);
-        m_solutionProgress->setEnabled(true);
-        m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
-
-        m_animationCellList = krossWord()->cells();
-
-        setDefaultCursor();
-        action(actionName(Move_Eraser))->setChecked(false);
-        enableEditActions();
-        break;
-    case ShowingCongratulations:
-        qDebug() << "New state: ShowingCongratulations";
-        if (m_state != ShowingCrossword) {
-            qDebug() << "Showing congrats without having a crossword doesn't make sense...";
-        }
-
-        statusBar()->showMessage(i18n("Congratulations! You solved the crossword perfectly."));
-        krossWord()->setInteractive(false);
-        stateChanged("showing_congratulations");
-
-        m_zoomWidget->setEnabled(false);
-        m_solutionProgress->setEnabled(false);
-        m_solutionProgress->setValue(100);
-
-        showCongratulationsItems();
-        break;
-    }
-
-    m_state = state;
-}
-
 bool GameGui::isInEditMode() const
 {
     return m_editMode != NoEditing;
@@ -618,7 +541,6 @@ bool GameGui::createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,cons
 
     setActionVisibility();
 
-    setState(ShowingCrossword);
     setEditMode();
     fitToPageSlot();
 
@@ -654,7 +576,6 @@ bool GameGui::createNewCrossWordFromTemplate(const QString& templateFilePath, co
 
     setActionVisibility();
 
-    setState(ShowingCrossword);
     setEditMode();
     fitToPageSlot();
     drawBackground(m_view);
@@ -704,7 +625,6 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
     bool readOk = krossWord()->read(resultUrl, &errorString, fileFormat, &undoData);
 
     if (readOk) {
-        setState(ShowingCrossword);
         m_undoStack->createFromData(krossWord(), undoData);
         m_undoStackLoaded = !undoData.isEmpty();
         m_lastAutoSave = QDateTime::currentDateTime();
@@ -755,7 +675,6 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
 
         return true;
     } else {
-        setState(ShowingNothing);
         m_undoStackLoaded = false;
         statusBar()->showMessage(i18n("Error while loading file '%1': %2", fileName, errorString));
         emit errorLoadingFile(fileName);
@@ -808,7 +727,6 @@ bool GameGui::closeFile()
         }
     }
 
-    setState(ShowingNothing);
     emit fileClosed(m_curFileName);
 
     return true;
@@ -1997,15 +1915,18 @@ void GameGui::setupPrinter(QPrinter &printer)
     printer.setDocName("print.pdf");
 }
 
-/*
-void CrossWordXmlGuiWindow::hideCongratulations()
+void GameGui::showCongratulations()
 {
-    setState(ShowingCrossword);
-}
-*/
+    statusBar()->showMessage(i18n("Congratulations! You solved the crossword perfectly."));
+    krossWord()->setInteractive(false);
+    stateChanged("showing_congratulations");
 
-void GameGui::showCongratulationsItems()
-{
+    m_zoomWidget->setEnabled(false);
+    m_solutionProgress->setEnabled(false);
+    m_solutionProgress->setValue(100);
+
+    //----------------
+
     m_animation = new QParallelAnimationGroup(this);
     m_animation->setLoopCount(1);
 
@@ -2013,20 +1934,22 @@ void GameGui::showCongratulationsItems()
     addAnimation();
 
     // show the congratulations...
-    // MESSAGEBOX WILL BE REPLACED WITH SOMETHING BETTER
+    // CHECK: MESSAGEBOX WILL BE REPLACED WITH SOMETHING BETTER
     KMessageBox::information(this, i18n("Congratulations!\nYou solved the crossword perfectly."));
 }
 
 QList<QPropertyAnimation *> GameGui::makeAnimation()
 {
-    std::random_shuffle(m_animationCellList.begin(), m_animationCellList.end());
+    KrossWordCellList cellList = krossWord()->cells();
+
+    std::random_shuffle(cellList.begin(), cellList.end());
 
     QList<QPropertyAnimation*> ret_list;
 
-    for (int i = 0; i < m_animationCellList.size(); i += 2) {
-        if (i != m_animationCellList.size() - 1) {
-            KrossWordCell* cell1 = m_animationCellList.at(i);
-            KrossWordCell* cell2 = m_animationCellList.at(i + 1);
+    for (int i = 0; i < cellList.size(); i += 2) {
+        if (i != cellList.size() - 1) {
+            KrossWordCell* cell1 = cellList.at(i);
+            KrossWordCell* cell2 = cellList.at(i + 1);
 
             QPropertyAnimation *cellAnimPos1 = new QPropertyAnimation(cell1, "pos");
             QPropertyAnimation *cellAnimPos2 = new QPropertyAnimation(cell2, "pos");
@@ -2377,7 +2300,7 @@ void GameGui::removeVerticalClueSlot()
 void GameGui::checkSlot()
 {
     if (krossWord()->check()) {
-        setState(ShowingCongratulations);
+        showCongratulations();
     } else {
         statusBar()->showMessage(i18n("There are missing / wrong letters, sorry."));
         KMessageBox::information(this, i18n("There are missing / wrong letters, sorry."), i18n("Check"));
