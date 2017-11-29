@@ -958,14 +958,14 @@ bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode w
 
     if (fileFormat == KwpFormat) {
         KwpManager kwpManager(&file);
-        bool writeOk = kwpManager.write(crosswordData); // CHECK: missing writeMode
+        bool writeOk = kwpManager.write(crosswordData);
         if (!writeOk) {
             *errorString = i18n("Error writing crossword: %1", kwpManager.errorString());
             return false;
         }
     } else if (fileFormat == KwpzFormat) {
         KwpzManager kwpzManager(&file);
-        bool writeOk = kwpzManager.write(crosswordData); // CHECK: missing writeMode
+        bool writeOk = kwpzManager.write(crosswordData);
         if (!writeOk) {
             *errorString = i18n("Error writing compressed crossword: %1", kwpzManager.errorString());
             return false;
@@ -975,7 +975,7 @@ bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode w
             qDebug() << "Can't store undoData to *.puz-files";
         }
         PuzManager puzManager(&file);
-        bool writeOk = puzManager.write(crosswordData); // CHECK: missing writeMode
+        bool writeOk = puzManager.write(crosswordData);
         if (!writeOk && errorString != NULL) {
             *errorString = i18n("Error writing AcrossLite's .puz-format.");
             return false;
@@ -2318,8 +2318,9 @@ void KrossWord::setEditable(bool editable)
 
 void KrossWord::setInteractive(bool interactive)
 {
-    if (m_interactive == interactive)
+    if (m_interactive == interactive) {
         return;
+    }
 
     m_interactive = interactive;
 
@@ -2849,16 +2850,19 @@ void KrossWord::setHighlightedClue(ClueCell* clue)
 //  qDebug() << "no new highlighted clue";
 //     qDebug() << "";
 
-    if (m_highlightedClue == clue)
+    if (m_highlightedClue == clue) {
         return;
+    }
 
     m_previousHighlightedClue = m_highlightedClue;
-    if (m_previousHighlightedClue)
+    if (m_previousHighlightedClue) {
         m_previousHighlightedClue->setHighlight(false);
+    }
 
     m_highlightedClue = clue;
-    if (m_highlightedClue)
+    if (m_highlightedClue) {
         m_highlightedClue->setHighlight(true);
+    }
 
     // Give some time to animations TODO: fix crash here
 //     QApplication::processEvents( QEventLoop::ExcludeUserInputEvents, 35 );
@@ -3032,66 +3036,6 @@ QString KrossWord::errorMessageFromErrorType(ErrorType errorType)
 
     return "Unknown error.";
 }
-
-// CHECK: to remove
-/*
-AnswerOffset KrossWord::answerOffsetFromString(const QString &s)
-{
-    QString sl = s.toLower();
-    if (sl == "cluehidden")
-        return OnClueCell;
-    else if (sl == "right")
-        return OffsetRight;
-    else if (sl == "bottom")
-        return OffsetBottom;
-    else if (sl == "left")
-        return OffsetLeft;
-    else if (sl == "top")
-        return OffsetTop;
-    else if (sl == "topleft")
-        return OffsetTopLeft;
-    else if (sl == "topright")
-        return OffsetTopRight;
-    else if (sl == "bottomleft")
-        return OffsetBottomLeft;
-    else if (sl == "bottomright")
-        return OffsetBottomRight;
-    else {
-        qDebug() << "Couldn't get enumerable for" << s;
-        return OffsetInvalid;
-    }
-}
-*/
-
-// CHECK: to remove
-/*
-QString KrossWord::answerOffsetToString(AnswerOffset answerOffset)
-{
-    switch (answerOffset) {
-    case OffsetTop:
-        return "Top";
-    case OffsetRight:
-        return "Right";
-    case OffsetLeft:
-        return "Left";
-    case OffsetBottom:
-        return "Bottom";
-    case OffsetTopLeft:
-        return "TopLeft";
-    case OffsetTopRight:
-        return "TopRight";
-    case OffsetBottomLeft:
-        return "BottomLeft";
-    case OffsetBottomRight:
-        return "BottomRight";
-    case OffsetInvalid: // Shouldn't appear here..
-        qDebug() << "Got an invalid answerOffset";
-    case OnClueCell:
-    default:
-        return "ClueHidden";
-    }
-}
-*/
 
 } // namespace Crossword
 

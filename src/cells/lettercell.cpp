@@ -154,10 +154,8 @@ void LetterCell::focusOutEvent(QFocusEvent* event)
 
 LetterCell *LetterCell::nextHighlightedLetterCell()
 {
-    if (krossWord()->highlightedClue() &&
-            krossWord()->highlightedClue()->lastLetter() != this) {
-        const Offset letterOffset = KrosswordGrid::letterOffset(
-                                        krossWord()->highlightedClue()->orientation());
+    if (krossWord()->highlightedClue() && krossWord()->highlightedClue()->lastLetter() != this) {
+        const Offset letterOffset = KrosswordGrid::letterOffset(krossWord()->highlightedClue()->orientation());
         return (LetterCell*)krossWord()->at(coord() + letterOffset);
     }
 
@@ -312,8 +310,7 @@ LetterCell *LetterCell::letterCellOnBottom(SiblingLetterCellFlags siblingLetterC
 
 void LetterCell::keyPressEvent(QKeyEvent* event)
 {
-    if (event->text().length() >= 1 &&
-            krossWord()->crosswordTypeInfo().isCharacterLegal(event->text().at(0))) {
+    if (event->text().length() >= 1 && krossWord()->crosswordTypeInfo().isCharacterLegal(event->text().at(0))) {
         event->accept();
         QChar newChar = event->text().toUpper()[0];
         switch (krossWord()->letterEditMode()) {

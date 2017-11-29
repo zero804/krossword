@@ -1204,21 +1204,23 @@ bool ClueCell::isCorrectAnswerEmpty() const
 
 void ClueCell::setHighlight(bool enable)
 {
-//   qDebug() << enable;
-    if (isHighlighted() == enable)
+    if (isHighlighted() == enable) {
         return;
+    }
 
     krossWord()->animator()->beginEnqueueAnimations();
 
     KrossWordCell::setHighlight(enable);
-    if (enable)
+    if (enable) {
         krossWord()->setHighlightedClue(this);
-    else
+    } else {
         krossWord()->setHighlightedClue(NULL);
+    }
 
     LetterCellList letterList = letters();
-    foreach(LetterCell * letterCell, letterList)
-    letterCell->setHighlight(enable);
+    foreach(LetterCell * letterCell, letterList) {
+        letterCell->setHighlight(enable);
+    }
 
     krossWord()->animator()->endEnqueueAnimations();
 

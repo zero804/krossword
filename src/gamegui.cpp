@@ -569,6 +569,7 @@ bool GameGui::createNewCrossWordFromTemplate(const QString& templateFilePath, co
 
     setEditMode();
     fitToPageSlot();
+
     drawBackground(m_view);
 
     return true;
@@ -631,6 +632,8 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
         setCurrentFileName(resultUrl.path());
         m_lastSavedUndoIndex = m_undoStack->index();
 
+        m_zoomWidget->setEnabled(true);
+        m_solutionProgress->setEnabled(true);
         m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
 
         if (krossWord()->crosswordTypeInfo().crosswordType == UnknownCrosswordType) {
@@ -648,21 +651,25 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
             }
         }
 
+        setDefaultCursor();
+        action(actionName(Move_Eraser))->setChecked(false);
+        enableEditActions();
+
         if (krossWord()->isEmpty()) {
             setEditMode();
         }
 
         adjustGuiToCrosswordType();
-        emit loadingFileComplete(m_curFileName);
-
-        m_clueTree->resizeColumnToContents(0); // we have to call it here because the clue list is created (empty) at game startup (way before the contents is loaded)
-
         fitToPageSlot();
         selectFirstClueSlot();
+
+        m_clueTree->resizeColumnToContents(0); // we have to call it here because the clue list is created (empty) at game startup (way before the contents is loaded)
 
         // save the url of the last opened crossword
         Settings::setLastCrossword(resultUrl.toLocalFile());
         Settings::self()->save();
+
+        emit loadingFileComplete(m_curFileName);
 
         return true;
     } else {
@@ -1456,10 +1463,11 @@ void GameGui::setDefaultCursor()
     //cursor.setAutoHideCursor(m_view, true); //CHECK
     KrossWordCellList cellList = krossWord()->cells(InteractiveCellTypes);
     foreach(KrossWordCell * cell, cellList) {
-        if (cell->isLetterCell())
+        if (cell->isLetterCell()) {
             cell->setCursor(cursorLetterCells);
-        else
+        } else {
             cell->setCursor(cursor);
+        }
     }
 }
 
@@ -1987,10 +1995,11 @@ void GameGui::fitToPageSlot()
 void GameGui::viewPanSlot(bool enabled)
 {
     krossWord()->setInteractive(!enabled);
-    if (enabled)
+    if (enabled) {
         m_view->setDragMode(QGraphicsView::ScrollHandDrag);
-    else
+    } else {
         m_view->setDragMode(QGraphicsView::NoDrag);
+    }
 }
 
 void GameGui::solveSlot()
@@ -2182,36 +2191,41 @@ void GameGui::selectFirstLetterOfClueSlot()
 
 void GameGui::selectLastLetterOfClueSlot()
 {
-    if (krossWord()->highlightedClue())
+    if (krossWord()->highlightedClue()) {
         krossWord()->highlightedClue()->lastLetter()->setFocus();
+    }
 }
 
 void GameGui::selectFirstClueSlot()
 {
     ClueCellList clueCells = krossWord()->clueCellsFromClueNumber(0);
     ClueCell *clueCell = NULL;
-    if (clueCells.count() == 2)
+    if (clueCells.count() == 2) {
         clueCell = clueCells[0]->isHidden() ? clueCells[0] : clueCells[1];
-    else if (!clueCells.isEmpty())
+    } else if (!clueCells.isEmpty()) {
         clueCell = clueCells.first();
+    }
 
     if (clueCell) {
         krossWord()->setHighlightedClue(clueCell);
         clueCell->firstLetter()->setFocus();
+        //krossWord()->setCurrentCell(clueCell);
     }
 }
 
 void GameGui::selectNextClueSlot()
 {
-    if (!krossWord()->highlightedClue())
+    if (!krossWord()->highlightedClue()) {
         return;
+    }
 
     ClueCell *clueCell = NULL;
     ClueCell *hClue = krossWord()->highlightedClue();
     if (hClue->isHorizontal()) {
         ClueCellList clueCells = krossWord()->clueCellsFromClueNumber(hClue->clueNumber());
-        if (clueCells.count() == 2)
+        if (clueCells.count() == 2) {
             clueCell = clueCells[0]->isVertical() ? clueCells[0] : clueCells[1];
+        }
     }
 
     if (!clueCell) {
@@ -2325,8 +2339,9 @@ void GameGui::eraseSlot(bool enable)
         KrossWordCellList cellList = krossWord()->cells(InteractiveCellTypes);
         foreach(KrossWordCell * cell, cellList)
         cell->setCursor(cursor);
-    } else
+    } else {
         setDefaultCursor();
+    }
 }
 
 void GameGui::clickedClueInDock(const QModelIndex &index)

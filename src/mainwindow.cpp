@@ -459,6 +459,7 @@ void MainWindow::crosswordLoadingComplete(const QString& fileName)
 
     if (m_loadProgressDialog) { // When loading a template there is no load progress dialog
         m_loadProgressDialog->close();
+        m_loadProgressDialog = nullptr;
     }
 
     int indexCrossword = m_mainStackedBar->indexOf(m_gameGui);
@@ -467,7 +468,11 @@ void MainWindow::crosswordLoadingComplete(const QString& fileName)
 
 void MainWindow::crosswordErrorLoading(const QString& fileName)
 {
-    m_loadProgressDialog->close();
+    if (m_loadProgressDialog) { // When loading a template there is no load progress dialog
+        m_loadProgressDialog->close();
+        m_loadProgressDialog = nullptr;
+    }
+
     KMessageBox::error(this, i18n("Error loading file '%1'", fileName));
     crosswordClosed(fileName);
 }

@@ -464,25 +464,6 @@ void KrossWordCell::focusOutEvent(QFocusEvent* event)
 
 void KrossWordCell::setHighlight(bool enable)
 {
-//   if ( enable ) {
-//     GlowEffect *effect = static_cast< GlowEffect* >( graphicsEffect() );
-//     if ( effect ) {
-//       effect->setEnabled( true );
-//       effect->setOffset( 0 );
-//       effect->setColor( krossWord()->theme()->glowColor() );
-//
-//       if ( krossWord()->isAnimationTypeEnabled(AnimateTransition) ) {
-//  QPropertyAnimation *blurAnim = new QPropertyAnimation( effect, "blurRadius" );
-//  blurAnim->setDuration( krossWord()->animationDuration() );
-//  blurAnim->setStartValue( 0 );
-//  blurAnim->setEndValue( 10 );
-//  blurAnim->start( QAbstractAnimation::DeleteWhenStopped );
-//       } else
-//  effect->setBlurRadius( 10 );
-//     }
-//   } else if ( graphicsEffect() )
-//     graphicsEffect()->setEnabled( false );
-
     m_highlight = enable;
 
     if (enable) {
