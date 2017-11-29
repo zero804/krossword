@@ -109,6 +109,7 @@ bool MainWindow::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswor
                                          const QString& authors, const QString& copyright,
                                          const QString& notes)
 {
+    setupGameGui();
     if (m_gameGui->createNewCrossWord(crosswordTypeInfo, crosswordSize, title, authors, copyright, notes)) {
         int indexCrossword = m_mainStackedBar->indexOf(m_gameGui);
         m_mainStackedBar->setCurrentIndex(indexCrossword);
@@ -120,6 +121,7 @@ bool MainWindow::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswor
 
 bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title, const QString& authors, const QString& copyright, const QString& notes)
 {
+    setupGameGui();
     if (m_gameGui->createNewCrossWordFromTemplate(templateFilePath, title, authors, copyright, notes)) {
         int indexCrossword = m_mainStackedBar->indexOf(m_gameGui);
         m_mainStackedBar->setCurrentIndex(indexCrossword);

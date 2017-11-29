@@ -521,10 +521,6 @@ bool GameGui::createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,cons
                                                const QString& title, const QString& authors,
                                                const QString& copyright, const QString& notes)
 {
-    if (!closeFile()) {
-        return false;
-    }
-
     m_curDocumentOrigin = DocumentNewlyCreated;
 
     krossWord()->createNew(crosswordTypeInfo, crosswordSize);
@@ -553,11 +549,6 @@ bool GameGui::createNewCrossWordFromTemplate(const QString& templateFilePath, co
                                                            const QString& authors, const QString& copyright,
                                                            const QString& notes)
 {
-    if (!closeFile()) {
-        return false;
-    }
-
-
     if (!loadFile(templateFilePath)) {
         return false;
     }
