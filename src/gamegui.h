@@ -264,7 +264,7 @@ signals:
     void fileSaved(const QString &fileName, const QString &oldFileName);
     void modificationTypesChanged(GameGui::ModificationTypes modificationTypes);
     void currentFileChanged(const QString &fileName, const QString &previousFileName);
-    void loadingFileComplete(const QString &fileName); // not used
+    void loadingFileComplete(const QString &fileName);
     void tempAutoSaveFileChanged(const QString &tmpFileName);
     void errorLoadingFile(const QString &fileName);
 

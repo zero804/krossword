@@ -998,7 +998,7 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
         return false;
     }
 
-    setHighlightedClue(NULL);
+    //setHighlightedClue(NULL);
     //removeAllCells(); //CHECK: done by createNew
     bool wasBlocking = blockSignals(true);
 

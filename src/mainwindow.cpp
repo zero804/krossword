@@ -135,25 +135,8 @@ bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath,
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
-    if (m_gameGui->isModified()) {
-        QString msg = i18n("The current crossword has been modified.\nWould you like to save it?");
-
-        int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"), KStandardGuiItem::save(), KStandardGuiItem::discard());
-
-        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !m_gameGui->save())) {
-            event->ignore();
-        } else {
-            event->accept();
-        }
-    } else {
-        event->accept();
-    }
-
-    if (event->isAccepted()) {
-        // Closing not aborted, so the temporary file can be deleted
-        m_gameGui->removeTempFile();
-
-        crosswordClosed("");
+    if (m_gameGui) {
+        m_gameGui->closeSlot();
     }
 }
 

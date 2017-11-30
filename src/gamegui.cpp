@@ -302,9 +302,8 @@ GameGui::GameGui(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
     m_curDocumentOrigin = NoDocument;
     m_modified = NoModification;
 
-    setAttribute(Qt::WA_DeleteOnClose); // CHECK: "Makes Qt delete this widget when the widget has accepted the close event"
+    //setAttribute(Qt::WA_DeleteOnClose); // CHECK: "Makes Qt delete this widget when the widget has accepted the close event"
     setObjectName("crossword");
-    setHelpMenuEnabled(false);   // The help menu is in the main window of the game
     setAcceptDrops(false);
     setAutoSaveSettings(QLatin1String("CrosswordWindow"), false);
 
@@ -621,7 +620,6 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
         m_undoStackLoaded = !undoData.isEmpty();
         m_lastAutoSave = QDateTime::currentDateTime();
 
-        statusBar()->showMessage(i18n("Loaded crossword from file '%1'", fileName), 5000);
         if (loadCrashedFile) {
             m_curDocumentOrigin = DocumentRestoredAfterCrash;
             setModificationType(ModifiedCrossword);
@@ -631,10 +629,6 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
         }
         setCurrentFileName(resultUrl.path());
         m_lastSavedUndoIndex = m_undoStack->index();
-
-        m_zoomWidget->setEnabled(true);
-        m_solutionProgress->setEnabled(true);
-        m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
 
         if (krossWord()->crosswordTypeInfo().crosswordType == UnknownCrosswordType) {
             if (KMessageBox::questionYesNo(this, i18n("The crossword type couldn't "
@@ -651,9 +645,13 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
             }
         }
 
+        statusBar()->showMessage(i18n("Loaded crossword from file '%1'", fileName), 5000);
+
+        m_zoomWidget->setEnabled(true);
+        m_solutionProgress->setEnabled(true);
+        m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
         setDefaultCursor();
         action(actionName(Move_Eraser))->setChecked(false);
-        enableEditActions();
 
         if (krossWord()->isEmpty()) {
             setEditMode();
