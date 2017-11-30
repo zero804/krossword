@@ -28,7 +28,7 @@ HtmlDelegate::HtmlDelegate(QObject *parent) : QStyledItemDelegate(parent)
 {
 }
 
-void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem & option, const QModelIndex &index) const
+void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     QStyleOptionViewItem options = option;
     initStyleOption(&options, index);
@@ -53,8 +53,9 @@ void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem & option,
     doc.setTextWidth(rc.width());
 
     // Center vertically
-    if (doc.size().height() < rc.height())
+    if (doc.size().height() < rc.height()) {
         rc.adjust(0, (rc.height() - doc.size().height()) / 2, 0, 0);
+    }
 
     // Draw using our rich text document
     painter->translate(rc.left(), rc.top());
@@ -64,14 +65,15 @@ void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem & option,
     painter->restore();
 }
 
-QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex & index) const
+QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     QStyleOptionViewItem options = option;
     initStyleOption(&options, index);
 
     QRect rcDeco;
-    if (index.data(Qt::DecorationRole).isValid())
+    if (index.data(Qt::DecorationRole).isValid()) {
         rcDeco.setSize(option.decorationSize);
+    }
 
     QTextDocument doc;
     QTextOption textOption;

@@ -2348,8 +2348,9 @@ void KrossWord::setInteractive(bool interactive)
 //  clue->update();
     }
 
-    if (!interactive)
+    if (!interactive) {
         setHighlightedClue(NULL);
+    }
 }
 
 void KrossWord::setDrawForPrinting(bool drawForPrinting)

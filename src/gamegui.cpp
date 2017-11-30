@@ -82,6 +82,7 @@ ClueListView::ClueListView(QWidget* parent) : QTreeView(parent), m_scrollAnimati
     setAlternatingRowColors(true);
     setVerticalScrollMode(ScrollPerPixel);
     setContextMenuPolicy(Qt::CustomContextMenu);
+    setHeaderHidden(true);
 
     setItemDelegate(new HtmlDelegate(this));
 }
@@ -605,7 +606,7 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
         resultUrl = url;
     }
 
-    setCurrentFileName(QString());
+    //setCurrentFileName(QString());
 
     // Read the file
     QFileInfo fileInfo(resultUrl.toLocalFile());
@@ -653,6 +654,8 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
         setDefaultCursor();
         action(actionName(Move_Eraser))->setChecked(false);
 
+        krossWord()->setInteractive(true);
+
         if (krossWord()->isEmpty()) {
             setEditMode();
         }
@@ -660,7 +663,7 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
         adjustGuiToCrosswordType();
         m_clueTree->resizeColumnToContents(0); // we have to call it here because the clue list is created (empty) at game startup (way before the contents is loaded)
 
-        fitToPageSlot();
+        //fitToPageSlot();
         selectFirstClueSlot();
 
         // save the url of the last opened crossword
@@ -1884,8 +1887,8 @@ KrossWordPuzzleView *GameGui::createKrossWordPuzzleView()
 
     view->scene()->setStickyFocus(true);
     view->krossWord()->setLetterEditMode(EmitEditRequestsOnKeyboardEdit);
-    view->krossWord()->setInteractive();
-    view->setMinimumSize(300, 200);
+    //view->krossWord()->setInteractive();
+    view->setMinimumSize(300, 300);
 
     connect(view, SIGNAL(signalChangeStatusbar(const QString&)), this, SLOT(signalChangeStatusbar(const QString&)));
     connect(view->krossWord(), SIGNAL(cluesAdded(ClueCellList)), this, SLOT(cluesAdded(ClueCellList)));
@@ -2598,10 +2601,11 @@ void GameGui::mousePressedOnCell(const QPointF& scenePos, Qt::MouseButton button
                     }
                 }
             } else {
-                if (cell->isLetterCell())
+                if (cell->isLetterCell()) {
                     ((LetterCell*)cell)->clear(ClearCurrentLetter);
-                else if (cell->isType(ClueCellType))
+                } else if (cell->isType(ClueCellType)) {
                     ((ClueCell*)cell)->clear(ClearCurrentLetter);
+                }
             }
         }
     }
@@ -2625,8 +2629,9 @@ void GameGui::cluesAboutToBeRemoved(ClueCellList clues)
     if (clues.count() == krossWord()->clues().count())
         m_clueModel->clear();
     else {
-        foreach(ClueCell * clue, clues)
-        m_clueModel->removeClue(clue);
+        foreach(ClueCell * clue, clues) {
+            m_clueModel->removeClue(clue);
+        }
     }
 }
 

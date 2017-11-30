@@ -27,20 +27,22 @@ ClueItem::ClueItem(ClueCell *clueCell) : QStandardItem(clueCell->clueWithNumber(
     m_clueCell = clueCell;
 
     setEditable(true);
-    if (clueCell->clueNumber() != -1)
+    if (clueCell->clueNumber() != -1) {
         setData(clueCell->clueNumber(), Qt::UserRole + 1);
-    else
+    } else {
         setData(clueCell->clue(), Qt::UserRole + 1);
+    }
 }
 
 QVariant ClueItem::data(int role) const
 {
-    if (role == Qt::EditRole)
+    if (role == Qt::EditRole) {
         return m_clueCell->clue();
-    else if (role == Qt::DisplayRole)
+    } else if (role == Qt::DisplayRole) {
         return m_clueCell->clueWithNumber("<table><tr><td><b>%1. </b></td><td>%2</td></tr></table>"); //("<b>%1. </b>%2")
-    else
+    } else {
         return QStandardItem::data(role);
+    }
 }
 
 void ClueItem::setData(const QVariant& value, int role)
@@ -56,20 +58,15 @@ void ClueItem::setData(const QVariant& value, int role)
 
 ClueModel::ClueModel(QObject* parent) : QStandardItemModel(0, 1, parent)
 {
-    setHorizontalHeaderLabels(QStringList() << i18n("Clue"));
     setSortRole(Qt::UserRole + 1);
 
-    m_itemHorizontal = new QStandardItem("<b><h3>" + i18n("Across clues") + "</h3></b>");
-    m_itemVertical = new QStandardItem("<b><h3>" + i18n("Down clues") + "</h3></b>");
+    m_itemHorizontal = new QStandardItem("<b>" + i18n("Across clues") + "</b>");
+    m_itemVertical = new QStandardItem("<b>" + i18n("Down clues") + "</b>");
 
-    QFont font = m_itemHorizontal->font();
-    font.setBold(true);
-    m_itemHorizontal->setFont(font);
-    m_itemVertical->setFont(font);
     m_itemHorizontal->setEditable(false);
     m_itemVertical->setEditable(false);
 
-    // Sort across clue list before down clue list
+    // Put across clues before down clues
     m_itemHorizontal->setData(0, Qt::UserRole + 1);
     m_itemVertical->setData(1, Qt::UserRole + 1);
 
@@ -117,28 +114,30 @@ void ClueModel::updateClueText(ClueCell* clue, const QString& newText)
 {
     Q_UNUSED(newText);
     ClueItem *item = clueItem(clue);
-    if (item)
+    if (item) {
         emit itemChanged(item);
+    }
 }
 
 void ClueModel::removeClue(ClueCell* clueCell)
 {
     ClueItem *clue = clueItem(clueCell);
-    if (!clue)
+    if (!clue) {
         return;
+    }
 
     removeRow(clue->row(), clue->parent()->index());
 }
 
 ClueItem* ClueModel::clueItem(ClueCell* clueCell) const
 {
-    QStandardItem *item = clueCell->isHorizontal()
-                          ? m_itemHorizontal : m_itemVertical;
+    QStandardItem *item = clueCell->isHorizontal() ? m_itemHorizontal : m_itemVertical;
 
     for (int row = 0; row < item->rowCount(); ++row) {
         ClueItem *curClueItem = static_cast< ClueItem* >(item->child(row));
-        if (curClueItem->clueCell() == clueCell)
+        if (curClueItem->clueCell() == clueCell) {
             return curClueItem;
+        }
     }
 
     // Not found in list of the clues current orientation, now search the list
@@ -147,8 +146,9 @@ ClueItem* ClueModel::clueItem(ClueCell* clueCell) const
                                ? m_itemVertical : m_itemHorizontal;
     for (int row = 0; row < otherItem->rowCount(); ++row) {
         ClueItem *curClueItem = static_cast< ClueItem* >(otherItem->child(row));
-        if (curClueItem->clueCell() == clueCell)
+        if (curClueItem->clueCell() == clueCell) {
             return curClueItem;
+        }
     }
 
     qDebug() << "Clue not found in model" << clueCell;
@@ -158,12 +158,10 @@ ClueItem* ClueModel::clueItem(ClueCell* clueCell) const
 ClueItem* ClueModel::clueItemFromIndex(const QModelIndex& index) const
 {
     if (index.parent() != m_itemHorizontal->index()
-            && index.parent() != m_itemVertical->index())
+            && index.parent() != m_itemVertical->index()) {
         return NULL; // No clue item
+    }
 
     QModelIndex clueItemIndex = index.parent().child(index.row(), 0);
     return dynamic_cast<ClueItem*>(itemFromIndex(clueItemIndex));
 }
-
-
-
