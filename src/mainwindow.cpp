@@ -142,8 +142,9 @@ void MainWindow::closeEvent(QCloseEvent* event)
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 {
-    if (event->mimeData()->hasUrls())
+    if (event->mimeData()->hasUrls()) {
         event->accept();
+    }
 }
 
 void MainWindow::dropEvent(QDropEvent *event)

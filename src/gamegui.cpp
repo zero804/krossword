@@ -658,10 +658,10 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
         }
 
         adjustGuiToCrosswordType();
+        m_clueTree->resizeColumnToContents(0); // we have to call it here because the clue list is created (empty) at game startup (way before the contents is loaded)
+
         fitToPageSlot();
         selectFirstClueSlot();
-
-        m_clueTree->resizeColumnToContents(0); // we have to call it here because the clue list is created (empty) at game startup (way before the contents is loaded)
 
         // save the url of the last opened crossword
         Settings::setLastCrossword(resultUrl.toLocalFile());
@@ -1496,8 +1496,9 @@ void GameGui::updateClueDock()
         m_clueModel->clear();
         m_clueSelectionModel->clear();
         return;
-    } else
+    } else {
         m_clueModel = new ClueModel();
+    }
 
     connect(m_clueModel, SIGNAL(changeClueTextRequest(ClueCell*, QString)),
             this, SLOT(changeClueTextRequested(ClueCell*, QString)));
@@ -2207,7 +2208,6 @@ void GameGui::selectFirstClueSlot()
     if (clueCell) {
         krossWord()->setHighlightedClue(clueCell);
         clueCell->firstLetter()->setFocus();
-        //krossWord()->setCurrentCell(clueCell);
     }
 }
 
