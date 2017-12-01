@@ -72,7 +72,6 @@ public:
 
     virtual void animateScrollTo(const QModelIndex &index);
 
-
 protected slots:
     void scrollAnimationFinished();
     void resumeIfPaused();

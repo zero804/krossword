@@ -45,11 +45,10 @@ void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem &option, 
     options.text = "";
     options.widget->style()->drawControl(QStyle::CE_ItemViewItem, &options, painter, options.widget);
 
-    QRect rc = options.rect.adjusted(0, 0, 0, -2);
+    QRect rc = options.rect; //.adjusted(0, 0, 0, -2);
     if (index.data(Qt::DecorationRole).isValid()) {
         rc.adjust(option.decorationSize.width() + 4, 0, 0, 0);
     }
-
     doc.setTextWidth(rc.width());
 
     // Center vertically

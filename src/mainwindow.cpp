@@ -135,6 +135,8 @@ bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath,
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
+    Q_UNUSED(event);
+
     if (m_gameGui) {
         m_gameGui->closeSlot();
     }

@@ -611,7 +611,7 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
     // Read the file
     QFileInfo fileInfo(resultUrl.toLocalFile());
     QString fileName = fileInfo.fileName();
-    updateClueDock();
+    //updateClueDock();
 
     QByteArray undoData;
     bool readOk = krossWord()->read(resultUrl, &errorString, fileFormat, &undoData);
@@ -661,7 +661,7 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
         }
 
         adjustGuiToCrosswordType();
-        m_clueTree->resizeColumnToContents(0); // we have to call it here because the clue list is created (empty) at game startup (way before the contents is loaded)
+        //m_clueTree->resizeColumnToContents(0); // we have to call it here because the clue list is created (empty) at game startup (way before the contents is loaded)
 
         //fitToPageSlot();
         selectFirstClueSlot();
@@ -717,13 +717,22 @@ bool GameGui::saveAs(const KrossWord::WriteMode writeMode)
 
 bool GameGui::closeFile()
 {
+    bool isClosing = false;
     if (isModified()) {
         QString msg = i18n("The current crossword has been modified.\n Would you like to save it?");
         int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"),
                      KStandardGuiItem::save(), KStandardGuiItem::discard());
         if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !save())) {
             return false;
+        } else {
+            isClosing = true;
         }
+    } else {
+        isClosing = true;
+    }
+
+    if (isClosing) {
+        removeTempFile(m_curTmpFileName);
     }
 
     emit fileClosed(m_curFileName);
@@ -1801,11 +1810,7 @@ void GameGui::autoSaveToTempFile()
 
     QString errorString, tmpFileName;
     if (m_curTmpFileName.isEmpty()) {
-        //QTemporaryFile tmpFile(componentData());
         QTemporaryFile tmpFile("krossword"); //CHECK: retrieve name
-
-//code was //  tmpFile.setSuffix( getpid() );
-//Add to constructor and adapt if necessary: QDir::tempPath() + QLatin1String("/myapp_XXXXXX") + QLatin1String( getpid() ) 
         tmpFile.open();
         tmpFileName = tmpFile.fileName();
         tmpFile.close();
