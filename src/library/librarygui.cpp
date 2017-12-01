@@ -49,8 +49,6 @@ LibraryGui::LibraryGui(MainWindow* parent) : KXmlGuiWindow(parent, Qt::WindowFla
       m_downloadCrosswordsDlg(nullptr)
 {
     QString libraryDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QLatin1Char('/') + "library";
-    QDir dir;
-    dir.mkpath(libraryDir);
     m_libraryModel->setRootPath(libraryDir);
 
     if (!m_libraryDelegate) {

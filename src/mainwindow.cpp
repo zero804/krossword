@@ -37,6 +37,7 @@
 
 #include <KFilePlacesModel>
 #include <QStandardPaths>
+//#include <KIO/CopyJob> //for copying templates
 
 #include <QMenuBar>
 #include <QStatusBar>
@@ -228,16 +229,44 @@ void MainWindow::setupMainTabWidget()
 
 void MainWindow::setupPlaces()
 {
-    QUrl libraryUrl = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "library");
-    QUrl templatesUrl = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "templates");
-
-    KFilePlacesModel *placesModel = new KFilePlacesModel();
-    if (placesModel->url(placesModel->closestItem(libraryUrl)) != libraryUrl) {
-        placesModel->addPlace(i18n("Library"),libraryUrl, "favorites", QApplication::applicationName());
+    QUrl libraryDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+                                          + QLatin1Char('/') + "library");
+    if (!QDir(libraryDir.toString(QUrl::PreferLocalFile)).exists()) {
+        QDir().mkpath(libraryDir.toString(QUrl::PreferLocalFile));
     }
 
-    if (placesModel->url(placesModel->closestItem(templatesUrl)) != templatesUrl) {
-        placesModel->addPlace(i18n("Templates"), templatesUrl, "krossword", QApplication::applicationName());
+    QUrl templateDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+                                            + QLatin1Char('/') + "templates");
+    if (!QDir(templateDir.toString(QUrl::PreferLocalFile)).exists()) {
+        //QString sysTemplateDir = QStandardPaths::locate(QStandardPaths::AppDataLocation, "templates", QStandardPaths::LocateDirectory);
+        QDir().mkpath(templateDir.toString(QUrl::PreferLocalFile));
+
+        /*
+        // creating subdirectories if needed
+        QDirIterator it(sysTemplateDir, QDir::Dirs | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+        while (it.hasNext()) {
+            QString subDir = it.next().remove(sysTemplateDir);
+            QDir().mkpath(templateDir.toString(QUrl::PreferLocalFile) + subDir);
+        }
+
+        // copy templates
+        QDirIterator itT(sysTemplateDir, QStringList() << "*.kwpz", QDir::Files, QDirIterator::Subdirectories);
+        while (itT.hasNext()) {
+            QString dest = itT.next().remove(sysTemplateDir);
+            KIO::copy(QUrl::fromLocalFile(itT.filePath()), QUrl::fromLocalFile(templateDir.toString(QUrl::PreferLocalFile) + dest), KIO::HideProgressInfo);
+        }
+
+        qDebug() << "Created local templates directory and copied default crossword templates.";
+        */
+    }
+
+    KFilePlacesModel *placesModel = new KFilePlacesModel();
+    if (placesModel->url(placesModel->closestItem(libraryDir)) != libraryDir) {
+        placesModel->addPlace(i18n("Library"),libraryDir, "favorites", QApplication::applicationName());
+    }
+
+    if (placesModel->url(placesModel->closestItem(templateDir)) != templateDir) {
+        placesModel->addPlace(i18n("Templates"), templateDir, "krossword", QApplication::applicationName());
     }
 
     delete placesModel;
