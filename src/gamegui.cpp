@@ -2328,9 +2328,11 @@ void GameGui::clearSlot()
         krossWord()->clear();
 
         // Sync manually and connect signal again
-        foreach(ClueCell * cell, krossWord()->clues())
+        foreach(ClueCell * cell, krossWord()->clues()) {
             answerChanged(cell, cell->currentAnswer(), false);
+        }
 
+        setModificationType(ModifiedCrossword);
         connect(krossWord(), SIGNAL(answerChanged(ClueCell*, const QString&)), this, SLOT(answerChanged(ClueCell*, const QString&)));
     }
 }
