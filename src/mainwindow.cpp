@@ -61,7 +61,12 @@ MainWindow::MainWindow() : KXmlGuiWindow(),
 
     QString lastUnsavedFileBeforeCrash = Settings::lastUnsavedFileBeforeCrash();
     if (!lastUnsavedFileBeforeCrash.isEmpty()) {
-        showRestoreOption(lastUnsavedFileBeforeCrash);
+        // check it's a .kwpz as expected
+        QMimeDatabase mimeDatabase;
+        QMimeType mimeType = mimeDatabase.mimeTypeForFile(lastUnsavedFileBeforeCrash, QMimeDatabase::MatchDefault);
+        if (mimeType.inherits("application/x-krosswordpuzzle-compressed")) {
+            showRestoreOption(lastUnsavedFileBeforeCrash);
+        }
     }
 }
 
@@ -297,9 +302,11 @@ void MainWindow::showRestoreOption(const QString& lastUnsavedFileBeforeCrash)
                                             KStandardGuiItem::discard());
     if (result == KMessageBox::Yes) {
         loadFile(QUrl::fromLocalFile(lastUnsavedFileBeforeCrash), Crossword::KrossWord::KwpzFormat, true);
-    } else {
-        m_gameGui->removeTempFile(lastUnsavedFileBeforeCrash);
     }
+
+    //m_gameGui->removeTempFile(lastUnsavedFileBeforeCrash);
+    QFile::remove(lastUnsavedFileBeforeCrash);
+    crosswordAutoSaveFileChanged(QString());
 }
 
 QString MainWindow::displayFileName(const QString &fileName)

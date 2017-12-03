@@ -1840,7 +1840,6 @@ void GameGui::removeTempFile(const QString &fileName)
 {
     if (!fileName.isEmpty()) {
         m_curTmpFileName = fileName;
-
     }
 
     if (m_curTmpFileName.isEmpty()) {
