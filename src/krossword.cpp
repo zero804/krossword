@@ -857,14 +857,16 @@ CrosswordData KrossWord::getCrosswordData(WriteMode writeMode, const QByteArray 
         crosswordData.customCrosswordRules = crosswordTypeInfo();
     }
 
-    if (!getTitle().isEmpty() && writeMode != KrossWord::Template) {
-        crosswordData.title = getTitle();
-    }
-    if (!getAuthors().isEmpty()) {
-        crosswordData.authors = getAuthors();
-    }
-    if (!getCopyright().isEmpty()) {
-        crosswordData.copyright = getCopyright();
+    if (writeMode != KrossWord::Template) {
+        if (!getTitle().isEmpty()) {
+            crosswordData.title = getTitle();
+        }
+        if (!getAuthors().isEmpty()) {
+            crosswordData.authors = getAuthors();
+        }
+        if (!getCopyright().isEmpty()) {
+            crosswordData.copyright = getCopyright();
+        }
     }
     if (!getNotes().isEmpty()) {
         crosswordData.notes = getNotes();
