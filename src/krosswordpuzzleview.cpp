@@ -28,10 +28,9 @@ KrossWordPuzzleView::KrossWordPuzzleView(KrossWordPuzzleScene *scene, QWidget *p
     // setOptimizationFlags( QGraphicsView::DontSavePainterState );
     setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
 
-    // setMinimumSize( 100, 100 );
-    setCacheMode(CacheBackground);
+    //setCacheMode(CacheBackground);
     settingsChanged();
-    // setAutoFillBackground(true);
+    //setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 
     setObjectName("krosswordpuzzleview");
 }
@@ -88,6 +87,7 @@ void KrossWordPuzzleView::drawBackground(QPainter *painter, const QRectF &rect)
 {
     QBrush brush = this->backgroundBrush();
     brush.setTransform(QTransform(painter->worldTransform().inverted()));
+    painter->setPen(Qt::NoPen);
     painter->setBrush(brush);
     painter->drawRect(rect);
 }
