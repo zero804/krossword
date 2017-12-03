@@ -696,11 +696,17 @@ bool GameGui::save()
 bool GameGui::saveAs(const KrossWord::WriteMode writeMode)
 {
     QUrl startDir;
-    if (m_curDocumentOrigin == DocumentDownloaded || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
-        startDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+    if (writeMode == KrossWord::Template) {
+        startDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+                                       + QLatin1Char('/') + "templates");
     } else {
-        startDir = QUrl::fromLocalFile(m_curFileName);
+        if (m_curDocumentOrigin == DocumentDownloaded || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
+            startDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+        } else {
+            startDir = QUrl::fromLocalFile(m_curFileName);
+        }
     }
+
 
     QString fileName = QFileDialog::getSaveFileName(this, QString(), startDir.path(), i18n("Krossword file (*.kwpz)"));
 
@@ -743,7 +749,7 @@ bool GameGui::closeFile()
 bool GameGui::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, bool saveUndoStack)
 {
     KrossWord::FileFormat fileFormat = KrossWord::fileFormatFromFileName(fileName);
-    if (fileFormat == KrossWord::PuzFormat) { // CHECK: we don't want to support PUZ exporting...s
+    if (fileFormat == KrossWord::PuzFormat) { // CHECK: we don't want to support PUZ exporting...
         bool hasConfidencesSet = false;
         LetterCellList letterList = krossWord()->letters();
         foreach(LetterCell * letter, letterList) {
