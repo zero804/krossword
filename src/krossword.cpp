@@ -880,7 +880,11 @@ CrosswordData KrossWord::getCrosswordData(WriteMode writeMode, const QByteArray 
         clueInfo.orientation = (clue->orientation() == Qt::Horizontal ? ClueOrientation::Horizontal : ClueOrientation::Vertical);
         clueInfo.answerOffset = clue->answerOffset();
         if (writeMode == KrossWord::Normal) {
-            clueInfo.clue = clue->clue();
+            if (crosswordData.type == Crossword::CrosswordType::CodedPuzzle) {
+                clueInfo.clue = QString();
+            } else {
+                clueInfo.clue = clue->clue();
+            }
             clueInfo.solution = clue->correctAnswer();
             clueInfo.answer = clue->currentAnswer();
         } else if (writeMode == KrossWord::Template) {
