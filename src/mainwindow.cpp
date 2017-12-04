@@ -41,6 +41,7 @@
 
 #include <QMenuBar>
 #include <QStatusBar>
+#include <QDesktopWidget>
 
 MainWindow::MainWindow() : KXmlGuiWindow(),
       m_libraryGui(nullptr),
@@ -77,9 +78,7 @@ MainWindow::~MainWindow()
 
 QSize MainWindow::sizeHint() const
 {
-    // expand a bit the window ("The size of top-level widgets are constrained to 2/3 of the desktop's height and width")
-    // to define the default size for the first run
-    return KXmlGuiWindow::sizeHint().expandedTo(QSize(1024, 768));
+    return KXmlGuiWindow::sizeHint().expandedTo(QDesktopWidget().availableGeometry().size() * 0.7);
 }
 
 void MainWindow::loadFile(const QUrl &url, Crossword::KrossWord::FileFormat fileFormat, bool loadCrashedFile)

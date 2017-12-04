@@ -82,7 +82,7 @@ LibraryGui::LibraryGui(MainWindow* parent) : KXmlGuiWindow(parent, Qt::WindowFla
 
     setupActions();
     setupGUI(ToolBar | /*Keys | */Save | Create, "krossword_library_ui.rc");
-    menuBar()->hide(); // because it will be exposed as needed in the mainwindow
+    menuBar()->hide();
 
     connect(m_libraryTree, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(libraryItemDoubleClicked(QModelIndex)));
     connect(m_libraryTree->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), this, SLOT(libraryCurrentChanged(QModelIndex, QModelIndex))); // to keep updated the available actions

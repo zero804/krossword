@@ -345,6 +345,7 @@ GameGui::GameGui(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
 
     setupActions();
     setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krossword_crossword_ui.rc");
+    menuBar()->hide();
 
     setEditMode(NoEditing);
 }
