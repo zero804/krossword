@@ -344,8 +344,9 @@ GameGui::GameGui(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
     addDockWidget(Qt::RightDockWidgetArea, createCurrentCellDock());
 
     setupActions();
-
     setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krossword_crossword_ui.rc");
+
+    setEditMode(NoEditing);
 }
 
 GameGui::~GameGui()
