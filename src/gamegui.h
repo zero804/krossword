@@ -222,12 +222,6 @@ public:
     };
     Q_DECLARE_FLAGS(ModificationTypes, ModificationType)
 
-    enum EditMode {
-        NoEditing,
-        Editing,
-        EditingInteractiveAddClue   //Unused
-    };
-
     GameGui(QWidget* parent = nullptr);
     virtual ~GameGui();
 
@@ -239,7 +233,7 @@ public:
     KrossWord *solutionKrossWord() const;
 
     bool isInEditMode() const;
-    void setEditMode(EditMode editMode = Editing);
+    void setEditMode(bool editMode = false);
 
     bool createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize, const QString &title,
                             const QString &authors, const QString &copyright, const QString &notes);
@@ -422,7 +416,7 @@ private:
 
     ModificationTypes m_modified;
     DocumentOrigin m_curDocumentOrigin;
-    EditMode m_editMode;
+    bool m_editMode;
     QString m_curFileName, m_curTmpFileName;
     int m_lastSavedUndoIndex;
 

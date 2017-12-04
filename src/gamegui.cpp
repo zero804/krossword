@@ -347,7 +347,7 @@ GameGui::GameGui(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
     setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krossword_crossword_ui.rc");
     menuBar()->hide();
 
-    setEditMode(NoEditing);
+    setEditMode(false);
 }
 
 GameGui::~GameGui()
@@ -486,10 +486,10 @@ KrossWord* GameGui::krossWord() const
 
 bool GameGui::isInEditMode() const
 {
-    return m_editMode != NoEditing;
+    return m_editMode;
 }
 
-void GameGui::setEditMode(EditMode editMode)
+void GameGui::setEditMode(bool editMode)
 {
     m_editMode = editMode;
 
@@ -508,6 +508,7 @@ void GameGui::setEditMode(EditMode editMode)
         toolBar("editToolBar")->setVisible(true);
 
         m_currentCellDock->show();
+        m_undoViewDock->show();
     } else {
         if (krossWord()->crosswordTypeInfo().clueType == NumberClues1To26
                 && krossWord()->crosswordTypeInfo().clueMapping == CluesReferToCells
@@ -516,6 +517,7 @@ void GameGui::setEditMode(EditMode editMode)
         }
         m_clueTree->setEditTriggers(QAbstractItemView::NoEditTriggers);
         toolBar("editToolBar")->setVisible(false);
+        m_undoViewDock->hide();
     }
 }
 
@@ -539,7 +541,7 @@ bool GameGui::createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,cons
 
     setActionVisibility();
 
-    setEditMode();
+    setEditMode(true);
     fitToPageSlot();
 
     drawBackground(m_view);
@@ -569,7 +571,7 @@ bool GameGui::createNewCrossWordFromTemplate(const QString& templateFilePath, co
 
     setActionVisibility();
 
-    setEditMode();
+    setEditMode(true);
     fitToPageSlot();
 
     drawBackground(m_view);
@@ -659,7 +661,7 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
         krossWord()->setInteractive(true);
 
         if (krossWord()->isEmpty()) {
-            setEditMode();
+            setEditMode(true);
         }
 
         adjustGuiToCrosswordType();
@@ -1140,11 +1142,11 @@ void GameGui::enableEditModeSlot(bool enable)
         if (m_curDocumentOrigin == DocumentNewlyCreated || krossWord()->isEmpty()
                 || KMessageBox::warningContinueCancel(this, i18n("This will cause all answers to be shown and editable.\nIf you want to solve the crossword you should cancel."),
                         "Enable Edit Mode", KStandardGuiItem::cont(), KStandardGuiItem::cancel(), "dont_show_edit_mode_confirmation") == KMessageBox::Continue)
-            setEditMode(Editing);
+            setEditMode(true);
         else
             action(actionName(Edit_EnableEditMode))->setChecked(m_editMode);
     } else
-        setEditMode(NoEditing);
+        setEditMode(false);
 }
 
 void GameGui::editPasteSpecialCharacter()
@@ -1788,9 +1790,12 @@ void GameGui::adjustGuiToCrosswordType()
         action(actionName(ShowClueDock))->setDisabled(true);
     } else {
         action(actionName(ShowClueDock))->setEnabled(true);
+        /*
         if (krossWord()->crosswordTypeInfo().clueCellHandling == ClueCellsDisallowed) {
             m_clueDock->show();
         }
+        */
+        m_clueDock->show();
     }
     setActionVisibility();
 }
@@ -1869,7 +1874,7 @@ void GameGui::setCurrentFileName(const QString& fileName)
 
     if (!m_view || fileName.isEmpty()) {
         stateChanged("no_file_opened");
-        setEditMode(NoEditing);
+        setEditMode(false);
         m_clueDock->setEnabled(false);
         m_undoViewDock->setEnabled(false);
         m_currentCellDock->setEnabled(false);
