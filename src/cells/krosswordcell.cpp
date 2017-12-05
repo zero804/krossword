@@ -89,6 +89,34 @@ KrossWordCell::~KrossWordCell()
     delete m_cache;
 }
 
+int KrossWordCell::type() const {
+    return Type;
+}
+
+CellType KrossWordCell::getCellType() const {
+    return m_cellType;
+}
+
+bool KrossWordCell::isType(CellType cellType) const {
+    return m_cellType == cellType;
+}
+
+bool KrossWordCell::isLetterCell() const {
+    return false;
+}
+
+KrossWord *KrossWordCell::krossWord() const {
+    return m_krossWord;
+}
+
+Grid2D::Coord KrossWordCell::coord() const {
+    return m_coord;
+}
+
+QPixmap KrossWordCell::pixmap() const {
+    return *m_cache;
+}
+
 qreal KrossWordCell::scaleX() const
 {
     return transform().m11();
@@ -101,6 +129,16 @@ void KrossWordCell::setScaleX(qreal scaleX)
 //   translate( transformOriginPoint().x(), transformOriginPoint().y() );
     setTransform(QTransform(scaleX / transform().m11(), 0, 0, 1, 0, 0), true);
 //   translate( -transformOriginPoint().x(), -transformOriginPoint().y() );
+}
+
+QList<SyncCategory> KrossWordCell::allSynchronizationCategories() const {
+    return QList< SyncCategory >() << OtherSynchronization
+                                   << SolutionLetterSynchronization
+                                   << SameCharacterLetterSynchronization;
+}
+
+const QHash<SyncCategory, QHash<KrossWordCell *, SyncMethods> > &KrossWordCell::synchronizationByCategory() const {
+    return m_synchronizedCells;
 }
 
 void KrossWordCell::setCoord(Coord newCoord, bool updateInCrosswordGrid)
@@ -352,7 +390,7 @@ void KrossWordCell::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
     if (event->button() == Qt::RightButton) {
         if (isLetterCell() || getCellType() == EmptyCellType) {
-            krossWord()->setHighlightedClue(NULL);
+            krossWord()->setHighlightedClue(nullptr);
             setHighlight();
         }
         krossWord()->emitCustomContextMenuRequested(event->scenePos(), this);
@@ -415,18 +453,23 @@ void KrossWordCell::focusInEvent(QFocusEvent* event)
 void KrossWordCell::blurAnimationInFinished()
 {
     delete m_blurAnim;
-    m_blurAnim = NULL;
+    m_blurAnim = nullptr;
 }
 
 void KrossWordCell::blurAnimationOutFinished()
 {
     delete m_blurAnim;
-    m_blurAnim = NULL;
+    m_blurAnim = nullptr;
 
     GlowEffect *effect = static_cast< GlowEffect* >(graphicsEffect());
     if (effect) {
         effect->setEnabled(false);
     }
+}
+
+void KrossWordCell::clearCacheAndUpdate() {
+    clearCache(Crossword::Animator::Instant);
+    update();
 }
 
 void KrossWordCell::focusOutEvent(QFocusEvent* event)
@@ -500,7 +543,7 @@ LetterCell* EmptyCell::toLetterCell(const QChar& correctContent)
 
 void EmptyCell::focusInEvent(QFocusEvent* event)
 {
-    krossWord()->setHighlightedClue(NULL);
+    krossWord()->setHighlightedClue(nullptr);
     if (krossWord()->isEditable()) {
         setHighlight();
     }

@@ -34,7 +34,7 @@ CurrentCellWidget::CurrentCellWidget(KrossWord *krossWord, Dictionary *dictionar
     : QWidget(parent), m_krossWord(0), m_dictionary(dictionary),
       m_currentCell(0)
 {
-    m_convertToSolutionLetter = NULL;
+    m_convertToSolutionLetter = nullptr;
     setupNoCell();
     setKrossWord(krossWord);
 }
@@ -87,7 +87,7 @@ void CurrentCellWidget::editModeChanged(bool editable)
     Q_UNUSED(editable);
 
     KrossWordCell *currentCell = m_currentCell;
-    m_currentCell = NULL;
+    m_currentCell = nullptr;
     currentCellChanged(currentCell, currentCell);
 }
 
@@ -105,7 +105,7 @@ void CurrentCellWidget::setupNoCell()
 //   qDebug() << "Setup no cell";
 
     m_noCell = true;
-    m_currentClue = NULL;
+    m_currentClue = nullptr;
 
     QLabel *w;
     if (!m_widgets.contains(EmptyCellType)) {
@@ -120,25 +120,12 @@ void CurrentCellWidget::setupNoCell()
 
 void CurrentCellWidget::setupNoPropertiesCell(KrossWordCell *cell)
 {
-//   qDebug() << "Setup no properties cell" << cell;
-
-    // Give some time to animations TODO: fix crash here
-//   QApplication::processEvents( QEventLoop::ExcludeUserInputEvents, 20 );
 
     m_noCell = true;
-    m_currentClue = NULL;
+    m_currentClue = nullptr;
 
-//   QLabel *w;
-//   if ( !m_widgets.contains(EmptyCellType) ) {
-//     w = new QLabel( i18n("No cell selected.") );
-//     m_widgets.insert( EmptyCellType, w );
-//   } else {
-//     w = static_cast< QLabel* >( m_widgets[EmptyCellType] );
-//   }
-//
     // Recreate every time
     QWidget *w;
-//   if ( !m_widgets.contains(AllCellTypes) ) {
     QGridLayout *layout = new QGridLayout;
     QString text = i18n("%1 selected at (%2, %3).",
                         displayStringFromCellType(cell->getCellType()),
@@ -234,8 +221,9 @@ void CurrentCellWidget::setupClueCell(ClueCell* clue, LetterCell *letter)
     if (krossWord()->isEditable()) {
         // Don't allow conversion to solution letters if the current crossword type
         // doesn't allow solution letters.
-        if (!krossWord()->crosswordTypeInfo().cellTypes.testFlag(SolutionLetterCellType))
-            letter = NULL;
+        if (!krossWord()->crosswordTypeInfo().cellTypes.testFlag(SolutionLetterCellType)) {
+            letter = nullptr;
+        }
 
         ClueCellWidgetWithConvertButton *w;
         if (!m_widgets.contains(ClueCellType)) {
@@ -273,7 +261,7 @@ void CurrentCellWidget::setupClueCell(ClueCell* clue, LetterCell *letter)
 void CurrentCellWidget::setupImageCell(ImageCell* image)
 {
     m_noCell = false;
-    m_currentClue = NULL;
+    m_currentClue = nullptr;
     if (krossWord()->isEditable()) {
         ImageCellWidget *w;
         if (!m_widgets.contains(ImageCellType)) {
@@ -292,7 +280,7 @@ void CurrentCellWidget::setupImageCell(ImageCell* image)
 void CurrentCellWidget::setupSolutionLetterCell(SolutionLetterCell* solutionLetter)
 {
     m_noCell = false;
-    m_currentClue = NULL;
+    m_currentClue = nullptr;
     if (krossWord()->isEditable()) {
         SolutionLetterCellWidget *w;
         if (!m_widgets.contains(SolutionLetterCellType)) {
@@ -442,8 +430,8 @@ void ClueCellWidgetWithConvertButton::setCells(ClueCell *clue, LetterCell *lette
         l->removeWidget(m_hLine);
         delete m_convertToSolLetterButton;
         delete m_hLine;
-        m_convertToSolLetterButton = NULL;
-        m_hLine = NULL;
+        m_convertToSolLetterButton = nullptr;
+        m_hLine = nullptr;
     }
     m_letterCell = letter;
 

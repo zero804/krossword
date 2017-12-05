@@ -103,16 +103,16 @@ private:
     /** Removes the path for crosswords that are in the library. */
     static QString displayFileName(const QString &fileName);
 
-    Ui::settings           ui_settings;
+    Ui::settings ui_settings;
 
-    LibraryGui            *m_libraryGui;           //Owned
-    GameGui *m_gameGui;         //Owned
+    LibraryGui *m_libraryGui;         //Owned
+    GameGui *m_gameGui;               //Owned
 
-    QDialog               *m_loadProgressDialog;    //Owned
-    QString                m_caption;
-    QStackedWidget        *m_mainStackedBar;        //Owned
+    QDialog *m_loadProgressDialog;    //Owned
+    QString m_caption;
+    QStackedWidget *m_mainStackedBar; //Owned
 
-    Dictionary   *m_dictionary;          // Owned
+    Dictionary *m_dictionary;         // Owned
 };
 
 #endif // _MAINWINDOW_H_

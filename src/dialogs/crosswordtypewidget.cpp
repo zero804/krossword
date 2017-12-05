@@ -172,7 +172,7 @@ bool CrosswordTypeWidget::removeUserButtonElementNoLayout()
     if (hasUserButtonElement()) {
         m_layout->removeWidget(m_btnUser);
         delete m_btnUser;
-        m_btnUser = NULL;
+        m_btnUser = nullptr;
         return true; // Return true, if the element has been deleted
     } else
         return false;
@@ -190,7 +190,7 @@ bool CrosswordTypeWidget::setIconElementNoLayout(bool shown)
         if (hasIconElement()) {
             m_layout->removeWidget(m_icon);
             delete m_icon;
-            m_icon = NULL;
+            m_icon = nullptr;
         }
     }
 
@@ -212,7 +212,7 @@ bool CrosswordTypeWidget::setDetailsElementNoLayout(bool shown)
             m_chkDetails->setChecked(m_showingDetails = false);
             m_layout->removeWidget(m_chkDetails);
             delete m_chkDetails;
-            m_chkDetails = NULL;
+            m_chkDetails = nullptr;
         }
     }
 
@@ -232,7 +232,7 @@ bool CrosswordTypeWidget::setRulesElementNoLayout(bool shown)
         if (hasRulesElement()) {
             m_layout->removeWidget(m_btnRules);
             delete m_btnRules;
-            m_btnRules = NULL;
+            m_btnRules = nullptr;
         }
     }
 
@@ -278,7 +278,7 @@ void CrosswordTypeWidget::createLayout()
     } else if (m_spacer) {
         m_layout->removeItem(m_spacer);
         delete m_spacer;
-        m_spacer = NULL;
+        m_spacer = nullptr;
     }
 
     if (m_btnRules) {
@@ -326,7 +326,7 @@ void CrosswordTypeWidget::setTextScrollable(bool scrollable)
 
         // Delete scroll area
         delete m_infoScroller;
-        m_infoScroller = NULL;
+        m_infoScroller = nullptr;
     }
 }
 

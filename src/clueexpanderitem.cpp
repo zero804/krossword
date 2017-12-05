@@ -79,7 +79,7 @@ void ClueExpanderItem::clueLastLetterChanged(LetterCell* lastLetter)
 
 void ClueExpanderItem::lastLetterDestroyed(QObject*)
 {
-    m_lastLetter = NULL;
+    m_lastLetter = nullptr;
 }
 
 void ClueExpanderItem::clueCellMoved()

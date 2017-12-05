@@ -29,10 +29,13 @@
 namespace Crossword
 {
 
-ImageCell::ImageCell(KrossWord* krossWord, const Coord& coordTopLeft,
-                     int horizontalCellSpan, int verticalCellSpan, const QUrl &url)
-    : SpannedCell(krossWord, ImageCellType, coordTopLeft,
-                  horizontalCellSpan, verticalCellSpan)
+ImageCell::ImageCell(KrossWord* krossWord, const Coord& coordTopLeft, int horizontalCellSpan, int verticalCellSpan,
+                     const QUrl &url)
+    : SpannedCell(krossWord,
+                  ImageCellType,
+                  coordTopLeft,
+                  horizontalCellSpan,
+                  verticalCellSpan)
 {
     setUrl(url);
 
@@ -74,9 +77,13 @@ void ImageCell::drawBackgroundForPrinting(QPainter *p, const QStyleOptionGraphic
     drawBackground(p, options);
 }
 
+QUrl ImageCell::url() const {
+    return m_url;
+}
+
 void ImageCell::focusInEvent(QFocusEvent* event)
 {
-    krossWord()->setHighlightedClue(NULL);
+    krossWord()->setHighlightedClue(nullptr);
     if (krossWord()->isEditable()) {
         setHighlight();
     }

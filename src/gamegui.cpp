@@ -138,7 +138,7 @@ void ClueListView::resumeIfPaused()
 void ClueListView::scrollAnimationFinished()
 {
     delete m_scrollAnimation;
-    m_scrollAnimation = NULL;
+    m_scrollAnimation = nullptr;
 }
 
 //===========================================================
@@ -204,10 +204,6 @@ GameGui::GameGui(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
     menuBar()->hide();
 
     setEditMode(false);
-}
-
-GameGui::~GameGui()
-{
 }
 
 const char *GameGui::actionName(GameGui::Action actionEnum) const
@@ -337,7 +333,7 @@ KrossWordPuzzleView *GameGui::view() const
 
 KrossWord* GameGui::krossWord() const
 {
-    return m_view ? m_view->krossWord() : NULL;
+    return m_view ? m_view->krossWord() : nullptr;
 }
 
 bool GameGui::isInEditMode() const
@@ -1919,7 +1915,7 @@ void GameGui::hintSlot()
 void GameGui::highlightCellForPopup()
 {
     if (m_popupMenuCell) {
-        krossWord()->setHighlightedClue(NULL);
+        krossWord()->setHighlightedClue(nullptr);
         m_popupMenuCell->setHighlight();
     }
 }
@@ -2074,7 +2070,7 @@ void GameGui::selectLastLetterOfClueSlot()
 void GameGui::selectFirstClueSlot()
 {
     ClueCellList clueCells = krossWord()->clueCellsFromClueNumber(0);
-    ClueCell *clueCell = NULL;
+    ClueCell *clueCell = nullptr;
     if (clueCells.count() == 2) {
         clueCell = clueCells[0]->isHidden() ? clueCells[0] : clueCells[1];
     } else if (!clueCells.isEmpty()) {
@@ -2093,7 +2089,7 @@ void GameGui::selectNextClueSlot()
         return;
     }
 
-    ClueCell *clueCell = NULL;
+    ClueCell *clueCell = nullptr;
     ClueCell *hClue = krossWord()->highlightedClue();
     if (hClue->isHorizontal()) {
         ClueCellList clueCells = krossWord()->clueCellsFromClueNumber(hClue->clueNumber());
@@ -2121,7 +2117,7 @@ void GameGui::selectPreviousClueSlot()
     if (!krossWord()->highlightedClue())
         return;
 
-    ClueCell *clueCell = NULL;
+    ClueCell *clueCell = nullptr;
     ClueCell *hClue = krossWord()->highlightedClue();
     if (hClue->isVertical()) {
         ClueCellList clueCells = krossWord()->clueCellsFromClueNumber(hClue->clueNumber());
@@ -2146,7 +2142,7 @@ void GameGui::selectPreviousClueSlot()
 void GameGui::selectLastClueSlot()
 {
     ClueCellList clueCells = krossWord()->clueCellsFromClueNumber(krossWord()->maxClueNumber());
-    ClueCell *clueCell = NULL;
+    ClueCell *clueCell = nullptr;
     if (clueCells.count() == 2)
         clueCell = clueCells[0]->isVertical() ? clueCells[0] : clueCells[1];
     else if (!clueCells.isEmpty())
@@ -2336,7 +2332,7 @@ void GameGui::currentCellChanged(KrossWordCell* currentCell, KrossWordCell* prev
 
 void GameGui::customContextMenuRequestedForCell(const QPointF &scenePos, KrossWordCell *cell)
 {
-    QMenu *menu = NULL;
+    QMenu *menu = nullptr;
 
     m_popupMenuCell = cell;
     connect(cell, SIGNAL(destroyed(QObject*)), this, SLOT(popupMenuCellDestroyed(QObject*)));
@@ -2513,7 +2509,7 @@ void GameGui::cluesAboutToBeRemoved(ClueCellList clues)
 void GameGui::popupMenuCellDestroyed(QObject *)
 {
 //     qDebug() << "m_popupMenuCell destroyed";
-    m_popupMenuCell = NULL;
+    m_popupMenuCell = nullptr;
 }
 
 void GameGui::addLettersToClueRequest(ClueCell *clue, int lettersToAdd)

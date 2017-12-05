@@ -25,8 +25,6 @@ UndoStackExt::UndoStackExt(QObject* parent)
     : QUndoStack(parent)
 {
     m_executingRedo = true;
-//   m_lastCommand = NULL;
-//   m_deleteLastCommand = false;
     QDataStream stream(&m_data, QIODevice::WriteOnly);
     m_storedStartIndex = index();
     stream << (qint16)index(); // Write initial index
@@ -43,44 +41,16 @@ bool UndoStackExt::tryPush(UndoCommandExt* command,
     if (command->checkRedo(errorMessage)) {
         command->setUndoStack(this);
 
-//     qDebug() << command->type();
-//     m_data.open( QIODevice::Append );
         if (index() < m_dataIndexPos.count()) {
             QDataStream stream(&m_data, QIODevice::WriteOnly);
-
-//       qDebug() << "UndoStackExt::tryPush() | seeked to"
-//         << m_dataIndexPos[index()] << "for type" << command->type();
-//       qDebug() << "TEST TYPE" << static_cast<qint8>( command->type() );
-
-//       UndoCommandExt *mergedCommand = NULL;
-//       if ( command->id() != -1 && m_lastCommand
-//      && command->id() == m_lastCommand->id()
-//      && index() - 1 >= 0
-//      && (mergedCommand = m_lastCommand->mergedWith(command)) ) {
-//  stream.device()->seek( m_dataIndexPos[index() - 1] );
-//  stream << static_cast<qint8>( mergedCommand->type() );
-//  mergedCommand->appendToData( &stream );
-//
-//  if ( m_deleteLastCommand )
-//    delete m_lastCommand;
-//  m_lastCommand = mergedCommand;
-//       } else {
             stream.device()->seek(m_dataIndexPos[index()]);
             stream << static_cast<qint8>(command->type());
             command->appendToData(&stream);
 
-//  if ( m_deleteLastCommand )
-//    delete m_lastCommand;
-//  m_lastCommand = command;
-//       }
             stream.device()->close();
         } else {
             qDebug() << "Wrong index" << index() << "size =" << m_dataIndexPos.size()
                      << "Clearing stored undo stack";
-//       QDataStream stream( &m_data, QIODevice::Append );
-//       stream << static_cast<qint8>( command->type() );
-//       command->appendToData( &stream );
-//       stream.device()->close();
             m_dataIndexPos.clear();
             m_dataIndexPos << sizeof(qint16);
 
@@ -270,7 +240,7 @@ UndoCommandExt* UndoCommandExt::fromData(KrossWord* krossWord,
 
     qDebug() << "Undo command type" << command
              << "is unknown. Further processing will fail...";
-    return NULL;
+    return nullptr;
 }
 
 
@@ -1585,7 +1555,7 @@ const UndoCommandExt* CrosswordCompoundUndoCommand::findFirstChild(Command comma
             return cmd;
     }
 
-    return NULL; // None found
+    return nullptr; // None found
 }
 
 bool CrosswordCompoundUndoCommand::hasChildOfType(Command command) const
@@ -1781,7 +1751,7 @@ void ConvertCrosswordCommand::setupText()
 void ConvertCrosswordCommand::redoMaybe()
 {
     m_krossWord->setCrosswordTypeInfo(m_newTypeInfo);
-    m_krossWord->setHighlightedClue(NULL);
+    m_krossWord->setHighlightedClue(nullptr);
 
     CrosswordCompoundUndoCommand::redoMaybe();
 //   qDebug() << "REDO CONVERSION...";
@@ -1818,7 +1788,7 @@ void ConvertCrosswordCommand::redoMaybe()
 void ConvertCrosswordCommand::undoMaybe()
 {
     m_krossWord->setCrosswordTypeInfo(m_oldTypeInfo);
-    m_krossWord->setHighlightedClue(NULL);
+    m_krossWord->setHighlightedClue(nullptr);
 
     CrosswordCompoundUndoCommand::undoMaybe();
 //   qDebug() << "UNDO CONVERSION...";

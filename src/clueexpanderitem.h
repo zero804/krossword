@@ -42,13 +42,13 @@ public:
 
     KrossWord *krossWord() const {
         return m_krossWord;
-    };
+    }
     ClueCell *clue() const {
         return m_clue;
-    };
+    }
     QColor color() const {
         return m_color;
-    };
+    }
     void setColor(const QColor &color);
 
     const QColor normalColor() const;

@@ -65,7 +65,7 @@ void LetterCell::init(ClueCell* clueHorizontal, ClueCell* clueVertical)
 
 void LetterCell::init(ClueCell* clue)
 {
-    m_clueHorizontal = m_clueVertical = NULL;
+    m_clueHorizontal = m_clueVertical = nullptr;
     setClue(clue);
     m_currentLetter = ' ';
     m_confidence = Confident;
@@ -118,7 +118,7 @@ LetterCell* LetterCell::letterCellAtOffset(Offset offset) const
             && (cell = krossWord()->at(coordAtOffset)) && cell->isLetterCell())
         return (LetterCell*)cell;
     else
-        return NULL;
+        return nullptr;
 }
 
 LetterCell *LetterCell::letterCellOnRight() const
@@ -146,8 +146,8 @@ QChar LetterCell::correctLetter() const
     ClueCell *clue;
     int firstLetterOffset, letterOffset;
 
-    if (m_clueHorizontal == NULL) {
-        Q_ASSERT(m_clueVertical != NULL);   // At least one question is needed
+    if (m_clueHorizontal == nullptr) {
+        Q_ASSERT(m_clueVertical != nullptr);   // At least one question is needed
         clue = m_clueVertical;
         firstLetterOffset = clue->firstLetterOffset().second;
         letterOffset = coord().second - clue->coord().second - firstLetterOffset;
@@ -213,12 +213,12 @@ ClueCell* LetterCell::getOrthogonalClueTo(ClueCell* question) const
 
 bool LetterCell::detachClue(ClueCell* cell)
 {
-    Q_ASSERT(cell != NULL);
+    Q_ASSERT(cell != nullptr);
 
     if (m_clueHorizontal == cell)
-        m_clueHorizontal = NULL;
+        m_clueHorizontal = nullptr;
     else if (m_clueVertical == cell)
-        m_clueVertical = NULL;
+        m_clueVertical = nullptr;
     else
         return false;
 
@@ -394,10 +394,10 @@ void LetterCell::setClue(ClueCell* clue)
 
 void LetterCell::detachClues()
 {
-    if (m_clueHorizontal != NULL)
-        m_clueHorizontal = NULL;
-    if (m_clueVertical != NULL)
-        m_clueVertical = NULL;
+    if (m_clueHorizontal != nullptr)
+        m_clueHorizontal = nullptr;
+    if (m_clueVertical != nullptr)
+        m_clueVertical = nullptr;
 }
 
 
@@ -442,7 +442,7 @@ SolutionLetterCell* SolutionLetterCell::fromLetterCell(LetterCell *&letter,
         if (letter->scene())
             letter->scene()->removeItem(letter);
         delete letter;
-        letter = NULL;
+        letter = nullptr;
     }
     return solutionLetter;
 }

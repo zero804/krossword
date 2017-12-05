@@ -103,7 +103,7 @@ private:
     void clearLayout();
     void setupNoCell();
     void setupNoPropertiesCell(KrossWordCell *cell);
-    void setupClueCell(ClueCell *clue, LetterCell *letter = NULL);
+    void setupClueCell(ClueCell *clue, LetterCell *letter = nullptr);
     void setupImageCell(ImageCell *image);
     void setupSolutionLetterCell(SolutionLetterCell *solutionLetter);
 

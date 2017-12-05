@@ -28,7 +28,7 @@
 
 #include "kgrid2d.h"
 
-using KGrid2D::Coord;
+using Grid2D::Coord;
 
 namespace Crossword
 {
@@ -60,7 +60,7 @@ enum CellType {
             * To make use of this in the flags class CellTypes, only use values computed
             * like this: value=2^x with x>=4. */
 };
-Q_DECLARE_FLAGS(CellTypes, CellType);
+Q_DECLARE_FLAGS(CellTypes, CellType)
 
 QList< CellType > allCellTypes();
 
@@ -105,7 +105,7 @@ enum SyncMethod {
     SyncAll = SyncSelection | SyncContent /**< Same as SyncSelection and
             * SyncContent together. */
 };
-Q_DECLARE_FLAGS(SyncMethods, SyncMethod);
+Q_DECLARE_FLAGS(SyncMethods, SyncMethod)
 
 enum SyncCategory {
     OtherSynchronization = 0x1,
@@ -116,7 +116,7 @@ enum SyncCategory {
                         | SolutionLetterSynchronization
                         | SameCharacterLetterSynchronization
 };
-Q_DECLARE_FLAGS(SyncCategories, SyncCategory);
+Q_DECLARE_FLAGS(SyncCategories, SyncCategory)
 
 /** Where the first letter cell of the answer to a clue is, relative to
  * the clue cell position. */
@@ -171,7 +171,7 @@ enum KeyboardNavigationType {
                                  | NavigateSwitchOrientationOnArrowKeyNavigation
                                  /**< Enable all keyboard navigation types. */
 };
-Q_DECLARE_FLAGS(KeyboardNavigation, KeyboardNavigationType);
+Q_DECLARE_FLAGS(KeyboardNavigation, KeyboardNavigationType)
 
 /** Types of error when trying to change the crossword. For example, the
 * @ref insertClue and @ref canInsertClue methods returns a value of type
@@ -211,7 +211,7 @@ enum ErrorType {
     ErrorImageCellsDisallowed = 0x4000, /**< Image cells aren't allowed in
             * the current crossword type. */
 };
-Q_DECLARE_FLAGS(ErrorTypes, ErrorType);
+Q_DECLARE_FLAGS(ErrorTypes, ErrorType)
 
 /** Types of crosswords. */
 enum CrosswordType {
@@ -451,19 +451,19 @@ inline bool operator<(const Coord &coord1, const Coord &coord2)
 {
     return (coord1.first < coord2.first && coord1.second <= coord2.second)
            || (coord1.first <= coord2.first && coord1.second < coord2.second);
-};
+}
 inline bool operator<= (const Coord &coord1, const Coord &coord2)
 {
     return coord1.first <= coord2.first && coord1.second <= coord2.second;
-};
+}
 inline bool operator>(const Coord &coord1, const Coord &coord2)
 {
     return coord2 < coord1;
-};
+}
 inline bool operator>=(const Coord &coord1, const Coord &coord2)
 {
     return coord2 <= coord1;
-};
+}
 
 inline QDebug &operator <<(QDebug debug, Crossword::SyncCategory syncCategory)
 {
@@ -479,7 +479,7 @@ inline QDebug &operator <<(QDebug debug, Crossword::SyncCategory syncCategory)
     default:
         return debug << "SyncCategory unknown" << syncCategory;
     }
-};
+}
 
 inline QDebug &operator <<(QDebug debug, Crossword::SyncMethod syncMethod)
 {
@@ -495,13 +495,13 @@ inline QDebug &operator <<(QDebug debug, Crossword::SyncMethod syncMethod)
     default:
         return debug << "SyncMethod unknown" << syncMethod;
     }
-};
+}
 
 inline QDebug &operator <<(QDebug debug,
                            Crossword::LetterCellContent letterCellContent)
 {
     return debug << Crossword::CrosswordTypeInfo::stringFromLetterCellContent(
                letterCellContent);
-};
+}
 
 #endif // Multiple inclusion guard

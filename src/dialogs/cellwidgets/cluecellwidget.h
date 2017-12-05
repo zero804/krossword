@@ -36,13 +36,12 @@ class ClueCellWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit ClueCellWidget(ClueCell *clueCell, Dictionary *dictionary = NULL,
-                            QWidget* parent = 0);
+    explicit ClueCellWidget(ClueCell *clueCell, Dictionary *dictionary = nullptr, QWidget* parent = 0);
 
     void setClue(ClueCell *clueCell);
     ClueCell *clueCell() const {
         return m_clueCell;
-    };
+    }
 
 signals:
     void changeOrientationRequest(ClueCell *clueCell,

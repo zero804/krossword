@@ -103,8 +103,23 @@ DoubleClueCell::DoubleClueCell(KrossWord* krossWord, const Coord& coord,
 //   qDebug() << "    - " << boundingRect();
 }
 
-ClueCell* DoubleClueCell::clue(AnswerOffset answerOffset,
-                               Qt::Orientation orientation) const
+int DoubleClueCell::type() const {
+    return Type;
+}
+
+ClueCell *DoubleClueCell::clue1() const {
+    return m_clue1;
+}
+
+ClueCell *DoubleClueCell::clue2() const {
+    return m_clue2;
+}
+
+ClueCellList DoubleClueCell::clues() const {
+    return ClueCellList() << m_clue1 << m_clue2;
+}
+
+ClueCell* DoubleClueCell::clue(AnswerOffset answerOffset, Qt::Orientation orientation) const
 {
     if (m_clue1->answerOffset() == answerOffset
             && m_clue1->orientation() == orientation)
@@ -113,7 +128,7 @@ ClueCell* DoubleClueCell::clue(AnswerOffset answerOffset,
              && m_clue2->orientation() == orientation)
         return m_clue2;
     else
-        return NULL;
+        return nullptr;
 }
 
 void DoubleClueCell::removeClueCell(ClueCell* clueCell)
@@ -126,12 +141,14 @@ void DoubleClueCell::removeClueCell(ClueCell* clueCell)
     clueCell->setParentItem(krossWord());
     otherClueCell->setParentItem(krossWord());
 
-    if (clueCell->scene())
+    if (clueCell->scene()) {
         clueCell->scene()->removeItem(clueCell);
+    }
     clueCell->setFlag(ItemIsFocusable, false);
     clueCell->deleteLater();
 
-    m_clue1 = m_clue2 = NULL;
+    m_clue1 = nullptr;
+    m_clue2 = nullptr;
 
     bool otherIsBelow = otherClueCell->y() > quartHeight * 1.1;
 
@@ -164,12 +181,17 @@ ClueCell* DoubleClueCell::takeClueCell(ClueCell* clueCell)
     if (clueCell->scene())
         clueCell->scene()->removeItem(clueCell);
 
-    m_clue1 = m_clue2 = NULL;
+    m_clue1 = nullptr;
+    m_clue2 = nullptr;
     krossWord()->replaceCell(this, otherClueCell);
     otherClueCell->clearCache();
     otherClueCell->setVisible(true);
 
     return clueCell;
+}
+
+bool DoubleClueCell::hasClue(ClueCell *clue) const {
+    return m_clue1 == clue || m_clue2 == clue;
 }
 
 QRectF ClueCell::boundingRect() const
@@ -226,6 +248,27 @@ QRectF ClueCell::boundingRectIncludingAnswerCells() const
     return rect;
 }
 
+Qt::Orientation ClueCell::orientation() const {
+    return m_orientation;
+}
+
+bool ClueCell::isHorizontal() const {
+    return m_orientation == Qt::Horizontal;
+}
+
+bool ClueCell::isVertical() const {
+    return m_orientation == Qt::Vertical;
+}
+
+QList<AnswerOffset> ClueCell::allAnswerOffsets() {
+    return QList< AnswerOffset >()
+            << OffsetTopLeft << OffsetTop
+            << OffsetTopRight << OffsetLeft
+            << OnClueCell << OffsetRight
+            << OffsetBottomLeft << OffsetBottom
+            << OffsetBottomRight;
+}
+
 ClueCell::ClueCell(KrossWord* krossWord, Coord coord,
                    Qt::Orientation orientation, AnswerOffset answerOffset,
                    QString clue, QString answer)
@@ -247,6 +290,10 @@ ClueCell::ClueCell(KrossWord* krossWord, Coord coord,
 
     connect(this, SIGNAL(currentAnswerChanged(ClueCell*, const QString&)),
             krossWord, SLOT(answerChangedSlot(ClueCell*, const QString&)));
+}
+
+int ClueCell::type() const {
+    return Type;
 }
 
 void ClueCell::setClue(const QString &clue)
@@ -296,23 +343,11 @@ void ClueCell::focusInEvent(QFocusEvent* event)
 
 void ClueCell::focusOutEvent(QFocusEvent* event)
 {
-    // Only remove highlight if the scene still has focus
-//     if ( scene() && scene()->hasFocus() )
-//  krossWord()->setHighlightedClue( NULL );
     KrossWordCell::focusOutEvent(event);
 }
 
 void ClueCell::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
-//     if ( !krossWord()->isInteractive() ) {
-//  event->ignore();
-//  return;
-//     }
-    /*
-        firstLetter()->setFocus();
-        setHighlight();
-        event->accept();*/
-
     KrossWordCell::mousePressEvent(event);
 }
 
@@ -540,7 +575,7 @@ AnswerOffset ClueCell::tryToMakeVisible(bool simulate,
 
     AnswerOffset newAnswerOffset = OffsetInvalid;
     Coord newClueCellCoord;
-    ClueCell *clueCell = NULL;
+    ClueCell *clueCell = nullptr;
     foreach(const AnswerOffset & offset, offsets) {
 //     qDebug() << "Test offset" << ClueCell::answerOffsetToOffset( offset );
         Coord testNewClueCellCoord = coord() - ClueCell::answerOffsetToOffset(offset);
@@ -555,7 +590,7 @@ AnswerOffset ClueCell::tryToMakeVisible(bool simulate,
         if (cellType == EmptyCellType) {
             newAnswerOffset = offset;
             newClueCellCoord = testNewClueCellCoord;
-            clueCell = NULL;
+            clueCell = nullptr;
             break;
         } else if (cellType == ClueCellType && !clueCell) {
             newAnswerOffset = offset;
@@ -589,6 +624,10 @@ AnswerOffset ClueCell::tryToMakeVisible(bool simulate,
     return newAnswerOffset;
 }
 
+QString ClueCell::clue() const {
+    return m_clue;
+}
+
 Coord ClueCell::firstLetterCoords() const
 {
     return coord() + ClueCell::answerOffsetToOffset(m_answerOffset);
@@ -598,6 +637,34 @@ Coord ClueCell::firstLetterCoords(Coord clueCoords,
                                   AnswerOffset answerOffset)
 {
     return clueCoords + ClueCell::answerOffsetToOffset(answerOffset);
+}
+
+bool ClueCell::isHidden() const {
+    return m_answerOffset == OnClueCell;
+}
+
+LetterCellList ClueCell::letters() const {
+    return m_letters;
+}
+
+LetterCell *ClueCell::firstLetter() const {
+    return m_letters.isEmpty() ? nullptr : m_letters.first();
+}
+
+LetterCell *ClueCell::lastLetter() const {
+    return m_letters.isEmpty() ? nullptr : m_letters.last();
+}
+
+LetterCell *ClueCell::letterAt(int letterIndex) const {
+    return m_letters[ letterIndex ];
+}
+
+int ClueCell::posOfLetter(LetterCell *letterCell) const {
+    return m_letters.indexOf(letterCell);
+}
+
+bool ClueCell::answerContainsLetter(LetterCell *letterCell) const {
+    return m_letters.contains(letterCell);   /*posOfLetter(letterCell) != -1;*/
 }
 
 int ClueCell::minAnswerLength() const
@@ -614,6 +681,14 @@ int ClueCell::setAnswerLength(int newLength)
 {
     addLetters(newLength - answerLength());
     return answerLength();
+}
+
+int ClueCell::answerLength() const {
+    return m_correctAnswer.length();
+}
+
+int ClueCell::clueNumber() const {
+    return m_clueNumber;
 }
 
 int ClueCell::canAddLetters(int count) const
@@ -734,17 +809,20 @@ int ClueCell::addLetters(int count)
                 letter->setHighlight();
         } else { // sign < 0
             // Remove letter cell from clue
-            if (m_correctAnswer.length() < m_krossWord->crosswordTypeInfo().minAnswerLength)
+            if (m_correctAnswer.length() < m_krossWord->crosswordTypeInfo().minAnswerLength) {
                 break; // Don't remove letter cells when the minimum answer length is reached
+            }
 
             letter = dynamic_cast<LetterCell*>(cell);
-            if (!letter)
+            if (!letter) {
                 break; // No letter cell found to remove
+            }
 
             if (!letter->isCrossed()) {
                 // Remove letter
-                if (letter == oldLastLetter)
-                    oldLastLetter = NULL;
+                if (letter == oldLastLetter) {
+                    oldLastLetter = nullptr;
+                }
                 krossWord()->removeCell(coord);
             }
             letter->detachClue(this);
@@ -878,6 +956,10 @@ QString ClueCell::clueWithNumber(QString format) const
         return QString(format).arg(clueNumber() + 1).arg(m_clue);
     } else
         return m_clue;
+}
+
+QString ClueCell::correctAnswer() const {
+    return m_correctAnswer;
 }
 
 void ClueCell::wrapClueText()
@@ -1173,6 +1255,10 @@ bool ClueCell::isAnswerCorrect() const
     return true;
 }
 
+bool ClueCell::isInDoubleClueCell() const {
+    return qgraphicsitem_cast< DoubleClueCell* >(parentItem());
+}
+
 void ClueCell::solve()
 {
     setCurrentAnswer(correctAnswer(), Solved);
@@ -1214,7 +1300,7 @@ void ClueCell::setHighlight(bool enable)
     if (enable) {
         krossWord()->setHighlightedClue(this);
     } else {
-        krossWord()->setHighlightedClue(NULL);
+        krossWord()->setHighlightedClue(nullptr);
     }
 
     LetterCellList letterList = letters();
@@ -1224,6 +1310,16 @@ void ClueCell::setHighlight(bool enable)
 
     krossWord()->animator()->endEnqueueAnimations();
 
+}
+
+AnswerOffset ClueCell::answerOffset() const {
+    return m_answerOffset;
+}
+
+Offset ClueCell::firstLetterOffset(AnswerOffset answerOffset) const {
+    return answerOffset == OffsetInvalid
+            ? answerOffsetToOffset(m_answerOffset)
+            : answerOffsetToOffset(answerOffset);
 }
 
 void ClueCell::answerLetterChanged(LetterCell* letter, const QChar &newLetter)
@@ -1276,6 +1372,16 @@ void ClueCell::setCorrectAnswer(const QString& correctAnswer)
     krossWord()->animator()->endEnqueueAnimations();
 
     emit correctAnswerChanged(this, m_correctAnswer);
+}
+
+qreal ClueCell::transitionHeightFactor() const {
+    return m_transitionHeightFactor;
+}
+
+void ClueCell::setTransitionHeightFactor(qreal transitionHeightFactor) {
+    prepareGeometryChange();
+    m_transitionHeightFactor = transitionHeightFactor;
+    clearCache(Animator::Instant);
 }
 
 void ClueCell::setClueNumber(int clueNumber)

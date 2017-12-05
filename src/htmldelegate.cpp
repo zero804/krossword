@@ -24,9 +24,9 @@
 
 #include <QLineEdit>
 
-HtmlDelegate::HtmlDelegate(QObject *parent) : QStyledItemDelegate(parent)
-{
-}
+HtmlDelegate::HtmlDelegate(QObject *parent)
+    : QStyledItemDelegate(parent)
+{ }
 
 void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
@@ -121,13 +121,12 @@ void CrosswordAnswerValidator::fixup(QString &input) const
 
 void CrosswordAnswerValidator::fix(QString& input, const QString &allowedChars)
 {
-    fix(input, NULL, allowedChars);
+    fix(input, nullptr, allowedChars);
 }
 
-void CrosswordAnswerValidator::fix(QString& input,
-                                   const Crossword::CrosswordTypeInfo& crosswordType)
+void CrosswordAnswerValidator::fix(QString& input, const Crossword::CrosswordTypeInfo& crosswordType)
 {
-    fix(input, NULL, crosswordType.allowedChars());
+    fix(input, nullptr, crosswordType.allowedChars());
 }
 
 void CrosswordAnswerValidator::fix(QString& input, int* pos, const Crossword::CrosswordTypeInfo& crosswordType)

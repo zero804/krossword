@@ -43,7 +43,7 @@ KrossWord::KrossWord(int width, int height)
 
 void KrossWord::init(uint width, uint height)
 {
-    m_krossWordGrid = new KGrid2D::Generic<KrossWordCell*>(width, height);
+    m_krossWordGrid = new Grid2D::Generic<KrossWordCell*>(width, height);
     m_emptyCellColorForPrinting = Qt::black;
     m_cellSize = QSizeF(50, 50);
 }
@@ -80,7 +80,7 @@ void KrossWord::resizeTo(const QSizeF& size)
 }
 */
 
-KrossWord::ErrorType KrossWord::insertImage(const KGrid2D::Coord &coord,
+KrossWord::ErrorType KrossWord::insertImage(const Grid2D::Coord &coord,
         int horizontalCellSpan, int verticalCellSpan, QUrl url,
         ErrorTypes errorTypesToIgnore, ImageCell **insertedImage)
 {
@@ -178,7 +178,7 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
 
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        if (errorString != NULL)
+        if (errorString != nullptr)
             *errorString = file.errorString();
         qWarning() << file.errorString();
         return false;
@@ -392,15 +392,15 @@ ClueCell* KrossWord::firstClue() const
                 return (ClueCell*)cell;
             else if (cell->isLetterCell()) {   // Needed to get hidden clues
                 LetterCell *letter = (LetterCell*)cell;
-                if (letter->clueHorizontal() != NULL)
+                if (letter->clueHorizontal() != nullptr)
                     return letter->clueHorizontal();
-                else if (letter->clueVertical() != NULL)
+                else if (letter->clueVertical() != nullptr)
                     return letter->clueVertical();
             }
         } // for x
     } // for y
 
-    return NULL;
+    return nullptr;
 }
 
 ClueCellList KrossWord::clues() const
@@ -572,7 +572,7 @@ bool KrossWord::canTakeClueCell(const Coord& coord,
     return true;
 }
 
-KrossWord::ErrorType KrossWord::canInsertImage(const KGrid2D::Coord& coord,
+KrossWord::ErrorType KrossWord::canInsertImage(const Grid2D::Coord& coord,
         int horizontalCellSpan, int verticalCellSpan,
         KrossWord::ErrorTypes correctnessesToIgnore, ImageCell* excludedImage)
 {
@@ -591,7 +591,7 @@ KrossWord::ErrorType KrossWord::canInsertImage(const KGrid2D::Coord& coord,
     return NoError;
 }
 
-KrossWord::ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
+KrossWord::ErrorType KrossWord::canInsertClue(const Grid2D::Coord& coord,
         Qt::Orientation orientation, const Offset &firstLetterOffset,
         const QString& answer, ErrorTypes correctnessesToIgnore,
         bool allowDoubleClueCells, ClueCell *excludedClue)
@@ -600,9 +600,9 @@ KrossWord::ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
     if (!correctnessesToIgnore.testFlag(ErrorClueDoesntFit)
             && (!inside(coord) || !inside(coord + firstLetterOffset)
                 || (orientation == Qt::Horizontal
-                    && !inside(coord + firstLetterOffset + KGrid2D::Coord(answer.length() - 1, 0)))
+                    && !inside(coord + firstLetterOffset + Grid2D::Coord(answer.length() - 1, 0)))
                 || (orientation == Qt::Vertical
-                    && !inside(coord + firstLetterOffset + KGrid2D::Coord(0, answer.length() - 1))))) {
+                    && !inside(coord + firstLetterOffset + Grid2D::Coord(0, answer.length() - 1))))) {
         qDebug() << "Clue doesn't fit into the grid" << coord << firstLetterOffset << answer
                  << "orientation =" << orientation << "answer-length =" << answer.length();
         return ErrorClueDoesntFit;
@@ -659,7 +659,7 @@ KrossWord::ErrorType KrossWord::canInsertClue(const KGrid2D::Coord& coord,
     return KrossWord::NoError;
 }
 
-KrossWord::ErrorType KrossWord::insertClue(const KGrid2D::Coord &coord,
+KrossWord::ErrorType KrossWord::insertClue(const Grid2D::Coord &coord,
         Qt::Orientation orientation,
         ClueCell::AnswerOffset answerOffset,
         const QString &clue, const QString &answer,
@@ -722,7 +722,7 @@ void KrossWord::removeCell(KrossWordCell* cell)
     removeCell(cell->coord());
 }
 
-void KrossWord::removeCell(const KGrid2D::Coord& coord)
+void KrossWord::removeCell(const Grid2D::Coord& coord)
 {
     replaceCell(coord, new EmptyCell(this, coord));
 }
@@ -732,13 +732,13 @@ void KrossWord::replaceCell(KrossWordCell* cell, KrossWordCell* newCell)
     replaceCell(cell->coord(), newCell);
 }
 
-void KrossWord::replaceCell(const KGrid2D::Coord& coord, KrossWordCell* newCell)
+void KrossWord::replaceCell(const Grid2D::Coord& coord, KrossWordCell* newCell)
 {
     Q_ASSERT(newCell);
     replaceCell(coord, newCell, true);
 }
 
-void KrossWord::replaceCell(const KGrid2D::Coord& coord,
+void KrossWord::replaceCell(const Grid2D::Coord& coord,
                             KrossWordCell* newCell, bool deleteOldCell)
 {
     KrossWordCell *oldCell = at(coord);
@@ -785,18 +785,16 @@ void KrossWord::replaceCell(const KGrid2D::Coord& coord,
 }
 
 // TODO Move to LetterCell::toSolutionLetter?
-bool KrossWord::convertToSolutionLetter(const KGrid2D::Coord& coord,
-                                        int solutionLetterIndex)
+bool KrossWord::convertToSolutionLetter(const Grid2D::Coord& coord, int solutionLetterIndex)
 {
     LetterCell *letter = qgraphicsitem_cast<LetterCell*>(at(coord));
-//     if ( oldCell == NULL || oldCell->cellType() != KrossWordCell::LetterCellType )
-    if (!letter)   // letter isn't a LetterCell
+    if (!letter) {   // letter isn't a LetterCell
         return false;
-//     LetterCell *letter = qgraphicsitem_cast<LetterCell*>( oldCell );
+    }
 
-    SolutionLetterCell *solutionLetter =
-        SolutionLetterCell::fromLetterCell(letter, solutionLetterIndex);
+    SolutionLetterCell *solutionLetter = SolutionLetterCell::fromLetterCell(letter, solutionLetterIndex);
 
+    //CHECK: What the heck is this???? Hypotesis: this[coord] = solutionLetter  ---  maybe?
     operator[](coord) = solutionLetter;
 
     return true;
@@ -830,17 +828,11 @@ void KrossWord::resizeGrid(uint width, uint height)
 
 void KrossWord::resizeScene()
 {
-    if (!scene())
+    if (!scene()) {
         return;
-//     Q_ASSERT( scene() != NULL );
-    /*
-        QRect rect( 0, 0, cellSize().toSize().width() * width(),
-           cellSize().toSize().height() * height() );*/
+    }
     QRect rect = QRect(QPoint(), boundingRect().size().toSize());
-//     scene()->setSceneRect( rect );
     scene()->setSceneRect(rect.adjusted(-150, -150, 150, 150));
-
-//     qDebug() << scene()->sceneRect();
 }
 
 bool KrossWord::isEmpty() const
@@ -864,10 +856,6 @@ void KrossWord::deleteAllCells()
 
     KrossWordCellList cellList = cells();
     qDeleteAll(cellList);
-
-//     foreach ( KrossWordCell *cell, cellList ) {
-//  replaceCell( cell, NULL );
-//     }
 
     m_krossWordGrid->resize(0, 0);
     m_solutionLetters.clear();

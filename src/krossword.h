@@ -53,11 +53,11 @@ class Animator;
  *
  * This is a square bidimensionnal grid for crosswords (@ref KGrid2D::Square).
  */
-class KrosswordGrid : public KGrid2D::Square< KrossWordCell* >
+class KrosswordGrid : public Grid2D::Square< KrossWordCell* >
 {
 public:
     explicit KrosswordGrid(uint width = 0, uint height = 0)
-        : KGrid2D::Square< KrossWordCell* >(width, height) {}
+        : Grid2D::Square< KrossWordCell* >(width, height) {}
 
     /**
       * @return the offset for the given neighbour.
@@ -221,7 +221,7 @@ public:
     * @param height The height of the new crossword. That is, how many vertical
     * cells should be created.
     * @see resizeGrid() */
-    explicit KrossWord(const KrosswordTheme *theme = NULL, int width = 0, int height = 0);
+    explicit KrossWord(const KrosswordTheme *theme = nullptr, int width = 0, int height = 0);
 
     virtual ~KrossWord();
 
@@ -286,7 +286,7 @@ public:
     * @param url The URL to the file to read.
     * @param errorString Contains a string describing the error, if false was returned.
     * @return False, if there was an error. */
-    bool read(const QUrl &url, QString *errorString = NULL, FileFormat fileFormat = DetermineByType, QByteArray *undoData = NULL);
+    bool read(const QUrl &url, QString *errorString = nullptr, FileFormat fileFormat = DetermineByType, QByteArray *undoData = nullptr);
 
     /** Convert the crossword into a data model.*/
     CrosswordData getCrosswordData(WriteMode writeMode, const QByteArray &undoData = QByteArray()); // CHECK: temporary name
@@ -298,7 +298,7 @@ public:
     * @param undoData Undo data to be written into the crossword file, works
     * only for XML files.
     * @return False, if there was an error. */
-    bool write(const QString &fileName, QString *errorString = NULL,
+    bool write(const QString &fileName, QString *errorString = nullptr,
                WriteMode writeMode = Normal,
                FileFormat fileFormat = DetermineByType,
                const QByteArray &undoData = QByteArray());
@@ -352,7 +352,7 @@ public:
 
     bool canTakeSpannedCell(const Coord &coord,
                             int horizontalCellSpan, int verticalCellSpan,
-                            SpannedCell* excludedSpannedCell = NULL) const;
+                            SpannedCell* excludedSpannedCell = nullptr) const;
 
     /** Inserts a new image into the crossword at @p coord.
     * @note This method first checks if the new image with the given span
@@ -373,10 +373,10 @@ public:
     * @returns Other values of ErrorType, if there was an error when inserting
     * the image.
     * @see canInsertClue() */
-    ErrorType insertImage(const KGrid2D::Coord &coord,
+    ErrorType insertImage(const Grid2D::Coord &coord,
                           int horizontalCellSpan, int verticalCellSpan, QUrl url,
                           ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
-                          ImageCell **insertedImage = NULL);
+                          ImageCell **insertedImage = nullptr);
 
     /** Gets a list with all legal answer offsets for a new clue at the given
     * coordinates @p clueCellCoord with the given @p orientation. You can set
@@ -390,11 +390,11 @@ public:
     QList< AnswerOffset > legalAnswerOffsets(
         Coord clueCellCoord, Qt::Orientation orientation,
         int answerLength,
-        ClueCell *excludedClue = NULL) const;
+        ClueCell *excludedClue = nullptr) const;
     bool canTakeClueCell(const Coord &coord,
                          const Offset &firstLetterOffset = Offset(0, 0),
                          bool allowDoubleClueCells = true,
-                         ClueCell *excludedClue = NULL) const;
+                         ClueCell *excludedClue = nullptr) const;
 
     /** Inserts a new clue into the crossword at @p coord. This method won't
     * overwrite existing cells, except for those of type EmptyCell. Existing cells
@@ -425,14 +425,14 @@ public:
     * @returns Other values of ErrorType, if there was an error when inserting
     * the clue and it's answers letter cells.
     * @see canInsertClue() */
-    ErrorType insertClue(const KGrid2D::Coord &coord,
+    ErrorType insertClue(const Grid2D::Coord &coord,
                          Qt::Orientation orientation,
                          AnswerOffset answerOffset,
                          const QString &clue, const QString &answer,
                          CellType cellType = LetterCellType,
                          ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
                          bool allowDoubleClueCells = true,
-                         ClueCell **insertedClue = NULL);
+                         ClueCell **insertedClue = nullptr);
 
     /** Returns true, if a clue cell with it's answer letters fits into the
     * current crossword at @p coord.
@@ -447,7 +447,7 @@ public:
     * double clue cells if needed, ie. if there's already a clue cell at @p coord.
     * @param excludedClue You can specify a clue cell which shouldn't be taken
     * into account when checking if the new clue can be inserted. */
-    ErrorType canInsertClue(const KGrid2D::Coord &coord,
+    ErrorType canInsertClue(const Grid2D::Coord &coord,
                             Qt::Orientation orientation,
                             const Offset &answerOffset,
                             const QString &answer,
@@ -470,7 +470,7 @@ public:
                                       ErrorTypes errorTypesToIgnore =
                                           DontIgnoreErrors,
                                       bool allowDoubleClueCells = true,
-                                      SolutionLetterCellList *removedSolutionLetterCells = NULL);
+                                      SolutionLetterCellList *removedSolutionLetterCells = nullptr);
 
     /** Returns true, if an image cell with it's horizontal and vertical cell
     * span fits into the current crossword at @p coord.
@@ -482,10 +482,10 @@ public:
     * @param errorTypesToIgnore Error types to ignore.
     * @param excludedClue You can specify a clue cell which shouldn't be taken
     * into account when checking if the new clue can be inserted. */
-    ErrorType canInsertImage(const KGrid2D::Coord &coord,
+    ErrorType canInsertImage(const Grid2D::Coord &coord,
                              int horizontalCellSpan, int verticalCellSpan,
                              ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
-                             ImageCell *excludedImage = NULL);
+                             ImageCell *excludedImage = nullptr);
 
     /** Removes the given clue from the crossword. It also removes answer
     * letters of the clue, if the letters have no second clue. Otherwise
@@ -506,11 +506,11 @@ public:
     * have a clue in @p orientation. These cells can be used for the answer
     * letter cells of a clue cell. */
     int maxAnswerLengthAt(const Coord &coord, Qt::Orientation orientation,
-                          ClueCell *excludedClue = NULL);
+                          ClueCell *excludedClue = nullptr);
 
     bool correctLettersAt(const Coord &coord, Qt::Orientation orientation,
                           int letterCount, QString *correctLetters,
-                          ClueCell *excludeClue = NULL);
+                          ClueCell *excludeClue = nullptr);
 
     void setupSameLetterSynchronization();
     void removeSameLetterSynchronization();
@@ -627,7 +627,7 @@ public:
     inline KrossWordCell *at(Coord coord) const {
         if (!inside(coord)) {
             qDebug() << coord << "isn't inside the grid! Returning NULL.";
-            return NULL;
+            return nullptr;
         }
         return m_krossWordGrid->at(coord);
     }

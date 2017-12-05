@@ -39,80 +39,57 @@ class ClueCell : public KrossWordCell
     friend class SolutionLetterCell; // SolutionLetterCell::toLetter() needs to call findLetters()
     friend class KrossWord;
 
-    Q_PROPERTY(qreal transitionHeightFactor READ transitionHeightFactor
-               WRITE setTransitionHeightFactor)
+    Q_PROPERTY(qreal transitionHeightFactor READ transitionHeightFactor WRITE setTransitionHeightFactor)
 
 public:
     static const char EmptyCorrectCharacter = ' ';
 
-    static QList< AnswerOffset > allAnswerOffsets() {
-        return QList< AnswerOffset >()
-               << OffsetTopLeft << OffsetTop
-               << OffsetTopRight << OffsetLeft
-               << OnClueCell << OffsetRight
-               << OffsetBottomLeft << OffsetBottom
-               << OffsetBottomRight;
-    };
+    static QList< AnswerOffset > allAnswerOffsets();
 
-    ClueCell(KrossWord *krossWord, Coord coord,
-             Qt::Orientation orientation, AnswerOffset answerOffset,
+    ClueCell(KrossWord *krossWord, Coord coord, Qt::Orientation orientation, AnswerOffset answerOffset,
              QString clue, QString answer);
 
     /** For qgraphicsitem_cast. */
     enum { Type = UserType + 3 };
-    virtual int type() const {
-        return Type;
-    };
+    virtual int type() const override;
 
-    virtual QRectF boundingRect() const;
+    virtual QRectF boundingRect() const override;
     QRectF boundingRectIncludingAnswerCells() const;
 
     /** The orientation in which the clue's answer letter cells are arranged. */
-    Qt::Orientation orientation() const {
-        return m_orientation;
-    };
+    Qt::Orientation orientation() const;
+
     /** Whether or not this is a horizontal clue. @see orientation() */
-    bool isHorizontal() const {
-        return m_orientation == Qt::Horizontal;
-    }
+    bool isHorizontal() const;
     /** Whether or not this is a vertical clue. @see orientation() */
-    bool isVertical() const {
-        return m_orientation == Qt::Vertical;
-    };
+    bool isVertical() const;
 
-    static QList<Coord> answerCoordList(const Coord &clueCoord,
-                                        AnswerOffset answerOffset,
-                                        Qt::Orientation orientation,
-                                        int answerLength);
+    static QList<Coord> answerCoordList(const Coord &clueCoord, AnswerOffset answerOffset,
+                                        Qt::Orientation orientation, int answerLength);
 
-    ErrorType setProperties(Qt::Orientation newOrientation,
-                            AnswerOffset newAnswerOffset,
-                            const QString &newCorrectAnswer);
+    ErrorType setProperties(Qt::Orientation newOrientation, AnswerOffset newAnswerOffset, const QString &newCorrectAnswer);
+
     /** Hides the clue cell, by moving it's coordinates to the coordinates of the
     * first answer answerLengthChangedcell and setting answer offset to @ref OnClueCell. */
     void setHidden();
     bool setUnhidden(AnswerOffset newAnswerOffset);
+
     /** Tries to find an empty cell sibling to the current position of this clue
     * cell and moves this clue cell to the found empty cell. It also adjusts the
     * answer offset appropriately. If the answer offset wasn't @ref OnClueCell
     * nothing is done and true is returned.
     * @returns true If the clue cell could be made visible.
     * false If no appropriate empty cell for the clue cell could be found. */
-    AnswerOffset tryToMakeVisible(bool simulate = false,
-                                  QList<Coord> disallowedCoords = QList<Coord>());
+    AnswerOffset tryToMakeVisible(bool simulate = false, QList<Coord> disallowedCoords = QList<Coord>());
 
     /** Gets the clue string of the clue cell. */
-    QString clue() const {
-        return m_clue;
-    };
+    QString clue() const;
     /** Sets the clue string of the clue cell. */
     void setClue(const QString &clue);
     /** Sets the string for the item in clue list */
     QString clueWithNumber(QString format = "%1. %2") const;
     /** Gets the correct answer. */
-    QString correctAnswer() const {
-        return m_correctAnswer;
-    };
+    QString correctAnswer() const;
     /** Gets the current answer by concatenating the current letter
     * (@ref LetterCell::currentLetter()) of the letter cells of this clue
     * (@ref letters()).
@@ -127,76 +104,52 @@ public:
     * @see LetterCell::isCorrect() */
     bool isAnswerCorrect() const;
 
-    inline bool isInDoubleClueCell() const {
-        return qgraphicsitem_cast< DoubleClueCell* >(parentItem());
-    };
+    inline bool isInDoubleClueCell() const;
 
     /** Solves all letter cells of this clue cell by setting it's current
     * answer to the correct answer. */
     void solve();
     /** Clears all letter cell of this clue cell by clearing it's current
     * answer. */
-    void clear(ClearMode clearMode =
-                   ClearCurrentLetter);
+    void clear(ClearMode clearMode = ClearCurrentLetter);
     bool isEmpty() const;
     bool isCorrectAnswerEmpty() const;
 
     virtual void setHighlight(bool hightlight = true);
 
     /** Gets the offset of the first answer letter cell. */
-    AnswerOffset answerOffset() const {
-        return m_answerOffset;
-    };
+    AnswerOffset answerOffset() const;
 //  KrossWord::ErrorType setAnswerOffset( AnswerOffset answerOffset );
     /** The offset of the first letter of the answer in the crossword grid.
     * Can be (0 or +-1, 0 or +-1). It is (0, 0) if the clue is hidden. The
     * clue cell is hidden, if @ref answerOffset() is
     * @ref ClueCell::ClueHidden. */
-    inline Offset firstLetterOffset(AnswerOffset answerOffset = OffsetInvalid) const {
-        return answerOffset == OffsetInvalid
-               ? answerOffsetToOffset(m_answerOffset)
-               : answerOffsetToOffset(answerOffset);
-    };
+    Offset firstLetterOffset(AnswerOffset answerOffset = OffsetInvalid) const;
     Coord firstLetterCoords() const;
 
     static Offset answerOffsetToOffset(AnswerOffset answerOffset);
     static AnswerOffset offsetToAnswerOffset(Offset offset);
 
-    static Coord firstLetterCoords(Coord clueCoords,
-                                   AnswerOffset answerOffset);
-    bool isHidden() const {
-        return m_answerOffset == OnClueCell;
-    };
+    static Coord firstLetterCoords(Coord clueCoords, AnswerOffset answerOffset);
+    bool isHidden() const;
 
     /** Returns a list of all letter cells that represent the answer to this clue. */
-    LetterCellList letters() const {
-        return m_letters;
-    };
+    LetterCellList letters() const;
     /** Gets the first letter cell of the answer to this clue cell.
     * @see lastLetter()
     * @see letterAt() */
-    LetterCell *firstLetter() const {
-        return m_letters.isEmpty() ? NULL : m_letters.first();
-    };
+    LetterCell *firstLetter() const;
     /** Gets the last letter cell of the answer to this clue cell.
     * @see firstLetter()
     * @see letterAt() */
-    LetterCell *lastLetter() const {
-        return m_letters.isEmpty() ? NULL : m_letters.last();
-    };
+    LetterCell *lastLetter() const;
     /** The the letter cell at @p letterIndex from the answer letter cells.
     * @see firstLetter()
     * @see lastLetter()
     * @see letters() */
-    LetterCell *letterAt(int letterIndex) const {
-        return m_letters[ letterIndex ];
-    };
-    int posOfLetter(LetterCell *letterCell) const {
-        return m_letters.indexOf(letterCell);
-    };
-    bool answerContainsLetter(LetterCell *letterCell) const {
-        return m_letters.contains(letterCell);   /*posOfLetter(letterCell) != -1;*/
-    };
+    LetterCell *letterAt(int letterIndex) const;
+    int posOfLetter(LetterCell *letterCell) const;
+    bool answerContainsLetter(LetterCell *letterCell) const;
 
     /** Returns the maximal number of letters that can actually be added /
     * removed, but maximally @p count. */
@@ -206,26 +159,16 @@ public:
     int minAnswerLength() const;
     int maxAnswerLength() const;
     int setAnswerLength(int newLength);
-    int answerLength() const {
-        return m_correctAnswer.length();
-    };
+    int answerLength() const;
 
-    int clueNumber() const {
-        return m_clueNumber;
-    };
+    int clueNumber() const;
     void setClueNumber(int clueNumber);
 
     /** Sets the correct answer to this clue cell. */
     void setCorrectAnswer(const QString &correctAnswer);
 
-    qreal transitionHeightFactor() const {
-        return m_transitionHeightFactor;
-    };
-    void setTransitionHeightFactor(qreal transitionHeightFactor) {
-        prepareGeometryChange();
-        m_transitionHeightFactor = transitionHeightFactor;
-        clearCache(Animator::Instant);
-    };
+    qreal transitionHeightFactor() const;
+    void setTransitionHeightFactor(qreal transitionHeightFactor);
 
 signals:
     /** Emitted, when the current answer changes. */
@@ -244,36 +187,32 @@ public slots:
     void letterRemoved(LetterCell *letter);
 
 protected:
-    virtual void focusInEvent(QFocusEvent* event);
-    virtual void focusOutEvent(QFocusEvent* event);
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
-    virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value);
+    virtual void focusInEvent(QFocusEvent* event) override;
+    virtual void focusOutEvent(QFocusEvent* event) override;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
+    virtual QVariant itemChange(GraphicsItemChange change, const QVariant& value) override;
 
-    virtual void drawBackground(QPainter* p, const QStyleOptionGraphicsItem* option);
-    virtual void drawForeground(QPainter *p, const QStyleOptionGraphicsItem* option);
+    virtual void drawBackground(QPainter* p, const QStyleOptionGraphicsItem* option) override;
+    virtual void drawForeground(QPainter *p, const QStyleOptionGraphicsItem* option) override;
     virtual void drawClueNumber(QPainter *p, const QStyleOptionGraphicsItem *option);
 
-    virtual void drawBackgroundForPrinting(QPainter* , const QStyleOptionGraphicsItem*);
-    virtual void drawForegroundForPrinting(QPainter* , const QStyleOptionGraphicsItem*);
+    virtual void drawBackgroundForPrinting(QPainter* , const QStyleOptionGraphicsItem*) override;
+    virtual void drawForegroundForPrinting(QPainter* , const QStyleOptionGraphicsItem*) override;
 
-    virtual void wrapClueText();
+    void wrapClueText();
 
     void createLayout(const QRect &rect);
-    void setProperties(Qt::Orientation newOrientation,
-                       AnswerOffset newAnswerOffset);
+    void setProperties(Qt::Orientation newOrientation, AnswerOffset newAnswerOffset);
     void setOrientation(Qt::Orientation newOrientation);
     void setAnswerOffset(AnswerOffset newAnswerOffset);
 
     void beginAddLetters();
     void endAddLetters();
-    void endAddLetters(Qt::Orientation newOrientation,
-                       AnswerOffset newAnswerOffset);
-    void findLetters(LetterCell *newLetter = NULL);
+    void endAddLetters(Qt::Orientation newOrientation, AnswerOffset newAnswerOffset);
+    void findLetters(LetterCell *newLetter = nullptr);
 
 private:
-    void findLetters(Qt::Orientation newOrientation,
-                     AnswerOffset newAnswerOffset,
-                     LetterCell *newLetter = NULL);
+    void findLetters(Qt::Orientation newOrientation, AnswerOffset newAnswerOffset, LetterCell *newLetter = nullptr);
 
     Qt::Orientation m_orientation;
     AnswerOffset m_answerOffset;
@@ -296,33 +235,21 @@ class DoubleClueCell : public KrossWordCell
     friend class ClueCell;
 
 public:
-    DoubleClueCell(KrossWord* krossWord, const Coord& coord,
-                   ClueCell *clue1, ClueCell *clue2);
+    DoubleClueCell(KrossWord* krossWord, const Coord& coord, ClueCell *clue1, ClueCell *clue2);
 
     /** For qgraphicsitem_cast. */
     enum { Type = UserType + 4 };
-    virtual int type() const {
-        return Type;
-    };
+    virtual int type() const override;
 
-    ClueCell *clue1() const {
-        return m_clue1;
-    };
-    ClueCell *clue2() const {
-        return m_clue2;
-    };
-    ClueCellList clues() const {
-        return ClueCellList() << m_clue1 << m_clue2;
-    };
+    ClueCell *clue1() const;
+    ClueCell *clue2() const;
+    ClueCellList clues() const;
 
-    ClueCell *clue(AnswerOffset answerOffset,
-                   Qt::Orientation orientation) const;
+    ClueCell *clue(AnswerOffset answerOffset, Qt::Orientation orientation) const;
 
     void removeClueCell(ClueCell *clueCell);
     ClueCell *takeClueCell(ClueCell *clueCell);
-    bool hasClue(ClueCell *clue) const {
-        return m_clue1 == clue || m_clue2 == clue;
-    };
+    bool hasClue(ClueCell *clue) const;
 
 private:
 //  bool setPositionFromCoordinates( bool animate = true );
@@ -355,7 +282,7 @@ inline QDebug &operator <<(QDebug debug, AnswerOffset answerOffset)
     default:
         return debug << "Unknown answer offset" << static_cast<int>(answerOffset);
     }
-};
+}
 
 inline QDebug &operator <<(QDebug debug, ClueCell *cell)
 {
@@ -368,34 +295,7 @@ inline QDebug &operator <<(QDebug debug, ClueCell *cell)
            << "| Clue: " << cell->clue()
            << "| Correct: " << cell->correctAnswer()
            << "| Current: " << cell->currentAnswer();
-
-//   try {
-//   if ( cell ) {
-//     debug << "  Correct: " << cell->correctAnswer();
-//     debug << "| Current: " << cell->currentAnswer() << endl;
-//     debug << "  Answer Offset: "
-//    << ClueCell::answerOffsetToOffset( cell->answerOffset() );
-//     debug << "| Orientation: " << cell->orientation() << endl;
-//     debug << "  Clue: " << cell->clue();
-//   }
-//   } catch() {
-//     debug << "Error getting current Answer. ";
-//
-//     debug << "Correct: ";
-//     debug << cell->correctAnswer();
-//
-//     debug << " Answer Offset: ";
-//     debug << ClueCell::answerOffsetToOffset( cell->answerOffset() );
-//
-//     debug << " Orientation: ";
-//     debug << cell->orientation();
-//
-//     debug << " Clue: ";
-//     debug << cell->clue();
-//   }
-
-//   return debug.space();
-};
+}
 
 // Sorting functions
 bool lessThanClueNumber(const ClueCell *clueCell1, const ClueCell *clueCell2);
@@ -409,6 +309,6 @@ bool lessThanOrientation(const ClueCell *clueCell1, const ClueCell *clueCell2);
 /** Vertical clues first. */
 bool greaterThanOrientation(const ClueCell *clueCell1, const ClueCell *clueCell2);
 
-}; // namespace Crossword
+} // namespace Crossword
 
 #endif // KROSSWORDCLUECELL_H

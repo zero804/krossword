@@ -145,7 +145,7 @@ void DictionaryDialog::hideInfoMessage()
     anim->start(QAbstractAnimation::DeleteWhenStopped);
     QTimer::singleShot(250, m_infoMessage, SLOT(close()));
 
-    m_infoMessage = NULL;
+    m_infoMessage = nullptr;
 }
 
 void DictionaryDialog::getWordsFromDictionaryClicked()

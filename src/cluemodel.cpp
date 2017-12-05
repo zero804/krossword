@@ -152,14 +152,14 @@ ClueItem* ClueModel::clueItem(ClueCell* clueCell) const
     }
 
     qDebug() << "Clue not found in model" << clueCell;
-    return NULL; // Item for clueCell not found
+    return nullptr; // Item for clueCell not found
 }
 
 ClueItem* ClueModel::clueItemFromIndex(const QModelIndex& index) const
 {
     if (index.parent() != m_itemHorizontal->index()
             && index.parent() != m_itemVertical->index()) {
-        return NULL; // No clue item
+        return nullptr; // No clue item
     }
 
     QModelIndex clueItemIndex = index.parent().child(index.row(), 0);

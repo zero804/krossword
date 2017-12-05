@@ -174,7 +174,7 @@ public:
     Q_DECLARE_FLAGS(ModificationTypes, ModificationType)
 
     GameGui(QWidget* parent = nullptr);
-    virtual ~GameGui();
+    ~GameGui() = default;
 
     const char *actionName(Action actionEnum) const;
 
@@ -225,10 +225,6 @@ public slots:
     void addClueSlot();
     void addImageSlot();
     void removeSlot();
-//     void cellPropertiesSlot();
-//     void solutionLetterCellPropertiesSlot();
-//     void convertToSolutionLetterSlot();
-//     void convertToLetterSlot();
     void clearCrosswordSlot();
     void propertiesSlot();
     void editCheckRotationSymmetrySlot();
@@ -246,7 +242,7 @@ public slots:
     void hintClueSlot();
     void hintHorizontalClueSlot();
     void hintVerticalClueSlot();
-    void clearCellSlot();       //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    void clearCellSlot();
     void clearClueSlot();
     void clearHorizontalClueSlot();
     void clearVerticalClueSlot();
@@ -342,8 +338,8 @@ private:
 
     void adjustGuiToCrosswordType();
 
-    void enableActions(KrossWordCell* currentCell = NULL);
-    void enableEditActions(KrossWordCell *currentCell = NULL);
+    void enableActions(KrossWordCell* currentCell = nullptr);
+    void enableEditActions(KrossWordCell *currentCell = nullptr);
 
     void setModificationType(ModificationType modificationType, bool set = true);
     void setCurrentFileName(const QString &fileName = QString());

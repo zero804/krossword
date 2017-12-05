@@ -34,8 +34,6 @@ SpannedCell::SpannedCell(KrossWord* krossWord, CellType cellType,
     m_verticalCellSpan = verticalCellSpan;
 
     m_transitionSize = QSizeF();
-//   setTransformOriginPoint( -m_transitionSize.width() / 2 - 0.5,
-//       -m_transitionSize.height() / 2 - 0.5 );
 }
 
 QRectF SpannedCell::boundingRect() const
@@ -52,12 +50,28 @@ QRectF SpannedCell::boundingRect() const
     }
 }
 
+int SpannedCell::type() const {
+    return Type;
+}
+
+QSizeF SpannedCell::transitionSize() const {
+    return m_transitionSize;
+}
+
 void SpannedCell::setTransitionSize(const QSizeF& transitionSize)
 {
     prepareGeometryChange();
     m_transitionSize = transitionSize;
     clearCache();
     update();
+}
+
+int SpannedCell::horizontalCellSpan() const {
+    return m_horizontalCellSpan;
+}
+
+int SpannedCell::verticalCellSpan() const {
+    return m_verticalCellSpan;
 }
 
 void SpannedCell::endSizeTransizionAnim()
@@ -70,7 +84,7 @@ void SpannedCell::endSizeTransizionAnim()
 
 void SpannedCell::setCellSpan(int horizontalCellSpan, int verticalCellSpan)
 {
-    QList< Coord > coordsBefore = spannedCoords();
+    QList<Coord> coordsBefore = spannedCoords();
 
     if (krossWord()->isAnimationEnabled()) {
         QPropertyAnimation *transitionSizeAnim = new QPropertyAnimation(this, "transitionSize");
@@ -89,7 +103,7 @@ void SpannedCell::setCellSpan(int horizontalCellSpan, int verticalCellSpan)
     m_horizontalCellSpan = horizontalCellSpan;
     m_verticalCellSpan = verticalCellSpan;
 
-    QList< Coord > coordsAfter = spannedCoords();
+    QList<Coord> coordsAfter = spannedCoords();
 
     // Set image cell into the crossword grid at all new coords.
     foreach(const Coord & coord, coordsAfter) {
@@ -108,18 +122,53 @@ void SpannedCell::setCellSpan(int horizontalCellSpan, int verticalCellSpan)
     }
 }
 
-QList< Coord > SpannedCell::spannedCoords() const
+QList<Coord> SpannedCell::spannedCoords() const
 {
     QList<Coord> coords;
     Coord coord;
-    for (coord.first = coordTopLeft().first;
-            coord.first <= coordBottomRight().first; ++coord.first) {
-        for (coord.second = coordTopLeft().second;
-                coord.second <= coordBottomRight().second; ++coord.second) {
+    for (coord.first = coordTopLeft().first; coord.first <= coordBottomRight().first; ++coord.first) {
+        for (coord.second = coordTopLeft().second; coord.second <= coordBottomRight().second; ++coord.second) {
             coords << coord;
         }
     }
     return coords;
 }
 
-}; // namespace Crossword
+void SpannedCell::setHorizontalCellSpan(int horizontalCellSpan)
+{
+    setCellSpan(horizontalCellSpan, m_verticalCellSpan);
+}
+
+void SpannedCell::setVerticalCellSpan(int verticalCellSpan)
+{
+    setCellSpan(m_horizontalCellSpan, verticalCellSpan);
+}
+
+bool SpannedCell::inside(const Grid2D::Coord &coord) {
+    return coord >= coordTopLeft() && coord <= coordBottomRight();
+}
+
+Grid2D::Coord SpannedCell::coordTopLeft() const
+{
+    return coord();
+}
+
+Grid2D::Coord SpannedCell::coordTopRight() const
+{
+    return Coord(coord().first + m_horizontalCellSpan - 1,
+                 coord().second);
+}
+
+Grid2D::Coord SpannedCell::coordBottomLeft() const
+{
+    return Coord(coord().first,
+                 coord().second + m_verticalCellSpan - 1);
+}
+
+Grid2D::Coord SpannedCell::coordBottomRight() const
+{
+    return Coord(coord().first + m_horizontalCellSpan - 1,
+                 coord().second + m_verticalCellSpan - 1);
+}
+
+} // namespace Crossword

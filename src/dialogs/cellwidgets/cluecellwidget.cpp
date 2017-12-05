@@ -84,7 +84,7 @@ ClueCellWidget::ClueCellWidget(ClueCell* clueCell,
     KCharSelect *charSelect;
     m_cluePropertiesCharMenu = new QMenu;
     charSelectAction = new QWidgetAction(this);
-    charSelect = new KCharSelect(this, NULL,
+    charSelect = new KCharSelect(this, nullptr,
                                  KCharSelect::SearchLine | KCharSelect::BlockCombos |
                                  KCharSelect::CharacterTable | KCharSelect::HistoryButtons);
     charSelect->setCurrentChar(QChar(0x2020));     // Dagger symbol
@@ -303,7 +303,7 @@ void ClueCellWidget::showAnswerOffsets(bool show)
 void ClueCellWidget::cluesAboutToBeRemoved(ClueCellList clues)
 {
     if (clues.contains(m_clueCell)) {
-        m_clueCell = NULL;
+        m_clueCell = nullptr;
         setEnabled(false);
     }
 }

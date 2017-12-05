@@ -615,31 +615,14 @@ QDataStream &operator >>(QDataStream &stream, CrosswordTypeInfo &typeInfo)
     return stream >> typeInfo.rotationSymmetryRequired;
 }
 
-}; // namespace Crossword
+} // namespace Crossword
 
 Crossword::Offset operator *(const Crossword::Offset &offset, int factor)
 {
     return Crossword::Offset(offset.first * factor, offset.second * factor);
-};
+}
 
 Coord operator+=(Coord & coord, const Crossword::Offset & offset)
 {
     return coord = coord + offset;
-};
-/*
-bool operator<( Coord& coord1, const Coord& coord2 ) {
-  return coord1.first < coord2.first && coord1.second < coord2.second;
 }
-
-bool operator<=( Coord& coord1, const Coord& coord2 ) {
-  qDebug() << coord1 << "<=?" << coord2;
-  return coord1.first <= coord2.first && coord1.second <= coord2.second;
-}
-
-bool operator>( Coord& coord1, const Coord& coord2 ) {
-  return coord1.first > coord2.first && coord1.second > coord2.second;
-}
-
-bool operator>=( Coord& coord1, const Coord& coord2 ) {
-  return coord1.first >= coord2.first && coord1.second >= coord2.second;
-}*/

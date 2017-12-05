@@ -32,8 +32,8 @@
 #include <QtWidgets/QGraphicsObject>
 
 class KrossWord;
-typedef KGrid2D::Coord Coord;
-typedef KGrid2D::Coord Offset;
+typedef Grid2D::Coord Coord;
+typedef Grid2D::Coord Offset;
 
 class KrossWordCell;
 class EmptyCell;
@@ -81,7 +81,7 @@ public:
   To make use of this in the flags class CellTypes, only use values computed
   like this: value=2^x with x>=4. */
     };
-    Q_DECLARE_FLAGS(CellTypes, CellType);
+    Q_DECLARE_FLAGS(CellTypes, CellType)
 
 
     KrossWordCell(KrossWord *krossWord, CellType cellType, const Coord &coord);
@@ -91,24 +91,24 @@ public:
     enum { Type = UserType + 1 };
     virtual int type() const {
         return Type;
-    };
+    }
 
     CellType cellType() const {
         return m_cellType;
-    };
+    }
     virtual bool isLetterCell() const {
         return false;
-    };
+    }
     Coord coord() const {
         return m_coord;
-    };
+    }
     KrossWord *krossWord() const {
         return m_krossWord;
-    };
+    }
 
     void clearCache() {
-        m_cache = NULL;
-    };
+        m_cache = nullptr;
+    }
 
     static QString displayStringFromCellType(CellType cellType);
 

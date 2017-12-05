@@ -34,23 +34,19 @@ public:
 
     /** For qgraphicsitem_cast. */
     enum { Type = UserType + 8 };
-    virtual int type() const {
+    virtual int type() const override {
         return Type;
-    };
+    }
 
-    virtual void drawBackground(
-        QPainter *p, const QStyleOptionGraphicsItem *options);
-    virtual void drawBackgroundForPrinting(
-        QPainter *p, const QStyleOptionGraphicsItem *options);
+    virtual void drawBackground(QPainter *p, const QStyleOptionGraphicsItem *options) override;
+    virtual void drawBackgroundForPrinting(QPainter *p, const QStyleOptionGraphicsItem *options) override;
 
-    QUrl url() const {
-        return m_url;
-    };
+    QUrl url() const;
     void setUrl(const QUrl &url);
 
 protected:
-    virtual void focusInEvent(QFocusEvent* event);
-    virtual void focusOutEvent(QFocusEvent* event);
+    virtual void focusInEvent(QFocusEvent* event) override;
+    virtual void focusOutEvent(QFocusEvent* event) override;
 
 private:
     QUrl m_url;

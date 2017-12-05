@@ -88,7 +88,7 @@ void TransitionAnimation::updateCurrentValue(const QVariant& value)
 void TransitionAnimation::cellDestroyed(QObject *obj)
 {
     qDebug() << "Cell destroyed! Delete transition item for ?" << obj;
-    m_cell = NULL;
+    m_cell = nullptr;
     stop();
 }
 
@@ -202,7 +202,7 @@ void Animator::endEnqueueAnimations()
 {
     if (m_queueBeginCount == 1) {
         m_queuedAnimationGroup->start(QAbstractAnimation::DeleteWhenStopped);
-        m_queuedAnimationGroup = NULL;
+        m_queuedAnimationGroup = nullptr;
         m_queueBeginCount = 0;
     } else if (m_queueBeginCount > 1)
         --m_queueBeginCount;
@@ -213,7 +213,7 @@ TransitionAnimation* Animator::animateTransition(KrossWordCell* cell,
         AnimateFlags flags)
 {
     if (!isEnabled() || duration == Instant)
-        return NULL;
+        return nullptr;
 
     if (isInTransition(cell)) {
         return m_transitionItems[ cell ];
@@ -257,7 +257,7 @@ QAbstractAnimation* Animator::animate(BasicAnimation basicAnimation,
         case AnimateBounce:
             break;
         }
-        return NULL;
+        return nullptr;
     } else {
         QPropertyAnimation *anim;
         switch (basicAnimation) {
@@ -282,7 +282,7 @@ QAbstractAnimation* Animator::animate(BasicAnimation basicAnimation,
 
         default:
             qWarning() << "Animation type unknown:" << basicAnimation;
-            return NULL;
+            return nullptr;
         }
 
         startOrEnqueue(anim, duration, flags);
@@ -301,7 +301,7 @@ QAbstractAnimation* Animator::animate(OneParameterAnimation animation,
             obj->setPos(argument.toPointF());
             break;
         }
-        return NULL;
+        return nullptr;
     } else {
         QPropertyAnimation *anim;
         switch (animation) {
@@ -315,7 +315,7 @@ QAbstractAnimation* Animator::animate(OneParameterAnimation animation,
 
         default:
             qWarning() << "Animation type unknown:" << animation;
-            return NULL;
+            return nullptr;
         }
 
         startOrEnqueue(anim, duration, flags);

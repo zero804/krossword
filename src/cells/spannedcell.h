@@ -36,37 +36,29 @@ public:
                 const Coord& coordTopLeft, int horizontalCellSpan,
                 int verticalCellSpan);
 
-    virtual QRectF boundingRect() const;
+    virtual QRectF boundingRect() const override;
 
     /** For qgraphicsitem_cast. */
     enum { Type = UserType + 7 };
-    virtual int type() const {
-        return Type;
-    };
 
-    QSizeF transitionSize() const {
-        return m_transitionSize;
-    };
+    virtual int type() const override;
+
+    QSizeF transitionSize() const;
     void setTransitionSize(const QSizeF &transitionSize);
 
-    int horizontalCellSpan() const {
-        return m_horizontalCellSpan;
-    };
-    int verticalCellSpan() const {
-        return m_verticalCellSpan;
-    };
+    int horizontalCellSpan() const;
+    int verticalCellSpan() const;
+
     void setCellSpan(int horizontalCellSpan, int verticalCellSpan);
-    inline void setHorizontalCellSpan(int horizontalCellSpan);
-    inline void setVerticalCellSpan(int verticalCellSpan);
+    void setHorizontalCellSpan(int horizontalCellSpan);
+    void setVerticalCellSpan(int verticalCellSpan);
 
-    bool inside(const Coord &coord) {
-        return coord >= coordTopLeft() && coord <= coordBottomRight();
-    };
+    bool inside(const Coord &coord);
 
-    inline Coord coordTopLeft() const;
-    inline Coord coordTopRight() const;
-    inline Coord coordBottomLeft() const;
-    inline Coord coordBottomRight() const;
+    Coord coordTopLeft() const;
+    Coord coordTopRight() const;
+    Coord coordBottomLeft() const;
+    Coord coordBottomRight() const;
 
     QList<Coord> spannedCoords() const;
 
@@ -80,36 +72,6 @@ private:
     QSizeF m_transitionSize;
 };
 
-inline void SpannedCell::setHorizontalCellSpan(int horizontalCellSpan)
-{
-    setCellSpan(horizontalCellSpan, m_verticalCellSpan);
-};
-
-inline void SpannedCell::setVerticalCellSpan(int verticalCellSpan)
-{
-    setCellSpan(m_horizontalCellSpan, verticalCellSpan);
-};
-
-inline Coord SpannedCell::coordTopLeft() const
-{
-    return coord();
-};
-inline Coord SpannedCell::coordTopRight() const
-{
-    return Coord(coord().first + m_horizontalCellSpan - 1,
-                 coord().second);
-};
-inline Coord SpannedCell::coordBottomLeft() const
-{
-    return Coord(coord().first,
-                 coord().second + m_verticalCellSpan - 1);
-};
-inline Coord SpannedCell::coordBottomRight() const
-{
-    return Coord(coord().first + m_horizontalCellSpan - 1,
-                 coord().second + m_verticalCellSpan - 1);
-};
-
-}; // namespace Crossword
+} // namespace Crossword
 
 #endif // SPANNEDCELL_H

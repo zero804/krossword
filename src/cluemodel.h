@@ -39,11 +39,11 @@ public:
     virtual void setData(const QVariant& value, int role = Qt::UserRole + 1);
     QStandardItem *parent() const {
         return QStandardItem::parent();
-    };
+    }
 
     ClueCell *clueCell() const {
         return m_clueCell;
-    };
+    }
 
 signals:
     void changeClueTextRequest(ClueCell *clue, const QString &newClueText);
@@ -61,10 +61,10 @@ public:
 
     QStandardItem *horizontalCluesItem() const {
         return m_itemHorizontal;
-    };
+    }
     QStandardItem *verticalCluesItem() const {
         return m_itemVertical;
-    };
+    }
 
     ClueItem *clueItem(ClueCell *clueCell) const;
     ClueItem *clueItemFromIndex(const QModelIndex &index) const;
@@ -82,7 +82,7 @@ protected slots:
     void updateClueText(ClueCell *clue, const QString &newText);
     void changeClueTextRequested(ClueCell *clue, const QString &newClueText) {
         emit changeClueTextRequest(clue, newClueText);
-    };
+    }
 
 private:
     QStandardItem *m_itemHorizontal;

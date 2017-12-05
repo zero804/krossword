@@ -325,8 +325,8 @@ bool KrossWordPuzStream::writeDataTo(QDataStream &ds,
 
 bool KrossWordPuzStream::write(QIODevice* device, KrossWord* krossWord)
 {
-    Q_ASSERT(device != NULL);
-    Q_ASSERT(krossWord != NULL);
+    Q_ASSERT(device != nullptr);
+    Q_ASSERT(krossWord != nullptr);
 
     if (krossWord->width() > 255 || krossWord->height() > 255) {
         qDebug() << "Maximal size of crosswords to be saved in the PUZ-format version 1.2/1.3 is 255x255.";

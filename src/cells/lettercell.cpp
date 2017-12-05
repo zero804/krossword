@@ -53,6 +53,10 @@ LetterCell::LetterCell(KrossWord* krossWord, const Coord& coord,
     init(clue, answerOffset);
 }
 
+const QColor LetterCell::editLetterColor() {
+    return Qt::blue;
+}
+
 LetterCell::LetterCell(KrossWord* krossWord, const Coord& coord,
                        ClueCell* clueHorizontal, ClueCell* clueVertical,
                        CellType cellType)
@@ -92,9 +96,62 @@ void LetterCell::init(ClueCell* clue, AnswerOffset answerOffset)
     setCursor(Qt::IBeamCursor);
 }
 
-LetterCell::~LetterCell()
-{
-//     detachClues();
+LetterCell *LetterCell::letterCellAtOffset(Offset offset) const {
+    return letterCellAt(coord() + offset);
+}
+
+bool LetterCell::isLetterCell() const {
+    return true;
+}
+
+int LetterCell::type() const {
+    return Type;
+}
+
+ClueCell *LetterCell::clueHorizontal() const {
+    return m_clueHorizontal;
+}
+
+ClueCell *LetterCell::clueVertical() const {
+    return m_clueVertical;
+}
+
+ClueCell *LetterCell::clue() const {
+    Q_ASSERT(!isCrossed());
+    return m_clueHorizontal ? m_clueHorizontal : m_clueVertical;
+}
+
+ClueCell *LetterCell::clue(Qt::Orientation orientation) const {
+    return orientation == Qt::Horizontal ? m_clueHorizontal : m_clueVertical;
+}
+
+ClueCellList LetterCell::clues() const {
+    ClueCellList clueList;
+    if (m_clueHorizontal)
+        clueList << m_clueHorizontal;
+    if (m_clueVertical)
+        clueList << m_clueVertical;
+    return clueList;
+}
+
+bool LetterCell::hasClueInDirection(Qt::Orientation orientation) const {
+    return clue(orientation);
+}
+
+bool LetterCell::isCrossed() const {
+    return m_clueHorizontal && m_clueVertical;
+}
+
+bool LetterCell::isAttachedToClue(ClueCell *clue) {
+    if (!clue) {
+        return false;
+    } else {
+        return m_clueHorizontal == clue || m_clueVertical == clue;
+    }
+}
+
+bool LetterCell::isAttachedToClueExclusivly(ClueCell *clue) {
+    return isAttachedToClue(clue) && !isCrossed();
 }
 
 void LetterCell::setConfidence(Confidence confidence)
@@ -106,7 +163,7 @@ void LetterCell::setConfidence(Confidence confidence)
 
 void LetterCell::focusInEvent(QFocusEvent* event)
 {
-//     qDebug() << "IN" << this->coord();
+    //     qDebug() << "IN" << this->coord();
 
     if (event->reason() == Qt::MouseFocusReason) {
 //       qDebug() << "    IN > MOUSE FOCUS REASON";
@@ -182,21 +239,41 @@ LetterCell* LetterCell::letterCellAt(Coord coord) const
             && (cell = krossWord()->at(coord)) && cell->isLetterCell())
         return dynamic_cast< LetterCell* >(cell);
     else
-        return NULL;
+        return nullptr;
 }
 
-LetterCell* LetterCell::letterCellAtOppositeEdge(KGrid2D::SquareBase::Neighbour n) const
+LetterCell* LetterCell::letterCellAtOppositeEdge(Grid2D::SquareBase::Neighbour n) const
 {
     Coord oppositeCoord = krossWord()->m_krossWordGrid->toEdge(coord(), n);
     KrossWordCell *oppositeCell = krossWord()->at(oppositeCoord);
     return dynamic_cast< LetterCell* >(oppositeCell);
 }
 
+LetterCell *LetterCell::letterCellOnRight(KeyboardNavigation keyboardNavigation) const {
+    return letterCellOnRight(keyboardNavigation.testFlag(NavigateJump)
+                             ? AllJumpFlags : DontJump);
+}
+
+LetterCell *LetterCell::letterCellOnLeft(KeyboardNavigation keyboardNavigation) const {
+    return letterCellOnLeft(keyboardNavigation.testFlag(NavigateJump)
+                            ? AllJumpFlags : DontJump);
+}
+
+LetterCell *LetterCell::letterCellOnTop(KeyboardNavigation keyboardNavigation) const {
+    return letterCellOnTop(keyboardNavigation.testFlag(NavigateJump)
+                           ? AllJumpFlags : DontJump);
+}
+
+LetterCell *LetterCell::letterCellOnBottom(KeyboardNavigation keyboardNavigation) const {
+    return letterCellOnBottom(keyboardNavigation.testFlag(NavigateJump)
+                              ? AllJumpFlags : DontJump);
+}
+
 LetterCell *LetterCell::letterCellOnRight(SiblingLetterCellFlags siblingLetterCellFlags) const
 {
     if (siblingLetterCellFlags.testFlag(JumpOverNonLetterCells)
             || siblingLetterCellFlags.testFlag(JumpToOppositeEdge)) {
-        LetterCell *letter = NULL;
+        LetterCell *letter = nullptr;
         Coord otherCoord = coord() + Offset(1, 0);
 
         if (siblingLetterCellFlags.testFlag(JumpToOppositeEdge)) {
@@ -225,7 +302,7 @@ LetterCell *LetterCell::letterCellOnLeft(SiblingLetterCellFlags siblingLetterCel
 {
     if (siblingLetterCellFlags.testFlag(JumpOverNonLetterCells)
             || siblingLetterCellFlags.testFlag(JumpToOppositeEdge)) {
-        LetterCell *letter = NULL;
+        LetterCell *letter = nullptr;
         Coord otherCoord = coord() + Offset(-1, 0);
 
         if (siblingLetterCellFlags.testFlag(JumpToOppositeEdge)) {
@@ -254,7 +331,7 @@ LetterCell *LetterCell::letterCellOnTop(SiblingLetterCellFlags siblingLetterCell
 {
     if (siblingLetterCellFlags.testFlag(JumpOverNonLetterCells)
             || siblingLetterCellFlags.testFlag(JumpToOppositeEdge)) {
-        LetterCell *letter = NULL;
+        LetterCell *letter = nullptr;
         Coord otherCoord = coord() + Offset(0, -1);
 
         if (siblingLetterCellFlags.testFlag(JumpToOppositeEdge)) {
@@ -283,7 +360,7 @@ LetterCell *LetterCell::letterCellOnBottom(SiblingLetterCellFlags siblingLetterC
 {
     if (siblingLetterCellFlags.testFlag(JumpOverNonLetterCells)
             || siblingLetterCellFlags.testFlag(JumpToOppositeEdge)) {
-        LetterCell *letter = NULL;
+        LetterCell *letter = nullptr;
         Coord otherCoord = coord() + Offset(0, 1);
 
         if (siblingLetterCellFlags.testFlag(JumpToOppositeEdge)) {
@@ -495,6 +572,10 @@ void LetterCell::clear(ClearMode clearMode)
         setCorrectLetter(' ');
 }
 
+bool LetterCell::needsEndBar() const {
+    return needsEndBar(Qt::Horizontal) || needsEndBar(Qt::Vertical);
+}
+
 QChar LetterCell::correctLetterFromClue(AnswerOffset answerOffset) const
 {
     ClueCell *clue;
@@ -573,6 +654,18 @@ void LetterCell::setCorrectLetter(const QChar& correctLetter)
     }
 }
 
+bool LetterCell::isCorrect() const {
+    return m_currentLetter == correctLetter();
+}
+
+bool LetterCell::isEmpty() const {
+    return m_currentLetter == ' ';
+}
+
+Confidence LetterCell::confidence() const {
+    return m_confidence;
+}
+
 void LetterCell::changeAnimValueChanged(const QVariant& value)
 {
     if (m_blockCacheClearing && (value.toReal() < 0.01
@@ -589,7 +682,7 @@ void LetterCell::changeAnimValueChanged(const QVariant& value)
 void LetterCell::changeAnimFinished()
 {
     delete m_changeAnim;
-    m_changeAnim = NULL;
+    m_changeAnim = nullptr;
 }
 
 void LetterCell::setCurrentLetter(const QChar& currentLetter,
@@ -658,9 +751,9 @@ bool LetterCell::detachClue(ClueCell* cell)
     Q_ASSERT(cell);
 
     if (m_clueHorizontal == cell)
-        setClueHorizontal(NULL);
+        setClueHorizontal(nullptr);
     else if (m_clueVertical == cell)
-        setClueVertical(NULL);
+        setClueVertical(nullptr);
     else
         return false;
 
@@ -688,6 +781,14 @@ void LetterCell::setPropertiesFrom(LetterCell* other)
 {
     m_confidence = other->confidence();
     setCurrentLetter(other->currentLetter());
+}
+
+QChar LetterCell::correctLetter() const {
+    return m_correctLetter;
+}
+
+QChar LetterCell::currentLetter() const {
+    return m_currentLetter;
 }
 
 void LetterCell::drawBackground(QPainter* p, const QStyleOptionGraphicsItem* option)
@@ -985,9 +1086,9 @@ void LetterCell::orientationChanged(ClueCell* clueCell,
 
     if (clueCell == m_clueHorizontal) {
         m_clueVertical = clueCell;
-        m_clueHorizontal = NULL;
+        m_clueHorizontal = nullptr;
     } else {
-        m_clueVertical = NULL;
+        m_clueVertical = nullptr;
         m_clueHorizontal = clueCell;
     }
 }
@@ -1072,10 +1173,10 @@ void LetterCell::setClue(ClueCell* clue)
 void LetterCell::detachClues()
 {
     if (m_clueHorizontal)
-        setClueHorizontal(NULL);
+        setClueHorizontal(nullptr);
 
     if (m_clueVertical)
-        setClueVertical(NULL);
+        setClueVertical(nullptr);
 }
 
 void LetterCell::mousePressEvent(QGraphicsSceneMouseEvent* event)
@@ -1143,6 +1244,14 @@ SolutionLetterCell::SolutionLetterCell(KrossWord* krossWord, const Coord& coord,
     init(solutionWordIndex);
 }
 
+int SolutionLetterCell::type() const {
+    return Type;
+}
+
+int SolutionLetterCell::solutionWordIndex() const {
+    return m_solutionWordIndex;
+}
+
 SolutionLetterCell::SolutionLetterCell(const LetterCell* letter, int solutionWordIndex)
     : LetterCell(letter->krossWord(), letter->coord(),
                  letter->clueHorizontal(), letter->clueVertical(),
@@ -1193,7 +1302,7 @@ SolutionLetterCell* SolutionLetterCell::fromLetterCell(LetterCell *&letter,
         if (letter->scene())
             letter->scene()->removeItem(letter);
         delete letter;
-        letter = NULL;
+        letter = nullptr;
     }
 
     return solutionLetter;
@@ -1225,7 +1334,7 @@ void SolutionLetterCell::drawForeground(QPainter* p, const QStyleOptionGraphicsI
 QDebug& operator<<(QDebug debug, LetterCell* cell)
 {
     if (!cell)
-        return debug << "NULL (LetterCell)";
+        return debug << "nullptr (LetterCell)";
 
     debug << (KrossWordCell*)cell
           << QString("Correct: %1, Current: %2")
