@@ -19,6 +19,7 @@ set(krossword_SRCS
    extendedsqltablemodel.cpp
    clueexpanderitem.cpp
    templatemodel.cpp
+   zoomwidget.cpp
 )
 
 INCLUDE (io/Sources.cmake)
