@@ -46,7 +46,6 @@
 MainWindow::MainWindow() : KXmlGuiWindow(),
       m_libraryGui(nullptr),
       m_gameGui(nullptr),
-      m_loadProgressDialog(nullptr),
       m_mainStackedBar(new QStackedWidget(this)),
       m_dictionary(new Dictionary)
 {
@@ -83,27 +82,19 @@ QSize MainWindow::sizeHint() const
 
 void MainWindow::loadFile(const QUrl &url, Crossword::KrossWord::FileFormat fileFormat, bool loadCrashedFile)
 {
-    m_loadProgressDialog = createLoadProgressDialog();
-    m_loadProgressDialog->show();
-
-    setupGameGui();
+    setupGameGui(); // CHECK: what if loaded == false?
     bool loaded = m_gameGui->loadFile(url, fileFormat, loadCrashedFile);
 
-    QString path = url.path();
-    bool is_internal_file = m_libraryGui->libraryManager()->isInLibrary(path);
-
-    if (!is_internal_file) {
-        if(loaded) {
+    if (loaded) {
+        if (!m_libraryGui->libraryManager()->isInLibrary(url.path())) {
             QString msg = i18n("Would you like to add the crossword into the library?");
             int result = KMessageBox::questionYesNo(this, msg, i18n("Save crossword"), KStandardGuiItem::yes(), KStandardGuiItem::no());
-
             if (result == KMessageBox::Yes) {
                 m_libraryGui->libraryAddCrossword(url);
             }
         }
-    }
-
-    if (!loaded) {
+        m_mainStackedBar->setCurrentIndex(m_mainStackedBar->indexOf(m_gameGui));
+    } else {
         QString msg = i18n("Could not open resource at ") + url.url(QUrl::PreferLocalFile);
         KMessageBox::sorry(this, msg, i18n("Resource unavailable"));
     }
@@ -116,8 +107,7 @@ bool MainWindow::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswor
 {
     setupGameGui();
     if (m_gameGui->createNewCrossWord(crosswordTypeInfo, crosswordSize, title, authors, copyright, notes)) {
-        int indexCrossword = m_mainStackedBar->indexOf(m_gameGui);
-        m_mainStackedBar->setCurrentIndex(indexCrossword);
+        m_mainStackedBar->setCurrentIndex(m_mainStackedBar->indexOf(m_gameGui));
         return true;
     } else {
         return false;
@@ -128,8 +118,7 @@ bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath,
 {
     setupGameGui();
     if (m_gameGui->createNewCrossWordFromTemplate(templateFilePath, title, authors, copyright, notes)) {
-        int indexCrossword = m_mainStackedBar->indexOf(m_gameGui);
-        m_mainStackedBar->setCurrentIndex(indexCrossword);
+        m_mainStackedBar->setCurrentIndex(m_mainStackedBar->indexOf(m_gameGui));
         return true;
     } else {
         return false;
@@ -175,34 +164,12 @@ void MainWindow::dropEvent(QDropEvent *event)
 
 //=====================================================================================
 
-QDialog* MainWindow::createLoadProgressDialog()
-{
-    QDialog *dialog = new QDialog(this);
-    dialog->setAttribute(Qt::WA_DeleteOnClose);
-    // TODO: No max/min buttons
-    dialog->setWindowTitle(i18n("Loading..."));
-
-    QVBoxLayout *layout = new QVBoxLayout(dialog);
-    QLabel *lblLoad = new QLabel(i18n("Loading the crossword, please wait..."), this);
-    layout->addWidget(lblLoad);
-    dialog->setLayout(layout);
-
-    dialog->setModal(true);
-    return dialog;
-}
-
 void MainWindow::setupGameGui()
 {
     m_gameGui = new GameGui(this);
     m_mainStackedBar->addWidget(m_gameGui);
 
     m_gameGui->krossWord()->setAnimationEnabled(Settings::animate());
-
-    connect(m_gameGui, SIGNAL(loadingFileComplete(QString)),
-            this,            SLOT(crosswordLoadingComplete(QString)));
-
-    connect(m_gameGui, SIGNAL(errorLoadingFile(QString)),
-            this,            SLOT(crosswordErrorLoading(QString)));
 
     connect(m_gameGui, SIGNAL(currentFileChanged(QString, QString)),
             this,            SLOT(crosswordCurrentChanged(QString, QString)));
@@ -472,30 +439,6 @@ void MainWindow::currentTabChanged(int index)
     plugActionList("library_game_list", libraryGameList);
     plugActionList("crossword_game_list", crosswordGameList);
     plugActionList("options_list", optionsList);
-}
-
-void MainWindow::crosswordLoadingComplete(const QString& fileName)
-{
-    Q_UNUSED(fileName);
-
-    if (m_loadProgressDialog) { // When loading a template there is no load progress dialog
-        m_loadProgressDialog->close();
-        m_loadProgressDialog = nullptr;
-    }
-
-    int indexCrossword = m_mainStackedBar->indexOf(m_gameGui);
-    m_mainStackedBar->setCurrentIndex(indexCrossword);
-}
-
-void MainWindow::crosswordErrorLoading(const QString& fileName)
-{
-    if (m_loadProgressDialog) { // When loading a template there is no load progress dialog
-        m_loadProgressDialog->close();
-        m_loadProgressDialog = nullptr;
-    }
-
-    KMessageBox::error(this, i18n("Error loading file '%1'", fileName));
-    crosswordClosed(fileName);
 }
 
 void MainWindow::crosswordClosed(const QString& fileName)

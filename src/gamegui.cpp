@@ -405,7 +405,7 @@ bool GameGui::createNewCrossWordFromTemplate(const QString& templateFilePath, co
                                                            const QString& authors, const QString& copyright,
                                                            const QString& notes)
 {
-    if (!loadFile(templateFilePath)) {
+    if (!loadFile(QUrl::fromLocalFile(templateFilePath))) {
         return false;
     }
 
@@ -431,11 +431,6 @@ bool GameGui::createNewCrossWordFromTemplate(const QString& templateFilePath, co
     return true;
 }
 
-inline bool GameGui::loadFile(const QString& fileName)
-{
-    return loadFile(QUrl::fromLocalFile(fileName));
-}
-
 bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool loadCrashedFile)
 {
     if (isModified()) {
@@ -446,31 +441,8 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
     }
 
     QString errorString;
-
-    QUrl resultUrl;
-    if (url.isEmpty()) {
-        resultUrl = QFileDialog::getOpenFileUrl(this,
-                                                QString(),
-                                                QUrl(),
-                                                "application/x-krosswordpuzzle "
-                                                "application/x-krosswordpuzzle-compressed "
-                                                "application/x-acrosslite-puz");
-        if (resultUrl.isEmpty()) {
-            return false; // No file was chosen
-        }
-    } else {
-        resultUrl = url;
-    }
-
-    //setCurrentFileName(QString());
-
-    // Read the file
-    QFileInfo fileInfo(resultUrl.toLocalFile());
-    QString fileName = fileInfo.fileName();
-    //updateClueDock();
-
     QByteArray undoData;
-    bool readOk = krossWord()->read(resultUrl, &errorString, fileFormat, &undoData);
+    bool readOk = krossWord()->read(url, &errorString, fileFormat, &undoData);
 
     if (readOk) {
         m_undoStack->createFromData(krossWord(), undoData);
@@ -481,10 +453,10 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
             m_curDocumentOrigin = DocumentRestoredAfterCrash;
             setModificationType(ModifiedCrossword);
         } else {
-            m_curDocumentOrigin = resultUrl.isLocalFile() ? DocumentOpenedLocally : DocumentDownloaded;
+            m_curDocumentOrigin = url.isLocalFile() ? DocumentOpenedLocally : DocumentDownloaded;
             setModificationType(NoModification);
         }
-        setCurrentFileName(resultUrl.path());
+        setCurrentFileName(url.path());
         m_lastSavedUndoIndex = m_undoStack->index();
 
         if (krossWord()->crosswordTypeInfo().crosswordType == UnknownCrosswordType) {
@@ -502,7 +474,7 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
             }
         }
 
-        statusBar()->showMessage(i18n("Loaded crossword from file '%1'", fileName), 5000);
+        statusBar()->showMessage(i18n("Loaded crossword from file '%1'", url.path()), 5000);
 
         m_zoomWidget->setEnabled(true);
         m_solutionProgress->setEnabled(true);
@@ -517,22 +489,16 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
         }
 
         adjustGuiToCrosswordType();
-        //m_clueTree->resizeColumnToContents(0); // we have to call it here because the clue list is created (empty) at game startup (way before the contents is loaded)
-
-        //fitToPageSlot();
         selectFirstClueSlot();
 
         // save the url of the last opened crossword
-        Settings::setLastCrossword(resultUrl.toLocalFile());
+        Settings::setLastCrossword(url.toLocalFile());
         Settings::self()->save();
-
-        emit loadingFileComplete(m_curFileName);
 
         return true;
     } else {
         m_undoStackLoaded = false;
-        statusBar()->showMessage(i18n("Error while loading file '%1': %2", fileName, errorString));
-        emit errorLoadingFile(fileName);
+        statusBar()->showMessage(i18n("Error while loading file '%1': %2", url.path(), errorString)); //CHECK: in Library statusbar isn't visible...
 
         return false;
     }
@@ -2486,8 +2452,9 @@ void GameGui::cluesAdded(ClueCellList clues)
 {
     Q_ASSERT(m_clueModel);
 
-    foreach(ClueCell * clue, clues)
-    m_clueModel->addClue(clue);
+    foreach(ClueCell * clue, clues) {
+        m_clueModel->addClue(clue);
+    }
 
     m_clueModel->sort(0);
     drawBackground(view());

@@ -86,15 +86,12 @@ public slots:
     void currentTabChanged(int);
 
 protected slots:
-    void crosswordLoadingComplete(const QString &fileName);
-    void crosswordErrorLoading(const QString &fileName);
     void crosswordCurrentChanged(const QString &fileName, const QString &oldFileName);
     void crosswordClosed(const QString &fileName);
     void crosswordModificationsChanged(GameGui::ModificationTypes modificationTypes);
     void crosswordAutoSaveFileChanged(const QString &fileName);
 
 private:
-    QDialog* createLoadProgressDialog();
     void setupMainTabWidget();
     void setupPlaces();
     void setupActions();
@@ -108,7 +105,6 @@ private:
     LibraryGui *m_libraryGui;         //Owned
     GameGui *m_gameGui;               //Owned
 
-    QDialog *m_loadProgressDialog;    //Owned
     QString m_caption;
     QStackedWidget *m_mainStackedBar; //Owned
 

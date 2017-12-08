@@ -191,7 +191,6 @@ public:
     bool createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title, const QString& authors,
                                         const QString& copyright, const QString& notes);
 
-    inline bool loadFile(const QString& fileName);
     bool loadFile(const QUrl &url, KrossWord::FileFormat fileFormat = KrossWord::DetermineByType, bool loadCrashedFile = false);
     bool save();
     bool saveAs(const Crossword::KrossWord::WriteMode writeMode);
@@ -208,9 +207,7 @@ signals:
     void fileSaved(const QString &fileName, const QString &oldFileName);
     void modificationTypesChanged(GameGui::ModificationTypes modificationTypes);
     void currentFileChanged(const QString &fileName, const QString &previousFileName);
-    void loadingFileComplete(const QString &fileName);
     void tempAutoSaveFileChanged(const QString &tmpFileName);
-    void errorLoadingFile(const QString &fileName);
 
 public slots:
     // Game actions
