@@ -66,7 +66,7 @@ int main(int argc, char *argv[]){
         } else {
             // Load just one crossword at once
             widget->show();
-            widget->loadSlot(QUrl::fromLocalFile(parser.positionalArguments().at(0)));
+            widget->loadFile(QUrl::fromLocalFile(parser.positionalArguments().at(0)));
         }
     }
 

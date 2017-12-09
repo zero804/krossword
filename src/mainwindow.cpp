@@ -86,6 +86,7 @@ void MainWindow::loadFile(const QUrl &url, Crossword::KrossWord::FileFormat file
     bool loaded = m_gameGui->loadFile(url, fileFormat, loadCrashedFile);
 
     if (loaded) {
+        m_mainStackedBar->setCurrentIndex(m_mainStackedBar->indexOf(m_gameGui));
         if (!m_libraryGui->libraryManager()->isInLibrary(url.path())) {
             QString msg = i18n("Would you like to add the crossword into the library?");
             int result = KMessageBox::questionYesNo(this, msg, i18n("Save crossword"), KStandardGuiItem::yes(), KStandardGuiItem::no());
@@ -93,7 +94,6 @@ void MainWindow::loadFile(const QUrl &url, Crossword::KrossWord::FileFormat file
                 m_libraryGui->libraryAddCrossword(url);
             }
         }
-        m_mainStackedBar->setCurrentIndex(m_mainStackedBar->indexOf(m_gameGui));
     } else {
         QString msg = i18n("Could not open resource at ") + url.url(QUrl::PreferLocalFile);
         KMessageBox::sorry(this, msg, i18n("Resource unavailable"));
@@ -292,11 +292,6 @@ QString MainWindow::displayFileName(const QString &fileName)
 }
 
 //=====================================================================================
-
-void MainWindow::loadSlot(const QUrl &url)
-{
-    loadFile(url);
-}
 
 void MainWindow::optionsPreferencesSlot()
 {

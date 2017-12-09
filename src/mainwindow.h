@@ -72,9 +72,6 @@ protected:
     virtual void dragEnterEvent(QDragEnterEvent* event);
 
 public slots:
-    void loadSlot(const QUrl &url/* = QUrl::fromLocalFile()*/);
-    //void loadFile(const QString &fileName);
-
     // Settings actions
     void optionsPreferencesSlot();
     void optionsDictionarySlot();

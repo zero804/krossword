@@ -160,7 +160,6 @@ public:
     enum DocumentOrigin {
         NoDocument, /**< No document is opened. */
         DocumentNewlyCreated, /**< The document has been newly created. */
-        DocumentDownloaded, /**< The document has been downloaded from the internet. */
         DocumentRestoredAfterCrash, /**< The document has been restored after a crash. */
         DocumentOpenedLocally /**< The document has been opened from a local file. */
     };

@@ -178,7 +178,7 @@ GameGui::GameGui(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
     setCentralWidget(m_view);
 
     // Create solution progress bar:
-    m_solutionProgress = new QProgressBar;
+    m_solutionProgress = new QProgressBar(this);
     m_solutionProgress->setFormat(i18nc("%p is replaced by the percentage of "
                                         "solved letter cells",
                                         // xgettext: no-c-format
@@ -188,7 +188,7 @@ GameGui::GameGui(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
     statusBar()->addPermanentWidget(m_solutionProgress);
 
     // Create zoom widgets:
-    m_zoomWidget = new ZoomWidget(3, 2);
+    m_zoomWidget = new ZoomWidget(3, 2, this);
     m_zoomWidget->setFixedWidth(150);
     m_zoomController = new ViewZoomController(m_view, m_zoomWidget, this);
 
@@ -386,7 +386,6 @@ bool GameGui::createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,cons
     krossWord()->setNotes(notes);
 
     m_lastAutoSave = QDateTime::currentDateTime();
-//   m_blockAutoSave = false;
     setModificationType(ModifiedCrossword);
     setCurrentFileName(i18n("New crossword"));
     m_solutionProgress->setValue(0);
@@ -416,7 +415,6 @@ bool GameGui::createNewCrossWordFromTemplate(const QString& templateFilePath, co
     krossWord()->setNotes(notes);
 
     m_lastAutoSave = QDateTime::currentDateTime();
-//   m_blockAutoSave = false;
     setModificationType(ModifiedCrossword);
     setCurrentFileName(i18n("New crossword"));
     m_solutionProgress->setValue(0);
@@ -433,13 +431,6 @@ bool GameGui::createNewCrossWordFromTemplate(const QString& templateFilePath, co
 
 bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool loadCrashedFile)
 {
-    if (isModified()) {
-        QString msg = i18n("The current crossword has been modified.\nWould you like to save it?");
-        int result = KMessageBox::warningYesNoCancel(this, msg, i18n("Close Document"), KStandardGuiItem::save(), KStandardGuiItem::discard());
-        if (result == KMessageBox::Cancel || (result == KMessageBox::Yes && !save()))
-            return false;
-    }
-
     QString errorString;
     QByteArray undoData;
     bool readOk = krossWord()->read(url, &errorString, fileFormat, &undoData);
@@ -453,7 +444,7 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
             m_curDocumentOrigin = DocumentRestoredAfterCrash;
             setModificationType(ModifiedCrossword);
         } else {
-            m_curDocumentOrigin = url.isLocalFile() ? DocumentOpenedLocally : DocumentDownloaded;
+            m_curDocumentOrigin = DocumentOpenedLocally;
             setModificationType(NoModification);
         }
         setCurrentFileName(url.path());
@@ -507,7 +498,6 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
 bool GameGui::save()
 {
     if (m_curFileName.isEmpty() || !QFile::exists(m_curFileName)
-            || m_curDocumentOrigin == DocumentDownloaded
             || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
         return saveAs(KrossWord::Normal);
     } else {
@@ -522,7 +512,7 @@ bool GameGui::saveAs(const KrossWord::WriteMode writeMode)
         startDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
                                        + QLatin1Char('/') + "templates");
     } else {
-        if (m_curDocumentOrigin == DocumentDownloaded || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
+        if (m_curDocumentOrigin == DocumentRestoredAfterCrash) {
             startDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
         } else {
             startDir = QUrl::fromLocalFile(m_curFileName);
@@ -619,7 +609,7 @@ bool GameGui::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, b
         setModificationType(NoModification);
         setCurrentFileName(fileName);
         statusBar()->showMessage(i18n("Wrote crossword to file '%1'", m_curFileName), 5000);
-        if (m_curDocumentOrigin == DocumentDownloaded || m_curDocumentOrigin == DocumentRestoredAfterCrash) {
+        if (m_curDocumentOrigin == DocumentRestoredAfterCrash) {
             m_curDocumentOrigin = DocumentOpenedLocally;
         }
         // TODO connect to signal from main game window
@@ -1603,6 +1593,7 @@ void GameGui::adjustGuiToCrosswordType()
         krossWord()->crosswordTypeInfo().clueType == NumberClues1To26
         && krossWord()->crosswordTypeInfo().clueMapping == CluesReferToCells
         && krossWord()->crosswordTypeInfo().letterCellContent == Characters;
+
     if (letterContentToClueNumberMappingUsed) {
         m_clueDock->hide();
         action(actionName(ShowClueDock))->setDisabled(true);
@@ -1718,7 +1709,7 @@ KrossWordPuzzleView *GameGui::createKrossWordPuzzleView()
 {
     KrossWordPuzzleView *view = new KrossWordPuzzleView(
                 new KrossWordPuzzleScene(
-                    new KrossWord(KrosswordRenderer::self()->getCurrentTheme())));
+                    new KrossWord(KrosswordRenderer::self()->getCurrentTheme()), this), this);
 
     view->scene()->setStickyFocus(true);
     view->krossWord()->setLetterEditMode(EmitEditRequestsOnKeyboardEdit);
