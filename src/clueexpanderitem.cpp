@@ -39,8 +39,7 @@ ClueExpanderItem::ClueExpanderItem(KrossWord* krossWord, ClueCell* clueCell)
 
     setZValue(1000);
     setVisible(krossWord->isEditable());
-    setCursor(QCursor(clueCell->isHorizontal()
-                      ? Qt::SizeHorCursor : Qt::SizeVerCursor));
+    setCursor(QCursor(clueCell->isHorizontal() ? Qt::SizeHorCursor : Qt::SizeVerCursor));
 
     clueLastLetterChanged(m_clue->lastLetter());
     setPosAfterCell(m_lastLetter);
@@ -242,5 +241,3 @@ void ClueExpanderItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 
     QGraphicsItem::mouseMoveEvent(event);
 }
-
-
