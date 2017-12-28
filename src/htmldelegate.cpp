@@ -21,7 +21,6 @@
 
 #include <QTextDocument>
 #include <QPainter>
-
 #include <QLineEdit>
 
 HtmlDelegate::HtmlDelegate(QObject *parent)
@@ -30,35 +29,35 @@ HtmlDelegate::HtmlDelegate(QObject *parent)
 
 void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    QStyleOptionViewItem options = option;
-    initStyleOption(&options, index);
+    QStyleOptionViewItem opt = option;
+    initStyleOption(&opt, index);
 
     painter->save();
 
     QTextDocument doc;
     QTextOption textOption;
-    textOption.setWrapMode(QTextOption::WordWrap);
+    textOption.setWrapMode(QTextOption::NoWrap);
     doc.setDefaultTextOption(textOption);
-    doc.setHtml(options.text);
+
+    QRect docRect = opt.rect;
+    if (index.data(Qt::DecorationRole).isValid()) {
+        docRect.adjust(opt.decorationSize.width() + doc.documentMargin(), 0, 0, 0);
+    }
+    doc.setTextWidth(docRect.width());
+    doc.setHtml(opt.text);
 
     // Call this to get the focus rect and selection background
-    options.text = "";
-    options.widget->style()->drawControl(QStyle::CE_ItemViewItem, &options, painter, options.widget);
-
-    QRect rc = options.rect; //.adjusted(0, 0, 0, -2);
-    if (index.data(Qt::DecorationRole).isValid()) {
-        rc.adjust(option.decorationSize.width() + 4, 0, 0, 0);
-    }
-    doc.setTextWidth(rc.width());
+    opt.text = QString(); // needed to draw the text later with html support
+    opt.widget->style()->drawControl(QStyle::CE_ItemViewItem, &opt, painter, opt.widget);
 
     // Center vertically
-    if (doc.size().height() < rc.height()) {
-        rc.adjust(0, (rc.height() - doc.size().height()) / 2, 0, 0);
+    if (doc.size().height() < docRect.height()) {
+        docRect.adjust(0, (docRect.height() - doc.size().height()) / 2, 0, 0);
     }
 
     // Draw using our rich text document
-    painter->translate(rc.left(), rc.top());
-    QRect clip(0, 0, rc.width(), rc.height());
+    painter->translate(docRect.left(), docRect.top());
+    QRect clip(0, 0, docRect.width(), docRect.height());
     doc.drawContents(painter, clip);
 
     painter->restore();
@@ -66,24 +65,24 @@ void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem &option, 
 
 QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    QStyleOptionViewItem options = option;
-    initStyleOption(&options, index);
-
-    QRect rcDeco;
-    if (index.data(Qt::DecorationRole).isValid()) {
-        rcDeco.setSize(option.decorationSize);
-    }
+    QStyleOptionViewItem opt = option;
+    initStyleOption(&opt, index);
 
     QTextDocument doc;
     QTextOption textOption;
-    textOption.setWrapMode(QTextOption::WordWrap);
+    textOption.setWrapMode(QTextOption::NoWrap);
     doc.setDefaultTextOption(textOption);
-    doc.setHtml(options.text);
-    doc.adjustSize();
+    doc.setHtml(opt.text);
 
-    return QSize(rcDeco.width() + 4 + doc.size().width(), qMax(rcDeco.height() + 4, (int)doc.size().height()));
+    QRect docRect(0, 0, doc.size().width(), doc.size().height());
+    if (index.data(Qt::DecorationRole).isValid()) {
+        docRect = docRect.united(QRect(0, 0, opt.decorationSize.width(), opt.decorationSize.height()));
+    }
+
+    return QSize(docRect.width() + doc.documentMargin(), docRect.height() + doc.documentMargin());
 }
 
+//----------------------------------
 
 QWidget* CrosswordAnswerDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
@@ -110,7 +109,6 @@ CrosswordAnswerValidator::CrosswordAnswerValidator(const Crossword::CrosswordTyp
 QValidator::State CrosswordAnswerValidator::validate(QString &input, int &pos) const
 {
     fix(input, &pos, m_allowedChars);
-
     return Acceptable;
 }
 
@@ -182,19 +180,18 @@ void CrosswordAnswerValidator::fix(QString& input, int *pos, const QString &allo
             while ((charPos = input.indexOf(it.key())) != -1
                     || (charPos = input.indexOf(it.key().toLower())) != -1) {
                 input.replace(charPos, 1, it.value());
-                if (charPos < *pos)
+                if (charPos < *pos) {
                     *pos += it.value().length() - 1;
+                }
             }
         }
     } else {
         QHash< QChar, QString >::const_iterator it;
-        for (it = replacements.constBegin(); it != replacements.constEnd(); ++it)
+        for (it = replacements.constBegin(); it != replacements.constEnd(); ++it) {
             input.replace(it.key(), it.value());
+        }
     }
 
     input = input.toUpper();
     input.remove(QRegExp(QString("[^%1]").arg(QRegExp::escape(allowedChars))));
 }
-
-
-

@@ -73,7 +73,9 @@ LibraryGui::LibraryGui(MainWindow* parent) : KXmlGuiWindow(parent, Qt::WindowFla
 
     m_libraryTree->header()->hideSection(1); //hide size column
     m_libraryTree->header()->hideSection(2); //hide type
-    m_libraryTree->header()->setSectionResizeMode(QHeaderView::Stretch);
+    m_libraryTree->header()->setStretchLastSection(false);
+    m_libraryTree->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+    m_libraryTree->header()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
 
     setObjectName("library");
     setAutoSaveSettings(QLatin1String("LibraryWindow"), false);

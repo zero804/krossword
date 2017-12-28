@@ -35,13 +35,10 @@
 //CHECK: #include "dialogs/printpreviewdialog.h"
 #include "dictionary.h"
 
-#include <KToggleAction>
 #include <KStandardGameAction>
 #include <KActionCollection>
 
 #include <KToolBar>
-#include <QUrl>
-#include <KLocalizedString>
 #include <KStandardGuiItem>
 #include <KMessageBox>
 #include <KRandom>
@@ -57,7 +54,6 @@
 #include <algorithm>
 
 #include <QScrollBar>
-#include <QToolTip>
 #include <QProgressBar>
 #include <QMenuBar>
 #include <QDockWidget>
@@ -82,9 +78,10 @@ ClueListView::ClueListView(QWidget* parent) : QTreeView(parent), m_scrollAnimati
     setSelectionBehavior(QAbstractItemView::SelectRows);
     setAllColumnsShowFocus(true);
     setAlternatingRowColors(true);
-    setVerticalScrollMode(ScrollPerPixel);
+    setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     setContextMenuPolicy(Qt::CustomContextMenu);
     setHeaderHidden(true);
+    setUniformRowHeights(true); // to disable if try again word wrapping
 
     setItemDelegate(new HtmlDelegate(this));
 }
@@ -436,6 +433,14 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
     bool readOk = krossWord()->read(url, &errorString, fileFormat, &undoData);
 
     if (readOk) {
+        krossWord()->setInteractive(true);
+        m_zoomWidget->setEnabled(true);
+        m_solutionProgress->setEnabled(true);
+        m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
+        setDefaultCursor();
+        action(actionName(Move_Eraser))->setChecked(false);
+        //enableEditActions();
+
         m_undoStack->createFromData(krossWord(), undoData);
         m_undoStackLoaded = !undoData.isEmpty();
         m_lastAutoSave = QDateTime::currentDateTime();
@@ -465,21 +470,12 @@ bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool l
             }
         }
 
-        statusBar()->showMessage(i18n("Loaded crossword from file '%1'", url.path()), 5000);
-
-        m_zoomWidget->setEnabled(true);
-        m_solutionProgress->setEnabled(true);
-        m_solutionProgress->setValue(krossWord()->solutionProgress() * 100);
-        setDefaultCursor();
-        action(actionName(Move_Eraser))->setChecked(false);
-
-        krossWord()->setInteractive(true);
-
         if (krossWord()->isEmpty()) {
             setEditMode(true);
         }
 
         adjustGuiToCrosswordType();
+        //fitToPageSlot();
         selectFirstClueSlot();
 
         // save the url of the last opened crossword
@@ -1319,7 +1315,7 @@ void GameGui::clueListContextMenuRequested(const QPoint &pos)
     menu->exec(m_clueTree->mapToGlobal(pos));
 }
 
-void GameGui::updateClueDock()
+void GameGui::updateClueTree()
 {
     // Fill clue model
     if (m_clueModel) {
@@ -1334,8 +1330,8 @@ void GameGui::updateClueDock()
             this, SLOT(changeClueTextRequested(ClueCell*, QString)));
 
     m_clueTree->setModel(m_clueModel);
-    m_clueTree->setFirstColumnSpanned(m_clueModel->horizontalCluesItem()->row(), QModelIndex(), true);
-    m_clueTree->setFirstColumnSpanned(m_clueModel->verticalCluesItem()->row(), QModelIndex(), true);
+    //m_clueTree->setFirstColumnSpanned(m_clueModel->horizontalCluesItem()->row(), QModelIndex(), true);
+    //m_clueTree->setFirstColumnSpanned(m_clueModel->verticalCluesItem()->row(), QModelIndex(), true);
     m_clueTree->expandAll();
 
     // Update selection model
@@ -1361,12 +1357,11 @@ QDockWidget *GameGui::createClueDock()
     m_clueDock->setObjectName("clueDock");
 
     QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(m_clueTree);
+    //layout->addWidget(m_clueTree);
     m_clueDock->setLayout(layout);
-
     m_clueDock->setWidget(m_clueTree);
 
-    updateClueDock();
+    updateClueTree();
 
     return m_clueDock;
 }
@@ -1691,7 +1686,7 @@ void GameGui::setCurrentFileName(const QString& fileName)
         if (m_clueModel) {
             m_clueModel->clear();
         }
-        updateClueDock();
+        updateClueTree();
         setModificationType(NoModification);
 
         emit currentFileChanged(QString(), oldFileName);
@@ -2175,8 +2170,9 @@ void GameGui::eraseSlot(bool enable)
 
 void GameGui::clickedClueInDock(const QModelIndex &index)
 {
-    if (index.parent() == QModelIndex())
+    if (index.parent() == QModelIndex()) {
         return;
+    }
 
     QModelIndex clueIndex = m_clueModel->index(index.row(), 0, index.parent());
     ClueCell *clue = ((ClueItem*)m_clueModel->itemFromIndex(clueIndex))->clueCell();
@@ -2188,8 +2184,9 @@ void GameGui::clickedClueInDock(const QModelIndex &index)
 
 void GameGui::currentClueInDockChanged(const QModelIndex &current, const QModelIndex &previous)
 {
-    if (current.parent() == QModelIndex() || current == previous)
+    if (current.parent() == QModelIndex() || current == previous) {
         return;
+    }
 
     QModelIndex clueIndex = m_clueModel->index(current.row(), 0, current.parent());
     ClueCell *clue = ((ClueItem*)m_clueModel->itemFromIndex(clueIndex))->clueCell();

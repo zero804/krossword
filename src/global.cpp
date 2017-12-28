@@ -539,7 +539,7 @@ QString CrosswordTypeInfo::allowedChars() const
 
 bool CrosswordTypeInfo::isCharacterLegal(const QChar& testCharacter) const
 {
-    qDebug() << testCharacter;
+    //qDebug() << testCharacter;
     switch (letterCellContent) {
     case Characters:
         return QString::fromUtf8("ABCDEFGHIJKLMNOPQRSTUVWXYZÅÆŒØ")

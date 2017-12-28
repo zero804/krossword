@@ -64,14 +64,19 @@ QVariant LibraryManager::data(const QModelIndex &index, int role) const
                     ? fi.fileName().remove(QRegExp("\\." + fi.suffix() + '$', Qt::CaseInsensitive))
                     : crosswordData.title;
 
-            QString itemText = QString("<b>%1</b><br>%2 %3x%4<br>%5 %6 - %7")
+            //<b>%1</b><br>%2 %3 x %4<br>%5 %6 - %7 //style=\"white-space:nowrap;\"
+            QString itemText = QString("<strong>%1</strong>"
+                                       "<table><tbody>"
+                                       "<tr><td>%2</td><td style=\"white-space:nowrap;\">%3 %4</td></tr>"
+                                       "<tr><td width=5%>%5</td><td width=95%>%6 x %7</td></tr>"
+                                       "</tbody></table>")
                                .arg(title)
-                               .arg(i18nc("The title for sizes of crosswords in the library tree view", "Size:"))
-                               .arg(crosswordData.width)
-                               .arg(crosswordData.height)
                                .arg(i18nc("The title for authors of crosswords in the library tree view", "Author(s):"))
                                .arg(crosswordData.authors)
-                               .arg(crosswordData.copyright);
+                               .arg(crosswordData.copyright.isEmpty() ? "" : "- " + crosswordData.copyright)
+                               .arg(i18nc("The title for sizes of crosswords in the library tree view", "Size:"))
+                               .arg(crosswordData.width)
+                               .arg(crosswordData.height);
 
             switch (role) {
             case Qt::DisplayRole:

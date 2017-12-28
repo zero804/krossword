@@ -47,12 +47,13 @@ QVariant ClueItem::data(int role) const
 
 void ClueItem::setData(const QVariant& value, int role)
 {
-    if (role == Qt::EditRole)
+    if (role == Qt::EditRole) {
         emit changeClueTextRequest(m_clueCell, value.toString());
-    else if (role == Qt::DisplayRole)
+    } else if (role == Qt::DisplayRole) {
         ; // Nothing to do
-    else
+    } else {
         QStandardItem::setData(value, role);
+    }
 }
 
 

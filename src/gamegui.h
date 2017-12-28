@@ -51,7 +51,6 @@ class QDockWidget;
 class QItemSelectionModel;
 
 class QAction;
-class KRecentFilesAction;
 
 class QPropertyAnimation;
 class QParallelAnimationGroup;
@@ -275,8 +274,7 @@ protected slots:
 
     void clueListContextMenuRequested(const QPoint &pos);
     void clickedClueInDock(const QModelIndex &index);
-    void currentClueInDockChanged(
-        const QModelIndex &current, const QModelIndex &previous);
+    void currentClueInDockChanged(const QModelIndex &current, const QModelIndex &previous);
 
     void popupMenuCellDestroyed(QObject*);
     void setDefaultCursor();
@@ -326,7 +324,7 @@ private:
 
     void setupActions();
     void setupPrinter(QPrinter &printer);
-    void updateClueDock();
+    void updateClueTree();
     void updateSolutionInToolBar();
     QDockWidget *createClueDock();
     QDockWidget *createUndoViewDock();
