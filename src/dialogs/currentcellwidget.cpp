@@ -157,6 +157,7 @@ void CurrentCellWidget::setupNoPropertiesCell(KrossWordCell *cell)
         lblCurrentAnswerValue->setWordWrap(true);
         lblClueValue->setAlignment(Qt::AlignLeft);
         lblCurrentAnswerValue->setAlignment(Qt::AlignLeft);
+        //lblClueValue->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::MinimumExpanding);
 
         // Give some time to animations TODO: fix crash here
 //       QApplication::processEvents( QEventLoop::ExcludeUserInputEvents, 20 );

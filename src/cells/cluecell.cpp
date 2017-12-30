@@ -1181,12 +1181,12 @@ void ClueCell::drawClueNumber(QPainter *p, const QStyleOptionGraphicsItem *optio
     // Draw clue number if any
     if (m_answerOffset == OnClueCell && m_clueNumber != -1) {
         QString text = QString("%1").arg(m_clueNumber + 1);
-        QFont font = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
-
         qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
 
-        font.setPixelSize(10.0 * levelOfDetail);
+        QFont font = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
+        font.setPointSizeF(qMin(9.0, 10.0 * levelOfDetail));
         font.setBold(true);
+
         p->setFont(font);
         QFontMetrics fontMetrics(font);
         QRect numberRect = fontMetrics.boundingRect(text);

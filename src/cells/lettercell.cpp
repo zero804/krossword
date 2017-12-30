@@ -906,26 +906,28 @@ void LetterCell::drawClueForCell(QPainter* p, const QStyleOptionGraphicsItem* op
 {
     p->save();
 
+    // draw clue text or number for coded puzzles
     QString text;
     if (krossWord()->crosswordTypeInfo().clueType == NumberClues1To26 && krossWord()->crosswordTypeInfo().letterCellContent == Characters) {
         int clueNumber = krossWord()->letterContentToClueNumberMapping().indexOf(correctLetter()) + 1;
-        if (clueNumber > 0)
+        if (clueNumber > 0) {
             text = QString::number(clueNumber);
-    } else
+        }
+    } else {
         text = clue()->clue();
-
-    QFont font = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
-
+    }
     qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
 
-    font.setPixelSize(10 * levelOfDetail);
+    QFont font = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
+    font.setPointSizeF(qMin(9.0, 10.0 * levelOfDetail));
     font.setBold(true);
+
     p->setFont(font);
     p->setPen(isEnabled() ? Qt::black : Qt::darkGray);
     QFontMetrics fontMetrics(font);
     QRect rect = fontMetrics.boundingRect(text);
     rect.setWidth(fontMetrics.width(text));
-    QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect, krossWord()->theme()->marginsLetterCell(levelOfDetail));
+    QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect, krossWord()->theme()->marginsClueCell(levelOfDetail));
     p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect, TopRight /*krossWord()->theme()->codedPuzzleCluePos()*/), text);
     p->restore();
 }
@@ -1315,18 +1317,18 @@ void SolutionLetterCell::drawForeground(QPainter* p, const QStyleOptionGraphicsI
     // Draw solution letter index
     p->save();
     QString text = QString("(%1)").arg(solutionWordIndex() + 1);
-    QFont font = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
-
     qreal levelOfDetail = QStyleOptionGraphicsItem::levelOfDetailFromTransform(QTransform(option->matrix));
 
-    font.setPointSizeF(10 * levelOfDetail);
+    QFont font = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
+    font.setPointSizeF(qMin(9.0, 10.0 * levelOfDetail));
+    font.setBold(true);
 
     p->setFont(font);
     p->setPen(isEnabled() ? Qt::black : Qt::darkGray);
     QFontMetrics fontMetrics(font);
     QRect rect = fontMetrics.boundingRect(text);
     rect.setWidth(fontMetrics.width(text));
-    QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect, krossWord()->theme()->marginsLetterCell(levelOfDetail));
+    QRect trimmedRect = KrosswordTheme::trimmedRect(option->rect, krossWord()->theme()->marginsClueCell(levelOfDetail));
     p->drawText(KrosswordTheme::rectAtPos(trimmedRect, rect, BottomLeft /*krossWord()->theme()->solutionLetterIndexPos()*/), text);
     p->restore();
 }
