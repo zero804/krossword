@@ -140,6 +140,8 @@ public:
 
         Options_Dictionaries,
 
+        View_Fit_Crossword,
+        View_Fit_Width,
         View_Pan,
 
         ShowClueDock,
@@ -255,6 +257,7 @@ public slots:
 
     // View actions
     void fitToPageSlot();
+    void fitToWidthSlot();
     void viewPanSlot(bool enabled);
 
     // Settings actions

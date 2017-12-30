@@ -116,6 +116,7 @@ qreal KrossWordPuzzleView::getMinimumZoomScale()
 void KrossWordPuzzleView::updateZoomMinimumScale()
 {
     m_minimumZoomScale = this->matrix().m11();
-    if (m_minimumZoomScale > 3.0)
+    if (m_minimumZoomScale > 3.0) {
         m_minimumZoomScale /= 2.0;
+    }
 }

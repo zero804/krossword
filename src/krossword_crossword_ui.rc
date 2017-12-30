@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="krossword_crossword" version="5">
+<kpartgui name="krossword_crossword" version="6">
 
 <!-- Menu bar -->
 <MenuBar>
@@ -42,6 +42,8 @@
     </Menu>
 
     <Menu name="view">
+        <Action name="view_fit_crossword" />
+        <Action name="view_fit_width" />
         <Action name="view_pan" />
     </Menu>
 </MenuBar>
@@ -163,9 +165,8 @@
         <Action name="move_select_next_clue" />
         <Action name="move_select_last_clue" />
 
-        <Action name="view_fit_to_page" />
-        <Action name="view_zoom_in" />
-        <Action name="view_zoom_out" />
+        <Action name="view_fit_crossword" />
+        <Action name="view_fit_width" />
     </disable>
 </State>
 
@@ -185,9 +186,8 @@
         <Action name="move_select_next_clue" />
         <Action name="move_select_last_clue" />
 
-        <Action name="view_fit_to_page" />
-        <Action name="view_zoom_in" />
-        <Action name="view_zoom_out" />
+        <Action name="view_fit_crossword" />
+        <Action name="view_fit_width" />
 
         <Action name="edit_enable_edit_mode" />
     </disable>

@@ -304,6 +304,10 @@ const char *GameGui::actionName(GameGui::Action actionEnum) const
     case Info_ConfidenceIsSolved:
         return "info_confidence_is_solved";
 
+    case View_Fit_Crossword:
+        return "view_fit_crossword";
+    case View_Fit_Width:
+        return "view_fit_width";
     case View_Pan:
         return "view_pan";
 
@@ -1019,9 +1023,15 @@ void GameGui::setupActions()
     ac->addAction(actionName(Game_PrintPreview), printPreviewAction);
 
     // View
-    QAction *fitToPageAction = KStandardAction::fitToPage(this, SLOT(fitToPageSlot()), ac);
-    fitToPageAction->setToolTip(i18n("Fit the whole crossword into the window"));
-    fitToPageAction->setIcon(QIcon::fromTheme(QStringLiteral("zoom-fit-best")));
+    QAction *fitToCrosswordAction = new QAction(QIcon::fromTheme(QStringLiteral("zoom-fit-page")), i18n("Fit crossword"), ac); // CHECK: or zoom-fit-best?
+    fitToCrosswordAction->setToolTip(i18n("Fit the whole crossword"));
+    ac->addAction(actionName(View_Fit_Crossword), fitToCrosswordAction);
+    connect(fitToCrosswordAction, SIGNAL(triggered()), this, SLOT(fitToPageSlot()));
+
+    QAction *fitToWidthAction = new QAction(QIcon::fromTheme(QStringLiteral("zoom-fit-width")), i18n("Fit width"), ac);
+    fitToWidthAction->setToolTip(i18n("Fit to crossword width"));
+    ac->addAction(actionName(View_Fit_Width), fitToWidthAction);
+    connect(fitToWidthAction, SIGNAL(triggered()), this, SLOT(fitToWidthSlot()));
 
     QAction *viewPanAction = new KToggleAction(QIcon::fromTheme(QStringLiteral("transform-move")), i18n("Pan"), ac);
     viewPanAction->setToolTip(i18n("Pan the view. Note that you can also pan while pressing the control key."));
@@ -1804,15 +1814,29 @@ QList<QPropertyAnimation *> GameGui::makeAnimation()
 
 void GameGui::fitToPageSlot()
 {
-    m_view->scene()->setSceneRect(krossWord()->boundingRect()); // CHECK
-    m_view->setSceneRect(m_view->scene()->sceneRect()); // CHECK
+    m_view->scene()->setSceneRect(krossWord()->boundingRect());
+    //m_view->setSceneRect(m_view->scene()->sceneRect()); // CHECK
 
     m_view->fitInView(m_view->sceneRect(), Qt::KeepAspectRatio);
 
     m_view->updateZoomMinimumScale();
     m_zoomWidget->setZoom(m_zoomWidget->minimumZoom());
 
-    krossWord()->clearCache();
+    //krossWord()->clearCache();
+}
+
+void GameGui::fitToWidthSlot()
+{
+    m_view->scene()->setSceneRect(krossWord()->boundingRect());
+    // fit to a qrect with a 1-pixel symbolic height to simply take advantage of KeepAspectRatio
+    m_view->fitInView(QRect(m_view->scene()->sceneRect().left(), m_view->scene()->sceneRect().top(), m_view->scene()->width(), 1), Qt::KeepAspectRatio);
+
+    qreal maximumZoomFactor = m_zoomWidget->maximumZoom() / qreal(m_zoomWidget->minimumZoom());
+    qreal minZoomScale = m_view->getMinimumZoomScale();
+    qreal maxZoomScale = maximumZoomFactor * minZoomScale;
+    m_zoomWidget->setZoom(m_view->transform().m11() / maxZoomScale * qreal(m_zoomWidget->maximumZoom()));
+
+    //krossWord()->clearCache();
 }
 
 void GameGui::viewPanSlot(bool enabled)
