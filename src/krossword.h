@@ -164,13 +164,6 @@ public:
         AnchorBottomLeft, AnchorBottom,   AnchorBottomRight
     };
 
-    enum FileFormat {
-        DetermineByType,
-        KwpFormat,
-        KwpzFormat,
-        PuzFormat
-    };
-
     enum ConversionCommand {
         NoCommand = 0x00,
 
@@ -279,14 +272,11 @@ public:
     /** Wheater or not the crossword has 180 degree rotation symmetry. */
     bool has180DegreeRotationSymmetry() const;
 
-    /** Gets the file format for a given @p fileName. */
-    static FileFormat fileFormatFromFileName(const QString &fileName);
-
     /** Reads a crossword from a file.
     * @param url The URL to the file to read.
     * @param errorString Contains a string describing the error, if false was returned.
     * @return False, if there was an error. */
-    bool read(const QUrl &url, QString *errorString = nullptr, FileFormat fileFormat = DetermineByType, QByteArray *undoData = nullptr);
+    bool read(const QUrl &url, QString *errorString = nullptr, QByteArray *undoData = nullptr);
 
     /** Convert the crossword into a data model.*/
     CrosswordData getCrosswordData(WriteMode writeMode, const QByteArray &undoData = QByteArray()); // CHECK: temporary name
@@ -294,14 +284,11 @@ public:
     /** Write the crossword into a file.
     * @param fileName The path to the file to write to.
     * @param errorString Contains a string describing the error, if false was returned.
-    * @param fileFormat The format of the file to write.
     * @param undoData Undo data to be written into the crossword file, works
     * only for XML files.
     * @return False, if there was an error. */
     bool write(const QString &fileName, QString *errorString = nullptr,
-               WriteMode writeMode = Normal,
-               FileFormat fileFormat = DetermineByType,
-               const QByteArray &undoData = QByteArray());
+               WriteMode writeMode = Normal, const QByteArray &undoData = QByteArray());
 
     /** Gets the clue cell at the coordinates @p coord with the given @p orientation.
     * If the clue cell is hidden, it gets the clue cell with @p orientation of the

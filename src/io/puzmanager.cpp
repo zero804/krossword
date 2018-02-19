@@ -1,6 +1,6 @@
 /*
 *   Copyright 2010 Friedrich Pülz <fpuelz@gmx.de>
-*   Copyright 2017 Giacomo Barazzetti <giacomosrv@gmail.com>
+*   Copyright 2017-2018 Giacomo Barazzetti <giacomosrv@gmail.com>
 *
 *   This program is free software; you can redistribute it and/or modify
 *   it under the terms of the GNU Library General Public License as
@@ -380,8 +380,9 @@ bool PuzManager::write(const CrosswordData &crossdata)
         return false;
     }
 
-    if (closeAfterWrite)
+    if (closeAfterWrite) {
         m_device->close();
+    }
     return true;
 }
 

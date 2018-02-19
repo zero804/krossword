@@ -80,10 +80,10 @@ QSize MainWindow::sizeHint() const
     return KXmlGuiWindow::sizeHint().expandedTo(QDesktopWidget().availableGeometry().size() * 0.7);
 }
 
-void MainWindow::loadFile(const QUrl &url, Crossword::KrossWord::FileFormat fileFormat, bool loadCrashedFile)
+void MainWindow::loadFile(const QUrl &url, bool loadCrashedFile)
 {
     setupGameGui(); // CHECK: what if loaded == false?
-    bool loaded = m_gameGui->loadFile(url, fileFormat, loadCrashedFile);
+    bool loaded = m_gameGui->loadFile(url, loadCrashedFile);
 
     if (loaded) {
         m_mainStackedBar->setCurrentIndex(m_mainStackedBar->indexOf(m_gameGui));
@@ -267,7 +267,7 @@ void MainWindow::showRestoreOption(const QString& lastUnsavedFileBeforeCrash)
                                             restoreButton,
                                             KStandardGuiItem::discard());
     if (result == KMessageBox::Yes) {
-        loadFile(QUrl::fromLocalFile(lastUnsavedFileBeforeCrash), Crossword::KrossWord::KwpzFormat, true);
+        loadFile(QUrl::fromLocalFile(lastUnsavedFileBeforeCrash), true);
     }
 
     //m_gameGui->removeTempFile(lastUnsavedFileBeforeCrash);

@@ -191,7 +191,7 @@ public:
     bool createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title, const QString& authors,
                                         const QString& copyright, const QString& notes);
 
-    bool loadFile(const QUrl &url, KrossWord::FileFormat fileFormat = KrossWord::DetermineByType, bool loadCrashedFile = false);
+    bool loadFile(const QUrl &url, bool loadCrashedFile = false);
     bool save();
     bool saveAs(const Crossword::KrossWord::WriteMode writeMode);
     bool closeFile();

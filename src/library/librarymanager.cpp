@@ -222,7 +222,7 @@ LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QStri
     Crossword::KrossWord krossWord;
     QString errorString;
 
-    if (!krossWord.read(url, &errorString, Crossword::KrossWord::FileFormat::DetermineByType)) {
+    if (!krossWord.read(url, &errorString)) {
         qDebug() << "addCrossword() reading error:" << errorString;
         outCrosswordUrl = QString();
         return E_ERROR_TYPE::ReadError;
@@ -243,7 +243,7 @@ LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QStri
 
         const QString fileUrl = filePath + tmpFileName + ".kwpz";
 
-        if (!krossWord.write(fileUrl, &errorString, Crossword::KrossWord::Normal, Crossword::KrossWord::KwpzFormat)) {
+        if (!krossWord.write(fileUrl, &errorString, Crossword::KrossWord::Normal)) {
             qDebug() << "addCrossword() writing error:" << errorString;
             outCrosswordUrl = QString();
             return E_ERROR_TYPE::WriteError;

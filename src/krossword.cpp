@@ -22,9 +22,7 @@
 #include "clueexpanderitem.h"
 #include "cells/krosswordcell.h"
 #include "cells/imagecell.h"
-#include "io/puzmanager.h"
-#include "io/kwpmanager.h"
-#include "io/kwpzmanager.h"
+#include "io/iomanager.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -38,8 +36,6 @@
 #include "animator.h"
 #include <QPropertyAnimation>
 #include <QFontDatabase>
-#include <QMimeDatabase>
-
 
 namespace Crossword
 {
@@ -831,20 +827,6 @@ ClueCellList KrossWord::clueCellsFromClueNumber(int clueNumber) const
     return ret;
 }
 
-KrossWord::FileFormat KrossWord::fileFormatFromFileName(const QString& fileName)
-{
-    QMimeDatabase db;
-    QString extension = db.suffixForFileName(fileName);
-    if (extension == "kwp") {
-        return KwpFormat;
-    } else if (extension == "kwpz") {
-        return KwpzFormat;
-    } else if (extension == "puz") {
-        return PuzFormat;
-    } else
-        return DetermineByType; // couldn't determine file format
-}
-
 CrosswordData KrossWord::getCrosswordData(WriteMode writeMode, const QByteArray &undoData)
 {
     CrosswordData crosswordData;
@@ -947,53 +929,24 @@ CrosswordData KrossWord::getCrosswordData(WriteMode writeMode, const QByteArray 
     return crosswordData;
 }
 
-bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode writeMode, FileFormat fileFormat, const QByteArray &undoData)
+bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode writeMode, const QByteArray &undoData)
 {
     QFile file(fileName);
     file.open(QIODevice::WriteOnly);
 
     CrosswordData crosswordData = getCrosswordData(writeMode, undoData);
 
-    if (fileFormat == DetermineByType) {
-        fileFormat = fileFormatFromFileName(fileName);
-        if (fileFormat == DetermineByType) {
-            qDebug() << QString("File format unknown for file '%1'").arg(fileName);
-            return false;
-        }
-    }
-
-    if (fileFormat == KwpFormat) {
-        KwpManager kwpManager(&file);
-        bool writeOk = kwpManager.write(crosswordData);
-        if (!writeOk) {
-            *errorString = i18n("Error writing crossword: %1", kwpManager.errorString());
-            return false;
-        }
-    } else if (fileFormat == KwpzFormat) {
-        KwpzManager kwpzManager(&file);
-        bool writeOk = kwpzManager.write(crosswordData);
-        if (!writeOk) {
-            *errorString = i18n("Error writing compressed crossword: %1", kwpzManager.errorString());
-            return false;
-        }
-    } else if (fileFormat == PuzFormat) { // CHECK: we don't want to export in puz format...
-        if (!undoData.isEmpty()) {
-            qDebug() << "Can't store undoData to *.puz-files";
-        }
-        PuzManager puzManager(&file);
-        bool writeOk = puzManager.write(crosswordData);
-        if (!writeOk && errorString != nullptr) {
-            *errorString = i18n("Error writing AcrossLite's .puz-format.");
-            return false;
-        }
-    } else {
+    IOManager ioManager(&file);
+    bool writeOk = ioManager.write(crosswordData);
+    if (!writeOk) {
+        *errorString = ioManager.errorString();
         return false;
     }
 
     return true;
 }
 
-bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileFormat, QByteArray *undoData)
+bool KrossWord::read(const QUrl &url, QString *errorString, QByteArray *undoData)
 {
     QFile file(url.path());
     if (!file.open(QIODevice::ReadOnly)) {
@@ -1008,50 +961,17 @@ bool KrossWord::read(const QUrl &url, QString *errorString, FileFormat fileForma
     //removeAllCells(); //CHECK: done by createNew
     bool wasBlocking = blockSignals(true);
 
+    IOManager ioManager(&file);
+    CrosswordData crosswordData;
+
     bool readOk = false;
-    bool fileFormatDeterminationFailed = false;
-    if (fileFormat == DetermineByType) {
-        QMimeDatabase mimeDatabase;
-        QMimeType mimeType = mimeDatabase.mimeTypeForFile(url.path(), QMimeDatabase::MatchDefault);
-        if (mimeType.inherits("application/x-crossword")) {
-            fileFormat = PuzFormat;
-        } else if (mimeType.inherits("application/x-krosswordpuzzle")) {
-            fileFormat = KwpFormat;
-        } else if (mimeType.inherits("application/x-krosswordpuzzle-compressed")) {
-            fileFormat = KwpzFormat;
-        } else {
-            fileFormatDeterminationFailed = true;
-        }
+    readOk = ioManager.read(crosswordData);
+    if (!readOk && errorString) {
+        *errorString = ioManager.errorString();
+        return false;
     }
+    createNew(crosswordData, undoData);
 
-    if (!fileFormatDeterminationFailed) {
-        CrosswordData crosswordData;
-
-        if (fileFormat == PuzFormat) {
-            PuzManager puzManager(&file);
-            readOk = puzManager.read(crosswordData);
-            if (!readOk && errorString) {
-                *errorString = i18n("Error reading AcrossLite's .puz-format.");
-                return false;
-            }
-        } else if (fileFormat == KwpFormat) {
-            KwpManager kwpManager(&file);
-            readOk = kwpManager.read(crosswordData);
-            if (!readOk && errorString) {
-                *errorString = kwpManager.errorString();
-                return false;
-            }
-        } else if (fileFormat == KwpzFormat) {
-            KwpzManager kwpzManager(&file);
-            readOk = kwpzManager.read(crosswordData);
-            if (!readOk && errorString) {
-                *errorString = kwpzManager.errorString();
-                return false;
-            }
-        }
-
-        createNew(crosswordData, undoData);
-    }
     file.close();
     blockSignals(wasBlocking);
     emit cluesAdded(clues());   // All clues are new

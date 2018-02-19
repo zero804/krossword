@@ -430,11 +430,11 @@ bool GameGui::createNewCrossWordFromTemplate(const QString& templateFilePath, co
     return true;
 }
 
-bool GameGui::loadFile(const QUrl &url, KrossWord::FileFormat fileFormat, bool loadCrashedFile)
+bool GameGui::loadFile(const QUrl &url, bool loadCrashedFile)
 {
     QString errorString;
     QByteArray undoData;
-    bool readOk = krossWord()->read(url, &errorString, fileFormat, &undoData);
+    bool readOk = krossWord()->read(url, &errorString, &undoData);
 
     if (readOk) {
         krossWord()->setInteractive(true);
@@ -560,8 +560,9 @@ bool GameGui::closeFile()
 
 bool GameGui::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, bool saveUndoStack)
 {
+    /* CHECK: we don't want to support PUZ exporting...but otherwise push warning somewhere...
     KrossWord::FileFormat fileFormat = KrossWord::fileFormatFromFileName(fileName);
-    if (fileFormat == KrossWord::PuzFormat) { // CHECK: we don't want to support PUZ exporting...
+    if (fileFormat == KrossWord::PuzFormat) {
         bool hasConfidencesSet = false;
         LetterCellList letterList = krossWord()->letters();
         foreach(LetterCell * letter, letterList) {
@@ -594,11 +595,12 @@ bool GameGui::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, b
             }
         }
     }
+    */
 
     QString errorString;
     bool writeOk;
     if (saveUndoStack) {
-        writeOk = krossWord()->write(fileName, &errorString, writeMode, KrossWord::DetermineByType, m_undoStack->data());
+        writeOk = krossWord()->write(fileName, &errorString, writeMode, m_undoStack->data());
     } else {
         writeOk = krossWord()->write(fileName, &errorString, writeMode);
     }
@@ -1637,7 +1639,7 @@ void GameGui::autoSaveToTempFile()
 
     QString errorString, tmpFileName;
     if (m_curTmpFileName.isEmpty()) {
-        QTemporaryFile tmpFile("krossword"); //CHECK: retrieve name
+        QTemporaryFile tmpFile("krosswordXXXXXX.kwpz"); //CHECK: retrieve name
         tmpFile.open();
         tmpFileName = tmpFile.fileName();
         tmpFile.close();
@@ -1645,10 +1647,7 @@ void GameGui::autoSaveToTempFile()
         tmpFileName = m_curTmpFileName;
     }
 
-    bool writeOk = krossWord()->write(tmpFileName, &errorString,
-                                      KrossWord::Normal,
-                                      KrossWord::KwpzFormat,
-                                      m_undoStack->data());
+    bool writeOk = krossWord()->write(tmpFileName, &errorString, KrossWord::Normal, m_undoStack->data());
 
     if (!writeOk) {
         qDebug() << "Error while automatically saving temporary file:" << errorString;
