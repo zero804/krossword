@@ -44,23 +44,23 @@ IOManager::IOManager(QFile *file)
 
 bool IOManager::read(CrosswordData &crossData)
 {
-    bool readOk = false;
-
-    CrosswordIO *generic = nullptr;
-    if (m_fileFormat == PuzFormat) {
-        generic = new PuzManager(m_device);
+    CrosswordIO *manager = nullptr;
+    if (m_fileFormat == PuzFormat) { // CHECK: PuzManager should be a bit more "expressive" about errors
+        manager = new PuzManager(m_device);
     } else if (m_fileFormat == KwpFormat) {
-        generic = new KwpManager(m_device);
-    } else if (m_fileFormat == KwpzFormat) { // CHECK: setErrorString(i18n("Error reading AcrossLite's .puz-format."));
-        generic = new KwpzManager(m_device);
+        manager = new KwpManager(m_device);
+    } else if (m_fileFormat == KwpzFormat) {
+        manager = new KwpzManager(m_device);
     } else if (m_fileFormat == UnknowFormat) {
         setErrorString(i18n("Unknown file format."));
         return false;
     }
 
-    readOk = generic->read(crossData);
+    Q_ASSERT(manager != nullptr);
+
+    bool readOk = manager->read(crossData);
     if (!readOk) {
-        setErrorString(generic->errorString());
+        setErrorString(manager->errorString());
     }
 
     return readOk;
@@ -68,23 +68,24 @@ bool IOManager::read(CrosswordData &crossData)
 
 bool IOManager::write(const CrosswordData &crossData)
 {
-    bool writeOk = false;
-
-    CrosswordIO *generic = nullptr;
-    if (m_fileFormat == PuzFormat) { // CHECK: we don't want to export in puz format...
-        generic = new PuzManager(m_device);
-    } else if (m_fileFormat == KwpFormat) {
-        generic = new KwpManager(m_device);
+    CrosswordIO *manager = nullptr;
+    if (m_fileFormat == KwpFormat) {
+        manager = new KwpManager(m_device);
     } else if (m_fileFormat == KwpzFormat) {
-        generic = new KwpzManager(m_device);
+        manager = new KwpzManager(m_device);
+    } else if (m_fileFormat == PuzFormat) {
+        setErrorString(i18n("PUZ writing not supported."));
+        return false;
     } else if (m_fileFormat == UnknowFormat) {
         setErrorString(i18n("Unknown file format."));
         return false;
     }
 
-    writeOk = generic->write(crossData);
+    Q_ASSERT(manager != nullptr);
+
+    bool writeOk = manager->write(crossData);
     if (!writeOk) {
-        setErrorString(i18n("Error writing crossword: %1", generic->errorString()));
+        setErrorString(i18n("Error writing crossword: %1", manager->errorString()));
     }
 
     return writeOk;

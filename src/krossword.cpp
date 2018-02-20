@@ -940,6 +940,8 @@ bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode w
     bool writeOk = ioManager.write(crosswordData);
     if (!writeOk) {
         *errorString = ioManager.errorString();
+        file.close();
+        file.remove();
         return false;
     }
 
@@ -972,6 +974,7 @@ bool KrossWord::read(const QUrl &url, QString *errorString, QByteArray *undoData
     readOk = ioManager.read(crosswordData);
     if (!readOk && errorString) {
         *errorString = ioManager.errorString();
+        file.close();
         return false;
     }
     createNew(crosswordData, undoData);

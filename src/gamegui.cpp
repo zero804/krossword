@@ -619,7 +619,7 @@ bool GameGui::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, b
 
         return true;
     } else {
-        statusBar()->showMessage(i18n("Error while writing file %1", errorString));
+        statusBar()->showMessage(i18n("Error while writing file: %1", errorString));
         return false;
     }
 }

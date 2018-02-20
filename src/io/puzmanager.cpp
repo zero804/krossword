@@ -83,7 +83,7 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
         return false;
     }
 
-    if (QString(fileMagic) == (FILE_MAGIC)) {
+    if (QString(fileMagic) == (FILE_MAGIC)) { // CHECK:
         qDebug() << QString("Wrong file magic '%1', should be '%2'").arg(fileMagic.data()).arg(FILE_MAGIC);
         return false;
     }
@@ -107,7 +107,7 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
         return false;
     }
     if (!QString(version).startsWith(QLatin1String("1.2"))) {
-        qDebug() << "Unsupported PUZ-version:" << version << "Should be 1.2";
+        setErrorString(i18n("Unsupported PUZ version:") + QString(version));
     }
     delete[] version;
 
@@ -154,9 +154,6 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
     if (m_puzData.title.isEmpty() && (pos = QString(m_puzData.authors).indexOf(QRegExp("by", Qt::CaseInsensitive))) != -1) {
         m_puzData.title = m_puzData.authors.left(pos).trimmed();
         m_puzData.authors = m_puzData.authors.mid(pos).trimmed();
-
-        qDebug() << "Extracted title from author field:" << m_puzData.title
-                 << "author is now" << m_puzData.authors;
     }
 
     // Read clues
@@ -213,6 +210,7 @@ bool PuzManager::writeDataTo(QDataStream &dataStream, const QByteArray &data, in
     return dataStream.writeRawData(data, len) == len;
 }
 
+// CHECK: actually we don't want to save in puz format
 bool PuzManager::write(const CrosswordData &crossdata)
 {
     Q_ASSERT(m_device);
@@ -221,7 +219,7 @@ bool PuzManager::write(const CrosswordData &crossdata)
     setErrorString(QString());
 
     if (crossdata.width > 255 || crossdata.height > 255) {
-        qDebug() << "Maximal size of crosswords to be saved in the PUZ-format version 1.2/1.3 is 255x255.";
+        setErrorString(i18n("Maximal size of crosswords to be saved in the PUZ-format version 1.2/1.3 is 255x255."));
         return false;
     }
 
@@ -301,13 +299,11 @@ bool PuzManager::write(const CrosswordData &crossdata)
         return false;
     }
 
-    data.close();
-
     // Get checksums
     PuzChecksums puzChecksums = generateChecksums(&data);
 
     // Write checksums to buffer
-    data.open(QIODevice::ReadWrite);
+    data.seek(0x0);
     ds << puzChecksums.main;
     if (!data.seek(0xe)) {     // Skip magic string
         return false;
@@ -330,10 +326,8 @@ PuzManager::PuzChecksums PuzManager::generateChecksums(QIODevice* buffer) const
 {
     PuzChecksums checksums;
 
-    buffer->open(QIODevice::ReadOnly);
     buffer->seek(0x2c);
     checksums.cib = checkSumRegion(buffer->read(8), 8, 0);
-    buffer->close();
 
     // TODO: checksum AND checksumPart are wrong... (something to do with \0-termination?)
     int gridStringLength = m_puzData.width * m_puzData.height;
@@ -409,8 +403,7 @@ bool PuzManager::mapClues(QList<ClueInfo> &clues)
             bool assignedNumber = false;
             if (cellNeedsAcrossNumber(x, y)) {
                 if (curClueIndex >= (uint)m_puzData.clues.count()) {
-                    qDebug() << "Error in reading PUZ";
-                    qDebug() << "Too few clues:" << m_puzData.clues.count() << "Tried index" << curClueIndex;
+                    setErrorString(i18n("PUZ reading error: missing clues"));
                     return false;
                 }
                 clues.append(ClueInfo(index,
@@ -425,8 +418,7 @@ bool PuzManager::mapClues(QList<ClueInfo> &clues)
 
             if (cellNeedsDownNumber(x, y)) {
                 if (curClueIndex >= (uint)m_puzData.clues.count()) {
-                    qDebug() << "Error in reading PUZ";
-                    qDebug() << "Too few clues:" << m_puzData.clues.count() << "Tried index" << curClueIndex;
+                    setErrorString(i18n("PUZ reading error: missing clues"));
                     return false;
                 }
                 clues.append(ClueInfo(index,
