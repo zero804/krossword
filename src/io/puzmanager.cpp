@@ -63,11 +63,6 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
 {
     Q_ASSERT(device);
 
-    bool closeAfterRead;
-    if ((closeAfterRead = !device->isOpen()) && !device->open(QIODevice::ReadOnly)) {
-        return false;
-    }
-
     QDataStream dataStream;
     dataStream.setDevice(device);
     dataStream.setByteOrder(QDataStream::LittleEndian);
@@ -79,25 +74,17 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
     if (checksums) {
         dataStream >> checksums->main;
     } else if (!device->seek(OFFSET_FILE_MAGIC)) {
-        if (closeAfterRead) {
-            device->close();
-        }
         return false;
     }
 
     // Read and check file magic
     fileMagic.reserve(12);
     if (dataStream.readRawData(fileMagic.data(), 12) < 12) {
-        if (closeAfterRead) {
-            device->close();
-        }
         return false;
     }
+
     if (QString(fileMagic) == (FILE_MAGIC)) {
         qDebug() << QString("Wrong file magic '%1', should be '%2'").arg(fileMagic.data()).arg(FILE_MAGIC);
-        if (closeAfterRead) {
-            device->close();
-        }
         return false;
     }
 
@@ -110,9 +97,6 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
             checksums->masked << masked;
         }
     } else if (!device->seek(OFFSET_VERSION)) {
-        if (closeAfterRead) {
-            device->close();
-        }
         return false;
     }
 
@@ -120,9 +104,6 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
     char *version = new char[4];
     if (dataStream.readRawData(version, 4) < 4) {
         delete[] version;
-        if (closeAfterRead) {
-            device->close();
-        }
         return false;
     }
     if (!QString(version).startsWith(QLatin1String("1.2"))) {
@@ -132,9 +113,6 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
 
     // Read crossword grid size
     if (!device->seek(OFFSET_GRID_SIZE)) {
-        if (closeAfterRead) {
-            device->close();
-        }
         return false;
     }
     dataStream >> m_puzData.width;
@@ -145,18 +123,12 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
 
     // Read puzzle solution string
     if (!device->seek(OFFSET_SOLUTION)) {
-        if (closeAfterRead) {
-            device->close();
-        }
         return false;
     }
     gridStringLength = m_puzData.width * m_puzData.height;
     char *solution = new char[gridStringLength];
     if (dataStream.readRawData(solution, gridStringLength) != gridStringLength) {
         delete[] solution;
-        if (closeAfterRead) {
-            device->close();
-        }
         return false;
     }
     m_puzData.solution.clear();
@@ -167,9 +139,6 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
     char *state = new char[gridStringLength];
     if (dataStream.readRawData(state, gridStringLength) != gridStringLength) {
         delete[]  state;
-        if (closeAfterRead) {
-            device->close();
-        }
         return false;
     }
     m_puzData.state.clear();
@@ -198,17 +167,12 @@ bool PuzManager::readData(QIODevice *device, PuzManager::PuzChecksums *checksums
     // Read notes
     m_puzData.notes = readZeroTerminatedString(dataStream);
 
-    if (closeAfterRead) {
-        device->close();
-    }
-
     return true;
 }
 
 PuzManager::PuzManager(QIODevice *device)
     : CrosswordIO(device)
 {
-
 }
 
 bool PuzManager::read(CrosswordData &crossData)
@@ -222,7 +186,6 @@ bool PuzManager::read(CrosswordData &crossData)
     if (!readData(m_device, &checksums)) {
         return false;
     }
-    m_device->close();
 
     PuzChecksums generatedChecksums = generateChecksums(m_device);
     qDebug() << "main" << checksums.main << "=?=" << generatedChecksums.main;
@@ -273,11 +236,6 @@ bool PuzManager::write(const CrosswordData &crossdata)
     m_puzData.state = QByteArray(crossdata.width * crossdata.height, '.'); // initialize filling with black cells
     prepareDataForWrite(crossdata);
 
-    bool closeAfterWrite;
-    if ((closeAfterWrite = !m_device->isOpen()) && !m_device->open(QIODevice::WriteOnly)) {
-        return false;
-    }
-
     QDataStream dataStream;
     dataStream.setDevice(m_device);
     dataStream.setByteOrder(QDataStream::LittleEndian);
@@ -288,25 +246,20 @@ bool PuzManager::write(const CrosswordData &crossdata)
     ds.setByteOrder(QDataStream::LittleEndian);
 
     if (!data.seek(OFFSET_FILE_MAGIC)) {     // Skip bytes: Main checksum
-        if (closeAfterWrite) m_device->close();
         return false;
     }
     if (ds.writeRawData("ACROSS&DOWN\0", 12) != 12) {     // Magic string
-        if (closeAfterWrite) m_device->close();
         return false;
     }
 
     if (!data.seek(OFFSET_VERSION)) {     // Skip bytes: CIB checksum, masked checksums
-        if (closeAfterWrite) m_device->close();
         return false;
     }
     if (ds.writeRawData("1.2\0", 4) != 4) {     // Version
-        if (closeAfterWrite) m_device->close();
         return false;
     }
 
     if (!data.seek(OFFSET_GRID_SIZE)) {     // Skip bytes: Masked checksums
-        if (closeAfterWrite) m_device->close();
         return false;
     }
     ds << (qint8)m_puzData.width;
@@ -318,41 +271,33 @@ bool PuzManager::write(const CrosswordData &crossdata)
     ds << (qint8)0;
 
     if (!data.seek(OFFSET_SOLUTION)) {
-        if (closeAfterWrite) m_device->close();
         return false;
     }
     int gridStringLength = m_puzData.width * m_puzData.height;
     if (ds.writeRawData(m_puzData.solution, gridStringLength) != gridStringLength) {
-        if (closeAfterWrite) m_device->close();
         return false;
     }
     if (ds.writeRawData(m_puzData.state, gridStringLength) != gridStringLength) {
-        if (closeAfterWrite) m_device->close();
         return false;
     }
 
     if (!writeDataTo(ds, m_puzData.title, m_puzData.title.length() + 1)) {
-        if (closeAfterWrite) m_device->close();
         return false;
     }
     if (!writeDataTo(ds, m_puzData.authors, m_puzData.authors.length() + 1)) {
-        if (closeAfterWrite) m_device->close();
         return false;
     }
     if (!writeDataTo(ds, m_puzData.copyright, m_puzData.copyright.length() + 1)) {
-        if (closeAfterWrite) m_device->close();
         return false;
     }
 
     for (qint16 i = 0; i < m_puzData.clues.count(); ++i) {
         if (!writeDataTo(ds, m_puzData.clues[i], m_puzData.clues[i].length() + 1)) {
-            if (closeAfterWrite) m_device->close();
             return false;
         }
     }
 
     if (!writeDataTo(ds, m_puzData.notes, m_puzData.notes.length() + 1)) {
-        if (closeAfterWrite) m_device->close();
         return false;
     }
 
@@ -365,7 +310,6 @@ bool PuzManager::write(const CrosswordData &crossdata)
     data.open(QIODevice::ReadWrite);
     ds << puzChecksums.main;
     if (!data.seek(0xe)) {     // Skip magic string
-        if (closeAfterWrite) m_device->close();
         return false;
     }
     ds << puzChecksums.cib;
@@ -376,13 +320,9 @@ bool PuzManager::write(const CrosswordData &crossdata)
 
     // Write everything buffered
     if (!dataStream.writeRawData(data.buffer(), data.size())) {
-        if (closeAfterWrite) m_device->close();
         return false;
     }
 
-    if (closeAfterWrite) {
-        m_device->close();
-    }
     return true;
 }
 

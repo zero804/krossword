@@ -943,12 +943,15 @@ bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode w
         return false;
     }
 
+    file.close();
     return true;
 }
 
 bool KrossWord::read(const QUrl &url, QString *errorString, QByteArray *undoData)
 {
     QFile file(url.path());
+    file.open(QIODevice::ReadOnly);
+    /*
     if (!file.open(QIODevice::ReadOnly)) {
         if (errorString != nullptr) {
             *errorString = file.errorString();
@@ -956,6 +959,7 @@ bool KrossWord::read(const QUrl &url, QString *errorString, QByteArray *undoData
         qWarning() << file.errorString();
         return false;
     }
+    */
 
     //setHighlightedClue(NULL);
     //removeAllCells(); //CHECK: done by createNew
@@ -972,10 +976,10 @@ bool KrossWord::read(const QUrl &url, QString *errorString, QByteArray *undoData
     }
     createNew(crosswordData, undoData);
 
-    file.close();
     blockSignals(wasBlocking);
     emit cluesAdded(clues());   // All clues are new
 
+    file.close();
     return readOk;
 }
 

@@ -60,6 +60,7 @@ bool KwpzManager::read(CrosswordData &crossData)
     }
     KArchiveFile *crosswordFile = (KArchiveFile*)crosswordEntry;
     QIODevice *crosswordDevice = crosswordFile->createDevice();
+    crosswordDevice->open(QIODevice::ReadOnly);
 
     // Read the crossword
     KwpManager kwpManager(crosswordDevice);
@@ -68,6 +69,7 @@ bool KwpzManager::read(CrosswordData &crossData)
 
     crosswordDevice->close();
     delete crosswordDevice;
+
     if (!zip.close()) {
         setErrorString(i18n("Couldn't close the ZIP archive")); // CHECK: a bit too much?
         return false;

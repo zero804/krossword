@@ -125,10 +125,6 @@ bool KwpManager::read(CrosswordData &crossData)
 
     setErrorString(QString());
 
-    bool closeAfterRead;
-    if ((closeAfterRead = !m_device->isOpen()) && !m_device->open(QIODevice::ReadOnly)) {
-        return false;
-    }
     m_xmlReader.setDevice(m_device);
 
     while (!m_xmlReader.atEnd()) {
@@ -147,9 +143,6 @@ bool KwpManager::read(CrosswordData &crossData)
 
     setErrorString(m_xmlReader.errorString());
 
-    if (closeAfterRead) {
-        m_device->close();
-    }
     return !m_xmlReader.error();
 }
 
@@ -482,22 +475,12 @@ bool KwpManager::write(const CrosswordData &crossData)
 
     setErrorString(QString());
 
-    bool closeAfterWrite;
-    if ((closeAfterWrite = !m_device->isOpen()) && !m_device->open(QIODevice::WriteOnly)) {
-        setErrorString(m_device->errorString());
-        return false;
-    }
-
     m_xmlWriter.setDevice(m_device);
     m_xmlWriter.setAutoFormatting(true);
 
     m_xmlWriter.writeStartDocument("1.0", true);
     writeData(crossData);
     m_xmlWriter.writeEndDocument();
-
-    if (closeAfterWrite) {
-        m_device->close();
-    }
 
     return true;
 }

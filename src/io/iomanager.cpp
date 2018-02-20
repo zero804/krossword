@@ -46,29 +46,21 @@ bool IOManager::read(CrosswordData &crossData)
 {
     bool readOk = false;
 
+    CrosswordIO *generic = nullptr;
     if (m_fileFormat == PuzFormat) {
-        PuzManager puzManager(m_device);
-        readOk = puzManager.read(crossData);
-        if (!readOk) {
-            setErrorString(i18n("Error reading AcrossLite's .puz-format."));
-            return false;
-        }
+        generic = new PuzManager(m_device);
     } else if (m_fileFormat == KwpFormat) {
-        KwpManager kwpManager(m_device);
-        readOk = kwpManager.read(crossData);
-        if (!readOk) {
-            setErrorString(kwpManager.errorString());
-            return false;
-        }
-    } else if (m_fileFormat == KwpzFormat) {
-        KwpzManager kwpzManager(m_device);
-        readOk = kwpzManager.read(crossData);
-        if (!readOk) {
-            setErrorString(kwpzManager.errorString());
-            return false;
-        }
+        generic = new KwpManager(m_device);
+    } else if (m_fileFormat == KwpzFormat) { // CHECK: setErrorString(i18n("Error reading AcrossLite's .puz-format."));
+        generic = new KwpzManager(m_device);
     } else if (m_fileFormat == UnknowFormat) {
+        setErrorString(i18n("Unknown file format."));
         return false;
+    }
+
+    readOk = generic->read(crossData);
+    if (!readOk) {
+        setErrorString(generic->errorString());
     }
 
     return readOk;
@@ -78,29 +70,21 @@ bool IOManager::write(const CrosswordData &crossData)
 {
     bool writeOk = false;
 
-    if (m_fileFormat == KwpFormat) {
-        KwpManager kwpManager(m_device);
-        writeOk = kwpManager.write(crossData);
-        if (!writeOk) {
-            setErrorString(i18n("Error writing crossword: %1", kwpManager.errorString()));
-            return false;
-        }
+    CrosswordIO *generic = nullptr;
+    if (m_fileFormat == PuzFormat) { // CHECK: we don't want to export in puz format...
+        generic = new PuzManager(m_device);
+    } else if (m_fileFormat == KwpFormat) {
+        generic = new KwpManager(m_device);
     } else if (m_fileFormat == KwpzFormat) {
-        KwpzManager kwpzManager(m_device);
-        writeOk = kwpzManager.write(crossData);
-        if (!writeOk) {
-            setErrorString(i18n("Error writing compressed crossword: %1", kwpzManager.errorString()));
-            return false;
-        }
-    } else if (m_fileFormat == PuzFormat) { // CHECK: we don't want to export in puz format...
-        PuzManager puzManager(m_device);
-        writeOk = puzManager.write(crossData);
-        if (!writeOk) {
-            setErrorString(i18n("Error writing AcrossLite's .puz-format."));
-            return false;
-        }
+        generic = new KwpzManager(m_device);
     } else if (m_fileFormat == UnknowFormat) {
+        setErrorString(i18n("Unknown file format."));
         return false;
+    }
+
+    writeOk = generic->write(crossData);
+    if (!writeOk) {
+        setErrorString(i18n("Error writing crossword: %1", generic->errorString()));
     }
 
     return writeOk;
