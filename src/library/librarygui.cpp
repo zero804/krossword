@@ -22,8 +22,9 @@
 #include "librarygui.h"
 
 #include "mainwindow.h"
-#include "krossworddocument.h"
-#include "io/kwpzmanager.h"
+
+#include "io/iomanager.h"
+#include "krossworddocument.h" // CHECK: still needed for graphic export
 #include "htmldelegate.h"
 #include "settings.h"
 #include "dialogs/createnewcrossworddialog.h"
@@ -275,12 +276,21 @@ void LibraryGui::downloadCrosswordResult(KJob *job)
         m_downloadPreviewJob->start();
 
         //extracting metadata...
-        Crossword::KrossWord krossWord;
-        if (krossWord.read(QUrl::fromLocalFile(m_downloadedCrossword->fileName()))) {
-            if (m_downloadCrosswordsDlg) {
-                ui_download.labelTitleValue->setText(krossWord.getTitle());
-                ui_download.labelSizeValue->setText(QString::number(krossWord.width()) + 'x' + QString::number(krossWord.height()));
+        QFile file(m_downloadedCrossword->fileName());
+        if (!file.open(QIODevice::ReadOnly)) {
+            qWarning() << file.errorString();
+        } else {
+            IOManager manager(&file);
+            CrosswordData crosswordData;
+            if (!manager.read(crosswordData)) {
+                qWarning() << manager.errorString();
+            } else {
+                if (m_downloadCrosswordsDlg) {
+                    ui_download.labelTitleValue->setText(crosswordData.title);
+                    ui_download.labelSizeValue->setText(QString::number(crosswordData.width) + 'x' + QString::number(crosswordData.height));
+                }
             }
+            file.close();
         }
     }
 }
