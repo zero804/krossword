@@ -38,21 +38,20 @@ IOManager::IOManager(QFile *file)
         m_fileFormat = KwpzFormat;
     } else {
         m_fileFormat = UnknowFormat;
-        setErrorString(i18n("Unknow crossword format."));
     }
 }
 
 bool IOManager::read(CrosswordData &crossData)
 {
     CrosswordIO *manager = nullptr;
-    if (m_fileFormat == PuzFormat) { // CHECK: PuzManager should be a bit more "expressive" about errors
+    if (m_fileFormat == PuzFormat) {
         manager = new PuzManager(m_device);
     } else if (m_fileFormat == KwpFormat) {
         manager = new KwpManager(m_device);
     } else if (m_fileFormat == KwpzFormat) {
         manager = new KwpzManager(m_device);
     } else if (m_fileFormat == UnknowFormat) {
-        setErrorString(i18n("Unknown file format."));
+        setErrorString(i18n("Unknown crossword format."));
         return false;
     }
 
@@ -60,7 +59,7 @@ bool IOManager::read(CrosswordData &crossData)
 
     bool readOk = manager->read(crossData);
     if (!readOk) {
-        setErrorString(manager->errorString());
+        setErrorString(i18n("Crossword reading error: %1", manager->errorString()));
     }
 
     return readOk;
@@ -74,10 +73,10 @@ bool IOManager::write(const CrosswordData &crossData)
     } else if (m_fileFormat == KwpzFormat) {
         manager = new KwpzManager(m_device);
     } else if (m_fileFormat == PuzFormat) {
-        setErrorString(i18n("PUZ writing not supported."));
+        setErrorString(i18n("PUZ writing isn't supported."));
         return false;
     } else if (m_fileFormat == UnknowFormat) {
-        setErrorString(i18n("Unknown file format."));
+        setErrorString(i18n("Unknown crossword format."));
         return false;
     }
 
@@ -85,7 +84,7 @@ bool IOManager::write(const CrosswordData &crossData)
 
     bool writeOk = manager->write(crossData);
     if (!writeOk) {
-        setErrorString(i18n("Error writing crossword: %1", manager->errorString()));
+        setErrorString(i18n("Crossword writing error: %1", manager->errorString()));
     }
 
     return writeOk;

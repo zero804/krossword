@@ -136,12 +136,12 @@ bool KwpManager::read(CrosswordData &crossData)
                 readData(crossData);
                 break;
             } else {
-                m_xmlReader.raiseError("The file is not a Krossword version &lt;= 1.1 file.");
+                m_xmlReader.raiseError("Not a Krossword version <= 1.1 file.");
             }
         }
     }
 
-    setErrorString(m_xmlReader.errorString());
+    //setErrorString(m_xmlReader.errorString()); // CHECK: probably better not to expose too technical output
 
     return !m_xmlReader.error();
 }
@@ -419,8 +419,7 @@ void KwpManager::readUserDefinedCrosswordSettings(CrosswordData &crossData)
             } else if (m_xmlReader.name().compare(QLatin1String("minAnswerLength"), Qt::CaseInsensitive) == 0) {
                 int minAnswerLength = m_xmlReader.readElementText().toInt();
                 if (minAnswerLength < 1) {
-                    qDebug() << "In <userDefinedCrosswordSettings>: <minAnswerLength> "
-                             "is too small or not a number" << minAnswerLength;
+                    qDebug() << "In <userDefinedCrosswordSettings>: <minAnswerLength> is too small or not a number" << minAnswerLength;
                     minAnswerLength = 1;
                 }
                 crosswordTypeInfo.minAnswerLength = minAnswerLength;

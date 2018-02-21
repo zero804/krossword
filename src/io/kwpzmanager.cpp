@@ -89,10 +89,10 @@ bool KwpzManager::write(const CrosswordData &crossdata)
     QBuffer buffer;
     buffer.open(QBuffer::WriteOnly);
     KwpManager kwpManager(&buffer);
-    bool writeOk = kwpManager.write(crossdata);
+    bool kwpWriteOk = kwpManager.write(crossdata);
     buffer.close();
 
-    if (!writeOk) {
+    if (!kwpWriteOk) {
         setErrorString(kwpManager.errorString());
         return false;
     }
@@ -104,7 +104,7 @@ bool KwpzManager::write(const CrosswordData &crossdata)
         setErrorString(i18n("Couldn't open the ZIP archive for writing"));
         return false;
     }
-    if (!zip.prepareWriting("crossword.kwp", "krosswordpuzzle", "krosswordpuzzle", buffer.size())) {
+    if (!zip.prepareWriting("crossword.kwp", "krossword", "krossword", buffer.size())) {
         setErrorString(i18n("Error writing to the compressed file"));
         return false;
     }
@@ -117,7 +117,7 @@ bool KwpzManager::write(const CrosswordData &crossdata)
         return false;
     }
     if (!zip.close()) {
-        setErrorString(i18n("Couldn't close the ZIP archive"));
+        setErrorString(i18n("Couldn't close the ZIP archive")); // CHECK: a bit too much?
         return false;
     }
 
