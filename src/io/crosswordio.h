@@ -196,7 +196,7 @@ public:
     }
 
 protected:
-    QIODevice *m_device; // not owned
+    QIODevice *m_device; // not owned and it's caller responsibility to open/close/... it
 
 private:
     QString m_errorString;

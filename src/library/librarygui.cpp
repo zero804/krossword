@@ -146,10 +146,11 @@ void LibraryGui::libraryAddCrossword(const QUrl &url, const QString &folder)
             m_libraryTree->scrollTo(index);
         }
     } else {
-        if (errorCode == LibraryManager::E_ERROR_TYPE::ReadError)
+        if (errorCode == LibraryManager::E_ERROR_TYPE::ReadError) {
             KMessageBox::error(this, i18n("The crossword couldn't be imported to the library."));
-        else if (errorCode == LibraryManager::E_ERROR_TYPE::WriteError)
+        } else if (errorCode == LibraryManager::E_ERROR_TYPE::WriteError) {
             KMessageBox::error(this, i18n("The crossword couldn't be written to the library folder."));
+        }
     }
 }
 

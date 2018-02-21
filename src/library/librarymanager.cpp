@@ -18,8 +18,8 @@
 
 #include "librarymanager.h"
 
+#include "io/iomanager.h"
 #include "io/kwpzmanager.h"
-#include "krossword.h" // CHECK: TO REMOVE FOR A I/O MANAGER
 
 #include <QDebug>
 #include <QCryptographicHash>
@@ -138,7 +138,7 @@ void LibraryManager::extractMetadataSlot(const QString &path)
             if (!m_crosswordsData.contains(fileName)) {
                 QFile file(fileName);
                 file.open(QIODevice::ReadOnly);
-                KwpzManager kwpzManager(&file);
+                KwpzManager kwpzManager(&file); // CHECK: using directly kwpzManager (no IOManager) since we have just kwpz in library by design
                 CrosswordData crosswordData;
                 bool readOk = kwpzManager.read(crosswordData);
                 file.close();
@@ -208,51 +208,73 @@ bool LibraryManager::newFolder(const QString &folderName)
 
 LibraryManager::E_ERROR_TYPE LibraryManager::addCrossword(const QUrl &url, QString &outCrosswordUrl, const QString &folder)
 {
+    // read the crossword data
+    QFile inFile(url.path());
+    if (!inFile.open(QIODevice::ReadOnly)) {
+        qWarning() << inFile.errorString();
+        return E_ERROR_TYPE::ReadError;
+    }
+
+    IOManager inManager(&inFile);
+    CrosswordData crosswordData;
+    bool readOk = inManager.read(crosswordData);
+    inFile.close();
+
+    if (!readOk) {
+        outCrosswordUrl = QString();
+        qWarning() << inManager.errorString();
+        return E_ERROR_TYPE::ReadError;
+    }
+
+    // prepare basic filename for saving in library
+    QString fileName = crosswordData.title;
+    if (fileName.isEmpty()) {
+        fileName = "untitled";
+    } else {
+        fileName.remove("#");
+        fileName.remove("?");
+    }
+
+    // prepare file path for saving in library
     QString filePath;
     if (folder.isEmpty() || !folder.startsWith(rootDirectory().path())) {
         filePath = rootDirectory().path();
     } else {
         filePath = folder;
     }
-
     if (!filePath.endsWith(QDir::separator())) {
         filePath.append(QDir::separator());
     }
 
-    Crossword::KrossWord krossWord;
-    QString errorString;
-
-    if (!krossWord.read(url, &errorString)) {
-        qDebug() << "addCrossword() reading error:" << errorString;
-        outCrosswordUrl = QString();
-        return E_ERROR_TYPE::ReadError;
-    } else {
-        QString fileName = krossWord.getTitle().trimmed();
-        if (fileName.isEmpty()) {
-            fileName = "untitled";
-        }
-
-        fileName.remove("#");
-        fileName.remove("?");
-
-        QString tmpFileName = fileName;
-        int i = 1;
-        while (QFile::exists(filePath + tmpFileName + ".kwpz")) {
-            tmpFileName = fileName + '_' + QString::number(i++);
-        }
-
-        const QString fileUrl = filePath + tmpFileName + ".kwpz";
-
-        if (!krossWord.write(fileUrl, &errorString, Crossword::KrossWord::Normal)) {
-            qDebug() << "addCrossword() writing error:" << errorString;
-            outCrosswordUrl = QString();
-            return E_ERROR_TYPE::WriteError;
-        } else {
-            outCrosswordUrl = fileUrl;
-            m_crosswordsHash.insert(QUrl::fromLocalFile(fileUrl).path(), computeFileHash(fileUrl));
-            return E_ERROR_TYPE::Succeeded;
-        }
+    // prepare definitive url for saving in library
+    QString tmpFileName = fileName;
+    int i = 1;
+    while (QFile::exists(filePath + tmpFileName + ".kwpz")) {
+        tmpFileName = fileName + '_' + QString::number(i++);
     }
+    const QString fileUrl = filePath + tmpFileName + ".kwpz";
+
+    // save crossword in library
+    QFile outFile(fileUrl);
+    if (!outFile.open(QIODevice::WriteOnly)) {
+        qWarning() << outFile.errorString();
+        return E_ERROR_TYPE::WriteError;
+    }
+
+    IOManager outManager(&outFile);
+    if (!outManager.write(crosswordData)) {
+        outFile.remove(); // otherwise we got an empty file (it closes the QFile too)
+        outCrosswordUrl = QString();
+        qWarning() << outFile.errorString();
+        return E_ERROR_TYPE::WriteError;
+    } else {
+        outFile.close();
+        outCrosswordUrl = fileUrl;
+        m_crosswordsHash.insert(QUrl::fromLocalFile(fileUrl).path(), computeFileHash(fileUrl));
+        return E_ERROR_TYPE::Succeeded;
+    }
+
+    // return;
 }
 
 QFileInfoList LibraryManager::getCrosswordsFilePath() const

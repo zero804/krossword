@@ -932,28 +932,30 @@ CrosswordData KrossWord::getCrosswordData(WriteMode writeMode, const QByteArray 
 bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode writeMode, const QByteArray &undoData)
 {
     QFile file(fileName);
-    file.open(QIODevice::WriteOnly);
+    if (!file.open(QIODevice::WriteOnly)) {
+        if (errorString != nullptr) {
+            *errorString = file.errorString();
+        }
+        qWarning() << file.errorString();
+        return false;
+    }
 
     CrosswordData crosswordData = getCrosswordData(writeMode, undoData);
 
     IOManager ioManager(&file);
     bool writeOk = ioManager.write(crosswordData);
-    if (!writeOk) {
+    file.close();
+    if (!writeOk && errorString) {
         *errorString = ioManager.errorString();
-        file.close();
-        file.remove();
-        return false;
+        file.remove(); // otherwise we got an empty file
     }
 
-    file.close();
-    return true;
+    return writeOk;
 }
 
 bool KrossWord::read(const QUrl &url, QString *errorString, QByteArray *undoData)
 {
     QFile file(url.path());
-    file.open(QIODevice::ReadOnly);
-    /*
     if (!file.open(QIODevice::ReadOnly)) {
         if (errorString != nullptr) {
             *errorString = file.errorString();
@@ -961,7 +963,6 @@ bool KrossWord::read(const QUrl &url, QString *errorString, QByteArray *undoData
         qWarning() << file.errorString();
         return false;
     }
-    */
 
     //setHighlightedClue(NULL);
     //removeAllCells(); //CHECK: done by createNew
@@ -970,19 +971,17 @@ bool KrossWord::read(const QUrl &url, QString *errorString, QByteArray *undoData
     IOManager ioManager(&file);
     CrosswordData crosswordData;
 
-    bool readOk = false;
-    readOk = ioManager.read(crosswordData);
+    bool readOk = ioManager.read(crosswordData);
+    file.close();
     if (!readOk && errorString) {
         *errorString = ioManager.errorString();
-        file.close();
-        return false;
     }
+
     createNew(crosswordData, undoData);
 
     blockSignals(wasBlocking);
     emit cluesAdded(clues());   // All clues are new
 
-    file.close();
     return readOk;
 }
 
