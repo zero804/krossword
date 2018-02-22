@@ -964,8 +964,6 @@ bool KrossWord::read(const QUrl &url, QString *errorString, QByteArray *undoData
         return false;
     }
 
-    //setHighlightedClue(NULL);
-    //removeAllCells(); //CHECK: done by createNew
     bool wasBlocking = blockSignals(true);
 
     IOManager ioManager(&file);

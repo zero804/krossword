@@ -18,7 +18,8 @@
 */
 
 #include "dictionary.h"
-#include "krossword.h"
+
+#include "io/iomanager.h"
 #include "cells/cluecell.h"
 #include "extendedsqltablemodel.h"
 #include "htmldelegate.h"
@@ -569,48 +570,52 @@ int Dictionary::addEntriesFromCrosswords(const QStringList& fileNames, QWidget *
     int entryCountBefore = entryCount();
 
     // Read each file
-    QString errorString;
     QString beginSqlQuery = "INSERT INTO dictionary (word, clue) VALUES ";
     QStringList sqlInserts;
     int counter = 0, currentFileNr = 0;
     foreach(const QString & fileName, fileNames) {
         ++currentFileNr;
 
-        KrossWord krossWord;
-        qDebug() << "Reading crossword" << fileName;
-        if (!krossWord.read(QUrl::fromLocalFile(fileName), &errorString)) {
-            qDebug() << "Error reading" << fileName << errorString;
-            emit errorExtractedEntriesFromCrossword(fileName, errorString);
+        QFile file(fileName);
+        if (!file.open(QIODevice::ReadOnly)) {
+            qWarning() << "Error opening" << fileName << file.errorString();
         } else {
-            // Read each clue
-            int addedEntries = 0;
-            Crossword::ClueCellList clues = krossWord.clues();
-            foreach(ClueCell * clue, clues) {
-                sqlInserts << QString("('%1', '%2')").arg(clue->correctAnswer())
-                           .arg(clue->clue().replace('\'', "\\'"));   // Escape single quotes
-                ++counter;
-            }
-
-            progressBar->setValue(100 * (float)currentFileNr / (float)fileNames.count());
-
-            // Insert chunks of 1000 entries into the database
-            if (counter > 1000) {
-                counter = 0;
-
-                db.transaction();
-                foreach(QString s, sqlInserts) {
-                    QSqlQuery query = db.exec(beginSqlQuery + s);
+            IOManager manager(&file); // CHECK: porting to IOManager not tested
+            CrosswordData crosswordData;
+            if (!manager.read(crosswordData)) {
+                qWarning() << "Error reading" << fileName << manager.errorString();
+                emit errorExtractedEntriesFromCrossword(fileName, manager.errorString());
+            } else {
+                // Read each clue
+                int addedEntries = 0; // CHECK: unused?
+                foreach(ClueInfo clueInfo, crosswordData.clues) {
+                    sqlInserts << QString("('%1', '%2')")
+                                        .arg(clueInfo.solution)
+                                        .arg(clueInfo.clue.replace('\'', "\\'")); // Escape single quotes
+                    ++counter;
                 }
-                db.commit();
 
-                sqlInserts.clear();
+                progressBar->setValue(100 * (float)currentFileNr / (float)fileNames.count());
 
-                QApplication::processEvents();
+                // Insert chunks of 1000 entries into the database
+                if (counter > 1000) {
+                    counter = 0;
+                    db.transaction();
+                    foreach(QString s, sqlInserts) {
+                        QSqlQuery query = db.exec(beginSqlQuery + s);
+                    }
+                    db.commit();
+                    sqlInserts.clear();
+
+                    QApplication::processEvents();
+                }
+
+                emit extractedEntriesFromCrossword(fileName, addedEntries);
+                if (m_cancel) {
+                    break;
+                }
             }
-
-            emit extractedEntriesFromCrossword(fileName, addedEntries);
-            if (m_cancel)
-                break;
+            file.close();
         }
     }
 
