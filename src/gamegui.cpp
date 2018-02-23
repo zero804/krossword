@@ -19,6 +19,9 @@
 
 #include "gamegui.h"
 #include "krosswordpuzzleview.h"
+
+#include "io/iomanager.h"
+
 #include "krossworddocument.h"
 #include "commands.h"
 #include "cluemodel.h"
@@ -432,11 +435,27 @@ bool GameGui::createNewCrossWordFromTemplate(const QString& templateFilePath, co
 
 bool GameGui::loadFile(const QUrl &url, bool loadCrashedFile)
 {
-    QString errorString;
-    QByteArray undoData;
-    bool readOk = krossWord()->read(url, &errorString, &undoData);
+    QFile file(url.path());
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << file.errorString();
+        statusBar()->showMessage(i18n("Error opening '%1': %2", url.path(), file.errorString())); //CHECK: in Library statusbar isn't visible...
+        return false;
+    }
+    IOManager ioManager(&file);
+    CrosswordData crosswordData;
+    bool readOk = ioManager.read(crosswordData);
+    file.close();
 
-    if (readOk) {
+    if (!readOk) {
+        m_undoStackLoaded = false;
+        statusBar()->showMessage(i18n("Error loading '%1': %2", url.path(), ioManager.errorString())); //CHECK: in Library statusbar isn't visible...
+    } else {
+
+        bool wasBlocking = krossWord()->blockSignals(true); // CHECK: do we still need?
+        krossWord()->createNew(crosswordData);
+        krossWord()->blockSignals(wasBlocking);
+        cluesAdded(krossWord()->clues()); // All clues are new
+
         krossWord()->setInteractive(true);
         m_zoomWidget->setEnabled(true);
         m_solutionProgress->setEnabled(true);
@@ -445,6 +464,7 @@ bool GameGui::loadFile(const QUrl &url, bool loadCrashedFile)
         action(actionName(Move_Eraser))->setChecked(false);
         //enableEditActions();
 
+        QByteArray undoData = crosswordData.undoData; // CHECK: QByteArray::fromBase64(crosswordData.undoData)
         m_undoStack->createFromData(krossWord(), undoData);
         m_undoStackLoaded = !undoData.isEmpty();
         m_lastAutoSave = QDateTime::currentDateTime();
@@ -459,7 +479,7 @@ bool GameGui::loadFile(const QUrl &url, bool loadCrashedFile)
         setCurrentFileName(url.path());
         m_lastSavedUndoIndex = m_undoStack->index();
 
-        if (krossWord()->crosswordTypeInfo().crosswordType == UnknownCrosswordType) {
+        if (crosswordData.type == UnknownCrosswordType) {
             if (KMessageBox::questionYesNo(this, i18n("The crossword type couldn't "
                                            "be determined, so 'Free Crossword' is assumed.\n\n"
                                            "Do you want to convert the crossword to another type now?\n\n"
@@ -479,20 +499,14 @@ bool GameGui::loadFile(const QUrl &url, bool loadCrashedFile)
         }
 
         adjustGuiToCrosswordType();
-        //fitToPageSlot();
         selectFirstClueSlot();
 
         // save the url of the last opened crossword
         Settings::setLastCrossword(url.toLocalFile());
         Settings::self()->save();
-
-        return true;
-    } else {
-        m_undoStackLoaded = false;
-        statusBar()->showMessage(i18n("Error while loading file '%1': %2", url.path(), errorString)); //CHECK: in Library statusbar isn't visible...
-
-        return false;
     }
+
+    return readOk;
 }
 
 bool GameGui::save()

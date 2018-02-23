@@ -98,7 +98,7 @@ void KrossWord::setTheme(const KrosswordTheme* theme)
     clearCache();
 }
 
-void KrossWord::createNew(const CrosswordData &crosswordData, QByteArray *undoData)
+void KrossWord::createNew(const CrosswordData &crosswordData)
 {
     createNew(CrosswordTypeInfo::infoFromType(crosswordData.type), QSize(crosswordData.width, crosswordData.height));
 
@@ -165,10 +165,6 @@ void KrossWord::createNew(const CrosswordData &crosswordData, QByteArray *undoDa
             LetterCell *letter = (LetterCell*)cell;
             letter->setConfidence(confidenceInfo.confidence);
         }
-    }
-
-    if (undoData) {
-        *undoData = QByteArray::fromBase64(crosswordData.undoData);
     }
 }
 
@@ -951,36 +947,6 @@ bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode w
     }
 
     return writeOk;
-}
-
-bool KrossWord::read(const QUrl &url, QString *errorString, QByteArray *undoData)
-{
-    QFile file(url.path());
-    if (!file.open(QIODevice::ReadOnly)) {
-        if (errorString != nullptr) {
-            *errorString = file.errorString();
-        }
-        qWarning() << file.errorString();
-        return false;
-    }
-
-    bool wasBlocking = blockSignals(true);
-
-    IOManager ioManager(&file);
-    CrosswordData crosswordData;
-
-    bool readOk = ioManager.read(crosswordData);
-    file.close();
-    if (!readOk && errorString) {
-        *errorString = ioManager.errorString();
-    }
-
-    createNew(crosswordData, undoData);
-
-    blockSignals(wasBlocking);
-    emit cluesAdded(clues());   // All clues are new
-
-    return readOk;
 }
 
 QPixmap KrossWord::toPixmap(const QSize& size)

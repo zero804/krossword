@@ -368,49 +368,60 @@ void LibraryGui::libraryExportSlot()
         KMessageBox::information(this, i18n("Can't export whole directories. Please select a crossword."));
     }
 
-    Crossword::KrossWord krossWord;
-    QString errorString;
     QString filePath = index.data(QFileSystemModel::FilePathRole).toString();
-    if (!krossWord.read(QUrl::fromLocalFile(filePath), &errorString)) {
-        KMessageBox::error(this, i18n("There was an error opening the crossword.\n%1", errorString));
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        KMessageBox::error(this, i18n("There was an error opening the crossword.\n%1", file.errorString()));
     } else {
-        QString fileName = QFileDialog::getSaveFileName(
-                    this,
-                    i18n("Export"),
-                    QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
-                    "PDF document (*.pdf);;PNG image (*.png)");
+        IOManager ioManager(&file);
+        CrosswordData crosswordData;
+        bool readOk = ioManager.read(crosswordData);
+        file.close();
 
-        if (fileName.isEmpty()) {
-            return;
-        }
+        if (!readOk) {
+            KMessageBox::error(this, i18n("There was an error reading the crossword.\n%1", ioManager.errorString()));
+        } else {
+            Crossword::KrossWord krossWord;
+            krossWord.createNew(crosswordData);
 
-        QString fileSuffix = QFileInfo(fileName).suffix();
-        if (fileSuffix.compare("pdf", Qt::CaseInsensitive) == 0) {
-            QPrinter printer;
-            printer.setCreator("Krossword");
-            printer.setDocName(fileName);   // TODO: set krossword title if available
+            QString fileName = QFileDialog::getSaveFileName(
+                        this,
+                        i18n("Export"),
+                        QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
+                        "PDF document (*.pdf);;PNG image (*.png)");
 
-            printer.setOutputFileName(fileName);
-            PdfDocument document(&krossWord, &printer);
-            document.print();
-        } else if (fileSuffix.compare("png", Qt::CaseInsensitive) == 0) {
-            QPointer<QDialog> exportToImageDlg = new QDialog(this);
-            exportToImageDlg->setWindowTitle(i18n("Export Settings"));
-            exportToImageDlg->setModal(true);
-
-            ui_export_to_image.setupUi(exportToImageDlg);
-
-            if (exportToImageDlg->exec() == QDialog::Rejected) {
-                delete exportToImageDlg;
+            if (fileName.isEmpty()) {
                 return;
             }
 
-            QPixmap pix = krossWord.toPixmap(QSize(ui_export_to_image.width->value(), ui_export_to_image.height->value()));
-            delete exportToImageDlg;
+            QString fileSuffix = QFileInfo(fileName).suffix();
+            if (fileSuffix.compare("pdf", Qt::CaseInsensitive) == 0) {
+                QPrinter printer;
+                printer.setCreator("Krossword");
+                printer.setDocName(fileName);   // TODO: set krossword title if available
 
-            if (!pix.save(fileName, 0, 0/*0 means max compression for png fileformat*/)) {
-                qDebug() << "Export failed:" << fileName;
-                KMessageBox::error(this, i18n("Couldn't export the image to the specified file."));
+                printer.setOutputFileName(fileName);
+                PdfDocument document(&krossWord, &printer);
+                document.print();
+            } else if (fileSuffix.compare("png", Qt::CaseInsensitive) == 0) {
+                QPointer<QDialog> exportToImageDlg = new QDialog(this);
+                exportToImageDlg->setWindowTitle(i18n("Export Settings"));
+                exportToImageDlg->setModal(true);
+
+                ui_export_to_image.setupUi(exportToImageDlg);
+
+                if (exportToImageDlg->exec() == QDialog::Rejected) {
+                    delete exportToImageDlg;
+                    return;
+                }
+
+                QPixmap pix = krossWord.toPixmap(QSize(ui_export_to_image.width->value(), ui_export_to_image.height->value()));
+                delete exportToImageDlg;
+
+                if (!pix.save(fileName, 0, 0/*0 means max compression for png fileformat*/)) {
+                    qDebug() << "Export failed:" << fileName;
+                    KMessageBox::error(this, i18n("Couldn't export the image to the specified file."));
+                }
             }
         }
     }

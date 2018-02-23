@@ -246,7 +246,7 @@ public:
         return m_animationEnabled;
     }
 
-    void createNew(const CrosswordData &crosswordData, QByteArray *undoData);
+    void createNew(const CrosswordData &crosswordData);
     void createNew(const CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize);
 
     /** This method is provided for convenience. It calls
@@ -271,12 +271,6 @@ public:
 
     /** Wheater or not the crossword has 180 degree rotation symmetry. */
     bool has180DegreeRotationSymmetry() const;
-
-    /** Reads a crossword from a file.
-    * @param url The URL to the file to read.
-    * @param errorString Contains a string describing the error, if false was returned.
-    * @return False, if there was an error. */
-    bool read(const QUrl &url, QString *errorString = nullptr, QByteArray *undoData = nullptr);
 
     /** Convert the crossword into a data model.*/
     CrosswordData getCrosswordData(WriteMode writeMode, const QByteArray &undoData = QByteArray()); // CHECK: temporary name
