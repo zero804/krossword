@@ -925,30 +925,6 @@ CrosswordData KrossWord::getCrosswordData(WriteMode writeMode, const QByteArray 
     return crosswordData;
 }
 
-bool KrossWord::write(const QString& fileName, QString* errorString, WriteMode writeMode, const QByteArray &undoData)
-{
-    QFile file(fileName);
-    if (!file.open(QIODevice::WriteOnly)) {
-        if (errorString != nullptr) {
-            *errorString = file.errorString();
-        }
-        qWarning() << file.errorString();
-        return false;
-    }
-
-    CrosswordData crosswordData = getCrosswordData(writeMode, undoData);
-
-    IOManager ioManager(&file);
-    bool writeOk = ioManager.write(crosswordData);
-    file.close();
-    if (!writeOk && errorString) {
-        *errorString = ioManager.errorString();
-        file.remove(); // otherwise we got an empty file
-    }
-
-    return writeOk;
-}
-
 QPixmap KrossWord::toPixmap(const QSize& size)
 {
     // Adjust size to fit the crossword

@@ -45,7 +45,6 @@
 #include <KStandardGuiItem>
 #include <KMessageBox>
 #include <KRandom>
-#include <QTemporaryFile>
 #include <KXMLGUIFactory>
 #include <KCharSelect>
 
@@ -68,6 +67,7 @@
 #include <QStandardPaths>
 #include <QFileDialog>
 #include <QStatusBar>
+#include <QTemporaryFile>
 
 const int MIN_SECS_BETWEEN_AUTOSAVES = 30;
 
@@ -611,13 +611,17 @@ bool GameGui::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, b
     }
     */
 
-    QString errorString;
-    bool writeOk;
-    if (saveUndoStack) {
-        writeOk = krossWord()->write(fileName, &errorString, writeMode, m_undoStack->data());
-    } else {
-        writeOk = krossWord()->write(fileName, &errorString, writeMode);
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly)) {
+        statusBar()->showMessage(i18n("Error while writing file: %1", file.errorString()));
+        return false;
     }
+
+    CrosswordData crosswordData = krossWord()->getCrosswordData(writeMode, saveUndoStack ? m_undoStack->data() : QByteArray());
+
+    IOManager ioManager(&file);
+    bool writeOk = ioManager.write(crosswordData);
+    file.close();
 
     if (writeOk) {
         QString oldFileName = m_curFileName;
@@ -633,7 +637,8 @@ bool GameGui::writeTo(const QString &fileName, KrossWord::WriteMode writeMode, b
 
         return true;
     } else {
-        statusBar()->showMessage(i18n("Error while writing file: %1", errorString));
+        statusBar()->showMessage(i18n("Error while writing file: %1", ioManager.errorString()));
+        file.remove(); // otherwise we got an empty file
         return false;
     }
 }
@@ -1651,7 +1656,7 @@ void GameGui::autoSaveToTempFile()
         return;
     }
 
-    QString errorString, tmpFileName;
+    QString tmpFileName;
     if (m_curTmpFileName.isEmpty()) {
         QTemporaryFile tmpFile("krosswordXXXXXX.kwpz"); //CHECK: retrieve name
         tmpFile.open();
@@ -1661,10 +1666,18 @@ void GameGui::autoSaveToTempFile()
         tmpFileName = m_curTmpFileName;
     }
 
-    bool writeOk = krossWord()->write(tmpFileName, &errorString, KrossWord::Normal, m_undoStack->data());
+    QFile file(tmpFileName);
+    file.open(QIODevice::WriteOnly); //CHECK: no checking correct opening?
+
+    CrosswordData crosswordData = krossWord()->getCrosswordData(KrossWord::Normal, m_undoStack->data());
+
+    IOManager ioManager(&file);
+    bool writeOk = ioManager.write(crosswordData);
+    file.close();
 
     if (!writeOk) {
-        qDebug() << "Error while automatically saving temporary file:" << errorString;
+        qDebug() << "Error while automatically saving temporary file:" << ioManager.errorString();
+        //file.remove(); // CHECK: needed in this case?
     } else {
         qDebug() << "Saved crossword to temporary file.";
         m_lastAutoSave = QDateTime::currentDateTime();

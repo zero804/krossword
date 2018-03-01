@@ -275,15 +275,6 @@ public:
     /** Convert the crossword into a data model.*/
     CrosswordData getCrosswordData(WriteMode writeMode, const QByteArray &undoData = QByteArray()); // CHECK: temporary name
 
-    /** Write the crossword into a file.
-    * @param fileName The path to the file to write to.
-    * @param errorString Contains a string describing the error, if false was returned.
-    * @param undoData Undo data to be written into the crossword file, works
-    * only for XML files.
-    * @return False, if there was an error. */
-    bool write(const QString &fileName, QString *errorString = nullptr,
-               WriteMode writeMode = Normal, const QByteArray &undoData = QByteArray());
-
     /** Gets the clue cell at the coordinates @p coord with the given @p orientation.
     * If the clue cell is hidden, it gets the clue cell with @p orientation of the
     * letter cell at @p coord. If no clue cell could be found, it returns NULL. */
