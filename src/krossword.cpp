@@ -102,11 +102,6 @@ void KrossWord::createNew(const CrosswordData &crosswordData)
 {
     createNew(CrosswordTypeInfo::infoFromType(crosswordData.type), QSize(crosswordData.width, crosswordData.height));
 
-    setTitle(crosswordData.title);
-    setAuthors(crosswordData.authors);
-    setCopyright(crosswordData.copyright);
-    setNotes(crosswordData.notes);
-
     foreach (ClueInfo clueInfo, crosswordData.clues) {
         ClueCell *clueCell;
 
@@ -166,6 +161,11 @@ void KrossWord::createNew(const CrosswordData &crosswordData)
             letter->setConfidence(confidenceInfo.confidence);
         }
     }
+
+    setTitle(crosswordData.title);
+    setAuthors(crosswordData.authors);
+    setCopyright(crosswordData.copyright);
+    setNotes(crosswordData.notes);
 }
 
 void KrossWord::createNew(const CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize)

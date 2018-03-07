@@ -193,7 +193,7 @@ bool PuzManager::read(CrosswordData &crossData)
 
     crossData.width = int(m_puzData.width);
     crossData.height = int(m_puzData.height);
-    crossData.type = Crossword::CrosswordType::American; // PUZ is always American type
+    crossData.type = Crossword::CrosswordType::FreeCrossword; // Previously American, but some PUZs contain non-American puzzles...
     crossData.title = QString::fromLatin1(m_puzData.title);
     crossData.authors = QString::fromLatin1(m_puzData.authors);
     crossData.copyright = QString::fromLatin1(m_puzData.copyright);

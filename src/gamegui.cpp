@@ -450,7 +450,6 @@ bool GameGui::loadFile(const QUrl &url, bool loadCrashedFile)
         m_undoStackLoaded = false;
         statusBar()->showMessage(i18n("Error loading '%1': %2", url.path(), ioManager.errorString())); //CHECK: in Library statusbar isn't visible...
     } else {
-
         bool wasBlocking = krossWord()->blockSignals(true); // CHECK: do we still need?
         krossWord()->createNew(crosswordData);
         krossWord()->blockSignals(wasBlocking);
@@ -494,7 +493,7 @@ bool GameGui::loadFile(const QUrl &url, bool loadCrashedFile)
             }
         }
 
-        if (krossWord()->isEmpty()) {
+        if (krossWord()->isEmpty()) { // for new crossword (not from template)
             setEditMode(true);
         }
 

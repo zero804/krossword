@@ -82,11 +82,11 @@ QSize MainWindow::sizeHint() const
 
 void MainWindow::loadFile(const QUrl &url, bool loadCrashedFile)
 {
-    setupGameGui(); // CHECK: what if loaded == false?
-    bool loaded = m_gameGui->loadFile(url, loadCrashedFile);
+    setupGameGui();
 
-    if (loaded) {
-        m_mainStackedBar->setCurrentIndex(m_mainStackedBar->indexOf(m_gameGui));
+    if (m_gameGui->loadFile(url, loadCrashedFile)) {
+        m_mainStackedBar->setCurrentWidget(m_gameGui);
+
         if (!m_libraryGui->libraryManager()->isInLibrary(url.path())) {
             QString msg = i18n("Would you like to add the crossword into the library?");
             int result = KMessageBox::questionYesNo(this, msg, i18n("Save crossword"), KStandardGuiItem::yes(), KStandardGuiItem::no());
@@ -106,8 +106,9 @@ bool MainWindow::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswor
                                          const QString& notes)
 {
     setupGameGui();
+
     if (m_gameGui->createNewCrossWord(crosswordTypeInfo, crosswordSize, title, authors, copyright, notes)) {
-        m_mainStackedBar->setCurrentIndex(m_mainStackedBar->indexOf(m_gameGui));
+        m_mainStackedBar->setCurrentWidget(m_gameGui);
         return true;
     } else {
         return false;
@@ -117,8 +118,9 @@ bool MainWindow::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswor
 bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title, const QString& authors, const QString& copyright, const QString& notes)
 {
     setupGameGui();
+
     if (m_gameGui->createNewCrossWordFromTemplate(templateFilePath, title, authors, copyright, notes)) {
-        m_mainStackedBar->setCurrentIndex(m_mainStackedBar->indexOf(m_gameGui));
+        m_mainStackedBar->setCurrentWidget(m_gameGui);
         return true;
     } else {
         return false;

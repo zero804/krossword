@@ -1309,7 +1309,6 @@ void ClueCell::setHighlight(bool enable)
     }
 
     krossWord()->animator()->endEnqueueAnimations();
-
 }
 
 AnswerOffset ClueCell::answerOffset() const {

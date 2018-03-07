@@ -952,9 +952,10 @@ void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* opt
             y = option->rect.height() * 0.35f;
         }
 
-        if(krossWord()->crosswordTypeInfo().crosswordType != CrosswordType::American) {
+        if (krossWord()->crosswordTypeInfo().crosswordType != CrosswordType::American) {
             switch (clueHorizontal()->answerOffset()) {
             case OnClueCell:
+                break; // no arrow because no visible cluecell
             case OffsetRight:
                 KrosswordRenderer::self()->renderElement(p,
                         "arrow_right",
@@ -1020,6 +1021,7 @@ void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* opt
         if(krossWord()->crosswordTypeInfo().crosswordType != CrosswordType::American) {
             switch (clueVertical()->answerOffset()) {
             case OnClueCell:
+                break; // no arrow because no visible cluecell
             case OffsetBottom:
                 KrosswordRenderer::self()->renderElement(p, "arrow_down",
                         QRect(option->rect.left() + x, option->rect.top() + 1,
