@@ -964,7 +964,7 @@ void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* opt
             case OffsetTop:
                 KrosswordRenderer::self()->renderElement(p,
                         "arrow_bottom_right",
-                        QRect(option->rect.left() + x, option->rect.top() + krossWord()->getCellSize().height() - 1 - arrowWidth,
+                        QRect(option->rect.left() + x, option->rect.bottom() + 1 - arrowWidth,
                               arrowLength, arrowWidth));
                 break;
             case OffsetBottom:
@@ -1036,8 +1036,8 @@ void LetterCell::drawClueArrows(QPainter* p, const QStyleOptionGraphicsItem* opt
             case OffsetLeft:
                 KrosswordRenderer::self()->renderElement(p,
                         "arrow_right_down",
-                        QRect(option->rect.left() + krossWord()->getCellSize().width() -
-                              1 - arrowLength, option->rect.top() + y, arrowLength, arrowWidth));
+                        QRect(option->rect.right() - arrowLength, option->rect.top() + y,
+                              arrowLength, arrowWidth));
                 break;
             case OffsetBottomRight:
                 KrosswordRenderer::self()->renderElement(p,
