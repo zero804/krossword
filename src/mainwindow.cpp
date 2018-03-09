@@ -415,7 +415,7 @@ void MainWindow::currentTabChanged(int index)
         optionsList << m_gameGui->toolBarMenuAction();
         optionsList << m_gameGui->action(m_gameGui->actionName(GameGui::ShowClueDock));
         optionsList << m_gameGui->action(m_gameGui->actionName(GameGui::ShowUndoViewDock));
-        optionsList << m_gameGui->action(m_gameGui->actionName(GameGui::ShowCurrentCellDock));
+        optionsList << m_gameGui->action(m_gameGui->actionName(GameGui::ShowCurrentClueDock));
     } else { // tabLibrary
         setCaption(i18n("Library"));
 

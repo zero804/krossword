@@ -34,7 +34,7 @@
 #include "dialogs/crosswordpropertiesdialog.h"
 #include "dialogs/convertcrossworddialog.h"
 #include "dialogs/statisticsdialog.h"
-#include "dialogs/currentcellwidget.h"
+#include "dialogs/currentcluewidget.h"
 //CHECK: #include "dialogs/printpreviewdialog.h"
 #include "dictionary.h"
 
@@ -197,7 +197,7 @@ GameGui::GameGui(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
 
     addDockWidget(Qt::RightDockWidgetArea, createClueDock());
     addDockWidget(Qt::RightDockWidgetArea, createUndoViewDock());
-    addDockWidget(Qt::RightDockWidgetArea, createCurrentCellDock());
+    addDockWidget(Qt::RightDockWidgetArea, createCurrentClueDock());
 
     setupActions();
     setupGUI(StatusBar | ToolBar /*| Keys*/ | Save | Create, "krossword_crossword_ui.rc");
@@ -318,8 +318,8 @@ const char *GameGui::actionName(GameGui::Action actionEnum) const
         return "showClueDock";
     case ShowUndoViewDock:
         return "showUndoViewDock";
-    case ShowCurrentCellDock:
-        return "showCurrentCellDock";
+    case ShowCurrentClueDock:
+        return "showCurrentClueDock";
 
     case RecentTab_RecentFilesRemove:
         return "recent_files_remove";
@@ -363,7 +363,7 @@ void GameGui::setEditMode(bool editMode)
         m_clueTree->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed);
         toolBar("editToolBar")->setVisible(true);
 
-        m_currentCellDock->show();
+        m_currentClueDock->show();
         m_undoViewDock->show();
     } else {
         if (krossWord()->crosswordTypeInfo().clueType == NumberClues1To26
@@ -1173,11 +1173,11 @@ void GameGui::setupActions()
     showUndoViewDockAction->setShortcut(QKeySequence(Qt::Key_F4));
     showUndoViewDockAction->setText(i18n("Show Edit History Dock"));
 
-    QAction *showCurrentCellDockAction = m_currentCellDock->toggleViewAction();
-    ac->addAction(actionName(ShowCurrentCellDock), showCurrentCellDockAction);
-    showCurrentCellDockAction->setShortcut(QKeySequence(Qt::Key_F2));
-    showCurrentCellDockAction->setText(i18n("Show Current Cell Dock"));
-    connect(showCurrentCellDockAction, SIGNAL(toggled(bool)), this, SLOT(currentCellDockToggled(bool)));
+    QAction *showCurrentClueDockAction = m_currentClueDock->toggleViewAction();
+    ac->addAction(actionName(ShowCurrentClueDock), showCurrentClueDockAction);
+    showCurrentClueDockAction->setShortcut(QKeySequence(Qt::Key_F2));
+    showCurrentClueDockAction->setText(i18n("Show Current Clue Dock"));
+    connect(showCurrentClueDockAction, SIGNAL(toggled(bool)), this, SLOT(currentClueDockToggled(bool)));
 
     // Edit mode actions
     KToggleAction *enableEditModeAction = new KToggleAction(QIcon::fromTheme(QStringLiteral("document-edit")), i18nc("@action:intoolbar", "Edit Mode"), this);
@@ -1406,40 +1406,40 @@ QDockWidget *GameGui::createUndoViewDock()
     return m_undoViewDock;
 }
 
-QDockWidget* GameGui::createCurrentCellDock()
+QDockWidget* GameGui::createCurrentClueDock()
 {
-    m_currentCellWidget = new CurrentCellWidget(krossWord(), new Dictionary); //CHECK: mainwindow getDictionary
-    m_currentCellDock = new QDockWidget(i18n("Current Cell"), this);
-    m_currentCellDock->setObjectName("currentCellDock");
-    m_currentCellDock->setWidget(m_currentCellWidget);
+    m_currentClueWidget = new CurrentClueWidget(krossWord(), new Dictionary); //CHECK: mainwindow getDictionary
+    m_currentClueDock = new QDockWidget(i18n("Current Clue"), this);
+    m_currentClueDock->setObjectName("currentClueDock");
+    m_currentClueDock->setWidget(m_currentClueWidget);
 
-    connect(m_currentCellWidget,
+    connect(m_currentClueWidget,
             SIGNAL(changeAnswerOffsetRequest(ClueCell*, AnswerOffset)),
             this, SLOT(changeAnswerOffsetRequested(ClueCell*, AnswerOffset)));
-    connect(m_currentCellWidget,
+    connect(m_currentClueWidget,
             SIGNAL(changeOrientationRequest(ClueCell*, Qt::Orientation)),
             this, SLOT(changeOrientationRequested(ClueCell*, Qt::Orientation)));
-    connect(m_currentCellWidget, SIGNAL(changeClueTextRequest(ClueCell*, QString)),
+    connect(m_currentClueWidget, SIGNAL(changeClueTextRequest(ClueCell*, QString)),
             this, SLOT(changeClueTextRequested(ClueCell*, QString)));
-    connect(m_currentCellWidget,
+    connect(m_currentClueWidget,
             SIGNAL(changeClueAndCorrectAnswerRequest(ClueCell*, QString, QString)),
             this, SLOT(changeClueAndCorrectAnswerRequested(ClueCell*, QString, QString)));
-    connect(m_currentCellWidget,
+    connect(m_currentClueWidget,
             SIGNAL(setSolutionWordIndexRequest(SolutionLetterCell*, int)),
             this, SLOT(setSolutionWordIndexRequested(SolutionLetterCell*, int)));
-    connect(m_currentCellWidget,
+    connect(m_currentClueWidget,
             SIGNAL(convertToLetterCellRequest(SolutionLetterCell*)),
             this, SLOT(convertToLetterCellRequested(SolutionLetterCell*)));
-    connect(m_currentCellWidget,
+    connect(m_currentClueWidget,
             SIGNAL(convertToSolutionLetterCellRequest(LetterCell*)),
             this, SLOT(convertToSolutionLetterCellRequested(LetterCell*)));
 
-    return m_currentCellDock;
+    return m_currentClueDock;
 }
 
-void GameGui::currentCellDockToggled(bool checked)
+void GameGui::currentClueDockToggled(bool checked)
 {
-    m_currentCellWidget->setWatchForChanges(checked);
+    m_currentClueWidget->setWatchForChanges(checked);
 }
 
 void GameGui::changeAnswerOffsetRequested(ClueCell* clueCell,
@@ -1716,7 +1716,7 @@ void GameGui::setCurrentFileName(const QString& fileName)
         setEditMode(false);
         m_clueDock->setEnabled(false);
         m_undoViewDock->setEnabled(false);
-        m_currentCellDock->setEnabled(false);
+        m_currentClueDock->setEnabled(false);
         m_undoStack->clear(); // This causes the modification flag to be set
         if (m_clueModel) {
             m_clueModel->clear();
@@ -1729,7 +1729,7 @@ void GameGui::setCurrentFileName(const QString& fileName)
         stateChanged("no_file_opened", StateReverse);
         m_clueDock->setEnabled(true);
         m_undoViewDock->setEnabled(true);
-        m_currentCellDock->setEnabled(true);
+        m_currentClueDock->setEnabled(true);
 
         emit currentFileChanged(m_curFileName, oldFileName);
     }

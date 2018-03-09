@@ -17,7 +17,7 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "currentcellwidget.h"
+#include "currentcluewidget.h"
 
 #include "../krossword.h"
 #include "../cells/krosswordcell.h"
@@ -30,7 +30,7 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-CurrentCellWidget::CurrentCellWidget(KrossWord *krossWord, Dictionary *dictionary, QWidget* parent)
+CurrentClueWidget::CurrentClueWidget(KrossWord *krossWord, Dictionary *dictionary, QWidget* parent)
     : QWidget(parent), m_krossWord(0), m_dictionary(dictionary),
       m_currentCell(0)
 {
@@ -39,7 +39,7 @@ CurrentCellWidget::CurrentCellWidget(KrossWord *krossWord, Dictionary *dictionar
     setKrossWord(krossWord);
 }
 
-CurrentCellWidget::~CurrentCellWidget()
+CurrentClueWidget::~CurrentClueWidget()
 {
     for (QHash<CellType, QWidget*>::const_iterator it = m_widgets.constBegin();
             it != m_widgets.constEnd(); ++it) {
@@ -51,7 +51,7 @@ CurrentCellWidget::~CurrentCellWidget()
     }
 }
 
-void CurrentCellWidget::setKrossWord(KrossWord* krossWord)
+void CurrentClueWidget::setKrossWord(KrossWord* krossWord)
 {
     if (m_krossWord)
         setWatchForChanges(false);
@@ -60,7 +60,7 @@ void CurrentCellWidget::setKrossWord(KrossWord* krossWord)
     setWatchForChanges();
 }
 
-void CurrentCellWidget::setWatchForChanges(bool enabled)
+void CurrentClueWidget::setWatchForChanges(bool enabled)
 {
     if (m_krossWord) {
         if (enabled) {
@@ -82,7 +82,7 @@ void CurrentCellWidget::setWatchForChanges(bool enabled)
     }
 }
 
-void CurrentCellWidget::editModeChanged(bool editable)
+void CurrentClueWidget::editModeChanged(bool editable)
 {
     Q_UNUSED(editable);
 
@@ -91,7 +91,7 @@ void CurrentCellWidget::editModeChanged(bool editable)
     currentCellChanged(currentCell, currentCell);
 }
 
-void CurrentCellWidget::convertToSolutionLetterCellRequested()
+void CurrentClueWidget::convertToSolutionLetterCellRequested()
 {
     Q_ASSERT(m_currentCellType == ClueCellType);
 
@@ -100,7 +100,7 @@ void CurrentCellWidget::convertToSolutionLetterCellRequested()
     emit convertToSolutionLetterCellRequest(w->letterCell());
 }
 
-void CurrentCellWidget::setupNoCell()
+void CurrentClueWidget::setupNoCell()
 {
 //   qDebug() << "Setup no cell";
 
@@ -118,26 +118,19 @@ void CurrentCellWidget::setupNoCell()
     replaceCurrentWidget(EmptyCellType, w);
 }
 
-void CurrentCellWidget::setupNoPropertiesCell(KrossWordCell *cell)
+void CurrentClueWidget::setupNoPropertiesCell(KrossWordCell *cell)
 {
-
     m_noCell = true;
     m_currentClue = nullptr;
 
     // Recreate every time
     QWidget *w;
     QGridLayout *layout = new QGridLayout;
-    QString text = i18n("%1 selected at (%2, %3).",
-                        displayStringFromCellType(cell->getCellType()),
-                        cell->coord().first + 1, cell->coord().second + 1);
-    QLabel *label = new QLabel(text);
-    label->setWordWrap(true);
-    layout->addWidget(label, 0, 0, 1, 2);
 
     ClueCell *clue = qgraphicsitem_cast< ClueCell* >(cell);
     if (clue) {
         QLabel *lblClue = new QLabel(i18n("Clue:"));
-        QLabel *lblCurrentAnswer = new QLabel(i18n("Current Answer:"));
+        QLabel *lblCurrentAnswer = new QLabel(i18n("Answer:"));
 
         QFont font = lblClue->font();
         font.setBold(true);
@@ -167,13 +160,9 @@ void CurrentCellWidget::setupNoPropertiesCell(KrossWordCell *cell)
         layout->addWidget(lblCurrentAnswer, 2, 0);
         layout->addWidget(lblCurrentAnswerValue, 2, 1);
 
-        layout->addItem(new QSpacerItem(10, 10, QSizePolicy::Ignored,
-                                        QSizePolicy::Expanding),
-                        3, 0, 1, 2);
+        layout->addItem(new QSpacerItem(10, 10, QSizePolicy::Ignored, QSizePolicy::Expanding), 3, 0, 1, 2);
     } else {
-        layout->addItem(new QSpacerItem(10, 10, QSizePolicy::Ignored,
-                                        QSizePolicy::Expanding),
-                        1, 0);
+        layout->addItem(new QSpacerItem(10, 10, QSizePolicy::Ignored, QSizePolicy::Expanding), 1, 0);
     }
 
     w = new QWidget;
@@ -189,15 +178,17 @@ void CurrentCellWidget::setupNoPropertiesCell(KrossWordCell *cell)
     m_widgets.insert(AllCellTypes, w);
 }
 
-void CurrentCellWidget::setupClueCell(ClueCell* clue, LetterCell *letter)
+void CurrentClueWidget::setupClueCell(ClueCell* clue, LetterCell *letter)
 {
-    if (!clue)
+    if (!clue) {
         return;
+    }
 
 //   qDebug() << "setupClueCell";
 
-    if (!letter)
+    if (!letter) {
         letter = clue->firstLetter();
+    }
 
     if (letter->getCellType() == SolutionLetterCellType) {
         setupSolutionLetterCell(qgraphicsitem_cast<SolutionLetterCell*>(letter));
@@ -255,11 +246,12 @@ void CurrentCellWidget::setupClueCell(ClueCell* clue, LetterCell *letter)
         }
 
         replaceCurrentWidget(ClueCellType, w);
-    } else
+    } else {
         setupNoPropertiesCell(clue);
+    }
 }
 
-void CurrentCellWidget::setupImageCell(ImageCell* image)
+void CurrentClueWidget::setupImageCell(ImageCell* image)
 {
     m_noCell = false;
     m_currentClue = nullptr;
@@ -278,7 +270,7 @@ void CurrentCellWidget::setupImageCell(ImageCell* image)
         setupNoPropertiesCell(image);
 }
 
-void CurrentCellWidget::setupSolutionLetterCell(SolutionLetterCell* solutionLetter)
+void CurrentClueWidget::setupSolutionLetterCell(SolutionLetterCell* solutionLetter)
 {
     m_noCell = false;
     m_currentClue = nullptr;
@@ -301,7 +293,7 @@ void CurrentCellWidget::setupSolutionLetterCell(SolutionLetterCell* solutionLett
         setupNoPropertiesCell(solutionLetter);
 }
 
-void CurrentCellWidget::replaceCurrentWidget(CellType newCellType,
+void CurrentClueWidget::replaceCurrentWidget(CellType newCellType,
         QWidget* newWidget)
 {
     if (layout()) {
@@ -337,12 +329,12 @@ void CurrentCellWidget::replaceCurrentWidget(CellType newCellType,
     newWidget->show();
 }
 
-void CurrentCellWidget::currentClueChanged(ClueCell* clue)
+void CurrentClueWidget::currentClueChanged(ClueCell* clue)
 {
     setupClueCell(clue, dynamic_cast<LetterCell*>(m_krossWord->currentCell()));
 }
 
-void CurrentCellWidget::currentCellChanged(KrossWordCell* currentCell,
+void CurrentClueWidget::currentCellChanged(KrossWordCell* currentCell,
         KrossWordCell* previousCell)
 {
     Q_UNUSED(previousCell)
@@ -382,7 +374,7 @@ void CurrentCellWidget::currentCellChanged(KrossWordCell* currentCell,
     }
 }
 
-void CurrentCellWidget::clearLayout()
+void CurrentClueWidget::clearLayout()
 {
     QList< QWidget* > children = findChildren< QWidget* >();
     foreach(QWidget * child, children) {

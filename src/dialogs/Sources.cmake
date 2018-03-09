@@ -7,7 +7,7 @@ set( krossword_SRCS ${krossword_SRCS}
    dialogs/movecellsdialog.cpp
    dialogs/crosswordpropertiesdialog.cpp
    dialogs/convertcrossworddialog.cpp
-   dialogs/currentcellwidget.cpp
+   dialogs/currentcluewidget.cpp
    dialogs/statisticsdialog.cpp
    dialogs/dictionarydialog.cpp
    dialogs/printpreviewdialog.cpp

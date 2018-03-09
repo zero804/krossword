@@ -36,7 +36,7 @@
 
 using namespace Crossword;
 
-class CurrentCellWidget;
+class CurrentClueWidget;
 class KrossWordPuzzleView;
 class UndoStackExt;
 class ClueModel;
@@ -146,7 +146,7 @@ public:
 
         ShowClueDock,
         ShowUndoViewDock,
-        ShowCurrentCellDock,
+        ShowCurrentClueDock,
 
         RecentTab_RecentFilesRemove
     };
@@ -302,7 +302,7 @@ protected slots:
     void convertToLetterCellRequested(SolutionLetterCell *solutionLetterCell);
     void convertToSolutionLetterCellRequested(LetterCell *letterCell);
 
-    void currentCellDockToggled(bool checked);
+    void currentClueDockToggled(bool checked);
 
     // KrossWord slots
     void currentClueChanged(ClueCell *question);
@@ -331,7 +331,7 @@ private:
     void updateSolutionInToolBar();
     QDockWidget *createClueDock();
     QDockWidget *createUndoViewDock();
-    QDockWidget *createCurrentCellDock();
+    QDockWidget *createCurrentClueDock();
 
     void adjustGuiToCrosswordType();
 
@@ -372,11 +372,11 @@ private:
 
     QDockWidget *m_clueDock;                    // Owned
     QDockWidget *m_undoViewDock;                // Owned
-    QDockWidget *m_currentCellDock;             // Owned
+    QDockWidget *m_currentClueDock;             // Owned
 
     QUndoView *m_undoView;                      // Owned
     UndoStackExt *m_undoStack;                  // Owned
-    CurrentCellWidget *m_currentCellWidget;     // Owned
+    CurrentClueWidget *m_currentClueWidget;     // Owned
     QTreeView *m_clueTree;                      // Owned
     ClueModel *m_clueModel;                     // Owned
     QItemSelectionModel *m_clueSelectionModel;  // Owned

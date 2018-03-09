@@ -40,13 +40,13 @@ using namespace Crossword;
 // class KrossWord;
 class Dictionary;
 
-class CurrentCellWidget : public QWidget
+class CurrentClueWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    CurrentCellWidget(KrossWord *krossWord, Dictionary *dictionary, QWidget* parent = 0);
-    ~CurrentCellWidget();
+    CurrentClueWidget(KrossWord *krossWord, Dictionary *dictionary, QWidget* parent = 0);
+    ~CurrentClueWidget();
 
     KrossWord *krossWord() const {
         return m_krossWord;
