@@ -2251,26 +2251,29 @@ void GameGui::currentClueChanged(ClueCell* clue)
         return;
     }
 
-    if (isInEditMode())
+    if (isInEditMode()) {
         stateChanged("clue_cell_highlighted");
+    }
 
-    if (clue->isHorizontal())
+    if (clue->isHorizontal()) {
         statusBar()->showMessage(
             i18n("Clue (across): \"%1\", %2 letters, current answer: \"%3\"",
                  clue->clueWithNumber(), clue->correctAnswer().length(),
                  clue->currentAnswer()));
-    else
+    } else {
         statusBar()->showMessage(
             i18n("Clue (down): \"%1\", %2 letters, current answer: \"%3\"",
                  clue->clueWithNumber(), clue->correctAnswer().length(),
                  clue->currentAnswer()));
+    }
 
     ClueItem *clueItem = m_clueModel->clueItem(clue);
     if (clueItem) {
         m_clueTree->selectionModel()->select(clueItem->index(), QItemSelectionModel::SelectCurrent | QItemSelectionModel::Rows);
         ((ClueListView*)m_clueTree)->animateScrollTo(clueItem->index());
-    } else
+    } else {
         qDebug() << "Clue not found in clue tree view:" << clue->clue();
+    }
 }
 
 void GameGui::answerChanged(ClueCell* clue, const QString &currentAnswer, bool statusbar)

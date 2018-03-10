@@ -31,8 +31,7 @@
 #include <QVBoxLayout>
 
 CurrentClueWidget::CurrentClueWidget(KrossWord *krossWord, Dictionary *dictionary, QWidget* parent)
-    : QWidget(parent), m_krossWord(0), m_dictionary(dictionary),
-      m_currentCell(0)
+    : QWidget(parent), m_krossWord(0), m_dictionary(dictionary), m_currentCell(0)
 {
     m_convertToSolutionLetter = nullptr;
     setupNoCell();
@@ -43,18 +42,21 @@ CurrentClueWidget::~CurrentClueWidget()
 {
     for (QHash<CellType, QWidget*>::const_iterator it = m_widgets.constBegin();
             it != m_widgets.constEnd(); ++it) {
-        if (it.key() == m_currentCellType)
+        if (it.key() == m_currentCellType) {
             continue; // Only delete widgets that aren't currently in the layout
+        }
 
-        if (it.value())
+        if (it.value()) {
             it.value()->deleteLater();
+        }
     }
 }
 
 void CurrentClueWidget::setKrossWord(KrossWord* krossWord)
 {
-    if (m_krossWord)
+    if (m_krossWord) {
         setWatchForChanges(false);
+    }
 
     m_krossWord = krossWord;
     setWatchForChanges();
@@ -95,8 +97,7 @@ void CurrentClueWidget::convertToSolutionLetterCellRequested()
 {
     Q_ASSERT(m_currentCellType == ClueCellType);
 
-    ClueCellWidgetWithConvertButton *w =
-        static_cast< ClueCellWidgetWithConvertButton* >(m_widgets[ClueCellType]);
+    ClueCellWidgetWithConvertButton *w = static_cast< ClueCellWidgetWithConvertButton* >(m_widgets[ClueCellType]);
     emit convertToSolutionLetterCellRequest(w->letterCell());
 }
 
@@ -124,55 +125,22 @@ void CurrentClueWidget::setupNoPropertiesCell(KrossWordCell *cell)
     m_currentClue = nullptr;
 
     // Recreate every time
-    QWidget *w;
-    QGridLayout *layout = new QGridLayout;
+    QFormLayout *layout = new QFormLayout;
 
     ClueCell *clue = qgraphicsitem_cast< ClueCell* >(cell);
     if (clue) {
-        QLabel *lblClue = new QLabel(i18n("Clue:"));
-        QLabel *lblCurrentAnswer = new QLabel(i18n("Answer:"));
+        QLabel *labelClue = new QLabel(clue->clue());
+        QLabel *labelAnswer = new QLabel(clue->currentAnswer());
+        labelClue->setWordWrap(true);
+        labelAnswer->setWordWrap(true);
 
-        QFont font = lblClue->font();
-        font.setBold(true);
-        lblClue->setFont(font);
-        lblCurrentAnswer->setFont(font);
-        lblClue->setAlignment(Qt::AlignRight);
-        lblCurrentAnswer->setAlignment(Qt::AlignRight);
-        lblClue->setWordWrap(true);
-        lblCurrentAnswer->setWordWrap(true);
-
-        // Give some time to animations TODO: fix crash here
-//       QApplication::processEvents( QEventLoop::ExcludeUserInputEvents, 20 );
-
-        QLabel *lblClueValue = new QLabel(clue->clue());
-        QLabel *lblCurrentAnswerValue = new QLabel(clue->currentAnswer());
-        lblClueValue->setWordWrap(true);
-        lblCurrentAnswerValue->setWordWrap(true);
-        lblClueValue->setAlignment(Qt::AlignLeft);
-        lblCurrentAnswerValue->setAlignment(Qt::AlignLeft);
-        //lblClueValue->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::MinimumExpanding);
-
-        // Give some time to animations TODO: fix crash here
-//       QApplication::processEvents( QEventLoop::ExcludeUserInputEvents, 20 );
-
-        layout->addWidget(lblClue, 1, 0);
-        layout->addWidget(lblClueValue, 1, 1);
-        layout->addWidget(lblCurrentAnswer, 2, 0);
-        layout->addWidget(lblCurrentAnswerValue, 2, 1);
-
-        layout->addItem(new QSpacerItem(10, 10, QSizePolicy::Ignored, QSizePolicy::Expanding), 3, 0, 1, 2);
-    } else {
-        layout->addItem(new QSpacerItem(10, 10, QSizePolicy::Ignored, QSizePolicy::Expanding), 1, 0);
+        layout->addRow(i18n("Clue:"), labelClue);
+        layout->addRow(i18n("Answer:"), labelAnswer);
     }
 
+    QWidget *w;
     w = new QWidget;
     w->setLayout(layout);
-//     m_widgets.insert( AllCellTypes, w );
-//   } else
-//     w = m_widgets[ AllCellTypes ];
-
-    // Give some time to animations  TODO: fix crash here
-//   QApplication::processEvents( QEventLoop::ExcludeUserInputEvents, 20 );
 
     replaceCurrentWidget(AllCellTypes, w);
     m_widgets.insert(AllCellTypes, w);
@@ -193,19 +161,7 @@ void CurrentClueWidget::setupClueCell(ClueCell* clue, LetterCell *letter)
     if (letter->getCellType() == SolutionLetterCellType) {
         setupSolutionLetterCell(qgraphicsitem_cast<SolutionLetterCell*>(letter));
         return;
-    };
-
-// if ( clue == m_currentClue
-// {
-//     if ( !letter && !m_convertToSolutionLetter )
-//       return;
-//     else if ( letter && m_convertToSolutionLetter ) {
-//       int pos = clue->posOfLetter( letter );
-//       m_convertToSolutionLetter->setText(
-//    i18n("Convert Letter &%1 to Solution Letter", pos + 1) );
-//       return;
-//     }
-//   }
+    }
 
     m_currentClue = clue;
     m_noCell = false;
@@ -266,8 +222,9 @@ void CurrentClueWidget::setupImageCell(ImageCell* image)
         }
 
         replaceCurrentWidget(ImageCellType, w);
-    } else
+    } else {
         setupNoPropertiesCell(image);
+    }
 }
 
 void CurrentClueWidget::setupSolutionLetterCell(SolutionLetterCell* solutionLetter)
@@ -289,36 +246,23 @@ void CurrentClueWidget::setupSolutionLetterCell(SolutionLetterCell* solutionLett
         }
 
         replaceCurrentWidget(SolutionLetterCellType, w);
-    } else
+    } else {
         setupNoPropertiesCell(solutionLetter);
+    }
 }
 
-void CurrentClueWidget::replaceCurrentWidget(CellType newCellType,
-        QWidget* newWidget)
+void CurrentClueWidget::replaceCurrentWidget(CellType newCellType, QWidget* newWidget)
 {
     if (layout()) {
         QWidget *w;
-        if (m_widgets.contains(m_currentCellType)
-                && (w = m_widgets[m_currentCellType])) {
+        if (m_widgets.contains(m_currentCellType) && (w = m_widgets[m_currentCellType])) {
             w->hide();
 
-//       SolutionLetterCellWidget *solLetterCellWidget;
             if (m_currentCellType == AllCellTypes)  {
                 w->deleteLater();
                 m_widgets.remove(AllCellTypes);
             }
-
-//  case SolutionLetterCellType:
-//    solLetterCellWidget = static_cast< SolutionLetterCellWidget* >( w );
-//    disconnect( solLetterCellWidget,
-//         SIGNAL(setSolutionWordIndexRequest(SolutionLetterCell*,int)),
-//         this, SLOT(setSolutionWordIndexRequested(SolutionLetterCell*,int)) );
-//    disconnect( solLetterCellWidget,
-//         SIGNAL(convertToLetterCellRequest(SolutionLetterCell*)),
-//         this, SLOT(convertToLetterCellRequested(SolutionLetterCell*)) );
-//    break;
         }
-
         delete layout();
     }
 
@@ -338,8 +282,9 @@ void CurrentClueWidget::currentCellChanged(KrossWordCell* currentCell,
         KrossWordCell* previousCell)
 {
     Q_UNUSED(previousCell)
-    if (currentCell == m_currentCell)
+    if (currentCell == m_currentCell) {
         return;
+    }
 
     m_currentCell = currentCell;
     if (currentCell) {
@@ -352,8 +297,7 @@ void CurrentClueWidget::currentCellChanged(KrossWordCell* currentCell,
             if (!m_krossWord->highlightedClue()) {
                 setupNoPropertiesCell(currentCell);
             } else {
-                setupClueCell(m_krossWord->highlightedClue(),
-                              qgraphicsitem_cast<LetterCell*>(currentCell));
+                setupClueCell(m_krossWord->highlightedClue(), qgraphicsitem_cast<LetterCell*>(currentCell));
             }
             break;
 
@@ -386,11 +330,8 @@ void CurrentClueWidget::clearLayout()
 }
 
 
-ClueCellWidgetWithConvertButton::ClueCellWidgetWithConvertButton(
-    ClueCell* clue, Dictionary *dictionary,
-    LetterCell* letter, QWidget* parent)
-    : QWidget(parent), m_letterCell(0),
-      m_convertToSolLetterButton(0), m_hLine(0)
+ClueCellWidgetWithConvertButton::ClueCellWidgetWithConvertButton(ClueCell* clue, Dictionary *dictionary, LetterCell* letter, QWidget* parent)
+    : QWidget(parent), m_letterCell(0), m_convertToSolLetterButton(0), m_hLine(0)
 {
     m_clueCellWidget = new ClueCellWidget(clue, dictionary);
     QFormLayout *layout = new QFormLayout;
@@ -415,8 +356,7 @@ void ClueCellWidgetWithConvertButton::setCells(ClueCell *clue, LetterCell *lette
         }
 
         int pos = clue->posOfLetter(letter);
-        m_convertToSolLetterButton->setText(i18n("Convert &Letter %1 to Solution Letter",
-                                            pos + 1));
+        m_convertToSolLetterButton->setText(i18n("Convert &Letter %1 to Solution Letter", pos + 1));
     } else if (m_letterCell) {
         // Remove the button and separation line
         l->removeWidget(m_convertToSolLetterButton);
