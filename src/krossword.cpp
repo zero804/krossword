@@ -1048,10 +1048,7 @@ void KrossWord::updateHeaderItem()
     } else {
         m_headerItem->setTextWidth(boundingRect().width()); // max width
         m_headerItem->setDefaultTextColor(m_theme->fontColor());
-        m_headerItem->setHtml(QString(i18n("<strong>%1</strong> by %2<br><small>%3</small>"))
-                              .arg(getTitle())
-                              .arg(getAuthors())
-                              .arg(getCopyright()));
+        m_headerItem->setHtml(i18n("<strong>%1</strong> by %2<br><small>%3</small>", getTitle(), getAuthors(), getCopyright()));
         m_headerItem->setVisible(true);
     }
 }

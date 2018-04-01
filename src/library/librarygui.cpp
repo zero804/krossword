@@ -195,12 +195,12 @@ void LibraryGui::downloadProviderChanged(int index)
     /*
     case ChrisWords:
         for (int i = 1; i <= 5; ++i) {
-            item = new QListWidgetItem(QString(i18n("Crossword %1")).arg(i));
+            item = new QListWidgetItem(i18n("Crossword %1", i));
             item->setData(Qt::UserRole, QString("https://dl.dropboxusercontent.com/u/91385912/PUZ00%1.puz").arg(i));
             ui_download.crosswords->addItem(item);
         }
         for (int i = 6; i <= 18; ++i) {
-            item = new QListWidgetItem(QString(i18n("Crossword %1")).arg(i));
+            item = new QListWidgetItem(i18n("Crossword %1", i));
             item->setData(Qt::UserRole, QString("https://dl.dropboxusercontent.com/u/91385912/PUZ0%1/PUZ0%1.puz").arg(i, 2, 10, QChar('0')));
             ui_download.crosswords->addItem(item);
         }
@@ -209,7 +209,7 @@ void LibraryGui::downloadProviderChanged(int index)
 
     case Motscroisesch:
         for (int i = 1; i <= 18; ++i) {
-            item = new SortedListWidgetItem(QString(i18n("Crossword %1")).arg(i));
+            item = new SortedListWidgetItem(i18n("Crossword %1", i));
             item->setData(Qt::UserRole, QString("http://www.mots-croises.ch/Grilles/HC/HC-00%1.puz").arg(i, 2, 10, QChar('0')));
             item->setData(Qt::UserRole + 1, i);
             ui_download.crosswords->addItem(item);
@@ -223,7 +223,7 @@ void LibraryGui::downloadProviderChanged(int index)
     case TheWeek: // CHECK: working from 302 to 429 at 28/10/2017
         int week = (QDate(2009, 6, 12).daysTo(QDate::currentDate())) / 7;
         for (int i = 1; i <= week; ++i) {
-            item = new SortedListWidgetItem(QString(i18n("Week %1")).arg(i));
+            item = new SortedListWidgetItem(i18n("Week %1", i));
             item->setData(Qt::UserRole, QString("http://api.theweek.com/sites/default/files/crosswords/Week%1.puz").arg(i, 2, 10, QChar('0')));
             item->setData(Qt::UserRole + 1, i);
             ui_download.crosswords->addItem(item);

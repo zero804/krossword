@@ -1741,7 +1741,7 @@ KrossWordPuzzleView *GameGui::createKrossWordPuzzleView()
                 new KrossWordPuzzleScene(
                     new KrossWord(KrosswordRenderer::self()->getCurrentTheme()), this), this);
 
-    view->scene()->setStickyFocus(true);
+    view->scene()->setStickyFocus(true); // CHECK: really needed?
     view->krossWord()->setLetterEditMode(EmitEditRequestsOnKeyboardEdit);
     //view->krossWord()->setInteractive();
     view->setMinimumSize(300, 300);
