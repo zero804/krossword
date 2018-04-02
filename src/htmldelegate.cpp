@@ -36,7 +36,7 @@ void HtmlDelegate::paint(QPainter* painter, const QStyleOptionViewItem &option, 
 
     QTextDocument doc;
     QTextOption textOption;
-    textOption.setWrapMode(QTextOption::NoWrap);
+    textOption.setWrapMode(QTextOption::WordWrap);
     doc.setDefaultTextOption(textOption);
 
     QRect docRect = opt.rect;
@@ -70,16 +70,17 @@ QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelInd
 
     QTextDocument doc;
     QTextOption textOption;
-    textOption.setWrapMode(QTextOption::NoWrap);
+    textOption.setWrapMode(QTextOption::WordWrap);
     doc.setDefaultTextOption(textOption);
     doc.setHtml(opt.text);
+    doc.adjustSize();
 
-    QRect docRect(0, 0, doc.size().width(), doc.size().height());
+    QRect delegateRect(0, 0, doc.size().width() + doc.documentMargin(), doc.size().height() + doc.documentMargin());
     if (index.data(Qt::DecorationRole).isValid()) {
-        docRect = docRect.united(QRect(0, 0, opt.decorationSize.width(), opt.decorationSize.height()));
+        delegateRect = delegateRect.united(QRect(0, 0, opt.decorationSize.width(), opt.decorationSize.height()));
     }
 
-    return QSize(docRect.width() + doc.documentMargin(), docRect.height() + doc.documentMargin());
+    return QSize(delegateRect.size());
 }
 
 //----------------------------------

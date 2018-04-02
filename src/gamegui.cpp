@@ -84,7 +84,6 @@ ClueListView::ClueListView(QWidget* parent) : QTreeView(parent), m_scrollAnimati
     setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     setContextMenuPolicy(Qt::CustomContextMenu);
     setHeaderHidden(true);
-    setUniformRowHeights(true); // to disable if try again word wrapping
 
     setItemDelegate(new HtmlDelegate(this));
 }

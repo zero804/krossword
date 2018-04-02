@@ -104,8 +104,9 @@ void ClueModel::updateClueOrientation(ClueCell* clue, Qt::Orientation newOrienta
     ClueItem *item = clueItem(clue);
     if (!item
             || (item->parent() == m_itemHorizontal && clue->isHorizontal())
-            || (item->parent() == m_itemVertical && clue->isVertical()))
+            || (item->parent() == m_itemVertical && clue->isVertical())) {
         return;
+    }
 
     removeRow(item->row(), item->parent()->index());
     addClue(clue);
