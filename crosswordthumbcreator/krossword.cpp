@@ -35,7 +35,7 @@
 
 
 KrossWord::KrossWord(int width, int height)
-    : QGraphicsObject(0)
+    : QGraphicsObject(nullptr)
 {
     init(width, height);
     fillWithEmptyCells();

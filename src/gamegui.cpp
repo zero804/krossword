@@ -71,7 +71,7 @@
 
 const int MIN_SECS_BETWEEN_AUTOSAVES = 30;
 
-ClueListView::ClueListView(QWidget* parent) : QTreeView(parent), m_scrollAnimation(0)
+ClueListView::ClueListView(QWidget* parent) : QTreeView(parent), m_scrollAnimation(nullptr)
 {
     setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
 

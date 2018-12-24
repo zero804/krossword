@@ -1836,8 +1836,7 @@ ResizeCrosswordCommand::ResizeCrosswordCommand(KrossWord *krossWord,
 
 //   qDebug() << "Resize Command | Anchor =" << anchor
 //       << "| New Size =" << newWidth << newHeight;
-    KrossWordCellList removedCells = krossWord->resizeGrid(
-                                         newWidth, newHeight, anchor, true);
+    KrossWordCellList removedCells = krossWord->setGridSize(newWidth, newHeight, anchor, true);
     foreach(KrossWordCell * cell, removedCells) {
         ClueCell *clue;
         ImageCell *image;
@@ -1884,7 +1883,7 @@ bool ResizeCrosswordCommand::mergeWith(const QUndoCommand* other)
 void ResizeCrosswordCommand::redoMaybe()
 {
     UndoCommandExt::redoMaybe(); // remove cells for resizing
-    m_krossWord->resizeGrid(m_newWidth, m_newHeight, m_anchor);
+    m_krossWord->setGridSize(m_newWidth, m_newHeight, m_anchor);
 }
 
 // bool ResizeCrosswordCommand::checkUndo( QString* errorMessage ) const {
@@ -1900,7 +1899,7 @@ void ResizeCrosswordCommand::redoMaybe()
 
 void ResizeCrosswordCommand::undoMaybe()
 {
-    m_krossWord->resizeGrid(m_oldWidth, m_oldHeight, m_anchor);
+    m_krossWord->setGridSize(m_oldWidth, m_oldHeight, m_anchor);
     UndoCommandExt::undoMaybe(); // reinsert cells that were removed by the resizing
 
     // TODO: Re-add removed clues (by child commands of remove invalidated cells command)

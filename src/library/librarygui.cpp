@@ -418,7 +418,7 @@ void LibraryGui::libraryExportSlot()
                 QPixmap pix = krossWord.toPixmap(QSize(ui_export_to_image.width->value(), ui_export_to_image.height->value()));
                 delete exportToImageDlg;
 
-                if (!pix.save(fileName, 0, 0/*0 means max compression for png fileformat*/)) {
+                if (!pix.save(fileName, nullptr/*format from filename*/, 0/*0 means max compression for png fileformat*/)) {
                     qDebug() << "Export failed:" << fileName;
                     KMessageBox::error(this, i18n("Couldn't export the image to the specified file."));
                 }
@@ -582,7 +582,6 @@ void LibraryGui::libraryNewFolderSlot()
 void LibraryGui::libraryCreateCrosswordSlot()
 {
     QPointer<CreateNewCrosswordDialog> dialog = new CreateNewCrosswordDialog(this);
-
     if (dialog->exec() == QDialog::Accepted) {
         if (dialog->useTemplate()) {
             m_mainWindow->createNewCrossWordFromTemplate(dialog->templateFilePath(),
@@ -597,7 +596,6 @@ void LibraryGui::libraryCreateCrosswordSlot()
                                              dialog->copyright(), dialog->notes());
         }
     }
-
     delete dialog;
 }
 

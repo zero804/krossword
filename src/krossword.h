@@ -214,7 +214,7 @@ public:
     * @param height The height of the new crossword. That is, how many vertical
     * cells should be created.
     * @see resizeGrid() */
-    explicit KrossWord(const KrosswordTheme *theme = nullptr, int width = 0, int height = 0);
+    explicit KrossWord(const KrosswordTheme *theme = nullptr, uint width = 0, uint height = 0);
 
     virtual ~KrossWord();
 
@@ -254,17 +254,19 @@ public:
     * if @p simulate is true.
     * @returns The conversion information to convert from the current
     * crossword type to the one described in @p newInfo. */
-    ConversionInfo convertToType(CrosswordTypeInfo newInfo,
-                                 bool simulate = false);
+    ConversionInfo convertToType(CrosswordTypeInfo newInfo, bool simulate = false);
+
     /** Generates conversion information to convert from the current
     * crossword type to the one described in @p newInfo. To perform the
     * conversion described in the conversion information, pass it to
     * @ref executeConversionInfo. To get a string with user readable
     * information about the conversion use @ref conversionInfoToString. */
     ConversionInfo generateConversionInfo(CrosswordTypeInfo newInfo);
+
     /** Executes the conversion described in conversionInfo. To get
     * conversion information use @ref generateConversionInfo. */
     void executeConversionInfo(ConversionInfo conversionInfo);
+
     /** Returns a user readable info string describing what cells get removed
     * when performing the conversion described in @p conversionInfo. */
     QString conversionInfoToString(ConversionInfo conversionInfo);
@@ -278,8 +280,7 @@ public:
     /** Gets the clue cell at the coordinates @p coord with the given @p orientation.
     * If the clue cell is hidden, it gets the clue cell with @p orientation of the
     * letter cell at @p coord. If no clue cell could be found, it returns NULL. */
-    ClueCell *findClueCell(const Coord &coord, Qt::Orientation orientation,
-                           AnswerOffset answerOffset) const;
+    ClueCell *findClueCell(const Coord &coord, Qt::Orientation orientation, AnswerOffset answerOffset) const;
 
     /** Gets the clue cell with the given zero-based clue number @p clueNumber.
     * If no clue cell could be found, it returns NULL. */
@@ -292,6 +293,7 @@ public:
     QString getTitle() const {
         return m_title;
     }
+
     /** Sets the title of the crossword to @p title. */
     void setTitle(const QString &title);
 
@@ -299,6 +301,7 @@ public:
     QString getAuthors() const {
         return m_authors;
     }
+
     /** Sets the authors string to @p authors. */
     void setAuthors(const QString &authors);
 
@@ -306,6 +309,7 @@ public:
     QString getCopyright() const {
         return m_copyright;
     }
+
     /** Sets the copyright information string to @p copyright. */
     void setCopyright(const QString &copyright);
 
@@ -313,6 +317,7 @@ public:
     QString getNotes() const {
         return m_notes;
     }
+
     /** Sets the notes of the crossword to @p notes. */
     void setNotes(const QString &notes);
 
@@ -423,8 +428,7 @@ public:
                             Qt::Orientation orientation,
                             const Offset &answerOffset,
                             const QString &answer,
-                            ErrorTypes errorTypesToIgnore =
-                                DontIgnoreErrors,
+                            ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
                             bool allowDoubleClueCells = true,
                             ClueCell *excludedClue = NULL);
 
@@ -439,8 +443,7 @@ public:
                                       Qt::Orientation newOrientation,
                                       Offset newAnswerOffset,
                                       const QString &newCorrectAnswer,
-                                      ErrorTypes errorTypesToIgnore =
-                                          DontIgnoreErrors,
+                                      ErrorTypes errorTypesToIgnore = DontIgnoreErrors,
                                       bool allowDoubleClueCells = true,
                                       SolutionLetterCellList *removedSolutionLetterCells = nullptr);
 
@@ -477,8 +480,7 @@ public:
     * @return The number of empty cells or letter cells which doesn't already
     * have a clue in @p orientation. These cells can be used for the answer
     * letter cells of a clue cell. */
-    int maxAnswerLengthAt(const Coord &coord, Qt::Orientation orientation,
-                          ClueCell *excludedClue = nullptr);
+    int maxAnswerLengthAt(const Coord &coord, Qt::Orientation orientation, ClueCell *excludedClue = nullptr);
 
     bool correctLettersAt(const Coord &coord, Qt::Orientation orientation,
                           int letterCount, QString *correctLetters,
@@ -486,91 +488,103 @@ public:
 
     void setupSameLetterSynchronization();
     void removeSameLetterSynchronization();
-    void removeSynchronization(
-        SyncMethods syncMethods = SyncAll,
-        SyncCategories syncCategories =
-            AllSyncCategories);
+    void removeSynchronization(SyncMethods syncMethods = SyncAll, SyncCategories syncCategories = AllSyncCategories);
 
     /** Returns a list of all cells of the crossword.
     * @see KrossWordCell::cellType() */
     KrossWordCellList cells(CellTypes cellTypes = AllCellTypes) const;
+
     /** Returns a list of cells beginning with the cell at @p coord and going
     * in direction @p orientation.
     * @param coord The coordinates of the first cell in the returned list.
     * @param orientation The direction to go to collect the cells.
     * @param count The maximal number of cells or -1 to get all cells in the
     * given direction. */
-    KrossWordCellList cells(const Coord &coord,
-                            Qt::Orientation orientation,
-                            int count = -1) const;
+    KrossWordCellList cells(const Coord &coord, Qt::Orientation orientation, int count = -1) const;
+
     /** Returns a list of empty cells of the crossword.
     * @see KrossWordCell::cellType() */
     EmptyCellList emptyCells() const;
+
     /** Returns a list of all clues of the crossword. */
     ClueCellList clues() const {
         return m_clues;
     }
+
     /** Gets all horizontal and vertical clues, sorted by clue number (if the
     * clues have a clue number). */
-    void clues(ClueCellList *horizontalClues,
-               ClueCellList *verticalClues) const;
+    void clues(ClueCellList *horizontalClues, ClueCellList *verticalClues) const;
+
     /** Returns a list of all letters of the crossword. */
     LetterCellList letters() const;
+
     /** Returns a list of all empty letters of the crossword. */
     LetterCellList emptyLetters() const;
+
     /** Returns a list of all letters that form the solution word of the crossword. */
     SolutionLetterCellList solutionWordLetters() const {
         return m_solutionLetters;
     }
+
     /** Returns a list of all images of the crossword. */
     ImageCellList images() const;
 
     /** Solve the crossword automatically by filling all correct letters into
     * the letter cells of this crossword. */
     void solve();
+
     /** Check if the crossword is correctly filled with letters.
     * @returns true If all letters are filled and correct.
     * @returns false Otherwise. */
     bool check() const;
+
     /** Clears all letter cells. */
     void clear();
-    /** Resizes the crossword grid. The grid is then filled with empty cells.
+
+    /** Set the crossword grid. The grid is then filled with empty cells.
     * @param width The new width.
     * @param height The new height.
     * @param simulate If true, no resizing is actually done, but the cells that
     * would have been are returned. If false, the crossword grid is resized.
     * @returns A list of cells that were removed. */
-    KrossWordCellList resizeGrid(uint width, uint height,
-                                 ResizeAnchor anchor = AnchorCenter, bool simulate = false);
+    KrossWordCellList setGridSize(uint width, uint height, ResizeAnchor anchor = AnchorCenter, bool simulate = false);
     KrossWordCellList moveCells(int dx, int dy, bool simulate = false);
+
     /** Removes all cells, replacing them with empty cells.
     * @note To really delete all cells, you can resize the crossword to 0x0.
     * @see resizeGrid() */
     void removeAllCells();
+
     /** Returns the size of one crossword cell. */
     QSizeF getCellSize() const {
         return m_cellSize;
     }
+
     /** Checks if this crossword has a solution word. It checks if there are any
     * solution letter cells. */
     bool hasSolutionWord() const {
         return !solutionWordLetters().isEmpty();
     }
+
     /** Gets the correct solution word.
     * @see currentSolutionWord */
     QString solutionWord(const QChar &charNonLinkedLetters = ' ') const;
+
     /** Gets the solution word as it is currently solved. Not solved (empty)
     * letter cells generate a '-' in the returned string.
     * @see solutionWord */
     QString currentSolutionWord() const;
+
     /** Gets the currently highlighted clue.
     * @see setHighlightedClue */
     ClueCell *highlightedClue() const {
         return m_highlightedClue;
     }
+
     ClueCell *previousHighlightedClue() const {
         return m_previousHighlightedClue;
     }
+
     /** Sets the highlighted clue. All letter cells and the clue cell
     * are then highlighted. A previously highlighted clue will no longer be
     * highlighted.
@@ -608,10 +622,12 @@ public:
     inline uint width() const {
         return m_krossWordGrid->width();
     }
+
     /** Gets the height of the crossword grid. */
     inline uint height() const {
         return m_krossWordGrid->height();
     }
+
     /** Returns true, if the given coordinates are inside the crossword grid. */
     inline bool inside(Coord coord) const {
         return m_krossWordGrid->inside(coord);
@@ -650,6 +666,7 @@ public:
     bool isEditable() const {
         return m_editable;
     }
+
     /** Enables / disables the edit mode for the crossword.
     * @see isEditable.
     * @see setInteractive. */
@@ -668,6 +685,7 @@ public:
     QColor emptyCellColorForPrinting() const {
         return m_emptyCellColorForPrinting;
     }
+
     void setEmptyCellColorForPrinting(const QColor &color) {
         m_emptyCellColorForPrinting = color;
     }
@@ -687,6 +705,7 @@ public:
     EditMode letterEditMode() const {
         return m_letterEditMode;
     }
+
     /** Changes the edit mode of all letter cells. */
     void setLetterEditMode(EditMode editMode) {
         m_letterEditMode = editMode;
@@ -695,6 +714,7 @@ public:
     KeyboardNavigation keyboardNavigation() const {
         return m_keyboardNavigation;
     }
+
     void setKeyboardNavigation(KeyboardNavigation keyboardNavigation =
                                    DefaultKeyboardNavigation) {
         m_keyboardNavigation = keyboardNavigation;
@@ -709,6 +729,7 @@ public:
     const KrosswordTheme *theme() const {
         return m_theme;
     }
+
     void setTheme(const KrosswordTheme *theme);
     
 protected:
@@ -730,6 +751,7 @@ protected:
     * afterwards so use with care. This method is used by @ref resizeGrid().
     * @see removeAllCells() */
     void deleteAllCells();
+
     /** Removes the cell @p cell and inserts the cell @p newCell at the same
     * coordinates.
     * @param cell The cell to replace.
@@ -737,6 +759,7 @@ protected:
     * removing it. This is needed to assure consistency. Should not be NULL.
     * @see removeCell */
     void replaceCell(KrossWordCell *cell, KrossWordCell *newCell);
+
     /** Removes the cell at the given coordinates and inserts the new @p cell.
     * @param coord The coordinates of the cell to replace.
     * @param cell The cell to insert at the given coordinates after removing
@@ -745,10 +768,12 @@ protected:
     inline void replaceCell(const Coord &coord, KrossWordCell *newCell) {
         replaceCell(coord, newCell, true);
     };
+
     /** Removes the cell @p cell and inserts an empty cell instead.
     * @param cell The cell to remove.
     * @see replaceCell*/
     void removeCell(KrossWordCell *cell);
+
     /** Removes the cell at the given coordinates and inserts an empty cell instead.
     * @param coord The coordinates of the cell to remove.
     * @see replaceCell */
@@ -757,20 +782,20 @@ protected:
 
     // Maybe this should also be done with signals/slots..? I think this way it's
     // easier, because the cells don't need all to be connected.
+
     void emitCustomContextMenuRequested(const QPointF &pos, KrossWordCell *cell) {
         emit customContextMenuRequested(pos, cell);
     };
-    void emitLetterEditRequest(LetterCell *letter, const QChar &currentLetter,
-                               const QChar &newLetter) {
+
+    void emitLetterEditRequest(LetterCell *letter, const QChar &currentLetter, const QChar &newLetter) {
         emit letterEditRequest(letter, currentLetter, newLetter);
     };
-    void emitMousePressed(const QPointF &pos, Qt::MouseButton button,
-                          KrossWordCell *cell) {
+
+    void emitMousePressed(const QPointF &pos, Qt::MouseButton button, KrossWordCell *cell) {
         emit mousePressed(pos, button, cell);
     };
 
-    virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
-                       QWidget* widget = 0);
+    virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
 signals:
     /** This signal is emitted when new clues are added. When reading crosswords
@@ -795,19 +820,21 @@ signals:
 
     /** The currently selected cell has been changed. */
     void currentCellChanged(KrossWordCell *currentCell, KrossWordCell *previousCell);
+
     /** Another clue was selected. */
     void currentClueChanged(ClueCell *clue);
+
     /** The currently selected answer has been changed. */
     void answerChanged(ClueCell *clue, const QString &currentAnswer);
+
     /** A solution letter has been changed. */
-    void solutionLetterChanged(SolutionLetterCell *solutionLetter,
-                               const QString &currentSolutionWord, int changedLetterIndex);
+    void solutionLetterChanged(SolutionLetterCell *solutionLetter, const QString &currentSolutionWord, int changedLetterIndex);
 
     /** Requests changing the current letter of @p letter from @p currentLetter
     * to @p newLetter.
     * To be used with QUndoCommand to have control over what's changed. */
-    void letterEditRequest(LetterCell *letter, const QChar &currentLetter,
-                           const QChar &newLetter);
+    void letterEditRequest(LetterCell *letter, const QChar &currentLetter, const QChar &newLetter);
+
     void addLettersToClueRequest(ClueCell *clue, int lettersToAdd);
 
     void editModeChanged(bool editable);
@@ -822,35 +849,32 @@ protected slots:
     void addLettersToClueRequestSlot(ClueCell *clue, int lettersToAdd) {
         emit addLettersToClueRequest(clue, lettersToAdd);
     };
+
     /** An answer of the crossword has been changed. */
     void answerChangedSlot(ClueCell *clue, const QString &currentAnswer);
+
     /** A letter of the solution word has been changed. */
     void solutionLetterChanged(LetterCell *letter, const QChar &newLetter);
+
     /** A crossword cell has received focus. */
     void focusCellChanged(KrossWordCell *currentCell);
 
     void currentCellDestroyed(QObject*);
 
 private:
-    void replaceCell(const Coord& coord, KrossWordCell *newCell,
-                     bool deleteOldCell);
+    void replaceCell(const Coord& coord, KrossWordCell *newCell, bool deleteOldCell);
     void removeCell(const Coord &coord, bool deleteOldCell);
     KrossWordCellList invalidateCellRegion(const Coord &coordTopLeft,
                                            const Coord &coordBottomRight,
                                            bool simulate = false);
-    KrossWordCellList invalidateCell(const Coord &coord,
-                                     bool simulate = false);
+    KrossWordCellList invalidateCell(const Coord &coord, bool simulate = false);
 
     void init(uint width = 0, uint height = 0);
     void fillWithEmptyCells();
-    void fillWithEmptyCells(const Coord &coordTopLeft,
-                            const Coord &coordBottomRight);
-    bool canTakeClueLetterCell(const Coord &coord, Qt::Orientation orientation,
-                               ClueCell *excludedClue = NULL);
-    bool isCellEmptyIfClueIsExcluded(const Coord &coord,
-                                     ClueCell *excludedClue) const;
-    bool isCellEmptyIfSpannedCellIsExcluded(const Coord &coord,
-                                            SpannedCell* excludedSpannedCell) const;
+    void fillWithEmptyCells(const Coord &coordTopLeft, const Coord &coordBottomRight);
+    bool canTakeClueLetterCell(const Coord &coord, Qt::Orientation orientation, ClueCell *excludedClue = NULL);
+    bool isCellEmptyIfClueIsExcluded(const Coord &coord, ClueCell *excludedClue) const;
+    bool isCellEmptyIfSpannedCellIsExcluded(const Coord &coord, SpannedCell* excludedSpannedCell) const;
 
     //void setTopLeftCellOffset(const QPointF &topLeftCellOffset);
     void updateHeaderItem();

@@ -40,11 +40,11 @@
 namespace Crossword
 {
 
-KrossWord::KrossWord(const KrosswordTheme *theme, int width, int height)
-    : QGraphicsObject(0), m_animator(new Animator()),
-    m_currentCell(0), m_previousCell(0),
-    m_highlightedClue(0), m_previousHighlightedClue(0),
-    m_focusItem(0), m_headerItem(0),
+KrossWord::KrossWord(const KrosswordTheme *theme, uint width, uint height)
+    : QGraphicsObject(nullptr), m_animator(new Animator()),
+    m_currentCell(nullptr), m_previousCell(nullptr),
+    m_highlightedClue(nullptr), m_previousHighlightedClue(nullptr),
+    m_focusItem(nullptr), m_headerItem(nullptr),
     m_theme(theme)
 {
     init(width, height);
@@ -170,8 +170,8 @@ void KrossWord::createNew(const CrosswordData &crosswordData)
 
 void KrossWord::createNew(const CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize)
 {
-    removeAllCells();
-    resizeGrid(crosswordSize.width(), crosswordSize.height());
+    //removeAllCells(); //CHECK: still needed?
+    setGridSize(crosswordSize.width(), crosswordSize.height());
 
     m_crosswordTypeInfo = crosswordTypeInfo;
 
@@ -2439,7 +2439,7 @@ KrossWordCellList KrossWord::moveCells(int dx, int dy, bool simulate)
     return uniqueRemovedCells;
 }
 
-KrossWordCellList KrossWord::resizeGrid(uint width, uint height, ResizeAnchor anchor, bool simulate)
+KrossWordCellList KrossWord::setGridSize(uint width, uint height, ResizeAnchor anchor, bool simulate)
 {
     KrossWordCellList removedCells;
     uint prevWidth = this->width();
@@ -2449,7 +2449,7 @@ KrossWordCellList KrossWord::resizeGrid(uint width, uint height, ResizeAnchor an
         return removedCells;
     }
 
-    QRect sourceRect;
+    //QRect sourceRect;
     Offset offset;
     int dw = width - prevWidth, dh = height - prevHeight;
     switch (anchor) {

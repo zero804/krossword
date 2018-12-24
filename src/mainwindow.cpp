@@ -174,16 +174,16 @@ void MainWindow::setupGameGui()
     m_gameGui->krossWord()->setAnimationEnabled(Settings::animate());
 
     connect(m_gameGui, SIGNAL(currentFileChanged(QString, QString)),
-            this,            SLOT(crosswordCurrentChanged(QString, QString)));
+            this, SLOT(crosswordCurrentChanged(QString, QString)));
 
     connect(m_gameGui, SIGNAL(fileClosed(QString)),
-            this,            SLOT(crosswordClosed(QString)));
+            this, SLOT(crosswordClosed(QString)));
 
     connect(m_gameGui, SIGNAL(modificationTypesChanged(GameGui::ModificationTypes)),
-            this,            SLOT(crosswordModificationsChanged(GameGui::ModificationTypes)));
+            this, SLOT(crosswordModificationsChanged(GameGui::ModificationTypes)));
 
     connect(m_gameGui, SIGNAL(tempAutoSaveFileChanged(QString)),
-            this,            SLOT(crosswordAutoSaveFileChanged(QString)));
+            this, SLOT(crosswordAutoSaveFileChanged(QString)));
 }
 
 Dictionary* MainWindow::getDictionary()

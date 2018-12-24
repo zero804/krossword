@@ -243,7 +243,7 @@ void CrosswordPropertiesDialog::sizeChanged(int columns, int rows)
 
 void CrosswordPropertiesDialog::updateInfoText(KrossWord::ResizeAnchor anchor, int columns, int rows)
 {
-    KrossWordCellList removedCells = m_krossWord->resizeGrid(columns, rows, anchor, true);
+    KrossWordCellList removedCells = m_krossWord->setGridSize(columns, rows, anchor, true);
     int clueCount = 0, imageCount = 0;
     foreach(KrossWordCell * cell, removedCells) {
         if (cell->isType(ClueCellType))
