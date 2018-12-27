@@ -46,6 +46,7 @@
 MainWindow::MainWindow() : KXmlGuiWindow(),
       m_libraryGui(nullptr),
       m_gameGui(nullptr),
+      m_loadDialog(nullptr),
       m_mainStackedBar(new QStackedWidget(this)),
       m_dictionary(new Dictionary)
 {
@@ -80,12 +81,31 @@ QSize MainWindow::sizeHint() const
     return KXmlGuiWindow::sizeHint().expandedTo(QDesktopWidget().availableGeometry().size() * 0.7);
 }
 
+QDialog* MainWindow::createLoadDialog()
+{
+    QDialog *dialog = new QDialog(this);
+    dialog->setWindowFlag(Qt::Dialog);  // TODO: No max/min buttons
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->setWindowTitle(i18n("Loading..."));
+    QVBoxLayout *layout = new QVBoxLayout(dialog);
+    QLabel *label = new QLabel(i18n("Loading..."), this);
+    layout->addWidget(label);
+    dialog->setLayout(layout);
+    //dialog->setWindowModality(Qt::ApplicationModal);
+    dialog->setModal(true);
+
+    return dialog;
+}
+
 void MainWindow::loadFile(const QUrl &url, bool loadCrashedFile)
 {
+    m_loadDialog = createLoadDialog();
+    m_loadDialog->show();
+
     setupGameGui();
 
     if (m_gameGui->loadFile(url, loadCrashedFile)) {
-        m_mainStackedBar->setCurrentWidget(m_gameGui);
+        //m_mainStackedBar->setCurrentWidget(m_gameGui);
 
         if (!m_libraryGui->libraryManager()->isInLibrary(url.path())) {
             QString msg = i18n("Would you like to add the crossword into the library?");
@@ -172,6 +192,9 @@ void MainWindow::setupGameGui()
     m_mainStackedBar->addWidget(m_gameGui);
 
     m_gameGui->krossWord()->setAnimationEnabled(Settings::animate());
+
+    connect(m_gameGui, SIGNAL(loadFileCompleted()),
+            this, SLOT(crosswordLoadCompleted()));
 
     connect(m_gameGui, SIGNAL(currentFileChanged(QString, QString)),
             this, SLOT(crosswordCurrentChanged(QString, QString)));
@@ -436,6 +459,16 @@ void MainWindow::currentTabChanged(int index)
     plugActionList("library_game_list", libraryGameList);
     plugActionList("crossword_game_list", crosswordGameList);
     plugActionList("options_list", optionsList);
+}
+
+void MainWindow::crosswordLoadCompleted()
+{
+    if (m_loadDialog) { // When loading a template there is no load progress dialog
+        m_loadDialog->close(); // using Qt::WA_DeleteOnClose
+        m_loadDialog = nullptr;
+    }
+
+    m_mainStackedBar->setCurrentWidget(m_gameGui);
 }
 
 void MainWindow::crosswordClosed(const QString& fileName)

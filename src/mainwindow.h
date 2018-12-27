@@ -58,7 +58,6 @@ public:
 
     bool createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize,
                             const QString &title, const QString &authors, const QString &copyright, const QString &notes);
-
     bool createNewCrossWordFromTemplate(const QString &templateFilePath, const QString &title,
                                         const QString &authors, const QString &copyright, const QString &notes);
 
@@ -83,12 +82,14 @@ public slots:
     void currentTabChanged(int);
 
 protected slots:
+    void crosswordLoadCompleted();
     void crosswordCurrentChanged(const QString &fileName, const QString &oldFileName);
     void crosswordClosed(const QString &fileName);
     void crosswordModificationsChanged(GameGui::ModificationTypes modificationTypes);
     void crosswordAutoSaveFileChanged(const QString &fileName);
 
 private:
+    QDialog* createLoadDialog();
     void setupMainTabWidget();
     void setupPlaces();
     void setupActions();
@@ -102,6 +103,7 @@ private:
     LibraryGui *m_libraryGui;         //Owned
     GameGui *m_gameGui;               //Owned
 
+    QDialog *m_loadDialog;            //Owned
     QString m_caption;
     QStackedWidget *m_mainStackedBar; //Owned
 

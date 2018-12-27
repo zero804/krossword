@@ -207,6 +207,7 @@ signals:
     void fileSaved(const QString &fileName, const QString &oldFileName);
     void modificationTypesChanged(GameGui::ModificationTypes modificationTypes);
     void currentFileChanged(const QString &fileName, const QString &previousFileName);
+    void loadFileCompleted();
     void tempAutoSaveFileChanged(const QString &tmpFileName);
 
 public slots:

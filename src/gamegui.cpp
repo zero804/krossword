@@ -438,6 +438,7 @@ bool GameGui::loadFile(const QUrl &url, bool loadCrashedFile)
     if (!file.open(QIODevice::ReadOnly)) {
         qWarning() << file.errorString();
         statusBar()->showMessage(i18n("Error opening '%1': %2", url.path(), file.errorString())); //CHECK: in Library statusbar isn't visible...
+        emit loadFileCompleted();
         return false;
     }
     IOManager ioManager(&file);
@@ -504,6 +505,7 @@ bool GameGui::loadFile(const QUrl &url, bool loadCrashedFile)
         Settings::self()->save();
     }
 
+    emit loadFileCompleted();
     return readOk;
 }
 
