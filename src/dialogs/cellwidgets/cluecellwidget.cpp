@@ -26,6 +26,7 @@
 
 #include <QWidgetAction>
 #include <QMenu>
+#include <QButtonGroup>
 
 #include <KCharSelect>
 
