@@ -376,7 +376,7 @@ void GameGui::setEditMode(bool editMode)
     }
 }
 
-bool GameGui::createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,const QSize &crosswordSize,
+void GameGui::createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,const QSize &crosswordSize,
                                                const QString& title, const QString& authors,
                                                const QString& copyright, const QString& notes)
 {
@@ -400,7 +400,7 @@ bool GameGui::createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,cons
 
     drawBackground(m_view);
 
-    return true;
+    emit gameReady();
 }
 
 bool GameGui::createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title,
@@ -438,7 +438,7 @@ bool GameGui::loadFile(const QUrl &url, bool loadCrashedFile)
     if (!file.open(QIODevice::ReadOnly)) {
         qWarning() << file.errorString();
         statusBar()->showMessage(i18n("Error opening '%1': %2", url.path(), file.errorString())); //CHECK: in Library statusbar isn't visible...
-        emit loadFileCompleted();
+        //emit loadFileCompleted();
         return false;
     }
     IOManager ioManager(&file);
@@ -505,7 +505,7 @@ bool GameGui::loadFile(const QUrl &url, bool loadCrashedFile)
         Settings::self()->save();
     }
 
-    emit loadFileCompleted();
+    emit gameReady();
     return readOk;
 }
 
