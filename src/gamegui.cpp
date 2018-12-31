@@ -68,6 +68,8 @@
 #include <QFileDialog>
 #include <QStatusBar>
 #include <QTemporaryFile>
+#include <QPropertyAnimation>
+#include <QTimer>
 
 const int MIN_SECS_BETWEEN_AUTOSAVES = 30;
 

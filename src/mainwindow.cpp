@@ -190,7 +190,7 @@ void MainWindow::setupGameGui()
     m_gameGui = new GameGui(this);
     m_mainStackedBar->addWidget(m_gameGui);
 
-    m_gameGui->krossWord()->setAnimationEnabled(Settings::animate());
+    //m_gameGui->krossWord()->setAnimationEnabled(Settings::animate());
 
     connect(m_gameGui, SIGNAL(gameReady()),
             this, SLOT(showGame()));
@@ -351,7 +351,7 @@ void MainWindow::settingsChanged()
 {
     m_gameGui->updateTheme();
 
-    m_gameGui->krossWord()->setAnimationEnabled(Settings::animate());
+    //m_gameGui->krossWord()->setAnimationEnabled(Settings::animate());
 }
 
 void MainWindow::showStatusbarGlobal(bool show)
