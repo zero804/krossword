@@ -61,8 +61,6 @@ public:
     bool createNewCrossWordFromTemplate(const QString &templateFilePath, const QString &title,
                                         const QString &authors, const QString &copyright, const QString &notes);
 
-    void setupGameGui();
-
     Dictionary* getDictionary();
     
 protected:
@@ -89,9 +87,11 @@ protected slots:
     void crosswordAutoSaveFileChanged(const QString &fileName);
 
 private:
-    QDialog* createLoadDialog();
     void setupPlaces();
     void setupActions();
+    void setupGameGui();
+    QDialog* createLoadDialog();
+
     void showRestoreOption(const QString &lastUnsavedFileBeforeCrash);
 
     /** Removes the path for crosswords that are in the library. */
@@ -99,12 +99,12 @@ private:
 
     Ui::settings ui_settings;
 
+    QStackedWidget *m_mainStackedBar; //Owned
     LibraryGui *m_libraryGui;         //Owned
     GameGui *m_gameGui;               //Owned
 
     QDialog *m_loadDialog;            //Owned
     QString m_caption;
-    QStackedWidget *m_mainStackedBar; //Owned
 
     Dictionary *m_dictionary;         // Owned
 };

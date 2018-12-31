@@ -42,12 +42,14 @@
 #include <QMenuBar>
 #include <QStatusBar>
 #include <QDesktopWidget>
+#include <QMimeDatabase>
+#include <QMimeData>
 
 MainWindow::MainWindow() : KXmlGuiWindow(),
+      m_mainStackedBar(new QStackedWidget(this)),
       m_libraryGui(new LibraryGui(this)),
       m_gameGui(nullptr),
       m_loadDialog(nullptr),
-      m_mainStackedBar(new QStackedWidget(this)),
       m_dictionary(new Dictionary)
 {
     setAcceptDrops(true);
@@ -129,7 +131,6 @@ void MainWindow::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswor
     setupGameGui();
 
     m_gameGui->createNewCrossWord(crosswordTypeInfo, crosswordSize, title, authors, copyright, notes);
-    //m_mainStackedBar->setCurrentWidget(m_gameGui);
 }
 
 bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath,
@@ -139,7 +140,6 @@ bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath,
     setupGameGui();
 
     if (m_gameGui->createNewCrossWordFromTemplate(templateFilePath, title, authors, copyright, notes)) {
-        //m_mainStackedBar->setCurrentWidget(m_gameGui);
         return true;
     }
 
