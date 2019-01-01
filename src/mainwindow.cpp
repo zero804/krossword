@@ -72,6 +72,8 @@ MainWindow::MainWindow() : KXmlGuiWindow(),
             showRestoreOption(lastUnsavedFileBeforeCrash);
         }
     }
+
+    //setupGameGui();
 }
 
 MainWindow::~MainWindow()
@@ -104,7 +106,7 @@ void MainWindow::loadFile(const QUrl &url, bool loadCrashedFile)
     setupGameGui();
 
     m_loadDialog = createLoadDialog();
-    m_loadDialog->show();
+    //m_loadDialog->show();
 
     if (m_gameGui->loadFile(url, loadCrashedFile)) {
         if (!m_libraryGui->libraryManager()->isInLibrary(url.path())) {
@@ -467,8 +469,11 @@ void MainWindow::crosswordClosed(const QString& fileName)
 
     m_mainStackedBar->setCurrentWidget(m_libraryGui);
 
+    m_mainStackedBar->removeWidget(m_gameGui);
     delete m_gameGui;
     m_gameGui = nullptr;
+
+    //setupGameGui();
 }
 
 void MainWindow::crosswordCurrentChanged(const QString& fileName, const QString& oldFileName)

@@ -38,7 +38,7 @@ class KrossWordPuzzleView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    explicit KrossWordPuzzleView(KrossWordPuzzleScene *scene, QWidget *parent = 0);
+    explicit KrossWordPuzzleView(KrossWordPuzzleScene *scene, QWidget *parent);
     virtual ~KrossWordPuzzleView() = default;
 
     inline Crossword::KrossWord *krossWord() const {

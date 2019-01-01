@@ -170,7 +170,7 @@ GameGui::GameGui(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
 
     // Load theme /* Should not do it manually */
     QString savedThemeName = Settings::theme();
-    if (savedThemeName != "") {
+    if (!savedThemeName.isEmpty()) {
         KrosswordRenderer::self()->setTheme(savedThemeName);
     }
 
@@ -1740,9 +1740,7 @@ void GameGui::setCurrentFileName(const QString& fileName)
 
 KrossWordPuzzleView *GameGui::createKrossWordPuzzleView()
 {
-    KrossWordPuzzleView *view = new KrossWordPuzzleView(
-                new KrossWordPuzzleScene(
-                    new KrossWord(KrosswordRenderer::self()->getCurrentTheme()), this), this);
+    KrossWordPuzzleView *view = new KrossWordPuzzleView(new KrossWordPuzzleScene(this), this);
 
     view->scene()->setStickyFocus(true); // CHECK: really needed?
     view->krossWord()->setLetterEditMode(EmitEditRequestsOnKeyboardEdit);
