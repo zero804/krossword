@@ -90,7 +90,6 @@ private:
     void setupPlaces();
     void setupActions();
     void setupGameGui();
-    QDialog* createLoadDialog();
 
     void showRestoreOption(const QString &lastUnsavedFileBeforeCrash);
 
@@ -103,7 +102,6 @@ private:
     LibraryGui *m_libraryGui;         //Owned
     GameGui *m_gameGui;               //Owned
 
-    QDialog *m_loadDialog;            //Owned
     QString m_caption;
 
     Dictionary *m_dictionary;         // Owned

@@ -49,7 +49,6 @@ MainWindow::MainWindow() : KXmlGuiWindow(),
       m_mainStackedBar(new QStackedWidget(this)),
       m_libraryGui(new LibraryGui(this)),
       m_gameGui(nullptr),
-      m_loadDialog(nullptr),
       m_dictionary(new Dictionary)
 {
     setAcceptDrops(true);
@@ -73,7 +72,7 @@ MainWindow::MainWindow() : KXmlGuiWindow(),
         }
     }
 
-    //setupGameGui();
+    setupGameGui(); // CHECK: workaround focus bug
 }
 
 MainWindow::~MainWindow()
@@ -86,27 +85,9 @@ QSize MainWindow::sizeHint() const
     return KXmlGuiWindow::sizeHint().expandedTo(QDesktopWidget().availableGeometry().size() * 0.7);
 }
 
-QDialog* MainWindow::createLoadDialog()
-{
-    QDialog *dialog = new QDialog(this);
-    //dialog->setWindowFlag(Qt::Dialog);  // TODO: No max/min buttons
-    dialog->setAttribute(Qt::WA_DeleteOnClose);
-    dialog->setWindowTitle(i18n("Loading..."));
-    QVBoxLayout *layout = new QVBoxLayout(dialog);
-    QLabel *label = new QLabel(i18n("Loading..."), this);
-    layout->addWidget(label);
-    dialog->setLayout(layout);
-    dialog->setModal(true);
-
-    return dialog;
-}
-
 void MainWindow::loadFile(const QUrl &url, bool loadCrashedFile)
 {
-    setupGameGui();
-
-    m_loadDialog = createLoadDialog();
-    //m_loadDialog->show();
+    //setupGameGui(); // CHECK: workaround focus bug
 
     if (m_gameGui->loadFile(url, loadCrashedFile)) {
         if (!m_libraryGui->libraryManager()->isInLibrary(url.path())) {
@@ -130,7 +111,7 @@ void MainWindow::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswor
                                          const QString& authors, const QString& copyright,
                                          const QString& notes)
 {
-    setupGameGui();
+    //setupGameGui(); // CHECK: workaround focus bug
 
     m_gameGui->createNewCrossWord(crosswordTypeInfo, crosswordSize, title, authors, copyright, notes);
 }
@@ -139,7 +120,7 @@ bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath,
                                                 const QString& title, const QString& authors,
                                                 const QString& copyright, const QString& notes)
 {
-    setupGameGui();
+    //setupGameGui(); // CHECK: workaround focus bug
 
     if (m_gameGui->createNewCrossWordFromTemplate(templateFilePath, title, authors, copyright, notes)) {
         return true;
@@ -191,8 +172,6 @@ void MainWindow::setupGameGui()
 {
     m_gameGui = new GameGui(this);
     m_mainStackedBar->addWidget(m_gameGui);
-
-    //m_gameGui->krossWord()->setAnimationEnabled(Settings::animate());
 
     connect(m_gameGui, SIGNAL(gameReady()),
             this, SLOT(showGame()));
@@ -352,8 +331,6 @@ void MainWindow::optionsDictionarySlot()
 void MainWindow::settingsChanged()
 {
     m_gameGui->updateTheme();
-
-    //m_gameGui->krossWord()->setAnimationEnabled(Settings::animate());
 }
 
 void MainWindow::showStatusbarGlobal(bool show)
@@ -455,11 +432,6 @@ void MainWindow::currentTabChanged(int index)
 
 void MainWindow::showGame()
 {
-    if (m_loadDialog) { // When loading a template there is no load progress dialog
-        m_loadDialog->close(); // using Qt::WA_DeleteOnClose
-        m_loadDialog = nullptr;
-    }
-
     m_mainStackedBar->setCurrentWidget(m_gameGui);
 }
 
@@ -473,7 +445,7 @@ void MainWindow::crosswordClosed(const QString& fileName)
     delete m_gameGui;
     m_gameGui = nullptr;
 
-    //setupGameGui();
+    setupGameGui(); // CHECK: workaround focus bug
 }
 
 void MainWindow::crosswordCurrentChanged(const QString& fileName, const QString& oldFileName)
