@@ -3,6 +3,6 @@
  Type=Service
  Name=Crossword files
  ServiceTypes=ThumbCreator
- MimeType=application/x-crossword;application/x-krosswordpuzzle;application/x-krosswordpuzzle-compressed;
+ MimeType=application/x-acrosslite-puz;application/x-krosswordpuzzle;application/x-krosswordpuzzle-compressed;
  CacheThumbnail=true
  X-KDE-Library=crosswordthumbnail

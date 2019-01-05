@@ -30,7 +30,7 @@ IOManager::IOManager(QFile *file)
 {
     QMimeDatabase mimeDatabase;
     QMimeType mimeType = mimeDatabase.mimeTypeForFile(file->fileName(), QMimeDatabase::MatchDefault);
-    if (mimeType.inherits("application/x-crossword")) {
+    if (mimeType.inherits("application/x-acrosslite-puz")) {
         m_fileFormat = PuzFormat;
     } else if (mimeType.inherits("application/x-krosswordpuzzle")) {
         m_fileFormat = KwpFormat;
