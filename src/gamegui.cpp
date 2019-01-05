@@ -1166,21 +1166,21 @@ void GameGui::setupActions()
     connect(selectLastClueAction, SIGNAL(triggered()), this, SLOT(selectLastClueSlot()));
 
     // Dock toggle actions
+    QAction *showCurrentClueDockAction = m_currentClueDock->toggleViewAction();
+    ac->addAction(actionName(ShowCurrentClueDock), showCurrentClueDockAction);
+    ac->setDefaultShortcut(showCurrentClueDockAction, QKeySequence(Qt::Key_F2));
+    showCurrentClueDockAction->setText(i18n("Show Current Clue Dock"));
+    connect(showCurrentClueDockAction, SIGNAL(toggled(bool)), this, SLOT(currentClueDockToggled(bool)));
+
     QAction *showClueDockAction = m_clueDock->toggleViewAction();
     ac->addAction(actionName(ShowClueDock), showClueDockAction);
-    showClueDockAction->setShortcut(QKeySequence(Qt::Key_F3));
+    ac->setDefaultShortcut(showClueDockAction, QKeySequence(Qt::Key_F3));
     showClueDockAction->setText(i18n("Show Clue Dock"));
 
     QAction *showUndoViewDockAction = m_undoViewDock->toggleViewAction();
     ac->addAction(actionName(ShowUndoViewDock), showUndoViewDockAction);
-    showUndoViewDockAction->setShortcut(QKeySequence(Qt::Key_F4));
+    ac->setDefaultShortcut(showUndoViewDockAction, QKeySequence(Qt::Key_F4));
     showUndoViewDockAction->setText(i18n("Show Edit History Dock"));
-
-    QAction *showCurrentClueDockAction = m_currentClueDock->toggleViewAction();
-    ac->addAction(actionName(ShowCurrentClueDock), showCurrentClueDockAction);
-    showCurrentClueDockAction->setShortcut(QKeySequence(Qt::Key_F2));
-    showCurrentClueDockAction->setText(i18n("Show Current Clue Dock"));
-    connect(showCurrentClueDockAction, SIGNAL(toggled(bool)), this, SLOT(currentClueDockToggled(bool)));
 
     // Edit mode actions
     KToggleAction *enableEditModeAction = new KToggleAction(QIcon::fromTheme(QStringLiteral("document-edit")), i18nc("@action:intoolbar", "Edit Mode"), this);
