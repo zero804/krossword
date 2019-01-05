@@ -56,13 +56,10 @@ public:
 
     void loadFile(const QUrl &url, bool loadCrashedFile = false);
 
-    bool createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize,
+    void createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize,
                             const QString &title, const QString &authors, const QString &copyright, const QString &notes);
-
     bool createNewCrossWordFromTemplate(const QString &templateFilePath, const QString &title,
                                         const QString &authors, const QString &copyright, const QString &notes);
-
-    void setupGameGui();
 
     Dictionary* getDictionary();
     
@@ -83,15 +80,17 @@ public slots:
     void currentTabChanged(int);
 
 protected slots:
+    void showGame();
     void crosswordCurrentChanged(const QString &fileName, const QString &oldFileName);
     void crosswordClosed(const QString &fileName);
     void crosswordModificationsChanged(GameGui::ModificationTypes modificationTypes);
     void crosswordAutoSaveFileChanged(const QString &fileName);
 
 private:
-    void setupMainTabWidget();
     void setupPlaces();
     void setupActions();
+    void setupGameGui();
+
     void showRestoreOption(const QString &lastUnsavedFileBeforeCrash);
 
     /** Removes the path for crosswords that are in the library. */
@@ -99,11 +98,11 @@ private:
 
     Ui::settings ui_settings;
 
+    QStackedWidget *m_mainStackedBar; //Owned
     LibraryGui *m_libraryGui;         //Owned
     GameGui *m_gameGui;               //Owned
 
     QString m_caption;
-    QStackedWidget *m_mainStackedBar; //Owned
 
     Dictionary *m_dictionary;         // Owned
 };

@@ -28,15 +28,8 @@
 class KrossWordPuzzleScene : public QGraphicsScene
 {
 public:
-    explicit KrossWordPuzzleScene(Crossword::KrossWord *krossWord, QObject* parent = 0)
-        : QGraphicsScene(parent),
-          m_krossWord(krossWord) {
-        addItem(m_krossWord);
-        setItemIndexMethod(NoIndex);
-    }
-
-    KrossWordPuzzleScene(QObject* parent = 0) : QGraphicsScene(parent),
-          m_krossWord(new Crossword::KrossWord()) {
+    KrossWordPuzzleScene(QObject* parent)
+        : QGraphicsScene(parent), m_krossWord(new Crossword::KrossWord()) {
         addItem(m_krossWord);
         setItemIndexMethod(NoIndex);
     }

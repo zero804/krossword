@@ -42,11 +42,13 @@
 #include <QMenuBar>
 #include <QStatusBar>
 #include <QDesktopWidget>
+#include <QMimeDatabase>
+#include <QMimeData>
 
 MainWindow::MainWindow() : KXmlGuiWindow(),
-      m_libraryGui(nullptr),
-      m_gameGui(nullptr),
       m_mainStackedBar(new QStackedWidget(this)),
+      m_libraryGui(new LibraryGui(this)),
+      m_gameGui(nullptr),
       m_dictionary(new Dictionary)
 {
     setAcceptDrops(true);
@@ -56,7 +58,8 @@ MainWindow::MainWindow() : KXmlGuiWindow(),
     setupActions();
     setupGUI(Save | Create);
 
-    setupMainTabWidget();
+    connect(m_mainStackedBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
+    m_mainStackedBar->addWidget(m_libraryGui);
     setCentralWidget(m_mainStackedBar);
 
     QString lastUnsavedFileBeforeCrash = Settings::lastUnsavedFileBeforeCrash();
@@ -68,6 +71,8 @@ MainWindow::MainWindow() : KXmlGuiWindow(),
             showRestoreOption(lastUnsavedFileBeforeCrash);
         }
     }
+
+    setupGameGui(); // CHECK: workaround focus bug
 }
 
 MainWindow::~MainWindow()
@@ -82,49 +87,46 @@ QSize MainWindow::sizeHint() const
 
 void MainWindow::loadFile(const QUrl &url, bool loadCrashedFile)
 {
-    setupGameGui();
+    //setupGameGui(); // CHECK: workaround focus bug
 
     if (m_gameGui->loadFile(url, loadCrashedFile)) {
-        m_mainStackedBar->setCurrentWidget(m_gameGui);
-
         if (!m_libraryGui->libraryManager()->isInLibrary(url.path())) {
-            QString msg = i18n("Would you like to add the crossword into the library?");
-            int result = KMessageBox::questionYesNo(this, msg, i18n("Save crossword"), KStandardGuiItem::yes(), KStandardGuiItem::no());
-            if (result == KMessageBox::Yes) {
+            if (KMessageBox::questionYesNo(this,
+                                           i18n("Would you like to add the crossword into the library?"),
+                                           i18n("Save crossword"),
+                                           KStandardGuiItem::yes(), KStandardGuiItem::no())
+                                           == KMessageBox::Yes) {
                 m_libraryGui->libraryAddCrossword(url);
             }
         }
     } else {
-        QString msg = i18n("Could not open resource at ") + url.url(QUrl::PreferLocalFile);
-        KMessageBox::sorry(this, msg, i18n("Resource unavailable"));
+        KMessageBox::sorry(this,
+                           i18n("Could not open resource at ") + url.url(QUrl::PreferLocalFile),
+                           i18n("Resource unavailable"));
     }
 }
 
-bool MainWindow::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo,
+void MainWindow::createNewCrossWord(const Crossword::CrosswordTypeInfo &crosswordTypeInfo,
                                          const QSize &crosswordSize, const QString& title,
                                          const QString& authors, const QString& copyright,
                                          const QString& notes)
 {
-    setupGameGui();
+    //setupGameGui(); // CHECK: workaround focus bug
 
-    if (m_gameGui->createNewCrossWord(crosswordTypeInfo, crosswordSize, title, authors, copyright, notes)) {
-        m_mainStackedBar->setCurrentWidget(m_gameGui);
-        return true;
-    } else {
-        return false;
-    }
+    m_gameGui->createNewCrossWord(crosswordTypeInfo, crosswordSize, title, authors, copyright, notes);
 }
 
-bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title, const QString& authors, const QString& copyright, const QString& notes)
+bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath,
+                                                const QString& title, const QString& authors,
+                                                const QString& copyright, const QString& notes)
 {
-    setupGameGui();
+    //setupGameGui(); // CHECK: workaround focus bug
 
     if (m_gameGui->createNewCrossWordFromTemplate(templateFilePath, title, authors, copyright, notes)) {
-        m_mainStackedBar->setCurrentWidget(m_gameGui);
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 //=====================================================================================
@@ -171,7 +173,8 @@ void MainWindow::setupGameGui()
     m_gameGui = new GameGui(this);
     m_mainStackedBar->addWidget(m_gameGui);
 
-    m_gameGui->krossWord()->setAnimationEnabled(Settings::animate());
+    connect(m_gameGui, SIGNAL(gameReady()),
+            this, SLOT(showGame()));
 
     connect(m_gameGui, SIGNAL(currentFileChanged(QString, QString)),
             this, SLOT(crosswordCurrentChanged(QString, QString)));
@@ -189,15 +192,6 @@ void MainWindow::setupGameGui()
 Dictionary* MainWindow::getDictionary()
 {
     return m_dictionary;
-}
-
-void MainWindow::setupMainTabWidget()
-{
-    m_libraryGui = new LibraryGui(this);
-    int indexLibrary = m_mainStackedBar->addWidget(m_libraryGui);
-    m_mainStackedBar->setCurrentIndex(indexLibrary);
-    connect(m_mainStackedBar, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
-    currentTabChanged(indexLibrary);
 }
 
 void MainWindow::setupPlaces()
@@ -337,8 +331,6 @@ void MainWindow::optionsDictionarySlot()
 void MainWindow::settingsChanged()
 {
     m_gameGui->updateTheme();
-
-    m_gameGui->krossWord()->setAnimationEnabled(Settings::animate());
 }
 
 void MainWindow::showStatusbarGlobal(bool show)
@@ -438,14 +430,22 @@ void MainWindow::currentTabChanged(int index)
     plugActionList("options_list", optionsList);
 }
 
+void MainWindow::showGame()
+{
+    m_mainStackedBar->setCurrentWidget(m_gameGui);
+}
+
 void MainWindow::crosswordClosed(const QString& fileName)
 {
     Q_UNUSED(fileName);
 
     m_mainStackedBar->setCurrentWidget(m_libraryGui);
 
+    m_mainStackedBar->removeWidget(m_gameGui);
     delete m_gameGui;
     m_gameGui = nullptr;
+
+    setupGameGui(); // CHECK: workaround focus bug
 }
 
 void MainWindow::crosswordCurrentChanged(const QString& fileName, const QString& oldFileName)

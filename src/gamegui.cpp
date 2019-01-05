@@ -68,6 +68,8 @@
 #include <QFileDialog>
 #include <QStatusBar>
 #include <QTemporaryFile>
+#include <QPropertyAnimation>
+#include <QTimer>
 
 const int MIN_SECS_BETWEEN_AUTOSAVES = 30;
 
@@ -168,7 +170,7 @@ GameGui::GameGui(QWidget* parent) : KXmlGuiWindow(parent, Qt::Widget),
 
     // Load theme /* Should not do it manually */
     QString savedThemeName = Settings::theme();
-    if (savedThemeName != "") {
+    if (!savedThemeName.isEmpty()) {
         KrosswordRenderer::self()->setTheme(savedThemeName);
     }
 
@@ -376,7 +378,7 @@ void GameGui::setEditMode(bool editMode)
     }
 }
 
-bool GameGui::createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,const QSize &crosswordSize,
+void GameGui::createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,const QSize &crosswordSize,
                                                const QString& title, const QString& authors,
                                                const QString& copyright, const QString& notes)
 {
@@ -400,7 +402,7 @@ bool GameGui::createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo,cons
 
     drawBackground(m_view);
 
-    return true;
+    emit gameReady();
 }
 
 bool GameGui::createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title,
@@ -438,6 +440,7 @@ bool GameGui::loadFile(const QUrl &url, bool loadCrashedFile)
     if (!file.open(QIODevice::ReadOnly)) {
         qWarning() << file.errorString();
         statusBar()->showMessage(i18n("Error opening '%1': %2", url.path(), file.errorString())); //CHECK: in Library statusbar isn't visible...
+        //emit loadFileCompleted();
         return false;
     }
     IOManager ioManager(&file);
@@ -504,6 +507,7 @@ bool GameGui::loadFile(const QUrl &url, bool loadCrashedFile)
         Settings::self()->save();
     }
 
+    emit gameReady();
     return readOk;
 }
 
@@ -1736,9 +1740,7 @@ void GameGui::setCurrentFileName(const QString& fileName)
 
 KrossWordPuzzleView *GameGui::createKrossWordPuzzleView()
 {
-    KrossWordPuzzleView *view = new KrossWordPuzzleView(
-                new KrossWordPuzzleScene(
-                    new KrossWord(KrosswordRenderer::self()->getCurrentTheme()), this), this);
+    KrossWordPuzzleView *view = new KrossWordPuzzleView(new KrossWordPuzzleScene(this), this);
 
     view->scene()->setStickyFocus(true); // CHECK: really needed?
     view->krossWord()->setLetterEditMode(EmitEditRequestsOnKeyboardEdit);

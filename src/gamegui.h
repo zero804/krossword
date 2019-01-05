@@ -186,7 +186,7 @@ public:
     bool isInEditMode() const;
     void setEditMode(bool editMode = false);
 
-    bool createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize, const QString &title,
+    void createNewCrossWord(const CrosswordTypeInfo &crosswordTypeInfo, const QSize &crosswordSize, const QString &title,
                             const QString &authors, const QString &copyright, const QString &notes);
     bool createNewCrossWordFromTemplate(const QString& templateFilePath, const QString& title, const QString& authors,
                                         const QString& copyright, const QString& notes);
@@ -207,6 +207,7 @@ signals:
     void fileSaved(const QString &fileName, const QString &oldFileName);
     void modificationTypesChanged(GameGui::ModificationTypes modificationTypes);
     void currentFileChanged(const QString &fileName, const QString &previousFileName);
+    void gameReady();
     void tempAutoSaveFileChanged(const QString &tmpFileName);
 
 public slots:
