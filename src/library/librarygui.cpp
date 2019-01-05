@@ -175,8 +175,8 @@ void LibraryGui::downloadProviderChanged(int index)
         getDownloadCrosswordItems("http://herbach.dnsalias.com/wsj/wsj%1.puz", QDate(2013, 1, 4), QDate::currentDate(), 7);
         break;
 
-    case ChronicleHigherEducation:
-        getDownloadCrosswordItems("http://chronicle.com/items/biz/puzzles/20%1.puz", QDate(2009, 10, 9), QDate::currentDate(), 7);
+    case ChronicleHigherEducation: // from https://www.chronicle.com/section/Crosswords/43
+        getDownloadCrosswordItems("http://chronicle.com/items/biz/puzzles/20%1.puz", QDate(2009, 10, 9), QDate(2018, 12, 28), 7);
         break;
 
     case CrossNerd:
@@ -216,11 +216,11 @@ void LibraryGui::downloadProviderChanged(int index)
         }
         break;
 
-    case WashingtonPost: // CHECK: test availability over time
+    case WashingtonPost:
         getDownloadCrosswordItems("http://herbach.dnsalias.com/WaPo/wp%1.puz", QDate(2017, 9, 24), QDate::currentDate(), 7);
         break;
 
-    case TheWeek: // CHECK: working from 302 to 429 at 28/10/2017
+    case TheWeek: // CHECK: working from 302 to 463 at 05/01/2019
         int week = (QDate(2009, 6, 12).daysTo(QDate::currentDate())) / 7;
         for (int i = 1; i <= week; ++i) {
             item = new SortedListWidgetItem(i18n("Week %1", i));

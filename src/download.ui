@@ -7,17 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>607</width>
-    <height>455</height>
+    <height>463</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Download Crosswords</string>
   </property>
   <layout class="QFormLayout" name="formLayout_2">
-   <item row="0" column="0">
+   <item row="1" column="0">
     <widget class="QLabel" name="lblProviders">
      <property name="text">
-      <string>&amp;Provider:</string>
+      <string>Pro&amp;vider:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -27,7 +27,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
+   <item row="1" column="1">
     <widget class="KComboBox" name="providers">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -43,7 +43,7 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
+   <item row="2" column="0">
     <widget class="QLabel" name="lblTargetDirectory">
      <property name="text">
       <string>Download &amp;to:</string>
@@ -56,7 +56,7 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
+   <item row="2" column="1">
     <widget class="KComboBox" name="targetDirectory">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -69,7 +69,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0" colspan="2">
+   <item row="3" column="0" colspan="2">
     <widget class="QGroupBox" name="groupBox">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -192,16 +192,28 @@
      </layout>
     </widget>
    </item>
-   <item row="3" column="0" colspan="2">
+   <item row="4" column="0" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="labelMessage">
+     <property name="text">
+      <string>Crosswords availability can change over time because of providers modifications.</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>providers</tabstop>
