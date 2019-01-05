@@ -1037,11 +1037,11 @@ void GameGui::setupActions()
     connect(saveAsTemplateAction, SIGNAL(triggered()), this, SLOT(saveAsTemplateSlot()));
 
     // Print and print preview
-    QAction *printAction = KStandardAction::print(this, SLOT(printSlot()), 0);
+    QAction *printAction = KStandardAction::print(this, SLOT(printSlot()), ac);
     printAction->setToolTip(i18n("Print the crossword"));
     ac->addAction("game_print", printAction);
 
-    QAction *printPreviewAction = KStandardAction::printPreview(this, SLOT(printPreviewSlot()), 0);
+    QAction *printPreviewAction = KStandardAction::printPreview(this, SLOT(printPreviewSlot()), ac);
     printPreviewAction->setToolTip(i18n("Show a print preview"));
     ac->addAction(actionName(Game_PrintPreview), printPreviewAction);
 
