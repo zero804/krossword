@@ -41,14 +41,14 @@ namespace Crossword
 LetterCell::LetterCell(KrossWord* krossWord, const Coord& coord,
                        ClueCell* clueHorizontal, ClueCell* clueVertical)
     : KrossWordCell(krossWord, LetterCellType, coord),
-      m_clueHorizontal(0), m_clueVertical(0), m_changeAnim(0)
+      m_clueHorizontal(nullptr), m_clueVertical(nullptr), m_changeAnim(nullptr)
 {
     init(clueHorizontal, clueVertical);
 }
 LetterCell::LetterCell(KrossWord* krossWord, const Coord& coord,
                        ClueCell* clue, AnswerOffset answerOffset)
     : KrossWordCell(krossWord, LetterCellType, coord),
-      m_clueHorizontal(0), m_clueVertical(0), m_changeAnim(0)
+      m_clueHorizontal(nullptr), m_clueVertical(nullptr), m_changeAnim(nullptr)
 {
     init(clue, answerOffset);
 }
@@ -61,7 +61,7 @@ LetterCell::LetterCell(KrossWord* krossWord, const Coord& coord,
                        ClueCell* clueHorizontal, ClueCell* clueVertical,
                        CellType cellType)
     : KrossWordCell(krossWord, cellType, coord),
-      m_clueHorizontal(0), m_clueVertical(0), m_changeAnim(0)
+      m_clueHorizontal(nullptr), m_clueVertical(nullptr), m_changeAnim(nullptr)
 {
     init(clueHorizontal, clueVertical);
 }
@@ -70,7 +70,7 @@ LetterCell::LetterCell(KrossWord* krossWord, const Coord& coord,
                        ClueCell* clue, CellType cellType,
                        AnswerOffset answerOffset)
     : KrossWordCell(krossWord, cellType, coord),
-      m_clueHorizontal(0), m_clueVertical(0), m_changeAnim(0)
+      m_clueHorizontal(nullptr), m_clueVertical(nullptr), m_changeAnim(nullptr)
 {
     init(clue, answerOffset);
 }

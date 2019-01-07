@@ -167,7 +167,7 @@ void TransitionAnimation::updateState(QAbstractAnimation::State newState,
             m_pixmapObject->scene()->removeItem(m_pixmapObject);
         }
         delete m_pixmapObject;
-        m_pixmapObject = 0;
+        m_pixmapObject = nullptr;
 
         QVariantAnimation::updateState(newState, oldState);
         emit finished(m_cell);

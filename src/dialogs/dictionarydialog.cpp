@@ -33,7 +33,7 @@
 #include <QFileDialog>
 
 DictionaryDialog::DictionaryDialog(Dictionary* dictionary, QWidget* parent)
-    : QDialog(parent), m_dictionary(dictionary), m_infoMessage(0)
+    : QDialog(parent), m_dictionary(dictionary), m_infoMessage(nullptr)
 {
     setWindowTitle(i18n("Dictionary"));
     ui_dictionaries.setupUi(this);;

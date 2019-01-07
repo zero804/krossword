@@ -24,7 +24,7 @@
 
 
 CrosswordPreviewWidget::CrosswordPreviewWidget(QWidget* parent)
-    : QLabel(parent), m_previewJob(0)
+    : QLabel(parent), m_previewJob(nullptr)
 {
     m_previewSize = QSize(256, 256);
 }

@@ -245,7 +245,7 @@ UndoCommandExt* UndoCommandExt::fromData(KrossWord* krossWord,
 
 
 UndoCommandExt::UndoCommandExt(UndoCommandExt* parent)
-    : QUndoCommand(parent), m_undoStack(0)
+    : QUndoCommand(parent), m_undoStack(nullptr)
 {
     if (parent)
         m_undoStack = parent->undoStack();

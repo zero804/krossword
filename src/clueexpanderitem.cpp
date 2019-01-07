@@ -29,7 +29,7 @@
 #include <QPropertyAnimation>
 ClueExpanderItem::ClueExpanderItem(KrossWord* krossWord, ClueCell* clueCell)
     : QGraphicsObject(krossWord), m_krossWord(krossWord), m_clue(clueCell),
-      m_lastLetter(0)
+      m_lastLetter(nullptr)
 {
     Q_ASSERT(clueCell);
 

@@ -28,8 +28,8 @@
 
 CrosswordTypeWidget::CrosswordTypeWidget(QWidget* parent)
     : QWidget(parent),
-      m_icon(0), m_chkDetails(0), m_btnRules(0), m_btnUser(0), m_spacer(0),
-      m_infoScroller(0)
+      m_icon(nullptr), m_chkDetails(nullptr), m_btnRules(nullptr), m_btnUser(nullptr), m_spacer(nullptr),
+      m_infoScroller(nullptr)
 {
     m_showingDetails = false;
     m_editMode = EditReadOnlyExceptForUserDefined;
@@ -49,8 +49,8 @@ CrosswordTypeWidget::CrosswordTypeWidget(
     CrosswordTypeInfo typeInfo, Elements elements,
     QWidget* parent)
     : QWidget(parent),
-      m_icon(0), m_chkDetails(0), m_btnRules(0), m_btnUser(0), m_spacer(0),
-      m_infoScroller(0)
+      m_icon(nullptr), m_chkDetails(nullptr), m_btnRules(nullptr), m_btnUser(nullptr), m_spacer(nullptr),
+      m_infoScroller(nullptr)
 {
     m_showingDetails = false;
     m_editMode = EditReadOnlyExceptForUserDefined;

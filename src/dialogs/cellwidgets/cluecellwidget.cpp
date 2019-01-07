@@ -34,7 +34,7 @@
 
 ClueCellWidget::ClueCellWidget(ClueCell* clueCell,
                                Dictionary *dictionary, QWidget* parent)
-    : QWidget(parent), m_clueCell(0)
+    : QWidget(parent), m_clueCell(nullptr)
 {
     Q_ASSERT(clueCell);
 

@@ -31,7 +31,7 @@
 #include <QVBoxLayout>
 
 CurrentClueWidget::CurrentClueWidget(KrossWord *krossWord, Dictionary *dictionary, QWidget* parent)
-    : QWidget(parent), m_krossWord(0), m_dictionary(dictionary), m_currentCell(0)
+    : QWidget(parent), m_krossWord(nullptr), m_dictionary(dictionary), m_currentCell(nullptr)
 {
     m_convertToSolutionLetter = nullptr;
     setupNoCell();
