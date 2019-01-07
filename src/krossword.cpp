@@ -31,7 +31,6 @@
 
 #include <QUrl>
 #include <QIcon>
-#include <kglobalsettings.h>
 
 #include "animator.h"
 #include <QPropertyAnimation>

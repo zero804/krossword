@@ -30,8 +30,6 @@
 #include <QPainter>
 #include <qmath.h>
 
-#include <kglobalsettings.h>
-
 #include "animator.h"
 #include <QPropertyAnimation>
 #include <QFontDatabase>

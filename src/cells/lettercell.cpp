@@ -32,7 +32,6 @@
 #include <QPainter>
 
 #include <QPropertyAnimation>
-#include <kglobalsettings.h>
 #include <QFontDatabase>
 
 namespace Crossword

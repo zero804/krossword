@@ -23,7 +23,6 @@
 #include <qevent.h>
 #include <QtWidgets/QGraphicsSceneMouseEvent>
 #include <QtWidgets/QGraphicsScene>
-#include <kglobalsettings.h>
 #include <QFontDatabase>
 
 LetterCell::LetterCell(KrossWord* krossWord, const Coord& coord,

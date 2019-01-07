@@ -23,7 +23,6 @@
 #include <QCommandLineParser>
 
 #include <KAboutData>
-#include <KDE/KLocale>
 
 static const char description[] =
     I18N_NOOP("A crossword puzzle game and editor for KDE.\nBased on KrossWordPuzzle.");
