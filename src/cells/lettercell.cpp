@@ -415,8 +415,7 @@ void LetterCell::keyPressEvent(QKeyEvent* event)
         }
     } else {
         switch (event->key()) {
-            // Qt::Key_Tab is handled by KrossWordPuzzleScene::keyPressEvent
-            LetterCell *cell;
+            // Qt::Key_Tab is handled by KrossWordPuzzleScene::keyPressEvent 
         case Qt::Key_Backspace:
             event->accept();
             switch (krossWord()->letterEditMode()) {
@@ -454,6 +453,7 @@ void LetterCell::keyPressEvent(QKeyEvent* event)
                 switchHighlightedClue();
             }
             if (krossWord()->keyboardNavigation().testFlag(NavigateWithArrowKeys)) {
+                LetterCell *cell;
                 if ((cell = letterCellOnLeft(krossWord()->keyboardNavigation())))
                     cell->setFocus();
             }
@@ -469,6 +469,7 @@ void LetterCell::keyPressEvent(QKeyEvent* event)
             }
 
             if (krossWord()->keyboardNavigation().testFlag(NavigateWithArrowKeys)) {
+                LetterCell *cell;
                 if ((cell = letterCellOnTop(krossWord()->keyboardNavigation())))
                     cell->setFocus();
             }
@@ -483,6 +484,7 @@ void LetterCell::keyPressEvent(QKeyEvent* event)
                 switchHighlightedClue();
             }
             if (krossWord()->keyboardNavigation().testFlag(NavigateWithArrowKeys)) {
+                LetterCell *cell;
                 if ((cell = letterCellOnRight(krossWord()->keyboardNavigation())))
                     cell->setFocus();
             }
@@ -497,6 +499,7 @@ void LetterCell::keyPressEvent(QKeyEvent* event)
                 switchHighlightedClue();
             }
             if (krossWord()->keyboardNavigation().testFlag(NavigateWithArrowKeys)) {
+                LetterCell *cell;
                 if ((cell = letterCellOnBottom(krossWord()->keyboardNavigation())))
                     cell->setFocus();
             }

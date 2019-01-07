@@ -1333,7 +1333,6 @@ bool KrossWord::canTakeClueCell(const Coord& coord,
     case EmptyCellType:
         // Clue can be added here
         return true;
-        break;
 
     case LetterCellType:
     case SolutionLetterCellType:
@@ -1364,7 +1363,6 @@ bool KrossWord::canTakeClueCell(const Coord& coord,
 //      qDebug() << "Can't add clue cells at coordinates containing cells with type"
 //    << KrossWordCell::displayStringFromCellType( cellAtCoord->cellType() );
         return false;
-        break;
     }
 
     return true;

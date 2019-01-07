@@ -81,7 +81,6 @@ QVariant LibraryManager::data(const QModelIndex &index, int role) const
             switch (role) {
             case Qt::DisplayRole:
                 return itemText;
-                break;
             case Qt::DecorationRole:
                 if (m_thumbnails.contains(libraryItem)) {
                     return m_thumbnails.value(libraryItem);

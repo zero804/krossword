@@ -111,8 +111,6 @@ QRect KrosswordTheme::rectAtPos(const QRect& bounds, const QRect& itemRect, Item
     case BottomRight:
         return QRect(bounds.right() - itemRect.width(), bounds.bottom() - itemRect.height(), itemRect.width(), itemRect.height());
     }
-
-    return QRect(); // To make the buildService happy for openSuse 11.1 TODO: Test.
 }
 
 QRect KrosswordTheme::trimmedRect(const QRect& source, const QMargins& margins)
