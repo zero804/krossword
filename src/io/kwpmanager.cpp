@@ -310,6 +310,7 @@ void KwpManager::readClue(CrosswordData &crossData)
             return;
         }
 
+        uint number;
         QString clue, answer, currentAnswer;
         // To allow clues with no text (which are useful for editing the clue text later, eg. for templates):
         bool hasTextTag = false;
@@ -318,7 +319,14 @@ void KwpManager::readClue(CrosswordData &crossData)
         for (int i = 1; i <= 3;) {
             if (m_xmlReader.isStartElement()) {
                 ++i;
-                if (m_xmlReader.name().compare(QLatin1String("text"), Qt::CaseInsensitive) == 0) {
+                if (m_xmlReader.name().compare(QLatin1String("number"), Qt::CaseInsensitive) == 0) {
+                    hasTextTag = true;
+                    m_xmlReader.readNext();
+
+                    if (m_xmlReader.isCharacters() && !m_xmlReader.isWhitespace()) {
+                        number = m_xmlReader.text().toUInt();
+                    }
+                } else if (m_xmlReader.name().compare(QLatin1String("text"), Qt::CaseInsensitive) == 0) {
                     hasTextTag = true;
                     m_xmlReader.readNext();
 
@@ -349,7 +357,7 @@ void KwpManager::readClue(CrosswordData &crossData)
             return;
         }
 
-        crossData.clues.append(ClueInfo(index, 0, orientation, answerOffset, clue, answer, currentAnswer));
+        crossData.clues.append(ClueInfo(index, number, orientation, answerOffset, clue, answer, currentAnswer));
     }
 }
 
@@ -601,6 +609,7 @@ void KwpManager::writeClue(const ClueInfo &clueInfo, const uint gridWidth)
     }
     */
 
+    m_xmlWriter.writeTextElement("number", QString::number(clueInfo.number + 1));
     m_xmlWriter.writeTextElement("text", clueInfo.clue);
     m_xmlWriter.writeTextElement("answer", clueInfo.solution); // CHECK: missing characters as '-' or similar?
     m_xmlWriter.writeTextElement("currentAnswer", clueInfo.answer); // CHECK: missing characters as '-' or similar?
