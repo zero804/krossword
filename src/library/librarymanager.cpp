@@ -99,7 +99,8 @@ QVariant LibraryManager::data(const QModelIndex &index, int role) const
 
 void LibraryManager::onDirectoryLoaded(const QString &path)
 {
-    Q_UNUSED(path);
+    Q_UNUSED(path)
+
     m_function();
 }
 
@@ -161,7 +162,7 @@ void LibraryManager::extractMetadataSlot(const QString &path)
 
 void LibraryManager::computeCrosswordsHashSlot(const QString& path)
 {
-    Q_UNUSED(path);
+    Q_UNUSED(path)
 
     QFileInfoList crosswordsPath = getCrosswordsFilePath();
     foreach(QFileInfo path, crosswordsPath) {

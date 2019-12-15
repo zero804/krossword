@@ -2459,7 +2459,7 @@ void GameGui::customContextMenuRequestedForCell(const QPointF &scenePos, KrossWo
 
 void GameGui::mousePressedOnCell(const QPointF& scenePos, Qt::MouseButton button, KrossWordCell *cell)
 {
-    Q_UNUSED(scenePos);
+    Q_UNUSED(scenePos)
 
     if (button == Qt::LeftButton) {
         if (action(actionName(Move_Eraser))->isChecked()) {
@@ -2534,7 +2534,8 @@ void GameGui::addLettersToClueRequest(ClueCell *clue, int lettersToAdd)
 
 void GameGui::letterEditRequest(LetterCell* letter, const QChar &currentLetter, const QChar &newLetter)
 {
-    Q_UNUSED(currentLetter);
+    Q_UNUSED(currentLetter)
+
     if (krossWord()->isEditable()) {
         QString errorMessage;
         if (!m_undoStack->tryPush(new LetterEditCommand(krossWord(), true, letter->coord(), letter->correctLetter(), newLetter), &errorMessage)) {
@@ -2560,7 +2561,7 @@ void GameGui::addAnimation()
 void GameGui::clueMappingCurrentLetterChanged(
     QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
-    Q_UNUSED(previous);
+    Q_UNUSED(previous)
 
     QChar ch = current->text(0)[ 0 ];
     int clueNumber = krossWord()->letterContentToClueNumberMapping().indexOf(ch) + 1;

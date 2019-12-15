@@ -237,7 +237,7 @@ void LibraryGui::downloadProviderChanged(int index)
 
 void LibraryGui::downloadCurrentCrosswordChanged(QListWidgetItem* current, QListWidgetItem* previous)
 {
-    Q_UNUSED(previous);
+    Q_UNUSED(previous)
 
     if (!current)
         return;
@@ -297,7 +297,7 @@ void LibraryGui::downloadCrosswordResult(KJob *job)
 
 void LibraryGui::downloadPreviewJobGotPreview(const KFileItem& fi, const QPixmap& pix)
 {
-    Q_UNUSED(fi);
+    Q_UNUSED(fi)
 
     if (m_downloadCrosswordsDlg && ui_download.preview) {
         ui_download.preview->setPixmap(pix);
@@ -334,7 +334,7 @@ void LibraryGui::libraryOpenItem(const QModelIndex& index)
 
 void LibraryGui::libraryCurrentChanged(const QModelIndex& current, const QModelIndex& previous)
 {
-    Q_UNUSED(previous);
+    Q_UNUSED(previous)
 
     bool isCrosswordSelected = !(m_libraryModel->isDir(current));
     action(actionName(Library_Export))->setEnabled(isCrosswordSelected);

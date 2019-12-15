@@ -734,7 +734,8 @@ void LetterCell::setCurrentLetter(const QChar& currentLetter,
 
 void LetterCell::setCurrentLetterSlot(LetterCell* letter, const QChar& newLetter)
 {
-    Q_UNUSED(letter);
+    Q_UNUSED(letter)
+
     setCurrentLetter(newLetter);
 }
 
@@ -1102,8 +1103,8 @@ void LetterCell::orientationChanged(ClueCell* clueCell,
 void LetterCell::correctAnswerChanged(ClueCell* clue,
                                       const QString& correctAnswer)
 {
-    Q_UNUSED(clue);
-    Q_UNUSED(correctAnswer);
+    Q_UNUSED(clue)
+    Q_UNUSED(correctAnswer)
 
     m_correctLetter = correctLetterFromClue();
     clearCache();

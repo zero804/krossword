@@ -171,7 +171,7 @@ void CreateNewCrosswordDialog::templateLocationChanged(const QString& path)
 
 void CreateNewCrosswordDialog::currentTemplateChanged(const QModelIndex& current, const QModelIndex& previous)
 {
-    Q_UNUSED(previous);
+    Q_UNUSED(previous)
 
     QString filePath = m_templateModel->filePath(current);
     ui_create_new.preview->showPreview(filePath);

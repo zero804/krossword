@@ -99,7 +99,7 @@ void ClueModel::addClue(ClueCell* clueCell)
 
 void ClueModel::updateClueOrientation(ClueCell* clue, Qt::Orientation newOrientation)
 {
-    Q_UNUSED(newOrientation);
+    Q_UNUSED(newOrientation)
 
     ClueItem *item = clueItem(clue);
     if (!item
@@ -114,7 +114,8 @@ void ClueModel::updateClueOrientation(ClueCell* clue, Qt::Orientation newOrienta
 
 void ClueModel::updateClueText(ClueCell* clue, const QString& newText)
 {
-    Q_UNUSED(newText);
+    Q_UNUSED(newText)
+
     ClueItem *item = clueItem(clue);
     if (item) {
         emit itemChanged(item);

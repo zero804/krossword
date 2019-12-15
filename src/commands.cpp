@@ -2304,7 +2304,8 @@ SetupSameLetterSynchronizationCommand::SetupSameLetterSynchronizationCommand(
     KrossWord* krossWord, QDataStream* stream, UndoCommandExt* parent)
     : UndoCommandExt(parent), m_krossWord(krossWord)
 {
-    Q_UNUSED(stream);
+    Q_UNUSED(stream)
+
     setupText();
 }
 

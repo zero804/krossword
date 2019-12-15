@@ -85,8 +85,9 @@ DictionaryDialog::DictionaryDialog(Dictionary* dictionary, QWidget* parent)
 void DictionaryDialog::tableSelectionChanged(const QItemSelection& selected,
         const QItemSelection& deselected)
 {
-    Q_UNUSED(selected);
-    Q_UNUSED(deselected);
+    Q_UNUSED(selected)
+    Q_UNUSED(deselected)
+
     ui_dictionaries.removeEntries->setEnabled(
         !ui_dictionaries.tableDictionary->selectionModel()->selectedIndexes().isEmpty());
 }

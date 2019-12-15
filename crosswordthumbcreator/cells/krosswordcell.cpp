@@ -103,7 +103,7 @@ void EmptyCell::drawBackgroundForPrinting(QPainter* p, const QStyleOptionGraphic
 
 void KrossWordCell::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-    Q_UNUSED(widget);
+    Q_UNUSED(widget)
 
     drawBackgroundForPrinting(painter, option);
     drawForegroundForPrinting(painter, option);

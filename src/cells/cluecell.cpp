@@ -892,7 +892,8 @@ void ClueCell::endAddLetters(Qt::Orientation newOrientation,
 
 void ClueCell::letterAdded(LetterCell* letter)
 {
-    Q_UNUSED(letter);
+    Q_UNUSED(letter)
+
     if (m_dontProcessLetterAdded)
         return;
 
@@ -1321,8 +1322,8 @@ Offset ClueCell::firstLetterOffset(AnswerOffset answerOffset) const {
 
 void ClueCell::answerLetterChanged(LetterCell* letter, const QChar &newLetter)
 {
-    Q_UNUSED(letter);
-    Q_UNUSED(newLetter);
+    Q_UNUSED(letter)
+    Q_UNUSED(newLetter)
 
     emit currentAnswerChanged(this, currentAnswer());
 }

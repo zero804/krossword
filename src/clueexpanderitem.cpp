@@ -94,14 +94,16 @@ void ClueExpanderItem::krosswordEditModeChanged(bool editable)
 void ClueExpanderItem::clueAnswerLengthChanged(ClueCell *clueCell,
         int newLength)
 {
-    Q_UNUSED(newLength);
+    Q_UNUSED(newLength)
+
     setPosAfterCell(clueCell->lastLetter());
 }
 
 void ClueExpanderItem::clueCorrectAnswerChanged(ClueCell *clueCell,
         const QString &correctAnswer)
 {
-    Q_UNUSED(clueCell);
+    Q_UNUSED(clueCell)
+
     m_origCorrectAnswer.replace(0, correctAnswer.length(), correctAnswer);
 }
 
@@ -135,7 +137,8 @@ void ClueExpanderItem::paint(QPainter* painter,
                              const QStyleOptionGraphicsItem* option,
                              QWidget* widget)
 {
-    Q_UNUSED(widget);
+    Q_UNUSED(widget)
+
     painter->fillRect(option->rect, m_color);
 }
 
@@ -161,7 +164,8 @@ const QColor ClueExpanderItem::dragColor() const
 
 void ClueExpanderItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
+
     m_isDragging = true;
     grabMouse();
 
@@ -175,7 +179,8 @@ void ClueExpanderItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
 void ClueExpanderItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
+
     m_isDragging = false;
     setPos(m_homePos);
     ungrabMouse();

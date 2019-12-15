@@ -133,7 +133,7 @@ bool MainWindow::createNewCrossWordFromTemplate(const QString& templateFilePath,
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
 
     if (m_gameGui) {
         m_gameGui->closeSlot();
@@ -437,7 +437,7 @@ void MainWindow::showGame()
 
 void MainWindow::crosswordClosed(const QString& fileName)
 {
-    Q_UNUSED(fileName);
+    Q_UNUSED(fileName)
 
     m_mainStackedBar->setCurrentWidget(m_libraryGui);
 
@@ -450,7 +450,7 @@ void MainWindow::crosswordClosed(const QString& fileName)
 
 void MainWindow::crosswordCurrentChanged(const QString& fileName, const QString& oldFileName)
 {
-    Q_UNUSED(oldFileName);
+    Q_UNUSED(oldFileName)
 
     if (fileName.isEmpty()) {
         m_caption.clear();
@@ -469,7 +469,8 @@ void MainWindow::crosswordCurrentChanged(const QString& fileName, const QString&
 
 void MainWindow::crosswordModificationsChanged(GameGui::ModificationTypes modificationTypes)
 {
-    Q_UNUSED(modificationTypes);
+    Q_UNUSED(modificationTypes)
+
     crosswordCurrentChanged(m_gameGui->currentFileName(), m_gameGui->currentFileName());
 }
 

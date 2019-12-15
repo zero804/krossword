@@ -196,7 +196,8 @@ void LetterCell::setCurrentLetter(const QChar& currentLetter, Confidence confide
 
 void LetterCell::setCurrentLetterSlot(LetterCell* letter, const QChar& newLetter)
 {
-    Q_UNUSED(letter);
+    Q_UNUSED(letter)
+
     setCurrentLetter(newLetter);
 }
 

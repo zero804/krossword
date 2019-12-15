@@ -87,7 +87,7 @@ QSize HtmlDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelInd
 
 QWidget* CrosswordAnswerDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-    Q_UNUSED(option);
+    Q_UNUSED(option)
 
 //     return QStyledItemDelegate::createEditor( parent, option, index );
     QLineEdit *lineEdit = new QLineEdit(index.data().toString(), parent);

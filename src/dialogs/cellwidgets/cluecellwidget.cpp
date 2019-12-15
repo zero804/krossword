@@ -311,7 +311,8 @@ void ClueCellWidget::cluesAboutToBeRemoved(ClueCellList clues)
 
 void ClueCellWidget::cluesAdded(ClueCellList clues)
 {
-    Q_UNUSED(clues);
+    Q_UNUSED(clues)
+
     if (clues.contains(m_clueCell))
         setEnabled(true);
 }
@@ -319,7 +320,8 @@ void ClueCellWidget::cluesAdded(ClueCellList clues)
 void ClueCellWidget::cellAnswerOffsetChanged(ClueCell *clueCell,
         AnswerOffset answerOffset)
 {
-    Q_UNUSED(clueCell);
+    Q_UNUSED(clueCell)
+
     m_btnGroupAnswerOffset->button(static_cast<int>(answerOffset))->
     setChecked(true);
     fillDictionaryAnswers();
@@ -329,7 +331,8 @@ void ClueCellWidget::cellAnswerOffsetChanged(ClueCell *clueCell,
 void ClueCellWidget::cellOrientationChanged(ClueCell *clueCell,
         Qt::Orientation orientation)
 {
-    Q_UNUSED(clueCell);
+    Q_UNUSED(clueCell)
+
     (orientation == Qt::Vertical ? ui_clue_properties_dock.vertical
      : ui_clue_properties_dock.horizontal)->setChecked(true);
     fillDictionaryAnswers();
@@ -339,7 +342,8 @@ void ClueCellWidget::cellOrientationChanged(ClueCell *clueCell,
 void ClueCellWidget::cellClueTextChanged(ClueCell *clueCell,
         const QString& clueText)
 {
-    Q_UNUSED(clueCell);
+    Q_UNUSED(clueCell)
+
 
     if (clueText != ui_clue_properties_dock.clue->text()) {
         // Block signals to not emit changeClueTextRequest
@@ -351,8 +355,8 @@ void ClueCellWidget::cellClueTextChanged(ClueCell *clueCell,
 
 void ClueCellWidget::cellAnswerLengthChanged(ClueCell *clueCell, int length)
 {
-    Q_UNUSED(clueCell);
-    Q_UNUSED(length);
+    Q_UNUSED(clueCell)
+    Q_UNUSED(length)
 
     enableOrientations();
     enableAnswerOffsets();

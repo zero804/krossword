@@ -86,7 +86,7 @@ void CurrentClueWidget::setWatchForChanges(bool enabled)
 
 void CurrentClueWidget::editModeChanged(bool editable)
 {
-    Q_UNUSED(editable);
+    Q_UNUSED(editable)
 
     KrossWordCell *currentCell = m_currentCell;
     m_currentCell = nullptr;
@@ -282,6 +282,7 @@ void CurrentClueWidget::currentCellChanged(KrossWordCell* currentCell,
         KrossWordCell* previousCell)
 {
     Q_UNUSED(previousCell)
+
     if (currentCell == m_currentCell) {
         return;
     }

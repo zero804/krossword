@@ -48,7 +48,7 @@ void CrosswordPreviewWidget::showPreview(const QString& fileName,
 
 void CrosswordPreviewWidget::previewJobFailed(const KFileItem& fileItem)
 {
-    Q_UNUSED(fileItem);
+    Q_UNUSED(fileItem)
 
     setText(i18n("Preview failed"));
     setPixmap(QPixmap());
@@ -58,7 +58,7 @@ void CrosswordPreviewWidget::previewJobFailed(const KFileItem& fileItem)
 void CrosswordPreviewWidget::previewJobGotPreview(const KFileItem& fileItem,
         const QPixmap& pixmap)
 {
-    Q_UNUSED(fileItem);
+    Q_UNUSED(fileItem)
 
     setText(QString());
     setPixmap(pixmap);

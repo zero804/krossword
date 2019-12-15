@@ -62,8 +62,8 @@ QRectF KrossWord::boundingRect() const
 void KrossWord::paint(QPainter* painter,
                       const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
 
     painter->fillRect(option->rect, Qt::white);
 }

@@ -345,7 +345,7 @@ void KrossWordCell::removeSynchronization(SyncMethods syncMethods,
 
 void KrossWordCell::setFocusSlot(KrossWordCell* cell)
 {
-    Q_UNUSED(cell);   // TODO: remove cell parameter?
+    Q_UNUSED(cell)   // TODO: remove cell parameter?
 
     setFocus(); // TEST
 }
@@ -561,7 +561,8 @@ void EmptyCell::focusOutEvent(QFocusEvent* event)
 
 void EmptyCell::keyPressEvent(QKeyEvent* event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
+
     // TODO
 //     if ( krossWord()->isEditable() && event->text().length() >= 1
 //      && krossWord()->crosswordTypeInfo().isCharacterLegal(event->text().at(0))
@@ -617,7 +618,7 @@ void EmptyCell::drawBackgroundForPrinting(QPainter* p, const QStyleOptionGraphic
 
 void KrossWordCell::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-    Q_UNUSED(widget);
+    Q_UNUSED(widget)
 
     if (krossWord()->isDrawingForPrinting()) {
         drawBackgroundForPrinting(painter, option);

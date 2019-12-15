@@ -242,8 +242,8 @@ QRectF KrossWord::boundingRect() const
 
 void KrossWord::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
 
     if (isDrawingForPrinting()) {
         painter->fillRect(boundingRect(), Qt::white);
@@ -2746,7 +2746,7 @@ void KrossWord::answerChangedSlot(ClueCell* clue, const QString& currentAnswer)
 
 void KrossWord::solutionLetterChanged(LetterCell* letter, const QChar& newLetter)
 {
-    Q_UNUSED(newLetter);
+    Q_UNUSED(newLetter)
 
     SolutionLetterCell *solutionLetter = qgraphicsitem_cast<SolutionLetterCell*>(letter);
     emit solutionLetterChanged(solutionLetter, currentSolutionWord(),
